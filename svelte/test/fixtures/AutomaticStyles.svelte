@@ -2,10 +2,22 @@
   import { useStyleRuntime } from '@zerodep-css/svelte';
   const { css } = useStyleRuntime();
   let width = $state(10);
+  let siblingWidth = $state(10);
   const colors = ['red', 'blue', 'initial', undefined];
   let colorIndex = 0;
   let color = $state<string | undefined>(colors[0]);
 </script>
+
+<button data-sibling-change onclick={() => (siblingWidth = 20)}>sibling</button>
+<div
+  data-sibling-source
+  class={css((s) => {
+    s.selector('& + [data-auto-sibling]', (n) => {
+      n.width.px(siblingWidth);
+    });
+  })}
+></div>
+<div data-auto-sibling></div>
 
 <button
   data-auto-color

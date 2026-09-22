@@ -77,6 +77,14 @@ const structures: Readonly<Record<string, number>> = {
   scope: 1,
   pseudoFunction: 2,
 };
+
+function ownedSelector(value: ts.Expression): boolean {
+  const selector = unwrap(value);
+  if (!ts.isStringLiteralLike(selector)) return false;
+  const text = selector.text.trim();
+  // 只证明一条同宿主路径；后代也可能被嵌套实例的同名变量遮蔽，不能盲目提升。
+  return text.startsWith('&') && !/[&,+~|\\\s>]/.test(text.slice(1)) && !text.includes('::');
+}
 function metadata(value: ts.Expression, builder: string): boolean {
   if (ts.isIdentifier(value)) return value.text === builder;
   if (
@@ -198,6 +206,24 @@ export function automaticDeclarations(
       ts.isCallExpression(expression)
     ) {
       const count = structures[member.name.text];
+      if (member.name.text === 'pseudoFunction' && expression.arguments[0]) {
+        const name = unwrap(expression.arguments[0]);
+        if (ts.isStringLiteralLike(name) && name.text.startsWith('::')) return false;
+      }
+      if (
+        member.name.text === 'selector' &&
+        (!expression.arguments[0] || !ownedSelector(expression.arguments[0]))
+      )
+        return false;
+      if (member.name.text === 'pseudo' && expression.arguments[0]) {
+        const name = unwrap(expression.arguments[0]);
+        if (
+          ts.isStringLiteralLike(name) &&
+          name.text.startsWith('::') &&
+          !['::before', '::after', '::marker', '::selection', '::placeholder'].includes(name.text)
+        )
+          return false;
+      }
       if (
         count === undefined ||
         expression.arguments.length !== count + 1 ||

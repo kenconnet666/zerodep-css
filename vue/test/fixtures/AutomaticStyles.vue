@@ -3,12 +3,25 @@ import { ref } from 'vue';
 import { useStyleRuntime } from '@zerodep-css/vue';
 const { css } = useStyleRuntime();
 const width = ref(10);
+const siblingWidth = ref(10);
 const colors = ['red', 'blue', 'initial', undefined];
 let colorIndex = 0;
 const color = ref<string | undefined>(colors[0]);
 </script>
 
 <template>
+  <button data-sibling-change @click="siblingWidth = 20">sibling</button>
+  <div
+    data-sibling-source
+    :class="
+      css((s) => {
+        s.selector('& + [data-auto-sibling]', (n) => {
+          n.width.px(siblingWidth);
+        });
+      })
+    "
+  ></div>
+  <div data-auto-sibling></div>
   <button
     data-auto-color
     @click="

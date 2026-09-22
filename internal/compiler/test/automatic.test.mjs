@@ -92,6 +92,29 @@ for (const [framework, transform] of [
     });
     assert.equal(transform(source, filename), null);
   });
+  test(`${framework}：不能把宿主变量提升给兄弟、祖先或其他未知继承目标`, () => {
+    for (const selector of [
+      '& + .peer',
+      '& ~ .peer',
+      ':has(> &)',
+      '& .child, .outside',
+      '&::backdrop',
+      '& > .child',
+    ]) {
+      const source = fixture(framework, `s.selector('${selector}',n=>{n.width.px(gap)});`);
+      assert.equal(transform(source, filename), null, selector);
+    }
+    assert.equal(
+      transform(fixture(framework, `s.pseudo('::backdrop',n=>{n.width.px(gap)});`), filename),
+      null,
+    );
+    assert(
+      transform(
+        fixture(framework, `s.selector('&:hover',n=>{n.width.px(gap)});`),
+        filename,
+      ).code.includes('formatUnitValues'),
+    );
+  });
   test(`${framework}：raw、token 和完整模板值自动绑定，保留必要结构重算`, () => {
     const source = fixture(
       framework,

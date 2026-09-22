@@ -263,6 +263,10 @@ try {
       assert.equal(await autoValue.evaluate((e) => e.style.length), 0);
       await first.locator('[data-auto-color]').click();
       assert.equal(await autoValue.getAttribute('class'), valueClass);
+      const sibling = first.locator('[data-auto-sibling]');
+      assert.equal(await sibling.evaluate((element) => getComputedStyle(element).width), '10px');
+      await first.locator('[data-sibling-change]').click();
+      assert.equal(await sibling.evaluate((element) => getComputedStyle(element).width), '20px');
       await page.locator('[data-theme-move]').click();
       assert.equal(await page.locator('#theme-portal [data-theme-leaf="portal"]').count(), 1);
       await page.locator('[data-theme-parent-change]').click();
