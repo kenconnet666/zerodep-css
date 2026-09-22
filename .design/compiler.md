@@ -43,6 +43,8 @@ css((s) => {
 
 自动路径支持直接原生 HTML class 使用点，以及保留原模板守卫的单层 keyed 简单数组循环。Vue 使用原生 computed 和按实际使用点的列表缓存；Svelte 使用原生 style 指令。
 
+初始化入口也参与判断：无参数 useStyleRuntime()、明确不含 cssType 的 context/theme 选项对象，以及未遮蔽的 undefined 位置参数可进入自动路径。配置 cssType、spread 或无法解析的初始化参数时保留运行时，避免覆盖派生类的属性行为；debug 来源仍可记录。旧位置参数继续有效，若希望对显式 context 保留可证明优化，可写 `useStyleRuntime({ context })`。
+
 不能安全提升的回调整体保留运行时行为：未知 if/switch、函数调用和副作用、局部赋值、派生 Css 类型、动态结构参数。脚本 const 保留定义时快照，computed/$derived 保留原生重算；组件透传、class 拼接、复杂循环/slot/异步边界、SVG/MathML 也保持原有源码。回退可能随动态值产生新的哈希类名，这是明确保留的能力。
 
 被提升的变量读取应无副作用；不要在 getter 中隐式写状态。表达式含调用或局部写入时不会提升。资源与全局样式继续使用运行时所有权，不能把元素绑定写到全局 :root。

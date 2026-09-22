@@ -27,6 +27,33 @@ for (const [framework, transform] of [
   ['svelte', svelte],
 ]) {
   const filename = resolve('Automatic.' + framework);
+  test(`${framework}：初始化选项只在可证明使用系统 Css 时自动提升`, () => {
+    const source = fixture(framework, 's.width.px(gap);');
+    for (const argument of [
+      '{cssType:AppCss}',
+      'options',
+      '{...options}',
+      '{[key]:value}',
+      '{get cssType(){return AppCss;}}',
+    ]) {
+      const input = source.replace('useStyleRuntime()', `useStyleRuntime(${argument})`);
+      assert.equal(transform(input, filename), null, argument);
+      const debug = transform(input, filename, { debug: true });
+      assert(debug.code.includes('withStyleSource'));
+      assert(!debug.code.includes('--zcss-'));
+    }
+    for (const argument of ['{}', '{theme:scope}', '{context:context}', 'undefined,scope']) {
+      const result = transform(
+        source.replace('useStyleRuntime()', `useStyleRuntime(${argument})`),
+        filename,
+      );
+      assert(result.code.includes('formatUnitValues'), argument);
+    }
+    const shadowed = source
+      .replace('const {css}', 'const undefined={cssType:AppCss};const {css}')
+      .replace('useStyleRuntime()', 'useStyleRuntime(undefined)');
+    assert.equal(transform(shadowed, filename), null);
+  });
   test(`${framework}：常用状态快捷方法保留动态绑定`, () => {
     for (const method of ['focus', 'focusWithin', 'active', 'disabled']) {
       const result = transform(fixture(framework, `s.${method}(h=>{h.width.px(gap);});`), filename);

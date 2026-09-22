@@ -56,9 +56,9 @@ export interface RuntimeStats {
   readonly globals: number;
   readonly cssCharacters: number;
 }
-export interface StyleRuntime {
+export interface StyleRuntime<C extends Css = Css> {
   readonly config: OutputConfig;
-  css(factory: StyleFactory): string;
+  css(factory: StyleFactory<C>): string;
   css<T extends Css>(factory: StyleFactory<T>, cssType: CssConstructor<T>): string;
   keyframes(definition: KeyframesDefinition): string;
   mountGlobal(value: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle;

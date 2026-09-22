@@ -9,10 +9,10 @@ const brand = ref(props.initial);
 const portal = ref(false);
 const gap = ref('4px');
 provideTheme(theme, () => ({ color: { brand: brand.value } }));
-const scope = provideTheme(spacing, () => ({ gap: gap.value }));
-const { css } = useStyleRuntime(undefined, scope);
-const current = useTheme(theme, scope);
-const currentSpacing = useTheme(spacing, scope);
+provideTheme(spacing, () => ({ gap: gap.value }));
+const { css } = useStyleRuntime({ cssType: AppCss });
+const current = useTheme(theme);
+const currentSpacing = useTheme(spacing);
 </script>
 <template>
   <button data-theme-spacing @click="gap = '8px'">spacing</button>
@@ -30,7 +30,7 @@ const currentSpacing = useTheme(spacing, scope);
         s.color.brand;
         s.backgroundColor.text;
         s.padding.raw(spacing.tokens.gap);
-      }, AppCss)
+      })
     "
   >
     parent

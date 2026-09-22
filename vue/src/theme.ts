@@ -20,16 +20,25 @@ import { createThemeScope, readTheme, resolveTheme } from '@zerodep-css/core/the
 export const themeKey: InjectionKey<ThemeScope> = Symbol('zerodep-css-theme');
 const localScopes = new WeakMap<object, ThemeScope>();
 
-/** 初始化时捕获祖先作用域；在 computed/模板中调用 getter 才追踪当前主题依赖。 */
+/** 与 Svelte 对齐：当前组件已提供的作用域优先，未提供时才继承祖先。 */
+export function resolveThemeScope(): ThemeScope | undefined {
+  const instance = getCurrentInstance();
+  return (
+    (instance ? localScopes.get(instance) : undefined) ??
+    (hasInjectionContext() ? inject(themeKey, undefined) : undefined)
+  );
+}
+
+/** 初始化时捕获当前有效作用域；在 computed/模板中调用 getter 才追踪主题依赖。 */
 export function useTheme<T extends ThemeTree>(
   definition: ThemeDefinition<T>,
   scope?: ThemeScope,
 ): () => ThemeValues<T> {
-  const captured = scope ?? (hasInjectionContext() ? inject(themeKey, undefined) : undefined);
+  const captured = scope ?? resolveThemeScope();
   return () => readTheme(definition, captured);
 }
 
-/** 当前组件显式使用返回作用域；后代通过 Vue provide/inject 继承。 */
+/** 当前组件后续读取与后代均可继承；返回值用于显式选择或跨 context 使用。 */
 export function provideTheme<T extends ThemeTree>(
   definition: ThemeDefinition<T>,
   overrides: () => ThemeOverrides<T> | null | undefined = () => undefined,
@@ -40,7 +49,7 @@ export function provideTheme<T extends ThemeTree>(
   if (!instance || !getCurrentScope())
     throw new Error('provideTheme must run during component setup.');
   // 同一组件可连续提供多个主题；Vue inject 本身只读取祖先，不包含先前的 provide。
-  const parent = localScopes.get(instance) ?? inject(themeKey, undefined);
+  const parent = resolveThemeScope();
   const values = computed(() => resolveTheme(definition, overrides(), parent));
   const scope = createThemeScope(definition, () => values.value, parent);
   provide(themeKey, scope);

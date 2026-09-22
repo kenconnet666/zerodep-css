@@ -8,16 +8,16 @@ import { provideTheme, useStyleRuntime } from '@zerodep-css/vue';
 import { ref } from 'vue';
 
 const dark = ref(false);
-const scope = provideTheme(lightTheme, () =>
-  dark.value ? darkTheme.defaults : lightTheme.defaults,
-);
-const { css } = useStyleRuntime(undefined, scope);
-// 模板中调用 css(s => { s.color.text; s.backgroundColor.surface; s.padding.lg; }, ThemeCss)
+provideTheme(lightTheme, () => (dark.value ? darkTheme.defaults : lightTheme.defaults));
+const { css } = useStyleRuntime({ cssType: ThemeCss });
+// 模板中调用 css(s => { s.color.text; s.backgroundColor.surface; s.padding.lg; })
 ```
 
 Svelte 使用同名 `/themes` 入口、`$state` 和 `provideTheme(lightTheme, () => dark ? darkTheme.defaults : lightTheme.defaults)`。后代组件自动继承作用域；局部 provider 可只覆盖需要修改的字段。
 
 暗色通过亮色预设的 extend 创建，两者 schema 与变量身份一致。自定义预设也使用 `darkTheme.extend({ color: { primary: '#...' } })`，不会修改系统默认值。应用可以继续继承 ThemeCss 增加自己的关键字，或直接继承 Css 使用预设的 token 树。
+
+作者类保持两重继承：系统 Css 只含标准能力；ThemeCss extends Css 增加内置主题关键字。用户可以 `class AppCss extends Css` 自行组织主题，也可以 `class AppCss extends ThemeCss` 继续增加成员。`useStyleRuntime({ cssType: AppCss })` 对两条路径都保留完整类型；没有传 cssType 时仍使用系统 Css，不隐式加载或注入主题关键字。
 
 ## Token 分组
 

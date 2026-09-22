@@ -3,6 +3,45 @@ import type { StyleFactory } from './builder-types.js';
 import type { StyleRuntime } from './runtime.js';
 import type { ThemeDefinition, ThemeOverrides, ThemeTree, ThemeValues } from './theme.js';
 import { themeStyle } from './theme.js';
+import type { StyleContext } from './context.js';
+
+/** 组件选择视图，不改变宿主 runtime 的配置或所有权。 */
+export interface UseStyleRuntimeOptions<T extends Css = Css> {
+  readonly context?: StyleContext;
+  readonly theme?: ThemeScope;
+  readonly cssType?: CssConstructor<T>;
+}
+
+/** 保留旧位置参数；选项只在初始化时读取一次，避免调用方后续修改改变视图。 */
+export function styleRuntimeOptions(
+  input?: StyleContext | UseStyleRuntimeOptions,
+  theme?: ThemeScope,
+): UseStyleRuntimeOptions {
+  if (input === undefined) return { theme };
+  if (input && typeof input === 'object' && 'runtime' in input)
+    return { context: input as StyleContext, theme };
+  if (!input || typeof input !== 'object' || Array.isArray(input))
+    throw new TypeError('Expected a style context or style runtime options.');
+  if (theme !== undefined)
+    throw new TypeError('Do not mix style runtime options and positional theme.');
+  const prototype = Object.getPrototypeOf(input);
+  if (prototype !== Object.prototype && prototype !== null)
+    throw new TypeError('Style runtime options must be a plain object.');
+  for (const key of Reflect.ownKeys(input))
+    if (!['context', 'theme', 'cssType'].includes(String(key)) || typeof key !== 'string')
+      throw new TypeError('Unknown style runtime option: ' + String(key));
+  const { context, theme: scope, cssType } = input as UseStyleRuntimeOptions;
+  if (context !== undefined && (!context || typeof context !== 'object' || !context.runtime))
+    throw new TypeError('Expected a style context.');
+  if (scope !== undefined && (!scope || !Array.isArray(scope.themes)))
+    throw new TypeError('Expected a theme scope.');
+  if (
+    cssType !== undefined &&
+    (typeof cssType !== 'function' || (cssType !== Css && !(cssType.prototype instanceof Css)))
+  )
+    throw new TypeError('The CSS type must extend Css.');
+  return { context, theme: scope, cssType };
+}
 
 export interface ThemeState {
   readonly name: string;
@@ -67,13 +106,23 @@ export function createThemeScope<T extends ThemeTree>(
 }
 
 /** 每个元素携带逻辑组件作用域的有效变量类，因此 DOM 移动不改变主题。 */
-export function withTheme(runtime: StyleRuntime, scope?: ThemeScope): StyleRuntime {
-  if (!scope?.themes.length) return runtime;
+export function withTheme(runtime: StyleRuntime, scope?: ThemeScope): StyleRuntime;
+export function withTheme<T extends Css>(
+  runtime: StyleRuntime,
+  scope: ThemeScope | undefined,
+  cssType: CssConstructor<T>,
+): StyleRuntime<T>;
+export function withTheme(
+  runtime: StyleRuntime,
+  scope?: ThemeScope,
+  defaultCss: CssConstructor = Css,
+): StyleRuntime {
+  if (!scope?.themes.length && defaultCss === Css) return runtime;
   function css(factory: StyleFactory): string;
   function css<T extends Css>(factory: StyleFactory<T>, cssType: CssConstructor<T>): string;
-  function css(factory: StyleFactory<never>, cssType: CssConstructor = Css): string {
+  function css(factory: StyleFactory<never>, cssType: CssConstructor = defaultCss): string {
     const content = runtime.css(factory as StyleFactory, cssType);
-    const names = scope!.themes.map((theme) => theme.className(runtime));
+    const names = scope?.themes.map((theme) => theme.className(runtime)) ?? [];
     return [...names, content].join(' ');
   }
   return Object.freeze({ ...runtime, css });

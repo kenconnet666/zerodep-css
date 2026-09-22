@@ -5,8 +5,8 @@
   import PresetOverride from './PresetOverride.svelte';
   let { name, initialDark }: { name: string; initialDark: boolean } = $props();
   let dark = $state(untrack(() => initialDark));
-  const scope = provideTheme(lightTheme, () => (dark ? darkTheme.defaults : lightTheme.defaults));
-  const { css } = useStyleRuntime(undefined, scope);
+  provideTheme(lightTheme, () => (dark ? darkTheme.defaults : lightTheme.defaults));
+  const { css } = useStyleRuntime({ cssType: ThemeCss });
   const tones = [
     ['success', 'onSuccess'],
     ['warning', 'onWarning'],
@@ -36,13 +36,13 @@
     s.borderColor.border;
     s.borderRadius.lg;
     s.boxShadow.md;
-  }, ThemeCss)}
+  })}
 >
   <h2
     class={css((s) => {
       s.fontSize.lg;
       s.margin.zero;
-    }, ThemeCss)}
+    })}
   >
     {dark ? '暗色主题' : '亮色主题'}
   </h2>
@@ -52,7 +52,7 @@
       s.color.textMuted;
       s.fontSize.sm;
       s.margin.zero;
-    }, ThemeCss)}
+    })}
   >
     语义颜色、共享尺度与独立作用域
   </p>
@@ -76,7 +76,7 @@
         h.outlineOffset.px(2);
         h.outlineColor.focusRing;
       });
-    }, ThemeCss)}>切换亮暗</button
+    })}>切换亮暗</button
   >
   <input
     data-preset-input
@@ -98,14 +98,14 @@
         h.outlineWidth.px(2);
         h.outlineColor.focusRing;
       });
-    }, ThemeCss)}
+    })}
   />
   <div
     class={css((s) => {
       s.display.flex;
       s.flexWrap.wrap;
       s.gap.sm;
-    }, ThemeCss)}
+    })}
   >
     {#each tones as tone (tone[0])}<span
         data-preset-tone={tone[0]}
@@ -115,7 +115,7 @@
           s.padding.xs;
           s.borderRadius.sm;
           s.fontSize.xs;
-        }, ThemeCss)}>{tone[0]}</span
+        })}>{tone[0]}</span
       >{/each}
   </div>
   <PresetOverride />

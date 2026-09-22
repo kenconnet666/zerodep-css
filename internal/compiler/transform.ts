@@ -10,7 +10,7 @@ import ts from 'typescript';
 import MagicString from 'magic-string';
 import { sourceMapper } from './source-map.js';
 import { automaticDeclarations } from './automatic.js';
-import { unshadowed } from './scope.js';
+import { unshadowed, capturedInside } from './scope.js';
 export { unshadowed } from './scope.js';
 import { createHash } from 'node:crypto';
 import { relative, resolve, isAbsolute } from 'node:path';
@@ -44,6 +44,7 @@ export function session(
   );
   const imports = new Map<string, { module: string; original: string }>(),
     css = new Set<string>(),
+    automaticCss = new Set<string>(),
     runtime = new Set<string>();
   const used = new Set<string>();
   walk(ast, (n) => {
@@ -73,8 +74,26 @@ export function session(
             if (
               (e.propertyName?.getText(ast) ?? e.name.getText(ast)) === 'css' &&
               ts.isIdentifier(e.name)
-            )
+            ) {
               css.add(e.name.text);
+              const argument = d.initializer.arguments[0];
+              // 选项可能隐藏派生类。仅证明系统 Css 的初始化才允许属性提升。
+              const defaults =
+                !argument ||
+                (ts.isIdentifier(argument) &&
+                  argument.text === 'undefined' &&
+                  !imports.has('undefined') &&
+                  !capturedInside(argument, ast)) ||
+                (ts.isObjectLiteralExpression(argument) &&
+                  argument.properties.every(
+                    (property) =>
+                      (ts.isPropertyAssignment(property) ||
+                        ts.isShorthandPropertyAssignment(property)) &&
+                      (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name)) &&
+                      ['context', 'theme'].includes(property.name.text),
+                  ));
+              if (defaults) automaticCss.add(e.name.text);
+            }
   let counter = 0;
   const fresh = (kind: string): string => {
     let value;
@@ -148,6 +167,7 @@ export function session(
       // 目前自动提升限定为直接模板使用点；脚本快照和派生类保留运行时合同。
       if (
         allowAutomatic &&
+        automaticCss.has(node.expression.text) &&
         node.arguments.length === 1 &&
         ts.isVariableDeclaration(node.parent) &&
         node.parent.initializer === node &&

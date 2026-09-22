@@ -232,6 +232,12 @@ try {
           ),
         );
       const ssrTheme = await themeState();
+      assert.deepEqual(
+        await page
+          .locator('[data-custom-unit]')
+          .evaluateAll((elements) => elements.map((element) => getComputedStyle(element).width)),
+        Array(4).fill('22px'),
+      );
       assert.equal(ssrTheme.parent.color, 'rgb(255, 0, 0)');
       assert.equal(ssrTheme.child.background, 'rgb(0, 255, 0)');
       assert.equal(ssrTheme.reset.background, 'rgb(0, 0, 0)');

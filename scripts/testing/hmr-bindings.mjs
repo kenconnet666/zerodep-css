@@ -25,7 +25,7 @@ const {css}=useStyleRuntime(); const width=ref(2);
 </script><template><button @click="width++">update</button><div data-target :class="css(s=>{${style}})" style="height: 5px"></div></template>`;
   return `<script>
 import {untrack} from 'svelte'; import {useStyleRuntime} from '@zerodep-css/svelte';
-let {context}=$props();const {css}=useStyleRuntime(untrack(()=>context));let width=$state(2);
+let {context}=$props();const {css}=useStyleRuntime({context:untrack(()=>context)});let width=$state(2);
 </script><button onclick={()=>width++}>update</button><div data-target class={css(s=>{${style}})} style="height: 5px"></div>`;
 }
 try {

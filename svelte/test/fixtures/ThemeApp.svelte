@@ -9,10 +9,10 @@
   let portalHost: HTMLDivElement | undefined;
   let gap = $state('4px');
   provideTheme(theme, () => ({ color: { brand } }));
-  const scope = provideTheme(spacing, () => ({ gap }));
-  const { css } = useStyleRuntime(undefined, scope);
-  const current = useTheme(theme, scope);
-  const currentSpacing = useTheme(spacing, scope);
+  provideTheme(spacing, () => ({ gap }));
+  const { css } = useStyleRuntime({ cssType: AppCss });
+  const current = useTheme(theme);
+  const currentSpacing = useTheme(spacing);
   // 移动后的节点仍由本夹具拥有，销毁时清理实际 DOM 位置。
   onDestroy(() => portalHost?.remove());
 </script>
@@ -37,7 +37,7 @@
     s.color.brand;
     s.backgroundColor.text;
     s.padding.raw(spacing.tokens.gap);
-  }, AppCss)}
+  })}
 >
   parent
 </div>

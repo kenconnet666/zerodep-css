@@ -5,10 +5,8 @@ import { lightTheme, darkTheme, ThemeCss } from '@zerodep-css/vue/themes';
 import PresetOverride from './PresetOverride.vue';
 const props = defineProps<{ name: string; initialDark: boolean }>();
 const dark = ref(props.initialDark);
-const scope = provideTheme(lightTheme, () =>
-  dark.value ? darkTheme.defaults : lightTheme.defaults,
-);
-const { css } = useStyleRuntime(undefined, scope);
+provideTheme(lightTheme, () => (dark.value ? darkTheme.defaults : lightTheme.defaults));
+const { css } = useStyleRuntime({ cssType: ThemeCss });
 const tones = [
   ['success', 'onSuccess'],
   ['warning', 'onWarning'],
@@ -39,7 +37,7 @@ const tones = [
         s.borderColor.border;
         s.borderRadius.lg;
         s.boxShadow.md;
-      }, ThemeCss)
+      })
     "
   >
     <h2
@@ -47,7 +45,7 @@ const tones = [
         css((s) => {
           s.fontSize.lg;
           s.margin.zero;
-        }, ThemeCss)
+        })
       "
     >
       {{ dark ? '暗色主题' : '亮色主题' }}
@@ -59,7 +57,7 @@ const tones = [
           s.color.textMuted;
           s.fontSize.sm;
           s.margin.zero;
-        }, ThemeCss)
+        })
       "
     >
       语义颜色、共享尺度与独立作用域
@@ -85,7 +83,7 @@ const tones = [
             h.outlineOffset.px(2);
             h.outlineColor.focusRing;
           });
-        }, ThemeCss)
+        })
       "
     >
       切换亮暗
@@ -111,7 +109,7 @@ const tones = [
             h.outlineWidth.px(2);
             h.outlineColor.focusRing;
           });
-        }, ThemeCss)
+        })
       "
     />
     <div
@@ -120,7 +118,7 @@ const tones = [
           s.display.flex;
           s.flexWrap.wrap;
           s.gap.sm;
-        }, ThemeCss)
+        })
       "
     >
       <span
@@ -134,7 +132,7 @@ const tones = [
             s.padding.xs;
             s.borderRadius.sm;
             s.fontSize.xs;
-          }, ThemeCss)
+          })
         "
         >{{ tone[0] }}</span
       >

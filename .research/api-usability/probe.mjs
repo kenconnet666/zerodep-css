@@ -78,7 +78,7 @@ const explicit=useTheme(theme,scope);
   const match = /<output>(.*?)<\/output>/.exec(html);
   assert(match);
   results.svelte = JSON.parse(match[1].replaceAll('&quot;', '"'));
-  assert.deepEqual(results.vue, { before: 'red', implicit: 'red', explicit: 'blue' });
+  assert.deepEqual(results.vue, { before: 'red', implicit: 'blue', explicit: 'blue' });
   assert.deepEqual(results.svelte, { before: 'red', implicit: 'blue', explicit: 'blue' });
 
   class AppCss extends Css {

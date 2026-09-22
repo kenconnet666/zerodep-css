@@ -11,9 +11,9 @@ const currentTheme = useTheme(lightTheme);
 const chartColor = computed(() => currentTheme().color.primary);
 ```
 
-默认读取祖先提供的逻辑作用域；provider 自身使用 `useTheme(theme, scope)`。无同名 provider 时返回传入预设默认值，同名不兼容 schema 报错。返回值深只读；`const snapshot = currentTheme()` 是调用时快照，不能代替 computed。该 API 不注册样式、不新建订阅，也不依赖 style context。
+默认读取当前组件已提供的主题，未提供时继承祖先；也可显式 `useTheme(theme, scope)` 选择作用域。无同名 provider 时返回传入预设默认值，同名不兼容 schema 报错。返回值深只读；`const snapshot = currentTheme()` 是调用时快照，不能代替 computed。该 API 不注册样式、不新建订阅，也不依赖 style context。
 
-主题使用 `defineTheme` 的静态定义和 `provideTheme(theme, () => overrides)` 的原生 computed 覆盖。后代 `useStyleRuntime()` 自动继承；当前 provider 组件使用返回的作用域：`const scope = provideTheme(theme, () => overrides.value); const { css } = useStyleRuntime(undefined, scope)`。同组件可连续提供多个主题。显式 `useStyleRuntime(context)` 只使用指定运行时；需要主题时同时传入 scope。
+主题使用 `defineTheme` 的静态定义和 `provideTheme(theme, () => overrides)` 的原生 computed 覆盖。当前组件在 provideTheme 之后调用 `useStyleRuntime()` 即可使用，后代也自动继承。同组件可连续提供多个主题。显式 `useStyleRuntime(context)` 只使用指定运行时；需要主题时同时传入 scope。
 
 主题运行时的 css 返回可用于 class 属性的类名列表，其中包含有效主题变量类和内容类。放在模板或 computed 中会随主题变化更新；普通 const 字符串仍是调用时快照。子对象只覆盖指定字段，null 恢复当前预设默认值。主题类附在样式元素上，因此 Vue Teleport 后仍保持逻辑组件作用域的主题。provider 不销毁共享 context，应用/请求宿主负责最终 dispose。
 
@@ -90,3 +90,13 @@ useGlobalCss('page/background', (g) => {
 只有全局槽位需要 key；普通类名由内容哈希决定。完整字符串 SSR 已有真实组件验收；流式 SSR、Suspense 中尚未恢复的异步子树和 Nuxt 专用插件没有验收，completeHydration 必须等所有相关组件实际初始化后调用。
 
 本地验证：`pnpm check`、`pnpm test:unit`、`pnpm test:browser:frameworks`。完整 LSP 补全/错误夹具和 core 浏览器回归也在 CI 中执行。
+
+## 一次选择作者类与作用域
+
+`const { css } = useStyleRuntime({ cssType: AppCss })` 在初始化时选择作者类，后续 `css(s => { ... })` 自动推断它的自定义成员和嵌套类型。也可以传 `{ context, theme: scope, cssType: AppCss }`；选项只读取一次，修改选项对象不会切换已创建的视图。运行时依旧由宿主拥有，视图不新建样式表。
+
+不指定 cssType 时使用系统 Css；AppCss 可以直接继承 Css 自建主题，也可以继承 `/themes` 的 ThemeCss 保留内置主题后继续扩展。单次仍可用 `css(factory, OtherCss)` 覆盖类型。普通 JS 函数负责样式复用，if/switch 负责条件；focus/focusWithin/active/disabled 提供常用状态快捷写法。
+
+先 provideTheme 再取得 css/useTheme，当前组件即可使用该主题。先前取得的读取函数或视图不追溯切换作用域。显式 context 保留隔离语义，需要主题时同时传 theme。旧 `useStyleRuntime(context?, scope?)` 继续可用。
+
+自定义作者类和无法证明初始化类型的调用保留运行时行为；标准类使用 `useStyleRuntime()` 或 `useStyleRuntime({ context })` 等明确选项对象时仍可自动优化。

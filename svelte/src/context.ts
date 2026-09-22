@@ -1,6 +1,12 @@
 import { getContext, setContext } from 'svelte';
-import type { StyleContext, StyleRuntime, ThemeScope } from '@zerodep-css/core';
-import { withTheme } from '@zerodep-css/core/theme-runtime';
+import {
+  Css,
+  type StyleContext,
+  type StyleRuntime,
+  type ThemeScope,
+  type UseStyleRuntimeOptions,
+} from '@zerodep-css/core';
+import { styleRuntimeOptions, withTheme } from '@zerodep-css/core/theme-runtime';
 import { themeKey } from './theme.svelte.js';
 
 const key = Symbol('zerodep-css');
@@ -14,7 +20,16 @@ export function resolveContext(explicit?: StyleContext): StyleContext {
   return context;
 }
 /** 在组件初始化时获取，后续模板求值无需再次访问 context。 */
-export function useStyleRuntime(context?: StyleContext, theme?: ThemeScope): StyleRuntime {
-  const scope = theme ?? (!context ? getContext<ThemeScope | undefined>(themeKey) : undefined);
-  return withTheme(resolveContext(context).runtime, scope);
+export function useStyleRuntime<T extends Css = Css>(
+  options: UseStyleRuntimeOptions<T>,
+): StyleRuntime<T>;
+export function useStyleRuntime(context?: StyleContext, theme?: ThemeScope): StyleRuntime;
+export function useStyleRuntime(
+  input?: StyleContext | UseStyleRuntimeOptions,
+  theme?: ThemeScope,
+): StyleRuntime {
+  const options = styleRuntimeOptions(input, theme);
+  const scope =
+    options.theme ?? (!options.context ? getContext<ThemeScope | undefined>(themeKey) : undefined);
+  return withTheme(resolveContext(options.context).runtime, scope, options.cssType ?? Css);
 }

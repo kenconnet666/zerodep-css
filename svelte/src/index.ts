@@ -4,6 +4,7 @@ export { provideTheme, useTheme } from './theme.svelte.js';
 export { defineTheme } from '@zerodep-css/core';
 export type {
   ThemeScope,
+  UseStyleRuntimeOptions,
   ThemeDefinition,
   ThemeValues,
   ThemeTokens,

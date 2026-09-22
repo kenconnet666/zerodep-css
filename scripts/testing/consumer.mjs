@@ -176,6 +176,15 @@ const global: StylesheetFactory = g => g.containerQuery('(width > 10px)', g => g
 const result: string = useStyleRuntime(context).css(style);
 class AppCss extends Css { get color(){ return this.extendProperty(super.color,{brand:'#2463eb'}); } control(){this.padding.px(8);} }
 const extended: string = useStyleRuntime(context).css(s=>{s.control();s.color.brand;s.hover(h=>h.control());},AppCss);
+const appStyle = useStyleRuntime({context,cssType:AppCss});
+appStyle.css(s=>{s.control();s.focus(h=>h.color.brand);});
+// @ts-expect-error 初始化类型不会丢失方法签名或开放任意成员
+appStyle.css(s=>s.unknownMethod());
+// @ts-expect-error 局部视图不接受 runtime 所有权配置
+useStyleRuntime({context,nonce:'other'});
+// @ts-expect-error 指定的类型必须继承 Css
+useStyleRuntime({context,cssType:class {}});
+context.mountGlobal('typed-global',g=>g.rule('button',s=>s.control(),AppCss));
 const preset: string = useStyleRuntime(context).css(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;},ThemeCss);
 darkTheme.extend({color:{primary:'#123456'}}); void lightTheme; void preset;
 context.mountGlobal('consumer',global); context.dispose(); void result; void extended; void defaultCss; void cssPlugin; void transformCss;

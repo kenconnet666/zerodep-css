@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { computed, ref } from 'vue';
-import { defineTheme, useTheme } from '../../dist/index.js';
+import { computed, ref, createSSRApp, h } from 'vue';
+import { renderToString } from 'vue/server-renderer';
+import { defineTheme, useTheme, provideTheme } from '../../dist/index.js';
 import { createThemeScope } from '../../../core/dist/theme-runtime.js';
 
 test('Vue 主题 getter 在使用点跟踪依赖，初始化不读取且请求间不共享值', () => {
@@ -25,4 +26,20 @@ test('Vue 主题 getter 在使用点跟踪依赖，初始化不读取且请求�
   assert.equal(reads, 2);
   assert.equal(other(), theme.defaults);
   assert.equal(useTheme(theme)(), theme.defaults);
+});
+
+test('当前 provider 可以立即读取主题，先前读取函数不追溯切换作用域', async () => {
+  const theme = defineTheme('self', { color: 'red' });
+  let values;
+  await renderToString(
+    createSSRApp({
+      setup() {
+        const before = useTheme(theme);
+        const scope = provideTheme(theme, () => ({ color: 'blue' }));
+        values = [before().color, useTheme(theme)().color, useTheme(theme, scope)().color];
+        return () => h('div');
+      },
+    }),
+  );
+  assert.deepEqual(values, ['red', 'blue', 'blue']);
 });

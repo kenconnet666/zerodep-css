@@ -1,4 +1,6 @@
 import { Css, createRuntime } from '../../src/index.js';
+import { ThemeCss } from '../../src/themes.js';
+import { withTheme } from '../../src/theme-runtime.js';
 
 class AppCss extends Css {
   get color() {
@@ -16,6 +18,33 @@ class InvalidCss extends Css {
 }
 
 const runtime = createRuntime({ target: null });
+class BrandedCss extends ThemeCss {
+  get color() {
+    return this.extendProperty(super.color, { brand: '#123456' });
+  }
+}
+const branded = withTheme(runtime, undefined, BrandedCss);
+branded.css((s) => {
+  s.color.red;
+  s.color.primary;
+  s.color.brand;
+  s.focus((h) => h.color.brand);
+});
+runtime.mountGlobal((g) =>
+  g.rule(
+    'button',
+    (s) => {
+      s.color.primary;
+      s.color.brand;
+    },
+    BrandedCss,
+  ),
+);
+withTheme(runtime, undefined, AppCss).css((s) => {
+  s.color.brand;
+  // @ts-expect-error 直接继承系统类不会隐式得到预设主题关键字
+  s.color.primary;
+});
 const name: string = runtime.css((s) => {
   s.control('small');
   s.color.brand;
