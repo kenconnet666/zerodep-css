@@ -1,5 +1,7 @@
 # zerodep-css 实施研究：生成数据、类型与原生响应式接入
 
+> 历史材料中的 ibind 已在阶段四更名为 bx；当前功能以 architecture.md、roadmap.md 和各包 README 为准。
+
 > 历史阶段研究记录：其中“当前”“下一阶段”指各节撰写时点。当前实现见 [architecture.md](architecture.md)，未完成工作见 [roadmap.md](roadmap.md)。
 
 日期：2026-09-22。状态：研究结论与可运行探针；不是生产框架验收。

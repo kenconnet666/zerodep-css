@@ -1,6 +1,18 @@
 # 换机继续开发交接
 
-交接日期：2026-09-22。本次交付范围为阶段 3.5；ibind 编译是下一阶段，尚未实现。
+交接更新：2026-09-22。阶段四 bx 编译首版已在本机实施，API 和边界见 [bx 编译说明](bx-compiler.md)。本页原阶段 3.5 的远程提交和 CI 证据保留供追溯，不能作为阶段四 CI 已通过的证据。
+
+## 阶段四补充
+
+- 原 ibind 更名为 bx，core/vue/svelte 只保留 bx 导出；Vue/Svelte 新增独立 compiler 子路径及 bxPlugin。
+- Vue 使用稳定 computed，Svelte 使用原生 style 指令。值更新不重跑样式回调，普通值仍重算/换 class；支持有限同组件 class 复用、简单 keyed 列表、单位/多变量、SSR/hydration 和 HMR。
+- scripts/compiler 共用分析器由根 build 内联到两个 compiler 产物；core/binding 是生成组件的内部格式化入口。默认入口没有编译依赖。
+- test:unit 已包含编译器正反例；test:browser:frameworks 增加 bx 浏览器与真实 Vite HMR；test:consumer 安装并验证 compiler 子路径。HMR 临时项目不放在 Vite 默认忽略的 test-results 下，结束后只清理本轮创建的目录。
+- 本阶段的报告位于 test-results/bindings、bindings-hmr、consumer、bundle；提交交付时分别报告本地和 CI 状态。换机仍执行下方 frozen install、根 build 与 lsp:setup。
+- 本轮本地已通过：根 check/build、53 项快速测试、三语言类型负例与修复清零、17 项 core 浏览器场景、原框架回归及 bx 浏览器/SSR/HMR、独立消费者、生成一致性、格式和体积检查。新增 TS/Vue/Svelte 关键文件的原生 LSP 完成诊断且无错误。本轮未触发 CI，默认四个入口的体积仍与阶段 3.5 基线一致。
+- 仍然 private，不发布。下一步优先处理 bx-compiler.md 中明确拒绝的复杂作用域/动态 spread 等范围，不重复启动已完成的最小探针。
+
+以下远程基线和旧验收数字属于阶段 3.5。
 
 ## 先确认分支
 
@@ -108,12 +120,8 @@ Git 推送需在新机配置自己的 GitHub 凭据。旧机曾使用已登录�
 
 ## 下一位开发者从哪里继续
 
-先读 AGENTS.md、architecture.md、roadmap.md，再看三个包 README。implementation-research.md、architecture-audit.md 是历史依据，其中的“下一阶段”不能覆盖当前路线。
+先读 AGENTS.md、architecture.md、roadmap.md、bx-compiler.md，再看三个包 README。bx-plan.md 保留获批计划及实施结果；implementation-research.md 和 architecture-audit.md 是历史依据。
 
-下一阶段是 ibind 编译：普通值保持运行时重算和哈希类名切换，只有显式 ibind 生成元素 CSS 变量绑定。首先做两种官方编译链的最小探针，验证导入别名/作用域、单位、多变量、SSR 初值和绑定更新不重跑样式回调。编译器放适配器独立子路径，Node/AST/Vite 依赖不能进入默认浏览器入口。不提前创建第四个产品包或全套空插件。
+后续扩展必须保持普通值重算/换 class、只有显式 bx 才生成元素变量的合同；绑定变量本身，不把整个 transform 字符串变成一个绑定。组件透传、跨文件使用、动态资源与复杂模板作用域分别验收，不能默默漏掉使用点。
 
-关键约束：ibind 绑定变量本身，不绑定整个 transform 字符串；`${ibind(x)}px` 不能替换成 var(--x)px。脚本 class 复用到多个元素时必须明确绑定使用点；无法追踪的情况给出诊断，不能悄悄丢绑定。具体退出条件见 roadmap.md。
-
-可直接交给新任务的起始说明：
-
-> 在 feat/native-reactivity 分支继续 zerodep-css。先读取 AGENTS.md 与 .design/handoff.md、architecture.md、roadmap.md，核对远程最新提交和工作区状态。阶段 3.5 已完成，接下来研究并实施显式 ibind 的官方 Vue/Svelte 编译链最小探针，保留 css(factory): string、token/raw 分离及普通值运行时重算。代码写适当中文注释，中文 Git 提交；耗时回归交给 CI，并核实对应提交的结果。
+开始前核对分支和最新提交、本机依赖与 LSP。不要把阶段 3.5 的成功 CI 或生成的 workflow 文件当作新提交的运行成功记录。

@@ -21,14 +21,14 @@ const panelClass = css((s) => {
 // panelClass 是 string。也可以直接写 class={css(s => { ... })}。
 ```
 
-每次调用同步执行回调，读取普通变量的当前值，构建、序列化、计算哈希并保证规则已注册。同内容同配置复用 class 和规则。外部 const 字符串不会自己更新；框架依赖跟踪、SSR 上下文和生命周期适配属于下一阶段。
+每次调用同步执行回调，读取普通变量的当前值，构建、序列化、计算哈希并保证规则已注册。同内容同配置复用 class 和规则。外部 const 字符串不会自己更新；框架依赖跟踪、SSR 上下文和生命周期由 Vue/Svelte 适配器提供。
 
 - CSS 属性是不可调用对象：固定值用 `s.display.flex`，动态字面量用 `s.display.token(value)`，开放值用 `s.width.raw('50%')`，单位值用 `s.width.px(50)`。不支持 `s.width(...)`。
 - `token` 严格限制为该属性的已知字面量并提供补全；`raw` 保留属性值类型、数字约束和已知值补全，同时允许任意字符串通过类型检查。实际序列化仍校验 CSS 语法边界，字符串开放不代表浏览器一定支持该值。
 - 根层可调用的是 selector/media/hover 等结构或辅助入口；自定义/未知属性的写值入口也使用第二层方法：`s.custom.raw('--name', value)`、`s.property.raw('future-property', value)`。
 - 重复声明、fallback、简写/长属性和嵌套交错保持顺序。
 - `container` 是 CSS 属性，容器查询使用 `containerQuery`。
-- `cssVar('--name', fallback)` 只引用已有 CSS 变量，不建立 JS 订阅；只有 `ibind` 才会在后续编译阶段创建绑定。
+- `cssVar('--name', fallback)` 只引用已有 CSS 变量，不建立 JS 订阅；只有显式 `bx` 经 Vue/Svelte 编译插件转换后才创建元素绑定。
 - `animationName.raw` 接受动画定义/数组，空数组输出 `animation-name:none`。token/raw 的 null/undefined 省略声明；单位方法不接受空值。
 - 普通值每次变化可产生新 class，旧规则保留至所属 runtime.dispose；不自动改为 CSS 变量。
 
@@ -154,7 +154,7 @@ renderStyles 保留独立 style 块，正确处理 @import/@namespace 的每张�
 - CSSTree 3.2.1 是固定的运行时解析依赖，处理选择器、值、规则边界及所需描述符检查。生成工具仍使用固定数据版本。
 - 原始值/规则必须通过语法解析，但语法成功不等于所有浏览器实现了该属性或值。目录中的规范条目依然可能是浏览器尚未支持的特征。
 - 每个逻辑记录目前拥有可定位的 style 节点，便于独立插入、原位替换、回滚与 SSR 恢复；后续依据测量优化分组。`stats()` 提供记录数量与 CSS 字符数。
-- `ibind` 仍然是编译标记，未编译时明确报错；没有隐式变量提升或主题预设。Vue/Svelte 的监听与生命周期由各自适配器实现，core 不依赖框架。
+- `bx` 是编译标记，Vue/Svelte compiler 插件负责转换；未编译时明确报错；没有隐式变量提升或主题预设。Vue/Svelte 的监听与生命周期由各自适配器实现，core 不依赖框架。
 
 ## 验收命令
 

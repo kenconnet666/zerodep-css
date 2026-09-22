@@ -1,5 +1,7 @@
 # 目录、命名与基础设施审计
 
+> 历史材料中的 ibind 已在阶段四更名为 bx；当前功能以 architecture.md、roadmap.md 和各包 README 为准。
+
 审计日期：2026-09-22。源码基线：`ea5836e`，分支 `feat/native-reactivity`。本文件为审计结论与下一阶段建议，不代表建议 API 已实施。本轮不重排产品目录、不修改公共 API。
 
 ## 结论与保留项

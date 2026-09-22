@@ -1,6 +1,8 @@
 # Svelte 适配
 
-使用 Svelte 5 原生模板跟踪和 `$derived`，不导入 `svelte/internal`，不建立第二套 store。普通动态值重新计算并切换哈希 class；`ibind` 编译尚未实现。
+显式 `bx` 编译通过 `@zerodep-css/svelte/compiler` 的 `bxPlugin()` 接入官方 Vite Svelte 插件，生成原生 style 绑定。安装示例、支持范围与定位诊断见 [bx 编译说明](../.design/bx-compiler.md)。
+
+使用 Svelte 5 原生模板跟踪和 `$derived`，不导入 `svelte/internal`，不建立第二套 store。普通动态值重新计算并切换哈希 class；`bx` 通过独立 compiler 插件接入，范围见下文。
 
 宿主创建应用/请求自己的 `createStyleContext`，通过根组件 props 传入：
 

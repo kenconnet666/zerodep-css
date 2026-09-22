@@ -1,5 +1,7 @@
 # CSS 类型生成研究探针
 
+> 历史材料中的 ibind 已在阶段四更名为 bx；当前功能以 architecture.md、roadmap.md 和各包 README 为准。
+
 这个目录用于验证数据和类型方案，不是正式 core/vue/svelte 包，也不会构建或发布框架。
 
 其中早期 API 探针保留研究时的候选形态，不代表当前产品合同。当前属性对象不可调用，token/raw 分离，以 `core/README.md` 和正式生成器为准。
