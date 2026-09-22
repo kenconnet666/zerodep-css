@@ -14,6 +14,8 @@ export default defineConfig({ plugins: [cssPlugin(), vue()] });
 
 Svelte 使用 `@zerodep-css/svelte/compiler` 的同名入口，后接官方 `svelte()` 插件。插件只处理完整组件源码；官方插件继续负责响应式、SSR 和 HMR。直接转换接口为 `transformCss(source, filename, { root?, debug? })`，无改动时返回 null。
 
+严格 CSP 禁止 style 属性时使用 `cssPlugin({ bindings: 'runtime' })`。动态值保留原生运行时类名更新，不生成元素变量绑定；静态准备与开发来源仍可用。配合请求 runtime 的 nonce，可在 `style-src-attr 'none'` 下保持 SSR 首屏、hydration 和后续更新一致。该选项不移除应用自己编写的 style 属性，服务端和客户端应使用同一编译配置。
+
 ## 作者写法
 
 在组件初始化时取得 `const { css } = useStyleRuntime()`，在原生元素的 class 中直接调用：

@@ -21,7 +21,11 @@ function components(server) {
     setup(bundler) {
       bundler.onLoad({ filter: /\.vue$/ }, async ({ path }) => {
         const original = await readFile(path, 'utf8');
-        const source = vueBx(original, path, { root })?.code ?? original;
+        const source =
+          vueBx(original, path, {
+            root,
+            bindings: path.endsWith('CspApp.vue') ? 'runtime' : 'variables',
+          })?.code ?? original;
         const { descriptor, errors } = parse(source, { filename: path });
         if (errors.length) throw errors[0];
         const compiled = compileScript(descriptor, {
@@ -33,7 +37,11 @@ function components(server) {
       });
       bundler.onLoad({ filter: /\.svelte$/ }, async ({ path }) => {
         const original = await readFile(path, 'utf8');
-        const source = svelteBx(original, path, { root })?.code ?? original;
+        const source =
+          svelteBx(original, path, {
+            root,
+            bindings: path.endsWith('CspApp.svelte') ? 'runtime' : 'variables',
+          })?.code ?? original;
         const result = compile(source, {
           filename: path,
           generate: server ? 'server' : 'client',
@@ -105,9 +113,15 @@ for (const framework of ['vue', 'svelte']) {
     ),
   );
   pages[framework] = a.html;
+  pages[framework + '-csp'] = (await renderPage(framework, 20, true)).html;
 }
 const client = await readFile(resolve(output, 'client.mjs'));
 const http = createServer((req, res) => {
+  if (req.url?.endsWith('-csp'))
+    res.setHeader(
+      'Content-Security-Policy',
+      "default-src 'self'; script-src 'self'; style-src 'nonce-style-token'; style-src-attr 'none'",
+    );
   res.setHeader(
     'Content-Type',
     req.url === '/client.mjs' ? 'text/javascript' : 'text/html; charset=utf-8',
@@ -313,6 +327,48 @@ try {
       });
       assert.deepEqual(errors, []);
       report.push({ framework, ssr, initial, bound, ordinary, ssrTheme, changedTheme, localTheme });
+    });
+  }
+  for (const framework of ['vue', 'svelte']) {
+    await withBrowserPage(browser, output, framework + '-strict-csp', async (page) => {
+      const errors = [];
+      page.on('pageerror', (error) => errors.push(error.message));
+      page.on('console', (message) => {
+        if (['warning', 'error'].includes(message.type())) errors.push(message.text());
+      });
+      await page.goto(`http://127.0.0.1:${http.address().port}/${framework}-csp`);
+      const element = page.locator('[data-csp-value]');
+      const read = () =>
+        element.evaluate((node) => ({
+          width: getComputedStyle(node).width,
+          color: getComputedStyle(node).color,
+          className: node.className,
+        }));
+      const ssr = await read();
+      assert.equal(ssr.width, '20px');
+      assert.equal(ssr.color, 'rgb(255, 0, 0)');
+      assert.equal(await page.locator('[style]').count(), 0);
+      await page.evaluate(async (framework) => {
+        window.fixture = await (await import('/client.mjs')).start(framework, true, true);
+      }, framework);
+      assert.deepEqual(await read(), ssr);
+      await page.locator('[data-csp-change]').click();
+      const updated = await read();
+      assert.equal(updated.width, '21px');
+      assert.notEqual(updated.className, ssr.className);
+      assert.equal(await page.locator('[style]').count(), 0);
+      assert(
+        await page
+          .locator('style')
+          .evaluateAll((nodes) => nodes.every((node) => node.nonce === 'style-token')),
+      );
+      await page.evaluate(async () => {
+        await window.fixture.destroy();
+        window.fixture.dispose();
+      });
+      assert.equal(await page.locator('style').count(), 0);
+      assert.deepEqual(errors, []);
+      report.push({ framework, strictCsp: true, ssr, updated });
     });
   }
   await writeFile(

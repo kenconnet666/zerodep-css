@@ -3,6 +3,8 @@ export interface CompilerOptions {
   root?: string;
   /** 开发期记录项目相对的样式调用位置；不改变 CSS 哈希。 */
   debug?: boolean;
+  /** 严格 CSP 禁止 style 属性时使用 runtime；静态准备和源码诊断仍可保留。 */
+  bindings?: 'variables' | 'runtime';
 }
 export interface TransformResult {
   code: string;

@@ -29,6 +29,8 @@ export function session(
   framework: Framework,
   options: CompilerOptions = {},
 ) {
+  if (options.bindings !== undefined && !['variables', 'runtime'].includes(options.bindings))
+    throw new TypeError('Compiler bindings must be variables or runtime.');
   const root = resolve(options.root ?? process.cwd());
   const id = relative(root, resolve(filename)).replaceAll('\\', '/');
   const output = new MagicString(source);
@@ -152,7 +154,9 @@ export function session(
         !id.startsWith('../') &&
         !isAbsolute(id)
       ) {
-        const automatic = automaticDeclarations(callback);
+        const candidates = automaticDeclarations(callback);
+        const automatic =
+          options.bindings === 'runtime' && candidates?.length ? undefined : candidates;
         if (automatic && automatic.every((declaration) => declaration.kind === 'unit')) {
           // 静态源码摘要随 HMR 内容改变，不把旧站点缓存当作新样式。
           const key = createHash('sha256')

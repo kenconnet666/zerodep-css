@@ -92,6 +92,19 @@ for (const [framework, transform] of [
     });
     assert.equal(transform(source, filename), null);
   });
+  test(`${framework}：严格 CSP 模式保留动态运行时和静态准备`, () => {
+    const dynamic = fixture(framework, 's.width.px(gap);');
+    assert.equal(transform(dynamic, filename, { bindings: 'runtime' }), null);
+    const debug = transform(dynamic, filename, { bindings: 'runtime', debug: true });
+    assert(debug.code.includes('withStyleSource'));
+    assert(!debug.code.includes('--zcss-'));
+    assert(!debug.code.includes('prepareStyle'));
+    const fixed = transform(fixture(framework, 's.display.flex;'), filename, {
+      bindings: 'runtime',
+    });
+    assert(fixed.code.includes('prepareStyle'));
+    assert.throws(() => transform(dynamic, filename, { bindings: 'invalid' }), /bindings/);
+  });
   test(`${framework}：不能把宿主变量提升给兄弟、祖先或其他未知继承目标`, () => {
     for (const selector of [
       '& + .peer',

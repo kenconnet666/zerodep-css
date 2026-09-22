@@ -26,5 +26,6 @@
 
 - 亮暗数据、继承身份、可选 ThemeCss 与三包 themes 子路径已实现；根类型/构建、全 token getter 和独立对比度测试通过，默认 cssVar 入口仍为 3,610 minified / 1,333 gzip 字节。
 - 新预设 getter 的自动声明推断曾产生 118,213 字节；已用基础属性索引类型明确返回合同，降至 3,927 字节，保留所有补全和类型负例。
-- 新增 R8（待修复）：严格 style-src-attr 'none' 下，SSR 元素变量属性被 CSP 阻止，而客户端 CSSOM 更新仍能生效。真实 Chrome 探针得到 SSR 回退蓝色、客户端更新绿色；需提供明确的编译运行时模式，并验证 nonce 下的完整 SSR/hydration。
+- 新增 R8：严格 style-src-attr 'none' 下，SSR 元素变量属性被 CSP 阻止，而客户端 CSSOM 更新仍能生效。已增加 bindings:'runtime'，保留静态准备和源码诊断；真实 Vue/Svelte 的 nonce、首屏、hydration、更新与清理本地通过，完整三引擎验证交给 CI。
+- 新增 R9：开发诊断曾在已回退的复杂循环/slot 中误包装局部同名 css 函数；Vue/Svelte 解构循环已实测复现，继续修正完整词法作用域，而不是只关闭自动变量。
 - 追加缓存大输入审查：条目数量有界不等于字符串总量有界，需要检查大型 CSS 值是否被长期保留，并在不拒绝合法 CSS 的前提下收紧缓存预算。
