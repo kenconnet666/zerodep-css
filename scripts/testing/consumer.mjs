@@ -131,7 +131,13 @@ context.mountGlobal('consumer',global); context.dispose(); void result; void ext
       ],
       { cwd: folder, env: environment },
     );
-    for (const component of ['ReactiveApp', 'ReactiveStyles', 'BoundApp', 'BoundStyles'])
+    for (const component of [
+      'ReactiveApp',
+      'ReactiveStyles',
+      'BoundApp',
+      'BoundStyles',
+      'AutomaticStyles',
+    ])
       await copyFile(
         resolve(root, `${framework}/test/fixtures/${component}.${framework}`),
         join(folder, `${component}.${framework}`),
