@@ -10,7 +10,7 @@ export type {
   StyleManifest,
 } from './runtime.js';
 export type { OutputConfig, StyleRecord } from './serialize.js';
-export { cssVar, ibind } from './values.js';
+export { cssVar, bx } from './values.js';
 export type { Binding, CssVariable } from './values.js';
 export type {
   DeclarationBuilder,

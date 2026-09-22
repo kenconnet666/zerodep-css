@@ -4,7 +4,7 @@ import {
   keyframes,
   globalCss,
   cssVar,
-  ibind,
+  bx,
   type StyleBuilder,
 } from '../../src/index.js';
 
@@ -35,8 +35,8 @@ export function typeContract(width: number, visible: boolean) {
     s.animationDuration.ms(100, 200);
     s.opacity.pct(50);
     s.color.raw(cssVar('--text'));
-    s.width.px(ibind(width));
-    s.color.raw(ibind('red'));
+    s.width.px(bx(width));
+    s.color.raw(bx('red'));
     s.container.raw('card / inline-size');
     s.containerQuery('card (width > 20rem)', (n) => {
       n.display.grid;
@@ -66,7 +66,7 @@ export function typeContract(width: number, visible: boolean) {
     // @ts-expect-error 时间属性不接受长度
     s.animationDuration.px(10);
     // @ts-expect-error 数值方法不接受带单位字符串
-    s.width.px(ibind('10px'));
+    s.width.px(bx('10px'));
     // @ts-expect-error 简写个数错误
     s.padding.px(1, 2, 3, 4, 5);
     // @ts-expect-error 单位方法不允许 undefined，避免不完整的列表
@@ -115,9 +115,9 @@ export function typeContract(width: number, visible: boolean) {
     });
   });
   // @ts-expect-error 不能对编译标记进行普通数值运算
-  ibind(width) * 2;
-  // @ts-expect-error ibind 只接收 CSS 标量
-  ibind({ width });
+  bx(width) * 2;
+  // @ts-expect-error bx 只接收 CSS 标量
+  bx({ width });
 }
 export function reusable(s: StyleBuilder) {
   s.display.flex;
