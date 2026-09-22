@@ -63,6 +63,10 @@ try {
       resolve: {
         alias: [
           {
+            find: '@zerodep-css/core/compiler-runtime',
+            replacement: resolve(root, 'core/dist/compiler-runtime.js'),
+          },
+          {
             find: '@zerodep-css/vue/compiler-runtime',
             replacement: resolve(root, 'vue/dist/compiler-runtime.js'),
           },

@@ -31,6 +31,7 @@ const fade = keyframes((k) => {
   k.to((s) => s.opacity.raw(1));
 });
 const className = ssr.css((s) => {
+  s.name('ssr-box').config({ debug: true });
   s.padding.px(8, 16);
   s.animationName.raw(fade);
   s.animationDuration.ms(1);

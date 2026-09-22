@@ -32,3 +32,10 @@ runtime.css((s) => {
 // @ts-expect-error 自定义类型必须传入对应构造器
 runtime.css<AppCss>((s) => s.control('small'));
 void name;
+runtime.css((s) => {
+  s.name('typed').config({ debug: true });
+  // @ts-expect-error 局部配置不能切换共享 runtime 身份
+  s.config({ namespace: 'other' });
+  // @ts-expect-error 名称必须是字符串
+  s.name(1);
+});

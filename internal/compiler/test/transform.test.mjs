@@ -62,6 +62,21 @@ for (const [framework, transform] of [
     );
     assert.equal(transform(fixture(framework, 'css(s=>{s.width.px(width);})'), filename), null);
   });
+  test(`${framework}：无 bx 的开发样式也能携带相对源码位置`, () => {
+    const script = `import {useStyleRuntime} from '@zerodep-css/${framework}';const {css}=useStyleRuntime();`;
+    const source =
+      framework === 'vue'
+        ? `<script setup>${script}</script><template><div :class="css(s=>{s.name('card');s.color.red;})"/></template>`
+        : `<script>${script}</script><div class={css(s=>{s.name('card');s.color.red;})}/>`;
+    const result = transform(source, resolve('src/Named.' + framework), { debug: true });
+    assert(result.code.includes('withStyleSource'));
+    assert(result.code.includes('src/Named.' + framework));
+    if (framework === 'vue') {
+      const { descriptor } = parse(result.code);
+      compileScript(descriptor, { id: 'named', inlineTemplate: true });
+    } else compile(result.code, { filename: resolve('src/Named.svelte'), generate: 'client' });
+    assert.equal(transform(source, resolve('src/Named.' + framework), { debug: false }), null);
+  });
   test(`${framework}：项目外无 bx 的组件交回官方编译器`, () => {
     const source =
       framework === 'vue'

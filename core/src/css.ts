@@ -2,6 +2,7 @@ import { propertyMetadata } from './generated/metadata.js';
 import type { StyleProperties, SimplePseudo, FunctionalPseudo } from './generated/properties.js';
 import type { DeclarationHelpers, StyleFactory } from './builder-types.js';
 import type { CssVariable } from './values.js';
+import type { StyleConfig } from './style-metadata.js';
 
 /** Css 的构建能力由一次同步样式求值提供，实例不能脱离该求值继续写样式。 */
 export interface CssConstruction {
@@ -53,6 +54,17 @@ export class Css {
     const operation = this[constructionKey].read(name);
     if (typeof operation !== 'function') throw new TypeError('Invalid CSS structure operation.');
     operation(...args);
+  }
+
+  /** 命名整个本次根样式；不会创建没有内容摘要的全局 class。 */
+  name(value: string): this {
+    this.structure('name', value);
+    return this;
+  }
+  /** 当前构建的局部诊断配置，不修改共享 runtime 或其他样式。 */
+  config(value: StyleConfig): this {
+    this.structure('config', value);
+    return this;
   }
 
   selector(selector: string, factory: StyleFactory<this>): void {

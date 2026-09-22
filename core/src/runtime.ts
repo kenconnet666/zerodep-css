@@ -1,4 +1,4 @@
-import { globalCss, buildStyleProgram } from './builder.js';
+import { globalCss, buildStyleDefinition } from './builder.js';
 import { browserSheet, renderStyleTag, type BrowserSheet, type StyleTarget } from './sheet.js';
 import {
   canonicalSheet,
@@ -19,9 +19,10 @@ import {
 import type { KeyframesDefinition, StylesheetDefinition } from './style-program.js';
 import type { StylesheetFactory, StyleFactory } from './builder-types.js';
 import { Css, type CssConstructor } from './css.js';
+import { validateStyleName, validateStyleDebug } from './style-metadata.js';
 
 export interface StyleManifest {
-  readonly version: 1;
+  readonly version: 1 | 2;
   readonly config: OutputConfig;
   readonly records: readonly StyleRecord[];
 }
@@ -35,6 +36,8 @@ export interface RuntimeOptions {
   readonly insertionPoint?: ChildNode;
   readonly hydrate?: StyleManifest;
   readonly maxRecords?: number;
+  /** 收集本次样式诊断元数据，不参与 CSS 内容哈希。 */
+  readonly debug?: boolean;
 }
 export interface GlobalStyleHandle {
   readonly id: string;
@@ -105,7 +108,7 @@ function layerRecord(config: OutputConfig): StyleRecord | undefined {
 function manifestRecords(manifest: StyleManifest, config: OutputConfig): readonly StyleRecord[] {
   const incoming = manifest?.config;
   if (
-    manifest?.version !== 1 ||
+    (manifest?.version !== 1 && manifest?.version !== 2) ||
     !incoming ||
     incoming.namespace !== config.namespace ||
     incoming.layer !== config.layer ||
@@ -125,16 +128,24 @@ function manifestRecords(manifest: StyleManifest, config: OutputConfig): readonl
       value.dependencies.some((d: unknown) => typeof d !== 'string')
     )
       throw new TypeError('Invalid manifest record.');
+    if (value.name !== undefined) validateStyleName(value.name);
+    if (
+      (value.name !== undefined || value.debug !== undefined) &&
+      (value.kind !== 'class' || manifest.version !== 2)
+    )
+      throw new TypeError('Named/debug styles require a version 2 class record.');
     const record: StyleRecord = Object.freeze({
       id: value.id,
       kind: value.kind,
       body: value.body,
       dependencies: Object.freeze([...value.dependencies]),
+      ...(value.name === undefined ? {} : { name: value.name }),
+      ...(value.debug === undefined ? {} : { debug: validateStyleDebug(value.debug) }),
     });
     if (ids.has(record.id)) throw new Error('Duplicate manifest record: ' + record.id);
     ids.add(record.id);
     if (record.kind === 'class' || record.kind === 'keyframes') {
-      if (record.id !== namedId(config, record.kind, record.body))
+      if (record.id !== namedId(config, record.kind, record.body, record.name))
         throw new Error('Manifest content hash mismatch: ' + record.id);
     } else if (record.kind === 'global') {
       const slot = record.id.slice(config.namespace.length + 3);
@@ -179,6 +190,8 @@ function manifestRecords(manifest: StyleManifest, config: OutputConfig): readonl
 }
 
 export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
+  if (options.debug !== undefined && typeof options.debug !== 'boolean')
+    throw new TypeError('Runtime debug must be boolean.');
   const config = configFor(options);
   const target =
     options.target === undefined
@@ -300,6 +313,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
         claim(record, claims.get(record.id)!);
       }
       for (const [id, record] of metadataUpdates) records.set(id, record);
+      for (const record of metadataUpdates.values()) host?.updateMetadata(record);
     } catch (error) {
       for (const node of inserted) node.remove();
       throw error;
@@ -339,7 +353,11 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     config,
     css(factory: StyleFactory<never>, cssType: CssConstructor = Css) {
       alive();
-      const compiled = compileProgram(buildStyleProgram(factory, cssType), config);
+      const definition = buildStyleDefinition(factory, cssType);
+      const compiled = compileProgram(definition.program, config, {
+        ...definition.metadata,
+        debug: definition.metadata.debug ?? options.debug ?? !!definition.metadata.source,
+      });
       ensure(compiled);
       return compiled.record.id;
     },
@@ -369,7 +387,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     },
     snapshot() {
       alive();
-      return Object.freeze({ version: 1, config, records: Object.freeze([...records.values()]) });
+      return Object.freeze({ version: 2, config, records: Object.freeze([...records.values()]) });
     },
     renderStyles() {
       alive();

@@ -1,5 +1,6 @@
 import { generate, ident, lexer, parse, walk, type CssNode, type StyleSheet } from 'css-tree';
 import { hashText } from './hash.js';
+import { validateStyleName, type StyleDebug, type StyleMetadata } from './style-metadata.js';
 import type {
   CssValue,
   Declaration,
@@ -22,6 +23,8 @@ export interface StyleRecord {
   readonly kind: RecordKind;
   readonly body: string;
   readonly dependencies: readonly string[];
+  readonly name?: string;
+  readonly debug?: StyleDebug;
 }
 export interface PropertyRegistration {
   readonly name: string;
@@ -33,11 +36,34 @@ export interface CompiledStyle {
 }
 /** 相同 CSS 的引用路径可能不同；依赖做并集，不把它误判为哈希碰撞。 */
 export function mergeRecord(previous: StyleRecord, next: StyleRecord): StyleRecord {
-  if (previous.id !== next.id || previous.kind !== next.kind || previous.body !== next.body)
+  if (
+    previous.id !== next.id ||
+    previous.kind !== next.kind ||
+    previous.body !== next.body ||
+    previous.name !== next.name
+  )
     throw new Error('CSS hash/record collision: ' + next.id);
-  if (next.dependencies.every((id) => previous.dependencies.includes(id))) return previous;
+  let debug = previous.debug;
+  if (next.debug) {
+    const sources = new Map(
+      [...(previous.debug?.sources ?? []), ...next.debug.sources].map((source) => [
+        JSON.stringify(source),
+        source,
+      ]),
+    );
+    debug = Object.freeze({
+      declarations: Math.max(previous.debug?.declarations ?? 0, next.debug.declarations),
+      sources: Object.freeze([...sources.values()].slice(0, 32)),
+    });
+  }
+  if (
+    next.dependencies.every((id) => previous.dependencies.includes(id)) &&
+    JSON.stringify(debug) === JSON.stringify(previous.debug)
+  )
+    return previous;
   return Object.freeze({
     ...previous,
+    ...(debug ? { debug } : {}),
     dependencies: Object.freeze(
       [...new Set([...previous.dependencies, ...next.dependencies])].sort(),
     ),
@@ -224,10 +250,17 @@ function styleBody(
     })
     .join('');
 }
-export function namedId(config: OutputConfig, kind: 'class' | 'keyframes', body: string): string {
+export function namedId(
+  config: OutputConfig,
+  kind: 'class' | 'keyframes',
+  body: string,
+  name?: string,
+): string {
+  if (name !== undefined) validateStyleName(name);
   return (
     config.namespace +
     (kind === 'keyframes' ? '-k-' : '-c-') +
+    (name === undefined ? '' : name + '-') +
     hashText(JSON.stringify([config, kind, body]))
   );
 }
@@ -308,10 +341,33 @@ export function registrations(css: string): readonly PropertyRegistration[] {
   });
   return [...definitions].map(([name, body]) => ({ name, body }));
 }
-export function compileProgram(program: StyleProgram, config: OutputConfig): CompiledStyle {
+export function compileProgram(
+  program: StyleProgram,
+  config: OutputConfig,
+  metadata: Readonly<StyleMetadata> = {},
+): CompiledStyle {
   const context = compiler(config);
   const body = styleBody(program, context.animation);
-  const record = context.named('class', body, [...context.resources.keys()]);
+  const base = context.named('class', body, [...context.resources.keys()]);
+  const count = (nodes: StyleProgram): number =>
+    nodes.reduce(
+      (total, node) => total + (node.kind === 'declaration' ? 1 : count(node.children)),
+      0,
+    );
+  const record: StyleRecord = Object.freeze({
+    ...base,
+    ...(metadata.name === undefined
+      ? {}
+      : { id: namedId(config, 'class', body, metadata.name), name: metadata.name }),
+    ...(metadata.debug
+      ? {
+          debug: Object.freeze({
+            declarations: count(program),
+            sources: Object.freeze(metadata.source ? [metadata.source] : []),
+          }),
+        }
+      : {}),
+  });
   validateRecord(record, config);
   return { record, dependencies: [...context.resources.values()] };
 }

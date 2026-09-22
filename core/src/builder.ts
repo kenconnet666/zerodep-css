@@ -32,12 +32,20 @@ import type {
 } from './builder-types.js';
 import { isCssVariable, validateCustomName } from './values.js';
 import { Css, type CssConstructor } from './css.js';
+import {
+  getStyleSource,
+  setStyleConfig,
+  validateStyleName,
+  type StyleMetadata,
+} from './style-metadata.js';
 
 type Table = Readonly<Record<string, PropertyMetadata>>;
 type Factory = (builder: never) => unknown;
 interface Session {
   active: boolean;
   cssType: CssConstructor;
+  depth: number;
+  metadata?: StyleMetadata;
 }
 const simpleSet = new Set(simplePseudos);
 const functionalSet = new Set(functionalPseudos);
@@ -76,8 +84,12 @@ function invoke(factory: Factory, builder: unknown) {
     throw new TypeError('Style callbacks must return void and must not be async.');
   }
 }
-function withSession<T>(action: (session: Session) => T, cssType: CssConstructor = Css): T {
-  const session = { active: true, cssType };
+function withSession<T>(
+  action: (session: Session) => T,
+  cssType: CssConstructor = Css,
+  metadata?: StyleMetadata,
+): T {
+  const session = { active: true, cssType, depth: 0, metadata };
   try {
     return action(session);
   } finally {
@@ -251,6 +263,13 @@ function declarations(
 }
 function style(factory: Factory, session: Session, important = false): StyleProgram {
   const nodes: StyleNode[] = [];
+  const isRoot = session.depth === 0;
+  const metadata = (): StyleMetadata => {
+    alive(session);
+    if (!isRoot || !session.metadata)
+      throw new Error('name/config are only available on the root local style.');
+    return session.metadata;
+  };
   const nest = (selector: string, child: Factory) => {
     alive(session);
     text(selector, 'Selector');
@@ -281,6 +300,16 @@ function style(factory: Factory, session: Session, important = false): StyleProg
     );
   };
   const helpers = {
+    name(value: unknown) {
+      const target = metadata();
+      validateStyleName(value);
+      if (target.name !== undefined && target.name !== value)
+        throw new Error('A style cannot have conflicting names.');
+      target.name = value;
+    },
+    config(value: unknown) {
+      setStyleConfig(metadata(), value);
+    },
     selector: nest,
     pseudo(name: string, child: Factory) {
       if (!simpleSet.has(name)) throw new TypeError('Unknown simple pseudo: ' + name);
@@ -306,19 +335,33 @@ function style(factory: Factory, session: Session, important = false): StyleProg
       nodes.push(...style(child, session, true));
     },
   };
-  const properties = declarations(propertyMetadata, nodes, session, important, helpers) as object;
-  const builder = new session.cssType({
-    read: (key) => Reflect.get(properties, key),
-    assertActive: () => alive(session),
-  });
-  if (!(builder instanceof Css)) throw new TypeError('The CSS type must extend Css.');
-  invoke(factory, builder);
-  return Object.freeze(nodes);
+  session.depth++;
+  try {
+    const properties = declarations(propertyMetadata, nodes, session, important, helpers) as object;
+    const builder = new session.cssType({
+      read: (key) => Reflect.get(properties, key),
+      assertActive: () => alive(session),
+    });
+    if (!(builder instanceof Css)) throw new TypeError('The CSS type must extend Css.');
+    invoke(factory, builder);
+    return Object.freeze(nodes);
+  } finally {
+    session.depth--;
+  }
 }
 
 /** 内部纯构建入口；不返回 class、不写样式表、不建立订阅。 */
 export function buildStyleProgram(factory: Factory, cssType: CssConstructor = Css): StyleProgram {
-  return withSession((session) => style(factory, session), cssType);
+  return buildStyleDefinition(factory, cssType).program;
+}
+export function buildStyleDefinition(
+  factory: Factory,
+  cssType: CssConstructor = Css,
+): { readonly program: StyleProgram; readonly metadata: Readonly<StyleMetadata> } {
+  const source = getStyleSource(factory);
+  const metadata: StyleMetadata = source ? { source } : {};
+  const program = withSession((session) => style(factory, session), cssType, metadata);
+  return Object.freeze({ program, metadata: Object.freeze(metadata) });
 }
 function frameDeclarations(factory: Factory, session: Session): readonly Declaration[] {
   const nodes: Declaration[] = [];

@@ -35,7 +35,7 @@ export function transformBx(
   const script = ast.instance.content;
   if (!hasRange(script)) throw new Error('Missing Svelte script source range: ' + filename);
   const ctx = session(source, filename, script.start, script.end, 'svelte', options);
-  if (!ctx.macros.size) return null;
+  if (!ctx.macros.size && !options.debug) return null;
   const classes = new Map<
     string,
     TransformedExpression & { uses: number; declaration: ts.VariableDeclaration }
@@ -60,7 +60,11 @@ export function transformBx(
         if (ts.isIdentifier(d.name) && d.initializer) {
           const offset = ctx.scriptStart + d.initializer.getStart(ctx.ast);
           const result = ctx.expression(d.initializer.getText(ctx.ast), offset);
-          if (!result.bindings.length) continue;
+          if (!result.bindings.length) {
+            if (result.code !== d.initializer.getText(ctx.ast))
+              ctx.output.overwrite(offset, ctx.scriptStart + d.initializer.end, result.code);
+            continue;
+          }
           if (
             !(statement.declarationList.flags & ts.NodeFlags.Const) ||
             statement.modifiers?.length ||
@@ -162,6 +166,8 @@ export function transformBx(
           attr.end,
           result.bindings.map((b) => ` style:${b.name}={${b.expression}}`).join(''),
         );
+      } else if (result.code !== text) {
+        ctx.output.overwrite(expression.start, expression.end, result.code);
       }
     }
     function inspectExpressions(value: unknown): void {

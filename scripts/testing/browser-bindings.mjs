@@ -68,6 +68,7 @@ for (const server of [true, false]) {
     external: server ? ['vue', 'vue/*', 'svelte', 'svelte/*', 'css-tree'] : [],
     alias: {
       '@zerodep-css/core/binding': resolve(root, 'core/dist/binding.js'),
+      '@zerodep-css/core/compiler-runtime': resolve(root, 'core/dist/compiler-runtime.js'),
       '@zerodep-css/vue/compiler-runtime': resolve(root, 'vue/dist/compiler-runtime.js'),
       '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
       '@zerodep-css/vue': resolve(root, 'vue/dist/index.js'),

@@ -503,6 +503,7 @@ export async function runBrowserTests(browser, baseUrl, ssr, output) {
           k.to((s) => s.opacity.raw(1));
         });
         const name = r.css((s) => {
+          s.name('ssr-box').config({ debug: true });
           s.padding.px(8, 16);
           s.animationName.raw(fade);
           s.animationDuration.ms(1);

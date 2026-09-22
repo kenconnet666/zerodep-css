@@ -6,6 +6,7 @@ export interface BrowserSheet {
   readonly nonce?: string;
   readonly nodes: Map<string, HTMLStyleElement>;
   verify(id: string): void;
+  updateMetadata(record: StyleRecord): void;
   insert(record: StyleRecord, before?: HTMLStyleElement): HTMLStyleElement;
   remove(node: HTMLStyleElement): void;
   dispose(): void;
@@ -22,7 +23,21 @@ export function attribute(value: string): string {
     .replaceAll('>', '&gt;');
 }
 export function renderStyleTag(record: StyleRecord, config: OutputConfig, nonce?: string): string {
-  return `<style data-zerodep="${attribute(config.namespace)}" data-zerodep-id="${attribute(record.id)}"${nonce === undefined ? '' : ` nonce="${attribute(nonce)}"`}>${htmlCss(renderRecord(record, config))}</style>`;
+  const debug = Object.entries(metadataAttributes(record))
+    .map(([key, value]) => ` ${key}="${attribute(value)}"`)
+    .join('');
+  return `<style data-zerodep="${attribute(config.namespace)}" data-zerodep-id="${attribute(record.id)}"${nonce === undefined ? '' : ` nonce="${attribute(nonce)}"`}${debug}>${htmlCss(renderRecord(record, config))}</style>`;
+}
+function metadataAttributes(record: StyleRecord): Record<string, string> {
+  return {
+    ...(record.name === undefined ? {} : { 'data-zerodep-name': record.name }),
+    ...(record.debug
+      ? {
+          'data-zerodep-declarations': String(record.debug.declarations),
+          'data-zerodep-sources': JSON.stringify(record.debug.sources),
+        }
+      : {}),
+  };
 }
 export function browserSheet(
   target: StyleTarget,
@@ -104,6 +119,12 @@ export function browserSheet(
     document: doc,
     nodes,
     nonce,
+    updateMetadata(record) {
+      const node = nodes.get(record.id);
+      if (node)
+        for (const [key, value] of Object.entries(metadataAttributes(record)))
+          node.setAttribute(key, value);
+    },
     verify(id) {
       const node = nodes.get(id);
       const header = config.layers.length ? nodes.get(config.namespace + '-layers') : undefined;
@@ -132,6 +153,8 @@ export function browserSheet(
       const node = doc.createElement('style');
       node.setAttribute('data-zerodep', config.namespace);
       node.setAttribute('data-zerodep-id', record.id);
+      for (const [key, value] of Object.entries(metadataAttributes(record)))
+        node.setAttribute(key, value);
       if (nonce !== undefined) node.nonce = nonce;
       try {
         container.insertBefore(node, before ?? end);

@@ -1,6 +1,7 @@
 export { keyframes, globalCss } from './builder.js';
 export { Css } from './css.js';
 export type { CssConstructor, CssConstruction } from './css.js';
+export type { StyleConfig, StyleSource } from './style-metadata.js';
 export { css, injectGlobal, createRuntime } from './runtime.js';
 export { createStyleContext } from './context.js';
 export type { StyleContext, StyleContextManifest, StyleContextOptions } from './context.js';

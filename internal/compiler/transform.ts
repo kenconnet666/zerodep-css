@@ -101,7 +101,9 @@ export function session(
   };
   const valueName = fresh('value');
   const tupleName = fresh('tuple');
+  const sourceName = fresh('source');
   let hasBindings = false;
+  let hasSources = false;
   const mapper = sourceMapper(source, filename);
   const mapToOriginal = mapper.expression;
   const error: (offset: number, message: string) => never = (offset, message) => {
@@ -145,6 +147,18 @@ export function session(
       )
         return;
       const callback = node.arguments[0];
+      if (callback && options.debug && !id.startsWith('../') && !isAbsolute(id)) {
+        const offset = base + node.getStart(file);
+        const before = source.slice(0, offset);
+        const location = {
+          file: id,
+          line: before.split('\n').length,
+          column: offset - before.lastIndexOf('\n'),
+        };
+        edits.appendLeft(callback.getStart(file) - prefix.length, `${sourceName}(`);
+        edits.appendLeft(callback.end - prefix.length, `, ${JSON.stringify(location)})`);
+        hasSources = true;
+      }
       if (!callback || (!ts.isArrowFunction(callback) && !ts.isFunctionExpression(callback)))
         return;
       const styleCallback = callback;
@@ -370,11 +384,17 @@ export function session(
     scriptEnd,
     mapToOriginal,
     finish(extra = '') {
-      if (!hasBindings) return null;
-      output.appendLeft(
-        scriptStart,
-        `\nimport { bxValue as ${valueName}, bxTuple as ${tupleName} } from '@zerodep-css/core/binding';\n`,
-      );
+      if (!hasBindings && !hasSources) return null;
+      if (hasBindings)
+        output.appendLeft(
+          scriptStart,
+          `\nimport { bxValue as ${valueName}, bxTuple as ${tupleName} } from '@zerodep-css/core/binding';\n`,
+        );
+      if (hasSources)
+        output.appendLeft(
+          scriptStart,
+          `\nimport { withStyleSource as ${sourceName} } from '@zerodep-css/core/compiler-runtime';\n`,
+        );
       output.appendLeft(scriptEnd, '\n' + extra + '\n');
       return mapper.finish(output);
     },
@@ -450,15 +470,17 @@ export function vitePlugin(
   options: CompilerOptions = {},
 ): CompilerPlugin {
   let root = options.root;
+  let debug = options.debug;
   return {
     name: `zerodep-${framework}-bx`,
     enforce: 'pre',
     configResolved(config) {
       root ??= config.root;
+      debug ??= config.command === 'serve' && !config.isProduction;
     },
     transform(source, id) {
       if (id.includes('?') || !id.endsWith('.' + framework)) return null;
-      return transform(source, id, { ...options, root });
+      return transform(source, id, { ...options, root, debug });
     },
   };
 }

@@ -47,7 +47,7 @@ export function transformBx(
     'vue',
     options,
   );
-  if (!ctx.macros.size) return null;
+  if (!ctx.macros.size && !options.debug) return null;
   const metadata = compileScript(descriptor, { id: filename }).bindings ?? {};
   const computed = ctx.fresh('computed'),
     unref = ctx.fresh('unref'),
@@ -123,7 +123,11 @@ export function transformBx(
         if (ts.isIdentifier(d.name) && d.initializer) {
           const offset = ctx.scriptStart + d.initializer.getStart(ctx.ast);
           const result = ctx.expression(d.initializer.getText(ctx.ast), offset);
-          if (!result.bindings.length) continue;
+          if (!result.bindings.length) {
+            if (result.code !== d.initializer.getText(ctx.ast))
+              ctx.output.overwrite(offset, ctx.scriptStart + d.initializer.end, result.code);
+            continue;
+          }
           if (
             !(statement.declarationList.flags & ts.NodeFlags.Const) ||
             statement.modifiers?.length ||
@@ -255,6 +259,12 @@ export function transformBx(
         ctx.output.appendLeft(
           classProp.loc.end.offset,
           ` :style="${attr('[' + [...styles, styleName].join(',') + ']')}"`,
+        );
+      } else if (result.code !== expression) {
+        ctx.output.overwrite(
+          classProp.loc.start.offset,
+          classProp.loc.end.offset,
+          `:class="${attr(result.code)}"`,
         );
       }
     }

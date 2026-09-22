@@ -34,6 +34,14 @@ const panelClass = css((s) => {
 - `animationName.raw` 接受动画定义/数组，空数组输出 `animation-name:none`。token/raw 的 null/undefined 省略声明；单位方法不接受空值。
 - 普通值每次变化可产生新 class，旧规则保留至所属 runtime.dispose；不自动改为 CSS 变量。
 
+## 样式命名与诊断
+
+根 `css` 回调可以使用 `s.name('panel').config({ debug: true })`，生成包含 `panel` 和内容哈希的类名。名字允许 1–128 个字母、数字、下划线或连字符；同名不同内容仍有不同哈希。名字作用于整个根样式，不能在 hover、media 或全局规则中重新命名。
+
+`config` 首版只有 `debug`，用于按样式覆盖运行时的诊断开关。运行时也接受 `createRuntime({ debug: true })`；重复指定冲突的本地配置会报错。nonce、target 和 namespace 仍由运行时宿主管理。
+
+Vue/Svelte 编译插件在 Vite 开发模式默认附加项目相对文件位置，也可以显式设置插件的 `debug`。诊断记录声明数量与最多 32 个来源，通过 style 标签的 `data-zerodep-*` 属性和 SSR manifest 查看。来源不进入内容哈希，生产模式默认不生成来源。SSR 样式 manifest 输出版本 2，仍可恢复未包含新元数据的版本 1。
+
 ## keyframes：保留资源依赖
 
 ```ts
