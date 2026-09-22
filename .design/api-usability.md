@@ -50,3 +50,7 @@
 本地 check/build、110 项快速测试、框架浏览器/SSR/HMR 与体积门禁通过；新增测试覆盖外部修改隔离、getter 读取次数、null 重置及负零。完整代码提交 `37459d6` 的 [CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35790231732) 七个 job 全部通过：Windows/Linux、语言服务与独立类型负例、独立消费者，以及 Chromium/Firefox/WebKit 的 core 和框架套件。独占 HMR、消费者及旧版编译临时目录均已清理，诊断和性能报告保留在忽略目录。
 
 实施提交为 `502a151`（组件状态/全局派生类）、`0723dd9`（配置视图/主题一致性）、`37459d6`（解析优化与测量）。本页随后随同进程对照探针归档。三个包仍 private，版本 0.2.0，新增能力列于未发布变更记录。
+
+最终类型复核补充：显式 `useStyleRuntime<AppCss>({})` 曾因 cssType 可选而产生没有实际构造器的类型承诺。Vue 负例在修复前报 unused @ts-expect-error，证明确实遗漏约束；泛型重载现要求实际 cssType，普通无类型选项使用系统 Css 返回值。Vue/Svelte 类型夹具与独立消费者同步保留负例，正常选项对象仍自动推断作者类。
+
+该补充已再次通过本地 check/build、110 项快速测试、框架浏览器/SSR/HMR 和独立消费者，并增加系统 runtime 不能被标注为派生 runtime 的核心类型负例。提交后的 CI 以当前分支对应提交的工作流记录为准；上方链接保留完整算法实现的已通过证据。

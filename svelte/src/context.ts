@@ -1,6 +1,7 @@
 import { getContext, setContext } from 'svelte';
 import {
   Css,
+  type CssConstructor,
   type StyleContext,
   type StyleRuntime,
   type ThemeScope,
@@ -20,9 +21,10 @@ export function resolveContext(explicit?: StyleContext): StyleContext {
   return context;
 }
 /** 在组件初始化时获取，后续模板求值无需再次访问 context。 */
-export function useStyleRuntime<T extends Css = Css>(
-  options: UseStyleRuntimeOptions<T>,
+export function useStyleRuntime<T extends Css>(
+  options: UseStyleRuntimeOptions<T> & { readonly cssType: CssConstructor<T> },
 ): StyleRuntime<T>;
+export function useStyleRuntime(options: UseStyleRuntimeOptions): StyleRuntime;
 export function useStyleRuntime(context?: StyleContext, theme?: ThemeScope): StyleRuntime;
 export function useStyleRuntime(
   input?: StyleContext | UseStyleRuntimeOptions,

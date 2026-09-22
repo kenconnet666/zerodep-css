@@ -1,7 +1,15 @@
 <script lang="ts">
-  import { useStyleRuntime, keyframes, globalCss } from '@zerodep-css/svelte';
+  import { Css, useStyleRuntime, keyframes, globalCss } from '@zerodep-css/svelte';
 
   const { css } = useStyleRuntime();
+  class CustomCss extends Css {
+    control() {
+      this.padding.px(8);
+    }
+  }
+  useStyleRuntime({ cssType: CustomCss }).css((s) => s.control());
+  // @ts-expect-error 声明泛型不能代替实际传入构造器
+  useStyleRuntime<CustomCss>({});
 
   let { width = 120 }: { width?: number } = $props();
   const fade = keyframes((k) => {

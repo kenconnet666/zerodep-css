@@ -1,6 +1,7 @@
 import { hasInjectionContext, inject, provide, type App, type InjectionKey } from 'vue';
 import {
   Css,
+  type CssConstructor,
   type StyleContext,
   type StyleRuntime,
   type ThemeScope,
@@ -24,9 +25,10 @@ export function resolveContext(explicit?: StyleContext): StyleContext {
   return context;
 }
 /** 初始化时取得实例；返回的 css 可在模板、computed 或业务函数中调用。 */
-export function useStyleRuntime<T extends Css = Css>(
-  options: UseStyleRuntimeOptions<T>,
+export function useStyleRuntime<T extends Css>(
+  options: UseStyleRuntimeOptions<T> & { readonly cssType: CssConstructor<T> },
 ): StyleRuntime<T>;
+export function useStyleRuntime(options: UseStyleRuntimeOptions): StyleRuntime;
 export function useStyleRuntime(context?: StyleContext, theme?: ThemeScope): StyleRuntime;
 export function useStyleRuntime(
   input?: StyleContext | UseStyleRuntimeOptions,

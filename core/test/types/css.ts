@@ -1,4 +1,4 @@
-import { Css, createRuntime } from '../../src/index.js';
+import { Css, createRuntime, type StyleRuntime } from '../../src/index.js';
 import { ThemeCss } from '../../src/themes.js';
 import { withTheme } from '../../src/theme-runtime.js';
 
@@ -18,6 +18,9 @@ class InvalidCss extends Css {
 }
 
 const runtime = createRuntime({ target: null });
+// @ts-expect-error 类型标注不能把系统 runtime 变成派生类 runtime
+const invalidRuntime: StyleRuntime<AppCss> = runtime;
+void invalidRuntime;
 class BrandedCss extends ThemeCss {
   get color() {
     return this.extendProperty(super.color, { brand: '#123456' });

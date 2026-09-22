@@ -177,6 +177,8 @@ const result: string = useStyleRuntime(context).css(style);
 class AppCss extends Css { get color(){ return this.extendProperty(super.color,{brand:'#2463eb'}); } control(){this.padding.px(8);} }
 const extended: string = useStyleRuntime(context).css(s=>{s.control();s.color.brand;s.hover(h=>h.control());},AppCss);
 const appStyle = useStyleRuntime({context,cssType:AppCss});
+// @ts-expect-error 泛型声明不能替代运行时构造器
+useStyleRuntime<AppCss>({context});
 appStyle.css(s=>{s.control();s.focus(h=>h.color.brand);});
 // @ts-expect-error 初始化类型不会丢失方法签名或开放任意成员
 appStyle.css(s=>s.unknownMethod());
