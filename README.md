@@ -45,6 +45,7 @@ pnpm test:browser:frameworks
 - [项目语言服务](.design/language-services.md)
 - [实施规划与阶段记录](.design/implementation-research.md)
 - [当前架构](.design/architecture.md)
+- [换机交接与恢复步骤](.design/handoff.md)
 - [后续路线](.design/roadmap.md)
 - [目录、命名与基础设施审计及下一阶段](.design/architecture-audit.md)
 - [正式 CSS 覆盖清单](.design/css-coverage.json)
