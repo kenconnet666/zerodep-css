@@ -94,6 +94,7 @@ try {
       `import { createStyleContext, type StyleFactory, type StylesheetFactory } from '@zerodep-css/core';
 import { useStyleRuntime } from '@zerodep-css/${framework}';
 import { bx } from '@zerodep-css/${framework}';
+import { Css } from '@zerodep-css/${framework}';
 import { bxPlugin, transformBx } from '@zerodep-css/${framework}/compiler';
 import type { Plugin } from 'vite';
 const compilerPlugin: Plugin = bxPlugin(); void compilerPlugin;
@@ -109,7 +110,9 @@ s.display.token('unknown-token');
 s.width('50%'); s.width.px(bx(12)); };
 const global: StylesheetFactory = g => g.containerQuery('(width > 10px)', g => g.rule('body', style));
 const result: string = useStyleRuntime(context).css(style);
-context.mountGlobal('consumer',global); context.dispose(); void result; void defaultCss; void bxPlugin; void transformBx;
+class AppCss extends Css { get color(){ return this.extendProperty(super.color,{brand:'#2463eb'}); } control(){this.padding.px(8);} }
+const extended: string = useStyleRuntime(context).css(s=>{s.control();s.color.brand;s.hover(h=>h.control());},AppCss);
+context.mountGlobal('consumer',global); context.dispose(); void result; void extended; void defaultCss; void bxPlugin; void transformBx;
 `,
     );
     pnpm(

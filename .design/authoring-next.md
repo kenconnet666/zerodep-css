@@ -14,12 +14,12 @@
 
 ## Css 与用户派生类
 
-当前底层是生成的类型接口和运行时 Builder，并没有可继承的 Css 类。只增加一个同名类型或类型断言无法满足要求：派生成员、getter、方法、super 调用、类型补全及实际执行都必须一致。
+生产化阶段已接入真实 Css 基类，使用 `css(factory, AppCss)` 选择派生类型；默认仍使用系统 Css。类型化扩展、getter、方法、super、私有字段和嵌套回调均有实际执行与类型验收。名称、完整主题作用域和自动绑定仍按后续阶段推进。
 
-下面只说明作者意图；派生类怎样与 runtime/context 创建过程结合尚未定稿：
+下面说明作者意图；将派生类作为 css 的第二个参数交给当前 runtime/context 即可使用：
 
 ```ts
-// 候选，尚未实现。
+// 已实现的类继承作者模型。
 class AppCss extends Css {
   get brandColor() {
     return '#2463eb';

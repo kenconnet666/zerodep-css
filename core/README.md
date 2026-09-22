@@ -1,5 +1,7 @@
 # @zerodep-css/core
 
+`Css` 是可继承的作者基类。`runtime.css(factory, AppCss)`（浏览器默认入口同形）在每次构建中创建指定派生类型，保留 getter、方法、super、私有字段与嵌套回调类型。使用 `extendProperty(super.color, { brand: value })` 可在派生 getter 中增加类型化关键字；不能覆盖已有属性操作。实例由运行时拥有，不在多个构建之间共享，构建结束后不能继续操作。
+
 运行时 CSS 工具。公开入口 `css(factory): string` 直接返回哈希类名，可以写在浏览器模板表达式里，也可以先赋值为字符串再绑定。内部纯 Builder 已收为实现细节，不再从包入口导出 `useCss`。
 
 ## css：模板内或外部使用

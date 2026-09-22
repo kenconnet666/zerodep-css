@@ -18,6 +18,7 @@ import {
 } from './serialize.js';
 import type { KeyframesDefinition, StylesheetDefinition } from './style-program.js';
 import type { StylesheetFactory, StyleFactory } from './builder-types.js';
+import { Css, type CssConstructor } from './css.js';
 
 export interface StyleManifest {
   readonly version: 1;
@@ -50,6 +51,7 @@ export interface RuntimeStats {
 export interface StyleRuntime {
   readonly config: OutputConfig;
   css(factory: StyleFactory): string;
+  css<T extends Css>(factory: StyleFactory<T>, cssType: CssConstructor<T>): string;
   keyframes(definition: KeyframesDefinition): string;
   mountGlobal(value: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle;
   /** 认领 SSR 恢复的全局槽位，不根据内容猜测组件身份。 */
@@ -335,9 +337,9 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   }
   const runtime: StyleRuntime = {
     config,
-    css(factory) {
+    css(factory: StyleFactory<never>, cssType: CssConstructor = Css) {
       alive();
-      const compiled = compileProgram(buildStyleProgram(factory), config);
+      const compiled = compileProgram(buildStyleProgram(factory, cssType), config);
       ensure(compiled);
       return compiled.record.id;
     },
@@ -441,8 +443,10 @@ function defaultRuntime(): StyleRuntime {
   return owners.get(document)?.get('z') ?? createRuntime({ target: document });
 }
 /** 浏览器中直接返回字符串类名；普通变量在每次调用时重新求值。 */
-export function css(factory: StyleFactory): string {
-  return defaultRuntime().css(factory);
+export function css(factory: StyleFactory): string;
+export function css<T extends Css>(factory: StyleFactory<T>, cssType: CssConstructor<T>): string;
+export function css(factory: StyleFactory<never>, cssType: CssConstructor = Css): string {
+  return defaultRuntime().css(factory as StyleFactory, cssType);
 }
 /** 应用级全局样式便捷入口，返回可更新/释放的挂载。 */
 export function injectGlobal(value: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle {

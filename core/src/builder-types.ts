@@ -7,6 +7,7 @@ import type {
 } from './generated/properties.js';
 import type { CssVariable, Input } from './values.js';
 import type { KeyframesDefinition } from './style-program.js';
+import type { Css } from './css.js';
 
 export interface DeclarationHelpers {
   readonly custom: { raw(name: `--${string}`, value: Input<string | number> | CssVariable): void };
@@ -34,7 +35,7 @@ export interface StyleHelpers extends DeclarationHelpers {
   important(factory: StyleFactory): void;
 }
 export type StyleBuilder = StyleProperties & StyleHelpers;
-export type StyleFactory = (s: StyleBuilder) => void;
+export type StyleFactory<T = Css> = (s: T) => void;
 export type FrameOffset =
   | number
   | 'from'

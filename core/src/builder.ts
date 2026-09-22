@@ -31,11 +31,13 @@ import type {
   StyleFactory,
 } from './builder-types.js';
 import { isCssVariable, validateCustomName } from './values.js';
+import { Css, type CssConstructor } from './css.js';
 
 type Table = Readonly<Record<string, PropertyMetadata>>;
 type Factory = (builder: never) => unknown;
 interface Session {
   active: boolean;
+  cssType: CssConstructor;
 }
 const simpleSet = new Set(simplePseudos);
 const functionalSet = new Set(functionalPseudos);
@@ -74,8 +76,8 @@ function invoke(factory: Factory, builder: unknown) {
     throw new TypeError('Style callbacks must return void and must not be async.');
   }
 }
-function withSession<T>(action: (session: Session) => T): T {
-  const session = { active: true };
+function withSession<T>(action: (session: Session) => T, cssType: CssConstructor = Css): T {
+  const session = { active: true, cssType };
   try {
     return action(session);
   } finally {
@@ -197,6 +199,19 @@ function declarations(
         append(meta.cssName, value);
       };
       const property = new Proxy(Object.create(null) as object, {
+        has(_object, member) {
+          if (typeof member !== 'string') return false;
+          return (
+            member === 'raw' ||
+            member === 'token' ||
+            Object.hasOwn(keywords, member) ||
+            plans.some((plan) =>
+              unitFamilies[plan.family]!.some(
+                (unit) => member === (unit === '%' ? 'pct' : unit) + plan.suffix,
+              ),
+            )
+          );
+        },
         get(_object, member) {
           if (typeof member !== 'string' || member === 'then') return undefined;
           alive(session);
@@ -291,13 +306,19 @@ function style(factory: Factory, session: Session, important = false): StyleProg
       nodes.push(...style(child, session, true));
     },
   };
-  invoke(factory, declarations(propertyMetadata, nodes, session, important, helpers));
+  const properties = declarations(propertyMetadata, nodes, session, important, helpers) as object;
+  const builder = new session.cssType({
+    read: (key) => Reflect.get(properties, key),
+    assertActive: () => alive(session),
+  });
+  if (!(builder instanceof Css)) throw new TypeError('The CSS type must extend Css.');
+  invoke(factory, builder);
   return Object.freeze(nodes);
 }
 
 /** 内部纯构建入口；不返回 class、不写样式表、不建立订阅。 */
-export function buildStyleProgram(factory: StyleFactory): StyleProgram {
-  return withSession((session) => style(factory, session));
+export function buildStyleProgram(factory: Factory, cssType: CssConstructor = Css): StyleProgram {
+  return withSession((session) => style(factory, session), cssType);
 }
 function frameDeclarations(factory: Factory, session: Session): readonly Declaration[] {
   const nodes: Declaration[] = [];
