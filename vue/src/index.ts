@@ -1,6 +1,6 @@
 export { installStyleContext, provideStyleContext, useStyleRuntime } from './context.js';
 export { useGlobalCss } from './global.js';
-export { provideTheme } from './theme.js';
+export { provideTheme, useTheme } from './theme.js';
 export { defineTheme } from '@zerodep-css/core';
 export type {
   ThemeScope,

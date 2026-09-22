@@ -1,6 +1,6 @@
 # 当前交接与换机恢复
 
-更新：2026-09-23。本项目为 core/vue/svelte 三包的混合 CSS 框架，保留运行时与复杂场景回退，自动编译使用 cssPlugin/transformCss，公开 bx 已移除。当前状态以 [生产验收](production-audit.md) 与 [执行记录](production-plan.md) 为准，history 下的旧 API 不应继续用于实现。
+更新：2026-09-23。本项目为 core/vue/svelte 三包的混合 CSS 框架，保留运行时与复杂场景回退，自动编译使用 cssPlugin/transformCss，公开 bx 已移除。0.2 基线状态见 [生产验收](production-audit.md) 与 [执行记录](production-plan.md)，本轮修复与新增 API 见 [维护审查](maintenance-audit.md)，history 下的旧 API 不应继续用于实现。
 
 ## 取得工作区
 
@@ -26,8 +26,8 @@ pnpm lsp:setup
 
 ## 当前主要入口
 
-- core：css/createRuntime/createStyleContext、Css 类与 extendProperty、defineTheme、全局样式与动画资源。
-- Vue/Svelte：useStyleRuntime、useGlobalCss、provideStyleContext、provideTheme；Vue 应用入口另有 installStyleContext。
+- core：css/createRuntime/createStyleContext、Css 类与 extendProperty、defineTheme/readTheme、全局样式与动画资源。
+- Vue/Svelte：useStyleRuntime、useGlobalCss、provideStyleContext、provideTheme/useTheme；Vue 应用入口另有 installStyleContext。
 - 编译器：适配器的 `/compiler` 子路径提供 cssPlugin/transformCss。内部生成代码入口不作为业务作者 API。
 - 预设：三个包的 `/themes` 子路径提供 lightTheme/darkTheme/ThemeCss；严格 CSP 可用 cssPlugin({ bindings: 'runtime' })。
 - `s.name(...).config({ debug })` 提供根命名和相对源码诊断；配置中的 target/nonce/layers 属于 runtime 宿主。

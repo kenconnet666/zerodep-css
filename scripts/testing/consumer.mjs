@@ -128,9 +128,10 @@ try {
     await save(
       join(folder, 'themes-smoke.mjs'),
       `import assert from 'node:assert/strict';
-import {createRuntime} from '@zerodep-css/core';
+import {createRuntime,readTheme} from '@zerodep-css/core';
 import {ThemeCss,lightTheme,darkTheme} from '@zerodep-css/${framework}/themes';
 const runtime=createRuntime({target:null});
+assert.equal(readTheme(lightTheme),lightTheme.defaults);
 try { runtime.css(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;},ThemeCss);
 assert.notEqual(lightTheme.className(runtime),darkTheme.className(runtime));
 assert.equal(runtime.stats().classes,3); } finally { runtime.dispose(); }
@@ -140,8 +141,8 @@ assert.equal(runtime.stats().classes,3); } finally { runtime.dispose(); }
     // 使用独立消费者的 TypeScript 与 NodeNext 条件，而不是仓库的 zerodep-source 条件。
     await save(
       join(folder, 'types.ts'),
-      `import { createStyleContext, type StyleFactory, type StylesheetFactory } from '@zerodep-css/core';
-import { useStyleRuntime, defineTheme, provideTheme } from '@zerodep-css/${framework}';
+      `import { createStyleContext, readTheme, type StyleFactory, type StylesheetFactory } from '@zerodep-css/core';
+import { useStyleRuntime, useTheme, defineTheme, provideTheme } from '@zerodep-css/${framework}';
 // @ts-expect-error bx 已移除，动态值直接交给 cssPlugin
 import { bx } from '@zerodep-css/${framework}';
 import { Css } from '@zerodep-css/${framework}';
@@ -156,6 +157,13 @@ import type { StyleProgram } from '@zerodep-css/core';
 const context = createStyleContext({target:null});
 const palette = defineTheme('consumer-theme', {color:{brand:'red'}});
 const themeScope = provideTheme(palette, () => ({color:{brand:'blue'}}));
+const currentTheme = useTheme(palette, themeScope);
+const brand: string = currentTheme().color.brand; void brand;
+readTheme(palette, themeScope);
+// @ts-expect-error 主题 getter 保留只读字段结构
+currentTheme().color.brand = 'green';
+// @ts-expect-error 不能读取未声明的主题字段
+currentTheme().spacing;
 useStyleRuntime(context, themeScope);
 // @ts-expect-error 主题叶类型不能因 provider 接入而放宽
 provideTheme(palette, () => ({color:{brand:1}}));

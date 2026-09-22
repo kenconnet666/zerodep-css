@@ -1,5 +1,19 @@
 # Svelte 适配
 
+`useTheme(definition, scope?)` 返回读取当前有效主题的函数，适用于图表等 JavaScript 消费者。组件初始化时获取函数，在模板或 `$derived` 中调用以追踪原生依赖：
+
+```svelte
+<script lang="ts">
+  import { useTheme } from '@zerodep-css/svelte';
+  import { lightTheme } from '@zerodep-css/svelte/themes';
+
+  const currentTheme = useTheme(lightTheme);
+  const chartColor = $derived(currentTheme().color.primary);
+</script>
+```
+
+默认捕获当前组件 context 中的逻辑作用域；provider 自身建议显式传入 `useTheme(theme, scope)`。无同名 provider 时返回传入预设默认值，同名不兼容 schema 报错。返回值深只读；普通 `const snapshot = currentTheme()` 是调用时快照。读取函数可以在初始化后继续调用，不会再次访问 context；不注册样式、不新建 store，也不依赖 style context。
+
 主题使用 `defineTheme` 的静态定义和 `provideTheme(theme, () => overrides)` 的原生 rune 覆盖。后代 `useStyleRuntime()` 自动继承；当前 provider 组件可显式使用返回的作用域：`const scope = provideTheme(theme, () => overrides); const { css } = useStyleRuntime(undefined, scope)`。显式 `useStyleRuntime(context)` 只使用指定运行时；需要主题时同时传入 scope。
 
 主题运行时的 css 返回可用于 class 属性的类名列表，其中包含有效主题变量类和内容类。放在模板或 $derived 中会随主题变化更新；普通 const 字符串仍是调用时快照。子对象只覆盖指定字段，null 恢复当前预设默认值。主题类附在样式元素上，移动 DOM 后仍保持逻辑组件作用域的主题。provider 不销毁共享 context，应用/请求宿主负责最终 dispose。

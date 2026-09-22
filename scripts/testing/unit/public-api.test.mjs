@@ -6,9 +6,11 @@ import * as svelte from '../../../svelte/dist/index.js';
 
 test('作者入口保持 css 字符串合同，适配器不再暴露默认浏览器实例', () => {
   assert.equal(typeof core.css, 'function');
+  assert.equal(typeof core.readTheme, 'function');
   for (const adapter of [vue, svelte]) {
     assert(!('css' in adapter));
     assert.equal(typeof adapter.useStyleRuntime, 'function');
+    assert.equal(typeof adapter.useTheme, 'function');
   }
   assert(!('useCss' in core));
   assert(!('buildStyleProgram' in core));

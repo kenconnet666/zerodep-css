@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { defineTheme, createRuntime } from '../../dist/index.js';
+import { defineTheme, createRuntime, readTheme } from '../../dist/index.js';
 import { createThemeScope, resolveTheme, withTheme } from '../../dist/theme-runtime.js';
 
 test('作用域替换同名主题并保留其他主题，运行时视图跟随有效值变化', () => {
@@ -50,4 +50,35 @@ test('同名不兼容定义不能进入父主题作用域', () => {
   const parent = createThemeScope(first, () => first.defaults);
   assert.throws(() => createThemeScope(second, () => second.defaults, parent), /schema/);
   assert.throws(() => resolveTheme(second, undefined, parent), /schema/);
+  assert.throws(() => readTheme(second, parent), /schema/);
+});
+
+test('主题读取保持快照身份、预设回退、多主题与请求隔离，不持有旧值', () => {
+  const theme = defineTheme('app', { color: { brand: 'red', text: 'black' }, opacity: 1 });
+  const dark = theme.extend({ color: { text: 'white' } });
+  const space = defineTheme('space', { gap: '8px' });
+  let current = theme.resolve({ color: { brand: 'blue' } });
+  let reads = 0;
+  const scope = createThemeScope(theme, () => {
+    reads++;
+    return current;
+  });
+  const combined = createThemeScope(space, () => space.defaults, scope);
+  const otherRequest = createThemeScope(theme, () => dark.defaults);
+  assert.equal(reads, 0);
+  assert.equal(readTheme(dark), dark.defaults);
+  assert.equal(readTheme(space, scope), space.defaults);
+  assert.equal(reads, 0);
+  const before = readTheme(theme, combined);
+  assert.equal(before, current);
+  assert.equal(reads, 1);
+  assert.equal(readTheme(dark, combined), current);
+  assert.equal(readTheme(theme, otherRequest), dark.defaults);
+  current = theme.resolve({ color: { brand: 'green' } });
+  assert.equal(readTheme(theme, combined).color.brand, 'green');
+  assert.equal(before.color.brand, 'blue');
+  assert(Object.isFrozen(before.color));
+  assert.throws(() => {
+    before.color.brand = 'yellow';
+  }, TypeError);
 });

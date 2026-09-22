@@ -32,6 +32,8 @@ Css 是实际可继承的作者类，提供系统属性；extendProperty 增加�
 
 可选 themes 入口提供 lightTheme、darkTheme 和 ThemeCss，覆盖语义颜色、尺度、字体、时长与阴影，支持预设继承和局部覆盖。详细配对和用法见 [系统亮暗主题](themes.md)。
 
+readTheme(definition, scope?) 返回有效主题的深只读快照；适配器 useTheme 返回捕获作用域的 getter，可供模板/computed/$derived 追踪。无同名 provider 时回退到传入定义的默认值，同名 schema 冲突报错；读取不注册样式、不创建订阅。新增 API 和维护证据见 [维护审查](maintenance-audit.md)。
+
 主题视图的 css 返回类名列表。放在模板/computed/$derived 中会随有效主题更新，DOM 移动不改变逻辑主题。定义不持有请求状态；组件不 dispose 共享 context。全局样式有稳定、唯一的 owner key，更新保持原槽位顺序，宿主最终释放 runtime/context。
 
 计算缓存与规则生命周期分开：256 项计算缓存和 128 项绑定校验缓存可以驱逐，绑定缓存同时限制为 65,536 UTF-16 字符，超大合法值不驻留；已注册规则可能被仍存活的 DOM 或已保存字符串使用，不自动 LRU 删除。应用可使用 maxRecords 限制记录数，超限明确失败且不破坏旧记录。

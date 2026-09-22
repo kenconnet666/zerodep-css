@@ -60,11 +60,15 @@ const className = `${palette} ${content}`;
 
 主题定义不持有 runtime/请求状态，`className` 将变量声明注册到传入 runtime；不同主题值复用各自的变量类，不改写引用它们的内容规则。core 调用者显式组合主题类与内容类；Vue/Svelte 的 provideTheme 和 useStyleRuntime 接入自动向下传播，使用方式见适配器 README。
 
+`readTheme(definition, scope?)` 从显式 `ThemeScope` 读取该主题当前的深只读快照，保留完整字段类型；没有同名主题时返回传入定义的 `defaults`。同名但 schema 不兼容会报错。读取不会注册 CSS 或访问 DOM，可用于服务端和非 CSS 逻辑。结果不会随后续主题变化被原地修改；需要当前值时重新调用。框架组件优先使用适配器的 `useTheme` 捕获作用域。
+
 ## 样式命名与诊断
 
 根 `css` 回调可以使用 `s.name('panel').config({ debug: true })`，生成包含 `panel` 和内容哈希的类名。名字允许 1–128 个字母、数字、下划线或连字符；同名不同内容仍有不同哈希。名字作用于整个根样式，不能在 hover、media 或全局规则中重新命名。
 
 `config` 首版只有 `debug`，用于按样式覆盖运行时的诊断开关。运行时也接受 `createRuntime({ debug: true })`；重复指定冲突的本地配置会报错。nonce、target 和 namespace 仍由运行时宿主管理。
+
+局部配置须为普通对象或无原型的数据对象；未知自有字段（包含 symbol 和不可枚举字段）会报错，不会静默忽略。
 
 Vue/Svelte 编译插件在 Vite 开发模式默认附加项目相对文件位置，也可以显式设置插件的 `debug`。诊断记录声明数量与最多 32 个来源，通过 style 标签的 `data-zerodep-*` 属性和 SSR manifest 查看。来源不进入内容哈希，生产模式默认不生成来源。SSR 样式 manifest 输出版本 2，仍可恢复未包含新元数据的版本 1。
 

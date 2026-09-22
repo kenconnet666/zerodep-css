@@ -1,5 +1,18 @@
 # Vue 适配
 
+`useTheme(definition, scope?)` 返回读取当前有效主题的函数，适用于图表等 JavaScript 消费者。在 setup 中调用一次，在模板、computed 或 effect 中调用返回函数以追踪原生响应式依赖：
+
+```ts
+import { computed } from 'vue';
+import { useTheme } from '@zerodep-css/vue';
+import { lightTheme } from '@zerodep-css/vue/themes';
+
+const currentTheme = useTheme(lightTheme);
+const chartColor = computed(() => currentTheme().color.primary);
+```
+
+默认读取祖先提供的逻辑作用域；provider 自身使用 `useTheme(theme, scope)`。无同名 provider 时返回传入预设默认值，同名不兼容 schema 报错。返回值深只读；`const snapshot = currentTheme()` 是调用时快照，不能代替 computed。该 API 不注册样式、不新建订阅，也不依赖 style context。
+
 主题使用 `defineTheme` 的静态定义和 `provideTheme(theme, () => overrides)` 的原生 computed 覆盖。后代 `useStyleRuntime()` 自动继承；当前 provider 组件使用返回的作用域：`const scope = provideTheme(theme, () => overrides.value); const { css } = useStyleRuntime(undefined, scope)`。同组件可连续提供多个主题。显式 `useStyleRuntime(context)` 只使用指定运行时；需要主题时同时传入 scope。
 
 主题运行时的 css 返回可用于 class 属性的类名列表，其中包含有效主题变量类和内容类。放在模板或 computed 中会随主题变化更新；普通 const 字符串仍是调用时快照。子对象只覆盖指定字段，null 恢复当前预设默认值。主题类附在样式元素上，因此 Vue Teleport 后仍保持逻辑组件作用域的主题。provider 不销毁共享 context，应用/请求宿主负责最终 dispose。

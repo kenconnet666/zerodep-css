@@ -1,6 +1,24 @@
-import { defineTheme, createRuntime, Css, type ThemeOverrides } from '../../src/index.js';
+import {
+  defineTheme,
+  readTheme,
+  createRuntime,
+  Css,
+  type ThemeOverrides,
+} from '../../src/index.js';
 
 const theme = defineTheme('app', { color: { brand: 'red' }, opacity: 1 });
+const values = readTheme(theme);
+const brand: string = values.color.brand;
+const opacity: number = values.opacity;
+void brand;
+void opacity;
+// @ts-expect-error 主题读取保留字段结构
+values.color.unknown;
+// @ts-expect-error 读取结果是深只读快照
+values.color.brand = 'blue';
+// @ts-expect-error 数字叶不会退化成字符串
+const invalidOpacity: string = values.opacity;
+void invalidOpacity;
 const overrides: ThemeOverrides<typeof theme.defaults> = { color: { brand: 'blue' } };
 theme.resolve(overrides);
 theme.extend({ opacity: 0.5 });

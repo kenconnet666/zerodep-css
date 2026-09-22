@@ -56,14 +56,15 @@ pnpm test:browser:frameworks
 - [生产验收与缺陷复核](.design/production-audit.md)
 - [系统亮暗主题](.design/themes.md)
 - [追加审计与修复](.design/presets-audit-plan.md)
+- [维护审查与主题读取 API](.design/maintenance-audit.md)
 - [版本变更记录](CHANGELOG.md)
 - [换机交接与恢复步骤](.design/handoff.md)
 - [后续路线](.design/roadmap.md)
 - [目录、命名与基础设施审计及下一阶段](.design/history/architecture-audit.md)
 - [正式 CSS 覆盖清单](.design/css-coverage.json)
 
-SSR 必须每个请求创建 runtime，并使用该实例的 css 函数；顶层 css 不使用服务端全局单例。浏览器当前采用原生 CSS nesting，真实验收基于本机 Chrome；兼容范围和测试证据见 core 文档。
+SSR 必须每个请求创建 runtime，并使用该实例的 css 函数；顶层 css 不使用服务端全局单例。浏览器采用原生 CSS nesting，本地验证使用已安装 Chrome，CI 覆盖 Chromium、Firefox、WebKit；兼容范围和测试证据见 core 文档。
 
 项目已配置 zerodep_lsp。可直接运行 `pnpm lsp:inspect <相对文件路径...>`；语言服务改动后运行 `pnpm lsp:verify`。换机使用 `./scripts/language-services/setup.ps1 -Verify` 生成本机配置，不改写用户全局设置。
 
-GitHub Actions 在 Linux 运行完整验证、独立 tarball 消费与体积预算，在 Windows 验证安装、类型、构建和单元测试，并上传报告。测试命令默认准备构建；同一轮已构建后可传 --no-build，CI 每个 job 只构建一次。日常本地至少运行 `pnpm check`、`pnpm build` 与对应单元/组件测试；完整类型补全验收和 core 浏览器回归可由 CI 执行。浏览器默认使用本机 Chrome，CI 使用 Playwright Chromium；不发布包或部署站点。
+GitHub Actions 在 Linux 运行完整验证、独立 tarball 消费与体积预算，在 Windows 验证安装、类型、构建和单元测试，并上传报告。测试命令默认准备构建；同一轮已构建后可传 --no-build，CI 每个 job 只构建一次。日常本地至少运行 `pnpm check`、`pnpm build` 与对应单元/组件测试；完整类型补全验收和 core 浏览器回归可由 CI 执行。CI 三引擎使用 Playwright 配套浏览器；不发布包或部署站点。

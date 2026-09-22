@@ -15,7 +15,7 @@ export interface ThemeScope {
   readonly themes: readonly ThemeState[];
 }
 
-function inherited<T extends ThemeTree>(
+function findTheme<T extends ThemeTree>(
   definition: ThemeDefinition<T>,
   parent?: ThemeScope,
 ): ThemeState | undefined {
@@ -24,6 +24,15 @@ function inherited<T extends ThemeTree>(
     throw new TypeError('Incompatible theme schema: ' + definition.name);
   return state;
 }
+/** 只读取当前冻结快照；无同名 provider 时使用传入定义的默认值，不注册 CSS。 */
+export function readTheme<T extends ThemeTree>(
+  definition: ThemeDefinition<T>,
+  scope?: ThemeScope,
+): ThemeValues<T> {
+  return (
+    (findTheme(definition, scope)?.values as ThemeValues<T> | undefined) ?? definition.defaults
+  );
+}
 export function resolveTheme<T extends ThemeTree>(
   definition: ThemeDefinition<T>,
   overrides: ThemeOverrides<T> | null | undefined,
@@ -31,7 +40,7 @@ export function resolveTheme<T extends ThemeTree>(
 ): ThemeValues<T> {
   return definition.resolve(
     overrides,
-    inherited(definition, parent)?.values as ThemeValues<T> | undefined,
+    findTheme(definition, parent)?.values as ThemeValues<T> | undefined,
   );
 }
 export function createThemeScope<T extends ThemeTree>(
@@ -39,7 +48,7 @@ export function createThemeScope<T extends ThemeTree>(
   read: () => ThemeValues<T>,
   parent?: ThemeScope,
 ): ThemeScope {
-  inherited(definition, parent);
+  findTheme(definition, parent);
   const entries = new Map(parent?.themes.map((theme) => [theme.name, theme]));
   entries.set(
     definition.name,

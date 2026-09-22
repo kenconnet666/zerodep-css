@@ -1,6 +1,6 @@
 export { provideStyleContext, useStyleRuntime } from './context.js';
 export { useGlobalCss } from './global.svelte.js';
-export { provideTheme } from './theme.svelte.js';
+export { provideTheme, useTheme } from './theme.svelte.js';
 export { defineTheme } from '@zerodep-css/core';
 export type {
   ThemeScope,

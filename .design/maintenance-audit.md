@@ -24,4 +24,16 @@
 - HMR 独占临时目录从历史 `.research/bx` 移入 `scripts/testing/.hmr-*`；正常执行后清理，并在浏览器启动/关闭失败时仍执行路径核验和目录回收。旧研究数据不改动。
 - 路线图基线修正为 0.2.0。
 
-主题读取 API 和最终 CI 验收进行中。
+第二阶段已实现主题读取 API：
+
+- core 的 readTheme 按 name/schema 查找当前作用域快照，不复制、解析或注册规则；无对应 provider 返回调用方定义的 defaults。
+- Vue/Svelte 的 useTheme 初始化时捕获作用域，返回 getter；调用时追踪 computed/rune 原生依赖，无自建 store 和订阅。provider 自身传显式 scope，后代自动取得上下文。
+- 重用既有 schema 检查，并把内部 inherited 更名为 findTheme，反映供解析和只读查询共用的职责。
+- 增加只读与字段类型负例、初始化不读取、动态更新、默认预设、同名 schema 错误及独立请求单测。
+- 真实 Vue/Svelte 夹具将 JS 读取值与浏览器样式对照，覆盖 SSR、hydration、父/子更新、null 重置、多主题、Teleport/DOM 移动与销毁重挂载。
+
+本地 check/build、101 项快速测试、框架浏览器/SSR/HMR 与体积门禁已通过。原生 LSP 对 core 实现、类型夹具、Vue/Svelte 组件均 complete=true、errors=0。Svelte 官方检查器对新增主题模块和叶组件无问题；父测试夹具报告的直接 DOM 移动是刻意验证逻辑主题与 DOM 位置无关的既有场景，保留其显式清理，不作为普通应用用法推广。
+
+独立消费者验证已通过：Vue/Svelte 分别安装 tarball，检查新导出与严格类型、官方 Vite 客户端/SSR 构建和 hydration；两套生产依赖审计均无已知漏洞。独占临时消费者和 HMR 项目已由测试清理，报告保留在忽略目录 test-results。
+
+最终 CI 验收进行中。审查覆盖配置/编译/主题 API 边界及测试资源所有权；本轮未改变序列化、CSSOM 事务和恢复协议，也未承诺流式 SSR 或新的编译优化范围。

@@ -224,6 +224,8 @@ try {
               {
                 color: getComputedStyle(element).color,
                 background: getComputedStyle(element).backgroundColor,
+                values: JSON.parse(element.getAttribute('data-theme-values')),
+                gap: element.getAttribute('data-theme-gap'),
                 content: element.className.split(' ').at(-1),
               },
             ]),
@@ -233,6 +235,18 @@ try {
       assert.equal(ssrTheme.parent.color, 'rgb(255, 0, 0)');
       assert.equal(ssrTheme.child.background, 'rgb(0, 255, 0)');
       assert.equal(ssrTheme.reset.background, 'rgb(0, 0, 0)');
+      assert.equal(ssrTheme.parent.values.color.brand, 'red');
+      assert.equal(ssrTheme.child.values.color.text, 'lime');
+      assert.equal(ssrTheme.reset.values.color.text, 'black');
+      for (const state of Object.values(ssrTheme)) assert.equal(state.gap, '4px');
+      assert.deepEqual(
+        await page
+          .locator('[data-theme-fallback]')
+          .evaluateAll((elements) =>
+            elements.map((element) => element.getAttribute('data-theme-fallback')),
+          ),
+        ['0.5', '0.5', '0.5', '0.5'],
+      );
       assert.equal(ssr.width, '20px');
       assert.equal(ssr.otherWidth, '40px');
       assert.notEqual(ssr.className, ssr.otherClass);
@@ -357,15 +371,21 @@ try {
       assert.equal(await page.locator('#theme-portal [data-theme-leaf="portal"]').count(), 1);
       await page.locator('[data-theme-parent-change]').click();
       const changedTheme = await themeState();
-      for (const name of ['parent', 'sibling', 'child', 'portal'])
+      for (const name of ['parent', 'sibling', 'child', 'portal']) {
         assert.equal(changedTheme[name].color, 'rgb(0, 0, 255)');
+        assert.equal(changedTheme[name].values.color.brand, 'blue');
+      }
       assert.equal(changedTheme.reset.color, 'rgb(255, 0, 0)');
+      assert.equal(changedTheme.reset.values.color.brand, 'red');
       assert.equal(changedTheme.child.background, 'rgb(0, 255, 0)');
       await page.locator('[data-theme-local]').click();
       const localTheme = await themeState();
       assert.equal(localTheme.child.background, 'rgb(255, 255, 0)');
       assert.equal(localTheme.parent.background, 'rgb(0, 0, 0)');
+      assert.equal(localTheme.child.values.color.text, 'yellow');
+      assert.equal(localTheme.parent.values.color.text, 'black');
       await page.locator('[data-theme-spacing]').click();
+      for (const state of Object.values(await themeState())) assert.equal(state.gap, '8px');
       assert.deepEqual(
         await page
           .locator('[data-theme-leaf]')

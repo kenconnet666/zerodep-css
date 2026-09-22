@@ -14,7 +14,7 @@ assert(
   themeDeclarationBytes <= 8192,
   'Preset declarations must reuse base types instead of expanding the full keyword tables.',
 );
-for (const name of ['css', 'createRuntime', 'createStyleContext', 'cssVar']) {
+for (const name of ['css', 'createRuntime', 'createStyleContext', 'cssVar', 'readTheme']) {
   const result = await build({
     stdin: {
       contents: `import { ${name} } from './core/dist/index.js'; console.log(${name});`,

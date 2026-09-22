@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, Teleport } from 'vue';
-import { provideTheme, useStyleRuntime } from '@zerodep-css/vue';
+import { provideTheme, useTheme, useStyleRuntime } from '@zerodep-css/vue';
 import { theme, spacing, AppCss } from './theme';
 import ThemeLeaf from './ThemeLeaf.vue';
 import ThemeBranch from './ThemeBranch.vue';
@@ -11,6 +11,8 @@ const gap = ref('4px');
 provideTheme(theme, () => ({ color: { brand: brand.value } }));
 const scope = provideTheme(spacing, () => ({ gap: gap.value }));
 const { css } = useStyleRuntime(undefined, scope);
+const current = useTheme(theme, scope);
+const currentSpacing = useTheme(spacing, scope);
 </script>
 <template>
   <button data-theme-spacing @click="gap = '8px'">spacing</button>
@@ -20,6 +22,8 @@ const { css } = useStyleRuntime(undefined, scope);
   <button data-theme-move @click="portal = true">move</button>
   <div
     data-theme-leaf="parent"
+    :data-theme-values="JSON.stringify(current())"
+    :data-theme-gap="currentSpacing().gap"
     :class="
       css((s) => {
         s.name('themed-content');

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { untrack, onDestroy } from 'svelte';
-  import { provideTheme, useStyleRuntime } from '@zerodep-css/svelte';
+  import { provideTheme, useTheme, useStyleRuntime } from '@zerodep-css/svelte';
   import { theme, spacing, AppCss } from './theme';
   import ThemeLeaf from './ThemeLeaf.svelte';
   import ThemeBranch from './ThemeBranch.svelte';
@@ -11,6 +11,8 @@
   provideTheme(theme, () => ({ color: { brand } }));
   const scope = provideTheme(spacing, () => ({ gap }));
   const { css } = useStyleRuntime(undefined, scope);
+  const current = useTheme(theme, scope);
+  const currentSpacing = useTheme(spacing, scope);
   // 移动后的节点仍由本夹具拥有，销毁时清理实际 DOM 位置。
   onDestroy(() => portalHost?.remove());
 </script>
@@ -28,6 +30,8 @@
 >
 <div
   data-theme-leaf="parent"
+  data-theme-values={JSON.stringify(current())}
+  data-theme-gap={currentSpacing().gap}
   class={css((s) => {
     s.name('themed-content');
     s.color.brand;
