@@ -7,7 +7,7 @@ import type {
 } from './generated/properties.js';
 import type { CssVariable, Input } from './values.js';
 import type { KeyframesDefinition } from './style-program.js';
-import type { Css } from './css.js';
+import type { Css, CssConstructor } from './css.js';
 
 export interface DeclarationHelpers {
   readonly custom: { raw(name: `--${string}`, value: Input<string | number> | CssVariable): void };
@@ -23,6 +23,10 @@ export interface StyleHelpers extends DeclarationHelpers {
   pseudoFunction(name: FunctionalPseudo, arguments_: string, factory: StyleFactory): void;
   hover(factory: StyleFactory): void;
   focusVisible(factory: StyleFactory): void;
+  focus(factory: StyleFactory): void;
+  focusWithin(factory: StyleFactory): void;
+  active(factory: StyleFactory): void;
+  disabled(factory: StyleFactory): void;
   before(factory: StyleFactory): void;
   after(factory: StyleFactory): void;
   media(query: string, factory: StyleFactory): void;
@@ -70,6 +74,7 @@ export type PageBuilder = Omit<DeclarationBuilder, keyof DescriptorBuilders['@pa
   };
 export interface GlobalBuilder {
   rule(selector: string, factory: StyleFactory): void;
+  rule<T extends Css>(selector: string, factory: StyleFactory<T>, cssType: CssConstructor<T>): void;
   media(query: string, factory: GlobalFactory): void;
   supports(query: string, factory: GlobalFactory): void;
   containerQuery(query: string, factory: GlobalFactory): void;

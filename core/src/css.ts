@@ -82,6 +82,18 @@ export class Css {
   focusVisible(factory: StyleFactory<this>): void {
     this.structure('focusVisible', factory);
   }
+  focus(factory: StyleFactory<this>): void {
+    this.structure('focus', factory);
+  }
+  focusWithin(factory: StyleFactory<this>): void {
+    this.structure('focusWithin', factory);
+  }
+  active(factory: StyleFactory<this>): void {
+    this.structure('active', factory);
+  }
+  disabled(factory: StyleFactory<this>): void {
+    this.structure('disabled', factory);
+  }
   before(factory: StyleFactory<this>): void {
     this.structure('before', factory);
   }

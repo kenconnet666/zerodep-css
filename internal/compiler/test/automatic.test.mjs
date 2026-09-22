@@ -27,6 +27,13 @@ for (const [framework, transform] of [
   ['svelte', svelte],
 ]) {
   const filename = resolve('Automatic.' + framework);
+  test(`${framework}：常用状态快捷方法保留动态绑定`, () => {
+    for (const method of ['focus', 'focusWithin', 'active', 'disabled']) {
+      const result = transform(fixture(framework, `s.${method}(h=>{h.width.px(gap);});`), filename);
+      assert(result.code.includes('formatUnitValues'));
+      assert(result.code.includes(`s.${method}`));
+    }
+  });
   test(`${framework}：参数初始化和特殊函数不进入静态准备或绑定提升`, () => {
     for (const expression of [
       'css((s, unused = effect()) => {s.color.red;})',

@@ -32,6 +32,27 @@ runtime.css((s) => {
 // @ts-expect-error 自定义类型必须传入对应构造器
 runtime.css<AppCss>((s) => s.control('small'));
 void name;
+runtime.mountGlobal((g) => {
+  g.rule(
+    'button',
+    (s) => {
+      s.control('small');
+      s.focus((h) => h.control('large'));
+      s.focusWithin((h) => h.color.brand);
+      s.active((h) => h.color.brand);
+      s.disabled((h) => h.color.brand);
+      // @ts-expect-error 全局派生类仍保留参数限制
+      s.control('other');
+    },
+    AppCss,
+  );
+  g.rule('input', (s) => {
+    // @ts-expect-error 相邻规则不继承上条规则的自定义类型
+    s.control('small');
+  });
+  // @ts-expect-error 未传构造器不能使用用户类型
+  g.rule<AppCss>('a', (s) => s.control('small'));
+});
 runtime.css((s) => {
   s.name('typed').config({ debug: true });
   // @ts-expect-error 局部配置不能切换共享 runtime 身份

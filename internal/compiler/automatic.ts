@@ -65,6 +65,10 @@ function constant(value: ts.Expression): string | number | boolean | null | type
 const structures: Readonly<Record<string, number>> = {
   hover: 0,
   focusVisible: 0,
+  focus: 0,
+  focusWithin: 0,
+  active: 0,
+  disabled: 0,
   before: 0,
   after: 0,
   startingStyle: 0,

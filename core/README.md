@@ -30,6 +30,7 @@ const panelClass = css((s) => {
 - 根层可调用的是 selector/media/hover 等结构或辅助入口；自定义/未知属性的写值入口也使用第二层方法：`s.custom.raw('--name', value)`、`s.property.raw('future-property', value)`。
 - 重复声明、fallback、简写/长属性和嵌套交错保持顺序。
 - `container` 是 CSS 属性，容器查询使用 `containerQuery`。
+- 常用状态可写 `s.focus(...)`、`s.focusWithin(...)`、`s.active(...)`、`s.disabled(...)`，分别等价于对应的 `s.pseudo(':...', ...)`；disabled 采用原生 `:disabled`，不会把 aria-disabled 自动当作禁用状态。
 - `cssVar('--name', fallback)` 只引用已有 CSS 变量，不建立 JS 订阅；Vue/Svelte 编译插件在安全位置自动创建元素绑定。
 - `animationName.raw` 接受动画定义/数组，空数组输出 `animation-name:none`。token/raw 的 null/undefined 省略声明；单位方法不接受空值。
 - 普通值每次变化可产生新 class，旧规则保留至所属 runtime.dispose；不自动改为 CSS 变量。
@@ -101,6 +102,8 @@ keyframes 创建可复用的冻结定义；`animationName.raw` 接受定义或�
 不要把动画定义对象直接插入普通字符串。需要动画名称时使用同一实例的 `runtime.keyframes(fade)`，它会先注册并返回名称。显式 `globalCss` 中的 `g.animation(fade)` 保留所在条件/层的作用范围，不跨这些位置盲目去重。
 
 ## 全局样式：定义、挂载和更新
+
+全局规则可使用与局部相同的作者类：`g.rule('button', s => s.control('small'), AppCss)`。第三参数只作用于该规则和其中的嵌套回调，相邻规则仍使用系统 Css。共享样式可直接写为 `const control: StyleFactory<AppCss> = s => { ... }`，在同一回调中按顺序调用后再覆盖属性；无需额外的组合或条件 DSL。
 
 ```ts
 import { globalCss, injectGlobal } from '@zerodep-css/core';

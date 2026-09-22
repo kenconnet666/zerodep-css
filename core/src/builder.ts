@@ -322,6 +322,10 @@ function style(factory: Factory, session: Session, important = false): StyleProg
     },
     hover: (child: Factory) => nest('&:hover', child),
     focusVisible: (child: Factory) => nest('&:focus-visible', child),
+    focus: (child: Factory) => nest('&:focus', child),
+    focusWithin: (child: Factory) => nest('&:focus-within', child),
+    active: (child: Factory) => nest('&:active', child),
+    disabled: (child: Factory) => nest('&:disabled', child),
     before: (child: Factory) => nest('&::before', child),
     after: (child: Factory) => nest('&::after', child),
     media: (query: string, child: Factory) => group('@media', query, child),
@@ -440,10 +444,12 @@ function globals(factory: Factory, session: Session, root: boolean): readonly Gl
     });
   };
   const builder: GlobalBuilder = {
-    rule(selector, child) {
+    rule(selector: string, child: Factory, cssType: CssConstructor = Css) {
       alive(session);
       text(selector, 'Global selector');
-      append({ kind: 'style-rule', selector, relative: false, children: style(child, session) });
+      // 每条规则独立构建会话，派生类不会泄漏到相邻规则，捕获实例也及时失效。
+      const children = withSession((local) => style(child, local), cssType);
+      append({ kind: 'style-rule', selector, relative: false, children });
     },
     media: (query, child) => group('@media', query, child),
     supports: (query, child) => group('@supports', query, child),
