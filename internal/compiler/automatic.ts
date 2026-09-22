@@ -7,14 +7,17 @@ import {
   unitFamilies,
 } from '../../core/src/generated/metadata.js';
 import type { NumericAlternatives } from '../../core/src/metadata-types.js';
+import type { BindingFormat } from '../../core/src/binding.js';
 
-export interface AutomaticDeclaration {
+interface Declaration {
   call: ts.CallExpression;
   property: ts.PropertyAccessExpression;
-  unit: string;
-  alternatives: NumericAlternatives;
-  separator: string;
 }
+export type AutomaticDeclaration = Declaration &
+  (
+    | { kind: 'unit'; unit: string; alternatives: NumericAlternatives; separator: string }
+    | { kind: 'value'; format: BindingFormat }
+  );
 
 function unwrap(value: ts.Expression): ts.Expression {
   while (
@@ -124,6 +127,8 @@ function read(value: ts.Expression, callback: ts.ArrowFunction | ts.FunctionExpr
       read(value.whenTrue, callback) &&
       read(value.whenFalse, callback)
     );
+  if (ts.isTemplateExpression(value))
+    return value.templateSpans.every((span) => read(span.expression, callback));
   return false;
 }
 
@@ -212,7 +217,21 @@ export function automaticDeclarations(
     }
     const args = expression.arguments;
     if (member.name.text === 'raw' || member.name.text === 'token') {
-      return args.length === 1 && literal(args[0]!);
+      if (args.length !== 1 || !read(args[0]!, callback)) return false;
+      if (!literal(args[0]!)) {
+        const numbers = meta.numbers.map((plan) => plan[0]!);
+        if (meta.zero) numbers.push({ min: 0, max: 0 });
+        declarations.push({
+          kind: 'value',
+          call: expression,
+          property,
+          format:
+            member.name.text === 'token'
+              ? { tokens: Object.values(keywordGroups[meta.keywords]!) }
+              : { numbers },
+        });
+      }
+      return true;
     }
     let matched = false;
     for (const plan of helperGroups[meta.helpers]!) {
@@ -223,6 +242,7 @@ export function automaticDeclarations(
         matched = true;
         if (args.some((arg) => !literal(arg)))
           declarations.push({
+            kind: 'unit',
             call: expression,
             property,
             unit,

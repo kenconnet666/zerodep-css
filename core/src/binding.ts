@@ -1,5 +1,6 @@
-import { parse, walk } from 'css-tree';
+import { parse, walk, ident } from 'css-tree';
 import type { NumericCheck, NumericAlternatives } from './metadata-types.js';
+import { isCssVariable, validateCustomName } from './values.js';
 
 /** 保留单位多参数备选语法的整体约束，不能把位置约束分别取并集。 */
 export function bxTuple(
@@ -69,7 +70,7 @@ function checkValue(value: unknown, format: BindingFormat): asserts value is str
     throw new TypeError('Invalid bx token.');
 }
 
-function checkSyntax(result: string): void {
+function checkSyntax(result: string) {
   if (!result.trim()) throw new TypeError('bx values must not be empty.');
   const ast = parse(result, {
     context: 'value',
@@ -79,6 +80,47 @@ function checkSyntax(result: string): void {
   });
   walk(ast, (node) => {
     if (node.type === 'Raw') throw new TypeError('Invalid bx CSS value.');
+  });
+  return ast;
+}
+
+const cssWide = new Set(['initial', 'inherit', 'unset', 'revert', 'revert-layer']);
+
+/**
+ * 普通值走元素变量；空值省略声明，CSS-wide 关键字与显式变量保留直接声明。
+ * 后两类决定级联语义，不能把 initial 等值塞进自定义属性后假定语义相同。
+ */
+export function createDeclarationBinding(name: `--${string}`, format: BindingFormat = {}) {
+  validateCustomName(name);
+  const variable = `var(${name})`;
+  const cache = new Map<string, boolean>();
+  const options = {
+    ...format,
+    numbers: format.numbers?.map((rule) => ({ ...rule })),
+    tokens: format.tokens && [...format.tokens],
+  };
+  function direct(value: unknown): boolean {
+    if (value === null || value === undefined) return true;
+    if (!options.tokens && isCssVariable(value)) return true;
+    checkValue(value, options);
+    if (typeof value === 'number') return false;
+    const cached = cache.get(value);
+    if (cached !== undefined) return cached;
+    const ast = checkSyntax(value);
+    const first = ast.type === 'Value' && ast.children.size === 1 ? ast.children.first : undefined;
+    const result =
+      first?.type === 'Identifier' && cssWide.has(ident.decode(first.name).toLowerCase());
+    if (cache.size >= 128) cache.delete(cache.keys().next().value!);
+    cache.set(value, result);
+    return result;
+  }
+  return Object.freeze({
+    value(value: unknown): unknown {
+      return direct(value) ? value : variable;
+    },
+    inline(value: unknown): string | undefined {
+      return direct(value) ? undefined : String(value);
+    },
   });
 }
 

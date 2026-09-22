@@ -2,6 +2,8 @@
 
 自动绑定迁移已开始：没有旧 `bx` 导入时，编译插件可将原生模板直接 `css(s => { s.padding.px(8, gap); })` 中的动态单位值编译为元素 CSS 变量。支持静态参数的嵌套结构和字面量可判定的 if/switch；未知控制流、派生类、脚本快照、组件透传和复杂表达式保留运行时行为。可证明稳定的样式第一次执行仍经过完整校验，后续由 runtime 有界缓存跳过重复构建和解析。完整迁移目标见[生产化计划](../.design/production-plan.md)。
 
+同样支持 `raw(value)`、`token(value)` 和完整模板字符串。普通值更新元素变量；空值省略声明，CSS-wide 关键字与显式 `cssVar` 引用保留直接声明。后几类变化仍可能切换类名，以保持覆盖与继承语义；字符串校验按绑定使用 128 项有界缓存。被提升的值读取应保持纯粹，函数调用、局部写入等会触发整体运行时回退。
+
 显式 `bx` 编译通过 `@zerodep-css/vue/compiler` 的 `bxPlugin()` 接入官方 Vite Vue 插件。支持内联及同组件脚本 class、单位/多绑定、完整字符串 SSR 和 hydration。安装示例、支持范围与定位诊断见 [bx 编译说明](../.design/bx-compiler.md)。
 
 `css(factory): string` 保持同步字符串返回；普通值依赖 Vue 原生 render/computed 跟踪。属性写法与 core 完全相同，`token` 严格字面量、`raw` 允许字符串，属性对象不能直接调用。

@@ -2,7 +2,28 @@
   import { useStyleRuntime } from '@zerodep-css/svelte';
   const { css } = useStyleRuntime();
   let width = $state(10);
+  const colors = ['red', 'blue', 'initial', undefined];
+  let colorIndex = 0;
+  let color = $state<string | undefined>(colors[0]);
 </script>
+
+<button
+  data-auto-color
+  onclick={() => {
+    colorIndex = (colorIndex + 1) % colors.length;
+    color = colors[colorIndex];
+  }}>color</button
+>
+<div
+  data-auto-value
+  class={css((s) => {
+    s.name('automatic-color');
+    s.color.red;
+    s.color.raw(color);
+  })}
+>
+  value
+</div>
 
 <button data-auto-change onclick={() => width++}>automatic</button>
 <div

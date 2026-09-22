@@ -105,6 +105,8 @@ export function session(
   const sourceName = fresh('source');
   const unitsName = fresh('units');
   const prepareName = fresh('prepare');
+  const declarationName = fresh('declaration');
+  const declarationBindings: string[] = [];
   let hasBindings = false;
   let hasAutomatic = false;
   let hasPrepared = false;
@@ -181,7 +183,7 @@ export function session(
         !isAbsolute(id)
       ) {
         const automatic = automaticDeclarations(callback);
-        if (automatic) {
+        if (automatic && automatic.every((declaration) => declaration.kind === 'unit')) {
           // 静态源码摘要随 HMR 内容改变，不把旧站点缓存当作新样式。
           const key = createHash('sha256')
             .update(id + ':' + (base + callback.getStart(file)) + ':' + callback.getText(file))
@@ -195,10 +197,29 @@ export function session(
           const name =
             '--zbx-' +
             createHash('sha256')
-              .update(id + ':' + offset + ':units')
+              .update(id + ':' + offset + ':' + declaration.kind)
               .digest('hex')
               .slice(0, 16);
           mapper.reference(name, offset);
+          if (declaration.kind === 'value') {
+            const helper = fresh('binding');
+            const argument = declaration.call.arguments[0]!.getText(file);
+            declarationBindings.push(
+              `const ${helper} = ${declarationName}(${JSON.stringify(name)}, ${JSON.stringify(declaration.format)});`,
+            );
+            bindings.push({
+              name,
+              expression: mapToOriginal(`${helper}.inline(${argument})`, offset),
+              offset,
+            });
+            edits.overwrite(
+              declaration.call.getStart(file) - prefix.length,
+              declaration.call.end - prefix.length,
+              `${declaration.property.getText(file)}.raw(${helper}.value(${argument}))`,
+            );
+            hasBindings = true;
+            continue;
+          }
           const value = `${unitsName}([${declaration.call.arguments.map((arg) => arg.getText(file)).join(',')}], ${JSON.stringify(declaration.alternatives)}, ${JSON.stringify(declaration.unit)}, ${JSON.stringify(declaration.separator)})`;
           bindings.push({ name, expression: mapToOriginal(value, offset), offset });
           edits.overwrite(
@@ -450,6 +471,12 @@ export function session(
           scriptStart,
           `\nimport { prepareStyle as ${prepareName} } from '@zerodep-css/core/compiler-runtime';\n`,
         );
+      if (declarationBindings.length)
+        output.appendLeft(
+          scriptStart,
+          `\nimport { createDeclarationBinding as ${declarationName} } from '@zerodep-css/core/compiler-runtime';\n`,
+        );
+      output.appendLeft(scriptEnd, '\n' + declarationBindings.join('\n') + '\n');
       output.appendLeft(scriptEnd, '\n' + extra + '\n');
       return mapper.finish(output);
     },

@@ -48,7 +48,7 @@ for (const [framework, transform] of [
       'let local=gap;s.padding.px(local);local++;',
       's.padding.px(getGap());',
       's.padding.px(gap);effect();',
-      's.color.raw(color);s.padding.px(gap);',
+      's.color.raw(getColor());s.padding.px(gap);',
       's.media(query,h=>{h.padding.px(gap)});',
     ])
       assert.equal(transform(fixture(framework, body), filename), null, body);
@@ -91,6 +91,20 @@ for (const [framework, transform] of [
       expression: 'cls',
     });
     assert.equal(transform(source, filename), null);
+  });
+  test(`${framework}：raw、token 和完整模板值自动绑定，保留必要结构重算`, () => {
+    const source = fixture(
+      framework,
+      's.color.raw(color);s.display.token(display);s.transform.raw(`translate(${gap}px, 2px)`);',
+      { script: `let color='red';let display='flex';` },
+    );
+    const result = transform(source, filename);
+    assert(result.code.includes('createDeclarationBinding'));
+    assert(!result.code.includes('prepareStyle'));
+    assert.equal((result.code.match(/\.inline\(/g) ?? []).length, 3);
+    if (framework === 'vue')
+      compileScript(parse(result.code).descriptor, { id: 'values', inlineTemplate: true });
+    else compile(result.code, { filename, generate: 'client' });
   });
   test(`${framework}：静态分支与嵌套声明可准备，未选分支不生成绑定`, () => {
     const source = fixture(

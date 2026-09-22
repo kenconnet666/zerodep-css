@@ -222,6 +222,21 @@ try {
       assert.equal(ordinary.otherClass, initial.otherClass);
       await first.locator('[data-color]').click();
       assert.equal((await read()).className, initial.className);
+      const autoValue = first.locator('[data-auto-value]');
+      const valueClass = await autoValue.getAttribute('class');
+      const valueStats = (await read()).stats;
+      assert.equal(await autoValue.evaluate((e) => getComputedStyle(e).color), 'rgb(255, 0, 0)');
+      await first.locator('[data-auto-color]').click();
+      assert.equal(await autoValue.evaluate((e) => getComputedStyle(e).color), 'rgb(0, 0, 255)');
+      assert.equal(await autoValue.getAttribute('class'), valueClass);
+      assert.deepEqual((await read()).stats, valueStats);
+      await first.locator('[data-auto-color]').click();
+      assert.equal(await autoValue.evaluate((e) => getComputedStyle(e).color), 'rgb(0, 0, 0)');
+      await first.locator('[data-auto-color]').click();
+      assert.equal(await autoValue.evaluate((e) => getComputedStyle(e).color), 'rgb(255, 0, 0)');
+      assert.equal(await autoValue.evaluate((e) => e.style.length), 0);
+      await first.locator('[data-auto-color]').click();
+      assert.equal(await autoValue.getAttribute('class'), valueClass);
       await page.evaluate(async () => {
         await window.fixture.destroy();
         window.fixture.dispose();
