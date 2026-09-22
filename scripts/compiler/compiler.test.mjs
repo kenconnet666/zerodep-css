@@ -54,6 +54,16 @@ for (const [framework, transform] of [
     );
     assert.equal(transform(fixture(framework, 'css(s=>{s.width.px(width);})'), filename), null);
   });
+  test(`${framework}：项目外无 bx 的组件交回官方编译器`, () => {
+    const source =
+      framework === 'vue'
+        ? '<script setup>const value=1;</script><template><div>{{value}}</div></template>'
+        : '<script>const value=1;</script><div>{value}</div>';
+    assert.equal(
+      transform(source, resolve('external', 'App.' + framework), { root: resolve('app') }),
+      null,
+    );
+  });
   test(`${framework}：作用域和字符串边界给定位诊断`, () => {
     for (const expression of [
       'css(s=>{const local=1;s.width.px(bx(local));})',
@@ -62,6 +72,7 @@ for (const [framework, transform] of [
       'css(s=>{if(width)s.width.px(bx(width));})',
       'css(s=>{if(width)return;s.width.px(bx(width));})',
       'css(s=>{s.width.px(bx(width++));})',
+      'css(s=>{s.animation.ms(width,bx(width));})',
       'width ? css(s=>{s.width.px(bx(width));}) : null',
       'css(s=>{s.transform.raw(`foo${bx(width)}px`);})',
     ])

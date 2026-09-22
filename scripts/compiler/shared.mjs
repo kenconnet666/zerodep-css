@@ -44,8 +44,6 @@ export function unshadowed(node, name, boundary) {
 export function session(source, filename, scriptStart, scriptEnd, framework, options = {}) {
   const root = resolve(options.root ?? process.cwd());
   const id = relative(root, resolve(filename)).replaceAll('\\', '/');
-  if (id.startsWith('../') || isAbsolute(id))
-    throw new Error('bx compiler filename must be inside root.');
   const output = new MagicString(source);
   const text = source.slice(scriptStart, scriptEnd);
   const ast = ts.createSourceFile(
@@ -78,6 +76,9 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
           runtime.add(item.name.text);
       }
     }
+  // 不使用 bx 的外部组件交回官方插件，不能被本项目的变量 ID 边界误拦截。
+  if (macros.size && (id.startsWith('../') || isAbsolute(id)))
+    throw new Error('bx compiler filename must be inside root.');
   for (const statement of ast.statements)
     if (ts.isVariableStatement(statement))
       for (const d of statement.declarationList.declarations)
@@ -299,6 +300,19 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
           let tuple;
           if (alternatives.length > 1 && declaration.arguments.length > 1) {
             const values = declaration.arguments.map((arg) => {
+              if (
+                !macro(arg, file) &&
+                !ts.isNumericLiteral(arg) &&
+                !(
+                  ts.isPrefixUnaryExpression(arg) &&
+                  [ts.SyntaxKind.PlusToken, ts.SyntaxKind.MinusToken].includes(arg.operator) &&
+                  ts.isNumericLiteral(arg.operand)
+                )
+              )
+                error(
+                  base + arg.getStart(file),
+                  '带联合约束的单位参数首版只允许 bx 和数值常量混用，避免改变 const 样式的普通值快照。',
+                );
               const value = macro(arg, file) ? arg.arguments[0] : arg;
               if (!value) error(base + arg.getStart(file), 'bx 只接受一个标量值。');
               validateRead(value);
