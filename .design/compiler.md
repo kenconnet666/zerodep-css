@@ -12,7 +12,7 @@ import { cssPlugin } from '@zerodep-css/vue/compiler';
 export default defineConfig({ plugins: [cssPlugin(), vue()] });
 ```
 
-Svelte 使用 `@zerodep-css/svelte/compiler` 的同名入口，后接官方 `svelte()` 插件。插件只处理完整组件源码；官方插件继续负责响应式、SSR 和 HMR。直接转换接口为 `transformCss(source, filename, { root?, debug? })`，无改动时返回 null。
+Svelte 使用 `@zerodep-css/svelte/compiler` 的同名入口，后接官方 `svelte()` 插件。插件只处理完整组件源码；官方插件继续负责响应式、SSR 和 HMR。直接转换接口为 `transformCss(source, filename, { root?, debug?, bindings? })`，无改动时返回 null。
 
 严格 CSP 禁止 style 属性时使用 `cssPlugin({ bindings: 'runtime' })`。动态值保留原生运行时类名更新，不生成元素变量绑定；静态准备与开发来源仍可用。配合请求 runtime 的 nonce，可在 `style-src-attr 'none'` 下保持 SSR 首屏、hydration 和后续更新一致。该选项不移除应用自己编写的 style 属性，服务端和客户端应使用同一编译配置。
 
@@ -36,7 +36,7 @@ css((s) => {
 - raw/token 的普通值和完整模板字符串自动绑定。空值仍省略声明；CSS-wide 关键字与显式 cssVar 引用保留直接声明，必要时重算类名，避免改变覆盖和继承。
 - 静态关键字、字面量、同宿主 selector/media/hover 等结构可准备；字面量能够决定的 if/switch 只为可达分支生成绑定。selector 选中后代、兄弟、祖先或未知伪元素时保留运行时，避免变量不可达或被嵌套实例遮蔽。
 - 无动态结构的可准备样式在第一次使用时完整验证，后续通过当前 runtime 的 256 项缓存跳过构建和解析。源码摘要随 HMR 内容变化；清理计算缓存不删除已注册规则。
-- raw 字符串校验按组件绑定持有最多 128 项成功结果，不建立跨请求缓存。
+- raw 字符串校验按组件绑定持有最多 128 项成功结果，合计最多 65,536 个 UTF-16 字符，不建立跨请求缓存。超大合法值仍正常校验与输出，但不长期驻留缓存。
 
 ## 支持和回退边界
 

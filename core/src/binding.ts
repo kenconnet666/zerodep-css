@@ -1,6 +1,7 @@
 import { parse, walk, ident } from 'css-tree';
 import type { NumericCheck, NumericAlternatives } from './metadata-types.js';
 import { isCssVariable, validateCustomName } from './values.js';
+import { StringCache } from './string-cache.js';
 
 /** 保留单位多参数备选语法的整体约束，不能把位置约束分别取并集。 */
 export function validateUnitValues(
@@ -93,7 +94,7 @@ const cssWide = new Set(['initial', 'inherit', 'unset', 'revert', 'revert-layer'
 export function createDeclarationBinding(name: `--${string}`, format: BindingFormat = {}) {
   validateCustomName(name);
   const variable = `var(${name})`;
-  const cache = new Map<string, boolean>();
+  const cache = new StringCache<boolean>();
   const options = {
     ...format,
     numbers: format.numbers?.map((rule) => ({ ...rule })),
@@ -110,7 +111,6 @@ export function createDeclarationBinding(name: `--${string}`, format: BindingFor
     const first = ast.type === 'Value' && ast.children.size === 1 ? ast.children.first : undefined;
     const result =
       first?.type === 'Identifier' && cssWide.has(ident.decode(first.name).toLowerCase());
-    if (cache.size >= 128) cache.delete(cache.keys().next().value!);
     cache.set(value, result);
     return result;
   }
@@ -153,7 +153,7 @@ export function createValueFormatter(format: BindingFormat = {}): (value: unknow
   const tokens = snapshot.tokens ? new Set(snapshot.tokens) : undefined;
   if (tokens) for (const token of tokens) checkSyntax(token);
   const valueFormat: BindingFormat = { unit: snapshot.unit, numbers: snapshot.numbers };
-  const cache = new Map<string, string>();
+  const cache = new StringCache<string>();
   return (value) => {
     checkValue(value, valueFormat);
     if (tokens) {
@@ -165,8 +165,7 @@ export function createValueFormatter(format: BindingFormat = {}): (value: unknow
     const cached = cache.get(value);
     if (cached !== undefined) return cached;
     checkSyntax(value);
-    // FIFO 足以约束校验结果内存；淘汰结果不会删除仍被 DOM 使用的样式规则。
-    if (cache.size >= 128) cache.delete(cache.keys().next().value!);
+    // 淘汰只释放校验结果；不影响 DOM 或已注册规则。
     cache.set(value, value);
     return value;
   };
