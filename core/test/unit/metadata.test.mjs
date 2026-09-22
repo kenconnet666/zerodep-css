@@ -106,3 +106,31 @@ test('旧的未命名 manifest 仍可恢复', () => {
   assert.equal(restored.stats().classes, 1);
   restored.dispose();
 });
+
+test('局部配置拒绝非数据对象与所有未知自有字段，失败不注册规则', () => {
+  const runtime = createRuntime({ target: null });
+  try {
+    for (const config of [
+      new Date(),
+      Object.create({ debug: true }),
+      { [Symbol('cache')]: true },
+      Object.defineProperty({}, 'cache', { value: false }),
+    ]) {
+      assert.throws(() =>
+        runtime.css((s) => {
+          s.config(config);
+          s.color.red;
+        }),
+      );
+      assert.equal(runtime.stats().classes, 0);
+    }
+    const config = Object.assign(Object.create(null), { debug: true });
+    runtime.css((s) => {
+      s.config(config);
+      s.color.red;
+    });
+    assert.equal(runtime.snapshot().records[0].debug.declarations, 1);
+  } finally {
+    runtime.dispose();
+  }
+});

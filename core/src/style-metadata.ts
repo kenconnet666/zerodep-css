@@ -64,8 +64,11 @@ export function validateStyleDebug(value: unknown): StyleDebug {
 export function setStyleConfig(metadata: StyleMetadata, config: unknown): void {
   if (!config || typeof config !== 'object' || Array.isArray(config))
     throw new TypeError('Expected local style configuration.');
-  for (const key of Object.keys(config))
-    if (key !== 'debug') throw new TypeError('Unknown local style option: ' + key);
+  const prototype = Object.getPrototypeOf(config);
+  if (prototype !== Object.prototype && prototype !== null)
+    throw new TypeError('Expected plain local style configuration.');
+  for (const key of Reflect.ownKeys(config))
+    if (key !== 'debug') throw new TypeError('Unknown local style option: ' + String(key));
   const { debug } = config as StyleConfig;
   if (debug === undefined) return;
   if (typeof debug !== 'boolean') throw new TypeError('Style debug must be boolean.');

@@ -27,6 +27,22 @@ for (const [framework, transform] of [
   ['svelte', svelte],
 ]) {
   const filename = resolve('Automatic.' + framework);
+  test(`${framework}：参数初始化和特殊函数不进入静态准备或绑定提升`, () => {
+    for (const expression of [
+      'css((s, unused = effect()) => {s.color.red;})',
+      'css((s, unused = effect()) => {s.width.px(gap);})',
+      'css(s => {s.hover((h, unused = effect()) => {h.width.px(gap);});})',
+      'css(async s => {s.width.px(gap);})',
+      'css(function* (s) {s.width.px(gap);})',
+      'css((...s) => {s.color.red;})',
+    ]) {
+      const source = fixture(framework, '', { expression });
+      assert.equal(transform(source, filename), null, expression);
+      const debug = transform(source, filename, { debug: true });
+      assert(!debug.code.includes('prepareStyle'), expression);
+      assert(!debug.code.includes('--zcss-'), expression);
+    }
+  });
   test(`${framework}：普通动态单位值无需标记，整组单位共享一个绑定`, () => {
     const result = transform(
       fixture(framework, 's.display.flex;s.padding.px(8,gap + 2);'),

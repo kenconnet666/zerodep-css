@@ -12,10 +12,10 @@ import { withBrowserPage, prepareBrowserRun, browserRunId } from './browser-evid
 
 const output = resolve(root, 'test-results/bindings-hmr');
 await prepareBrowserRun(output);
-const browser = await launchBrowser();
+let browser;
 const report = [];
 // Vite 默认忽略 test-results；开发项目必须放到实际受监视的独占临时目录。
-const temporary = await mkdtemp(resolve(root, '.research/bx/hmr-'));
+const temporary = await mkdtemp(resolve(root, 'scripts/testing/.hmr-'));
 function component(framework, stage) {
   const style = stage === 2 ? 's.width.px(7);' : `s.width.${stage === 1 ? 'rem' : 'px'}(width);`;
   if (framework === 'vue')
@@ -29,6 +29,7 @@ let {context}=$props();const {css}=useStyleRuntime(untrack(()=>context));let wid
 </script><button onclick={()=>width++}>update</button><div data-target class={css(s=>{${style}})} style="height: 5px"></div>`;
 }
 try {
+  browser = await launchBrowser();
   for (const framework of ['vue', 'svelte']) {
     const folder = resolve(temporary, framework);
     await mkdir(folder, { recursive: true });
@@ -133,10 +134,13 @@ try {
   );
   console.log('VERIFIED: automatic CSS HMR unit change, reactive updates and binding removal');
 } finally {
-  await browser.close();
-  const actual = await realpath(temporary);
-  const parent = await realpath(resolve(root, '.research/bx'));
-  assert.equal(dirname(actual), parent);
-  assert(actual.startsWith(resolve(parent, 'hmr-')));
-  await rm(actual, { recursive: true });
+  try {
+    await browser?.close();
+  } finally {
+    const actual = await realpath(temporary);
+    const parent = await realpath(resolve(root, 'scripts/testing'));
+    assert.equal(dirname(actual), parent);
+    assert(actual.startsWith(resolve(parent, '.hmr-')));
+    await rm(actual, { recursive: true });
+  }
 }

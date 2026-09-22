@@ -18,6 +18,7 @@ dist-ssr
 !.vscode/settings.json
 .codex/config.toml
 test-results/
+scripts/testing/.hmr-*/
 *.tsbuildinfo
 .svelte-kit/
 .idea

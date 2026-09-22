@@ -154,8 +154,15 @@ export function automaticDeclarations(
     return true;
   }
   function body(fn: ts.ArrowFunction | ts.FunctionExpression): boolean {
-    const builder = fn.parameters[0]?.name;
+    const parameter = fn.parameters[0];
+    const builder = parameter?.name;
+    // 参数默认值也可能有副作用；异步/生成器交回运行时保留原有诊断。
     return (
+      fn.parameters.length === 1 &&
+      !parameter?.initializer &&
+      !parameter?.dotDotDotToken &&
+      !fn.asteriskToken &&
+      !fn.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.AsyncKeyword) &&
       !!builder &&
       ts.isIdentifier(builder) &&
       ts.isBlock(fn.body) &&
