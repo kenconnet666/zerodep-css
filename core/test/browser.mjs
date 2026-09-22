@@ -354,7 +354,8 @@ export async function runBrowserTests(browser, baseUrl, ssr) {
       r.mountGlobal((g) => {
         g.fontFace((d) => {
           d.fontFamily.raw('RuntimeFont');
-          d.src.raw('local("Arial")');
+          // Windows 与 Playwright Linux runner 的本机字体不同；不依赖外部字体网络。
+          d.src.raw('local("Arial"),local("Liberation Sans"),local("DejaVu Sans")');
         });
         g.counterStyle('runtime-steps', (d) => {
           d.system.cyclic;
