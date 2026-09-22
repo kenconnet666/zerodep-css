@@ -103,6 +103,8 @@ try {
     };
     await save(join(folder, 'package.json'), JSON.stringify(manifest, null, 2));
     pnpm(['install', '--no-frozen-lockfile'], { cwd: folder, env: environment });
+    // 在真实安装图上审查；workspace 目录 svelte 不能被误当成同名官方包的版本。
+    pnpm(['audit', '--prod', '--audit-level', 'moderate'], { cwd: folder, env: environment });
     for (const name of ['core', framework]) {
       const installed = await realpath(join(folder, 'node_modules/@zerodep-css', name));
       assert(
@@ -305,7 +307,14 @@ context.completeHydration(); window.consumer={ready:true,counts,stats:()=>contex
     }
     // 保留每次消费安装的锁文件，方便排查临时消费者的实际依赖版本。
     await copyFile(join(folder, 'pnpm-lock.yaml'), join(output, `${framework}-lock.yaml`));
-    report.results.push({ framework, types: true, clientBuild: true, ssr: true, hydration: true });
+    report.results.push({
+      framework,
+      dependencyAudit: true,
+      types: true,
+      clientBuild: true,
+      ssr: true,
+      hydration: true,
+    });
   }
   report.status = 'passed';
   console.log(JSON.stringify(report.results));
