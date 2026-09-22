@@ -83,12 +83,16 @@ export function assertSameRecord(previous: StyleRecord, next: StyleRecord): void
   mergeRecord(previous, next);
 }
 function configFor(options: RuntimeOptions): OutputConfig {
-  const namespace = options.namespace ?? 'z';
+  const requestedNamespace = options.namespace;
+  const namespace = requestedNamespace === undefined ? 'z' : requestedNamespace;
   if (typeof namespace !== 'string' || !/^[a-z][a-z0-9-]*$/.test(namespace))
     throw new TypeError(
       'Namespace must use lowercase letters, digits and hyphens, starting with a letter.',
     );
-  const layers = [...(options.layers ?? [])];
+  const requestedLayers = options.layers;
+  if (requestedLayers !== undefined && !Array.isArray(requestedLayers))
+    throw new TypeError('layers must be an array.');
+  const layers = [...(requestedLayers ?? [])];
   const validLayer = (s: string) =>
     /^-?[_a-zA-Z][_a-zA-Z0-9-]*(?:\.-?[_a-zA-Z][_a-zA-Z0-9-]*)*$/.test(s);
   if (
@@ -202,20 +206,31 @@ function manifestRecords(manifest: StyleManifest, config: OutputConfig): readonl
 }
 
 export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
+  if (!options || typeof options !== 'object' || Array.isArray(options))
+    throw new TypeError('Expected runtime options.');
   const collectDebug = options.debug;
-  if (options.debug !== undefined && typeof options.debug !== 'boolean')
+  if (collectDebug !== undefined && typeof collectDebug !== 'boolean')
     throw new TypeError('Runtime debug must be boolean.');
   const config = configFor(options);
+  const requestedTarget = options.target;
   const target =
-    options.target === undefined
+    requestedTarget === undefined
       ? typeof document === 'undefined'
         ? null
         : document
-      : options.target;
-  const maxRecords = options.maxRecords ?? Infinity;
+      : requestedTarget;
+  if (
+    target !== null &&
+    (typeof target !== 'object' ||
+      !(target.nodeType === 9 || (target.nodeType === 11 && 'host' in target)))
+  )
+    throw new TypeError('target must be a Document, ShadowRoot or null.');
+  const requestedLimit = options.maxRecords;
+  const maxRecords = requestedLimit === undefined ? Infinity : requestedLimit;
   if (maxRecords !== Infinity && (!Number.isSafeInteger(maxRecords) || maxRecords < 1))
     throw new TypeError('maxRecords must be a positive integer.');
-  if (options.nonce !== undefined && typeof options.nonce !== 'string')
+  const nonce = options.nonce;
+  if (nonce !== undefined && typeof nonce !== 'string')
     throw new TypeError('nonce must be a string.');
   if (target && owners.get(target)?.has(config.namespace))
     throw new Error('This target already has a runtime for namespace ' + config.namespace);
@@ -443,7 +458,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     renderStyles() {
       alive();
       return [...records.values()]
-        .map((record) => renderStyleTag(record, config, host?.nonce ?? options.nonce))
+        .map((record) => renderStyleTag(record, config, host?.nonce ?? nonce))
         .join('');
     },
     renderManifest() {
@@ -478,8 +493,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       const restored = manifestRecords(options.hydrate, config);
       if (restored.length > maxRecords) throw new Error('Hydration exceeds style record limit.');
       const claims = validateClaims(restored);
-      if (target)
-        host = browserSheet(target, config, options.nonce, restored, options.insertionPoint);
+      if (target) host = browserSheet(target, config, nonce, restored, options.insertionPoint);
       for (const record of restored) {
         records.set(record.id, record);
         claim(record, claims.get(record.id)!);
@@ -487,8 +501,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
           globalIndex = Math.max(globalIndex, Number(record.id.slice(config.namespace.length + 3)));
       }
     } else {
-      if (target)
-        host = browserSheet(target, config, options.nonce, undefined, options.insertionPoint);
+      if (target) host = browserSheet(target, config, nonce, undefined, options.insertionPoint);
       const header = layerRecord(config);
       if (header) commit([header]);
     }
