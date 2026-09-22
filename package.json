@@ -15,6 +15,8 @@
     "data:diff": "node scripts/generate-css.mjs --diff",
     "test:types": "node scripts/verify-style-types.mjs",
     "test:browser": "node scripts/test-browser.mjs",
+    "test:frameworks": "pnpm build && node scripts/test-frameworks.mjs",
+    "test:adapters": "pnpm build && node --test vue/test/*.test.mjs",
     "test": "pnpm --filter @zerodep-css/core run build && node --test core/test/*.test.mjs scripts/css-data/*.test.mjs",
     "format:check": "prettier --check core vue svelte scripts package.json pnpm-workspace.yaml tsconfig*.json",
     "lsp:setup": "pwsh -NoProfile -File scripts/language-services/setup.ps1",

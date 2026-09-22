@@ -140,7 +140,11 @@ const { css } = runtime;
 
 恢复会核对版本、配置、内容摘要、资源依赖、style 数量/顺序/内容及 CSSOM 接受的根规则数，不重复插入服务器规则。全局槽位用 `runtime.claimGlobal(id)` 显式认领，供适配器建立生命周期；不根据内容猜组件身份。非全局资源持续驻留到 runtime.dispose。
 
-顶层 css 在 Node 中明确报错，避免偷偷使用跨请求全局缓存。SSR 应从请求实例取得同形态的 css 函数；Vue/Svelte 的自动上下文接入尚未实现。
+顶层 css 在 Node 中明确报错，避免偷偷使用跨请求全局缓存。SSR 应从请求实例取得同形态的 css 函数；Vue/Svelte 适配器通过应用/组件 context 提供它。
+
+框架集成使用 `createStyleContext(options)`，由它持有 runtime，并通过 `mountGlobal(key, factory)` 维护稳定 key 到全局槽位的映射。`snapshot()` 返回带 runtime manifest 的上下文 manifest，`renderManifest()` 提供 HTML 安全 JSON；客户端传入相同配置与 `hydrate`，在框架完成恢复后调用 `completeHydration()` 检查遗漏的全局槽位。key 在同一上下文的活跃挂载中必须唯一。使用 context 时不要绕过它调用 runtime.mountGlobal/claimGlobal，否则 snapshot 会拒绝不完整的映射。直接 keyframes/css 不受此限制。
+
+宿主拥有 context：每个 SSR 请求独立创建并在输出结束/失败时 finally dispose，浏览器应用完全卸载后 dispose。组件清理自己的全局挂载，不清理共享 class。`claimGlobal(id, definition)` 支持先事务更新再认领，更新失败不消耗认领资格。
 
 renderStyles 保留独立 style 块，正确处理 @import/@namespace 的每张样式表边界。HTML 的 style 结束标签、nonce 属性和 manifest JSON 已做对应编码。不要用客户端 style.outerHTML 抽取 CSS：动态规则通过 CSSOM 插入，应从 runtime.snapshot/renderStyles 获取。
 
@@ -150,7 +154,7 @@ renderStyles 保留独立 style 块，正确处理 @import/@namespace 的每张�
 - CSSTree 3.2.1 是固定的运行时解析依赖，处理选择器、值、规则边界及所需描述符检查。生成工具仍使用固定数据版本。
 - 原始值/规则必须通过语法解析，但语法成功不等于所有浏览器实现了该属性或值。目录中的规范条目依然可能是浏览器尚未支持的特征。
 - 每个逻辑记录目前拥有可定位的 style 节点，便于独立插入、原位替换、回滚与 SSR 恢复；后续依据测量优化分组。`stats()` 提供记录数量与 CSS 字符数。
-- `ibind` 仍然是编译标记，未编译时明确报错；没有隐式变量提升、Vue/Svelte 订阅或主题预设。
+- `ibind` 仍然是编译标记，未编译时明确报错；没有隐式变量提升或主题预设。Vue/Svelte 的监听与生命周期由各自适配器实现，core 不依赖框架。
 
 ## 验收命令
 

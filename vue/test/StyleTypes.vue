@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { css, keyframes, globalCss } from '@zerodep-css/core';
+import { useStyleRuntime, keyframes, globalCss } from '@zerodep-css/vue';
+
+const { css } = useStyleRuntime();
 
 const width = ref(120);
 const fade = keyframes((k) => {

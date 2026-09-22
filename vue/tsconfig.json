@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": { "noEmit": true, "customConditions": ["zerodep-source"], "types": [] },
-  "vueCompilerOptions": { "strictTemplates": true },
+  "vueCompilerOptions": { "strictTemplates": true, "dataAttributes": ["data-*"] },
   "include": ["src/**/*.ts", "src/**/*.vue", "test/**/*.ts", "test/**/*.vue"]
 }

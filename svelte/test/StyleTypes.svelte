@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { css, keyframes, globalCss } from '@zerodep-css/core';
+  import { useStyleRuntime, keyframes, globalCss } from '@zerodep-css/svelte';
+
+  const { css } = useStyleRuntime();
 
   let { width = 120 }: { width?: number } = $props();
   const fade = keyframes((k) => {

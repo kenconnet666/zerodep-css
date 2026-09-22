@@ -53,7 +53,7 @@ export interface StyleRuntime {
   keyframes(definition: KeyframesDefinition): string;
   mountGlobal(value: StylesheetDefinition | RootFactory): GlobalStyleHandle;
   /** 认领 SSR 恢复的全局槽位，不根据内容猜测组件身份。 */
-  claimGlobal(id: string): GlobalStyleHandle;
+  claimGlobal(id: string, value?: StylesheetDefinition | RootFactory): GlobalStyleHandle;
   snapshot(): StyleManifest;
   renderStyles(): string;
   renderManifest(): string;
@@ -356,10 +356,12 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       claimed.add(id);
       return handle(id);
     },
-    claimGlobal(id) {
+    claimGlobal(id, value) {
       alive();
       if (records.get(id)?.kind !== 'global' || claimed.has(id))
         throw new Error('Global slot is unavailable or already claimed.');
+      // 更新成功后才认领；失败保留服务端记录，允许重试。
+      if (value !== undefined) ensure(compileGlobal(definition(value), id, config), id);
       claimed.add(id);
       return handle(id);
     },

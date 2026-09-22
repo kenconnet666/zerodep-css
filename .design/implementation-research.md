@@ -156,7 +156,7 @@ Svelte 5.57.0 已验证普通 class 回调与 style 指令组合：初始调用 
 
 ## 10. 实施顺序与验收
 
-本轮工作区和原生 LSP 验收完成后，按以下阶段实施。当前三个包入口仍为空；研究探针不计为框架功能完成。每阶段达到退出条件后再进入下一阶段。
+本轮工作区和原生 LSP 验收完成后，按以下阶段实施。阶段一至三当前实现记录见第 14 至 17 节；研究探针不计为框架功能完成。每阶段达到退出条件后再进入下一阶段。
 
 ### 阶段一：正式数据生成与 core 纯构建基础（已实施，见第 14 节）
 
@@ -200,7 +200,7 @@ Svelte 5.57.0 已验证普通 class 回调与 style 指令组合：初始调用 
 
 本阶段完成 css 的字符串返回与运行时行为；Vue/Svelte 对该入口的原生响应式/生命周期接入在阶段三完成。ibind 编译、主题预设或 reset 默认行为仍按后续阶段执行。不能因阶段拆分而改变最终 `css(factory): string` 合同。
 
-### 阶段三：Vue/Svelte 普通响应式与 SSR 接入
+### 阶段三：Vue/Svelte 普通响应式与 SSR 接入（实现见第 17 节）
 
 仅接普通变量触发重算与 class 切换。Vue 使用原生 render effect/稳定 computed；Svelte 使用原生模板编译。复用 core，禁止第二套 signal/store。
 
@@ -532,3 +532,24 @@ css(s => {
 当前验证：31 项 Node 测试通过；17 项 Chrome 153 浏览器测试通过；22 处静态预期类型错误通过。独立 LSP 验证三种语言各五处错误，修正后清零，并分别确认 token/raw 的字面量参数补全包含 flex、inline-grid 等候选，属性成员补全没有函数原生成员。
 
 已初始化本地 Git 仓库，提交说明使用中文。正式源码、生成产物、覆盖清单和可复现测试进入版本管理；本机 .codex/config.toml、node_modules、dist、语言服务/浏览器报告不提交。文本通过 .gitattributes 固定 LF，避免换机后破坏生成一致性检查。
+
+## 17. 原生框架适配与 CI（2026-09-22）
+
+本阶段保持 css(factory): string 以及第 16 节属性合同。Vue/Svelte 的 useStyleRuntime 在初始化时取得绑定到应用/请求的 runtime；模板调用由框架原生依赖跟踪，脚本中分别使用 computed/$derived。普通 const 字符串不自动变化。模板更新不等于逐样式缓存，Vue 无关重渲染可能再次调用 inline css；派生缓存和 core 规则去重分别验证。
+
+新增框架无关的 createStyleContext：持有独立 runtime、稳定全局 key 到 slot 的映射、上下文 manifest、安全 JSON 输出、恢复遗漏检查和整实例清理。useGlobalCss(key, factory) 的 key 必须在同一上下文活跃 owner 中唯一。认领顺序不依赖组件调用顺序；core claimGlobal 支持事务更新成功后才认领，失败保留旧记录供重试。绕过 context 直接管理全局槽位会使映射不完整，snapshot 明确拒绝。
+
+Vue 使用 provide/inject、computed + watch(pre)、onScopeDispose。Svelte 使用初始化 context、纯定义 $derived、首次同步挂载、$effect.pre 更新、onDestroy 清理 effect root。两者 SSR 都同步收集且不建立客户端 watcher，不在服务端组件清理时删除尚未输出的规则。宿主必须按请求创建上下文并 finally dispose；客户端先恢复 context，再 hydration，等待相关组件完成后 completeHydration，应用卸载后再 dispose。
+
+没有引入私有框架响应式 API、自建 signal、普通变量隐式提升或 ibind 编译。css 在 render/derived 求值时同步确保规则注册，具有幂等副作用；废弃渲染产生的 class 留到 context 释放，不声称纯计算或中止渲染自动回收。完整字符串 SSR 为本阶段范围，流式 SSR、异步 Suspense/boundary 全流程、Nuxt/SvelteKit 专用插件后续单独验收。
+
+验证入口：
+
+- pnpm test：34 项 core/生成器测试，含 key 映射、失败认领重试、跨请求隔离及 manifest 校验。
+- pnpm test:adapters：Vue 应用注入/缺失上下文诊断、服务端 scope 结束后保留输出且不建立订阅。
+- pnpm test:frameworks：官方 Vue/Svelte 编译器处理实际 SFC/rune 模块，消费 dist；验证双请求不同状态隔离、SSR 首屏样式、恢复复用 style 节点、原生更新、派生缓存、条件依赖、回到旧内容复用 class、全局提前停止、卸载/重挂、共享类存活和普通客户端挂载。
+- 本地 Chrome 153 首轮组件验收通过，记录回调次数、规则数量及包含模块加载的 hydration 耗时；这些是机器基线，不是性能承诺。真实模板由 zerodep_lsp 诊断 complete=true、errors=0。
+- test:types 的 Vue/Svelte 负例与补全入口改为从适配器 useStyleRuntime 获取 css，以覆盖实际包边界。
+- GitHub Actions 分别运行基础检查、完整语言服务验收、Chromium 回归，并上传报告。CI 成功需以实际对应提交的 run 为准；不发布、不部署。
+
+API 用法和 SSR 宿主职责详见 vue/README.md、svelte/README.md、core/README.md。
