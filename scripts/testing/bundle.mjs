@@ -9,6 +9,11 @@ const baseline = JSON.parse(
   await readFile(resolve(root, 'scripts/testing/bundle-budget.json'), 'utf8'),
 );
 const entries = [];
+const themeDeclarationBytes = (await readFile(resolve(root, 'core/dist/themes.d.ts'))).length;
+assert(
+  themeDeclarationBytes <= 8192,
+  'Preset declarations must reuse base types instead of expanding the full keyword tables.',
+);
 for (const name of ['css', 'createRuntime', 'createStyleContext', 'cssVar']) {
   const result = await build({
     stdin: {
@@ -49,7 +54,11 @@ await mkdir(output, { recursive: true });
 await writeFile(
   resolve(output, 'results.json'),
   JSON.stringify(
-    { note: '单函数保活，非网络或速度承诺；预算用于阻止意外体积回归。', entries },
+    {
+      note: '单函数保活，非网络或速度承诺；预算用于阻止意外体积回归。',
+      themeDeclarationBytes,
+      entries,
+    },
     null,
     2,
   ) + '\n',

@@ -48,6 +48,9 @@ for (const [framework, transform] of [
       'let local=gap;s.padding.px(local);local++;',
       's.padding.px(getGap());',
       's.padding.px(gap);effect();',
+      's.constructor.name;s.padding.px(gap);',
+      's.toString.call(s);s.padding.px(gap);',
+      's.width.dvh(gap);',
       's.color.raw(getColor());s.padding.px(gap);',
       's.media(query,h=>{h.padding.px(gap)});',
     ])

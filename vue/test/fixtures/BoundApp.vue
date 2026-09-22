@@ -2,9 +2,32 @@
 import type { StyleContext } from '@zerodep-css/core';
 import BoundStyles from './BoundStyles.vue';
 import ThemeApp from './ThemeApp.vue';
+import PresetPanel from './PresetPanel.vue';
+import DifferentialStyles from './DifferentialStyles.vue';
+import { useStyleRuntime } from '@zerodep-css/vue';
+const { css } = useStyleRuntime();
 defineProps<{ context: StyleContext; initialWidth: number; record: (kind: string) => void }>();
 </script>
 <template>
+  <DifferentialStyles />
+  <div
+    data-presets
+    :class="
+      css((s) => {
+        s.display.flex;
+        s.flexWrap.wrap;
+        s.gap.px(24);
+        s.padding.px(24);
+        s.width.raw('fit-content');
+        s.backgroundColor.raw('#e2e8f0');
+      })
+    "
+  >
+    <PresetPanel name="light" :initial-dark="false" /><PresetPanel
+      name="dark"
+      :initial-dark="true"
+    />
+  </div>
   <div id="theme-portal"></div>
   <ThemeApp :initial="initialWidth === 20 ? 'red' : 'blue'" />
   <section data-instance="a">

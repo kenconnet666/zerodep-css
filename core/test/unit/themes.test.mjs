@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Css, createRuntime } from '../../dist/index.js';
 import { ThemeCss, lightTheme, darkTheme } from '../../dist/themes.js';
+import { parse, walk, generate } from 'css-tree';
 
 // 独立按 WCAG 2.2 相对亮度计算；不使用产品代码或四舍五入来判断阈值。
 // https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
@@ -99,6 +100,58 @@ test('可选作者类不污染 Css，所有公开 token getter 均无关键字�
     assert.equal(runtime.css(factory, ThemeCss), content);
     assert.equal(runtime.stats().classes, 3);
     assert(runtime.renderStyles().includes('color-scheme:var('));
+  } finally {
+    runtime.dispose();
+  }
+});
+
+test('所有便利成员写入正确 CSS 属性和语义变量，不因 getter 复制而串位', () => {
+  const properties = [
+    ['color', 'color', 'color'],
+    ['backgroundColor', 'background-color', 'color'],
+    ['borderColor', 'border-color', 'color'],
+    ['outlineColor', 'outline-color', 'color'],
+    ['fill', 'fill', 'color'],
+    ['stroke', 'stroke', 'color'],
+    ['padding', 'padding', 'space'],
+    ['margin', 'margin', 'space'],
+    ['gap', 'gap', 'space'],
+    ['borderRadius', 'border-radius', 'radius'],
+    ['fontFamily', 'font-family', 'fontFamily'],
+    ['fontSize', 'font-size', 'fontSize'],
+    ['transitionDuration', 'transition-duration', 'duration'],
+    ['boxShadow', 'box-shadow', 'shadow'],
+    ['colorScheme', 'color-scheme', null],
+  ];
+  const runtime = createRuntime({ target: null });
+  try {
+    for (const [member, property, group] of properties) {
+      const tokens = group ? lightTheme.tokens[group] : { theme: lightTheme.tokens.colorScheme };
+      for (const [keyword, token] of Object.entries(tokens)) {
+        const id = runtime.css((s) => {
+          s[member][keyword];
+        }, ThemeCss);
+        const declarations = [];
+        walk(
+          parse(runtime.snapshot().records.find((record) => record.id === id).body, {
+            context: 'declarationList',
+            parseCustomProperty: true,
+          }),
+          (node) => {
+            if (node.type === 'Declaration') declarations.push(node);
+          },
+        );
+        assert.deepEqual(
+          declarations.map((node) => node.property),
+          [property],
+          member + '.' + keyword,
+        );
+        assert(
+          generate(declarations[0].value).startsWith(`var(${token.name},`),
+          member + '.' + keyword,
+        );
+      }
+    }
   } finally {
     runtime.dispose();
   }

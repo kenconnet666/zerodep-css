@@ -68,3 +68,24 @@ test('值变化复用规则，空值恢复前置声明，CSS-wide 保留直接�
     runtime.dispose();
   }
 });
+
+test('不合法或无法证明的属性值保留原声明，不能改变前置 fallback', () => {
+  const color = createDeclarationBinding('--color', { property: 'color', numbers: [] });
+  for (const value of ['banana', 'future-color(1)', 'var(--external, green)']) {
+    assert.equal(color.value(value), value);
+    assert.equal(color.inline(value), undefined);
+  }
+  for (const value of ['red', 'rgb(30 40 50 / .8)', 'rebeccapurple']) {
+    assert.equal(color.value(value), 'var(--color)');
+    assert.equal(color.inline(value), value);
+  }
+  const width = createDeclarationBinding('--width', { property: 'width' });
+  assert.equal(width.value('-2px'), '-2px');
+  assert.equal(width.value('10px'), 'var(--width)');
+  assert.equal(width.value('fit-content(10px)'), 'fit-content(10px)');
+  assert.equal(width.value('calc(20px * 10px)'), 'calc(20px * 10px)');
+  const display = createDeclarationBinding('--display', { property: 'display' });
+  assert.equal(display.value('run-in'), 'run-in');
+  assert.equal(display.value('ruby-base-container'), 'ruby-base-container');
+  assert.equal(display.value('flex'), 'var(--display)');
+});

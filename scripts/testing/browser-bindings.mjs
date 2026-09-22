@@ -77,6 +77,9 @@ for (const server of [true, false]) {
     // Node 侧保持框架单实例；CSSTree 的相对数据文件也由其原生加载器解析。
     external: server ? ['vue', 'vue/*', 'svelte', 'svelte/*', 'css-tree'] : [],
     alias: {
+      '@zerodep-css/core/themes': resolve(root, 'core/dist/themes.js'),
+      '@zerodep-css/vue/themes': resolve(root, 'vue/dist/themes.js'),
+      '@zerodep-css/svelte/themes': resolve(root, 'svelte/dist/themes.js'),
       '@zerodep-css/core/compiler-runtime': resolve(root, 'core/dist/compiler-runtime.js'),
       '@zerodep-css/core/theme-runtime': resolve(root, 'core/dist/theme-runtime.js'),
       '@zerodep-css/vue/compiler-runtime': resolve(root, 'vue/dist/compiler-runtime.js'),
@@ -167,6 +170,42 @@ try {
           };
         });
       const ssr = await read();
+      const presets = () =>
+        page.locator('[data-preset]').evaluateAll((elements) =>
+          Object.fromEntries(
+            elements.map((element) => {
+              const style = getComputedStyle(element),
+                button = getComputedStyle(element.querySelector('[data-preset-toggle]'));
+              return [
+                element.getAttribute('data-preset'),
+                {
+                  background: style.backgroundColor,
+                  color: style.color,
+                  scheme: style.colorScheme,
+                  padding: style.padding,
+                  radius: style.borderRadius,
+                  content: element.className.split(' ').at(-1),
+                  buttonBackground: button.backgroundColor,
+                  buttonColor: button.color,
+                },
+              ];
+            }),
+          ),
+        );
+      const ssrPresets = await presets();
+      assert.equal(ssrPresets.light.background, 'rgb(255, 255, 255)');
+      assert.equal(ssrPresets.light.color, 'rgb(15, 23, 42)');
+      assert.equal(ssrPresets.light.scheme, 'light');
+      assert.equal(ssrPresets.light.buttonBackground, 'rgb(37, 99, 235)');
+      assert.equal(ssrPresets.light.buttonColor, 'rgb(255, 255, 255)');
+      assert.equal(ssrPresets.dark.background, 'rgb(15, 23, 42)');
+      assert.equal(ssrPresets.dark.color, 'rgb(248, 250, 252)');
+      assert.equal(ssrPresets.dark.scheme, 'dark');
+      assert.equal(ssrPresets.dark.buttonBackground, 'rgb(147, 197, 253)');
+      assert.equal(ssrPresets.dark.buttonColor, 'rgb(11, 18, 32)');
+      assert.equal(ssrPresets.light.content, ssrPresets.dark.content);
+      assert.equal(ssrPresets.light.padding, '24px');
+      assert.equal(ssrPresets.light.radius, '12px');
       const themeState = () =>
         page.locator('[data-theme-leaf]').evaluateAll((elements) =>
           Object.fromEntries(
@@ -199,6 +238,27 @@ try {
         ),
       );
       const initial = await read();
+      assert.deepEqual(await presets(), ssrPresets);
+      await page
+        .locator('[data-presets]')
+        .screenshot({ path: resolve(output, `${framework}-themes.png`) });
+      const lightPanel = page.locator('[data-preset="light"]');
+      await lightPanel.locator('[data-preset-toggle]').click();
+      const switched = await presets();
+      assert.deepEqual(switched.light, ssrPresets.dark);
+      assert.deepEqual(switched.dark, ssrPresets.dark);
+      await lightPanel.locator('[data-preset-toggle]').focus();
+      await page.keyboard.press('Tab');
+      assert.equal(
+        await lightPanel
+          .locator('[data-preset-input]')
+          .evaluate((element) => getComputedStyle(element).outlineStyle),
+        'solid',
+      );
+      for (let index = 0; index < 19; index++)
+        await lightPanel.locator('[data-preset-toggle]').click();
+      assert.deepEqual(await presets(), ssrPresets);
+      assert.deepEqual((await read()).stats, initial.stats);
       assert.deepEqual(await themeState(), ssrTheme);
       assert.equal(initial.height, '7px');
       assert.equal(initial.border, '2px');
@@ -313,6 +373,28 @@ try {
         ),
         1,
       );
+      const count = Number(await page.locator('[data-differential]').getAttribute('data-count'));
+      assert(
+        Number.isSafeInteger(count) && count >= 14,
+        'Differential cases must not be silently skipped.',
+      );
+      for (let index = 0; index < count * 2; index++) {
+        const values = await page.evaluate(() =>
+          ['candidate', 'reference'].map((kind) => {
+            const style = getComputedStyle(document.querySelector('[data-diff-' + kind + ']'));
+            return {
+              color: style.color,
+              width: style.width,
+              display: style.display,
+              padding: style.padding,
+              margin: style.marginLeft,
+              opacity: style.opacity,
+            };
+          }),
+        );
+        assert.deepEqual(values[0], values[1], `${framework} differential case ${index % count}`);
+        await page.locator('[data-diff-next]').click();
+      }
       await page.evaluate(async () => {
         await window.fixture.destroy();
         window.fixture.dispose();
@@ -328,7 +410,19 @@ try {
         window.fixture.dispose();
       });
       assert.deepEqual(errors, []);
-      report.push({ framework, ssr, initial, bound, ordinary, ssrTheme, changedTheme, localTheme });
+      report.push({
+        framework,
+        ssr,
+        initial,
+        bound,
+        ordinary,
+        ssrTheme,
+        changedTheme,
+        localTheme,
+        ssrPresets,
+        switched,
+        differentialCases: count * 2,
+      });
     });
   }
   for (const framework of ['vue', 'svelte']) {
@@ -379,7 +473,7 @@ try {
     JSON.stringify({ engine: browserEngine, passed: true, report }, null, 2),
   );
   console.log(
-    'VERIFIED: automatic CSS client/SSR/hydration, units, multiple values, shared classes, instance isolation, keyed lists and disposal',
+    'VERIFIED: automatic CSS, presets, differential values, strict CSP, SSR/hydration, scopes and disposal',
   );
 } finally {
   await browser?.close();

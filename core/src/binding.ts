@@ -1,7 +1,9 @@
-import { parse, walk, ident } from 'css-tree';
+import { parse, walk, ident, lexer } from 'css-tree';
 import type { NumericCheck, NumericAlternatives } from './metadata-types.js';
 import { isCssVariable, validateCustomName } from './values.js';
 import { StringCache } from './string-cache.js';
+import { portableUnits } from './binding-policy.js';
+import type { CssNode } from 'css-tree';
 
 /** 保留单位多参数备选语法的整体约束，不能把位置约束分别取并集。 */
 export function validateUnitValues(
@@ -33,6 +35,9 @@ export interface BindingFormat {
   readonly unit?: string;
   readonly numbers?: readonly NumericCheck[];
   readonly tokens?: readonly string[];
+}
+export interface DeclarationFormat extends Omit<BindingFormat, 'unit'> {
+  readonly property?: string;
 }
 
 /** 自动单位绑定以整组为边界，联合参数只求值和校验一次。 */
@@ -75,6 +80,7 @@ function checkSyntax(result: string) {
   if (!result.trim()) throw new TypeError('CSS binding values must not be empty.');
   const ast = parse(result, {
     context: 'value',
+    parseCustomProperty: true,
     onParseError(error) {
       throw error;
     },
@@ -86,12 +92,103 @@ function checkSyntax(result: string) {
 }
 
 const cssWide = new Set(['initial', 'inherit', 'unset', 'revert', 'revert-layer']);
+const portableFunctions = new Set([
+  'rgb',
+  'rgba',
+  'hsl',
+  'hsla',
+  'translate',
+  'translatex',
+  'translatey',
+  'translatez',
+  'translate3d',
+  'scale',
+  'scalex',
+  'scaley',
+  'scalez',
+  'scale3d',
+  'rotate',
+  'rotatex',
+  'rotatey',
+  'rotatez',
+  'rotate3d',
+  'skew',
+  'skewx',
+  'skewy',
+  'matrix',
+  'matrix3d',
+  'perspective',
+]);
+const portableDisplay = new Set([
+  'none',
+  'block',
+  'inline',
+  'inline-block',
+  'flex',
+  'inline-flex',
+  'grid',
+  'inline-grid',
+  'contents',
+  'flow-root',
+  'table',
+  'inline-table',
+  'table-row',
+  'table-cell',
+  'table-caption',
+  'table-column',
+  'table-row-group',
+  'table-header-group',
+  'table-footer-group',
+  'table-column-group',
+  'list-item',
+]);
+
+function portableValue(ast: CssNode, property: string): boolean {
+  let safe = true;
+  walk(ast, (node) => {
+    switch (node.type) {
+      case 'Value':
+      case 'WhiteSpace':
+      case 'Number':
+      case 'Percentage':
+      case 'Hash':
+      case 'Url':
+        break;
+      case 'Operator':
+        if (!['/', ','].includes(node.value) || property === 'content') safe = false;
+        break;
+      case 'Dimension':
+        if (!portableUnits.has(node.unit.toLowerCase())) safe = false;
+        break;
+      case 'Function':
+        if (!portableFunctions.has(node.name.toLowerCase())) safe = false;
+        break;
+      case 'String':
+        if (!['font-family', 'content'].includes(property)) safe = false;
+        break;
+      case 'Identifier': {
+        const name = ident.decode(node.name).toLowerCase();
+        if (
+          property !== 'font-family' &&
+          !(property === 'display' && portableDisplay.has(name)) &&
+          !['transparent', 'currentcolor'].includes(name) &&
+          !lexer.matchType('named-color', node).matched
+        )
+          safe = false;
+        break;
+      }
+      default:
+        safe = false;
+    }
+  });
+  return safe;
+}
 
 /**
  * 普通值走元素变量；空值省略声明，CSS-wide 关键字与显式变量保留直接声明。
  * 后两类决定级联语义，不能把 initial 等值塞进自定义属性后假定语义相同。
  */
-export function createDeclarationBinding(name: `--${string}`, format: BindingFormat = {}) {
+export function createDeclarationBinding(name: `--${string}`, format: DeclarationFormat = {}) {
   validateCustomName(name);
   const variable = `var(${name})`;
   const cache = new StringCache<boolean>();
@@ -109,8 +206,19 @@ export function createDeclarationBinding(name: `--${string}`, format: BindingFor
     if (cached !== undefined) return cached;
     const ast = checkSyntax(value);
     const first = ast.type === 'Value' && ast.children.size === 1 ? ast.children.first : undefined;
-    const result =
+    let result =
       first?.type === 'Identifier' && cssWide.has(ident.decode(first.name).toLowerCase());
+    if (!result && options.property) {
+      // 非法属性值原本会在解析声明时被忽略；变成 var 后会改变 fallback 语义。
+      // 未来语法或无法证明的 var/env 表达式保留直接声明，不以优化器拒绝 raw。
+      try {
+        result =
+          !lexer.matchProperty(options.property, ast).matched ||
+          !portableValue(ast, options.property);
+      } catch {
+        result = true;
+      }
+    }
     cache.set(value, result);
     return result;
   }

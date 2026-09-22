@@ -7,7 +7,8 @@ import {
   unitFamilies,
 } from '../../core/src/generated/metadata.js';
 import type { NumericAlternatives } from '../../core/src/metadata-types.js';
-import type { BindingFormat } from '../../core/src/binding.js';
+import type { DeclarationFormat } from '../../core/src/binding.js';
+import { portableUnits } from '../../core/src/binding-policy.js';
 
 interface Declaration {
   call: ts.CallExpression;
@@ -16,7 +17,7 @@ interface Declaration {
 export type AutomaticDeclaration = Declaration &
   (
     | { kind: 'unit'; unit: string; alternatives: NumericAlternatives; separator: string }
-    | { kind: 'value'; format: BindingFormat }
+    | { kind: 'value'; format: DeclarationFormat }
   );
 
 function unwrap(value: ts.Expression): ts.Expression {
@@ -236,7 +237,9 @@ export function automaticDeclarations(
     if (!ts.isPropertyAccessExpression(member.expression)) return false;
     const property = member.expression;
     if (!ts.isIdentifier(property.expression) || property.expression.text !== builder) return false;
-    const meta = propertyMetadata[property.name.text];
+    const meta = Object.hasOwn(propertyMetadata, property.name.text)
+      ? propertyMetadata[property.name.text]
+      : undefined;
     if (!meta || meta.resource) return false;
     if (!ts.isCallExpression(expression)) {
       return Object.hasOwn(keywordGroups[meta.keywords]!, member.name.text);
@@ -251,10 +254,12 @@ export function automaticDeclarations(
           kind: 'value',
           call: expression,
           property,
-          format:
-            member.name.text === 'token'
+          format: {
+            property: meta.cssName,
+            ...(member.name.text === 'token'
               ? { tokens: Object.values(keywordGroups[meta.keywords]!) }
-              : { numbers },
+              : { numbers }),
+          },
         });
       }
       return true;
@@ -265,6 +270,8 @@ export function automaticDeclarations(
         if ((unit === '%' ? 'pct' : unit) + plan.suffix !== member.name.text) continue;
         const alternatives = plan.arities[args.length];
         if (!alternatives || !args.every((arg) => read(arg, callback))) return false;
+        if (!portableUnits.has(unit.toLowerCase()) && args.some((arg) => !literal(arg)))
+          return false;
         matched = true;
         if (args.some((arg) => !literal(arg)))
           declarations.push({

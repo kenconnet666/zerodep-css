@@ -191,6 +191,8 @@ context.mountGlobal('consumer',global); context.dispose(); void result; void ext
       'ThemeApp',
       'ThemeBranch',
       'ThemeLeaf',
+      'PresetPanel',
+      'DifferentialStyles',
     ])
       await copyFile(
         resolve(root, `${framework}/test/fixtures/${component}.${framework}`),
