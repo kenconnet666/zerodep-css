@@ -15,7 +15,7 @@ pnpm lsp:setup -SkipInstall -Verify
 
 PowerShell 也可以直接执行 `./scripts/language-services/setup.ps1 -SkipInstall -Verify`。
 
-`setup.ps1` 默认安装锁文件依赖并构建三包；只更新 `.codex/config.toml` 的带标记配置区，保留其他设置，遇到非管理区同名服务报错。换机或移动目录后重跑脚本，重新检测绝对 Node、仓库和入口路径。不写用户全局 Codex 配置。
+`setup.ps1` 默认安装锁文件依赖并构建三包；只更新 `.codex/config.toml` 的带标记配置区，保留其他设置，遇到非管理区同名服务报错。两个 MCP 的入口参数使用相对项目根目录的路径，LSP 的项目根参数为 `.`。仅 Node 可执行文件和 `cwd` 由脚本生成本机绝对路径，避免桌面宿主的 PATH 或启动目录不同导致启动失败。换机或移动目录后重跑脚本，无需手改路径；生成配置不进 Git，不写用户全局 Codex 配置。
 
 `-Verify` 从 `codex mcp get --json` 读取实际解析后的启动配置，分别启动两个 MCP 并发现工具，再执行完整语言诊断验收。配置读取是否成功、独立 MCP 是否工作、当前桌面任务是否已加载工具是不同证据。
 

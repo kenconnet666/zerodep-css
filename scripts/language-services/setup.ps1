@@ -7,7 +7,7 @@ $repoPath = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
 $nodeExecutable = (Get-Command node -CommandType Application | Select-Object -First 1).Source
 $pnpmExecutable = (Get-Command pnpm | Select-Object -First 1).Source
 
-# 固定依赖与启动路径，避免桌面宿主的 PATH、工作目录与终端不同。
+# 仅固定本机 Node 和工作目录；模板入口相对工作目录，避免依赖桌面宿主的 PATH。
 $nodeMajor = & $nodeExecutable -p 'process.versions.node.split(".")[0]'
 if ($nodeMajor -ne '24') { throw '请先选择 Node 24，再运行安装脚本。' }
 if (-not $SkipInstall) {
@@ -22,8 +22,6 @@ $template = Get-Content -LiteralPath (Join-Path $repoPath '.codex/config.example
 $paths = @{
     '__NODE__' = $nodeExecutable
     '__ROOT__' = $repoPath
-    '__LSP__' = Join-Path $PSScriptRoot 'server.mjs'
-    '__SVELTE__' = Join-Path $repoPath 'node_modules/@sveltejs/mcp/dist/index.mjs'
 }
 foreach ($entry in $paths.GetEnumerator()) {
     # JSON 字符串转义也适用于这里的 TOML 基本字符串；统一斜杠方便人工检查。

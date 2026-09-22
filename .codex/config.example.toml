@@ -1,15 +1,15 @@
-# setup.ps1 生成本机绝对路径；不要原样复制为 config.toml。
+# setup.ps1 生成本机 Node 和工作目录；入口参数相对 cwd，不要原样复制模板。
 # BEGIN ZERODEP LANGUAGE SERVICES
 [mcp_servers.zerodep_lsp]
 command = __NODE__
-args = [__LSP__, __ROOT__]
+args = ["scripts/language-services/server.mjs", "."]
 cwd = __ROOT__
 startup_timeout_sec = 30
 tool_timeout_sec = 90
 
 [mcp_servers.zerodep_svelte_docs]
 command = __NODE__
-args = [__SVELTE__]
+args = ["node_modules/@sveltejs/mcp/dist/index.mjs"]
 cwd = __ROOT__
 startup_timeout_sec = 30
 tool_timeout_sec = 90

@@ -38,7 +38,7 @@ pnpm test:unit --no-build
 pwsh -NoProfile -File scripts/language-services/setup.ps1 -SkipInstall -Verify
 ```
 
-该脚本会构建并用模板生成本机 .codex/config.toml，配置项目 zerodep_lsp 和官方 Svelte MCP；不会修改用户全局 Codex 配置。生成后重启客户端或新建项目任务，使其加载新配置。不要直接复制旧电脑的 config.toml，其中的 Node 和工作区绝对路径会失效。
+该脚本会构建并用模板生成本机 .codex/config.toml，配置项目 zerodep_lsp 和官方 Svelte MCP；不会修改用户全局 Codex 配置。两个 MCP 的入口参数使用项目相对路径，LSP 的项目根参数为 `.`；Node 可执行文件和启动工作目录仍按本机自动检测，确保桌面宿主不依赖终端的 PATH 或启动目录。换机或移动仓库后重跑上述命令即可，无需手改路径。生成后重启客户端或新建项目任务，使其加载新配置。不要直接复制旧电脑的 config.toml，其中本机生成的路径会失效。
 
 ```powershell
 pnpm lsp:inspect vue/src/global.ts svelte/test/fixtures/ReactiveStyles.svelte
