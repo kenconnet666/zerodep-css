@@ -11,6 +11,10 @@
       "zerodep-source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./compiler": {
+      "types": "./dist/compiler/index.d.ts",
+      "default": "./dist/compiler/index.js"
     }
   },
   "scripts": {
@@ -18,7 +22,10 @@
     "check": "vue-tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@zerodep-css/core": "workspace:^"
+    "@zerodep-css/core": "workspace:^",
+    "magic-string": "catalog:",
+    "typescript": "catalog:",
+    "@jridgewell/sourcemap-codec": "catalog:"
   },
   "peerDependencies": {
     "vue": "^3.5.43"

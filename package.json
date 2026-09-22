@@ -54,6 +54,9 @@
     "vscode-jsonrpc": "catalog:languageServices",
     "vue": "catalog:",
     "vue-tsc": "catalog:languageServices",
-    "zod": "catalog:languageServices"
+    "zod": "catalog:languageServices",
+    "magic-string": "catalog:",
+    "@jridgewell/sourcemap-codec": "catalog:",
+    "@jridgewell/trace-mapping": "catalog:"
   }
 }

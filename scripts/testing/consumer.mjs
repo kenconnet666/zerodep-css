@@ -67,6 +67,7 @@ try {
         vite: await version('vite'),
         [plugin]: await version(plugin),
         typescript: await version('typescript'),
+        '@types/node': await version('@types/node'),
       },
       pnpm: {
         overrides: { '@zerodep-css/core': `file:${tarball('core')}` },
@@ -92,6 +93,10 @@ try {
       join(folder, 'types.ts'),
       `import { createStyleContext, type StyleFactory, type StylesheetFactory } from '@zerodep-css/core';
 import { useStyleRuntime } from '@zerodep-css/${framework}';
+import { bx } from '@zerodep-css/${framework}';
+import { bxPlugin, transformBx } from '@zerodep-css/${framework}/compiler';
+import type { Plugin } from 'vite';
+const compilerPlugin: Plugin = bxPlugin(); void compilerPlugin;
 // @ts-expect-error 适配器不再暴露绕过上下文的默认 css
 import { css as defaultCss } from '@zerodep-css/${framework}';
 // @ts-expect-error 内部 IR 不属于根入口
@@ -101,10 +106,10 @@ const style: StyleFactory = s => { s.display.token('flex'); s.width.raw('future-
 // @ts-expect-error token 不能退化为任意字符串
 s.display.token('unknown-token');
 // @ts-expect-error 属性不可直接调用
-s.width('50%'); };
+s.width('50%'); s.width.px(bx(12)); };
 const global: StylesheetFactory = g => g.containerQuery('(width > 10px)', g => g.rule('body', style));
 const result: string = useStyleRuntime(context).css(style);
-context.mountGlobal('consumer',global); context.dispose(); void result; void defaultCss;
+context.mountGlobal('consumer',global); context.dispose(); void result; void defaultCss; void bxPlugin; void transformBx;
 `,
     );
     pnpm(
@@ -123,16 +128,22 @@ context.mountGlobal('consumer',global); context.dispose(); void result; void def
       ],
       { cwd: folder, env: environment },
     );
-    for (const component of ['ReactiveApp', 'ReactiveStyles'])
+    for (const component of ['ReactiveApp', 'ReactiveStyles', 'BoundApp', 'BoundStyles'])
       await copyFile(
         resolve(root, `${framework}/test/fixtures/${component}.${framework}`),
         join(folder, `${component}.${framework}`),
       );
     await save(
+      join(folder, `ConsumerApp.${framework}`),
+      framework === 'vue'
+        ? `<script setup>import ReactiveApp from './ReactiveApp.vue'; import BoundApp from './BoundApp.vue'; import {provideStyleContext} from '@zerodep-css/vue'; const props=defineProps(['context','initialColor','record']); provideStyleContext(props.context);</script><template><ReactiveApp v-bind="props"/><BoundApp :context="props.context" :record="props.record" :initial-width="20"/></template>`
+        : `<script>import ReactiveApp from './ReactiveApp.svelte'; import BoundApp from './BoundApp.svelte'; let props=$props();</script><ReactiveApp {...props}/><BoundApp context={props.context} record={props.record} initialWidth={20}/>`,
+    );
+    await save(
       join(folder, 'vite.config.js'),
       framework === 'vue'
-        ? "import {defineConfig} from 'vite'; import vue from '@vitejs/plugin-vue'; export default defineConfig({plugins:[vue()],build:{manifest:true,rollupOptions:{input:'client.js'}}});"
-        : "import {defineConfig} from 'vite'; import {svelte} from '@sveltejs/vite-plugin-svelte'; export default defineConfig({plugins:[svelte()],build:{manifest:true,rollupOptions:{input:'client.js'}}});",
+        ? "import {defineConfig} from 'vite'; import vue from '@vitejs/plugin-vue'; import {bxPlugin} from '@zerodep-css/vue/compiler'; export default defineConfig({plugins:[bxPlugin(),vue()],build:{manifest:true,rollupOptions:{input:'client.js'}}});"
+        : "import {defineConfig} from 'vite'; import {svelte} from '@sveltejs/vite-plugin-svelte'; import {bxPlugin} from '@zerodep-css/svelte/compiler'; export default defineConfig({plugins:[bxPlugin(),svelte()],build:{manifest:true,rollupOptions:{input:'client.js'}}});",
     );
     const imports =
       framework === 'vue'
@@ -141,7 +152,7 @@ context.mountGlobal('consumer',global); context.dispose(); void result; void def
     await save(
       join(folder, 'server.js'),
       `${imports}
-import {createStyleContext} from '@zerodep-css/core'; import App from './ReactiveApp.${framework}';
+import {createStyleContext} from '@zerodep-css/core'; import App from './ConsumerApp.${framework}';
 export async function renderPage(){ const context=createStyleContext({target:null,namespace:'consumer'}); try {
 const props={context,initialColor:'red',record(){}};
 const html=${framework === 'vue' ? 'await renderToString(createSSRApp(App,props))' : '(await render(App,{props})).body'};
@@ -152,12 +163,12 @@ return {html,styles:context.renderStyles(),manifest:context.renderManifest()};
     await save(
       join(folder, 'client.js'),
       `${framework === 'vue' ? "import {createSSRApp,nextTick} from 'vue';" : "import {hydrate,tick,unmount} from 'svelte';"}
-import {createStyleContext} from '@zerodep-css/core'; import App from './ReactiveApp.${framework}';
+import {createStyleContext} from '@zerodep-css/core'; import App from './ConsumerApp.${framework}';
 const context=createStyleContext({namespace:'consumer',hydrate:JSON.parse(document.querySelector('#manifest').textContent)});
-const props={context,initialColor:'red',record(){}};
+const counts={}; const props={context,initialColor:'red',record(kind){counts[kind]=(counts[kind]??0)+1;}};
 const app=${framework === 'vue' ? 'createSSRApp(App,props)' : "hydrate(App,{target:document.querySelector('#app'),props})"};
 ${framework === 'vue' ? "app.mount('#app'); await nextTick();" : 'await tick();'}
-context.completeHydration(); window.consumer={ready:true, async dispose(){ ${framework === 'vue' ? 'app.unmount();' : 'await unmount(app);'} const globals=context.runtime.stats().globals; context.dispose(); return globals; }};
+context.completeHydration(); window.consumer={ready:true,counts,stats:()=>context.runtime.stats(), async dispose(){ ${framework === 'vue' ? 'app.unmount();' : 'await unmount(app);'} const globals=context.runtime.stats().globals; context.dispose(); return globals; }};
 `,
     );
     pnpm(['exec', 'vite', 'build', '--outDir', 'dist/client'], { cwd: folder, env: environment });
@@ -220,6 +231,24 @@ context.completeHydration(); window.consumer={ready:true, async dispose(){ ${fra
         await page.waitForFunction(
           () => getComputedStyle(document.querySelector('[data-derived]')).width === '21px',
         );
+        const bindingBefore = await page.evaluate(() => ({
+          counts: { ...window.consumer.counts },
+          stats: window.consumer.stats(),
+          className: document.querySelector('[data-instance="a"] [data-shared]').className,
+        }));
+        await page.locator('[data-instance="a"] [data-bound]').click();
+        assert.equal(
+          await page
+            .locator('[data-instance="a"] [data-shared]')
+            .evaluate((el) => getComputedStyle(el).width),
+          '21px',
+        );
+        const bindingAfter = await page.evaluate(() => ({
+          counts: { ...window.consumer.counts },
+          stats: window.consumer.stats(),
+          className: document.querySelector('[data-instance="a"] [data-shared]').className,
+        }));
+        assert.deepEqual(bindingAfter, bindingBefore);
         assert.equal(await page.evaluate(() => window.consumer.dispose()), 0);
         assert.equal(await page.locator('style').count(), 0);
         assert.deepEqual(errors, []);

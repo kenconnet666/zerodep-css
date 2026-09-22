@@ -1,0 +1,72 @@
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import { bx as bindValue, useStyleRuntime } from '@zerodep-css/vue';
+
+const props = defineProps<{ initialWidth: number; record: (kind: string) => void }>();
+const { css } = useStyleRuntime();
+const width = ref(props.initialWidth);
+const color = ref('red');
+const x = ref(2);
+const y = ref(3);
+const unrelated = ref(0);
+const visible = ref(true);
+const rows = ref([
+  { id: 'a', width: 11 },
+  { id: 'b', width: 22 },
+]);
+const shared = computed(() =>
+  css((s) => {
+    props.record('shared');
+    s.color.raw(color.value);
+    s.width.px(bindValue(width.value));
+    s.padding.px(1, bindValue(x.value), 3, bindValue(y.value));
+    s.transform.raw(`translate(${bindValue(x.value)}px, ${bindValue(y.value)}px)`);
+  }),
+);
+</script>
+
+<template>
+  <button
+    data-bound
+    @click="
+      width++;
+      x++;
+      y++;
+    "
+  >
+    bound
+  </button>
+  <button data-color @click="color = color === 'red' ? 'blue' : 'red'">color</button>
+  <button data-other @click="unrelated++">{{ unrelated }}</button>
+  <button data-visible @click="visible = !visible">visible</button>
+  <button data-row @click="rows[0]!.width++">row</button>
+  <button data-reorder @click="rows.reverse()">reorder</button>
+  <div
+    data-shared
+    :class="shared"
+    :style="[{ height: '7px' }, 'border-top: 2px solid green']"
+  ></div>
+  <div v-if="visible" data-shared-copy :class="shared" style="height: 9px"></div>
+  <div
+    data-inline
+    :class="
+      css((s) => {
+        props.record('inline');
+        s.color.raw(color);
+        s.width.px(bindValue(width));
+      })
+    "
+  ></div>
+  <div
+    v-for="row in rows"
+    :key="row.id"
+    :data-row-id="row.id"
+    :class="
+      css((s) => {
+        props.record('row');
+        s.height.px(5);
+        s.width.px(bindValue(row.width));
+      })
+    "
+  ></div>
+</template>

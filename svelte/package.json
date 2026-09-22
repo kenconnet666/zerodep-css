@@ -12,6 +12,10 @@
       "types": "./dist/index.d.ts",
       "svelte": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./compiler": {
+      "types": "./dist/compiler/index.d.ts",
+      "default": "./dist/compiler/index.js"
     }
   },
   "scripts": {
@@ -19,7 +23,10 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
-    "@zerodep-css/core": "workspace:^"
+    "@zerodep-css/core": "workspace:^",
+    "magic-string": "catalog:",
+    "typescript": "catalog:",
+    "@jridgewell/sourcemap-codec": "catalog:"
   },
   "peerDependencies": {
     "svelte": "^5.57.0"

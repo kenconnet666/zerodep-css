@@ -19,5 +19,10 @@ if (kind === 'unit') {
     'vue/test/unit/*.test.mjs',
     'scripts/css-data/*.test.mjs',
     'scripts/testing/unit/*.test.mjs',
+    'scripts/compiler/*.test.mjs',
   ]);
 } else run(process.execPath, [resolve(root, 'scripts/testing', entries[kind])]);
+if (kind === 'browser:frameworks')
+  run(process.execPath, [resolve(root, 'scripts/testing/browser-bindings.mjs')]);
+if (kind === 'browser:frameworks')
+  run(process.execPath, [resolve(root, 'scripts/testing/hmr-bindings.mjs')]);

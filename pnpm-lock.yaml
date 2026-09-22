@@ -6,6 +6,12 @@ settings:
 
 catalogs:
   default:
+    '@jridgewell/sourcemap-codec':
+      specifier: 1.6.0
+      version: 1.6.0
+    '@jridgewell/trace-mapping':
+      specifier: 0.3.31
+      version: 0.3.31
     '@playwright/test':
       specifier: 1.63.0
       version: 1.63.0
@@ -36,6 +42,9 @@ catalogs:
     esbuild:
       specifier: 0.28.2
       version: 0.28.2
+    magic-string:
+      specifier: 0.30.21
+      version: 0.30.21
     prettier:
       specifier: 3.9.7
       version: 3.9.7
@@ -93,6 +102,12 @@ importers:
 
   .:
     devDependencies:
+      '@jridgewell/sourcemap-codec':
+        specifier: 'catalog:'
+        version: 1.6.0
+      '@jridgewell/trace-mapping':
+        specifier: 'catalog:'
+        version: 0.3.31
       '@modelcontextprotocol/sdk':
         specifier: catalog:languageServices
         version: 1.30.0(zod@4.6.5)
@@ -135,6 +150,9 @@ importers:
       esbuild:
         specifier: 'catalog:'
         version: 0.28.2
+      magic-string:
+        specifier: 'catalog:'
+        version: 0.30.21
       prettier:
         specifier: 'catalog:'
         version: 3.9.7
@@ -183,9 +201,18 @@ importers:
 
   svelte:
     dependencies:
+      '@jridgewell/sourcemap-codec':
+        specifier: 'catalog:'
+        version: 1.6.0
       '@zerodep-css/core':
         specifier: workspace:^
         version: link:../core
+      magic-string:
+        specifier: 'catalog:'
+        version: 0.30.21
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
     devDependencies:
       svelte:
         specifier: 'catalog:'
@@ -193,9 +220,18 @@ importers:
 
   vue:
     dependencies:
+      '@jridgewell/sourcemap-codec':
+        specifier: 'catalog:'
+        version: 1.6.0
       '@zerodep-css/core':
         specifier: workspace:^
         version: link:../core
+      magic-string:
+        specifier: 'catalog:'
+        version: 0.30.21
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
     devDependencies:
       vue:
         specifier: 'catalog:'

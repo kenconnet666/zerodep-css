@@ -4,6 +4,9 @@ packages:
   - svelte
 
 catalog:
+  magic-string: 0.30.21
+  '@jridgewell/sourcemap-codec': 1.6.0
+  '@jridgewell/trace-mapping': 0.3.31
   '@playwright/test': 1.63.0
   '@vitejs/plugin-vue': 6.0.9
   '@sveltejs/vite-plugin-svelte': 7.3.0
