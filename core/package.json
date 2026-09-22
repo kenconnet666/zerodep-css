@@ -16,6 +16,11 @@
     "./compiler-runtime": {
       "types": "./dist/compiler-runtime.d.ts",
       "default": "./dist/compiler-runtime.js"
+    },
+    "./theme-runtime": {
+      "zerodep-source": "./src/theme-runtime.ts",
+      "types": "./dist/theme-runtime.d.ts",
+      "default": "./dist/theme-runtime.js"
     }
   },
   "scripts": {

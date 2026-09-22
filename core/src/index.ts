@@ -5,6 +5,7 @@ export type { StyleConfig, StyleSource } from './style-metadata.js';
 export { css, injectGlobal, createRuntime } from './runtime.js';
 export { createStyleContext } from './context.js';
 export { defineTheme } from './theme.js';
+export type { ThemeScope } from './theme-runtime.js';
 export type {
   ThemeTree,
   ThemeDefinition,

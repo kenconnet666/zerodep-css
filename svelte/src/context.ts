@@ -1,5 +1,7 @@
 import { getContext, setContext } from 'svelte';
-import type { StyleContext, StyleRuntime } from '@zerodep-css/core';
+import type { StyleContext, StyleRuntime, ThemeScope } from '@zerodep-css/core';
+import { withTheme } from '@zerodep-css/core/theme-runtime';
+import { themeKey } from './theme.svelte.js';
 
 const key = Symbol('zerodep-css');
 export function provideStyleContext(context: StyleContext): void {
@@ -12,6 +14,7 @@ export function resolveContext(explicit?: StyleContext): StyleContext {
   return context;
 }
 /** 在组件初始化时获取，后续模板求值无需再次访问 context。 */
-export function useStyleRuntime(context?: StyleContext): StyleRuntime {
-  return resolveContext(context).runtime;
+export function useStyleRuntime(context?: StyleContext, theme?: ThemeScope): StyleRuntime {
+  const scope = theme ?? (!context ? getContext<ThemeScope | undefined>(themeKey) : undefined);
+  return withTheme(resolveContext(context).runtime, scope);
 }

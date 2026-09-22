@@ -1,5 +1,9 @@
 # Vue 适配
 
+主题使用 `defineTheme` 的静态定义和 `provideTheme(theme, () => overrides)` 的原生 computed 覆盖。后代 `useStyleRuntime()` 自动继承；当前 provider 组件使用返回的作用域：`const scope = provideTheme(theme, () => overrides.value); const { css } = useStyleRuntime(undefined, scope)`。同组件可连续提供多个主题。显式 `useStyleRuntime(context)` 只使用指定运行时；需要主题时同时传入 scope。
+
+主题运行时的 css 返回可用于 class 属性的类名列表，其中包含有效主题变量类和内容类。放在模板或 computed 中会随主题变化更新；普通 const 字符串仍是调用时快照。子对象只覆盖指定字段，null 恢复当前预设默认值。主题类附在样式元素上，因此 Vue Teleport 后仍保持逻辑组件作用域的主题。provider 不销毁共享 context，应用/请求宿主负责最终 dispose。
+
 自动绑定已接入：编译插件可将原生模板直接 `css(s => { s.padding.px(8, gap); })` 中的动态单位值编译为元素 CSS 变量。支持静态参数的嵌套结构和字面量可判定的 if/switch；未知控制流、派生类、脚本快照、组件透传和复杂表达式保留运行时行为。可证明稳定的样式第一次执行仍经过完整校验，后续由 runtime 有界缓存跳过重复构建和解析。完整迁移目标见[生产化计划](../.design/production-plan.md)。
 
 同样支持 `raw(value)`、`token(value)` 和完整模板字符串。普通值更新元素变量；空值省略声明，CSS-wide 关键字与显式 `cssVar` 引用保留直接声明。后几类变化仍可能切换类名，以保持覆盖与继承语义；字符串校验按绑定使用 128 项有界缓存。被提升的值读取应保持纯粹，函数调用、局部写入等会触发整体运行时回退。

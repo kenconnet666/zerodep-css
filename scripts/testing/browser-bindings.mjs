@@ -68,6 +68,7 @@ for (const server of [true, false]) {
     external: server ? ['vue', 'vue/*', 'svelte', 'svelte/*', 'css-tree'] : [],
     alias: {
       '@zerodep-css/core/compiler-runtime': resolve(root, 'core/dist/compiler-runtime.js'),
+      '@zerodep-css/core/theme-runtime': resolve(root, 'core/dist/theme-runtime.js'),
       '@zerodep-css/vue/compiler-runtime': resolve(root, 'vue/dist/compiler-runtime.js'),
       '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
       '@zerodep-css/vue': resolve(root, 'vue/dist/index.js'),
@@ -92,6 +93,16 @@ for (const framework of ['vue', 'svelte']) {
   assert.deepEqual(
     a.manifest.runtime.records.filter((r) => r.name?.startsWith('automatic')),
     b.manifest.runtime.records.filter((r) => r.name?.startsWith('automatic')),
+  );
+  assert(
+    a.manifest.runtime.records
+      .filter((record) => record.name === 'app-theme')
+      .every((record) => !record.body.includes(':blue')),
+  );
+  assert(
+    b.manifest.runtime.records.some(
+      (record) => record.name === 'app-theme' && record.body.includes(':blue'),
+    ),
   );
   pages[framework] = a.html;
 }
@@ -144,6 +155,23 @@ try {
           };
         });
       const ssr = await read();
+      const themeState = () =>
+        page.locator('[data-theme-leaf]').evaluateAll((elements) =>
+          Object.fromEntries(
+            elements.map((element) => [
+              element.getAttribute('data-theme-leaf'),
+              {
+                color: getComputedStyle(element).color,
+                background: getComputedStyle(element).backgroundColor,
+                content: element.className.split(' ').at(-1),
+              },
+            ]),
+          ),
+        );
+      const ssrTheme = await themeState();
+      assert.equal(ssrTheme.parent.color, 'rgb(255, 0, 0)');
+      assert.equal(ssrTheme.child.background, 'rgb(0, 255, 0)');
+      assert.equal(ssrTheme.reset.background, 'rgb(0, 0, 0)');
       assert.equal(ssr.width, '20px');
       assert.equal(ssr.otherWidth, '40px');
       assert.notEqual(ssr.className, ssr.otherClass);
@@ -159,6 +187,7 @@ try {
         ),
       );
       const initial = await read();
+      assert.deepEqual(await themeState(), ssrTheme);
       assert.equal(initial.height, '7px');
       assert.equal(initial.border, '2px');
       const automatic = first.locator('[data-auto]');
@@ -238,6 +267,36 @@ try {
       assert.equal(await autoValue.evaluate((e) => e.style.length), 0);
       await first.locator('[data-auto-color]').click();
       assert.equal(await autoValue.getAttribute('class'), valueClass);
+      await page.locator('[data-theme-move]').click();
+      assert.equal(await page.locator('#theme-portal [data-theme-leaf="portal"]').count(), 1);
+      await page.locator('[data-theme-parent-change]').click();
+      const changedTheme = await themeState();
+      for (const name of ['parent', 'sibling', 'child', 'portal'])
+        assert.equal(changedTheme[name].color, 'rgb(0, 0, 255)');
+      assert.equal(changedTheme.reset.color, 'rgb(255, 0, 0)');
+      assert.equal(changedTheme.child.background, 'rgb(0, 255, 0)');
+      await page.locator('[data-theme-local]').click();
+      const localTheme = await themeState();
+      assert.equal(localTheme.child.background, 'rgb(255, 255, 0)');
+      assert.equal(localTheme.parent.background, 'rgb(0, 0, 0)');
+      await page.locator('[data-theme-spacing]').click();
+      assert.deepEqual(
+        await page
+          .locator('[data-theme-leaf]')
+          .evaluateAll((elements) => elements.map((element) => getComputedStyle(element).padding)),
+        Array(5).fill('8px'),
+      );
+      for (const name of Object.keys(localTheme))
+        assert.equal(localTheme[name].content, ssrTheme[name].content);
+      assert.equal(
+        await page.evaluate(
+          () =>
+            window.fixture
+              .snapshot()
+              .runtime.records.filter((record) => record.name === 'themed-content').length,
+        ),
+        1,
+      );
       await page.evaluate(async () => {
         await window.fixture.destroy();
         window.fixture.dispose();
@@ -247,12 +306,13 @@ try {
         window.fixture = await (await import('/client.mjs')).start(framework, false);
       }, framework);
       assert.equal((await read()).width, '20px');
+      assert.deepEqual(await themeState(), ssrTheme);
       await page.evaluate(async () => {
         await window.fixture.destroy();
         window.fixture.dispose();
       });
       assert.deepEqual(errors, []);
-      report.push({ framework, ssr, initial, bound, ordinary });
+      report.push({ framework, ssr, initial, bound, ordinary, ssrTheme, changedTheme, localTheme });
     });
   }
   await writeFile(

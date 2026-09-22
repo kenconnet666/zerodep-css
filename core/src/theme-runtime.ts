@@ -1,0 +1,71 @@
+import { Css, type CssConstructor } from './css.js';
+import type { StyleFactory } from './builder-types.js';
+import type { StyleRuntime } from './runtime.js';
+import type { ThemeDefinition, ThemeOverrides, ThemeTree, ThemeValues } from './theme.js';
+import { themeStyle } from './theme.js';
+
+export interface ThemeState {
+  readonly name: string;
+  readonly schema: string;
+  readonly values: ThemeTree;
+  className(runtime: StyleRuntime): string;
+}
+/** 作用域只保存原生响应式 getter，不接管共享 runtime 的生命周期。 */
+export interface ThemeScope {
+  readonly themes: readonly ThemeState[];
+}
+
+function inherited<T extends ThemeTree>(
+  definition: ThemeDefinition<T>,
+  parent?: ThemeScope,
+): ThemeState | undefined {
+  const state = parent?.themes.find((theme) => theme.name === definition.name);
+  if (state && state.schema !== definition.schema)
+    throw new TypeError('Incompatible theme schema: ' + definition.name);
+  return state;
+}
+export function resolveTheme<T extends ThemeTree>(
+  definition: ThemeDefinition<T>,
+  overrides: ThemeOverrides<T> | null | undefined,
+  parent?: ThemeScope,
+): ThemeValues<T> {
+  return definition.resolve(
+    overrides,
+    inherited(definition, parent)?.values as ThemeValues<T> | undefined,
+  );
+}
+export function createThemeScope<T extends ThemeTree>(
+  definition: ThemeDefinition<T>,
+  read: () => ThemeValues<T>,
+  parent?: ThemeScope,
+): ThemeScope {
+  inherited(definition, parent);
+  const entries = new Map(parent?.themes.map((theme) => [theme.name, theme]));
+  entries.set(
+    definition.name,
+    Object.freeze({
+      name: definition.name,
+      schema: definition.schema,
+      get values() {
+        return read();
+      },
+      className(runtime: StyleRuntime) {
+        return runtime.css(themeStyle(definition, read()));
+      },
+    }),
+  );
+  return Object.freeze({ themes: Object.freeze([...entries.values()]) });
+}
+
+/** 每个元素携带逻辑组件作用域的有效变量类，因此 DOM 移动不改变主题。 */
+export function withTheme(runtime: StyleRuntime, scope?: ThemeScope): StyleRuntime {
+  if (!scope?.themes.length) return runtime;
+  function css(factory: StyleFactory): string;
+  function css<T extends Css>(factory: StyleFactory<T>, cssType: CssConstructor<T>): string;
+  function css(factory: StyleFactory<never>, cssType: CssConstructor = Css): string {
+    const content = runtime.css(factory as StyleFactory, cssType);
+    const names = scope!.themes.map((theme) => theme.className(runtime));
+    return [...names, content].join(' ');
+  }
+  return Object.freeze({ ...runtime, css });
+}

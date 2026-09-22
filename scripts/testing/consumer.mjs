@@ -92,7 +92,7 @@ try {
     await save(
       join(folder, 'types.ts'),
       `import { createStyleContext, type StyleFactory, type StylesheetFactory } from '@zerodep-css/core';
-import { useStyleRuntime } from '@zerodep-css/${framework}';
+import { useStyleRuntime, defineTheme, provideTheme } from '@zerodep-css/${framework}';
 // @ts-expect-error bx 已移除，动态值直接交给 cssPlugin
 import { bx } from '@zerodep-css/${framework}';
 import { Css } from '@zerodep-css/${framework}';
@@ -104,6 +104,11 @@ import { css as defaultCss } from '@zerodep-css/${framework}';
 // @ts-expect-error 内部 IR 不属于根入口
 import type { StyleProgram } from '@zerodep-css/core';
 const context = createStyleContext({target:null});
+const palette = defineTheme('consumer-theme', {color:{brand:'red'}});
+const themeScope = provideTheme(palette, () => ({color:{brand:'blue'}}));
+useStyleRuntime(context, themeScope);
+// @ts-expect-error 主题叶类型不能因 provider 接入而放宽
+provideTheme(palette, () => ({color:{brand:1}}));
 const style: StyleFactory = s => { s.display.token('flex'); s.width.raw('future-value');
 // @ts-expect-error token 不能退化为任意字符串
 s.display.token('unknown-token');
@@ -138,11 +143,15 @@ context.mountGlobal('consumer',global); context.dispose(); void result; void ext
       'BoundApp',
       'BoundStyles',
       'AutomaticStyles',
+      'ThemeApp',
+      'ThemeBranch',
+      'ThemeLeaf',
     ])
       await copyFile(
         resolve(root, `${framework}/test/fixtures/${component}.${framework}`),
         join(folder, `${component}.${framework}`),
       );
+    await copyFile(resolve(root, `${framework}/test/fixtures/theme.ts`), join(folder, 'theme.ts'));
     await save(
       join(folder, `ConsumerApp.${framework}`),
       framework === 'vue'

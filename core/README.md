@@ -58,7 +58,7 @@ const className = `${palette} ${content}`;
 
 预设继承沿用同一变量标识。`resolve(overrides, inheritedValues?)` 产生冻结的有效主题：undefined 继承，null 重置到当前预设默认值，对象递归局部覆盖。未知字段、错误叶类型、循环结构和不能作为变量值使用的 CSS-wide 关键字会报错。修改原始默认值或覆盖对象不影响已产生的快照。
 
-主题定义不持有 runtime/请求状态，`className` 将变量声明注册到传入 runtime；不同主题值复用各自的变量类，不改写引用它们的内容规则。框架 provider 的自动向下传播正在单独接入，当前 core 调用者显式组合主题类与内容类。
+主题定义不持有 runtime/请求状态，`className` 将变量声明注册到传入 runtime；不同主题值复用各自的变量类，不改写引用它们的内容规则。core 调用者显式组合主题类与内容类；Vue/Svelte 的 provideTheme 和 useStyleRuntime 接入自动向下传播，使用方式见适配器 README。
 
 ## 样式命名与诊断
 

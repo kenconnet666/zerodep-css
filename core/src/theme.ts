@@ -3,6 +3,22 @@ import { hashText } from './hash.js';
 import { validateStyleName } from './style-metadata.js';
 import { createDeclarationBinding } from './binding.js';
 import type { StyleRuntime } from './runtime.js';
+import type { StyleFactory } from './builder-types.js';
+
+const styleKey = Symbol('zerodep.theme-style');
+interface ThemeStyle {
+  [styleKey](values: ThemeTree): StyleFactory;
+}
+
+/** 框架作用域传入已解析的冻结快照，避免每个元素重复解析主题叶值。 */
+export function themeStyle<T extends ThemeTree>(
+  definition: ThemeDefinition<T>,
+  values: ThemeValues<T>,
+): StyleFactory {
+  const factory = (definition as ThemeDefinition<T> & ThemeStyle)[styleKey];
+  if (!factory) throw new TypeError('Expected a theme created by defineTheme.');
+  return factory(values);
+}
 
 export interface ThemeTree {
   readonly [key: string]: string | number | ThemeTree;
@@ -118,7 +134,7 @@ export function defineTheme<const T extends ThemeTree>(
     }
     return Object.freeze(result);
   }
-  const definition: ThemeDefinition<T> = {
+  const definition: ThemeDefinition<T> & ThemeStyle = {
     name,
     schema: JSON.stringify(shape),
     defaults: baseline as ThemeValues<T>,
@@ -133,14 +149,17 @@ export function defineTheme<const T extends ThemeTree>(
     },
     className(runtime, values) {
       const resolved = definition.resolve(values);
-      return runtime.css((s) => {
+      return runtime.css(themeStyle(definition, resolved));
+    },
+    [styleKey](resolved) {
+      return (s) => {
         s.name(name);
         for (const variable of variables) {
           let value: string | number | ThemeTree = resolved;
           for (const part of variable.path) value = (value as ThemeTree)[part]!;
           s.custom.raw(variable.name, value as string | number);
         }
-      });
+      };
     },
   };
   return Object.freeze(definition);
