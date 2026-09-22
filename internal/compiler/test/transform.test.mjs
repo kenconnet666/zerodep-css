@@ -81,3 +81,27 @@ test('Svelte 模板 const 遮蔽 css 别名时保留局部函数', () => {
   const source = `<script>import {useStyleRuntime} from '@zerodep-css/svelte';const {css:style}=useStyleRuntime();let width=10;</script>{#if true}{@const style=()=> 'local'}<div class={style(s=>{s.width.px(width)})}/>{/if}`;
   assert.equal(svelte(source, resolve('Shadow.svelte')), null);
 });
+
+test('开发来源尊重 Vue 解构循环与 slot 的局部同名函数', () => {
+  const script = `<script setup>import {useStyleRuntime} from '@zerodep-css/vue';const {css}=useStyleRuntime();const rows=[{css:n=>'local'+n}];</script>`;
+  for (const template of [
+    `<div v-for="{css} in rows" :class="css(3)"/>`,
+    `<Renderer v-slot="{css}"><div :class="css(3)"/></Renderer>`,
+    `<template v-for="row in rows"><div v-for="{css} in rows" :class="css(3)"/></template>`,
+  ])
+    assert.equal(
+      vue(script + `<template>${template}</template>`, resolve('Local.vue'), { debug: true }),
+      null,
+    );
+});
+
+test('开发来源尊重 Svelte 解构循环、await 与 legacy let 的词法身份', () => {
+  const script = `<script>import {useStyleRuntime} from '@zerodep-css/svelte';const {css}=useStyleRuntime();const rows=[{css:n=>'local'+n}];const promise=Promise.resolve(rows[0].css);</script>`;
+  for (const template of [
+    `{#each rows as {css}}<div class={css(3)}/>{/each}`,
+    `{#await promise then css}<div class={css(3)}/>{/await}`,
+    `{#await promise}<div>pending</div>{:catch css}<div class={css(3)}/>{/await}`,
+    `<Renderer let:css><div class={css(3)}/></Renderer>`,
+  ])
+    assert.equal(svelte(script + template, resolve('Local.svelte'), { debug: true }), null);
+});

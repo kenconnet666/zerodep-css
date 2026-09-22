@@ -3,7 +3,7 @@ import type {
   CompilerPlugin,
   TransformResult,
 } from '../../internal/compiler/types.js';
-import { bindingNames } from '../../internal/compiler/scope.js';
+import { patternNames } from '../../internal/compiler/scope.js';
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -29,16 +29,7 @@ export function transformCss(
   if (!ctx.css.size && !options.debug) return null;
   const addPattern = (pattern: unknown, names: Set<string>): void => {
     if (!hasRange(pattern)) return;
-    const file = ts.createSourceFile(
-      'template-scope.ts',
-      `function scope(${source.slice(pattern.start, pattern.end)}) {}`,
-      ts.ScriptTarget.Latest,
-      true,
-      ts.ScriptKind.TS,
-    );
-    const declaration = file.statements[0];
-    if (declaration && ts.isFunctionDeclaration(declaration))
-      for (const parameter of declaration.parameters) bindingNames(parameter.name, names);
+    for (const name of patternNames(source.slice(pattern.start, pattern.end))) names.add(name);
   };
   // 脚本内的 class 保持定义时机；这里只附加开发诊断。
   for (const statement of ctx.ast.statements)
@@ -86,18 +77,23 @@ export function transformCss(
         typeof context.name !== 'string'
       )
         blocked = true;
-      else
-        locals = new Set([
-          ...locals,
-          context.name,
-          ...(typeof node.index === 'string' ? [node.index] : []),
-        ]);
+      locals = new Set(locals);
+      addPattern(context, locals);
+      if (typeof node.index === 'string') locals.add(node.index);
     }
     if (node.type === 'SnippetBlock' && Array.isArray(node.parameters)) {
       locals = new Set(locals);
       for (const parameter of node.parameters) addPattern(parameter, locals);
     }
     const attributes = Array.isArray(node.attributes) ? node.attributes.filter(isRecord) : [];
+    const letLocals = new Set(locals);
+    for (const attribute of attributes)
+      if (attribute.type === 'LetDirective') {
+        if (attribute.expression) addPattern(attribute.expression, letLocals);
+        else if (typeof attribute.name === 'string') letLocals.add(attribute.name);
+      }
+    if (!['Component', 'SvelteComponent', 'SvelteSelf'].includes(String(node.type)))
+      locals = letLocals;
     const attr = attributes.find((a) => a.type === 'Attribute' && a.name === 'class');
     const value: unknown =
       Array.isArray(attr?.value) && attr.value.length === 1 ? attr.value[0] : attr?.value;
@@ -140,12 +136,18 @@ export function transformCss(
       'then',
       'catch',
     ])
-      if (node[key])
+      if (node[key]) {
+        let childLocals = node.type === 'EachBlock' && key === 'fallback' ? outerLocals : letLocals;
+        if (node.type === 'AwaitBlock' && (key === 'then' || key === 'catch')) {
+          childLocals = new Set(childLocals);
+          addPattern(key === 'then' ? node.value : node.error, childLocals);
+        }
         visit(
           node[key],
           node.type === 'EachBlock' && key === 'fallback' ? restricted : blocked,
-          node.type === 'EachBlock' && key === 'fallback' ? outerLocals : locals,
+          childLocals,
         );
+      }
   }
   visit(ast.fragment);
   return ctx.finish();

@@ -1,5 +1,21 @@
 import ts from 'typescript';
 
+/** 模板绑定模式也按 TS 语法处理，解构/默认值/rest 不靠字符串切分猜名字。 */
+export function patternNames(pattern: string): Set<string> {
+  const result = new Set<string>();
+  const file = ts.createSourceFile(
+    'template-scope.ts',
+    `function scope(${pattern}) {}`,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS,
+  );
+  const declaration = file.statements[0];
+  if (declaration && ts.isFunctionDeclaration(declaration))
+    for (const parameter of declaration.parameters) bindingNames(parameter.name, result);
+  return result;
+}
+
 /** 只解析声明身份，不通过同名字符串猜测宏或把嵌套函数的局部变量算到外层。 */
 export function bindingNames(node: ts.BindingName, target = new Set<string>()): Set<string> {
   if (ts.isIdentifier(node)) target.add(node.text);

@@ -7,8 +7,8 @@ import { createServer } from 'node:http';
 import { build, transform } from 'esbuild';
 import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile, compileModule } from 'svelte/compiler';
-import { transformCss as vueBx } from '../../vue/dist/compiler/index.js';
-import { transformCss as svelteBx } from '../../svelte/dist/compiler/index.js';
+import { transformCss as vueCss } from '../../vue/dist/compiler/index.js';
+import { transformCss as svelteCss } from '../../svelte/dist/compiler/index.js';
 import { launchBrowser, browserEngine } from './browser-launch.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -22,9 +22,10 @@ function components(server) {
       bundler.onLoad({ filter: /\.vue$/ }, async ({ path }) => {
         const original = await readFile(path, 'utf8');
         const source =
-          vueBx(original, path, {
+          vueCss(original, path, {
             root,
             bindings: path.endsWith('CspApp.vue') ? 'runtime' : 'variables',
+            debug: path.endsWith('CspApp.vue'),
           })?.code ?? original;
         const { descriptor, errors } = parse(source, { filename: path });
         if (errors.length) throw errors[0];
@@ -38,9 +39,10 @@ function components(server) {
       bundler.onLoad({ filter: /\.svelte$/ }, async ({ path }) => {
         const original = await readFile(path, 'utf8');
         const source =
-          svelteBx(original, path, {
+          svelteCss(original, path, {
             root,
             bindings: path.endsWith('CspApp.svelte') ? 'runtime' : 'variables',
+            debug: path.endsWith('CspApp.svelte'),
           })?.code ?? original;
         const result = compile(source, {
           filename: path,
@@ -347,6 +349,7 @@ try {
       const ssr = await read();
       assert.equal(ssr.width, '20px');
       assert.equal(ssr.color, 'rgb(255, 0, 0)');
+      assert.equal(await page.locator('[data-csp-shadow]').getAttribute('class'), 'local3');
       assert.equal(await page.locator('[style]').count(), 0);
       await page.evaluate(async (framework) => {
         window.fixture = await (await import('/client.mjs')).start(framework, true, true);

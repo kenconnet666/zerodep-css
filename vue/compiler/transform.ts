@@ -18,6 +18,7 @@ interface Loop {
   patched: boolean;
 }
 import { parse, compileScript } from 'vue/compiler-sfc';
+import { patternNames } from '../../internal/compiler/scope.js';
 import {
   session,
   walk,
@@ -119,15 +120,28 @@ export function transformCss(
           if (result.code !== d.initializer.getText(ctx.ast))
             ctx.output.overwrite(offset, ctx.scriptStart + d.initializer.end, result.code);
         }
-  function visit(node: VueNode, restricted = false, inheritedLoop?: Loop): void {
+  function visit(
+    node: VueNode,
+    restricted = false,
+    inheritedLoop?: Loop,
+    inheritedLocals = new Set<string>(),
+  ): void {
     const element = node.type === 1 ? node : undefined;
     const props = element?.props ?? [];
     const forProp = props.find((p): p is VueDirective => p.type === 7 && p.name === 'for');
+    const locals = new Set(inheritedLocals);
+    const add = (pattern: VueDirective['exp']) => {
+      if (pattern?.type === 4) for (const name of patternNames(pattern.content)) locals.add(name);
+    };
     let loop = inheritedLoop;
     let scoped =
       restricted || element?.tagType === 1 || props.some((p) => p.type === 7 && p.name === 'slot');
     if (forProp) {
       const info = forProp.forParseResult;
+      // 即使不能优化循环，也必须保留词法身份，开发诊断不能误包局部同名函数。
+      add(info?.value);
+      add(info?.key);
+      add(info?.index);
       const simple = (exp: VueDirective['exp']) => (exp?.type === 4 ? exp : undefined);
       const source = simple(info?.source);
       const value = simple(info?.value)?.content,
@@ -165,7 +179,7 @@ export function transformCss(
       const result = ctx.expression(
         expression,
         classExpression.loc.start.offset,
-        new Set(loop ? [loop.value, loop.index] : []),
+        locals,
         !!element &&
           element.tagType === 0 &&
           element.tag !== 'svg' &&
@@ -217,8 +231,12 @@ export function transformCss(
         );
       }
     }
+    const childLocals = new Set(locals);
+    const slot = props.find((p): p is VueDirective => p.type === 7 && p.name === 'slot');
+    if (slot?.exp?.type === 4)
+      for (const name of patternNames(slot.exp.content)) childLocals.add(name);
     if (node.type === 0 || node.type === 1)
-      for (const child of node.children) visit(child, scoped, loop);
+      for (const child of node.children) visit(child, scoped, loop, childLocals);
   }
   if (descriptor.template.ast) visit(descriptor.template.ast);
   // 提升后的模板表达式通过当前组件的 props 视图读取，不能遗留自由变量。

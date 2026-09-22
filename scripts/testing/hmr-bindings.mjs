@@ -5,8 +5,8 @@ import { createServer } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { launchBrowser, browserEngine } from './browser-launch.mjs';
-import { cssPlugin as vueBx } from '../../vue/dist/compiler/index.js';
-import { cssPlugin as svelteBx } from '../../svelte/dist/compiler/index.js';
+import { cssPlugin as vueCss } from '../../vue/dist/compiler/index.js';
+import { cssPlugin as svelteCss } from '../../svelte/dist/compiler/index.js';
 import { root } from '../lib/environment.mjs';
 import { withBrowserPage } from './browser-evidence.mjs';
 
@@ -49,8 +49,8 @@ try {
       root: folder,
       plugins:
         framework === 'vue'
-          ? [vueBx({ root: folder }), vue()]
-          : [svelteBx({ root: folder }), svelte({ configFile: false })],
+          ? [vueCss({ root: folder }), vue()]
+          : [svelteCss({ root: folder }), svelte({ configFile: false })],
       resolve: {
         alias: [
           {
