@@ -1,7 +1,7 @@
 // 自动生成，勿手工修改。来源：csstype 3.2.3, Webref 8.7.5, CSSTree 3.2.1 (MIT)。
 
 import type { CssProperty, Bound } from '../values.js';
-import type { KeyframesDefinition } from '../program.js';
+import type { KeyframesDefinition } from '../style-program.js';
 interface KeywordValues {
   0:
     | 'AccentColor'

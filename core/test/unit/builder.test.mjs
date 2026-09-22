@@ -1,16 +1,16 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { keyframes, globalCss, cssVar, ibind } from '../dist/index.js';
-import { useCss } from '../dist/builder.js';
+import { keyframes, globalCss, cssVar, ibind } from '../../dist/index.js';
+import { buildStyleProgram } from '../../dist/builder.js';
 import {
   propertyMetadata,
   keywordGroups,
   helperGroups,
   descriptorMetadata,
-} from '../dist/generated/metadata.js';
+} from '../../dist/generated/metadata.js';
 
 test('保留 fallback、简写和长属性的书写顺序', () => {
-  const p = useCss((s) => {
+  const p = buildStyleProgram((s) => {
     s.height.vh(100);
     s.height.dvh(100);
     s.marginLeft.px(4);
@@ -36,18 +36,18 @@ test('普通控制流每次重新执行，构建器没有共享状态', () => {
     s.display.token(open ? 'flex' : 'none');
     if (open) s.gap.px(8);
   };
-  assert.equal(useCss(factory).length, 1);
+  assert.equal(buildStyleProgram(factory).length, 1);
   open = true;
-  assert.equal(useCss(factory).length, 2);
+  assert.equal(buildStyleProgram(factory).length, 2);
   assert.equal(
-    useCss((s) => {
+    buildStyleProgram((s) => {
       s.opacity.raw(1);
     }).length,
     1,
   );
 });
 test('生成单位方法区分维度、分隔符、范围和参数个数', () => {
-  const p = useCss((s) => {
+  const p = buildStyleProgram((s) => {
     s.padding.px(1, 2, 3, 4);
     s.animationDuration.ms(100, 200);
     s.opacity.pct(50);
@@ -68,24 +68,24 @@ test('生成单位方法区分维度、分隔符、范围和参数个数', () =>
     (s) => s.width.px(Infinity),
     (s) => s.width.px('2'),
   ])
-    assert.throws(() => useCss(callback), TypeError);
+    assert.throws(() => buildStyleProgram(callback), TypeError);
 });
 test('严格调用与显式 raw/自定义属性分离', () => {
   assert.throws(
     () =>
-      useCss((s) => {
+      buildStyleProgram((s) => {
         s.display.token('banana');
       }),
     /Unknown CSS token/,
   );
   assert.throws(
     () =>
-      useCss((s) => {
+      buildStyleProgram((s) => {
         s.font.px(12);
       }),
     /Unknown/,
   );
-  const p = useCss((s) => {
+  const p = buildStyleProgram((s) => {
     s.width.raw('50%');
     s.width.raw(0);
     s.transform.raw('translate(1px, 2px)');
@@ -95,10 +95,10 @@ test('严格调用与显式 raw/自定义属性分离', () => {
   assert.equal(p[0].value.value, '50%');
   assert.equal(p[2].value.kind, 'raw');
   assert.equal(p[4].property, 'future-property');
-  assert.throws(() => useCss((s) => s.display.raw({})), TypeError);
+  assert.throws(() => buildStyleProgram((s) => s.display.raw({})), TypeError);
 });
 test('选择器、嵌套条件和交错声明不重排', () => {
-  const p = useCss((s) => {
+  const p = buildStyleProgram((s) => {
     s.color.red;
     s.hover((h) => {
       h.color.blue;
@@ -116,14 +116,14 @@ test('选择器、嵌套条件和交错声明不重排', () => {
   );
   assert.equal(p[1].selector, '&:hover');
   assert.equal(p[3].children[0].name, '@container');
-  assert.throws(() => useCss((s) => s.selector('.external', () => {})), /contain &/);
-  const c = useCss((s) => {
+  assert.throws(() => buildStyleProgram((s) => s.selector('.external', () => {})), /contain &/);
+  const c = buildStyleProgram((s) => {
     s.container.raw('card / inline-size');
   });
   assert.equal(c[0].property, 'container');
 });
 test('伪选择器目录完整提供，未知名称拒绝', () => {
-  const p = useCss((s) => {
+  const p = buildStyleProgram((s) => {
     s.pseudo('::selection', (n) => {
       n.color.red;
     });
@@ -136,10 +136,10 @@ test('伪选择器目录完整提供，未知名称拒绝', () => {
   });
   assert.equal(p[1].selector, '&:has(> img)');
   assert.equal(p[2].children[0].value.value, '"a&b;c:d"');
-  assert.throws(() => useCss((s) => s.pseudo(':not-real', () => {})), /Unknown/);
+  assert.throws(() => buildStyleProgram((s) => s.pseudo(':not-real', () => {})), /Unknown/);
 });
 test('important 传播到对应声明但不能进入帧上下文', () => {
-  const p = useCss((s) => {
+  const p = buildStyleProgram((s) => {
     s.important((i) => {
       i.color.red;
       i.hover((h) => {
@@ -244,7 +244,7 @@ test('全局条件没有根级前导入口，根级顺序被检查', () => {
 });
 test('CSS 变量引用保持结构，ibind 尚未有编译接入时明确报错', () => {
   const v = cssVar('--tone', 'red');
-  const p = useCss((s) => {
+  const p = buildStyleProgram((s) => {
     s.color.raw(v);
   });
   assert.deepEqual(p[0].value, { kind: 'variable', name: '--tone', fallback: 'red' });
@@ -254,7 +254,7 @@ test('CSS 变量引用保持结构，ibind 尚未有编译接入时明确报错'
   assert.throws(() => ibind(2), /compiler integration/);
 });
 test('属性是不可调用对象，不暴露函数成员', () => {
-  const p = useCss((s) => {
+  const p = buildStyleProgram((s) => {
     assert.equal(typeof s.width, 'object');
     assert.throws(() => s.width('10px'), TypeError);
     assert.throws(() => s.width.call(undefined, '10px'), /Unknown/);
@@ -268,7 +268,7 @@ test('属性是不可调用对象，不暴露函数成员', () => {
   );
 });
 test('token 严格校验字面量，raw 不限制字符串枚举并保留数值约束', () => {
-  const p = useCss((s) => {
+  const p = buildStyleProgram((s) => {
     s.display.token('flex');
     s.display.raw('future-display-value');
     s.width.raw('calc(100% - 2rem)');
@@ -278,34 +278,34 @@ test('token 严格校验字面量，raw 不限制字符串枚举并保留数值�
     p.map((n) => n.value.value),
     ['flex', 'future-display-value', 'calc(100% - 2rem)', 0.5],
   );
-  assert.throws(() => useCss((s) => s.width.token('50%')), /Unknown CSS token/);
-  assert.throws(() => useCss((s) => s.opacity.token(1)), /Unknown CSS token/);
-  assert.throws(() => useCss((s) => s.color.raw(1)), /numeric/);
+  assert.throws(() => buildStyleProgram((s) => s.width.token('50%')), /Unknown CSS token/);
+  assert.throws(() => buildStyleProgram((s) => s.opacity.token(1)), /Unknown CSS token/);
+  assert.throws(() => buildStyleProgram((s) => s.color.raw(1)), /numeric/);
 });
 test('回调必须同步，捕获的 Builder 在回调外失效', () => {
   let captured;
-  useCss((s) => {
+  buildStyleProgram((s) => {
     captured = s;
     s.opacity.raw(1);
   });
   assert.throws(() => captured.opacity.raw(0), /synchronous/);
-  assert.throws(() => useCss(() => 42), /return void/);
+  assert.throws(() => buildStyleProgram(() => 42), /return void/);
   assert.throws(
     () =>
-      useCss(async (s) => {
+      buildStyleProgram(async (s) => {
         s.opacity.raw(1);
       }),
     /async/,
   );
   assert.throws(
     () =>
-      useCss((s) => {
+      buildStyleProgram((s) => {
         throw new Error('user error');
       }),
     /user error/,
   );
   assert.equal(
-    useCss((s) => {
+    buildStyleProgram((s) => {
       s.opacity.raw(1);
     })[0].value.value,
     1,
@@ -315,7 +315,7 @@ test('每个生成属性成员都被运行时识别，元数据组引用有效',
   for (const [name, meta] of Object.entries(propertyMetadata)) {
     assert(keywordGroups[meta.keywords]);
     assert(helperGroups[meta.helpers]);
-    const p = useCss((s) => {
+    const p = buildStyleProgram((s) => {
       s[name].inherit;
     });
     assert.equal(p[0].property, meta.cssName);

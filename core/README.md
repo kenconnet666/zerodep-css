@@ -164,7 +164,7 @@ pnpm build
 pnpm check
 pnpm test
 pnpm test:types
-pnpm test:browser
+pnpm test:browser:core
 ```
 
 浏览器验收默认使用已安装的 Chrome；也可通过 ZERODEP_BROWSER_CHANNEL 指定已具备的 Playwright Chromium channel。报告在 test-results/browser，类型/LSP 报告在 test-results/types。许可见 THIRD_PARTY_NOTICES.md。

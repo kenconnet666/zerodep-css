@@ -6,7 +6,7 @@ import {
   installStyleContext,
   useStyleRuntime,
   useGlobalCss,
-} from '../dist/index.js';
+} from '../../dist/index.js';
 
 test('Vue 显式上下文、应用注入与缺失上下文诊断', () => {
   const context = createStyleContext({ target: null });

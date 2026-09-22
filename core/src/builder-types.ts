@@ -6,7 +6,7 @@ import type {
   StyleProperties,
 } from './generated/properties.js';
 import type { CssVariable, Input } from './values.js';
-import type { KeyframesDefinition } from './program.js';
+import type { KeyframesDefinition } from './style-program.js';
 
 export interface DeclarationHelpers {
   readonly custom: { raw(name: `--${string}`, value: Input<string | number> | CssVariable): void };
@@ -16,7 +16,7 @@ export interface DeclarationHelpers {
 export type DeclarationBuilder = StyleProperties & DeclarationHelpers;
 export type DeclarationFactory = (s: DeclarationBuilder) => void;
 export interface StyleHelpers extends DeclarationHelpers {
-  /** 任意相对选择器，要求包含 &；语法的完整解析留给后续序列化阶段。 */
+  /** 任意相对选择器，要求包含 &；由序列化阶段完整解析。 */
   selector(selector: string, factory: StyleFactory): void;
   pseudo(name: SimplePseudo, factory: StyleFactory): void;
   pseudoFunction(name: FunctionalPseudo, arguments_: string, factory: StyleFactory): void;
@@ -71,7 +71,7 @@ export interface GlobalBuilder {
   rule(selector: string, factory: StyleFactory): void;
   media(query: string, factory: GlobalFactory): void;
   supports(query: string, factory: GlobalFactory): void;
-  container(query: string, factory: GlobalFactory): void;
+  containerQuery(query: string, factory: GlobalFactory): void;
   layer(name: string, factory: GlobalFactory): void;
   scope(prelude: string, factory: GlobalFactory): void;
   startingStyle(factory: GlobalFactory): void;
@@ -88,9 +88,9 @@ export interface GlobalBuilder {
   /** 明确的未类型化规则，不隐式重写或改变作用域。 */
   rawRule(css: string): void;
 }
-export interface RootBuilder extends GlobalBuilder {
+export interface StylesheetBuilder extends GlobalBuilder {
   layerOrder(...names: string[]): void;
   statement(name: '@import' | '@namespace', prelude: string): void;
 }
 export type GlobalFactory = (g: GlobalBuilder) => void;
-export type RootFactory = (g: RootBuilder) => void;
+export type StylesheetFactory = (g: StylesheetBuilder) => void;

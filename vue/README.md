@@ -56,7 +56,7 @@ useGlobalCss('page/background', (g) => {
 - `provideStyleContext(context)` 用于 setup 中覆盖后代上下文；Vue inject 不读取本组件刚 provide 的值，本组件可用 `useStyleRuntime(context)` 显式取得它。显式参数也适用于组件外调用。
 - `useGlobalCss(key, factory, context?)` 要求活跃 setup/effect scope，返回 `{ id, dispose }`。客户端用 computed + watch，在 pre 阶段更新原槽位，scope 结束或手动 dispose 时停止监听并释放。SSR 只同步执行一次并保留到请求输出。
 - 同一 context 内同时挂载的全局 key 必须唯一；列表组件使用带业务 ID 的稳定 key，并保持服务端和客户端一致。不能在模板中反复调用 useGlobalCss。
-- 从适配器直接导入的 `css` 是 core 浏览器默认实例便捷入口，不读取 provider。需要 SSR、nonce、自定义 namespace 或 ShadowRoot 时使用 `useStyleRuntime()` 返回的 css。
+- 适配器不再导出默认 `css`。组件使用 `useStyleRuntime()` 返回的 css；纯浏览器默认实例便捷入口只从 core 导入，不能代替请求/应用上下文。
 
 ## SSR 与恢复
 
@@ -66,4 +66,4 @@ useGlobalCss('page/background', (g) => {
 
 只有全局槽位需要 key；普通类名由内容哈希决定。完整字符串 SSR 已有真实组件验收；流式 SSR、Suspense 中尚未恢复的异步子树和 Nuxt 专用插件没有验收，completeHydration 必须等所有相关组件实际初始化后调用。
 
-本地验证：`pnpm check`、`pnpm test:adapters`、`pnpm test:frameworks`。完整 LSP 补全/错误夹具和 core 浏览器回归也在 CI 中执行。
+本地验证：`pnpm check`、`pnpm test:unit`、`pnpm test:browser:frameworks`。完整 LSP 补全/错误夹具和 core 浏览器回归也在 CI 中执行。

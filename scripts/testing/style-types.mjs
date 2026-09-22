@@ -4,14 +4,14 @@ import { access, mkdir, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const require = createRequire(resolve(root, 'package.json'));
 const { Client } = require('@modelcontextprotocol/sdk/client/index.js');
 const { StdioClientTransport } = require('@modelcontextprotocol/sdk/client/stdio.js');
 const paths = [
-  'core/test/__style_negative__.ts',
-  'vue/test/__StyleNegative.vue',
-  'svelte/test/__StyleNegative.svelte',
+  'core/test/types/__style_negative__.ts',
+  'vue/test/types/__StyleNegative.vue',
+  'svelte/test/types/__StyleNegative.svelte',
 ];
 for (const path of paths) {
   try {
@@ -47,7 +47,7 @@ function source(file, valid) {
   if (file.endsWith('.svelte'))
     return `<script lang="ts">${imported}</script>\n<div title={String(css(s => { ${declarations(valid)} }).length)}></div>`;
   return (
-    "import { css } from '../src/index.js';\nexport const result = css(s => { " +
+    "import { css } from '../../src/index.js';\nexport const result = css(s => { " +
     declarations(valid) +
     ' });'
   );

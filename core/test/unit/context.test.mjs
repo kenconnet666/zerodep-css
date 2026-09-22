@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { createStyleContext } from '../dist/index.js';
+import { createStyleContext } from '../../dist/index.js';
 
 const server = (options = {}) => createStyleContext({ target: null, ...options });
 test('上下文的稳定 key 独立于认领顺序，重复 key 不覆盖其他 owner', () => {

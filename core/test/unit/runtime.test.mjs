@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { css, createRuntime, globalCss, keyframes, cssVar } from '../dist/index.js';
-import { assertSameRecord } from '../dist/runtime.js';
-import { namedId } from '../dist/serialize.js';
+import { css, createRuntime, globalCss, keyframes, cssVar } from '../../dist/index.js';
+import { assertSameRecord } from '../../dist/runtime.js';
+import { namedId } from '../../dist/serialize.js';
 
 const server = (options) => createRuntime({ target: null, ...options });
 const fade = () =>

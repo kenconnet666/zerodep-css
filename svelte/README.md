@@ -46,7 +46,7 @@
 <div class={panelClass}></div>
 ```
 
-`useStyleRuntime(context?)` 在组件初始化时读取 context 并返回 runtime；之后 css 闭包不再查询 context。显式传入 context 可在组件外取得 runtime。从适配器直接导入 css 是 core 的浏览器默认实例入口，不会自动读取组件 context；SSR/自定义配置应使用初始化时取得的 css。
+`useStyleRuntime(context?)` 在组件初始化时读取 context 并返回 runtime；之后 css 闭包不再查询 context。显式传入 context 可在组件外取得 runtime。适配器不再导出默认 css；组件使用初始化时取得的 css。core 的浏览器默认入口不读取组件 context，不能代替 SSR/自定义配置。
 
 `const cls = css(...)` 只是一次计算；需要动态外部变量时使用 `$derived`。样式回调必须同步，不修改响应式状态。css 在派生读取时会同步注册规则，具有幂等注册副作用，不是纯函数；废弃计算产生的 class 也保留到 context.dispose，不承诺对中止渲染自动回收。
 
@@ -62,4 +62,4 @@
 
 包由 svelte-package 输出，包含 `.svelte.js` rune 模块，消费者须经过 Svelte 官方编译链（通常由 Vite Svelte 插件处理）。测试使用官方 compile/compileModule 同时构建客户端和服务端，并实际测试 dist 入口。
 
-本地验证：`pnpm check`、`pnpm test:frameworks`。报告位于 `test-results/frameworks/results.json`；CI 运行完整语言服务和浏览器回归并上传报告。
+本地验证：`pnpm check`、`pnpm test:browser:frameworks`。报告位于 `test-results/frameworks/results.json`；CI 运行完整语言服务和浏览器回归并上传报告。

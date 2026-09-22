@@ -33,9 +33,10 @@ pnpm check
 pnpm generate:check
 pnpm test
 pnpm test:types
-pnpm test:browser
-pnpm test:adapters
-pnpm test:frameworks
+pnpm test:browser:core
+pnpm test:consumer
+pnpm size:check
+pnpm test:browser:frameworks
 ```
 
 - [core API、SSR 用法和当前边界](core/README.md)
@@ -43,6 +44,8 @@ pnpm test:frameworks
 - [Svelte 适配与 SSR](svelte/README.md)
 - [项目语言服务](.design/language-services.md)
 - [实施规划与阶段记录](.design/implementation-research.md)
+- [当前架构](.design/architecture.md)
+- [后续路线](.design/roadmap.md)
 - [目录、命名与基础设施审计及下一阶段](.design/architecture-audit.md)
 - [正式 CSS 覆盖清单](.design/css-coverage.json)
 
@@ -50,4 +53,4 @@ SSR 必须每个请求创建 runtime，并使用该实例的 css 函数；顶层
 
 项目已配置 zerodep_lsp。可直接运行 `pnpm lsp:inspect <相对文件路径...>`；语言服务改动后运行 `pnpm lsp:verify`。换机使用 `./scripts/language-services/setup.ps1 -Verify` 生成本机配置，不改写用户全局设置。
 
-GitHub Actions 在 push/PR 时分别运行类型构建和单元测试、完整语言服务验收、Chromium 浏览器回归，并上传 test-results。日常本地至少运行 `pnpm check`、`pnpm build` 与对应单元/组件测试；完整类型补全验收和 core 浏览器回归可由 CI 执行。浏览器默认使用本机 Chrome，CI 使用 Playwright Chromium；不发布包或部署站点。
+GitHub Actions 在 Linux 运行完整验证、独立 tarball 消费与体积预算，在 Windows 验证安装、类型、构建和单元测试，并上传报告。测试命令默认准备构建；同一轮已构建后可传 --no-build，CI 每个 job 只构建一次。日常本地至少运行 `pnpm check`、`pnpm build` 与对应单元/组件测试；完整类型补全验收和 core 浏览器回归可由 CI 执行。浏览器默认使用本机 Chrome，CI 使用 Playwright Chromium；不发布包或部署站点。

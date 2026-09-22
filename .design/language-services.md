@@ -46,11 +46,11 @@ PowerShell 也可以直接执行 `./scripts/language-services/setup.ps1 -SkipIns
 
 语言服务全部从当前项目 node_modules 解析，不回退到参考仓库、用户目录或全局安装。
 
-| 文件 | 语义实现 |
-| --- | --- |
-| TS/JS | typescript-language-server + 项目 TypeScript |
-| .svelte | svelte-language-server 的 pull diagnostics 与 LSP 查询 |
-| .vue | TypeScript server + @vue/typescript-plugin，Vue language server 同步文档并转发专属请求 |
+| 文件    | 语义实现                                                                               |
+| ------- | -------------------------------------------------------------------------------------- |
+| TS/JS   | typescript-language-server + 项目 TypeScript                                           |
+| .svelte | svelte-language-server 的 pull diagnostics 与 LSP 查询                                 |
+| .vue    | TypeScript server + @vue/typescript-plugin，Vue language server 同步文档并转发专属请求 |
 
 Vue 3.3.11 是混合架构：脚本和模板 TS 语义诊断/跳转/引用/补全来自装有 Vue 插件的 tsserver，不能把 Vue language server 不提供 pull diagnostics 当成无错误。桥同时为 Vue 专属服务接入 `tsserver/request` / `tsserver/response`。当前安装版本使用单个元组通知，按已安装源码处理，不照抄旧文档的嵌套元组。
 
@@ -68,14 +68,14 @@ pnpm lsp:inspect core/src/index.ts vue/test/LanguageFixture.vue svelte/test/Lang
 
 ## 固定版本与编辑器
 
-| 工具 | 版本 |
-| --- | --- |
-| TypeScript | 6.0.3 |
-| typescript-language-server | 6.0.0 |
-| Svelte / svelte-check | 5.57.0 / 4.7.6 |
-| svelte-language-server / typescript-svelte-plugin | 0.18.4 / 0.3.52 |
-| Vue | 3.5.43 |
-| @vue/language-server / @vue/typescript-plugin / vue-tsc | 3.3.11 |
+| 工具                                                    | 版本            |
+| ------------------------------------------------------- | --------------- |
+| TypeScript                                              | 6.0.3           |
+| typescript-language-server                              | 6.0.0           |
+| Svelte / svelte-check                                   | 5.57.0 / 4.7.6  |
+| svelte-language-server / typescript-svelte-plugin       | 0.18.4 / 0.3.52 |
+| Vue                                                     | 3.5.43          |
+| @vue/language-server / @vue/typescript-plugin / vue-tsc | 3.3.11          |
 
 Svelte language server 的 peer 范围是 `^5.9.2 || ^6.0.2`，因此 TypeScript 使用 6.0.3，没有强行升级到不在此范围的 7.x。后续升级重新运行三种语言的语义验收。
 

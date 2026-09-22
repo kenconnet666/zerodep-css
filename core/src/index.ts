@@ -11,7 +11,7 @@ export type {
 } from './runtime.js';
 export type { OutputConfig, StyleRecord } from './serialize.js';
 export { cssVar, ibind } from './values.js';
-export type { Binding, CssVariable, Bound, Input } from './values.js';
+export type { Binding, CssVariable } from './values.js';
 export type {
   DeclarationBuilder,
   DeclarationFactory,
@@ -21,11 +21,11 @@ export type {
   FrameOffset,
   GlobalBuilder,
   GlobalFactory,
-  RootBuilder,
-  RootFactory,
+  StylesheetBuilder,
+  StylesheetFactory,
   PageBuilder,
   PageMarginBox,
-} from './types.js';
+} from './builder-types.js';
 export type {
   StyleProperties,
   DescriptorBuilders,
@@ -33,20 +33,5 @@ export type {
   SimplePseudo,
   FunctionalPseudo,
 } from './generated/properties.js';
-export type {
-  CssValue,
-  Declaration,
-  StyleNode,
-  StyleProgram,
-  StyleRule,
-  StyleGroup,
-  Frame,
-  KeyframesDefinition,
-  StylesheetDefinition,
-  GlobalNode,
-  GlobalGroup,
-  DescriptorBlock,
-  PageRule,
-  Statement,
-  RawRule,
-} from './program.js';
+// 资源定义是作者 API 的返回类型；内部 IR 节点不作为根入口的兼容承诺。
+export type { KeyframesDefinition, StylesheetDefinition } from './style-program.js';

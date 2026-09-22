@@ -3,8 +3,8 @@ import { renderToString } from 'vue/server-renderer';
 import { render } from 'svelte/server';
 import { createStyleContext } from '@zerodep-css/core';
 import { installStyleContext } from '@zerodep-css/vue';
-import VueApp from '../../vue/test/ReactiveApp.vue';
-import SvelteApp from '../../svelte/test/ReactiveApp.svelte';
+import VueApp from '../../../vue/test/fixtures/ReactiveApp.vue';
+import SvelteApp from '../../../svelte/test/fixtures/ReactiveApp.svelte';
 
 export async function renderPage(framework, color = 'red') {
   const context = createStyleContext({ target: null, namespace: framework });

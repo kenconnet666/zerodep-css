@@ -1,4 +1,4 @@
-import { globalCss, useCss as buildStyle } from './builder.js';
+import { globalCss, buildStyleProgram } from './builder.js';
 import { browserSheet, renderStyleTag, type BrowserSheet, type StyleTarget } from './sheet.js';
 import {
   canonicalSheet,
@@ -16,8 +16,8 @@ import {
   type PropertyRegistration,
   type StyleRecord,
 } from './serialize.js';
-import type { KeyframesDefinition, StylesheetDefinition } from './program.js';
-import type { RootFactory, StyleFactory } from './types.js';
+import type { KeyframesDefinition, StylesheetDefinition } from './style-program.js';
+import type { StylesheetFactory, StyleFactory } from './builder-types.js';
 
 export interface StyleManifest {
   readonly version: 1;
@@ -37,7 +37,7 @@ export interface RuntimeOptions {
 }
 export interface GlobalStyleHandle {
   readonly id: string;
-  update(value: StylesheetDefinition | RootFactory): void;
+  update(value: StylesheetDefinition | StylesheetFactory): void;
   dispose(): void;
 }
 export interface RuntimeStats {
@@ -51,9 +51,9 @@ export interface StyleRuntime {
   readonly config: OutputConfig;
   css(factory: StyleFactory): string;
   keyframes(definition: KeyframesDefinition): string;
-  mountGlobal(value: StylesheetDefinition | RootFactory): GlobalStyleHandle;
+  mountGlobal(value: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle;
   /** 认领 SSR 恢复的全局槽位，不根据内容猜测组件身份。 */
-  claimGlobal(id: string, value?: StylesheetDefinition | RootFactory): GlobalStyleHandle;
+  claimGlobal(id: string, value?: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle;
   snapshot(): StyleManifest;
   renderStyles(): string;
   renderManifest(): string;
@@ -308,14 +308,14 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   function ensure(compiled: CompiledStyle, replacing?: string) {
     commit([...compiled.dependencies, compiled.record], replacing);
   }
-  function definition(input: StylesheetDefinition | RootFactory): StylesheetDefinition {
+  function definition(input: StylesheetDefinition | StylesheetFactory): StylesheetDefinition {
     return typeof input === 'function' ? globalCss(input) : input;
   }
   function handle(id: string): GlobalStyleHandle {
     let closed = false;
     return Object.freeze({
       id,
-      update(input: StylesheetDefinition | RootFactory) {
+      update(input: StylesheetDefinition | StylesheetFactory) {
         alive();
         if (closed || !records.has(id)) throw new Error('Global style slot is no longer active.');
         ensure(compileGlobal(definition(input), id, config), id);
@@ -337,7 +337,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     config,
     css(factory) {
       alive();
-      const compiled = compileProgram(buildStyle(factory), config);
+      const compiled = compileProgram(buildStyleProgram(factory), config);
       ensure(compiled);
       return compiled.record.id;
     },
@@ -445,6 +445,6 @@ export function css(factory: StyleFactory): string {
   return defaultRuntime().css(factory);
 }
 /** 应用级全局样式便捷入口，返回可更新/释放的挂载。 */
-export function injectGlobal(value: StylesheetDefinition | RootFactory): GlobalStyleHandle {
+export function injectGlobal(value: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle {
   return defaultRuntime().mountGlobal(value);
 }

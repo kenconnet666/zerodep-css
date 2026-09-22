@@ -1,23 +1,27 @@
 import assert from 'node:assert/strict';
+import { withBrowserPage } from '../../../scripts/testing/browser-evidence.mjs';
 
-export async function runBrowserTests(browser, baseUrl, ssr) {
+export async function runBrowserTests(browser, baseUrl, ssr, output) {
   const results = [];
   async function scenario(name, fn, path = '/') {
-    const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
-    const errors = [];
-    page.on('pageerror', (e) => errors.push(e.message));
-    try {
-      await page.goto(baseUrl + path);
-      await page.evaluate(async () => {
-        window.z = await import('/core.js');
-      });
-      const result = await fn(page);
-      assert.deepEqual(errors, [], 'Unexpected browser errors');
-      results.push({ name, result });
-      console.log('BROWSER PASS: ' + name);
-    } finally {
-      await page.close();
-    }
+    return withBrowserPage(
+      browser,
+      output,
+      name,
+      async (page) => {
+        const errors = [];
+        page.on('pageerror', (e) => errors.push(e.message));
+        await page.goto(baseUrl + path);
+        await page.evaluate(async () => {
+          window.z = await import('/core.js');
+        });
+        const result = await fn(page);
+        assert.deepEqual(errors, [], 'Unexpected browser errors');
+        results.push({ name, result });
+        console.log('BROWSER PASS: ' + name);
+      },
+      { viewport: { width: 800, height: 600 } },
+    );
   }
   await scenario('直接 css / 外部字符串、重复使用和内容变化', async (page) => {
     const result = await page.evaluate(() => {

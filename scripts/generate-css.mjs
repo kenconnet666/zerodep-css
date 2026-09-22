@@ -76,7 +76,7 @@ function documentation(record) {
 }
 const types = `${header}
 import type { CssProperty, Bound } from '../values.js';
-import type { KeyframesDefinition } from '../program.js';
+import type { KeyframesDefinition } from '../style-program.js';
 interface KeywordValues {
 ${keywordGroups.map((keywords, i) => `${i}: ${union(Object.values(keywords))};`).join('\n')}
 }
@@ -125,7 +125,7 @@ export type FunctionalPseudo = ${union(schema.functionalPseudos)};
 export type DescriptorRule = keyof DescriptorBuilders;
 `;
 const runtime = `${header}
-import type { PropertyMetadata, HelperPlan, KeywordGroup } from '../metadata.js';
+import type { PropertyMetadata, HelperPlan, KeywordGroup } from '../metadata-types.js';
 export const keywordGroups: readonly KeywordGroup[] = ${JSON.stringify(keywordGroups)};
 export const helperGroups: readonly (readonly HelperPlan[])[] = ${JSON.stringify(helperGroups)};
 export const unitFamilies: Readonly<Record<string, readonly string[]>> = ${JSON.stringify(schema.units)};

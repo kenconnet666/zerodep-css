@@ -1,11 +1,11 @@
 import { onDestroy, untrack } from 'svelte';
-import { globalCss, type RootFactory, type StyleContext } from '@zerodep-css/core';
+import { globalCss, type StylesheetFactory, type StyleContext } from '@zerodep-css/core';
 import { resolveContext } from './context.js';
 
 /** 全局样式 owner：初始化挂载、原生响应式更新、提前停止或组件卸载清理。 */
 export function useGlobalCss(
   identity: string,
-  factory: RootFactory,
+  factory: StylesheetFactory,
   explicit?: StyleContext,
 ): { readonly id: string; dispose(): void } {
   const context = resolveContext(explicit);

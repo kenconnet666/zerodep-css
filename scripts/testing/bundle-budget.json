@@ -1,0 +1,6 @@
+{
+  "css": { "minifiedBytes": 520000, "gzipBytes": 105000 },
+  "createRuntime": { "minifiedBytes": 520000, "gzipBytes": 105000 },
+  "createStyleContext": { "minifiedBytes": 525000, "gzipBytes": 106000 },
+  "cssVar": { "minifiedBytes": 4500, "gzipBytes": 1800 }
+}

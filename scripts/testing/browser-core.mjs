@@ -1,22 +1,14 @@
 import { createServer } from 'node:http';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { spawnSync } from 'node:child_process';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createRequire } from 'node:module';
 import { build } from 'esbuild';
 import { chromium } from '@playwright/test';
-import { runBrowserTests } from '../core/test/browser.mjs';
+import { runBrowserTests } from '../../core/test/browser/runtime.mjs';
+import { verifyEvidence } from './evidence-smoke.mjs';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const require = createRequire(import.meta.url);
-const built = spawnSync(
-  process.execPath,
-  [require.resolve('typescript/bin/tsc'), '-p', resolve(root, 'core/tsconfig.build.json')],
-  { cwd: root, stdio: 'inherit', windowsHide: true },
-);
-if (built.status !== 0) process.exit(built.status ?? 1);
-const { createRuntime, keyframes } = await import('../core/dist/index.js');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const { createRuntime, keyframes } = await import('../../core/dist/index.js');
 const bundled = await build({
   entryPoints: [resolve(root, 'core/src/index.ts')],
   bundle: true,
@@ -77,10 +69,16 @@ try {
     channel: channel === 'chromium' ? undefined : channel,
     headless: true,
   });
-  const results = await runBrowserTests(browser, `http://127.0.0.1:${http.address().port}`, {
-    className,
-    globalIds: [a.id, b.id, c.id],
-  });
+  await verifyEvidence(browser, resolve(root, 'test-results/browser/evidence-self-test'));
+  const results = await runBrowserTests(
+    browser,
+    `http://127.0.0.1:${http.address().port}`,
+    {
+      className,
+      globalIds: [a.id, b.id, c.id],
+    },
+    resolve(root, 'test-results/browser'),
+  );
   const report = { browser: browser.version(), channel, bundleBytes: js.length, results };
   await mkdir(resolve(root, 'test-results/browser'), { recursive: true });
   await writeFile(

@@ -8,7 +8,7 @@ import type {
   KeyframesDefinition,
   StyleProgram,
   StylesheetDefinition,
-} from './program.js';
+} from './style-program.js';
 
 export interface OutputConfig {
   readonly namespace: string;

@@ -5,8 +5,8 @@ import {
   type StyleManifest,
   type StyleRuntime,
 } from './runtime.js';
-import type { RootFactory } from './types.js';
-import type { StylesheetDefinition } from './program.js';
+import type { StylesheetFactory } from './builder-types.js';
+import type { StylesheetDefinition } from './style-program.js';
 
 export interface StyleContextManifest {
   readonly version: 1;
@@ -22,7 +22,7 @@ export interface StyleContext {
   readonly runtime: StyleRuntime;
   readonly server: boolean;
   /** 同一 key 同时只允许一个活跃挂载；释放后可以重新使用。 */
-  mountGlobal(key: string, value: StylesheetDefinition | RootFactory): GlobalStyleHandle;
+  mountGlobal(key: string, value: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle;
   snapshot(): StyleContextManifest;
   renderStyles(): string;
   renderManifest(): string;

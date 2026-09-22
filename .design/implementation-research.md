@@ -1,5 +1,7 @@
 # zerodep-css 实施研究：生成数据、类型与原生响应式接入
 
+> 历史阶段研究记录：其中“当前”“下一阶段”指各节撰写时点。当前实现见 [architecture.md](architecture.md)，未完成工作见 [roadmap.md](roadmap.md)。
+
 日期：2026-09-22。状态：研究结论与可运行探针；不是生产框架验收。
 
 ## 1. 已明确的合同
@@ -18,19 +20,19 @@
 
 研究脚本：`.research/css-types/audit.mjs`，固定依赖及锁文件位于同目录。
 
-| 数据或检查 | 结果 |
-| --- | --- |
-| csstype 3.2.3 Properties | 857 个属性 |
-| Standard / Vendor / Obsolete / SVG | 497 / 250 / 107 / 60，集合有重叠 |
-| csstype 简单 / 函数式伪选择器 | 130 / 28 |
-| Webref CSS 8.7.5 属性 / 函数 / 选择器 / 类型 | 821 / 161 / 158 / 528 |
-| Webref at-rules / 描述符 | 55 / 102 |
-| CSSTree 3.2.1 成功解析的 syntax | 1696 |
-| 无 syntax 的特征 | 129，包含以 prose 定义的基础类型等，并非都无法支持 |
-| 未直接解析引用候选 | 4，必须进一步区分作用域引用、基础类型和真正缺口 |
-| csstype 无精确 Webref 名称映射 / 反向差异 | 295 / 259，不等于缺陷数量 |
-| 虚拟生成属性 / 关键字成员 | 857 / 22448 |
-| 全量属性访问检查 / 代表性负例 | 857 / 8，TypeScript 6.0.3 检查零诊断 |
+| 数据或检查                                   | 结果                                               |
+| -------------------------------------------- | -------------------------------------------------- |
+| csstype 3.2.3 Properties                     | 857 个属性                                         |
+| Standard / Vendor / Obsolete / SVG           | 497 / 250 / 107 / 60，集合有重叠                   |
+| csstype 简单 / 函数式伪选择器                | 130 / 28                                           |
+| Webref CSS 8.7.5 属性 / 函数 / 选择器 / 类型 | 821 / 161 / 158 / 528                              |
+| Webref at-rules / 描述符                     | 55 / 102                                           |
+| CSSTree 3.2.1 成功解析的 syntax              | 1696                                               |
+| 无 syntax 的特征                             | 129，包含以 prose 定义的基础类型等，并非都无法支持 |
+| 未直接解析引用候选                           | 4，必须进一步区分作用域引用、基础类型和真正缺口    |
+| csstype 无精确 Webref 名称映射 / 反向差异    | 295 / 259，不等于缺陷数量                          |
+| 虚拟生成属性 / 关键字成员                    | 857 / 22448                                        |
+| 全量属性访问检查 / 代表性负例                | 857 / 8，TypeScript 6.0.3 检查零诊断               |
 
 关键字数是每个属性的成员总数，包含重复的全局关键字和颜色等；报告已经按关键字组去重。生成声明与检查在内存中进行，未把数百 KB 类型探针混入产品源码。单次类型探针约 1 秒，仅用于可行性判断，不是 IDE 或编译性能 SLA。
 
@@ -113,7 +115,9 @@ MDN data 官方正在转向 Webref，因此不把 mdn-data 作为新项目唯一
 
 ```ts
 declare const binding: unique symbol;
-interface Binding<T> { readonly [binding]: T }
+interface Binding<T> {
+  readonly [binding]: T;
+}
 type Input<T> = T | Binding<T>;
 declare function ibind<T extends string | number>(value: T): Binding<T>;
 ```
@@ -240,12 +244,12 @@ Svelte 5.57.0 已验证普通 class 回调与 style 指令组合：初始调用 
 
 ### 12.1 对照结论
 
-| 参考 | 已核对机制 | 建议吸收 | 不直接继承 |
-| --- | --- | --- | --- |
-| Emotion @emotion/css | css / keyframes / injectGlobal 共用序列化与 cache；keyframes 返回名称并插入；cx 读取已注册样式并合成 | 共用序列化/注册表、资源去重、样式内容组合 | 默认全局单例及只追加的动态全局规则 |
-| Emotion @emotion/react | keyframes 返回带样式定义的资源；Global 维护专用 sheet、更新和卸载 | 资源定义与挂载分开，动态全局规则有生命周期和固定位置 | React 生命周期 API 和伪装成 string 的资源对象 |
-| Tailwind 当前 v4 文档及源码 | 原子规则、variants、任意值/属性/变体、原生层、theme、preflight；内部区分 rule/at-rule/declaration | 条件组合、层序、值/规则扩展和 AST 分层 | token 类名语言、静态扫描约束、默认主题变量和默认 reset |
-| UnoCSS 当前文档及 generator 源码 | 静态/动态规则、variant handlers、shortcuts、preflights、层、规则排序、原始 CSS 扩展 | 通用规则变换、组合、显式预设、保留 fallback 顺序 | 必須经过原子类名解析的作者 API、隐式处理普通 JS 响应式值 |
+| 参考                             | 已核对机制                                                                                           | 建议吸收                                             | 不直接继承                                               |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------- |
+| Emotion @emotion/css             | css / keyframes / injectGlobal 共用序列化与 cache；keyframes 返回名称并插入；cx 读取已注册样式并合成 | 共用序列化/注册表、资源去重、样式内容组合            | 默认全局单例及只追加的动态全局规则                       |
+| Emotion @emotion/react           | keyframes 返回带样式定义的资源；Global 维护专用 sheet、更新和卸载                                    | 资源定义与挂载分开，动态全局规则有生命周期和固定位置 | React 生命周期 API 和伪装成 string 的资源对象            |
+| Tailwind 当前 v4 文档及源码      | 原子规则、variants、任意值/属性/变体、原生层、theme、preflight；内部区分 rule/at-rule/declaration    | 条件组合、层序、值/规则扩展和 AST 分层               | token 类名语言、静态扫描约束、默认主题变量和默认 reset   |
+| UnoCSS 当前文档及 generator 源码 | 静态/动态规则、variant handlers、shortcuts、preflights、层、规则排序、原始 CSS 扩展                  | 通用规则变换、组合、显式预设、保留 fallback 顺序     | 必須经过原子类名解析的作者 API、隐式处理普通 JS 响应式值 |
 
 UnoCSS 也有观察 DOM 并生成样式的 browser runtime，不能把它一概称为仅构建期工具。我们的更新源仍直接使用 Vue/Svelte 响应式机制，不再观察 DOM class 来反推样式变化。
 
@@ -255,21 +259,21 @@ UnoCSS 内部分组 layer 与原生 CSS @layer 不是同一回事；原生 CSS l
 
 仅有属性接口、hover/media 与类名生成，还不能称为完整 CSS 工具。应同时覆盖下面这些结构：
 
-| 能力 | 必需的表示与入口 | 类型边界 |
-| --- | --- | --- |
-| 普通声明 | property/value/important，有序数组 | 按属性生成 |
-| 重复声明与 fallback | 重复节点保留，不用对象覆盖 | 允许多次设置同一属性 |
-| selector lists / 组合器 / 伪类 / 伪元素 | 相对选择器 AST 和任意 selector 入口 | 常用类型化，任意合法选择器可表达 |
-| 媒体、supports、container 条件 | 可嵌套的条件规则 | 条件字符串与可选构建器 |
-| @scope / @starting-style | 明确的分组或嵌套声明上下文 | 不能只当媒体查询别名 |
-| @layer 声明与块 | 根级层序语句 + 分组节点 | 固定层序、允许命名子层 |
-| @keyframes | 有序 frame 列表 + 声明块 | 不提供普通 selector/media/important 快捷成员 |
-| @font-face / @property / @counter-style | 专属描述符上下文 | 不复用普通 Properties 值类型 |
-| @page 与页边框 | 描述符/声明与嵌套 margin rules | 独立上下文 |
-| @import / @namespace | 根级前导语句与位置规则 | 不允许出现在 class 回调内 |
-| CSS 函数、列表、数学值 | 值结构和明确 raw 值出口 | 不把所有合法 CSS 字符串穷举为 TS 联合 |
-| 自定义属性、显式 var 引用 | 普通声明和值工具 | 不等同于自动 ibind |
-| 新属性与新 at-rule | 可保留的通用 AST / raw 入口 | 标明未类型化，不伪装成强类型已覆盖 |
+| 能力                                    | 必需的表示与入口                    | 类型边界                                     |
+| --------------------------------------- | ----------------------------------- | -------------------------------------------- |
+| 普通声明                                | property/value/important，有序数组  | 按属性生成                                   |
+| 重复声明与 fallback                     | 重复节点保留，不用对象覆盖          | 允许多次设置同一属性                         |
+| selector lists / 组合器 / 伪类 / 伪元素 | 相对选择器 AST 和任意 selector 入口 | 常用类型化，任意合法选择器可表达             |
+| 媒体、supports、container 条件          | 可嵌套的条件规则                    | 条件字符串与可选构建器                       |
+| @scope / @starting-style                | 明确的分组或嵌套声明上下文          | 不能只当媒体查询别名                         |
+| @layer 声明与块                         | 根级层序语句 + 分组节点             | 固定层序、允许命名子层                       |
+| @keyframes                              | 有序 frame 列表 + 声明块            | 不提供普通 selector/media/important 快捷成员 |
+| @font-face / @property / @counter-style | 专属描述符上下文                    | 不复用普通 Properties 值类型                 |
+| @page 与页边框                          | 描述符/声明与嵌套 margin rules      | 独立上下文                                   |
+| @import / @namespace                    | 根级前导语句与位置规则              | 不允许出现在 class 回调内                    |
+| CSS 函数、列表、数学值                  | 值结构和明确 raw 值出口             | 不把所有合法 CSS 字符串穷举为 TS 联合        |
+| 自定义属性、显式 var 引用               | 普通声明和值工具                    | 不等同于自动 ibind                           |
+| 新属性与新 at-rule                      | 可保留的通用 AST / raw 入口         | 标明未类型化，不伪装成强类型已覆盖           |
 
 建议使用“公共基础结构可表达 CSS、常用语法有强类型辅助、未知语法有明确出口”的承诺。能输出 CSS、TS 能证明语法合法、浏览器支持是三个独立指标。
 
@@ -292,13 +296,19 @@ UnoCSS 内部分组 layer 与原生 CSS @layer 不是同一回事；原生 CSS l
 候选：
 
 ```ts
-const fade = keyframes(k => {
-  k.from(s => { s.opacity.raw(0); });
-  k.at(50, s => { s.opacity.raw(0.5); });
-  k.to(s => { s.opacity.raw(1); });
+const fade = keyframes((k) => {
+  k.from((s) => {
+    s.opacity.raw(0);
+  });
+  k.at(50, (s) => {
+    s.opacity.raw(0.5);
+  });
+  k.to((s) => {
+    s.opacity.raw(1);
+  });
 });
 
-css(s => {
+css((s) => {
   s.animationName.raw(fade);
   s.animationDuration.ms(180);
   s.animationTimingFunction.easeOut;
@@ -318,10 +328,12 @@ css(s => {
 候选：
 
 ```ts
-useGlobalCss(g => {
-  g.layer('base', g => {
-    g.rule('html, body', s => { s.margin.px(0); });
-    g.rule('body', s => {
+useGlobalCss((g) => {
+  g.layer('base', (g) => {
+    g.rule('html, body', (s) => {
+      s.margin.px(0);
+    });
+    g.rule('body', (s) => {
       s.backgroundColor.raw(theme.background);
       s.color.raw(theme.text);
     });
@@ -344,12 +356,20 @@ SSR 不能只扫描 HTML class 提取规则：全局样式、动画、字体和�
 优先让所有语法降低到同一 selector / condition / layer 树。`hover` 等只是带类型的便捷入口；原始 selector 保持可用：
 
 ```ts
-css(s => {
-  s.selector('.group:hover &', s => { s.color.raw('red'); });
-  s.selector('.peer:checked ~ &', s => { s.display.flex; });
-  s.selector('&[data-state="open"] > .icon', s => { s.opacity.raw(1); });
-  s.media('(width >= 48rem)', s => {
-    s.hover(s => { s.color.raw('blue'); });
+css((s) => {
+  s.selector('.group:hover &', (s) => {
+    s.color.raw('red');
+  });
+  s.selector('.peer:checked ~ &', (s) => {
+    s.display.flex;
+  });
+  s.selector('&[data-state="open"] > .icon', (s) => {
+    s.opacity.raw(1);
+  });
+  s.media('(width >= 48rem)', (s) => {
+    s.hover((s) => {
+      s.color.raw('blue');
+    });
   });
 });
 ```
@@ -513,13 +533,15 @@ SSR 必须每个请求使用独立 createRuntime 及其 css 函数。顶层 css 
 按用户最新要求，参照 Modal.svelte 的使用形态，把属性可调用方案收回。当前实现、生成声明、测试和示例均统一为：
 
 ```ts
-css(s => {
+css((s) => {
   s.display.flex;
   s.display.token(visible ? 'flex' : 'none');
   s.width.raw('50%');
   s.flexShrink.raw(0);
   s.padding.px(8, 16);
-  s.hover(h => { h.color.red; });
+  s.hover((h) => {
+    h.color.red;
+  });
 });
 ```
 

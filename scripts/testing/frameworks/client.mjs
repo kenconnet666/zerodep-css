@@ -2,8 +2,8 @@ import { createSSRApp, createApp, nextTick } from 'vue';
 import { hydrate, mount, tick, unmount } from 'svelte';
 import { createStyleContext } from '@zerodep-css/core';
 import { installStyleContext } from '@zerodep-css/vue';
-import VueApp from '../../vue/test/ReactiveApp.vue';
-import SvelteApp from '../../svelte/test/ReactiveApp.svelte';
+import VueApp from '../../../vue/test/fixtures/ReactiveApp.vue';
+import SvelteApp from '../../../svelte/test/fixtures/ReactiveApp.svelte';
 
 export async function start(framework, restore = true) {
   const manifest = JSON.parse(document.querySelector('#styles').textContent);

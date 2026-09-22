@@ -20,7 +20,7 @@ export type CssProperty<Tokens extends string, V extends string | number, K, H, 
 } & K &
   H;
 
-/** 只有框架编译器可转换此标记。第一阶段不会伪造变量订阅。 */
+/** 只有框架编译器可转换此标记；未接入编译器时不伪造变量订阅。 */
 export function ibind<const T extends string | number>(_value: T): Binding<T> {
   throw new TypeError(
     'ibind requires the Vue/Svelte compiler integration; it is not a runtime identity function.',

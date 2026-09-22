@@ -7,7 +7,7 @@ import {
   simplePseudos,
   unitFamilies,
 } from './generated/metadata.js';
-import type { NumericAlternatives, PropertyMetadata } from './metadata.js';
+import type { NumericAlternatives, PropertyMetadata } from './metadata-types.js';
 import type {
   CssValue,
   Declaration,
@@ -18,7 +18,7 @@ import type {
   StyleNode,
   StyleProgram,
   StylesheetDefinition,
-} from './program.js';
+} from './style-program.js';
 import type {
   DeclarationFactory,
   FrameBuilder,
@@ -26,10 +26,10 @@ import type {
   GlobalBuilder,
   GlobalFactory,
   PageBuilder,
-  RootBuilder,
-  RootFactory,
+  StylesheetBuilder,
+  StylesheetFactory,
   StyleFactory,
-} from './types.js';
+} from './builder-types.js';
 import { isCssVariable, validateCustomName } from './values.js';
 
 type Table = Readonly<Record<string, PropertyMetadata>>;
@@ -295,8 +295,8 @@ function style(factory: Factory, session: Session, important = false): StyleProg
   return Object.freeze(nodes);
 }
 
-/** 第一阶段的纯构建入口；不返回 class、不写样式表、不建立订阅。 */
-export function useCss(factory: StyleFactory): StyleProgram {
+/** 内部纯构建入口；不返回 class、不写样式表、不建立订阅。 */
+export function buildStyleProgram(factory: StyleFactory): StyleProgram {
   return withSession((session) => style(factory, session));
 }
 function frameDeclarations(factory: Factory, session: Session): readonly Declaration[] {
@@ -383,7 +383,7 @@ function globals(factory: Factory, session: Session, root: boolean): readonly Gl
     },
     media: (query, child) => group('@media', query, child),
     supports: (query, child) => group('@supports', query, child),
-    container: (query, child) => group('@container', query, child),
+    containerQuery: (query, child) => group('@container', query, child),
     layer: (name, child) => group('@layer', name, child),
     scope: (prelude, child) => group('@scope', prelude, child),
     startingStyle: (child) => group('@starting-style', '', child),
@@ -433,7 +433,7 @@ function globals(factory: Factory, session: Session, root: boolean): readonly Gl
     },
   };
   if (root) {
-    const r = builder as RootBuilder;
+    const r = builder as StylesheetBuilder;
     r.layerOrder = (...names) => {
       alive(session);
       if (!names.length) throw new TypeError('Expected layer names.');
@@ -456,8 +456,8 @@ function globals(factory: Factory, session: Session, root: boolean): readonly Gl
   invoke(factory, builder);
   return Object.freeze(rules);
 }
-/** 创建全局样式定义；挂载、更新和释放属于后续运行时及适配器。 */
-export function globalCss(factory: RootFactory): StylesheetDefinition {
+/** 创建全局样式定义；挂载、更新和释放由运行时及适配器负责。 */
+export function globalCss(factory: StylesheetFactory): StylesheetDefinition {
   return withSession((session) =>
     Object.freeze({ kind: 'stylesheet', rules: globals(factory, session, true) }),
   );

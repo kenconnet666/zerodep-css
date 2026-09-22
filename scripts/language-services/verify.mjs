@@ -134,8 +134,8 @@ try {
     'core/src/index.ts',
     'vue/src/index.ts',
     'svelte/src/index.ts',
-    'vue/test/LanguageFixture.vue',
-    'svelte/test/LanguageFixture.svelte',
+    'vue/test/types/LanguageFixture.vue',
+    'svelte/test/types/LanguageFixture.svelte',
   ]) {
     const result = await call('diagnostics', { filePath });
     assert(result.complete && result.errors === 0, JSON.stringify(result));
