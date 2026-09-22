@@ -3,6 +3,8 @@
 - 默认中文沟通。当前已实现 core 样式引擎和 Vue/Svelte 原生响应式、上下文与完整字符串 SSR 接入；bx 已有首版编译接入，支持范围见 `.design/bx-compiler.md`。实际 API 见各包 README，当前架构见 `.design/architecture.md`，后续计划见 `.design/roadmap.md`，不要把其他候选 API 当作已实现功能。
 - 三个产品包是根目录的 `core`、`vue`、`svelte`。core 不依赖 Vue/Svelte，适配器使用框架原生响应式；包名暂定且保持 private。
 - 普通动态值运行时重算并切换哈希类名。只有显式 `bx` 才进行 CSS 变量编译绑定，不隐式提升普通变量。
+- 后续作者模型已确认采用 `class AppCss extends Css` 的类继承，系统基类提供标准 CSS，用户扩展主题色、类型和成员；目前尚未实现，设计见 `.design/authoring-next.md`。运行时 if/switch/函数复用优先，recipes/variants 不是既定目标。
+- bx 的后续形态与能力对标 Vue SFC CSS v-bind()，不能把现有“禁止所有函数调用”等首版限制当作最终合同。s.name('xxx').config({...}) 为新增规划：name 提供可读类名与诊断，config 字段待讨论，均未实现。
 - CSS 属性对象不可调用。使用 s.display.flex、s.display.token(value)、s.width.raw('50%')、s.width.px(50)；token 是严格字面量，raw 保留类型/补全并允许任意字符串。s.xx(...) 用于 selector/media/hover 等结构方法，不用于属性直接赋值。
 - Git 提交说明使用中文；验证通过后提交，不把过渡中的失败状态当作完成版提交。
 - 代码保留适当的中文注释，重点解释公共 API 合同、所有权/生命周期、响应式与 SSR 边界、事务/缓存策略；不要逐行复述显而易见的语法。生成文件的注释由生成器维护。

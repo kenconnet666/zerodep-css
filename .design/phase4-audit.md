@@ -2,6 +2,8 @@
 
 审查日期：2026-09-22。代码基线：`ba5f98b`。本轮不修复产品实现、不移动目录；只记录复现结果和待讨论方案。用户已选择下一步优先改善组件内的条件、嵌套和动态值体验。
 
+后续用户确认与修订见 [最新作者模型](authoring-next.md)：采用类继承扩展标准 CSS，recipes/variants 不是既定目标；bx 对标 Vue SFC CSS v-bind()，新增 name/config 规划。因此 R4 保留为实际语义差异证据，如何处理应服从新的变量语义合同，不再预设全部拒绝 CSS-wide 关键字。其余复现结果保持有效。
+
 ## 结论
 
 建议先做阶段 4.1「编译语义修复与边界整理」，再做阶段 4.2「现有组件写法扩展」。目前有六类已复现缺陷，不能以已有 53 项快速测试通过替代这些缺失的语义验收。三个产品包和 core/runtime/context 的基本职责不需要因此推翻；需要优先修正的是宏分析、模板求值边界及变量降级。
@@ -120,9 +122,9 @@ css((s) => {
 
 先强化现有 raw 模板的 CSS token 上下文分析。若实际组件证明字符串方案仍易错，再比较带单位的 CSS 值构造器，例如候选 `translate(px(bx(x)), px(bx(y)))`。后者能提高静态约束，但会增加一套值组合 API 和编译规则，现在不定名、不实现。
 
-### 暂缓：recipes、variants、主题预设
+### 非既定目标：recipes、variants、主题预设框架
 
-用户本轮优先级是组件内写法。组件变体、slot recipes 和主题变量合约有成熟先例，但本项目尚不需要复制一整套体系。后续若转向组件库，可分别参考 [vanilla-extract recipes](https://github.com/vanilla-extract-css/vanilla-extract/blob/master/site/docs/packages/recipes.md)、[主题合约](https://github.com/vanilla-extract-css/vanilla-extract/blob/master/site/docs/api/create-theme-contract.md)和 [Panda slot recipes](https://github.com/chakra-ui/panda/blob/main/website/content/docs/concepts/slot-recipes.mdx)。这些是调研参照，不是本项目已接受的 API。
+用户明确指出运行时 css 的 if/switch 和普通函数已能灵活表达逻辑，不一定需要 recipes/variants。主题和自定义成员采用 `class AppCss extends Css` 的继承方向。此前查阅的第三方方案只保留为研究背景，不应变成默认待办或引导本项目复制一套主题/变体体系。
 
 ## 建议的下一步顺序
 
@@ -135,4 +137,4 @@ css((s) => {
 
 ## 需要共同确定的取舍
 
-最先需要确定的是 bx 的 CSS-wide 值域：建议首轮明确拒绝 initial/inherit/unset/revert/revert-layer 等关键字，并引导使用普通 token/raw 声明；如要求 bx 对这些值也完全等价，应先证明层叠和继承方案，再扩展支持。其他方向按用户已选的组件内体验推进，不重新讨论已确认的 bx 命名和普通值更新合同。
+用户后续指定 bx 对标 Vue SFC CSS v-bind()，因此 CSS-wide、空值等应先按变量语义做对照验收，撤回“默认全部拒绝 CSS-wide”作为既定修复方向的建议。类继承与 name/config 的新增规划、仍待讨论的配置字段见 authoring-next.md。继续按用户已选的组件内体验推进，不重新讨论已确认的 bx 命名和普通值更新合同。

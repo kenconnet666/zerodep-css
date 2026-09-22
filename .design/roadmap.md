@@ -12,6 +12,8 @@
 
 ## 后续优先事项：扩展绑定覆盖并保持现有合同
 
+用户确认的最新作者模型见 [继承、bx、命名与局部配置](authoring-next.md)：采用 `class AppCss extends Css` 扩展系统 CSS，运行时 if/switch 优先；bx 对标 Vue CSS v-bind()；规划 s.name().config() 和开发源码诊断。新增能力尚未实现，config 字段待定；recipes/variants 不作为默认路线。
+
 - 动态属性 spread、嵌套 builder 回调中的 bx、嵌套/解构循环：先给出正反例和所有权策略，再逐项解除当前定位诊断。
 - 组件透传、跨文件 class、Teleport、SVG/MathML、动态 keyframes/global：分别验证使用点和生命周期，不自动把绑定写到 :root。
 - 宏诊断在构建插件中，编辑器目前负责原生类型与补全；如需即时宿主/作用域错误，另做框架语言工具接入。
