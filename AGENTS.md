@@ -5,6 +5,7 @@
 - 普通动态值运行时重算并切换哈希类名。只有显式 `ibind` 才进行 CSS 变量编译绑定，不隐式提升普通变量。
 - CSS 属性对象不可调用。使用 s.display.flex、s.display.token(value)、s.width.raw('50%')、s.width.px(50)；token 是严格字面量，raw 保留类型/补全并允许任意字符串。s.xx(...) 用于 selector/media/hover 等结构方法，不用于属性直接赋值。
 - Git 提交说明使用中文；验证通过后提交，不把过渡中的失败状态当作完成版提交。
+- 代码保留适当的中文注释，重点解释公共 API 合同、所有权/生命周期、响应式与 SSR 边界、事务/缓存策略；不要逐行复述显而易见的语法。生成文件的注释由生成器维护。
 - 依赖精确版本集中在 `pnpm-workspace.yaml`，包内使用 catalog/workspace 协议。使用 Node 24、pnpm 10.34.5，不升级全局工具。
 - 修改 TS/Vue/Svelte 后至少执行对应包的 check；基础配置或跨包变更执行根 `pnpm check`、`pnpm build`。
 - 修改 CSS 数据/生成器后运行 `pnpm generate:css`、`pnpm generate:check`；不要手改 `core/src/generated`。Builder 或生成类型变更运行 `pnpm test`、`pnpm test:types`，保留规范独立负例。

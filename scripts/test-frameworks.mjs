@@ -12,6 +12,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = resolve(root, 'test-results/frameworks');
 await mkdir(output, { recursive: true });
 function components(server) {
+  // 测试同一份真实组件的客户端/服务端产物，不能手写 render 函数替代模板编译。
   return {
     name: 'official-framework-compilers',
     setup(bundler) {
@@ -36,6 +37,7 @@ function components(server) {
         return { contents: result.js.code, loader: 'js', resolveDir: dirname(path) };
       });
       bundler.onLoad({ filter: /\.svelte\.[jt]s$/ }, async ({ path }) => {
+        // svelte-package 保留 rune 模块，消费者还须通过官方 compileModule。
         const source = await readFile(path, 'utf8');
         const js = path.endsWith('.ts') ? (await transform(source, { loader: 'ts' })).code : source;
         const result = compileModule(js, {
@@ -56,6 +58,7 @@ for (const server of [true, false]) {
     format: 'esm',
     platform: server ? 'node' : 'browser',
     target: 'es2023',
+    // Node 侧保持框架单实例；CSSTree 的相对数据文件也由其原生加载器解析。
     external: server ? ['vue', 'vue/*', 'svelte', 'svelte/*', 'css-tree'] : [],
     alias: {
       '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
@@ -74,6 +77,7 @@ for (const server of [true, false]) {
 const { renderPage } = await import(pathToFileURL(resolve(output, 'server.mjs')).href);
 const pages = {};
 for (const framework of ['vue', 'svelte']) {
+  // 相同 namespace、不同请求状态并发渲染，能暴露模块级 registry 的交叉污染。
   const [red, blue] = await Promise.all([
     renderPage(framework, 'red'),
     renderPage(framework, 'blue'),

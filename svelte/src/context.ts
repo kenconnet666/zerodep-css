@@ -6,6 +6,7 @@ export function provideStyleContext(context: StyleContext): void {
   setContext(key, context);
 }
 export function resolveContext(explicit?: StyleContext): StyleContext {
+  // 显式实例不依赖组件上下文；默认分支必须在组件初始化阶段执行。
   const context = explicit ?? getContext<StyleContext | undefined>(key);
   if (!context) throw new Error('Provide a style context or pass one explicitly.');
   return context;
