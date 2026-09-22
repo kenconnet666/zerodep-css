@@ -251,7 +251,7 @@ context.completeHydration(); window.consumer={ready:true,counts,stats:()=>contex
           await page
             .locator('[data-instance="a"] [data-auto]')
             .evaluate((el) => getComputedStyle(el).width),
-          '21px',
+          '11px',
         );
         const bindingAfter = await page.evaluate(() => ({
           counts: { ...window.consumer.counts },
