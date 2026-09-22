@@ -43,6 +43,7 @@ pnpm test:frameworks
 - [Svelte 适配与 SSR](svelte/README.md)
 - [项目语言服务](.design/language-services.md)
 - [实施规划与阶段记录](.design/implementation-research.md)
+- [目录、命名与基础设施审计及下一阶段](.design/architecture-audit.md)
 - [正式 CSS 覆盖清单](.design/css-coverage.json)
 
 SSR 必须每个请求创建 runtime，并使用该实例的 css 函数；顶层 css 不使用服务端全局单例。浏览器当前采用原生 CSS nesting，真实验收基于本机 Chrome；兼容范围和测试证据见 core 文档。
