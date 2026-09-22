@@ -28,6 +28,8 @@ scripts/    数据生成、语言服务和浏览器/类型验收
 
 打包使用仓库内 `pnpm pack`：`.pnpmfile.cjs` 在 tarball 清单中移除仅供本地 LSP 使用的 `zerodep-source` 条件。发布产物只导出存在的 dist 文件；core/Vue JS source map 内嵌源码，声明定位到已发布的 d.ts。独立消费者 CI 检查所有导出目标和地图，不依赖当前机器的源目录。
 
+本地已有构建时，可用 `node scripts/testing/browser-core.mjs --match 缓存` 执行名称匹配的关键场景；定向报告放在 `test-results/browser-focused`，不会覆盖完整报告。CI 默认不传筛选条件，执行完整回归。
+
 ```powershell
 pnpm install --frozen-lockfile
 pnpm build

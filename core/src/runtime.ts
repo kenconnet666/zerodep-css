@@ -335,6 +335,18 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     }
   }
   function ensure(compiled: CompiledStyle, replacing?: string) {
+    if (
+      !replacing &&
+      records.get(compiled.record.id) === compiled.record &&
+      compiled.dependencies.every((record) => records.get(record.id) === record)
+    ) {
+      alive();
+      if (busy) throw new Error('Reentrant stylesheet mutation.');
+      // 缓存命中仍验证 DOM 所有权；只跳过重复构造事务，不吞掉外部删除或禁用。
+      for (const record of compiled.dependencies) host?.verify(record.id);
+      host?.verify(compiled.record.id);
+      return;
+    }
     commit([...compiled.dependencies, compiled.record], replacing);
   }
   function definition(input: StylesheetDefinition | StylesheetFactory): StylesheetDefinition {

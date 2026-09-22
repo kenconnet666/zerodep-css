@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import { withBrowserPage } from '../../../scripts/testing/browser-evidence.mjs';
 
-export async function runBrowserTests(browser, baseUrl, ssr, output) {
+export async function runBrowserTests(browser, baseUrl, ssr, output, match) {
   const results = [];
   async function scenario(name, fn, path = '/') {
+    if (match && !name.includes(match)) return;
     return withBrowserPage(
       browser,
       output,
@@ -318,6 +319,36 @@ export async function runBrowserTests(browser, baseUrl, ssr, output) {
     assert(result.failed);
     return result;
   });
+  await scenario('缓存命中仍拒绝 CSSOM 插入过程中的重入注册', async (page) => {
+    const result = await page.evaluate(() => {
+      const runtime = window.z.createRuntime({ namespace: 'reentrant-cache' });
+      const factory = (s) => s.color.red;
+      const first = runtime.css(factory);
+      const insert = CSSStyleSheet.prototype.insertRule;
+      let message = '';
+      try {
+        CSSStyleSheet.prototype.insertRule = function (rule, index) {
+          try {
+            runtime.css(factory);
+          } catch (error) {
+            message = error.message;
+          }
+          return insert.call(this, rule, index);
+        };
+        runtime.css((s) => s.color.blue);
+      } finally {
+        CSSStyleSheet.prototype.insertRule = insert;
+      }
+      const same = runtime.css(factory) === first;
+      const records = runtime.stats().records;
+      runtime.dispose();
+      return { message, same, records };
+    });
+    assert.match(result.message, /Reentrant/);
+    assert.equal(result.same, true);
+    assert.equal(result.records, 2);
+    return result;
+  });
   await scenario('ShadowRoot 隔离与插入位置', async (page) => {
     const result = await page.evaluate(() => {
       const host = document.createElement('div');
@@ -562,5 +593,6 @@ export async function runBrowserTests(browser, baseUrl, ssr, output) {
     },
     '/ssr',
   );
+  if (match && !results.length) throw new Error('No browser scenario matched: ' + match);
   return results;
 }

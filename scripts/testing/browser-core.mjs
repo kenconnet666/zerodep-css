@@ -1,4 +1,6 @@
 import { createServer } from 'node:http';
+import { parseArgs } from 'node:util';
+import { createHash } from 'node:crypto';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,6 +10,17 @@ import { runBrowserTests } from '../../core/test/browser/runtime.mjs';
 import { verifyEvidence } from './evidence-smoke.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+const {
+  values: { match },
+} = parseArgs({ options: { match: { type: 'string' } } });
+// 针对性结果不覆盖完整回归报告，避免把局部通过误当全套成功。
+const output = match
+  ? resolve(
+      root,
+      'test-results/browser-focused',
+      createHash('sha256').update(match).digest('hex').slice(0, 12),
+    )
+  : resolve(root, 'test-results/browser');
 const { createRuntime, keyframes } = await import('../../core/dist/index.js');
 const bundled = await build({
   entryPoints: [resolve(root, 'core/src/index.ts')],
@@ -70,7 +83,7 @@ try {
     channel: channel === 'chromium' ? undefined : channel,
     headless: true,
   });
-  await verifyEvidence(browser, resolve(root, 'test-results/browser/evidence-self-test'));
+  if (!match) await verifyEvidence(browser, resolve(output, 'evidence-self-test'));
   const results = await runBrowserTests(
     browser,
     `http://127.0.0.1:${http.address().port}`,
@@ -78,20 +91,19 @@ try {
       className,
       globalIds: [a.id, b.id, c.id],
     },
-    resolve(root, 'test-results/browser'),
+    output,
+    match,
   );
-  const report = { browser: browser.version(), channel, bundleBytes: js.length, results };
-  await mkdir(resolve(root, 'test-results/browser'), { recursive: true });
-  await writeFile(
-    resolve(root, 'test-results/browser/results.json'),
-    JSON.stringify(report, null, 2) + '\n',
-  );
+  const report = { browser: browser.version(), channel, match, bundleBytes: js.length, results };
+  await mkdir(output, { recursive: true });
+  await writeFile(resolve(output, 'results.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(
     JSON.stringify({
       browser: report.browser,
       channel,
       bundleBytes: js.length,
       passed: results.length,
+      match,
     }),
   );
 } finally {
