@@ -16,13 +16,20 @@ import { pathToFileURL } from 'node:url';
 import { createServer } from 'node:http';
 import { launchBrowser, browserEngine } from './browser-launch.mjs';
 import { root, pnpm, run } from '../lib/environment.mjs';
-import { withBrowserPage } from './browser-evidence.mjs';
+import { withBrowserPage, prepareBrowserRun, browserRunId } from './browser-evidence.mjs';
 
 const output = resolve(root, 'test-results/consumer');
-await mkdir(output, { recursive: true });
+await prepareBrowserRun(output);
 // 必须位于仓库外，才不会被 workspace、祖先 node_modules 或源码 alias 悄悄兜底。
 const workspace = await mkdtemp(join(tmpdir(), 'zerodep-consumer-'));
-const report = { engine: browserEngine, workspace, results: [], status: 'running' };
+const report = {
+  runId: browserRunId,
+  engine: browserEngine,
+  workspace,
+  results: [],
+  status: 'running',
+  passed: false,
+};
 const environment = { ...process.env, NODE_PATH: '', CI: 'true' };
 let browser;
 async function save(path, value) {
@@ -192,6 +199,7 @@ context.mountGlobal('consumer',global); context.dispose(); void result; void ext
       'ThemeBranch',
       'ThemeLeaf',
       'PresetPanel',
+      'PresetOverride',
       'DifferentialStyles',
     ])
       await copyFile(
@@ -334,6 +342,7 @@ context.completeHydration(); window.consumer={ready:true,counts,stats:()=>contex
     });
   }
   report.status = 'passed';
+  report.passed = true;
   console.log(JSON.stringify(report.results));
 } catch (error) {
   report.status = 'failed';

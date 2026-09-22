@@ -8,10 +8,10 @@ import { launchBrowser, browserEngine } from './browser-launch.mjs';
 import { cssPlugin as vueCss } from '../../vue/dist/compiler/index.js';
 import { cssPlugin as svelteCss } from '../../svelte/dist/compiler/index.js';
 import { root } from '../lib/environment.mjs';
-import { withBrowserPage } from './browser-evidence.mjs';
+import { withBrowserPage, prepareBrowserRun, browserRunId } from './browser-evidence.mjs';
 
 const output = resolve(root, 'test-results/bindings-hmr');
-await mkdir(output, { recursive: true });
+await prepareBrowserRun(output);
 const browser = await launchBrowser();
 const report = [];
 // Vite 默认忽略 test-results；开发项目必须放到实际受监视的独占临时目录。
@@ -125,7 +125,11 @@ try {
   }
   await writeFile(
     resolve(output, 'results.json'),
-    JSON.stringify({ engine: browserEngine, passed: true, report }, null, 2),
+    JSON.stringify(
+      { runId: browserRunId, engine: browserEngine, status: 'passed', passed: true, report },
+      null,
+      2,
+    ),
   );
   console.log('VERIFIED: automatic CSS HMR unit change, reactive updates and binding removal');
 } finally {

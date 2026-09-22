@@ -1,6 +1,16 @@
 import { mkdir, writeFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
+
+export const browserRunId = randomUUID();
+/** 新运行先撤销旧成功摘要；失败/中断时不能把上次结果当作本次完成。 */
+export async function prepareBrowserRun(output) {
+  await mkdir(output, { recursive: true });
+  await writeFile(
+    resolve(output, 'results.json'),
+    JSON.stringify({ runId: browserRunId, status: 'running', passed: false }) + '\n',
+  );
+}
 
 /** 每个场景独立留证；失败时的 trace/截图不能依赖整套测试最终成功。 */
 export async function withBrowserPage(browser, output, name, task, options = {}) {
@@ -25,7 +35,13 @@ export async function withBrowserPage(browser, output, name, task, options = {})
     if (response.status() >= 400)
       diagnostics.push({ kind: 'http', url: response.url(), status: response.status() });
   });
-  const report = { name, browser: browser.version(), status: 'running', diagnostics };
+  const report = {
+    runId: browserRunId,
+    name,
+    browser: browser.version(),
+    status: 'running',
+    diagnostics,
+  };
   try {
     const result = await task(page);
     report.status = 'passed';

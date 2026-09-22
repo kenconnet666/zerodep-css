@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { withBrowserPage } from './browser-evidence.mjs';
+import { withBrowserPage, prepareBrowserRun, browserRunId } from './browser-evidence.mjs';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -10,10 +10,11 @@ import { compile, compileModule } from 'svelte/compiler';
 import { transformCss as vueCss } from '../../vue/dist/compiler/index.js';
 import { transformCss as svelteCss } from '../../svelte/dist/compiler/index.js';
 import { launchBrowser, browserEngine } from './browser-launch.mjs';
+import { verifyBindingSupport } from './bindings/support.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const output = resolve(root, 'test-results/bindings');
-await mkdir(output, { recursive: true });
+await prepareBrowserRun(output);
 function components(server) {
   // 测试同一份真实组件的客户端/服务端产物，不能手写 render 函数替代模板编译。
   return {
@@ -146,6 +147,7 @@ try {
         if (['warning', 'error'].includes(m.type())) errors.push(m.text());
       });
       await page.goto(`http://127.0.0.1:${http.address().port}/${framework}`);
+      const supportProbeCases = await verifyBindingSupport(page);
       const first = page.locator('[data-instance="a"]');
       const read = () =>
         page.evaluate(() => {
@@ -187,6 +189,10 @@ try {
                   content: element.className.split(' ').at(-1),
                   buttonBackground: button.backgroundColor,
                   buttonColor: button.color,
+                  localBackground: getComputedStyle(element.querySelector('[data-preset-local]'))
+                    .backgroundColor,
+                  localPrimary: getComputedStyle(element.querySelector('[data-preset-custom]'))
+                    .backgroundColor,
                 },
               ];
             }),
@@ -196,11 +202,15 @@ try {
       assert.equal(ssrPresets.light.background, 'rgb(255, 255, 255)');
       assert.equal(ssrPresets.light.color, 'rgb(15, 23, 42)');
       assert.equal(ssrPresets.light.scheme, 'light');
+      assert.equal(ssrPresets.light.localPrimary, 'rgb(147, 51, 234)');
+      assert.equal(ssrPresets.light.localBackground, ssrPresets.light.background);
       assert.equal(ssrPresets.light.buttonBackground, 'rgb(37, 99, 235)');
       assert.equal(ssrPresets.light.buttonColor, 'rgb(255, 255, 255)');
       assert.equal(ssrPresets.dark.background, 'rgb(15, 23, 42)');
       assert.equal(ssrPresets.dark.color, 'rgb(248, 250, 252)');
       assert.equal(ssrPresets.dark.scheme, 'dark');
+      assert.equal(ssrPresets.dark.localPrimary, 'rgb(147, 51, 234)');
+      assert.equal(ssrPresets.dark.localBackground, ssrPresets.dark.background);
       assert.equal(ssrPresets.dark.buttonBackground, 'rgb(147, 197, 253)');
       assert.equal(ssrPresets.dark.buttonColor, 'rgb(11, 18, 32)');
       assert.equal(ssrPresets.light.content, ssrPresets.dark.content);
@@ -422,6 +432,7 @@ try {
         ssrPresets,
         switched,
         differentialCases: count * 2,
+        supportProbeCases,
       });
     });
   }
@@ -470,7 +481,11 @@ try {
   }
   await writeFile(
     resolve(output, 'results.json'),
-    JSON.stringify({ engine: browserEngine, passed: true, report }, null, 2),
+    JSON.stringify(
+      { runId: browserRunId, engine: browserEngine, status: 'passed', passed: true, report },
+      null,
+      2,
+    ),
   );
   console.log(
     'VERIFIED: automatic CSS, presets, differential values, strict CSP, SSR/hydration, scopes and disposal',

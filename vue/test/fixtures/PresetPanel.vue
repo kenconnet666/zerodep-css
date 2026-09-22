@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { provideTheme, useStyleRuntime } from '@zerodep-css/vue';
 import { lightTheme, darkTheme, ThemeCss } from '@zerodep-css/vue/themes';
+import PresetOverride from './PresetOverride.vue';
 const props = defineProps<{ name: string; initialDark: boolean }>();
 const dark = ref(props.initialDark);
 const scope = provideTheme(lightTheme, () =>
@@ -138,5 +139,6 @@ const tones = [
         >{{ tone[0] }}</span
       >
     </div>
+    <PresetOverride />
   </section>
 </template>

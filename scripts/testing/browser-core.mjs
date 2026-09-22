@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
 import { runBrowserTests } from '../../core/test/browser/runtime.mjs';
+import { prepareBrowserRun, browserRunId } from './browser-evidence.mjs';
 import { verifyEvidence } from './evidence-smoke.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -21,6 +22,7 @@ const output = match
       createHash('sha256').update(match).digest('hex').slice(0, 12),
     )
   : resolve(root, 'test-results/browser');
+await prepareBrowserRun(output);
 const { createRuntime, keyframes } = await import('../../core/dist/index.js');
 const bundled = await build({
   entryPoints: [resolve(root, 'core/dist/index.js')],
@@ -91,6 +93,9 @@ try {
     match,
   );
   const report = {
+    runId: browserRunId,
+    status: 'passed',
+    passed: true,
     engine: browserEngine,
     browser: browser.version(),
     channel,

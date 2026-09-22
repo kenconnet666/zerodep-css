@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { withBrowserPage } from './browser-evidence.mjs';
+import { withBrowserPage, prepareBrowserRun, browserRunId } from './browser-evidence.mjs';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -11,7 +11,7 @@ import { launchBrowser, browserEngine } from './browser-launch.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const output = resolve(root, 'test-results/frameworks');
-await mkdir(output, { recursive: true });
+await prepareBrowserRun(output);
 function components(server) {
   // 测试同一份真实组件的客户端/服务端产物，不能手写 render 函数替代模板编译。
   return {
@@ -221,7 +221,14 @@ try {
       });
     });
   }
-  await writeFile(resolve(output, 'results.json'), JSON.stringify(report, null, 2) + '\n');
+  await writeFile(
+    resolve(output, 'results.json'),
+    JSON.stringify(
+      { runId: browserRunId, status: 'passed', passed: true, results: report },
+      null,
+      2,
+    ) + '\n',
+  );
   console.log(
     JSON.stringify({
       passed: report.map((r) => r.framework),

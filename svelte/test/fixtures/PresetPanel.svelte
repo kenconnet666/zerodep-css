@@ -2,6 +2,7 @@
   import { untrack } from 'svelte';
   import { provideTheme, useStyleRuntime } from '@zerodep-css/svelte';
   import { lightTheme, darkTheme, ThemeCss } from '@zerodep-css/svelte/themes';
+  import PresetOverride from './PresetOverride.svelte';
   let { name, initialDark }: { name: string; initialDark: boolean } = $props();
   let dark = $state(untrack(() => initialDark));
   const scope = provideTheme(lightTheme, () => (dark ? darkTheme.defaults : lightTheme.defaults));
@@ -117,4 +118,5 @@
         }, ThemeCss)}>{tone[0]}</span
       >{/each}
   </div>
+  <PresetOverride />
 </section>
