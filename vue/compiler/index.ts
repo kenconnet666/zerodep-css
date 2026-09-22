@@ -1,4 +1,4 @@
-export { transformBx, bxPlugin } from './transform.js';
+export { transformCss, cssPlugin } from './transform.js';
 export type {
   CompilerOptions,
   CompilerPlugin,

@@ -3,7 +3,7 @@ import type { NumericCheck, NumericAlternatives } from './metadata-types.js';
 import { isCssVariable, validateCustomName } from './values.js';
 
 /** 保留单位多参数备选语法的整体约束，不能把位置约束分别取并集。 */
-export function bxTuple(
+export function validateUnitValues(
   values: readonly unknown[],
   alternatives: NumericAlternatives,
 ): readonly number[] {
@@ -23,7 +23,7 @@ export function bxTuple(
         }),
     )
   )
-    throw new TypeError('Invalid bx unit argument combination.');
+    throw new TypeError('Invalid CSS binding unit argument combination.');
   return values as readonly number[];
 }
 
@@ -43,16 +43,16 @@ export function formatUnitValues(
 ): string {
   if (!safeUnit(unit) || ![' ', ', '].includes(separator))
     throw new TypeError('Invalid unit binding format.');
-  return bxTuple(values, alternatives)
+  return validateUnitValues(values, alternatives)
     .map((value) => String(value) + unit)
     .join(separator);
 }
 
 function checkValue(value: unknown, format: BindingFormat): asserts value is string | number {
   if (typeof value !== 'string' && typeof value !== 'number')
-    throw new TypeError('bx expects a CSS string or number.');
+    throw new TypeError('CSS binding expects a CSS string or number.');
   if (format.unit !== undefined && typeof value !== 'number')
-    throw new TypeError('bx unit values must be numbers.');
+    throw new TypeError('CSS binding unit values must be numbers.');
   if (typeof value === 'number') {
     if (
       !Number.isFinite(value) ||
@@ -64,14 +64,14 @@ function checkValue(value: unknown, format: BindingFormat): asserts value is str
             (rule.max === undefined || value <= rule.max),
         ))
     )
-      throw new TypeError('Invalid bx numeric value.');
+      throw new TypeError('Invalid CSS binding numeric value.');
   }
   if (format.tokens && (typeof value !== 'string' || !format.tokens.includes(value)))
-    throw new TypeError('Invalid bx token.');
+    throw new TypeError('Invalid CSS binding token.');
 }
 
 function checkSyntax(result: string) {
-  if (!result.trim()) throw new TypeError('bx values must not be empty.');
+  if (!result.trim()) throw new TypeError('CSS binding values must not be empty.');
   const ast = parse(result, {
     context: 'value',
     onParseError(error) {
@@ -79,7 +79,7 @@ function checkSyntax(result: string) {
     },
   });
   walk(ast, (node) => {
-    if (node.type === 'Raw') throw new TypeError('Invalid bx CSS value.');
+    if (node.type === 'Raw') throw new TypeError('Invalid bound CSS value.');
   });
   return ast;
 }
@@ -130,7 +130,7 @@ function safeUnit(unit: string | undefined): boolean {
 }
 
 /** 兼容迁移前的生成代码；不创建跨请求的全局可变缓存。 */
-export function bxValue(value: unknown, format: BindingFormat = {}): string {
+export function formatValue(value: unknown, format: BindingFormat = {}): string {
   checkValue(value, format);
   const result = String(value) + (format.unit ?? '');
   if (typeof value !== 'number' || !safeUnit(format.unit)) checkSyntax(result);
@@ -157,7 +157,8 @@ export function createValueFormatter(format: BindingFormat = {}): (value: unknow
   return (value) => {
     checkValue(value, valueFormat);
     if (tokens) {
-      if (typeof value !== 'string' || !tokens.has(value)) throw new TypeError('Invalid bx token.');
+      if (typeof value !== 'string' || !tokens.has(value))
+        throw new TypeError('Invalid CSS binding token.');
       return value;
     }
     if (typeof value === 'number') return String(value) + (snapshot.unit ?? '');

@@ -1,6 +1,6 @@
 // 自动生成，勿手工修改。来源：csstype 3.2.3, Webref 8.7.5, CSSTree 3.2.1 (MIT)。
 
-import type { CssProperty, Bound } from '../values.js';
+import type { CssProperty } from '../values.js';
 import type { KeyframesDefinition } from '../style-program.js';
 interface KeywordValues {
   0:
@@ -14630,13298 +14630,8558 @@ interface HelperMembers {
   0: {};
   1: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    s(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ms(...values: [value1: number] | [value1: number, value2: number]): void;
     /** s；逗号分隔，保留声明顺序。 */
     sList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     msList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   2: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    s(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ms(...values: [value1: number] | [value1: number, value2: number]): void;
     /** s；逗号分隔，保留声明顺序。 */
     sList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     msList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   3: {
     /** s；逗号分隔，保留声明顺序。 */
     s(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     ms(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   4: {
     /** s；逗号分隔，保留声明顺序。 */
     s(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     ms(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   5: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    mm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    q(...values: [value1: number] | [value1: number, value2: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    in(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pt(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pc(...values: [value1: number] | [value1: number, value2: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    px(...values: [value1: number] | [value1: number, value2: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    em(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rem(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ic(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ric(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cm；逗号分隔，保留声明顺序。 */
     cmList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mmList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     qList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     inList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     ptList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pcList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     pxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     emList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     remList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     exList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rexList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     capList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcapList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     chList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rchList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     icList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ricList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     viList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     sviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqiList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pct(...values: [value1: number] | [value1: number, value2: number]): void;
     /** %；逗号分隔，保留声明顺序。 */
     pctList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   6: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；逗号分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   7: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；逗号分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   8: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    mm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    q(...values: [value1: number] | [value1: number, value2: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    in(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pt(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pc(...values: [value1: number] | [value1: number, value2: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    px(...values: [value1: number] | [value1: number, value2: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    em(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rem(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ic(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ric(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cm；逗号分隔，保留声明顺序。 */
     cmList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mmList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     qList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     inList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     ptList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pcList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     pxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     emList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     remList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     exList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rexList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     capList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcapList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     chList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rchList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     icList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ricList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     viList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     sviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqiList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pct(...values: [value1: number] | [value1: number, value2: number]): void;
     /** %；逗号分隔，保留声明顺序。 */
     pctList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   9: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>]): void;
+    cm(...values: [value1: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>]): void;
+    mm(...values: [value1: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>]): void;
+    q(...values: [value1: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>]): void;
+    in(...values: [value1: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>]): void;
+    pt(...values: [value1: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>]): void;
+    pc(...values: [value1: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>]): void;
+    px(...values: [value1: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>]): void;
+    em(...values: [value1: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>]): void;
+    rem(...values: [value1: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>]): void;
+    ex(...values: [value1: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>]): void;
+    rex(...values: [value1: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>]): void;
+    cap(...values: [value1: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>]): void;
+    rcap(...values: [value1: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>]): void;
+    ch(...values: [value1: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>]): void;
+    rch(...values: [value1: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>]): void;
+    ic(...values: [value1: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>]): void;
+    ric(...values: [value1: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>]): void;
+    lh(...values: [value1: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>]): void;
+    rlh(...values: [value1: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>]): void;
+    vw(...values: [value1: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>]): void;
+    svw(...values: [value1: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>]): void;
+    lvw(...values: [value1: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>]): void;
+    dvw(...values: [value1: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>]): void;
+    vh(...values: [value1: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>]): void;
+    svh(...values: [value1: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>]): void;
+    lvh(...values: [value1: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>]): void;
+    dvh(...values: [value1: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>]): void;
+    vi(...values: [value1: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>]): void;
+    svi(...values: [value1: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>]): void;
+    lvi(...values: [value1: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>]): void;
+    dvi(...values: [value1: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>]): void;
+    vb(...values: [value1: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>]): void;
+    svb(...values: [value1: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>]): void;
+    lvb(...values: [value1: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>]): void;
+    dvb(...values: [value1: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>]): void;
+    vmin(...values: [value1: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: Bound<number>]): void;
+    svmin(...values: [value1: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: Bound<number>]): void;
+    lvmin(...values: [value1: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: Bound<number>]): void;
+    dvmin(...values: [value1: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>]): void;
+    vmax(...values: [value1: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: Bound<number>]): void;
+    svmax(...values: [value1: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: Bound<number>]): void;
+    lvmax(...values: [value1: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: Bound<number>]): void;
+    dvmax(...values: [value1: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>]): void;
+    cqw(...values: [value1: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>]): void;
+    cqh(...values: [value1: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>]): void;
+    cqi(...values: [value1: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>]): void;
+    cqb(...values: [value1: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: Bound<number>]): void;
+    cqmin(...values: [value1: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: Bound<number>]): void;
+    cqmax(...values: [value1: number]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>]): void;
+    pct(...values: [value1: number]): void;
   };
   10: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>]): void;
+    cm(...values: [value1: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>]): void;
+    mm(...values: [value1: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>]): void;
+    q(...values: [value1: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>]): void;
+    in(...values: [value1: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>]): void;
+    pt(...values: [value1: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>]): void;
+    pc(...values: [value1: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>]): void;
+    px(...values: [value1: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>]): void;
+    em(...values: [value1: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>]): void;
+    rem(...values: [value1: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>]): void;
+    ex(...values: [value1: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>]): void;
+    rex(...values: [value1: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>]): void;
+    cap(...values: [value1: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>]): void;
+    rcap(...values: [value1: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>]): void;
+    ch(...values: [value1: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>]): void;
+    rch(...values: [value1: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>]): void;
+    ic(...values: [value1: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>]): void;
+    ric(...values: [value1: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>]): void;
+    lh(...values: [value1: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>]): void;
+    rlh(...values: [value1: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>]): void;
+    vw(...values: [value1: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>]): void;
+    svw(...values: [value1: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>]): void;
+    lvw(...values: [value1: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>]): void;
+    dvw(...values: [value1: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>]): void;
+    vh(...values: [value1: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>]): void;
+    svh(...values: [value1: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>]): void;
+    lvh(...values: [value1: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>]): void;
+    dvh(...values: [value1: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>]): void;
+    vi(...values: [value1: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>]): void;
+    svi(...values: [value1: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>]): void;
+    lvi(...values: [value1: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>]): void;
+    dvi(...values: [value1: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>]): void;
+    vb(...values: [value1: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>]): void;
+    svb(...values: [value1: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>]): void;
+    lvb(...values: [value1: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>]): void;
+    dvb(...values: [value1: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>]): void;
+    vmin(...values: [value1: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: Bound<number>]): void;
+    svmin(...values: [value1: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: Bound<number>]): void;
+    lvmin(...values: [value1: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: Bound<number>]): void;
+    dvmin(...values: [value1: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>]): void;
+    vmax(...values: [value1: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: Bound<number>]): void;
+    svmax(...values: [value1: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: Bound<number>]): void;
+    lvmax(...values: [value1: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: Bound<number>]): void;
+    dvmax(...values: [value1: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>]): void;
+    cqw(...values: [value1: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>]): void;
+    cqh(...values: [value1: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>]): void;
+    cqi(...values: [value1: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>]): void;
+    cqb(...values: [value1: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: Bound<number>]): void;
+    cqmin(...values: [value1: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: Bound<number>]): void;
+    cqmax(...values: [value1: number]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>]): void;
+    pct(...values: [value1: number]): void;
   };
   11: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>]): void;
+    cm(...values: [value1: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>]): void;
+    mm(...values: [value1: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>]): void;
+    q(...values: [value1: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>]): void;
+    in(...values: [value1: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>]): void;
+    pt(...values: [value1: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>]): void;
+    pc(...values: [value1: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>]): void;
+    px(...values: [value1: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>]): void;
+    em(...values: [value1: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>]): void;
+    rem(...values: [value1: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>]): void;
+    ex(...values: [value1: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>]): void;
+    rex(...values: [value1: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>]): void;
+    cap(...values: [value1: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>]): void;
+    rcap(...values: [value1: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>]): void;
+    ch(...values: [value1: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>]): void;
+    rch(...values: [value1: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>]): void;
+    ic(...values: [value1: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>]): void;
+    ric(...values: [value1: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>]): void;
+    lh(...values: [value1: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>]): void;
+    rlh(...values: [value1: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>]): void;
+    vw(...values: [value1: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>]): void;
+    svw(...values: [value1: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>]): void;
+    lvw(...values: [value1: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>]): void;
+    dvw(...values: [value1: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>]): void;
+    vh(...values: [value1: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>]): void;
+    svh(...values: [value1: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>]): void;
+    lvh(...values: [value1: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>]): void;
+    dvh(...values: [value1: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>]): void;
+    vi(...values: [value1: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>]): void;
+    svi(...values: [value1: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>]): void;
+    lvi(...values: [value1: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>]): void;
+    dvi(...values: [value1: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>]): void;
+    vb(...values: [value1: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>]): void;
+    svb(...values: [value1: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>]): void;
+    lvb(...values: [value1: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>]): void;
+    dvb(...values: [value1: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>]): void;
+    vmin(...values: [value1: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: Bound<number>]): void;
+    svmin(...values: [value1: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: Bound<number>]): void;
+    lvmin(...values: [value1: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: Bound<number>]): void;
+    dvmin(...values: [value1: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>]): void;
+    vmax(...values: [value1: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: Bound<number>]): void;
+    svmax(...values: [value1: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: Bound<number>]): void;
+    lvmax(...values: [value1: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: Bound<number>]): void;
+    dvmax(...values: [value1: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>]): void;
+    cqw(...values: [value1: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>]): void;
+    cqh(...values: [value1: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>]): void;
+    cqi(...values: [value1: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>]): void;
+    cqb(...values: [value1: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: Bound<number>]): void;
+    cqmin(...values: [value1: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: Bound<number>]): void;
+    cqmax(...values: [value1: number]): void;
   };
   12: {
     /** fr；空格分隔，保留声明顺序。 */
     fr(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   13: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    mm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    q(...values: [value1: number] | [value1: number, value2: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    in(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pt(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pc(...values: [value1: number] | [value1: number, value2: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    px(...values: [value1: number] | [value1: number, value2: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    em(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rem(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ic(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ric(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pct(...values: [value1: number] | [value1: number, value2: number]): void;
   };
   14: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    mm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    q(...values: [value1: number] | [value1: number, value2: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    in(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pt(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pc(...values: [value1: number] | [value1: number, value2: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    px(...values: [value1: number] | [value1: number, value2: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    em(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rem(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ic(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ric(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
   };
   15: {
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   16: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   17: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   18: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   19: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   20: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    mm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    q(...values: [value1: number] | [value1: number, value2: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    in(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pt(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pc(...values: [value1: number] | [value1: number, value2: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    px(...values: [value1: number] | [value1: number, value2: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    em(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rem(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ic(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ric(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cm；逗号分隔，保留声明顺序。 */
     cmList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mmList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     qList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     inList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     ptList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pcList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     pxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     emList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     remList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     exList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rexList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     capList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcapList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     chList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rchList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     icList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ricList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     viList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     sviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqiList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   21: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   22: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    mm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    q(...values: [value1: number] | [value1: number, value2: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    in(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pt(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pc(...values: [value1: number] | [value1: number, value2: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    px(...values: [value1: number] | [value1: number, value2: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    em(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rem(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ic(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ric(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pct(...values: [value1: number] | [value1: number, value2: number]): void;
   };
   23: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>]): void;
+    pct(...values: [value1: number]): void;
   };
   24: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>]): void;
+    cm(...values: [value1: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>]): void;
+    mm(...values: [value1: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>]): void;
+    q(...values: [value1: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>]): void;
+    in(...values: [value1: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>]): void;
+    pt(...values: [value1: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>]): void;
+    pc(...values: [value1: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>]): void;
+    px(...values: [value1: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>]): void;
+    em(...values: [value1: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>]): void;
+    rem(...values: [value1: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>]): void;
+    ex(...values: [value1: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>]): void;
+    rex(...values: [value1: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>]): void;
+    cap(...values: [value1: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>]): void;
+    rcap(...values: [value1: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>]): void;
+    ch(...values: [value1: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>]): void;
+    rch(...values: [value1: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>]): void;
+    ic(...values: [value1: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>]): void;
+    ric(...values: [value1: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>]): void;
+    lh(...values: [value1: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>]): void;
+    rlh(...values: [value1: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>]): void;
+    vw(...values: [value1: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>]): void;
+    svw(...values: [value1: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>]): void;
+    lvw(...values: [value1: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>]): void;
+    dvw(...values: [value1: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>]): void;
+    vh(...values: [value1: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>]): void;
+    svh(...values: [value1: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>]): void;
+    lvh(...values: [value1: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>]): void;
+    dvh(...values: [value1: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>]): void;
+    vi(...values: [value1: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>]): void;
+    svi(...values: [value1: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>]): void;
+    lvi(...values: [value1: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>]): void;
+    dvi(...values: [value1: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>]): void;
+    vb(...values: [value1: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>]): void;
+    svb(...values: [value1: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>]): void;
+    lvb(...values: [value1: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>]): void;
+    dvb(...values: [value1: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>]): void;
+    vmin(...values: [value1: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: Bound<number>]): void;
+    svmin(...values: [value1: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: Bound<number>]): void;
+    lvmin(...values: [value1: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: Bound<number>]): void;
+    dvmin(...values: [value1: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>]): void;
+    vmax(...values: [value1: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: Bound<number>]): void;
+    svmax(...values: [value1: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: Bound<number>]): void;
+    lvmax(...values: [value1: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: Bound<number>]): void;
+    dvmax(...values: [value1: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>]): void;
+    cqw(...values: [value1: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>]): void;
+    cqh(...values: [value1: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>]): void;
+    cqi(...values: [value1: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>]): void;
+    cqb(...values: [value1: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: Bound<number>]): void;
+    cqmin(...values: [value1: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: Bound<number>]): void;
+    cqmax(...values: [value1: number]): void;
   };
   25: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>]): void;
+    pct(...values: [value1: number]): void;
   };
   26: {
     /** fr；空格分隔，保留声明顺序。 */
     fr(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   27: {
     /** deg；空格分隔，保留声明顺序。 */
-    deg(...values: [value1: Bound<number>]): void;
+    deg(...values: [value1: number]): void;
     /** grad；空格分隔，保留声明顺序。 */
-    grad(...values: [value1: Bound<number>]): void;
+    grad(...values: [value1: number]): void;
     /** rad；空格分隔，保留声明顺序。 */
-    rad(...values: [value1: Bound<number>]): void;
+    rad(...values: [value1: number]): void;
     /** turn；空格分隔，保留声明顺序。 */
-    turn(...values: [value1: Bound<number>]): void;
+    turn(...values: [value1: number]): void;
   };
   28: {
     /** dpi；空格分隔，保留声明顺序。 */
-    dpi(...values: [value1: Bound<number>]): void;
+    dpi(...values: [value1: number]): void;
     /** dpcm；空格分隔，保留声明顺序。 */
-    dpcm(...values: [value1: Bound<number>]): void;
+    dpcm(...values: [value1: number]): void;
     /** dppx；空格分隔，保留声明顺序。 */
-    dppx(...values: [value1: Bound<number>]): void;
+    dppx(...values: [value1: number]): void;
     /** x；空格分隔，保留声明顺序。 */
-    x(...values: [value1: Bound<number>]): void;
+    x(...values: [value1: number]): void;
   };
   29: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   30: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    s(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ms(...values: [value1: number] | [value1: number, value2: number]): void;
   };
   31: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: Bound<number>]): void;
+    s(...values: [value1: number]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: Bound<number>]): void;
+    ms(...values: [value1: number]): void;
   };
   32: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>, value2: Bound<number>]): void;
+    pct(...values: [value1: number, value2: number]): void;
   };
   33: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    cm(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    mm(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    q(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    in(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    pt(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    pc(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    px(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    em(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    rem(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    ex(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    rex(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    cap(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    rcap(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    ch(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    rch(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    ic(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    ric(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    lh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    rlh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    vw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    svw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    lvw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    dvw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    vh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    svh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    lvh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    dvh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    vi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    svi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    lvi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    dvi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    vb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    svb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    lvb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    dvb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    vmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    svmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    lvmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    dvmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    vmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    svmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    lvmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    dvmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    cqw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    cqh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    cqi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    cqb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    cqmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(
-      ...values: [
-        value1: Bound<number>,
-        value2: Bound<number>,
-        value3: Bound<number>,
-        value4: Bound<number>,
-      ]
-    ): void;
+    cqmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
   };
   34: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    s(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ms(...values: [value1: number] | [value1: number, value2: number]): void;
   };
   35: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: Bound<number>]): void;
+    s(...values: [value1: number]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: Bound<number>]): void;
+    ms(...values: [value1: number]): void;
   };
   36: {
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
   };
   37: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   38: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    mm(...values: [value1: number] | [value1: number, value2: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    q(...values: [value1: number] | [value1: number, value2: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    in(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pt(...values: [value1: number] | [value1: number, value2: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pc(...values: [value1: number] | [value1: number, value2: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    px(...values: [value1: number] | [value1: number, value2: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    em(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rem(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rex(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rch(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ic(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ric(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    svb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(
-      ...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]
-    ): void;
+    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
   };
   39: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cm；逗号分隔，保留声明顺序。 */
     cmList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mmList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     qList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     inList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     ptList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pcList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     pxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     emList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     remList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     exList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rexList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     capList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcapList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     chList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rchList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     icList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ricList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     viList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     sviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dviList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqwList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqhList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqiList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqbList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqminList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmaxList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；逗号分隔，保留声明顺序。 */
     pctList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   40: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** %；逗号分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   41: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: Bound<number>]): void;
+    cm(...values: [value1: number]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: Bound<number>]): void;
+    mm(...values: [value1: number]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: Bound<number>]): void;
+    q(...values: [value1: number]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: Bound<number>]): void;
+    in(...values: [value1: number]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: Bound<number>]): void;
+    pt(...values: [value1: number]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: Bound<number>]): void;
+    pc(...values: [value1: number]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: Bound<number>]): void;
+    px(...values: [value1: number]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: Bound<number>]): void;
+    em(...values: [value1: number]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: Bound<number>]): void;
+    rem(...values: [value1: number]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: Bound<number>]): void;
+    ex(...values: [value1: number]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: Bound<number>]): void;
+    rex(...values: [value1: number]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: Bound<number>]): void;
+    cap(...values: [value1: number]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: Bound<number>]): void;
+    rcap(...values: [value1: number]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: Bound<number>]): void;
+    ch(...values: [value1: number]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: Bound<number>]): void;
+    rch(...values: [value1: number]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: Bound<number>]): void;
+    ic(...values: [value1: number]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: Bound<number>]): void;
+    ric(...values: [value1: number]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: Bound<number>]): void;
+    lh(...values: [value1: number]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: Bound<number>]): void;
+    rlh(...values: [value1: number]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: Bound<number>]): void;
+    vw(...values: [value1: number]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: Bound<number>]): void;
+    svw(...values: [value1: number]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: Bound<number>]): void;
+    lvw(...values: [value1: number]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: Bound<number>]): void;
+    dvw(...values: [value1: number]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: Bound<number>]): void;
+    vh(...values: [value1: number]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: Bound<number>]): void;
+    svh(...values: [value1: number]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: Bound<number>]): void;
+    lvh(...values: [value1: number]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: Bound<number>]): void;
+    dvh(...values: [value1: number]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: Bound<number>]): void;
+    vi(...values: [value1: number]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: Bound<number>]): void;
+    svi(...values: [value1: number]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: Bound<number>]): void;
+    lvi(...values: [value1: number]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: Bound<number>]): void;
+    dvi(...values: [value1: number]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: Bound<number>]): void;
+    vb(...values: [value1: number]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: Bound<number>]): void;
+    svb(...values: [value1: number]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: Bound<number>]): void;
+    lvb(...values: [value1: number]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: Bound<number>]): void;
+    dvb(...values: [value1: number]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: Bound<number>]): void;
+    vmin(...values: [value1: number]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: Bound<number>]): void;
+    svmin(...values: [value1: number]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: Bound<number>]): void;
+    lvmin(...values: [value1: number]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: Bound<number>]): void;
+    dvmin(...values: [value1: number]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: Bound<number>]): void;
+    vmax(...values: [value1: number]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: Bound<number>]): void;
+    svmax(...values: [value1: number]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: Bound<number>]): void;
+    lvmax(...values: [value1: number]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: Bound<number>]): void;
+    dvmax(...values: [value1: number]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: Bound<number>]): void;
+    cqw(...values: [value1: number]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: Bound<number>]): void;
+    cqh(...values: [value1: number]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: Bound<number>]): void;
+    cqi(...values: [value1: number]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: Bound<number>]): void;
+    cqb(...values: [value1: number]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: Bound<number>]): void;
+    cqmin(...values: [value1: number]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: Bound<number>]): void;
+    cqmax(...values: [value1: number]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>]): void;
+    pct(...values: [value1: number]): void;
   };
   42: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pct(...values: [value1: number] | [value1: number, value2: number]): void;
   };
   43: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    s(...values: [value1: number] | [value1: number, value2: number]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    ms(...values: [value1: number] | [value1: number, value2: number]): void;
     /** s；逗号分隔，保留声明顺序。 */
     sList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     msList(
       ...values:
-        | [value1: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>]
-        | [value1: Bound<number>, value2: Bound<number>, value3: Bound<number>]
-        | [
-            value1: Bound<number>,
-            value2: Bound<number>,
-            value3: Bound<number>,
-            value4: Bound<number>,
-          ]
+        | [value1: number]
+        | [value1: number, value2: number]
+        | [value1: number, value2: number, value3: number]
+        | [value1: number, value2: number, value3: number, value4: number]
     ): void;
   };
   44: {
     /** hz；空格分隔，保留声明顺序。 */
-    hz(...values: [value1: Bound<number>]): void;
+    hz(...values: [value1: number]): void;
     /** khz；空格分隔，保留声明顺序。 */
-    khz(...values: [value1: Bound<number>]): void;
+    khz(...values: [value1: number]): void;
     /** st；空格分隔，保留声明顺序。 */
-    st(...values: [value1: Bound<number>]): void;
+    st(...values: [value1: number]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>]): void;
+    pct(...values: [value1: number]): void;
   };
   45: {
     /** db；空格分隔，保留声明顺序。 */
-    db(...values: [value1: Bound<number>]): void;
+    db(...values: [value1: number]): void;
   };
   46: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pct(...values: [value1: number] | [value1: number, value2: number]): void;
   };
   47: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: Bound<number>] | [value1: Bound<number>, value2: Bound<number>]): void;
+    pct(...values: [value1: number] | [value1: number, value2: number]): void;
   };
 }
 export interface StyleProperties {

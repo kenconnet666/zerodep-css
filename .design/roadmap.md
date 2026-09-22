@@ -1,27 +1,22 @@
 # 后续实施路线
 
-当前：阶段 1–3、阶段 3.5 和阶段四 bx 编译首版已实施。架构以 architecture.md 和三个包 README 为准；换机步骤与验证边界见 handoff.md。
+当前工作由 [生产化执行计划](production-plan.md) 驱动，按阶段提交并通过完整 CI。自动编译 API 和回退支持矩阵见 [compiler.md](compiler.md)，不再采用旧 bx 作者合同。
 
-## 阶段四：显式 bx 编译首版
+## 已完成的基础
 
-实施决策见 [阶段四计划](bx-plan.md)，实际支持矩阵与 Vite 接入见 [bx 编译说明](bx-compiler.md)。原名 ibind 已改为 bx，不保留旧别名。
+- core 样式引擎、顺序与资源注册、Vue/Svelte 原生上下文与字符串 SSR/hydration。
+- 严格 TypeScript 编译器、真实 Css 类继承、根命名与开发相对来源诊断。
+- 模板动态单位/raw/token 自动绑定；CSS-wide 和空值保留级联语义。
+- 静态声明、已知嵌套结构和可判定分支准备缓存；复杂情形仍可运行时重算。
+- LSP 桥、跨平台 CI、真实组件浏览器/HMR 与独立安装消费者验证。
 
-已采用官方编译器前的 AST 源码转换。Vue 使用稳定 computed，Svelte 使用原生 style 指令；普通动态值继续重算/换 class，只有 bx 创建元素变量绑定。三个产品包保持 private，编译依赖不进入默认浏览器入口。
+## 继续推进的生产化工作
 
-已覆盖有限的同组件 class 复用、单位/多变量、源码映射、SSR/hydration、条件及简单 keyed 数组循环、HMR 和独立 tarball 消费。无法追踪的 class、复杂作用域和未知拼接明确诊断。绑定拥有元素变量，class 规则仍驻留到 runtime/context.dispose。
+1. 主题树与类型扩展：应用/组件作用域向下覆盖，区分逻辑上下文和 DOM 继承，保证请求隔离与跨挂载位置正确；主题 token 保持可复用的符号引用。
+2. 运行时重复结果缓存与注册优化：不改变声明覆盖、全局槽位顺序、资源依赖和事务失败边界；缓存必须有上限并由宿主拥有。
+3. 编译覆盖与审查：脚本派生样式、复杂模板与派生类的优化收益和正确性；不可安全优化时保留原生行为，不为支持矩阵引入静默失效。
+4. 生产消费与交付：包元数据、版本与浏览器范围、源码可达性、CSP/目标容器和错误恢复、真实 CI 最终验收及可迁移交接。
 
-## 后续优先事项：扩展绑定覆盖并保持现有合同
+recipes/variants 不作为默认目标；运行时 if/switch 与类继承继续是正式作者能力。流式 SSR 和专用 Nuxt/SvelteKit 集成需要独立界定支持范围。三个包保持 private，本轮不自动发布包或更改许可。
 
-用户确认的最新作者模型见 [继承、bx、命名与局部配置](authoring-next.md)：采用 `class AppCss extends Css` 扩展系统 CSS，运行时 if/switch 优先；bx 对标 Vue CSS v-bind()；规划 s.name().config() 和开发源码诊断。新增能力尚未实现，config 字段待定；recipes/variants 不作为默认路线。
-
-- 动态属性 spread、嵌套 builder 回调中的 bx、嵌套/解构循环：先给出正反例和所有权策略，再逐项解除当前定位诊断。
-- 组件透传、跨文件 class、Teleport、SVG/MathML、动态 keyframes/global：分别验证使用点和生命周期，不自动把绑定写到 :root。
-- 宏诊断在构建插件中，编辑器目前负责原生类型与补全；如需即时宿主/作用域错误，另做框架语言工具接入。
-- 根据实际场景测量编译耗时、Vue 数组派生和变量校验成本；优化前保留回调计数、规则数量及计算样式基线。
-
-## 独立后续事项
-
-- 根据 bundle metafile 优化 CSS 解析器/元数据成本，保留语义和失败校验；不因体积大直接删除校验，也不默认 sideEffects:false。
-- 流式 SSR、异步 Suspense/boundary 完整流程、Nuxt/SvelteKit 插件单独研究。
-- 发布前处理 LICENSE、repository/engines 等元数据、声明地图源码可达性、浏览器支持范围、版本策略。暂不发布、不改 private。
-- 如增加跨框架共享编译实现，先证明重复部分值得共享，再建私有工具边界；不提前增加产品包。
+历史宏方案见 [bx-plan.md](bx-plan.md)，只用于追溯旧决策。

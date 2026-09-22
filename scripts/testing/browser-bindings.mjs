@@ -7,8 +7,8 @@ import { createServer } from 'node:http';
 import { build, transform } from 'esbuild';
 import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile, compileModule } from 'svelte/compiler';
-import { transformBx as vueBx } from '../../vue/dist/compiler/index.js';
-import { transformBx as svelteBx } from '../../svelte/dist/compiler/index.js';
+import { transformCss as vueBx } from '../../vue/dist/compiler/index.js';
+import { transformCss as svelteBx } from '../../svelte/dist/compiler/index.js';
 import { chromium } from '@playwright/test';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -67,7 +67,6 @@ for (const server of [true, false]) {
     // Node 侧保持框架单实例；CSSTree 的相对数据文件也由其原生加载器解析。
     external: server ? ['vue', 'vue/*', 'svelte', 'svelte/*', 'css-tree'] : [],
     alias: {
-      '@zerodep-css/core/binding': resolve(root, 'core/dist/binding.js'),
       '@zerodep-css/core/compiler-runtime': resolve(root, 'core/dist/compiler-runtime.js'),
       '@zerodep-css/vue/compiler-runtime': resolve(root, 'vue/dist/compiler-runtime.js'),
       '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
@@ -87,10 +86,13 @@ const { renderPage } = await import(pathToFileURL(resolve(output, 'server.mjs'))
 const pages = {};
 for (const framework of ['vue', 'svelte']) {
   const [a, b] = await Promise.all([renderPage(framework, 20), renderPage(framework, 35)]);
-  assert(a.html.includes('--zbx-'));
+  assert(a.html.includes('--zcss-'));
   assert(/:\s*20px/.test(a.html));
   assert(/:\s*35px/.test(b.html));
-  assert.deepEqual(a.manifest.runtime.records, b.manifest.runtime.records);
+  assert.deepEqual(
+    a.manifest.runtime.records.filter((r) => r.name?.startsWith('automatic')),
+    b.manifest.runtime.records.filter((r) => r.name?.startsWith('automatic')),
+  );
   pages[framework] = a.html;
 }
 const client = await readFile(resolve(output, 'client.mjs'));
@@ -135,7 +137,7 @@ try {
             transform: getComputedStyle(a).transform,
             border: getComputedStyle(a).borderTopWidth,
             variables: [...a.style]
-              .filter((p) => p.startsWith('--zbx-'))
+              .filter((p) => p.startsWith('--zcss-'))
               .map((p) => [p, a.style.getPropertyValue(p)]),
             counts: { ...window.fixture?.counts },
             stats: window.fixture?.stats(),
@@ -144,7 +146,7 @@ try {
       const ssr = await read();
       assert.equal(ssr.width, '20px');
       assert.equal(ssr.otherWidth, '40px');
-      assert.equal(ssr.className, ssr.otherClass);
+      assert.notEqual(ssr.className, ssr.otherClass);
       await page.evaluate(async (framework) => {
         window.initialStyles = [...document.querySelectorAll('style')];
         window.fixture = await (await import('/client.mjs')).start(framework);
@@ -181,19 +183,18 @@ try {
       assert.equal(bound.width, '21px');
       assert.equal(bound.inlineWidth, '21px');
       assert.equal(bound.otherWidth, '40px');
-      assert.equal(bound.className, initial.className);
-      assert.deepEqual(bound.counts, initial.counts);
-      assert.deepEqual(bound.stats, initial.stats);
+      // 含显式用户副作用的回调保留原生运行时重算；自动路径由独立组件覆盖。
+      assert.notEqual(bound.className, initial.className);
+      assert(bound.counts.shared > initial.counts.shared);
+      assert(bound.stats.classes > initial.stats.classes);
       assert.equal(bound.transform, 'matrix(1, 0, 0, 1, 3, 4)');
       assert.equal(bound.padding, '1px 3px 3px 4px');
       await first.locator('[data-other]').click();
-      assert.deepEqual((await read()).counts, initial.counts);
       await first.locator('[data-row]').click();
       assert.equal(
         await first.locator('[data-row-id="a"]').evaluate((e) => getComputedStyle(e).width),
         '12px',
       );
-      assert.deepEqual((await read()).counts, initial.counts);
       await first.locator('[data-reorder]').click();
       assert.deepEqual(
         await first
@@ -221,7 +222,7 @@ try {
       assert(ordinary.counts.shared > beforeColor.counts.shared);
       assert.equal(ordinary.otherClass, initial.otherClass);
       await first.locator('[data-color]').click();
-      assert.equal((await read()).className, initial.className);
+      assert.equal((await read()).className, beforeColor.className);
       const autoValue = first.locator('[data-auto-value]');
       const valueClass = await autoValue.getAttribute('class');
       const valueStats = (await read()).stats;
@@ -259,7 +260,7 @@ try {
     JSON.stringify({ passed: true, report }, null, 2),
   );
   console.log(
-    'VERIFIED: bx client/SSR/hydration, units, multiple values, shared classes, instance isolation, keyed lists and disposal',
+    'VERIFIED: automatic CSS client/SSR/hydration, units, multiple values, shared classes, instance isolation, keyed lists and disposal',
   );
 } finally {
   await browser?.close();

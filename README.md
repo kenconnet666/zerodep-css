@@ -11,7 +11,7 @@ const panelClass = css((s) => {
 });
 ```
 
-当前已实现类型生成、运行时序列化、动画资源、全局样式挂载，以及 Vue/Svelte 原生响应式、上下文与 SSR 恢复接入。显式 `bx` 已有首版 Vue/Svelte 编译接入，详见 [.design/bx-compiler.md](.design/bx-compiler.md)。
+当前已实现类型生成、运行时序列化、动画资源、全局样式挂载，以及 Vue/Svelte 原生响应式、上下文与 SSR 恢复接入。Vue/Svelte 自动编译支持动态变量、静态准备与复杂情形运行时回退，详见[编译说明](.design/compiler.md)。
 
 属性对象不可调用：固定值 `s.display.flex`，严格字面量 `s.display.token(value)`，开放值 `s.width.raw('50%')`，单位方法 `s.width.px(50)`。raw 保留已知值补全，并允许任意字符串通过类型检查；不提供 `s.width(...)`。
 

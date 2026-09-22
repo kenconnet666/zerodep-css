@@ -13,10 +13,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./binding": {
-      "types": "./dist/binding.d.ts",
-      "default": "./dist/binding.js"
-    },
     "./compiler-runtime": {
       "types": "./dist/compiler-runtime.d.ts",
       "default": "./dist/compiler-runtime.js"

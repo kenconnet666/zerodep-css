@@ -10,7 +10,7 @@
 - scripts/css-data：离线 schema/grammar/policy。运行时 metadata 与声明从同源生成，core/src/generated 不手工编辑。
 - scripts/testing：测试准备、共享浏览器执行器、隔离消费者和体积验证。组件夹具属于各自包的 test/fixtures，类型夹具放 test/types，快速单元测试放 test/unit。
 - scripts/language-services：项目级 MCP 桥、安装与五项语义验收。换机重建 .codex/config.toml，不复制本机路径。
-- 适配器 compiler：bx 的 SFC 源码转换和 Vite 插件。internal/compiler 共用 TS 词法/单位分析，构建时内联到两端独立 compiler 子路径；core/binding 仅格式化和校验元素变量，不创建响应式订阅或注册规则。具体支持边界见 bx-compiler.md。
+- 适配器 compiler：自动 CSS 的 SFC 源码转换和 Vite 插件。internal/compiler 共用 TS 词法/单位分析，构建时内联到两端独立 compiler 子路径；core/binding 仅格式化和校验元素变量，不创建响应式订阅或注册规则。具体支持边界见 compiler.md。
 
 三个产品包位于根目录并保持 private。构建先安全清理三个 dist，再按 workspace 依赖顺序构建，防止更名后的旧文件进入产物。
 
@@ -56,7 +56,7 @@ const className = css((s) => {
 - globalCss 创建定义，useGlobalCss(key, factory) 创建有生命周期的全局挂载。key 在上下文活跃 owner 中唯一。
 - CSSOM 注册是幂等副作用，不宣称 css 为纯函数。普通 class 和共享动画保留到 runtime/context.dispose；组件只释放自己的全局槽位及订阅。
 - 每个 SSR 请求独立上下文。先渲染/收集，再输出样式和 manifest，最后 finally dispose。客户端先恢复 context，再框架 hydration，完成后检查 completeHydration。
-- bx 已有 Vue/Svelte 首版源码转换；未编译时运行时明确报错。没有普通变量隐式提升、流式 SSR 或专用元框架插件。
+- 动态值自动提升、安全静态准备与复杂回退已接入 Vue/Svelte。公开 bx 已移除；流式 SSR 和专用元框架插件仍不在已实现范围。
 
 ## 基础设施合同
 

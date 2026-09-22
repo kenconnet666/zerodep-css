@@ -5,8 +5,8 @@ import { createServer } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { chromium } from '@playwright/test';
-import { bxPlugin as vueBx } from '../../vue/dist/compiler/index.js';
-import { bxPlugin as svelteBx } from '../../svelte/dist/compiler/index.js';
+import { cssPlugin as vueBx } from '../../vue/dist/compiler/index.js';
+import { cssPlugin as svelteBx } from '../../svelte/dist/compiler/index.js';
 import { root } from '../lib/environment.mjs';
 import { withBrowserPage } from './browser-evidence.mjs';
 
@@ -21,21 +21,16 @@ const report = [];
 // Vite 默认忽略 test-results；开发项目必须放到实际受监视的独占临时目录。
 const temporary = await mkdtemp(resolve(root, '.research/bx/hmr-'));
 function component(framework, stage) {
-  const style =
-    stage === 2
-      ? 's.width.px(7);'
-      : `s.width.${stage === 1 ? 'rem' : 'px'}(bx(width${framework === 'vue' ? '.value' : ''}));`;
+  const style = stage === 2 ? 's.width.px(7);' : `s.width.${stage === 1 ? 'rem' : 'px'}(width);`;
   if (framework === 'vue')
     return `<script setup>
-import {ref,computed} from 'vue'; import {bx,useStyleRuntime} from '@zerodep-css/vue';
+import {ref} from 'vue'; import {useStyleRuntime} from '@zerodep-css/vue';
 const {css}=useStyleRuntime(); const width=ref(2);
-const cls=computed(()=>css(s=>{${style}}));
-</script><template><button @click="width++">update</button><div data-target :class="cls" style="height: 5px"></div></template>`;
+</script><template><button @click="width++">update</button><div data-target :class="css(s=>{${style}})" style="height: 5px"></div></template>`;
   return `<script>
-import {untrack} from 'svelte'; import {bx,useStyleRuntime} from '@zerodep-css/svelte';
+import {untrack} from 'svelte'; import {useStyleRuntime} from '@zerodep-css/svelte';
 let {context}=$props();const {css}=useStyleRuntime(untrack(()=>context));let width=$state(2);
-const cls=$derived(css(s=>{${style}}));
-</script><button onclick={()=>width++}>update</button><div data-target class={cls} style="height: 5px"></div>`;
+</script><button onclick={()=>width++}>update</button><div data-target class={css(s=>{${style}})} style="height: 5px"></div>`;
 }
 try {
   for (const framework of ['vue', 'svelte']) {
@@ -70,7 +65,6 @@ try {
             find: '@zerodep-css/vue/compiler-runtime',
             replacement: resolve(root, 'vue/dist/compiler-runtime.js'),
           },
-          { find: '@zerodep-css/core/binding', replacement: resolve(root, 'core/dist/binding.js') },
           ...['core', 'vue', 'svelte'].map((name) => ({
             find: '@zerodep-css/' + name,
             replacement: resolve(root, name, 'dist/index.js'),
@@ -92,7 +86,7 @@ try {
         );
         const first = await page
           .locator('[data-target]')
-          .evaluate((e) => [...e.style].filter((p) => p.startsWith('--zbx-')));
+          .evaluate((e) => [...e.style].filter((p) => p.startsWith('--zcss-')));
         assert.equal(first.length, 1);
         await writeFile(file, component(framework, 1));
         await page.waitForFunction(
@@ -100,7 +94,7 @@ try {
         );
         const second = await page
           .locator('[data-target]')
-          .evaluate((e) => [...e.style].filter((p) => p.startsWith('--zbx-')));
+          .evaluate((e) => [...e.style].filter((p) => p.startsWith('--zcss-')));
         assert.equal(second.length, 1);
         assert.notEqual(first[0], second[0]);
         await page.locator('button').click();
@@ -114,7 +108,7 @@ try {
         assert.deepEqual(
           await page
             .locator('[data-target]')
-            .evaluate((e) => [...e.style].filter((p) => p.startsWith('--zbx-'))),
+            .evaluate((e) => [...e.style].filter((p) => p.startsWith('--zcss-'))),
           [],
         );
         assert.equal(
@@ -133,7 +127,7 @@ try {
     resolve(output, 'results.json'),
     JSON.stringify({ passed: true, report }, null, 2),
   );
-  console.log('VERIFIED: bx HMR unit change, reactive updates and binding removal');
+  console.log('VERIFIED: automatic CSS HMR unit change, reactive updates and binding removal');
 } finally {
   await browser.close();
   const actual = await realpath(temporary);

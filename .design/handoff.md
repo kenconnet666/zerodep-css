@@ -1,3 +1,5 @@
+> 2026-09-23 更新：当前处于无人值守生产化目标，实际阶段和 CI 证据见 [production-plan.md](production-plan.md)，自动编译入口见 [compiler.md](compiler.md)。以下阶段四与阶段 3.5 内容为历史交接，旧 bx 合同已由自动绑定替代。
+
 # 换机继续开发交接
 
 交接更新：2026-09-22。阶段四 bx 编译首版已在本机实施，API 和边界见 [bx 编译说明](bx-compiler.md)。本页原阶段 3.5 的远程提交和 CI 证据保留供追溯，不能作为阶段四 CI 已通过的证据。
@@ -122,6 +124,6 @@ Git 推送需在新机配置自己的 GitHub 凭据。旧机曾使用已登录�
 
 先读 AGENTS.md、architecture.md、roadmap.md、bx-compiler.md，再看三个包 README。bx-plan.md 保留获批计划及实施结果；implementation-research.md 和 architecture-audit.md 是历史依据。
 
-后续扩展必须保持普通值重算/换 class、只有显式 bx 才生成元素变量的合同；绑定变量本身，不把整个 transform 字符串变成一个绑定。组件透传、跨文件使用、动态资源与复杂模板作用域分别验收，不能默默漏掉使用点。
+当前扩展保持自动绑定与运行时回退并存；原宏绑定规则属于历史合同。组件透传、跨文件使用、动态资源与复杂模板作用域分别验收，不能默默漏掉使用点。
 
 开始前核对分支和最新提交、本机依赖与 LSP。不要把阶段 3.5 的成功 CI 或生成的 workflow 文件当作新提交的运行成功记录。

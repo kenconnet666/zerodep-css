@@ -1,6 +1,6 @@
 <script lang="ts">
   import { untrack } from 'svelte';
-  import { bx as bindValue, useStyleRuntime } from '@zerodep-css/svelte';
+  import { useStyleRuntime } from '@zerodep-css/svelte';
   import AutomaticStyles from './AutomaticStyles.svelte';
   let { initialWidth, record }: { initialWidth: number; record: (kind: string) => void } = $props();
   const { css } = useStyleRuntime();
@@ -20,9 +20,9 @@
     css((s) => {
       record('shared');
       s.color.raw(color);
-      s.width.px(bindValue(width));
-      s.padding.px(1, bindValue(x), 3, bindValue(y));
-      s.transform.raw(`translate(${bindValue(x)}px, ${bindValue(y)}px)`);
+      s.width.px(width);
+      s.padding.px(1, x, 3, y);
+      s.transform.raw(`translate(${x}px, ${y}px)`);
     }),
   );
 </script>
@@ -54,7 +54,7 @@
   class={css((s) => {
     record('inline');
     s.color.raw(color);
-    s.width.px(bindValue(width));
+    s.width.px(width);
   })}
 ></div>
 {#each rows as row (row.id)}
@@ -64,7 +64,7 @@
       class={css((s) => {
         record('row');
         s.height.px(5);
-        s.width.px(bindValue(row.width!));
+        s.width.px(row.width!);
       })}
     ></div>
   {/if}

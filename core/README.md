@@ -30,7 +30,7 @@ const panelClass = css((s) => {
 - 根层可调用的是 selector/media/hover 等结构或辅助入口；自定义/未知属性的写值入口也使用第二层方法：`s.custom.raw('--name', value)`、`s.property.raw('future-property', value)`。
 - 重复声明、fallback、简写/长属性和嵌套交错保持顺序。
 - `container` 是 CSS 属性，容器查询使用 `containerQuery`。
-- `cssVar('--name', fallback)` 只引用已有 CSS 变量，不建立 JS 订阅；只有显式 `bx` 经 Vue/Svelte 编译插件转换后才创建元素绑定。
+- `cssVar('--name', fallback)` 只引用已有 CSS 变量，不建立 JS 订阅；Vue/Svelte 编译插件在安全位置自动创建元素绑定。
 - `animationName.raw` 接受动画定义/数组，空数组输出 `animation-name:none`。token/raw 的 null/undefined 省略声明；单位方法不接受空值。
 - 普通值每次变化可产生新 class，旧规则保留至所属 runtime.dispose；不自动改为 CSS 变量。
 
@@ -164,7 +164,7 @@ renderStyles 保留独立 style 块，正确处理 @import/@namespace 的每张�
 - CSSTree 3.2.1 是固定的运行时解析依赖，处理选择器、值、规则边界及所需描述符检查。生成工具仍使用固定数据版本。
 - 原始值/规则必须通过语法解析，但语法成功不等于所有浏览器实现了该属性或值。目录中的规范条目依然可能是浏览器尚未支持的特征。
 - 每个逻辑记录目前拥有可定位的 style 节点，便于独立插入、原位替换、回滚与 SSR 恢复；后续依据测量优化分组。`stats()` 提供记录数量与 CSS 字符数。
-- `bx` 是编译标记，Vue/Svelte compiler 插件负责转换；未编译时明确报错；没有隐式变量提升或主题预设。Vue/Svelte 的监听与生命周期由各自适配器实现，core 不依赖框架。
+- 框架编译器自动提升安全的动态属性值，复杂情况保留运行时重算；core 本身不猜测响应式所有权。Vue/Svelte 的监听与生命周期由各自适配器实现，core 不依赖框架。
 
 ## 验收命令
 

@@ -93,11 +93,12 @@ try {
       join(folder, 'types.ts'),
       `import { createStyleContext, type StyleFactory, type StylesheetFactory } from '@zerodep-css/core';
 import { useStyleRuntime } from '@zerodep-css/${framework}';
+// @ts-expect-error bx 已移除，动态值直接交给 cssPlugin
 import { bx } from '@zerodep-css/${framework}';
 import { Css } from '@zerodep-css/${framework}';
-import { bxPlugin, transformBx } from '@zerodep-css/${framework}/compiler';
+import { cssPlugin, transformCss } from '@zerodep-css/${framework}/compiler';
 import type { Plugin } from 'vite';
-const compilerPlugin: Plugin = bxPlugin(); void compilerPlugin;
+const compilerPlugin: Plugin = cssPlugin(); void compilerPlugin;
 // @ts-expect-error 适配器不再暴露绕过上下文的默认 css
 import { css as defaultCss } from '@zerodep-css/${framework}';
 // @ts-expect-error 内部 IR 不属于根入口
@@ -107,12 +108,12 @@ const style: StyleFactory = s => { s.display.token('flex'); s.width.raw('future-
 // @ts-expect-error token 不能退化为任意字符串
 s.display.token('unknown-token');
 // @ts-expect-error 属性不可直接调用
-s.width('50%'); s.width.px(bx(12)); };
+s.width('50%'); s.width.px(12); };
 const global: StylesheetFactory = g => g.containerQuery('(width > 10px)', g => g.rule('body', style));
 const result: string = useStyleRuntime(context).css(style);
 class AppCss extends Css { get color(){ return this.extendProperty(super.color,{brand:'#2463eb'}); } control(){this.padding.px(8);} }
 const extended: string = useStyleRuntime(context).css(s=>{s.control();s.color.brand;s.hover(h=>h.control());},AppCss);
-context.mountGlobal('consumer',global); context.dispose(); void result; void extended; void defaultCss; void bxPlugin; void transformBx;
+context.mountGlobal('consumer',global); context.dispose(); void result; void extended; void defaultCss; void cssPlugin; void transformCss;
 `,
     );
     pnpm(
@@ -151,8 +152,8 @@ context.mountGlobal('consumer',global); context.dispose(); void result; void ext
     await save(
       join(folder, 'vite.config.js'),
       framework === 'vue'
-        ? "import {defineConfig} from 'vite'; import vue from '@vitejs/plugin-vue'; import {bxPlugin} from '@zerodep-css/vue/compiler'; export default defineConfig({plugins:[bxPlugin(),vue()],build:{manifest:true,rollupOptions:{input:'client.js'}}});"
-        : "import {defineConfig} from 'vite'; import {svelte} from '@sveltejs/vite-plugin-svelte'; import {bxPlugin} from '@zerodep-css/svelte/compiler'; export default defineConfig({plugins:[bxPlugin(),svelte()],build:{manifest:true,rollupOptions:{input:'client.js'}}});",
+        ? "import {defineConfig} from 'vite'; import vue from '@vitejs/plugin-vue'; import {cssPlugin} from '@zerodep-css/vue/compiler'; export default defineConfig({plugins:[cssPlugin(),vue()],build:{manifest:true,rollupOptions:{input:'client.js'}}});"
+        : "import {defineConfig} from 'vite'; import {svelte} from '@sveltejs/vite-plugin-svelte'; import {cssPlugin} from '@zerodep-css/svelte/compiler'; export default defineConfig({plugins:[cssPlugin(),svelte()],build:{manifest:true,rollupOptions:{input:'client.js'}}});",
     );
     const imports =
       framework === 'vue'
@@ -243,19 +244,19 @@ context.completeHydration(); window.consumer={ready:true,counts,stats:()=>contex
         const bindingBefore = await page.evaluate(() => ({
           counts: { ...window.consumer.counts },
           stats: window.consumer.stats(),
-          className: document.querySelector('[data-instance="a"] [data-shared]').className,
+          className: document.querySelector('[data-instance="a"] [data-auto]').className,
         }));
-        await page.locator('[data-instance="a"] [data-bound]').click();
+        await page.locator('[data-instance="a"] [data-auto-change]').click();
         assert.equal(
           await page
-            .locator('[data-instance="a"] [data-shared]')
+            .locator('[data-instance="a"] [data-auto]')
             .evaluate((el) => getComputedStyle(el).width),
           '21px',
         );
         const bindingAfter = await page.evaluate(() => ({
           counts: { ...window.consumer.counts },
           stats: window.consumer.stats(),
-          className: document.querySelector('[data-instance="a"] [data-shared]').className,
+          className: document.querySelector('[data-instance="a"] [data-auto]').className,
         }));
         assert.deepEqual(bindingAfter, bindingBefore);
         assert.equal(await page.evaluate(() => window.consumer.dispose()), 0);

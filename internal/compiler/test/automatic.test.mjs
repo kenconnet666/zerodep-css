@@ -3,8 +3,8 @@ import test from 'node:test';
 import { resolve } from 'node:path';
 import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile } from 'svelte/compiler';
-import { transformBx as vue } from '../../../vue/dist/compiler/index.js';
-import { transformBx as svelte } from '../../../svelte/dist/compiler/index.js';
+import { transformCss as vue } from '../../../vue/dist/compiler/index.js';
+import { transformCss as svelte } from '../../../svelte/dist/compiler/index.js';
 import { formatUnitValues } from '../../../core/dist/compiler-runtime.js';
 import * as compilerRuntime from '../../../core/dist/compiler-runtime.js';
 import * as adapter from '../../../vue/dist/index.js';
@@ -35,7 +35,7 @@ for (const [framework, transform] of [
     assert(result);
     assert.match(result.code, /formatUnitValues/);
     assert.match(result.code, /padding.raw/);
-    assert.equal((result.code.match(/var\(--zbx-/g) ?? []).length, 1);
+    assert.equal((result.code.match(/var\(--zcss-/g) ?? []).length, 1);
     assert.match(result.code, /s.display.flex/);
     if (framework === 'vue')
       compileScript(parse(result.code).descriptor, { id: 'auto', inlineTemplate: true });
@@ -113,7 +113,7 @@ for (const [framework, transform] of [
     );
     for (const debug of [false, true]) {
       const result = transform(source, filename, { debug });
-      assert.equal((result.code.match(/var\(--zbx-/g) ?? []).length, 2);
+      assert.equal((result.code.match(/var\(--zcss-/g) ?? []).length, 2);
       assert.match(result.code, /prepareStyle/);
       if (framework === 'vue')
         compileScript(parse(result.code).descriptor, { id: 'branches', inlineTemplate: true });
@@ -148,8 +148,7 @@ test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async 
     (id) => {
       if (id === '@zerodep-css/vue') return adapter;
       if (id === '@zerodep-css/vue/compiler-runtime') return vueCompilerRuntime;
-      if (id === '@zerodep-css/core/compiler-runtime' || id === '@zerodep-css/core/binding')
-        return compilerRuntime;
+      if (id === '@zerodep-css/core/compiler-runtime') return compilerRuntime;
       return require(id);
     },
     module,

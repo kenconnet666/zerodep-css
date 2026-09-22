@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { keyframes, globalCss, cssVar, bx } from '../../dist/index.js';
+import { keyframes, globalCss, cssVar } from '../../dist/index.js';
 import { buildStyleProgram } from '../../dist/builder.js';
 import {
   propertyMetadata,
@@ -242,7 +242,7 @@ test('全局条件没有根级前导入口，根级顺序被检查', () => {
     TypeError,
   );
 });
-test('CSS 变量引用保持结构，bx 未经过编译转换时明确报错', () => {
+test('CSS 变量引用保持结构', () => {
   const v = cssVar('--tone', 'red');
   const p = buildStyleProgram((s) => {
     s.color.raw(v);
@@ -251,7 +251,6 @@ test('CSS 变量引用保持结构，bx 未经过编译转换时明确报错', (
   assert.equal(cssVar('--0').name, '--0');
   assert.equal(cssVar('--颜色').name, '--颜色');
   assert.throws(() => cssVar('tone'), TypeError);
-  assert.throws(() => bx(2), /compiler integration/);
 });
 test('属性是不可调用对象，不暴露函数成员', () => {
   const p = buildStyleProgram((s) => {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { bx as bindValue, useStyleRuntime } from '@zerodep-css/vue';
+import { useStyleRuntime } from '@zerodep-css/vue';
 import AutomaticStyles from './AutomaticStyles.vue';
 
 const props = defineProps<{ initialWidth: number; record: (kind: string) => void }>();
@@ -21,9 +21,9 @@ const shared = computed(() =>
   css((s) => {
     props.record('shared');
     s.color.raw(color.value);
-    s.width.px(bindValue(width.value));
-    s.padding.px(1, bindValue(x.value), 3, bindValue(y.value));
-    s.transform.raw(`translate(${bindValue(x.value)}px, ${bindValue(y.value)}px)`);
+    s.width.px(width.value);
+    s.padding.px(1, x.value, 3, y.value);
+    s.transform.raw(`translate(${x.value}px, ${y.value}px)`);
   }),
 );
 </script>
@@ -57,7 +57,7 @@ const shared = computed(() =>
       css((s) => {
         props.record('inline');
         s.color.raw(color);
-        s.width.px(bindValue(width));
+        s.width.px(width);
       })
     "
   ></div>
@@ -69,7 +69,7 @@ const shared = computed(() =>
         css((s) => {
           props.record('row');
           s.height.px(5);
-          s.width.px(bindValue(row.width!));
+          s.width.px(row.width!);
         })
       "
     ></div>

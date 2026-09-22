@@ -42,7 +42,7 @@ const header = `// 自动生成，勿手工修改。来源：csstype ${schema.so
 const union = (values) =>
   values.length ? values.map((v) => JSON.stringify(v)).join(' | ') : 'never';
 const tuple = (n) =>
-  '[' + Array.from({ length: n }, (_, i) => `value${i + 1}: Bound<number>`).join(', ') + ']';
+  '[' + Array.from({ length: n }, (_, i) => `value${i + 1}: number`).join(', ') + ']';
 function propertyType(record, metadata) {
   const parts = [`KeywordValues[${metadata.keywords}]`];
   if (record.numbers.length) parts.push('number');
@@ -75,7 +75,7 @@ function documentation(record) {
   );
 }
 const types = `${header}
-import type { CssProperty, Bound } from '../values.js';
+import type { CssProperty } from '../values.js';
 import type { KeyframesDefinition } from '../style-program.js';
 interface KeywordValues {
 ${keywordGroups.map((keywords, i) => `${i}: ${union(Object.values(keywords))};`).join('\n')}

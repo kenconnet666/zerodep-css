@@ -13,8 +13,8 @@ export type {
   StyleManifest,
 } from './runtime.js';
 export type { OutputConfig, StyleRecord } from './serialize.js';
-export { cssVar, bx } from './values.js';
-export type { Binding, CssVariable } from './values.js';
+export { cssVar } from './values.js';
+export type { CssVariable } from './values.js';
 export type {
   DeclarationBuilder,
   DeclarationFactory,

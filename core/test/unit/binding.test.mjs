@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { bxValue, bxTuple, createValueFormatter } from '../../dist/binding.js';
+import { formatValue, validateUnitValues, createValueFormatter } from '../../dist/binding.js';
 
 test('已知数值路径保留类型、范围、整数与单位约束', () => {
   const format = createValueFormatter({
@@ -11,8 +11,8 @@ test('已知数值路径保留类型、范围、整数与单位约束', () => {
   assert.equal(format(100), '100px');
   for (const value of [-1, 101, 0.5, NaN, Infinity, null, undefined, '1', {}])
     assert.throws(() => format(value));
-  assert.equal(bxValue(1e30, { unit: 'px' }), '1e+30px');
-  assert.equal(bxValue(-0, { unit: '%' }), '0%');
+  assert.equal(formatValue(1e30, { unit: 'px' }), '1e+30px');
+  assert.equal(formatValue(-0, { unit: '%' }), '0%');
   assert.throws(() => createValueFormatter({ unit: 'px;color:red' }));
 });
 
@@ -38,6 +38,6 @@ test('格式化快路径不能放宽联合参数备选约束', () => {
     [{ min: 0 }, {}],
     [{}, { min: 0 }],
   ];
-  assert.deepEqual(bxTuple([-1, 1], alternatives), [-1, 1]);
-  assert.throws(() => bxTuple([-1, -1], alternatives));
+  assert.deepEqual(validateUnitValues([-1, 1], alternatives), [-1, 1]);
+  assert.throws(() => validateUnitValues([-1, -1], alternatives));
 });
