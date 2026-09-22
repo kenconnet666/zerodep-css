@@ -43,4 +43,10 @@
 
 主题关键字和主题变量类构建仍有成本，探针同时保留这些对照。没有为了微基准增加多层缓存；普通函数、原生响应式和当前规则所有权继续有效。
 
-最终本地 check/build、110 项快速测试、框架浏览器/SSR/HMR 与体积门禁通过；新增测试覆盖外部修改隔离、getter 读取次数、null 重置及负零。最终全量 CI 结论随后归档。
+追加 `.research/performance/theme-resolution.mjs` 在同一进程中交替测量旧/新实现，使用相同的当前依赖隔离 merge 的算法差异，五轮中位数分别为默认父主题 863.7→49.4 ms、局部父主题 838.4→107.2 ms，与第一轮结论一致。旧实现从 git 提交 0723dd9 读取并临时编译；生成目录经路径核验后清理，结果留在 test-results/theme-resolution-paired.json。可在构建后运行 `node .research/performance/theme-resolution.mjs` 复验。
+
+## 最终验收
+
+本地 check/build、110 项快速测试、框架浏览器/SSR/HMR 与体积门禁通过；新增测试覆盖外部修改隔离、getter 读取次数、null 重置及负零。完整代码提交 `37459d6` 的 [CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35790231732) 七个 job 全部通过：Windows/Linux、语言服务与独立类型负例、独立消费者，以及 Chromium/Firefox/WebKit 的 core 和框架套件。独占 HMR、消费者及旧版编译临时目录均已清理，诊断和性能报告保留在忽略目录。
+
+实施提交为 `502a151`（组件状态/全局派生类）、`0723dd9`（配置视图/主题一致性）、`37459d6`（解析优化与测量）。本页随后随同进程对照探针归档。三个包仍 private，版本 0.2.0，新增能力列于未发布变更记录。
