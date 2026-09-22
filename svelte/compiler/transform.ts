@@ -35,7 +35,7 @@ export function transformBx(
   const script = ast.instance.content;
   if (!hasRange(script)) throw new Error('Missing Svelte script source range: ' + filename);
   const ctx = session(source, filename, script.start, script.end, 'svelte', options);
-  if (!ctx.macros.size && !options.debug) return null;
+  if (!ctx.css.size && !ctx.macros.size && !options.debug) return null;
   const classes = new Map<
     string,
     TransformedExpression & { uses: number; declaration: ts.VariableDeclaration }
@@ -143,7 +143,16 @@ export function transformBx(
       const text = source.slice(expression.start, expression.end);
       const shared = !locals.has(text.trim()) && classes.get(text.trim());
       if (!shared) assertNoClassReferences(ctx, text, expression.start, classes, locals);
-      const result = shared || ctx.expression(text, expression.start, locals);
+      const result =
+        shared ||
+        ctx.expression(
+          text,
+          expression.start,
+          locals,
+          node.type === 'RegularElement' &&
+            !blocked &&
+            !attributes.some((a) => a.type === 'SpreadAttribute'),
+        );
       if (result.bindings.length) {
         if (!hasRange(attr)) return ctx.error(expression.start, 'Missing Svelte attribute range.');
         if (!shared && !result.direct)

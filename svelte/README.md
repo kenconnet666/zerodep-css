@@ -1,5 +1,7 @@
 # Svelte 适配
 
+自动绑定迁移已开始：没有旧 `bx` 导入时，编译插件可将原生模板直接 `css(s => { s.padding.px(8, gap); })` 中的动态单位值编译为原生 style 绑定。当前仅提升无控制流、无未知调用的根声明；派生类、脚本快照、组件透传和复杂表达式保留运行时行为。完整迁移目标见[生产化计划](../.design/production-plan.md)。
+
 显式 `bx` 编译通过 `@zerodep-css/svelte/compiler` 的 `bxPlugin()` 接入官方 Vite Svelte 插件，生成原生 style 绑定。安装示例、支持范围与定位诊断见 [bx 编译说明](../.design/bx-compiler.md)。
 
 使用 Svelte 5 原生模板跟踪和 `$derived`，不导入 `svelte/internal`，不建立第二套 store。普通动态值重新计算并切换哈希 class；`bx` 通过独立 compiler 插件接入，范围见下文。

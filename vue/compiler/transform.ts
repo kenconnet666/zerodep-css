@@ -47,7 +47,7 @@ export function transformBx(
     'vue',
     options,
   );
-  if (!ctx.macros.size && !options.debug) return null;
+  if (!ctx.css.size && !ctx.macros.size && !options.debug) return null;
   const metadata = compileScript(descriptor, { id: filename }).bindings ?? {};
   const computed = ctx.fresh('computed'),
     unref = ctx.fresh('unref'),
@@ -197,6 +197,12 @@ export function transformBx(
             expression,
             classExpression.loc.start.offset,
             new Set(loop ? [loop.value, loop.index] : []),
+            !!element &&
+              element.tagType === 0 &&
+              element.tag !== 'svg' &&
+              element.ns === 0 &&
+              !scoped &&
+              !props.some((p) => p.type === 7 && p.name === 'bind' && !p.arg),
           );
       if (shared || result?.bindings.length) {
         if (!shared && !result.direct)

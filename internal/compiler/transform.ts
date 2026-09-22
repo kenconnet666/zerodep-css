@@ -12,6 +12,7 @@ type MacroCall = ts.CallExpression & { expression: ts.Identifier };
 import ts from 'typescript';
 import MagicString from 'magic-string';
 import { sourceMapper } from './source-map.js';
+import { automaticDeclarations } from './automatic.js';
 import { bindingNames as names, unshadowed, capturedInside } from './scope.js';
 export { unshadowed } from './scope.js';
 import { createHash } from 'node:crypto';
@@ -102,7 +103,9 @@ export function session(
   const valueName = fresh('value');
   const tupleName = fresh('tuple');
   const sourceName = fresh('source');
+  const unitsName = fresh('units');
   let hasBindings = false;
+  let hasAutomatic = false;
   let hasSources = false;
   const mapper = sourceMapper(source, filename);
   const mapToOriginal = mapper.expression;
@@ -124,6 +127,7 @@ export function session(
     text: string,
     offset: number,
     shadowed = new Set<string>(),
+    allowAutomatic = false,
   ): TransformedExpression {
     const prefix = 'const __expression = ';
     const file = ts.createSourceFile(
@@ -164,6 +168,35 @@ export function session(
       const styleCallback = callback;
       const builder = callback.parameters[0]?.name;
       if (!builder || !ts.isIdentifier(builder)) return;
+      // 目前自动提升限定为直接模板使用点；脚本快照和派生类保留运行时合同。
+      if (
+        allowAutomatic &&
+        !macros.size &&
+        node.arguments.length === 1 &&
+        ts.isVariableDeclaration(node.parent) &&
+        node.parent.initializer === node &&
+        !id.startsWith('../') &&
+        !isAbsolute(id)
+      ) {
+        for (const declaration of automaticDeclarations(callback)) {
+          const offset = base + declaration.call.getStart(file);
+          const name =
+            '--zbx-' +
+            createHash('sha256')
+              .update(id + ':' + offset + ':units')
+              .digest('hex')
+              .slice(0, 16);
+          mapper.reference(name, offset);
+          const value = `${unitsName}([${declaration.call.arguments.map((arg) => arg.getText(file)).join(',')}], ${JSON.stringify(declaration.alternatives)}, ${JSON.stringify(declaration.unit)}, ${JSON.stringify(declaration.separator)})`;
+          bindings.push({ name, expression: mapToOriginal(value, offset), offset });
+          edits.overwrite(
+            declaration.call.getStart(file) - prefix.length,
+            declaration.call.end - prefix.length,
+            `${declaration.property.getText(file)}.raw(${JSON.stringify(`var(${name})`)})`,
+          );
+          hasBindings = hasAutomatic = true;
+        }
+      }
       function validateRead(arg: ts.Expression): void {
         walk(arg, (n) => {
           if (
@@ -394,6 +427,11 @@ export function session(
         output.appendLeft(
           scriptStart,
           `\nimport { withStyleSource as ${sourceName} } from '@zerodep-css/core/compiler-runtime';\n`,
+        );
+      if (hasAutomatic)
+        output.appendLeft(
+          scriptStart,
+          `\nimport { formatUnitValues as ${unitsName} } from '@zerodep-css/core/compiler-runtime';\n`,
         );
       output.appendLeft(scriptEnd, '\n' + extra + '\n');
       return mapper.finish(output);

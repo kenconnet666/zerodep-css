@@ -33,6 +33,20 @@ export interface BindingFormat {
   readonly tokens?: readonly string[];
 }
 
+/** 自动单位绑定以整组为边界，联合参数只求值和校验一次。 */
+export function formatUnitValues(
+  values: readonly unknown[],
+  alternatives: NumericAlternatives,
+  unit: string,
+  separator: string,
+): string {
+  if (!safeUnit(unit) || ![' ', ', '].includes(separator))
+    throw new TypeError('Invalid unit binding format.');
+  return bxTuple(values, alternatives)
+    .map((value) => String(value) + unit)
+    .join(separator);
+}
+
 function checkValue(value: unknown, format: BindingFormat): asserts value is string | number {
   if (typeof value !== 'string' && typeof value !== 'number')
     throw new TypeError('bx expects a CSS string or number.');
