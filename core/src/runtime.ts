@@ -16,7 +16,7 @@ import {
   type PropertyRegistration,
   type StyleRecord,
 } from './serialize.js';
-import type { KeyframesDefinition, StylesheetDefinition } from './style-program.js';
+import type { KeyframesDefinition, StylesheetDefinition, StyleProgram } from './style-program.js';
 import type { StylesheetFactory, StyleFactory } from './builder-types.js';
 import { Css, type CssConstructor } from './css.js';
 import {
@@ -110,6 +110,13 @@ function layerRecord(config: OutputConfig): StyleRecord | undefined {
     dependencies: Object.freeze([]),
   });
 }
+
+function cacheable(program: StyleProgram): boolean {
+  // 动画定义可带外部资源图，仍走原完整编译与依赖合并路径。
+  return program.every((node) =>
+    node.kind === 'declaration' ? node.value.kind !== 'animations' : cacheable(node.children),
+  );
+}
 function manifestRecords(manifest: StyleManifest, config: OutputConfig): readonly StyleRecord[] {
   const incoming = manifest?.config;
   if (
@@ -195,6 +202,7 @@ function manifestRecords(manifest: StyleManifest, config: OutputConfig): readonl
 }
 
 export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
+  const collectDebug = options.debug;
   if (options.debug !== undefined && typeof options.debug !== 'boolean')
     throw new TypeError('Runtime debug must be boolean.');
   const config = configFor(options);
@@ -355,30 +363,40 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     });
   }
   // 编译站点缓存属于当前 runtime；驱逐只丢计算结果，绝不删除仍被 DOM 使用的规则。
-  const preparedStyles = new Map<string, CompiledStyle>();
+  const compiledStyles = new Map<string, CompiledStyle>();
   const runtime: StyleRuntime = {
     config,
     css(factory: StyleFactory<never>, cssType: CssConstructor = Css) {
       alive();
       const prepared = cssType === Css ? getPreparedKey(factory) : undefined;
-      const cacheKey = prepared
-        ? prepared + JSON.stringify(getStyleSource(factory) ?? null)
+      let cacheKey = prepared
+        ? 'p:' + prepared + JSON.stringify(getStyleSource(factory) ?? null)
         : undefined;
-      const cached = cacheKey ? preparedStyles.get(cacheKey) : undefined;
+      const cached = cacheKey ? compiledStyles.get(cacheKey) : undefined;
       if (cached) {
         ensure(cached);
         return cached.record.id;
       }
       const definition = buildStyleDefinition(factory, cssType);
+      if (!cacheKey && cacheable(definition.program)) {
+        const key = 'd:' + JSON.stringify(definition);
+        // 同时限制键大小，避免少量巨大样式让计算缓存占用不可控内存。
+        if (key.length <= 65536) cacheKey = key;
+        const previous = cacheKey ? compiledStyles.get(cacheKey) : undefined;
+        if (previous) {
+          ensure(previous);
+          return previous.record.id;
+        }
+      }
       const compiled = compileProgram(definition.program, config, {
         ...definition.metadata,
-        debug: definition.metadata.debug ?? options.debug ?? !!definition.metadata.source,
+        debug: definition.metadata.debug ?? collectDebug ?? !!definition.metadata.source,
       });
       ensure(compiled);
       // 完整注册成功后才缓存，失败仍允许原位重试。
       if (cacheKey) {
-        if (preparedStyles.size >= 256) preparedStyles.delete(preparedStyles.keys().next().value!);
-        preparedStyles.set(cacheKey, compiled);
+        if (compiledStyles.size >= 256) compiledStyles.delete(compiledStyles.keys().next().value!);
+        compiledStyles.set(cacheKey, compiled);
       }
       return compiled.record.id;
     },
@@ -438,7 +456,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       host?.dispose();
       for (const id of records.keys()) releaseClaims(id);
       records.clear();
-      preparedStyles.clear();
+      compiledStyles.clear();
       claimed.clear();
       if (target) owners.get(target)?.delete(config.namespace);
     },
