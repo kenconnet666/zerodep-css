@@ -34,6 +34,32 @@ const panelClass = css((s) => {
 - `animationName.raw` 接受动画定义/数组，空数组输出 `animation-name:none`。token/raw 的 null/undefined 省略声明；单位方法不接受空值。
 - 普通值每次变化可产生新 class，旧规则保留至所属 runtime.dispose；不自动改为 CSS 变量。
 
+## 主题定义与预设继承
+
+`defineTheme(name, defaults)` 创建冻结的主题树；字符串和有限数字为叶值。`theme.tokens` 保留字段类型，并将每个叶映射为含默认 fallback 的 CSS 变量引用，未提供主题类时也可使用默认值。
+
+```ts
+import { Css, defineTheme, createRuntime } from '@zerodep-css/core';
+
+const theme = defineTheme('app', { color: { brand: '#2463eb', text: '#202020' } });
+const dark = theme.extend({ color: { text: '#fafafa' } });
+class AppCss extends Css {
+  get color() {
+    return this.extendProperty(super.color, theme.tokens.color);
+  }
+}
+const runtime = createRuntime({ target: null });
+const palette = dark.className(runtime);
+const content = runtime.css((s) => {
+  s.color.brand;
+}, AppCss);
+const className = `${palette} ${content}`;
+```
+
+预设继承沿用同一变量标识。`resolve(overrides, inheritedValues?)` 产生冻结的有效主题：undefined 继承，null 重置到当前预设默认值，对象递归局部覆盖。未知字段、错误叶类型、循环结构和不能作为变量值使用的 CSS-wide 关键字会报错。修改原始默认值或覆盖对象不影响已产生的快照。
+
+主题定义不持有 runtime/请求状态，`className` 将变量声明注册到传入 runtime；不同主题值复用各自的变量类，不改写引用它们的内容规则。框架 provider 的自动向下传播正在单独接入，当前 core 调用者显式组合主题类与内容类。
+
 ## 样式命名与诊断
 
 根 `css` 回调可以使用 `s.name('panel').config({ debug: true })`，生成包含 `panel` 和内容哈希的类名。名字允许 1–128 个字母、数字、下划线或连字符；同名不同内容仍有不同哈希。名字作用于整个根样式，不能在 hover、media 或全局规则中重新命名。

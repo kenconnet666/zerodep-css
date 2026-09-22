@@ -4,6 +4,14 @@ export type { CssConstructor, CssConstruction } from './css.js';
 export type { StyleConfig, StyleSource } from './style-metadata.js';
 export { css, injectGlobal, createRuntime } from './runtime.js';
 export { createStyleContext } from './context.js';
+export { defineTheme } from './theme.js';
+export type {
+  ThemeTree,
+  ThemeDefinition,
+  ThemeValues,
+  ThemeTokens,
+  ThemeOverrides,
+} from './theme.js';
 export type { StyleContext, StyleContextManifest, StyleContextOptions } from './context.js';
 export type {
   StyleRuntime,
