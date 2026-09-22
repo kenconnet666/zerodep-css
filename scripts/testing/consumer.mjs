@@ -132,6 +132,7 @@ import {createRuntime,readTheme} from '@zerodep-css/core';
 import {ThemeCss,lightTheme,darkTheme} from '@zerodep-css/${framework}/themes';
 const runtime=createRuntime({target:null});
 assert.equal(readTheme(lightTheme),lightTheme.defaults);
+await assert.rejects(()=>import('@zerodep-css/core/theme-runtime'),{code:'ERR_PACKAGE_PATH_NOT_EXPORTED'});
 try { runtime.css(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;},ThemeCss);
 assert.notEqual(lightTheme.className(runtime),darkTheme.className(runtime));
 assert.equal(runtime.stats().classes,3); } finally { runtime.dispose(); }
@@ -143,6 +144,8 @@ assert.equal(runtime.stats().classes,3); } finally { runtime.dispose(); }
       join(folder, 'types.ts'),
       `import { createStyleContext, readTheme, type StyleFactory, type StylesheetFactory } from '@zerodep-css/core';
 import { useStyleRuntime, useTheme, defineTheme, provideTheme } from '@zerodep-css/${framework}';
+// @ts-expect-error 旧作者类型已统一为 Css
+import type { StyleBuilder } from '@zerodep-css/core';
 // @ts-expect-error bx 已移除，动态值直接交给 cssPlugin
 import { bx } from '@zerodep-css/${framework}';
 import { Css } from '@zerodep-css/${framework}';
@@ -155,6 +158,10 @@ import { css as defaultCss } from '@zerodep-css/${framework}';
 // @ts-expect-error 内部 IR 不属于根入口
 import type { StyleProgram } from '@zerodep-css/core';
 const context = createStyleContext({target:null});
+// @ts-expect-error 只保留选项对象，禁止旧位置参数
+useStyleRuntime(context);
+// @ts-expect-error 第二个位置参数不再支持
+useStyleRuntime(undefined, {themes:[]});
 const palette = defineTheme('consumer-theme', {color:{brand:'red'}});
 const themeScope = provideTheme(palette, () => ({color:{brand:'blue'}}));
 const currentTheme = useTheme(palette, themeScope);
@@ -164,7 +171,7 @@ readTheme(palette, themeScope);
 currentTheme().color.brand = 'green';
 // @ts-expect-error 不能读取未声明的主题字段
 currentTheme().spacing;
-useStyleRuntime(context, themeScope);
+useStyleRuntime({context, theme:themeScope});
 // @ts-expect-error 主题叶类型不能因 provider 接入而放宽
 provideTheme(palette, () => ({color:{brand:1}}));
 const style: StyleFactory = s => { s.display.token('flex'); s.width.raw('future-value');
@@ -173,9 +180,9 @@ s.display.token('unknown-token');
 // @ts-expect-error 属性不可直接调用
 s.width('50%'); s.width.px(12); };
 const global: StylesheetFactory = g => g.containerQuery('(width > 10px)', g => g.rule('body', style));
-const result: string = useStyleRuntime(context).css(style);
+const result: string = useStyleRuntime({ context }).css(style);
 class AppCss extends Css { get color(){ return this.extendProperty(super.color,{brand:'#2463eb'}); } control(){this.padding.px(8);} }
-const extended: string = useStyleRuntime(context).css(s=>{s.control();s.color.brand;s.hover(h=>h.control());},AppCss);
+const extended: string = useStyleRuntime({ context }).css(s=>{s.control();s.color.brand;s.hover(h=>h.control());},AppCss);
 const appStyle = useStyleRuntime({context,cssType:AppCss});
 // @ts-expect-error 泛型声明不能替代运行时构造器
 useStyleRuntime<AppCss>({context});
@@ -187,7 +194,7 @@ useStyleRuntime({context,nonce:'other'});
 // @ts-expect-error 指定的类型必须继承 Css
 useStyleRuntime({context,cssType:class {}});
 context.mountGlobal('typed-global',g=>g.rule('button',s=>s.control(),AppCss));
-const preset: string = useStyleRuntime(context).css(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;},ThemeCss);
+const preset: string = useStyleRuntime({ context }).css(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;},ThemeCss);
 darkTheme.extend({color:{primary:'#123456'}}); void lightTheme; void preset;
 context.mountGlobal('consumer',global); context.dispose(); void result; void extended; void defaultCss; void cssPlugin; void transformCss;
 `,

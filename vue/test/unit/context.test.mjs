@@ -13,7 +13,7 @@ import {
 test('Vue 显式上下文、应用注入与缺失上下文诊断', () => {
   const context = createStyleContext({ target: null });
   assert.throws(() => useStyleRuntime(), /Provide a style context/);
-  assert.equal(useStyleRuntime(context), context.runtime);
+  assert.equal(useStyleRuntime({ context }), context.runtime);
   const app = createSSRApp({ render: () => null });
   installStyleContext(app, context);
   assert.equal(

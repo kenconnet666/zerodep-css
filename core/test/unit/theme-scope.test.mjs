@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { defineTheme, createRuntime, readTheme } from '../../dist/index.js';
-import { createThemeScope, resolveTheme, withTheme } from '../../dist/theme-runtime.js';
+import { createThemeScope, resolveTheme, createRuntimeView } from '../../dist/style-scope.js';
 
 test('作用域替换同名主题并保留其他主题，运行时视图跟随有效值变化', () => {
   const theme = defineTheme('colors', { brand: 'red', text: 'black' });
@@ -14,7 +14,7 @@ test('作用域替换同名主题并保留其他主题，运行时视图跟随�
   assert.equal(child.themes.length, 2);
   assert(Object.isFrozen(child.themes));
   const runtime = createRuntime({ target: null });
-  const view = withTheme(runtime, child);
+  const view = createRuntimeView(runtime, child);
   try {
     const factory = (s) => {
       s.color.raw(theme.tokens.brand);

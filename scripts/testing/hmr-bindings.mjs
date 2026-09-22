@@ -55,8 +55,8 @@ try {
       resolve: {
         alias: [
           {
-            find: '@zerodep-css/core/theme-runtime',
-            replacement: resolve(root, 'core/dist/theme-runtime.js'),
+            find: '@zerodep-css/core/style-scope',
+            replacement: resolve(root, 'core/dist/style-scope.js'),
           },
           {
             find: '@zerodep-css/core/compiler-runtime',

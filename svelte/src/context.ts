@@ -7,7 +7,7 @@ import {
   type ThemeScope,
   type UseStyleRuntimeOptions,
 } from '@zerodep-css/core';
-import { styleRuntimeOptions, withTheme } from '@zerodep-css/core/theme-runtime';
+import { normalizeStyleOptions, createRuntimeView } from '@zerodep-css/core/style-scope';
 import { themeKey } from './theme.svelte.js';
 
 const key = Symbol('zerodep-css');
@@ -24,14 +24,11 @@ export function resolveContext(explicit?: StyleContext): StyleContext {
 export function useStyleRuntime<T extends Css>(
   options: UseStyleRuntimeOptions<T> & { readonly cssType: CssConstructor<T> },
 ): StyleRuntime<T>;
-export function useStyleRuntime(options: UseStyleRuntimeOptions): StyleRuntime;
-export function useStyleRuntime(context?: StyleContext, theme?: ThemeScope): StyleRuntime;
-export function useStyleRuntime(
-  input?: StyleContext | UseStyleRuntimeOptions,
-  theme?: ThemeScope,
-): StyleRuntime {
-  const options = styleRuntimeOptions(input, theme);
+export function useStyleRuntime(options?: UseStyleRuntimeOptions): StyleRuntime;
+export function useStyleRuntime(input?: UseStyleRuntimeOptions): StyleRuntime {
+  if (arguments.length > 1) throw new TypeError('useStyleRuntime accepts one options object.');
+  const options = normalizeStyleOptions(input);
   const scope =
     options.theme ?? (!options.context ? getContext<ThemeScope | undefined>(themeKey) : undefined);
-  return withTheme(resolveContext(options.context).runtime, scope, options.cssType ?? Css);
+  return createRuntimeView(resolveContext(options.context).runtime, scope, options.cssType ?? Css);
 }

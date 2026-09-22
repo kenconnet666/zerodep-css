@@ -1,8 +1,6 @@
 import type {
   DescriptorBuilders,
   DescriptorRule,
-  FunctionalPseudo,
-  SimplePseudo,
   StyleProperties,
 } from './generated/properties.js';
 import type { CssVariable, Input } from './values.js';
@@ -16,29 +14,6 @@ export interface DeclarationHelpers {
 }
 export type DeclarationBuilder = StyleProperties & DeclarationHelpers;
 export type DeclarationFactory = (s: DeclarationBuilder) => void;
-export interface StyleHelpers extends DeclarationHelpers {
-  /** 任意相对选择器，要求包含 &；由序列化阶段完整解析。 */
-  selector(selector: string, factory: StyleFactory): void;
-  pseudo(name: SimplePseudo, factory: StyleFactory): void;
-  pseudoFunction(name: FunctionalPseudo, arguments_: string, factory: StyleFactory): void;
-  hover(factory: StyleFactory): void;
-  focusVisible(factory: StyleFactory): void;
-  focus(factory: StyleFactory): void;
-  focusWithin(factory: StyleFactory): void;
-  active(factory: StyleFactory): void;
-  disabled(factory: StyleFactory): void;
-  before(factory: StyleFactory): void;
-  after(factory: StyleFactory): void;
-  media(query: string, factory: StyleFactory): void;
-  supports(query: string, factory: StyleFactory): void;
-  /** 与 CSS 的 container 属性区分，避免覆盖其属性调用与补全。 */
-  containerQuery(query: string, factory: StyleFactory): void;
-  layer(name: string, factory: StyleFactory): void;
-  scope(prelude: string, factory: StyleFactory): void;
-  startingStyle(factory: StyleFactory): void;
-  important(factory: StyleFactory): void;
-}
-export type StyleBuilder = StyleProperties & StyleHelpers;
 export type StyleFactory<T = Css> = (s: T) => void;
 export type FrameOffset =
   | number

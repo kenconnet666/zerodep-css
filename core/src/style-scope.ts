@@ -12,18 +12,11 @@ export interface UseStyleRuntimeOptions<T extends Css = Css> {
   readonly cssType?: CssConstructor<T>;
 }
 
-/** 保留旧位置参数；选项只在初始化时读取一次，避免调用方后续修改改变视图。 */
-export function styleRuntimeOptions(
-  input?: StyleContext | UseStyleRuntimeOptions,
-  theme?: ThemeScope,
-): UseStyleRuntimeOptions {
-  if (input === undefined) return { theme };
-  if (input && typeof input === 'object' && 'runtime' in input)
-    return { context: input as StyleContext, theme };
+/** 选项只在初始化时读取一次，避免调用方后续修改改变视图。 */
+export function normalizeStyleOptions(input?: UseStyleRuntimeOptions): UseStyleRuntimeOptions {
+  if (input === undefined) return {};
   if (!input || typeof input !== 'object' || Array.isArray(input))
-    throw new TypeError('Expected a style context or style runtime options.');
-  if (theme !== undefined)
-    throw new TypeError('Do not mix style runtime options and positional theme.');
+    throw new TypeError('Expected style runtime options.');
   const prototype = Object.getPrototypeOf(input);
   if (prototype !== Object.prototype && prototype !== null)
     throw new TypeError('Style runtime options must be a plain object.');
@@ -106,13 +99,13 @@ export function createThemeScope<T extends ThemeTree>(
 }
 
 /** 每个元素携带逻辑组件作用域的有效变量类，因此 DOM 移动不改变主题。 */
-export function withTheme(runtime: StyleRuntime, scope?: ThemeScope): StyleRuntime;
-export function withTheme<T extends Css>(
+export function createRuntimeView(runtime: StyleRuntime, scope?: ThemeScope): StyleRuntime;
+export function createRuntimeView<T extends Css>(
   runtime: StyleRuntime,
   scope: ThemeScope | undefined,
   cssType: CssConstructor<T>,
 ): StyleRuntime<T>;
-export function withTheme(
+export function createRuntimeView(
   runtime: StyleRuntime,
   scope?: ThemeScope,
   defaultCss: CssConstructor = Css,

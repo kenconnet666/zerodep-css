@@ -5,8 +5,8 @@ export type { StyleConfig, StyleSource } from './style-metadata.js';
 export { css, injectGlobal, createRuntime } from './runtime.js';
 export { createStyleContext } from './context.js';
 export { defineTheme } from './theme.js';
-export { readTheme } from './theme-runtime.js';
-export type { ThemeScope, UseStyleRuntimeOptions } from './theme-runtime.js';
+export { readTheme } from './style-scope.js';
+export type { ThemeScope, UseStyleRuntimeOptions } from './style-scope.js';
 export type {
   ThemeTree,
   ThemeDefinition,
@@ -28,7 +28,6 @@ export type { CssVariable } from './values.js';
 export type {
   DeclarationBuilder,
   DeclarationFactory,
-  StyleBuilder,
   StyleFactory,
   FrameBuilder,
   FrameOffset,

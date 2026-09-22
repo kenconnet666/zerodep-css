@@ -8,7 +8,7 @@ const props = defineProps<{
   record: (kind: string) => void;
 }>();
 provideStyleContext(props.context);
-const { css } = useStyleRuntime(props.context);
+const { css } = useStyleRuntime({ context: props.context });
 const show = ref(true);
 </script>
 

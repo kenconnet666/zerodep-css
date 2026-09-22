@@ -92,7 +92,7 @@ export function session(
                       (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name)) &&
                       ['context', 'theme'].includes(property.name.text),
                   ));
-              if (defaults) automaticCss.add(e.name.text);
+              if (defaults && d.initializer.arguments.length <= 1) automaticCss.add(e.name.text);
             }
   let counter = 0;
   const fresh = (kind: string): string => {

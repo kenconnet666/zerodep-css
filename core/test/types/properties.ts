@@ -1,11 +1,4 @@
-import {
-  css,
-  createRuntime,
-  keyframes,
-  globalCss,
-  cssVar,
-  type StyleBuilder,
-} from '../../src/index.js';
+import { css, createRuntime, keyframes, globalCss, cssVar, type Css } from '../../src/index.js';
 
 // 仅由 tsc 检查，不执行这些包含宏/预期错误的类型用例。
 export function typeContract(width: number, visible: boolean) {
@@ -114,7 +107,7 @@ export function typeContract(width: number, visible: boolean) {
     });
   });
 }
-export function reusable(s: StyleBuilder) {
+export function reusable(s: Css) {
   s.display.flex;
   s.alignItems.center;
 }

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { performance } from 'node:perf_hooks';
 import { createRuntime, readTheme, Css } from '../../core/dist/index.js';
 import { lightTheme, darkTheme, ThemeCss } from '../../core/dist/themes.js';
-import { createThemeScope, withTheme } from '../../core/dist/theme-runtime.js';
+import { createThemeScope, createRuntimeView } from '../../core/dist/style-scope.js';
 
 const iterations = 2000;
 const rounds = 5;
@@ -43,10 +43,10 @@ function sample(name) {
   const runtime = createRuntime({ target: null });
   let current = lightTheme.defaults;
   const scope = createThemeScope(lightTheme, () => current);
-  const configured = withTheme(runtime, undefined, AppCss);
-  const preset = withTheme(runtime, undefined, ThemeCss);
+  const configured = createRuntimeView(runtime, undefined, AppCss);
+  const preset = createRuntimeView(runtime, undefined, ThemeCss);
   const inherited = lightTheme.resolve({ color: { primary: '#654321' } });
-  const themed = withTheme(runtime, scope);
+  const themed = createRuntimeView(runtime, scope);
   let last;
   const step = (i) => {
     if (name === 'runtime') return runtime.css(basic);

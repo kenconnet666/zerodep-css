@@ -53,7 +53,7 @@ const explicit=useTheme(theme,scope);
     platform: 'node',
     external: ['svelte', 'svelte/*', 'css-tree'],
     alias: {
-      '@zerodep-css/core/theme-runtime': resolve(root, 'core/dist/theme-runtime.js'),
+      '@zerodep-css/core/style-scope': resolve(root, 'core/dist/style-scope.js'),
       '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
       '@zerodep-css/svelte': resolve(root, 'svelte/dist/index.js'),
     },

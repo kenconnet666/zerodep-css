@@ -1,6 +1,6 @@
 import { Css, createRuntime, type StyleRuntime } from '../../src/index.js';
 import { ThemeCss } from '../../src/themes.js';
-import { withTheme } from '../../src/theme-runtime.js';
+import { createRuntimeView } from '../../src/style-scope.js';
 
 class AppCss extends Css {
   get color() {
@@ -26,7 +26,7 @@ class BrandedCss extends ThemeCss {
     return this.extendProperty(super.color, { brand: '#123456' });
   }
 }
-const branded = withTheme(runtime, undefined, BrandedCss);
+const branded = createRuntimeView(runtime, undefined, BrandedCss);
 branded.css((s) => {
   s.color.red;
   s.color.primary;
@@ -43,7 +43,7 @@ runtime.mountGlobal((g) =>
     BrandedCss,
   ),
 );
-withTheme(runtime, undefined, AppCss).css((s) => {
+createRuntimeView(runtime, undefined, AppCss).css((s) => {
   s.color.brand;
   // @ts-expect-error 直接继承系统类不会隐式得到预设主题关键字
   s.color.primary;

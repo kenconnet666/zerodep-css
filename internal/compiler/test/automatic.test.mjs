@@ -42,13 +42,17 @@ for (const [framework, transform] of [
       assert(debug.code.includes('withStyleSource'));
       assert(!debug.code.includes('--zcss-'));
     }
-    for (const argument of ['{}', '{theme:scope}', '{context:context}', 'undefined,scope']) {
+    for (const argument of ['{}', '{theme:scope}', '{context:context}', 'undefined']) {
       const result = transform(
         source.replace('useStyleRuntime()', `useStyleRuntime(${argument})`),
         filename,
       );
       assert(result.code.includes('formatUnitValues'), argument);
     }
+    assert.equal(
+      transform(source.replace('useStyleRuntime()', 'useStyleRuntime(undefined,scope)'), filename),
+      null,
+    );
     const shadowed = source
       .replace('const {css}', 'const undefined={cssType:AppCss};const {css}')
       .replace('useStyleRuntime()', 'useStyleRuntime(undefined)');

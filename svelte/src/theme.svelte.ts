@@ -6,7 +6,7 @@ import type {
   ThemeTree,
   ThemeValues,
 } from '@zerodep-css/core';
-import { createThemeScope, readTheme, resolveTheme } from '@zerodep-css/core/theme-runtime';
+import { createThemeScope, readTheme, resolveTheme } from '@zerodep-css/core/style-scope';
 
 export const themeKey = Symbol('zerodep-css-theme');
 

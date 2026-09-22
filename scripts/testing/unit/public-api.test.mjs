@@ -4,6 +4,19 @@ import * as core from '../../../core/dist/index.js';
 import * as vue from '../../../vue/dist/index.js';
 import * as svelte from '../../../svelte/dist/index.js';
 
+test('适配器仅接受初始化选项，拒绝旧位置参数而不是静默丢失主题', () => {
+  const context = core.createStyleContext({ target: null });
+  try {
+    for (const adapter of [vue, svelte]) {
+      assert.equal(adapter.useStyleRuntime({ context }), context.runtime);
+      assert.throws(() => adapter.useStyleRuntime(context), /Unknown style runtime option/);
+      assert.throws(() => adapter.useStyleRuntime(undefined, { themes: [] }), /one options object/);
+    }
+  } finally {
+    context.dispose();
+  }
+});
+
 test('作者入口保持 css 字符串合同，适配器不再暴露默认浏览器实例', () => {
   assert.equal(typeof core.css, 'function');
   assert.equal(typeof core.readTheme, 'function');

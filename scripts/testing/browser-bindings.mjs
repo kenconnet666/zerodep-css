@@ -82,7 +82,7 @@ for (const server of [true, false]) {
       '@zerodep-css/vue/themes': resolve(root, 'vue/dist/themes.js'),
       '@zerodep-css/svelte/themes': resolve(root, 'svelte/dist/themes.js'),
       '@zerodep-css/core/compiler-runtime': resolve(root, 'core/dist/compiler-runtime.js'),
-      '@zerodep-css/core/theme-runtime': resolve(root, 'core/dist/theme-runtime.js'),
+      '@zerodep-css/core/style-scope': resolve(root, 'core/dist/style-scope.js'),
       '@zerodep-css/vue/compiler-runtime': resolve(root, 'vue/dist/compiler-runtime.js'),
       '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
       '@zerodep-css/vue': resolve(root, 'vue/dist/index.js'),

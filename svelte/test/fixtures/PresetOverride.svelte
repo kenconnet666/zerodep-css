@@ -4,7 +4,7 @@
   const scope = provideTheme(lightTheme, () => ({
     color: { primary: '#9333ea', onPrimary: '#ffffff' },
   }));
-  const { css } = useStyleRuntime(undefined, scope);
+  const { css } = useStyleRuntime({ theme: scope });
 </script>
 
 <div
