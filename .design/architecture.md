@@ -4,7 +4,7 @@
 
 ## 包边界
 
-- core：生成数据、真实 Css 类、有序样式结构、CSS 语法处理、哈希、CSSOM/SSR 注册、主题定义与宿主上下文。不依赖 Vue 或 Svelte。css-tree 是明确的运行时依赖，仓库名不代表零第三方依赖。
+- core：生成数据、真实 Css 类、有序样式结构、CSS 语法处理、哈希、CSSOM/SSR 注册、主题定义与宿主上下文。可选 themes 子路径提供两套预设和 ThemeCss，不加载到默认入口。不依赖 Vue 或 Svelte。css-tree 是明确的运行时依赖，仓库名不代表零第三方依赖。
 - vue：provide/inject、computed/watch、scope 清理。index.ts 只导出，context.ts 管实例取得，global.ts 管全局样式生命周期。
 - svelte：初始化 context、原生模板/$derived、global.svelte.ts 中的 effect 生命周期；由官方 Svelte 编译链处理 rune 模块。
 - scripts/css-data：离线 schema/grammar/policy。运行时 metadata 与声明从同源生成，core/src/generated 不手工编辑。
@@ -76,6 +76,6 @@ pnpm 的主 workspace 依赖由 catalog 精确固定；框架 peer 表示消费�
 
 浏览器矩阵覆盖 Chromium、Firefox、WebKit，core 使用 dist 入口，框架使用官方编译链和真实组件。原生 CSS 特性由目标浏览器实现，本库不附加兼容性转换器。
 
-计算缓存最多 256 项，普通结果键不超过 64 KiB；绑定字符串校验缓存最多 128 项。缓存驱逐不删除仍可能被 DOM 或已保存字符串引用的规则，宿主可配置 maxRecords 并最终 dispose。缓存命中仍保持注册重入锁和 DOM 删除/禁用检查。
+计算缓存最多 256 项，普通结果键不超过 64 KiB；绑定字符串校验缓存最多 128 项且合计 65,536 UTF-16 字符。缓存驱逐不删除仍可能被 DOM 或已保存字符串引用的规则，宿主可配置 maxRecords 并最终 dispose。缓存命中仍保持注册重入锁和 DOM 删除/禁用检查。
 
 打包时移除本地 zerodep-source 导出条件，JS source map 内嵌源码，不发布悬空声明地图。消费者检查全部导出与地图，包元数据给出 Node 范围和仓库目录。三个包保持 private，不在本轮自动公开发布或选择许可证。

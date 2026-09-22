@@ -1,6 +1,6 @@
 # zerodep-css
 
-0.1.0 内部生产基线：强类型链式 CSS 框架，结合自动编译、框架原生响应式与完整运行时。公开的 `css(s => { ... }): string` 生成和注册哈希类名，既可直接用于浏览器模板，也可先赋值为字符串。三个包保持 private。
+0.2.0 内部生产基线：强类型链式 CSS 框架，结合自动编译、框架原生响应式与完整运行时。公开的 `css(s => { ... }): string` 生成和注册哈希类名，既可直接用于浏览器模板，也可先赋值为字符串。三个包保持 private。
 
 ```ts
 import { css } from '@zerodep-css/core';
@@ -54,7 +54,9 @@ pnpm test:browser:frameworks
 - [当前架构](.design/architecture.md)
 - [支持矩阵与生产使用合同](.design/support.md)
 - [生产验收与缺陷复核](.design/production-audit.md)
-- [0.1.0 变更记录](CHANGELOG.md)
+- [系统亮暗主题](.design/themes.md)
+- [追加审计与修复](.design/presets-audit-plan.md)
+- [版本变更记录](CHANGELOG.md)
 - [换机交接与恢复步骤](.design/handoff.md)
 - [后续路线](.design/roadmap.md)
 - [目录、命名与基础设施审计及下一阶段](.design/history/architecture-audit.md)

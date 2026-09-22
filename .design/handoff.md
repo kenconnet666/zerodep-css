@@ -29,6 +29,7 @@ pnpm lsp:setup
 - core：css/createRuntime/createStyleContext、Css 类与 extendProperty、defineTheme、全局样式与动画资源。
 - Vue/Svelte：useStyleRuntime、useGlobalCss、provideStyleContext、provideTheme；Vue 应用入口另有 installStyleContext。
 - 编译器：适配器的 `/compiler` 子路径提供 cssPlugin/transformCss。内部生成代码入口不作为业务作者 API。
+- 预设：三个包的 `/themes` 子路径提供 lightTheme/darkTheme/ThemeCss；严格 CSP 可用 cssPlugin({ bindings: 'runtime' })。
 - `s.name(...).config({ debug })` 提供根命名和相对源码诊断；配置中的 target/nonce/layers 属于 runtime 宿主。
 
 主题和动态样式放在模板、computed 或 $derived 中；普通 const 字符串保留调用时快照。主题视图返回可用于 class 属性的类名列表。模板编译只在可证明正确的作用域提升值，其他代码保留运行时语义；具体边界见 [编译说明](compiler.md)。
