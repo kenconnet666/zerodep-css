@@ -1,3 +1,5 @@
+> 历史归档：此页保留当时的判断和验证记录。当前 API 与状态见 [当前架构](../architecture.md)、[编译说明](../compiler.md) 和 [生产验收](../production-audit.md)。
+
 # 目录、命名与基础设施审计
 
 > 历史材料中的 ibind 已在阶段四更名为 bx；当前功能以 architecture.md、roadmap.md 和各包 README 为准。

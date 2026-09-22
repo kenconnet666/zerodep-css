@@ -1,4 +1,6 @@
-> 历史记录：此页描述已移除的显式宏方案；当前 API 以 [自动 CSS 编译](compiler.md) 为准。
+> 历史归档：此页保留当时的判断和验证记录。当前 API 与状态见 [当前架构](../architecture.md)、[编译说明](../compiler.md) 和 [生产验收](../production-audit.md)。
+
+> 历史记录：此页描述已移除的显式宏方案；当前 API 以 [自动 CSS 编译](../compiler.md) 为准。
 
 # 显式 bx 编译：首版使用与边界
 

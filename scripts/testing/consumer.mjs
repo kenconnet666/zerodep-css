@@ -14,7 +14,7 @@ import { tmpdir } from 'node:os';
 import { resolve, join, dirname, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createServer } from 'node:http';
-import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
+import { launchBrowser, browserEngine } from './browser-launch.mjs';
 import { root, pnpm, run } from '../lib/environment.mjs';
 import { withBrowserPage } from './browser-evidence.mjs';
 

@@ -1,6 +1,6 @@
 # zerodep-css
 
-强类型链式 CSS 运行时框架。公开的 `css(s => { ... }): string` 已能生成和注册哈希类名，既可直接用于浏览器模板，也可先赋值为字符串。
+0.1.0 内部生产基线：强类型链式 CSS 框架，结合自动编译、框架原生响应式与完整运行时。公开的 `css(s => { ... }): string` 生成和注册哈希类名，既可直接用于浏览器模板，也可先赋值为字符串。三个包保持 private。
 
 ```ts
 import { css } from '@zerodep-css/core';
@@ -19,8 +19,9 @@ const panelClass = css((s) => {
 core/       生成类型、CSS 运行时、动画/全局资源及 SSR
 vue/        Vue 上下文、全局样式监听与组件夹具
 svelte/     Svelte context、runes 全局样式与组件夹具
+internal/   两端共用的严格 TypeScript 编译分析
 scripts/    数据生成、语言服务和浏览器/类型验收
-.design/    实施研究、阶段记录和覆盖清单
+.design/    当前架构、支持/验收/交接；history 存放旧方案
 .research/  研究探针、原始模板归档
 ```
 
@@ -49,11 +50,14 @@ pnpm test:browser:frameworks
 - [Vue 适配与 SSR](vue/README.md)
 - [Svelte 适配与 SSR](svelte/README.md)
 - [项目语言服务](.design/language-services.md)
-- [实施规划与阶段记录](.design/implementation-research.md)
+- [实施规划与阶段记录](.design/history/implementation-research.md)
 - [当前架构](.design/architecture.md)
+- [支持矩阵与生产使用合同](.design/support.md)
+- [生产验收与缺陷复核](.design/production-audit.md)
+- [0.1.0 变更记录](CHANGELOG.md)
 - [换机交接与恢复步骤](.design/handoff.md)
 - [后续路线](.design/roadmap.md)
-- [目录、命名与基础设施审计及下一阶段](.design/architecture-audit.md)
+- [目录、命名与基础设施审计及下一阶段](.design/history/architecture-audit.md)
 - [正式 CSS 覆盖清单](.design/css-coverage.json)
 
 SSR 必须每个请求创建 runtime，并使用该实例的 css 函数；顶层 css 不使用服务端全局单例。浏览器当前采用原生 CSS nesting，真实验收基于本机 Chrome；兼容范围和测试证据见 core 文档。

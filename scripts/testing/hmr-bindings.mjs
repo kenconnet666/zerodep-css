@@ -4,7 +4,7 @@ import { resolve, dirname } from 'node:path';
 import { createServer } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
+import { launchBrowser, browserEngine } from './browser-launch.mjs';
 import { cssPlugin as vueBx } from '../../vue/dist/compiler/index.js';
 import { cssPlugin as svelteBx } from '../../svelte/dist/compiler/index.js';
 import { root } from '../lib/environment.mjs';

@@ -1,11 +1,11 @@
 # zerodep-css 工作约定
 
-- 当前执行优先级：用户已授权无人值守完成整个产品生产化，见 `.design/production-plan.md`。自主决策、分阶段中文提交并推送，完整回归留给 CI/CD，本地完成类型/构建和针对性关键验证；不得以较早的 bx 方案限制最新目标。
-- 最新目标是保留运行时的混合架构：移除公开 bx，动态属性值自动编译为变量绑定，结构和复杂情形保留正确的运行时回退；当前自动路径与回退边界见 `.design/compiler.md`。
+- 0.1.0 内部生产基线的范围和证据见 `.design/support.md`、`.design/production-audit.md`，执行记录见 `.design/production-plan.md`。维护时分阶段中文提交，完整回归交给 CI/CD，本地完成类型/构建和针对性关键验证；history 中的旧方案不代表当前 API。
+- 保持运行时的混合架构：公开 bx 已移除，动态属性值自动编译为变量绑定，结构和复杂情形保留正确的运行时回退；当前自动路径与回退边界见 `.design/compiler.md`。
 - 默认中文沟通。当前已实现 core 样式引擎和 Vue/Svelte 原生响应式、上下文与完整字符串 SSR 接入；已移除公开 bx，自动编译支持范围见 `.design/compiler.md`。实际 API 见各包 README，当前架构见 `.design/architecture.md`，后续计划见 `.design/roadmap.md`，不要把其他候选 API 当作已实现功能。
 - 三个产品包是根目录的 `core`、`vue`、`svelte`。core 不依赖 Vue/Svelte，适配器使用框架原生响应式；包名暂定且保持 private。
 - 安全模板声明中的动态单位/raw/token 自动绑定；空值和 CSS-wide 保持直接声明语义，复杂回调与脚本快照保留运行时行为。
-- 作者模型采用 `class AppCss extends Css` 的真实类继承，通过 css(factory, AppCss) 使用；系统基类提供标准 CSS，派生 getter 可用 extendProperty 增加关键字，不能覆盖既有属性操作。完整主题作用域仍按生产化计划推进。运行时 if/switch/函数复用优先，recipes/variants 不是既定目标。
+- 作者模型采用 `class AppCss extends Css` 的真实类继承，通过 css(factory, AppCss) 使用；系统基类提供标准 CSS，派生 getter 可用 extendProperty 增加关键字，不能覆盖既有属性操作。defineTheme/provideTheme 已提供预设继承、局部覆盖和框架逻辑作用域。运行时 if/switch/函数复用优先，recipes/variants 不是既定目标。
 - s.name('xxx').config({debug}) 已实现根样式命名与开发来源诊断；config 当前只含 debug，不能把 runtime 的 target/nonce 等所有权选项放入局部配置。
 - CSS 属性对象不可调用。使用 s.display.flex、s.display.token(value)、s.width.raw('50%')、s.width.px(50)；token 是严格字面量，raw 保留类型/补全并允许任意字符串。s.xx(...) 用于 selector/media/hover 等结构方法，不用于属性直接赋值。
 - Git 提交说明使用中文；验证通过后提交，不把过渡中的失败状态当作完成版提交。

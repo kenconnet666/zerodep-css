@@ -7,7 +7,7 @@ import { createServer } from 'node:http';
 import { build, transform } from 'esbuild';
 import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile, compileModule } from 'svelte/compiler';
-import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
+import { launchBrowser, browserEngine } from './browser-launch.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const output = resolve(root, 'test-results/frameworks');
@@ -208,6 +208,7 @@ try {
       assert.equal(await page.locator('style').count(), 0);
       assert.deepEqual(errors, []);
       report.push({
+        engine: browserEngine,
         framework,
         browser: browser.version(),
         ssrIsolated: true,

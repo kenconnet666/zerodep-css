@@ -9,7 +9,7 @@ import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile, compileModule } from 'svelte/compiler';
 import { transformCss as vueBx } from '../../vue/dist/compiler/index.js';
 import { transformCss as svelteBx } from '../../svelte/dist/compiler/index.js';
-import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
+import { launchBrowser, browserEngine } from './browser-launch.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const output = resolve(root, 'test-results/bindings');
