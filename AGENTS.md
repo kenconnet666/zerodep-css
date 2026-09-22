@@ -18,6 +18,7 @@
 - 长时完整 LSP、生成一致性和 core 浏览器回归可交给 GitHub Actions；本地仍完成类型/构建与改动对应的关键测试。交付须区分本地通过、CI 通过或 CI 未完成，不把 workflow 文件当作运行成功。
 - createStyleContext 由应用/请求宿主拥有；全局样式用稳定且唯一的 key 挂载，恢复后 completeHydration 检查遗漏。组件只释放自身全局槽位和订阅，不能 dispose 共享上下文。
 - 使用项目 `zerodep_lsp` 做诊断、hover、definitions、references、completions。当前会话没有该 MCP 时，使用 `pnpm lsp:inspect <相对文件路径...>`。超时或 complete=false 不是无错误。
+- Node 编译源码放 internal/compiler 与 vue/compiler、svelte/compiler；浏览器源码仍放各包 src。编译代码使用严格 TS，执行 pnpm check:compiler；根 check 自动包含它，声明由根 build 生成，不手写 .d.mts 替代实现检查。
 - 修改语言服务桥或升级相关依赖后运行 `pnpm lsp:verify`，必须通过预置错误检出、修复清零和五项工具验收。WebStorm MCP 的空问题列表不能代替语义验收。
 - `.codex/config.toml` 由 `pnpm lsp:setup` 生成并忽略；模板和启动脚本可迁移。不要修改用户全局 Codex 配置或结束其他项目 Node 进程。
 - `.research` 保留研究探针和旧模板归档，不参与产品构建；测试夹具放所属包的 test 目录，不发布到 dist。

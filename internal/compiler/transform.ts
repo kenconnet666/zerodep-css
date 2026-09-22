@@ -1,3 +1,14 @@
+import type { BindingFormat } from '../../core/src/binding.js';
+import type { HelperPlan } from '../../core/src/metadata-types.js';
+import type {
+  CompilerOptions,
+  CompilerPlugin,
+  SourceTransform,
+  ValueBinding,
+  TransformedExpression,
+} from './types.js';
+type Framework = 'vue' | 'svelte';
+type MacroCall = ts.CallExpression & { expression: ts.Identifier };
 import ts from 'typescript';
 import MagicString from 'magic-string';
 import { encode } from '@jridgewell/sourcemap-codec';
@@ -8,23 +19,23 @@ import {
   helperGroups,
   unitFamilies,
   keywordGroups,
-} from '../../core/src/generated/metadata.ts';
+} from '../../core/src/generated/metadata.js';
 
 export { ts, MagicString };
-export function walk(node, visit) {
+export function walk(node: ts.Node, visit: (node: ts.Node) => void): void {
   visit(node);
   ts.forEachChild(node, (child) => {
     walk(child, visit);
   });
 }
-function names(node, target = new Set()) {
+function names(node: ts.BindingName, target = new Set<string>()): Set<string> {
   if (ts.isIdentifier(node)) target.add(node.text);
   else if (ts.isObjectBindingPattern(node) || ts.isArrayBindingPattern(node))
     for (const item of node.elements) if (ts.isBindingElement(item)) names(item.name, target);
   return target;
 }
-function declarations(node) {
-  const result = new Set();
+function declarations(node: ts.Block): Set<string> {
+  const result = new Set<string>();
   for (const statement of node.statements ?? []) {
     if (ts.isVariableStatement(statement))
       for (const d of statement.declarationList.declarations) names(d.name, result);
@@ -34,14 +45,21 @@ function declarations(node) {
   return result;
 }
 // 以词法声明辨认宏；同名参数/局部变量不会误当导入宏。
-export function unshadowed(node, name, boundary) {
+export function unshadowed(node: ts.Node, name: string, boundary: ts.Node): boolean {
   for (let p = node.parent; p && p !== boundary; p = p.parent) {
     if (ts.isFunctionLike(p) && p.parameters.some((x) => names(x.name).has(name))) return false;
     if (ts.isBlock(p) && declarations(p).has(name)) return false;
   }
   return true;
 }
-export function session(source, filename, scriptStart, scriptEnd, framework, options = {}) {
+export function session(
+  source: string,
+  filename: string,
+  scriptStart: number,
+  scriptEnd: number,
+  framework: Framework,
+  options: CompilerOptions = {},
+) {
   const root = resolve(options.root ?? process.cwd());
   const id = relative(root, resolve(filename)).replaceAll('\\', '/');
   const output = new MagicString(source);
@@ -53,18 +71,19 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
     true,
     ts.ScriptKind.TS,
   );
-  const imports = new Map(),
-    macros = new Set(),
-    css = new Set(),
-    runtime = new Set();
-  const used = new Set();
+  const imports = new Map<string, { module: string; original: string }>(),
+    macros = new Set<string>(),
+    css = new Set<string>(),
+    runtime = new Set<string>();
+  const used = new Set<string>();
   walk(ast, (n) => {
     if (ts.isIdentifier(n)) used.add(n.text);
   });
   for (const n of ast.statements)
     if (ts.isImportDeclaration(n) && ts.isStringLiteral(n.moduleSpecifier)) {
       const module = n.moduleSpecifier.text;
-      for (const item of n.importClause?.namedBindings?.elements ?? []) {
+      const bindings = n.importClause?.namedBindings;
+      for (const item of bindings && ts.isNamedImports(bindings) ? bindings.elements : []) {
         const original = item.propertyName?.text ?? item.name.text;
         imports.set(item.name.text, { module, original });
         if (
@@ -95,7 +114,7 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
             )
               css.add(e.name.text);
   let counter = 0;
-  const fresh = (kind) => {
+  const fresh = (kind: string): string => {
     let value;
     do value = `__zbx_${kind}_${counter++}`;
     while (used.has(value) || source.includes(value));
@@ -105,25 +124,30 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
   const valueName = fresh('value');
   const tupleName = fresh('tuple');
   let hasBindings = false;
-  const anchors = [];
-  const mapToOriginal = (text, offset) => {
+  const anchors: { text: string; offset: number }[] = [];
+  const mapToOriginal = (text: string, offset: number): string => {
     anchors.push({ text, offset });
     return text;
   };
-  const error = (offset, message) => {
+  const error: (offset: number, message: string) => never = (offset, message) => {
     const before = source.slice(0, offset),
       line = before.split('\n').length,
       column = offset - before.lastIndexOf('\n');
-    const e = new Error(`[zerodep bx] ${filename}:${line}:${column}: ${message}`);
-    e.loc = { file: filename, line, column };
-    throw e;
+    throw Object.assign(new Error(`[zerodep bx] ${filename}:${line}:${column}: ${message}`), {
+      loc: { file: filename, line, column },
+    });
   };
-  const macro = (node, file) =>
+  const macro = (node: ts.Node | undefined, file: ts.SourceFile): node is MacroCall =>
+    !!node &&
     ts.isCallExpression(node) &&
     ts.isIdentifier(node.expression) &&
     macros.has(node.expression.text) &&
     unshadowed(node, node.expression.text, file);
-  function expression(text, offset, shadowed = new Set()) {
+  function expression(
+    text: string,
+    offset: number,
+    shadowed = new Set<string>(),
+  ): TransformedExpression {
     const prefix = 'const __expression = ';
     const file = ts.createSourceFile(
       'expression.ts',
@@ -134,8 +158,8 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
     );
     const base = offset - prefix.length;
     const edits = new MagicString(text);
-    const bindings = [];
-    const consumed = new Set();
+    const bindings: ValueBinding[] = [];
+    const consumed = new Set<ts.CallExpression>();
     walk(file, (node) => {
       if (
         !ts.isCallExpression(node) ||
@@ -150,11 +174,11 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
         return;
       const builder = callback.parameters[0]?.name;
       if (!builder || !ts.isIdentifier(builder)) return;
-      const local = new Set();
+      const local = new Set<string>();
       walk(callback, (n) => {
         if (ts.isVariableDeclaration(n) || ts.isParameter(n)) names(n.name, local);
       });
-      function validateRead(arg) {
+      function validateRead(arg: ts.Expression): void {
         walk(arg, (n) => {
           if (
             ts.isCallExpression(n) ||
@@ -179,9 +203,14 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
             error(base + n.getStart(file), 'bx 不能捕获样式回调内部变量。');
         });
       }
-      function binding(call, format = {}, valueExpression) {
+      function binding(
+        call: MacroCall,
+        format: BindingFormat = {},
+        valueExpression?: string,
+      ): string {
         if (call.arguments.length !== 1) error(base + call.getStart(file), 'bx 只接受一个标量值。');
         const arg = call.arguments[0];
+        if (!arg) error(base + call.getStart(file), 'bx 缺少值。');
         validateRead(arg);
         const name =
           '--zbx-' +
@@ -208,12 +237,12 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
         )
           return;
         const methodNode = declaration.expression,
-          propertyNode = methodNode.expression;
+          propertyNode = declaration.expression.expression;
         if (propertyNode.expression.getText(file) !== builder.text) return;
         const property = propertyNode.name.text,
           method = methodNode.name.text,
           meta = propertyMetadata[property];
-        const hits = [];
+        const hits: MacroCall[] = [];
         for (const arg of declaration.arguments)
           walk(arg, (n) => {
             if (macro(n, file) && !shadowed.has(n.expression.text)) hits.push(n);
@@ -245,19 +274,19 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
             );
         if (!meta || meta.resource)
           error(base + declaration.getStart(file), '该属性或资源尚不支持 bx。');
-        let replacement;
+        let replacement: string;
         if (method === 'raw' || method === 'token') {
           const arg = declaration.arguments[0];
-          if (declaration.arguments.length !== 1)
+          if (declaration.arguments.length !== 1 || !arg)
             error(base + declaration.getStart(file), 'raw/token 只接受一个参数。');
           if (macro(arg, file)) {
-            const numbers = meta.numbers.map((x) => x[0]);
+            const numbers = meta.numbers.map((x) => x[0]!);
             if (meta.zero) numbers.push({ min: 0, max: 0 });
             replacement = JSON.stringify(
               binding(
                 arg,
                 method === 'token'
-                  ? { tokens: Object.values(keywordGroups[meta.keywords]) }
+                  ? { tokens: Object.values(keywordGroups[meta.keywords]!) }
                   : { numbers },
               ),
             );
@@ -287,17 +316,18 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
             replacement = JSON.stringify(value);
           } else error(base + arg.getStart(file), 'bx 必须直接作为属性参数或受支持的模板插值。');
         } else {
-          let plan, unit;
-          for (const candidate of helperGroups[meta.helpers])
-            for (const u of unitFamilies[candidate.family])
+          let plan: HelperPlan | undefined, unit: string | undefined;
+          for (const candidate of helperGroups[meta.helpers]!)
+            for (const u of unitFamilies[candidate.family]!)
               if ((u === '%' ? 'pct' : u) + candidate.suffix === method) {
                 plan = candidate;
                 unit = u;
               }
-          if (!plan || !plan.arities[declaration.arguments.length])
+          if (!plan || unit === undefined || !plan.arities[declaration.arguments.length])
             error(base + declaration.getStart(file), '无效的单位方法或参数数量。');
-          const alternatives = plan.arities[declaration.arguments.length];
-          let tuple;
+          const alternatives = plan.arities[declaration.arguments.length]!;
+          const unitName = unit;
+          let tuple: string | undefined;
           if (alternatives.length > 1 && declaration.arguments.length > 1) {
             const values = declaration.arguments.map((arg) => {
               if (
@@ -321,14 +351,14 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
             tuple = `${tupleName}([${values.join(',')}], ${JSON.stringify(alternatives)})`;
           }
           const parts = declaration.arguments.map((arg, index) => {
-            const numbers = plan.arities[declaration.arguments.length].map((x) => x[index]);
+            const numbers = alternatives.map((x) => x[index]!);
             if (macro(arg, file))
               return JSON.stringify(
-                binding(arg, { unit, numbers }, tuple ? `${tuple}[${index}]` : undefined),
+                binding(arg, { unit: unitName, numbers }, tuple ? `${tuple}[${index}]` : undefined),
               );
             if (hits.some((x) => x.pos >= arg.pos && x.end <= arg.end))
               error(base + arg.getStart(file), '单位参数中的 bx 不支持额外运算。');
-            return `${valueName}(${arg.getText(file)}, ${JSON.stringify({ unit, numbers })})`;
+            return `${valueName}(${arg.getText(file)}, ${JSON.stringify({ unit: unitName, numbers })})`;
           });
           replacement = `[${parts.join(',')}].join(${JSON.stringify(plan.separator === ',' ? ', ' : ' ')})`;
         }
@@ -343,9 +373,13 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
       if (macro(n, file) && !shadowed.has(n.expression.text) && !consumed.has(n))
         error(base + n.getStart(file), '无法确定 bx 的样式声明或元素所有权。');
     });
-    const initializer = file.statements[0]?.declarationList?.declarations[0]?.initializer;
+    const first = file.statements[0];
+    const initializer =
+      first && ts.isVariableStatement(first)
+        ? first.declarationList.declarations[0]?.initializer
+        : undefined;
     const direct =
-      initializer &&
+      !!initializer &&
       ts.isCallExpression(initializer) &&
       css.has(initializer.expression.getText(file));
     return { code: edits.toString(), bindings, direct };
@@ -400,7 +434,11 @@ export function session(source, filename, scriptStart, scriptEnd, framework, opt
   };
 }
 
-export function classInitializer(node, ctx, framework) {
+export function classInitializer(
+  node: ts.Expression,
+  ctx: TransformContext,
+  framework: Framework,
+): boolean {
   if (!ts.isCallExpression(node)) return false;
   const callee = node.expression.getText(ctx.ast);
   if (ctx.css.has(callee)) return true;
@@ -408,7 +446,7 @@ export function classInitializer(node, ctx, framework) {
   if (framework === 'vue' && imported?.module === 'vue' && imported.original === 'computed') {
     const fn = node.arguments[0];
     return (
-      fn &&
+      !!fn &&
       ts.isArrowFunction(fn) &&
       ts.isCallExpression(fn.body) &&
       ctx.css.has(fn.body.expression.getText(ctx.ast))
@@ -417,13 +455,19 @@ export function classInitializer(node, ctx, framework) {
   return (
     framework === 'svelte' &&
     callee === '$derived' &&
-    node.arguments[0] &&
+    !!node.arguments[0] &&
     ts.isCallExpression(node.arguments[0]) &&
     ctx.css.has(node.arguments[0].expression.getText(ctx.ast))
   );
 }
 
-export function assertNoClassReferences(ctx, text, offset, classes, locals = new Set()) {
+export function assertNoClassReferences(
+  ctx: TransformContext,
+  text: string,
+  offset: number,
+  classes: ReadonlyMap<string, unknown>,
+  locals = new Set<string>(),
+): void {
   const prefix = 'const __expression = ';
   const ast = ts.createSourceFile(
     'use.ts',
@@ -453,7 +497,11 @@ export function assertNoClassReferences(ctx, text, offset, classes, locals = new
 }
 
 /** Vite 插件只处理完整 SFC，官方插件负责后续编译、SSR 和 HMR。 */
-export function vitePlugin(framework, transform, options = {}) {
+export function vitePlugin(
+  framework: Framework,
+  transform: SourceTransform,
+  options: CompilerOptions = {},
+): CompilerPlugin {
   let root = options.root;
   return {
     name: `zerodep-${framework}-bx`,
@@ -467,3 +515,5 @@ export function vitePlugin(framework, transform, options = {}) {
     },
   };
 }
+
+export type TransformContext = ReturnType<typeof session>;

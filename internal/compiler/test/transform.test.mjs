@@ -3,9 +3,9 @@ import test from 'node:test';
 import { resolve } from 'node:path';
 import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile } from 'svelte/compiler';
-import { transformBx as vue } from '../../vue/dist/compiler/index.js';
-import { transformBx as svelte } from '../../svelte/dist/compiler/index.js';
-import { bxValue, bxTuple } from '../../core/dist/binding.js';
+import { transformBx as vue } from '../../../vue/dist/compiler/index.js';
+import { transformBx as svelte } from '../../../svelte/dist/compiler/index.js';
+import { bxValue, bxTuple } from '../../../core/dist/binding.js';
 import { TraceMap, originalPositionFor } from '@jridgewell/trace-mapping';
 
 function fixture(framework, expression, extra = '', alias = 'bx') {

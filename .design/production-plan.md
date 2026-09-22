@@ -47,3 +47,4 @@
 - 基线完整 CI：9de27b0 对应运行 35739573541 已完成并成功；这只证明旧覆盖面与基础环境可用，审查缺陷仍需增加回归后修复。
 - 第一项运行时优化：已知数值/单位不再创建 CSS AST；新增实例化格式化器，固定 token 预校验，raw 成功结果按 owner 使用 128 项有界缓存。此阶段保留旧生成代码入口，自动绑定迁移时统一收敛内部命名。
 - 57a3f82 的完整 CI（35740308697）已成功。共用命令环境迁移到 scripts/lib，按实际导入解析更新引用，根 check/build 与启动器语法检查通过。
+- 编译源码迁入 internal/compiler 与适配器 compiler 目录，使用严格 TypeScript；独立 compiler 构建不再混入 svelte-package 的浏览器源码处理。根 check 已纳入 check:compiler，公开声明由实现生成并映射到包内类型文件。根 check/build、15 项编译针对性测试与关键源文件原生 LSP 通过。

@@ -10,7 +10,7 @@
 - scripts/css-data：离线 schema/grammar/policy。运行时 metadata 与声明从同源生成，core/src/generated 不手工编辑。
 - scripts/testing：测试准备、共享浏览器执行器、隔离消费者和体积验证。组件夹具属于各自包的 test/fixtures，类型夹具放 test/types，快速单元测试放 test/unit。
 - scripts/language-services：项目级 MCP 桥、安装与五项语义验收。换机重建 .codex/config.toml，不复制本机路径。
-- 适配器 src/compiler：bx 的 SFC 源码转换和 Vite 插件。scripts/compiler 共用 TS 词法/单位分析，构建时内联到两端独立 compiler 子路径；core/binding 仅格式化和校验元素变量，不创建响应式订阅或注册规则。具体支持边界见 bx-compiler.md。
+- 适配器 compiler：bx 的 SFC 源码转换和 Vite 插件。internal/compiler 共用 TS 词法/单位分析，构建时内联到两端独立 compiler 子路径；core/binding 仅格式化和校验元素变量，不创建响应式订阅或注册规则。具体支持边界见 bx-compiler.md。
 
 三个产品包位于根目录并保持 private。构建先安全清理三个 dist，再按 workspace 依赖顺序构建，防止更名后的旧文件进入产物。
 

@@ -12,4 +12,4 @@
 
 三条路径在仅绑定值变化时 class/规则数均不变，但 Vue 直接求值仍执行了回调。因此产品选择 Vue 稳定 computed 和 Svelte 原生 style 指令。不同请求的 SSR 初值及客户端 hydration 也已验收。
 
-产物写到忽略的 `test-results/bx-probe`，其中 results.json 保留回调次数、class、规则统计和计算宽度。真实宏的别名、作用域、源码映射及限制由 `scripts/compiler/compiler.test.mjs` 验证；真实组件、独立消费和 HMR 测试入口见 `.design/bx-compiler.md`。
+产物写到忽略的 `test-results/bx-probe`，其中 results.json 保留回调次数、class、规则统计和计算宽度。真实宏的别名、作用域、源码映射及限制由 `internal/compiler/test/transform.test.mjs` 验证；真实组件、独立消费和 HMR 测试入口见 `.design/bx-compiler.md`。

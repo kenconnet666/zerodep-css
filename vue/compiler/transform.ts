@@ -1,3 +1,22 @@
+import type { SFCDescriptor } from 'vue/compiler-sfc';
+import type {
+  CompilerOptions,
+  CompilerPlugin,
+  TransformResult,
+  ValueBinding,
+} from '../../internal/compiler/types.js';
+type VueRoot = NonNullable<NonNullable<SFCDescriptor['template']>['ast']>;
+type VueNode = VueRoot | VueRoot['children'][number];
+type VueElement = Extract<VueNode, { type: 1 }>;
+type VueDirective = Extract<VueElement['props'][number], { type: 7 }>;
+interface Loop {
+  value: string;
+  index: string;
+  source: string;
+  prop: VueDirective;
+  needsIndex: boolean;
+  patched: boolean;
+}
 import { parse, compileScript } from 'vue/compiler-sfc';
 import {
   session,
@@ -8,10 +27,14 @@ import {
   vitePlugin,
   classInitializer,
   assertNoClassReferences,
-} from '../../../scripts/compiler/shared.mjs';
+} from '../../internal/compiler/transform.js';
 
 /** Vue script setup 的组件源码转换；输出继续交给官方 Vue 插件。 */
-export function transformBx(source, filename, options = {}) {
+export function transformBx(
+  source: string,
+  filename: string,
+  options: CompilerOptions = {},
+): TransformResult | null {
   const { descriptor, errors } = parse(source, { filename });
   if (errors.length) throw errors[0];
   const script = descriptor.scriptSetup;
@@ -25,13 +48,16 @@ export function transformBx(source, filename, options = {}) {
     options,
   );
   if (!ctx.macros.size) return null;
-  const metadata = compileScript(descriptor, { id: filename }).bindings;
+  const metadata = compileScript(descriptor, { id: filename }).bindings ?? {};
   const computed = ctx.fresh('computed'),
     unref = ctx.fresh('unref');
   const extra = [`import { computed as ${computed}, unref as ${unref} } from 'vue';`];
-  const classes = new Map();
-  const attr = (text) => text.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
-  function scriptExpression(expression, locals = new Set()) {
+  const classes = new Map<
+    string,
+    { style: string; uses: number; declaration: ts.VariableDeclaration }
+  >();
+  const attr = (text: string) => text.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
+  function scriptExpression(expression: string, locals = new Set<string>()): string {
     const prefix = 'const __expression = ';
     const ast = ts.createSourceFile(
       'template.ts',
@@ -45,7 +71,7 @@ export function transformBx(source, filename, options = {}) {
       if (
         !ts.isIdentifier(n) ||
         locals.has(n.text) ||
-        !['setup-ref', 'setup-maybe-ref', 'setup-let'].includes(metadata[n.text]) ||
+        !['setup-ref', 'setup-maybe-ref', 'setup-let'].includes(metadata[n.text] ?? '') ||
         !unshadowed(n, n.text, ast)
       )
         return;
@@ -63,15 +89,15 @@ export function transformBx(source, filename, options = {}) {
     });
     return result.toString();
   }
-  function calculation(expression, name, loop) {
-    const locals = loop ? new Set([loop.value, loop.index]) : new Set();
+  function calculation(expression: string, name: string, loop?: Loop): string {
+    const locals = loop ? new Set([loop.value, loop.index]) : new Set<string>();
     const code = scriptExpression(expression, locals);
     extra.push(
       `const ${name} = ${computed}(() => (${loop ? `(${scriptExpression(loop.source)}).map((${loop.value},${loop.index}) => (${code}))` : code}));`,
     );
     return loop ? `${name}[${loop.index}]` : name;
   }
-  function style(bindings, fromTemplate, loop) {
+  function style(bindings: ValueBinding[], fromTemplate: boolean, loop?: Loop): string {
     const name = ctx.fresh('style');
     if (fromTemplate)
       for (const b of bindings)
@@ -108,59 +134,73 @@ export function transformBx(source, filename, options = {}) {
             declaration: d,
           });
         }
-  function visit(node, restricted = false, inheritedLoop) {
-    const props = node.props ?? [];
-    const forProp = props.find((p) => p.type === 7 && p.name === 'for');
+  function visit(node: VueNode, restricted = false, inheritedLoop?: Loop): void {
+    const element = node.type === 1 ? node : undefined;
+    const props = element?.props ?? [];
+    const forProp = props.find((p): p is VueDirective => p.type === 7 && p.name === 'for');
     let loop = inheritedLoop;
     let scoped =
-      restricted || node.tagType === 1 || props.some((p) => p.type === 7 && p.name === 'slot');
+      restricted || element?.tagType === 1 || props.some((p) => p.type === 7 && p.name === 'slot');
     if (forProp) {
       const info = forProp.forParseResult;
-      const value = info?.value?.content,
-        index = info?.key?.content ?? ctx.fresh('index');
+      const simple = (exp: VueDirective['exp']) => (exp?.type === 4 ? exp : undefined);
+      const source = simple(info?.source);
+      const value = simple(info?.value)?.content,
+        index = simple(info?.key)?.content ?? ctx.fresh('index');
       if (
         inheritedLoop ||
         !value ||
+        !source ||
         !/^[A-Za-z_$][\w$]*$/.test(value) ||
         !/^[A-Za-z_$][\w$]*$/.test(index) ||
-        info.index ||
-        !props.some((p) => p.type === 7 && p.name === 'bind' && p.arg?.content === 'key')
+        info?.index ||
+        !props.some(
+          (p) => p.type === 7 && p.name === 'bind' && p.arg?.type === 4 && p.arg.content === 'key',
+        )
       )
         scoped = true;
       else
         loop = {
           value,
           index,
-          source: info.source.content,
+          source: source.content,
           prop: forProp,
-          needsIndex: !info.key,
+          needsIndex: !info?.key,
           patched: false,
         };
     }
     const classProp = props.find(
-      (p) => p.type === 7 && p.name === 'bind' && p.arg?.content === 'class',
+      (p): p is VueDirective =>
+        p.type === 7 && p.name === 'bind' && p.arg?.type === 4 && p.arg.content === 'class',
     );
-    if (classProp?.exp) {
-      const expression = classProp.exp.content;
+    const classExpression = classProp?.exp;
+    if (classProp && classExpression?.type === 4) {
+      const expression = classExpression.content;
       let styleName;
       const locals = new Set(loop ? [loop.value, loop.index] : []);
       const shared = !locals.has(expression.trim()) && classes.get(expression.trim());
       if (!shared)
-        assertNoClassReferences(ctx, expression, classProp.exp.loc.start.offset, classes, locals);
+        assertNoClassReferences(ctx, expression, classExpression.loc.start.offset, classes, locals);
       const result = shared
-        ? null
+        ? { code: '', bindings: [], direct: true }
         : ctx.expression(
             expression,
-            classProp.exp.loc.start.offset,
+            classExpression.loc.start.offset,
             new Set(loop ? [loop.value, loop.index] : []),
           );
       if (shared || result?.bindings.length) {
         if (!shared && !result.direct)
           ctx.error(
-            classProp.exp.loc.start.offset,
+            classExpression.loc.start.offset,
             '内联 bx 样式必须是直接 css 调用；请将条件移到元素或脚本派生值。',
           );
-        if (node.tagType !== 0 || node.tag === 'svg' || node.ns !== 0 || scoped)
+        if (
+          !element ||
+          element.tagType !== 0 ||
+          element.tag === 'svg' ||
+          element.ns !== 0 ||
+          scoped
+        )
           ctx.error(
             classProp.loc.start.offset,
             'bx 支持静态原生 HTML 元素及单层 keyed 数组循环；暂不支持嵌套循环、解构或 slot 作用域。',
@@ -194,10 +234,12 @@ export function transformBx(source, filename, options = {}) {
         const existing = props.filter(
           (p) =>
             (p.type === 6 && p.name === 'style') ||
-            (p.type === 7 && p.name === 'bind' && p.arg?.content === 'style'),
+            (p.type === 7 && p.name === 'bind' && p.arg?.type === 4 && p.arg.content === 'style'),
         );
         const styles = existing.map((p) =>
-          p.type === 6 ? JSON.stringify(p.value?.content ?? '') : `(${p.exp?.content ?? '{}'})`,
+          p.type === 6
+            ? JSON.stringify(p.value?.content ?? '')
+            : `(${p.exp?.type === 4 ? p.exp.content : '{}'})`,
         );
         for (const p of existing) {
           if (p.loc.source.includes('--zbx-'))
@@ -211,13 +253,14 @@ export function transformBx(source, filename, options = {}) {
       }
     }
     for (const prop of props)
-      if (prop !== classProp && prop.exp)
+      if (prop !== classProp && prop.type === 7 && prop.exp?.type === 4)
         assertNoClassReferences(ctx, prop.exp.content, prop.exp.loc.start.offset, classes);
-    if (node.type === 5)
+    if (node.type === 5 && node.content.type === 4)
       assertNoClassReferences(ctx, node.content.content, node.content.loc.start.offset, classes);
-    for (const child of node.children ?? []) visit(child, scoped, loop);
+    if (node.type === 0 || node.type === 1)
+      for (const child of node.children) visit(child, scoped, loop);
   }
-  visit(descriptor.template.ast);
+  if (descriptor.template.ast) visit(descriptor.template.ast);
   for (const [name, definition] of classes) {
     if (!definition.uses)
       ctx.error(
@@ -241,6 +284,6 @@ export function transformBx(source, filename, options = {}) {
   }
   return ctx.finish(extra.join('\n'));
 }
-export function bxPlugin(options = {}) {
+export function bxPlugin(options: CompilerOptions = {}): CompilerPlugin {
   return vitePlugin('vue', transformBx, options);
 }

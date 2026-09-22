@@ -19,7 +19,7 @@ if (kind === 'unit') {
     'vue/test/unit/*.test.mjs',
     'scripts/css-data/*.test.mjs',
     'scripts/testing/unit/*.test.mjs',
-    'scripts/compiler/*.test.mjs',
+    'internal/compiler/test/*.test.mjs',
   ]);
 } else run(process.execPath, [resolve(root, 'scripts/testing', entries[kind])]);
 if (kind === 'browser:frameworks')

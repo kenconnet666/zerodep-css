@@ -1,5 +1,6 @@
-import { lstat, realpath, rm, copyFile, mkdir } from 'node:fs/promises';
+import { lstat, realpath, rm, copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { build } from 'esbuild';
+import ts from 'typescript';
 import { resolve, sep } from 'node:path';
 import { root, pnpm } from './lib/environment.mjs';
 
@@ -18,13 +19,14 @@ for (const name of ['core', 'vue', 'svelte']) {
   }
 }
 pnpm(['-r', 'run', 'build']);
+pnpm(['exec', 'tsc', '-p', 'internal/compiler/tsconfig.build.json']);
 
 // 两端共用宏的词法/单位分析，构建时内联到独立 compiler 子路径，不增加产品包。
 for (const name of ['vue', 'svelte']) {
   const output = resolve(root, name, 'dist/compiler');
   await mkdir(output, { recursive: true });
   await build({
-    entryPoints: [resolve(root, name, 'src/compiler/index.mjs')],
+    entryPoints: [resolve(root, name, 'compiler/index.ts')],
     outfile: resolve(output, 'index.js'),
     bundle: true,
     packages: 'external',
@@ -33,8 +35,33 @@ for (const name of ['vue', 'svelte']) {
     target: 'node24',
     sourcemap: true,
   });
-  await copyFile(resolve(root, name, 'src/compiler/index.d.mts'), resolve(output, 'index.d.ts'));
-  // svelte-package 会复制源码 mjs；独立入口只交付已内联共享分析器的构建产物。
-  await rm(resolve(output, 'index.mjs'), { force: true });
-  await rm(resolve(output, 'index.d.mts'), { force: true });
+  // 声明来自实际实现；只将共享公开类型的路径投影到包内，不泄漏工作区私有路径。
+  for (const entry of ['index', 'transform']) {
+    let declaration = await readFile(
+      resolve(root, 'test-results/compiler-types', name, `compiler/${entry}.d.ts`),
+      'utf8',
+    );
+    const ast = ts.createSourceFile(entry + '.d.ts', declaration, ts.ScriptTarget.Latest, true);
+    const replacements = [];
+    for (const statement of ast.statements) {
+      if (!ts.isImportDeclaration(statement) && !ts.isExportDeclaration(statement)) continue;
+      const specifier = statement.moduleSpecifier;
+      if (
+        specifier &&
+        ts.isStringLiteral(specifier) &&
+        specifier.text.endsWith('/internal/compiler/types.js')
+      )
+        replacements.push({ start: specifier.getStart(ast), end: specifier.end });
+    }
+    for (const replacement of replacements.reverse())
+      declaration =
+        declaration.slice(0, replacement.start) +
+        "'./types.js'" +
+        declaration.slice(replacement.end);
+    await writeFile(resolve(output, entry + '.d.ts'), declaration);
+  }
+  await copyFile(
+    resolve(root, 'test-results/compiler-types/internal/compiler/types.d.ts'),
+    resolve(output, 'types.d.ts'),
+  );
 }

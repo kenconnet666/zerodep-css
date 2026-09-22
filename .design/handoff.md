@@ -6,7 +6,7 @@
 
 - 原 ibind 更名为 bx，core/vue/svelte 只保留 bx 导出；Vue/Svelte 新增独立 compiler 子路径及 bxPlugin。
 - Vue 使用稳定 computed，Svelte 使用原生 style 指令。值更新不重跑样式回调，普通值仍重算/换 class；支持有限同组件 class 复用、简单 keyed 列表、单位/多变量、SSR/hydration 和 HMR。
-- scripts/compiler 共用分析器由根 build 内联到两个 compiler 产物；core/binding 是生成组件的内部格式化入口。默认入口没有编译依赖。
+- internal/compiler 共用分析器由根 build 内联到两个 compiler 产物；core/binding 是生成组件的内部格式化入口。默认入口没有编译依赖。
 - test:unit 已包含编译器正反例；test:browser:frameworks 增加 bx 浏览器与真实 Vite HMR；test:consumer 安装并验证 compiler 子路径。HMR 临时项目不放在 Vite 默认忽略的 test-results 下，结束后只清理本轮创建的目录。
 - 本阶段的报告位于 test-results/bindings、bindings-hmr、consumer、bundle；提交交付时分别报告本地和 CI 状态。换机仍执行下方 frozen install、根 build 与 lsp:setup。
 - 本轮本地已通过：根 check/build、53 项快速测试、三语言类型负例与修复清零、17 项 core 浏览器场景、原框架回归及 bx 浏览器/SSR/HMR、独立消费者、生成一致性、格式和体积检查。新增 TS/Vue/Svelte 关键文件的原生 LSP 完成诊断且无错误。本轮未触发 CI，默认四个入口的体积仍与阶段 3.5 基线一致。
