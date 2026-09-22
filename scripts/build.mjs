@@ -1,7 +1,7 @@
 import { lstat, realpath, rm, copyFile, mkdir } from 'node:fs/promises';
 import { build } from 'esbuild';
 import { resolve, sep } from 'node:path';
-import { root, pnpm } from './testing/environment.mjs';
+import { root, pnpm } from './lib/environment.mjs';
 
 // tsc 不会清除已更名模块；每次构建只清理三个包的生成目录，避免旧入口混入 tarball。
 const boundary = await realpath(root);

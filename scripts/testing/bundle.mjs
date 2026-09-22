@@ -3,7 +3,7 @@ import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
 import { build } from 'esbuild';
-import { root } from './environment.mjs';
+import { root } from '../lib/environment.mjs';
 
 const baseline = JSON.parse(
   await readFile(resolve(root, 'scripts/testing/bundle-budget.json'), 'utf8'),

@@ -15,7 +15,7 @@ import { resolve, join, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createServer } from 'node:http';
 import { chromium } from '@playwright/test';
-import { root, pnpm, run } from './environment.mjs';
+import { root, pnpm, run } from '../lib/environment.mjs';
 import { withBrowserPage } from './browser-evidence.mjs';
 
 const output = resolve(root, 'test-results/consumer');

@@ -7,7 +7,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { chromium } from '@playwright/test';
 import { bxPlugin as vueBx } from '../../vue/dist/compiler/index.js';
 import { bxPlugin as svelteBx } from '../../svelte/dist/compiler/index.js';
-import { root } from './environment.mjs';
+import { root } from '../lib/environment.mjs';
 import { withBrowserPage } from './browser-evidence.mjs';
 
 const output = resolve(root, 'test-results/bindings-hmr');

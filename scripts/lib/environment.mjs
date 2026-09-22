@@ -2,6 +2,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
+// 构建、生成和测试共享的工作区/进程边界，不依赖任何测试框架。
 export const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 export function run(file, args, options = {}) {
   const result = spawnSync(file, args, {

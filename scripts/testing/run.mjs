@@ -1,5 +1,5 @@
 import { resolve } from 'node:path';
-import { root, run, pnpm } from './environment.mjs';
+import { root, run, pnpm } from '../lib/environment.mjs';
 
 const kind = process.argv[2];
 const entries = {
