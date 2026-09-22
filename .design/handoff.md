@@ -2,6 +2,8 @@
 
 更新：2026-09-23。本项目为 core/vue/svelte 三包的混合 CSS 框架，保留运行时与复杂场景回退，自动编译使用 cssPlugin/transformCss，公开 bx 已移除。0.2 基线状态见 [生产验收](production-audit.md) 与 [执行记录](production-plan.md)，本轮修复与新增 API 见 [维护审查](maintenance-audit.md)，history 下的旧 API 不应继续用于实现。
 
+后续已完成初始化选项、组件状态与全局派生类、当前组件主题一致性及主题解析优化，决策和测量见 [API 易用性](api-usability.md)。Css → ThemeCss → 用户类保持两重继承，用户也可直接从 Css 自建主题。
+
 ## 取得工作区
 
 仓库：`https://github.com/kenconnet666/zerodep-css.git`。本轮工作在 `feat/native-reactivity`；换机后明确检出该分支，再核对远端 CI 与提交。不要仅凭默认分支或旧交接中的提交号判断状态。

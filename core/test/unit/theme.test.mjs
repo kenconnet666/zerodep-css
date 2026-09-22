@@ -56,6 +56,34 @@ test('定义和有效值不会随外部对象修改，并拒绝非法类型及�
   assert.throws(() => defineTheme('bad name', { value: 'red' }));
 });
 
+test('相同默认值复用仍保留外部输入隔离、getter 读取和负零语义', () => {
+  const theme = defineTheme('reuse', { color: { brand: 'red', text: 'black' }, zero: 0 });
+  assert.equal(theme.resolve(undefined, theme.defaults), theme.defaults);
+  let reads = 0;
+  const input = {
+    color: {
+      get brand() {
+        reads++;
+        return 'red';
+      },
+      text: 'black',
+    },
+    zero: 0,
+  };
+  const first = theme.resolve(undefined, input);
+  assert.equal(reads, 1);
+  assert(Object.isFrozen(first.color));
+  input.color.text = 'blue';
+  const second = theme.resolve(undefined, input);
+  assert.equal(reads, 2);
+  assert.equal(first.color.text, 'black');
+  assert.equal(second.color.text, 'blue');
+  assert(Object.is(theme.resolve({ zero: -0 }, theme.defaults).zero, -0));
+  assert.throws(() => theme.resolve(undefined, { ...input, other: 'red' }), /Unknown theme field/);
+  assert.throws(() => theme.resolve({ color: { brand: 'initial' } }, theme.defaults), /CSS-wide/);
+  assert.equal(theme.resolve({ color: { brand: null } }, second).color.brand, 'red');
+});
+
 test('真实 Css 派生关键字引用主题变量，规则与主题值分别复用且请求隔离', () => {
   const theme = defineTheme('app', { color: { brand: 'red' } });
   class AppCss extends Css {

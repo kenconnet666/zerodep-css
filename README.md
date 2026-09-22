@@ -57,6 +57,7 @@ pnpm test:browser:frameworks
 - [系统亮暗主题](.design/themes.md)
 - [追加审计与修复](.design/presets-audit-plan.md)
 - [维护审查与主题读取 API](.design/maintenance-audit.md)
+- [组件 API 易用性与性能测量](.design/api-usability.md)
 - [版本变更记录](CHANGELOG.md)
 - [换机交接与恢复步骤](.design/handoff.md)
 - [后续路线](.design/roadmap.md)

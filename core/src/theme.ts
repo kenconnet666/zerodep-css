@@ -114,7 +114,8 @@ export function defineTheme<const T extends ThemeTree>(
   const references = tokens(baseline, []);
   function merge(base: ThemeTree, previous: ThemeTree, override: unknown): ThemeTree {
     if (override === null) return base;
-    if (override === undefined) return previous;
+    // 已冻结且验证过的默认/父节点可以直接复用；不缓存外部输入或请求数据。
+    if (override === undefined || override === previous) return previous;
     if (!record(override)) throw new TypeError('Theme overrides must match their declared group.');
     for (const key of Reflect.ownKeys(override))
       if (typeof key !== 'string' || !Object.hasOwn(base, key))
@@ -123,14 +124,14 @@ export function defineTheme<const T extends ThemeTree>(
     for (const [key, value] of Object.entries(base)) {
       const next = Object.hasOwn(override, key) ? override[key] : undefined;
       const prior = previous[key]!;
-      result[key] =
-        typeof value === 'object'
-          ? merge(value, prior as ThemeTree, next)
-          : next === undefined
-            ? prior
-            : next === null
-              ? value
-              : leaf(next, typeof value);
+      // 同值复用已有验证结果；Object.is 保留 JS 数字叶的负零语义。
+      if (next === undefined || Object.is(next, prior)) result[key] = prior;
+      else if (next === null || Object.is(next, value)) result[key] = value;
+      else
+        result[key] =
+          typeof value === 'object'
+            ? merge(value, prior as ThemeTree, next)
+            : leaf(next, typeof value);
     }
     return Object.freeze(result);
   }
