@@ -30,6 +30,8 @@ scripts/    数据生成、语言服务和浏览器/类型验收
 
 本地已有构建时，可用 `node scripts/testing/browser-core.mjs --match 缓存` 执行名称匹配的关键场景；定向报告放在 `test-results/browser-focused`，不会覆盖完整报告。CI 默认不传筛选条件，执行完整回归。
 
+浏览器测试统一由 `ZERODEP_BROWSER_ENGINE` 选择 chromium/firefox/webkit；默认 chromium 使用本机 Chrome，`ZERODEP_BROWSER_CHANNEL=chromium` 改用 Playwright 安装的 Chromium。CI 对三种引擎分别运行样式、框架、SSR 和 HMR 回归；当前运行状态以实际 CI 结果为准。
+
 ```powershell
 pnpm install --frozen-lockfile
 pnpm build

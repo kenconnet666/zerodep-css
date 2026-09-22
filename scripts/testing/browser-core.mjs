@@ -5,7 +5,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
-import { chromium } from '@playwright/test';
+import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
 import { runBrowserTests } from '../../core/test/browser/runtime.mjs';
 import { verifyEvidence } from './evidence-smoke.mjs';
 
@@ -23,7 +23,7 @@ const output = match
   : resolve(root, 'test-results/browser');
 const { createRuntime, keyframes } = await import('../../core/dist/index.js');
 const bundled = await build({
-  entryPoints: [resolve(root, 'core/src/index.ts')],
+  entryPoints: [resolve(root, 'core/dist/index.js')],
   bundle: true,
   format: 'esm',
   platform: 'browser',
@@ -78,11 +78,7 @@ try {
     http.once('error', fail);
     http.listen(0, '127.0.0.1', ok);
   });
-  const channel = process.env.ZERODEP_BROWSER_CHANNEL ?? 'chrome';
-  browser = await chromium.launch({
-    channel: channel === 'chromium' ? undefined : channel,
-    headless: true,
-  });
+  browser = await launchBrowser();
   if (!match) await verifyEvidence(browser, resolve(output, 'evidence-self-test'));
   const results = await runBrowserTests(
     browser,
@@ -94,7 +90,14 @@ try {
     output,
     match,
   );
-  const report = { browser: browser.version(), channel, match, bundleBytes: js.length, results };
+  const report = {
+    engine: browserEngine,
+    browser: browser.version(),
+    channel,
+    match,
+    bundleBytes: js.length,
+    results,
+  };
   await mkdir(output, { recursive: true });
   await writeFile(resolve(output, 'results.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(

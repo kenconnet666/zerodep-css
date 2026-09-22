@@ -7,7 +7,7 @@ import { createServer } from 'node:http';
 import { build, transform } from 'esbuild';
 import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile, compileModule } from 'svelte/compiler';
-import { chromium } from '@playwright/test';
+import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const output = resolve(root, 'test-results/frameworks');
@@ -105,11 +105,7 @@ let browser;
 const report = [];
 try {
   await new Promise((ok) => http.listen(0, '127.0.0.1', ok));
-  const channel = process.env.ZERODEP_BROWSER_CHANNEL ?? 'chrome';
-  browser = await chromium.launch({
-    channel: channel === 'chromium' ? undefined : channel,
-    headless: true,
-  });
+  browser = await launchBrowser();
   for (const framework of ['vue', 'svelte']) {
     await withBrowserPage(browser, output, framework, async (page) => {
       const errors = [];

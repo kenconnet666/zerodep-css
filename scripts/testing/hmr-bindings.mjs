@@ -4,7 +4,7 @@ import { resolve, dirname } from 'node:path';
 import { createServer } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { chromium } from '@playwright/test';
+import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
 import { cssPlugin as vueBx } from '../../vue/dist/compiler/index.js';
 import { cssPlugin as svelteBx } from '../../svelte/dist/compiler/index.js';
 import { root } from '../lib/environment.mjs';
@@ -12,11 +12,7 @@ import { withBrowserPage } from './browser-evidence.mjs';
 
 const output = resolve(root, 'test-results/bindings-hmr');
 await mkdir(output, { recursive: true });
-const channel = process.env.ZERODEP_BROWSER_CHANNEL ?? 'chrome';
-const browser = await chromium.launch({
-  channel: channel === 'chromium' ? undefined : channel,
-  headless: true,
-});
+const browser = await launchBrowser();
 const report = [];
 // Vite 默认忽略 test-results；开发项目必须放到实际受监视的独占临时目录。
 const temporary = await mkdtemp(resolve(root, '.research/bx/hmr-'));
@@ -129,7 +125,7 @@ try {
   }
   await writeFile(
     resolve(output, 'results.json'),
-    JSON.stringify({ passed: true, report }, null, 2),
+    JSON.stringify({ engine: browserEngine, passed: true, report }, null, 2),
   );
   console.log('VERIFIED: automatic CSS HMR unit change, reactive updates and binding removal');
 } finally {

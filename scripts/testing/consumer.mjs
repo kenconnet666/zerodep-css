@@ -14,7 +14,7 @@ import { tmpdir } from 'node:os';
 import { resolve, join, dirname, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createServer } from 'node:http';
-import { chromium } from '@playwright/test';
+import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
 import { root, pnpm, run } from '../lib/environment.mjs';
 import { withBrowserPage } from './browser-evidence.mjs';
 
@@ -22,7 +22,7 @@ const output = resolve(root, 'test-results/consumer');
 await mkdir(output, { recursive: true });
 // 必须位于仓库外，才不会被 workspace、祖先 node_modules 或源码 alias 悄悄兜底。
 const workspace = await mkdtemp(join(tmpdir(), 'zerodep-consumer-'));
-const report = { workspace, results: [], status: 'running' };
+const report = { engine: browserEngine, workspace, results: [], status: 'running' };
 const environment = { ...process.env, NODE_PATH: '', CI: 'true' };
 let browser;
 async function save(path, value) {
@@ -75,11 +75,7 @@ try {
       packs,
       archives.find((file) => file.startsWith(`zerodep-css-${name}-`)),
     );
-  const channel = process.env.ZERODEP_BROWSER_CHANNEL ?? 'chrome';
-  browser = await chromium.launch({
-    channel: channel === 'chromium' ? undefined : channel,
-    headless: true,
-  });
+  browser = await launchBrowser();
   for (const framework of ['vue', 'svelte']) {
     const folder = join(workspace, framework);
     await mkdir(folder);
