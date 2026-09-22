@@ -1,0 +1,52 @@
+{
+  "name": "zerodep-css-workspace",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.5",
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": "10.34.5"
+  },
+  "scripts": {
+    "build": "pnpm -r run build",
+    "check": "pnpm -r run check",
+    "generate:css": "node scripts/generate-css.mjs",
+    "generate:check": "node scripts/generate-css.mjs --check",
+    "data:diff": "node scripts/generate-css.mjs --diff",
+    "test:types": "node scripts/verify-style-types.mjs",
+    "test:browser": "node scripts/test-browser.mjs",
+    "test": "pnpm --filter @zerodep-css/core run build && node --test core/test/*.test.mjs scripts/css-data/*.test.mjs",
+    "format:check": "prettier --check core vue svelte scripts package.json pnpm-workspace.yaml tsconfig*.json",
+    "lsp:setup": "pwsh -NoProfile -File scripts/language-services/setup.ps1",
+    "lsp:verify": "node scripts/language-services/verify.mjs .",
+    "lsp:inspect": "node scripts/language-services/inspect.mjs .",
+    "research:types": "node .research/css-types/audit.mjs --deps .",
+    "research:syntax": "node .research/css-types/expressiveness.mjs --deps ."
+  },
+  "devDependencies": {
+    "@playwright/test": "catalog:",
+    "@types/css-tree": "catalog:",
+    "@modelcontextprotocol/sdk": "catalog:languageServices",
+    "@sveltejs/mcp": "catalog:languageServices",
+    "@sveltejs/package": "catalog:",
+    "@types/node": "catalog:",
+    "@vue/language-server": "catalog:languageServices",
+    "@vue/typescript-plugin": "catalog:languageServices",
+    "@webref/css": "catalog:",
+    "css-tree": "catalog:",
+    "csstype": "catalog:",
+    "esbuild": "catalog:",
+    "prettier": "catalog:",
+    "prettier-plugin-svelte": "catalog:",
+    "svelte": "catalog:",
+    "svelte-check": "catalog:",
+    "svelte-language-server": "catalog:languageServices",
+    "typescript": "catalog:",
+    "typescript-language-server": "catalog:languageServices",
+    "typescript-svelte-plugin": "catalog:languageServices",
+    "vscode-jsonrpc": "catalog:languageServices",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:languageServices",
+    "zod": "catalog:languageServices"
+  }
+}

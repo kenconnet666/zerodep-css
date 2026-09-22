@@ -1,0 +1,8 @@
+node_modules
+**/dist
+**/.svelte-kit
+.research/**/report.json
+.research/**/expressiveness-report.json
+pnpm-lock.yaml
+test-results
+.codex/config.toml

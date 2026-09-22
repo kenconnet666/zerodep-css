@@ -1,0 +1,16 @@
+# setup.ps1 生成本机绝对路径；不要原样复制为 config.toml。
+# BEGIN ZERODEP LANGUAGE SERVICES
+[mcp_servers.zerodep_lsp]
+command = __NODE__
+args = [__LSP__, __ROOT__]
+cwd = __ROOT__
+startup_timeout_sec = 30
+tool_timeout_sec = 90
+
+[mcp_servers.zerodep_svelte_docs]
+command = __NODE__
+args = [__SVELTE__]
+cwd = __ROOT__
+startup_timeout_sec = 30
+tool_timeout_sec = 90
+# END ZERODEP LANGUAGE SERVICES

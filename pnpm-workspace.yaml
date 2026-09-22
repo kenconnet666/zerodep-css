@@ -1,0 +1,42 @@
+packages:
+  - core
+  - vue
+  - svelte
+
+catalog:
+  '@playwright/test': 1.63.0
+  '@types/css-tree': 3.2.0
+  '@sveltejs/package': 2.5.8
+  '@types/node': 24.13.5
+  '@webref/css': 8.7.5
+  css-tree: 3.2.1
+  esbuild: 0.28.2
+  csstype: 3.2.3
+  prettier: 3.9.7
+  prettier-plugin-svelte: 4.1.1
+  svelte: 5.57.0
+  svelte-check: 4.7.6
+  typescript: 6.0.3
+  vue: 3.5.43
+
+catalogs:
+  languageServices:
+    '@modelcontextprotocol/sdk': 1.30.0
+    '@sveltejs/mcp': 0.1.26
+    '@vue/language-server': 3.3.11
+    '@vue/typescript-plugin': 3.3.11
+    svelte-language-server: 0.18.4
+    typescript-language-server: 6.0.0
+    typescript-svelte-plugin: 0.3.52
+    vscode-jsonrpc: 8.2.1
+    vue-tsc: 3.3.11
+    zod: 4.6.5
+
+catalogMode: strict
+linkWorkspacePackages: false
+sharedWorkspaceLockfile: true
+strictPeerDependencies: true
+autoInstallPeers: false
+
+onlyBuiltDependencies:
+  - esbuild

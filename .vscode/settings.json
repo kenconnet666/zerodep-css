@@ -1,0 +1,6 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "svelte.plugin.typescript.enable": true,
+  "files.exclude": { "**/dist": true }
+}
