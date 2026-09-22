@@ -19,7 +19,12 @@ import {
 import type { KeyframesDefinition, StylesheetDefinition } from './style-program.js';
 import type { StylesheetFactory, StyleFactory } from './builder-types.js';
 import { Css, type CssConstructor } from './css.js';
-import { validateStyleName, validateStyleDebug } from './style-metadata.js';
+import {
+  validateStyleName,
+  validateStyleDebug,
+  getPreparedKey,
+  getStyleSource,
+} from './style-metadata.js';
 
 export interface StyleManifest {
   readonly version: 1 | 2;
@@ -349,16 +354,32 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       },
     });
   }
+  // 编译站点缓存属于当前 runtime；驱逐只丢计算结果，绝不删除仍被 DOM 使用的规则。
+  const preparedStyles = new Map<string, CompiledStyle>();
   const runtime: StyleRuntime = {
     config,
     css(factory: StyleFactory<never>, cssType: CssConstructor = Css) {
       alive();
+      const prepared = cssType === Css ? getPreparedKey(factory) : undefined;
+      const cacheKey = prepared
+        ? prepared + JSON.stringify(getStyleSource(factory) ?? null)
+        : undefined;
+      const cached = cacheKey ? preparedStyles.get(cacheKey) : undefined;
+      if (cached) {
+        ensure(cached);
+        return cached.record.id;
+      }
       const definition = buildStyleDefinition(factory, cssType);
       const compiled = compileProgram(definition.program, config, {
         ...definition.metadata,
         debug: definition.metadata.debug ?? options.debug ?? !!definition.metadata.source,
       });
       ensure(compiled);
+      // 完整注册成功后才缓存，失败仍允许原位重试。
+      if (cacheKey) {
+        if (preparedStyles.size >= 256) preparedStyles.delete(preparedStyles.keys().next().value!);
+        preparedStyles.set(cacheKey, compiled);
+      }
       return compiled.record.id;
     },
     keyframes(value) {
@@ -417,6 +438,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       host?.dispose();
       for (const id of records.keys()) releaseClaims(id);
       records.clear();
+      preparedStyles.clear();
       claimed.clear();
       if (target) owners.get(target)?.delete(config.namespace);
     },

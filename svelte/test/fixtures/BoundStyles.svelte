@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { bx as bindValue, useStyleRuntime } from '@zerodep-css/svelte';
+  import AutomaticStyles from './AutomaticStyles.svelte';
   let { initialWidth, record }: { initialWidth: number; record: (kind: string) => void } = $props();
   const { css } = useStyleRuntime();
   // initialWidth 是实例初值，后续变化由组件自己拥有。
@@ -25,6 +26,8 @@
     }),
   );
 </script>
+
+<AutomaticStyles />
 
 <button
   data-bound

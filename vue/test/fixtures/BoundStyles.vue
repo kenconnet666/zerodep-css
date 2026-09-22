@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { bx as bindValue, useStyleRuntime } from '@zerodep-css/vue';
+import AutomaticStyles from './AutomaticStyles.vue';
 
 const props = defineProps<{ initialWidth: number; record: (kind: string) => void }>();
 const { css } = useStyleRuntime();
@@ -28,6 +29,7 @@ const shared = computed(() =>
 </script>
 
 <template>
+  <AutomaticStyles />
   <button
     data-bound
     @click="

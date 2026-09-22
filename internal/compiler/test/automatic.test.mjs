@@ -49,7 +49,7 @@ for (const [framework, transform] of [
       's.padding.px(getGap());',
       's.padding.px(gap);effect();',
       's.color.raw(color);s.padding.px(gap);',
-      's.hover(h=>{h.padding.px(gap)});',
+      's.media(query,h=>{h.padding.px(gap)});',
     ])
       assert.equal(transform(fixture(framework, body), filename), null, body);
     assert.equal(
@@ -68,7 +68,9 @@ for (const [framework, transform] of [
       ),
       null,
     );
-    assert.equal(transform(fixture(framework, 's.padding.px(8,10);'), filename), null);
+    const staticResult = transform(fixture(framework, 's.padding.px(8,10);'), filename);
+    assert.match(staticResult.code, /prepareStyle/);
+    assert(!staticResult.code.includes('formatUnitValues'));
     assert.equal(
       transform(fixture(framework, 's.padding.px(gap);', { tag: 'Other' }), filename),
       null,
@@ -89,6 +91,20 @@ for (const [framework, transform] of [
       expression: 'cls',
     });
     assert.equal(transform(source, filename), null);
+  });
+  test(`${framework}：静态分支与嵌套声明可准备，未选分支不生成绑定`, () => {
+    const source = fixture(
+      framework,
+      `if(false){s.width.px(missing.width)}else{s.hover(h=>{h.padding.px(gap)})}switch('b'){case 'a':s.width.px(missing.width);break;case 'b':s.media('(width > 1px)',m=>{m.width.px(gap)});break;default:s.width.px(missing.width);}`,
+    );
+    for (const debug of [false, true]) {
+      const result = transform(source, filename, { debug });
+      assert.equal((result.code.match(/var\(--zbx-/g) ?? []).length, 2);
+      assert.match(result.code, /prepareStyle/);
+      if (framework === 'vue')
+        compileScript(parse(result.code).descriptor, { id: 'branches', inlineTemplate: true });
+      else compile(result.code, { filename, generate: 'client' });
+    }
   });
 }
 test('整组单位格式化保留联合约束、顺序和非法输入拒绝', () => {

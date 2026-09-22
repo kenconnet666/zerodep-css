@@ -104,8 +104,10 @@ export function session(
   const tupleName = fresh('tuple');
   const sourceName = fresh('source');
   const unitsName = fresh('units');
+  const prepareName = fresh('prepare');
   let hasBindings = false;
   let hasAutomatic = false;
+  let hasPrepared = false;
   let hasSources = false;
   const mapper = sourceMapper(source, filename);
   const mapToOriginal = mapper.expression;
@@ -178,7 +180,17 @@ export function session(
         !id.startsWith('../') &&
         !isAbsolute(id)
       ) {
-        for (const declaration of automaticDeclarations(callback)) {
+        const automatic = automaticDeclarations(callback);
+        if (automatic) {
+          // 静态源码摘要随 HMR 内容改变，不把旧站点缓存当作新样式。
+          const key = createHash('sha256')
+            .update(id + ':' + (base + callback.getStart(file)) + ':' + callback.getText(file))
+            .digest('hex');
+          edits.prependLeft(callback.getStart(file) - prefix.length, `${prepareName}(`);
+          edits.appendLeft(callback.end - prefix.length, `, ${JSON.stringify(key)})`);
+          hasPrepared = true;
+        }
+        for (const declaration of automatic ?? []) {
           const offset = base + declaration.call.getStart(file);
           const name =
             '--zbx-' +
@@ -417,7 +429,7 @@ export function session(
     scriptEnd,
     mapToOriginal,
     finish(extra = '') {
-      if (!hasBindings && !hasSources) return null;
+      if (!hasBindings && !hasSources && !hasPrepared) return null;
       if (hasBindings)
         output.appendLeft(
           scriptStart,
@@ -432,6 +444,11 @@ export function session(
         output.appendLeft(
           scriptStart,
           `\nimport { formatUnitValues as ${unitsName} } from '@zerodep-css/core/compiler-runtime';\n`,
+        );
+      if (hasPrepared)
+        output.appendLeft(
+          scriptStart,
+          `\nimport { prepareStyle as ${prepareName} } from '@zerodep-css/core/compiler-runtime';\n`,
         );
       output.appendLeft(scriptEnd, '\n' + extra + '\n');
       return mapper.finish(output);

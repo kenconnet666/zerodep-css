@@ -159,6 +159,23 @@ try {
       const initial = await read();
       assert.equal(initial.height, '7px');
       assert.equal(initial.border, '2px');
+      const automatic = first.locator('[data-auto]');
+      const automaticClass = await automatic.getAttribute('class');
+      assert(automaticClass.includes('automatic-'));
+      assert.equal(await automatic.evaluate((e) => getComputedStyle(e).width), '10px');
+      await first.locator('[data-auto-change]').click();
+      assert.equal(await automatic.evaluate((e) => getComputedStyle(e).width), '11px');
+      assert.equal(await automatic.evaluate((e) => getComputedStyle(e).padding), '2px 11px');
+      assert.equal(await automatic.getAttribute('class'), automaticClass);
+      assert.deepEqual((await read()).stats, initial.stats);
+      assert.equal(
+        await page
+          .locator('[data-instance="b"] [data-auto]')
+          .evaluate((e) => getComputedStyle(e).width),
+        '10px',
+      );
+      await automatic.hover();
+      assert.equal(await automatic.evaluate((e) => getComputedStyle(e).width), '12px');
       await first.locator('[data-bound]').click();
       const bound = await read();
       assert.equal(bound.width, '21px');

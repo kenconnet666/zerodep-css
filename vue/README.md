@@ -1,6 +1,6 @@
 # Vue 适配
 
-自动绑定迁移已开始：没有旧 `bx` 导入时，编译插件可将原生模板直接 `css(s => { s.padding.px(8, gap); })` 中的动态单位值编译为元素 CSS 变量。当前仅提升无控制流、无未知调用的根声明；派生类、脚本快照、组件透传和复杂表达式保留运行时行为。完整迁移目标见[生产化计划](../.design/production-plan.md)。
+自动绑定迁移已开始：没有旧 `bx` 导入时，编译插件可将原生模板直接 `css(s => { s.padding.px(8, gap); })` 中的动态单位值编译为元素 CSS 变量。支持静态参数的嵌套结构和字面量可判定的 if/switch；未知控制流、派生类、脚本快照、组件透传和复杂表达式保留运行时行为。可证明稳定的样式第一次执行仍经过完整校验，后续由 runtime 有界缓存跳过重复构建和解析。完整迁移目标见[生产化计划](../.design/production-plan.md)。
 
 显式 `bx` 编译通过 `@zerodep-css/vue/compiler` 的 `bxPlugin()` 接入官方 Vite Vue 插件。支持内联及同组件脚本 class、单位/多绑定、完整字符串 SSR 和 hydration。安装示例、支持范围与定位诊断见 [bx 编译说明](../.design/bx-compiler.md)。
 

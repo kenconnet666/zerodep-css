@@ -18,6 +18,7 @@ export interface StyleDebug {
   readonly sources: readonly StyleSource[];
 }
 const sourceKey: unique symbol = Symbol('zerodep.style-source');
+const preparedKey: unique symbol = Symbol('zerodep.prepared-style');
 
 export function validateStyleName(value: unknown): asserts value is string {
   if (
@@ -78,7 +79,25 @@ export function withStyleSource<T>(factory: StyleFactory<T>, source: StyleSource
   const normalized = validateStyleSource(source);
   const wrapped: StyleFactory<T> = (builder) => factory(builder);
   Object.defineProperty(wrapped, sourceKey, { value: normalized });
+  const key = getPreparedKey(factory);
+  if (key) Object.defineProperty(wrapped, preparedKey, { value: key });
   return wrapped;
+}
+
+/** 仅供生成代码：key 必须覆盖全部静态源码；可变读取已移到元素绑定。 */
+export function prepareStyle<T>(factory: StyleFactory<T>, key: string): StyleFactory<T> {
+  if (typeof factory !== 'function' || !/^[a-f0-9]{64}$/.test(key))
+    throw new TypeError('Invalid prepared style.');
+  const wrapped: StyleFactory<T> = (builder) => factory(builder);
+  Object.defineProperty(wrapped, preparedKey, { value: key });
+  const source = getStyleSource(factory);
+  if (source) Object.defineProperty(wrapped, sourceKey, { value: source });
+  return wrapped;
+}
+export function getPreparedKey(factory: unknown): string | undefined {
+  return typeof factory === 'function'
+    ? (factory as { [preparedKey]?: string })[preparedKey]
+    : undefined;
 }
 export function getStyleSource(factory: unknown): StyleSource | undefined {
   return typeof factory === 'function'

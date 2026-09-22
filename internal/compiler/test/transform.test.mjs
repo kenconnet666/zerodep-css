@@ -75,7 +75,9 @@ for (const [framework, transform] of [
       const { descriptor } = parse(result.code);
       compileScript(descriptor, { id: 'named', inlineTemplate: true });
     } else compile(result.code, { filename: resolve('src/Named.svelte'), generate: 'client' });
-    assert.equal(transform(source, resolve('src/Named.' + framework), { debug: false }), null);
+    const production = transform(source, resolve('src/Named.' + framework), { debug: false });
+    assert(production.code.includes('prepareStyle'));
+    assert(!production.code.includes('withStyleSource'));
   });
   test(`${framework}：项目外无 bx 的组件交回官方编译器`, () => {
     const source =

@@ -39,6 +39,67 @@ function literal(value: ts.Expression): boolean {
       literal(value.operand))
   );
 }
+const unknownValue = Symbol('unknown');
+function constant(value: ts.Expression): string | number | boolean | null | typeof unknownValue {
+  value = unwrap(value);
+  if (ts.isStringLiteralLike(value)) return value.text;
+  if (ts.isNumericLiteral(value)) return Number(value.text);
+  if (value.kind === ts.SyntaxKind.TrueKeyword) return true;
+  if (value.kind === ts.SyntaxKind.FalseKeyword) return false;
+  if (value.kind === ts.SyntaxKind.NullKeyword) return null;
+  if (ts.isPrefixUnaryExpression(value)) {
+    const operand = constant(value.operand);
+    if (operand === unknownValue) return unknownValue;
+    if (value.operator === ts.SyntaxKind.ExclamationToken) return !operand;
+    if (typeof operand === 'number') {
+      if (value.operator === ts.SyntaxKind.MinusToken) return -operand;
+      if (value.operator === ts.SyntaxKind.PlusToken) return operand;
+    }
+  }
+  return unknownValue;
+}
+const structures: Readonly<Record<string, number>> = {
+  hover: 0,
+  focusVisible: 0,
+  before: 0,
+  after: 0,
+  startingStyle: 0,
+  important: 0,
+  selector: 1,
+  pseudo: 1,
+  media: 1,
+  supports: 1,
+  containerQuery: 1,
+  layer: 1,
+  scope: 1,
+  pseudoFunction: 2,
+};
+function metadata(value: ts.Expression, builder: string): boolean {
+  if (ts.isIdentifier(value)) return value.text === builder;
+  if (
+    !ts.isCallExpression(value) ||
+    !ts.isPropertyAccessExpression(value.expression) ||
+    value.arguments.length !== 1
+  )
+    return false;
+  const member = value.expression;
+  const argument = unwrap(value.arguments[0]!);
+  if (!metadata(member.expression, builder)) return false;
+  if (member.name.text === 'name') return ts.isStringLiteralLike(argument);
+  return (
+    member.name.text === 'config' &&
+    ts.isObjectLiteralExpression(argument) &&
+    argument.properties.every(
+      (property) =>
+        ts.isPropertyAssignment(property) &&
+        (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name)) &&
+        property.name.text === 'debug' &&
+        [ts.SyntaxKind.TrueKeyword, ts.SyntaxKind.FalseKeyword].includes(
+          unwrap(property.initializer).kind,
+        ),
+    )
+  );
+}
 function read(value: ts.Expression, callback: ts.ArrowFunction | ts.FunctionExpression): boolean {
   value = unwrap(value);
   if (literal(value)) return true;
@@ -72,37 +133,93 @@ function read(value: ts.Expression, callback: ts.ArrowFunction | ts.FunctionExpr
  */
 export function automaticDeclarations(
   callback: ts.ArrowFunction | ts.FunctionExpression,
-): AutomaticDeclaration[] {
-  const builder = callback.parameters[0]?.name;
-  if (!builder || !ts.isIdentifier(builder) || !ts.isBlock(callback.body)) return [];
+): AutomaticDeclaration[] | undefined {
   const declarations: AutomaticDeclaration[] = [];
-  for (const statement of callback.body.statements) {
-    if (ts.isEmptyStatement(statement)) continue;
-    if (!ts.isExpressionStatement(statement)) return [];
+  function statements(items: readonly ts.Statement[], builder: string): boolean {
+    for (const statement of items) if (!visit(statement, builder)) return false;
+    return true;
+  }
+  function body(fn: ts.ArrowFunction | ts.FunctionExpression): boolean {
+    const builder = fn.parameters[0]?.name;
+    return (
+      !!builder &&
+      ts.isIdentifier(builder) &&
+      ts.isBlock(fn.body) &&
+      statements(fn.body.statements, builder.text)
+    );
+  }
+  function visit(statement: ts.Statement, builder: string): boolean {
+    if (ts.isEmptyStatement(statement)) return true;
+    if (ts.isBlock(statement)) return statements(statement.statements, builder);
+    if (ts.isIfStatement(statement)) {
+      const condition = constant(statement.expression);
+      if (condition === unknownValue) return false;
+      const selected = condition ? statement.thenStatement : statement.elseStatement;
+      return !selected || visit(selected, builder);
+    }
+    if (ts.isSwitchStatement(statement)) {
+      const value = constant(statement.expression);
+      if (value === unknownValue) return false;
+      let selected = -1,
+        fallback = -1;
+      const clauses = statement.caseBlock.clauses;
+      for (let index = 0; index < clauses.length; index++) {
+        const clause = clauses[index]!;
+        if (ts.isDefaultClause(clause)) {
+          fallback = index;
+          continue;
+        }
+        const label = constant(clause.expression);
+        if (label === unknownValue) return false;
+        if (label === value && selected === -1) selected = index;
+      }
+      if (selected === -1) selected = fallback;
+      if (selected === -1) return true;
+      for (const clause of clauses.slice(selected))
+        for (const child of clause.statements) {
+          if (ts.isBreakStatement(child) && !child.label) return true;
+          if (!visit(child, builder)) return false;
+        }
+      return true;
+    }
+    if (!ts.isExpressionStatement(statement)) return false;
     const expression = unwrap(statement.expression);
+    if (ts.isCallExpression(expression) && metadata(expression, builder)) return true;
     const member = ts.isCallExpression(expression) ? expression.expression : expression;
-    if (!ts.isPropertyAccessExpression(member) || !ts.isPropertyAccessExpression(member.expression))
-      return [];
+    if (!ts.isPropertyAccessExpression(member)) return false;
+    if (
+      ts.isIdentifier(member.expression) &&
+      member.expression.text === builder &&
+      ts.isCallExpression(expression)
+    ) {
+      const count = structures[member.name.text];
+      if (
+        count === undefined ||
+        expression.arguments.length !== count + 1 ||
+        !expression.arguments.slice(0, count).every((arg) => ts.isStringLiteralLike(unwrap(arg)))
+      )
+        return false;
+      const nested = expression.arguments[count]!;
+      return (ts.isArrowFunction(nested) || ts.isFunctionExpression(nested)) && body(nested);
+    }
+    if (!ts.isPropertyAccessExpression(member.expression)) return false;
     const property = member.expression;
-    if (!ts.isIdentifier(property.expression) || property.expression.text !== builder.text)
-      return [];
+    if (!ts.isIdentifier(property.expression) || property.expression.text !== builder) return false;
     const meta = propertyMetadata[property.name.text];
-    if (!meta || meta.resource) return [];
+    if (!meta || meta.resource) return false;
     if (!ts.isCallExpression(expression)) {
-      if (!Object.hasOwn(keywordGroups[meta.keywords]!, member.name.text)) return [];
-      continue;
+      return Object.hasOwn(keywordGroups[meta.keywords]!, member.name.text);
     }
     const args = expression.arguments;
     if (member.name.text === 'raw' || member.name.text === 'token') {
-      if (args.length !== 1 || !literal(args[0]!)) return [];
-      continue;
+      return args.length === 1 && literal(args[0]!);
     }
     let matched = false;
     for (const plan of helperGroups[meta.helpers]!) {
       for (const unit of unitFamilies[plan.family]!) {
         if ((unit === '%' ? 'pct' : unit) + plan.suffix !== member.name.text) continue;
         const alternatives = plan.arities[args.length];
-        if (!alternatives || !args.every((arg) => read(arg, callback))) return [];
+        if (!alternatives || !args.every((arg) => read(arg, callback))) return false;
         matched = true;
         if (args.some((arg) => !literal(arg)))
           declarations.push({
@@ -114,7 +231,7 @@ export function automaticDeclarations(
           });
       }
     }
-    if (!matched) return [];
+    return matched;
   }
-  return declarations;
+  return body(callback) ? declarations : undefined;
 }
