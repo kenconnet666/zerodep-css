@@ -11,7 +11,7 @@ import {
   lstat,
 } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { resolve, join, dirname } from 'node:path';
+import { resolve, join, dirname, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createServer } from 'node:http';
 import { chromium } from '@playwright/test';
@@ -32,6 +32,37 @@ async function save(path, value) {
 async function version(name) {
   return JSON.parse(await readFile(resolve(root, 'node_modules', name, 'package.json'), 'utf8'))
     .version;
+}
+async function verifyPackage(folder) {
+  const manifest = JSON.parse(await readFile(join(folder, 'package.json'), 'utf8'));
+  assert(
+    !JSON.stringify(manifest.exports).includes('zerodep-source'),
+    'Workspace-only export leaked into package.',
+  );
+  function targets(value) {
+    if (typeof value === 'string') return [value];
+    return value && typeof value === 'object' ? Object.values(value).flatMap(targets) : [];
+  }
+  for (const target of targets(manifest.exports)) {
+    const file = resolve(folder, target);
+    assert(file.startsWith(folder + sep), 'Package export leaves the package.');
+    assert((await lstat(file)).isFile(), 'Missing package export: ' + target);
+  }
+  for (const file of await readdir(join(folder, 'dist'), { recursive: true })) {
+    if (!file.endsWith('.map')) continue;
+    const map = JSON.parse(await readFile(join(folder, 'dist', file), 'utf8'));
+    assert(!file.endsWith('.d.ts.map'), 'Declaration map points to unpublished source.');
+    assert(
+      map.sources.every((source) => !/^(?:[a-z]:|\/)/i.test(source)),
+      'Machine-specific path in source map.',
+    );
+    assert.equal(
+      map.sourcesContent?.length,
+      map.sources.length,
+      'Source map must embed its sources.',
+    );
+    assert(map.sourcesContent.every((source) => typeof source === 'string'));
+  }
 }
 try {
   const packs = join(workspace, 'packs');
@@ -87,6 +118,7 @@ try {
         !files.includes('test') && !files.includes('src'),
         'Non-product files leaked into tarball.',
       );
+      await verifyPackage(installed);
     }
     // 使用独立消费者的 TypeScript 与 NodeNext 条件，而不是仓库的 zerodep-source 条件。
     await save(

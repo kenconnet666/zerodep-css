@@ -29,5 +29,15 @@
   },
   "dependencies": {
     "css-tree": "catalog:"
-  }
+  },
+  "description": "强类型 CSS 运行时、主题与 SSR 样式管理",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
+    "directory": "core"
+  },
+  "homepage": "https://github.com/kenconnet666/zerodep-css"
 }

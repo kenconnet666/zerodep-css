@@ -98,6 +98,8 @@ catalogs:
       specifier: 4.6.5
       version: 4.6.5
 
+pnpmfileChecksum: sha256-meSusDxoJmT/E/TLo/meU6chHiQ/xg6CUaQxYghMapk=
+
 importers:
 
   .:

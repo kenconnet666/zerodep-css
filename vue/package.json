@@ -36,5 +36,15 @@
   },
   "devDependencies": {
     "vue": "catalog:"
-  }
+  },
+  "description": "Vue 原生响应式 CSS 与自动编译接入",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
+    "directory": "vue"
+  },
+  "homepage": "https://github.com/kenconnet666/zerodep-css"
 }

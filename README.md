@@ -26,6 +26,8 @@ scripts/    数据生成、语言服务和浏览器/类型验收
 
 要求 Node 24、pnpm 10.34.5、PowerShell 7。版本统一在 pnpm-workspace.yaml 管理，三个包仍保持 private。
 
+打包使用仓库内 `pnpm pack`：`.pnpmfile.cjs` 在 tarball 清单中移除仅供本地 LSP 使用的 `zerodep-source` 条件。发布产物只导出存在的 dist 文件；core/Vue JS source map 内嵌源码，声明定位到已发布的 d.ts。独立消费者 CI 检查所有导出目标和地图，不依赖当前机器的源目录。
+
 ```powershell
 pnpm install --frozen-lockfile
 pnpm build

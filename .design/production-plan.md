@@ -43,6 +43,8 @@
 
 ## 执行记录
 
+- 2f5df25 的完整 CI（35759480345）已成功，主题作用域已通过独立安装和官方构建验证。打包审查修复了 core/Vue source map 缺源码与本地专用导出条件泄漏：JS 地图内嵌源码，声明直接定位发布的 d.ts；pnpm beforePacking 只在 tarball 清单中去掉 zerodep-source，本地 LSP 保持不变。已真实打包 core 验证导出目标，并将所有包的导出/地图检查加入消费者 CI；依赖版本未变，锁文件仅新增 hook 校验和。
+
 - f461ff2 的完整 CI（35757234608）已成功。Vue/Svelte provider 与主题运行时视图已接入原生 computed/rune；同时提供多个主题、部分覆盖、null 重置、父级与局部更新、请求隔离、Vue Teleport/Svelte DOM 移动及 SSR/hydration 已有真实组件覆盖。主题解析快照交给内部声明工厂，元素不重复解析主题叶值；仍通过 runtime 注册/验证规则。独立消费者复制清单与类型用例同步扩展，当前 const 类名保持调用时快照，动态主题写在模板/computed/$derived 中。
 
 - core 主题基础已实现：defineTheme 的冻结树与类型化 token、保持变量身份的 extend、undefined 继承/null 重置/递归覆盖，以及请求 runtime 的变量类。真实 Css 派生 getter、类型负例、输入拒绝、快照不可变和请求隔离通过针对性验证；框架 provider 尚未实现，不能将 core 基础视为完整主题树验收。

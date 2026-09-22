@@ -21,7 +21,7 @@ for (const name of ['core', 'vue', 'svelte']) {
 pnpm(['-r', 'run', 'build']);
 pnpm(['exec', 'tsc', '-p', 'internal/compiler/tsconfig.build.json']);
 
-// 两端共用宏的词法/单位分析，构建时内联到独立 compiler 子路径，不增加产品包。
+// 两端共用编译分析，构建时内联到独立 compiler 子路径，不增加产品包。
 for (const name of ['vue', 'svelte']) {
   const output = resolve(root, name, 'dist/compiler');
   await mkdir(output, { recursive: true });

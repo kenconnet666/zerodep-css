@@ -15,7 +15,7 @@
     "data:diff": "node scripts/generate-css.mjs --diff",
     "test:types": "node scripts/testing/run.mjs types",
     "test": "pnpm test:unit",
-    "format:check": "prettier --check core vue svelte internal scripts .github .design README.md AGENTS.md package.json pnpm-workspace.yaml tsconfig*.json",
+    "format:check": "prettier --check core vue svelte internal scripts .github .design .pnpmfile.cjs README.md AGENTS.md package.json pnpm-workspace.yaml tsconfig*.json",
     "lsp:setup": "pwsh -NoProfile -File scripts/language-services/setup.ps1",
     "lsp:verify": "node scripts/language-services/verify.mjs .",
     "lsp:inspect": "node scripts/language-services/inspect.mjs .",
