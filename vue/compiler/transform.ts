@@ -50,8 +50,15 @@ export function transformBx(
   if (!ctx.macros.size) return null;
   const metadata = compileScript(descriptor, { id: filename }).bindings ?? {};
   const computed = ctx.fresh('computed'),
-    unref = ctx.fresh('unref');
-  const extra = [`import { computed as ${computed}, unref as ${unref} } from 'vue';`];
+    unref = ctx.fresh('unref'),
+    instance = ctx.fresh('instance'),
+    propsView = ctx.fresh('props'),
+    memo = ctx.fresh('memo');
+  let needsProps = false;
+  let needsMemo = false;
+  const extra = [
+    `import { computed as ${computed}, unref as ${unref}, getCurrentInstance as ${instance} } from 'vue';`,
+  ];
   const classes = new Map<
     string,
     { style: string; uses: number; declaration: ts.VariableDeclaration }
@@ -68,23 +75,25 @@ export function transformBx(
     );
     const result = new MagicString(expression);
     walk(ast, (n) => {
-      if (
-        !ts.isIdentifier(n) ||
-        locals.has(n.text) ||
-        !['setup-ref', 'setup-maybe-ref', 'setup-let'].includes(metadata[n.text] ?? '') ||
-        !unshadowed(n, n.text, ast)
-      )
-        return;
+      if (!ts.isIdentifier(n) || locals.has(n.text) || !unshadowed(n, n.text, ast)) return;
       if (
         (ts.isPropertyAccessExpression(n.parent) && n.parent.name === n) ||
         (ts.isPropertyAssignment(n.parent) && n.parent.name === n) ||
         ts.isParameter(n.parent)
       )
         return;
+      const bindingType = metadata[n.text];
+      let replacement: string;
+      if (bindingType === 'props' || bindingType === 'props-aliased') {
+        needsProps = true;
+        replacement = `${propsView}[${JSON.stringify(metadata.__propsAliases?.[n.text] ?? n.text)}]`;
+      } else if (['setup-ref', 'setup-maybe-ref', 'setup-let'].includes(bindingType ?? '')) {
+        replacement = `${unref}(${n.text})`;
+      } else return;
       result.overwrite(
         n.getStart(ast) - prefix.length,
         n.end - prefix.length,
-        `${ts.isShorthandPropertyAssignment(n.parent) ? n.text + ': ' : ''}${unref}(${n.text})`,
+        `${ts.isShorthandPropertyAssignment(n.parent) ? n.text + ': ' : ''}${replacement}`,
       );
     });
     return result.toString();
@@ -92,19 +101,16 @@ export function transformBx(
   function calculation(expression: string, name: string, loop?: Loop): string {
     const locals = loop ? new Set([loop.value, loop.index]) : new Set<string>();
     const code = scriptExpression(expression, locals);
-    extra.push(
-      `const ${name} = ${computed}(() => (${loop ? `(${scriptExpression(loop.source)}).map((${loop.value},${loop.index}) => (${code}))` : code}));`,
-    );
-    return loop ? `${name}[${loop.index}]` : name;
+    if (loop) {
+      needsMemo = true;
+      extra.push(`const ${name} = ${memo}((${loop.value}, ${loop.index}) => (${code}));`);
+      return `${name}(${loop.value}, ${loop.index})`;
+    }
+    extra.push(`const ${name} = ${computed}(() => (${code}));`);
+    return name;
   }
   function style(bindings: ValueBinding[], fromTemplate: boolean, loop?: Loop): string {
     const name = ctx.fresh('style');
-    if (fromTemplate)
-      for (const b of bindings)
-        ctx.mapToOriginal(
-          scriptExpression(b.expression, new Set(loop ? [loop.value, loop.index] : [])),
-          b.offset,
-        );
     const expression = `({${bindings.map((b) => `${JSON.stringify(b.name)}: ${b.expression}`).join(',')}})`;
     if (fromTemplate) return calculation(expression, name, loop);
     extra.push(`const ${name} = ${computed}(() => (${expression}));`);
@@ -282,6 +288,11 @@ export function transformBx(
         );
     });
   }
+  // 提升后的模板表达式通过当前组件的 props 视图读取，不能遗留自由变量。
+  // 不改写 defineProps/解构语法，让官方编译器继续处理其原生响应式转换。
+  if (needsProps) extra.splice(1, 0, `const ${propsView} = ${instance}().props;`);
+  if (needsMemo)
+    extra.unshift(`import { useStyleMemo as ${memo} } from '@zerodep-css/vue/compiler-runtime';`);
   return ctx.finish(extra.join('\n'));
 }
 export function bxPlugin(options: CompilerOptions = {}): CompilerPlugin {

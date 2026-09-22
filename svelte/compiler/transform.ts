@@ -4,6 +4,7 @@ import type {
   TransformResult,
   TransformedExpression,
 } from '../../internal/compiler/types.js';
+import { bindingNames } from '../../internal/compiler/scope.js';
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -40,6 +41,19 @@ export function transformBx(
     TransformedExpression & { uses: number; declaration: ts.VariableDeclaration }
   >();
   const extra: string[] = [];
+  const addPattern = (pattern: unknown, names: Set<string>): void => {
+    if (!hasRange(pattern)) return;
+    const file = ts.createSourceFile(
+      'template-scope.ts',
+      `function scope(${source.slice(pattern.start, pattern.end)}) {}`,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const declaration = file.statements[0];
+    if (declaration && ts.isFunctionDeclaration(declaration))
+      for (const parameter of declaration.parameters) bindingNames(parameter.name, names);
+  };
   for (const statement of ctx.ast.statements)
     if (ts.isVariableStatement(statement))
       for (const d of statement.declarationList.declarations)
@@ -68,10 +82,23 @@ export function transformBx(
   function visit(node: unknown, restricted = false, locals = new Set<string>()): void {
     if (!node || typeof node !== 'object') return;
     if (Array.isArray(node)) {
-      for (const child of node) visit(child, restricted, locals);
+      const blockLocals = new Set(locals);
+      // {@const} 的名字属于整个模板块；与脚本导入同名时仍须保留原生词法身份。
+      for (const child of node)
+        if (
+          isRecord(child) &&
+          child.type === 'ConstTag' &&
+          isRecord(child.declaration) &&
+          Array.isArray(child.declaration.declarations)
+        )
+          for (const declaration of child.declaration.declarations)
+            if (isRecord(declaration)) addPattern(declaration.id, blockLocals);
+      for (const child of node) visit(child, restricted, blockLocals);
       return;
     }
     if (!isRecord(node)) return;
+    const outerLocals = locals;
+    const templateNode = node;
     let blocked =
       restricted ||
       ['SnippetBlock', 'AwaitBlock', 'SvelteBoundary', 'Component', 'SvelteComponent'].includes(
@@ -95,6 +122,10 @@ export function transformBx(
           context.name,
           ...(typeof node.index === 'string' ? [node.index] : []),
         ]);
+    }
+    if (node.type === 'SnippetBlock' && Array.isArray(node.parameters)) {
+      locals = new Set(locals);
+      for (const parameter of node.parameters) addPattern(parameter, locals);
     }
     const attributes = Array.isArray(node.attributes) ? node.attributes.filter(isRecord) : [];
     const attr = attributes.find((a) => a.type === 'Attribute' && a.name === 'class');
@@ -142,7 +173,13 @@ export function transformBx(
       if (!isRecord(value)) return;
       if (hasRange(value.expression) && value.expression !== expression) {
         const e = value.expression;
-        assertNoClassReferences(ctx, source.slice(e.start, e.end), e.start, classes, locals);
+        assertNoClassReferences(
+          ctx,
+          source.slice(e.start, e.end),
+          e.start,
+          classes,
+          templateNode.type === 'EachBlock' && value === templateNode ? outerLocals : locals,
+        );
         return;
       }
       for (const key of ['value', 'attributes']) if (value[key]) inspectExpressions(value[key]);
@@ -160,7 +197,12 @@ export function transformBx(
       'then',
       'catch',
     ])
-      if (node[key]) visit(node[key], blocked, locals);
+      if (node[key])
+        visit(
+          node[key],
+          node.type === 'EachBlock' && key === 'fallback' ? restricted : blocked,
+          node.type === 'EachBlock' && key === 'fallback' ? outerLocals : locals,
+        );
   }
   visit(ast.fragment);
   for (const [name, definition] of classes) {

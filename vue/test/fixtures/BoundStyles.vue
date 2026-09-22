@@ -10,9 +10,11 @@ const x = ref(2);
 const y = ref(3);
 const unrelated = ref(0);
 const visible = ref(true);
-const rows = ref([
+const rows = ref<{ id: string; width?: number }[]>([
   { id: 'a', width: 11 },
   { id: 'b', width: 22 },
+  // 隐藏行没有宽度，编译优化不得越过模板守卫求值。
+  { id: 'hidden' },
 ]);
 const shared = computed(() =>
   css((s) => {
@@ -39,7 +41,7 @@ const shared = computed(() =>
   <button data-color @click="color = color === 'red' ? 'blue' : 'red'">color</button>
   <button data-other @click="unrelated++">{{ unrelated }}</button>
   <button data-visible @click="visible = !visible">visible</button>
-  <button data-row @click="rows[0]!.width++">row</button>
+  <button data-row @click="if (rows[0]?.width !== undefined) rows[0].width++;">row</button>
   <button data-reorder @click="rows.reverse()">reorder</button>
   <div
     data-shared
@@ -57,16 +59,17 @@ const shared = computed(() =>
       })
     "
   ></div>
-  <div
-    v-for="row in rows"
-    :key="row.id"
-    :data-row-id="row.id"
-    :class="
-      css((s) => {
-        props.record('row');
-        s.height.px(5);
-        s.width.px(bindValue(row.width));
-      })
-    "
-  ></div>
+  <template v-for="row in rows" :key="row.id">
+    <div
+      v-if="row.width !== undefined"
+      :data-row-id="row.id"
+      :class="
+        css((s) => {
+          props.record('row');
+          s.height.px(5);
+          s.width.px(bindValue(row.width!));
+        })
+      "
+    ></div>
+  </template>
 </template>

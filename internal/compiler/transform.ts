@@ -11,7 +11,9 @@ type Framework = 'vue' | 'svelte';
 type MacroCall = ts.CallExpression & { expression: ts.Identifier };
 import ts from 'typescript';
 import MagicString from 'magic-string';
-import { encode } from '@jridgewell/sourcemap-codec';
+import { sourceMapper } from './source-map.js';
+import { bindingNames as names, unshadowed, capturedInside } from './scope.js';
+export { unshadowed } from './scope.js';
 import { createHash } from 'node:crypto';
 import { relative, resolve, isAbsolute } from 'node:path';
 import {
@@ -27,30 +29,6 @@ export function walk(node: ts.Node, visit: (node: ts.Node) => void): void {
   ts.forEachChild(node, (child) => {
     walk(child, visit);
   });
-}
-function names(node: ts.BindingName, target = new Set<string>()): Set<string> {
-  if (ts.isIdentifier(node)) target.add(node.text);
-  else if (ts.isObjectBindingPattern(node) || ts.isArrayBindingPattern(node))
-    for (const item of node.elements) if (ts.isBindingElement(item)) names(item.name, target);
-  return target;
-}
-function declarations(node: ts.Block): Set<string> {
-  const result = new Set<string>();
-  for (const statement of node.statements ?? []) {
-    if (ts.isVariableStatement(statement))
-      for (const d of statement.declarationList.declarations) names(d.name, result);
-    if ((ts.isFunctionDeclaration(statement) || ts.isClassDeclaration(statement)) && statement.name)
-      result.add(statement.name.text);
-  }
-  return result;
-}
-// 以词法声明辨认宏；同名参数/局部变量不会误当导入宏。
-export function unshadowed(node: ts.Node, name: string, boundary: ts.Node): boolean {
-  for (let p = node.parent; p && p !== boundary; p = p.parent) {
-    if (ts.isFunctionLike(p) && p.parameters.some((x) => names(x.name).has(name))) return false;
-    if (ts.isBlock(p) && declarations(p).has(name)) return false;
-  }
-  return true;
 }
 export function session(
   source: string,
@@ -124,11 +102,8 @@ export function session(
   const valueName = fresh('value');
   const tupleName = fresh('tuple');
   let hasBindings = false;
-  const anchors: { text: string; offset: number }[] = [];
-  const mapToOriginal = (text: string, offset: number): string => {
-    anchors.push({ text, offset });
-    return text;
-  };
+  const mapper = sourceMapper(source, filename);
+  const mapToOriginal = mapper.expression;
   const error: (offset: number, message: string) => never = (offset, message) => {
     const before = source.slice(0, offset),
       line = before.split('\n').length,
@@ -172,12 +147,9 @@ export function session(
       const callback = node.arguments[0];
       if (!callback || (!ts.isArrowFunction(callback) && !ts.isFunctionExpression(callback)))
         return;
+      const styleCallback = callback;
       const builder = callback.parameters[0]?.name;
       if (!builder || !ts.isIdentifier(builder)) return;
-      const local = new Set<string>();
-      walk(callback, (n) => {
-        if (ts.isVariableDeclaration(n) || ts.isParameter(n)) names(n.name, local);
-      });
       function validateRead(arg: ts.Expression): void {
         walk(arg, (n) => {
           if (
@@ -197,7 +169,7 @@ export function session(
             );
           if (
             ts.isIdentifier(n) &&
-            local.has(n.text) &&
+            capturedInside(n, styleCallback) &&
             !(ts.isPropertyAccessExpression(n.parent) && n.parent.name === n)
           )
             error(base + n.getStart(file), 'bx 不能捕获样式回调内部变量。');
@@ -219,7 +191,7 @@ export function session(
             .digest('hex')
             .slice(0, 16);
         const offset = base + call.getStart(file);
-        mapToOriginal(name, offset);
+        mapper.reference(name, offset);
         const expression = mapToOriginal(
           `${valueName}(${valueExpression ?? arg.getText(file)}, ${JSON.stringify(format)})`,
           offset,
@@ -404,32 +376,7 @@ export function session(
         `\nimport { bxValue as ${valueName}, bxTuple as ${tupleName} } from '@zerodep-css/core/binding';\n`,
       );
       output.appendLeft(scriptEnd, '\n' + extra + '\n');
-      const code = output.toString();
-      const mapOptions = { source: filename, includeContent: true, hires: true };
-      const decoded = output.generateDecodedMap(mapOptions);
-      // 新生成/提升的绑定代码映射回原 bx 表达式；未改动代码保留逐字符映射。
-      for (const { text, offset } of anchors) {
-        const original = source.slice(0, offset),
-          sourceLine = original.split('\n').length - 1,
-          sourceColumn = offset - original.lastIndexOf('\n') - 1;
-        for (
-          let index = code.indexOf(text);
-          index !== -1;
-          index = code.indexOf(text, index + text.length)
-        ) {
-          const before = code.slice(0, index),
-            line = before.split('\n').length - 1,
-            column = index - before.lastIndexOf('\n') - 1;
-          const entries = (decoded.mappings[line] ??= []);
-          const previous = entries.findIndex((e) => e[0] === column);
-          if (previous !== -1) entries.splice(previous, 1);
-          entries.push([column, 0, sourceLine, sourceColumn]);
-          entries.sort((a, b) => a[0] - b[0]);
-        }
-      }
-      const map = output.generateMap(mapOptions);
-      map.mappings = encode(decoded.mappings);
-      return { code, map };
+      return mapper.finish(output);
     },
   };
 }

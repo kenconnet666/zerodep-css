@@ -10,9 +10,10 @@
   let y = $state(3);
   let unrelated = $state(0);
   let visible = $state(true);
-  let rows = $state([
+  let rows = $state<{ id: string; width?: number }[]>([
     { id: 'a', width: 11 },
     { id: 'b', width: 22 },
+    { id: 'hidden' },
   ]);
   const shared = $derived(
     css((s) => {
@@ -36,7 +37,12 @@
 <button data-color onclick={() => (color = color === 'red' ? 'blue' : 'red')}>color</button>
 <button data-other onclick={() => unrelated++}>{unrelated}</button>
 <button data-visible onclick={() => (visible = !visible)}>visible</button>
-<button data-row onclick={() => rows[0]!.width++}>row</button>
+<button
+  data-row
+  onclick={() => {
+    if (rows[0]?.width !== undefined) rows[0].width++;
+  }}>row</button
+>
 <button data-reorder onclick={() => rows.reverse()}>reorder</button>
 <div data-shared class={shared} style="height: 7px; border-top: 2px solid green"></div>
 {#if visible}<div data-shared-copy class={shared} style:height="9px"></div>{/if}
@@ -49,12 +55,14 @@
   })}
 ></div>
 {#each rows as row (row.id)}
-  <div
-    data-row-id={row.id}
-    class={css((s) => {
-      record('row');
-      s.height.px(5);
-      s.width.px(bindValue(row.width));
-    })}
-  ></div>
+  {#if row.width !== undefined}
+    <div
+      data-row-id={row.id}
+      class={css((s) => {
+        record('row');
+        s.height.px(5);
+        s.width.px(bindValue(row.width!));
+      })}
+    ></div>
+  {/if}
 {/each}

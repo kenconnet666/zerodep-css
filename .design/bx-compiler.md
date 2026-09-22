@@ -73,7 +73,7 @@ const panel = $derived(
 - Vue script setup、Svelte 实例脚本中的原生 HTML 元素；内联 css、同组件的 const/computed/$derived class，及多个直接使用点。
 - token/raw 标量、单位方法、多参数单位方法、普通参数和 bx 混用；运行时检查标量、有限数值、单位参数范围、token 与 CSS 值边界。
 - 同一变量在不同单位中使用；模板字符串中的独立 CSS 值及明确单位后缀，例如 `translate(${bx(x)}px, ${bx(y)}px)`。x/y 各自绑定，不绑定整段 transform，不产生 `var(--x)px`。
-- 元素条件挂载、单层 keyed 数组循环的简单局部变量、重排、实例隔离和卸载。Vue 循环用数组 map 派生 class/style，单个绑定更新不重跑样式回调；不承诺每次只计算一项 style。
+- 元素条件挂载、单层 keyed 数组循环的简单局部变量、重排、实例隔离和卸载。Vue 循环在原模板使用点按实际行和索引缓存派生值，隐藏行不提前计算，单个绑定更新不重跑样式回调。
 - Vue 的显式 style 字符串/对象/数组，Svelte 的显式 style 属性和 style 指令。生成变量使用保留前缀 `--zbx-`；业务不要写入该前缀，生成绑定拥有其优先级和生命周期。
 - 完整字符串 SSR 初值、请求隔离、hydration 复用、生产构建、独立 tarball 消费及官方 Vite HMR。
 

@@ -62,6 +62,10 @@ try {
           : [svelteBx({ root: folder }), svelte({ configFile: false })],
       resolve: {
         alias: [
+          {
+            find: '@zerodep-css/vue/compiler-runtime',
+            replacement: resolve(root, 'vue/dist/compiler-runtime.js'),
+          },
           { find: '@zerodep-css/core/binding', replacement: resolve(root, 'core/dist/binding.js') },
           ...['core', 'vue', 'svelte'].map((name) => ({
             find: '@zerodep-css/' + name,
