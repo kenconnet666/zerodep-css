@@ -118,6 +118,18 @@ try {
       );
       await verifyPackage(installed);
     }
+    await save(
+      join(folder, 'themes-smoke.mjs'),
+      `import assert from 'node:assert/strict';
+import {createRuntime} from '@zerodep-css/core';
+import {ThemeCss,lightTheme,darkTheme} from '@zerodep-css/${framework}/themes';
+const runtime=createRuntime({target:null});
+try { runtime.css(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;},ThemeCss);
+assert.notEqual(lightTheme.className(runtime),darkTheme.className(runtime));
+assert.equal(runtime.stats().classes,3); } finally { runtime.dispose(); }
+`,
+    );
+    run(process.execPath, ['themes-smoke.mjs'], { cwd: folder, env: environment });
     // 使用独立消费者的 TypeScript 与 NodeNext 条件，而不是仓库的 zerodep-source 条件。
     await save(
       join(folder, 'types.ts'),
@@ -126,6 +138,7 @@ import { useStyleRuntime, defineTheme, provideTheme } from '@zerodep-css/${frame
 // @ts-expect-error bx 已移除，动态值直接交给 cssPlugin
 import { bx } from '@zerodep-css/${framework}';
 import { Css } from '@zerodep-css/${framework}';
+import { ThemeCss, lightTheme, darkTheme } from '@zerodep-css/${framework}/themes';
 import { cssPlugin, transformCss } from '@zerodep-css/${framework}/compiler';
 import type { Plugin } from 'vite';
 const compilerPlugin: Plugin = cssPlugin(); void compilerPlugin;
@@ -148,6 +161,8 @@ const global: StylesheetFactory = g => g.containerQuery('(width > 10px)', g => g
 const result: string = useStyleRuntime(context).css(style);
 class AppCss extends Css { get color(){ return this.extendProperty(super.color,{brand:'#2463eb'}); } control(){this.padding.px(8);} }
 const extended: string = useStyleRuntime(context).css(s=>{s.control();s.color.brand;s.hover(h=>h.control());},AppCss);
+const preset: string = useStyleRuntime(context).css(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;},ThemeCss);
+darkTheme.extend({color:{primary:'#123456'}}); void lightTheme; void preset;
 context.mountGlobal('consumer',global); context.dispose(); void result; void extended; void defaultCss; void cssPlugin; void transformCss;
 `,
     );

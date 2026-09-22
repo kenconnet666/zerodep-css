@@ -8,6 +8,11 @@
     "THIRD_PARTY_NOTICES.md"
   ],
   "exports": {
+    "./themes": {
+      "zerodep-source": "./src/themes.ts",
+      "types": "./dist/themes.d.ts",
+      "default": "./dist/themes.js"
+    },
     ".": {
       "zerodep-source": "./src/index.ts",
       "types": "./dist/index.d.ts",
