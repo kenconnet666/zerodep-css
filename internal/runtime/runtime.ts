@@ -1,4 +1,6 @@
 import { createStyleNormalizer } from './normalize.js';
+import { DEV } from 'esm-env';
+import { createRecordWarning } from './diagnostics.js';
 import { reconstructClass } from './composition.js';
 import { globalCss, buildStyleDefinition } from './builder.js';
 import { browserSheet, renderStyleTag, type BrowserSheet, type StyleTarget } from './sheet.js';
@@ -56,6 +58,8 @@ export interface RuntimeOptions {
   readonly insertionPoint?: ChildNode;
   readonly hydrate?: StyleManifest;
   readonly maxRecords?: number;
+  /** 开发宿主的软提示起点，默认 10000 条记录并逐次翻倍；false 关闭，不限制注册。 */
+  readonly warnAt?: number | false;
   /** 收集本次样式诊断元数据，不参与 CSS 内容哈希。 */
   readonly debug?: boolean;
 }
@@ -247,6 +251,17 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   if (nonce !== undefined && typeof nonce !== 'string')
     throw new TypeError('nonce must be a string.');
   if (target) assertTargetAvailable(target, config.namespace);
+  const hydrate = options.hydrate;
+  const restored = hydrate ? manifestRecords(hydrate, config) : undefined;
+  if (restored && restored.length > maxRecords)
+    throw new Error('Hydration exceeds style record limit.');
+  // 默认只诊断开发浏览器，避免 SSR 每请求重复刷日志；debug 是显式的服务端诊断入口。
+  const warn = createRecordWarning(
+    config.namespace,
+    (!!target && DEV) || collectDebug === true,
+    options.warnAt,
+    restored?.length ?? (config.layers.length ? 1 : 0),
+  );
   const doc = target
     ? target.nodeType === 9
       ? (target as Document)
@@ -259,6 +274,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   let host: BrowserSheet | undefined;
   let disposed = false,
     busy = false,
+    ready = false,
     globalIndex = 0;
   const alive = () => {
     if (disposed) throw new Error('Style runtime has been disposed.');
@@ -298,6 +314,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   function commit(batch: readonly StyleRecord[], replacing?: string) {
     alive();
     if (busy) throw new Error('Reentrant stylesheet mutation.');
+    const previousSize = records.size;
     busy = true;
     const inserted: HTMLStyleElement[] = [];
     try {
@@ -350,6 +367,8 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     } finally {
       busy = false;
     }
+    // 仅在事务成功且增加记录后提示；不能让诊断影响 CSS 注册和回滚。
+    if (ready && records.size > previousSize) warn(records.size);
   }
   function ensure(compiled: CompiledStyle, replacing?: string) {
     if (
@@ -644,9 +663,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     },
   };
   try {
-    if (options.hydrate) {
-      const restored = manifestRecords(options.hydrate, config);
-      if (restored.length > maxRecords) throw new Error('Hydration exceeds style record limit.');
+    if (restored) {
       const claims = validateClaims(
         restored.map((record) => ({
           record,
@@ -666,6 +683,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       if (header) commit([header]);
     }
     if (target) registerTarget(target, config.namespace, runtime);
+    ready = true;
     return Object.freeze(runtime);
   } catch (error) {
     host?.dispose();

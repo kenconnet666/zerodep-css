@@ -24,6 +24,8 @@ if (kind === 'unit') {
 } else run(process.execPath, [resolve(root, 'scripts/testing', entries[kind])]);
 if (kind === 'browser:runtime')
   run(process.execPath, [resolve(root, 'internal/runtime/test/browser/host-ownership.mjs')]);
+if (kind === 'browser:runtime')
+  run(process.execPath, [resolve(root, 'internal/runtime/test/browser/diagnostics.mjs')]);
 if (kind === 'browser:frameworks')
   run(process.execPath, [resolve(root, 'scripts/testing/browser-bindings.mjs')]);
 if (kind === 'browser:frameworks')

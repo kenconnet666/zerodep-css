@@ -31,4 +31,23 @@ Vue 使用 `host.install(app)`，应用卸载会释放 host；同一 host 不属
 
 自动编译目前只分析同一 SFC 中能直接追踪的 `createStyles`/`useCss` 来源，包括直接链式调用；跨项目模块的调用保守保留运行时。安全动态值可成为元素变量绑定，CSS-wide、空值及无法证明等价的结构保持原声明或运行时路径。严格 CSP 禁止元素 style 属性时，可选插件使用 `cssPlugin({ bindings: 'runtime' })` 与请求 nonce；应用自己写的 style 属性仍由应用负责。脚本中的普通 `const` class 是快照，响应式重算由 Vue computed 或 Svelte `$derived`/模板承担。
 
-适配器完整运行时入口的体积与 core 中 `cssVar` 等小入口不同。完整引擎包含属性数据、解析、序列化、宿主注册和缓存。普通结果缓存最多 256 项、键不超过 65,536 字符；绑定字符串缓存最多 128 项且合计不超过 65,536 个 UTF-16 字符。缓存可驱逐，但已注册规则可能仍被 DOM 或已保存的 class 字符串使用，不能随缓存淘汰删除。`maxRecords` 可限制记录增长，超限会拒绝新增且不破坏旧记录。`name` 和 `config({ debug })` 提供按需来源诊断，不改变内容哈希；服务端与客户端恢复应使用同一构建产物。
+适配器完整运行时入口的体积与 core 中 `cssVar` 等小入口不同。完整引擎包含属性数据、解析、序列化、宿主注册和缓存。普通结果缓存最多 256 项、键不超过 65,536 字符；绑定字符串缓存最多 128 项且合计不超过 65,536 个 UTF-16 字符。缓存可驱逐，但已注册规则可能仍被 DOM 或已保存的 class 字符串使用，不能随缓存淘汰删除。`name` 和 `config({ debug })` 提供按需来源诊断，不改变内容哈希；服务端与客户端恢复应使用同一构建产物。
+
+## 宿主选项与增长诊断
+
+选项传给 `styles.createHost(options)`，类型为适配器的 `StyleHostOptions`；局部 `s.config` 仍只有 debug。
+
+| 选项                   | 作用                                                                                |
+| ---------------------- | ----------------------------------------------------------------------------------- |
+| target                 | Document 或 ShadowRoot；省略时选当前 document，Node 默认独立服务端；null 显式服务端 |
+| namespace              | 同一目标上的宿主名字，默认 z；同 namespace 不能有两个活跃宿主                       |
+| layers / layer         | 原生层顺序及默认层，默认无层、无 reset                                              |
+| nonce / insertionPoint | CSP style nonce 与样式块插入位置                                                    |
+| hydrate                | 同配置 SSR manifest；恢复完成后调用 completeHydration                               |
+| maxRecords             | 显式硬上限，默认无限；超限拒绝新增，不破坏原记录                                    |
+| warnAt                 | 软提示起点，默认 10000 条逻辑记录；正安全整数可调整，false 关闭，始终不限制注册     |
+| debug                  | 开启详细记录；true 也允许在服务端或未知环境显式开启增长提示                         |
+
+开发浏览器在成功新增且达到软提示阈值时警告，下次阈值翻倍；一次跨越多个阈值只发一条，记录数回落也不重新刷屏。它统计逻辑样式记录，包含 class、动画及全局槽位，不是浏览器的 CSSRule 数量。缓存命中、原槽位更新、失败注册及 manifest 恢复不触发增长提示；增长本身不等于泄漏，记录可能仍被保存的 class 使用。
+
+环境判定使用 esm-env 的 development/production 条件与 Node 环境回退，不要求启用 CSS 编译插件或注入 process。生产与未知环境默认静默，普通 SSR 不逐请求提示；需要服务端诊断时显式 debug:true，并可配置 warnAt。debug:false 不关闭开发浏览器的软提示，关闭使用 warnAt:false。默认增长诊断不自动开启源码信息，日志通道故障也不会让已成功的 CSS 注册变成失败。

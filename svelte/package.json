@@ -36,7 +36,8 @@
     "magic-string": "catalog:",
     "typescript": "catalog:",
     "@jridgewell/sourcemap-codec": "catalog:",
-    "css-tree": "catalog:"
+    "css-tree": "catalog:",
+    "esm-env": "catalog:"
   },
   "peerDependencies": {
     "svelte": "^5.57.0"

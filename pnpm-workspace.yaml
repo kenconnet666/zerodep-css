@@ -4,6 +4,7 @@ packages:
   - svelte
 
 catalog:
+  esm-env: 1.2.2
   yaml: 2.9.1
   magic-string: 0.30.21
   '@jridgewell/sourcemap-codec': 1.6.0

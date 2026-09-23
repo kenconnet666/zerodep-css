@@ -35,7 +35,8 @@
     "magic-string": "catalog:",
     "typescript": "catalog:",
     "@jridgewell/sourcemap-codec": "catalog:",
-    "css-tree": "catalog:"
+    "css-tree": "catalog:",
+    "esm-env": "catalog:"
   },
   "peerDependencies": {
     "vue": "^3.5.43"

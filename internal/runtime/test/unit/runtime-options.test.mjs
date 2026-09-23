@@ -17,6 +17,7 @@ test('运行时配置拒绝错误容器/序列类型，而不是静默切到服�
     { target: null, layers: new Set(['base']) },
     { target: null, namespace: null },
     { target: null, maxRecords: null },
+    ...[null, true, 0, -1, 1.5, Infinity, '2'].map((warnAt) => ({ target: null, warnAt })),
     { target: null, nonce: 1 },
   ])
     assert.throws(() => createRuntime(options));
@@ -42,7 +43,7 @@ test('调用者后续修改不改变已创建运行时的 nonce、层与诊断�
 });
 
 test('配置 getter 只在创建时读取一次', () => {
-  const reads = { namespace: 0, nonce: 0, debug: 0 };
+  const reads = { namespace: 0, nonce: 0, debug: 0, warnAt: 0 };
   const runtime = createRuntime({
     target: null,
     get namespace() {
@@ -57,6 +58,10 @@ test('配置 getter 只在创建时读取一次', () => {
       reads.debug++;
       return true;
     },
+    get warnAt() {
+      reads.warnAt++;
+      return false;
+    },
   });
   try {
     runtime.css((s) => {
@@ -64,7 +69,7 @@ test('配置 getter 只在创建时读取一次', () => {
     });
     runtime.renderStyles();
     runtime.renderStyles();
-    assert.deepEqual(reads, { namespace: 1, nonce: 1, debug: 1 });
+    assert.deepEqual(reads, { namespace: 1, nonce: 1, debug: 1, warnAt: 1 });
   } finally {
     runtime.dispose();
   }

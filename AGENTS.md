@@ -10,6 +10,7 @@
 - 作者模型采用 `class AppCss extends Css` 的真实类继承，在项目 `createStyles({ cssType: AppCss })` 后使用绑定的 `useCss()`；系统基类提供标准 CSS，派生 getter 可用 extendProperty 增加关键字，不能覆盖既有属性操作。defineTheme/provideTheme 已提供预设继承、局部覆盖和框架逻辑作用域。运行时 if/switch/函数复用优先，recipes/variants 不是既定目标。
 - 局部作者类型统一为 Css，ThemeCss 是可选的第二层。项目 createStyles({cssType?,theme?}) 绑定 useCss/useTheme/provideTheme/useGlobalCss；组件 const css=useCss()。旧 useStyleRuntime 和业务 context 入口不再公开。适配器根入口保留 createStyles/Css/defineTheme/cssVar/keyframes 五个运行值；keyframes 来自适配器内部引擎。host 每应用/请求创建：Vue app.use(host)，Svelte 根 host.provide，SSR 输出后 finally dispose。
 - s.name('xxx').config({debug}) 已实现根样式命名与开发来源诊断；config 当前只含 debug，不能把 runtime 的 target/nonce 等所有权选项放入局部配置。
+- host 的 warnAt 是软提示起点，默认开发浏览器 10000 条逻辑记录后翻倍去重，false 关闭；SSR/生产默认静默，host debug:true 可显式启用。maxRecords 仍是单独的显式硬上限，默认无限；不能让诊断失败影响注册，也不能为了缓存或诊断删除仍可能使用的记录。
 - CSS 属性对象不可调用。使用 s.display.flex、s.display.token(value)、s.width.raw('50%')、s.width.px(50)；token 是严格字面量，raw 保留类型/补全并允许任意字符串。s.xx(...) 用于 selector/media/hover 等结构方法，不用于属性直接赋值。
 - Git 提交说明使用中文；验证通过后提交，不把过渡中的失败状态当作完成版提交。
 - 代码保留适当的中文注释，重点解释公共 API 合同、所有权/生命周期、响应式与 SSR 边界、事务/缓存策略；不要逐行复述显而易见的语法。生成文件的注释由生成器维护。
