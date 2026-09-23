@@ -1,0 +1,797 @@
+{
+  "status": "passed",
+  "control": false,
+  "revision": "c98995cf2da9c786f534471c30145f3e5f848bde",
+  "node": "v24.12.0",
+  "samples": [
+    {
+      "round": 0,
+      "scenario": "first-use",
+      "kind": "baseline",
+      "milliseconds": 28.472600000000057
+    },
+    {
+      "round": 0,
+      "scenario": "first-use",
+      "kind": "ir",
+      "milliseconds": 23.18899999999985
+    },
+    {
+      "round": 0,
+      "scenario": "first-use",
+      "kind": "body",
+      "milliseconds": 17.958599999999933
+    },
+    {
+      "round": 0,
+      "scenario": "first-use",
+      "kind": "template",
+      "milliseconds": 1.635200000000168
+    },
+    {
+      "round": 0,
+      "scenario": "first-use",
+      "kind": "full",
+      "milliseconds": 0.6554000000000997
+    },
+    {
+      "round": 0,
+      "scenario": "requests",
+      "kind": "baseline",
+      "milliseconds": 422.4016999999999
+    },
+    {
+      "round": 0,
+      "scenario": "requests",
+      "kind": "ir",
+      "milliseconds": 360.62289999999985
+    },
+    {
+      "round": 0,
+      "scenario": "requests",
+      "kind": "body",
+      "milliseconds": 195.50960000000032
+    },
+    {
+      "round": 0,
+      "scenario": "requests",
+      "kind": "template",
+      "milliseconds": 25.134700000000066
+    },
+    {
+      "round": 0,
+      "scenario": "requests",
+      "kind": "full",
+      "milliseconds": 17.094900000000052
+    },
+    {
+      "round": 0,
+      "scenario": "warm",
+      "kind": "baseline",
+      "milliseconds": 21.783300000000054
+    },
+    {
+      "round": 0,
+      "scenario": "warm",
+      "kind": "ir",
+      "milliseconds": 22.361499999999978
+    },
+    {
+      "round": 0,
+      "scenario": "warm",
+      "kind": "body",
+      "milliseconds": 24.717599999999948
+    },
+    {
+      "round": 0,
+      "scenario": "warm",
+      "kind": "template",
+      "milliseconds": 24.376100000000406
+    },
+    {
+      "round": 0,
+      "scenario": "warm",
+      "kind": "full",
+      "milliseconds": 24.817000000000007
+    },
+    {
+      "round": 1,
+      "scenario": "first-use",
+      "kind": "full",
+      "milliseconds": 0.8247000000001208
+    },
+    {
+      "round": 1,
+      "scenario": "first-use",
+      "kind": "template",
+      "milliseconds": 1.3596999999999753
+    },
+    {
+      "round": 1,
+      "scenario": "first-use",
+      "kind": "body",
+      "milliseconds": 13.855500000000575
+    },
+    {
+      "round": 1,
+      "scenario": "first-use",
+      "kind": "ir",
+      "milliseconds": 23.08269999999993
+    },
+    {
+      "round": 1,
+      "scenario": "first-use",
+      "kind": "baseline",
+      "milliseconds": 22.843699999999444
+    },
+    {
+      "round": 1,
+      "scenario": "requests",
+      "kind": "full",
+      "milliseconds": 19.08849999999984
+    },
+    {
+      "round": 1,
+      "scenario": "requests",
+      "kind": "template",
+      "milliseconds": 19.80789999999979
+    },
+    {
+      "round": 1,
+      "scenario": "requests",
+      "kind": "body",
+      "milliseconds": 210.6819000000005
+    },
+    {
+      "round": 1,
+      "scenario": "requests",
+      "kind": "ir",
+      "milliseconds": 376.48039999999946
+    },
+    {
+      "round": 1,
+      "scenario": "requests",
+      "kind": "baseline",
+      "milliseconds": 463.66579999999976
+    },
+    {
+      "round": 1,
+      "scenario": "warm",
+      "kind": "full",
+      "milliseconds": 23.753900000000613
+    },
+    {
+      "round": 1,
+      "scenario": "warm",
+      "kind": "template",
+      "milliseconds": 22.852100000000064
+    },
+    {
+      "round": 1,
+      "scenario": "warm",
+      "kind": "body",
+      "milliseconds": 19.42240000000038
+    },
+    {
+      "round": 1,
+      "scenario": "warm",
+      "kind": "ir",
+      "milliseconds": 19.633299999999508
+    },
+    {
+      "round": 1,
+      "scenario": "warm",
+      "kind": "baseline",
+      "milliseconds": 20.922999999999774
+    },
+    {
+      "round": 2,
+      "scenario": "first-use",
+      "kind": "baseline",
+      "milliseconds": 26.190099999999802
+    },
+    {
+      "round": 2,
+      "scenario": "first-use",
+      "kind": "ir",
+      "milliseconds": 21.00749999999971
+    },
+    {
+      "round": 2,
+      "scenario": "first-use",
+      "kind": "body",
+      "milliseconds": 13.318000000000211
+    },
+    {
+      "round": 2,
+      "scenario": "first-use",
+      "kind": "template",
+      "milliseconds": 1.7991000000001804
+    },
+    {
+      "round": 2,
+      "scenario": "first-use",
+      "kind": "full",
+      "milliseconds": 0.928899999999885
+    },
+    {
+      "round": 2,
+      "scenario": "requests",
+      "kind": "baseline",
+      "milliseconds": 420.03300000000036
+    },
+    {
+      "round": 2,
+      "scenario": "requests",
+      "kind": "ir",
+      "milliseconds": 372.3109999999997
+    },
+    {
+      "round": 2,
+      "scenario": "requests",
+      "kind": "body",
+      "milliseconds": 215.6320999999998
+    },
+    {
+      "round": 2,
+      "scenario": "requests",
+      "kind": "template",
+      "milliseconds": 19.673000000000684
+    },
+    {
+      "round": 2,
+      "scenario": "requests",
+      "kind": "full",
+      "milliseconds": 14.172499999999673
+    },
+    {
+      "round": 2,
+      "scenario": "warm",
+      "kind": "baseline",
+      "milliseconds": 27.628700000000208
+    },
+    {
+      "round": 2,
+      "scenario": "warm",
+      "kind": "ir",
+      "milliseconds": 24.213600000000042
+    },
+    {
+      "round": 2,
+      "scenario": "warm",
+      "kind": "body",
+      "milliseconds": 20.68040000000019
+    },
+    {
+      "round": 2,
+      "scenario": "warm",
+      "kind": "template",
+      "milliseconds": 22.24210000000039
+    },
+    {
+      "round": 2,
+      "scenario": "warm",
+      "kind": "full",
+      "milliseconds": 22.022299999999632
+    },
+    {
+      "round": 3,
+      "scenario": "first-use",
+      "kind": "full",
+      "milliseconds": 0.7862000000004628
+    },
+    {
+      "round": 3,
+      "scenario": "first-use",
+      "kind": "template",
+      "milliseconds": 0.881399999999303
+    },
+    {
+      "round": 3,
+      "scenario": "first-use",
+      "kind": "body",
+      "milliseconds": 12.909999999999854
+    },
+    {
+      "round": 3,
+      "scenario": "first-use",
+      "kind": "ir",
+      "milliseconds": 23.549199999999473
+    },
+    {
+      "round": 3,
+      "scenario": "first-use",
+      "kind": "baseline",
+      "milliseconds": 26.77099999999973
+    },
+    {
+      "round": 3,
+      "scenario": "requests",
+      "kind": "full",
+      "milliseconds": 13.45129999999972
+    },
+    {
+      "round": 3,
+      "scenario": "requests",
+      "kind": "template",
+      "milliseconds": 20.26429999999982
+    },
+    {
+      "round": 3,
+      "scenario": "requests",
+      "kind": "body",
+      "milliseconds": 208.2537000000002
+    },
+    {
+      "round": 3,
+      "scenario": "requests",
+      "kind": "ir",
+      "milliseconds": 411.28510000000006
+    },
+    {
+      "round": 3,
+      "scenario": "requests",
+      "kind": "baseline",
+      "milliseconds": 435.3017999999993
+    },
+    {
+      "round": 3,
+      "scenario": "warm",
+      "kind": "full",
+      "milliseconds": 21.96639999999934
+    },
+    {
+      "round": 3,
+      "scenario": "warm",
+      "kind": "template",
+      "milliseconds": 18.854699999999866
+    },
+    {
+      "round": 3,
+      "scenario": "warm",
+      "kind": "body",
+      "milliseconds": 17.675100000000384
+    },
+    {
+      "round": 3,
+      "scenario": "warm",
+      "kind": "ir",
+      "milliseconds": 45.6242000000002
+    },
+    {
+      "round": 3,
+      "scenario": "warm",
+      "kind": "baseline",
+      "milliseconds": 32.344599999998536
+    },
+    {
+      "round": 4,
+      "scenario": "first-use",
+      "kind": "baseline",
+      "milliseconds": 29.02089999999953
+    },
+    {
+      "round": 4,
+      "scenario": "first-use",
+      "kind": "ir",
+      "milliseconds": 30.852200000001176
+    },
+    {
+      "round": 4,
+      "scenario": "first-use",
+      "kind": "body",
+      "milliseconds": 18.129399999999805
+    },
+    {
+      "round": 4,
+      "scenario": "first-use",
+      "kind": "template",
+      "milliseconds": 1.3744999999998981
+    },
+    {
+      "round": 4,
+      "scenario": "first-use",
+      "kind": "full",
+      "milliseconds": 0.7851000000009662
+    },
+    {
+      "round": 4,
+      "scenario": "requests",
+      "kind": "baseline",
+      "milliseconds": 619.7978999999996
+    },
+    {
+      "round": 4,
+      "scenario": "requests",
+      "kind": "ir",
+      "milliseconds": 576.9817000000003
+    },
+    {
+      "round": 4,
+      "scenario": "requests",
+      "kind": "body",
+      "milliseconds": 347.9215000000004
+    },
+    {
+      "round": 4,
+      "scenario": "requests",
+      "kind": "template",
+      "milliseconds": 20.987299999998868
+    },
+    {
+      "round": 4,
+      "scenario": "requests",
+      "kind": "full",
+      "milliseconds": 19.721999999999753
+    },
+    {
+      "round": 4,
+      "scenario": "warm",
+      "kind": "baseline",
+      "milliseconds": 21.284299999999348
+    },
+    {
+      "round": 4,
+      "scenario": "warm",
+      "kind": "ir",
+      "milliseconds": 24.023199999999633
+    },
+    {
+      "round": 4,
+      "scenario": "warm",
+      "kind": "body",
+      "milliseconds": 20.17859999999928
+    },
+    {
+      "round": 4,
+      "scenario": "warm",
+      "kind": "template",
+      "milliseconds": 18.458699999999226
+    },
+    {
+      "round": 4,
+      "scenario": "warm",
+      "kind": "full",
+      "milliseconds": 22.366299999999683
+    },
+    {
+      "round": 5,
+      "scenario": "first-use",
+      "kind": "full",
+      "milliseconds": 1.1505999999990308
+    },
+    {
+      "round": 5,
+      "scenario": "first-use",
+      "kind": "template",
+      "milliseconds": 1.3387000000002445
+    },
+    {
+      "round": 5,
+      "scenario": "first-use",
+      "kind": "body",
+      "milliseconds": 15.341999999998734
+    },
+    {
+      "round": 5,
+      "scenario": "first-use",
+      "kind": "ir",
+      "milliseconds": 22.342599999999948
+    },
+    {
+      "round": 5,
+      "scenario": "first-use",
+      "kind": "baseline",
+      "milliseconds": 24.33260000000155
+    },
+    {
+      "round": 5,
+      "scenario": "requests",
+      "kind": "full",
+      "milliseconds": 15.5583000000006
+    },
+    {
+      "round": 5,
+      "scenario": "requests",
+      "kind": "template",
+      "milliseconds": 22.10699999999997
+    },
+    {
+      "round": 5,
+      "scenario": "requests",
+      "kind": "body",
+      "milliseconds": 197.26720000000023
+    },
+    {
+      "round": 5,
+      "scenario": "requests",
+      "kind": "ir",
+      "milliseconds": 371.90419999999904
+    },
+    {
+      "round": 5,
+      "scenario": "requests",
+      "kind": "baseline",
+      "milliseconds": 441.4255000000012
+    },
+    {
+      "round": 5,
+      "scenario": "warm",
+      "kind": "full",
+      "milliseconds": 24.17399999999907
+    },
+    {
+      "round": 5,
+      "scenario": "warm",
+      "kind": "template",
+      "milliseconds": 20.062599999999293
+    },
+    {
+      "round": 5,
+      "scenario": "warm",
+      "kind": "body",
+      "milliseconds": 20.591099999999642
+    },
+    {
+      "round": 5,
+      "scenario": "warm",
+      "kind": "ir",
+      "milliseconds": 23.157400000000052
+    },
+    {
+      "round": 5,
+      "scenario": "warm",
+      "kind": "baseline",
+      "milliseconds": 22.465400000000955
+    },
+    {
+      "round": 6,
+      "scenario": "first-use",
+      "kind": "baseline",
+      "milliseconds": 25.6179000000011
+    },
+    {
+      "round": 6,
+      "scenario": "first-use",
+      "kind": "ir",
+      "milliseconds": 19.504499999999098
+    },
+    {
+      "round": 6,
+      "scenario": "first-use",
+      "kind": "body",
+      "milliseconds": 12.614300000001094
+    },
+    {
+      "round": 6,
+      "scenario": "first-use",
+      "kind": "template",
+      "milliseconds": 1.5141999999996187
+    },
+    {
+      "round": 6,
+      "scenario": "first-use",
+      "kind": "full",
+      "milliseconds": 1.095999999999549
+    },
+    {
+      "round": 6,
+      "scenario": "requests",
+      "kind": "baseline",
+      "milliseconds": 407.6233999999986
+    },
+    {
+      "round": 6,
+      "scenario": "requests",
+      "kind": "ir",
+      "milliseconds": 384.8120999999992
+    },
+    {
+      "round": 6,
+      "scenario": "requests",
+      "kind": "body",
+      "milliseconds": 239.97370000000046
+    },
+    {
+      "round": 6,
+      "scenario": "requests",
+      "kind": "template",
+      "milliseconds": 22.265299999999115
+    },
+    {
+      "round": 6,
+      "scenario": "requests",
+      "kind": "full",
+      "milliseconds": 19.83259999999973
+    },
+    {
+      "round": 6,
+      "scenario": "warm",
+      "kind": "baseline",
+      "milliseconds": 22.61290000000008
+    },
+    {
+      "round": 6,
+      "scenario": "warm",
+      "kind": "ir",
+      "milliseconds": 25.109800000000178
+    },
+    {
+      "round": 6,
+      "scenario": "warm",
+      "kind": "body",
+      "milliseconds": 26.582500000000437
+    },
+    {
+      "round": 6,
+      "scenario": "warm",
+      "kind": "template",
+      "milliseconds": 30.506499999999505
+    },
+    {
+      "round": 6,
+      "scenario": "warm",
+      "kind": "full",
+      "milliseconds": 39.056399999999485
+    }
+  ],
+  "sizes": [
+    {
+      "kind": "baseline",
+      "sites": 64,
+      "minified": 14733,
+      "gzip": 2930
+    },
+    {
+      "kind": "ir",
+      "sites": 64,
+      "minified": 55491,
+      "gzip": 3835
+    },
+    {
+      "kind": "body",
+      "sites": 64,
+      "minified": 25475,
+      "gzip": 3480
+    },
+    {
+      "kind": "template",
+      "sites": 64,
+      "minified": 32515,
+      "gzip": 3831
+    },
+    {
+      "kind": "full",
+      "sites": 64,
+      "minified": 47275,
+      "gzip": 5451
+    }
+  ],
+  "counts": {
+    "baseline": {
+      "first": {
+        "value": 5,
+        "declaration": 5,
+        "selectorList": 1,
+        "stylesheet": 3
+      },
+      "warm": {}
+    },
+    "ir": {
+      "first": {
+        "value": 5,
+        "declaration": 5,
+        "selectorList": 1,
+        "stylesheet": 3
+      },
+      "warm": {}
+    },
+    "body": {
+      "first": {
+        "stylesheet": 2
+      },
+      "warm": {}
+    },
+    "template": {
+      "first": {},
+      "warm": {}
+    },
+    "full": {
+      "first": {},
+      "warm": {}
+    }
+  },
+  "checks": [
+    "namespace/layers/runtime debug parity; full artifacts fall back on config mismatch",
+    "selected branches only; unsafe AST rejected; invalid CSS deferred via fallback; derived Css fallback",
+    "manifest restore parity; disposed runtime and record limits",
+    "source diagnostics and explicit debug override; cache eviction; artifact version fallback"
+  ],
+  "results": [
+    {
+      "scenario": "first-use",
+      "kind": "baseline",
+      "median": 26.190099999999802
+    },
+    {
+      "scenario": "first-use",
+      "kind": "ir",
+      "median": 23.08269999999993
+    },
+    {
+      "scenario": "first-use",
+      "kind": "body",
+      "median": 13.855500000000575
+    },
+    {
+      "scenario": "first-use",
+      "kind": "template",
+      "median": 1.3744999999998981
+    },
+    {
+      "scenario": "first-use",
+      "kind": "full",
+      "median": 0.8247000000001208
+    },
+    {
+      "scenario": "requests",
+      "kind": "baseline",
+      "median": 435.3017999999993
+    },
+    {
+      "scenario": "requests",
+      "kind": "ir",
+      "median": 376.48039999999946
+    },
+    {
+      "scenario": "requests",
+      "kind": "body",
+      "median": 210.6819000000005
+    },
+    {
+      "scenario": "requests",
+      "kind": "template",
+      "median": 20.987299999998868
+    },
+    {
+      "scenario": "requests",
+      "kind": "full",
+      "median": 17.094900000000052
+    },
+    {
+      "scenario": "warm",
+      "kind": "baseline",
+      "median": 22.465400000000955
+    },
+    {
+      "scenario": "warm",
+      "kind": "ir",
+      "median": 24.023199999999633
+    },
+    {
+      "scenario": "warm",
+      "kind": "body",
+      "median": 20.591099999999642
+    },
+    {
+      "scenario": "warm",
+      "kind": "template",
+      "median": 22.24210000000039
+    },
+    {
+      "scenario": "warm",
+      "kind": "full",
+      "median": 23.753900000000613
+    }
+  ],
+  "build": {
+    "sites": 64,
+    "samples": [
+      47.494300000000294,
+      43.39760000000024,
+      30.813099999999395,
+      29.280399999999645,
+      26.50510000000031
+    ]
+  }
+}
