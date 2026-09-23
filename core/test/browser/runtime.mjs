@@ -82,6 +82,65 @@ export async function runBrowserTests(browser, baseUrl, ssr, output, match) {
     );
     return initial;
   });
+  await scenario('raw 未知值与完整 token 流由浏览器决定有效性', async (page) => {
+    const result = await page.evaluate(() => {
+      const runtime = window.z.createRuntime({ namespace: 'raw-native' });
+      const cases = [
+        ['width', 'future(??? [a;b] {c:d})'],
+        ['width', ''],
+        ['--tokens', '!foo bar'],
+        ['--block', '{a:b;c:d}'],
+        ['--comment', 'a/**/b'],
+        ['--future', 'future(a;b !foo)'],
+      ];
+      const values = [];
+      for (const [property, value] of cases) {
+        const parent = document.createElement('section');
+        parent.style.width = '140px';
+        const native = document.createElement('div'),
+          actual = document.createElement('div');
+        native.style.cssText = property + ':' + value + ';';
+        actual.className = runtime.css((s) => s.property.raw(property, value));
+        parent.append(native, actual);
+        document.body.append(parent);
+        values.push({
+          property,
+          native: getComputedStyle(native).getPropertyValue(property),
+          actual: getComputedStyle(actual).getPropertyValue(property),
+        });
+      }
+      return values;
+    });
+    for (const value of result) assert.equal(value.actual, value.native, value.property);
+    return result;
+  });
+  await scenario('raw 换行与 Unicode 在 SSR HTML 解析后可恢复', async (page) => {
+    const result = await page.evaluate(() => {
+      const factory = (s) => {
+        s.custom.raw('--space', 'a\r\nb');
+        s.custom.raw('--nul', 'a\0b');
+        s.content.raw('"\uD800😊"');
+      };
+      const server = window.z.createRuntime({ target: null, namespace: 'raw-text' });
+      const name = server.css(factory),
+        manifest = server.snapshot();
+      const container = document.createElement('div');
+      container.innerHTML = server.renderStyles();
+      document.head.append(...container.childNodes);
+      const client = window.z.createRuntime({ namespace: 'raw-text', hydrate: manifest });
+      try {
+        return {
+          same: name === client.css(factory),
+          count: document.querySelectorAll('style[data-zerodep="raw-text"]').length,
+        };
+      } finally {
+        client.dispose();
+        server.dispose();
+      }
+    });
+    assert.deepEqual(result, { same: true, count: 1 });
+    return result;
+  });
   await scenario('原生嵌套、交错声明、属性字符串和伪元素', async (page) => {
     await page.evaluate(() => {
       const r = window.z.createRuntime({ namespace: 'nested' });

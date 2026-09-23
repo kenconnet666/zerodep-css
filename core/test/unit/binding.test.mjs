@@ -28,7 +28,7 @@ test('格式快照不被调用者后续修改，token 与 raw 缓存不能绕过
   assert.equal(raw('calc(0px + 1px)'), 'calc(0px + 1px)');
   for (let index = 0; index < 2; index++) {
     assert.throws(() => raw('red;color:blue'));
-    assert.throws(() => raw(''));
+    assert.equal(raw(''), '');
     assert.throws(() => raw(1));
   }
 });

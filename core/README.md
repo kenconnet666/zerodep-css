@@ -29,6 +29,7 @@ const panelClass = css((s) => {
 - `token` 严格限制为该属性的已知字面量并提供补全；`raw` 保留属性值类型、数字约束和已知值补全，同时允许任意字符串通过类型检查。实际序列化仍校验 CSS 语法边界，字符串开放不代表浏览器一定支持该值。
 - 根层可调用的是 selector/media/hover 等结构或辅助入口；自定义/未知属性的写值入口也使用第二层方法：`s.custom.raw('--name', value)`、`s.property.raw('future-property', value)`。
 - 同一选择器/条件上下文内，同名属性（含规范明确的同义别名）后写替换前写，不考虑旧声明的 important。被删除的声明不再作为 fallback。不同属性的简写/长属性保留原生声明顺序与层叠关系，不猜解 raw 简写；其他上下文分别处理。
+- raw 只检查声明结构边界，完整但未知/无效的属性值交给浏览器处理；空字符串也不代表省略。值中的隐式 !important、未闭合结构、跨声明内容及非法属性名会报错，即使稍后被同属性覆盖。CSS 输入码点统一预处理，保证 SSR 文本恢复一致。
 - `container` 是 CSS 属性，容器查询使用 `containerQuery`。
 - 常用状态可写 `s.focus(...)`、`s.focusWithin(...)`、`s.active(...)`、`s.disabled(...)`，分别等价于对应的 `s.pseudo(':...', ...)`；disabled 采用原生 `:disabled`，不会把 aria-disabled 自动当作禁用状态。
 - `cssVar('--name', fallback)` 只引用已有 CSS 变量，不建立 JS 订阅；Vue/Svelte 编译插件在安全位置自动创建元素绑定。

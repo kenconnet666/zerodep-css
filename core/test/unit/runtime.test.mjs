@@ -204,7 +204,7 @@ test('SSR 转义结束标签且不破坏小于比较，nonce/JSON 安全编码',
   });
   const html = r.renderStyles();
   assert(!html.includes('</StYlE>'));
-  assert(html.includes('\\3c /StYlE'));
+  assert(html.includes('</\\53 tYlE'));
   assert(html.includes('width<400px'));
   assert(html.includes('nonce="&quot;&lt;&amp;"'));
   const encoded = r.renderManifest();

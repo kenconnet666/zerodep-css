@@ -1,6 +1,8 @@
 import { generate, ident, lexer, parse, walk, type CssNode, type StyleSheet } from 'css-tree';
 import { hashText } from './hash.js';
 import { validateStyleName, type StyleDebug, type StyleMetadata } from './style-metadata.js';
+import { parseStructure } from './css-syntax.js';
+import { assertValueStructure, normalizeCssText } from './css-value.js';
 import type {
   CssValue,
   Declaration,
@@ -78,15 +80,20 @@ function parsed(
   text: string,
   context: 'value' | 'selectorList' | 'declaration' | 'stylesheet' | 'atrule',
 ): CssNode {
-  const ast = parse(text, {
+  text = normalizeCssText(text);
+  const structural = context === 'declaration' || context === 'stylesheet' || context === 'atrule';
+  const ast = (structural ? parseStructure : parse)(text, {
     context,
     parseCustomProperty: true,
     onParseError(error) {
       throw error;
     },
   });
+  const values = new Set<CssNode>();
   walk(ast, (node) => {
-    if (node.type === 'Raw') throw new TypeError('Unsupported or invalid CSS syntax: ' + text);
+    if (node.type === 'Declaration') values.add(node.value);
+    if (node.type === 'Raw' && !values.has(node))
+      throw new TypeError('Unsupported or invalid CSS structure: ' + text);
   });
   return ast;
 }
@@ -128,7 +135,10 @@ function validateDescriptors(name: string, node: Extract<CssNode, { type: 'Atrul
     if (child.type !== 'Declaration')
       throw new TypeError('@' + name + ' only accepts descriptors.');
     if (child.important) throw new TypeError('Descriptors do not accept !important.');
-    declarations.set(ident.decode(child.property).toLowerCase(), child);
+    declarations.set(ident.decode(child.property).toLowerCase(), {
+      ...child,
+      value: parsed(generate(child.value), 'value') as Extract<CssNode, { type: 'Value' }>,
+    });
   });
   if (name === 'font-face' && (!declarations.has('font-family') || !declarations.has('src')))
     throw new TypeError('@font-face requires font-family and src.');
@@ -216,6 +226,7 @@ function literal(value: CssValue, animation: (definition: KeyframesDefinition) =
     value.kind === 'variable'
       ? `var(${value.name}${value.fallback === undefined ? '' : ',' + value.fallback})`
       : String(value.value);
+  if (value.kind === 'raw' || value.kind === 'variable') return text;
   return generate(parsed(text, 'value'));
 }
 function declaration(
@@ -223,6 +234,7 @@ function declaration(
   animation: (definition: KeyframesDefinition) => string,
 ): string {
   const value = literal(node.value, animation);
+  assertValueStructure(value, ident.decode(node.property).startsWith('--'));
   const ast = parsed(
     `${node.property}:${value}${node.important ? '!important' : ''}`,
     'declaration',
@@ -231,8 +243,6 @@ function declaration(
     throw new TypeError('Invalid CSS property name.');
   if (Boolean(ast.important) !== node.important)
     throw new TypeError('Use important() rather than adding !important to a value.');
-  if (!value && !node.property.startsWith('--'))
-    throw new TypeError('Empty CSS declaration value.');
   return generate(ast) + ';';
 }
 function styleBody(

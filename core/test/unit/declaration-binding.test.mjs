@@ -21,8 +21,10 @@ test('普通声明自动绑定并保留 CSS-wide、空值和显式变量语义',
     assert.equal(binding.value(value), value);
     assert.equal(binding.inline(value), undefined);
   }
-  for (const value of [-1, NaN, {}, true, 'red;color:blue', ''])
+  for (const value of [-1, NaN, {}, true, 'red;color:blue'])
     assert.throws(() => binding.value(value));
+  assert.equal(binding.value(''), '');
+  assert.equal(binding.inline(''), undefined);
 });
 
 test('绑定缓存不放宽 token 校验，原始配置修改不影响已创建的绑定', () => {

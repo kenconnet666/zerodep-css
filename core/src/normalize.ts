@@ -1,6 +1,7 @@
 import { ident, parse, generate } from 'css-tree';
 import { propertyAliases } from './generated/metadata.js';
 import type { StyleNode, StyleProgram } from './style-program.js';
+import { normalizeCssText } from './css-value.js';
 
 interface Context {
   boundaries: readonly string[];
@@ -36,7 +37,7 @@ export function createStyleNormalizer() {
     const key = kind + ':' + (atrule ?? '') + '\0' + text;
     const existing = syntax.get(key);
     if (existing !== undefined) return existing;
-    const value = generate(parse(text, { context: kind, atrule }));
+    const value = generate(parse(normalizeCssText(text), { context: kind, atrule }));
     if (key.length <= 4096) {
       if (syntax.size >= 256) syntax.delete(syntax.keys().next().value!);
       syntax.set(key, value);

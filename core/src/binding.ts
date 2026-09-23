@@ -3,6 +3,7 @@ import type { NumericCheck, NumericAlternatives } from './metadata-types.js';
 import { isCssVariable, validateCustomName } from './values.js';
 import { StringCache } from './string-cache.js';
 import { portableUnits } from './binding-policy.js';
+import { assertValueStructure, normalizeCssText } from './css-value.js';
 import type { CssNode } from 'css-tree';
 
 /** 保留单位多参数备选语法的整体约束，不能把位置约束分别取并集。 */
@@ -76,19 +77,24 @@ function checkValue(value: unknown, format: BindingFormat): asserts value is str
     throw new TypeError('Invalid CSS binding token.');
 }
 
-function checkSyntax(result: string) {
-  if (!result.trim()) throw new TypeError('CSS binding values must not be empty.');
-  const ast = parse(result, {
-    context: 'value',
-    parseCustomProperty: true,
-    onParseError(error) {
-      throw error;
-    },
-  });
-  walk(ast, (node) => {
-    if (node.type === 'Raw') throw new TypeError('Invalid bound CSS value.');
-  });
-  return ast;
+function checkSyntax(result: string, customProperty = false): CssNode | undefined {
+  assertValueStructure(result, customProperty);
+  try {
+    const ast = parse(result, {
+      context: 'value',
+      parseCustomProperty: true,
+      onParseError(error) {
+        throw error;
+      },
+    });
+    walk(ast, (node) => {
+      if (node.type === 'Raw') throw new Error('Unknown value syntax.');
+    });
+    return ast;
+  } catch {
+    // 语法表无法证明能变量化时走原声明，不把优化失败变成作者错误。
+    return undefined;
+  }
 }
 
 const cssWide = new Set(['initial', 'inherit', 'unset', 'revert', 'revert-layer']);
@@ -204,11 +210,15 @@ export function createDeclarationBinding(name: `--${string}`, format: Declaratio
     if (typeof value === 'number') return false;
     const cached = cache.get(value);
     if (cached !== undefined) return cached;
-    const ast = checkSyntax(value);
-    const first = ast.type === 'Value' && ast.children.size === 1 ? ast.children.first : undefined;
+    const ast = checkSyntax(value, options.property?.startsWith('--'));
+    if (!value.trim() || (!ast && options.property)) {
+      cache.set(value, true);
+      return true;
+    }
+    const first = ast?.type === 'Value' && ast.children.size === 1 ? ast.children.first : undefined;
     let result =
       first?.type === 'Identifier' && cssWide.has(ident.decode(first.name).toLowerCase());
-    if (!result && options.property) {
+    if (!result && options.property && ast) {
       // 非法属性值原本会在解析声明时被忽略；变成 var 后会改变 fallback 语义。
       // 未来语法或无法证明的 var/env 表达式保留直接声明，不以优化器拒绝 raw。
       try {
@@ -224,9 +234,11 @@ export function createDeclarationBinding(name: `--${string}`, format: Declaratio
   }
   return Object.freeze({
     value(value: unknown): unknown {
+      if (typeof value === 'string') value = normalizeCssText(value);
       return direct(value) ? value : variable;
     },
     inline(value: unknown): string | undefined {
+      if (typeof value === 'string') value = normalizeCssText(value);
       return direct(value) ? undefined : String(value);
     },
   });

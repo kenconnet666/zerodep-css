@@ -33,6 +33,8 @@ import type {
 import { isCssVariable, validateCustomName } from './values.js';
 import { Css, type CssConstructor } from './css.js';
 import { normalizeStyleProgram } from './normalize.js';
+import { assertValueStructure, normalizeCssText, validatePropertyName } from './css-value.js';
+import { ident } from 'css-tree';
 import {
   getStyleSource,
   setStyleConfig,
@@ -126,7 +128,7 @@ function valueNode(value: unknown, raw: boolean): CssValue {
     return Object.freeze({
       kind: 'variable',
       name: value.name,
-      ...(value.fallback !== undefined ? { fallback: value.fallback } : {}),
+      ...(value.fallback !== undefined ? { fallback: normalizeCssText(value.fallback) } : {}),
     });
   if (typeof value !== 'string' && typeof value !== 'number')
     throw new TypeError('Expected a CSS string, number or explicit cssVar reference.');
@@ -156,6 +158,18 @@ function declarations(
   const append = (property: string, value: unknown, raw = false) => {
     alive(session);
     if (value === undefined || value === null) return;
+    // 即使后续同属性写入覆盖它，也不能吞掉原调用中的结构错误。
+    if (raw && typeof value === 'string') {
+      const normalized = normalizeCssText(value);
+      assertValueStructure(normalized, ident.decode(property).startsWith('--'));
+      value = normalized;
+    }
+    if (isCssVariable(value)) {
+      validateCustomName(value.name);
+      assertValueStructure(
+        `var(${value.name}${value.fallback === undefined ? '' : ',' + value.fallback})`,
+      );
+    }
     target.push(
       Object.freeze({ kind: 'declaration', property, value: valueNode(value, raw), important }),
     );
@@ -178,7 +192,7 @@ function declarations(
                 raw(name: string, value: unknown) {
                   if (key === 'custom') validateCustomName(name);
                   else text(name, 'Raw property name');
-                  append(name, value, true);
+                  append(validatePropertyName(name), value, true);
                 },
               }),
             );

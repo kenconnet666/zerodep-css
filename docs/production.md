@@ -24,6 +24,18 @@
 - P1a 本地通过 check/build、generate:check、现有单元回归、TS/Vue/Svelte 独立类型负例、19 个 core 浏览器场景、双框架 SSR/hydration/原生更新/HMR；normalize 的原生 LSP 完整零错误。最终跨平台/三引擎以对应提交 CI 为准。
 - 本页仅记录实际进度，尚未宣称新架构完成或最终 CI 通过。
 
+### P1b raw 结构边界
+
+raw 的结构验证与属性值有效性分离：先用 tokenizer 校验完整括号、字符串、URL、注释及声明分隔边界，再保留值 token 流，不依赖属性语法表接受未知函数/值。CSS 空字符串同样交给浏览器决定有效性；null/undefined 的省略是另一个合同。
+
+CSSTree 默认声明解析还会将 !foo 等旧 hack 当成优先级，因此使用其公开 fork 扩展声明的值读取，仅拆出标准 important，其他结构复用原解析器。已知数值/关键字不重复做 raw 扫描。raw/token 的自动变量化仍需额外证明，未知语法走原声明，不因优化失败而报作者错误。
+
+即使声明随后被覆盖，非法 raw 值和非法属性名也立即报错，避免错误被整理阶段吞掉。CSS 输入预处理统一 CR/CRLF/FF、NUL 和孤立代理码点，使记录、hash、HTML 样式与 hydration 使用相同文本；正常 Unicode 保留。
+
+新增用例覆盖未知函数、空值文本、自定义 token/块、!foo、转义、注释、未闭合 URL/字符串、被覆盖的坏输入、浏览器原生差分及 SSR 字符恢复。独立解析器入口经函数封装保持 tree shaking，cssVar/readTheme 小入口不应因结构解析器而膨胀。
+
+SSR 结束标签改为转义标签名首字母，保留自定义 token 流中的 `<` delimiter 类型，大小写和字符串内容不变。P1b 本地通过 check/build、类型负例、核心浏览器与双框架 SSR/hydration/HMR；体积检查仍保留小入口 tree shaking。
+
 ### P1 覆盖边界调整
 
 交叉复核发现：把所有后写长属性收齐后删除早期简写，会让 important 简写在“补齐第四边”时突然消失，从而改变另外三边；任意 raw/var 简写也不能可靠拆开。因此采用明确、可维护的边界：**标准化同名属性（含规范明确的 legacyAliasOf）直接后写替换，不考虑前 important；不同属性的简写/长属性及 all 保留原始声明顺序，交给浏览器处理原生层叠。**

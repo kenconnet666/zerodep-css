@@ -17,8 +17,11 @@ export interface BrowserSheet {
   dispose(): void;
 }
 export function htmlCss(css: string): string {
-  // 仅处理 HTML raw-text 的结束标签序列，不改变媒体查询中的 < 运算符。
-  return css.replace(/<\/style/gi, (token) => '\\3c ' + token.slice(1));
+  // 转义标签名中的字母，既阻止 HTML 结束标签，又保留 < 的 CSS delimiter 类型。
+  return css.replace(
+    /<\/style/gi,
+    (token) => '</\\' + token.charCodeAt(2).toString(16) + ' ' + token.slice(3),
+  );
 }
 export function attribute(value: string): string {
   return value
