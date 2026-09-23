@@ -9,6 +9,34 @@ import {
   descriptorMetadata,
 } from '../../dist/generated/metadata.js';
 
+test('按需 helper 保留嵌套所有权、引用身份与同步生命周期', () => {
+  let rootHover, nestedHover, raw;
+  const program = buildStyleProgram((s) => {
+    s.width.px(8);
+    rootHover = (fn) => s.hover(fn);
+    rootHover((h) => {
+      nestedHover = (fn) => h.hover(fn);
+      assert.throws(() => h.name('nested'), /root local/);
+      h.custom.raw('--space', '4px');
+      h.important((i) => i.width.px(4));
+    });
+    // 嵌套已结束后才首次读取元数据，仍属于根构建器。
+    s.name('lazy').config({ debug: true });
+    raw = s.property.raw;
+    assert.equal(raw, s.property.raw);
+    raw('accent-color', 'red');
+  });
+  assert.equal(program[1].children[0].property, '--space');
+  assert.equal(program[1].children[1].important, true);
+  assert.equal(program[2].property, 'accent-color');
+  for (const call of [
+    () => rootHover(() => {}),
+    () => nestedHover(() => {}),
+    () => raw('color', 'blue'),
+  ])
+    assert.throws(call, /synchronous/);
+});
+
 test('保留 fallback、简写和长属性的书写顺序', () => {
   const p = buildStyleProgram((s) => {
     s.height.vh(100);

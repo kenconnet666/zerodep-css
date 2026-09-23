@@ -13,6 +13,29 @@ function fixture(framework, expression) {
     ? `<script setup lang="ts">${script}</script><template><div :class="${expression}"/></template>`
     : `<script lang="ts">${script}</script><div class={${expression}}/>`;
 }
+test('Vue 静态准备保留模板来源锚点，结束标签留在模板作用域', () => {
+  const source = fixture('vue', 'style(s=>{s.width.px(8);})');
+  const result = vue(source, resolve('StaticMap.vue'));
+  const map = new TraceMap(JSON.parse(result.map.toString()));
+  const offset = result.code.indexOf(
+    '__zcss_prepare_',
+    result.code.indexOf('const __zcss_static_'),
+  );
+  const before = result.code.slice(0, offset);
+  const point = originalPositionFor(map, {
+    line: before.split('\n').length,
+    column: offset - before.lastIndexOf('\n') - 1,
+  });
+  assert.equal(point.column, source.indexOf('s=>'));
+  for (const debug of [false, true]) {
+    const unsafe = fixture('vue', "style(s=>{s.content.raw('&lt;/script&gt;');})");
+    const transformed = vue(unsafe, resolve('EndTag.vue'), { debug });
+    assert(!transformed.code.includes('const __zcss_static_'));
+    const parsed = parse(transformed.code);
+    assert.deepEqual(parsed.errors, []);
+    compileScript(parsed.descriptor, { id: 'tag', inlineTemplate: true });
+  }
+});
 for (const [framework, transform] of [
   ['vue', vue],
   ['svelte', svelte],

@@ -263,3 +263,79 @@ test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async 
   }
   assert.deepEqual(records[0], records[1], '不同请求的动态值不进入规则或哈希');
 });
+
+test('Vue 静态准备按组件复用，保留模板守卫、诊断与请求所有权', async () => {
+  const source = `<script setup lang="ts">import {useStyleRuntime} from '@zerodep-css/vue';defineProps<{show:boolean}>();const {css}=useStyleRuntime();const rows=[1,2,3];</script><template><div v-if="show"><span v-for="row in rows" :key="row" :class="css(s=>{s.name('static');s.width.px(8);})"/></div><div v-if="false" :class="css(s=>{s.width.px(-1);})"/></template>`;
+  for (const debug of [false, true]) {
+    const transformed = vue(source, resolve('StaticReuse.vue'), { debug });
+    const compiled = compileScript(parse(transformed.code).descriptor, {
+      id: 'static-reuse',
+      inlineTemplate: true,
+      templateOptions: { ssr: true },
+    });
+    const js = await compileJs(compiled.content, { loader: 'ts', format: 'cjs', target: 'node24' });
+    const module = { exports: {} },
+      require = createRequire(import.meta.url);
+    let preparations = 0;
+    const calls = [];
+    new Function('require', 'module', 'exports', js.code)(
+      (id) => {
+        if (id === '@zerodep-css/vue')
+          return {
+            ...adapter,
+            useStyleRuntime() {
+              const runtime = adapter.useStyleRuntime();
+              return {
+                ...runtime,
+                css(factory) {
+                  calls.push(factory);
+                  return runtime.css(factory);
+                },
+              };
+            },
+          };
+        if (id === '@zerodep-css/core/compiler-runtime')
+          return {
+            ...compilerRuntime,
+            prepareStyle(...args) {
+              preparations++;
+              return compilerRuntime.prepareStyle(...args);
+            },
+          };
+        return require(id);
+      },
+      module,
+      module.exports,
+    );
+    const snapshots = [];
+    for (const show of [false, true, true]) {
+      const context = createStyleContext({ target: null });
+      try {
+        const app = createSSRApp(module.exports.default, { show });
+        adapter.installStyleContext(app, context);
+        await renderToString(app);
+        assert.equal(context.runtime.stats().records, show ? 1 : 0);
+        if (show) snapshots.push(context.runtime.snapshot());
+      } finally {
+        context.dispose();
+      }
+    }
+    assert.equal(preparations, 6, '每组件准备两个函数，不提前执行非法的隐藏样式');
+    assert.equal(calls.length, 6);
+    assert.equal(calls[0], calls[1]);
+    assert.equal(calls[1], calls[2]);
+    assert.notEqual(calls[2], calls[3], '不同组件/请求各自拥有准备函数');
+    assert.deepEqual(snapshots[0], snapshots[1]);
+    if (debug) assert(JSON.stringify(snapshots[0]).includes('StaticReuse.vue'));
+    const updated = vue(source.replace('px(8)', 'px(9)'), resolve('StaticReuse.vue'), { debug });
+    const keys = (text) => text.match(/[a-f0-9]{64}/g);
+    assert.notEqual(keys(transformed.code)[0], keys(updated.code)[0], 'HMR 内容变更更新准备身份');
+  }
+});
+
+test('Vue 静态准备保留未选分支，不重复改写已提升的回调', () => {
+  const source = fixture('vue', 'if(false){css(h=>{h.color.red;});}s.width.px(8);');
+  const result = vue(source, resolve('StaticDeadBranch.vue'), { debug: true });
+  assert(result.code.includes('if(false){css(h=>{h.color.red;});}'));
+  compileScript(parse(result.code).descriptor, { id: 'dead', inlineTemplate: true });
+});

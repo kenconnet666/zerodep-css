@@ -17,7 +17,10 @@ const report = [];
 // Vite 默认忽略 test-results；开发项目必须放到实际受监视的独占临时目录。
 const temporary = await mkdtemp(resolve(root, 'scripts/testing/.hmr-'));
 function component(framework, stage) {
-  const style = stage === 2 ? 's.width.px(7);' : `s.width.${stage === 1 ? 'rem' : 'px'}(width);`;
+  const style =
+    stage >= 2
+      ? `s.width.px(${stage === 2 ? 7 : 9});`
+      : `s.width.${stage === 1 ? 'rem' : 'px'}(width);`;
   if (framework === 'vue')
     return `<script setup>
 import {ref} from 'vue'; import {useStyleRuntime} from '@zerodep-css/vue';
@@ -116,9 +119,21 @@ try {
           await page.locator('[data-target]').evaluate((e) => getComputedStyle(e).height),
           '5px',
         );
+        const staticClass = await page.locator('[data-target]').getAttribute('class');
+        await writeFile(file, component(framework, 3));
+        await page.waitForFunction(
+          () => getComputedStyle(document.querySelector('[data-target]')).width === '9px',
+        );
+        assert.notEqual(await page.locator('[data-target]').getAttribute('class'), staticClass);
         assert.deepEqual(errors, []);
         await page.evaluate(() => window.stopFixture());
-        report.push({ framework, unitChange: true, updateAfterHmr: true, removedBinding: true });
+        report.push({
+          framework,
+          unitChange: true,
+          updateAfterHmr: true,
+          removedBinding: true,
+          staticChange: true,
+        });
       });
     } finally {
       await server.close();

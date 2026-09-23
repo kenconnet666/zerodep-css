@@ -107,6 +107,7 @@ export function session(
   const prepareName = fresh('prepare');
   const declarationName = fresh('declaration');
   const declarationBindings: string[] = [];
+  const preparedBindings: string[] = [];
   let hasBindings = false;
   let hasAutomatic = false;
   let hasPrepared = false;
@@ -138,7 +139,11 @@ export function session(
     const base = offset - prefix.length;
     const edits = new MagicString(text);
     const bindings: ValueBinding[] = [];
+    let reusedCallback: ts.Node | undefined;
     walk(file, (node) => {
+      // 已提升回调的未选静态分支可能含任意代码，不能再对其子树做重叠编辑。
+      if (reusedCallback && node.pos >= reusedCallback.pos && node.end <= reusedCallback.end)
+        return;
       if (
         !ts.isCallExpression(node) ||
         !ts.isIdentifier(node.expression) ||
@@ -148,6 +153,26 @@ export function session(
       )
         return;
       const callback = node.arguments[0];
+      const candidates =
+        callback &&
+        (ts.isArrowFunction(callback) || ts.isFunctionExpression(callback)) &&
+        allowAutomatic &&
+        automaticCss.has(node.expression.text) &&
+        node.arguments.length === 1 &&
+        ts.isVariableDeclaration(node.parent) &&
+        node.parent.initializer === node &&
+        !id.startsWith('../') &&
+        !isAbsolute(id)
+          ? automaticDeclarations(callback)
+          : undefined;
+      const automatic =
+        options.bindings === 'runtime' && candidates?.length ? undefined : candidates;
+      // 仅复用完全静态的 Vue 回调；动态单位继续交给现有 computed 路径。
+      // 这里只创建函数，css 的求值、宿主检查与规则注册仍留在模板使用点。
+      let factorySource = callback?.getText(file);
+      // 模板字符串可含 HTML 解码后的结束标签；不能把它直接插入 script setup。
+      const reuse =
+        framework === 'vue' && automatic?.length === 0 && !/<\/script/i.test(factorySource ?? '');
       if (callback && options.debug && !id.startsWith('../') && !isAbsolute(id)) {
         const offset = base + node.getStart(file);
         const before = source.slice(0, offset);
@@ -156,8 +181,11 @@ export function session(
           line: before.split('\n').length,
           column: offset - before.lastIndexOf('\n'),
         };
-        edits.appendLeft(callback.getStart(file) - prefix.length, `${sourceName}(`);
-        edits.appendLeft(callback.end - prefix.length, `, ${JSON.stringify(location)})`);
+        if (reuse) factorySource = `${sourceName}(${factorySource}, ${JSON.stringify(location)})`;
+        else {
+          edits.appendLeft(callback.getStart(file) - prefix.length, `${sourceName}(`);
+          edits.appendLeft(callback.end - prefix.length, `, ${JSON.stringify(location)})`);
+        }
         hasSources = true;
       }
       if (!callback || (!ts.isArrowFunction(callback) && !ts.isFunctionExpression(callback)))
@@ -165,28 +193,30 @@ export function session(
       const builder = callback.parameters[0]?.name;
       if (!builder || !ts.isIdentifier(builder)) return;
       // 目前自动提升限定为直接模板使用点；脚本快照和派生类保留运行时合同。
-      if (
-        allowAutomatic &&
-        automaticCss.has(node.expression.text) &&
-        node.arguments.length === 1 &&
-        ts.isVariableDeclaration(node.parent) &&
-        node.parent.initializer === node &&
-        !id.startsWith('../') &&
-        !isAbsolute(id)
-      ) {
-        const candidates = automaticDeclarations(callback);
-        const automatic =
-          options.bindings === 'runtime' && candidates?.length ? undefined : candidates;
-        if (automatic && automatic.every((declaration) => declaration.kind === 'unit')) {
+      if (automatic) {
+        if (automatic.every((declaration) => declaration.kind === 'unit')) {
           // 静态源码摘要随 HMR 内容改变，不把旧站点缓存当作新样式。
           const key = createHash('sha256')
             .update(id + ':' + (base + callback.getStart(file)) + ':' + callback.getText(file))
             .digest('hex');
-          edits.prependLeft(callback.getStart(file) - prefix.length, `${prepareName}(`);
-          edits.appendLeft(callback.end - prefix.length, `, ${JSON.stringify(key)})`);
+          if (reuse) {
+            const name = fresh('static');
+            reusedCallback = callback;
+            preparedBindings.push(
+              `const ${name} = ${mapToOriginal(`${prepareName}(${factorySource}, ${JSON.stringify(key)})`, base + callback.getStart(file))};`,
+            );
+            edits.overwrite(
+              callback.getStart(file) - prefix.length,
+              callback.end - prefix.length,
+              name,
+            );
+          } else {
+            edits.prependLeft(callback.getStart(file) - prefix.length, `${prepareName}(`);
+            edits.appendLeft(callback.end - prefix.length, `, ${JSON.stringify(key)})`);
+          }
           hasPrepared = true;
         }
-        for (const declaration of automatic ?? []) {
+        for (const declaration of automatic) {
           const offset = base + declaration.call.getStart(file);
           const name =
             '--zcss-' +
@@ -285,6 +315,7 @@ export function session(
           `\nimport { createDeclarationBinding as ${declarationName} } from '@zerodep-css/core/compiler-runtime';\n`,
         );
       output.appendLeft(scriptEnd, '\n' + declarationBindings.join('\n') + '\n');
+      output.appendLeft(scriptEnd, '\n' + preparedBindings.join('\n') + '\n');
       output.appendLeft(scriptEnd, '\n' + extra + '\n');
       return mapper.finish(output);
     },

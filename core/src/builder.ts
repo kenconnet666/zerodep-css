@@ -148,7 +148,7 @@ function declarations(
   target: StyleNode[] | Declaration[],
   session: Session,
   important: boolean,
-  extra: Record<string, unknown> = {},
+  extra: Record<string, unknown> | (() => Record<string, unknown>) = {},
   custom = true,
 ): unknown {
   const cache = new Map<string, unknown>();
@@ -159,31 +159,34 @@ function declarations(
       Object.freeze({ kind: 'declaration', property, value: valueNode(value, raw), important }),
     );
   };
-  const helpers: Record<string, unknown> = { ...extra };
-  if (custom) {
-    helpers.custom = Object.freeze({
-      raw(name: string, value: unknown) {
-        validateCustomName(name);
-        append(name, value, true);
-      },
-    });
-    helpers.property = Object.freeze({
-      raw(name: string, value: unknown) {
-        text(name, 'Raw property name');
-        append(name, value, true);
-      },
-    });
-  }
-  for (const name of Object.keys(helpers))
+  let helpers = typeof extra === 'function' ? undefined : extra;
+  for (const name of helpers ? Object.keys(helpers) : [])
     if (Object.hasOwn(table, name))
       throw new TypeError('Builder helper shadows a CSS property: ' + name);
   return new Proxy(Object.create(null) as object, {
     get(_target, key) {
       if (typeof key !== 'string' || key === 'then') return undefined;
       alive(session);
-      if (Object.hasOwn(helpers, key)) return helpers[key];
-      if (!Object.hasOwn(table, key))
+      if (!Object.hasOwn(table, key)) {
+        // 普通属性不分配结构/自定义属性 helper；每个构建器仍独立拥有其闭包。
+        if (custom && (key === 'custom' || key === 'property')) {
+          if (!cache.has(key))
+            cache.set(
+              key,
+              Object.freeze({
+                raw(name: string, value: unknown) {
+                  if (key === 'custom') validateCustomName(name);
+                  else text(name, 'Raw property name');
+                  append(name, value, true);
+                },
+              }),
+            );
+          return cache.get(key);
+        }
+        helpers ??= (extra as () => Record<string, unknown>)();
+        if (Object.hasOwn(helpers, key)) return helpers[key];
         throw new TypeError('Unknown CSS property in this context: ' + key);
+      }
       if (cache.has(key)) return cache.get(key);
       const meta = table[key]!;
       const keywords = keywordGroups[meta.keywords]!;
@@ -266,87 +269,104 @@ function declarations(
     },
   });
 }
+let styleHelpersValidated = false;
 function style(factory: Factory, session: Session, important = false): StyleProgram {
   const nodes: StyleNode[] = [];
   const isRoot = session.depth === 0;
-  const metadata = (): StyleMetadata => {
-    alive(session);
-    if (!isRoot || !session.metadata)
-      throw new Error('name/config are only available on the root local style.');
-    return session.metadata;
-  };
-  const nest = (selector: string, child: Factory) => {
-    alive(session);
-    text(selector, 'Selector');
-    if (!selector.includes('&')) throw new TypeError('Relative selectors must contain &.');
-    nodes.push(
-      Object.freeze({
-        kind: 'style-rule',
-        selector,
-        relative: true,
-        children: style(child, session, important),
-      }),
-    );
-  };
-  const group = (
-    name: '@media' | '@supports' | '@container' | '@layer' | '@scope' | '@starting-style',
-    prelude: string,
-    child: Factory,
-  ) => {
-    alive(session);
-    text(prelude, name, name === '@starting-style');
-    nodes.push(
-      Object.freeze({
-        kind: 'style-group',
-        name,
-        prelude,
-        children: style(child, session, important),
-      }),
-    );
-  };
-  const helpers = {
-    name(value: unknown) {
-      const target = metadata();
-      validateStyleName(value);
-      if (target.name !== undefined && target.name !== value)
-        throw new Error('A style cannot have conflicting names.');
-      target.name = value;
-    },
-    config(value: unknown) {
-      setStyleConfig(metadata(), value);
-    },
-    selector: nest,
-    pseudo(name: string, child: Factory) {
-      if (!simpleSet.has(name)) throw new TypeError('Unknown simple pseudo: ' + name);
-      nest('&' + name, child);
-    },
-    pseudoFunction(name: string, args: string, child: Factory) {
-      if (!functionalSet.has(name)) throw new TypeError('Unknown functional pseudo: ' + name);
-      text(args, 'Pseudo arguments');
-      nest('&' + name + '(' + args + ')', child);
-    },
-    hover: (child: Factory) => nest('&:hover', child),
-    focusVisible: (child: Factory) => nest('&:focus-visible', child),
-    focus: (child: Factory) => nest('&:focus', child),
-    focusWithin: (child: Factory) => nest('&:focus-within', child),
-    active: (child: Factory) => nest('&:active', child),
-    disabled: (child: Factory) => nest('&:disabled', child),
-    before: (child: Factory) => nest('&::before', child),
-    after: (child: Factory) => nest('&::after', child),
-    media: (query: string, child: Factory) => group('@media', query, child),
-    supports: (query: string, child: Factory) => group('@supports', query, child),
-    containerQuery: (query: string, child: Factory) => group('@container', query, child),
-    layer: (name: string, child: Factory) => group('@layer', name, child),
-    scope: (prelude: string, child: Factory) => group('@scope', prelude, child),
-    startingStyle: (child: Factory) => group('@starting-style', '', child),
-    important(child: Factory) {
+  const createHelpers = () => {
+    const metadata = (): StyleMetadata => {
       alive(session);
-      nodes.push(...style(child, session, true));
-    },
+      if (!isRoot || !session.metadata)
+        throw new Error('name/config are only available on the root local style.');
+      return session.metadata;
+    };
+    const nest = (selector: string, child: Factory) => {
+      alive(session);
+      text(selector, 'Selector');
+      if (!selector.includes('&')) throw new TypeError('Relative selectors must contain &.');
+      nodes.push(
+        Object.freeze({
+          kind: 'style-rule',
+          selector,
+          relative: true,
+          children: style(child, session, important),
+        }),
+      );
+    };
+    const group = (
+      name: '@media' | '@supports' | '@container' | '@layer' | '@scope' | '@starting-style',
+      prelude: string,
+      child: Factory,
+    ) => {
+      alive(session);
+      text(prelude, name, name === '@starting-style');
+      nodes.push(
+        Object.freeze({
+          kind: 'style-group',
+          name,
+          prelude,
+          children: style(child, session, important),
+        }),
+      );
+    };
+    const helpers = {
+      name(value: unknown) {
+        const target = metadata();
+        validateStyleName(value);
+        if (target.name !== undefined && target.name !== value)
+          throw new Error('A style cannot have conflicting names.');
+        target.name = value;
+      },
+      config(value: unknown) {
+        setStyleConfig(metadata(), value);
+      },
+      selector: nest,
+      pseudo(name: string, child: Factory) {
+        if (!simpleSet.has(name)) throw new TypeError('Unknown simple pseudo: ' + name);
+        nest('&' + name, child);
+      },
+      pseudoFunction(name: string, args: string, child: Factory) {
+        if (!functionalSet.has(name)) throw new TypeError('Unknown functional pseudo: ' + name);
+        text(args, 'Pseudo arguments');
+        nest('&' + name + '(' + args + ')', child);
+      },
+      hover: (child: Factory) => nest('&:hover', child),
+      focusVisible: (child: Factory) => nest('&:focus-visible', child),
+      focus: (child: Factory) => nest('&:focus', child),
+      focusWithin: (child: Factory) => nest('&:focus-within', child),
+      active: (child: Factory) => nest('&:active', child),
+      disabled: (child: Factory) => nest('&:disabled', child),
+      before: (child: Factory) => nest('&::before', child),
+      after: (child: Factory) => nest('&::after', child),
+      media: (query: string, child: Factory) => group('@media', query, child),
+      supports: (query: string, child: Factory) => group('@supports', query, child),
+      containerQuery: (query: string, child: Factory) => group('@container', query, child),
+      layer: (name: string, child: Factory) => group('@layer', name, child),
+      scope: (prelude: string, child: Factory) => group('@scope', prelude, child),
+      startingStyle: (child: Factory) => group('@starting-style', '', child),
+      important(child: Factory) {
+        alive(session);
+        nodes.push(...style(child, session, true));
+      },
+    };
+    // helper 名字与生成元数据固定；只验证一次，不保存任何构建器或业务状态。
+    if (!styleHelpersValidated) {
+      for (const name of [...Object.keys(helpers), 'custom', 'property'])
+        if (Object.hasOwn(propertyMetadata, name))
+          throw new TypeError('Builder helper shadows a CSS property: ' + name);
+      styleHelpersValidated = true;
+    }
+    return helpers;
   };
   session.depth++;
   try {
-    const properties = declarations(propertyMetadata, nodes, session, important, helpers) as object;
+    const properties = declarations(
+      propertyMetadata,
+      nodes,
+      session,
+      important,
+      createHelpers,
+    ) as object;
     const builder = new session.cssType({
       read: (key) => Reflect.get(properties, key),
       assertActive: () => alive(session),
