@@ -21,10 +21,43 @@ test('普通声明自动绑定并保留 CSS-wide、空值和显式变量语义',
     assert.equal(binding.value(value), value);
     assert.equal(binding.inline(value), undefined);
   }
-  for (const value of [-1, NaN, {}, true, 'red;color:blue'])
+  assert.equal(binding.value(-1), -1);
+  assert.equal(binding.inline(-1), undefined);
+  for (const value of [NaN, Infinity, {}, true, 'red;color:blue'])
     assert.throws(() => binding.value(value));
   assert.equal(binding.value(''), '');
   assert.equal(binding.inline(''), undefined);
+});
+
+test('raw 数字仅在元数据证明时变量化，未知或越界数保留直接声明', () => {
+  const zIndex = createDeclarationBinding('--z', {
+    property: 'z-index',
+    numbers: [{ integer: true }],
+  });
+  assert.equal(zIndex.value(2), 'var(--z)');
+  assert.equal(zIndex.inline(2), '2');
+  assert.equal(zIndex.value(1.5), 1.5);
+  assert.equal(zIndex.inline(1.5), undefined);
+  const weight = createDeclarationBinding('--weight', {
+    property: 'font-weight',
+    numbers: [{ min: 1, max: 1000 }],
+  });
+  assert.equal(weight.value(450.5), 'var(--weight)');
+  assert.equal(weight.value(1001), 1001);
+  assert.equal(weight.inline(1001), undefined);
+  const opacity = createDeclarationBinding('--opacity', { property: 'opacity', numbers: [{}] });
+  assert.equal(opacity.value(2), 'var(--opacity)');
+  assert.equal(opacity.inline(2), '2');
+  const color = createDeclarationBinding('--color-number', { property: 'color', numbers: [] });
+  assert.equal(color.value(1), 1);
+  assert.equal(color.inline(1), undefined);
+  for (const value of [NaN, Infinity, -Infinity])
+    assert.throws(() => zIndex.value(value), /numeric/);
+  const token = createDeclarationBinding('--token-number', {
+    property: 'display',
+    tokens: ['flex'],
+  });
+  assert.throws(() => token.value(1), /token/);
 });
 
 test('绑定缓存不放宽 token 校验，原始配置修改不影响已创建的绑定', () => {

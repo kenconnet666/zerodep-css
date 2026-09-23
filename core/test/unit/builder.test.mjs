@@ -118,7 +118,6 @@ test('生成单位方法区分维度、分隔符、范围和参数个数', () =>
     (s) => s.padding.px(1, 2, 3, 4, 5),
     (s) => s.padding.px(-1),
     (s) => s.animationDuration.ms(-1),
-    (s) => s.zIndex.raw(1.5),
     (s) => s.width.px(Infinity),
     (s) => s.width.px('2'),
   ])
@@ -320,7 +319,7 @@ test('属性是不可调用对象，不暴露函数成员', () => {
     ['10px', 0.5],
   );
 });
-test('token 严格校验字面量，raw 不限制字符串枚举并保留数值约束', () => {
+test('token 严格校验字面量，raw 允许开放字符串与有限数字', () => {
   const p = buildStyleProgram((s) => {
     s.display.token('flex');
     s.display.raw('future-display-value');
@@ -333,7 +332,23 @@ test('token 严格校验字面量，raw 不限制字符串枚举并保留数值�
   );
   assert.throws(() => buildStyleProgram((s) => s.width.token('50%')), /Unknown CSS token/);
   assert.throws(() => buildStyleProgram((s) => s.opacity.token(1)), /Unknown CSS token/);
-  assert.throws(() => buildStyleProgram((s) => s.color.raw(1)), /numeric/);
+  const rawNumbers = buildStyleProgram((s) => {
+    s.opacity.raw(2);
+    s.zIndex.raw(1.5);
+    s.fontWeight.raw(1001);
+    s.color.raw(1);
+  });
+  assert.deepEqual(
+    rawNumbers.map((node) => [node.property, node.value.value]),
+    [
+      ['opacity', 2],
+      ['z-index', 1.5],
+      ['font-weight', 1001],
+      ['color', 1],
+    ],
+  );
+  for (const value of [NaN, Infinity, -Infinity])
+    assert.throws(() => buildStyleProgram((s) => s.opacity.raw(value)), /finite/);
 });
 test('回调必须同步，捕获的 Builder 在回调外失效', () => {
   let captured;

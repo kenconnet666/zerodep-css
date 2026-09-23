@@ -222,8 +222,8 @@ function declarations(
           return;
         }
         if (typeof value === 'number') {
-          if (!numeric([value], meta.numbers) && !(value === 0 && meta.zero))
-            throw new TypeError('Invalid numeric value: ' + key);
+          // raw 只检查 JavaScript 数字边界；属性值是否有效由浏览器决定。
+          if (!Number.isFinite(value)) throw new TypeError('CSS numbers must be finite.');
         } else if (typeof value !== 'string') throw new TypeError('Invalid CSS value: ' + key);
         append(meta.cssName, value, true);
       };

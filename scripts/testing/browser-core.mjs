@@ -34,6 +34,15 @@ const bundled = await build({
   minify: true,
 });
 const js = bundled.outputFiles[0].contents;
+const bindings = await build({
+  entryPoints: [resolve(root, 'core/dist/compiler-runtime.js')],
+  bundle: true,
+  format: 'esm',
+  platform: 'browser',
+  target: 'es2023',
+  write: false,
+  minify: true,
+});
 const ssr = createRuntime({
   target: null,
   namespace: 'ssr',
@@ -60,6 +69,11 @@ const hostile = ssr.css((s) =>
 );
 const ssrHtml = `<!doctype html><html><head>${ssr.renderStyles()}</head><body><div id="ssr-box" class="${className}">SSR</div><div id="hostile" class="${hostile}"></div><script type="application/json" id="manifest">${ssr.renderManifest()}</script></body></html>`;
 const http = createServer((req, res) => {
+  if (req.url === '/bindings.js') {
+    res.setHeader('Content-Type', 'text/javascript');
+    res.end(bindings.outputFiles[0].contents);
+    return;
+  }
   if (req.url === '/core.js') {
     res.setHeader('Content-Type', 'text/javascript');
     res.end(js);

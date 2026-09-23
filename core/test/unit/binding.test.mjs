@@ -100,3 +100,22 @@ test('自动绑定不额外读取 raw 引用对象，token 对引用对象仍严
   const token = createDeclarationBinding('--token', { property: 'color', tokens: ['red'] });
   assert.throws(() => bindValue({}, '--token', token, cssVar('--color')), /expects a CSS string/);
 });
+
+test('越界 raw 数字经绑定后保留直接声明且不写元素变量', () => {
+  const bindings = Object.create(null);
+  const zIndex = createDeclarationBinding('--z', {
+    property: 'z-index',
+    numbers: [{ integer: true }],
+  });
+  const runtime = createRuntime({ target: null });
+  try {
+    runtime.css((s) => s.zIndex.raw(bindValue(bindings, '--z', zIndex, 1.5)));
+    assert.deepEqual(Object.keys(bindings), []);
+    assert.equal(runtime.snapshot().records[0].body, 'z-index:1.5;');
+    runtime.css((s) => s.zIndex.raw(bindValue(bindings, '--z', zIndex, 2)));
+    assert.equal(bindings['--z'], '2');
+    assert.equal(runtime.snapshot().records[1].body, 'z-index:var(--z);');
+  } finally {
+    runtime.dispose();
+  }
+});

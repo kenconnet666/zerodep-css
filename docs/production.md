@@ -96,7 +96,13 @@ createStyles 四个明确重载要求作者类、默认主题的泛型必须由�
 
 编译器只认同 SFC 的直接 createStyles 来源，支持对象方法、解构 hook 与直接链三种形态；未知配置和跨模块导入保守运行时。raw 引用对象交给原 Builder 校验，修复 Proxy 描述符被优化器额外读取而改变后续声明的问题。
 
-本地根 check/build、167 项完整单元、后续新增 Proxy 回归的定向单元、三语言负例、双框架 SSR/hydration/HMR/项目宿主、独立 tarball 与体积门禁通过。迁移文档与换机入口已重写。审计另发现 raw(number) 仍按属性范围提前拒绝，下一独立修复将改为有限数边界与浏览器判值，不混入显式单位方法的合同。
+本地根 check/build、167 项完整单元、后续新增 Proxy 回归的定向单元、三语言负例、双框架 SSR/hydration/HMR/项目宿主、独立 tarball 与体积门禁通过。迁移文档与换机入口已重写。P2c/P2d 提交 cfd6b17/82bcec3 的远程 CI 均已通过。
+
+### raw 数字语义补正
+
+raw(number) 只拒绝 NaN/Infinity，不再用属性元数据提前拒绝有限数字。自动绑定仍需证明数字满足属性语法；不能证明时保留直接声明，不写 inline 变量。否则 z-index:1.5 等原本在解析时失效的声明，变成 var 后会在计算值阶段失效，错误地遮蔽外部层叠值。token 与显式单位方法的参数合同保持各自校验。
+
+本地根 check/build、170 项单元、三语言类型负例与 LSP 通过。真实 Chrome 差分覆盖直接原生声明、运行时声明和编译绑定 helper：z-index:1.5 与 font-weight:1001 保留外部有效值，opacity:2 正常钳制为 1。
 
 ### P1 覆盖边界调整
 

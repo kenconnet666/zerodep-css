@@ -239,8 +239,19 @@ export function createDeclarationBinding(name: `--${string}`, format: Declaratio
   function direct(value: unknown): boolean {
     if (value === null || value === undefined) return true;
     if (!options.tokens && isCssVariable(value)) return true;
+    if (typeof value === 'number') {
+      if (!Number.isFinite(value)) throw new TypeError('Invalid CSS binding numeric value.');
+      if (options.tokens) throw new TypeError('Invalid CSS binding token.');
+      // 未被当前元数据证明可变量化的 raw 数字保留直接声明；var 会延后失效时机。
+      return !options.numbers?.some(
+        (rule) =>
+          (!rule.integer || Number.isInteger(value)) &&
+          (rule.min === undefined || value >= rule.min) &&
+          (rule.max === undefined || value <= rule.max),
+      );
+    }
     checkValue(value, options);
-    if (typeof value === 'number') return false;
+    if (typeof value !== 'string') throw new TypeError('CSS binding expects a CSS string.');
     const cached = cache.get(value);
     if (cached !== undefined) return cached;
     const ast = checkSyntax(value, options.property?.startsWith('--'));

@@ -47,6 +47,57 @@ export async function runBrowserTests(browser, baseUrl, ssr, output, match) {
     assert.equal(result.padding, '12px');
     return result;
   });
+  await scenario('raw 数字与原生声明一致，不能用变量改变无效值的层叠', async (page) => {
+    const result = await page.evaluate(async () => {
+      const { bindValue, createDeclarationBinding } = await import('/bindings.js');
+      const baseline = document.createElement('style');
+      baseline.textContent =
+        '.numeric-base{position:relative;z-index:7;font-weight:700;opacity:.4}';
+      document.head.append(baseline);
+      const runtime = window.z.createRuntime({ namespace: 'raw-number' });
+      const nodes = [];
+      try {
+        return [
+          { property: 'z-index', member: 'zIndex', value: 1.5, numbers: [{ integer: true }] },
+          {
+            property: 'font-weight',
+            member: 'fontWeight',
+            value: 1001,
+            numbers: [{ min: 1, max: 1000 }],
+          },
+          { property: 'opacity', member: 'opacity', value: 2, numbers: [{}] },
+        ].map(({ property, member, value, numbers }) => {
+          const binding = createDeclarationBinding('--number', { property, numbers });
+          const inline = Object.create(null);
+          const classes = [
+            '',
+            runtime.css((s) => s[member].raw(value)),
+            runtime.css((s) => s[member].raw(bindValue(inline, '--number', binding, value))),
+          ];
+          const computed = classes.map((className, index) => {
+            const node = document.createElement('div');
+            node.className = 'numeric-base ' + className;
+            if (index === 0) node.style.setProperty(property, String(value));
+            if (index === 2) for (const name in inline) node.style.setProperty(name, inline[name]);
+            document.body.append(node);
+            nodes.push(node);
+            return getComputedStyle(node).getPropertyValue(property);
+          });
+          return { property, computed, variables: Object.keys(inline) };
+        });
+      } finally {
+        for (const node of nodes) node.remove();
+        baseline.remove();
+        runtime.dispose();
+      }
+    });
+    assert.deepEqual(result, [
+      { property: 'z-index', computed: ['7', '7', '7'], variables: [] },
+      { property: 'font-weight', computed: ['700', '700', '700'], variables: [] },
+      { property: 'opacity', computed: ['1', '1', '1'], variables: ['--number'] },
+    ]);
+    return result;
+  });
   await scenario('作者层覆盖先于 CSS 优先级且按上下文隔离', async (page) => {
     await page.evaluate(() => {
       const runtime = window.z.createRuntime({ namespace: 'replace' });
