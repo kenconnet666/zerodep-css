@@ -83,6 +83,9 @@ export function valuePriorityOffset(value: string, customProperty = false): numb
 }
 
 export function assertValueStructure(value: string, customProperty = false): void {
+  // 编译绑定反复生成这一完整形态；无分隔符/转义/fallback，无需重复扫描 token。
+  // endsWith 保证严格到结尾（JS 正则的 $ 也能匹配尾换行之前的位置）。
+  if (value.endsWith(')') && /^var\(--[A-Za-z_][A-Za-z0-9_-]*\)$/.test(value)) return;
   if (valuePriorityOffset(value, customProperty) !== undefined)
     throw new TypeError('Use important() rather than adding !important to a value.');
 }

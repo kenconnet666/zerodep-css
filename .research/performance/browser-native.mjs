@@ -18,7 +18,7 @@ await writeFile(
 );
 const bundle = await build({
   stdin: {
-    contents: `export {createRuntime,cssVar} from './core/dist/index.js'; export {prepareStyle,formatUnitValues} from './core/dist/compiler-runtime.js'; export {lightTheme} from './core/dist/themes.js'; export {createThemeScope,createRuntimeView} from './core/dist/style-scope.js';`,
+    contents: `export {createRuntime} from './internal/runtime/dist/index.js'; export {cssVar} from '@zerodep-css/core'; export {prepareStyle,formatUnitValues} from './internal/runtime/dist/compiler-runtime.js'; export {lightTheme} from '@zerodep-css/core/themes'; export {createThemeScope,createRuntimeView,prepareThemeStyle} from './internal/runtime/dist/style-scope.js';`,
     resolveDir: root,
   },
   bundle: true,
@@ -50,16 +50,41 @@ try {
       lightTheme,
       createThemeScope,
       createRuntimeView,
+      prepareThemeStyle,
     } = window.bench;
-    // 原生主题基线直接使用预先生成的同一份 CSS，不把生成耗时放入原生更新。
-    const reference = createRuntime({ target: null, namespace: 'native-theme' });
-    let nativeTheme;
-    try {
-      nativeTheme = lightTheme.className(reference);
-      document.head.insertAdjacentHTML('beforeend', reference.renderStyles());
-    } finally {
-      reference.dispose();
+    // 对齐框架准备器：只在样本计时外构建一次默认主题样式。
+    const preparedTheme = prepareThemeStyle(lightTheme, lightTheme.defaults);
+    // 原生主题只序列化共同输入数据，不经 runtime、哈希或样式解析器。
+    const nativeThemeRules = [];
+    function appendThemeValues(tokens, values) {
+      for (const [key, token] of Object.entries(tokens)) {
+        const value = values[key];
+        if (token && typeof token === 'object' && typeof token.name === 'string') {
+          if (typeof value !== 'string' && typeof value !== 'number')
+            throw new Error(`Invalid native theme leaf: ${key}`);
+          nativeThemeRules.push(`${token.name}:${value}`);
+        } else if (token && typeof token === 'object' && value && typeof value === 'object') {
+          appendThemeValues(token, value);
+        } else {
+          throw new Error(`Invalid native theme branch: ${key}`);
+        }
+      }
     }
+    function countThemeLeaves(value) {
+      return Object.values(value).reduce(
+        (count, child) =>
+          count + (child && typeof child === 'object' ? countThemeLeaves(child) : 1),
+        0,
+      );
+    }
+    appendThemeValues(lightTheme.tokens, lightTheme.defaults);
+    const nativeThemeLeafCount = countThemeLeaves(lightTheme.defaults);
+    if (nativeThemeRules.length !== nativeThemeLeafCount)
+      throw new Error('Native theme baseline does not include every theme leaf.');
+    const nativeThemeStyle = document.createElement('style');
+    nativeThemeStyle.textContent = `.native-theme{${nativeThemeRules.join(';')}}`;
+    document.head.appendChild(nativeThemeStyle);
+    const nativeTheme = 'native-theme';
     const nodesPerBatch = 200,
       batches = 50,
       rounds = 7,
@@ -81,12 +106,6 @@ try {
       alternatives = [[{ min: 0 }]];
     let sequence = 0;
     function sample(name) {
-      const stage = document.createElement('div');
-      stage.className = 'bench';
-      const nodes = Array.from({ length: nodesPerBatch }, () =>
-        stage.appendChild(document.createElement('div')),
-      );
-      document.body.appendChild(stage);
       const runtime = name.startsWith('native')
         ? undefined
         : createRuntime({ namespace: `perf${sequence++}` });
@@ -94,15 +113,22 @@ try {
         name === 'prepared-themed'
           ? createRuntimeView(
               runtime,
-              createThemeScope(lightTheme, () => lightTheme.defaults),
+              createThemeScope(
+                lightTheme,
+                () => lightTheme.defaults,
+                undefined,
+                () => preparedTheme,
+              ),
             )
           : runtime;
+      let stage;
+      let nodes = [];
       const previous = Array(nodesPerBatch).fill('');
       const dynamic = name.endsWith('vars') || name.endsWith('classes');
       let checksum = 0;
-      function update(batch) {
+      function update(batch, initial = false) {
         for (let i = 0; i < nodes.length; i++) {
-          const value = dynamic ? 20 + ((batch + i) % 16) : 20;
+          const value = dynamic && !initial ? 20 + ((batch + i) % 16) : 20;
           let className;
           if (name === 'native-static') className = 'native-static';
           else if (name === 'native-themed') className = `native-static ${nativeTheme}`;
@@ -141,10 +167,19 @@ try {
         checksum += stage.offsetHeight;
       }
       try {
+        const mountStart = performance.now();
+        stage = document.createElement('div');
+        stage.className = 'bench';
+        nodes = Array.from({ length: nodesPerBatch }, () =>
+          stage.appendChild(document.createElement('div')),
+        );
+        document.body.appendChild(stage);
+        update(0, true);
+        const mountMilliseconds = performance.now() - mountStart;
         for (let batch = 0; batch < warmupBatches; batch++) update(batch);
         const start = performance.now();
         for (let batch = 0; batch < batches; batch++) update(batch);
-        const milliseconds = performance.now() - start;
+        const updateMilliseconds = performance.now() - start;
         for (let i = 0; i < nodes.length; i++) {
           const expected = dynamic ? 20 + ((batches - 1 + i) % 16) : 20;
           if (getComputedStyle(nodes[i]).width !== `${expected}px`)
@@ -169,9 +204,9 @@ try {
                 : 1)
         )
           throw new Error(`Unexpected rule growth: ${name}`);
-        return { milliseconds, records, checksum };
+        return { mountMilliseconds, updateMilliseconds, records, checksum };
       } finally {
-        stage.remove();
+        stage?.remove();
         runtime?.dispose();
       }
     }
@@ -188,14 +223,22 @@ try {
       batches,
       rounds,
       warmupBatches,
+      nativeThemeLeafCount,
       samples,
       medians: Object.fromEntries(
-        names.map((name) => [
-          name,
-          samples[name].map((v) => v.milliseconds).sort((a, b) => a - b)[Math.floor(rounds / 2)],
+        ['mount', 'update'].map((phase) => [
+          phase,
+          Object.fromEntries(
+            names.map((name) => {
+              const metric = `${phase}Milliseconds`;
+              const values = samples[name].map((sample) => sample[metric]).sort((a, b) => a - b);
+              return [name, values[Math.floor(rounds / 2)]];
+            }),
+          ),
         ]),
       ),
     };
+    nativeThemeStyle.remove();
   });
   assert.deepEqual(errors, []);
   const report = {
@@ -204,7 +247,7 @@ try {
     browser: browser.version(),
     engine: browserEngine,
     channel: browserChannel,
-    note: '已加载引擎的核心热路径；不包含 Vue/Svelte 调度、网络和 JS 首次解析。静态原生 CSS 没有引擎计算，基线只保留相同循环/差异检查。',
+    note: '纯 DOM 下界；native theme 只用 defaults/tokens 直接序列化相同主题叶，不调用引擎、哈希或解析器。prepared-* 是手工调用内部 prepareStyle 的计算下界，不代表完整编译插件路径；主题样式在计时外按 prepareThemeStyle 预备一次。真实框架编译对照由 frameworks.mjs 负责。不包含 Vue/Svelte 调度、runtime 创建、网络和 JS 首次解析。挂载计时包含节点创建、初始 class/变量写入和首次布局读取；更新计时包含后续差异更新与布局读取。静态原生 CSS 没有引擎计算，基线只保留相同循环/差异检查。',
     ...result,
   };
   await writeFile(resolve(output, 'results.json'), JSON.stringify(report, null, 2) + '\n');

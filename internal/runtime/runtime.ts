@@ -566,8 +566,12 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
         return compose(inputs, cssType);
       const factory = inputs[0] as StyleFactory<never>;
       const prepared = cssType === Css ? getPreparedKey(factory) : undefined;
+      const source = prepared ? getStyleSource(factory) : undefined;
+      // 主题的内部键已包含全部冻结内容；直接复用原字符串，避免每个元素重新拼接/散列长键。
       let cacheKey = prepared
-        ? 'p:' + prepared + JSON.stringify(getStyleSource(factory) ?? null)
+        ? source === undefined && prepared.startsWith('runtime:')
+          ? prepared
+          : 'p:' + prepared + JSON.stringify(source ?? null)
         : undefined;
       if (cacheKey && cacheKey.length > 65536) cacheKey = undefined;
       const cached = cacheKey ? compiledStyles.get(cacheKey) : undefined;

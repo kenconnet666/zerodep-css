@@ -33,11 +33,9 @@ CI 在 Windows/Linux 执行基础检查，并分别运行 Chromium、Firefox、W
 
 运行前先 pnpm build；脚本读取 dist，不把源码与旧产物混测。
 
-- `.research/performance/prepared-styles.mjs` 比较普通回调和编译器准备路径。
-- `.research/performance/authoring.mjs` 对照普通样式、配置视图、主题样式、关键字、读取与覆盖解析，并检查规则数量和等价输出。
-- `.research/performance/theme-resolution.mjs` 从 Git 提交 0723dd9 读取旧主题实现，在同一进程、相同依赖下交替测量旧/新算法；旧实现临时编译目录执行后清理。
-- `.research/api-usability/probe.mjs` 使用官方 Vue/Svelte SSR 验证当前组件主题和全局派生类，不把候选接口当作产品功能。
+- `pnpm research:compare` 分别执行 Vue/Svelte 与原生、Emotion、goober、vanilla-extract、UnoCSS 的真实组件对照，保留编译命中与规则数量证据。
+- `.research/performance/browser-native.mjs` 是不含框架调度的纯 DOM 对照，不能与组件更新总耗时混算。
+- `.research/performance/profile-runtime.mjs <label>` 仅定位 Node 计算热点，采样开销不作页面速度结论。
+- `.research/performance/cache-paired.mjs <baseline> <label> [--control]` 隔离构建两个版本，并交替计时、验证完整输出与工厂次数。基线必须采用 internal/runtime 之后的同 API 版本。
 
-Node 24.18.0、预热后每项 2,000 次、5 轮交替取中位数：默认父主题局部覆盖由 863.7 ms 降至 49.4 ms，局部父主题覆盖由 838.4 ms 降至 107.2 ms。优化复用已验证的相同节点/叶值，没有新增缓存或跨请求状态，仍检查外部输入、getter、null 重置与负零。
-
-这只是特定 Node 计算路径，不是页面帧率或整体应用提速承诺。其他热路径的变化在测量波动范围内；主题关键字与变量类构建仍有开销。原始性能和测试输出保留在忽略的 test-results，需要新结论时按同样方法复测。
+当前数据与范围以[性能对照](performance.md)为准。旧主题算法、预热和编译优先实验保留在 Git 历史与研究原始样本中；旧脚本不再代表当前 API，也不能将不同基准数字拼成页面提速。

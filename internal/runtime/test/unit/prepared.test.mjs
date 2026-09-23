@@ -2,8 +2,43 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createRuntime, Css } from '../../dist/index.js';
 import { prepareStyle, withStyleSource } from '../../dist/compiler-runtime.js';
+import { prepareRuntimeStyle } from '../../../../core/dist/internal.js';
 
 const key = (n) => n.toString(16).padStart(64, '0');
+
+test('内部长键复用仍区分来源，缓存命中不省略可观察的元数据读取', () => {
+  let calls = 0;
+  const factory = prepareRuntimeStyle((s) => {
+    calls++;
+    s.width.px(1);
+  }, 'body'.repeat(500));
+  const runtime = createRuntime({ target: null });
+  try {
+    const id = runtime.css(factory);
+    let reads = 0;
+    const proxy = new Proxy(factory, {
+      get(target, key, receiver) {
+        if (typeof key === 'symbol') reads++;
+        return Reflect.get(target, key, receiver);
+      },
+    });
+    assert.equal(runtime.css(proxy), id);
+    assert.equal(calls, 1);
+    assert.equal(reads, 2);
+    const first = withStyleSource(factory, { file: 'one.ts', line: 1, column: 1 });
+    const second = withStyleSource(factory, { file: 'two.ts', line: 2, column: 1 });
+    runtime.css(first);
+    runtime.css(first);
+    runtime.css(second);
+    assert.equal(calls, 3);
+    assert.deepEqual(
+      runtime.snapshot().records[0].debug.sources.map((source) => source.file),
+      ['one.ts', 'two.ts'],
+    );
+  } finally {
+    runtime.dispose();
+  }
+});
 
 test('准备样式在同一 runtime 跳过重复 Builder，跨请求与恢复不共享缓存', () => {
   let builds = 0;

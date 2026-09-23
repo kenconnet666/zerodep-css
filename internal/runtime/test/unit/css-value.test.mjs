@@ -39,6 +39,29 @@ test('原始值只检查结构，允许未知值、完整函数和引号内分�
   assert.doesNotThrow(() => assertValueStructure('{a:b;c:d}', true));
 });
 
+test('简单变量快速路径保留复杂形态和结构拒绝边界', () => {
+  for (const value of [
+    'var(--x)',
+    'var(--zcss-a19)',
+    'var(--_X)',
+    'var(--x)\n',
+    'var(--x,red)',
+    'var( --x)',
+    'var(--x/**/)',
+    'var(--\\78)',
+  ])
+    assert.doesNotThrow(() => assertValueStructure(value));
+  for (const value of [
+    'var(--x)!important',
+    'var(--x);color:red',
+    'var(--x',
+    'var(--x))',
+    ')var(--x)',
+    'var(--x)/*',
+  ])
+    assert.throws(() => assertValueStructure(value));
+});
+
 test('原始值拒绝跨声明、未闭合结构、EOF 自动闭合和隐式 important', () => {
   for (const value of [
     'red;color:blue',
