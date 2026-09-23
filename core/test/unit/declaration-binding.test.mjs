@@ -38,6 +38,9 @@ test('raw 数字仅在元数据证明时变量化，未知或越界数保留直�
   assert.equal(zIndex.inline(2), '2');
   assert.equal(zIndex.value(1.5), 1.5);
   assert.equal(zIndex.inline(1.5), undefined);
+  assert.equal(zIndex.value(1e21), 1e21);
+  assert.equal(zIndex.inline(1e21), undefined);
+  assert.equal(zIndex.value('1e21'), '1e21');
   const weight = createDeclarationBinding('--weight', {
     property: 'font-weight',
     numbers: [{ min: 1, max: 1000 }],
@@ -51,6 +54,13 @@ test('raw 数字仅在元数据证明时变量化，未知或越界数保留直�
   const color = createDeclarationBinding('--color-number', { property: 'color', numbers: [] });
   assert.equal(color.value(1), 1);
   assert.equal(color.inline(1), undefined);
+  // 元数据和 css-tree 都接受此数字，但规范正文要求非负，不能只依据宽泛语法表。
+  const stroke = createDeclarationBinding('--stroke', { property: 'stroke-width', numbers: [{}] });
+  assert.equal(stroke.value(-1), -1);
+  assert.equal(stroke.inline(-1), undefined);
+  assert.equal(stroke.value(2), 2);
+  assert.equal(stroke.value('-1'), '-1');
+  assert.equal(stroke.inline('-1'), undefined);
   for (const value of [NaN, Infinity, -Infinity])
     assert.throws(() => zIndex.value(value), /numeric/);
   const token = createDeclarationBinding('--token-number', {

@@ -182,6 +182,31 @@ const portableDisplay = new Set([
   'list-item',
 ]);
 
+/** 语法表未必包含规范正文的限制（如 stroke-width 禁止负数），数字优化只认已核实语义。 */
+function portableNumber(property: string, value: number, text = String(value)): boolean {
+  const integer = /^[+-]?\d+$/.test(text);
+  switch (property) {
+    case 'opacity':
+      return true;
+    case 'z-index':
+    case 'order':
+      return integer;
+    case 'font-weight':
+      return value >= 1 && value <= 1000;
+    case 'flex-grow':
+    case 'flex-shrink':
+    case 'line-height':
+    case 'animation-iteration-count':
+      return value >= 0;
+    case 'column-count':
+    case 'orphans':
+    case 'widows':
+      return integer && value >= 1;
+    default:
+      return false;
+  }
+}
+
 function portableValue(ast: CssNode, property: string): boolean {
   let safe = true;
   walk(ast, (node) => {
@@ -242,7 +267,8 @@ export function createDeclarationBinding(name: `--${string}`, format: Declaratio
     if (typeof value === 'number') {
       if (!Number.isFinite(value)) throw new TypeError('Invalid CSS binding numeric value.');
       if (options.tokens) throw new TypeError('Invalid CSS binding token.');
-      // 未被当前元数据证明可变量化的 raw 数字保留直接声明；var 会延后失效时机。
+      // 未被证明可变量化的 raw 数字保留直接声明；var 会延后失效时机。
+      if (options.property && !portableNumber(options.property, value)) return true;
       return !options.numbers?.some(
         (rule) =>
           (!rule.integer || Number.isInteger(value)) &&
@@ -262,6 +288,8 @@ export function createDeclarationBinding(name: `--${string}`, format: Declaratio
     const first = ast?.type === 'Value' && ast.children.size === 1 ? ast.children.first : undefined;
     let result =
       first?.type === 'Identifier' && cssWide.has(ident.decode(first.name).toLowerCase());
+    if (first?.type === 'Number' && options.property)
+      result = !portableNumber(options.property, Number(first.value), first.value);
     if (!result && options.property && ast) {
       // 非法属性值原本会在解析声明时被忽略；变成 var 后会改变 fallback 语义。
       // 未来语法或无法证明的 var/env 表达式保留直接声明，不以优化器拒绝 raw。

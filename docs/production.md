@@ -104,6 +104,8 @@ raw(number) 只拒绝 NaN/Infinity，不再用属性元数据提前拒绝有限�
 
 本地根 check/build、170 项单元、三语言类型负例与 LSP 通过。真实 Chrome 差分覆盖直接原生声明、运行时声明和编译绑定 helper：z-index:1.5 与 font-weight:1001 保留外部有效值，opacity:2 正常钳制为 1。
 
+独立复核补充发现：宽泛语法表不包含所有规范正文限制，例如负数 stroke-width。因此数字变量优化只覆盖已核实的常用数值属性，其他数字保留直接声明；同样处理单个数字字符串。整数属性还要求序列化后是整数 token，不能把 Number.isInteger(1e21) 当成 CSS 整数证明。定向单元与真实 SVG 层叠回归通过。依据：[Fill and Stroke 的非负宽度要求](https://www.w3.org/TR/fill-stroke-3/#stroke-width)、[CSS Syntax 整数 token](https://www.w3.org/TR/css-syntax-3/#typedef-integer)、[变量的计算值失效行为](https://www.w3.org/TR/css-variables-1/#invalid-variables)。
+
 ### P1 覆盖边界调整
 
 交叉复核发现：把所有后写长属性收齐后删除早期简写，会让 important 简写在“补齐第四边”时突然消失，从而改变另外三边；任意 raw/var 简写也不能可靠拆开。因此采用明确、可维护的边界：**标准化同名属性（含规范明确的 legacyAliasOf）直接后写替换，不考虑前 important；不同属性的简写/长属性及 all 保留原始声明顺序，交给浏览器处理原生层叠。**

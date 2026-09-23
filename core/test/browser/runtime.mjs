@@ -98,6 +98,45 @@ export async function runBrowserTests(browser, baseUrl, ssr, output, match) {
     ]);
     return result;
   });
+  await scenario('raw 数字的 SVG 语义限制不能被宽泛语法表放宽', async (page) => {
+    const result = await page.evaluate(async () => {
+      const { bindValue, createDeclarationBinding } = await import('/bindings.js');
+      const baseline = document.createElement('style');
+      baseline.textContent = '.stroke-base{stroke-width:5px}';
+      document.head.append(baseline);
+      const runtime = window.z.createRuntime({ namespace: 'raw-stroke' });
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.style.strokeWidth = '12px';
+      document.body.append(svg);
+      try {
+        const binding = createDeclarationBinding('--stroke', {
+          property: 'stroke-width',
+          numbers: [{}],
+        });
+        const variables = Object.create(null);
+        const classes = [
+          '',
+          runtime.css((s) => s.strokeWidth.raw(-1)),
+          runtime.css((s) => s.strokeWidth.raw(bindValue(variables, '--stroke', binding, -1))),
+        ];
+        const computed = classes.map((name, index) => {
+          const path = document.createElementNS(svg.namespaceURI, 'path');
+          path.setAttribute('class', 'stroke-base ' + name);
+          if (index === 0) path.style.strokeWidth = '-1';
+          if (index === 2) for (const key in variables) path.style.setProperty(key, variables[key]);
+          svg.append(path);
+          return getComputedStyle(path).strokeWidth;
+        });
+        return { computed, variables: Object.keys(variables) };
+      } finally {
+        runtime.dispose();
+        baseline.remove();
+        svg.remove();
+      }
+    });
+    assert.deepEqual(result, { computed: ['5px', '5px', '5px'], variables: [] });
+    return result;
+  });
   await scenario('作者层覆盖先于 CSS 优先级且按上下文隔离', async (page) => {
     await page.evaluate(() => {
       const runtime = window.z.createRuntime({ namespace: 'replace' });
