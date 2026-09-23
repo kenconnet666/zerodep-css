@@ -70,6 +70,21 @@ for (const [framework, transform] of [
   ['vue', vue],
   ['svelte', svelte],
 ]) {
+  test(`${framework}：单表达式箭头的变量来源仍映射到原属性`, () => {
+    const source = fixture(framework, 'style(s=>s.width.px(width))');
+    const result = transform(source, resolve('ConciseMap.' + framework));
+    const map = new TraceMap(JSON.parse(result.map.toString()));
+    assert.deepEqual(map.sourcesContent, [source]);
+    const offset = result.code.indexOf('--zcss-');
+    assert(offset >= 0);
+    const before = result.code.slice(0, offset);
+    const point = originalPositionFor(map, {
+      line: before.split('\n').length,
+      column: offset - before.lastIndexOf('\n') - 1,
+    });
+    assert.equal(point.line, 1);
+    assert.equal(point.column, source.indexOf('s.width'));
+  });
   test(`${framework}：css 别名与重复值的源码位置独立保留`, () => {
     const source = fixture(framework, 'style(s=>{s.width.px(width);s.height.px(width)})');
     const result = transform(source, resolve('Sample.' + framework));

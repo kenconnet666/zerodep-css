@@ -327,10 +327,12 @@ export function session(
           const argumentsText = declaration.call.arguments
             .map((arg) => arg.getText(file))
             .join(',');
+          const plan = fresh('unit_plan');
+          declarationBindings.push(`const ${plan} = ${JSON.stringify(declaration.alternatives)};`);
           edits.overwrite(
             declaration.call.getStart(file) - prefix.length,
             declaration.call.end - prefix.length,
-            `${declaration.property.getText(file)}.raw(${unitBindingName}(${bindingsLocal}, ${JSON.stringify(name)}, [${argumentsText}], ${JSON.stringify(declaration.alternatives)}, ${JSON.stringify(declaration.unit)}, ${JSON.stringify(declaration.separator)}))`,
+            `${declaration.property.getText(file)}.raw(${unitBindingName}(${bindingsLocal}, ${JSON.stringify(name)}, [${argumentsText}], ${plan}, ${JSON.stringify(declaration.unit)}, ${JSON.stringify(declaration.separator)}))`,
           );
           hasUnitBindings = true;
         }

@@ -161,17 +161,19 @@ export function automaticDeclarations(
     const parameter = fn.parameters[0];
     const builder = parameter?.name;
     // 参数默认值也可能有副作用；异步/生成器交回运行时保留原有诊断。
-    return (
+    if (!(
       fn.parameters.length === 1 &&
       !parameter?.initializer &&
       !parameter?.dotDotDotToken &&
       !fn.asteriskToken &&
       !fn.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.AsyncKeyword) &&
       !!builder &&
-      ts.isIdentifier(builder) &&
-      ts.isBlock(fn.body) &&
-      statements(fn.body.statements, builder.text)
-    );
+      ts.isIdentifier(builder)
+    ))
+      return false;
+    return ts.isBlock(fn.body)
+      ? statements(fn.body.statements, builder.text)
+      : ts.isArrowFunction(fn) && visitExpression(unwrap(fn.body), builder.text);
   }
   function visit(statement: ts.Statement, builder: string): boolean {
     if (ts.isEmptyStatement(statement)) return true;
@@ -207,8 +209,11 @@ export function automaticDeclarations(
         }
       return true;
     }
-    if (!ts.isExpressionStatement(statement)) return false;
-    const expression = unwrap(statement.expression);
+    return (
+      ts.isExpressionStatement(statement) && visitExpression(unwrap(statement.expression), builder)
+    );
+  }
+  function visitExpression(expression: ts.Expression, builder: string): boolean {
     if (ts.isCallExpression(expression) && metadata(expression, builder)) return true;
     const member = ts.isCallExpression(expression) ? expression.expression : expression;
     if (!ts.isPropertyAccessExpression(member)) return false;

@@ -44,6 +44,11 @@ function propsExpression(framework, result) {
   const spread = element.attributes.find((attribute) => attribute.type === 'SpreadAttribute');
   return result.code.slice(spread.expression.start, spread.expression.end);
 }
+function unitPlanDeclarations(result) {
+  return [...result.code.matchAll(/const __zcss_unit_plan_\d+ = \[[^;\n]*\];/g)]
+    .map((match) => match[0])
+    .join('\n');
+}
 for (const [framework, transform] of [
   ['vue', vue],
   ['svelte', svelte],
@@ -170,6 +175,52 @@ for (const [framework, transform] of [
       assert(result.code.includes(`s.${method}`));
     }
   });
+  test(`${framework}：单表达式箭头可静态准备，嵌套箭头仍只改写安全的值`, () => {
+    for (const expression of [
+      'css(s=>s.display.flex)',
+      'css(s=>s.hover(h=>h.display.flex))',
+      "css(s=>s.media('(width > 1px)',m=>m.display.flex))",
+    ]) {
+      const result = transform(fixture(framework, '', { expression }), filename);
+      assert(result?.code.includes('prepareStyle'), expression);
+      assert(result.code.includes(expression.slice(expression.indexOf('s=>'), -1)), expression);
+      if (framework === 'vue')
+        compileScript(parse(result.code).descriptor, {
+          id: 'concise-static',
+          inlineTemplate: true,
+        });
+      else compile(result.code, { filename, generate: 'client' });
+    }
+    const dynamic = transform(
+      fixture(framework, '', { expression: 'css(s=>s.hover(h=>h.width.px(gap)))' }),
+      filename,
+    );
+    assert(dynamic?.code.includes('bindUnit'));
+    assert(!dynamic.code.includes('prepareStyle'));
+    assert(dynamic.code.includes('s=>s.hover(h=>h.width.raw('));
+    if (framework === 'vue')
+      compileScript(parse(dynamic.code).descriptor, {
+        id: 'concise-dynamic',
+        inlineTemplate: true,
+      });
+    else compile(dynamic.code, { filename, generate: 'client' });
+  });
+  test(`${framework}：单表达式箭头的未知调用和动态结构保留运行时`, () => {
+    for (const expression of [
+      'css(s=>s.width.px(getGap()))',
+      'css(s=>gap ? s.color.red : s.color.blue)',
+      'css(s=>s.width.dvh(gap))',
+      'css(s=>s.media(query,h=>h.width.px(gap)))',
+      'css(async s=>s.width.px(gap))',
+      'css((s=effect())=>s.width.px(gap))',
+    ]) {
+      const source = fixture(framework, '', { expression });
+      assert.equal(transform(source, filename), null, expression);
+      const debug = transform(source, filename, { debug: true });
+      assert(!debug.code.includes('bindUnit'), expression);
+      assert(!debug.code.includes('prepareStyle'), expression);
+    }
+  });
   test(`${framework}：参数初始化和特殊函数不进入静态准备或绑定提升`, () => {
     for (const expression of [
       'css((s, unused = effect()) => {s.color.red;})',
@@ -195,6 +246,10 @@ for (const [framework, transform] of [
     assert.match(result.code, /bindUnit/);
     assert.match(result.code, /padding.raw/);
     assert.equal((result.code.match(/--zcss-[a-f0-9]{16}/g) ?? []).length, 1);
+    const plan = result.code.match(/const (__zcss_unit_plan_\d+) = (\[[^;\n]*\]);/);
+    assert(plan);
+    assert(propsExpression(framework, result).includes(`, ${plan[1]}, "px", " "`));
+    assert.equal((result.code.match(/const __zcss_unit_plan_\d+ =/g) ?? []).length, 1);
     assert(!result.code.includes('prepareStyle'));
     assert.match(result.code, /s.display.flex/);
     if (framework === 'vue')
@@ -319,7 +374,7 @@ for (const [framework, transform] of [
       'css',
       'state',
       alias,
-      `return ${propsExpression(framework, result)}`,
+      `${unitPlanDeclarations(result)}\nreturn ${propsExpression(framework, result)}`,
     );
     const runtime = createRuntime({ target: null });
     try {
@@ -359,6 +414,46 @@ for (const [framework, transform] of [
       runtime.dispose();
     }
   });
+  test(`${framework}：单表达式箭头动态单位每次调用只读取一次 getter`, () => {
+    const result = transform(
+      fixture(framework, '', {
+        expression: 'css(s=>s.width.px(state.gap))',
+        script: 'const state={gap:12};',
+      }),
+      filename,
+    );
+    assert(result?.code.includes('bindUnit'));
+    assert(!result.code.includes('prepareStyle'));
+    const alias = result.code.match(/bindUnit as (\w+)/)[1];
+    const evaluate = new Function(
+      'css',
+      'state',
+      alias,
+      `${unitPlanDeclarations(result)}\nreturn ${propsExpression(framework, result)}`,
+    );
+    const runtime = createRuntime({ target: null });
+    let reads = 0;
+    try {
+      const props = evaluate(
+        runtime.css,
+        {
+          get gap() {
+            reads++;
+            return 12;
+          },
+        },
+        bindUnit,
+      );
+      assert.equal(reads, 1);
+      assert(
+        framework === 'vue'
+          ? Object.values(props.style).includes('12px')
+          : props.style.includes('12px'),
+      );
+    } finally {
+      runtime.dispose();
+    }
+  });
   test(`${framework}：多参数单位空值仍先求值全部参数，动态原 style 回退`, () => {
     const result = transform(
       fixture(framework, 's.padding.px(state.first,state.second);', {
@@ -371,7 +466,7 @@ for (const [framework, transform] of [
       'css',
       'state',
       alias,
-      `return ${propsExpression(framework, result)}`,
+      `${unitPlanDeclarations(result)}\nreturn ${propsExpression(framework, result)}`,
     );
     const runtime = createRuntime({ target: null });
     const reads = [];
@@ -426,7 +521,7 @@ for (const [framework, transform] of [
       'css',
       'state',
       alias,
-      `return ${propsExpression(framework, result)}`,
+      `${unitPlanDeclarations(result)}\nreturn ${propsExpression(framework, result)}`,
     );
     const runtime = createRuntime({ target: null });
     let reads = 0;
@@ -453,7 +548,10 @@ for (const [framework, transform] of [
   });
   test(`${framework}：raw 输入 getter 只读取一次，变量 class 与 inline 值同源`, () => {
     const result = transform(
-      fixture(framework, 's.color.raw(state.color);', { script: 'const state={color:"red"};' }),
+      fixture(framework, '', {
+        expression: 'css(s=>s.color.raw(state.color))',
+        script: 'const state={color:"red"};',
+      }),
       filename,
     );
     const alias = result.code.match(/bindValue as (\w+)/)[1];
@@ -519,7 +617,7 @@ test('整组单位格式化保留联合约束、顺序和非法输入拒绝', ()
 });
 
 test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async () => {
-  const source = `<script setup lang="ts">import {createStyles} from '@zerodep-css/vue';defineProps<{gap:number}>();const styles=createStyles();const css=styles.useCss();const rows=[{id:'hidden',detail:null},{id:'visible',detail:{width:20}}];</script><template><div :class="css(s=>{s.padding.px(8,gap)})"/><template v-for="row in rows" :key="row.id"><span v-if="row.detail" :class="css(s=>{s.width.px(row.detail.width)})"/></template></template>`;
+  const source = `<script setup lang="ts">import {createStyles} from '@zerodep-css/vue';defineProps<{gap:number}>();const styles=createStyles();const css=styles.useCss();const rows=[{id:'hidden',detail:null},{id:'visible',detail:{width:20}}];</script><template><div :class="css(s=>{s.padding.px(8,gap)})"/><template v-for="row in rows" :key="row.id"><span v-if="row.detail" :class="css(s=>s.width.px(row.detail.width))"/></template></template>`;
   const result = vue(source, resolve('AutomaticSSR.vue'));
   const compiled = compileScript(parse(result.code).descriptor, {
     id: 'automatic',
