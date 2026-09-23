@@ -1,12 +1,12 @@
-import { lstat, realpath, rm, copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { lstat, realpath, rm, cp, copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { build } from 'esbuild';
 import ts from 'typescript';
 import { resolve, sep } from 'node:path';
 import { root, pnpm } from './lib/environment.mjs';
 
-// tsc 不会清除已更名模块；每次构建只清理三个包的生成目录，避免旧入口混入 tarball。
+// tsc 不会清除已更名模块；只清理已验证位于工作区内的生成目录。
 const boundary = await realpath(root);
-for (const name of ['core', 'vue', 'svelte']) {
+for (const name of ['core', 'vue', 'svelte', 'internal/runtime']) {
   const parent = await realpath(resolve(root, name));
   if (!parent.startsWith(boundary + sep)) throw new Error('Package path leaves the workspace.');
   const target = resolve(parent, 'dist');
@@ -18,7 +18,14 @@ for (const name of ['core', 'vue', 'svelte']) {
     if (error.code !== 'ENOENT') throw error;
   }
 }
-pnpm(['-r', 'run', 'build']);
+pnpm(['--filter', '@zerodep-css/core', 'run', 'build']);
+pnpm(['exec', 'tsc', '-p', 'internal/runtime/tsconfig.build.json']);
+// 引擎按模块发布在适配包内部；共享身份通过 core/internal 外部引用，不复制进引擎。
+for (const name of ['vue', 'svelte'])
+  await cp(resolve(root, 'internal/runtime/dist'), resolve(root, name, 'dist/runtime'), {
+    recursive: true,
+  });
+pnpm(['--filter', '@zerodep-css/vue', '--filter', '@zerodep-css/svelte', 'run', 'build']);
 pnpm(['exec', 'tsc', '-p', 'internal/compiler/tsconfig.build.json']);
 
 // 两端共用编译分析，构建时内联到独立 compiler 子路径，不增加产品包。

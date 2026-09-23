@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "customConditions": ["zerodep-source"],
+    "types": []
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["dist"]
+}

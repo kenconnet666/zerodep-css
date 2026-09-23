@@ -63,6 +63,8 @@ const color = ref('red');
 
 完整静态值与能证明边界的动态值可分别准备或绑定。可绑定的动态声明保留在原样式位置；分支不可静态证明、CSS 值结构复杂或属性语法未知时，继续走 runtime，具体值交给浏览器判断。编译器不会因它的语法表无法证明而拒绝合法新值。
 
+raw 字符串中出现负的 number、dimension 或 percentage token 时保留直接声明，不把 css-tree 的类型匹配当成完整范围证明。规范正文可能另有限制，例如 `stroke-width`、`border-width` 和 `line-height` 的负值无效；负值合法的 margin 等属性也采用同一保守回退。opacity 的有限 `raw(number)` 保留独立快速路径，因为超界值会按 CSS 规则钳制。
+
 raw 数字的自动绑定只覆盖已核实语义的常用数值属性；语法元数据不足以单独证明浏览器的实际值约束。其余有限数字保持直接声明，整数属性还检查序列化后的 token 形态。该边界只影响优化，不限制运行时 raw 写法。
 
 作者应优先使用普通函数复用和 `if`/`switch` 编写条件样式。已知结构的同 host class 可由 `css(base, override, [condition && extra])` 组合；外部 class 透传。组合得到的普通 class 字符串是快照，不会携带或复制元素变量绑定。

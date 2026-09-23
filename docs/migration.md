@@ -43,4 +43,4 @@ Svelte 根组件通过 `host.provide()` 安装 context，应在 `untrack(() => h
 
 客户端用 SSR manifest 创建同配置 host，完成框架水合和相关组件初始化后调用 `completeHydration()`。它会报告尚未认领的服务端全局槽位。完整字符串 SSR 与水合有真实组件验证；Nuxt/Kit 集成尚未完成。
 
-core 中的旧独立 engine 入口仍在，计划在 P2e 移除；新适配器项目应使用 `createStyles` 和 host API。
+core 根入口现在只保留 `Css`、`cssVar`、`defineTheme` 等作者能力，不再作为独立引擎入口。完整引擎源码位于 `internal/runtime`，构建后分别进入 Vue/Svelte 包的 `dist/runtime`；`@zerodep-css/core/internal` 和适配包的 `#runtime` 只供内部调用。运行时单元、类型与浏览器夹具已移到 `internal/runtime/test`，迁移后的最终验收状态见[实施记录](production.md)。

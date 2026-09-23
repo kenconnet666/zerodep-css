@@ -1,11 +1,6 @@
 import { onDestroy, untrack } from 'svelte';
-import {
-  Css,
-  globalCss,
-  type CssConstructor,
-  type StylesheetFactory,
-  type StyleContext,
-} from '@zerodep-css/core';
+import { Css, type CssConstructor, type StylesheetFactory } from '@zerodep-css/core';
+import { globalCss, type StyleContext } from '#runtime';
 import { resolveContext } from './context.js';
 
 /** 全局样式 owner：初始化挂载、原生响应式更新、提前停止或组件卸载清理。 */

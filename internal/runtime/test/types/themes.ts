@@ -1,5 +1,5 @@
-import { createRuntime } from '../../src/index.js';
-import { ThemeCss, lightTheme, darkTheme } from '../../src/themes.js';
+import { createRuntime } from '../../index.js';
+import { ThemeCss, lightTheme, darkTheme } from '../../../../core/src/themes.js';
 
 const runtime = createRuntime({ target: null });
 runtime.css((s) => {

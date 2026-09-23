@@ -19,7 +19,7 @@ test('Vue 项目入口使用真实 host 完整恢复主题、全局样式并在�
   try {
     const coreAliases = {
       '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
-      '@zerodep-css/core/style-scope': resolve(root, 'core/dist/style-scope.js'),
+      '@zerodep-css/core/internal': resolve(root, 'core/dist/internal.js'),
     };
     await build({
       entryPoints: [resolve(root, 'vue/test/browser/project-server.mjs')],

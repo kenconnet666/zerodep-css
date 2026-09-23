@@ -1,214 +1,38 @@
 # @zerodep-css/core
 
-`Css` 是可继承的作者基类。`runtime.css(factory, AppCss)`（浏览器默认入口同形）在每次构建中创建指定派生类型，保留 getter、方法、super、私有字段与嵌套回调类型。使用 `extendProperty(super.color, { brand: value })` 可在派生 getter 中增加类型化关键字；不能覆盖已有属性操作。实例由运行时拥有，不在多个构建之间共享，构建结束后不能继续操作。
+core 是共享作者模型，不再提供可独立运行的 CSS 引擎。业务从根入口取得 `Css`、`cssVar`、`defineTheme` 及其类型；可选 `/themes` 入口提供 `ThemeCss`、`lightTheme`、`darkTheme`。生成的标准属性类型保留在 `core/src/generated/properties.ts`，完整值元数据和执行引擎位于 `internal/runtime`，构建时复制到 Vue、Svelte 适配包各自的 `dist/runtime`。
 
-运行时 CSS 工具。公开入口 `css(factory): string` 直接返回哈希类名，可以写在浏览器模板表达式里，也可以先赋值为字符串再绑定。内部纯 Builder 已收为实现细节，不再从包入口导出 `useCss`。
-
-## css：模板内或外部使用
+## 作者类与主题定义
 
 ```ts
-import { css } from '@zerodep-css/core';
+import { Css, cssVar, defineTheme } from '@zerodep-css/core';
 
-const panelClass = css((s) => {
-  s.display.flex;
-  s.padding.px(8, 16);
-  s.width.raw('50%');
-  s.hover((h) => {
-    h.color.blue;
-  });
-  s.containerQuery('card (width > 20rem)', (c) => {
-    c.display.grid;
-  });
+export const theme = defineTheme('app', {
+  color: { brand: '#2463eb', text: '#202020' },
 });
-// panelClass 是 string。也可以直接写 class={css(s => { ... })}。
-```
 
-每次调用同步执行回调，读取普通变量的当前值，构建、序列化、计算哈希并保证规则已注册。同内容同配置复用 class 和规则。外部 const 字符串不会自己更新；框架依赖跟踪、SSR 上下文和生命周期由 Vue/Svelte 适配器提供。
-
-- CSS 属性是不可调用对象：固定值用 `s.display.flex`，动态字面量用 `s.display.token(value)`，开放值用 `s.width.raw('50%')`，单位值用 `s.width.px(50)`。不支持 `s.width(...)`。
-- `token` 严格限制为该属性的已知字面量并提供补全；`raw` 保留属性值类型和已知值补全，同时允许任意字符串通过类型检查。运行时只检查声明结构与数字有限性，具体值交给浏览器判断；显式单位方法仍检查各自参数约束。无法证明有效的 raw 数字保留直接声明，避免转成变量后改变无效值的层叠行为。
-- 根层可调用的是 selector/media/hover 等结构或辅助入口；自定义/未知属性的写值入口也使用第二层方法：`s.custom.raw('--name', value)`、`s.property.raw('future-property', value)`。
-- 同一选择器/条件上下文内，同名属性（含规范明确的同义别名）后写替换前写，不考虑旧声明的 important。被删除的声明不再作为 fallback。不同属性的简写/长属性保留原生声明顺序与层叠关系，不猜解 raw 简写；其他上下文分别处理。
-- raw 只检查声明结构边界，完整但未知/无效的属性值交给浏览器处理；空字符串也不代表省略。值中的隐式 !important、未闭合结构、跨声明内容及非法属性名会报错，即使稍后被同属性覆盖。CSS 输入码点统一预处理，保证 SSR 文本恢复一致。
-- `container` 是 CSS 属性，容器查询使用 `containerQuery`。
-- 常用状态可写 `s.focus(...)`、`s.focusWithin(...)`、`s.active(...)`、`s.disabled(...)`，分别等价于对应的 `s.pseudo(':...', ...)`；disabled 采用原生 `:disabled`，不会把 aria-disabled 自动当作禁用状态。
-- `cssVar('--name', fallback)` 只引用已有 CSS 变量，不建立 JS 订阅；Vue/Svelte 编译插件在安全位置自动创建元素绑定。
-- `animationName.raw` 接受动画定义/数组，空数组输出 `animation-name:none`。token/raw 的 null/undefined 省略声明；单位方法中任一参数为 null/undefined 时省略整条声明，0 仍是有效值。
-- 普通值每次变化可产生新 class，旧规则保留至所属 runtime.dispose；不自动改为 CSS 变量。
-
-## 主题定义与预设继承
-
-`defineTheme(name, defaults)` 创建冻结的主题树；字符串和有限数字为叶值。`theme.tokens` 保留字段类型，并将每个叶映射为含默认 fallback 的 CSS 变量引用，未提供主题类时也可使用默认值。
-
-```ts
-import { Css, defineTheme, createRuntime } from '@zerodep-css/core';
-
-const theme = defineTheme('app', { color: { brand: '#2463eb', text: '#202020' } });
-const dark = theme.extend({ color: { text: '#fafafa' } });
-class AppCss extends Css {
+export class AppCss extends Css {
   get color() {
     return this.extendProperty(super.color, theme.tokens.color);
   }
+
+  control() {
+    this.display.flex;
+    this.color.brand;
+  }
 }
-const runtime = createRuntime({ target: null });
-const palette = dark.className(runtime);
-const content = runtime.css((s) => {
-  s.color.brand;
-}, AppCss);
-const className = `${palette} ${content}`;
+
+export const foreground = cssVar('--app-foreground', '#202020');
 ```
 
-预设继承沿用同一变量标识。`resolve(overrides, inheritedValues?)` 产生冻结的有效主题：null/undefined 继承父值，对象递归局部覆盖；传入 theme.defaults 或对应默认子树/叶值可显式恢复预设。未知字段、错误叶类型、循环结构和不能作为变量值使用的 CSS-wide 关键字会报错。修改原始默认值或覆盖对象不影响已产生的快照。
+`Css` 是真实类。派生 getter、方法、`super`、私有字段和嵌套回调保留 JavaScript 类语义；`extendProperty` 只增加类型化关键字，拒绝覆盖已有属性操作。引擎为每次同步样式求值创建作者实例，结束后不能继续使用该实例。属性对象不可直接调用：固定值用 `s.display.flex`，严格字面量用 `s.display.token(value)`，开放值用 `s.width.raw('50%')`，单位值用 `s.width.px(50)`。结构方法如 `hover`、`media`、`selector` 仍在根层调用。
 
-主题定义不持有 runtime/请求状态，`className` 将变量声明注册到传入 runtime；不同主题值复用各自的变量类，不改写引用它们的内容规则。core 调用者显式组合主题类与内容类；Vue/Svelte 的 provideTheme 和 useStyleRuntime 接入自动向下传播，使用方式见适配器 README。
+`defineTheme` 冻结默认值与 token 树。`extend` 创建新预设并保持同一主题家族的变量身份；局部覆盖中 `null`/`undefined` 表示继承，显式传入 `theme.defaults` 才恢复定义值。主题叶允许字符串或有限数字，CSS-wide 关键字和不完整的声明结构会在定义时拒绝。主题定义只保存可共享的静态数据，不拥有应用或 SSR 请求运行状态。内置 `ThemeCss extends Css` 是可选第二层，业务也可以直接继承 `Css`。
 
-`readTheme(definition, scope?)` 从显式 `ThemeScope` 读取该主题当前的深只读快照，保留完整字段类型；没有同名主题时返回传入定义的 `defaults`。同名但 schema 不兼容会报错。读取不会注册 CSS 或访问 DOM，可用于服务端和非 CSS 逻辑。结果不会随后续主题变化被原地修改；需要当前值时重新调用。框架组件优先使用适配器的 `useTheme` 捕获作用域。
+## 框架接入与内部边界
 
-## 样式命名与诊断
+Vue/Svelte 业务从对应适配包导入 `createStyles`，在项目 `styles.ts` 绑定 `AppCss` 与默认主题；组件调用绑定后的 `useCss()`、`provideTheme()`、`useGlobalCss()` 等方法。每个应用或 SSR 请求再由适配器 `createHost(options)` 创建独立运行时。`keyframes` 从适配器根入口导入，普通 class、全局样式、SSR 样式输出与恢复均由适配器 host 管理。完整示例见 [Vue](../vue/README.md)、[Svelte](../svelte/README.md) 和[架构](../docs/architecture.md)。
 
-根 `css` 回调可以使用 `s.name('panel').config({ debug: true })`，生成包含 `panel` 和内容哈希的类名。名字允许 1–128 个字母、数字、下划线或连字符；同名不同内容仍有不同哈希。名字作用于整个根样式，不能在 hover、media 或全局规则中重新命名。
+`@zerodep-css/core/internal` 是适配器使用的非业务子路径，保存跨两份引擎必须共享的 `Css` 身份、变量品牌、主题与编译元数据标记、浏览器宿主仲裁。适配包的 `#runtime` 是包内私有导入，指向自身 `dist/runtime`；不要从业务代码引用这些内部入口，也不要在模块顶层创建请求运行时。core 不依赖 Vue 或 Svelte，主题值检查仍使用 `css-tree` 的轻量 tokenizer；完整运行时的解析、序列化和 CSSOM 操作在内部引擎中。
 
-`config` 首版只有 `debug`，用于按样式覆盖运行时的诊断开关。运行时也接受 `createRuntime({ debug: true })`；重复指定冲突的本地配置会报错。nonce、target 和 namespace 仍由运行时宿主管理。
-
-局部配置须为普通对象或无原型的数据对象；未知自有字段（包含 symbol 和不可枚举字段）会报错，不会静默忽略。
-
-Vue/Svelte 编译插件在 Vite 开发模式默认附加项目相对文件位置，也可以显式设置插件的 `debug`。诊断记录声明数量与最多 32 个来源，通过 style 标签的 `data-zerodep-*` 属性和 SSR manifest 查看。来源不进入内容哈希，生产模式默认不生成来源。SSR 样式 manifest 输出版本 2，仍可恢复未包含新元数据的版本 1。
-
-## keyframes：保留资源依赖
-
-```ts
-import { css, keyframes } from '@zerodep-css/core';
-
-const fade = keyframes((k) => {
-  k.from((s) => {
-    s.opacity.raw(0);
-  });
-  k.at(50, (s) => {
-    s.opacity.raw(0.5);
-  });
-  k.to((s) => {
-    s.opacity.raw(1);
-  });
-});
-
-const animated = css((s) => {
-  s.animationName.raw(fade);
-  s.animationDuration.ms(180);
-  s.animationFillMode.forwards;
-});
-```
-
-keyframes 创建可复用的冻结定义；`animationName.raw` 接受定义或定义数组，编译时记录依赖，注册 class 前注册所需动画。同一动画不会因多个 class 引用而重复注册。重复帧偏移和命名时间线范围保留。通过已注册名称和通过动画定义产生同一段 CSS 时复用规则并合并依赖，不因此误报哈希碰撞。
-
-不要把动画定义对象直接插入普通字符串。需要动画名称时使用同一实例的 `runtime.keyframes(fade)`，它会先注册并返回名称。显式 `globalCss` 中的 `g.animation(fade)` 保留所在条件/层的作用范围，不跨这些位置盲目去重。
-
-## 全局样式：定义、挂载和更新
-
-全局规则可使用与局部相同的作者类：`g.rule('button', s => s.control('small'), AppCss)`。第三参数只作用于该规则和其中的嵌套回调，相邻规则仍使用系统 Css。共享样式可直接写为 `const control: StyleFactory<AppCss> = s => { ... }`，在同一回调中按顺序调用后再覆盖属性；无需额外的组合或条件 DSL。
-
-```ts
-import { globalCss, injectGlobal } from '@zerodep-css/core';
-
-const base = globalCss((g) => {
-  g.rule('html, body', (s) => {
-    s.margin.px(0);
-  });
-  g.fontFace((d) => {
-    d.fontFamily.raw('Demo');
-    d.src.raw('local("Arial")');
-    d.fontDisplay.swap;
-  });
-});
-const mounted = injectGlobal(base);
-mounted.update((g) =>
-  g.rule('body', (s) => {
-    s.color.blue;
-  }),
-);
-// 所有者退出时：mounted.dispose();
-```
-
-`globalCss` 只创建定义；`injectGlobal` 挂到浏览器默认 runtime，返回可更新和释放的句柄。也可使用 `runtime.mountGlobal(factoryOrDefinition)`。
-
-每次挂载拥有固定顺序槽位。更新在原位置替换，失败保留原规则；A 红、B 蓝、C 红这种相同内容的不同位置不会合并。普通 class/动画不按组件回收，防止其他 DOM 仍持有字符串而失去样式。
-
-font-face、property、counter-style、page 等保留独立上下文。运行时检查所支持资源的必需字段和明显不合法的组合；`@property` 同名不同定义会拒绝，单个 owner 释放不会删除其他 owner 的登记。
-
-## runtime：配置、ShadowRoot 和 SSR
-
-```ts
-import { createRuntime } from '@zerodep-css/core';
-
-const runtime = createRuntime({
-  namespace: 'app',
-  layers: ['base', 'components'],
-  layer: 'components',
-  nonce: 'request-nonce',
-});
-const { css } = runtime;
-const className = css((s) => {
-  s.display.flex;
-});
-```
-
-配置项：
-
-- `target`：Document / ShadowRoot；省略时使用当前 document，Node 中为独立服务器实例。显式 null 始终选择服务器模式。
-- `namespace`：同一目标中一个 namespace 由一个 runtime 管理。默认 `z`，浏览器顶层 css 自动复用该实例。
-- `layers` / `layer`：显式原生层序及默认层；默认无 layer、无 reset。
-- `nonce`：新 style 元素的 CSP nonce；SSR 恢复可从已有标签继承。
-- `insertionPoint`：新 runtime 样式块之前的直接子节点；恢复时保留服务器既有位置。
-- `maxRecords`：可选记录上限，超限明确失败，不通过 LRU 删除活跃规则。
-
-SSR 每次请求独立创建实例，并使用它提供的 css：
-
-```ts
-const runtime = createRuntime({ target: null, namespace: 'app' });
-const { css } = runtime;
-const className = css((s) => {
-  s.padding.px(8, 16);
-});
-const stylesHtml = runtime.renderStyles();
-const manifest = runtime.snapshot();
-const manifestJson = runtime.renderManifest();
-// 将 stylesHtml 放到 head；manifestJson 可放在 application/json script 中。
-runtime.dispose();
-```
-
-浏览器接管：
-
-```ts
-const runtime = createRuntime({ namespace: 'app', hydrate: manifest });
-const { css } = runtime;
-```
-
-恢复会核对版本、配置、内容摘要、资源依赖、style 数量/顺序/内容及 CSSOM 接受的根规则数，不重复插入服务器规则。全局槽位用 `runtime.claimGlobal(id)` 显式认领，供适配器建立生命周期；不根据内容猜组件身份。非全局资源持续驻留到 runtime.dispose。
-
-顶层 css 在 Node 中明确报错，避免偷偷使用跨请求全局缓存。SSR 应从请求实例取得同形态的 css 函数；Vue/Svelte 适配器通过应用/组件 context 提供它。
-
-框架集成使用 `createStyleContext(options)`，由它持有 runtime，并通过 `mountGlobal(key, factory)` 维护稳定 key 到全局槽位的映射。`snapshot()` 返回带 runtime manifest 的上下文 manifest，`renderManifest()` 提供 HTML 安全 JSON；客户端传入相同配置与 `hydrate`，在框架完成恢复后调用 `completeHydration()` 检查遗漏的全局槽位。key 在同一上下文的活跃挂载中必须唯一。使用 context 时不要绕过它调用 runtime.mountGlobal/claimGlobal，否则 snapshot 会拒绝不完整的映射。直接 keyframes/css 不受此限制。
-
-宿主拥有 context：每个 SSR 请求独立创建并在输出结束/失败时 finally dispose，浏览器应用完全卸载后 dispose。组件清理自己的全局挂载，不清理共享 class。`claimGlobal(id, definition)` 支持先事务更新再认领，更新失败不消耗认领资格。
-
-renderStyles 保留独立 style 块，正确处理 @import/@namespace 的每张样式表边界。HTML 的 style 结束标签、nonce 属性和 manifest JSON 已做对应编码。不要用客户端 style.outerHTML 抽取 CSS：动态规则通过 CSSOM 插入，应从 runtime.snapshot/renderStyles 获取。
-
-## 支持范围与实现选择
-
-- 使用原生 CSS nesting，要求支持交错声明的现代浏览器；当前真实浏览器验收基于 Chrome 153。没有自动展开为旧浏览器 CSS，也没有自动加厂商前缀。
-- CSSTree 3.2.1 是固定的运行时解析依赖，处理选择器、值、规则边界及所需描述符检查。生成工具仍使用固定数据版本。
-- 原始值/规则必须通过语法解析，但语法成功不等于所有浏览器实现了该属性或值。目录中的规范条目依然可能是浏览器尚未支持的特征。
-- 每个逻辑记录目前拥有可定位的 style 节点，便于独立插入、原位替换、回滚与 SSR 恢复；后续依据测量优化分组。`stats()` 提供记录数量与 CSS 字符数。
-- 框架编译器自动提升安全的动态属性值，复杂情况保留运行时重算；core 本身不猜测响应式所有权。Vue/Svelte 的监听与生命周期由各自适配器实现，core 不依赖框架。
-
-## 验收命令
-
-```powershell
-pnpm generate:check
-pnpm build
-pnpm check
-pnpm test
-pnpm test:types
-pnpm test:browser:core
-```
-
-浏览器验收默认使用已安装的 Chrome；也可通过 ZERODEP_BROWSER_CHANNEL 指定已具备的 Playwright Chromium channel。报告在 test-results/browser，类型/LSP 报告在 test-results/types。许可见 THIRD_PARTY_NOTICES.md。
+CSS 属性声明与运行时元数据同源生成：属性类型在 `core/src/generated/properties.ts`，完整运行时数据在 `internal/runtime/generated/metadata.ts`。不要手改生成文件。作者模型用 core 的类型检查验证，运行时另执行 `pnpm check:runtime` 与 `pnpm test:browser:runtime`；这些命令的最新完成状态以[实施记录](../docs/production.md)为准。

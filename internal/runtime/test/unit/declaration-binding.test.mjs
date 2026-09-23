@@ -134,3 +134,27 @@ test('不合法或无法证明的属性值保留原声明，不能改变前置 f
   assert.equal(display.value('ruby-base-container'), 'ruby-base-container');
   assert.equal(display.value('flex'), 'var(--display)');
 });
+
+test('语法表没有表达的负值范围保留为直接声明', () => {
+  for (const [property, value] of [
+    ['stroke-width', '-1px'],
+    ['stroke-dasharray', '5px -1px'],
+    ['line-height', '-1px'],
+    ['border-width', '-1px'],
+  ]) {
+    const binding = createDeclarationBinding('--negative', { property });
+    assert.equal(binding.value(value), value, property);
+    assert.equal(binding.inline(value), undefined, property);
+  }
+
+  const margin = createDeclarationBinding('--margin', { property: 'margin-left' });
+  assert.equal(margin.value('-1px'), '-1px');
+  assert.equal(margin.inline('-1px'), undefined);
+
+  const opacity = createDeclarationBinding('--opacity', {
+    property: 'opacity',
+    numbers: [{}],
+  });
+  assert.equal(opacity.value(-0.5), 'var(--opacity)');
+  assert.equal(opacity.inline(-0.5), '-0.5');
+});

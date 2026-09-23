@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { createDeclarationBinding } from '../../../core/dist/binding.js';
+import { createDeclarationBinding } from '../../../internal/runtime/dist/binding.js';
 
 const candidates = [];
 function add(property, values) {
@@ -12,7 +12,7 @@ function add(property, values) {
     }
   }
 }
-const channels = ['0', '1', '100', '-1', '10%', '50%', 'none'];
+const channels = ['0', '1', '25', '75', '100', '-1', '10%', '50%', 'none'];
 const colors = [];
 for (const fn of ['rgb', 'rgba', 'hsl', 'hsla'])
   for (const separator of [',', ' '])

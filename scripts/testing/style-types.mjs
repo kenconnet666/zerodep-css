@@ -9,7 +9,7 @@ const require = createRequire(resolve(root, 'package.json'));
 const { Client } = require('@modelcontextprotocol/sdk/client/index.js');
 const { StdioClientTransport } = require('@modelcontextprotocol/sdk/client/stdio.js');
 const paths = [
-  'core/test/types/__style_negative__.ts',
+  'internal/runtime/test/types/__style_negative__.ts',
   'vue/test/types/__StyleNegative.vue',
   'svelte/test/types/__StyleNegative.svelte',
 ];
@@ -47,7 +47,7 @@ function source(file, valid) {
   if (file.endsWith('.svelte'))
     return `<script lang="ts">${imported}</script>\n<div title={String(css(s => { ${declarations(valid)} }).length)}></div>`;
   return (
-    "import { css } from '../../src/index.js';\nexport const result = css(s => { " +
+    "import { css } from '../../index.js';\nexport const result = css(s => { " +
     declarations(valid) +
     ' });'
   );

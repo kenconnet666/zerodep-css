@@ -5,8 +5,7 @@ import {
   type StyleManifest,
   type StyleRuntime,
 } from './runtime.js';
-import type { StylesheetFactory } from './builder-types.js';
-import type { StylesheetDefinition } from './style-program.js';
+import { type StylesheetFactory, type StylesheetDefinition } from '@zerodep-css/core/internal';
 
 export interface StyleContextManifest {
   readonly version: 1;

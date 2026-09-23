@@ -1,18 +1,25 @@
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { build } from 'esbuild';
-import { launchBrowser } from '../../../scripts/testing/browser-launch.mjs';
+import { launchBrowser } from '../../../../scripts/testing/browser-launch.mjs';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 
 test('独立 runtime 模块共享浏览器宿主所有权', async () => {
-  // 两个 URL 各自实例化完整 runtime；只有 host.js 是同一个浏览器模块。
+  // 两个 URL 各自实例化引擎；core/internal 同一 URL 保证 Css 与宿主注册身份一致。
+  const shared = await build({
+    entryPoints: [resolve(root, 'core/dist/internal.js')],
+    bundle: true,
+    format: 'esm',
+    platform: 'browser',
+    target: 'es2023',
+    write: false,
+  });
   const bundled = await build({
-    entryPoints: [resolve(root, 'core/dist/runtime.js')],
+    entryPoints: [resolve(root, 'internal/runtime/dist/runtime.js')],
     bundle: true,
     format: 'esm',
     platform: 'browser',
@@ -20,10 +27,10 @@ test('独立 runtime 模块共享浏览器宿主所有权', async () => {
     write: false,
     plugins: [
       {
-        name: 'shared-host',
+        name: 'shared-core-author',
         setup(bundler) {
-          bundler.onResolve({ filter: /^\.\/host\.js$/ }, () => ({
-            path: '/host.js',
+          bundler.onResolve({ filter: /^@zerodep-css\/core(?:\/internal)?$/ }, () => ({
+            path: '/shared-core.js',
             external: true,
           }));
         },
@@ -31,11 +38,11 @@ test('独立 runtime 模块共享浏览器宿主所有权', async () => {
     ],
   });
   const runtimeJs = bundled.outputFiles[0].contents;
-  const hostJs = await readFile(resolve(root, 'core/dist/host.js'));
+  const sharedJs = shared.outputFiles[0].contents;
   const http = createServer((request, response) => {
-    if (request.url === '/host.js') {
+    if (request.url === '/shared-core.js') {
       response.setHeader('Content-Type', 'text/javascript');
-      response.end(hostJs);
+      response.end(sharedJs);
     } else if (request.url === '/runtime-a.js' || request.url === '/runtime-b.js') {
       response.setHeader('Content-Type', 'text/javascript');
       response.end(runtimeJs);

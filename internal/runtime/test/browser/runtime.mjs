@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { withBrowserPage } from '../../../scripts/testing/browser-evidence.mjs';
+import { withBrowserPage } from '../../../../scripts/testing/browser-evidence.mjs';
 
 export async function runBrowserTests(browser, baseUrl, ssr, output, match) {
   const results = [];
@@ -135,6 +135,103 @@ export async function runBrowserTests(browser, baseUrl, ssr, output, match) {
       }
     });
     assert.deepEqual(result, { computed: ['5px', '5px', '5px'], variables: [] });
+    return result;
+  });
+  await scenario('raw 字符串负数 token 保留解析时级联', async (page) => {
+    const result = await page.evaluate(async () => {
+      const { bindValue, createDeclarationBinding } = await import('/bindings.js');
+      const baseline = document.createElement('style');
+      baseline.textContent = `
+        svg { stroke-width: 12px; stroke-dasharray: 12px 12px; }
+        .stroke-width-base { stroke-width: 5px; }
+        .stroke-dasharray-base { stroke-dasharray: 2px 2px; }
+        .line-parent { line-height: 20px; }
+        .line-height-base { line-height: 5px; }
+        .border-width-base { border-style: solid; border-width: 5px; }
+      `;
+      document.head.append(baseline);
+      const runtime = window.z.createRuntime({ namespace: 'raw-negative-string' });
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      const lineParent = document.createElement('div');
+      lineParent.className = 'line-parent';
+      const nodes = [svg, lineParent];
+      document.body.append(svg, lineParent);
+
+      try {
+        function pair(property, member, value, baseClass, parent, tagName) {
+          const binding = createDeclarationBinding('--negative', { property });
+          const variables = Object.create(null);
+          const directClass = runtime.css((s) => s[member].raw(value));
+          const boundClass = runtime.css((s) =>
+            s[member].raw(bindValue(variables, '--negative', binding, value)),
+          );
+          const result = [];
+          for (const [className, addVariables] of [
+            [directClass, false],
+            [boundClass, true],
+          ]) {
+            const element = document.createElementNS(
+              parent.namespaceURI || 'http://www.w3.org/1999/xhtml',
+              tagName,
+            );
+            element.setAttribute('class', baseClass + ' ' + className);
+            if (addVariables)
+              for (const [name, text] of Object.entries(variables))
+                element.style.setProperty(name, text);
+            parent.append(element);
+            nodes.push(element);
+            result.push(getComputedStyle(element).getPropertyValue(property));
+          }
+          return { values: result, variables: Object.keys(variables) };
+        }
+
+        const results = {
+          strokeWidth: pair(
+            'stroke-width',
+            'strokeWidth',
+            '-1px',
+            'stroke-width-base',
+            svg,
+            'path',
+          ),
+          strokeDasharray: pair(
+            'stroke-dasharray',
+            'strokeDasharray',
+            '5px -1px',
+            'stroke-dasharray-base',
+            svg,
+            'path',
+          ),
+          lineHeight: pair(
+            'line-height',
+            'lineHeight',
+            '-1px',
+            'line-height-base',
+            lineParent,
+            'span',
+          ),
+          borderWidth: pair(
+            'border-width',
+            'borderWidth',
+            '-1px',
+            'border-width-base',
+            document.body,
+            'div',
+          ),
+        };
+        return results;
+      } finally {
+        runtime.dispose();
+        baseline.remove();
+        for (const node of nodes) node.remove();
+      }
+    });
+    assert.deepEqual(result, {
+      strokeWidth: { values: ['5px', '5px'], variables: [] },
+      strokeDasharray: { values: ['2px, 2px', '2px, 2px'], variables: [] },
+      lineHeight: { values: ['5px', '5px'], variables: [] },
+      borderWidth: { values: ['5px', '5px'], variables: [] },
+    });
     return result;
   });
   await scenario('作者层覆盖先于 CSS 优先级且按上下文隔离', async (page) => {

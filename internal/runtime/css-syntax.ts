@@ -1,5 +1,6 @@
-import { fork, ident, tokenTypes, type CssNode, type ParseOptions } from 'css-tree';
-import { valuePriorityOffset } from './css-value.js';
+import { fork, ident, tokenTypes } from './css-parser.js';
+import type { CssNode, ParseOptions } from 'css-tree';
+import { valuePriorityOffset } from '@zerodep-css/core/internal';
 
 type RawValue = Extract<CssNode, { type: 'Raw' }>;
 interface DeclarationParser {

@@ -23,9 +23,12 @@ for (const name of [
   'cssVar',
   'readTheme',
 ]) {
+  const entry = ['Css', 'defineTheme', 'cssVar'].includes(name)
+    ? './core/dist/index.js'
+    : './internal/runtime/dist/index.js';
   const result = await build({
     stdin: {
-      contents: `import { ${name} } from './core/dist/index.js'; console.log(${name});`,
+      contents: `import { ${name} } from '${entry}'; console.log(${name});`,
       resolveDir: root,
     },
     bundle: true,
@@ -49,6 +52,13 @@ for (const name of [
   const leaked = modules.filter(
     (m) => m.bytes && /(?:node:|vite|typescript|@babel|compiler-sfc|svelte\/compiler)/.test(m.file),
   );
+  if (modules.some((m) => m.bytes && /css-tree\/dist\/csstree\.esm\.js$/.test(m.file)))
+    assert(
+      !modules.some(
+        (m) => m.bytes && /css-tree\/(?:lib\/(?:syntax|lexer|parser|data)|dist\/data)/.test(m.file),
+      ),
+      'Portable parser must not retain a second copy through a root side-effect import.',
+    );
   if (name === 'Css')
     assert(
       !modules.some((m) => m.bytes && /(?:generated\/metadata|css-tree)/.test(m.file)),

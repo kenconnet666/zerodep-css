@@ -1,17 +1,12 @@
 import { getContext, setContext } from 'svelte';
-import type {
-  ThemeDefinition,
-  ThemeInput,
-  ThemeScope,
-  ThemeTree,
-  ThemeValues,
-} from '@zerodep-css/core';
+import type { ThemeDefinition, ThemeInput, ThemeTree, ThemeValues } from '@zerodep-css/core';
 import {
+  type ThemeScope,
   createThemeScope,
   prepareThemeStyle,
   readTheme,
   resolveTheme,
-} from '@zerodep-css/core/style-scope';
+} from '#runtime';
 
 export const themeKey = Symbol('zerodep-css-theme');
 

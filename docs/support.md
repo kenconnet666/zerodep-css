@@ -11,9 +11,11 @@
 | Vue      | Vue 3.5；原生 computed/watch、provide/inject、Teleport、客户端与完整字符串 SSR             |
 | Svelte   | Svelte 5；原生 rune、context、客户端与完整字符串 SSR，rune 模块走官方编译器                |
 | 样式宿主 | Document、ShadowRoot、显式 insertionPoint、CSP style nonce                                 |
-| 独立消费 | 仓库构建与 tarball 验证；三个包仍 private，未公开发布 npm                                  |
+| 独立消费 | 仓库构建与 tarball 检查属于验收门槛；目录迁移后的本地独立消费已通过，三个包仍 private      |
 
 运行时 CSS 是正式能力。`css` 的回调可使用普通函数、`if`/`switch` 和真实 `Css` 继承；`css` 执行回调后同步返回 class 字符串，可选编译插件只优化能证明等价的路径。原生 nesting、layer、scope、容器查询等不做通用前缀或 polyfill；不支持的根规则若注册失败，不会被记录为成功。完整字符串 SSR 已有基础 Vue/Svelte 接入；流式分块 SSR、Nuxt/SvelteKit 专用请求流程以及边缘运行环境尚不在当前已验收范围。
+
+core 根入口只提供 `Css`、`cssVar`、`defineTheme` 三个运行值和作者类型；内置预设从 `/themes` 导入。Vue/Svelte 根入口保留 `createStyles`、`Css`、`defineTheme`、`cssVar`、`keyframes` 五个运行值。完整引擎在 `internal/runtime`，构建时复制到适配包各自的 `dist/runtime`；`@zerodep-css/core/internal` 与适配包的 `#runtime` 均不是业务 API。引擎迁移后的本地类型、浏览器和独立消费已通过；跨平台结果以对应提交 CI 为准。
 
 ## 项目入口与所有权
 
@@ -29,4 +31,4 @@ Vue 使用 `host.install(app)`，应用卸载会释放 host；同一 host 不属
 
 自动编译目前只分析同一 SFC 中能直接追踪的 `createStyles`/`useCss` 来源，包括直接链式调用；跨项目模块的调用保守保留运行时。安全动态值可成为元素变量绑定，CSS-wide、空值及无法证明等价的结构保持原声明或运行时路径。严格 CSP 禁止元素 style 属性时，可选插件使用 `cssPlugin({ bindings: 'runtime' })` 与请求 nonce；应用自己写的 style 属性仍由应用负责。脚本中的普通 `const` class 是快照，响应式重算由 Vue computed 或 Svelte `$derived`/模板承担。
 
-完整运行时入口的体积与 `cssVar` 等小入口不同。运行时包含属性数据、解析、序列化、宿主注册和缓存。普通结果缓存最多 256 项、键不超过 65,536 字符；绑定字符串缓存最多 128 项且合计不超过 65,536 个 UTF-16 字符。缓存可驱逐，但已注册规则可能仍被 DOM 或已保存的 class 字符串使用，不能随缓存淘汰删除。`maxRecords` 可限制记录增长，超限会拒绝新增且不破坏旧记录。`name` 和 `config({ debug })` 提供按需来源诊断，不改变内容哈希；服务端与客户端恢复应使用同一构建产物。
+适配器完整运行时入口的体积与 core 中 `cssVar` 等小入口不同。完整引擎包含属性数据、解析、序列化、宿主注册和缓存。普通结果缓存最多 256 项、键不超过 65,536 字符；绑定字符串缓存最多 128 项且合计不超过 65,536 个 UTF-16 字符。缓存可驱逐，但已注册规则可能仍被 DOM 或已保存的 class 字符串使用，不能随缓存淘汰删除。`maxRecords` 可限制记录增长，超限会拒绝新增且不破坏旧记录。`name` 和 `config({ debug })` 提供按需来源诊断，不改变内容哈希；服务端与客户端恢复应使用同一构建产物。

@@ -5,10 +5,10 @@
 ## 先读这些记录
 
 - [已拍板合同](runtime-first.md)：运行时 CSS 是正式能力；编译、变量绑定和缓存只做等价优化。Vue 3.5/Svelte 5、Nuxt 4/SvelteKit 2、Node SSR 与静态部署是首版目标。
-- [阶段、提交和实际验证](production.md)：P1 已完成；P2 在收敛作者入口、宿主与引擎边界。后续 P3–P6 尚须继续，不宣称目标已经全部完成。
+- [阶段、提交和实际验证](production.md)：P1 已完成基础阶段；P2e 引擎归位、构建、独立消费和本地回归已通过；对应提交的远程 CI 仍须确认。后续 P3–P6 尚须继续，不宣称目标已经全部完成。
 - [当前公开 API 迁移](migration.md)、[支持边界](support.md)、[编译边界](compiler.md)：以这些文件和当前源码为准。历史 API/性能证据从 Git 查询。
 
-新项目使用 createStyles 绑定 useCss/useTheme/provideTheme/useGlobalCss，createHost 按应用或请求创建。Vue app.use(host)，Svelte 根 host.provide；Vue 应用卸载释放 host，Svelte 最终 unmount 后由入口显式释放。SSR 都在完整输出后 finally dispose。core 的旧独立引擎入口尚待 P2e 迁出，不能把过渡结构当作最终包边界。
+新项目使用 `createStyles` 绑定 `useCss`/`useTheme`/`provideTheme`/`useGlobalCss`，`createHost` 按应用或请求创建。Vue `app.use(host)`，Svelte 根 `host.provide()`；Vue 应用卸载释放 host，Svelte 最终 `unmount` 后由入口显式释放。SSR 都在完整输出后 `finally dispose`。core 根入口是薄作者模型；完整引擎在 `internal/runtime`，构建时复制到两个适配包。`core/internal` 与适配包 `#runtime` 是内部边界，不用于业务代码。
 
 ## 取得工作区
 
@@ -19,6 +19,8 @@ git switch codex/runtime-first
 pnpm install --frozen-lockfile
 pnpm build
 pnpm check
+pnpm check:runtime
+pnpm test:browser:runtime --no-build
 pnpm lsp:setup
 ```
 
@@ -38,6 +40,6 @@ pnpm lsp:setup
 
 性能文档中的早期横向数据属于历史基线；P4 要按新 API 分别复测 Vue/Svelte、运行时/可选优化和原生 CSS，不把小入口体积当成完整引擎体积，也不承诺等于原生 CSS。
 
-旧调试遗留过不属于当前执行的临时目录，相关删除曾被自动审查拒绝；不要为了收尾清理未知目录、共享包缓存或其它项目资源。当前测试应只在 finally 清理自己创建的临时目录；需要留存的证据放研究结果或相应报告目录。
+测试只清理本次创建的临时目录；需要保留的失败证据放研究结果或相应报告目录，不删除来源不明的共享数据。
 
 产品包保持 private，不自动发布 npm 或改变许可证。

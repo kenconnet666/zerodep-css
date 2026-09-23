@@ -5,9 +5,9 @@ import {
   type CssFunction,
   type StyleInput,
   type StyleRuntime,
-} from '../../src/index.js';
-import { ThemeCss } from '../../src/themes.js';
-import { createRuntimeView } from '../../src/style-scope.js';
+} from '../../index.js';
+import { ThemeCss } from '../../../../core/src/themes.js';
+import { createRuntimeView } from '../../style-scope.js';
 
 class AppCss extends Css {
   get color() {

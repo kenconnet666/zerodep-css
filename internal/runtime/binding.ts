@@ -1,9 +1,16 @@
-import { parse, walk, ident, lexer } from 'css-tree';
-import type { NumericCheck, NumericAlternatives } from './metadata-types.js';
-import { isCssVariable, validateCustomName } from './values.js';
+import { parse, walk, ident, lexer } from './css-parser.js';
+import {
+  type NumericCheck,
+  type NumericAlternatives,
+  isCssVariable,
+  validateCustomName,
+  assertValueStructure,
+  normalizeCssText,
+} from '@zerodep-css/core/internal';
+
 import { StringCache } from './string-cache.js';
 import { portableUnits } from './binding-policy.js';
-import { assertValueStructure, normalizeCssText } from './css-value.js';
+
 import type { CssNode } from 'css-tree';
 
 /** 保留单位多参数备选语法的整体约束，不能把位置约束分别取并集。 */
@@ -213,16 +220,18 @@ function portableValue(ast: CssNode, property: string): boolean {
     switch (node.type) {
       case 'Value':
       case 'WhiteSpace':
-      case 'Number':
-      case 'Percentage':
       case 'Hash':
       case 'Url':
+        break;
+      case 'Number':
+      case 'Percentage':
+        if (Number(node.value) < 0) safe = false;
         break;
       case 'Operator':
         if (!['/', ','].includes(node.value) || property === 'content') safe = false;
         break;
       case 'Dimension':
-        if (!portableUnits.has(node.unit.toLowerCase())) safe = false;
+        if (!portableUnits.has(node.unit.toLowerCase()) || Number(node.value) < 0) safe = false;
         break;
       case 'Function':
         if (!portableFunctions.has(node.name.toLowerCase())) safe = false;

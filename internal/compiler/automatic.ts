@@ -5,10 +5,10 @@ import {
   keywordGroups,
   propertyMetadata,
   unitFamilies,
-} from '../../core/src/generated/metadata.js';
-import type { NumericAlternatives } from '../../core/src/metadata-types.js';
-import type { DeclarationFormat } from '../../core/src/binding.js';
-import { portableUnits } from '../../core/src/binding-policy.js';
+} from '../runtime/generated/metadata.js';
+import type { NumericAlternatives } from '@zerodep-css/core/internal';
+import type { DeclarationFormat } from '../runtime/binding.js';
+import { portableUnits } from '../runtime/binding-policy.js';
 
 interface Declaration {
   call: ts.CallExpression;

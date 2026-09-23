@@ -4,13 +4,16 @@
 
 ## 包与源码边界
 
-- `core`：真实 `Css` 类、类型与生成 CSS 数据、有序样式描述、解析/序列化、主题定义、浏览器宿主仲裁、CSSOM 与完整字符串 SSR 运行时。`css-tree` 仍是运行时依赖，仓库名不表示没有第三方依赖。完整引擎目前物理上仍在 `core/src`；迁到共享 `internal/runtime` 再纳入框架包是后续阶段，不能视作已完成。
-- `vue`：Vue 3.5 的 provide/inject、computed/watch 与组件生命周期；`createStyles` 将配置绑定到 `useCss` 等方法，`createHost().install(app)` 安装应用宿主。
+- `core`：真实 `Css` 类、作者类型、`cssVar`、`defineTheme`、预设与跨适配器共享的身份和宿主仲裁。根入口只有 `Css`、`cssVar`、`defineTheme` 三个运行值及作者类型；`/themes` 提供预设。`/internal` 是非业务桥，不从根入口加载完整引擎。主题值检查仍依赖 `css-tree` 的 tokenizer。
+- `internal/runtime`：有序样式描述、完整生成元数据、解析/序列化、绑定、缓存、CSSOM/SSR 注册与恢复。它不是第六个产品包；根构建按模块编译后，将 JS、声明和地图复制到 Vue/Svelte 各自的 `dist/runtime`。
+- `vue`：Vue 3.5 的 provide/inject、computed/watch 与组件生命周期；`createStyles` 绑定 `useCss` 等方法，`createHost().install(app)` 安装应用宿主。
 - `svelte`：Svelte 5 的 context、模板和 `$derived`，以及组件全局样式的 effect 生命周期；`createHost().provide()` 在根组件初始化时安装宿主。rune 模块通过官方编译链处理。
 - `internal/compiler`：两框架共享的严格 TS 源码分析，构建时内联到各自独立的 `./compiler` 子路径。生成代码所需的运行时辅助入口与业务根入口分开，不把 Node 编译依赖导入浏览器入口。
-- `scripts/css-data` 生成运行时元数据与作者类型；`scripts/testing` 和 `scripts/language-services` 分别承担真实组件/消费者验收与项目级语言服务。
+- `scripts/css-data` 从同一数据生成 `core/src/generated/properties.ts` 与 `internal/runtime/generated/metadata.ts`；`scripts/testing` 和 `scripts/language-services` 分别承担真实组件/消费者验收与项目级语言服务。引擎单元、类型和浏览器夹具位于 `internal/runtime/test`。
 
 现有三个产品包均位于根目录且保持 private。Nuxt 4 与 SvelteKit 2 的专用包、Node SSR 和静态预渲染完整验收属于首版后续阶段，目前未作为已实现包列入此边界。
+
+适配器的 `#runtime` 是各自 `package.json#imports` 定义的私有路径，只指向本包内的 `dist/runtime`；发布产物不引用工作区外的源码。两份内部引擎都从 `@zerodep-css/core/internal` 取得同一个 `Css` 构造器、变量品牌、主题/准备标记及浏览器宿主注册表，不能各自复制这些身份。core 根入口不提供 `css`、`createRuntime`、`createStyleContext`、`keyframes` 或全局挂载业务函数；适配包根入口提供 `createStyles`、`Css`、`defineTheme`、`cssVar`、`keyframes` 五个运行值。
 
 ## 应用配置、执行与恢复
 
@@ -33,7 +36,7 @@ export const { useCss, useTheme, provideTheme, useGlobalCss, createHost } = crea
 
 ```text
 作者回调 / AppCss
-  → 真实 Css + 有序样式描述
+  → core 真实 Css + 适配包内部引擎的有序样式描述
   → 同上下文规范属性归并、序列化和校验
   → 内容哈希、资源与宿主事务注册
   → class 字符串
@@ -51,4 +54,4 @@ export const { useCss, useTheme, provideTheme, useGlobalCss, createHost } = crea
 
 可选 `cssPlugin` 当前只识别同一 SFC 内能直接追踪的 `createStyles`/`useCss` 来源，包括直接链式调用。项目 `styles.ts` 跨文件导出的绑定方法保持完整运行时行为，尚不做跨模块编译证明。变量绑定会在原求值点读取动态输入，复杂回调或派生作者类保守回退；优化失败不改变合法作者代码的执行、错误和 SSR 合同。
 
-完整运行时入口与 `cssVar` 等小入口体积不同；属性元数据、解析器、序列化和宿主注册仍是浏览器完整运行时所需代码。原生 CSS 特性由目标浏览器实现，本库不提供通用前缀或 polyfill。当前实现与最终生产就绪之间仍有目录迁移、元框架接入及完整矩阵验收，见[生产实施记录](production.md)。
+core 的小作者入口与适配器完整运行时入口体积不同；属性元数据、解析器、序列化和宿主注册仍是浏览器完整运行时所需代码。原生 CSS 特性由目标浏览器实现，本库不提供通用前缀或 polyfill。源码归位和构建复制已进入 P2e，当前结果仍待针对性和完整矩阵验收；元框架接入也尚未完成，见[生产实施记录](production.md)。

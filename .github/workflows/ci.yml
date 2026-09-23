@@ -91,7 +91,7 @@ jobs:
       - run: pnpm exec playwright install --with-deps ${{ matrix.engine }}
       - run: pnpm build
       - run: pnpm test:browser:frameworks --no-build
-      - run: pnpm test:browser:core --no-build
+      - run: pnpm test:browser:runtime --no-build
         if: success() || failure()
       - uses: actions/upload-artifact@v4
         if: always()

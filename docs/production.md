@@ -20,7 +20,7 @@
 ## 当前进度
 
 - 已完成决策讨论并进入目标模式。
-- P1 已完成作者覆盖、raw 原生值、单位空值和主题继承的实施及本地验证。下一阶段进入 P2 的薄 core、项目入口、useCss 和统一组合。
+- P1 已完成作者覆盖、raw 原生值、单位空值和主题继承的实施及本地验证。P2 的项目入口、useCss、统一组合已交付；内部引擎归位正在完成独立消费验收，后续进入 P3 生命周期与诊断。
 - P1a 本地通过 check/build、generate:check、现有单元回归、TS/Vue/Svelte 独立类型负例、19 个 core 浏览器场景、双框架 SSR/hydration/原生更新/HMR；normalize 的原生 LSP 完整零错误。最终跨平台/三引擎以对应提交 CI 为准。
 - 本页仅记录实际进度，尚未宣称新架构完成或最终 CI 通过。
 - P1b 提交 6fe37b2 与 SSR manifest 补充修复 0600d3f 均已推送且对应远程 CI 成功；P1c 的本地结果不代表尚未提交代码已通过 CI。
@@ -98,6 +98,18 @@ createStyles 四个明确重载要求作者类、默认主题的泛型必须由�
 
 本地根 check/build、167 项完整单元、后续新增 Proxy 回归的定向单元、三语言负例、双框架 SSR/hydration/HMR/项目宿主、独立 tarball 与体积门禁通过。迁移文档与换机入口已重写。P2c/P2d 提交 cfd6b17/82bcec3 的远程 CI 均已通过。
 
+### P2e 内部引擎与独立消费
+
+完整引擎与测试迁至 internal/runtime，core 只保留共享作者模型、主题定义、轻量值边界和宿主身份。构建先产出 core，再按模块生成引擎并复制到 Vue/Svelte 的 dist/runtime；适配器通过包内 #runtime 映射读取，Node 编译器和编译产物 helper 分属各框架独立子路径。两份引擎共用 core 的 Css、变量/主题标记和 DOM 所有权，避免跨适配器身份冲突。
+
+源码检查使用 zerodep-source，发布构建解析包内声明；移开全部 dist 后的根 check 已通过，避免用陈旧产物遮蔽干净 CI 问题。引擎类型/单元/浏览器夹具归属 internal/runtime/test，命令改为 test:browser:runtime，不保留旧命令别名。新 LSP watcher 递归覆盖内部运行时，完整三语言语义验收通过。
+
+独立消费者暴露两项包边界问题并驱动修正：内部共享桥不再多导出 tokenizer 的第三方类型；完整解析器统一从官方 css-tree/dist/csstree.esm 读取，避免 Svelte SSR 二次打包后 createRequire 相对 JSON 路径失效。保留原类型声明，未要求应用配置额外 external。模块图断言禁止同时保留完整源码解析器与便携解析器。
+
+便携解析器与 core 轻量 tokenizer 在完整引擎中有少量重复代码；完整 css 入口从迁移后的 510960 B / 104874 B gzip 变为 516136 B / 106805 B gzip，增加约 1.8% gzip，换取无额外配置的 SSR 打包兼容。原始体积预算保持不变，三个完整引擎入口的 gzip 预算各增加 3000 B；Css/defineTheme/cssVar 等小入口预算不变。这不是运行速度测量，P4 仍需单独诊断。
+
+本地根 check/build、无 dist 检查、生成一致性、172 项单元、三语言类型负例与 LSP、25 个运行时浏览器场景、独立引擎共享宿主、双框架 SSR/hydration/HMR/项目宿主、独立 tarball 的 NodeNext 类型与生产构建均通过。最后统一解析器导入后另通过组合/事务/跨引擎身份定向回归、模块图和体积检查，再次完整通过两框架独立消费者。生产依赖审计无已知漏洞；成功消费者自行清理。本次失败消费者临时目录 zerodep-consumer-tBeOVK、zerodep-consumer-LsYPcY、zerodep-consumer-9E6gze 的定点清理被自动审批策略拒绝，保留在系统临时目录，不绕过拒绝。P2e 远程 CI 以提交后的实际结果为准；此前 558a27a/8f882d1 两次 raw 修复的远程 CI 均已通过。
+
 ### raw 数字语义补正
 
 raw(number) 只拒绝 NaN/Infinity，不再用属性元数据提前拒绝有限数字。自动绑定仍需证明数字满足属性语法；不能证明时保留直接声明，不写 inline 变量。否则 z-index:1.5 等原本在解析时失效的声明，变成 var 后会在计算值阶段失效，错误地遮蔽外部层叠值。token 与显式单位方法的参数合同保持各自校验。
@@ -105,6 +117,8 @@ raw(number) 只拒绝 NaN/Infinity，不再用属性元数据提前拒绝有限�
 本地根 check/build、170 项单元、三语言类型负例与 LSP 通过。真实 Chrome 差分覆盖直接原生声明、运行时声明和编译绑定 helper：z-index:1.5 与 font-weight:1001 保留外部有效值，opacity:2 正常钳制为 1。
 
 独立复核补充发现：宽泛语法表不包含所有规范正文限制，例如负数 stroke-width。因此数字变量优化只覆盖已核实的常用数值属性，其他数字保留直接声明；同样处理单个数字字符串。整数属性还要求序列化后是整数 token，不能把 Number.isInteger(1e21) 当成 CSS 整数证明。定向单元与真实 SVG 层叠回归通过。依据：[Fill and Stroke 的非负宽度要求](https://www.w3.org/TR/fill-stroke-3/#stroke-width)、[CSS Syntax 整数 token](https://www.w3.org/TR/css-syntax-3/#typedef-integer)、[变量的计算值失效行为](https://www.w3.org/TR/css-variables-1/#invalid-variables)。
+
+raw 字符串变量化也对负的 number、dimension 和 percentage token 保守回退；属性语法表能匹配 `<length>` 等基础类型，却未必表达 `stroke-width`、`border-width` 或 `line-height` 对负值的正文限制。负值合法的属性同样保留直接声明，只减少优化；有限数值 opacity 仍可走钳制快速路径。真实浏览器直接声明与 var 替换差分覆盖这些负维度边界。
 
 ### P1 覆盖边界调整
 

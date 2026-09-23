@@ -10,7 +10,7 @@
 | ------------------------------------------------------ | -------------------------------------------------- |
 | TS/Vue/Svelte 与编译器类型                             | `pnpm check`、`pnpm lsp:verify`、`pnpm test:types` |
 | 产品与编译器单元                                       | `pnpm test:unit`                                   |
-| CSSOM、资源、顺序、CSP、ShadowRoot、事务和 SSR         | `pnpm test:browser:core`                           |
+| CSSOM、资源、顺序、CSP、ShadowRoot、事务和 SSR         | `pnpm test:browser:runtime`                        |
 | 原生响应式、主题、派生类、自动绑定、SSR/hydration、HMR | `pnpm test:browser:frameworks`                     |
 | 独立 tarball、官方插件、导出、声明、地图与生产依赖审计 | `pnpm test:consumer`                               |
 | 生成一致性与体积                                       | `pnpm generate:check`、`pnpm size:check`           |

@@ -4,7 +4,7 @@ import { computed, ref, createSSRApp, h } from 'vue';
 import { renderToString } from 'vue/server-renderer';
 import { defineTheme } from '../../dist/index.js';
 import { useTheme, provideTheme } from '../../dist/theme.js';
-import { createThemeScope } from '../../../core/dist/style-scope.js';
+import { createThemeScope } from '../../../internal/runtime/dist/style-scope.js';
 
 test('Vue 主题 getter 在使用点跟踪依赖，初始化不读取且请求间不共享值', () => {
   const theme = defineTheme('app', { color: 'red' });

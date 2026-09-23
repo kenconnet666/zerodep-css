@@ -146,6 +146,9 @@ importers:
       '@webref/css':
         specifier: 'catalog:'
         version: 8.7.5(css-tree@3.2.1)
+      '@zerodep-css/core':
+        specifier: workspace:*
+        version: link:core
       css-tree:
         specifier: 'catalog:'
         version: 3.2.1
@@ -215,6 +218,9 @@ importers:
       '@zerodep-css/core':
         specifier: workspace:^
         version: link:../core
+      css-tree:
+        specifier: 'catalog:'
+        version: 3.2.1
       magic-string:
         specifier: 'catalog:'
         version: 0.30.21
@@ -234,6 +240,9 @@ importers:
       '@zerodep-css/core':
         specifier: workspace:^
         version: link:../core
+      css-tree:
+        specifier: 'catalog:'
+        version: 3.2.1
       magic-string:
         specifier: 'catalog:'
         version: 0.30.21

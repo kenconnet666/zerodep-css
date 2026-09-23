@@ -3,7 +3,7 @@
 已拍板合同见 [runtime-first](runtime-first.md)，具体进度和证据见 [production](production.md)。当前持续实施目标尚未全部完成；以下按工作顺序推进。
 
 1. **P1 作者语义**：同上下文同名属性后写替换、原生简写关系、raw 结构边界、空值省略和主题继承，已完成基础验证。
-2. **P2 API 与包边界**：createStyles/useCss/createHost、统一组合、删除旧同义入口；把完整引擎迁至内部目录，core 保留薄作者模型。共享宿主仲裁不能随 Vue/Svelte 打包重复。
+2. **P2 API 与包边界**：createStyles/useCss/createHost、统一组合和旧同义入口移除已进入实现；完整引擎源码已归位 `internal/runtime`，构建时复制到 Vue/Svelte 的包内私有 `dist/runtime`。core 保留作者模型及共享宿主仲裁，不能随两份引擎重复。当前仍需完成新包边界的类型、浏览器和独立消费验收。
 3. **P3 生命周期与诊断**：全局同 key 同内容共享和冲突、请求/应用边界、失败恢复、宽松增长诊断；先保持 native computed/runes 的所有权，不叠加第二套响应式系统。
 4. **P4 等价优化与性能**：依据实际热点优化 Builder/序列化/缓存与可证明的编译计划；考虑跨模块项目配置、有限分支和简单表达式。分别测 Vue/Svelte，与原生 CSS 和其他方案比较；不能为数字改变回调求值或值失效语义。
 5. **P5 元框架**：新增 Nuxt 4、SvelteKit 2 两个正式适配包，真实验证 Node SSR、hydration、导航、HMR、生产构建和静态预渲染。边缘运行环境、Nuxt 3 和流式 SSR 后续单独验收。

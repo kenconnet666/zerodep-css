@@ -5,6 +5,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationMap": false,
+    "customConditions": [],
     "rootDir": "../..",
     "outDir": "../../test-results/compiler-types"
   }

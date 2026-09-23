@@ -1,17 +1,22 @@
-import { generate, ident, lexer, parse, walk, type CssNode, type StyleSheet } from 'css-tree';
-import { hashText } from './hash.js';
-import { validateStyleName, type StyleDebug, type StyleMetadata } from './style-metadata.js';
+import { generate, ident, lexer, parse, walk } from './css-parser.js';
+import type { CssNode, StyleSheet } from 'css-tree';
+import {
+  hashText,
+  validateStyleName,
+  type StyleDebug,
+  type StyleMetadata,
+  assertValueStructure,
+  normalizeCssText,
+  type CssValue,
+  type Declaration,
+  type Frame,
+  type GlobalNode,
+  type KeyframesDefinition,
+  type StyleProgram,
+  type StylesheetDefinition,
+} from '@zerodep-css/core/internal';
+
 import { parseStructure } from './css-syntax.js';
-import { assertValueStructure, normalizeCssText } from './css-value.js';
-import type {
-  CssValue,
-  Declaration,
-  Frame,
-  GlobalNode,
-  KeyframesDefinition,
-  StyleProgram,
-  StylesheetDefinition,
-} from './style-program.js';
 
 export interface OutputConfig {
   readonly namespace: string;

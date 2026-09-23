@@ -1,6 +1,7 @@
 export { createStyles } from './styles.js';
 export type { StyleHost } from './styles.js';
-export { Css, defineTheme, cssVar, keyframes } from '@zerodep-css/core';
+export { Css, defineTheme, cssVar } from '@zerodep-css/core';
+export { keyframes } from '#runtime';
 export type {
   CssConstructor,
   CssConstruction,
@@ -15,7 +16,9 @@ export type {
   ThemeTree,
   StyleFactory,
   StylesheetFactory,
+} from '@zerodep-css/core';
+export type {
   StyleContextOptions as StyleHostOptions,
   StyleContextManifest as StyleManifest,
   RuntimeStats as StyleStats,
-} from '@zerodep-css/core';
+} from '#runtime';

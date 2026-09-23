@@ -3,14 +3,11 @@
   "compilerOptions": {
     "noEmit": false,
     "declaration": true,
-    "declarationMap": false,
     "sourceMap": true,
     "inlineSources": true,
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist",
-    "customConditions": [],
-    "paths": {}
+    "customConditions": []
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.test.ts", "test"]
+  "exclude": ["dist", "test"]
 }

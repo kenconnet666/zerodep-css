@@ -354,27 +354,27 @@ export function session(
       if (hasSources)
         output.appendLeft(
           scriptStart,
-          `\nimport { withStyleSource as ${sourceName} } from '@zerodep-css/core/compiler-runtime';\n`,
+          `\nimport { withStyleSource as ${sourceName} } from '@zerodep-css/${framework}/compiler-runtime';\n`,
         );
       if (hasUnitBindings)
         output.appendLeft(
           scriptStart,
-          `\nimport { bindUnit as ${unitBindingName} } from '@zerodep-css/core/compiler-runtime';\n`,
+          `\nimport { bindUnit as ${unitBindingName} } from '@zerodep-css/${framework}/compiler-runtime';\n`,
         );
       if (hasValueBindings)
         output.appendLeft(
           scriptStart,
-          `\nimport { bindValue as ${valueBindingName} } from '@zerodep-css/core/compiler-runtime';\n`,
+          `\nimport { bindValue as ${valueBindingName} } from '@zerodep-css/${framework}/compiler-runtime';\n`,
         );
       if (hasPrepared)
         output.appendLeft(
           scriptStart,
-          `\nimport { prepareStyle as ${prepareName} } from '@zerodep-css/core/compiler-runtime';\n`,
+          `\nimport { prepareStyle as ${prepareName} } from '@zerodep-css/${framework}/compiler-runtime';\n`,
         );
       if (declarationBindings.length)
         output.appendLeft(
           scriptStart,
-          `\nimport { createDeclarationBinding as ${declarationName} } from '@zerodep-css/core/compiler-runtime';\n`,
+          `\nimport { createDeclarationBinding as ${declarationName} } from '@zerodep-css/${framework}/compiler-runtime';\n`,
         );
       output.appendLeft(scriptEnd, '\n' + declarationBindings.join('\n') + '\n');
       output.appendLeft(scriptEnd, '\n' + preparedBindings.join('\n') + '\n');

@@ -1,13 +1,9 @@
 import { getAllContexts, getContext, onDestroy, setContext } from 'svelte';
 import {
   Css,
-  createStyleContext,
   type CssConstructor,
   type CssFunction,
   type ProjectThemeHooks,
-  type StyleContext,
-  type StyleContextOptions,
-  type RuntimeStats,
   type StylesOptions,
   type StylesheetFactory,
   type ThemeDefinition,
@@ -15,12 +11,17 @@ import {
   type ThemeTree,
 } from '@zerodep-css/core';
 import {
+  createStyleContext,
+  type StyleContext,
+  type StyleContextOptions,
+  type RuntimeStats,
   createRuntimeView,
   normalizeStylesOptions,
   projectThemeArguments,
   projectThemeScope,
   type ThemeScope,
-} from '@zerodep-css/core/style-scope';
+} from '#runtime';
+
 import { resolveContext, provideStyleContext } from './context.js';
 import { useGlobalCss as baseUseGlobalCss } from './global.svelte.js';
 import {

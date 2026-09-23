@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { Css, createRuntime } from '../../dist/index.js';
-import { ThemeCss, lightTheme, darkTheme } from '../../dist/themes.js';
+import { ThemeCss, lightTheme, darkTheme } from '../../../../core/dist/themes.js';
 import { parse, walk, generate } from 'css-tree';
 
 // 独立按 WCAG 2.2 相对亮度计算；不使用产品代码或四舍五入来判断阈值。

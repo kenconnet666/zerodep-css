@@ -1,7 +1,6 @@
 import type { App } from 'vue';
 import {
   Css,
-  createStyleContext,
   type CssConstructor,
   type CssFunction,
   type StylesOptions,
@@ -10,18 +9,20 @@ import {
   type ThemeInput,
   type ThemeTree,
   type StylesheetFactory,
+} from '@zerodep-css/core';
+import {
+  createStyleContext,
   type StyleContextOptions,
   type StyleContext,
   type RuntimeStats,
-} from '@zerodep-css/core';
-import {
   createRuntimeView,
   createThemeScope,
   prepareThemeStyle,
   normalizeStylesOptions,
   projectThemeArguments,
   projectThemeScope,
-} from '@zerodep-css/core/style-scope';
+} from '#runtime';
+
 import { installStyleContext, resolveContext } from './context.js';
 import {
   themeKey,

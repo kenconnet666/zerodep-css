@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { assertValueStructure, normalizeCssText } from '../../dist/css-value.js';
+import { assertValueStructure, normalizeCssText } from '../../../../core/dist/css-value.js';
 import { createRuntime, cssVar } from '../../dist/index.js';
 import { createDeclarationBinding } from '../../dist/compiler-runtime.js';
 import { htmlCss } from '../../dist/sheet.js';

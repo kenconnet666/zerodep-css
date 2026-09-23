@@ -1,7 +1,8 @@
-import { generate, type CssNode } from 'css-tree';
+import { generate } from './css-parser.js';
+import type { CssNode } from 'css-tree';
 import { parseStructure } from './css-syntax.js';
 import { compileProgram, type OutputConfig, type StyleRecord } from './serialize.js';
-import type { CssValue, StyleNode, StyleProgram } from './style-program.js';
+import type { CssValue, StyleNode, StyleProgram } from '@zerodep-css/core/internal';
 
 const groups = new Set([
   '@media',

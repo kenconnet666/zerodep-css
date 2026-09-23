@@ -1,10 +1,20 @@
-import { Css, type CssConstructor } from './css.js';
-import type { StyleFactory, StyleInput } from './builder-types.js';
+import {
+  Css,
+  type CssConstructor,
+  type StyleFactory,
+  type StyleInput,
+  type ThemeDefinition,
+  type ThemeOverrides,
+  type ThemeTree,
+  type ThemeValues,
+  themeStyle,
+  prepareThemeStyle,
+} from '@zerodep-css/core/internal';
+
 import type { StyleRuntime } from './runtime.js';
-import type { ThemeDefinition, ThemeOverrides, ThemeTree, ThemeValues } from './theme.js';
-import { themeStyle, prepareThemeStyle } from './theme.js';
-export { prepareThemeStyle } from './theme.js';
-export { normalizeStylesOptions, projectThemeArguments } from './style-project.js';
+
+export { prepareThemeStyle } from '@zerodep-css/core/internal';
+export { normalizeStylesOptions, projectThemeArguments } from '@zerodep-css/core/internal';
 
 export interface ThemeState {
   readonly name: string;

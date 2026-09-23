@@ -1,5 +1,5 @@
 import { getContext, setContext } from 'svelte';
-import type { StyleContext } from '@zerodep-css/core';
+import type { StyleContext } from '#runtime';
 
 const key = Symbol('zerodep-css');
 export function provideStyleContext(context: StyleContext): void {

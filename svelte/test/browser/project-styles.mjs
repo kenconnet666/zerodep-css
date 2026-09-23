@@ -58,7 +58,7 @@ test('项目入口、根宿主、主题与水合使用同一请求运行时', as
         external: server ? ['svelte', 'svelte/*', 'css-tree'] : [],
         alias: {
           '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
-          '@zerodep-css/core/style-scope': resolve(root, 'core/dist/style-scope.js'),
+          '@zerodep-css/core/internal': resolve(root, 'core/dist/internal.js'),
           '@zerodep-css/svelte': resolve(root, 'svelte/dist/index.js'),
         },
         define: { 'process.env.NODE_ENV': '"development"' },

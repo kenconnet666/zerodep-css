@@ -21,21 +21,17 @@ PowerShell 也可以直接执行 `./scripts/language-services/setup.ps1 -SkipIns
 
 项目 MCP 只在受信任项目中加载。已打开的 Codex 任务未必热加载新服务器：配置完成后在 MCP 设置重启服务/重载 Codex，再检查原生工具可用性。[官方项目 MCP 配置说明](https://learn.chatgpt.com/docs/extend/mcp?surface=cli)。
 
-## 三个包
+## 源码与类型检查
 
-- `@zerodep-css/core`：已实现 css 字符串类名、资源/样式表和 SSR registry；API 见 `core/README.md`。
-- `@zerodep-css/vue`：依赖 workspace core，Vue 为 peer，使用 vue-tsc 检查 .vue 脚本及模板。
-- `@zerodep-css/svelte`：依赖 workspace core，Svelte 为 peer，使用 svelte-check 和 svelte-package；后续支持 rune 模块的包处理。
+- core 保存共享作者模型、主题定义和生成的属性类型。
+- Vue/Svelte 适配器以框架为 peer，分别用 vue-tsc、svelte-check 检查组件；Svelte rune 模块由官方工具处理。
+- internal/runtime 保存完整引擎与单元、类型、浏览器夹具；internal/compiler 保存 Node 编译分析。
 
-三个包当前保持 private。开发检查使用 `zerodep-source` exports condition；正常消费使用 dist 声明和 JS，不用全局 paths 冒充已构建包。build 按 workspace 依赖顺序先构建 core。
+三个产品包保持 private。开发检查使用 zerodep-source exports condition 与适配器私有 #runtime 源码映射；构建后及独立消费使用包内 JS 和声明，不依赖源码路径。根 build 先构建 core，再生成并复制内部引擎，最后构建适配器。
 
-`vue/test/LanguageFixture.vue`、`svelte/test/LanguageFixture.svelte` 验证原生框架语义与 workspace 导入，均排除在产品构建之外。原始 Vite 模板 src/public 已归档到 `.research/legacy-starter`，不参与三包构建。
+语言夹具位于 vue/test/LanguageFixture.vue 与 svelte/test/LanguageFixture.svelte。CSS 类型夹具在 internal/runtime/test/types、vue/test/types 与 svelte/test/types，全部排除在产品构建之外。原始模板归档不参与构建。
 
-第一阶段新增 `core/test/types.ts`、`vue/test/StyleTypes.vue`、`svelte/test/StyleTypes.svelte`，使用真正的生成类型与纯 Builder。`pnpm test:types` 验证三种语言各四处 CSS 错误、修复清零及补全/悬停/跳转。当前原生 LSP 的补全可显示 `px(value1: Bound<number>): void` 和中文说明；详情在 `test-results/types`。
-
-第二阶段这些类型夹具已切换为正式 `css(factory): string`，Vue/Svelte 模板使用 class 绑定，并加入 keyframes 资源类型。语言服务桥与服务器版本未修改。
-
-属性 API 校正后，`test:types` 改为每种语言五处错误（含不可调用属性对象），并分别检查 token/raw 参数的字面量补全。raw 任意字符串为正例，不允许通过去掉补全或放宽整个 Builder 索引签名来实现。
+pnpm test:types 临时生成三种语言的负例，每种检测五处 CSS 错误（含不可调用属性对象），修复后清零，再验证 token/raw 补全、悬停与跳转。raw 任意字符串是正例；不能通过放宽整个作者模型索引签名实现。临时文件由 finally 清理，证据保存在 test-results/types。
 
 ## MCP 和协议
 

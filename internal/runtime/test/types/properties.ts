@@ -1,4 +1,4 @@
-import { css, createRuntime, keyframes, globalCss, cssVar, type Css } from '../../src/index.js';
+import { css, createRuntime, keyframes, globalCss, cssVar, type Css } from '../../index.js';
 
 // 仅由 tsc 检查，不执行这些包含宏/预期错误的类型用例。
 export function typeContract(width: number, visible: boolean) {

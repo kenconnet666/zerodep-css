@@ -62,8 +62,8 @@ for (const server of [true, false]) {
     // Node 侧保持框架单实例；CSSTree 的相对数据文件也由其原生加载器解析。
     external: server ? ['vue', 'vue/*', 'svelte', 'svelte/*', 'css-tree'] : [],
     alias: {
+      '@zerodep-css/core/internal': resolve(root, 'core/dist/internal.js'),
       '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
-      '@zerodep-css/core/style-scope': resolve(root, 'core/dist/style-scope.js'),
       '@zerodep-css/vue': resolve(root, 'vue/dist/index.js'),
       '@zerodep-css/svelte': resolve(root, 'svelte/dist/index.js'),
     },

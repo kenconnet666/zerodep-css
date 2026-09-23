@@ -8,19 +8,14 @@ import {
   hasInjectionContext,
   type InjectionKey,
 } from 'vue';
-import type {
-  ThemeDefinition,
-  ThemeScope,
-  ThemeTree,
-  ThemeValues,
-  ThemeInput,
-} from '@zerodep-css/core';
+import type { ThemeDefinition, ThemeTree, ThemeValues, ThemeInput } from '@zerodep-css/core';
 import {
+  type ThemeScope,
   createThemeScope,
   prepareThemeStyle,
   readTheme,
   resolveTheme,
-} from '@zerodep-css/core/style-scope';
+} from '#runtime';
 
 export const themeKey: InjectionKey<ThemeScope> = Symbol('zerodep-css-theme');
 const localScopes = new WeakMap<object, ThemeScope>();

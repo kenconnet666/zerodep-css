@@ -3,7 +3,7 @@ import { root, run, pnpm } from '../lib/environment.mjs';
 
 const kind = process.argv[2];
 const entries = {
-  'browser:core': 'browser-core.mjs',
+  'browser:runtime': 'browser-runtime.mjs',
   'browser:frameworks': 'browser-frameworks.mjs',
   types: 'style-types.mjs',
   consumer: 'consumer.mjs',
@@ -15,15 +15,15 @@ if (!process.argv.includes('--no-build')) pnpm(['build']);
 if (kind === 'unit') {
   run(process.execPath, [
     '--test',
-    'core/test/unit/*.test.mjs',
+    'internal/runtime/test/unit/*.test.mjs',
     'vue/test/unit/*.test.mjs',
     'scripts/css-data/*.test.mjs',
     'scripts/testing/unit/*.test.mjs',
     'internal/compiler/test/*.test.mjs',
   ]);
 } else run(process.execPath, [resolve(root, 'scripts/testing', entries[kind])]);
-if (kind === 'browser:core')
-  run(process.execPath, [resolve(root, 'core/test/browser/host-ownership.mjs')]);
+if (kind === 'browser:runtime')
+  run(process.execPath, [resolve(root, 'internal/runtime/test/browser/host-ownership.mjs')]);
 if (kind === 'browser:frameworks')
   run(process.execPath, [resolve(root, 'scripts/testing/browser-bindings.mjs')]);
 if (kind === 'browser:frameworks')

@@ -7,40 +7,43 @@ import {
   simplePseudos,
   unitFamilies,
 } from './generated/metadata.js';
-import type { NumericAlternatives, PropertyMetadata } from './metadata-types.js';
-import type {
-  CssValue,
-  Declaration,
-  DescriptorBlock,
-  Frame,
-  GlobalNode,
-  KeyframesDefinition,
-  StyleNode,
-  StyleProgram,
-  StylesheetDefinition,
-} from './style-program.js';
-import type {
-  DeclarationFactory,
-  FrameBuilder,
-  FrameOffset,
-  GlobalBuilder,
-  GlobalFactory,
-  PageBuilder,
-  StylesheetBuilder,
-  StylesheetFactory,
-  StyleFactory,
-} from './builder-types.js';
-import { isCssVariable, validateCustomName } from './values.js';
-import { Css, type CssConstructor } from './css.js';
-import { normalizeStyleProgram } from './normalize.js';
-import { assertValueStructure, normalizeCssText, validatePropertyName } from './css-value.js';
-import { ident } from 'css-tree';
 import {
+  type NumericAlternatives,
+  type PropertyMetadata,
+  type CssValue,
+  type Declaration,
+  type DescriptorBlock,
+  type Frame,
+  type GlobalNode,
+  type KeyframesDefinition,
+  type StyleNode,
+  type StyleProgram,
+  type StylesheetDefinition,
+  type DeclarationFactory,
+  type FrameBuilder,
+  type FrameOffset,
+  type GlobalBuilder,
+  type GlobalFactory,
+  type PageBuilder,
+  type StylesheetBuilder,
+  type StylesheetFactory,
+  type StyleFactory,
+  isCssVariable,
+  validateCustomName,
+  Css,
+  type CssConstructor,
+  assertValueStructure,
+  normalizeCssText,
+  validatePropertyName,
   getStyleSource,
   setStyleConfig,
   validateStyleName,
   type StyleMetadata,
-} from './style-metadata.js';
+} from '@zerodep-css/core/internal';
+
+import { normalizeStyleProgram } from './normalize.js';
+
+import { ident } from './css-parser.js';
 
 type Table = Readonly<Record<string, PropertyMetadata>>;
 type Factory = (builder: never) => unknown;

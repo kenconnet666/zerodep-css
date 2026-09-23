@@ -21,17 +21,22 @@
     "./compiler": {
       "types": "./dist/compiler/index.d.ts",
       "default": "./dist/compiler/index.js"
+    },
+    "./compiler-runtime": {
+      "types": "./dist/compiler-runtime.d.ts",
+      "default": "./dist/compiler-runtime.js"
     }
   },
   "scripts": {
-    "build": "svelte-package -i src -o dist",
+    "build": "svelte-package -i src -o dist --preserve-output --tsconfig tsconfig.build.json",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
     "@zerodep-css/core": "workspace:^",
     "magic-string": "catalog:",
     "typescript": "catalog:",
-    "@jridgewell/sourcemap-codec": "catalog:"
+    "@jridgewell/sourcemap-codec": "catalog:",
+    "css-tree": "catalog:"
   },
   "peerDependencies": {
     "svelte": "^5.57.0"
@@ -48,5 +53,11 @@
     "url": "git+https://github.com/kenconnet666/zerodep-css.git",
     "directory": "svelte"
   },
-  "homepage": "https://github.com/kenconnet666/zerodep-css"
+  "homepage": "https://github.com/kenconnet666/zerodep-css",
+  "imports": {
+    "#runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "default": "./dist/runtime/index.js"
+    }
+  }
 }

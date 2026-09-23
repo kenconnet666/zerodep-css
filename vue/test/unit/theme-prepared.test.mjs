@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { computed, shallowRef, effectScope, watchEffect, nextTick } from 'vue';
-import { defineTheme, createRuntime } from '../../../core/dist/index.js';
+import { defineTheme } from '../../../core/dist/index.js';
+import { createRuntime } from '../../../internal/runtime/dist/index.js';
 import {
   createThemeScope,
   createRuntimeView,
   prepareThemeStyle,
-} from '../../../core/dist/style-scope.js';
+} from '../../../internal/runtime/dist/style-scope.js';
 
 test('原生 computed 缓存主题准备，普通回调继续执行，依赖更新及 runtime 隔离保持正确', async () => {
   const theme = defineTheme('native-cache', { color: 'red' });

@@ -1,6 +1,6 @@
 // 自动生成，勿手工修改。来源：csstype 3.2.3, Webref 8.7.5, CSSTree 3.2.1 (MIT)。
 
-import type { PropertyMetadata, HelperPlan, KeywordGroup } from '../metadata-types.js';
+import type { PropertyMetadata, HelperPlan, KeywordGroup } from '@zerodep-css/core/internal';
 export const keywordGroups: readonly KeywordGroup[] = [
   {
     AccentColor: 'AccentColor',

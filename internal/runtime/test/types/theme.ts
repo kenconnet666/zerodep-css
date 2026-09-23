@@ -1,10 +1,4 @@
-import {
-  defineTheme,
-  readTheme,
-  createRuntime,
-  Css,
-  type ThemeOverrides,
-} from '../../src/index.js';
+import { defineTheme, readTheme, createRuntime, Css, type ThemeOverrides } from '../../index.js';
 
 const theme = defineTheme('app', { color: { brand: 'red' }, opacity: 1 });
 const values = readTheme(theme);

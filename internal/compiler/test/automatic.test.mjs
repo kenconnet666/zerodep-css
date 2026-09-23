@@ -10,10 +10,10 @@ import {
   bindValue,
   createDeclarationBinding,
   formatUnitValues,
-} from '../../../core/dist/compiler-runtime.js';
-import * as compilerRuntime from '../../../core/dist/compiler-runtime.js';
+} from '../../runtime/dist/compiler-runtime.js';
+import * as compilerRuntime from '../../runtime/dist/compiler-runtime.js';
 import * as adapter from '../../../vue/dist/index.js';
-import { createRuntime } from '../../../core/dist/index.js';
+import { createRuntime } from '../../runtime/dist/index.js';
 import { createRequire } from 'node:module';
 import { transform as compileJs } from 'esbuild';
 import { createSSRApp } from 'vue';
@@ -532,7 +532,7 @@ test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async 
   new Function('require', 'module', 'exports', js.code)(
     (id) => {
       if (id === '@zerodep-css/vue') return adapter;
-      if (id === '@zerodep-css/core/compiler-runtime') return compilerRuntime;
+      if (id === '@zerodep-css/vue/compiler-runtime') return compilerRuntime;
       return require(id);
     },
     module,
@@ -589,7 +589,7 @@ test('Vue 静态准备按组件复用，保留模板守卫、诊断与请求所�
               };
             },
           };
-        if (id === '@zerodep-css/core/compiler-runtime')
+        if (id === '@zerodep-css/vue/compiler-runtime')
           return {
             ...compilerRuntime,
             prepareStyle(...args) {

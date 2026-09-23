@@ -18,28 +18,28 @@ import {
   type PropertyRegistration,
   type StyleRecord,
 } from './serialize.js';
-import type {
-  KeyframesDefinition,
-  StyleNode,
-  StylesheetDefinition,
-  StyleProgram,
-} from './style-program.js';
-import type { CssFunction, StyleInput, StylesheetFactory, StyleFactory } from './builder-types.js';
-import { Css, type CssConstructor } from './css.js';
-import { normalizeCssText } from './css-value.js';
 import {
+  type KeyframesDefinition,
+  type StyleNode,
+  type StylesheetDefinition,
+  type StyleProgram,
+  type CssFunction,
+  type StyleInput,
+  type StylesheetFactory,
+  type StyleFactory,
+  Css,
+  type CssConstructor,
+  normalizeCssText,
   validateStyleName,
   validateStyleDebug,
   getPreparedKey,
   getStyleSource,
-} from './style-metadata.js';
-import {
   assertTargetAvailable,
   createRegistrationOwner,
   findTargetRuntime,
   registerTarget,
   releaseTarget,
-} from './host.js';
+} from '@zerodep-css/core/internal';
 
 export interface StyleManifest {
   readonly version: 1 | 2;

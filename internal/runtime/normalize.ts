@@ -1,7 +1,6 @@
-import { ident, parse, generate } from 'css-tree';
+import { ident, parse, generate } from './css-parser.js';
 import { propertyAliases } from './generated/metadata.js';
-import type { StyleNode, StyleProgram } from './style-program.js';
-import { normalizeCssText } from './css-value.js';
+import { type StyleNode, type StyleProgram, normalizeCssText } from '@zerodep-css/core/internal';
 
 interface Context {
   boundaries: readonly string[];

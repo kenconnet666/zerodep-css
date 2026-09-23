@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "pnpm -r run check && pnpm check:compiler",
+    "check": "pnpm -r run check && pnpm check:runtime && pnpm check:compiler",
     "generate:css": "node scripts/generate-css.mjs",
     "generate:check": "node scripts/generate-css.mjs --check",
     "data:diff": "node scripts/generate-css.mjs --diff",
@@ -23,13 +23,15 @@
     "research:syntax": "node .research/css-types/expressiveness.mjs --deps .",
     "research:compare": "node .research/performance/compare-engines.mjs",
     "test:unit": "node scripts/testing/run.mjs unit",
-    "test:browser:core": "node scripts/testing/run.mjs browser:core",
+    "test:browser:runtime": "node scripts/testing/run.mjs browser:runtime",
     "test:browser:frameworks": "node scripts/testing/run.mjs browser:frameworks",
     "test:consumer": "node scripts/testing/run.mjs consumer",
     "size:check": "node scripts/testing/run.mjs bundle",
-    "check:compiler": "tsc -p internal/compiler/tsconfig.json"
+    "check:compiler": "tsc -p internal/compiler/tsconfig.json",
+    "check:runtime": "tsc -p internal/runtime/tsconfig.json"
   },
   "devDependencies": {
+    "@zerodep-css/core": "workspace:*",
     "yaml": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@sveltejs/vite-plugin-svelte": "catalog:",

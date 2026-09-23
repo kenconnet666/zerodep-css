@@ -1,11 +1,6 @@
 import { computed, getCurrentScope, onScopeDispose, watch } from 'vue';
-import {
-  Css,
-  globalCss,
-  type CssConstructor,
-  type StylesheetFactory,
-  type StyleContext,
-} from '@zerodep-css/core';
+import { Css, type CssConstructor, type StylesheetFactory } from '@zerodep-css/core';
+import { globalCss, type StyleContext } from '#runtime';
 import { resolveContext } from './context.js';
 
 /** 初始化时挂载一次；原生依赖变化更新同一槽位，scope 结束时停止监听。 */

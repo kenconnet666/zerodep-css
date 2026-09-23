@@ -13,6 +13,7 @@ import {
 import { tmpdir } from 'node:os';
 import { resolve, join, dirname, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { createRequire } from 'node:module';
 import { createServer } from 'node:http';
 import { launchBrowser, browserEngine } from './browser-launch.mjs';
 import { root, pnpm, run } from '../lib/environment.mjs';
@@ -54,6 +55,18 @@ async function verifyPackage(folder) {
     const file = resolve(folder, target);
     assert(file.startsWith(folder + sep), 'Package export leaves the package.');
     assert((await lstat(file)).isFile(), 'Missing package export: ' + target);
+  }
+  if (manifest.name !== '@zerodep-css/core') {
+    const runtime = manifest.imports?.['#runtime'];
+    assert(runtime?.types && runtime?.default, 'Missing private runtime JS/type mapping.');
+    const js = resolve(folder, runtime.default),
+      types = resolve(folder, runtime.types);
+    for (const file of [js, types]) {
+      assert(file.startsWith(folder + sep), 'Private runtime target leaves the package.');
+      assert((await lstat(file)).isFile(), 'Missing private runtime target: ' + file);
+    }
+    const resolved = createRequire(join(folder, 'package.json')).resolve('#runtime');
+    assert.equal(await realpath(resolved), await realpath(js));
   }
   for (const file of await readdir(join(folder, 'dist'), { recursive: true })) {
     if (!file.endsWith('.map')) continue;
@@ -128,13 +141,18 @@ try {
     await save(
       join(folder, 'themes-smoke.mjs'),
       `import assert from 'node:assert/strict';
+import * as core from '@zerodep-css/core';
 import {Css} from '@zerodep-css/core';
 import {ThemeCss,lightTheme,darkTheme} from '@zerodep-css/${framework}/themes';
 assert(ThemeCss.prototype instanceof Css);
 assert(Object.isFrozen(lightTheme.defaults));
 assert.notDeepEqual(lightTheme.defaults,darkTheme.defaults);
 assert.equal(lightTheme.tokens.color.primary.name,darkTheme.tokens.color.primary.name);
+for (const name of ['css','injectGlobal','createRuntime','createStyleContext','keyframes','globalCss','readTheme'])
+  assert.equal(Object.hasOwn(core,name),false,'core author entry exposes engine: '+name);
 await assert.rejects(()=>import('@zerodep-css/core/theme-runtime'),{code:'ERR_PACKAGE_PATH_NOT_EXPORTED'});
+for (const name of ['compiler-runtime','style-scope'])
+  await assert.rejects(()=>import('@zerodep-css/core/'+name),{code:'ERR_PACKAGE_PATH_NOT_EXPORTED'});
 `,
     );
     run(process.execPath, ['themes-smoke.mjs'], { cwd: folder, env: environment });
@@ -147,6 +165,8 @@ import { cssPlugin, transformCss } from '@zerodep-css/${framework}/compiler';
 import type { Plugin } from 'vite';
 // @ts-expect-error 旧作者类型已统一为 Css
 import type { StyleBuilder } from '@zerodep-css/core';
+// @ts-expect-error core 根入口不再暴露独立引擎
+import { createRuntime } from '@zerodep-css/core';
 // @ts-expect-error bx 已移除
 import { bx } from '@zerodep-css/${framework}';
 // @ts-expect-error 旧组件入口不再公开

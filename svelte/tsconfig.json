@@ -5,7 +5,10 @@
     "allowJs": true,
     "checkJs": true,
     "customConditions": ["zerodep-source"],
-    "types": ["svelte"]
+    "types": ["svelte"],
+    "paths": {
+      "#runtime": ["../internal/runtime/index.ts"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "test/**/*.ts", "test/**/*.svelte"]
 }

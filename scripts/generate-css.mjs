@@ -126,7 +126,7 @@ export type FunctionalPseudo = ${union(schema.functionalPseudos)};
 export type DescriptorRule = keyof DescriptorBuilders;
 `;
 const runtime = `${header}
-import type { PropertyMetadata, HelperPlan, KeywordGroup } from '../metadata-types.js';
+import type { PropertyMetadata, HelperPlan, KeywordGroup } from '@zerodep-css/core/internal';
 export const keywordGroups: readonly KeywordGroup[] = ${JSON.stringify(keywordGroups)};
 export const helperGroups: readonly (readonly HelperPlan[])[] = ${JSON.stringify(helperGroups)};
 export const unitFamilies: Readonly<Record<string, readonly string[]>> = ${JSON.stringify(schema.units)};
@@ -209,7 +209,7 @@ const outputs = {
     singleQuote: true,
     printWidth: 100,
   }),
-  'core/src/generated/metadata.ts': await format(runtime, {
+  'internal/runtime/generated/metadata.ts': await format(runtime, {
     parser: 'typescript',
     singleQuote: true,
     printWidth: 100,

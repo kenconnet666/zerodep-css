@@ -6,7 +6,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { launchBrowser, browserEngine, browserChannel as channel } from './browser-launch.mjs';
-import { runBrowserTests } from '../../core/test/browser/runtime.mjs';
+import { runBrowserTests } from '../../internal/runtime/test/browser/runtime.mjs';
 import { prepareBrowserRun, browserRunId } from './browser-evidence.mjs';
 import { verifyEvidence } from './evidence-smoke.mjs';
 
@@ -23,9 +23,9 @@ const output = match
     )
   : resolve(root, 'test-results/browser');
 await prepareBrowserRun(output);
-const { createRuntime, keyframes } = await import('../../core/dist/index.js');
+const { createRuntime, keyframes } = await import('../../internal/runtime/dist/index.js');
 const bundled = await build({
-  entryPoints: [resolve(root, 'core/dist/index.js')],
+  entryPoints: [resolve(root, 'internal/runtime/dist/index.js')],
   bundle: true,
   format: 'esm',
   platform: 'browser',
@@ -35,7 +35,7 @@ const bundled = await build({
 });
 const js = bundled.outputFiles[0].contents;
 const bindings = await build({
-  entryPoints: [resolve(root, 'core/dist/compiler-runtime.js')],
+  entryPoints: [resolve(root, 'internal/runtime/dist/compiler-runtime.js')],
   bundle: true,
   format: 'esm',
   platform: 'browser',

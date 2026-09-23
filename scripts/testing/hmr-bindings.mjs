@@ -58,12 +58,16 @@ try {
       resolve: {
         alias: [
           {
-            find: '@zerodep-css/core/style-scope',
-            replacement: resolve(root, 'core/dist/style-scope.js'),
+            find: '@zerodep-css/core/internal',
+            replacement: resolve(root, 'core/dist/internal.js'),
           },
           {
-            find: '@zerodep-css/core/compiler-runtime',
-            replacement: resolve(root, 'core/dist/compiler-runtime.js'),
+            find: '@zerodep-css/vue/compiler-runtime',
+            replacement: resolve(root, 'vue/dist/compiler-runtime.js'),
+          },
+          {
+            find: '@zerodep-css/svelte/compiler-runtime',
+            replacement: resolve(root, 'svelte/dist/compiler-runtime.js'),
           },
           ...['core', 'vue', 'svelte'].map((name) => ({
             find: '@zerodep-css/' + name,
