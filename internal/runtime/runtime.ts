@@ -279,10 +279,13 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   const alive = () => {
     if (disposed) throw new Error('Style runtime has been disposed.');
   };
-  function prepareRecords(batch: readonly StyleRecord[]) {
+  function prepareRecords(batch: readonly StyleRecord[], compiled?: CompiledStyle) {
     return batch.map((record) => ({
       record,
-      ...inspectStylesheet(renderRecord(record, config)),
+      // 依赖合并或重建会产生新 record；只有原主记录可复用已验证的 AST 结果。
+      ...(record === compiled?.record && compiled.inspection
+        ? compiled.inspection
+        : inspectStylesheet(renderRecord(record, config))),
     }));
   }
   function validateClaims(
@@ -311,7 +314,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     recordRegistrations.set(record.id, entries);
     registrationOwner.claim(record.id, entries);
   }
-  function commit(batch: readonly StyleRecord[], replacing?: string) {
+  function commit(batch: readonly StyleRecord[], replacing?: string, compiled?: CompiledStyle) {
     alive();
     if (busy) throw new Error('Reentrant stylesheet mutation.');
     const previousSize = records.size;
@@ -337,7 +340,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       if (records.size + pending.filter((r) => !records.has(r.id)).length > maxRecords)
         throw new Error('Style record limit exceeded.');
       // 只准备本次待写入记录；缓存命中仍走原来的宿主检查，不增加结果缓存。
-      const prepared = prepareRecords(pending);
+      const prepared = prepareRecords(pending, compiled);
       const claims = validateClaims(prepared, replacing);
       const nodes = new Map<string, HTMLStyleElement>();
       for (const { record, rules } of prepared) {
@@ -383,8 +386,10 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       host?.verify(compiled.record.id);
       return;
     }
-    commit([...compiled.dependencies, compiled.record], replacing);
+    commit([...compiled.dependencies, compiled.record], replacing, compiled);
   }
+  // 每个宿主复用一个判定；已有 ID 仍由 commit 验证正文、依赖和宿主状态。
+  const needsInspection = (record: StyleRecord) => !records.has(record.id);
   function definition(input: StylesheetDefinition | StylesheetFactory): StylesheetDefinition {
     return typeof input === 'function' ? globalCss(input) : input;
   }
@@ -590,15 +595,24 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
           return previous.record.id;
         }
       }
-      const compiled = compileProgram(definition.program, config, {
-        ...definition.metadata,
-        debug: definition.metadata.debug ?? collectDebug ?? !!definition.metadata.source,
-      });
+      const compiled = compileProgram(
+        definition.program,
+        config,
+        {
+          ...definition.metadata,
+          debug: definition.metadata.debug ?? collectDebug ?? !!definition.metadata.source,
+        },
+        needsInspection,
+      );
       ensure(compiled);
       // 完整注册成功后才缓存，失败仍允许原位重试。
       if (cacheKey) {
         if (compiledStyles.size >= 256) compiledStyles.delete(compiledStyles.keys().next().value!);
-        compiledStyles.set(cacheKey, compiled);
+        // inspection 含完整规则字符串，只服务首次事务；缓存仅保留可复用的记录身份。
+        compiledStyles.set(cacheKey, {
+          record: compiled.record,
+          dependencies: compiled.dependencies,
+        });
       }
       return compiled.record.id;
     },

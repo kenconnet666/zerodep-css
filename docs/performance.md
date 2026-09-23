@@ -55,11 +55,23 @@ CPU 采样定位到重复值结构扫描与缓存处理。此次仅做两项无�
 
 两次隔离源码成对 Node 测量中，相关变量场景下降约 18%—25%，主题场景下降约 29%—32%。每项 30,000 次、预热 3,000 次、7 轮交替，完整 snapshot 与工厂调用次数一致才计时。旧对旧控制约有 -13% 到 +10% 的波动；其他小差异不作结论。两次浏览器运行之间也有明显波动，因此上表报告当前结果，不把所有变化都归因于这两项优化。
 
+后续 P4c 针对新 class 注册：同一次解析同时完成结构验证和写入信息准备，宿主已存在该 ID 时不生成额外规则文本；依赖、组合、global 与 hydration 保持原检查路径。一次性检查结果不进入长期缓存。以上浏览器横向表未重跑 P4c，不能将这一改动混入表中比较。
+
+P4c 与 050d075 的隔离 Node 注册探针每项 2000 次、64 次预热、7 轮交替，两轮中新单属性约下降 15%—31%、新嵌套约下降 16%；重复动画约增加 1%—2%、重复组合约增加 3%—5%。旧对旧控制范围约 -7% 至 +14%，重复路径的小差异不作稳定结论；Node 结果不含 DOM、框架和布局，不能直接换算页面提速。提前无条件生成检查结果的候选增加了重复路径工作，最终改为仅新 ID 准备；原始候选与对照数据一并保留。
+
 ## 体积与使用判断
+
+当前路线接受完整 DSL、主题与运行时能力带来的包体积，不以缩到 Emotion 的大小为目标。体积继续记录并检查意外重复依赖；性能优化优先参考 Emotion 的缓存与规则写入机制，依据本库热点和语义等价性决定是否采用，不以删减运行时能力换取数字。
 
 P3b 完整 css 入口约 517 KB minified / 107 KB gzip；Css 作者入口约 2.2 KB / 0.8 KB，cssVar 约 0.4 KB / 0.3 KB。小入口不代表完整运行时大小。横向准备资产中的 Emotion create-instance 约 15.6 KB / 6.4 KB gzip，goober 约 2.3 KB / 1.3 KB；它们的功能边界与本库完整 DSL、资源和 SSR 校验不同，但本库的额外下载与解析成本确实存在。
 
 本库当前的收益是带类型的作者模型、普通 JS 控制流、组合、主题和框架生命周期接入，不能用这些特性掩盖性能差距。后续优化继续依据热点与等价性证据选择，始终保留运行时能力；不会为追求某个数字改写 getter 求值、空值、省略、覆盖或 SSR 语义。
+
+## 从 Emotion 借鉴的范围
+
+测量锁定 @emotion/css 11.13.5；它的 css 调用仍先 serializeStyles，再尝试插入，已注册内容避免重复写入。因此“缓存已存在样式”不等于跳过任意输入的序列化或业务求值，不能据此按函数引用缓存会变化的闭包。参见 [css 实现](https://github.com/emotion-js/emotion/blob/%40emotion/css%4011.13.5/packages/css/src/create-instance.ts)。
+
+其生产 speedy 模式通过 CSSOM insertRule 写入，并让一个 style 节点容纳多条规则（该版本上限 65000）。本库也已使用 insertRule，真正值得继续探测的是减少 style 节点与重复准备，而非简单换用同一个浏览器 API。合并节点仍是候选：必须保持 class/global 交错顺序、失败回滚、nonce、SSR 恢复与诊断定位，不直接照搬对插入失败的处理。参见 [StyleSheet 实现](https://github.com/emotion-js/emotion/blob/%40emotion/sheet%401.4.0/packages/sheet/src/index.ts)。
 
 ## 证据与复现
 
@@ -72,6 +84,8 @@ node .research/performance/browser-native.mjs
 node .research/performance/profile-runtime.mjs current
 node --expose-gc .research/performance/cache-paired.mjs f63ac11 current
 node --expose-gc .research/performance/cache-paired.mjs f63ac11 control --control
+node --expose-gc .research/performance/cache-paired.mjs 050d075 current --registration
+node --expose-gc .research/performance/cache-paired.mjs 050d075 control --registration --control
 ```
 
 正式计时串行，不与构建或其他测试同时运行。旧 paired/preheat/compile-first 脚本绑定旧 API，仅作为历史研究，不能在当前 checkout 直接跑出结果后标为当前产品性能。

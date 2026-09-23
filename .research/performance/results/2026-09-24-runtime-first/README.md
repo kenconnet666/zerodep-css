@@ -9,3 +9,14 @@
 cache-control 是旧对旧控制，cache-variable-theme/cache-repeat 是两次隔离源码成对测试。每个场景30000次、3000次预热、7轮交替，完整snapshot与工厂调用次数相同才记时。控制组约-13%到+10%的变化说明小差异不可下结论；相关优化场景重复下降约18%—25%和29%—32%，不推导整个页面等比例提速。profile-baseline仅为Node采样定位热点，排除inspector开停开销，不作页面性能结果。
 
 复现入口在上级目录 compare-engines.mjs、browser-native.mjs、cache-paired.mjs 与 profile-runtime.mjs。先根 pnpm build；正式计时串行，勿与构建/测试并行。
+
+## P4c 注册解析复用
+
+registration-* 的产品基线均为 050d075，Node 无 DOM 探针，各场景独立宿主、2000次正式操作、64次不重叠值预热、7轮交替，比较完整 snapshot 与工厂次数。生成/打包资产、宿主创建、预热与显式 GC 均在计时外。它们不更新上面的双框架浏览器对照数字。
+
+- registration-control：旧对旧控制，范围约-7%至+14%，不能将很小差异当成收益或回归。
+- registration-eager：未采用的候选，所有 compileProgram 都生成检查结果，重复动画约增加10%。
+- registration-lazy / registration-lazy-repeat：未采用的闭包候选，保留已验证 AST 至事务；仍有不必要的对象逃逸。
+- registration-pending / registration-pending-repeat：最终实现，每宿主复用一个记录存在性判定，仅新 class ID 在当前解析中生成 inspection；缓存不保留它。两轮新单属性约下降15%—31%、新嵌套约下降16%，重复路径的小差异不作结论。
+
+这些数据只评估注册准备成本；源代码构建在计时前进行，不是页面总时间。候选改动只涉及 internal/runtime/runtime.ts 与 serialize.ts，可从 P4c 提交查阅；未采用的 eager/lazy 数据用于保留决策依据，不代表产品行为。

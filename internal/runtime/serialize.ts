@@ -44,6 +44,8 @@ export interface StylesheetInspection {
 export interface CompiledStyle {
   readonly record: StyleRecord;
   readonly dependencies: readonly StyleRecord[];
+  /** 仅供本次新 class 注册复用；运行时结果缓存不保留。 */
+  readonly inspection?: StylesheetInspection;
 }
 /** 相同 CSS 的引用路径可能不同；依赖做并集，不把它误判为哈希碰撞。 */
 export function mergeRecord(previous: StyleRecord, next: StyleRecord): StyleRecord {
@@ -301,8 +303,7 @@ export function renderRecord(record: StyleRecord, config: OutputConfig): string 
   }
   return config.layer ? `@layer ${config.layer}{${css}}` : css;
 }
-export function validateRecord(record: StyleRecord, config: OutputConfig): void {
-  const ast = sheet(renderRecord(record, config));
+function validateParsedRecord(ast: StyleSheet, record: StyleRecord, config: OutputConfig): void {
   if (record.kind !== 'class' && record.kind !== 'keyframes') return;
   let nodes = ast.children.toArray();
   if (config.layer) {
@@ -330,6 +331,9 @@ export function validateRecord(record: StyleRecord, config: OutputConfig): void 
         throw new TypeError('Keyframes cannot contain !important.');
     });
   }
+}
+export function validateRecord(record: StyleRecord, config: OutputConfig): void {
+  validateParsedRecord(sheet(renderRecord(record, config)), record, config);
 }
 export function splitRules(css: string): readonly string[] {
   return sheet(css)
@@ -362,7 +366,9 @@ function propertyRegistrations(ast: StyleSheet): readonly PropertyRegistration[]
 }
 /** 同一写入事务的一次解析同时产出规则和注册声明，不建立额外缓存。 */
 export function inspectStylesheet(css: string): StylesheetInspection {
-  const ast = sheet(css);
+  return inspectParsedStylesheet(sheet(css));
+}
+function inspectParsedStylesheet(ast: StyleSheet): StylesheetInspection {
   const registrations = propertyRegistrations(ast);
   return { rules: ast.children.toArray().map((node) => generate(node)), registrations };
 }
@@ -374,6 +380,7 @@ export function compileProgram(
   program: StyleProgram,
   config: OutputConfig,
   metadata: Readonly<StyleMetadata> = {},
+  needsInspection?: (record: StyleRecord) => boolean,
 ): CompiledStyle {
   const context = compiler(config);
   const body = styleBody(program, context.animation);
@@ -397,8 +404,14 @@ export function compileProgram(
         }
       : {}),
   });
-  validateRecord(record, config);
-  return { record, dependencies: [...context.resources.values()] };
+  const ast = sheet(renderRecord(record, config));
+  validateParsedRecord(ast, record, config);
+  return {
+    record,
+    dependencies: [...context.resources.values()],
+    // 已有 class 和仅用于组合反解的编译不需要规则文本，也不让 AST 逃逸到缓存。
+    ...(needsInspection?.(record) ? { inspection: inspectParsedStylesheet(ast) } : {}),
+  };
 }
 function compiler(config: OutputConfig) {
   const resources = new Map<string, StyleRecord>();

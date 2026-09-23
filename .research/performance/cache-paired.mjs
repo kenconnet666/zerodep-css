@@ -10,6 +10,7 @@ import { root } from '../../scripts/lib/environment.mjs';
 const requested = process.argv[2] ?? 'f63ac11';
 const label = process.argv[3] ?? 'current';
 const control = process.argv.includes('--control');
+const registration = process.argv.includes('--registration');
 if (!/^[a-z0-9-]+$/.test(label)) throw new Error('Use a plain result label.');
 const baseline = execFileSync(
   'git',
@@ -18,7 +19,11 @@ const baseline = execFileSync(
 )
   .toString()
   .trim();
-const output = resolve(root, 'test-results/cache-paired', label);
+const output = resolve(
+  root,
+  'test-results/cache-paired',
+  registration ? label + '-registration' : label,
+);
 await mkdir(output, { recursive: true });
 
 async function bundle(name, historical) {
@@ -74,10 +79,12 @@ async function bundle(name, historical) {
 
 const before = await bundle('before', true),
   after = await bundle('after', control);
-const iterations = 30_000,
-  warmup = 3_000,
+const iterations = registration ? 2_000 : 30_000,
+  warmup = registration ? 64 : 3_000,
   rounds = 7;
-const names = ['keyword', 'unit', 'three-properties', 'nested', 'raw-variable', 'themed-unit'];
+const names = registration
+  ? ['fresh-single', 'fresh-nested', 'repeated-animation', 'repeated-composition']
+  : ['keyword', 'unit', 'three-properties', 'nested', 'raw-variable', 'themed-unit'];
 function sample(engine, name) {
   const runtime = engine.createRuntime({ target: null, namespace: 'paired', warnAt: false });
   const prepared = engine.prepareThemeStyle(engine.lightTheme, engine.lightTheme.defaults);
@@ -127,22 +134,111 @@ function sample(engine, name) {
   }
 }
 
-const report = { baseline, control, iterations, warmup, rounds, node: process.version, cases: {} };
+function registrationSample(engine, name) {
+  // 每个样本独占宿主；构造资源、预热与 GC 都发生在计时窗口外。
+  const runtime = engine.createRuntime({ target: null, namespace: 'paired', warnAt: false });
+  let calls = 0,
+    nestedCalls = 0,
+    setupCalls = 0;
+  try {
+    const animation =
+      name === 'repeated-animation'
+        ? engine.keyframes((k) => {
+            setupCalls++;
+            k.from((s) => s.opacity.raw(0));
+            k.to((s) => s.opacity.raw(1));
+          })
+        : undefined;
+    const base =
+      name === 'repeated-composition'
+        ? runtime.css((s) => {
+            setupCalls++;
+            s.color.red;
+          })
+        : undefined;
+    const action = (i) => {
+      switch (name) {
+        case 'fresh-single':
+          return runtime.css((s) => {
+            calls++;
+            s.width.px(20 + i);
+          });
+        case 'fresh-nested':
+          return runtime.css((s) => {
+            calls++;
+            s.width.px(20 + i);
+            s.hover((h) => {
+              nestedCalls++;
+              h.color.blue;
+            });
+          });
+        case 'repeated-animation':
+          return runtime.css((s) => {
+            calls++;
+            s.animationName.raw(animation);
+          });
+        case 'repeated-composition':
+          return runtime.css([
+            base,
+            (s) => {
+              calls++;
+              s.width.px(20);
+            },
+          ]);
+        default:
+          throw new Error('Unknown registration case: ' + name);
+      }
+    };
+    for (let i = 0; i < warmup; i++) action(i + iterations);
+    const initial = runtime.snapshot();
+    global.gc?.();
+    const start = performance.now();
+    for (let i = 0; i < iterations; i++) action(i);
+    const milliseconds = performance.now() - start;
+    const snapshot = runtime.snapshot();
+    assert.equal(calls, warmup + iterations);
+    assert.equal(nestedCalls, name === 'fresh-nested' ? calls : 0);
+    assert.equal(setupCalls, name.startsWith('repeated-') ? 1 : 0);
+    if (name.startsWith('fresh-'))
+      assert.equal(snapshot.records.length, initial.records.length + iterations);
+    else assert.deepEqual(snapshot, initial);
+    return { milliseconds, snapshot, calls, nestedCalls, setupCalls };
+  } finally {
+    runtime.dispose();
+  }
+}
+
+const report = {
+  baseline,
+  control,
+  ...(registration ? { mode: 'registration' } : {}),
+  iterations,
+  warmup,
+  rounds,
+  node: process.version,
+  cases: {},
+};
+const measure = registration ? registrationSample : sample;
 for (const name of names) {
   const samples = { before: [], after: [] };
   // 先各运行一次，正式采样交替先后；两边完整结果与调用次数相同才记录时间。
-  const first = sample(before, name),
-    second = sample(after, name);
+  const first = measure(before, name),
+    second = measure(after, name);
   assert.deepEqual(first.snapshot, second.snapshot);
+  assert.equal(first.calls, second.calls);
+  assert.equal(first.nestedCalls, second.nestedCalls);
+  assert.equal(first.setupCalls, second.setupCalls);
   for (let round = 0; round < rounds; round++) {
     const pair = {};
     for (const side of round % 2 ? ['after', 'before'] : ['before', 'after']) {
       global.gc?.();
-      pair[side] = sample(side === 'before' ? before : after, name);
+      pair[side] = measure(side === 'before' ? before : after, name);
       samples[side].push(pair[side].milliseconds);
     }
     assert.deepEqual(pair.before.snapshot, pair.after.snapshot);
     assert.equal(pair.before.calls, pair.after.calls);
+    assert.equal(pair.before.nestedCalls, pair.after.nestedCalls);
+    assert.equal(pair.before.setupCalls, pair.after.setupCalls);
   }
   const median = (values) => [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
   const beforeMs = median(samples.before),
