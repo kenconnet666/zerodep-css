@@ -40,6 +40,8 @@ node .research/performance/framework-paired.mjs 075b996 runtime
 
 原始数据在 `.research/performance/results/2026-09-23-lazy-*.json` 与 `2026-09-23-static-reuse*.json`。紧凑键和直接 reader 仍只是研究原型；本轮未将它们接入生产实现。
 
+首次 CI 的 Chromium/WebKit 在新增第三次 HMR 编辑时超时：trace 显示已经得到 7px，但没有收到第三次文件变化或 HMR 消息。测试连续写入落入 Chokidar 的 50ms change 去重窗口；测试服务启用 100ms 文件写入稳定检测，仍通过真实 watcher 和官方 HMR 验证 7px→9px 与类名变化，不放宽样式断言。最终验收以修复后的目标提交为准。
+
 ## 2026-09-23 热路径成本研究（尚未修改生产实现）
 
 研究基线 87807d1。Node 24.12.0，同一进程、每项预热 2,000 次，计时 20,000 次，7 轮交替顺序取中位数；计时前主动 GC，CPU 采样另行执行，不计入下表。普通回调持续执行，命中有限的 16 组结果。本轮只新增研究探针与文档。

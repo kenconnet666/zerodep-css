@@ -75,7 +75,14 @@ try {
           })),
         ],
       },
-      server: { host: '127.0.0.1', port: 0, fs: { allow: [root] } },
+      server: {
+        host: '127.0.0.1',
+        port: 0,
+        fs: { allow: [root] },
+        // 连续自动编辑可能落入 Chokidar 的 50ms change 去重窗口。
+        // 等文件稳定后再发事件，同时避免读取 writeFile 的中间内容；仍走真实 watcher/HMR。
+        watch: { awaitWriteFinish: { stabilityThreshold: 100, pollInterval: 10 } },
+      },
     });
     try {
       await server.listen();
