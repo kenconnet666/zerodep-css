@@ -88,6 +88,16 @@ css 接受多个字符串/回调，以及数组、false/null/undefined 空项，
 
 独立 tarball 消费也通过，包含新 createStyles 的 NodeNext 类型验证、默认主题/派生类负例，以及两框架客户端和 SSR 构建、hydration。此前 P2a/P2b 提交 02bd575/585382a 的完整远程 CI 均已成功；本阶段 CI 仍以新提交运行结果为准。
 
+### P2d 移除旧适配器 API
+
+两个框架根入口统一为 createStyles 与作者定义能力；旧 useStyleRuntime、standalone 主题/global/context 操作和 globalCss 不再公开。组件、SSR/hydration/HMR 驱动、独立包消费与负例均已迁移，不依赖旧入口兼容。删除不再生成的 Vue useStyleMemo 辅助模块及其包导出；core 的独立引擎入口仍待 P2e 处理。
+
+createStyles 四个明确重载要求作者类、默认主题的泛型必须由实际构造器/定义支撑。host.stats 提供轻量统计；dispose 清理对应用/根 context 的额外引用。无同名 provider 时项目预设同样参与 useCss，已有 provider 优先。
+
+编译器只认同 SFC 的直接 createStyles 来源，支持对象方法、解构 hook 与直接链三种形态；未知配置和跨模块导入保守运行时。raw 引用对象交给原 Builder 校验，修复 Proxy 描述符被优化器额外读取而改变后续声明的问题。
+
+本地根 check/build、167 项完整单元、后续新增 Proxy 回归的定向单元、三语言负例、双框架 SSR/hydration/HMR/项目宿主、独立 tarball 与体积门禁通过。迁移文档与换机入口已重写。审计另发现 raw(number) 仍按属性范围提前拒绝，下一独立修复将改为有限数边界与浏览器判值，不混入显式单位方法的合同。
+
 ### P1 覆盖边界调整
 
 交叉复核发现：把所有后写长属性收齐后删除早期简写，会让 important 简写在“补齐第四边”时突然消失，从而改变另外三边；任意 raw/var 简写也不能可靠拆开。因此采用明确、可维护的边界：**标准化同名属性（含规范明确的 legacyAliasOf）直接后写替换，不考虑前 important；不同属性的简写/长属性及 all 保留原始声明顺序，交给浏览器处理原生层叠。**

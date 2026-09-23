@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { createRuntime, cssVar } from '../../dist/index.js';
 import {
   formatValue,
   validateUnitValues,
@@ -72,4 +73,30 @@ test('格式化快路径不能放宽联合参数备选约束', () => {
   ];
   assert.deepEqual(validateUnitValues([-1, 1], alternatives), [-1, 1]);
   assert.throws(() => validateUnitValues([-1, -1], alternatives));
+});
+
+test('自动绑定不额外读取 raw 引用对象，token 对引用对象仍严格拒绝', () => {
+  const run = (optimized) => {
+    let reads = 0;
+    const input = new Proxy(cssVar('--color'), {
+      getOwnPropertyDescriptor(target, key) {
+        if (typeof key === 'symbol') reads++;
+        return Reflect.getOwnPropertyDescriptor(target, key);
+      },
+    });
+    const runtime = createRuntime({ target: null });
+    const binding = createDeclarationBinding('--bound', { property: 'color' });
+    try {
+      runtime.css((s) => {
+        s.color.raw(optimized ? bindValue({}, '--bound', binding, input) : input);
+        s.width.px(reads);
+      });
+      return runtime.snapshot().records[0].body;
+    } finally {
+      runtime.dispose();
+    }
+  };
+  assert.equal(run(true), run(false));
+  const token = createDeclarationBinding('--token', { property: 'color', tokens: ['red'] });
+  assert.throws(() => bindValue({}, '--token', token, cssVar('--color')), /expects a CSS string/);
 });

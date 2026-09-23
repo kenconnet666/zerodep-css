@@ -113,3 +113,24 @@ test('默认主题缺失时必须明确传定义，静态覆盖与 getter 使用
     host.dispose();
   }
 });
+
+test('共享宿主时作者预设与 useTheme 一致，实际 provider 优先于预设', () => {
+  const blue = theme.extend({ color: { brand: 'blue' } });
+  const project = createStyles({ cssType: AppCss, theme: blue });
+  for (const root of [createStyles(), createStyles({ theme })]) {
+    const host = root.createHost({ target: null });
+    const app = createSSRApp({ render: () => null });
+    host.install(app);
+    try {
+      app.runWithContext(() => {
+        const current = project.useTheme();
+        const css = project.useCss();
+        const tokens = css((s) => s.color.brand).split(' ');
+        const record = host.snapshot().runtime.records.find((record) => record.id === tokens[0]);
+        assert(record.body.includes(':' + current().color.brand + ';'));
+      });
+    } finally {
+      host.dispose();
+    }
+  }
+});

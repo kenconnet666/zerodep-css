@@ -7,6 +7,7 @@ import {
   type ProjectThemeHooks,
   type StyleContext,
   type StyleContextOptions,
+  type RuntimeStats,
   type StylesOptions,
   type StylesheetFactory,
   type ThemeDefinition,
@@ -17,6 +18,7 @@ import {
   createRuntimeView,
   normalizeStylesOptions,
   projectThemeArguments,
+  projectThemeScope,
   type ThemeScope,
 } from '@zerodep-css/core/style-scope';
 import { resolveContext, provideStyleContext } from './context.js';
@@ -33,6 +35,7 @@ export interface StyleHost extends Pick<
 > {
   /** 根组件初始化时安装一次；服务端由请求宿主在序列化后释放。 */
   provide(): void;
+  stats(): RuntimeStats;
 }
 
 export interface StylesProject<C extends Css, T extends ThemeTree> extends ProjectThemeHooks<T> {
@@ -48,6 +51,22 @@ export interface StylesProject<C extends Css, T extends ThemeTree> extends Proje
 }
 
 /** 项目入口只捕获作者类型与主题定义；运行实例由 createHost 按应用/请求创建。 */
+export function createStyles<C extends Css, T extends ThemeTree>(options: {
+  readonly cssType: CssConstructor<C>;
+  readonly theme: ThemeDefinition<T>;
+}): StylesProject<C, T>;
+export function createStyles<C extends Css>(options: {
+  readonly cssType: CssConstructor<C>;
+  readonly theme?: never;
+}): StylesProject<C, never>;
+export function createStyles<T extends ThemeTree>(options: {
+  readonly theme: ThemeDefinition<T>;
+  readonly cssType?: never;
+}): StylesProject<Css, T>;
+export function createStyles(options?: {
+  readonly cssType?: never;
+  readonly theme?: never;
+}): StylesProject<Css, never>;
 export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
   options?: StylesOptions<C, T>,
 ): StylesProject<C, T> {
@@ -73,7 +92,7 @@ export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
   return Object.freeze({
     ...projectThemes,
     useCss(): CssFunction<C> {
-      const scope = getCurrentThemeScope();
+      const scope = projectThemeScope(theme, getCurrentThemeScope());
       return createRuntimeView(resolveContext().runtime, scope, authorType).css as CssFunction<C>;
     },
     useGlobalCss(identity: string, factory: StylesheetFactory<C>) {
@@ -86,10 +105,12 @@ export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
       const dispose = () => {
         if (disposed) return;
         disposed = true;
+        owner = undefined;
         context.dispose();
       };
       return Object.freeze({
         server: context.server,
+        stats: context.runtime.stats,
         snapshot: context.snapshot,
         renderStyles: context.renderStyles,
         renderManifest: context.renderManifest,

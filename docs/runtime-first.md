@@ -102,7 +102,7 @@
 第四轮已确认：
 
 14. 项目建立统一样式入口（例如 styles.ts），配置 AppCss 并导出带作者类型的 useCss；组件从该入口导入，不重复配置类型，不依赖全局 TypeScript 类型声明。共享配置和入口，应用／SSR 请求分别持有运行状态。
-15. 组件统一使用 const css = useCss()，直接返回样式函数；替换 useStyleRuntime，不保留同义入口。此为待实施的新 API 决策。
+15. 组件统一使用 const css = useCss()，直接返回样式函数；替换 useStyleRuntime，不保留同义入口。已实现于 createStyles 绑定入口；阶段验证见 production.md。
 16. 未指定作者类型时默认系统 Css；需要内置主题关键字时显式选择 ThemeCss，用户可在任一层继承后于项目入口统一配置。
 
 第五轮已确认：

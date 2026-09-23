@@ -128,87 +128,74 @@ try {
     await save(
       join(folder, 'themes-smoke.mjs'),
       `import assert from 'node:assert/strict';
-import {createRuntime,readTheme} from '@zerodep-css/core';
+import {Css} from '@zerodep-css/core';
 import {ThemeCss,lightTheme,darkTheme} from '@zerodep-css/${framework}/themes';
-const runtime=createRuntime({target:null});
-assert.equal(readTheme(lightTheme),lightTheme.defaults);
+assert(ThemeCss.prototype instanceof Css);
+assert(Object.isFrozen(lightTheme.defaults));
+assert.notDeepEqual(lightTheme.defaults,darkTheme.defaults);
+assert.equal(lightTheme.tokens.color.primary.name,darkTheme.tokens.color.primary.name);
 await assert.rejects(()=>import('@zerodep-css/core/theme-runtime'),{code:'ERR_PACKAGE_PATH_NOT_EXPORTED'});
-try { runtime.css(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;},ThemeCss);
-assert.notEqual(lightTheme.className(runtime),darkTheme.className(runtime));
-assert.equal(runtime.stats().classes,3); } finally { runtime.dispose(); }
 `,
     );
     run(process.execPath, ['themes-smoke.mjs'], { cwd: folder, env: environment });
     // 使用独立消费者的 TypeScript 与 NodeNext 条件，而不是仓库的 zerodep-source 条件。
     await save(
       join(folder, 'types.ts'),
-      `import { createStyleContext, readTheme, type StyleFactory, type StylesheetFactory } from '@zerodep-css/core';
-import { createStyles, useStyleRuntime, useTheme, defineTheme, provideTheme } from '@zerodep-css/${framework}';
-// @ts-expect-error 旧作者类型已统一为 Css
-import type { StyleBuilder } from '@zerodep-css/core';
-// @ts-expect-error bx 已移除，动态值直接交给 cssPlugin
-import { bx } from '@zerodep-css/${framework}';
-import { Css } from '@zerodep-css/${framework}';
+      `import { createStyles, Css, defineTheme, type StyleFactory, type StylesheetFactory, type StyleHostOptions, type StyleManifest, type StyleStats } from '@zerodep-css/${framework}';
 import { ThemeCss, lightTheme, darkTheme } from '@zerodep-css/${framework}/themes';
 import { cssPlugin, transformCss } from '@zerodep-css/${framework}/compiler';
 import type { Plugin } from 'vite';
-const compilerPlugin: Plugin = cssPlugin(); void compilerPlugin;
-// @ts-expect-error 适配器不再暴露绕过上下文的默认 css
-import { css as defaultCss } from '@zerodep-css/${framework}';
-// @ts-expect-error 内部 IR 不属于根入口
+// @ts-expect-error 旧作者类型已统一为 Css
+import type { StyleBuilder } from '@zerodep-css/core';
+// @ts-expect-error bx 已移除
+import { bx } from '@zerodep-css/${framework}';
+// @ts-expect-error 旧组件入口不再公开
+import { useStyleRuntime } from '@zerodep-css/${framework}';
+// @ts-expect-error 不能绕过应用 host 取得隐式全局运行时
+import { css, createStyleContext, provideStyleContext } from '@zerodep-css/${framework}';
+// @ts-expect-error 内部 IR 不属于作者入口
 import type { StyleProgram } from '@zerodep-css/core';
-const context = createStyleContext({target:null});
-// @ts-expect-error 只保留选项对象，禁止旧位置参数
-useStyleRuntime(context);
-// @ts-expect-error 第二个位置参数不再支持
-useStyleRuntime(undefined, {themes:[]});
+const compilerPlugin: Plugin = cssPlugin(); void compilerPlugin; void transformCss;
 const palette = defineTheme('consumer-theme', {color:{brand:'red'}});
-const themeScope = provideTheme(palette, () => ({color:{brand:'blue'}}));
-const currentTheme = useTheme(palette, themeScope);
-const brand: string = currentTheme().color.brand; void brand;
-readTheme(palette, themeScope);
-// @ts-expect-error 主题 getter 保留只读字段结构
-currentTheme().color.brand = 'green';
-// @ts-expect-error 不能读取未声明的主题字段
-currentTheme().spacing;
-useStyleRuntime({context, theme:themeScope});
-// @ts-expect-error 主题叶类型不能因 provider 接入而放宽
-provideTheme(palette, () => ({color:{brand:1}}));
-const style: StyleFactory = s => { s.display.token('flex'); s.width.raw('future-value');
+class AppCss extends Css { get color(){ return this.extendProperty(super.color,{brand:'#2463eb'}); } control(){this.padding.px(8);} }
+const project = createStyles({cssType:AppCss,theme:palette});
+const options: StyleHostOptions = {target:null};
+const host = project.createHost(options);
+const manifest: StyleManifest = host.snapshot();
+const stats: StyleStats = host.stats();
+const current = project.useTheme();
+const brand: string = current().color.brand;
+project.provideTheme({color:{brand:'blue'}});
+project.provideTheme(palette, () => ({color:{brand:'green'}}));
+// @ts-expect-error 主题读取保留只读字段结构
+current().color.brand = 'green';
+// @ts-expect-error 不能读取未声明字段
+current().spacing;
+// @ts-expect-error 主题叶类型保持精确
+project.provideTheme({color:{brand:1}});
+// @ts-expect-error 没有默认主题时必须传定义
+createStyles().useTheme();
+// @ts-expect-error 显式作者泛型不能代替实际构造器
+createStyles<AppCss>();
+// @ts-expect-error 显式主题泛型不能代替实际主题定义
+createStyles<AppCss, typeof palette.defaults>({cssType:AppCss});
+// @ts-expect-error 所有权配置必须交给 createHost
+createStyles({nonce:'other'});
+// @ts-expect-error 作者类型须继承 Css
+createStyles({cssType:class {}});
+const style: StyleFactory = s => { s.display.flex; s.width.raw('future-value');
 // @ts-expect-error token 不能退化为任意字符串
 s.display.token('unknown-token');
 // @ts-expect-error 属性不可直接调用
 s.width('50%'); s.width.px(12); };
-const global: StylesheetFactory = g => g.containerQuery('(width > 10px)', g => g.rule('body', style));
-const result: string = useStyleRuntime({ context }).css(style);
-class AppCss extends Css { get color(){ return this.extendProperty(super.color,{brand:'#2463eb'}); } control(){this.padding.px(8);} }
-const project = createStyles({cssType:AppCss,theme:palette});
-const projectHost = project.createHost({target:null});
-const projectCss = project.useCss();
-const combined: string = projectCss('foreign', [false, null, s=>s.control()]);
-project.useGlobalCss('project-global', g=>g.media('screen', g=>g.rule('body', s=>s.control())));
-project.provideTheme({color:{brand:'green'}});
-const projectBrand: string = project.useTheme()().color.brand;
-// @ts-expect-error 项目入口仍保留主题叶类型
-project.provideTheme({color:{brand:1}});
-// @ts-expect-error 没有默认主题时须显式传定义
-createStyles().useTheme();
-projectHost.dispose(); void combined; void projectBrand;
-const extended: string = useStyleRuntime({ context }).css(s=>{s.control();s.color.brand;s.hover(h=>h.control());},AppCss);
-const appStyle = useStyleRuntime({context,cssType:AppCss});
-// @ts-expect-error 泛型声明不能替代运行时构造器
-useStyleRuntime<AppCss>({context});
-appStyle.css(s=>{s.control();s.focus(h=>h.color.brand);});
-// @ts-expect-error 初始化类型不会丢失方法签名或开放任意成员
-appStyle.css(s=>s.unknownMethod());
-// @ts-expect-error 局部视图不接受 runtime 所有权配置
-useStyleRuntime({context,nonce:'other'});
-// @ts-expect-error 指定的类型必须继承 Css
-useStyleRuntime({context,cssType:class {}});
-context.mountGlobal('typed-global',g=>g.rule('button',s=>s.control(),AppCss));
-const preset: string = useStyleRuntime({ context }).css(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;},ThemeCss);
+const global: StylesheetFactory<AppCss> = g => g.containerQuery('(width > 10px)', g => g.rule('body', s=>s.control()));
+project.useGlobalCss('consumer',global);
+const result: string = project.useCss()('foreign',[false,null,style,s=>{s.control();s.color.brand;}]);
+// @ts-expect-error 初始化类型不能丢失自定义方法约束
+project.useCss()(s=>s.unknownMethod());
+const preset: string = createStyles({cssType:ThemeCss,theme:darkTheme}).useCss()(s=>{s.color.primary;s.backgroundColor.surface;s.padding.md;});
 darkTheme.extend({color:{primary:'#123456'}}); void lightTheme; void preset;
-context.mountGlobal('consumer',global); context.dispose(); void result; void extended; void defaultCss; void cssPlugin; void transformCss;
+host.dispose(); void result; void manifest; void stats; void brand;
 `,
     );
     pnpm(
@@ -245,11 +232,14 @@ context.mountGlobal('consumer',global); context.dispose(); void result; void ext
         join(folder, `${component}.${framework}`),
       );
     await copyFile(resolve(root, `${framework}/test/fixtures/theme.ts`), join(folder, 'theme.ts'));
+    if (framework === 'svelte')
+      for (const file of ['styles.ts', 'preset.ts'])
+        await copyFile(resolve(root, `svelte/test/fixtures/${file}`), join(folder, file));
     await save(
       join(folder, `ConsumerApp.${framework}`),
       framework === 'vue'
-        ? `<script setup>import ReactiveApp from './ReactiveApp.vue'; import BoundApp from './BoundApp.vue'; import {provideStyleContext} from '@zerodep-css/vue'; const props=defineProps(['context','initialColor','record']); provideStyleContext(props.context);</script><template><ReactiveApp v-bind="props"/><BoundApp :context="props.context" :record="props.record" :initial-width="20"/></template>`
-        : `<script>import ReactiveApp from './ReactiveApp.svelte'; import BoundApp from './BoundApp.svelte'; let props=$props();</script><ReactiveApp {...props}/><BoundApp context={props.context} record={props.record} initialWidth={20}/>`,
+        ? `<script setup>import ReactiveApp from './ReactiveApp.vue'; import BoundApp from './BoundApp.vue'; const props=defineProps(['initialColor','record']);</script><template><ReactiveApp v-bind="props"/><BoundApp :record="props.record" :initial-width="20"/></template>`
+        : `<script>import {untrack} from 'svelte'; import ReactiveApp from './ReactiveApp.svelte'; import BoundApp from './BoundApp.svelte'; let {host,initialColor,record}=$props();untrack(()=>host).provide();</script><ReactiveApp {initialColor} {record}/><BoundApp {record} initialWidth={20}/>`,
     );
     await save(
       join(folder, 'vite.config.js'),
@@ -264,23 +254,23 @@ context.mountGlobal('consumer',global); context.dispose(); void result; void ext
     await save(
       join(folder, 'server.js'),
       `${imports}
-import {createStyleContext} from '@zerodep-css/core'; import App from './ConsumerApp.${framework}';
-export async function renderPage(){ const context=createStyleContext({target:null,namespace:'consumer'}); try {
-const props={context,initialColor:'red',record(){}};
-const html=${framework === 'vue' ? 'await renderToString(createSSRApp(App,props))' : '(await render(App,{props})).body'};
-return {html,styles:context.renderStyles(),manifest:context.renderManifest()};
-} finally {context.dispose();} }
+import {createStyles} from '@zerodep-css/${framework}'; import App from './ConsumerApp.${framework}';
+export async function renderPage(){ const host=createStyles().createHost({target:null,namespace:'consumer'}); try {
+const props={${framework === 'svelte' ? 'host,' : ''}initialColor:'red',record(){}};
+const html=${framework === 'vue' ? 'await renderToString(createSSRApp(App,props).use(host))' : '(await render(App,{props})).body'};
+return {html,styles:host.renderStyles(),manifest:host.renderManifest()};
+} finally {host.dispose();} }
 `,
     );
     await save(
       join(folder, 'client.js'),
       `${framework === 'vue' ? "import {createSSRApp,nextTick} from 'vue';" : "import {hydrate,tick,unmount} from 'svelte';"}
-import {createStyleContext} from '@zerodep-css/core'; import App from './ConsumerApp.${framework}';
-const context=createStyleContext({namespace:'consumer',hydrate:JSON.parse(document.querySelector('#manifest').textContent)});
-const counts={}; const props={context,initialColor:'red',record(kind){counts[kind]=(counts[kind]??0)+1;}};
-const app=${framework === 'vue' ? 'createSSRApp(App,props)' : "hydrate(App,{target:document.querySelector('#app'),props})"};
+import {createStyles} from '@zerodep-css/${framework}'; import App from './ConsumerApp.${framework}';
+const host=createStyles().createHost({namespace:'consumer',hydrate:JSON.parse(document.querySelector('#manifest').textContent)});
+const counts={}; const props={${framework === 'svelte' ? 'host,' : ''}initialColor:'red',record(kind){counts[kind]=(counts[kind]??0)+1;}};
+const app=${framework === 'vue' ? 'createSSRApp(App,props).use(host)' : "hydrate(App,{target:document.querySelector('#app'),props})"};
 ${framework === 'vue' ? "app.mount('#app'); await nextTick();" : 'await tick();'}
-context.completeHydration(); window.consumer={ready:true,counts,stats:()=>context.runtime.stats(), async dispose(){ ${framework === 'vue' ? 'app.unmount();' : 'await unmount(app);'} const globals=context.runtime.stats().globals; context.dispose(); return globals; }};
+host.completeHydration(); window.consumer={ready:true,counts,stats:()=>host.stats(), async dispose(){ ${framework === 'vue' ? 'app.unmount();' : 'await unmount(app);'} host.dispose(); return document.querySelectorAll('style[data-zerodep="consumer"]').length; }};
 `,
     );
     pnpm(['exec', 'vite', 'build', '--outDir', 'dist/client'], { cwd: folder, env: environment });

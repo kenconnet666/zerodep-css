@@ -13,19 +13,24 @@ import {
 } from '../../../core/dist/compiler-runtime.js';
 import * as compilerRuntime from '../../../core/dist/compiler-runtime.js';
 import * as adapter from '../../../vue/dist/index.js';
-import * as vueCompilerRuntime from '../../../vue/dist/compiler-runtime.js';
-import { createRuntime, createStyleContext } from '../../../core/dist/index.js';
+import { createRuntime } from '../../../core/dist/index.js';
 import { createRequire } from 'node:module';
 import { transform as compileJs } from 'esbuild';
 import { createSSRApp } from 'vue';
 import { renderToString } from 'vue/server-renderer';
 
 function fixture(framework, body, { tag = 'div', suffix = '', expression, script = '' } = {}) {
-  const setup = `import {useStyleRuntime} from '@zerodep-css/${framework}';const {css}=useStyleRuntime();let gap=10;${script}`;
+  const setup = `import {createStyles} from '@zerodep-css/${framework}';const styles=createStyles();const css=styles.useCss();let gap=10;${script}`;
   const css = expression ?? `css(s=>{${body}})`;
   return framework === 'vue'
     ? `<script setup lang="ts">${setup}</script><template><${tag} :class="${css}" ${suffix}/></template>`
     : `<script lang="ts">${setup}</script><${tag} class={${css}} ${suffix}/>`;
+}
+function projectFixture(framework, setup, body = 's.width.px(gap);') {
+  const script = `import {createStyles} from '@zerodep-css/${framework}';let gap=10;const theme={};const options={};const key='theme';const rows=[{css:()=>''}];class AppCss{};${setup}`;
+  return framework === 'vue'
+    ? `<script setup lang="ts">${script}</script><template><div :class="css(s=>{${body}})"/></template>`
+    : `<script lang="ts">${script}</script><div class={css(s=>{${body}})}/>`;
 }
 function propsExpression(framework, result) {
   if (framework === 'vue') {
@@ -44,35 +49,118 @@ for (const [framework, transform] of [
   ['svelte', svelte],
 ]) {
   const filename = resolve('Automatic.' + framework);
-  test(`${framework}：初始化选项只在可证明使用系统 Css 时自动提升`, () => {
-    const source = fixture(framework, 's.width.px(gap);');
-    for (const argument of [
-      '{cssType:AppCss}',
-      'options',
-      '{...options}',
-      '{[key]:value}',
-      '{get cssType(){return AppCss;}}',
+  test(`${framework}：同文件 createStyles 三种绑定形态可自动绑定并通过官方编译`, () => {
+    for (const setup of [
+      'const styles=createStyles();const css=styles.useCss();',
+      'const styles=createStyles({theme:theme});const css=styles.useCss();',
+      'const {useCss}=createStyles({});const css=useCss();',
+      'const {useCss:pick}=createStyles({theme:theme});const css=pick();',
+      'const css=createStyles().useCss();',
+      'const css=createStyles({theme:theme}).useCss();',
     ]) {
-      const input = source.replace('useStyleRuntime()', `useStyleRuntime(${argument})`);
-      assert.equal(transform(input, filename), null, argument);
-      const debug = transform(input, filename, { debug: true });
-      assert(debug.code.includes('withStyleSource'));
-      assert(!debug.code.includes('--zcss-'));
+      const result = transform(projectFixture(framework, setup), filename);
+      assert(result?.code.includes('bindUnit'), setup);
+      assert(!result.code.includes('prepareStyle'), setup);
+      if (framework === 'vue') {
+        const descriptor = parse(result.code).descriptor;
+        compileScript(descriptor, { id: 'new-hook', inlineTemplate: true });
+        compileScript(descriptor, {
+          id: 'new-hook-ssr',
+          inlineTemplate: true,
+          templateOptions: { ssr: true },
+        });
+      } else {
+        compile(result.code, { filename, generate: 'client' });
+        compile(result.code, { filename, generate: 'server' });
+      }
     }
-    for (const argument of ['{}', '{theme:scope}', '{context:context}', 'undefined']) {
-      const result = transform(
-        source.replace('useStyleRuntime()', `useStyleRuntime(${argument})`),
-        filename,
-      );
-      assert(result.code.includes('bindUnit'), argument);
-    }
-    assert.equal(
-      transform(source.replace('useStyleRuntime()', 'useStyleRuntime(undefined,scope)'), filename),
-      null,
+    const staticResult = transform(
+      projectFixture(
+        framework,
+        'const styles=createStyles();const css=styles.useCss();',
+        's.display.flex;',
+      ),
+      filename,
     );
-    const shadowed = source
-      .replace('const {css}', 'const undefined={cssType:AppCss};const {css}')
-      .replace('useStyleRuntime()', 'useStyleRuntime(undefined)');
+    assert(staticResult.code.includes('prepareStyle'));
+    const directStatic = transform(
+      projectFixture(framework, 'const css=createStyles().useCss();', 's.display.flex;'),
+      filename,
+    );
+    assert(directStatic.code.includes('prepareStyle'));
+  });
+  test(`${framework}：createStyles 派生类或未知配置只保留 debug 来源`, () => {
+    for (const options of [
+      '{cssType:AppCss}',
+      '{theme:theme,cssType:AppCss}',
+      '{...options}',
+      '{get theme(){return theme}}',
+      '{[key]:theme}',
+      '{other:theme}',
+      'options',
+      'undefined',
+    ]) {
+      const source = projectFixture(
+        framework,
+        `const styles=createStyles(${options});const css=styles.useCss();`,
+      );
+      assert.equal(transform(source, filename), null, options);
+      const debug = transform(source, filename, { debug: true });
+      assert(debug?.code.includes('withStyleSource'), options);
+      assert(!debug.code.includes('bindUnit'), options);
+      assert(!debug.code.includes('prepareStyle'), options);
+      const direct = projectFixture(framework, `const css=createStyles(${options}).useCss();`);
+      assert.equal(transform(direct, filename), null, options);
+      const directDebug = transform(direct, filename, { debug: true });
+      assert(directDebug?.code.includes('withStyleSource'), options);
+      assert(!directDebug.code.includes('bindUnit'), options);
+    }
+  });
+  test(`${framework}：createStyles 来源、const 和遮蔽限制不猜同名方法`, () => {
+    const valid = projectFixture(
+      framework,
+      'const styles=createStyles();const css=styles.useCss();',
+    );
+    const alias = valid
+      .replace('import {createStyles}', 'import {createStyles as makeStyles}')
+      .replace('styles=createStyles()', 'styles=makeStyles()');
+    assert(transform(alias, filename)?.code.includes('bindUnit'));
+    const directAlias = projectFixture(framework, 'const css=makeStyles().useCss();').replace(
+      'import {createStyles}',
+      'import {createStyles as makeStyles}',
+    );
+    assert(transform(directAlias, filename)?.code.includes('bindUnit'));
+    for (const source of [
+      valid.replace(`@zerodep-css/${framework}`, './styles'),
+      valid.replace(
+        `@zerodep-css/${framework}`,
+        `@zerodep-css/${framework === 'vue' ? 'svelte' : 'vue'}`,
+      ),
+      valid.replace('const styles=createStyles()', 'let styles=createStyles()'),
+      valid.replace('const styles=createStyles()', 'const styles={useCss(){return ()=>"foreign"}}'),
+      valid.replace('styles.useCss()', 'styles.useCss(1)'),
+      valid.replace(
+        'const styles=createStyles()',
+        'const styles=createStyles({theme, ...options})',
+      ),
+      projectFixture(framework, 'const {useCss}=createStyles();const css=useCss(1);'),
+      projectFixture(framework, 'const {useCss=other}=createStyles();const css=useCss();'),
+      projectFixture(framework, 'const styles=createStyles();const css=styles.other();'),
+      projectFixture(framework, 'let css=createStyles().useCss();'),
+      projectFixture(framework, 'const css=createStyles().useCss(1);'),
+      projectFixture(framework, 'const css=other().useCss();'),
+      projectFixture(framework, 'const css=createStyles({cssType:AppCss}).useCss();').replace(
+        `@zerodep-css/${framework}`,
+        './styles',
+      ),
+    ])
+      assert.equal(transform(source, filename), null, source);
+    const shadowed =
+      framework === 'vue'
+        ? valid.replace('<div :class=', '<div v-for="{css} in rows" :key="css" :class=')
+        : valid
+            .replace('<div class=', '{#each rows as {css}}<div class=')
+            .replace('/>', '/>{/each}');
     assert.equal(transform(shadowed, filename), null);
   });
   test(`${framework}：常用状态快捷方法保留动态绑定`, () => {
@@ -431,7 +519,7 @@ test('整组单位格式化保留联合约束、顺序和非法输入拒绝', ()
 });
 
 test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async () => {
-  const source = `<script setup lang="ts">import {useStyleRuntime} from '@zerodep-css/vue';defineProps<{gap:number}>();const {css}=useStyleRuntime();const rows=[{id:'hidden',detail:null},{id:'visible',detail:{width:20}}];</script><template><div :class="css(s=>{s.padding.px(8,gap)})"/><template v-for="row in rows" :key="row.id"><span v-if="row.detail" :class="css(s=>{s.width.px(row.detail.width)})"/></template></template>`;
+  const source = `<script setup lang="ts">import {createStyles} from '@zerodep-css/vue';defineProps<{gap:number}>();const styles=createStyles();const css=styles.useCss();const rows=[{id:'hidden',detail:null},{id:'visible',detail:{width:20}}];</script><template><div :class="css(s=>{s.padding.px(8,gap)})"/><template v-for="row in rows" :key="row.id"><span v-if="row.detail" :class="css(s=>{s.width.px(row.detail.width)})"/></template></template>`;
   const result = vue(source, resolve('AutomaticSSR.vue'));
   const compiled = compileScript(parse(result.code).descriptor, {
     id: 'automatic',
@@ -444,7 +532,6 @@ test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async 
   new Function('require', 'module', 'exports', js.code)(
     (id) => {
       if (id === '@zerodep-css/vue') return adapter;
-      if (id === '@zerodep-css/vue/compiler-runtime') return vueCompilerRuntime;
       if (id === '@zerodep-css/core/compiler-runtime') return compilerRuntime;
       return require(id);
     },
@@ -453,23 +540,23 @@ test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async 
   );
   const records = [];
   for (const gap of [12, 24]) {
-    const context = createStyleContext({ target: null });
+    const host = adapter.createStyles().createHost({ target: null });
     try {
       const app = createSSRApp(module.exports.default, { gap });
-      adapter.installStyleContext(app, context);
+      app.use(host);
       const html = await renderToString(app);
       assert(html.includes(`8px ${gap}px`));
       assert(html.includes('20px'));
-      records.push(context.runtime.snapshot().records);
+      records.push(host.snapshot().runtime.records);
     } finally {
-      context.dispose();
+      host.dispose();
     }
   }
   assert.deepEqual(records[0], records[1], '不同请求的动态值不进入规则或哈希');
 });
 
 test('Vue 静态准备按组件复用，保留模板守卫、诊断与请求所有权', async () => {
-  const source = `<script setup lang="ts">import {useStyleRuntime} from '@zerodep-css/vue';defineProps<{show:boolean}>();const {css}=useStyleRuntime();const rows=[1,2,3];</script><template><div v-if="show"><span v-for="row in rows" :key="row" :class="css(s=>{s.name('static');s.width.px(8);})"/></div><div v-if="false" :class="css(s=>{s.width.px(-1);})"/></template>`;
+  const source = `<script setup lang="ts">import {createStyles} from '@zerodep-css/vue';defineProps<{show:boolean}>();const styles=createStyles();const css=styles.useCss();const rows=[1,2,3];</script><template><div v-if="show"><span v-for="row in rows" :key="row" :class="css(s=>{s.name('static');s.width.px(8);})"/></div><div v-if="false" :class="css(s=>{s.width.px(-1);})"/></template>`;
   for (const debug of [false, true]) {
     const transformed = vue(source, resolve('StaticReuse.vue'), { debug });
     const compiled = compileScript(parse(transformed.code).descriptor, {
@@ -487,13 +574,17 @@ test('Vue 静态准备按组件复用，保留模板守卫、诊断与请求所�
         if (id === '@zerodep-css/vue')
           return {
             ...adapter,
-            useStyleRuntime() {
-              const runtime = adapter.useStyleRuntime();
+            createStyles(...args) {
+              const styles = adapter.createStyles(...args);
               return {
-                ...runtime,
-                css(factory) {
-                  calls.push(factory);
-                  return runtime.css(factory);
+                ...styles,
+                useCss() {
+                  const css = styles.useCss();
+                  return (...inputs) => {
+                    if (inputs.length === 1 && typeof inputs[0] === 'function')
+                      calls.push(inputs[0]);
+                    return css(...inputs);
+                  };
                 },
               };
             },
@@ -513,15 +604,15 @@ test('Vue 静态准备按组件复用，保留模板守卫、诊断与请求所�
     );
     const snapshots = [];
     for (const show of [false, true, true]) {
-      const context = createStyleContext({ target: null });
+      const host = adapter.createStyles().createHost({ target: null });
       try {
         const app = createSSRApp(module.exports.default, { show });
-        adapter.installStyleContext(app, context);
+        app.use(host);
         await renderToString(app);
-        assert.equal(context.runtime.stats().records, show ? 1 : 0);
-        if (show) snapshots.push(context.runtime.snapshot());
+        assert.equal(host.stats().records, show ? 1 : 0);
+        if (show) snapshots.push(host.snapshot().runtime);
       } finally {
-        context.dispose();
+        host.dispose();
       }
     }
     assert.equal(preparations, 6, '每组件准备两个函数，不提前执行非法的隐藏样式');

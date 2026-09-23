@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import type { StyleContext } from '@zerodep-css/core';
 import BoundStyles from './BoundStyles.vue';
 import ThemeApp from './ThemeApp.vue';
 import PresetPanel from './PresetPanel.vue';
 import DifferentialStyles from './DifferentialStyles.vue';
-import { useStyleRuntime } from '@zerodep-css/vue';
-const { css } = useStyleRuntime();
-defineProps<{ context: StyleContext; initialWidth: number; record: (kind: string) => void }>();
+import { createStyles } from '@zerodep-css/vue';
+const css = createStyles().useCss();
+defineProps<{ initialWidth: number; record: (kind: string) => void }>();
 </script>
 <template>
   <DifferentialStyles />

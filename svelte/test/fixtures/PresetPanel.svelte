@@ -1,12 +1,12 @@
 <script lang="ts">
   import { untrack } from 'svelte';
-  import { provideTheme, useStyleRuntime } from '@zerodep-css/svelte';
-  import { lightTheme, darkTheme, ThemeCss } from '@zerodep-css/svelte/themes';
+  import { lightTheme, darkTheme } from '@zerodep-css/svelte/themes';
+  import { presetStyles } from './preset.js';
   import PresetOverride from './PresetOverride.svelte';
   let { name, initialDark }: { name: string; initialDark: boolean } = $props();
   let dark = $state(untrack(() => initialDark));
-  provideTheme(lightTheme, () => (dark ? darkTheme.defaults : lightTheme.defaults));
-  const { css } = useStyleRuntime({ cssType: ThemeCss });
+  presetStyles.provideTheme(() => (dark ? darkTheme.defaults : lightTheme.defaults));
+  const css = presetStyles.useCss();
   const tones = [
     ['success', 'onSuccess'],
     ['warning', 'onWarning'],

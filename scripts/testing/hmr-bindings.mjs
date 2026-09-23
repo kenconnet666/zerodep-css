@@ -23,12 +23,12 @@ function component(framework, stage) {
       : `s.width.${stage === 1 ? 'rem' : 'px'}(width);`;
   if (framework === 'vue')
     return `<script setup>
-import {ref} from 'vue'; import {useStyleRuntime} from '@zerodep-css/vue';
-const {css}=useStyleRuntime(); const width=ref(2);
+import {ref} from 'vue'; import {createStyles} from '@zerodep-css/vue';
+const {useCss}=createStyles();const css=useCss(); const width=ref(2);
 </script><template><button @click="width++">update</button><div data-target :class="css(s=>{s.height.px(5);${style}})"></div><div data-fallback :class="css(s=>{${style}})" style="height: 5px"></div></template>`;
   return `<script>
-import {untrack} from 'svelte'; import {useStyleRuntime} from '@zerodep-css/svelte';
-let {context}=$props();const {css}=useStyleRuntime({context:untrack(()=>context)});let width=$state(2);
+import {untrack} from 'svelte'; import {createStyles} from '@zerodep-css/svelte';
+let {host}=$props();untrack(()=>host).provide();const {useCss}=createStyles();const css=useCss();let width=$state(2);
 </script><button onclick={()=>width++}>update</button><div data-target class={css(s=>{s.height.px(5);${style}})}></div><div data-fallback class={css(s=>{${style}})} style="height: 5px"></div>`;
 }
 try {
@@ -45,8 +45,8 @@ try {
     await writeFile(
       resolve(folder, 'main.js'),
       framework === 'vue'
-        ? `import {createApp} from 'vue'; import {createStyleContext,installStyleContext} from '@zerodep-css/vue'; import App from './App.vue'; const context=createStyleContext();const app=createApp(App);installStyleContext(app,context);app.mount('#app');window.stopFixture=()=>{app.unmount();context.dispose();};`
-        : `import {mount,unmount} from 'svelte'; import {createStyleContext} from '@zerodep-css/core'; import App from './App.svelte';const context=createStyleContext();const app=mount(App,{target:document.querySelector('#app'),props:{context}});window.stopFixture=async()=>{await unmount(app);context.dispose();};`,
+        ? `import {createApp} from 'vue'; import {createStyles} from '@zerodep-css/vue'; import App from './App.vue'; const host=createStyles().createHost();const app=createApp(App).use(host);app.mount('#app');window.stopFixture=()=>{app.unmount();};`
+        : `import {mount,unmount} from 'svelte'; import {createStyles} from '@zerodep-css/svelte'; import App from './App.svelte';const host=createStyles().createHost();const app=mount(App,{target:document.querySelector('#app'),props:{host}});window.stopFixture=async()=>{await unmount(app);host.dispose();};`,
     );
     const server = await createServer({
       configFile: false,
@@ -64,10 +64,6 @@ try {
           {
             find: '@zerodep-css/core/compiler-runtime',
             replacement: resolve(root, 'core/dist/compiler-runtime.js'),
-          },
-          {
-            find: '@zerodep-css/vue/compiler-runtime',
-            replacement: resolve(root, 'vue/dist/compiler-runtime.js'),
           },
           ...['core', 'vue', 'svelte'].map((name) => ({
             find: '@zerodep-css/' + name,

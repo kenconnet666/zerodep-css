@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { defineTheme, useTheme, useStyleRuntime } from '@zerodep-css/vue';
-import { AppCss, theme, spacing } from './theme';
+import { defineTheme } from '@zerodep-css/vue';
+import { theme, spacing, styles } from './theme';
 defineProps<{ name: string }>();
-const { css } = useStyleRuntime({ cssType: AppCss });
-const current = useTheme(theme);
-const gap = useTheme(spacing);
-const fallback = useTheme(defineTheme('unprovided', { opacity: 0.5 }));
+const css = styles.useCss();
+const current = styles.useTheme();
+const gap = styles.useTheme(spacing);
+const fallback = styles.useTheme(defineTheme('unprovided', { opacity: 0.5 }));
 </script>
 <template>
   <div

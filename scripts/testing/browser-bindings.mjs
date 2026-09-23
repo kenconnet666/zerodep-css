@@ -83,7 +83,6 @@ for (const server of [true, false]) {
       '@zerodep-css/svelte/themes': resolve(root, 'svelte/dist/themes.js'),
       '@zerodep-css/core/compiler-runtime': resolve(root, 'core/dist/compiler-runtime.js'),
       '@zerodep-css/core/style-scope': resolve(root, 'core/dist/style-scope.js'),
-      '@zerodep-css/vue/compiler-runtime': resolve(root, 'vue/dist/compiler-runtime.js'),
       '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
       '@zerodep-css/vue': resolve(root, 'vue/dist/index.js'),
       '@zerodep-css/svelte': resolve(root, 'svelte/dist/index.js'),
@@ -456,7 +455,6 @@ try {
       }
       await page.evaluate(async () => {
         await window.fixture.destroy();
-        window.fixture.dispose();
       });
       assert.equal(await page.locator('style').count(), 0);
       await page.evaluate(async (framework) => {
@@ -466,7 +464,6 @@ try {
       assert.deepEqual(await themeState(), ssrTheme);
       await page.evaluate(async () => {
         await window.fixture.destroy();
-        window.fixture.dispose();
       });
       assert.deepEqual(errors, []);
       report.push({
@@ -521,7 +518,6 @@ try {
       );
       await page.evaluate(async () => {
         await window.fixture.destroy();
-        window.fixture.dispose();
       });
       assert.equal(await page.locator('style').count(), 0);
       assert.deepEqual(errors, []);

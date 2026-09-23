@@ -1,76 +1,43 @@
-# 当前交接与换机恢复
+# 交接与换机恢复
 
-## 2026-09-23 运行时优先分支
+当前主线是 codex/runtime-first，基于完整运行时基线 2db10e3。用户已授权目标模式持续实施至约定生产范围可用；不要把旧的“停止剩余工作”记录当成当前指令，也不能把 codex/static-css 的强制静态限制带回本分支。
 
-最新用户决策：绝不放弃运行时 CSS，其余手段只作为优化。当前分支 codex/runtime-first 从 2db10e3 建立，完整运行时产品代码保留；该基线的 [CI 已通过](https://github.com/kenconnet666/zerodep-css/actions/runs/35830142412)。codex/static-css 保留为独立研究分支，不能以其强制静态限制覆盖本分支合同。
+## 先读这些记录
 
-新分支仅保留已验证的 LSP 目录监听修复，并记录 [具体讨论方案](runtime-first.md)；尚未开始新一轮产品重构。下文的 feat/native-reactivity、编译优先研究和停止点属于历史记录。新提交的 CI 应按自身 SHA 核对。
+- [已拍板合同](runtime-first.md)：运行时 CSS 是正式能力；编译、变量绑定和缓存只做等价优化。Vue 3.5/Svelte 5、Nuxt 4/SvelteKit 2、Node SSR 与静态部署是首版目标。
+- [阶段、提交和实际验证](production.md)：P1 已完成；P2 在收敛作者入口、宿主与引擎边界。后续 P3–P6 尚须继续，不宣称目标已经全部完成。
+- [当前公开 API 迁移](migration.md)、[支持边界](support.md)、[编译边界](compiler.md)：以这些文件和当前源码为准。历史 API/性能证据从 Git 查询。
 
-## 2026-09-23 后续优化进展
-
-旧停止点 `9cd39b9` 的七项 CI 已核对通过。本轮按用户要求边测边改，并优先使用框架原生缓存：主题声明准备由 computed/$derived 持有，core 复用既有有界缓存；仅另保留有测量收益的固定 token 索引，单位索引实验已撤回。作者 API 和运行时回退不变。
-
-同机基线/当前源码的 Vue/Svelte 实际组件对照、限制与复现步骤见 [performance](performance.md)；不要将其与旧机器的横向成绩直接比较。生产改动对应的 CI 状态需以新提交的 Actions 为准，下方“停止剩余工作”记录属于旧交接。
-
-## 2026-09-23 换机交接状态
-
-用户要求尽快推送，并明确停止剩余测试和优化。此交接提交保存当前整理与已完成的性能对照，不宣称最终汇总状态已重新通过完整 CI；推送后由接续者核对对应提交的工作流。
-
-- 已完成 API 收敛提交 `5f87b49`：useStyleRuntime 只保留选项对象，作者类型统一 Css；theme-runtime 改为 style-scope，内部函数同步改名，不留旧子路径别名。
-- 现行说明从 .design 迁到 docs，移除 13 份旧计划/重复审计，历史内容在 `8a09c05` 的 .design 下。生成覆盖报告仅移动，内容 hash 相同；格式忽略、生成脚本、文档引用和 AGENTS 已更新。新增本地文档链接检查。
-- 本轮 API 整理已实际通过 check/build、111 项快速测试、三语言类型负例、框架浏览器/SSR/HMR、独立消费者、生成一致性、体积门禁；新增文档链接测试也单独通过。style-scope 的 LSP 返回 complete=true、errors=0，修改的 Svelte 夹具通过官方检查器。
-- 随后新增了 YAML 开发依赖和 benchmark catalog，并完成 Vue/Svelte 各自的 Emotion/goober/vanilla-extract 对照。最终这些配置与文档合并后的全套 check/build/test **尚未重跑**，按用户要求直接交接。YAML 只是开发工具依赖；锁文件同时更新了 Vite 的可选 yaml peer 身份，没有升级 Vue/Svelte/Vite 版本。
-- 性能原始样本、对照版本、编译路径和依赖锁已提交到 `.research/performance/results/2026-09-23-*`，汇总见 [性能对照](performance.md)。它们可以随 Git 换机，不需要复制 test-results。
-
-## 留给接续者的工作
-
-1. 拉取该分支，先核对最新提交 CI；未通过则按日志处理。需要本地复验时按下面的构建步骤执行，不把旧 CI 成功当作当前状态成功。
-2. 性能尚未整体追平原生 CSS。自动变量路径接近原生变量，普通运行时仍慢于 Emotion/goober；ThemeCss 回退的重复主题构建和约 100 KB gzip 的完整运行时仍是突出问题。详见性能文档，当前没有继续改实现。
-3. 对照脚本使用真实 SFC、生产构建、200 元素、30 批更新、5 轮中位数，Vue/Svelte 分开测量；仅当前 Chrome，未测网络首屏、真实绘制、复杂业务和长期无限唯一值。复跑使用 `pnpm research:compare`，它会在临时目录安装固定对照依赖。
-4. 旧机器本轮调试留有 `%TEMP%/zerodep-bench-HhK6XT`（初始化失败）和 `%TEMP%/zerodep-bench-3CrKUv`（prepare-only 产物）。一次递归清理命令被自动审批审查拒绝，工具仅报告 blocked by policy；用户随后要求停止收尾之外的工作，未再清理。这些目录不提交、不影响换机，删除前核对归属。正常完成的对照运行已自动清理自己的临时目录。
-
-本机忽略目录中的报告和生成的 .codex/config.toml 不会随 Git 推送；需要保留的性能证据已单独归档，语言服务配置在新机器重建。
-
-本项目为 core/vue/svelte 三包的混合 CSS 框架，保留运行时与复杂场景回退。当前 API 见各包 README，支持范围与实际验证见 [support](support.md)、[validation](validation.md)。目录与 API 已收敛，换机时先核对 [migration](migration.md)，不要沿用旧位置参数或旧模块名。
+新项目使用 createStyles 绑定 useCss/useTheme/provideTheme/useGlobalCss，createHost 按应用或请求创建。Vue app.use(host)，Svelte 根 host.provide；Vue 应用卸载释放 host，Svelte 最终 unmount 后由入口显式释放。SSR 都在完整输出后 finally dispose。core 的旧独立引擎入口尚待 P2e 迁出，不能把过渡结构当作最终包边界。
 
 ## 取得工作区
-
-仓库：`https://github.com/kenconnet666/zerodep-css.git`。本轮工作在 `feat/native-reactivity`；换机后明确检出该分支，再核对远端 CI 与提交。不要仅凭默认分支或旧交接中的提交号判断状态。
 
 ```powershell
 git clone https://github.com/kenconnet666/zerodep-css.git
 cd zerodep-css
-git switch feat/native-reactivity
+git switch codex/runtime-first
 pnpm install --frozen-lockfile
 pnpm build
 pnpm check
 pnpm lsp:setup
 ```
 
-环境使用 Node 24、pnpm 10.34.5、PowerShell 7。不升级全局工具来绕过版本约束。产品代码、测试入口和源码诊断均不依赖原机器的绝对目录。
+使用 Node 24、pnpm 10.34.5；Windows 安装脚本使用 PowerShell 7。不升级全局工具绕过项目约束。开始前检查 git status、当前 HEAD 与远程对应 SHA 的 CI，保留用户已有改动。测试和源码不依赖旧机器的绝对目录。
 
 ## 语言服务
 
-`.codex/config.toml` 被忽略，由 `pnpm lsp:setup` 按当前机器重建；必要时重启 Codex 以加载项目 MCP。不要复制旧配置中的本机路径或修改全局 Codex 配置。
+.codex/config.toml 被忽略，由 lsp:setup 按当前机器重建；必要时重启 Codex 加载新 MCP。不要复制旧机器路径，不修改用户全局配置，也不结束其他项目进程。
 
-优先使用 zerodep_lsp 的诊断、hover、definitions、references、completions；会话没有该 MCP 或连接关闭时使用 `pnpm lsp:inspect <项目相对文件路径...>`。必须检查 complete=true，超时不代表无错误。桥或依赖变化后执行 `pnpm lsp:verify`；完整语义验收也由 CI 执行。
+优先使用 zerodep_lsp 的 diagnostics、hover、definitions、references、completions；没有该 MCP 时运行 pnpm lsp:inspect <项目相对文件路径...>。complete=false 或超时不能视为零错误。桥或依赖变化后执行 pnpm lsp:verify；完整语义验收也在 CI 中。
 
-## 当前主要入口
+## 验证与提交
 
-- core：css/createRuntime/createStyleContext、Css 类与 extendProperty、defineTheme/readTheme、全局样式与动画资源。
-- Vue/Svelte：useStyleRuntime、useGlobalCss、provideStyleContext、provideTheme/useTheme；Vue 应用入口另有 installStyleContext。
-- 编译器：适配器的 `/compiler` 子路径提供 cssPlugin/transformCss。内部生成代码入口不作为业务作者 API。
-- 预设：三个包的 `/themes` 子路径提供 lightTheme/darkTheme/ThemeCss；严格 CSP 可用 cssPlugin({ bindings: 'runtime' })。
-- `s.name(...).config({ debug })` 提供根命名和相对源码诊断；配置中的 target/nonce/layers 属于 runtime 宿主。
+只由一个流程统一 build，其余测试传 --no-build；不要让多个代理同时清理/写 dist。类型负例会创建临时夹具，运行期间不要全目录格式化或中途终止；若意外中断，先确认遗留探针确属本次执行，再定点清理。
 
-主题和动态样式放在模板、computed 或 $derived 中；普通 const 字符串保留调用时快照。主题视图返回可用于 class 属性的类名列表。模板编译只在可证明正确的作用域提升值，其他代码保留运行时语义；具体边界见 [编译说明](compiler.md)。
+分阶段中文提交并推送，明确区分本地通过与对应提交 CI 通过。CI 覆盖 Windows/Linux、三浏览器引擎、类型/LSP、SSR/hydration/HMR 和独立 tarball。pnpm pack 通过仓库 hook 去掉开发源码条件，产品不包含 test/src 或机器配置。五包矩阵最终以 Nuxt/Kit 适配加入后的真实消费与部署验收为准。
 
-## 构建与交付
+性能文档中的早期横向数据属于历史基线；P4 要按新 API 分别复测 Vue/Svelte、运行时/可选优化和原生 CSS，不把小入口体积当成完整引擎体积，也不承诺等于原生 CSS。
 
-本地执行类型、构建与改动对应的关键测试。完整生成一致性、LSP/负例、三引擎浏览器、SSR/HMR、独立 tarball 和体积回归由 GitHub Actions 执行。各 CI job 构建一次，后续传 --no-build。
+旧调试遗留过不属于当前执行的临时目录，相关删除曾被自动审查拒绝；不要为了收尾清理未知目录、共享包缓存或其它项目资源。当前测试应只在 finally 清理自己创建的临时目录；需要留存的证据放研究结果或相应报告目录。
 
-打包使用仓库内的 pnpm pack。beforePacking hook 在 tarball 中移除仅供本地使用的源码条件，不修改工作区清单；JS 地图内嵌源码，声明直接定位已发布的 d.ts。测试夹具、研究探针和机器配置不进入 dist。
-
-所有者负责 context/runtime.dispose。组件只释放自己的全局槽位与订阅；不要清理共享浏览器缓存、其他项目进程或非本轮容器。主题定义不持有请求状态，SSR 每请求创建独立上下文，客户端恢复后调用 completeHydration。
-
-三个包仍保持 private，不自动公开发布或变更许可证。旧交接和审查可从 Git 历史恢复；当前维护先读本页、architecture、compiler 和 validation。
+产品包保持 private，不自动发布 npm 或改变许可证。

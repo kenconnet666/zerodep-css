@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { provideTheme, useStyleRuntime } from '@zerodep-css/svelte';
-  import { lightTheme, ThemeCss } from '@zerodep-css/svelte/themes';
-  const scope = provideTheme(lightTheme, () => ({
+  import { presetStyles } from './preset.js';
+  presetStyles.provideTheme(() => ({
     color: { primary: '#9333ea', onPrimary: '#ffffff' },
   }));
-  const { css } = useStyleRuntime({ theme: scope });
+  const css = presetStyles.useCss();
 </script>
 
 <div
@@ -12,7 +11,7 @@
   class={css((s) => {
     s.color.text;
     s.backgroundColor.surface;
-  }, ThemeCss)}
+  })}
 >
   <span
     data-preset-custom
@@ -22,6 +21,6 @@
       s.padding.xs;
       s.borderRadius.sm;
       s.fontSize.xs;
-    }, ThemeCss)}>局部主色</span
+    })}>局部主色</span
   >
 </div>

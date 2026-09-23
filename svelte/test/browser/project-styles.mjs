@@ -59,21 +59,10 @@ test('项目入口、根宿主、主题与水合使用同一请求运行时', as
         alias: {
           '@zerodep-css/core': resolve(root, 'core/dist/index.js'),
           '@zerodep-css/core/style-scope': resolve(root, 'core/dist/style-scope.js'),
+          '@zerodep-css/svelte': resolve(root, 'svelte/dist/index.js'),
         },
         define: { 'process.env.NODE_ENV': '"development"' },
-        plugins: [
-          {
-            name: 'built-project-styles',
-            setup(bundler) {
-              bundler.onResolve({ filter: /^\.\.\/\.\.\/src\/styles\.js$/ }, ({ importer }) =>
-                importer.endsWith('ProjectStyles.ts')
-                  ? { path: resolve(root, 'svelte/dist/styles.js') }
-                  : undefined,
-              );
-            },
-          },
-          components(server),
-        ],
+        plugins: [components(server)],
       });
     }
     const { renderPage } = await import(pathToFileURL(resolve(output, 'server.mjs')).href);

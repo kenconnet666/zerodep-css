@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Css, defineTheme } from '@zerodep-css/core';
-import { createStyles } from '../../src/styles.js';
+import { createStyles } from '@zerodep-css/vue';
 class AppCss extends Css {
   control() {
     this.padding.px(8);
@@ -22,6 +22,10 @@ styles.provideTheme({ gap: '8' });
 // @ts-expect-error 主题字段不能凭空新增
 values().missing;
 const bare = createStyles();
+// @ts-expect-error 作者泛型不能代替实际构造器
+createStyles<AppCss>();
+// @ts-expect-error 主题泛型不能代替实际主题定义
+createStyles<AppCss, typeof theme.defaults>({ cssType: AppCss });
 // @ts-expect-error 没有默认主题时须显式指定定义
 bare.useTheme();
 // @ts-expect-error 系统 Css 不会被项目派生类污染

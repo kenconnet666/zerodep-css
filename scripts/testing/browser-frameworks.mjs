@@ -186,13 +186,9 @@ try {
       await page.locator('[data-toggle]').click();
       assert.equal((await read()).stats.globals, 1);
       await page.locator('[data-toggle]').click();
-      assert.equal(await page.evaluate(() => window.fixture.stats().globals), 0);
-      const stats = await page.evaluate(async () => {
-        const stats = await window.fixture.destroy();
-        window.fixture.dispose();
-        return stats;
-      });
+      const stats = await page.evaluate(() => window.fixture.stats());
       assert.equal(stats.globals, 0);
+      await page.evaluate(() => window.fixture.destroy());
       assert.equal(await page.locator('style').count(), 0);
       // 无服务端 DOM/样式的普通客户端挂载，使用同一已构建包入口。
       await page.evaluate(async (framework) => {
@@ -203,7 +199,6 @@ try {
       assert.equal((await read()).global, 'rgb(255, 0, 0)');
       await page.evaluate(async () => {
         await window.fixture.destroy();
-        window.fixture.dispose();
       });
       assert.equal(await page.locator('style').count(), 0);
       assert.deepEqual(errors, []);
@@ -217,7 +212,7 @@ try {
         baseline,
         changed,
         inactive,
-        finalStats: stats,
+        afterComponentUnmount: stats,
       });
     });
   }

@@ -1,6 +1,6 @@
 import { defineComponent, h, ref } from 'vue';
 import { Css, defineTheme } from '@zerodep-css/core';
-import { createStyles } from '../../dist/styles.js';
+import { createStyles } from '@zerodep-css/vue';
 
 export const theme = defineTheme('vue-project', { color: { brand: 'red' } });
 

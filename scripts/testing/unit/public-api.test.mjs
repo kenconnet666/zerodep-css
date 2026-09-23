@@ -4,16 +4,26 @@ import * as core from '../../../core/dist/index.js';
 import * as vue from '../../../vue/dist/index.js';
 import * as svelte from '../../../svelte/dist/index.js';
 
-test('适配器仅接受初始化选项，拒绝旧位置参数而不是静默丢失主题', () => {
-  const context = core.createStyleContext({ target: null });
-  try {
-    for (const adapter of [vue, svelte]) {
-      assert.equal(adapter.useStyleRuntime({ context }), context.runtime);
-      assert.throws(() => adapter.useStyleRuntime(context), /Unknown style runtime option/);
-      assert.throws(() => adapter.useStyleRuntime(undefined, { themes: [] }), /one options object/);
+test('适配器仅公开项目入口，宿主不暴露内部运行引擎', () => {
+  for (const adapter of [vue, svelte]) {
+    assert.deepEqual(Object.keys(adapter).sort(), [
+      'Css',
+      'createStyles',
+      'cssVar',
+      'defineTheme',
+      'keyframes',
+    ]);
+    const styles = adapter.createStyles();
+    const host = styles.createHost({ target: null });
+    try {
+      assert.equal(typeof styles.useCss, 'function');
+      assert.equal(host.stats().records, 0);
+      assert(!('runtime' in host));
+      assert.throws(() => adapter.createStyles({ context: host }), /only accept/);
+    } finally {
+      host.dispose();
     }
-  } finally {
-    context.dispose();
+    assert.throws(() => host.snapshot(), /disposed/);
   }
 });
 
@@ -22,8 +32,8 @@ test('作者入口保持 css 字符串合同，适配器不再暴露默认浏览
   assert.equal(typeof core.readTheme, 'function');
   for (const adapter of [vue, svelte]) {
     assert(!('css' in adapter));
-    assert.equal(typeof adapter.useStyleRuntime, 'function');
-    assert.equal(typeof adapter.useTheme, 'function');
+    assert(!('useStyleRuntime' in adapter));
+    assert(!('useTheme' in adapter));
   }
   assert(!('useCss' in core));
   assert(!('buildStyleProgram' in core));

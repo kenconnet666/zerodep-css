@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { provideTheme } from '@zerodep-css/vue';
-import { theme } from './theme';
+import { theme, styles } from './theme';
 import ThemeLeaf from './ThemeLeaf.vue';
 const props = defineProps<{ name: string; mode?: 'inherit' | 'defaults' }>();
 const background = ref('lime');
-provideTheme(theme, () =>
+styles.provideTheme(() =>
   props.mode === 'inherit'
     ? null
     : props.mode === 'defaults'

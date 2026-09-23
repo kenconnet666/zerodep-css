@@ -1,17 +1,18 @@
 <script lang="ts">
   import { untrack } from 'svelte';
-  import { provideStyleContext, useStyleRuntime, type StyleContext } from '@zerodep-css/svelte';
+  import type { StyleHost } from '@zerodep-css/svelte';
+  import { styles } from './styles.js';
   import BoundStyles from './BoundStyles.svelte';
   import ThemeApp from './ThemeApp.svelte';
   import PresetPanel from './PresetPanel.svelte';
   import DifferentialStyles from './DifferentialStyles.svelte';
   let {
-    context,
+    host,
     initialWidth,
     record,
-  }: { context: StyleContext; initialWidth: number; record: (kind: string) => void } = $props();
-  provideStyleContext(untrack(() => context));
-  const { css } = useStyleRuntime();
+  }: { host?: StyleHost; initialWidth: number; record: (kind: string) => void } = $props();
+  untrack(() => host)?.provide();
+  const css = styles.useCss();
 </script>
 
 <DifferentialStyles />

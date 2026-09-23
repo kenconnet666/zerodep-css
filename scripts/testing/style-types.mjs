@@ -41,7 +41,7 @@ const declarations = (valid) =>
     : 's.dispaly.flex; s.width.ms(2); s.padding.px(1,2,3,4,5); s.display.token("banana"); s.width("50%"); s.display.raw("future-display-value");';
 function source(file, valid) {
   const adapter = file.endsWith('.vue') ? 'vue' : 'svelte';
-  const imported = `import { useStyleRuntime } from '@zerodep-css/${adapter}'; const { css } = useStyleRuntime();`;
+  const imported = `import { createStyles } from '@zerodep-css/${adapter}'; const { useCss } = createStyles(); const css = useCss();`;
   if (file.endsWith('.vue'))
     return `<script setup lang="ts">${imported}</script>\n<template><div :title="String(css(s => { ${declarations(valid).replaceAll('"', "'")} }).length)"></div></template>`;
   if (file.endsWith('.svelte'))

@@ -8,7 +8,7 @@ import { transformCss as svelte } from '../../../svelte/dist/compiler/index.js';
 import { TraceMap, originalPositionFor } from '@jridgewell/trace-mapping';
 
 function fixture(framework, expression) {
-  const script = `import {useStyleRuntime} from '@zerodep-css/${framework}';const {css:style}=useStyleRuntime();let width=10;`;
+  const script = `import {createStyles} from '@zerodep-css/${framework}';const styles=createStyles();const style=styles.useCss();let width=10;`;
   return framework === 'vue'
     ? `<script setup lang="ts">${script}</script><template><div :class="${expression}"/></template>`
     : `<script lang="ts">${script}</script><div class={${expression}}/>`;
@@ -37,7 +37,7 @@ test('Vue 静态准备保留模板来源锚点，结束标签留在模板作用�
   }
 });
 test('Vue 动态参数中的结束标签留在模板，不注入 script setup', () => {
-  const source = `<script setup>import {useStyleRuntime} from '@zerodep-css/vue';const {css}=useStyleRuntime();const values={};</script><template><div :class="css(s=>{s.width.px(values[&quot;&lt;/script&gt;&quot;])})"/></template>`;
+  const source = `<script setup>import {createStyles} from '@zerodep-css/vue';const styles=createStyles();const css=styles.useCss();const values={};</script><template><div :class="css(s=>{s.width.px(values[&quot;&lt;/script&gt;&quot;])})"/></template>`;
   const result = vue(source, resolve('DynamicEndTag.vue'));
   assert(!result.code.slice(0, result.code.indexOf('</script>')).includes('values["</script>"]'));
   const parsed = parse(result.code);
@@ -45,7 +45,7 @@ test('Vue 动态参数中的结束标签留在模板，不注入 script setup', 
   compileScript(parsed.descriptor, { id: 'dynamic-end', inlineTemplate: true });
 });
 test('Vue 实体解码的模板局部变量不遮蔽生成 helper', () => {
-  const source = `<script setup>import {useStyleRuntime} from '@zerodep-css/vue';const {css}=useStyleRuntime();const rows=[1];</script><template><div v-for="&#95;&#95;zcss_bind_unit_1 in rows" :key="&#95;&#95;zcss_bind_unit_1" :class="css(s=>{s.width.px(&#95;&#95;zcss_bind_unit_1)})"/></template>`;
+  const source = `<script setup>import {createStyles} from '@zerodep-css/vue';const styles=createStyles();const css=styles.useCss();const rows=[1];</script><template><div v-for="&#95;&#95;zcss_bind_unit_1 in rows" :key="&#95;&#95;zcss_bind_unit_1" :class="css(s=>{s.width.px(&#95;&#95;zcss_bind_unit_1)})"/></template>`;
   const result = vue(source, resolve('EncodedIdentifier.vue'));
   assert(!result.code.includes('bindUnit as __zcss_bind_unit_1'));
   compileScript(parse(result.code).descriptor, { id: 'encoded', inlineTemplate: true });
@@ -131,12 +131,12 @@ for (const [framework, transform] of [
   });
 }
 test('Svelte 模板 const 遮蔽 css 别名时保留局部函数', () => {
-  const source = `<script>import {useStyleRuntime} from '@zerodep-css/svelte';const {css:style}=useStyleRuntime();let width=10;</script>{#if true}{@const style=()=> 'local'}<div class={style(s=>{s.width.px(width)})}/>{/if}`;
+  const source = `<script>import {createStyles} from '@zerodep-css/svelte';const styles=createStyles();const style=styles.useCss();let width=10;</script>{#if true}{@const style=()=> 'local'}<div class={style(s=>{s.width.px(width)})}/>{/if}`;
   assert.equal(svelte(source, resolve('Shadow.svelte')), null);
 });
 
 test('开发来源尊重 Vue 解构循环与 slot 的局部同名函数', () => {
-  const script = `<script setup>import {useStyleRuntime} from '@zerodep-css/vue';const {css}=useStyleRuntime();const rows=[{css:n=>'local'+n}];</script>`;
+  const script = `<script setup>import {createStyles} from '@zerodep-css/vue';const styles=createStyles();const css=styles.useCss();const rows=[{css:n=>'local'+n}];</script>`;
   for (const template of [
     `<div v-for="{css} in rows" :class="css(3)"/>`,
     `<Renderer v-slot="{css}"><div :class="css(3)"/></Renderer>`,
@@ -149,7 +149,7 @@ test('开发来源尊重 Vue 解构循环与 slot 的局部同名函数', () => 
 });
 
 test('开发来源尊重 Svelte 解构循环、await 与 legacy let 的词法身份', () => {
-  const script = `<script>import {useStyleRuntime} from '@zerodep-css/svelte';const {css}=useStyleRuntime();const rows=[{css:n=>'local'+n}];const promise=Promise.resolve(rows[0].css);</script>`;
+  const script = `<script>import {createStyles} from '@zerodep-css/svelte';const styles=createStyles();const css=styles.useCss();const rows=[{css:n=>'local'+n}];const promise=Promise.resolve(rows[0].css);</script>`;
   for (const template of [
     `{#each rows as {css}}<div class={css(3)}/>{/each}`,
     `{#await promise then css}<div class={css(3)}/>{/await}`,

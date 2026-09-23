@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { useStyleRuntime } from '@zerodep-css/svelte';
-  const { css } = useStyleRuntime();
+  import { createStyles } from '@zerodep-css/svelte';
+  const { useCss } = createStyles();
+  const css = useCss();
   let width = $state(10);
   let siblingWidth = $state(10);
   const colors = ['red', 'blue', 'initial', undefined];

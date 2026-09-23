@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useStyleRuntime } from '@zerodep-css/vue';
-const { css } = useStyleRuntime();
+import { createStyles } from '@zerodep-css/vue';
+const css = createStyles().useCss();
 const colors = [
   'red',
   'banana',

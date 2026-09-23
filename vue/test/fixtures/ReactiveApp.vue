@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { provideStyleContext, useStyleRuntime, type StyleContext } from '@zerodep-css/vue';
+import { createStyles } from '@zerodep-css/vue';
 import ReactiveStyles from './ReactiveStyles.vue';
 const props = defineProps<{
-  context: StyleContext;
   initialColor: string;
   record: (kind: string) => void;
 }>();
-provideStyleContext(props.context);
-const { css } = useStyleRuntime({ context: props.context });
+const css = createStyles().useCss();
 const show = ref(true);
 </script>
 

@@ -1,85 +1,54 @@
 # 当前架构
 
-本文件描述当前实现。维护方向见 [roadmap](roadmap.md)，验证证据见 [validation](validation.md)，目录/API 迁移见 [migration](migration.md)。旧方案保留在 Git 历史中。
+本文描述当前源码与已迁移的公开 API；阶段状态见[生产实施记录](production.md)，自动优化边界见[编译器](compiler.md)。运行时 CSS 是正式执行路径，编译、缓存与变量绑定只在能证明语义等价时优化它。
 
-## 包边界
+## 包与源码边界
 
-- core：生成数据、真实 Css 类、有序样式结构、CSS 语法处理、哈希、CSSOM/SSR 注册、主题定义与宿主上下文。可选 themes 子路径提供两套预设和 ThemeCss，不加载到默认入口。不依赖 Vue 或 Svelte。css-tree 是明确的运行时依赖，仓库名不代表零第三方依赖。
-- vue：provide/inject、computed/watch、scope 清理。index.ts 只导出，context.ts 管实例取得，global.ts 管全局样式生命周期。
-- svelte：初始化 context、原生模板/$derived、global.svelte.ts 中的 effect 生命周期；由官方 Svelte 编译链处理 rune 模块。
-- scripts/css-data：离线 schema/grammar/policy。运行时 metadata 与声明从同源生成，core/src/generated 不手工编辑。
-- scripts/testing：测试准备、共享浏览器执行器、隔离消费者和体积验证。组件夹具属于各自包的 test/fixtures，类型夹具放 test/types，快速单元测试放 test/unit。
-- scripts/language-services：项目级 MCP 桥、安装与五项语义验收。换机重建 .codex/config.toml，不复制本机路径。
-- 适配器 compiler：自动 CSS 的 SFC 源码转换和 Vite 插件。internal/compiler 共用严格 TS 分析，构建时内联到两端独立 compiler 子路径；core/compiler-runtime 是生成代码的内部入口，core/style-scope 是框架作用域桥。具体支持边界见 compiler.md。
+- `core`：真实 `Css` 类、类型与生成 CSS 数据、有序样式描述、解析/序列化、主题定义、浏览器宿主仲裁、CSSOM 与完整字符串 SSR 运行时。`css-tree` 仍是运行时依赖，仓库名不表示没有第三方依赖。完整引擎目前物理上仍在 `core/src`；迁到共享 `internal/runtime` 再纳入框架包是后续阶段，不能视作已完成。
+- `vue`：Vue 3.5 的 provide/inject、computed/watch 与组件生命周期；`createStyles` 将配置绑定到 `useCss` 等方法，`createHost().install(app)` 安装应用宿主。
+- `svelte`：Svelte 5 的 context、模板和 `$derived`，以及组件全局样式的 effect 生命周期；`createHost().provide()` 在根组件初始化时安装宿主。rune 模块通过官方编译链处理。
+- `internal/compiler`：两框架共享的严格 TS 源码分析，构建时内联到各自独立的 `./compiler` 子路径。生成代码所需的运行时辅助入口与业务根入口分开，不把 Node 编译依赖导入浏览器入口。
+- `scripts/css-data` 生成运行时元数据与作者类型；`scripts/testing` 和 `scripts/language-services` 分别承担真实组件/消费者验收与项目级语言服务。
 
-三个产品包位于根目录并保持 private。构建先安全清理三个 dist，再按 workspace 依赖顺序构建，防止更名后的旧文件进入产物。
+现有三个产品包均位于根目录且保持 private。Nuxt 4 与 SvelteKit 2 的专用包、Node SSR 和静态预渲染完整验收属于首版后续阶段，目前未作为已实现包列入此边界。
 
-## 数据与调用路径
+## 应用配置、执行与恢复
 
-```text
-csstype / Webref / CSSTree 固定数据
-  -> schema + policy -> generated properties / metadata
-
-css(factory)
-  -> 编译器证明稳定时命中准备缓存
-  -> 否则创建真实 Css -> 有序 StyleProgram / 元数据 -> 作者层后写替换 -> 结果缓存
-  -> 序列化与校验 -> 内容哈希 -> runtime 注册/去重 -> 字符串 class
-
-框架原生依赖通知
-  -> 普通绑定值更新元素变量
-  -> 结构与回退路径重新调用 css -> 必要时更新 class
-
-defineTheme -> 冻结 token/defaults -> provideTheme 的原生派生值
-  -> 子作用域局部覆盖 -> 有效主题变量类 + 内容类
-
-createStyleContext（应用/请求拥有）
-  -> runtime（规则、缓存、DOM/SSR）
-  -> 稳定全局 key / slot 映射 -> manifest -> hydration 认领
-```
-
-StyleFactory/StylesheetFactory 描述局部样式和顶层样式表回调，GlobalFactory 描述嵌套全局规则。containerQuery 在局部和全局上下文名称一致。内部 IR 在 style-program.ts，作者类型在 builder-types.ts，元数据结构类型在 metadata-types.ts；根入口只保留必要的作者、资源和 manifest 类型。
-
-## 作者合同
+项目入口只保存可共享的作者类型和默认主题定义，不创建运行实例：
 
 ```ts
-const { css } = useStyleRuntime();
-const className = css((s) => {
-  s.display.flex;
-  s.display.token('flex');
-  s.width.raw('50%');
-  s.padding.px(8, 16);
-  s.hover((h) => {
-    h.color.red;
-  });
+// styles.ts，Vue 和 Svelte 各自从对应适配包导入
+import { createStyles } from '@zerodep-css/vue';
+import { AppCss, appTheme } from './theme';
+
+export const { useCss, useTheme, provideTheme, useGlobalCss, createHost } = createStyles({
+  cssType: AppCss,
+  theme: appTheme,
 });
 ```
 
-- CSS 属性不可直接调用；token 为严格字面量，raw 保留补全并接受字符串。结构规则用根层调用。
-- css 同步返回字符串；普通 const 字符串不自动变化。模板跟踪由框架负责，脚本中使用 computed/$derived。
-- Css 支持真实继承、super、私有字段、extendProperty 与嵌套派生类型。实例只在一次同步回调内有效，不跨构建共享。
-- name/config(debug) 为根样式提供可读名称、声明数量与相对源码诊断；来源不进入内容哈希。主题视图返回类名列表，变量类保持逻辑上下文，不依赖 DOM 祖先的位置。
-- 适配器不导出默认 css。从 core 导入的 css 只面向浏览器默认 runtime；上下文、SSR、nonce 和 ShadowRoot 使用 useStyleRuntime() 取得的 css。
-- globalCss 创建定义，useGlobalCss(key, factory) 创建有生命周期的全局挂载。key 在上下文活跃 owner 中唯一。
-- CSSOM 注册是幂等副作用，不宣称 css 为纯函数。普通 class 和共享动画保留到 runtime/context.dispose；组件只释放自己的全局槽位及订阅。
-- 每个 SSR 请求独立上下文。先渲染/收集，再输出样式和 manifest，最后 finally dispose。客户端先恢复 context，再框架 hydration，完成后检查 completeHydration。
-- 动态值自动提升、安全静态准备与复杂回退已接入 Vue/Svelte。公开 bx 已移除；流式 SSR 和专用元框架插件仍不在已实现范围。
+组件初始化时调用 `const css = useCss()`，随后在模板、Vue computed 或 Svelte `$derived` 中调用 `css((s) => { ... })`。`css` 同步返回字符串；作者回调仍按普通 JavaScript 执行，支持函数复用、`if`/`switch`、真实继承与 `super`。`Css` 实例只在一次同步回调中有效；不能在异步回调或生命周期外继续写入。
 
-## 基础设施合同
+每个应用或 SSR 请求单独调用 `createHost(options)`。Vue 入口调用 `host.install(app)`，应用卸载自动释放；Svelte 根组件调用 `host.provide()`，根卸载只释放认领以支持 HMR，同一应用最终 `unmount` 后由入口显式 `host.dispose()`。服务端使用请求局部 host：渲染完整组件字符串，输出 `renderStyles()` 和 `renderManifest()`，再在 `finally` 释放。客户端先从 manifest 恢复 host，再执行 hydration，完成后调用 `completeHydration()`；全局样式靠稳定 key 认领原槽位。宿主可落在 Document 或 ShadowRoot，nonce 和插入点属于 host 配置，不属于局部 `s.config()`。
 
-pnpm 的主 workspace 依赖由 catalog 精确固定；框架 peer 表示消费范围，实际验收使用锁定版本。Node 主版本由 .node-version 和 engines 约束，pnpm 固定 10.34.5。不自动升级全局工具。
+```text
+作者回调 / AppCss
+  → 真实 Css + 有序样式描述
+  → 同上下文规范属性归并、序列化和校验
+  → 内容哈希、资源与宿主事务注册
+  → class 字符串
 
-本地测试命令默认构建；CI 每个 job 构建一次，然后传 --no-build。根 pnpm test 覆盖所有快速单元测试。Linux 完整 CI 包含生成一致性、语言服务、浏览器、独立消费和体积预算；Windows job 验证安装、类型、构建和单元测试。
+可选同 SFC 编译优化 → 安全值使用元素变量；其他代码继续运行时路径
+```
 
-独立消费者位于操作系统临时目录：pnpm pack 后按包名安装，使用官方 Vite 插件分别构建客户端/SSR 并执行 hydration；没有源码 alias/zerodep-source 条件，也不允许依赖仓库祖先 node_modules。消费者顶层工具版本精确固定，其安装锁文件进入测试报告；临时消费安装会解析传递依赖，与主 workspace frozen lockfile 的职责不同。
+同一上下文、同一规范属性后写直接删除前写，包括前写带 `important` 的情况。不同简写/长属性保留原顺序，由浏览器解释。`raw` 仅检查声明结构并保留新 CSS 值的浏览器原生语义；单位多参数只要有 `null`/`undefined` 就省略整条声明。`css(base, override)` 按顺序组合本 host 已知 class 与回调，也接受普通第三方 class、数组及 `false`/`null`/`undefined` 空项。第三方 class 不反解；本 host 的 class 字符串只是样式快照，不携带元素上的内联变量值。
 
-浏览器逐场景输出 JSON，失败时输出截图、trace 和控制台/请求诊断。core 浏览器测试主动注入一次失败，验证留证链路；evidence-self-test 内的失败是预期场景，其 verification.json 必须 passed。体积测试记录最小入口 minify/gzip 和模块贡献，对预算与浏览器编译依赖泄漏设置检查。
+## 主题、全局样式与编译边界
 
-浏览器矩阵覆盖 Chromium、Firefox、WebKit，core 使用 dist 入口，框架使用官方编译链和真实组件。原生 CSS 特性由目标浏览器实现，本库不附加兼容性转换器。
+`defineTheme` 持有冻结的 defaults、schema 和稳定 token 身份，不持有请求值。项目可从 `Css` 自行扩展，也可从 `ThemeCss extends Css` 增加内置预设关键字后再扩展。默认主题在没有同名 provider 时也会生成有效主题变量类；同名 provider 优先。`provideTheme` 接受静态覆盖对象、getter、`null`；局部 `null`/`undefined` 继承父值，传入 `definition.defaults` 才恢复预设。Vue computed 与 Svelte `$derived` 持有有效值，主题沿组件逻辑树继承，不依赖 Portal/Teleport 的 DOM 位置。
 
-计算缓存最多 256 项，普通结果键不超过 64 KiB；绑定字符串校验缓存最多 128 项且合计 65,536 UTF-16 字符。缓存驱逐不删除仍可能被 DOM 或已保存字符串引用的规则，宿主可配置 maxRecords 并最终 dispose。缓存命中仍保持注册重入锁和 DOM 删除/禁用检查。
+`useGlobalCss(key, factory)` 管理组件声明的全局槽位、更新和卸载；普通 class 与共享动画留到 host 释放。当前同 key 只允许一个活跃 owner；相同内容多 owner 共享是 P3 待实施。CSSOM 事务先验证冲突与所有待写规则，再更新记录；失败不留下半成品。计算缓存可淘汰，已注册规则不能随缓存淘汰直接删除。
 
-主题值和声明准备结果分别由 Vue computed/Svelte $derived 持有，不增加自有响应式缓存或订阅。core 仅以完整准备内容复用同一结果缓存，准备键也受 64 KiB 限制；私有弱引用身份表避免重复验证同 schema 的已冻结快照，不持有请求值。固定 CSS 关键字的查找索引只含生成元数据，不缓存业务状态。
+可选 `cssPlugin` 当前只识别同一 SFC 内能直接追踪的 `createStyles`/`useCss` 来源，包括直接链式调用。项目 `styles.ts` 跨文件导出的绑定方法保持完整运行时行为，尚不做跨模块编译证明。变量绑定会在原求值点读取动态输入，复杂回调或派生作者类保守回退；优化失败不改变合法作者代码的执行、错误和 SSR 合同。
 
-新规则注册在事务内一次解析渲染结果，同时得到规则列表和 @property 注册信息；资源检查与 CSSOM 插入共享该结果，不存入额外缓存或 manifest。恢复记录保留独立只读检查；所有插入成功后才更新记录/claims，失败时仍只回滚本事务节点。
-
-打包时移除本地 zerodep-source 导出条件，JS source map 内嵌源码，不发布悬空声明地图。消费者检查全部导出与地图，包元数据给出 Node 范围和仓库目录。三个包保持 private，不在本轮自动公开发布或选择许可证。
+完整运行时入口与 `cssVar` 等小入口体积不同；属性元数据、解析器、序列化和宿主注册仍是浏览器完整运行时所需代码。原生 CSS 特性由目标浏览器实现，本库不提供通用前缀或 polyfill。当前实现与最终生产就绪之间仍有目录迁移、元框架接入及完整矩阵验收，见[生产实施记录](production.md)。

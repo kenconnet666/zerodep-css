@@ -1,7 +1,7 @@
 import { createSSRApp, createApp, nextTick } from 'vue';
 import { hydrate, mount, tick, unmount } from 'svelte';
-import { createStyleContext } from '@zerodep-css/core';
-import { installStyleContext } from '@zerodep-css/vue';
+import { createStyles as createVueStyles } from '@zerodep-css/vue';
+import { createStyles as createSvelteStyles } from '@zerodep-css/svelte';
 import VueApp from '../../../vue/test/fixtures/BoundApp.vue';
 import SvelteApp from '../../../svelte/test/fixtures/BoundApp.svelte';
 import VueCsp from '../../../vue/test/fixtures/CspApp.vue';
@@ -9,14 +9,14 @@ import SvelteCsp from '../../../svelte/test/fixtures/CspApp.svelte';
 
 export async function start(framework, restore = true, csp = false) {
   const manifest = JSON.parse(document.querySelector('#styles').textContent);
-  const context = createStyleContext({
+  const host = (framework === 'vue' ? createVueStyles() : createSvelteStyles()).createHost({
     namespace: framework + (csp ? '-csp' : ''),
     nonce: csp && !restore ? 'style-token' : undefined,
     hydrate: restore ? manifest : undefined,
   });
   const counts = { inline: 0, derived: 0, global: 0 };
   const props = {
-    context,
+    ...(framework === 'svelte' ? { host } : {}),
     initialWidth: 20,
     record(kind) {
       counts[kind] = (counts[kind] ?? 0) + 1;
@@ -29,7 +29,7 @@ export async function start(framework, restore = true, csp = false) {
       csp ? VueCsp : VueApp,
       csp ? { initialWidth: props.initialWidth } : props,
     );
-    installStyleContext(app, context);
+    app.use(host);
     app.mount(target);
     destroy = () => app.unmount();
     await nextTick();
@@ -38,15 +38,14 @@ export async function start(framework, restore = true, csp = false) {
     destroy = () => unmount(app);
     await tick();
   }
-  context.completeHydration();
+  host.completeHydration();
   return {
     counts,
-    stats: () => context.runtime.stats(),
-    snapshot: () => context.snapshot(),
+    stats: () => host.stats(),
+    snapshot: () => host.snapshot(),
     async destroy() {
       await destroy();
-      return context.runtime.stats();
+      host.dispose();
     },
-    dispose: () => context.dispose(),
   };
 }

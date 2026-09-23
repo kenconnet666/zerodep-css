@@ -1,10 +1,11 @@
-# 自动 CSS 编译与运行时回退
+# 自动 CSS 编译
 
-Vue/Svelte 的编译入口统一为 `cssPlugin` 与 `transformCss`。公开 `bx`、`Binding` 及旧插件名称已移除；直接传入普通变量。core 仍可独立在运行时使用，框架自动优化需要安装编译插件。
+Vue 与 Svelte 编译器使用 `createStyles` 和项目 CSS hook。编译器只在能从当前组件源码证明作者配置和调用位置时做安全优化；其他写法继续由 runtime 处理。
 
 ## Vite 接入
 
 ```ts
+// Vue
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { cssPlugin } from '@zerodep-css/vue/compiler';
@@ -12,50 +13,71 @@ import { cssPlugin } from '@zerodep-css/vue/compiler';
 export default defineConfig({ plugins: [cssPlugin(), vue()] });
 ```
 
-Svelte 使用 `@zerodep-css/svelte/compiler` 的同名入口，后接官方 `svelte()` 插件。插件只处理完整组件源码；官方插件继续负责响应式、SSR 和 HMR。直接转换接口为 `transformCss(source, filename, { root?, debug?, bindings? })`，无改动时返回 null。
+Svelte 使用 `@zerodep-css/svelte/compiler` 的 `cssPlugin()`，放在官方 `svelte()` 插件之前。官方框架插件继续处理响应式、SSR 和 HMR。
 
-严格 CSP 禁止 style 属性时使用 `cssPlugin({ bindings: 'runtime' })`。动态值保留原生运行时类名更新，不生成元素变量绑定；静态准备与开发来源仍可用。配合请求 runtime 的 nonce，可在 `style-src-attr 'none'` 下保持 SSR 首屏、hydration 和后续更新一致。该选项不移除应用自己编写的 style 属性，服务端和客户端应使用同一编译配置。
+严格 CSP 禁止 style 属性时，可设置 `cssPlugin({ bindings: 'runtime' })`。该模式保留运行时 class 更新，不生成元素变量绑定；静态准备和调试来源仍可用。它不会移除业务代码自己编写的 style 属性，服务端和客户端应使用相同编译配置。
 
-## 作者写法
+## 自动路径
 
-在组件初始化时取得 `const { css } = useStyleRuntime()`，在原生元素的 class 中直接调用：
+当前编译器识别组件同文件中的常量 `createStyles` 与 `useCss` 绑定，包括默认选项、`{ theme }` 选项和直接链式调用：
 
-```ts
-css((s) => {
-  s.name('panel');
-  s.display.flex;
-  s.padding.px(8, gap);
-  s.color.raw(color);
-  s.hover((h) => {
-    h.opacity.raw(opacity);
-  });
-});
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { createStyles } from '@zerodep-css/vue';
+
+const styles = createStyles();
+const css = styles.useCss();
+const gap = ref(8);
+const color = ref('red');
+</script>
+
+<template>
+  <div
+    :class="
+      css((s) => {
+        s.display.flex;
+        s.padding.px(8, gap);
+        s.color.raw(color);
+      })
+    "
+  ></div>
+</template>
 ```
 
-- 单位参数在原声明位置整组读取一次，生成一个元素变量；任一参数为 null/undefined 时省略整条声明，保留前面的同属性声明。联合数值范围、参数个数和分隔符保持原合同。
-- raw/token 的可证明值和完整模板字符串自动绑定。空值仍省略声明；CSS-wide、显式 cssVar，以及属性语法无法证明的未知/未来值保留直接声明，必要时重算类名，避免改变覆盖、fallback 和继承。
-- 语法表本身不能证明浏览器支持。变量化进一步限定为基础单位、数值、常见颜色/变换等保守形式；未确认的关键字、较新单位与复杂数学表达式使用直接声明，保持浏览器与其他规则之间的层叠、继承语义。作者层已经被同属性后写删除的声明不会恢复为 fallback。
-- 静态关键字、字面量、同宿主 selector/media/hover 等结构可准备；字面量能够决定的 if/switch 只为可达分支生成绑定。selector 选中后代、兄弟、祖先或未知伪元素时保留运行时，避免变量不可达或被嵌套实例遮蔽。
-- 完全静态的可准备样式在第一次使用时完整验证，后续通过当前 runtime 的 256 项缓存跳过构建和解析。源码摘要随 HMR 内容变化；清理计算缓存不删除已注册规则。含动态绑定的回调继续执行，普通结果缓存只复用规则，不跳过值读取。
-- Vue 完全静态的安全模板回调在组件初始化时只创建一次准备函数，`css` 调用仍留在模板使用点。隐藏分支不会提前验证或注册样式，不跨组件/请求共享准备函数。动态声明留在原回调位置，class 与 style 共用一次输入快照；不通过额外 computed 改变普通 getter 的读取次数。无法安全移入 script 的源码保留使用点包装。
-- raw 字符串校验按组件绑定持有最多 128 项成功结果，合计最多 65,536 个 UTF-16 字符，不建立跨请求缓存。超大合法值仍正常校验与输出，但不长期驻留缓存。
+```svelte
+<script lang="ts">
+  import { createStyles } from '@zerodep-css/svelte';
 
-## 支持和回退边界
+  const styles = createStyles();
+  const css = styles.useCss();
+  let gap = $state(8);
+</script>
 
-自动路径支持直接原生 HTML class 使用点，以及保留原模板守卫的单层 keyed 简单数组循环。Vue 在原 class 位置生成 v-bind 对象，Svelte 生成原生属性 spread，一次产生 class 与元素变量；已有 style 属性时保守回退，避免改变属性表达式顺序或让原样式中未闭合的 token 吞掉新变量。
+<div
+  class={css((s) => {
+    s.padding.px(gap);
+  })}
+></div>
+```
 
-初始化入口也参与判断：无参数 useStyleRuntime()、明确不含 cssType 的 context/theme 选项对象可进入自动路径。配置 cssType、spread 或无法解析的初始化参数时保留运行时，避免覆盖派生类的属性行为；debug 来源仍可记录。显式 context 写为 `useStyleRuntime({ context })`，旧位置参数已移除。
+完整静态值与能证明边界的动态值可分别准备或绑定。可绑定的动态声明保留在原样式位置；分支不可静态证明、CSS 值结构复杂或属性语法未知时，继续走 runtime，具体值交给浏览器判断。编译器不会因它的语法表无法证明而拒绝合法新值。
 
-不能安全提升的回调整体保留运行时行为：未知 if/switch、函数调用和副作用、局部赋值、派生 Css 类型、动态结构参数。脚本 const 保留定义时快照，computed/$derived 保留原生重算；组件透传、class 拼接、复杂循环/slot/异步边界、SVG/MathML 也保持原有源码。回退可能随动态值产生新的哈希类名，这是明确保留的能力。
+作者应优先使用普通函数复用和 `if`/`switch` 编写条件样式。已知结构的同 host class 可由 `css(base, override, [condition && extra])` 组合；外部 class 透传。组合得到的普通 class 字符串是快照，不会携带或复制元素变量绑定。
 
-被提升的变量读取应无副作用；不要在 getter 中隐式写状态。表达式含调用或局部写入时不会提升。资源与全局样式继续使用运行时所有权，不能把元素绑定写到全局 :root。
+## 回退边界
 
-回调签名也属于安全证明：自动路径只接受一个无默认值、非 rest 的 builder 参数；额外参数、参数初始化、async 和生成器（包含嵌套结构回调）整体回退。这样不会因准备缓存跳过参数初始化的副作用，也不会绕过运行时的同步回调校验。
+以下情况保留 runtime 行为：
 
-## 诊断和迁移
+- 脚本内的 const/computed/$derived、组件 class 透传、SVG/MathML 或已有 style 属性。当前元素变量优化只面向直接的原生 HTML class 使用点。
+- 回调尚未使用可分析的语句块时，例如单表达式箭头函数；这类简写可以运行，但当前仍保留原运行时。
+- `createStyles` 与 `useCss` 通过另一个模块导出，或者作者配置只能在运行时确定。跨模块 `styles.ts` 是推荐的配置复用方式；优化不可证明时，功能仍然有效。
+- `createStyles` 指定 `cssType`，或包含编译器不认识的配置。开发来源诊断可继续记录。
+- 动态条件、函数调用、副作用、局部写入、复杂 selector/结构参数或嵌套控制流无法安全证明。
+- 可能改变 CSS 级联、继承或 var fallback 的值，及完整语法不能确认的未来 CSS 值。
 
-开发 Vite 默认记录项目相对文件、行和列；生产默认关闭，可由 `debug` 显式控制。`s.name(...).config({ debug })` 控制整份根样式的可读名称和诊断，来源不参与 CSS 内容哈希。
+编译优化不改变框架对模板、`computed`/`$derived` 的依赖跟踪，也不跳过需保留的业务 getter 求值。把动态值存入普通局部字符串只得到一次快照；需要更新时，在模板位置调用 `css`，或使用框架派生值。
 
-将 `bx(value)` 改为 `value`，把 `bxPlugin/transformBx` 改为 `cssPlugin/transformCss` 并删除 bx 导入。脚本内需要持续响应的样式继续写 computed/$derived；若需要自动变量优化，将可安全声明直接放在元素 class 中。重新构建服务端和客户端产物，不能混用不同版本生成的变量 ID。
+`cssPlugin` 是可选工具。未安装插件时，`createStyles().useCss()` 仍可完整运行。独立编译入口为 `transformCss(source, filename, { root?, debug?, bindings? })`；没有改动时返回 `null`。
 
-旧宏方案可从 Git 历史查询。当前验证证据见 [validation](validation.md)，API 迁移见 [migration](migration.md)。
+验证使用官方 Vue/Svelte 编译器构建客户端与 SSR 组件，并对生成产物进行浏览器水合测试。流式 SSR、Nuxt 专用模块和 Kit 插件不属于当前已完成范围。建议运行 `pnpm check:compiler`、`pnpm test:types` 和 `pnpm test:browser:frameworks`。

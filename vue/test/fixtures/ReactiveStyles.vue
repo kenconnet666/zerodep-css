@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useGlobalCss, useStyleRuntime } from '@zerodep-css/vue';
+import { createStyles } from '@zerodep-css/vue';
+const styles = createStyles();
+const css = styles.useCss();
 const props = defineProps<{ initialColor: string; record: (kind: string) => void }>();
-const { css } = useStyleRuntime();
 const width = ref(20);
 const color = ref(props.initialColor);
 const enabled = ref(true);
@@ -14,7 +15,7 @@ const external = computed(() =>
     s.color.raw(enabled.value ? color.value : 'green');
   }),
 );
-const global = useGlobalCss('fixture/global', (g) => {
+const global = styles.useGlobalCss('fixture/global', (g) => {
   props.record('global');
   g.rule('[data-global]', (s) => s.color.raw(color.value));
 });

@@ -1,4 +1,5 @@
 import { Css, defineTheme } from '@zerodep-css/core';
+import { createStyles } from '@zerodep-css/svelte';
 export const theme = defineTheme('app-theme', { color: { brand: 'red', text: 'black' } });
 export const spacing = defineTheme('app-spacing', { gap: '4px' });
 export class AppCss extends Css {
@@ -20,3 +21,4 @@ export class AppCss extends Css {
     return this.extendProperty(super.backgroundColor, theme.tokens.color);
   }
 }
+export const appStyles = createStyles({ cssType: AppCss, theme });

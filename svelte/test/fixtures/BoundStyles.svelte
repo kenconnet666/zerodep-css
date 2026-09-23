@@ -1,9 +1,10 @@
 <script lang="ts">
   import { untrack } from 'svelte';
-  import { useStyleRuntime } from '@zerodep-css/svelte';
+  import { createStyles } from '@zerodep-css/svelte';
   import AutomaticStyles from './AutomaticStyles.svelte';
   let { initialWidth, record }: { initialWidth: number; record: (kind: string) => void } = $props();
-  const { css } = useStyleRuntime();
+  const { useCss } = createStyles();
+  const css = useCss();
   // initialWidth 是实例初值，后续变化由组件自己拥有。
   let width = $state(untrack(() => initialWidth));
   let color = $state('red');

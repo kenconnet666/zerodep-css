@@ -11,6 +11,8 @@ import {
   type ThemeTree,
   type StylesheetFactory,
   type StyleContextOptions,
+  type StyleContext,
+  type RuntimeStats,
 } from '@zerodep-css/core';
 import {
   createRuntimeView,
@@ -18,6 +20,7 @@ import {
   prepareThemeStyle,
   normalizeStylesOptions,
   projectThemeArguments,
+  projectThemeScope,
 } from '@zerodep-css/core/style-scope';
 import { installStyleContext, resolveContext } from './context.js';
 import {
@@ -28,10 +31,43 @@ import {
 } from './theme.js';
 import { useGlobalCss as mountGlobal } from './global.js';
 
+export interface StyleHost extends Pick<
+  StyleContext,
+  'server' | 'snapshot' | 'renderStyles' | 'renderManifest' | 'completeHydration' | 'dispose'
+> {
+  install(app: App): void;
+  stats(): RuntimeStats;
+}
+
+export interface StylesProject<C extends Css, T extends ThemeTree> extends ProjectThemeHooks<T> {
+  createHost(options?: StyleContextOptions): StyleHost;
+  useCss(): CssFunction<C>;
+  useGlobalCss(
+    identity: string,
+    factory: StylesheetFactory<C>,
+  ): { readonly id: string; dispose(): void };
+}
+
 /** 可在项目 styles.ts 共享的配置；这里不创建应用或请求运行时。 */
+export function createStyles<C extends Css, T extends ThemeTree>(options: {
+  readonly cssType: CssConstructor<C>;
+  readonly theme: ThemeDefinition<T>;
+}): StylesProject<C, T>;
+export function createStyles<C extends Css>(options: {
+  readonly cssType: CssConstructor<C>;
+  readonly theme?: never;
+}): StylesProject<C, never>;
+export function createStyles<T extends ThemeTree>(options: {
+  readonly theme: ThemeDefinition<T>;
+  readonly cssType?: never;
+}): StylesProject<Css, T>;
+export function createStyles(options?: {
+  readonly cssType?: never;
+  readonly theme?: never;
+}): StylesProject<Css, never>;
 export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
   options?: StylesOptions<C, T>,
-) {
+): StylesProject<C, T> {
   const config = normalizeStylesOptions(options);
   const cssType = (config.cssType ?? Css) as CssConstructor<C>;
   const theme = config.theme as ThemeDefinition<ThemeTree> | undefined;
@@ -53,12 +89,16 @@ export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
     ...themeHooks,
     useCss(): CssFunction<C> {
       const context = resolveContext();
-      return createRuntimeView(context.runtime, resolveThemeScope(), cssType).css;
+      return createRuntimeView(
+        context.runtime,
+        projectThemeScope(theme, resolveThemeScope()),
+        cssType,
+      ).css;
     },
     useGlobalCss(identity: string, factory: StylesheetFactory<C>) {
       return mountGlobal(identity, factory, resolveContext(), cssType);
     },
-    createHost(options?: StyleContextOptions) {
+    createHost(options?: StyleContextOptions): StyleHost {
       const prepared = theme && prepareThemeStyle(theme, theme.defaults);
       const scope =
         theme &&
@@ -73,6 +113,7 @@ export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
       let disposed = false;
       const host = Object.freeze({
         server: context.server,
+        stats: context.runtime.stats,
         snapshot: context.snapshot,
         renderStyles: context.renderStyles,
         renderManifest: context.renderManifest,
@@ -80,6 +121,7 @@ export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
         dispose() {
           if (disposed) return;
           disposed = true;
+          installed = undefined;
           context.dispose();
         },
         install(app: App) {

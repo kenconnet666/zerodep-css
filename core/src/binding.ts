@@ -80,6 +80,8 @@ export function bindValue(
   binding: ReturnType<typeof createDeclarationBinding>,
   input: unknown,
 ): unknown {
+  // raw 的引用对象交回原 Builder 校验，避免优化器额外触发 Proxy 的属性描述符读取。
+  if (input !== null && typeof input === 'object' && binding.acceptsVariables) return input;
   const value = binding.value(input);
   const inline = binding.inline(input);
   if (inline !== undefined) bindings[name] = inline;
@@ -264,6 +266,7 @@ export function createDeclarationBinding(name: `--${string}`, format: Declaratio
     return result;
   }
   return Object.freeze({
+    acceptsVariables: !options.tokens,
     value(value: unknown): unknown {
       if (typeof value === 'string') value = normalizeCssText(value);
       return direct(value) ? value : variable;

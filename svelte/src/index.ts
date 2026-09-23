@@ -1,22 +1,24 @@
-export { provideStyleContext, useStyleRuntime } from './context.js';
-export { useGlobalCss } from './global.svelte.js';
-export { provideTheme, useTheme } from './theme.svelte.js';
+export { createStyles } from './styles.js';
+export type { StyleHost } from './styles.js';
 export { defineTheme } from '@zerodep-css/core';
+export { Css, cssVar, keyframes } from '@zerodep-css/core';
 export type {
-  ThemeScope,
-  UseStyleRuntimeOptions,
+  CssConstructor,
+  CssConstruction,
+  CssFunction,
+  CssVariable,
+  StyleInput,
+  StyleFactory,
+  StylesheetFactory,
+  StylesOptions,
+  ThemeInput,
+  ProjectThemeHooks,
   ThemeDefinition,
   ThemeValues,
   ThemeTokens,
   ThemeOverrides,
   ThemeTree,
+  StyleContextOptions as StyleHostOptions,
+  StyleContextManifest as StyleManifest,
+  RuntimeStats as StyleStats,
 } from '@zerodep-css/core';
-export { Css, createStyleContext, cssVar, keyframes, globalCss } from '@zerodep-css/core';
-export type {
-  StyleContext,
-  StyleContextManifest,
-  StyleContextOptions,
-  StyleFactory,
-  StylesheetFactory,
-} from '@zerodep-css/core';
-export { createStyles } from './styles.js';

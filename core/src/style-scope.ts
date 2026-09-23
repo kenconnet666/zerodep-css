@@ -2,41 +2,9 @@ import { Css, type CssConstructor } from './css.js';
 import type { StyleFactory, StyleInput } from './builder-types.js';
 import type { StyleRuntime } from './runtime.js';
 import type { ThemeDefinition, ThemeOverrides, ThemeTree, ThemeValues } from './theme.js';
-import { themeStyle } from './theme.js';
+import { themeStyle, prepareThemeStyle } from './theme.js';
 export { prepareThemeStyle } from './theme.js';
 export { normalizeStylesOptions, projectThemeArguments } from './style-project.js';
-import type { StyleContext } from './context.js';
-
-/** 组件选择视图，不改变宿主 runtime 的配置或所有权。 */
-export interface UseStyleRuntimeOptions<T extends Css = Css> {
-  readonly context?: StyleContext;
-  readonly theme?: ThemeScope;
-  readonly cssType?: CssConstructor<T>;
-}
-
-/** 选项只在初始化时读取一次，避免调用方后续修改改变视图。 */
-export function normalizeStyleOptions(input?: UseStyleRuntimeOptions): UseStyleRuntimeOptions {
-  if (input === undefined) return {};
-  if (!input || typeof input !== 'object' || Array.isArray(input))
-    throw new TypeError('Expected style runtime options.');
-  const prototype = Object.getPrototypeOf(input);
-  if (prototype !== Object.prototype && prototype !== null)
-    throw new TypeError('Style runtime options must be a plain object.');
-  for (const key of Reflect.ownKeys(input))
-    if (!['context', 'theme', 'cssType'].includes(String(key)) || typeof key !== 'string')
-      throw new TypeError('Unknown style runtime option: ' + String(key));
-  const { context, theme: scope, cssType } = input as UseStyleRuntimeOptions;
-  if (context !== undefined && (!context || typeof context !== 'object' || !context.runtime))
-    throw new TypeError('Expected a style context.');
-  if (scope !== undefined && (!scope || !Array.isArray(scope.themes)))
-    throw new TypeError('Expected a theme scope.');
-  if (
-    cssType !== undefined &&
-    (typeof cssType !== 'function' || (cssType !== Css && !(cssType.prototype instanceof Css)))
-  )
-    throw new TypeError('The CSS type must extend Css.');
-  return { context, theme: scope, cssType };
-}
 
 export interface ThemeState {
   readonly name: string;
@@ -101,6 +69,21 @@ export function createThemeScope<T extends ThemeTree>(
     }),
   );
   return Object.freeze({ themes: Object.freeze([...entries.values()]) });
+}
+
+/** 共用宿主的作者配置仍有自己的预设；已有同名 provider 始终优先于预设。 */
+export function projectThemeScope(
+  definition: ThemeDefinition<ThemeTree> | undefined,
+  parent?: ThemeScope,
+): ThemeScope | undefined {
+  if (!definition || findTheme(definition, parent)) return parent;
+  const prepared = prepareThemeStyle(definition, definition.defaults);
+  return createThemeScope(
+    definition,
+    () => definition.defaults,
+    parent,
+    () => prepared,
+  );
 }
 
 /** 每个元素携带逻辑组件作用域的有效变量类，因此 DOM 移动不改变主题。 */

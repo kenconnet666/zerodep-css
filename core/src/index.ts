@@ -7,7 +7,7 @@ export { css, injectGlobal, createRuntime } from './runtime.js';
 export { createStyleContext } from './context.js';
 export { defineTheme } from './theme.js';
 export { readTheme } from './style-scope.js';
-export type { ThemeScope, UseStyleRuntimeOptions } from './style-scope.js';
+export type { ThemeScope } from './style-scope.js';
 export type {
   ThemeTree,
   ThemeDefinition,

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useStyleRuntime } from '@zerodep-css/vue';
+import { createStyles } from '@zerodep-css/vue';
 import AutomaticStyles from './AutomaticStyles.vue';
 
 const props = defineProps<{ initialWidth: number; record: (kind: string) => void }>();
-const { css } = useStyleRuntime();
+const css = createStyles().useCss();
 const width = ref(props.initialWidth);
 const color = ref('red');
 const x = ref(2);

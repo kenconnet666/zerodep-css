@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { provideTheme, useStyleRuntime } from '@zerodep-css/vue';
+import { createStyles } from '@zerodep-css/vue';
 import { lightTheme, darkTheme, ThemeCss } from '@zerodep-css/vue/themes';
 import PresetOverride from './PresetOverride.vue';
 const props = defineProps<{ name: string; initialDark: boolean }>();
 const dark = ref(props.initialDark);
-provideTheme(lightTheme, () => (dark.value ? darkTheme.defaults : lightTheme.defaults));
-const { css } = useStyleRuntime({ cssType: ThemeCss });
+const styles = createStyles({ cssType: ThemeCss, theme: lightTheme });
+styles.provideTheme(() => (dark.value ? darkTheme.defaults : lightTheme.defaults));
+const css = styles.useCss();
 const tones = [
   ['success', 'onSuccess'],
   ['warning', 'onWarning'],

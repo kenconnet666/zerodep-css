@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useStyleRuntime } from '@zerodep-css/vue';
-const { css } = useStyleRuntime();
+import { createStyles } from '@zerodep-css/vue';
+const css = createStyles().useCss();
 const width = ref(10);
 const siblingWidth = ref(10);
 const colors = ['red', 'blue', 'initial', undefined];

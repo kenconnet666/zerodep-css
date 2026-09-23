@@ -20,10 +20,6 @@
     "./compiler": {
       "types": "./dist/compiler/index.d.ts",
       "default": "./dist/compiler/index.js"
-    },
-    "./compiler-runtime": {
-      "types": "./dist/compiler-runtime.d.ts",
-      "default": "./dist/compiler-runtime.js"
     }
   },
   "scripts": {

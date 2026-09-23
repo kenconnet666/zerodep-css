@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { provideTheme, useStyleRuntime } from '@zerodep-css/vue';
+import { createStyles } from '@zerodep-css/vue';
 import { lightTheme, ThemeCss } from '@zerodep-css/vue/themes';
-const scope = provideTheme(lightTheme, () => ({
+const styles = createStyles({ cssType: ThemeCss, theme: lightTheme });
+styles.provideTheme(() => ({
   color: { primary: '#9333ea', onPrimary: '#ffffff' },
 }));
-const { css } = useStyleRuntime({ theme: scope });
+const css = styles.useCss();
 </script>
 <template>
   <div
@@ -13,7 +14,7 @@ const { css } = useStyleRuntime({ theme: scope });
       css((s) => {
         s.color.text;
         s.backgroundColor.surface;
-      }, ThemeCss)
+      })
     "
   >
     <span
@@ -25,7 +26,7 @@ const { css } = useStyleRuntime({ theme: scope });
           s.padding.xs;
           s.borderRadius.sm;
           s.fontSize.xs;
-        }, ThemeCss)
+        })
       "
       >局部主色</span
     >

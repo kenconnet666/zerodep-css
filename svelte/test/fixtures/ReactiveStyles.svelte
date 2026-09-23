@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { useGlobalCss, useStyleRuntime } from '@zerodep-css/svelte';
+  import { styles } from './styles.js';
   let { initialColor, record }: { initialColor: string; record: (kind: string) => void } = $props();
-  const { css } = useStyleRuntime();
+  const css = styles.useCss();
   let width = $state(20);
   // 初始属性只作为本地可编辑状态的初值。
   // svelte-ignore state_referenced_locally
@@ -15,7 +15,7 @@
       s.color.raw(enabled ? color : 'green');
     }),
   );
-  const global = useGlobalCss('fixture/global', (g) => {
+  const global = styles.useGlobalCss('fixture/global', (g) => {
     record('global');
     g.rule('[data-global]', (s) => s.color.raw(color));
   });

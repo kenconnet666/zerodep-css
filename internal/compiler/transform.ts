@@ -9,7 +9,7 @@ import ts from 'typescript';
 import MagicString from 'magic-string';
 import { sourceMapper } from './source-map.js';
 import { automaticDeclarations } from './automatic.js';
-import { unshadowed, capturedInside } from './scope.js';
+import { unshadowed } from './scope.js';
 export { unshadowed } from './scope.js';
 import { createHash } from 'node:crypto';
 import { relative, resolve, isAbsolute } from 'node:path';
@@ -72,10 +72,9 @@ export function session(
     true,
     ts.ScriptKind.TS,
   );
-  const imports = new Map<string, { module: string; original: string }>(),
-    css = new Set<string>(),
+  const css = new Set<string>(),
     automaticCss = new Set<string>(),
-    runtime = new Set<string>();
+    projectFactories = new Set<string>();
   const used = templateIdentifiers(template);
   walk(ast, (n) => {
     if (ts.isIdentifier(n)) used.add(n.text);
@@ -86,44 +85,82 @@ export function session(
       const bindings = n.importClause?.namedBindings;
       for (const item of bindings && ts.isNamedImports(bindings) ? bindings.elements : []) {
         const original = item.propertyName?.text ?? item.name.text;
-        imports.set(item.name.text, { module, original });
-        if (module === `@zerodep-css/${framework}` && original === 'useStyleRuntime')
-          runtime.add(item.name.text);
+        if (module === `@zerodep-css/${framework}` && original === 'createStyles')
+          projectFactories.add(item.name.text);
       }
     }
+  const projects = new Map<string, boolean>();
+  const hooks = new Map<string, boolean>();
+  function projectDefault(initializer: ts.Expression | undefined): boolean | undefined {
+    if (
+      !initializer ||
+      !ts.isCallExpression(initializer) ||
+      !ts.isIdentifier(initializer.expression) ||
+      !projectFactories.has(initializer.expression.text) ||
+      !unshadowed(initializer.expression, initializer.expression.text, ast) ||
+      initializer.arguments.length > 1
+    )
+      return undefined;
+    const argument = initializer.arguments[0];
+    return (
+      !argument ||
+      (ts.isObjectLiteralExpression(argument) &&
+        argument.properties.every(
+          (property) =>
+            (ts.isPropertyAssignment(property) || ts.isShorthandPropertyAssignment(property)) &&
+            (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name)) &&
+            property.name.text === 'theme',
+        ))
+    );
+  }
   for (const statement of ast.statements)
     if (ts.isVariableStatement(statement))
-      for (const d of statement.declarationList.declarations)
-        if (
-          ts.isObjectBindingPattern(d.name) &&
-          d.initializer &&
-          ts.isCallExpression(d.initializer) &&
-          runtime.has(d.initializer.expression.getText(ast))
-        )
-          for (const e of d.name.elements)
-            if (
-              (e.propertyName?.getText(ast) ?? e.name.getText(ast)) === 'css' &&
-              ts.isIdentifier(e.name)
-            ) {
-              css.add(e.name.text);
-              const argument = d.initializer.arguments[0];
-              // 选项可能隐藏派生类。仅证明系统 Css 的初始化才允许属性提升。
-              const defaults =
-                !argument ||
-                (ts.isIdentifier(argument) &&
-                  argument.text === 'undefined' &&
-                  !imports.has('undefined') &&
-                  !capturedInside(argument, ast)) ||
-                (ts.isObjectLiteralExpression(argument) &&
-                  argument.properties.every(
-                    (property) =>
-                      (ts.isPropertyAssignment(property) ||
-                        ts.isShorthandPropertyAssignment(property)) &&
-                      (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name)) &&
-                      ['context', 'theme'].includes(property.name.text),
-                  ));
-              if (defaults && d.initializer.arguments.length <= 1) automaticCss.add(e.name.text);
+      for (const d of statement.declarationList.declarations) {
+        // 项目配置只识别当前文件的顶层 const 与对应适配器命名导入；未知配置保留调试来源。
+        if (statement.declarationList.flags & ts.NodeFlags.Const) {
+          const safe = projectDefault(d.initializer);
+          if (safe !== undefined) {
+            if (ts.isIdentifier(d.name)) projects.set(d.name.text, safe);
+            else if (ts.isObjectBindingPattern(d.name))
+              for (const element of d.name.elements) {
+                if (
+                  !element.dotDotDotToken &&
+                  !element.initializer &&
+                  ts.isIdentifier(element.name) &&
+                  (element.propertyName
+                    ? (ts.isIdentifier(element.propertyName) ||
+                        ts.isStringLiteral(element.propertyName)) &&
+                      element.propertyName.text === 'useCss'
+                    : element.name.text === 'useCss')
+                )
+                  hooks.set(element.name.text, safe);
+              }
+          } else if (
+            ts.isIdentifier(d.name) &&
+            d.initializer &&
+            ts.isCallExpression(d.initializer)
+          ) {
+            const call = d.initializer;
+            let selected: boolean | undefined;
+            if (call.arguments.length === 0) {
+              if (ts.isIdentifier(call.expression)) selected = hooks.get(call.expression.text);
+              else if (
+                ts.isPropertyAccessExpression(call.expression) &&
+                call.expression.name.text === 'useCss'
+              ) {
+                const owner = call.expression.expression;
+                selected = ts.isIdentifier(owner)
+                  ? projects.get(owner.text)
+                  : projectDefault(owner);
+              }
             }
+            if (selected !== undefined) {
+              css.add(d.name.text);
+              if (selected) automaticCss.add(d.name.text);
+            }
+          }
+        }
+      }
   let counter = 0;
   const fresh = (kind: string): string => {
     let value;
@@ -305,7 +342,6 @@ export function session(
     source,
     output,
     ast,
-    imports,
     css,
     fresh,
     error,

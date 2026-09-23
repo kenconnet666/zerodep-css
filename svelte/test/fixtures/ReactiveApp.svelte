@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { provideStyleContext, useStyleRuntime, type StyleContext } from '@zerodep-css/svelte';
+  import { untrack } from 'svelte';
+  import type { StyleHost } from '@zerodep-css/svelte';
+  import { styles } from './styles.js';
   import ReactiveStyles from './ReactiveStyles.svelte';
   let {
-    context,
+    host,
     initialColor,
     record,
-  }: { context: StyleContext; initialColor: string; record: (kind: string) => void } = $props();
-  // context 是组件树生命周期内固定的请求/应用实例。
-  // svelte-ignore state_referenced_locally
-  provideStyleContext(context);
-  const { css } = useStyleRuntime();
+  }: { host?: StyleHost; initialColor: string; record: (kind: string) => void } = $props();
+  untrack(() => host)?.provide();
+  const css = styles.useCss();
   let show = $state(true);
 </script>
 

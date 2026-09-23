@@ -1,18 +1,17 @@
 <script lang="ts">
   import { untrack, onDestroy } from 'svelte';
-  import { provideTheme, useTheme, useStyleRuntime } from '@zerodep-css/svelte';
-  import { theme, spacing, AppCss } from './theme';
+  import { spacing, appStyles } from './theme';
   import ThemeLeaf from './ThemeLeaf.svelte';
   import ThemeBranch from './ThemeBranch.svelte';
   let { initial }: { initial: string } = $props();
   let brand = $state(untrack(() => initial));
   let portalHost: HTMLDivElement | undefined;
   let gap = $state('4px');
-  provideTheme(theme, () => ({ color: { brand } }));
-  provideTheme(spacing, () => ({ gap }));
-  const { css } = useStyleRuntime({ cssType: AppCss });
-  const current = useTheme(theme);
-  const currentSpacing = useTheme(spacing);
+  appStyles.provideTheme(() => ({ color: { brand } }));
+  appStyles.provideTheme(spacing, () => ({ gap }));
+  const css = appStyles.useCss();
+  const current = appStyles.useTheme();
+  const currentSpacing = appStyles.useTheme(spacing);
   // 移动后的节点仍由本夹具拥有，销毁时清理实际 DOM 位置。
   onDestroy(() => portalHost?.remove());
 </script>

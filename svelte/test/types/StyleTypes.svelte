@@ -1,15 +1,16 @@
 <script lang="ts">
-  import { Css, useStyleRuntime, keyframes, globalCss } from '@zerodep-css/svelte';
+  import { Css, createStyles, keyframes } from '@zerodep-css/svelte';
 
-  const { css } = useStyleRuntime();
+  const { useCss, useGlobalCss } = createStyles();
+  const css = useCss();
   class CustomCss extends Css {
     control() {
       this.padding.px(8);
     }
   }
-  useStyleRuntime({ cssType: CustomCss }).css((s) => s.control());
+  createStyles({ cssType: CustomCss }).useCss()((s) => s.control());
   // @ts-expect-error 声明泛型不能代替实际传入构造器
-  useStyleRuntime<CustomCss>({});
+  createStyles<CustomCss>();
 
   let { width = 120 }: { width?: number } = $props();
   const fade = keyframes((k) => {
@@ -20,7 +21,7 @@
       s.opacity.raw(1);
     });
   });
-  const base = globalCss((g) => {
+  const base = useGlobalCss('type-base', (g) => {
     g.fontFace((d) => {
       d.fontFamily.raw('Demo');
       d.src.raw('url(demo.woff2)');
@@ -30,7 +31,7 @@
 </script>
 
 <div
-  data-rules={base.rules.length}
+  data-rules={base.id}
   class={css((s) => {
     s.display.flex;
     s.width.px(width);

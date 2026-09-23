@@ -1,5 +1,5 @@
 import { Css, defineTheme } from '@zerodep-css/core';
-import { createStyles } from '../../src/styles.js';
+import { createStyles } from '@zerodep-css/svelte';
 
 export const theme = defineTheme('project', { color: { brand: 'red' } });
 

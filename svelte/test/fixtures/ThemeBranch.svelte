@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { provideTheme } from '@zerodep-css/svelte';
-  import { theme } from './theme';
+  import { theme, appStyles } from './theme';
   import ThemeLeaf from './ThemeLeaf.svelte';
   let { name, mode }: { name: string; mode?: 'inherit' | 'defaults' } = $props();
   let background = $state('lime');
-  provideTheme(theme, () =>
+  appStyles.provideTheme(() =>
     mode === 'inherit'
       ? null
       : mode === 'defaults'

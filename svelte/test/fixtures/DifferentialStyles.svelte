@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { useStyleRuntime } from '@zerodep-css/svelte';
-  const { css } = useStyleRuntime();
+  import { createStyles } from '@zerodep-css/svelte';
+  const { useCss } = createStyles();
+  const css = useCss();
   const colors = [
     'red',
     'banana',

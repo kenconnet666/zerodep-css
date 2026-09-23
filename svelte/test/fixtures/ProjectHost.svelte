@@ -1,6 +1,6 @@
 <script lang="ts">
   import { untrack } from 'svelte';
-  import type { StyleHost } from '../../src/styles.js';
+  import type { StyleHost } from '@zerodep-css/svelte';
   import { styles } from './ProjectStyles.js';
 
   let {

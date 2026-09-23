@@ -1,6 +1,12 @@
 <script lang="ts">
-  import { Css, defineTheme } from '@zerodep-css/core';
-  import { createStyles } from '../../src/styles.js';
+  import {
+    Css,
+    createStyles,
+    defineTheme,
+    type StyleHostOptions,
+    type StyleManifest,
+    type StyleStats,
+  } from '@zerodep-css/svelte';
 
   const theme = defineTheme('project-types', { color: { brand: '#123456' } });
   const other = defineTheme('other-types', { gap: '8px' });
@@ -11,8 +17,18 @@
   }
   const styles = createStyles({ cssType: AppCss, theme });
   const plain = createStyles();
+  // @ts-expect-error 泛型不能代替实际作者类构造器
+  createStyles<AppCss>();
+  // @ts-expect-error 显式主题泛型不能代替主题定义
+  createStyles<AppCss, typeof theme.defaults>({ cssType: AppCss });
 
   function checkTypes() {
+    const host = styles.createHost({ target: null } satisfies StyleHostOptions);
+    const manifest: StyleManifest = host.snapshot();
+    const stats: StyleStats = host.stats();
+    void manifest;
+    void stats;
+    host.dispose();
     styles.useCss()((s) => s.color.brand);
     styles.useGlobalCss('project', (g) => g.rule('body', (s) => s.color.brand));
     styles.provideTheme({ color: { brand: '#abcdef' } });
