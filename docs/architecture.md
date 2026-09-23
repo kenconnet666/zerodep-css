@@ -22,7 +22,7 @@ csstype / Webref / CSSTree 固定数据
 
 css(factory)
   -> 编译器证明稳定时命中准备缓存
-  -> 否则创建真实 Css -> 有序 StyleProgram / 元数据 -> 结果缓存
+  -> 否则创建真实 Css -> 有序 StyleProgram / 元数据 -> 作者层后写替换 -> 结果缓存
   -> 序列化与校验 -> 内容哈希 -> runtime 注册/去重 -> 字符串 class
 
 框架原生依赖通知

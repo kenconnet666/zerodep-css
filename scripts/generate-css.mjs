@@ -133,6 +133,7 @@ export const propertyMetadata: Readonly<Record<string, PropertyMetadata>> = ${JS
 export const descriptorMetadata: Readonly<Record<string, Readonly<Record<string, PropertyMetadata>>>> = ${JSON.stringify(descriptorMetadata)};
 export const simplePseudos: readonly string[] = ${JSON.stringify(schema.simplePseudos)};
 export const functionalPseudos: readonly string[] = ${JSON.stringify(schema.functionalPseudos)};
+export const propertyAliases: Readonly<Record<string, string>> = ${JSON.stringify(schema.propertyAliases)};
 `;
 const coverage = {
   sources: schema.sources,

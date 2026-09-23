@@ -80,7 +80,7 @@ test('用户可以继承内置主题继续扩展，系统基类仍保持独立',
       s.focus((h) => h.color.brand);
     });
     context.runtime.mountGlobal((g) => g.rule('button', (s) => s.color.brand, BrandedCss));
-    assert.match(context.renderStyles(), /color:red;color:var\(--zt-/);
+    assert.doesNotMatch(context.renderStyles(), /color:red|color:var\(--zt-/);
     assert.match(context.renderStyles(), /color:#123456/);
     assert.throws(() => context.runtime.css((s) => s.color.primary), /Unknown keyword/);
   } finally {

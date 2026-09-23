@@ -37,7 +37,7 @@ test('按需 helper 保留嵌套所有权、引用身份与同步生命周期', 
     assert.throws(call, /synchronous/);
 });
 
-test('保留 fallback、简写和长属性的书写顺序', () => {
+test('同名属性后写替换，简写与长属性保持有效声明顺序', () => {
   const p = buildStyleProgram((s) => {
     s.height.vh(100);
     s.height.dvh(100);
@@ -48,9 +48,7 @@ test('保留 fallback、简写和长属性的书写顺序', () => {
   assert.deepEqual(
     p.map((n) => [n.property, n.value.value]),
     [
-      ['height', '100vh'],
       ['height', '100dvh'],
-      ['margin-left', '4px'],
       ['margin', '8px'],
       ['margin-left', '12px'],
     ],
@@ -120,9 +118,9 @@ test('严格调用与显式 raw/自定义属性分离', () => {
     s.custom.raw('--distance', '4px');
     s.property.raw('future-property', 'value');
   });
-  assert.equal(p[0].value.value, '50%');
-  assert.equal(p[2].value.kind, 'raw');
-  assert.equal(p[4].property, 'future-property');
+  assert.equal(p[0].value.value, 0);
+  assert.equal(p[1].value.kind, 'raw');
+  assert.equal(p[3].property, 'future-property');
   assert.throws(() => buildStyleProgram((s) => s.display.raw({})), TypeError);
 });
 test('选择器、嵌套条件和交错声明不重排', () => {
@@ -140,10 +138,10 @@ test('选择器、嵌套条件和交错声明不重排', () => {
   });
   assert.deepEqual(
     p.map((n) => n.kind),
-    ['declaration', 'style-rule', 'declaration', 'style-group'],
+    ['style-rule', 'declaration', 'style-group'],
   );
-  assert.equal(p[1].selector, '&:hover');
-  assert.equal(p[3].children[0].name, '@container');
+  assert.equal(p[0].selector, '&:hover');
+  assert.equal(p[2].children[0].name, '@container');
   assert.throws(() => buildStyleProgram((s) => s.selector('.external', () => {})), /contain &/);
   const c = buildStyleProgram((s) => {
     s.container.raw('card / inline-size');
@@ -176,9 +174,9 @@ test('important 传播到对应声明但不能进入帧上下文', () => {
     });
     s.color.green;
   });
-  assert(p[0].important);
-  assert(p[1].children[0].important);
-  assert.equal(p[2].important, false);
+  assert(p[0].children[0].important);
+  assert.equal(p[1].important, false);
+  assert.equal(p[1].value.value, 'green');
   assert.throws(() => keyframes((k) => k.from((s) => s.important(() => {}))), /Unknown/);
 });
 test('帧保留重复偏移和声明，支持多偏移、时间线范围', () => {
@@ -303,7 +301,7 @@ test('token 严格校验字面量，raw 不限制字符串枚举并保留数值�
   });
   assert.deepEqual(
     p.map((n) => n.value.value),
-    ['flex', 'future-display-value', 'calc(100% - 2rem)', 0.5],
+    ['future-display-value', 'calc(100% - 2rem)', 0.5],
   );
   assert.throws(() => buildStyleProgram((s) => s.width.token('50%')), /Unknown CSS token/);
   assert.throws(() => buildStyleProgram((s) => s.opacity.token(1)), /Unknown CSS token/);

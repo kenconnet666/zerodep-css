@@ -256,6 +256,13 @@ export async function createSchema() {
     }
   return {
     version: 1,
+    // 只统一规范明确列出的同义属性，不猜测厂商前缀或 raw 简写值。
+    propertyAliases: Object.fromEntries(
+      Object.values(spec.properties)
+        .filter((property) => property.legacyAliasOf)
+        .sort((a, b) => a.name.localeCompare(b.name, 'en'))
+        .map((property) => [property.name, property.legacyAliasOf]),
+    ),
     sources: sourceVersions,
     policy: {
       maximumHelperArguments,

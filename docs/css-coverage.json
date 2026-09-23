@@ -5,7 +5,7 @@
     "css-tree": "3.2.1",
     "typescript": "6.0.3"
   },
-  "schemaDigest": "c33c13e45fcf0d656556839a3073fa5cb4cacc984f0e6e1f99b51a5659dc051a",
+  "schemaDigest": "5e42e64eae65c266599d123897a690a9dd3300698f5dd20e0c077d9701238497",
   "policy": {
     "maximumHelperArguments": 4,
     "propertyApi": "noncallable-token-raw-v1",

@@ -1,3 +1,4 @@
+import { createStyleNormalizer } from './normalize.js';
 import { globalCss, buildStyleDefinition } from './builder.js';
 import { browserSheet, renderStyleTag, type BrowserSheet, type StyleTarget } from './sheet.js';
 import {
@@ -401,6 +402,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   }
   // 编译站点缓存属于当前 runtime；驱逐只丢计算结果，绝不删除仍被 DOM 使用的规则。
   const compiledStyles = new Map<string, CompiledStyle>();
+  const normalize = createStyleNormalizer();
   const runtime: StyleRuntime = {
     config,
     css(factory: StyleFactory<never>, cssType: CssConstructor = Css) {
@@ -415,7 +417,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
         ensure(cached);
         return cached.record.id;
       }
-      const definition = buildStyleDefinition(factory, cssType);
+      const definition = buildStyleDefinition(factory, cssType, normalize);
       if (!cacheKey && cacheable(definition.program)) {
         const key = 'd:' + JSON.stringify(definition);
         // 同时限制键大小，避免少量巨大样式让计算缓存占用不可控内存。
@@ -495,6 +497,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       for (const id of records.keys()) releaseClaims(id);
       records.clear();
       compiledStyles.clear();
+      normalize.clear();
       claimed.clear();
       if (target) owners.get(target)?.delete(config.namespace);
     },

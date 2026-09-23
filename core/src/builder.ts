@@ -32,6 +32,7 @@ import type {
 } from './builder-types.js';
 import { isCssVariable, validateCustomName } from './values.js';
 import { Css, type CssConstructor } from './css.js';
+import { normalizeStyleProgram } from './normalize.js';
 import {
   getStyleSource,
   setStyleConfig,
@@ -386,10 +387,11 @@ export function buildStyleProgram(factory: Factory, cssType: CssConstructor = Cs
 export function buildStyleDefinition(
   factory: Factory,
   cssType: CssConstructor = Css,
+  normalize: (program: StyleProgram) => StyleProgram = normalizeStyleProgram,
 ): { readonly program: StyleProgram; readonly metadata: Readonly<StyleMetadata> } {
   const source = getStyleSource(factory);
   const metadata: StyleMetadata = source ? { source } : {};
-  const program = withSession((session) => style(factory, session), cssType, metadata);
+  const program = normalize(withSession((session) => style(factory, session), cssType, metadata));
   return Object.freeze({ program, metadata: Object.freeze(metadata) });
 }
 function frameDeclarations(factory: Factory, session: Session): readonly Declaration[] {
@@ -473,7 +475,7 @@ function globals(factory: Factory, session: Session, root: boolean): readonly Gl
       alive(session);
       text(selector, 'Global selector');
       // 每条规则独立构建会话，派生类不会泄漏到相邻规则，捕获实例也及时失效。
-      const children = withSession((local) => style(child, local), cssType);
+      const children = normalizeStyleProgram(withSession((local) => style(child, local), cssType));
       append({ kind: 'style-rule', selector, relative: false, children });
     },
     media: (query, child) => group('@media', query, child),

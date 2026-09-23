@@ -31,7 +31,7 @@ test('css 返回字符串，同内容跨实例同名、同实例去重', () => {
   a.dispose();
   b.dispose();
 });
-test('序列化保留 fallback、交错声明、字面量 & 和原生嵌套', () => {
+test('序列化删除已替换声明，保留交错上下文、字面量 & 和原生嵌套', () => {
   const r = server();
   r.css((s) => {
     s.height.vh(100);
@@ -42,7 +42,9 @@ test('序列化保留 fallback、交错声明、字面量 & 和原生嵌套', ()
     s.selector('&[data-symbol="&"]', (n) => n.content.raw('"a&b;c:d"'));
   });
   const body = r.snapshot().records[0].body;
-  assert(body.indexOf('100vh') < body.indexOf('100dvh'));
+  assert(!body.includes('100vh'));
+  assert(body.includes('height:100dvh'));
+  assert(!body.includes('color:red'));
   assert(body.indexOf('color:blue') < body.indexOf('color:green'));
   assert(body.includes('[data-symbol="&"]'));
   assert(body.includes('"a&b;c:d"'));

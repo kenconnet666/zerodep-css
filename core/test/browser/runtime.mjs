@@ -47,6 +47,41 @@ export async function runBrowserTests(browser, baseUrl, ssr, output, match) {
     assert.equal(result.padding, '12px');
     return result;
   });
+  await scenario('作者层覆盖先于 CSS 优先级且按上下文隔离', async (page) => {
+    await page.evaluate(() => {
+      const runtime = window.z.createRuntime({ namespace: 'replace' });
+      const parent = document.createElement('section');
+      parent.style.width = '140px';
+      const el = document.createElement('div');
+      el.id = 'replacement';
+      el.textContent = 'replacement';
+      el.className = runtime.css((s) => {
+        s.important((i) => {
+          i.color.red;
+        });
+        s.paddingLeft.px(8);
+        s.color.blue;
+        s.padding.px(12);
+        s.width.px(50);
+        s.width.raw('red');
+        s.hover((h) => h.important((i) => i.color.red));
+        s.hover((h) => h.color.purple);
+      });
+      parent.append(el);
+      document.body.append(parent);
+    });
+    const initial = await page.locator('#replacement').evaluate((el) => {
+      const style = getComputedStyle(el);
+      return { color: style.color, padding: style.padding, width: style.width };
+    });
+    assert.deepEqual(initial, { color: 'rgb(0, 0, 255)', padding: '12px', width: '116px' });
+    await page.locator('#replacement').hover();
+    assert.equal(
+      await page.locator('#replacement').evaluate((el) => getComputedStyle(el).color),
+      'rgb(128, 0, 128)',
+    );
+    return initial;
+  });
   await scenario('原生嵌套、交错声明、属性字符串和伪元素', async (page) => {
     await page.evaluate(() => {
       const r = window.z.createRuntime({ namespace: 'nested' });
