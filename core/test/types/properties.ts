@@ -5,6 +5,10 @@ export function typeContract(width: number, visible: boolean) {
   const runtime = createRuntime({ target: null });
   const className: string = runtime.css((s) => {
     s.width.px(width);
+    s.width.px(visible ? width : null);
+    s.padding.px(8, visible ? 16 : undefined);
+    // @ts-expect-error false 不是声明省略标记
+    s.width.px(false);
   });
   const frames = keyframes((k) =>
     k.from((s) => {
@@ -61,7 +65,7 @@ export function typeContract(width: number, visible: boolean) {
     s.width.px('10px');
     // @ts-expect-error 简写个数错误
     s.padding.px(1, 2, 3, 4, 5);
-    // @ts-expect-error 单位方法不允许 undefined，避免不完整的列表
+    // 空值省略整个单位声明，不会留下不完整的参数列表。
     s.padding.px(undefined);
     // @ts-expect-error 必需的 font-family 等部分不能因包含 length 而消失
     s.font.px(12);

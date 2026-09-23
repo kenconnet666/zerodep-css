@@ -2,7 +2,6 @@ import type {
   CompilerOptions,
   CompilerPlugin,
   SourceTransform,
-  ValueBinding,
   TransformedExpression,
 } from './types.js';
 type Framework = 'vue' | 'svelte';
@@ -21,6 +20,36 @@ export function walk(node: ts.Node, visit: (node: ts.Node) => void): void {
     walk(child, visit);
   });
 }
+/** 框架解析后的模板表达式已完成实体解码，临时名分配必须先避开其中的标识符。 */
+function templateIdentifiers(root: unknown): Set<string> {
+  const names = new Set<string>();
+  const seen = new WeakSet<object>();
+  function visit(value: unknown): void {
+    if (!value || typeof value !== 'object' || seen.has(value)) return;
+    seen.add(value);
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item);
+      return;
+    }
+    const node = value as Record<string, unknown>;
+    if (node.type === 'Identifier' && typeof node.name === 'string') names.add(node.name);
+    if (node.type === 4 && typeof node.content === 'string') {
+      const file = ts.createSourceFile(
+        'template-expression.ts',
+        node.content,
+        ts.ScriptTarget.Latest,
+        true,
+        ts.ScriptKind.TS,
+      );
+      walk(file, (item) => {
+        if (ts.isIdentifier(item)) names.add(item.text);
+      });
+    }
+    for (const child of Object.values(node)) visit(child);
+  }
+  visit(root);
+  return names;
+}
 export function session(
   source: string,
   filename: string,
@@ -28,6 +57,7 @@ export function session(
   scriptEnd: number,
   framework: Framework,
   options: CompilerOptions = {},
+  template?: unknown,
 ) {
   if (options.bindings !== undefined && !['variables', 'runtime'].includes(options.bindings))
     throw new TypeError('Compiler bindings must be variables or runtime.');
@@ -46,7 +76,7 @@ export function session(
     css = new Set<string>(),
     automaticCss = new Set<string>(),
     runtime = new Set<string>();
-  const used = new Set<string>();
+  const used = templateIdentifiers(template);
   walk(ast, (n) => {
     if (ts.isIdentifier(n)) used.add(n.text);
   });
@@ -103,13 +133,14 @@ export function session(
     return value;
   };
   const sourceName = fresh('source');
-  const unitsName = fresh('units');
+  const unitBindingName = fresh('bind_unit');
+  const valueBindingName = fresh('bind_value');
   const prepareName = fresh('prepare');
   const declarationName = fresh('declaration');
   const declarationBindings: string[] = [];
   const preparedBindings: string[] = [];
-  let hasBindings = false;
-  let hasAutomatic = false;
+  let hasUnitBindings = false;
+  let hasValueBindings = false;
   let hasPrepared = false;
   let hasSources = false;
   const mapper = sourceMapper(source, filename);
@@ -136,9 +167,12 @@ export function session(
       true,
       ts.ScriptKind.TS,
     );
+    walk(file, (node) => {
+      if (ts.isIdentifier(node)) used.add(node.text);
+    });
     const base = offset - prefix.length;
     const edits = new MagicString(text);
-    const bindings: ValueBinding[] = [];
+    let bindingsLocal: string | undefined;
     let reusedCallback: ts.Node | undefined;
     walk(file, (node) => {
       // 已提升回调的未选静态分支可能含任意代码，不能再对其子树做重叠编辑。
@@ -167,8 +201,8 @@ export function session(
           : undefined;
       const automatic =
         options.bindings === 'runtime' && candidates?.length ? undefined : candidates;
-      // 仅复用完全静态的 Vue 回调；动态单位继续交给现有 computed 路径。
-      // 这里只创建函数，css 的求值、宿主检查与规则注册仍留在模板使用点。
+      if (automatic?.length) bindingsLocal = fresh('bindings');
+      // 动态读取留在回调原操作位置；仅完全静态的回调可提前准备。
       let factorySource = callback?.getText(file);
       // 模板字符串可含 HTML 解码后的结束标签；不能把它直接插入 script setup。
       const reuse =
@@ -194,7 +228,7 @@ export function session(
       if (!builder || !ts.isIdentifier(builder)) return;
       // 目前自动提升限定为直接模板使用点；脚本快照和派生类保留运行时合同。
       if (automatic) {
-        if (automatic.every((declaration) => declaration.kind === 'unit')) {
+        if (automatic.length === 0) {
           // 静态源码摘要随 HMR 内容改变，不把旧站点缓存当作新样式。
           const key = createHash('sha256')
             .update(id + ':' + (base + callback.getStart(file)) + ':' + callback.getText(file))
@@ -245,40 +279,27 @@ export function session(
             declarationBindings.push(
               `const ${helper} = ${declarationName}(${JSON.stringify(name)}, ${JSON.stringify(declaration.format)});`,
             );
-            bindings.push({
-              name,
-              expression: mapToOriginal(`${helper}.inline(${argument})`, offset),
-              offset,
-            });
             edits.overwrite(
               declaration.call.getStart(file) - prefix.length,
               declaration.call.end - prefix.length,
-              `${declaration.property.getText(file)}.raw(${helper}.value(${argument}))`,
+              `${declaration.property.getText(file)}.raw(${valueBindingName}(${bindingsLocal}, ${JSON.stringify(name)}, ${helper}, ${argument}))`,
             );
-            hasBindings = true;
+            hasValueBindings = true;
             continue;
           }
-          const value = `${unitsName}([${declaration.call.arguments.map((arg) => arg.getText(file)).join(',')}], ${JSON.stringify(declaration.alternatives)}, ${JSON.stringify(declaration.unit)}, ${JSON.stringify(declaration.separator)})`;
-          bindings.push({ name, expression: mapToOriginal(value, offset), offset });
+          const argumentsText = declaration.call.arguments
+            .map((arg) => arg.getText(file))
+            .join(',');
           edits.overwrite(
             declaration.call.getStart(file) - prefix.length,
             declaration.call.end - prefix.length,
-            `${declaration.property.getText(file)}.raw(${JSON.stringify(`var(${name})`)})`,
+            `${declaration.property.getText(file)}.raw(${unitBindingName}(${bindingsLocal}, ${JSON.stringify(name)}, [${argumentsText}], ${JSON.stringify(declaration.alternatives)}, ${JSON.stringify(declaration.unit)}, ${JSON.stringify(declaration.separator)}))`,
           );
-          hasBindings = hasAutomatic = true;
+          hasUnitBindings = true;
         }
       }
     });
-    const first = file.statements[0];
-    const initializer =
-      first && ts.isVariableStatement(first)
-        ? first.declarationList.declarations[0]?.initializer
-        : undefined;
-    const direct =
-      !!initializer &&
-      ts.isCallExpression(initializer) &&
-      css.has(initializer.expression.getText(file));
-    return { code: edits.toString(), bindings, direct };
+    return { code: edits.toString(), bindingsLocal };
   }
   return {
     source,
@@ -293,16 +314,21 @@ export function session(
     scriptEnd,
     mapToOriginal,
     finish(extra = '') {
-      if (!hasBindings && !hasSources && !hasPrepared) return null;
+      if (!hasUnitBindings && !hasValueBindings && !hasSources && !hasPrepared) return null;
       if (hasSources)
         output.appendLeft(
           scriptStart,
           `\nimport { withStyleSource as ${sourceName} } from '@zerodep-css/core/compiler-runtime';\n`,
         );
-      if (hasAutomatic)
+      if (hasUnitBindings)
         output.appendLeft(
           scriptStart,
-          `\nimport { formatUnitValues as ${unitsName} } from '@zerodep-css/core/compiler-runtime';\n`,
+          `\nimport { bindUnit as ${unitBindingName} } from '@zerodep-css/core/compiler-runtime';\n`,
+        );
+      if (hasValueBindings)
+        output.appendLeft(
+          scriptStart,
+          `\nimport { bindValue as ${valueBindingName} } from '@zerodep-css/core/compiler-runtime';\n`,
         );
       if (hasPrepared)
         output.appendLeft(

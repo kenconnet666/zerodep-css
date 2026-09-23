@@ -30,13 +30,8 @@ export type SourceTransform = (
   options?: CompilerOptions,
 ) => TransformResult | null;
 
-export interface ValueBinding {
-  name: string;
-  expression: string;
-  offset: number;
-}
 export interface TransformedExpression {
   code: string;
-  bindings: ValueBinding[];
-  direct: boolean;
+  /** 原模板表达式内的局部绑定表；动态回调在原操作位置写入它。 */
+  bindingsLocal?: string;
 }

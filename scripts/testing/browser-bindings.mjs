@@ -236,7 +236,7 @@ try {
         await page
           .locator('[data-custom-unit]')
           .evaluateAll((elements) => elements.map((element) => getComputedStyle(element).width)),
-        Array(4).fill('22px'),
+        Array(5).fill('22px'),
       );
       assert.equal(ssrTheme.parent.color, 'rgb(255, 0, 0)');
       assert.equal(ssrTheme.child.background, 'rgb(0, 255, 0)');
@@ -244,6 +244,7 @@ try {
       assert.equal(ssrTheme.parent.values.color.brand, 'red');
       assert.equal(ssrTheme.child.values.color.text, 'lime');
       assert.equal(ssrTheme.reset.values.color.text, 'black');
+      assert.deepEqual(ssrTheme.inherited, ssrTheme.parent);
       for (const state of Object.values(ssrTheme)) assert.equal(state.gap, '4px');
       assert.deepEqual(
         await page
@@ -251,7 +252,7 @@ try {
           .evaluateAll((elements) =>
             elements.map((element) => element.getAttribute('data-theme-fallback')),
           ),
-        ['0.5', '0.5', '0.5', '0.5'],
+        Array(5).fill('0.5'),
       );
       assert.equal(ssr.width, '20px');
       assert.equal(ssr.otherWidth, '40px');
@@ -355,6 +356,28 @@ try {
       await first.locator('[data-color]').click();
       assert.equal((await read()).className, beforeColor.className);
       const autoValue = first.locator('[data-auto-value]');
+      const nullable = first.locator('[data-nullable]');
+      const readNullable = () =>
+        nullable.evaluate((element) => ({
+          width: getComputedStyle(element).width,
+          padding: getComputedStyle(element).padding,
+          className: element.className,
+          variables: element.style.length,
+        }));
+      const absent = await readNullable();
+      assert.equal(absent.width, '16px');
+      assert.equal(absent.padding, '4px');
+      assert.equal(absent.variables, 0);
+      await first.locator('[data-nullable-change]').click();
+      const present = await readNullable();
+      assert.equal(present.width, '24px');
+      assert.equal(present.padding, '2px 24px');
+      assert.equal(present.variables, 2);
+      await first.locator('[data-nullable-change]').click();
+      assert.equal((await readNullable()).className, present.className);
+      assert.equal((await readNullable()).width, '30px');
+      await first.locator('[data-nullable-change]').click();
+      assert.deepEqual(await readNullable(), absent);
       const valueClass = await autoValue.getAttribute('class');
       const valueStats = (await read()).stats;
       assert.equal(await autoValue.evaluate((e) => getComputedStyle(e).color), 'rgb(255, 0, 0)');
@@ -377,7 +400,7 @@ try {
       assert.equal(await page.locator('#theme-portal [data-theme-leaf="portal"]').count(), 1);
       await page.locator('[data-theme-parent-change]').click();
       const changedTheme = await themeState();
-      for (const name of ['parent', 'sibling', 'child', 'portal']) {
+      for (const name of ['parent', 'sibling', 'child', 'portal', 'inherited']) {
         assert.equal(changedTheme[name].color, 'rgb(0, 0, 255)');
         assert.equal(changedTheme[name].values.color.brand, 'blue');
       }
@@ -396,7 +419,7 @@ try {
         await page
           .locator('[data-theme-leaf]')
           .evaluateAll((elements) => elements.map((element) => getComputedStyle(element).padding)),
-        Array(5).fill('8px'),
+        Array(6).fill('8px'),
       );
       for (const name of Object.keys(localTheme))
         assert.equal(localTheme[name].content, ssrTheme[name].content);

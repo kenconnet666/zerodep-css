@@ -43,5 +43,6 @@
 </div>
 <ThemeLeaf name="sibling" />
 <ThemeBranch name="child" />
-<ThemeBranch name="reset" reset />
+<ThemeBranch name="inherited" mode="inherit" />
+<ThemeBranch name="reset" mode="defaults" />
 <div bind:this={portalHost}><ThemeLeaf name="portal" /></div>

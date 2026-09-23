@@ -2,6 +2,7 @@
 
 import type { CssProperty } from '../values.js';
 import type { KeyframesDefinition } from '../style-program.js';
+type UnitValue = number | null | undefined;
 interface KeywordValues {
   0:
     | 'AccentColor'
@@ -14630,8558 +14631,8656 @@ interface HelperMembers {
   0: {};
   1: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: number] | [value1: number, value2: number]): void;
+    s(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: number] | [value1: number, value2: number]): void;
+    ms(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** s；逗号分隔，保留声明顺序。 */
     sList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     msList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   2: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: number] | [value1: number, value2: number]): void;
+    s(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: number] | [value1: number, value2: number]): void;
+    ms(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** s；逗号分隔，保留声明顺序。 */
     sList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     msList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   3: {
     /** s；逗号分隔，保留声明顺序。 */
     s(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     ms(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   4: {
     /** s；逗号分隔，保留声明顺序。 */
     s(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     ms(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   5: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number] | [value1: number, value2: number]): void;
+    cm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number] | [value1: number, value2: number]): void;
+    mm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number] | [value1: number, value2: number]): void;
+    q(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number] | [value1: number, value2: number]): void;
+    in(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number] | [value1: number, value2: number]): void;
+    pt(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number] | [value1: number, value2: number]): void;
+    pc(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number] | [value1: number, value2: number]): void;
+    px(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number] | [value1: number, value2: number]): void;
+    em(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number] | [value1: number, value2: number]): void;
+    rem(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number] | [value1: number, value2: number]): void;
+    ex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number] | [value1: number, value2: number]): void;
+    rex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number] | [value1: number, value2: number]): void;
+    cap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
+    rcap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number] | [value1: number, value2: number]): void;
+    ch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number] | [value1: number, value2: number]): void;
+    rch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number] | [value1: number, value2: number]): void;
+    ic(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number] | [value1: number, value2: number]): void;
+    ric(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
+    rlh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number] | [value1: number, value2: number]): void;
+    vw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number] | [value1: number, value2: number]): void;
+    svw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number] | [value1: number, value2: number]): void;
+    vh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number] | [value1: number, value2: number]): void;
+    svh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number] | [value1: number, value2: number]): void;
+    vi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number] | [value1: number, value2: number]): void;
+    svi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number] | [value1: number, value2: number]): void;
+    vb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number] | [value1: number, value2: number]): void;
+    svb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cm；逗号分隔，保留声明顺序。 */
     cmList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mmList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     qList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     inList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     ptList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pcList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     pxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     emList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     remList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     exList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rexList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     capList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcapList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     chList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rchList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     icList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ricList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     viList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     sviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqiList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number] | [value1: number, value2: number]): void;
+    pct(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** %；逗号分隔，保留声明顺序。 */
     pctList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   6: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；逗号分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   7: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；逗号分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   8: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number] | [value1: number, value2: number]): void;
+    cm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number] | [value1: number, value2: number]): void;
+    mm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number] | [value1: number, value2: number]): void;
+    q(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number] | [value1: number, value2: number]): void;
+    in(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number] | [value1: number, value2: number]): void;
+    pt(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number] | [value1: number, value2: number]): void;
+    pc(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number] | [value1: number, value2: number]): void;
+    px(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number] | [value1: number, value2: number]): void;
+    em(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number] | [value1: number, value2: number]): void;
+    rem(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number] | [value1: number, value2: number]): void;
+    ex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number] | [value1: number, value2: number]): void;
+    rex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number] | [value1: number, value2: number]): void;
+    cap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
+    rcap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number] | [value1: number, value2: number]): void;
+    ch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number] | [value1: number, value2: number]): void;
+    rch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number] | [value1: number, value2: number]): void;
+    ic(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number] | [value1: number, value2: number]): void;
+    ric(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
+    rlh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number] | [value1: number, value2: number]): void;
+    vw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number] | [value1: number, value2: number]): void;
+    svw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number] | [value1: number, value2: number]): void;
+    vh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number] | [value1: number, value2: number]): void;
+    svh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number] | [value1: number, value2: number]): void;
+    vi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number] | [value1: number, value2: number]): void;
+    svi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number] | [value1: number, value2: number]): void;
+    vb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number] | [value1: number, value2: number]): void;
+    svb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cm；逗号分隔，保留声明顺序。 */
     cmList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mmList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     qList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     inList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     ptList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pcList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     pxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     emList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     remList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     exList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rexList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     capList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcapList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     chList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rchList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     icList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ricList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     viList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     sviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqiList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number] | [value1: number, value2: number]): void;
+    pct(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** %；逗号分隔，保留声明顺序。 */
     pctList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   9: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number]): void;
+    cm(...values: [value1: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number]): void;
+    mm(...values: [value1: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number]): void;
+    q(...values: [value1: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number]): void;
+    in(...values: [value1: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number]): void;
+    pt(...values: [value1: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number]): void;
+    pc(...values: [value1: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number]): void;
+    px(...values: [value1: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number]): void;
+    em(...values: [value1: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number]): void;
+    rem(...values: [value1: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number]): void;
+    ex(...values: [value1: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number]): void;
+    rex(...values: [value1: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number]): void;
+    cap(...values: [value1: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number]): void;
+    rcap(...values: [value1: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number]): void;
+    ch(...values: [value1: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number]): void;
+    rch(...values: [value1: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number]): void;
+    ic(...values: [value1: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number]): void;
+    ric(...values: [value1: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number]): void;
+    lh(...values: [value1: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number]): void;
+    rlh(...values: [value1: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number]): void;
+    vw(...values: [value1: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number]): void;
+    svw(...values: [value1: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number]): void;
+    lvw(...values: [value1: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number]): void;
+    dvw(...values: [value1: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number]): void;
+    vh(...values: [value1: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number]): void;
+    svh(...values: [value1: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number]): void;
+    lvh(...values: [value1: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number]): void;
+    dvh(...values: [value1: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number]): void;
+    vi(...values: [value1: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number]): void;
+    svi(...values: [value1: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number]): void;
+    lvi(...values: [value1: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number]): void;
+    dvi(...values: [value1: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number]): void;
+    vb(...values: [value1: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number]): void;
+    svb(...values: [value1: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number]): void;
+    lvb(...values: [value1: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number]): void;
+    dvb(...values: [value1: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number]): void;
+    vmin(...values: [value1: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number]): void;
+    svmin(...values: [value1: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number]): void;
+    lvmin(...values: [value1: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number]): void;
+    dvmin(...values: [value1: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number]): void;
+    vmax(...values: [value1: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number]): void;
+    svmax(...values: [value1: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number]): void;
+    lvmax(...values: [value1: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number]): void;
+    dvmax(...values: [value1: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number]): void;
+    cqw(...values: [value1: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number]): void;
+    cqh(...values: [value1: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number]): void;
+    cqi(...values: [value1: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number]): void;
+    cqb(...values: [value1: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number]): void;
+    cqmin(...values: [value1: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number]): void;
+    cqmax(...values: [value1: UnitValue]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number]): void;
+    pct(...values: [value1: UnitValue]): void;
   };
   10: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number]): void;
+    cm(...values: [value1: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number]): void;
+    mm(...values: [value1: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number]): void;
+    q(...values: [value1: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number]): void;
+    in(...values: [value1: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number]): void;
+    pt(...values: [value1: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number]): void;
+    pc(...values: [value1: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number]): void;
+    px(...values: [value1: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number]): void;
+    em(...values: [value1: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number]): void;
+    rem(...values: [value1: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number]): void;
+    ex(...values: [value1: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number]): void;
+    rex(...values: [value1: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number]): void;
+    cap(...values: [value1: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number]): void;
+    rcap(...values: [value1: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number]): void;
+    ch(...values: [value1: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number]): void;
+    rch(...values: [value1: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number]): void;
+    ic(...values: [value1: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number]): void;
+    ric(...values: [value1: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number]): void;
+    lh(...values: [value1: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number]): void;
+    rlh(...values: [value1: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number]): void;
+    vw(...values: [value1: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number]): void;
+    svw(...values: [value1: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number]): void;
+    lvw(...values: [value1: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number]): void;
+    dvw(...values: [value1: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number]): void;
+    vh(...values: [value1: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number]): void;
+    svh(...values: [value1: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number]): void;
+    lvh(...values: [value1: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number]): void;
+    dvh(...values: [value1: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number]): void;
+    vi(...values: [value1: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number]): void;
+    svi(...values: [value1: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number]): void;
+    lvi(...values: [value1: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number]): void;
+    dvi(...values: [value1: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number]): void;
+    vb(...values: [value1: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number]): void;
+    svb(...values: [value1: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number]): void;
+    lvb(...values: [value1: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number]): void;
+    dvb(...values: [value1: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number]): void;
+    vmin(...values: [value1: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number]): void;
+    svmin(...values: [value1: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number]): void;
+    lvmin(...values: [value1: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number]): void;
+    dvmin(...values: [value1: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number]): void;
+    vmax(...values: [value1: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number]): void;
+    svmax(...values: [value1: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number]): void;
+    lvmax(...values: [value1: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number]): void;
+    dvmax(...values: [value1: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number]): void;
+    cqw(...values: [value1: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number]): void;
+    cqh(...values: [value1: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number]): void;
+    cqi(...values: [value1: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number]): void;
+    cqb(...values: [value1: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number]): void;
+    cqmin(...values: [value1: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number]): void;
+    cqmax(...values: [value1: UnitValue]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number]): void;
+    pct(...values: [value1: UnitValue]): void;
   };
   11: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number]): void;
+    cm(...values: [value1: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number]): void;
+    mm(...values: [value1: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number]): void;
+    q(...values: [value1: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number]): void;
+    in(...values: [value1: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number]): void;
+    pt(...values: [value1: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number]): void;
+    pc(...values: [value1: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number]): void;
+    px(...values: [value1: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number]): void;
+    em(...values: [value1: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number]): void;
+    rem(...values: [value1: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number]): void;
+    ex(...values: [value1: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number]): void;
+    rex(...values: [value1: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number]): void;
+    cap(...values: [value1: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number]): void;
+    rcap(...values: [value1: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number]): void;
+    ch(...values: [value1: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number]): void;
+    rch(...values: [value1: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number]): void;
+    ic(...values: [value1: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number]): void;
+    ric(...values: [value1: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number]): void;
+    lh(...values: [value1: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number]): void;
+    rlh(...values: [value1: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number]): void;
+    vw(...values: [value1: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number]): void;
+    svw(...values: [value1: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number]): void;
+    lvw(...values: [value1: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number]): void;
+    dvw(...values: [value1: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number]): void;
+    vh(...values: [value1: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number]): void;
+    svh(...values: [value1: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number]): void;
+    lvh(...values: [value1: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number]): void;
+    dvh(...values: [value1: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number]): void;
+    vi(...values: [value1: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number]): void;
+    svi(...values: [value1: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number]): void;
+    lvi(...values: [value1: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number]): void;
+    dvi(...values: [value1: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number]): void;
+    vb(...values: [value1: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number]): void;
+    svb(...values: [value1: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number]): void;
+    lvb(...values: [value1: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number]): void;
+    dvb(...values: [value1: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number]): void;
+    vmin(...values: [value1: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number]): void;
+    svmin(...values: [value1: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number]): void;
+    lvmin(...values: [value1: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number]): void;
+    dvmin(...values: [value1: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number]): void;
+    vmax(...values: [value1: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number]): void;
+    svmax(...values: [value1: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number]): void;
+    lvmax(...values: [value1: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number]): void;
+    dvmax(...values: [value1: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number]): void;
+    cqw(...values: [value1: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number]): void;
+    cqh(...values: [value1: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number]): void;
+    cqi(...values: [value1: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number]): void;
+    cqb(...values: [value1: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number]): void;
+    cqmin(...values: [value1: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number]): void;
+    cqmax(...values: [value1: UnitValue]): void;
   };
   12: {
     /** fr；空格分隔，保留声明顺序。 */
     fr(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   13: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number] | [value1: number, value2: number]): void;
+    cm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number] | [value1: number, value2: number]): void;
+    mm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number] | [value1: number, value2: number]): void;
+    q(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number] | [value1: number, value2: number]): void;
+    in(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number] | [value1: number, value2: number]): void;
+    pt(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number] | [value1: number, value2: number]): void;
+    pc(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number] | [value1: number, value2: number]): void;
+    px(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number] | [value1: number, value2: number]): void;
+    em(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number] | [value1: number, value2: number]): void;
+    rem(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number] | [value1: number, value2: number]): void;
+    ex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number] | [value1: number, value2: number]): void;
+    rex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number] | [value1: number, value2: number]): void;
+    cap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
+    rcap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number] | [value1: number, value2: number]): void;
+    ch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number] | [value1: number, value2: number]): void;
+    rch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number] | [value1: number, value2: number]): void;
+    ic(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number] | [value1: number, value2: number]): void;
+    ric(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
+    rlh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number] | [value1: number, value2: number]): void;
+    vw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number] | [value1: number, value2: number]): void;
+    svw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number] | [value1: number, value2: number]): void;
+    vh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number] | [value1: number, value2: number]): void;
+    svh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number] | [value1: number, value2: number]): void;
+    vi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number] | [value1: number, value2: number]): void;
+    svi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number] | [value1: number, value2: number]): void;
+    vb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number] | [value1: number, value2: number]): void;
+    svb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number] | [value1: number, value2: number]): void;
+    pct(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
   };
   14: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number] | [value1: number, value2: number]): void;
+    cm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number] | [value1: number, value2: number]): void;
+    mm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number] | [value1: number, value2: number]): void;
+    q(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number] | [value1: number, value2: number]): void;
+    in(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number] | [value1: number, value2: number]): void;
+    pt(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number] | [value1: number, value2: number]): void;
+    pc(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number] | [value1: number, value2: number]): void;
+    px(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number] | [value1: number, value2: number]): void;
+    em(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number] | [value1: number, value2: number]): void;
+    rem(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number] | [value1: number, value2: number]): void;
+    ex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number] | [value1: number, value2: number]): void;
+    rex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number] | [value1: number, value2: number]): void;
+    cap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
+    rcap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number] | [value1: number, value2: number]): void;
+    ch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number] | [value1: number, value2: number]): void;
+    rch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number] | [value1: number, value2: number]): void;
+    ic(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number] | [value1: number, value2: number]): void;
+    ric(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
+    rlh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number] | [value1: number, value2: number]): void;
+    vw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number] | [value1: number, value2: number]): void;
+    svw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number] | [value1: number, value2: number]): void;
+    vh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number] | [value1: number, value2: number]): void;
+    svh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number] | [value1: number, value2: number]): void;
+    vi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number] | [value1: number, value2: number]): void;
+    svi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number] | [value1: number, value2: number]): void;
+    vb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number] | [value1: number, value2: number]): void;
+    svb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
   };
   15: {
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   16: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   17: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   18: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   19: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   20: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number] | [value1: number, value2: number]): void;
+    cm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number] | [value1: number, value2: number]): void;
+    mm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number] | [value1: number, value2: number]): void;
+    q(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number] | [value1: number, value2: number]): void;
+    in(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number] | [value1: number, value2: number]): void;
+    pt(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number] | [value1: number, value2: number]): void;
+    pc(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number] | [value1: number, value2: number]): void;
+    px(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number] | [value1: number, value2: number]): void;
+    em(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number] | [value1: number, value2: number]): void;
+    rem(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number] | [value1: number, value2: number]): void;
+    ex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number] | [value1: number, value2: number]): void;
+    rex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number] | [value1: number, value2: number]): void;
+    cap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
+    rcap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number] | [value1: number, value2: number]): void;
+    ch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number] | [value1: number, value2: number]): void;
+    rch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number] | [value1: number, value2: number]): void;
+    ic(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number] | [value1: number, value2: number]): void;
+    ric(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
+    rlh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number] | [value1: number, value2: number]): void;
+    vw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number] | [value1: number, value2: number]): void;
+    svw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number] | [value1: number, value2: number]): void;
+    vh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number] | [value1: number, value2: number]): void;
+    svh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number] | [value1: number, value2: number]): void;
+    vi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number] | [value1: number, value2: number]): void;
+    svi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number] | [value1: number, value2: number]): void;
+    vb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number] | [value1: number, value2: number]): void;
+    svb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cm；逗号分隔，保留声明顺序。 */
     cmList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mmList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     qList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     inList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     ptList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pcList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     pxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     emList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     remList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     exList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rexList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     capList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcapList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     chList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rchList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     icList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ricList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     viList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     sviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqiList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   21: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   22: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number] | [value1: number, value2: number]): void;
+    cm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number] | [value1: number, value2: number]): void;
+    mm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number] | [value1: number, value2: number]): void;
+    q(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number] | [value1: number, value2: number]): void;
+    in(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number] | [value1: number, value2: number]): void;
+    pt(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number] | [value1: number, value2: number]): void;
+    pc(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number] | [value1: number, value2: number]): void;
+    px(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number] | [value1: number, value2: number]): void;
+    em(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number] | [value1: number, value2: number]): void;
+    rem(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number] | [value1: number, value2: number]): void;
+    ex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number] | [value1: number, value2: number]): void;
+    rex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number] | [value1: number, value2: number]): void;
+    cap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
+    rcap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number] | [value1: number, value2: number]): void;
+    ch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number] | [value1: number, value2: number]): void;
+    rch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number] | [value1: number, value2: number]): void;
+    ic(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number] | [value1: number, value2: number]): void;
+    ric(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
+    rlh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number] | [value1: number, value2: number]): void;
+    vw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number] | [value1: number, value2: number]): void;
+    svw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number] | [value1: number, value2: number]): void;
+    vh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number] | [value1: number, value2: number]): void;
+    svh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number] | [value1: number, value2: number]): void;
+    vi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number] | [value1: number, value2: number]): void;
+    svi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number] | [value1: number, value2: number]): void;
+    vb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number] | [value1: number, value2: number]): void;
+    svb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number] | [value1: number, value2: number]): void;
+    pct(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
   };
   23: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number]): void;
+    pct(...values: [value1: UnitValue]): void;
   };
   24: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number]): void;
+    cm(...values: [value1: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number]): void;
+    mm(...values: [value1: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number]): void;
+    q(...values: [value1: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number]): void;
+    in(...values: [value1: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number]): void;
+    pt(...values: [value1: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number]): void;
+    pc(...values: [value1: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number]): void;
+    px(...values: [value1: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number]): void;
+    em(...values: [value1: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number]): void;
+    rem(...values: [value1: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number]): void;
+    ex(...values: [value1: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number]): void;
+    rex(...values: [value1: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number]): void;
+    cap(...values: [value1: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number]): void;
+    rcap(...values: [value1: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number]): void;
+    ch(...values: [value1: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number]): void;
+    rch(...values: [value1: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number]): void;
+    ic(...values: [value1: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number]): void;
+    ric(...values: [value1: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number]): void;
+    lh(...values: [value1: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number]): void;
+    rlh(...values: [value1: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number]): void;
+    vw(...values: [value1: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number]): void;
+    svw(...values: [value1: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number]): void;
+    lvw(...values: [value1: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number]): void;
+    dvw(...values: [value1: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number]): void;
+    vh(...values: [value1: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number]): void;
+    svh(...values: [value1: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number]): void;
+    lvh(...values: [value1: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number]): void;
+    dvh(...values: [value1: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number]): void;
+    vi(...values: [value1: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number]): void;
+    svi(...values: [value1: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number]): void;
+    lvi(...values: [value1: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number]): void;
+    dvi(...values: [value1: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number]): void;
+    vb(...values: [value1: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number]): void;
+    svb(...values: [value1: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number]): void;
+    lvb(...values: [value1: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number]): void;
+    dvb(...values: [value1: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number]): void;
+    vmin(...values: [value1: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number]): void;
+    svmin(...values: [value1: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number]): void;
+    lvmin(...values: [value1: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number]): void;
+    dvmin(...values: [value1: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number]): void;
+    vmax(...values: [value1: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number]): void;
+    svmax(...values: [value1: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number]): void;
+    lvmax(...values: [value1: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number]): void;
+    dvmax(...values: [value1: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number]): void;
+    cqw(...values: [value1: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number]): void;
+    cqh(...values: [value1: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number]): void;
+    cqi(...values: [value1: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number]): void;
+    cqb(...values: [value1: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number]): void;
+    cqmin(...values: [value1: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number]): void;
+    cqmax(...values: [value1: UnitValue]): void;
   };
   25: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number]): void;
+    pct(...values: [value1: UnitValue]): void;
   };
   26: {
     /** fr；空格分隔，保留声明顺序。 */
     fr(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   27: {
     /** deg；空格分隔，保留声明顺序。 */
-    deg(...values: [value1: number]): void;
+    deg(...values: [value1: UnitValue]): void;
     /** grad；空格分隔，保留声明顺序。 */
-    grad(...values: [value1: number]): void;
+    grad(...values: [value1: UnitValue]): void;
     /** rad；空格分隔，保留声明顺序。 */
-    rad(...values: [value1: number]): void;
+    rad(...values: [value1: UnitValue]): void;
     /** turn；空格分隔，保留声明顺序。 */
-    turn(...values: [value1: number]): void;
+    turn(...values: [value1: UnitValue]): void;
   };
   28: {
     /** dpi；空格分隔，保留声明顺序。 */
-    dpi(...values: [value1: number]): void;
+    dpi(...values: [value1: UnitValue]): void;
     /** dpcm；空格分隔，保留声明顺序。 */
-    dpcm(...values: [value1: number]): void;
+    dpcm(...values: [value1: UnitValue]): void;
     /** dppx；空格分隔，保留声明顺序。 */
-    dppx(...values: [value1: number]): void;
+    dppx(...values: [value1: UnitValue]): void;
     /** x；空格分隔，保留声明顺序。 */
-    x(...values: [value1: number]): void;
+    x(...values: [value1: UnitValue]): void;
   };
   29: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   30: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: number] | [value1: number, value2: number]): void;
+    s(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: number] | [value1: number, value2: number]): void;
+    ms(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
   };
   31: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: number]): void;
+    s(...values: [value1: UnitValue]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: number]): void;
+    ms(...values: [value1: UnitValue]): void;
   };
   32: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number, value2: number]): void;
+    pct(...values: [value1: UnitValue, value2: UnitValue]): void;
   };
   33: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    cm(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    mm(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    q(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    in(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    pt(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    pc(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    px(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    em(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    rem(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    ex(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    rex(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    cap(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    rcap(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    ch(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    rch(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    ic(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    ric(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    lh(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    rlh(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    vw(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    svw(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    lvw(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    dvw(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    vh(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    svh(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    lvh(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    dvh(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    vi(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    svi(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    lvi(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    dvi(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    vb(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    svb(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    lvb(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    dvb(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    vmin(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    svmin(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    lvmin(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    dvmin(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    vmax(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    svmax(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    lvmax(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    dvmax(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    cqw(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    cqh(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    cqi(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    cqb(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    cqmin(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number, value2: number, value3: number, value4: number]): void;
+    cqmax(
+      ...values: [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
+    ): void;
   };
   34: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: number] | [value1: number, value2: number]): void;
+    s(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: number] | [value1: number, value2: number]): void;
+    ms(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
   };
   35: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: number]): void;
+    s(...values: [value1: UnitValue]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: number]): void;
+    ms(...values: [value1: UnitValue]): void;
   };
   36: {
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
   };
   37: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   38: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number] | [value1: number, value2: number]): void;
+    cm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number] | [value1: number, value2: number]): void;
+    mm(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number] | [value1: number, value2: number]): void;
+    q(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number] | [value1: number, value2: number]): void;
+    in(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number] | [value1: number, value2: number]): void;
+    pt(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number] | [value1: number, value2: number]): void;
+    pc(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number] | [value1: number, value2: number]): void;
+    px(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number] | [value1: number, value2: number]): void;
+    em(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number] | [value1: number, value2: number]): void;
+    rem(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number] | [value1: number, value2: number]): void;
+    ex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number] | [value1: number, value2: number]): void;
+    rex(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number] | [value1: number, value2: number]): void;
+    cap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number] | [value1: number, value2: number]): void;
+    rcap(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number] | [value1: number, value2: number]): void;
+    ch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number] | [value1: number, value2: number]): void;
+    rch(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number] | [value1: number, value2: number]): void;
+    ic(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number] | [value1: number, value2: number]): void;
+    ric(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number] | [value1: number, value2: number]): void;
+    rlh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number] | [value1: number, value2: number]): void;
+    vw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number] | [value1: number, value2: number]): void;
+    svw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number] | [value1: number, value2: number]): void;
+    vh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number] | [value1: number, value2: number]): void;
+    svh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number] | [value1: number, value2: number]): void;
+    vi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number] | [value1: number, value2: number]): void;
+    svi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number] | [value1: number, value2: number]): void;
+    vb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number] | [value1: number, value2: number]): void;
+    svb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    vmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    svmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    lvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    dvmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqw(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqh(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqi(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqb(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmin(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number] | [value1: number, value2: number]): void;
+    cqmax(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
   };
   39: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cm；逗号分隔，保留声明顺序。 */
     cmList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mmList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     qList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     inList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     ptList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pcList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     pxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     emList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     remList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     exList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rexList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     capList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcapList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     chList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rchList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     icList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ricList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     viList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     sviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dviList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqwList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqhList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqiList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqbList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqminList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmaxList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；逗号分隔，保留声明顺序。 */
     pctList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   40: {
     /** cm；逗号分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** mm；逗号分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** q；逗号分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** in；逗号分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pt；逗号分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** pc；逗号分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** px；逗号分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** em；逗号分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rem；逗号分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ex；逗号分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rex；逗号分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cap；逗号分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rcap；逗号分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ch；逗号分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rch；逗号分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ic；逗号分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ric；逗号分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lh；逗号分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** rlh；逗号分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vw；逗号分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svw；逗号分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvw；逗号分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvw；逗号分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vh；逗号分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svh；逗号分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvh；逗号分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvh；逗号分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vi；逗号分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svi；逗号分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvi；逗号分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvi；逗号分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vb；逗号分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svb；逗号分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvb；逗号分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvb；逗号分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmin；逗号分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmin；逗号分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmin；逗号分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmin；逗号分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** vmax；逗号分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** svmax；逗号分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** lvmax；逗号分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** dvmax；逗号分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqw；逗号分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqh；逗号分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqi；逗号分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqb；逗号分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmin；逗号分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** cqmax；逗号分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** %；逗号分隔，保留声明顺序。 */
     pct(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   41: {
     /** cm；空格分隔，保留声明顺序。 */
-    cm(...values: [value1: number]): void;
+    cm(...values: [value1: UnitValue]): void;
     /** mm；空格分隔，保留声明顺序。 */
-    mm(...values: [value1: number]): void;
+    mm(...values: [value1: UnitValue]): void;
     /** q；空格分隔，保留声明顺序。 */
-    q(...values: [value1: number]): void;
+    q(...values: [value1: UnitValue]): void;
     /** in；空格分隔，保留声明顺序。 */
-    in(...values: [value1: number]): void;
+    in(...values: [value1: UnitValue]): void;
     /** pt；空格分隔，保留声明顺序。 */
-    pt(...values: [value1: number]): void;
+    pt(...values: [value1: UnitValue]): void;
     /** pc；空格分隔，保留声明顺序。 */
-    pc(...values: [value1: number]): void;
+    pc(...values: [value1: UnitValue]): void;
     /** px；空格分隔，保留声明顺序。 */
-    px(...values: [value1: number]): void;
+    px(...values: [value1: UnitValue]): void;
     /** em；空格分隔，保留声明顺序。 */
-    em(...values: [value1: number]): void;
+    em(...values: [value1: UnitValue]): void;
     /** rem；空格分隔，保留声明顺序。 */
-    rem(...values: [value1: number]): void;
+    rem(...values: [value1: UnitValue]): void;
     /** ex；空格分隔，保留声明顺序。 */
-    ex(...values: [value1: number]): void;
+    ex(...values: [value1: UnitValue]): void;
     /** rex；空格分隔，保留声明顺序。 */
-    rex(...values: [value1: number]): void;
+    rex(...values: [value1: UnitValue]): void;
     /** cap；空格分隔，保留声明顺序。 */
-    cap(...values: [value1: number]): void;
+    cap(...values: [value1: UnitValue]): void;
     /** rcap；空格分隔，保留声明顺序。 */
-    rcap(...values: [value1: number]): void;
+    rcap(...values: [value1: UnitValue]): void;
     /** ch；空格分隔，保留声明顺序。 */
-    ch(...values: [value1: number]): void;
+    ch(...values: [value1: UnitValue]): void;
     /** rch；空格分隔，保留声明顺序。 */
-    rch(...values: [value1: number]): void;
+    rch(...values: [value1: UnitValue]): void;
     /** ic；空格分隔，保留声明顺序。 */
-    ic(...values: [value1: number]): void;
+    ic(...values: [value1: UnitValue]): void;
     /** ric；空格分隔，保留声明顺序。 */
-    ric(...values: [value1: number]): void;
+    ric(...values: [value1: UnitValue]): void;
     /** lh；空格分隔，保留声明顺序。 */
-    lh(...values: [value1: number]): void;
+    lh(...values: [value1: UnitValue]): void;
     /** rlh；空格分隔，保留声明顺序。 */
-    rlh(...values: [value1: number]): void;
+    rlh(...values: [value1: UnitValue]): void;
     /** vw；空格分隔，保留声明顺序。 */
-    vw(...values: [value1: number]): void;
+    vw(...values: [value1: UnitValue]): void;
     /** svw；空格分隔，保留声明顺序。 */
-    svw(...values: [value1: number]): void;
+    svw(...values: [value1: UnitValue]): void;
     /** lvw；空格分隔，保留声明顺序。 */
-    lvw(...values: [value1: number]): void;
+    lvw(...values: [value1: UnitValue]): void;
     /** dvw；空格分隔，保留声明顺序。 */
-    dvw(...values: [value1: number]): void;
+    dvw(...values: [value1: UnitValue]): void;
     /** vh；空格分隔，保留声明顺序。 */
-    vh(...values: [value1: number]): void;
+    vh(...values: [value1: UnitValue]): void;
     /** svh；空格分隔，保留声明顺序。 */
-    svh(...values: [value1: number]): void;
+    svh(...values: [value1: UnitValue]): void;
     /** lvh；空格分隔，保留声明顺序。 */
-    lvh(...values: [value1: number]): void;
+    lvh(...values: [value1: UnitValue]): void;
     /** dvh；空格分隔，保留声明顺序。 */
-    dvh(...values: [value1: number]): void;
+    dvh(...values: [value1: UnitValue]): void;
     /** vi；空格分隔，保留声明顺序。 */
-    vi(...values: [value1: number]): void;
+    vi(...values: [value1: UnitValue]): void;
     /** svi；空格分隔，保留声明顺序。 */
-    svi(...values: [value1: number]): void;
+    svi(...values: [value1: UnitValue]): void;
     /** lvi；空格分隔，保留声明顺序。 */
-    lvi(...values: [value1: number]): void;
+    lvi(...values: [value1: UnitValue]): void;
     /** dvi；空格分隔，保留声明顺序。 */
-    dvi(...values: [value1: number]): void;
+    dvi(...values: [value1: UnitValue]): void;
     /** vb；空格分隔，保留声明顺序。 */
-    vb(...values: [value1: number]): void;
+    vb(...values: [value1: UnitValue]): void;
     /** svb；空格分隔，保留声明顺序。 */
-    svb(...values: [value1: number]): void;
+    svb(...values: [value1: UnitValue]): void;
     /** lvb；空格分隔，保留声明顺序。 */
-    lvb(...values: [value1: number]): void;
+    lvb(...values: [value1: UnitValue]): void;
     /** dvb；空格分隔，保留声明顺序。 */
-    dvb(...values: [value1: number]): void;
+    dvb(...values: [value1: UnitValue]): void;
     /** vmin；空格分隔，保留声明顺序。 */
-    vmin(...values: [value1: number]): void;
+    vmin(...values: [value1: UnitValue]): void;
     /** svmin；空格分隔，保留声明顺序。 */
-    svmin(...values: [value1: number]): void;
+    svmin(...values: [value1: UnitValue]): void;
     /** lvmin；空格分隔，保留声明顺序。 */
-    lvmin(...values: [value1: number]): void;
+    lvmin(...values: [value1: UnitValue]): void;
     /** dvmin；空格分隔，保留声明顺序。 */
-    dvmin(...values: [value1: number]): void;
+    dvmin(...values: [value1: UnitValue]): void;
     /** vmax；空格分隔，保留声明顺序。 */
-    vmax(...values: [value1: number]): void;
+    vmax(...values: [value1: UnitValue]): void;
     /** svmax；空格分隔，保留声明顺序。 */
-    svmax(...values: [value1: number]): void;
+    svmax(...values: [value1: UnitValue]): void;
     /** lvmax；空格分隔，保留声明顺序。 */
-    lvmax(...values: [value1: number]): void;
+    lvmax(...values: [value1: UnitValue]): void;
     /** dvmax；空格分隔，保留声明顺序。 */
-    dvmax(...values: [value1: number]): void;
+    dvmax(...values: [value1: UnitValue]): void;
     /** cqw；空格分隔，保留声明顺序。 */
-    cqw(...values: [value1: number]): void;
+    cqw(...values: [value1: UnitValue]): void;
     /** cqh；空格分隔，保留声明顺序。 */
-    cqh(...values: [value1: number]): void;
+    cqh(...values: [value1: UnitValue]): void;
     /** cqi；空格分隔，保留声明顺序。 */
-    cqi(...values: [value1: number]): void;
+    cqi(...values: [value1: UnitValue]): void;
     /** cqb；空格分隔，保留声明顺序。 */
-    cqb(...values: [value1: number]): void;
+    cqb(...values: [value1: UnitValue]): void;
     /** cqmin；空格分隔，保留声明顺序。 */
-    cqmin(...values: [value1: number]): void;
+    cqmin(...values: [value1: UnitValue]): void;
     /** cqmax；空格分隔，保留声明顺序。 */
-    cqmax(...values: [value1: number]): void;
+    cqmax(...values: [value1: UnitValue]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number]): void;
+    pct(...values: [value1: UnitValue]): void;
   };
   42: {
     /** cm；空格分隔，保留声明顺序。 */
     cm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** mm；空格分隔，保留声明顺序。 */
     mm(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** q；空格分隔，保留声明顺序。 */
     q(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** in；空格分隔，保留声明顺序。 */
     in(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** pt；空格分隔，保留声明顺序。 */
     pt(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** pc；空格分隔，保留声明顺序。 */
     pc(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** px；空格分隔，保留声明顺序。 */
     px(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** em；空格分隔，保留声明顺序。 */
     em(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** rem；空格分隔，保留声明顺序。 */
     rem(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** ex；空格分隔，保留声明顺序。 */
     ex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** rex；空格分隔，保留声明顺序。 */
     rex(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** cap；空格分隔，保留声明顺序。 */
     cap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** rcap；空格分隔，保留声明顺序。 */
     rcap(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** ch；空格分隔，保留声明顺序。 */
     ch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** rch；空格分隔，保留声明顺序。 */
     rch(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** ic；空格分隔，保留声明顺序。 */
     ic(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** ric；空格分隔，保留声明顺序。 */
     ric(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** lh；空格分隔，保留声明顺序。 */
     lh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** rlh；空格分隔，保留声明顺序。 */
     rlh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** vw；空格分隔，保留声明顺序。 */
     vw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** svw；空格分隔，保留声明顺序。 */
     svw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** lvw；空格分隔，保留声明顺序。 */
     lvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** dvw；空格分隔，保留声明顺序。 */
     dvw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** vh；空格分隔，保留声明顺序。 */
     vh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** svh；空格分隔，保留声明顺序。 */
     svh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** lvh；空格分隔，保留声明顺序。 */
     lvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** dvh；空格分隔，保留声明顺序。 */
     dvh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** vi；空格分隔，保留声明顺序。 */
     vi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** svi；空格分隔，保留声明顺序。 */
     svi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** lvi；空格分隔，保留声明顺序。 */
     lvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** dvi；空格分隔，保留声明顺序。 */
     dvi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** vb；空格分隔，保留声明顺序。 */
     vb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** svb；空格分隔，保留声明顺序。 */
     svb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** lvb；空格分隔，保留声明顺序。 */
     lvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** dvb；空格分隔，保留声明顺序。 */
     dvb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** vmin；空格分隔，保留声明顺序。 */
     vmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** svmin；空格分隔，保留声明顺序。 */
     svmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** lvmin；空格分隔，保留声明顺序。 */
     lvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** dvmin；空格分隔，保留声明顺序。 */
     dvmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** vmax；空格分隔，保留声明顺序。 */
     vmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** svmax；空格分隔，保留声明顺序。 */
     svmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** lvmax；空格分隔，保留声明顺序。 */
     lvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** dvmax；空格分隔，保留声明顺序。 */
     dvmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** cqw；空格分隔，保留声明顺序。 */
     cqw(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** cqh；空格分隔，保留声明顺序。 */
     cqh(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** cqi；空格分隔，保留声明顺序。 */
     cqi(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** cqb；空格分隔，保留声明顺序。 */
     cqb(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** cqmin；空格分隔，保留声明顺序。 */
     cqmin(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** cqmax；空格分隔，保留声明顺序。 */
     cqmax(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
     ): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number] | [value1: number, value2: number]): void;
+    pct(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
   };
   43: {
     /** s；空格分隔，保留声明顺序。 */
-    s(...values: [value1: number] | [value1: number, value2: number]): void;
+    s(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** ms；空格分隔，保留声明顺序。 */
-    ms(...values: [value1: number] | [value1: number, value2: number]): void;
+    ms(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
     /** s；逗号分隔，保留声明顺序。 */
     sList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
     /** ms；逗号分隔，保留声明顺序。 */
     msList(
       ...values:
-        | [value1: number]
-        | [value1: number, value2: number]
-        | [value1: number, value2: number, value3: number]
-        | [value1: number, value2: number, value3: number, value4: number]
+        | [value1: UnitValue]
+        | [value1: UnitValue, value2: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue]
+        | [value1: UnitValue, value2: UnitValue, value3: UnitValue, value4: UnitValue]
     ): void;
   };
   44: {
     /** hz；空格分隔，保留声明顺序。 */
-    hz(...values: [value1: number]): void;
+    hz(...values: [value1: UnitValue]): void;
     /** khz；空格分隔，保留声明顺序。 */
-    khz(...values: [value1: number]): void;
+    khz(...values: [value1: UnitValue]): void;
     /** st；空格分隔，保留声明顺序。 */
-    st(...values: [value1: number]): void;
+    st(...values: [value1: UnitValue]): void;
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number]): void;
+    pct(...values: [value1: UnitValue]): void;
   };
   45: {
     /** db；空格分隔，保留声明顺序。 */
-    db(...values: [value1: number]): void;
+    db(...values: [value1: UnitValue]): void;
   };
   46: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number] | [value1: number, value2: number]): void;
+    pct(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
   };
   47: {
     /** %；空格分隔，保留声明顺序。 */
-    pct(...values: [value1: number] | [value1: number, value2: number]): void;
+    pct(...values: [value1: UnitValue] | [value1: UnitValue, value2: UnitValue]): void;
   };
 }
 export interface StyleProperties {

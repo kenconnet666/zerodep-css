@@ -72,6 +72,34 @@ test('普通控制流每次重新执行，构建器没有共享状态', () => {
     1,
   );
 });
+
+test('单位空值省略整条声明且所有参数仍按原顺序求值', () => {
+  const reads = [];
+  const input = (value) => {
+    reads.push(value);
+    return value;
+  };
+  const program = buildStyleProgram((s) => {
+    s.padding.px(8);
+    s.padding.px(input(null), input(4));
+    s.width.px(12);
+    s.width.px(undefined);
+    s.height.px(0);
+    s.margin.px(1, undefined, 3, 4);
+  });
+  assert.deepEqual(reads, [null, 4]);
+  assert.deepEqual(
+    program.map((node) => [node.property, node.value.value]),
+    [
+      ['padding', '8px'],
+      ['width', '12px'],
+      ['height', '0px'],
+    ],
+  );
+  assert.throws(() => buildStyleProgram((s) => s.width.px(null, 4)), /argument count/);
+  assert.throws(() => buildStyleProgram((s) => s.width.px(false)), /Invalid unit/);
+  assert.throws(() => buildStyleProgram((s) => s.width.px(NaN)), /Invalid unit/);
+});
 test('生成单位方法区分维度、分隔符、范围和参数个数', () => {
   const p = buildStyleProgram((s) => {
     s.padding.px(1, 2, 3, 4);

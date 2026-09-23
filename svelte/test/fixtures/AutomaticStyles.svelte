@@ -6,7 +6,27 @@
   const colors = ['red', 'blue', 'initial', undefined];
   let colorIndex = 0;
   let color = $state<string | undefined>(colors[0]);
+  const sizes = [null, 24, 30, undefined];
+  let sizeIndex = 0;
+  let size = $state<number | null | undefined>(null);
 </script>
+
+<button
+  data-nullable-change
+  onclick={() => {
+    sizeIndex = (sizeIndex + 1) % sizes.length;
+    size = sizes[sizeIndex];
+  }}>nullable</button
+>
+<div
+  data-nullable
+  class={css((s) => {
+    s.width.px(16);
+    s.width.px(size);
+    s.padding.px(4);
+    s.padding.px(2, size);
+  })}
+></div>
 
 <button data-sibling-change onclick={() => (siblingWidth = 20)}>sibling</button>
 <div

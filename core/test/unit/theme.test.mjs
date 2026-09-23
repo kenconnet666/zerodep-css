@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { defineTheme, createRuntime, Css } from '../../dist/index.js';
 
-test('主题预设继承保持变量身份，覆盖和 null 重置保持向下语义', () => {
+test('主题预设继承保持变量身份，空值继承父值且 defaults 显式重置', () => {
   const theme = defineTheme('app', { color: { brand: 'red', text: 'black' }, opacity: 1 });
   const dark = theme.extend({ color: { text: 'white' } });
   assert.equal(dark.tokens.color.text.name, theme.tokens.color.text.name);
@@ -15,9 +15,19 @@ test('主题预设继承保持变量身份，覆盖和 null 重置保持向下�
   assert.equal(child.color.text, 'green');
   assert.equal(child.opacity, 0.8);
   assert.deepEqual(theme.resolve(undefined, child), child);
-  assert.deepEqual(theme.resolve(null, child), theme.defaults);
-  assert.deepEqual(theme.resolve({ color: null }, child).color, theme.defaults.color);
+  assert.deepEqual(theme.resolve(null, child), child);
+  assert.deepEqual(theme.resolve({ color: null }, child).color, child.color);
+  assert.equal(theme.resolve({ color: { brand: null } }, child).color.brand, 'blue');
   assert.equal(theme.resolve({ color: { brand: null } }, child).color.text, 'green');
+  assert.deepEqual(theme.resolve(theme.defaults, child), theme.defaults);
+  assert.deepEqual(
+    theme.resolve({ color: theme.defaults.color }, child).color,
+    theme.defaults.color,
+  );
+  assert.equal(
+    theme.resolve({ color: { brand: theme.defaults.color.brand } }, child).color.brand,
+    'red',
+  );
   assert.equal(parent.color.text, 'black');
 });
 

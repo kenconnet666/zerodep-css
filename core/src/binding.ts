@@ -47,12 +47,43 @@ export function formatUnitValues(
   alternatives: NumericAlternatives,
   unit: string,
   separator: string,
-): string {
+): string | undefined {
   if (!safeUnit(unit) || ![' ', ', '].includes(separator))
     throw new TypeError('Invalid unit binding format.');
+  if (!alternatives.some((plan) => plan.length === values.length))
+    throw new TypeError('Invalid CSS binding unit argument combination.');
+  // 原始参数已按 JS 顺序求值；省略整条声明，不能拼接余下参数改变含义。
+  if (values.some((value) => value === null || value === undefined)) return undefined;
   return validateUnitValues(values, alternatives)
     .map((value) => String(value) + unit)
     .join(separator);
+}
+
+export function bindUnit(
+  bindings: Record<string, string>,
+  name: `--${string}`,
+  values: readonly unknown[],
+  alternatives: NumericAlternatives,
+  unit: string,
+  separator: string,
+): string | undefined {
+  const value = formatUnitValues(values, alternatives, unit, separator);
+  if (value === undefined) return undefined;
+  bindings[name] = value;
+  return `var(${name})`;
+}
+
+/** 在原声明位置读取一次输入；class 与 style 共用这个快照，不重复读取 getter。 */
+export function bindValue(
+  bindings: Record<string, string>,
+  name: `--${string}`,
+  binding: ReturnType<typeof createDeclarationBinding>,
+  input: unknown,
+): unknown {
+  const value = binding.value(input);
+  const inline = binding.inline(input);
+  if (inline !== undefined) bindings[name] = inline;
+  return value;
 }
 
 function checkValue(value: unknown, format: BindingFormat): asserts value is string | number {

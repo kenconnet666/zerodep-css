@@ -20,9 +20,10 @@
 ## 当前进度
 
 - 已完成决策讨论并进入目标模式。
-- P1a 已实现同名属性/规范别名覆盖、语法上下文归并与安全保守边界；P1 的 raw、单位空值和主题 null 迁移继续进行。
+- P1 已完成作者覆盖、raw 原生值、单位空值和主题继承的实施及本地验证。下一阶段进入 P2 的薄 core、项目入口、useCss 和统一组合。
 - P1a 本地通过 check/build、generate:check、现有单元回归、TS/Vue/Svelte 独立类型负例、19 个 core 浏览器场景、双框架 SSR/hydration/原生更新/HMR；normalize 的原生 LSP 完整零错误。最终跨平台/三引擎以对应提交 CI 为准。
 - 本页仅记录实际进度，尚未宣称新架构完成或最终 CI 通过。
+- P1b 提交 6fe37b2 与 SSR manifest 补充修复 0600d3f 均已推送且对应远程 CI 成功；P1c 的本地结果不代表尚未提交代码已通过 CI。
 
 ### P1b raw 结构边界
 
@@ -35,6 +36,14 @@ CSSTree 默认声明解析还会将 !foo 等旧 hack 当成优先级，因此使
 新增用例覆盖未知函数、空值文本、自定义 token/块、!foo、转义、注释、未闭合 URL/字符串、被覆盖的坏输入、浏览器原生差分及 SSR 字符恢复。独立解析器入口经函数封装保持 tree shaking，cssVar/readTheme 小入口不应因结构解析器而膨胀。
 
 SSR 结束标签改为转义标签名首字母，保留自定义 token 流中的 `<` delimiter 类型，大小写和字符串内容不变。P1b 本地通过 check/build、类型负例、核心浏览器与双框架 SSR/hydration/HMR；体积检查仍保留小入口 tree shaking。
+
+### P1c 空值与动态绑定一致性
+
+单位参数的类型统一允许 null/undefined；任一参数为空就省略整条声明，所有参数仍按 JS 原顺序求值，0 有效且 false 不作为通用省略标记。主题整体、分组、叶值的 null/undefined 都继承父值，显式 defaults 才恢复预设。
+
+交叉复核发现旧编译路径会重复读取 raw/token 输入，并可能通过 computed/prepare 跳过动态 getter。现改为在原回调位置格式化值，用一个快照同时产生 class 与元素 style。动态绑定暂不使用静态准备缓存；复杂 style 保留运行时。先保证语义一致，后续再测量安全的优化方向。
+
+P1c 本地通过根 check/build、153 项单元、TS/Vue/Svelte 类型负例、generate:check、体积检查、格式检查；两个框架通过 SSR/hydration、空值与有值往返、原生响应式、主题空值继承/显式 defaults、CSP、卸载和 HMR。HMR 同时检查变量优化与已有 style 时的运行时路径。绑定与编译分析文件的原生 LSP 诊断均 complete=true、零错误。完整跨平台/三引擎以本阶段提交 CI 为准。
 
 ### P1 覆盖边界调整
 

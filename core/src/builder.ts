@@ -261,9 +261,13 @@ function declarations(
               if (member !== (unit === '%' ? 'pct' : unit) + plan.suffix) continue;
               return (...values: unknown[]) => {
                 alive(session);
+                const alternatives = plan.arities[values.length];
+                if (!alternatives)
+                  throw new TypeError('Invalid unit argument count: ' + key + '.' + member);
+                if (values.some((value) => value === null || value === undefined)) return;
                 if (
                   !values.every((v) => typeof v === 'number') ||
-                  !numeric(values as number[], plan.arities[values.length] ?? [])
+                  !numeric(values as number[], alternatives)
                 )
                   throw new TypeError(
                     'Invalid unit arguments or numeric range: ' + key + '.' + member,

@@ -15,7 +15,7 @@ const chartColor = computed(() => currentTheme().color.primary);
 
 主题使用 `defineTheme` 的静态定义和 `provideTheme(theme, () => overrides)` 的原生 computed 覆盖。当前组件在 provideTheme 之后调用 `useStyleRuntime()` 即可使用，后代也自动继承。同组件可连续提供多个主题。显式 `useStyleRuntime({ context })` 只使用指定运行时；需要主题时同时传入 scope。
 
-主题运行时的 css 返回可用于 class 属性的类名列表，其中包含有效主题变量类和内容类。放在模板或 computed 中会随主题变化更新；普通 const 字符串仍是调用时快照。子对象只覆盖指定字段，null 恢复当前预设默认值。主题类附在样式元素上，因此 Vue Teleport 后仍保持逻辑组件作用域的主题。provider 不销毁共享 context，应用/请求宿主负责最终 dispose。
+主题运行时的 css 返回可用于 class 属性的类名列表，其中包含有效主题变量类和内容类。放在模板或 computed 中会随主题变化更新；普通 const 字符串仍是调用时快照。子对象只覆盖指定字段，null/undefined 继承父值；显式传入 theme.defaults 可恢复预设默认值。主题类附在样式元素上，因此 Vue Teleport 后仍保持逻辑组件作用域的主题。provider 不销毁共享 context，应用/请求宿主负责最终 dispose。
 
 编译插件接在框架官方 Vite 插件之前；自动值绑定、静态准备、严格 CSP 和运行时回退的完整边界统一见 [编译说明](../docs/compiler.md)。
 

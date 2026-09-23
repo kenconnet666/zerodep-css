@@ -37,6 +37,7 @@ const currentSpacing = useTheme(spacing);
   </div>
   <ThemeLeaf name="sibling" />
   <ThemeBranch name="child" />
-  <ThemeBranch name="reset" reset />
+  <ThemeBranch name="inherited" mode="inherit" />
+  <ThemeBranch name="reset" mode="defaults" />
   <Teleport to="#theme-portal" :disabled="!portal"><ThemeLeaf name="portal" /></Teleport>
 </template>

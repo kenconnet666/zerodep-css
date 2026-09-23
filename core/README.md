@@ -33,7 +33,7 @@ const panelClass = css((s) => {
 - `container` 是 CSS 属性，容器查询使用 `containerQuery`。
 - 常用状态可写 `s.focus(...)`、`s.focusWithin(...)`、`s.active(...)`、`s.disabled(...)`，分别等价于对应的 `s.pseudo(':...', ...)`；disabled 采用原生 `:disabled`，不会把 aria-disabled 自动当作禁用状态。
 - `cssVar('--name', fallback)` 只引用已有 CSS 变量，不建立 JS 订阅；Vue/Svelte 编译插件在安全位置自动创建元素绑定。
-- `animationName.raw` 接受动画定义/数组，空数组输出 `animation-name:none`。token/raw 的 null/undefined 省略声明；单位方法不接受空值。
+- `animationName.raw` 接受动画定义/数组，空数组输出 `animation-name:none`。token/raw 的 null/undefined 省略声明；单位方法中任一参数为 null/undefined 时省略整条声明，0 仍是有效值。
 - 普通值每次变化可产生新 class，旧规则保留至所属 runtime.dispose；不自动改为 CSS 变量。
 
 ## 主题定义与预设继承
@@ -58,7 +58,7 @@ const content = runtime.css((s) => {
 const className = `${palette} ${content}`;
 ```
 
-预设继承沿用同一变量标识。`resolve(overrides, inheritedValues?)` 产生冻结的有效主题：undefined 继承，null 重置到当前预设默认值，对象递归局部覆盖。未知字段、错误叶类型、循环结构和不能作为变量值使用的 CSS-wide 关键字会报错。修改原始默认值或覆盖对象不影响已产生的快照。
+预设继承沿用同一变量标识。`resolve(overrides, inheritedValues?)` 产生冻结的有效主题：null/undefined 继承父值，对象递归局部覆盖；传入 theme.defaults 或对应默认子树/叶值可显式恢复预设。未知字段、错误叶类型、循环结构和不能作为变量值使用的 CSS-wide 关键字会报错。修改原始默认值或覆盖对象不影响已产生的快照。
 
 主题定义不持有 runtime/请求状态，`className` 将变量声明注册到传入 runtime；不同主题值复用各自的变量类，不改写引用它们的内容规则。core 调用者显式组合主题类与内容类；Vue/Svelte 的 provideTheme 和 useStyleRuntime 接入自动向下传播，使用方式见适配器 README。
 

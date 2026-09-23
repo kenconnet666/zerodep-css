@@ -2,14 +2,19 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { resolve } from 'node:path';
 import { parse, compileScript } from 'vue/compiler-sfc';
-import { compile } from 'svelte/compiler';
+import { compile, parse as parseSvelte } from 'svelte/compiler';
 import { transformCss as vue } from '../../../vue/dist/compiler/index.js';
 import { transformCss as svelte } from '../../../svelte/dist/compiler/index.js';
-import { formatUnitValues } from '../../../core/dist/compiler-runtime.js';
+import {
+  bindUnit,
+  bindValue,
+  createDeclarationBinding,
+  formatUnitValues,
+} from '../../../core/dist/compiler-runtime.js';
 import * as compilerRuntime from '../../../core/dist/compiler-runtime.js';
 import * as adapter from '../../../vue/dist/index.js';
 import * as vueCompilerRuntime from '../../../vue/dist/compiler-runtime.js';
-import { createStyleContext } from '../../../core/dist/index.js';
+import { createRuntime, createStyleContext } from '../../../core/dist/index.js';
 import { createRequire } from 'node:module';
 import { transform as compileJs } from 'esbuild';
 import { createSSRApp } from 'vue';
@@ -21,6 +26,18 @@ function fixture(framework, body, { tag = 'div', suffix = '', expression, script
   return framework === 'vue'
     ? `<script setup lang="ts">${setup}</script><template><${tag} :class="${css}" ${suffix}/></template>`
     : `<script lang="ts">${setup}</script><${tag} class={${css}} ${suffix}/>`;
+}
+function propsExpression(framework, result) {
+  if (framework === 'vue') {
+    const element = parse(result.code).descriptor.template.ast.children[0];
+    return element.props.find((prop) => prop.type === 7 && prop.name === 'bind' && !prop.arg).exp
+      .content;
+  }
+  const element = parseSvelte(result.code, { modern: true }).fragment.nodes.find(
+    (node) => node.type === 'RegularElement',
+  );
+  const spread = element.attributes.find((attribute) => attribute.type === 'SpreadAttribute');
+  return result.code.slice(spread.expression.start, spread.expression.end);
 }
 for (const [framework, transform] of [
   ['vue', vue],
@@ -47,7 +64,7 @@ for (const [framework, transform] of [
         source.replace('useStyleRuntime()', `useStyleRuntime(${argument})`),
         filename,
       );
-      assert(result.code.includes('formatUnitValues'), argument);
+      assert(result.code.includes('bindUnit'), argument);
     }
     assert.equal(
       transform(source.replace('useStyleRuntime()', 'useStyleRuntime(undefined,scope)'), filename),
@@ -61,7 +78,7 @@ for (const [framework, transform] of [
   test(`${framework}：常用状态快捷方法保留动态绑定`, () => {
     for (const method of ['focus', 'focusWithin', 'active', 'disabled']) {
       const result = transform(fixture(framework, `s.${method}(h=>{h.width.px(gap);});`), filename);
-      assert(result.code.includes('formatUnitValues'));
+      assert(result.code.includes('bindUnit'));
       assert(result.code.includes(`s.${method}`));
     }
   });
@@ -87,9 +104,10 @@ for (const [framework, transform] of [
       filename,
     );
     assert(result);
-    assert.match(result.code, /formatUnitValues/);
+    assert.match(result.code, /bindUnit/);
     assert.match(result.code, /padding.raw/);
-    assert.equal((result.code.match(/var\(--zcss-/g) ?? []).length, 1);
+    assert.equal((result.code.match(/--zcss-[a-f0-9]{16}/g) ?? []).length, 1);
+    assert(!result.code.includes('prepareStyle'));
     assert.match(result.code, /s.display.flex/);
     if (framework === 'vue')
       compileScript(parse(result.code).descriptor, { id: 'auto', inlineTemplate: true });
@@ -127,7 +145,7 @@ for (const [framework, transform] of [
     );
     const staticResult = transform(fixture(framework, 's.padding.px(8,10);'), filename);
     assert.match(staticResult.code, /prepareStyle/);
-    assert(!staticResult.code.includes('formatUnitValues'));
+    assert(!staticResult.code.includes('bindUnit'));
     assert.equal(
       transform(fixture(framework, 's.padding.px(gap);', { tag: 'Other' }), filename),
       null,
@@ -182,7 +200,7 @@ for (const [framework, transform] of [
       transform(
         fixture(framework, `s.selector('&:hover',n=>{n.width.px(gap)});`),
         filename,
-      ).code.includes('formatUnitValues'),
+      ).code.includes('bindUnit'),
     );
   });
   test(`${framework}：raw、token 和完整模板值自动绑定，保留必要结构重算`, () => {
@@ -194,10 +212,195 @@ for (const [framework, transform] of [
     const result = transform(source, filename);
     assert(result.code.includes('createDeclarationBinding'));
     assert(!result.code.includes('prepareStyle'));
-    assert.equal((result.code.match(/\.inline\(/g) ?? []).length, 3);
+    assert.equal((result.code.match(/\.raw\(__zcss_bind_value_/g) ?? []).length, 3);
     if (framework === 'vue')
       compileScript(parse(result.code).descriptor, { id: 'values', inlineTemplate: true });
     else compile(result.code, { filename, generate: 'client' });
+  });
+  test(`${framework}：动态单位在回调原位置只读取一次，null 恢复前声明`, () => {
+    const result = transform(
+      fixture(framework, 's.width.px(50);s.width.px(state.gap);', {
+        script: 'const state={gap:12};',
+      }),
+      filename,
+    );
+    assert(!result.code.includes('prepareStyle'));
+    if (framework === 'vue') assert(!result.code.includes('computed as'));
+    const alias = result.code.match(/bindUnit as (\w+)/)[1];
+    const evaluate = new Function(
+      'css',
+      'state',
+      alias,
+      `return ${propsExpression(framework, result)}`,
+    );
+    const runtime = createRuntime({ target: null });
+    try {
+      let reads = 0;
+      const absent = evaluate(
+        runtime.css,
+        {
+          get gap() {
+            reads++;
+            return null;
+          },
+        },
+        bindUnit,
+      );
+      assert.equal(reads, 1);
+      assert.equal(runtime.snapshot().records[0].body, 'width:50px;');
+      assert.equal(absent.style, undefined);
+      const present = evaluate(
+        runtime.css,
+        {
+          get gap() {
+            reads++;
+            return 12;
+          },
+        },
+        bindUnit,
+      );
+      assert.equal(reads, 2);
+      assert.notEqual(absent.class, present.class);
+      assert(
+        framework === 'vue'
+          ? Object.values(present.style).includes('12px')
+          : present.style.includes('12px'),
+      );
+      assert.match(runtime.snapshot().records[1].body, /^width:var\(--zcss-/);
+    } finally {
+      runtime.dispose();
+    }
+  });
+  test(`${framework}：多参数单位空值仍先求值全部参数，动态原 style 回退`, () => {
+    const result = transform(
+      fixture(framework, 's.padding.px(state.first,state.second);', {
+        script: 'const state={first:null,second:0};',
+      }),
+      filename,
+    );
+    const alias = result.code.match(/bindUnit as (\w+)/)[1];
+    const evaluate = new Function(
+      'css',
+      'state',
+      alias,
+      `return ${propsExpression(framework, result)}`,
+    );
+    const runtime = createRuntime({ target: null });
+    const reads = [];
+    try {
+      const props = evaluate(
+        runtime.css,
+        {
+          get first() {
+            reads.push('first');
+            return null;
+          },
+          get second() {
+            reads.push('second');
+            return 0;
+          },
+        },
+        bindUnit,
+      );
+      assert.deepEqual(reads, ['first', 'second']);
+      assert.equal(props.style, undefined);
+      assert.equal(runtime.snapshot().records[0]?.body ?? '', '');
+    } finally {
+      runtime.dispose();
+    }
+    assert.equal(
+      transform(
+        fixture(framework, 's.width.px(gap);', {
+          suffix: framework === 'vue' ? ':style="state.inline"' : 'style={state.inline}',
+          script: 'const state={inline:"color:red"};',
+        }),
+        filename,
+      ),
+      null,
+    );
+    assert.equal(
+      transform(
+        fixture(framework, 's.width.px(gap);', { suffix: 'style="color:red/*"' }),
+        filename,
+      ),
+      null,
+    );
+  });
+  test(`${framework}：前面的非法固定声明先抛错，不提前读取后续 getter`, () => {
+    const result = transform(
+      fixture(framework, "s.color.token('invalid');s.width.px(state.gap);", {
+        script: 'const state={gap:12};',
+      }),
+      filename,
+    );
+    const alias = result.code.match(/bindUnit as (\w+)/)[1];
+    const evaluate = new Function(
+      'css',
+      'state',
+      alias,
+      `return ${propsExpression(framework, result)}`,
+    );
+    const runtime = createRuntime({ target: null });
+    let reads = 0;
+    try {
+      assert.throws(
+        () =>
+          evaluate(
+            runtime.css,
+            {
+              get gap() {
+                reads++;
+                return 12;
+              },
+            },
+            bindUnit,
+          ),
+        /Unknown CSS token/,
+      );
+      assert.equal(reads, 0);
+      assert.equal(runtime.stats().records, 0);
+    } finally {
+      runtime.dispose();
+    }
+  });
+  test(`${framework}：raw 输入 getter 只读取一次，变量 class 与 inline 值同源`, () => {
+    const result = transform(
+      fixture(framework, 's.color.raw(state.color);', { script: 'const state={color:"red"};' }),
+      filename,
+    );
+    const alias = result.code.match(/bindValue as (\w+)/)[1];
+    const helper = result.code.match(/const (\w+) = \w+\("(--zcss-[a-f0-9]{16})"/);
+    const evaluate = new Function(
+      'css',
+      'state',
+      alias,
+      helper[1],
+      `return ${propsExpression(framework, result)}`,
+    );
+    const runtime = createRuntime({ target: null });
+    let reads = 0;
+    try {
+      const props = evaluate(
+        runtime.css,
+        {
+          get color() {
+            reads++;
+            return 'red';
+          },
+        },
+        bindValue,
+        createDeclarationBinding(helper[2], { property: 'color' }),
+      );
+      assert.equal(reads, 1);
+      assert(
+        framework === 'vue'
+          ? Object.values(props.style).includes('red')
+          : props.style.includes('red'),
+      );
+      assert.match(runtime.snapshot().records[0].body, /^color:var\(--zcss-/);
+    } finally {
+      runtime.dispose();
+    }
   });
   test(`${framework}：静态分支与嵌套声明可准备，未选分支不生成绑定`, () => {
     const source = fixture(
@@ -206,8 +409,8 @@ for (const [framework, transform] of [
     );
     for (const debug of [false, true]) {
       const result = transform(source, filename, { debug });
-      assert.equal((result.code.match(/var\(--zcss-/g) ?? []).length, 2);
-      assert.match(result.code, /prepareStyle/);
+      assert.equal((result.code.match(/--zcss-[a-f0-9]{16}/g) ?? []).length, 2);
+      assert(!result.code.includes('prepareStyle'));
       if (framework === 'vue')
         compileScript(parse(result.code).descriptor, { id: 'branches', inlineTemplate: true });
       else compile(result.code, { filename, generate: 'client' });
@@ -221,8 +424,9 @@ test('整组单位格式化保留联合约束、顺序和非法输入拒绝', ()
   ];
   assert.equal(formatUnitValues([1, -2], choices, 'px', ' '), '1px -2px');
   assert.equal(formatUnitValues([-1, 2], choices, 'ms', ', '), '-1ms, 2ms');
-  for (const values of [[-1, -2], [1], [1, NaN], ['1', 2], [1, null]])
+  for (const values of [[-1, -2], [1], [1, NaN], ['1', 2], [null]])
     assert.throws(() => formatUnitValues(values, choices, 'px', ' '));
+  assert.equal(formatUnitValues([1, null], choices, 'px', ' '), undefined);
   assert.throws(() => formatUnitValues([1, 2], choices, 'px;color:red', ' '));
 });
 

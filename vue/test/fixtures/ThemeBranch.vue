@@ -3,13 +3,19 @@ import { ref } from 'vue';
 import { provideTheme } from '@zerodep-css/vue';
 import { theme } from './theme';
 import ThemeLeaf from './ThemeLeaf.vue';
-const props = defineProps<{ name: string; reset?: boolean }>();
+const props = defineProps<{ name: string; mode?: 'inherit' | 'defaults' }>();
 const background = ref('lime');
-provideTheme(theme, () => (props.reset ? null : { color: { text: background.value } }));
+provideTheme(theme, () =>
+  props.mode === 'inherit'
+    ? null
+    : props.mode === 'defaults'
+      ? theme.defaults
+      : { color: { text: background.value } },
+);
 </script>
 <template>
   <button
-    v-if="!reset"
+    v-if="!mode"
     data-theme-local
     @click="background = background === 'lime' ? 'yellow' : 'lime'"
   >

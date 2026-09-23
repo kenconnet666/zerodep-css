@@ -25,11 +25,11 @@ function component(framework, stage) {
     return `<script setup>
 import {ref} from 'vue'; import {useStyleRuntime} from '@zerodep-css/vue';
 const {css}=useStyleRuntime(); const width=ref(2);
-</script><template><button @click="width++">update</button><div data-target :class="css(s=>{${style}})" style="height: 5px"></div></template>`;
+</script><template><button @click="width++">update</button><div data-target :class="css(s=>{s.height.px(5);${style}})"></div><div data-fallback :class="css(s=>{${style}})" style="height: 5px"></div></template>`;
   return `<script>
 import {untrack} from 'svelte'; import {useStyleRuntime} from '@zerodep-css/svelte';
 let {context}=$props();const {css}=useStyleRuntime({context:untrack(()=>context)});let width=$state(2);
-</script><button onclick={()=>width++}>update</button><div data-target class={css(s=>{${style}})} style="height: 5px"></div>`;
+</script><button onclick={()=>width++}>update</button><div data-target class={css(s=>{s.height.px(5);${style}})}></div><div data-fallback class={css(s=>{${style}})} style="height: 5px"></div>`;
 }
 try {
   browser = await launchBrowser();
@@ -99,6 +99,15 @@ try {
           .locator('[data-target]')
           .evaluate((e) => [...e.style].filter((p) => p.startsWith('--zcss-')));
         assert.equal(first.length, 1);
+        const fallback = () =>
+          page
+            .locator('[data-fallback]')
+            .evaluate((e) => ({
+              width: getComputedStyle(e).width,
+              height: getComputedStyle(e).height,
+              variables: [...e.style].filter((p) => p.startsWith('--zcss-')).length,
+            }));
+        assert.deepEqual(await fallback(), { width: '2px', height: '5px', variables: 0 });
         await writeFile(file, component(framework, 1));
         await page.waitForFunction(
           () => getComputedStyle(document.querySelector('[data-target]')).width === '32px',
@@ -126,6 +135,7 @@ try {
           await page.locator('[data-target]').evaluate((e) => getComputedStyle(e).height),
           '5px',
         );
+        assert.deepEqual(await fallback(), { width: '7px', height: '5px', variables: 0 });
         const staticClass = await page.locator('[data-target]').getAttribute('class');
         await writeFile(file, component(framework, 3));
         await page.waitForFunction(

@@ -36,6 +36,36 @@ test('Vue 静态准备保留模板来源锚点，结束标签留在模板作用�
     compileScript(parsed.descriptor, { id: 'tag', inlineTemplate: true });
   }
 });
+test('Vue 动态参数中的结束标签留在模板，不注入 script setup', () => {
+  const source = `<script setup>import {useStyleRuntime} from '@zerodep-css/vue';const {css}=useStyleRuntime();const values={};</script><template><div :class="css(s=>{s.width.px(values[&quot;&lt;/script&gt;&quot;])})"/></template>`;
+  const result = vue(source, resolve('DynamicEndTag.vue'));
+  assert(!result.code.slice(0, result.code.indexOf('</script>')).includes('values["</script>"]'));
+  const parsed = parse(result.code);
+  assert.deepEqual(parsed.errors, []);
+  compileScript(parsed.descriptor, { id: 'dynamic-end', inlineTemplate: true });
+});
+test('Vue 实体解码的模板局部变量不遮蔽生成 helper', () => {
+  const source = `<script setup>import {useStyleRuntime} from '@zerodep-css/vue';const {css}=useStyleRuntime();const rows=[1];</script><template><div v-for="&#95;&#95;zcss_bind_unit_1 in rows" :key="&#95;&#95;zcss_bind_unit_1" :class="css(s=>{s.width.px(&#95;&#95;zcss_bind_unit_1)})"/></template>`;
+  const result = vue(source, resolve('EncodedIdentifier.vue'));
+  assert(!result.code.includes('bindUnit as __zcss_bind_unit_1'));
+  compileScript(parse(result.code).descriptor, { id: 'encoded', inlineTemplate: true });
+});
+test('生成的动态 props 不依赖可能被用户遮蔽的 Object 名称', () => {
+  for (const [framework, transform] of [
+    ['vue', vue],
+    ['svelte', svelte],
+  ]) {
+    const source = fixture(framework, 'style(s=>{s.width.px(width)})').replace(
+      'let width=10;',
+      'let width=10;const Object={keys(){throw Error("shadow")},entries(){throw Error("shadow")}};',
+    );
+    const result = transform(source, resolve('ShadowObject.' + framework));
+    assert(!/Object\.(?:keys|entries)\(/.test(result.code));
+    if (framework === 'vue')
+      compileScript(parse(result.code).descriptor, { id: 'shadow-object', inlineTemplate: true });
+    else compile(result.code, { filename: 'ShadowObject.svelte', generate: 'client' });
+  }
+});
 for (const [framework, transform] of [
   ['vue', vue],
   ['svelte', svelte],
@@ -45,10 +75,10 @@ for (const [framework, transform] of [
     const result = transform(source, resolve('Sample.' + framework));
     const map = new TraceMap(JSON.parse(result.map.toString()));
     assert.deepEqual(map.sourcesContent, [source]);
-    const references = [...result.code.matchAll(/var\((--zcss-[a-f0-9]+)\)/g)];
+    const references = [...result.code.matchAll(/(--zcss-[a-f0-9]{16})/g)];
     assert.equal(references.length, 2);
     for (let index = 0; index < references.length; index++) {
-      const offset = references[index].index + 4;
+      const offset = references[index].index;
       const before = result.code.slice(0, offset);
       const point = originalPositionFor(map, {
         line: before.split('\n').length,

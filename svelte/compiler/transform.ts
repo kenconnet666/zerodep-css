@@ -25,7 +25,7 @@ export function transformCss(
   if (!ast.instance) return null;
   const script = ast.instance.content;
   if (!hasRange(script)) throw new Error('Missing Svelte script source range: ' + filename);
-  const ctx = session(source, filename, script.start, script.end, 'svelte', options);
+  const ctx = session(source, filename, script.start, script.end, 'svelte', options, ast.fragment);
   if (!ctx.css.size && !options.debug) return null;
   const addPattern = (pattern: unknown, names: Set<string>): void => {
     if (!hasRange(pattern)) return;
@@ -109,17 +109,21 @@ export function transformCss(
         locals,
         node.type === 'RegularElement' &&
           !blocked &&
+          !attributes.some((a) => a.type === 'Attribute' && a.name === 'style') &&
           !attributes.some((a) => a.type === 'SpreadAttribute'),
       );
-      if (result.bindings.length) {
+      if (result.bindingsLocal) {
         if (!hasRange(attr)) return ctx.error(expression.start, 'Missing Svelte attribute range.');
         if (attributes.some((a) => hasRange(a) && source.slice(a.start, a.end).includes('--zcss-')))
           ctx.error(expression.start, '--zcss- 是编译器保留的元素变量前缀。');
-        ctx.output.overwrite(expression.start, expression.end, result.code);
-        ctx.output.appendLeft(
-          attr.end,
-          result.bindings.map((b) => ` style:${b.name}={${b.expression}}`).join(''),
-        );
+        const local = result.bindingsLocal!;
+        const className = ctx.fresh('class');
+        const styleName = ctx.fresh('style');
+        const hasStyle = ctx.fresh('has_style');
+        const keyName = ctx.fresh('key');
+        const code = `(()=>{const ${local}={__proto__:null};const ${className}=${result.code};let ${styleName}='';let ${hasStyle}=false;for(const ${keyName} in ${local}){${styleName}+=${keyName}+':'+${local}[${keyName}]+';';${hasStyle}=true;}return {class:${className},...(${hasStyle}?{style:${styleName}}:{})}})()`;
+        // spread 留在原 class 使用点；有原 style 属性时完整回退，指令仍由 Svelte 管理。
+        ctx.output.overwrite(attr.start, attr.end, `{...${code}}`);
       } else if (result.code !== text) {
         ctx.output.overwrite(expression.start, expression.end, result.code);
       }
