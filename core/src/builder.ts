@@ -49,6 +49,11 @@ interface Session {
 }
 const simpleSet = new Set(simplePseudos);
 const functionalSet = new Set(functionalPseudos);
+// 固定元数据的按需索引，不记录业务值、框架状态或构建实例。
+const keywordValues: (ReadonlySet<string> | undefined)[] = [];
+function keywordSet(group: number): ReadonlySet<string> {
+  return (keywordValues[group] ??= new Set(Object.values(keywordGroups[group]!)));
+}
 const marginBoxes = new Set([
   'top-left-corner',
   'top-left',
@@ -206,7 +211,7 @@ function declarations(
       const token = (value: unknown) => {
         alive(session);
         if (value === undefined || value === null) return;
-        if (typeof value !== 'string' || !Object.values(keywords).includes(value))
+        if (typeof value !== 'string' || !keywordSet(meta.keywords).has(value))
           throw new TypeError('Unknown CSS token for ' + key + ': ' + String(value));
         append(meta.cssName, value);
       };

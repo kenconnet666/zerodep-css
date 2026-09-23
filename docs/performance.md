@@ -1,8 +1,42 @@
 # 性能对照与未解决项
 
-本轮已按用户要求停止继续优化；以下记录是已完成的测试结果，不表示所有性能问题已经解决。
+本页保留历史横向对照与后续同机优化证据，不表示所有性能问题已经解决。不同基准的回调和机器不同，不能直接拼接其数值计算提升倍数。
 
-## 方法与环境
+## 2026-09-23 原生主题缓存优化
+
+基线为 `9cd39b9`，使用 Git 中的基线源码与当前源码，在相同依赖、同一进程/浏览器中交替运行。作者 API 不变，运行时能力不缩减。
+
+- Vue 用 computed、Svelte 用 $derived 保存纯主题声明准备结果，只在有效主题变化时重算；没有新增 watcher/effect root 或自有主题结果缓存。
+- core 复用已有 256 项 runtime 结果缓存，并仍在每次使用时检查注册与宿主。准备键使用完整声明内容，最大键长度仍为 64 KiB；超大内容继续正常求值。
+- 只有验证过并深冻结的主题快照可以免于重复验证。内部 WeakMap 仅记录 snapshot 对应的 schema 身份，弱引用不持有请求对象，也不保存 CSS/主题计算结果；外部对象和不同 schema 仍验证。
+- Builder 仅保留固定关键字集合的按需索引。单位索引没有稳定收益，已撤回；没有实例池化、用户 getter 缓存或按函数引用跳过回调。
+
+真实 Vue/Svelte SFC 的同机对照：Node 24.12.0、Chrome 153.0.8010.52，200 元素，预热 5 批，测量 30 批，交替 5 轮中位数。包含原生调度与布局刷新；不含网络下载、初次 JS 加载或真实绘制。主题场景使用 ThemeCss，并写入动态宽度、主题颜色和间距；切换场景每批同时切换亮暗主题。它与下方旧的横向基准不是同一份回调。
+
+| 场景         | Vue 旧→新（ms） | Svelte 旧→新（ms） |
+| ------------ | --------------: | -----------------: |
+| 普通运行时   |     67.7 → 73.3 |        74.8 → 70.4 |
+| 固定主题     |   474.2 → 137.9 |      481.5 → 156.0 |
+| 每批切换主题 |   487.4 → 145.1 |      489.2 → 154.1 |
+
+主题更新耗时下降约 68%–71%；普通运行时变化不一致，视为波动，不宣称整体运行时普遍提速。固定主题挂载中位数 Vue 21.0→10.8 ms，Svelte 21.4→11.5 ms。每轮都比较完整 manifest、class、计算样式和用户回调次数；计时区外还检查主题缓存命中后禁用样式表仍会被拒绝、卸载没有残留规则。
+
+Node 对照每项 2,000 次、5 轮：token 路径 30.54→21.23 ms；原生 computed 固定主题 196.38→39.39 ms，逐次切换主题 438.77→305.98 ms。不经原生准备的 core 作用域保持逐次求值，其变化在波动范围内。最初的无改动控制组有约 10%–18% 波动，因此小幅变化未计为收益。
+
+最初方案在逐次切换探针中出现退步，随后修正了重复快照验证，并让基线/当前都承担同样的原生主题解析；上述数字仅来自最终方案。普通回调执行次数与旧版本相同，输出/哈希/注册顺序均有断言。
+
+复现（脚本自行构建两版源码，不使用可能过期的 dist）：
+
+```powershell
+node --expose-gc .research/performance/runtime-paired.mjs 9cd39b9 repeat
+node .research/performance/framework-paired.mjs 9cd39b9 repeat
+```
+
+两条计时命令应顺序执行，期间不要并发构建或跑其他基准。原始样本已归档到 `.research/performance/results/2026-09-23-native-cache-node.json` 和 `2026-09-23-native-cache-frameworks.json`。后者记录生产源码 diff hash；相关脚本和测试随代码提交。
+
+createRuntime 单入口体积为 498683 / 100868 字节（minify/gzip），仍约 100 KB gzip；没有以删减能力换取速度，本轮未解决首包体积问题。
+
+## 历史横向对照：方法与环境
 
 - 环境：win32，Node v24.18.0，Chrome 153.0.8010.53；Vue 3.5.43、Svelte 5.57.0。
 - 对照：Emotion CSS 11.13.5、goober 2.1.19、vanilla-extract 1.21.2，官方 esbuild 插件 2.3.22。
@@ -82,4 +116,4 @@ Emotion/goober 是本次保活入口；vanilla 的 JS/CSS 是本次 18 个样式
 - `browser-native.mjs` 是隔离 core 的低层探针，不能代替此页的 Vue/Svelte 结果；其他 Node 探针见 validation。
 - 官方接入依据：[Emotion create-instance](https://github.com/emotion-js/emotion/blob/main/packages/css/README.md)、[goober targets](https://github.com/cristianbote/goober/blob/master/docs/docs/api/targets.md)、[vanilla-extract esbuild 插件](https://github.com/vanilla-extract-css/vanilla-extract/blob/master/site/docs/integrations/esbuild.md)。
 
-接续优先级：先核对最终提交 CI；随后审视固定主题类的重复构建、Vue 静态表达式的重复求值、普通运行时热路径及元数据/解析器体积。任何优化继续保留两重继承、运行时回退、宿主校验和 SSR 隔离；本轮未继续实施这些项。
+后续可研究普通运行时的重复解析、已有编译路径的准备成本及元数据/解析器体积。任何优化继续保留两重继承、运行时回退、宿主校验和 SSR 隔离；这些不属于本轮已经实现的收益。
