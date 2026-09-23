@@ -20,6 +20,7 @@ import {
 import type { KeyframesDefinition, StylesheetDefinition, StyleProgram } from './style-program.js';
 import type { StylesheetFactory, StyleFactory } from './builder-types.js';
 import { Css, type CssConstructor } from './css.js';
+import { normalizeCssText } from './css-value.js';
 import {
   validateStyleName,
   validateStyleDebug,
@@ -145,6 +146,8 @@ function manifestRecords(manifest: StyleManifest, config: OutputConfig): readonl
       value.dependencies.some((d: unknown) => typeof d !== 'string')
     )
       throw new TypeError('Invalid manifest record.');
+    if (normalizeCssText(value.body) !== value.body)
+      throw new TypeError('Manifest CSS body is not normalized.');
     if (value.name !== undefined) validateStyleName(value.name);
     if (
       (value.name !== undefined || value.debug !== undefined) &&

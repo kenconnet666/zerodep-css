@@ -236,6 +236,24 @@ test('manifest 拒绝篡改、错误依赖、错误配置及命名资源中的�
   });
   assert.throws(() => server({ hydrate: invalid }), /one root rule/);
 });
+test('manifest 只恢复规范化 CSS，并保留规范记录的哈希', () => {
+  const source = server();
+  try {
+    source.css((s) => s.color.red);
+    const canonical = source.snapshot();
+    for (const body of ['color:red\rblue;', 'color:red\r\nblue;', 'color:red\0blue;']) {
+      const record = { ...canonical.records[0], body };
+      record.id = namedId(canonical.config, 'class', body);
+      const manifest = { ...canonical, records: [record] };
+      assert.throws(() => server({ hydrate: manifest }), /not normalized/);
+    }
+    const restored = server({ hydrate: canonical });
+    assert.deepEqual(restored.snapshot(), canonical);
+    restored.dispose();
+  } finally {
+    source.dispose();
+  }
+});
 test('达到记录上限不修改缓存；碰撞明确报错；释放实例后不可再使用', () => {
   const r = server({ maxRecords: 1 });
   r.css((s) => s.color.red);
