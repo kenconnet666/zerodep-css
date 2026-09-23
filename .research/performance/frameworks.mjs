@@ -27,6 +27,7 @@ await writeFile(
 const cases = [
   { name: 'native-static', engine: 'native', mode: 'static' },
   { name: 'vanilla-static', engine: 'vanilla', mode: 'static' },
+  { name: 'uno-static', engine: 'uno', mode: 'static' },
   { name: 'zerodep-auto-static', engine: 'zerodep', mode: 'static', auto: true },
   { name: 'zerodep-runtime-static', engine: 'zerodep', mode: 'static' },
   { name: 'emotion-static', engine: 'emotion', mode: 'static' },
@@ -36,16 +37,21 @@ const cases = [
   { name: 'goober-once-static', engine: 'goober', mode: 'once' },
   { name: 'native-vars', engine: 'native', mode: 'vars' },
   { name: 'vanilla-vars', engine: 'vanilla', mode: 'vars' },
+  { name: 'uno-vars', engine: 'uno', mode: 'vars' },
+  { name: 'vanilla-dynamic', engine: 'vanilla-dynamic', mode: 'vars' },
   { name: 'emotion-vars', engine: 'emotion', mode: 'vars' },
   { name: 'goober-vars', engine: 'goober', mode: 'vars' },
   { name: 'zerodep-auto', engine: 'zerodep', mode: 'dynamic', auto: true },
   { name: 'native-classes', engine: 'native', mode: 'dynamic' },
   { name: 'vanilla-classes', engine: 'vanilla', mode: 'dynamic' },
+  { name: 'uno-classes', engine: 'uno', mode: 'dynamic' },
   { name: 'emotion-object', engine: 'emotion', mode: 'dynamic' },
   { name: 'goober-object', engine: 'goober', mode: 'dynamic' },
   { name: 'zerodep-runtime', engine: 'zerodep', mode: 'dynamic' },
   { name: 'native-growing-vars', engine: 'native', mode: 'vars', unique: true },
   { name: 'vanilla-growing-vars', engine: 'vanilla', mode: 'vars', unique: true },
+  { name: 'uno-growing-vars', engine: 'uno', mode: 'vars', unique: true },
+  { name: 'vanilla-dynamic-growing', engine: 'vanilla-dynamic', mode: 'vars', unique: true },
   { name: 'emotion-growing', engine: 'emotion', mode: 'dynamic', unique: true },
   { name: 'goober-growing', engine: 'goober', mode: 'dynamic', unique: true },
   { name: 'zerodep-growing-auto', engine: 'zerodep', mode: 'dynamic', auto: true, unique: true },
@@ -82,9 +88,11 @@ const {css}=useStyleRuntime(${item.cssType ? '{cssType:ThemeCss}' : ''});`
   let expression;
   if (ours) expression = `css(s=>{s.width.px(${value});})`;
   else if (item.mode === 'static')
-    expression = ['native', 'vanilla'].includes(item.engine) ? 'fixedClass' : 'emit({width:20})';
+    expression = ['native', 'vanilla', 'uno'].includes(item.engine)
+      ? 'fixedClass'
+      : 'emit({width:20})';
   else if (item.mode === 'dynamic')
-    expression = ['native', 'vanilla'].includes(item.engine)
+    expression = ['native', 'vanilla', 'uno'].includes(item.engine)
       ? `classes[${value}]`
       : `emit({width:${value}})`;
   if (item.theme && !ours && item.mode === 'dynamic') expression += "+' '+nativeTheme";
@@ -98,22 +106,34 @@ const {css}=useStyleRuntime(${item.cssType ? '{cssType:ThemeCss}' : ''});`
       expression = 'shared';
     } else expression = item.theme ? `variableClass+' '+nativeTheme` : 'variableClass';
   }
+  const vueStyle =
+    item.mode === 'vars'
+      ? item.engine === 'vanilla-dynamic'
+        ? `:style="dynamicVars(${value})"`
+        : `:style="{'--bench-width':(${value})+'px'}"`
+      : '';
+  const svelteStyle =
+    item.mode === 'vars'
+      ? item.engine === 'vanilla-dynamic'
+        ? `style={dynamicVars(${value}).toString()}`
+        : `style:--bench-width={(${value})+'px'}`
+      : '';
   if (framework === 'vue')
     return `<script setup>
 import {ref} from 'vue';
-const props=defineProps(['context','emit','expose','classes','fixedClass','variableClass','nativeTheme']);
-const {emit,classes,fixedClass,variableClass,nativeTheme}=props;
+const props=defineProps(['context','emit','expose','classes','fixedClass','variableClass','nativeTheme','dynamicVars']);
+const {emit,classes,fixedClass,variableClass,nativeTheme,dynamicVars}=props;
 const rows=Array.from({length:200},(_,id)=>({id}));const iteration=ref(0);
 props.expose({step(){iteration.value++},read(){return iteration.value}});
 ${setup}
-</script><template><div class="bench" :data-frame="iteration"><div v-for="row in rows" :key="row.id" :data-row="row.id" :class="${expression}" ${item.mode === 'vars' ? `:style="{'--bench-width':(${value})+'px'}"` : ''}></div></div></template>`;
+</script><template><div class="bench" :data-frame="iteration"><div v-for="row in rows" :key="row.id" :data-row="row.id" :class="${expression}" ${vueStyle}></div></div></template>`;
   return `<script>
 import {untrack} from 'svelte';
-let {context,emit,expose,classes,fixedClass,variableClass,nativeTheme}=$props();
+let {context,emit,expose,classes,fixedClass,variableClass,nativeTheme,dynamicVars}=$props();
 const rows=Array.from({length:200},(_,id)=>({id}));let iteration=$state(0);
 untrack(()=>expose({step(){iteration++},read(){return iteration}}));
 ${setup}
-</script><div class="bench" data-frame={iteration}>{#each rows as row(row.id)}<div data-row={row.id} class={${expression}} ${item.mode === 'vars' ? `style:--bench-width={(${value})+'px'}` : ''}></div>{/each}</div>`;
+</script><div class="bench" data-frame={iteration}>{#each rows as row(row.id)}<div data-row={row.id} class={${expression}} ${svelteStyle}></div>{/each}</div>`;
 }
 async function bundleFramework(framework) {
   const folder = resolve(workspace, framework);
@@ -137,8 +157,8 @@ export async function start(item,target){
  const context=item.engine==='zerodep'?createStyleContext({namespace:'bench-${framework}-'+sequence++}):undefined;
  const emotion=item.engine==='emotion'?window.emotionBench.createEmotion({key:'emotion-bench',container:stylesTarget,speedy:true}):undefined;
  const emit=emotion?.css??(item.engine==='goober'?window.gooberBench.css.bind({target:stylesTarget}):undefined);
- const vanilla=window.vanillaBench;
- const props={context,emit,expose(value){control=value},classes:item.engine==='vanilla'?vanilla.widths:Object.fromEntries(Array.from({length:16},(_,i)=>[i+20,'native-w'+(i+20)])),fixedClass:item.engine==='vanilla'?vanilla.fixed:'native-static',variableClass:item.engine==='vanilla'?vanilla.variable:'native-vars',nativeTheme:window.nativeTheme.className};
+ const vanilla=window.vanillaBench,compiled=item.engine==='uno'?window.unoBench:item.engine.startsWith('vanilla')?vanilla:null;
+ const props={context,emit,expose(value){control=value},classes:compiled?.widths??Object.fromEntries(Array.from({length:16},(_,i)=>[i+20,'native-w'+(i+20)])),fixedClass:compiled?.fixed??'native-static',variableClass:item.engine==='vanilla-dynamic'?vanilla.dynamicVariable:compiled?.variable??'native-vars',dynamicVars:value=>window.dynamicBench.assignInlineVars({[vanilla.dynamicWidth]:value+'px'}),nativeTheme:window.nativeTheme.className};
  let app;
  try{
  ${framework === 'vue' ? `app=createApp(components[item.name],props);if(context)installStyleContext(app,context);app.mount(target);await nextTick();` : `app=mount(components[item.name],{target,props});await tick();`}
@@ -266,9 +286,8 @@ try {
       await page.setContent(
         `<style>.bench{display:flex;flex-wrap:wrap;width:800px;contain:layout}.bench>div{height:2px;flex:none;padding:0;border:0;margin:0}.native-static{width:20px}.native-vars{width:var(--bench-width,20px)}${Array.from({ length: 16 }, (_, i) => `.native-w${i + 20}{width:${i + 20}px}`).join('')}</style>`,
       );
-      await page.addStyleTag({
-        content: await readFile(resolve(assets, manifest.stylesheet), 'utf8'),
-      });
+      for (const file of manifest.stylesheets ?? [manifest.stylesheet])
+        await page.addStyleTag({ content: await readFile(resolve(assets, file), 'utf8') });
       for (const file of [...manifest.scripts, `${framework}.js`])
         await page.addScriptTag({ content: await readFile(resolve(assets, file), 'utf8') });
       const results = await page.evaluate(async (cases) => {
@@ -315,7 +334,9 @@ try {
             )
               throw new Error('Incorrect theme: ' + item.name);
             const records = handle.records();
-            const expectedRecords = ['native', 'vanilla'].includes(item.engine)
+            const expectedRecords = ['native', 'vanilla', 'uno', 'vanilla-dynamic'].includes(
+              item.engine,
+            )
               ? 0
               : item.mode === 'dynamic' && (!item.auto || item.cssType)
                 ? (item.unique ? 200 + handle.read() : 16) +

@@ -6,6 +6,7 @@ import { dirname, basename, resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { gzipSync } from 'node:zlib';
 import { randomUUID } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import { parse } from 'yaml';
 import { root, pnpm, run } from '../../scripts/lib/environment.mjs';
@@ -46,12 +47,29 @@ try {
   await mkdir(assets);
   await writeFile(
     resolve(workspace, 'styles.css.ts'),
-    `import {style} from '@vanilla-extract/css';
+    `import {style,createVar} from '@vanilla-extract/css';
 export const fixed=style({width:20});
 export const variable=style({width:'var(--bench-width,20px)'});
+export const dynamicWidth=createVar();
+export const dynamicVariable=style({width:dynamicWidth});
 export const widths=Object.fromEntries(Array.from({length:16},(_,i)=>[i+20,style({width:i+20})]));
 `,
   );
+  // 调用真实 UnoCSS generator/preset 生成 CSS，不手工模拟它的类名产物。
+  const { createGenerator } = await import(pathToFileURL(require.resolve('@unocss/core')).href);
+  const { default: presetMini } = await import(
+    pathToFileURL(require.resolve('@unocss/preset-mini')).href
+  );
+  const widths = Object.fromEntries(
+    Array.from({ length: 16 }, (_, i) => [i + 20, `w-[${i + 20}px]`]),
+  );
+  const variable = 'w-[var(--bench-width)]';
+  const uno = await createGenerator({ presets: [presetMini()] });
+  const generated = await uno.generate([...Object.values(widths), variable].join(' '), {
+    preflights: false,
+  });
+  assert.equal(generated.matched.size, 17);
+  await writeFile(resolve(assets, 'uno.css'), generated.css);
   const common = {
     absWorkingDir: workspace,
     bundle: true,
@@ -63,6 +81,24 @@ export const widths=Object.fromEntries(Array.from({length:16},(_,i)=>[i+20,style
     define: { 'process.env.NODE_ENV': '"production"' },
   };
   const built = await Promise.allSettled([
+    build({
+      ...common,
+      stdin: {
+        contents: `export const widths=${JSON.stringify(widths)};export const fixed=${JSON.stringify(widths[20])};export const variable=${JSON.stringify(variable)};`,
+        resolveDir: workspace,
+      },
+      globalName: 'unoBench',
+      outfile: resolve(assets, 'uno.js'),
+    }),
+    build({
+      ...common,
+      stdin: {
+        contents: `export {assignInlineVars} from '@vanilla-extract/dynamic';`,
+        resolveDir: workspace,
+      },
+      globalName: 'dynamicBench',
+      outfile: resolve(assets, 'dynamic.js'),
+    }),
     build({
       ...common,
       stdin: {
@@ -88,7 +124,15 @@ export const widths=Object.fromEntries(Array.from({length:16},(_,i)=>[i+20,style
   ]);
   for (const result of built) if (result.status === 'rejected') throw result.reason;
   const sizes = {};
-  for (const name of ['emotion.js', 'goober.js', 'vanilla.js', 'vanilla.css']) {
+  for (const name of [
+    'emotion.js',
+    'goober.js',
+    'vanilla.js',
+    'vanilla.css',
+    'uno.js',
+    'uno.css',
+    'dynamic.js',
+  ]) {
     const bytes = await readFile(resolve(assets, name));
     sizes[name] = { bytes: bytes.length, gzipBytes: gzipSync(bytes).length };
   }
@@ -97,8 +141,8 @@ export const widths=Object.fromEntries(Array.from({length:16},(_,i)=>[i+20,style
     dependencies,
     frameworks: { vue: catalogs.catalog.vue, svelte: catalogs.catalog.svelte },
     sizes,
-    scripts: ['emotion.js', 'goober.js', 'vanilla.js'],
-    stylesheet: 'vanilla.css',
+    scripts: ['emotion.js', 'goober.js', 'vanilla.js', 'uno.js', 'dynamic.js'],
+    stylesheets: ['vanilla.css', 'uno.css'],
   };
   const manifestFile = resolve(assets, 'manifest.json');
   await writeFile(manifestFile, JSON.stringify(manifest, null, 2));

@@ -18,6 +18,7 @@ const sha = execFileSync('git', ['rev-parse', revision + '^{commit}'], {
   encoding: 'utf8',
 }).trim();
 const label = process.argv[3] ?? 'current';
+const control = process.argv.includes('--control');
 assert.match(label, /^[a-z0-9-]+$/);
 const output = resolve(root, 'test-results/framework-paired', label);
 await mkdir(output, { recursive: true });
@@ -26,19 +27,21 @@ const report = {
   baselineSha: sha,
   node: process.version,
   status: 'building',
+  control,
   results: [],
   samples: [],
 };
 await writeFile(resolve(output, 'results.json'), JSON.stringify(report));
 const previous = new Map();
 function source(framework, scenario) {
-  const themed = scenario !== 'runtime',
+  const themed = scenario.startsWith('theme'),
     toggle = scenario === 'theme-switch';
   const imports = `import {useStyleRuntime,provideTheme${framework === 'svelte' ? ',provideStyleContext' : ''}} from '@zerodep-css/${framework}';
 import {lightTheme,darkTheme,ThemeCss} from '@zerodep-css/${framework}/themes';`;
   const setup = `${themed ? `const themeScope=provideTheme(lightTheme,()=>(${framework === 'vue' ? 'dark.value' : 'dark'}?darkTheme.defaults:lightTheme.defaults));` : ''}
 const {css}=useStyleRuntime(${themed ? '{cssType:ThemeCss}' : ''});`;
-  const expression = `css(s=>{calls++;s.width.px(20+((frame+row)%16));${themed ? 's.color.primary;s.padding.sm;' : "s.display.token('block');"}})`;
+  const width = scenario === 'runtime-new' ? '20+frame*200+row' : '20+((frame+row)%16)';
+  const expression = `css(s=>{calls++;s.width.px(${width});${themed ? 's.color.primary;s.padding.sm;' : "s.display.token('block');"}})`;
   if (framework === 'vue')
     return `<script setup>
 import {ref} from 'vue';${imports}
@@ -52,7 +55,7 @@ untrack(()=>{provideStyleContext(context);expose({step(){frame++;${toggle ? 'dar
 ${setup}</script><div>{#each rows as row(row)}<div data-row class={${expression}}></div>{/each}</div>`;
 }
 const scripts = new Map();
-const cases = ['runtime', 'theme-fixed', 'theme-switch'];
+const cases = ['runtime', 'theme-fixed', 'theme-switch', 'runtime-new'];
 for (const framework of ['vue', 'svelte'])
   for (const implementation of ['baseline', 'current']) {
     const folder = resolve(output, framework + '-' + implementation);
@@ -122,7 +125,7 @@ return {async step(){controls.step();await ${framework === 'vue' ? 'nextTick()' 
               const local = relative(root, path).replaceAll('\\', '/');
               if (!/^(core|vue|svelte)\/src\//.test(local)) return;
               let text;
-              if (implementation === 'baseline') {
+              if (implementation === 'baseline' || control) {
                 if (!previous.has(local))
                   previous.set(
                     local,
@@ -183,6 +186,20 @@ try {
     const samples = await page.evaluate(async (cases) => {
       const target = document.querySelector('#target'),
         results = [];
+      // 两个 bundle 的框架/JIT 分别预热；不能把首次组件执行混入一边的中位数。
+      for (const scenario of cases)
+        for (const implementation of ['baseline', 'current']) {
+          target.replaceChildren();
+          const app = await window.bench[implementation].start(scenario, target);
+          try {
+            for (let i = 0; i < (scenario === 'runtime-new' ? 2 : 30); i++) {
+              await app.step();
+              void target.offsetHeight;
+            }
+          } finally {
+            await app.stop();
+          }
+        }
       for (let round = 0; round < 5; round++)
         for (const scenario of round % 2 ? [...cases].reverse() : cases) {
           const outputs = {};
@@ -194,12 +211,14 @@ try {
             const app = await window.bench[implementation].start(scenario, target);
             const mount = performance.now() - start;
             try {
-              for (let i = 0; i < 5; i++) {
+              const warmup = scenario === 'runtime-new' ? 1 : 5,
+                batches = scenario === 'runtime-new' ? 5 : 30;
+              for (let i = 0; i < warmup; i++) {
                 await app.step();
                 void target.offsetHeight;
               }
               const begin = performance.now();
-              for (let i = 0; i < 30; i++) {
+              for (let i = 0; i < batches; i++) {
                 await app.step();
                 void target.offsetHeight;
               }
@@ -212,7 +231,7 @@ try {
                 calls: app.calls(),
                 manifest: app.snapshot(),
               };
-              results.push({ round, scenario, implementation, mount, update });
+              results.push({ round, scenario, implementation, mount, update, warmup, batches });
               // 正确性断言放在计时区外：准备结果命中不能绕过外部禁用样式表的检查。
               const themeId = app.theme();
               if (themeId) {
