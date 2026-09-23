@@ -82,8 +82,8 @@ await build({
           const transformed = edit
             .toString()
             .replace(
-              'declarations(propertyMetadata, nodes, session, important, helpers) as object',
-              'declarations(propertyMetadata, nodes, session, important, helpers, true, true)',
+              /declarations\(\s*propertyMetadata,\s*nodes,\s*session,\s*important,\s*(helpers|createHelpers),?\s*\) as object/,
+              'declarations(propertyMetadata, nodes, session, important, $1, true, true)',
             )
             .replace(
               'read: (key) => Reflect.get(properties, key)',

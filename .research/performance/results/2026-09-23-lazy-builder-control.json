@@ -1,0 +1,852 @@
+{
+  "status": "passed",
+  "revision": "075b996",
+  "node": "v24.12.0",
+  "iterations": 20000,
+  "rounds": 7,
+  "control": true,
+  "results": [
+    {
+      "name": "empty",
+      "stage": "builder",
+      "baseline": 34.655800000000454,
+      "current": 35.27230000000054,
+      "ratio": 1.0177892300855869
+    },
+    {
+      "name": "empty",
+      "stage": "runtime",
+      "baseline": 58.16700000000128,
+      "current": 61.5626000000002,
+      "ratio": 1.0583767428266688
+    },
+    {
+      "name": "width",
+      "stage": "builder",
+      "baseline": 66.304900000001,
+      "current": 63.69980000000032,
+      "ratio": 0.9607102944126206
+    },
+    {
+      "name": "width",
+      "stage": "runtime",
+      "baseline": 136.062899999999,
+      "current": 141.14949999999953,
+      "ratio": 1.0373841804048023
+    },
+    {
+      "name": "three",
+      "stage": "builder",
+      "baseline": 102.10640000000058,
+      "current": 105.0650999999998,
+      "ratio": 1.0289766361364145
+    },
+    {
+      "name": "three",
+      "stage": "runtime",
+      "baseline": 205.17739999999867,
+      "current": 206.11130000000003,
+      "ratio": 1.0045516708955342
+    },
+    {
+      "name": "nested",
+      "stage": "builder",
+      "baseline": 124.07310000000143,
+      "current": 135.0625999999993,
+      "ratio": 1.0885727849146811
+    },
+    {
+      "name": "nested",
+      "stage": "runtime",
+      "baseline": 229.4287000000004,
+      "current": 236.2404000000006,
+      "ratio": 1.0296898339222609
+    }
+  ],
+  "samples": [
+    {
+      "round": 0,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 44.28890000000001
+    },
+    {
+      "round": 0,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 51.378600000000006
+    },
+    {
+      "round": 0,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 55.539999999999964
+    },
+    {
+      "round": 0,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 55.00390000000016
+    },
+    {
+      "round": 0,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 78.29860000000008
+    },
+    {
+      "round": 0,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 82.67669999999998
+    },
+    {
+      "round": 0,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 131.8139000000001
+    },
+    {
+      "round": 0,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 136.99749999999995
+    },
+    {
+      "round": 0,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 100.47389999999996
+    },
+    {
+      "round": 0,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 103.53760000000011
+    },
+    {
+      "round": 0,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 214.8689999999997
+    },
+    {
+      "round": 0,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 206.11130000000003
+    },
+    {
+      "round": 0,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 121.89859999999999
+    },
+    {
+      "round": 0,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 137.23379999999997
+    },
+    {
+      "round": 0,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 217.9967000000006
+    },
+    {
+      "round": 0,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 236.2404000000006
+    },
+    {
+      "round": 1,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 35.66280000000006
+    },
+    {
+      "round": 1,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 34.91870000000017
+    },
+    {
+      "round": 1,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 55.35950000000048
+    },
+    {
+      "round": 1,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 59.03520000000026
+    },
+    {
+      "round": 1,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 63.05590000000029
+    },
+    {
+      "round": 1,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 68.26650000000063
+    },
+    {
+      "round": 1,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 147.3739999999998
+    },
+    {
+      "round": 1,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 139.96799999999985
+    },
+    {
+      "round": 1,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 98.8676000000005
+    },
+    {
+      "round": 1,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 96.56829999999991
+    },
+    {
+      "round": 1,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 207.79759999999987
+    },
+    {
+      "round": 1,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 200.0046999999995
+    },
+    {
+      "round": 1,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 124.84830000000056
+    },
+    {
+      "round": 1,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 123.53520000000026
+    },
+    {
+      "round": 1,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 218.41529999999966
+    },
+    {
+      "round": 1,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 223.58050000000003
+    },
+    {
+      "round": 2,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 32.1876000000002
+    },
+    {
+      "round": 2,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 32.60149999999976
+    },
+    {
+      "round": 2,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 56.63180000000011
+    },
+    {
+      "round": 2,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 61.5626000000002
+    },
+    {
+      "round": 2,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 67.52729999999974
+    },
+    {
+      "round": 2,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 62.940599999999904
+    },
+    {
+      "round": 2,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 136.6333999999997
+    },
+    {
+      "round": 2,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 148.28979999999956
+    },
+    {
+      "round": 2,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 102.10640000000058
+    },
+    {
+      "round": 2,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 98.57049999999981
+    },
+    {
+      "round": 2,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 193.6957999999995
+    },
+    {
+      "round": 2,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 213.78680000000168
+    },
+    {
+      "round": 2,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 123.40650000000096
+    },
+    {
+      "round": 2,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 138.78240000000005
+    },
+    {
+      "round": 2,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 225.3222999999998
+    },
+    {
+      "round": 2,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 220.5139999999992
+    },
+    {
+      "round": 3,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 33.576999999999316
+    },
+    {
+      "round": 3,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 34.33430000000044
+    },
+    {
+      "round": 3,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 61.977100000000064
+    },
+    {
+      "round": 3,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 64.91889999999876
+    },
+    {
+      "round": 3,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 78.0015999999996
+    },
+    {
+      "round": 3,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 66.304900000001
+    },
+    {
+      "round": 3,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 164.95319999999992
+    },
+    {
+      "round": 3,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 162.5012999999999
+    },
+    {
+      "round": 3,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 135.72719999999936
+    },
+    {
+      "round": 3,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 112.05609999999979
+    },
+    {
+      "round": 3,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 205.91280000000006
+    },
+    {
+      "round": 3,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 214.09010000000126
+    },
+    {
+      "round": 3,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 143.60569999999825
+    },
+    {
+      "round": 3,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 127.2494000000006
+    },
+    {
+      "round": 3,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 260.3798000000006
+    },
+    {
+      "round": 3,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 261.6251999999986
+    },
+    {
+      "round": 4,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 68.22770000000128
+    },
+    {
+      "round": 4,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 36.36290000000008
+    },
+    {
+      "round": 4,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 54.60779999999977
+    },
+    {
+      "round": 4,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 58.80580000000009
+    },
+    {
+      "round": 4,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 64.3804999999993
+    },
+    {
+      "round": 4,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 63.69980000000032
+    },
+    {
+      "round": 4,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 136.062899999999
+    },
+    {
+      "round": 4,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 131.3730000000014
+    },
+    {
+      "round": 4,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 118.69750000000022
+    },
+    {
+      "round": 4,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 111.65299999999843
+    },
+    {
+      "round": 4,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 205.17739999999867
+    },
+    {
+      "round": 4,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 201.15539999999964
+    },
+    {
+      "round": 4,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 137.33129999999983
+    },
+    {
+      "round": 4,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 131.54160000000047
+    },
+    {
+      "round": 4,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 230.11869999999908
+    },
+    {
+      "round": 4,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 248.51419999999962
+    },
+    {
+      "round": 5,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 35.27230000000054
+    },
+    {
+      "round": 5,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 34.50250000000051
+    },
+    {
+      "round": 5,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 62.58719999999994
+    },
+    {
+      "round": 5,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 58.16700000000128
+    },
+    {
+      "round": 5,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 64.74409999999989
+    },
+    {
+      "round": 5,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 58.992599999999584
+    },
+    {
+      "round": 5,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 141.14949999999953
+    },
+    {
+      "round": 5,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 134.40120000000024
+    },
+    {
+      "round": 5,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 105.0650999999998
+    },
+    {
+      "round": 5,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 95.01419999999962
+    },
+    {
+      "round": 5,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 203.30569999999898
+    },
+    {
+      "round": 5,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 196.32710000000043
+    },
+    {
+      "round": 5,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 135.0625999999993
+    },
+    {
+      "round": 5,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 132.91630000000077
+    },
+    {
+      "round": 5,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 224.08970000000045
+    },
+    {
+      "round": 5,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 238.08550000000105
+    },
+    {
+      "round": 6,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 34.655800000000454
+    },
+    {
+      "round": 6,
+      "name": "empty",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 32.99140000000261
+    },
+    {
+      "round": 6,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 65.56520000000091
+    },
+    {
+      "round": 6,
+      "name": "empty",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 66.06710000000021
+    },
+    {
+      "round": 6,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 63.4188000000031
+    },
+    {
+      "round": 6,
+      "name": "width",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 61.606299999999464
+    },
+    {
+      "round": 6,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 127.82979999999952
+    },
+    {
+      "round": 6,
+      "name": "width",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 128.9213000000018
+    },
+    {
+      "round": 6,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 106.92160000000149
+    },
+    {
+      "round": 6,
+      "name": "three",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 110.38850000000093
+    },
+    {
+      "round": 6,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 208.9932000000008
+    },
+    {
+      "round": 6,
+      "name": "three",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 206.22010000000228
+    },
+    {
+      "round": 6,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "baseline",
+      "milliseconds": 124.07310000000143
+    },
+    {
+      "round": 6,
+      "name": "nested",
+      "stage": "builder",
+      "implementation": "current",
+      "milliseconds": 126.65669999999955
+    },
+    {
+      "round": 6,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "baseline",
+      "milliseconds": 229.4287000000004
+    },
+    {
+      "round": 6,
+      "name": "nested",
+      "stage": "runtime",
+      "implementation": "current",
+      "milliseconds": 237.9255000000012
+    }
+  ]
+}

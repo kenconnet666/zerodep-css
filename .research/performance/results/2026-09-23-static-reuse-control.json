@@ -1,0 +1,230 @@
+{
+  "runId": "d766290c-ae0a-4953-bc34-06ffeeeae04b",
+  "baselineSha": "075b996f88246c1168a7ce7f052959c2d8db5831",
+  "node": "v24.12.0",
+  "status": "passed",
+  "control": true,
+  "staticOnly": true,
+  "results": [
+    {
+      "framework": "vue",
+      "scenario": "static",
+      "baseline": {
+        "mount": 2.699999988079071,
+        "update": 81.59999999403954
+      },
+      "current": {
+        "mount": 2.6000000089406967,
+        "update": 80.90000000596046
+      },
+      "updateRatio": 0.9914215687729142
+    },
+    {
+      "framework": "svelte",
+      "scenario": "static",
+      "baseline": {
+        "mount": 3.9000000059604645,
+        "update": 3.2999999970197678
+      },
+      "current": {
+        "mount": 4.299999997019768,
+        "update": 4.0999999940395355
+      },
+      "updateRatio": 1.2424242417400753
+    }
+  ],
+  "samples": [
+    {
+      "framework": "vue",
+      "samples": [
+        {
+          "round": 0,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 2.7999999970197678,
+          "update": 68.5,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 0,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 3.7999999970197678,
+          "update": 61.29999999701977,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 1,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 1.7999999970197678,
+          "update": 58.099999994039536,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 1,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 3.2000000029802322,
+          "update": 55.80000001192093,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 2,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 2.1000000089406967,
+          "update": 90.1000000089407,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 2,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 2.6000000089406967,
+          "update": 120.1000000089407,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 3,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 3.2000000029802322,
+          "update": 96.5,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 3,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 2.2000000029802322,
+          "update": 86.59999999403954,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 4,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 2.699999988079071,
+          "update": 81.59999999403954,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 4,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 2.199999988079071,
+          "update": 80.90000000596046,
+          "warmup": 30,
+          "batches": 200
+        }
+      ]
+    },
+    {
+      "framework": "svelte",
+      "samples": [
+        {
+          "round": 0,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 6.600000008940697,
+          "update": 4.799999997019768,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 0,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 5.399999991059303,
+          "update": 6.0999999940395355,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 1,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 4.300000011920929,
+          "update": 4.0999999940395355,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 1,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 4.5999999940395355,
+          "update": 4.200000002980232,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 2,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 3.5999999940395355,
+          "update": 3.2999999970197678,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 2,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 4.299999997019768,
+          "update": 6.5999999940395355,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 3,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 3.2999999970197678,
+          "update": 2.5,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 3,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 3,
+          "update": 2.3999999910593033,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 4,
+          "scenario": "static",
+          "implementation": "baseline",
+          "mount": 3.9000000059604645,
+          "update": 2.1000000089406967,
+          "warmup": 30,
+          "batches": 200
+        },
+        {
+          "round": 4,
+          "scenario": "static",
+          "implementation": "current",
+          "mount": 2.9000000059604645,
+          "update": 2.5999999940395355,
+          "warmup": 30,
+          "batches": 200
+        }
+      ]
+    }
+  ],
+  "browser": "153.0.8010.52",
+  "currentDiffHash": "8ea339797c60827efc4fdd7c265962dc93a47857ba41a08798bd9b642c2b97d3"
+}

@@ -5,6 +5,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { createServer } from 'node:http';
 import { createHash, randomUUID } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 import { build, transform } from 'esbuild';
 import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile, compileModule } from 'svelte/compiler';
@@ -19,6 +20,7 @@ const sha = execFileSync('git', ['rev-parse', revision + '^{commit}'], {
 }).trim();
 const label = process.argv[3] ?? 'current';
 const control = process.argv.includes('--control');
+const staticOnly = process.argv.includes('--static');
 assert.match(label, /^[a-z0-9-]+$/);
 const output = resolve(root, 'test-results/framework-paired', label);
 await mkdir(output, { recursive: true });
@@ -28,6 +30,7 @@ const report = {
   node: process.version,
   status: 'building',
   control,
+  staticOnly,
   results: [],
   samples: [],
 };
@@ -41,25 +44,63 @@ import {lightTheme,darkTheme,ThemeCss} from '@zerodep-css/${framework}/themes';`
   const setup = `${themed ? `const themeScope=provideTheme(lightTheme,()=>(${framework === 'vue' ? 'dark.value' : 'dark'}?darkTheme.defaults:lightTheme.defaults));` : ''}
 const {css}=useStyleRuntime(${themed ? '{cssType:ThemeCss}' : ''});`;
   const width = scenario === 'runtime-new' ? '20+frame*200+row' : '20+((frame+row)%16)';
-  const expression = `css(s=>{calls++;s.width.px(${width});${themed ? 's.color.primary;s.padding.sm;' : "s.display.token('block');"}})`;
+  const expression =
+    scenario === 'static'
+      ? 'css(s=>{s.display.block;s.width.px(32);s.padding.px(8,16);})'
+      : `css(s=>{calls++;s.width.px(${width});${themed ? 's.color.primary;s.padding.sm;' : "s.display.token('block');"}})`;
   if (framework === 'vue')
     return `<script setup>
 import {ref} from 'vue';${imports}
 const props=defineProps(['expose','context']);const rows=Array.from({length:200},(_,i)=>i);
 const frame=ref(0),dark=ref(false);let calls=0;
 props.expose({step(){frame.value++;${toggle ? 'dark.value=!dark.value;' : ''}},calls:()=>calls,theme:()=>${themed ? 'themeScope.themes[0].className(props.context.runtime)' : 'null'}});
-${setup}</script><template><div><div v-for="row in rows" :key="row" data-row :class="${expression}"></div></div></template>`;
+${setup}</script><template><div :data-frame="frame"><div v-for="row in rows" :key="row" data-row :class="${expression}"></div></div></template>`;
   return `<script>import {untrack} from 'svelte';${imports}
 let {context,expose}=$props();const rows=Array.from({length:200},(_,i)=>i);let frame=$state(0),dark=$state(false),calls=0;
 untrack(()=>{provideStyleContext(context);expose({step(){frame++;${toggle ? 'dark=!dark;' : ''}},calls:()=>calls,theme:()=>${themed ? 'themeScope.themes[0].className(context.runtime)' : 'null'}});});
-${setup}</script><div>{#each rows as row(row)}<div data-row class={${expression}}></div>{/each}</div>`;
+${setup}</script><div data-frame={frame}>{#each rows as row(row)}<div data-row class={${expression}}></div>{/each}</div>`;
 }
 const scripts = new Map();
-const cases = ['runtime', 'theme-fixed', 'theme-switch', 'runtime-new'];
+const cases = staticOnly ? ['static'] : ['runtime', 'theme-fixed', 'theme-switch', 'runtime-new'];
 for (const framework of ['vue', 'svelte'])
   for (const implementation of ['baseline', 'current']) {
     const folder = resolve(output, framework + '-' + implementation);
     await mkdir(folder, { recursive: true });
+    let transformCss;
+    if (staticOnly) {
+      const compilerFile = resolve(folder, 'compiler.mjs');
+      await build({
+        entryPoints: [resolve(root, framework, 'compiler/index.ts')],
+        outfile: compilerFile,
+        bundle: true,
+        platform: 'node',
+        format: 'esm',
+        packages: 'external',
+        plugins:
+          implementation === 'baseline' || control
+            ? [
+                {
+                  name: 'baseline-compiler',
+                  setup(bundler) {
+                    bundler.onLoad({ filter: /\.ts$/ }, ({ path }) => {
+                      const local = relative(root, path).replaceAll('\\', '/');
+                      return {
+                        contents: execFileSync('git', ['show', `${sha}:${local}`], {
+                          cwd: root,
+                          encoding: 'utf8',
+                          maxBuffer: 16 * 1024 * 1024,
+                        }),
+                        loader: 'ts',
+                        resolveDir: dirname(path),
+                      };
+                    });
+                  },
+                },
+              ]
+            : [],
+      });
+      ({ transformCss } = await import(pathToFileURL(compilerFile).href));
+    }
     for (const scenario of cases)
       await writeFile(resolve(folder, scenario + '.' + framework), source(framework, scenario));
     const entry = resolve(folder, 'driver.js');
@@ -88,7 +129,14 @@ return {async step(){controls.step();await ${framework === 'vue' ? 'nextTick()' 
         __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false',
       },
       alias: Object.fromEntries(
-        ['core/style-scope', 'core/themes', 'core', framework + '/themes', framework].map((key) => [
+        [
+          'core/style-scope',
+          'core/compiler-runtime',
+          'core/themes',
+          'core',
+          framework + '/themes',
+          framework,
+        ].map((key) => [
           '@zerodep-css/' + key,
           resolve(
             root,
@@ -103,7 +151,10 @@ return {async step(){controls.step();await ${framework === 'vue' ? 'nextTick()' 
           name: 'official-sfc-and-git-baseline',
           setup(bundler) {
             bundler.onLoad({ filter: /\.(vue|svelte)$/ }, async ({ path }) => {
-              const text = await readFile(path, 'utf8');
+              const original = await readFile(path, 'utf8');
+              // 两版使用同一个虚拟文件路径，保证准备键不混入探针目录差异。
+              const text =
+                transformCss?.(original, resolve(root, 'Paired.' + framework))?.code ?? original;
               if (framework === 'vue') {
                 const { descriptor, errors } = parse(text, { filename: path });
                 assert.deepEqual(errors, []);
@@ -211,8 +262,8 @@ try {
             const app = await window.bench[implementation].start(scenario, target);
             const mount = performance.now() - start;
             try {
-              const warmup = scenario === 'runtime-new' ? 1 : 5,
-                batches = scenario === 'runtime-new' ? 5 : 30;
+              const warmup = scenario === 'runtime-new' ? 1 : scenario === 'static' ? 30 : 5,
+                batches = scenario === 'runtime-new' ? 5 : scenario === 'static' ? 200 : 30;
               for (let i = 0; i < warmup; i++) {
                 await app.step();
                 void target.offsetHeight;
@@ -291,7 +342,22 @@ try {
   throw error;
 } finally {
   report.currentDiffHash = createHash('sha256')
-    .update(execFileSync('git', ['diff', '--', 'core/src', 'vue/src', 'svelte/src'], { cwd: root }))
+    .update(
+      execFileSync(
+        'git',
+        [
+          'diff',
+          '--',
+          'core/src',
+          'vue/src',
+          'svelte/src',
+          'internal/compiler',
+          'vue/compiler',
+          'svelte/compiler',
+        ],
+        { cwd: root },
+      ),
+    )
     .digest('hex');
   await writeFile(resolve(output, 'results.json'), JSON.stringify(report, null, 2) + '\n');
   await browser?.close();
