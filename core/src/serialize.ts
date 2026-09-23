@@ -30,6 +30,10 @@ export interface PropertyRegistration {
   readonly name: string;
   readonly body: string;
 }
+export interface StylesheetInspection {
+  readonly rules: readonly string[];
+  readonly registrations: readonly PropertyRegistration[];
+}
 export interface CompiledStyle {
   readonly record: StyleRecord;
   readonly dependencies: readonly StyleRecord[];
@@ -320,9 +324,9 @@ export function splitRules(css: string): readonly string[] {
 export function canonicalSheet(css: string): string {
   return generate(sheet(css));
 }
-export function registrations(css: string): readonly PropertyRegistration[] {
+function propertyRegistrations(ast: StyleSheet): readonly PropertyRegistration[] {
   const definitions = new Map<string, string>();
-  walk(sheet(css), {
+  walk(ast, {
     visit: 'Atrule',
     enter(node) {
       if (ident.decode(node.name).toLowerCase() !== 'property') return;
@@ -340,6 +344,16 @@ export function registrations(css: string): readonly PropertyRegistration[] {
     },
   });
   return [...definitions].map(([name, body]) => ({ name, body }));
+}
+/** 同一写入事务的一次解析同时产出规则和注册声明，不建立额外缓存。 */
+export function inspectStylesheet(css: string): StylesheetInspection {
+  const ast = sheet(css);
+  const registrations = propertyRegistrations(ast);
+  return { rules: ast.children.toArray().map((node) => generate(node)), registrations };
+}
+/** 恢复记录已有 DOM/规则，不为只读注册检查生成用不到的规则字符串。 */
+export function registrations(css: string): readonly PropertyRegistration[] {
+  return propertyRegistrations(sheet(css));
 }
 export function compileProgram(
   program: StyleProgram,

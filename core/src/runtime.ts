@@ -7,9 +7,9 @@ import {
   compileProgram,
   namedId,
   mergeRecord,
+  inspectStylesheet,
   registrations,
   renderRecord,
-  splitRules,
   validateRecord,
   type CompiledStyle,
   type OutputConfig,
@@ -256,11 +256,19 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   const alive = () => {
     if (disposed) throw new Error('Style runtime has been disposed.');
   };
-  function validateClaims(batch: readonly StyleRecord[], replacing?: string) {
+  function prepareRecords(batch: readonly StyleRecord[]) {
+    return batch.map((record) => ({
+      record,
+      ...inspectStylesheet(renderRecord(record, config)),
+    }));
+  }
+  function validateClaims(
+    batch: readonly { record: StyleRecord; registrations: readonly PropertyRegistration[] }[],
+    replacing?: string,
+  ) {
     const claims = new Map<string, readonly PropertyRegistration[]>();
     const planned = new Map<string, string>();
-    for (const record of batch) {
-      const entries = registrations(renderRecord(record, config));
+    for (const { record, registrations: entries } of batch) {
       claims.set(record.id, entries);
       for (const entry of entries) {
         if (planned.has(entry.name) && planned.get(entry.name) !== entry.body)
@@ -319,13 +327,15 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       });
       if (records.size + pending.filter((r) => !records.has(r.id)).length > maxRecords)
         throw new Error('Style record limit exceeded.');
-      const claims = validateClaims(pending, replacing);
+      // 只准备本次待写入记录；缓存命中仍走原来的宿主检查，不增加结果缓存。
+      const prepared = prepareRecords(pending);
+      const claims = validateClaims(prepared, replacing);
       const nodes = new Map<string, HTMLStyleElement>();
-      for (const record of pending) {
-        splitRules(renderRecord(record, config));
+      for (const { record, rules } of prepared) {
         if (host) {
           const node = host.insert(
             record,
+            rules,
             record.id === replacing ? host.nodes.get(record.id) : undefined,
           );
           inserted.push(node);
@@ -493,7 +503,12 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     if (options.hydrate) {
       const restored = manifestRecords(options.hydrate, config);
       if (restored.length > maxRecords) throw new Error('Hydration exceeds style record limit.');
-      const claims = validateClaims(restored);
+      const claims = validateClaims(
+        restored.map((record) => ({
+          record,
+          registrations: registrations(renderRecord(record, config)),
+        })),
+      );
       if (target) host = browserSheet(target, config, nonce, restored, options.insertionPoint);
       for (const record of restored) {
         records.set(record.id, record);

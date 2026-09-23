@@ -7,7 +7,12 @@ export interface BrowserSheet {
   readonly nodes: Map<string, HTMLStyleElement>;
   verify(id: string): void;
   updateMetadata(record: StyleRecord): void;
-  insert(record: StyleRecord, before?: HTMLStyleElement): HTMLStyleElement;
+  /** rules 必须来自当前 runtime 事务中对该记录完整渲染结果的验证。 */
+  insert(
+    record: StyleRecord,
+    rules: readonly string[],
+    before?: HTMLStyleElement,
+  ): HTMLStyleElement;
   remove(node: HTMLStyleElement): void;
   dispose(): void;
 }
@@ -141,7 +146,7 @@ export function browserSheet(
           'A registered stylesheet or its boundary was removed/disabled outside this runtime.',
         );
     },
-    insert(record, before) {
+    insert(record, rules, before) {
       if (end.parentNode !== container || start.parentNode !== container)
         throw new Error('Runtime insertion boundary was removed.');
       if (
@@ -159,8 +164,7 @@ export function browserSheet(
       try {
         container.insertBefore(node, before ?? end);
         if (!node.sheet) throw new Error('Stylesheet is unavailable (check CSP and attachment).');
-        for (const rule of splitRules(renderRecord(record, config)))
-          node.sheet.insertRule(rule, node.sheet.cssRules.length);
+        for (const rule of rules) node.sheet.insertRule(rule, node.sheet.cssRules.length);
         return node;
       } catch (error) {
         node.remove();

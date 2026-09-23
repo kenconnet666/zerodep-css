@@ -2,6 +2,62 @@
 
 本页保留历史横向对照与后续同机优化证据，不表示所有性能问题已经解决。不同基准的回调和机器不同，不能直接拼接其数值计算提升倍数。
 
+## 2026-09-23 扩展框架对照与注册事务优化
+
+对照覆盖 Emotion/goober 运行时、vanilla-extract 静态提取、UnoCSS generator/preset-mini 的真实构建产物、vanilla-extract 静态 CSS + assignInlineVars 动态 helper，以及本库自动优化/纯运行时路径。UnoCSS 本次使用构建期 generator，不代表它只具备编译期能力。
+
+版本固定在 benchmark catalog：UnoCSS core/preset-mini 66.10.5、vanilla-extract/dynamic 2.1.5，其余对照版本沿用历史基线。依赖只装入独立临时目录，不进入产品依赖。UnoCSS 关闭 preflight，断言匹配 17 个候选，并在浏览器核对全部元素宽度。
+
+下表为修改后的横向结果：Node 24.12.0、Chrome 153.0.8010.52，200 元素，5 批预热、30 批更新、5 轮轮换次序中位数。更新含调度和布局刷新，不测网络、首次 JS 解析、绘制或构建耗时。
+
+| 路径                               | Vue 更新 ms | Svelte 更新 ms |
+| ---------------------------------- | ----------: | -------------: |
+| 原生有限类名                       |        29.9 |           31.1 |
+| UnoCSS 有限类名                    |        27.3 |           31.6 |
+| vanilla-extract 有限类名           |        28.0 |           31.6 |
+| Emotion 对象调用                   |        35.4 |           42.8 |
+| goober 对象调用                    |        36.3 |           39.2 |
+| zerodep 普通运行时                 |        63.0 |           75.5 |
+| 原生变量                           |        58.9 |           64.0 |
+| UnoCSS 变量类 + 原生 style         |        54.6 |           62.5 |
+| vanilla-extract + assignInlineVars |        66.9 |           74.1 |
+| zerodep 自动变量                   |        66.3 |           67.9 |
+
+静态提取/有限类名路径接近原生；本库自动变量路径更适合与变量更新比较。普通运行时与 Emotion/goober 仍有差距，不能把此次冷态优化说成热路径全面追平。Svelte 的 assignInlineVars 使用 helper 的 toString 交给 style 属性，Vue 使用对象 style，这些属于各框架的实际接入成本。
+
+### 耗时定位与保留的改动
+
+临时插桩只进入探针 bundle，正式计时不带插桩。以 447acd1 为旧源码：500 条新普通规则，Node 路径完整 stylesheet 解析为 1,500 次；修改后 1,000 次。嵌套规则为 2,000→1,500 次。纯命中场景两版都没有重新解析。浏览器普通新记录还消除 sheet.insert 中的一次重复解析，库内完整 stylesheet 解析由每条 4 次降至 2 次；值/声明等解析保持不变。
+
+独立 CPU 采样中，冷态嵌套场景约七成样本经过 CSSTree 调用链。这是 inclusive 采样，不表示整个页面七成时间属于解析器，也不是精确的函数独占耗时比例。
+
+实现只合并事务内部的工作：一次 inspectStylesheet 得到规则列表和 @property 注册信息，资源冲突检查和 CSSOM 插入共享结果。没有新增缓存，没有移除编译/输入验证、宿主检查或失败回滚，也不改 manifest/hash。恢复记录保留专门的只读注册检查，避免为恢复路径生成无用的规则字符串。
+
+同进程 Node 对照（5 轮中位数）为普通新规则 82.81→67.95 ms，嵌套新规则 171.78→146.20 ms。恢复探针为 48.34→51.77 ms，热重复为 26.20→26.61 ms，这两项不宣称收益；最初恢复路径曾有额外生成开销，已撤回该部分。原始样本随报告保留。
+
+真实 SFC 成对对照增加每批 200 个全新值的场景，先分别预热两版模块，再预热 1 批、计时 5 批（不要与上方 30 批横向数据混比），最后共 1,400 条规则：
+
+| 框架   | 旧→新更新 ms |  下降 | 旧→新挂载 ms |
+| ------ | -----------: | ----: | -----------: |
+| Vue    |  134.1→106.9 | 20.3% |    23.1→17.6 |
+| Svelte |  135.3→103.2 | 23.7% |    24.8→19.6 |
+
+相同旧代码对照的更新波动约 -3.6%～+3.9%。已有类名/主题热路径没有稳定收益；未充分预热时曾观察到较大差异，现已增加模块预热，并保留未预热及控制组报告，不据此宣称零回归或通用提速。成对测试比较完整 manifest、class、计算样式、用户回调次数，并检验禁用样式表和卸载清理。
+
+### 复现与后续方向
+
+依次执行 pnpm build、pnpm research:compare；成对探针命令如下：
+
+    node --expose-gc .research/performance/pipeline-paired.mjs 447acd1 repeat
+    node .research/performance/framework-paired.mjs 447acd1 repeat
+    node .research/performance/framework-paired.mjs 447acd1 control --control
+
+计时顺序运行，不并发构建/其他基准。framework-paired 现增加模块预热和 runtime-new 场景；旧报告按对应提交时的脚本理解。证据位于 .research/performance/results/2026-09-23-registration-*：横向数据、版本/依赖锁、修改前数据、解析计数与采样摘要、成对/控制组及未预热结果。完整 cpuprofile 位于忽略的 test-results，可由脚本重新生成。
+
+本轮保持作者写法、运行时复杂回退和原生响应式缓存不变。后续优先研究普通运行时 Builder/结果键成本和 Vue 静态表达式的重复调用；CSSOM 合并段与全面静态提取不在本轮实施范围。体积门禁仍通过，完整运行时约 101 KB gzip，体积差距仍未解决。
+
+官方接入依据：[UnoCSS guide](https://unocss.dev/guide/)、[vanilla-extract dynamic](https://vanilla-extract.style/documentation/packages/dynamic/)。
+
 ## 2026-09-23 原生主题缓存优化
 
 基线为 `9cd39b9`，使用 Git 中的基线源码与当前源码，在相同依赖、同一进程/浏览器中交替运行。作者 API 不变，运行时能力不缩减。
