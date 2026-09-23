@@ -1,4 +1,5 @@
 import { createStyleNormalizer } from './normalize.js';
+import { reconstructClass } from './composition.js';
 import { globalCss, buildStyleDefinition } from './builder.js';
 import { browserSheet, renderStyleTag, type BrowserSheet, type StyleTarget } from './sheet.js';
 import {
@@ -17,8 +18,13 @@ import {
   type PropertyRegistration,
   type StyleRecord,
 } from './serialize.js';
-import type { KeyframesDefinition, StylesheetDefinition, StyleProgram } from './style-program.js';
-import type { StylesheetFactory, StyleFactory } from './builder-types.js';
+import type {
+  KeyframesDefinition,
+  StyleNode,
+  StylesheetDefinition,
+  StyleProgram,
+} from './style-program.js';
+import type { CssFunction, StyleInput, StylesheetFactory, StyleFactory } from './builder-types.js';
 import { Css, type CssConstructor } from './css.js';
 import { normalizeCssText } from './css-value.js';
 import {
@@ -67,8 +73,9 @@ export interface RuntimeStats {
 }
 export interface StyleRuntime<C extends Css = Css> {
   readonly config: OutputConfig;
-  css(factory: StyleFactory<C>): string;
-  css<T extends Css>(factory: StyleFactory<T>, cssType: CssConstructor<T>): string;
+  css: CssFunction<C> & {
+    <T extends Css>(input: StyleInput<T>, cssType: CssConstructor<T>): string;
+  };
   keyframes(definition: KeyframesDefinition): string;
   mountGlobal(value: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle;
   /** 认领 SSR 恢复的全局槽位，不根据内容猜测组件身份。 */
@@ -121,6 +128,9 @@ function cacheable(program: StyleProgram): boolean {
   return program.every((node) =>
     node.kind === 'declaration' ? node.value.kind !== 'animations' : cacheable(node.children),
   );
+}
+function isCssConstructor(value: unknown): value is CssConstructor {
+  return typeof value === 'function' && (value === Css || value.prototype instanceof Css);
 }
 function manifestRecords(manifest: StyleManifest, config: OutputConfig): readonly StyleRecord[] {
   const incoming = manifest?.config;
@@ -383,10 +393,133 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   // 编译站点缓存属于当前 runtime；驱逐只丢计算结果，绝不删除仍被 DOM 使用的规则。
   const compiledStyles = new Map<string, CompiledStyle>();
   const normalize = createStyleNormalizer();
+  // 只缓存本宿主已知 class 的严格反解结果，淘汰不影响仍在用的规则与 manifest。
+  const reconstructed = new Map<string, { program: StyleProgram; characters: number }>();
+  let reconstructedCharacters = 0;
+  function knownProgram(record: StyleRecord): StyleProgram {
+    const cached = reconstructed.get(record.id);
+    if (cached) return cached.program;
+    const program = reconstructClass(record, config);
+    // 大规则仍可组合，但不因反解缓存让单个请求长期持有第二份巨量 IR。
+    const characters = record.body.length;
+    if (characters <= 32_768) {
+      while (reconstructed.size >= 128 || reconstructedCharacters + characters > 262_144) {
+        const first = reconstructed.keys().next().value!;
+        reconstructedCharacters -= reconstructed.get(first)!.characters;
+        reconstructed.delete(first);
+      }
+      reconstructed.set(record.id, { program, characters });
+      reconstructedCharacters += characters;
+    }
+    return program;
+  }
+  function compose(inputs: readonly unknown[], cssType: CssConstructor): string {
+    const pieces: (string | null)[] = [];
+    const nodes: StyleNode[] = [];
+    const dependencyIds = new Set<string>();
+    const sources = new Map<string, NonNullable<StyleRecord['debug']>['sources'][number]>();
+    let name: string | undefined;
+    const visiting = new Set<readonly unknown[]>();
+    let hasOwnStyle = false;
+    let debug = collectDebug === true;
+    let debugExplicit = false;
+    const own = () => {
+      if (!hasOwnStyle) {
+        hasOwnStyle = true;
+        pieces.push(null);
+      }
+    };
+    const addSource = (source: NonNullable<StyleRecord['debug']>['sources'][number]) => {
+      sources.set(JSON.stringify(source), source);
+    };
+    function append(input: unknown): void {
+      if (input === false || input === null || input === undefined) return;
+      if (Array.isArray(input)) {
+        if (visiting.has(input)) throw new TypeError('Cyclic CSS style input array.');
+        visiting.add(input);
+        try {
+          input.forEach(append);
+        } finally {
+          visiting.delete(input);
+        }
+        return;
+      }
+      if (typeof input === 'string') {
+        for (const token of input.match(/[^ \t\n\f\r]+/gu) ?? []) {
+          const record = records.get(token);
+          if (record?.kind !== 'class') {
+            pieces.push(token);
+            continue;
+          }
+          own();
+          for (const node of knownProgram(record)) nodes.push(node);
+          if (record.name) name = record.name;
+          if (record.debug) {
+            debug = true;
+            debugExplicit = true;
+            record.debug.sources.forEach(addSource);
+          }
+          record.dependencies.forEach((id) => dependencyIds.add(id));
+        }
+        return;
+      }
+      if (typeof input === 'function' && !isCssConstructor(input)) {
+        own();
+        const definition = buildStyleDefinition(input as StyleFactory<never>, cssType, normalize);
+        for (const node of definition.program) nodes.push(node);
+        if (definition.metadata.name) name = definition.metadata.name;
+        if (definition.metadata.debug !== undefined) {
+          debug = definition.metadata.debug;
+          debugExplicit = true;
+          if (!debug) sources.clear();
+        } else if (definition.metadata.source && !debugExplicit) {
+          debug = true;
+        }
+        if (debug && definition.metadata.source) addSource(definition.metadata.source);
+        return;
+      }
+      throw new TypeError('Expected a CSS class, style callback, empty item or style array.');
+    }
+    inputs.forEach(append);
+    if (!hasOwnStyle) return pieces.join(' ');
+    const program = normalize(Object.freeze(nodes));
+    const compiled = compileProgram(program, config, {
+      ...(name === undefined ? {} : { name }),
+      debug,
+    });
+    const dependencies = new Map(compiled.dependencies.map((record) => [record.id, record]));
+    for (const id of dependencyIds) {
+      const record = records.get(id);
+      if (!record || record.kind !== 'keyframes')
+        throw new Error('Known CSS class has a missing animation dependency: ' + id);
+      const previous = dependencies.get(id);
+      dependencies.set(id, previous ? mergeRecord(previous, record) : record);
+    }
+    const record: StyleRecord = Object.freeze({
+      ...compiled.record,
+      dependencies: Object.freeze([...dependencies.keys()].sort()),
+      ...(debug && compiled.record.debug
+        ? {
+            debug: Object.freeze({
+              declarations: compiled.record.debug.declarations,
+              sources: Object.freeze([...sources.values()].slice(0, 32)),
+            }),
+          }
+        : {}),
+    });
+    ensure({ record, dependencies: [...dependencies.values()] });
+    return pieces.map((part) => part ?? record.id).join(' ');
+  }
   const runtime: StyleRuntime = {
     config,
-    css(factory: StyleFactory<never>, cssType: CssConstructor = Css) {
+    css(...arguments_: unknown[]) {
       alive();
+      const explicit = arguments_.length === 2 && isCssConstructor(arguments_[1]);
+      const cssType = explicit ? (arguments_[1] as CssConstructor) : Css;
+      const inputs = explicit ? [arguments_[0]] : arguments_;
+      if (inputs.length !== 1 || typeof inputs[0] !== 'function' || isCssConstructor(inputs[0]))
+        return compose(inputs, cssType);
+      const factory = inputs[0] as StyleFactory<never>;
       const prepared = cssType === Css ? getPreparedKey(factory) : undefined;
       let cacheKey = prepared
         ? 'p:' + prepared + JSON.stringify(getStyleSource(factory) ?? null)
@@ -477,6 +610,8 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       for (const id of records.keys()) releaseClaims(id);
       records.clear();
       compiledStyles.clear();
+      reconstructed.clear();
+      reconstructedCharacters = 0;
       normalize.clear();
       claimed.clear();
       if (target) releaseTarget(target, config.namespace, runtime);
@@ -519,10 +654,13 @@ function defaultRuntime(): StyleRuntime {
   return findTargetRuntime<StyleRuntime>(document, 'z') ?? createRuntime({ target: document });
 }
 /** 浏览器中直接返回字符串类名；普通变量在每次调用时重新求值。 */
-export function css(factory: StyleFactory): string;
-export function css<T extends Css>(factory: StyleFactory<T>, cssType: CssConstructor<T>): string;
-export function css(factory: StyleFactory<never>, cssType: CssConstructor = Css): string {
-  return defaultRuntime().css(factory as StyleFactory, cssType);
+export function css(...inputs: StyleInput[]): string;
+export function css<T extends Css>(input: StyleInput<T>, cssType: CssConstructor<T>): string;
+export function css(...arguments_: unknown[]): string {
+  const runtime = defaultRuntime();
+  if (arguments_.length === 2 && isCssConstructor(arguments_[1]))
+    return runtime.css(arguments_[0] as StyleInput, arguments_[1]);
+  return runtime.css(...(arguments_ as StyleInput[]));
 }
 /** 应用级全局样式便捷入口，返回可更新/释放的挂载。 */
 export function injectGlobal(value: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle {

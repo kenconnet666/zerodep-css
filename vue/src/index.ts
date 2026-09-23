@@ -19,3 +19,4 @@ export type {
   StyleFactory,
   StylesheetFactory,
 } from '@zerodep-css/core';
+export { createStyles } from './styles.js';

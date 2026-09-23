@@ -15,6 +15,9 @@ export interface DeclarationHelpers {
 export type DeclarationBuilder = StyleProperties & DeclarationHelpers;
 export type DeclarationFactory = (s: DeclarationBuilder) => void;
 export type StyleFactory<T = Css> = (s: T) => void;
+export type StyleInput<T extends Css = Css> =
+  string | StyleFactory<T> | false | null | undefined | readonly StyleInput<T>[];
+export type CssFunction<T extends Css = Css> = (...inputs: StyleInput<T>[]) => string;
 export type FrameOffset =
   | number
   | 'from'
@@ -47,15 +50,15 @@ export type PageBuilder = Omit<DeclarationBuilder, keyof DescriptorBuilders['@pa
   DescriptorBuilders['@page'] & {
     marginBox(name: PageMarginBox, factory: DeclarationFactory): void;
   };
-export interface GlobalBuilder {
-  rule(selector: string, factory: StyleFactory): void;
-  rule<T extends Css>(selector: string, factory: StyleFactory<T>, cssType: CssConstructor<T>): void;
-  media(query: string, factory: GlobalFactory): void;
-  supports(query: string, factory: GlobalFactory): void;
-  containerQuery(query: string, factory: GlobalFactory): void;
-  layer(name: string, factory: GlobalFactory): void;
-  scope(prelude: string, factory: GlobalFactory): void;
-  startingStyle(factory: GlobalFactory): void;
+export interface GlobalBuilder<T extends Css = Css> {
+  rule(selector: string, factory: StyleFactory<T>): void;
+  rule<U extends Css>(selector: string, factory: StyleFactory<U>, cssType: CssConstructor<U>): void;
+  media(query: string, factory: GlobalFactory<T>): void;
+  supports(query: string, factory: GlobalFactory<T>): void;
+  containerQuery(query: string, factory: GlobalFactory<T>): void;
+  layer(name: string, factory: GlobalFactory<T>): void;
+  scope(prelude: string, factory: GlobalFactory<T>): void;
+  startingStyle(factory: GlobalFactory<T>): void;
   descriptors<R extends DescriptorRule>(
     name: R,
     prelude: string,
@@ -69,9 +72,9 @@ export interface GlobalBuilder {
   /** 明确的未类型化规则，不隐式重写或改变作用域。 */
   rawRule(css: string): void;
 }
-export interface StylesheetBuilder extends GlobalBuilder {
+export interface StylesheetBuilder<T extends Css = Css> extends GlobalBuilder<T> {
   layerOrder(...names: string[]): void;
   statement(name: '@import' | '@namespace', prelude: string): void;
 }
-export type GlobalFactory = (g: GlobalBuilder) => void;
-export type StylesheetFactory = (g: StylesheetBuilder) => void;
+export type GlobalFactory<T extends Css = Css> = (g: GlobalBuilder<T>) => void;
+export type StylesheetFactory<T extends Css = Css> = (g: StylesheetBuilder<T>) => void;

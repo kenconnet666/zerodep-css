@@ -10,10 +10,10 @@ import {
 } from 'vue';
 import type {
   ThemeDefinition,
-  ThemeOverrides,
   ThemeScope,
   ThemeTree,
   ThemeValues,
+  ThemeInput,
 } from '@zerodep-css/core';
 import {
   createThemeScope,
@@ -46,16 +46,15 @@ export function useTheme<T extends ThemeTree>(
 /** 当前组件后续读取与后代均可继承；返回值用于显式选择或跨 context 使用。 */
 export function provideTheme<T extends ThemeTree>(
   definition: ThemeDefinition<T>,
-  overrides: () => ThemeOverrides<T> | null | undefined = () => undefined,
+  overrides: ThemeInput<T> = undefined,
 ): ThemeScope {
-  if (typeof overrides !== 'function')
-    throw new TypeError('Theme overrides must be read from a getter.');
+  const read = typeof overrides === 'function' ? overrides : () => overrides;
   const instance = getCurrentInstance();
   if (!instance || !getCurrentScope())
     throw new Error('provideTheme must run during component setup.');
   // 同一组件可连续提供多个主题；Vue inject 本身只读取祖先，不包含先前的 provide。
   const parent = resolveThemeScope();
-  const values = computed(() => resolveTheme(definition, overrides(), parent));
+  const values = computed(() => resolveTheme(definition, read(), parent));
   // 原生 computed 管失效与缓存；声明准备只在有效主题变化后重算，不新增 watcher。
   const style = computed(() => prepareThemeStyle(definition, values.value));
   const scope = createThemeScope(

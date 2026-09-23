@@ -28,3 +28,6 @@ if (kind === 'browser:frameworks')
   run(process.execPath, [resolve(root, 'scripts/testing/browser-bindings.mjs')]);
 if (kind === 'browser:frameworks')
   run(process.execPath, [resolve(root, 'scripts/testing/hmr-bindings.mjs')]);
+if (kind === 'browser:frameworks')
+  for (const framework of ['vue', 'svelte'])
+    run(process.execPath, [resolve(root, framework, 'test/browser/project-styles.mjs')]);

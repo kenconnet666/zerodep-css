@@ -66,7 +66,10 @@ test('继承成员同样受构建生命周期约束，实例不会在调用间�
     assert.notEqual(first, second);
     assert.throws(() => first.control('small'), /synchronous callback/);
     assert.throws(() => new Css(), /style runtime/);
-    assert.throws(() => runtime.css(() => {}, class {}), /extend Css/);
+    // 多输入允许普通函数参与组合；不继承 Css 的 class 不能作为构造器或回调执行。
+    const beforeInvalidClass = runtime.snapshot();
+    assert.throws(() => runtime.css(() => {}, class {}), TypeError);
+    assert.deepEqual(runtime.snapshot(), beforeInvalidClass);
     class InvalidCss extends Css {
       get color() {
         return this.extendProperty(super.color, { raw: 'red' });

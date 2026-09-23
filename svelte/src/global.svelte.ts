@@ -1,20 +1,27 @@
 import { onDestroy, untrack } from 'svelte';
-import { globalCss, type StylesheetFactory, type StyleContext } from '@zerodep-css/core';
+import {
+  Css,
+  globalCss,
+  type CssConstructor,
+  type StylesheetFactory,
+  type StyleContext,
+} from '@zerodep-css/core';
 import { resolveContext } from './context.js';
 
 /** 全局样式 owner：初始化挂载、原生响应式更新、提前停止或组件卸载清理。 */
-export function useGlobalCss(
+export function useGlobalCss<C extends Css = Css>(
   identity: string,
-  factory: StylesheetFactory,
+  factory: StylesheetFactory<C>,
   explicit?: StyleContext,
+  cssType: CssConstructor<C> = Css as CssConstructor<C>,
 ): { readonly id: string; dispose(): void } {
   const context = resolveContext(explicit);
   // 服务端 effect 不执行；保留规则直到宿主输出并释放请求上下文。
-  if (context.server) return context.mountGlobal(identity, globalCss(factory));
+  if (context.server) return context.mountGlobal(identity, globalCss(factory, cssType));
   let handle: ReturnType<StyleContext['mountGlobal']> | undefined;
   let closed = false;
   // derived 只运行纯构建器；依赖读取留在这里，规则注册留在 effect/首次挂载中。
-  const definition = $derived(globalCss(factory));
+  const definition = $derived(globalCss(factory, cssType));
   // 独立 root 让返回句柄可以提前停止；因此必须由 onDestroy 显式回收。
   const stop = $effect.root(() => {
     $effect.pre(() => {

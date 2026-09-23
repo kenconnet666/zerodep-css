@@ -491,7 +491,7 @@ function globals(factory: Factory, session: Session, root: boolean): readonly Gl
     });
   };
   const builder: GlobalBuilder = {
-    rule(selector: string, child: Factory, cssType: CssConstructor = Css) {
+    rule(selector: string, child: Factory, cssType: CssConstructor = session.cssType) {
       alive(session);
       text(selector, 'Global selector');
       // 每条规则独立构建会话，派生类不会泄漏到相邻规则，捕获实例也及时失效。
@@ -574,8 +574,17 @@ function globals(factory: Factory, session: Session, root: boolean): readonly Gl
   return Object.freeze(rules);
 }
 /** 创建全局样式定义；挂载、更新和释放由运行时及适配器负责。 */
-export function globalCss(factory: StylesheetFactory): StylesheetDefinition {
-  return withSession((session) =>
-    Object.freeze({ kind: 'stylesheet', rules: globals(factory, session, true) }),
+export function globalCss(factory: StylesheetFactory): StylesheetDefinition;
+export function globalCss<T extends Css>(
+  factory: StylesheetFactory<T>,
+  cssType: CssConstructor<T>,
+): StylesheetDefinition;
+export function globalCss(
+  factory: StylesheetFactory<never>,
+  cssType: CssConstructor = Css,
+): StylesheetDefinition {
+  return withSession(
+    (session) => Object.freeze({ kind: 'stylesheet', rules: globals(factory, session, true) }),
+    cssType,
   );
 }

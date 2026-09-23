@@ -82,6 +82,51 @@ export async function runBrowserTests(browser, baseUrl, ssr, output, match) {
     );
     return initial;
   });
+  await scenario('组合恢复的 class 保留动画与嵌套，并删除前置 important', async (page) => {
+    const result = await page.evaluate(() => {
+      const server = window.z.createRuntime({ target: null, namespace: 'compose' });
+      const fade = window.z.keyframes((k) => {
+        k.from((s) => s.opacity.raw(0));
+        k.to((s) => s.opacity.raw(1));
+      });
+      const base = server.css((s) => {
+        s.important((s) => s.color.red);
+        s.hover((s) => s.color.purple);
+        s.animationName.raw(fade);
+        s.animationDuration.ms(1);
+      });
+      const manifest = server.snapshot();
+      const head = document.createElement('div');
+      head.innerHTML = server.renderStyles();
+      document.head.append(...head.childNodes);
+      server.dispose();
+      const client = window.z.createRuntime({ namespace: 'compose', hydrate: manifest });
+      window.composedRuntime = client;
+      const node = document.createElement('div');
+      node.id = 'composed-result';
+      node.textContent = 'composed';
+      node.className = client.css(base, [false, 'foreign', (s) => s.color.blue]);
+      document.body.append(node);
+      const style = getComputedStyle(node);
+      return {
+        color: style.color,
+        animation: style.animationName,
+        foreign: node.classList.contains('foreign'),
+        baseRemoved: !node.classList.contains(base),
+        animationExists: manifest.records.some((record) => record.id === style.animationName),
+      };
+    });
+    assert.equal(result.color, 'rgb(0, 0, 255)');
+    assert(result.foreign && result.baseRemoved && result.animationExists);
+    await page.locator('#composed-result').hover();
+    assert.equal(
+      await page.locator('#composed-result').evaluate((node) => getComputedStyle(node).color),
+      'rgb(128, 0, 128)',
+    );
+    await page.evaluate(() => window.composedRuntime.dispose());
+    assert.equal(await page.locator('style[data-zerodep="compose"]').count(), 0);
+    return result;
+  });
   await scenario('raw 未知值与完整 token 流由浏览器决定有效性', async (page) => {
     const result = await page.evaluate(() => {
       const runtime = window.z.createRuntime({ namespace: 'raw-native' });

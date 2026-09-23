@@ -1,6 +1,7 @@
 export { keyframes, globalCss } from './builder.js';
 export { Css } from './css.js';
 export type { CssConstructor, CssConstruction } from './css.js';
+export type { StylesOptions, ThemeInput, ProjectThemeHooks } from './style-project.js';
 export type { StyleConfig, StyleSource } from './style-metadata.js';
 export { css, injectGlobal, createRuntime } from './runtime.js';
 export { createStyleContext } from './context.js';
@@ -29,6 +30,8 @@ export type {
   DeclarationBuilder,
   DeclarationFactory,
   StyleFactory,
+  StyleInput,
+  CssFunction,
   FrameBuilder,
   FrameOffset,
   GlobalBuilder,

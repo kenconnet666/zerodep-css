@@ -1,4 +1,11 @@
-import { Css, createRuntime, type StyleRuntime } from '../../src/index.js';
+import {
+  Css,
+  createRuntime,
+  globalCss,
+  type CssFunction,
+  type StyleInput,
+  type StyleRuntime,
+} from '../../src/index.js';
 import { ThemeCss } from '../../src/themes.js';
 import { createRuntimeView } from '../../src/style-scope.js';
 
@@ -27,6 +34,16 @@ class BrandedCss extends ThemeCss {
   }
 }
 const branded = createRuntimeView(runtime, undefined, BrandedCss);
+const appCss = createRuntimeView(runtime, undefined, AppCss).css;
+const composite: CssFunction<AppCss> = appCss;
+const item: StyleInput<AppCss> = [false, 'foreign', (s) => s.control('small')];
+composite(item, (s) => s.color.brand);
+// @ts-expect-error 数字不是 class 或样式输入
+composite(7);
+globalCss((g) => {
+  g.rule('button', (s) => s.control('small'));
+  g.media('screen', (nested) => nested.rule('main', (s) => s.color.brand));
+}, AppCss);
 branded.css((s) => {
   s.color.red;
   s.color.primary;

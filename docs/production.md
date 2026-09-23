@@ -74,6 +74,20 @@ Css 的真实原型 getter 由引擎传入属性目录安装，不再导入完�
 
 后续公开外形收敛为模块级 createStyles 配置、每应用/请求 createHost、组件 const css=useCss()。Vue host.install 与 Svelte 根 host.provide 对接原生上下文；host 统一拥有 SSR 收集、恢复和释放，不在模块顶层创建 runtime。此段为后续实施方案，尚非已导出 API。
 
+### P2c 项目入口与样式组合
+
+Vue/Svelte 已新增 createStyles({cssType?,theme?})，返回绑定类型的 useCss、useGlobalCss、useTheme、provideTheme 和 createHost。默认主题可省略重复定义；显式传入其他主题仍可用。没有默认主题时类型层要求传入定义，普通对象与 getter 都由原生响应式读取，null 继承父值。全局规则和嵌套条件也继承 AppCss，无需每条 rule 重复传构造器。
+
+host 每应用/请求创建一次，只暴露收集、恢复和释放等宿主操作。Vue app.use(host) 通过应用卸载钩子清理；Svelte 根 host.provide() 只认领根，根组件卸载/HMR 释放认领，应用入口在最终 unmount 后显式 host.dispose()。SSR 都在序列化后 finally 释放，不能在组件 SSR onDestroy 提前删规则。
+
+css 接受多个字符串/回调，以及数组、false/null/undefined 空项，按输入顺序组合。已知类只在当前 host 内识别，canonical body 按需严格反解，回写必须相同；解析缓存最多 128 条/262144 个原文字符，单条超过 32768 字符仍可组合但不驻留。恢复的 manifest 同样可组合，动画依赖与来源保留，不重跑旧回调，不永久保存第二份完整 IR。后写 name/明确 debug 配置生效，外部类只作为 HTML class token 透传。
+
+类名字符串代表调用时的样式快照；复制编译生成的 class 字符串不会自动复制原元素上的 inline 变量。组合优先使用普通函数和 if/else/switch，数组/空项只是便利能力。单回调仍使用原有 prepared/结果缓存，不因绑定视图而退回完整组合路径。
+
+本地根 check/build、三语言类型负例、163 项单元、既有双框架 SSR/hydration/HMR、新项目入口的 SSR/真实浏览器生命周期测试、恢复类组合的 core 浏览器场景及体积检查通过。新入口已导出；旧 useStyleRuntime/显式 context 入口和既有样例尚在过渡，下一步统一迁移删除，不能把当前兼容过渡当成最终 API。项目跨模块 useCss 的编译优化也尚待后续保守分析，未识别时运行时仍可完整工作。
+
+独立 tarball 消费也通过，包含新 createStyles 的 NodeNext 类型验证、默认主题/派生类负例，以及两框架客户端和 SSR 构建、hydration。此前 P2a/P2b 提交 02bd575/585382a 的完整远程 CI 均已成功；本阶段 CI 仍以新提交运行结果为准。
+
 ### P1 覆盖边界调整
 
 交叉复核发现：把所有后写长属性收齐后删除早期简写，会让 important 简写在“补齐第四边”时突然消失，从而改变另外三边；任意 raw/var 简写也不能可靠拆开。因此采用明确、可维护的边界：**标准化同名属性（含规范明确的 legacyAliasOf）直接后写替换，不考虑前 important；不同属性的简写/长属性及 all 保留原始声明顺序，交给浏览器处理原生层叠。**

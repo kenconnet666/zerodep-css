@@ -143,7 +143,7 @@ assert.equal(runtime.stats().classes,3); } finally { runtime.dispose(); }
     await save(
       join(folder, 'types.ts'),
       `import { createStyleContext, readTheme, type StyleFactory, type StylesheetFactory } from '@zerodep-css/core';
-import { useStyleRuntime, useTheme, defineTheme, provideTheme } from '@zerodep-css/${framework}';
+import { createStyles, useStyleRuntime, useTheme, defineTheme, provideTheme } from '@zerodep-css/${framework}';
 // @ts-expect-error 旧作者类型已统一为 Css
 import type { StyleBuilder } from '@zerodep-css/core';
 // @ts-expect-error bx 已移除，动态值直接交给 cssPlugin
@@ -182,6 +182,18 @@ s.width('50%'); s.width.px(12); };
 const global: StylesheetFactory = g => g.containerQuery('(width > 10px)', g => g.rule('body', style));
 const result: string = useStyleRuntime({ context }).css(style);
 class AppCss extends Css { get color(){ return this.extendProperty(super.color,{brand:'#2463eb'}); } control(){this.padding.px(8);} }
+const project = createStyles({cssType:AppCss,theme:palette});
+const projectHost = project.createHost({target:null});
+const projectCss = project.useCss();
+const combined: string = projectCss('foreign', [false, null, s=>s.control()]);
+project.useGlobalCss('project-global', g=>g.media('screen', g=>g.rule('body', s=>s.control())));
+project.provideTheme({color:{brand:'green'}});
+const projectBrand: string = project.useTheme()().color.brand;
+// @ts-expect-error 项目入口仍保留主题叶类型
+project.provideTheme({color:{brand:1}});
+// @ts-expect-error 没有默认主题时须显式传定义
+createStyles().useTheme();
+projectHost.dispose(); void combined; void projectBrand;
 const extended: string = useStyleRuntime({ context }).css(s=>{s.control();s.color.brand;s.hover(h=>h.control());},AppCss);
 const appStyle = useStyleRuntime({context,cssType:AppCss});
 // @ts-expect-error 泛型声明不能替代运行时构造器

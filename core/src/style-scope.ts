@@ -1,9 +1,10 @@
 import { Css, type CssConstructor } from './css.js';
-import type { StyleFactory } from './builder-types.js';
+import type { StyleFactory, StyleInput } from './builder-types.js';
 import type { StyleRuntime } from './runtime.js';
 import type { ThemeDefinition, ThemeOverrides, ThemeTree, ThemeValues } from './theme.js';
 import { themeStyle } from './theme.js';
 export { prepareThemeStyle } from './theme.js';
+export { normalizeStylesOptions, projectThemeArguments } from './style-project.js';
 import type { StyleContext } from './context.js';
 
 /** 组件选择视图，不改变宿主 runtime 的配置或所有权。 */
@@ -115,12 +116,25 @@ export function createRuntimeView(
   defaultCss: CssConstructor = Css,
 ): StyleRuntime {
   if (!scope?.themes.length && defaultCss === Css) return runtime;
-  function css(factory: StyleFactory): string;
-  function css<T extends Css>(factory: StyleFactory<T>, cssType: CssConstructor<T>): string;
-  function css(factory: StyleFactory<never>, cssType: CssConstructor = defaultCss): string {
-    const content = runtime.css(factory as StyleFactory, cssType);
+  function css(...inputs: StyleInput[]): string;
+  function css<T extends Css>(input: StyleInput<T>, cssType: CssConstructor<T>): string;
+  function css(...arguments_: unknown[]): string {
+    const explicit =
+      arguments_.length === 2 &&
+      typeof arguments_[1] === 'function' &&
+      (arguments_[1] === Css || arguments_[1].prototype instanceof Css);
+    const cssType = explicit ? (arguments_[1] as CssConstructor) : defaultCss;
+    const inputs = explicit ? [arguments_[0]] : arguments_;
+    const content =
+      inputs.length === 1
+        ? runtime.css(inputs[0] as StyleInput, cssType)
+        : runtime.css(inputs as StyleInput[], cssType);
     const names = scope?.themes.map((theme) => theme.className(runtime)) ?? [];
-    return [...names, content].join(' ');
+    const themed = new Set(names);
+    return [
+      ...names,
+      ...(content.match(/[^ \t\n\f\r]+/gu) ?? []).filter((name) => !themed.has(name)),
+    ].join(' ');
   }
   return Object.freeze({ ...runtime, css });
 }
