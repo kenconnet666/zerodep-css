@@ -1,5 +1,11 @@
 # 当前交接与换机恢复
 
+## 2026-09-23 运行时优先分支
+
+最新用户决策：绝不放弃运行时 CSS，其余手段只作为优化。当前分支 codex/runtime-first 从 2db10e3 建立，完整运行时产品代码保留；该基线的 [CI 已通过](https://github.com/kenconnet666/zerodep-css/actions/runs/35830142412)。codex/static-css 保留为独立研究分支，不能以其强制静态限制覆盖本分支合同。
+
+新分支仅保留已验证的 LSP 目录监听修复，并记录 [具体讨论方案](runtime-first.md)；尚未开始新一轮产品重构。下文的 feat/native-reactivity、编译优先研究和停止点属于历史记录。新提交的 CI 应按自身 SHA 核对。
+
 ## 2026-09-23 后续优化进展
 
 旧停止点 `9cd39b9` 的七项 CI 已核对通过。本轮按用户要求边测边改，并优先使用框架原生缓存：主题声明准备由 computed/$derived 持有，core 复用既有有界缓存；仅另保留有测量收益的固定 token 索引，单位索引实验已撤回。作者 API 和运行时回退不变。

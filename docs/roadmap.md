@@ -2,6 +2,8 @@
 
 当前实现与证据见 [验证记录](validation.md) 和 [支持矩阵](support.md)。下列演进项不应被误读为已有能力。
 
+2026-09-23：已从运行时完整基线 2db10e3 建立 codex/runtime-first。运行时能力是产品合同，编译只做等价优化。下一阶段讨论入口为 [运行时优先方案](runtime-first.md)，具体改造尚待讨论，不继续推进强制静态路线。
+
 ## 已完成的基础
 
 - core 样式引擎、顺序与资源注册、Vue/Svelte 原生上下文与字符串 SSR/hydration。
