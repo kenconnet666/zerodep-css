@@ -27,6 +27,13 @@ import {
   getPreparedKey,
   getStyleSource,
 } from './style-metadata.js';
+import {
+  assertTargetAvailable,
+  createRegistrationOwner,
+  findTargetRuntime,
+  registerTarget,
+  releaseTarget,
+} from './host.js';
 
 export interface StyleManifest {
   readonly version: 1 | 2;
@@ -72,14 +79,6 @@ export interface StyleRuntime<C extends Css = Css> {
   stats(): RuntimeStats;
   dispose(): void;
 }
-
-const owners = new WeakMap<StyleTarget, Map<string, StyleRuntime>>();
-interface RegistrationOwner {
-  owner: symbol;
-  id: string;
-  body: string;
-}
-const documentRegistrations = new WeakMap<Document, Map<string, RegistrationOwner[]>>();
 
 export function assertSameRecord(previous: StyleRecord, next: StyleRecord): void {
   mergeRecord(previous, next);
@@ -236,20 +235,13 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
   const nonce = options.nonce;
   if (nonce !== undefined && typeof nonce !== 'string')
     throw new TypeError('nonce must be a string.');
-  if (target && owners.get(target)?.has(config.namespace))
-    throw new Error('This target already has a runtime for namespace ' + config.namespace);
-  const owner = Symbol(config.namespace);
+  if (target) assertTargetAvailable(target, config.namespace);
   const doc = target
     ? target.nodeType === 9
       ? (target as Document)
       : target.ownerDocument!
     : null;
-  let shared = doc ? documentRegistrations.get(doc) : undefined;
-  if (doc && !shared) {
-    shared = new Map();
-    documentRegistrations.set(doc, shared);
-  }
-  shared ??= new Map();
+  const registrationOwner = createRegistrationOwner(doc, config.namespace);
   const records = new Map<string, StyleRecord>();
   const recordRegistrations = new Map<string, readonly PropertyRegistration[]>();
   const claimed = new Set<string>();
@@ -278,34 +270,19 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
         if (planned.has(entry.name) && planned.get(entry.name) !== entry.body)
           throw new Error('Conflicting @property registration: ' + entry.name);
         planned.set(entry.name, entry.body);
-        for (const existing of shared!.get(entry.name) ?? []) {
-          if (existing.owner === owner && (existing.id === replacing || existing.id === record.id))
-            continue;
-          if (existing.body !== entry.body)
-            throw new Error('Conflicting @property registration: ' + entry.name);
-        }
       }
+      registrationOwner.validate(record.id, entries, replacing);
     }
     return claims;
   }
   function releaseClaims(id: string) {
-    for (const entry of recordRegistrations.get(id) ?? []) {
-      const remaining = (shared!.get(entry.name) ?? []).filter(
-        (r) => r.owner !== owner || r.id !== id,
-      );
-      if (remaining.length) shared!.set(entry.name, remaining);
-      else shared!.delete(entry.name);
-    }
+    registrationOwner.release(id, recordRegistrations.get(id) ?? []);
     recordRegistrations.delete(id);
   }
   function claim(record: StyleRecord, entries: readonly PropertyRegistration[]) {
     releaseClaims(record.id);
     recordRegistrations.set(record.id, entries);
-    for (const entry of entries) {
-      const list = shared!.get(entry.name) ?? [];
-      list.push({ owner, id: record.id, body: entry.body });
-      shared!.set(entry.name, list);
-    }
+    registrationOwner.claim(record.id, entries);
   }
   function commit(batch: readonly StyleRecord[], replacing?: string) {
     alive();
@@ -502,7 +479,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       compiledStyles.clear();
       normalize.clear();
       claimed.clear();
-      if (target) owners.get(target)?.delete(config.namespace);
+      if (target) releaseTarget(target, config.namespace, runtime);
     },
   };
   try {
@@ -527,25 +504,19 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       const header = layerRecord(config);
       if (header) commit([header]);
     }
-    if (target) {
-      let map = owners.get(target);
-      if (!map) {
-        map = new Map();
-        owners.set(target, map);
-      }
-      map.set(config.namespace, runtime);
-    }
+    if (target) registerTarget(target, config.namespace, runtime);
     return Object.freeze(runtime);
   } catch (error) {
     host?.dispose();
     for (const id of records.keys()) releaseClaims(id);
+    if (target) releaseTarget(target, config.namespace, runtime);
     throw error;
   }
 }
 function defaultRuntime(): StyleRuntime {
   if (typeof document === 'undefined')
     throw new Error('Server css() requires a request-local createRuntime(); use its css function.');
-  return owners.get(document)?.get('z') ?? createRuntime({ target: document });
+  return findTargetRuntime<StyleRuntime>(document, 'z') ?? createRuntime({ target: document });
 }
 /** 浏览器中直接返回字符串类名；普通变量在每次调用时重新求值。 */
 export function css(factory: StyleFactory): string;

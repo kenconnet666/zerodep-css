@@ -66,6 +66,14 @@ Css 的真实原型 getter 由引擎传入属性目录安装，不再导入完�
 
 本地 check/build、154 项单元、三语言类型负例、双框架主题/绑定/CSP/SSR/hydration/释放、体积门禁均通过；Css 与 tokenizer 类型桥的 LSP 完整零错误。独立 tarball 消费通过两框架依赖审计、类型、客户端/SSR 生产构建及 hydration。此阶段尚未迁移公开入口，core 根入口的旧运行 API 将在 P2 后续统一移除。
 
+### P2b 共享浏览器宿主边界
+
+宿主 namespace 与文档级 @property 的所有权抽至轻量 host 模块，无运行引擎/解析器依赖。没有 DOM 目标的请求仍创建独立局部注册表；释放 namespace 时校验原 owner，避免旧实例删除后来接管的目标。主题定义声明只依赖一个窄 css 方法，去除对完整引擎类型的反向依赖。
+
+真实浏览器以两个 ESM URL 实例化独立引擎，仅共享 host 模块：验证首次尚无 style 时的同 namespace 冲突、不同 namespace 的 @property 冲突、Document/ShadowRoot 交叉冲突、失败后释放重试及全部节点清理。该用例进入 browser:core，因此后续 CI 三引擎都会执行。本地根 check/build、19 项运行时/事务/上下文用例、21 项既有 core 浏览器场景、新双引擎用例、体积检查与 host LSP 完整零错误均通过。
+
+后续公开外形收敛为模块级 createStyles 配置、每应用/请求 createHost、组件 const css=useCss()。Vue host.install 与 Svelte 根 host.provide 对接原生上下文；host 统一拥有 SSR 收集、恢复和释放，不在模块顶层创建 runtime。此段为后续实施方案，尚非已导出 API。
+
 ### P1 覆盖边界调整
 
 交叉复核发现：把所有后写长属性收齐后删除早期简写，会让 important 简写在“补齐第四边”时突然消失，从而改变另外三边；任意 raw/var 简写也不能可靠拆开。因此采用明确、可维护的边界：**标准化同名属性（含规范明确的 legacyAliasOf）直接后写替换，不考虑前 important；不同属性的简写/长属性及 all 保留原始声明顺序，交给浏览器处理原生层叠。**

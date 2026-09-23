@@ -22,6 +22,8 @@ if (kind === 'unit') {
     'internal/compiler/test/*.test.mjs',
   ]);
 } else run(process.execPath, [resolve(root, 'scripts/testing', entries[kind])]);
+if (kind === 'browser:core')
+  run(process.execPath, [resolve(root, 'core/test/browser/host-ownership.mjs')]);
 if (kind === 'browser:frameworks')
   run(process.execPath, [resolve(root, 'scripts/testing/browser-bindings.mjs')]);
 if (kind === 'browser:frameworks')

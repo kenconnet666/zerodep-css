@@ -2,7 +2,6 @@ import { cssVar, type CssVariable } from './values.js';
 import { hashText } from './hash.js';
 import { prepareRuntimeStyle, validateStyleName } from './style-metadata.js';
 import { assertThemeValue } from './theme-value.js';
-import type { StyleRuntime } from './runtime.js';
 import type { StyleFactory } from './builder-types.js';
 
 const styleKey = Symbol('zerodep.theme-style');
@@ -59,7 +58,10 @@ export interface ThemeDefinition<T extends ThemeTree> {
   readonly tokens: ThemeTokens<T>;
   extend(overrides: ThemeOverrides<T>): ThemeDefinition<T>;
   resolve(overrides?: ThemeOverrides<T> | null, inherited?: ThemeValues<T>): ThemeValues<T>;
-  className(runtime: StyleRuntime, values?: ThemeOverrides<T> | null): string;
+  className(
+    runtime: { css(factory: StyleFactory): string },
+    values?: ThemeOverrides<T> | null,
+  ): string;
 }
 
 function record(value: unknown): value is Record<string, unknown> {
