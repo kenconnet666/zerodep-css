@@ -1,4 +1,3 @@
-import { propertyMetadata } from './generated/metadata.js';
 import type { StyleProperties, SimplePseudo, FunctionalPseudo } from './generated/properties.js';
 import type { DeclarationHelpers, StyleFactory } from './builder-types.js';
 import type { CssVariable } from './values.js';
@@ -6,12 +5,14 @@ import type { StyleConfig } from './style-metadata.js';
 
 /** Css 的构建能力由一次同步样式求值提供，实例不能脱离该求值继续写样式。 */
 export interface CssConstruction {
+  /** 由引擎提供完整标准属性目录；作者基类不加载值校验元数据。 */
+  readonly properties: readonly string[];
   readonly read: (key: PropertyKey) => unknown;
   readonly assertActive: () => void;
 }
 export type CssConstructor<T extends Css = Css> = new (construction: CssConstruction) => T;
 const constructionKey: unique symbol = Symbol('zerodep.css-construction');
-let propertiesInstalled = false;
+const installedCatalogs = new WeakSet<readonly string[]>();
 
 export interface Css extends StyleProperties, DeclarationHelpers {}
 
@@ -22,20 +23,22 @@ export class Css {
   constructor(construction: CssConstruction) {
     if (
       !construction ||
+      !Array.isArray(construction.properties) ||
       typeof construction.read !== 'function' ||
       typeof construction.assertActive !== 'function'
     )
       throw new TypeError('Css instances must be created by a style runtime.');
-    // 按需安装，避免只使用 cssVar 等小入口时触发整张属性表的初始化。
-    if (!propertiesInstalled) {
-      for (const key of [...Object.keys(propertyMetadata), 'custom', 'property']) {
+    // 目录来自引擎，稳定数组只检查一次；多个适配器共用基类时允许补齐新属性。
+    if (!installedCatalogs.has(construction.properties)) {
+      for (const key of [...construction.properties, 'custom', 'property']) {
+        if (Object.hasOwn(Css.prototype, key)) continue;
         Object.defineProperty(Css.prototype, key, {
           get(this: Css) {
             return this[constructionKey].read(key);
           },
         });
       }
-      propertiesInstalled = true;
+      installedCatalogs.add(construction.properties);
     }
     Object.defineProperty(this, constructionKey, { value: construction });
     return new Proxy(this, {

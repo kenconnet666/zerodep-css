@@ -28,6 +28,8 @@ class DarkCss extends AppCss {
 }
 
 test('Css 使用真实继承、super、私有字段和属性关键字扩展', () => {
+  // 先出现较小的目录，后续完整引擎仍须补齐真实 getter，不能只靠实例 Proxy。
+  new Css({ properties: [], read: () => undefined, assertActive() {} });
   const runtime = createRuntime({ target: null });
   try {
     const a = runtime.css((s) => {

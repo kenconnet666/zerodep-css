@@ -1,7 +1,9 @@
 {
+  "Css": { "minifiedBytes": 3000, "gzipBytes": 1200 },
+  "defineTheme": { "minifiedBytes": 13000, "gzipBytes": 5500 },
   "css": { "minifiedBytes": 520000, "gzipBytes": 105000 },
   "createRuntime": { "minifiedBytes": 520000, "gzipBytes": 105000 },
   "createStyleContext": { "minifiedBytes": 525000, "gzipBytes": 106000 },
-  "cssVar": { "minifiedBytes": 4500, "gzipBytes": 1800 },
-  "readTheme": { "minifiedBytes": 4500, "gzipBytes": 1800 }
+  "cssVar": { "minifiedBytes": 1000, "gzipBytes": 600 },
+  "readTheme": { "minifiedBytes": 1000, "gzipBytes": 600 }
 }

@@ -50,8 +50,9 @@ interface Session {
   depth: number;
   metadata?: StyleMetadata;
 }
-const simpleSet = new Set(simplePseudos);
-const functionalSet = new Set(functionalPseudos);
+const simpleSet = /* @__PURE__ */ new Set(simplePseudos);
+const propertyNames = /* @__PURE__ */ Object.keys(propertyMetadata);
+const functionalSet = /* @__PURE__ */ new Set(functionalPseudos);
 // 固定元数据的按需索引，不记录业务值、框架状态或构建实例。
 const keywordValues: (ReadonlySet<string> | undefined)[] = [];
 function keywordSet(group: number): ReadonlySet<string> {
@@ -387,6 +388,7 @@ function style(factory: Factory, session: Session, important = false): StyleProg
       createHelpers,
     ) as object;
     const builder = new session.cssType({
+      properties: propertyNames,
       read: (key) => Reflect.get(properties, key),
       assertActive: () => alive(session),
     });

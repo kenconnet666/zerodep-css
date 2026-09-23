@@ -1,4 +1,4 @@
-import { ident, tokenize, tokenTypes as token } from 'css-tree';
+import { ident, tokenize, tokenTypes as token } from './css-tokenizer.js';
 
 /** 与 CSS 输入预处理一致，保证 hash、HTML style 文本和 hydration 比较使用相同字符。 */
 export function normalizeCssText(value: string): string {

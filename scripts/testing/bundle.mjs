@@ -14,7 +14,15 @@ assert(
   themeDeclarationBytes <= 8192,
   'Preset declarations must reuse base types instead of expanding the full keyword tables.',
 );
-for (const name of ['css', 'createRuntime', 'createStyleContext', 'cssVar', 'readTheme']) {
+for (const name of [
+  'Css',
+  'defineTheme',
+  'css',
+  'createRuntime',
+  'createStyleContext',
+  'cssVar',
+  'readTheme',
+]) {
   const result = await build({
     stdin: {
       contents: `import { ${name} } from './core/dist/index.js'; console.log(${name});`,
@@ -41,6 +49,18 @@ for (const name of ['css', 'createRuntime', 'createStyleContext', 'cssVar', 'rea
   const leaked = modules.filter(
     (m) => m.bytes && /(?:node:|vite|typescript|@babel|compiler-sfc|svelte\/compiler)/.test(m.file),
   );
+  if (name === 'Css')
+    assert(
+      !modules.some((m) => m.bytes && /(?:generated\/metadata|css-tree)/.test(m.file)),
+      'Author class must not retain runtime validation metadata or the CSS parser.',
+    );
+  if (name === 'defineTheme')
+    assert(
+      !modules.some(
+        (m) => m.bytes && /css-tree\/(?:lib|dist)\/(?:syntax|lexer|parser|data)/.test(m.file),
+      ),
+      'Theme definitions need token boundaries, not the complete property parser or grammar data.',
+    );
   entries.push({
     name,
     minifiedBytes: bytes.length,

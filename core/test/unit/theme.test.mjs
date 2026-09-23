@@ -66,6 +66,41 @@ test('定义和有效值不会随外部对象修改，并拒绝非法类型及�
   assert.throws(() => defineTheme('bad name', { value: 'red' }));
 });
 
+test('主题叶只验证结构与 CSS-wide 值，并保留原始字符串', () => {
+  const original = '/*before*/ future(??? [a;b]) /*after*/\r\n';
+  const theme = defineTheme('future-values', { value: original });
+  assert.equal(theme.defaults.value, original);
+  assert.equal(theme.resolve({ value: original }).value, original);
+  assert.equal(theme.resolve({ value: '/**/' }).value, '/**/');
+  assert.equal(theme.resolve({ value: 'ini/**/tial' }).value, 'ini/**/tial');
+  assert.equal(theme.resolve({ value: '\\69/**/nitial' }).value, '\\69/**/nitial');
+  assert.equal(theme.resolve({ value: 'initial red' }).value, 'initial red');
+  assert.equal(theme.resolve({ value: '"initial"' }).value, '"initial"');
+  assert.equal(theme.resolve({ value: '!foo' }).value, '!foo');
+
+  for (const value of [
+    '',
+    ' \t\n ',
+    'initial',
+    'INITIAL',
+    'inherit',
+    'unset',
+    'revert',
+    '/*before*/ revert-layer /*after*/',
+    '\\69 nitial',
+    '/*before*/ \\69 nitial /*after*/',
+    'red;blue',
+    'red!important',
+    'future(foo',
+    'red}',
+    '{a:b}',
+  ])
+    assert.throws(() => theme.resolve({ value }), undefined, value);
+
+  for (const value of [NaN, Infinity, -Infinity])
+    assert.throws(() => defineTheme('nonfinite', { value }));
+});
+
 test('相同默认值复用仍保留外部输入隔离、getter 读取和负零语义', () => {
   const theme = defineTheme('reuse', { color: { brand: 'red', text: 'black' }, zero: 0 });
   assert.equal(theme.resolve(undefined, theme.defaults), theme.defaults);

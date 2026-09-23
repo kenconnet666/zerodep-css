@@ -1,7 +1,7 @@
 import { cssVar, type CssVariable } from './values.js';
 import { hashText } from './hash.js';
 import { prepareRuntimeStyle, validateStyleName } from './style-metadata.js';
-import { createDeclarationBinding } from './binding.js';
+import { assertThemeValue } from './theme-value.js';
 import type { StyleRuntime } from './runtime.js';
 import type { StyleFactory } from './builder-types.js';
 
@@ -81,9 +81,7 @@ export function defineTheme<const T extends ThemeTree>(
       (expected && typeof value !== expected)
     )
       throw new TypeError('Theme leaves must retain their string or number type.');
-    // 校验器不挂到可跨请求复用的定义上，避免缓存各请求的覆盖值。
-    if (createDeclarationBinding('--zt-validation').inline(value) === undefined)
-      throw new TypeError('CSS-wide keywords cannot be theme variable values.');
+    assertThemeValue(value);
     return value;
   }
   function copy(value: unknown): ThemeTree {

@@ -100,13 +100,11 @@ try {
           .evaluate((e) => [...e.style].filter((p) => p.startsWith('--zcss-')));
         assert.equal(first.length, 1);
         const fallback = () =>
-          page
-            .locator('[data-fallback]')
-            .evaluate((e) => ({
-              width: getComputedStyle(e).width,
-              height: getComputedStyle(e).height,
-              variables: [...e.style].filter((p) => p.startsWith('--zcss-')).length,
-            }));
+          page.locator('[data-fallback]').evaluate((e) => ({
+            width: getComputedStyle(e).width,
+            height: getComputedStyle(e).height,
+            variables: [...e.style].filter((p) => p.startsWith('--zcss-')).length,
+          }));
         assert.deepEqual(await fallback(), { width: '2px', height: '5px', variables: 0 });
         await writeFile(file, component(framework, 1));
         await page.waitForFunction(
