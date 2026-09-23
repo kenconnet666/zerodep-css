@@ -2,7 +2,10 @@
 
 ## 未发布 — 0.2 基线后维护
 
-- useStyleRuntime 新增 context/theme/cssType 选项对象，保留位置参数；可一次绑定派生类，完整保留系统类、自带主题类和用户继续继承的类型。
+- 初始化 API 统一为 useStyleRuntime(options?)，移除旧位置参数；局部作者类型统一为 Css，删除 StyleBuilder/StyleHelpers 重复声明。
+- 框架接入桥改名 core/style-scope，不保留 theme-runtime 子路径别名；现行文档迁入 docs，旧计划与审计从 Git 历史查询。迁移方式见 [API 与目录精简](docs/migration.md)。
+
+- useStyleRuntime 的 context/theme/cssType 选项对象可一次绑定派生类，完整保留系统类、自带主题类和用户继续继承的类型。
 - Vue 的主题读取与样式视图优先采用当前组件已提供的主题，与 Svelte 一致；初始化之前捕获的作用域保持原身份。
 - 新增 focus/focusWithin/active/disabled 快捷方法，全局 rule 支持指定派生类；未知初始化类型保留运行时以保护派生行为。
 - 主题覆盖复用已验证的相同默认节点和叶值，减少重复 CSS 解析；保留输入隔离、重置与负零语义，不增加跨请求缓存。
@@ -35,4 +38,4 @@
 - 编译器迁入严格 TypeScript，声明由实现生成；测试与工具目录按职责整理，旧方案文档归档。
 - 完整 CI 覆盖 Windows/Linux、LSP、三种浏览器引擎、SSR/HMR、独立安装、生成一致性、产物完整性和体积预算。
 
-从内部 0.0.0 基线迁移：删除 bx 包装与导入，改用 cssPlugin；服务端和客户端一起重新构建。脚本 const 仍是快照，动态场景使用模板、computed 或 $derived。详细边界见 [.design/support.md](.design/support.md)。
+从内部 0.0.0 基线迁移：删除 bx 包装与导入，改用 cssPlugin；服务端和客户端一起重新构建。脚本 const 仍是快照，动态场景使用模板、computed 或 $derived。详细边界见 [docs/support.md](docs/support.md)。

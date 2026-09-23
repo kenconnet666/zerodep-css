@@ -43,4 +43,4 @@ node C:\code\zerodep-css\.research\css-types\audit.mjs --deps C:\path\to\researc
 
 ## 不代表已经完成
 
-报告不证明所有 CSS 语法已转成严格 TS 类型，不证明 IDE 提示性能、CSS 引擎行为、ibind 编译和两个框架适配器已经实现。详细实施边界见 `.design/implementation-research.md`。
+报告只用于 CSS 类型表达能力研究，不替代 IDE、运行时或框架接入验收。当前实施边界见 [支持矩阵](../../docs/support.md)，原研究决策可从 Git 历史查询。

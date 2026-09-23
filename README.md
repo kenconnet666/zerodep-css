@@ -11,7 +11,7 @@ const panelClass = css((s) => {
 });
 ```
 
-当前已实现类型生成、运行时序列化、动画资源、全局样式挂载，以及 Vue/Svelte 原生响应式、上下文与 SSR 恢复接入。Vue/Svelte 自动编译支持动态变量、静态准备与复杂情形运行时回退，详见[编译说明](.design/compiler.md)。
+当前已实现类型生成、运行时序列化、动画资源、全局样式挂载，以及 Vue/Svelte 原生响应式、上下文与 SSR 恢复接入。Vue/Svelte 自动编译支持动态变量、静态准备与复杂情形运行时回退，详见[编译说明](docs/compiler.md)。
 
 属性对象不可调用：固定值 `s.display.flex`，严格字面量 `s.display.token(value)`，开放值 `s.width.raw('50%')`，单位方法 `s.width.px(50)`。raw 保留已知值补全，并允许任意字符串通过类型检查；不提供 `s.width(...)`。
 
@@ -21,7 +21,7 @@ vue/        Vue 上下文、全局样式监听与组件夹具
 svelte/     Svelte context、runes 全局样式与组件夹具
 internal/   两端共用的严格 TypeScript 编译分析
 scripts/    数据生成、语言服务和浏览器/类型验收
-.design/    当前架构、支持/验收/交接；history 存放旧方案
+docs/       现行架构、支持、验证、迁移与换机交接
 .research/  研究探针、原始模板归档
 ```
 
@@ -49,20 +49,17 @@ pnpm test:browser:frameworks
 - [core API、SSR 用法和当前边界](core/README.md)
 - [Vue 适配与 SSR](vue/README.md)
 - [Svelte 适配与 SSR](svelte/README.md)
-- [项目语言服务](.design/language-services.md)
-- [实施规划与阶段记录](.design/history/implementation-research.md)
-- [当前架构](.design/architecture.md)
-- [支持矩阵与生产使用合同](.design/support.md)
-- [生产验收与缺陷复核](.design/production-audit.md)
-- [系统亮暗主题](.design/themes.md)
-- [追加审计与修复](.design/presets-audit-plan.md)
-- [维护审查与主题读取 API](.design/maintenance-audit.md)
-- [组件 API 易用性与性能测量](.design/api-usability.md)
+- [项目语言服务](docs/language-services.md)
+- [当前架构](docs/architecture.md)
+- [支持矩阵与生产使用合同](docs/support.md)
+- [验证入口、历史证据与性能测量](docs/validation.md)
+- [Vue/Svelte 与原生、Emotion、goober、vanilla-extract 的性能对照](docs/performance.md)
+- [系统亮暗主题](docs/themes.md)
+- [API 与目录迁移](docs/migration.md)
 - [版本变更记录](CHANGELOG.md)
-- [换机交接与恢复步骤](.design/handoff.md)
-- [后续路线](.design/roadmap.md)
-- [目录、命名与基础设施审计及下一阶段](.design/history/architecture-audit.md)
-- [正式 CSS 覆盖清单](.design/css-coverage.json)
+- [换机交接与恢复步骤](docs/handoff.md)
+- [后续路线](docs/roadmap.md)
+- [正式 CSS 覆盖清单](docs/css-coverage.json)
 
 SSR 必须每个请求创建 runtime，并使用该实例的 css 函数；顶层 css 不使用服务端全局单例。浏览器采用原生 CSS nesting，本地验证使用已安装 Chrome，CI 覆盖 Chromium、Firefox、WebKit；兼容范围和测试证据见 core 文档。
 

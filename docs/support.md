@@ -30,11 +30,11 @@
 
 Css 是实际可继承的作者类，提供系统属性；extendProperty 增加用户关键字且拒绝覆盖已有操作。defineTheme 预设继承保持变量身份，provideTheme 使用组件逻辑作用域向下覆盖；当前 provider 组件可显式传入返回的 scope。
 
-组件可以 `useStyleRuntime({ cssType: AppCss })` 一次选择作者类，并按需指定 context/theme；默认仍为系统 Css。用户既可直接继承 Css，也可继承内置 ThemeCss 后继续扩展。当前组件在 provideTheme 之后读取样式/主题时自动使用它，先前捕获的视图不追溯改变。g.rule 的第三参数同样支持派生类，常用状态有 focus/focusWithin/active/disabled 快捷方法。完整范围与性能测量见 [API 易用性](api-usability.md)。
+组件可以 `useStyleRuntime({ cssType: AppCss })` 一次选择作者类，并按需指定 context/theme；默认仍为系统 Css。用户既可直接继承 Css，也可继承内置 ThemeCss 后继续扩展。当前组件在 provideTheme 之后读取样式/主题时自动使用它，先前捕获的视图不追溯改变。g.rule 的第三参数同样支持派生类，常用状态有 focus/focusWithin/active/disabled 快捷方法。完整范围与性能测量见 [API 易用性](validation.md)。
 
 可选 themes 入口提供 lightTheme、darkTheme 和 ThemeCss，覆盖语义颜色、尺度、字体、时长与阴影，支持预设继承和局部覆盖。详细配对和用法见 [系统亮暗主题](themes.md)。
 
-readTheme(definition, scope?) 返回有效主题的深只读快照；适配器 useTheme 返回捕获作用域的 getter，可供模板/computed/$derived 追踪。无同名 provider 时回退到传入定义的默认值，同名 schema 冲突报错；读取不注册样式、不创建订阅。新增 API 和维护证据见 [维护审查](maintenance-audit.md)。
+readTheme(definition, scope?) 返回有效主题的深只读快照；适配器 useTheme 返回捕获作用域的 getter，可供模板/computed/$derived 追踪。无同名 provider 时回退到传入定义的默认值，同名 schema 冲突报错；读取不注册样式、不创建订阅。新增 API 和维护证据见 [维护审查](validation.md)。
 
 主题视图的 css 返回类名列表。放在模板/computed/$derived 中会随有效主题更新，DOM 移动不改变逻辑主题。定义不持有请求状态；组件不 dispose 共享 context。全局样式有稳定、唯一的 owner key，更新保持原槽位顺序，宿主最终释放 runtime/context。
 
@@ -44,4 +44,4 @@ readTheme(definition, scope?) 返回有效主题的深只读快照；适配器 u
 
 根 name 加内容哈希；config 首版只有 debug。开发来源使用项目相对文件位置且有数量上限，不改变 CSS 内容哈希。运行时 manifest v2 兼容原 v1，服务端与客户端必须使用同一构建产物。
 
-本地 LSP 使用 zerodep-source 条件；pnpm 打包 hook 去掉该开发条件。JS 地图内嵌源码，声明直接定位发布的 d.ts。完整证据见 [生产验收](production-audit.md)，换机流程见 [交接](handoff.md)。
+本地 LSP 使用 zerodep-source 条件；pnpm 打包 hook 去掉该开发条件。JS 地图内嵌源码，声明直接定位发布的 d.ts。完整证据见 [生产验收](validation.md)，换机流程见 [交接](handoff.md)。

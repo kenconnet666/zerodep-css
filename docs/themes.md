@@ -33,4 +33,4 @@ ThemeCss 为颜色属性、padding/margin/gap、borderRadius、fontFamily/fontSi
 
 约定的文字/表面组合和强调色/on 前景色按 [WCAG 2.2 文本对比度](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)以未取整数值验证至少 4.5:1；border 和 focusRing 对各表面按[非文本对比度](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)验证至少 3:1。borderSubtle 和 overlay 是装饰/遮罩用途，不用于替代必要的交互边界或文字前景。
 
-这些检查针对明确的颜色配对，不代表任意混搭、自定义覆盖或整个应用自动满足可访问性标准。真实组件、亮暗切换、SSR 和三引擎追加验证的进度见 [追加审计](presets-audit-plan.md)。
+这些检查针对明确的颜色配对，不代表任意混搭、自定义覆盖或整个应用自动满足可访问性标准。真实组件、亮暗切换、SSR 和三引擎证据见 [验证记录](validation.md)。

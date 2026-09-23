@@ -181,7 +181,7 @@ const coverage = {
   exclusions: schema.exclusions,
 };
 if (process.argv.includes('--diff')) {
-  const previous = JSON.parse(await readFile(resolve(root, '.design/css-coverage.json'), 'utf8'));
+  const previous = JSON.parse(await readFile(resolve(root, 'docs/css-coverage.json'), 'utf8'));
   const oldMap = new Map(previous.properties.map((p) => [p.name, p]));
   const newMap = new Map(coverage.properties.map((p) => [p.name, p]));
   console.log(
@@ -212,7 +212,7 @@ const outputs = {
     singleQuote: true,
     printWidth: 100,
   }),
-  '.design/css-coverage.json': JSON.stringify(coverage, null, 2) + '\n',
+  'docs/css-coverage.json': JSON.stringify(coverage, null, 2) + '\n',
 };
 for (const [file, contents] of Object.entries(outputs)) {
   const path = resolve(root, file);

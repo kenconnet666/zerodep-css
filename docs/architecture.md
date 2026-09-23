@@ -1,6 +1,6 @@
 # 当前架构
 
-本文件描述当前实现。维护计划见 roadmap.md；history 保存历史研究与阶段决策，不作为当前 API 清单。最终证据映射见 production-audit.md。
+本文件描述当前实现。维护方向见 [roadmap](roadmap.md)，验证证据见 [validation](validation.md)，目录/API 迁移见 [migration](migration.md)。旧方案保留在 Git 历史中。
 
 ## 包边界
 
@@ -10,7 +10,7 @@
 - scripts/css-data：离线 schema/grammar/policy。运行时 metadata 与声明从同源生成，core/src/generated 不手工编辑。
 - scripts/testing：测试准备、共享浏览器执行器、隔离消费者和体积验证。组件夹具属于各自包的 test/fixtures，类型夹具放 test/types，快速单元测试放 test/unit。
 - scripts/language-services：项目级 MCP 桥、安装与五项语义验收。换机重建 .codex/config.toml，不复制本机路径。
-- 适配器 compiler：自动 CSS 的 SFC 源码转换和 Vite 插件。internal/compiler 共用严格 TS 分析，构建时内联到两端独立 compiler 子路径；core/compiler-runtime 是生成代码的内部入口，core/theme-runtime 是框架作用域桥。具体支持边界见 compiler.md。
+- 适配器 compiler：自动 CSS 的 SFC 源码转换和 Vite 插件。internal/compiler 共用严格 TS 分析，构建时内联到两端独立 compiler 子路径；core/compiler-runtime 是生成代码的内部入口，core/style-scope 是框架作用域桥。具体支持边界见 compiler.md。
 
 三个产品包位于根目录并保持 private。构建先安全清理三个 dist，再按 workspace 依赖顺序构建，防止更名后的旧文件进入产物。
 

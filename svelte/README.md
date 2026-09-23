@@ -14,15 +14,11 @@
 
 默认捕获当前组件 context 中的逻辑作用域，也可显式传入 `useTheme(theme, scope)`。无同名 provider 时返回传入预设默认值，同名不兼容 schema 报错。返回值深只读；普通 `const snapshot = currentTheme()` 是调用时快照。读取函数可以在初始化后继续调用，不会再次访问 context；不注册样式、不新建 store，也不依赖 style context。
 
-主题使用 `defineTheme` 的静态定义和 `provideTheme(theme, () => overrides)` 的原生 rune 覆盖。当前组件在 provideTheme 之后调用 `useStyleRuntime()` 即可使用，后代也自动继承。显式 `useStyleRuntime(context)` 只使用指定运行时；需要主题时同时传入 scope。
+主题使用 `defineTheme` 的静态定义和 `provideTheme(theme, () => overrides)` 的原生 rune 覆盖。当前组件在 provideTheme 之后调用 `useStyleRuntime()` 即可使用，后代也自动继承。显式 `useStyleRuntime({ context })` 只使用指定运行时；需要主题时同时传入 scope。
 
 主题运行时的 css 返回可用于 class 属性的类名列表，其中包含有效主题变量类和内容类。放在模板或 $derived 中会随主题变化更新；普通 const 字符串仍是调用时快照。子对象只覆盖指定字段，null 恢复当前预设默认值。主题类附在样式元素上，移动 DOM 后仍保持逻辑组件作用域的主题。provider 不销毁共享 context，应用/请求宿主负责最终 dispose。
 
-自动绑定已接入：编译插件可将原生模板直接 `css(s => { s.padding.px(8, gap); })` 中的动态单位值编译为原生 style 绑定。支持静态参数的嵌套结构和字面量可判定的 if/switch；未知控制流、派生类、脚本快照、组件透传和复杂表达式保留运行时行为。可证明稳定的样式第一次执行仍经过完整校验，后续由 runtime 有界缓存跳过重复构建和解析。完整迁移目标见[生产化计划](../.design/production-plan.md)。
-
-同样支持 `raw(value)`、`token(value)` 和完整模板字符串。普通值更新元素变量；空值省略声明，CSS-wide 关键字与显式 `cssVar` 引用保留直接声明。后几类变化仍可能切换类名，以保持覆盖与继承语义；字符串校验按绑定使用 128 项有界缓存。被提升的值读取应保持纯粹，函数调用、局部写入等会触发整体运行时回退。
-
-编译通过 `@zerodep-css/svelte/compiler` 的 `cssPlugin()` 接入官方 Vite 插件。使用方式与回退范围见[自动 CSS 编译说明](../.design/compiler.md)。
+编译插件接在框架官方 Vite 插件之前；自动值绑定、静态准备、严格 CSP 和运行时回退的完整边界统一见 [编译说明](../docs/compiler.md)。
 
 使用 Svelte 5 原生模板跟踪和 `$derived`，不导入 `svelte/internal`，不建立第二套 store。可安全分离的动态值使用原生 style 绑定；复杂回调继续原生重算并切换哈希 class。
 
@@ -70,7 +66,7 @@
 <div class={panelClass}></div>
 ```
 
-`useStyleRuntime(context?)` 在组件初始化时读取 context 并返回 runtime；之后 css 闭包不再查询 context。显式传入 context 可在组件外取得 runtime。适配器不再导出默认 css；组件使用初始化时取得的 css。core 的浏览器默认入口不读取组件 context，不能代替 SSR/自定义配置。
+`useStyleRuntime(options?)` 在组件初始化时读取 context 并返回 runtime；之后 css 闭包不再查询 context。显式传入 context 可在组件外取得 runtime。适配器不再导出默认 css；组件使用初始化时取得的 css。core 的浏览器默认入口不读取组件 context，不能代替 SSR/自定义配置。
 
 `const cls = css(...)` 只是一次计算；需要动态外部变量时使用 `$derived`。样式回调必须同步，不修改响应式状态。css 在派生读取时会同步注册规则，具有幂等注册副作用，不是纯函数；废弃计算产生的 class 也保留到 context.dispose，不承诺对中止渲染自动回收。
 
@@ -94,6 +90,6 @@
 
 不指定 cssType 时使用系统 Css；AppCss 可以直接继承 Css 自建主题，也可以继承 `/themes` 的 ThemeCss 保留内置主题后继续扩展。单次仍可用 `css(factory, OtherCss)` 覆盖类型。普通 JS 函数负责样式复用，if/switch 负责条件；focus/focusWithin/active/disabled 提供常用状态快捷写法。
 
-先 provideTheme 再取得 css/useTheme，当前组件即可使用该主题。先前取得的读取函数或视图不追溯切换作用域。显式 context 保留隔离语义，需要主题时同时传 theme。旧 `useStyleRuntime(context?, scope?)` 继续可用。
+先 provideTheme 再取得 css/useTheme，当前组件即可使用该主题。先前取得的读取函数或视图不追溯切换作用域。显式 context 保留隔离语义，需要主题时同时传 theme。初始化统一使用选项对象；迁移见 [精简说明](../docs/migration.md)。
 
 自定义作者类和无法证明初始化类型的调用保留运行时行为；标准类使用 `useStyleRuntime()` 或 `useStyleRuntime({ context })` 等明确选项对象时仍可自动优化。

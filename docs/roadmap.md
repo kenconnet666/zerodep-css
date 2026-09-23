@@ -1,6 +1,6 @@
 # 维护与后续演进
 
-0.2.0 内部生产基线的实现、支持范围与证据见 [生产验收](production-audit.md) 和 [支持矩阵](support.md)，后续维护见 [维护审查](maintenance-audit.md)。当前 API 不再采用旧 bx 作者合同；下列演进项不应被误读为已有能力。
+当前实现与证据见 [验证记录](validation.md) 和 [支持矩阵](support.md)。下列演进项不应被误读为已有能力。
 
 ## 已完成的基础
 
@@ -21,4 +21,4 @@
 
 recipes/variants 不作为默认目标；运行时 if/switch 与类继承继续是正式作者能力。流式 SSR 和专用 Nuxt/SvelteKit 集成需要独立界定支持范围。三个包保持 private，本轮不自动发布包或更改许可。
 
-历史宏方案见 [bx-plan.md](history/bx-plan.md)，只用于追溯旧决策。
+历史宏方案从 Git 查询，目录和 API 的收敛方式见 [迁移说明](migration.md)。

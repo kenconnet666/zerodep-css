@@ -43,7 +43,7 @@ css((s) => {
 
 自动路径支持直接原生 HTML class 使用点，以及保留原模板守卫的单层 keyed 简单数组循环。Vue 使用原生 computed 和按实际使用点的列表缓存；Svelte 使用原生 style 指令。
 
-初始化入口也参与判断：无参数 useStyleRuntime()、明确不含 cssType 的 context/theme 选项对象，以及未遮蔽的 undefined 位置参数可进入自动路径。配置 cssType、spread 或无法解析的初始化参数时保留运行时，避免覆盖派生类的属性行为；debug 来源仍可记录。旧位置参数继续有效，若希望对显式 context 保留可证明优化，可写 `useStyleRuntime({ context })`。
+初始化入口也参与判断：无参数 useStyleRuntime()、明确不含 cssType 的 context/theme 选项对象可进入自动路径。配置 cssType、spread 或无法解析的初始化参数时保留运行时，避免覆盖派生类的属性行为；debug 来源仍可记录。显式 context 写为 `useStyleRuntime({ context })`，旧位置参数已移除。
 
 不能安全提升的回调整体保留运行时行为：未知 if/switch、函数调用和副作用、局部赋值、派生 Css 类型、动态结构参数。脚本 const 保留定义时快照，computed/$derived 保留原生重算；组件透传、class 拼接、复杂循环/slot/异步边界、SVG/MathML 也保持原有源码。回退可能随动态值产生新的哈希类名，这是明确保留的能力。
 
@@ -57,4 +57,4 @@ css((s) => {
 
 将 `bx(value)` 改为 `value`，把 `bxPlugin/transformBx` 改为 `cssPlugin/transformCss` 并删除 bx 导入。脚本内需要持续响应的样式继续写 computed/$derived；若需要自动变量优化，将可安全声明直接放在元素 class 中。重新构建服务端和客户端产物，不能混用不同版本生成的变量 ID。
 
-旧宏计划和验收记录保留为历史依据，不代表当前 API。完整生产验收和剩余主题工作见 [生产化计划](production-plan.md)。
+旧宏方案可从 Git 历史查询。当前验证证据见 [validation](validation.md)，API 迁移见 [migration](migration.md)。

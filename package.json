@@ -15,12 +15,13 @@
     "data:diff": "node scripts/generate-css.mjs --diff",
     "test:types": "node scripts/testing/run.mjs types",
     "test": "pnpm test:unit",
-    "format:check": "prettier --check core vue svelte internal scripts .github .design .pnpmfile.cjs README.md CHANGELOG.md AGENTS.md package.json pnpm-workspace.yaml tsconfig*.json",
+    "format:check": "prettier --check core vue svelte internal scripts .github docs .pnpmfile.cjs README.md CHANGELOG.md AGENTS.md package.json pnpm-workspace.yaml tsconfig*.json",
     "lsp:setup": "pwsh -NoProfile -File scripts/language-services/setup.ps1",
     "lsp:verify": "node scripts/language-services/verify.mjs .",
     "lsp:inspect": "node scripts/language-services/inspect.mjs .",
     "research:types": "node .research/css-types/audit.mjs --deps .",
     "research:syntax": "node .research/css-types/expressiveness.mjs --deps .",
+    "research:compare": "node .research/performance/compare-engines.mjs",
     "test:unit": "node scripts/testing/run.mjs unit",
     "test:browser:core": "node scripts/testing/run.mjs browser:core",
     "test:browser:frameworks": "node scripts/testing/run.mjs browser:frameworks",
@@ -29,6 +30,7 @@
     "check:compiler": "tsc -p internal/compiler/tsconfig.json"
   },
   "devDependencies": {
+    "yaml": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@sveltejs/vite-plugin-svelte": "catalog:",
     "vite": "catalog:",
