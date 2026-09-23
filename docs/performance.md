@@ -2,6 +2,33 @@
 
 本页保留历史横向对照与后续同机优化证据，不表示所有性能问题已经解决。不同基准的回调和机器不同，不能直接拼接其数值计算提升倍数。
 
+## 2026-09-23 热路径成本研究（尚未修改生产实现）
+
+研究基线 87807d1。Node 24.12.0，同一进程、每项预热 2,000 次，计时 20,000 次，7 轮交替顺序取中位数；计时前主动 GC，CPU 采样另行执行，不计入下表。普通回调持续执行，命中有限的 16 组结果。本轮只新增研究探针与文档。
+
+| 场景   | 完整 runtime | 单独 Builder | 原键生成＋查询 | 紧凑键原型生成＋查询 |
+| ------ | -----------: | -----------: | -------------: | -------------------: |
+| 单属性 |    141.08 ms |     71.69 ms |       40.70 ms |             23.39 ms |
+| 三属性 |    219.90 ms |    110.35 ms |       68.05 ms |             36.61 ms |
+| 嵌套   |    242.68 ms |    138.26 ms |       67.58 ms |             36.16 ms |
+
+这些是独立实验，不能直接相加/相减得到精确占比。Builder 实验仍创建真实 Css 实例和不可变结构；键实验使用预先构建的定义，所以不能把其收益当成完整 runtime 的同比收益。CPU 源码映射采样集中于 builder.ts 的 declarations/style、Css 构造与代理访问，以及 runtime.css；少量解析采样来自采样期间的初始化，而非已命中的计时循环。
+
+研究发现与候选：
+
+1. Builder 在空回调时仍需初始化结构 helper、检查名字冲突、建立 property 容器、真实 Css 实例及多个 Proxy。空 Builder 也花费约 32.04 ms/20,000 次。可研究延迟创建结构 helper、一次验证固定元数据，但不能把这一整段成本全部归给 helpers。
+2. 属性读取目前经过 Css Proxy、原型 getter、construction.read、Reflect.get 和 property 容器 Proxy。仅在研究 bundle 中试验直接 reader，保留作者 Css Proxy、私有字段、继承和描述符 Proxy；单属性 141.08→129.95 ms，三属性 219.90→204.32 ms，嵌套 242.68→238.57 ms。收益有限，不支持为此推翻真实类模型。
+3. 普通缓存键目前序列化完整 IR 对象，重复携带字段名。紧凑 tuple 编码在独立键实验中减少约 43%–46% 耗时，没有新增缓存；但尚未接入 runtime，也没有证明完整身份等价。后续必须覆盖 literal/raw/cssVar、缺失值与 null、name/debug/source、顺序、动画依赖和缓存预算，不能简单换成短哈希。
+4. 固定样式控制中，普通调用 134.55 ms、每次 prepareStyle 包装 79.33 ms、复用同一准备函数 41.89 ms。Vue 现有静态模板转换确实把 prepareStyle 留在 class 表达式内。候选是把安全准备函数移到组件初始化处复用，而继续在使用点调用 css，保留条件求值时机、runtime 所有权检查和 HMR 失效。
+
+不建议直接缓存任意用户回调、池化 Css 实例、删除生命周期检查或自动把所有 css 调用移到模块级。也不能从 Node 静态控制组推断浏览器整体提升 47%；Svelte 无相关依赖时本来就不会反复求值。
+
+直接 reader 原型只存在于 esbuild 的研究 onLoad 转换中，未写回 core；基础对照涵盖继承/私有字段、嵌套、命名/诊断、font-face 与构建结束后的失效检查，但不等于完整消费者/三引擎验收。紧凑键只测了这四类定义（含空定义），不作为可发布实现。
+
+建议下一步先做 Vue 安全准备函数复用和 Builder helper 延迟初始化的真实组件探针，再决定是否实施紧凑结果键；每项单独比较。接入时仍优先使用框架原生 computed/$derived，不增加独立响应式缓存。
+
+复现：node --expose-gc .research/performance/hot-cost.mjs repeat。原始样本与采样摘要见 .research/performance/results/2026-09-23-hot-cost.json；完整 cpuprofile 在忽略的 test-results/hot-cost 下。研究过程不改动生产源码，也未把 Node 原型结果当成浏览器收益。
+
 ## 2026-09-23 扩展框架对照与注册事务优化
 
 对照覆盖 Emotion/goober 运行时、vanilla-extract 静态提取、UnoCSS generator/preset-mini 的真实构建产物、vanilla-extract 静态 CSS + assignInlineVars 动态 helper，以及本库自动优化/纯运行时路径。UnoCSS 本次使用构建期 generator，不代表它只具备编译期能力。
