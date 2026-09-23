@@ -15,7 +15,12 @@ import type {
   ThemeTree,
   ThemeValues,
 } from '@zerodep-css/core';
-import { createThemeScope, readTheme, resolveTheme } from '@zerodep-css/core/style-scope';
+import {
+  createThemeScope,
+  prepareThemeStyle,
+  readTheme,
+  resolveTheme,
+} from '@zerodep-css/core/style-scope';
 
 export const themeKey: InjectionKey<ThemeScope> = Symbol('zerodep-css-theme');
 const localScopes = new WeakMap<object, ThemeScope>();
@@ -51,7 +56,14 @@ export function provideTheme<T extends ThemeTree>(
   // 同一组件可连续提供多个主题；Vue inject 本身只读取祖先，不包含先前的 provide。
   const parent = resolveThemeScope();
   const values = computed(() => resolveTheme(definition, overrides(), parent));
-  const scope = createThemeScope(definition, () => values.value, parent);
+  // 原生 computed 管失效与缓存；声明准备只在有效主题变化后重算，不新增 watcher。
+  const style = computed(() => prepareThemeStyle(definition, values.value));
+  const scope = createThemeScope(
+    definition,
+    () => values.value,
+    parent,
+    () => style.value,
+  );
   provide(themeKey, scope);
   localScopes.set(instance, scope);
   onScopeDispose(() => {

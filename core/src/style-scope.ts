@@ -3,6 +3,7 @@ import type { StyleFactory } from './builder-types.js';
 import type { StyleRuntime } from './runtime.js';
 import type { ThemeDefinition, ThemeOverrides, ThemeTree, ThemeValues } from './theme.js';
 import { themeStyle } from './theme.js';
+export { prepareThemeStyle } from './theme.js';
 import type { StyleContext } from './context.js';
 
 /** 组件选择视图，不改变宿主 runtime 的配置或所有权。 */
@@ -79,6 +80,7 @@ export function createThemeScope<T extends ThemeTree>(
   definition: ThemeDefinition<T>,
   read: () => ThemeValues<T>,
   parent?: ThemeScope,
+  prepared?: () => StyleFactory,
 ): ThemeScope {
   findTheme(definition, parent);
   const entries = new Map(parent?.themes.map((theme) => [theme.name, theme]));
@@ -91,7 +93,9 @@ export function createThemeScope<T extends ThemeTree>(
         return read();
       },
       className(runtime: StyleRuntime) {
-        return runtime.css(themeStyle(definition, read()));
+        // 框架读取其原生派生值即能追踪依赖；没有框架准备器时保留逐次求值。
+        // 每次仍进入 runtime，不能以字符串缓存绕过宿主校验、dispose 或注册重试。
+        return runtime.css(prepared ? prepared() : themeStyle(definition, read()));
       },
     }),
   );

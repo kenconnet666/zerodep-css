@@ -399,6 +399,7 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       let cacheKey = prepared
         ? 'p:' + prepared + JSON.stringify(getStyleSource(factory) ?? null)
         : undefined;
+      if (cacheKey && cacheKey.length > 65536) cacheKey = undefined;
       const cached = cacheKey ? compiledStyles.get(cacheKey) : undefined;
       if (cached) {
         ensure(cached);

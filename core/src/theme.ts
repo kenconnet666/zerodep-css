@@ -1,13 +1,16 @@
 import { cssVar, type CssVariable } from './values.js';
 import { hashText } from './hash.js';
-import { validateStyleName } from './style-metadata.js';
+import { prepareRuntimeStyle, validateStyleName } from './style-metadata.js';
 import { createDeclarationBinding } from './binding.js';
 import type { StyleRuntime } from './runtime.js';
 import type { StyleFactory } from './builder-types.js';
 
 const styleKey = Symbol('zerodep.theme-style');
+// 只证明对象由本库按对应 schema 验证并深冻结；弱引用不持有请求值或计算结果。
+// 响应式结果缓存仍完全交给框架的 computed/$derived。
+const resolvedSchemas = new WeakMap<object, string>();
 interface ThemeStyle {
-  [styleKey](values: ThemeTree): StyleFactory;
+  [styleKey](values: ThemeTree, prepare?: boolean): StyleFactory;
 }
 
 /** 框架作用域传入已解析的冻结快照，避免每个元素重复解析主题叶值。 */
@@ -18,6 +21,16 @@ export function themeStyle<T extends ThemeTree>(
   const factory = (definition as ThemeDefinition<T> & ThemeStyle)[styleKey];
   if (!factory) throw new TypeError('Expected a theme created by defineTheme.');
   return factory(values);
+}
+
+/** 由框架 computed/$derived 持有的纯声明准备，不注册规则、不保存请求缓存。 */
+export function prepareThemeStyle<T extends ThemeTree>(
+  definition: ThemeDefinition<T>,
+  values: ThemeValues<T>,
+): StyleFactory {
+  const factory = (definition as ThemeDefinition<T> & ThemeStyle)[styleKey];
+  if (!factory) throw new TypeError('Expected a theme created by defineTheme.');
+  return factory(values, true);
 }
 
 export interface ThemeTree {
@@ -146,13 +159,34 @@ export function defineTheme<const T extends ThemeTree>(
     resolve(overrides, inherited) {
       // 父快照也通过当前 schema 验证，不能按相同名字混用不兼容的定义。
       const parent = inherited === undefined ? baseline : merge(baseline, baseline, inherited);
-      return merge(baseline, parent, overrides) as ThemeValues<T>;
+      const result = merge(baseline, parent, overrides) as ThemeValues<T>;
+      resolvedSchemas.set(result, definition.schema);
+      return result;
     },
     className(runtime, values) {
       const resolved = definition.resolve(values);
       return runtime.css(themeStyle(definition, resolved));
     },
-    [styleKey](resolved) {
+    [styleKey](resolved, prepare = false) {
+      if (prepare) {
+        // 准备结果只能捕获自行验证的冻结快照，不能凭 TS readonly 信任外部对象。
+        const snapshot =
+          resolvedSchemas.get(resolved) === definition.schema
+            ? resolved
+            : definition.resolve(undefined, resolved as ThemeValues<T>);
+        const entries = variables.map((variable) => {
+          let value: string | number | ThemeTree = snapshot;
+          for (const part of variable.path) value = (value as ThemeTree)[part]!;
+          return [variable.name, value as string | number] as const;
+        });
+        return prepareRuntimeStyle(
+          (s) => {
+            s.name(name);
+            for (const [variable, value] of entries) s.custom.raw(variable, value);
+          },
+          JSON.stringify(['theme', name, entries]),
+        );
+      }
       return (s) => {
         s.name(name);
         for (const variable of variables) {
@@ -163,5 +197,6 @@ export function defineTheme<const T extends ThemeTree>(
       };
     },
   };
+  resolvedSchemas.set(baseline, definition.schema);
   return Object.freeze(definition);
 }

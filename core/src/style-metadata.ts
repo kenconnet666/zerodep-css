@@ -102,6 +102,14 @@ export function getPreparedKey(factory: unknown): string | undefined {
     ? (factory as { [preparedKey]?: string })[preparedKey]
     : undefined;
 }
+
+/** 内部确定性声明使用完整内容作键；结果仍受 runtime 的同一缓存预算约束。 */
+export function prepareRuntimeStyle<T>(factory: StyleFactory<T>, content: string): StyleFactory<T> {
+  // 不用短哈希充当“已证明内容相同”，也不为超大输入增加另一份驻留缓存。
+  if (content.length <= 65520)
+    Object.defineProperty(factory, preparedKey, { value: 'runtime:' + content });
+  return factory;
+}
 export function getStyleSource(factory: unknown): StyleSource | undefined {
   return typeof factory === 'function'
     ? (factory as { [sourceKey]?: StyleSource })[sourceKey]

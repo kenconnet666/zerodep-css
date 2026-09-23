@@ -6,7 +6,12 @@ import type {
   ThemeTree,
   ThemeValues,
 } from '@zerodep-css/core';
-import { createThemeScope, readTheme, resolveTheme } from '@zerodep-css/core/style-scope';
+import {
+  createThemeScope,
+  prepareThemeStyle,
+  readTheme,
+  resolveTheme,
+} from '@zerodep-css/core/style-scope';
 
 export const themeKey = Symbol('zerodep-css-theme');
 
@@ -28,7 +33,14 @@ export function provideTheme<T extends ThemeTree>(
     throw new TypeError('Theme overrides must be read from a getter.');
   const parent = getContext<ThemeScope | undefined>(themeKey);
   const values = $derived.by(() => resolveTheme(definition, overrides(), parent));
-  const scope = createThemeScope(definition, () => values, parent);
+  // 使用同一组件拥有的原生派生缓存；不增加 effect root 或自定义主题缓存表。
+  const style = $derived(prepareThemeStyle(definition, values));
+  const scope = createThemeScope(
+    definition,
+    () => values,
+    parent,
+    () => style,
+  );
   setContext(themeKey, scope);
   return scope;
 }
