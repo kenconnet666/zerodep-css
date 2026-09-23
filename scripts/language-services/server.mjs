@@ -1,6 +1,7 @@
 import { requireProject, root as configuredRoot, serviceConfig } from './environment.mjs';
 import { spawn, execFileSync } from 'node:child_process';
-import { watch, existsSync } from 'node:fs';
+import { existsSync } from 'node:fs';
+import { watchDirectory } from './watch-directory.mjs';
 import { readFile, realpath, readdir } from 'node:fs/promises';
 import { extname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -216,28 +217,39 @@ async function start(kind) {
       watchers.get(directory)?.close();
       watchers.delete(directory);
       if (disposed || !existsSync(folder)) return;
-      const watcher = watch(folder, { recursive: directory.includes('/') }, (_event, filename) => {
-        if (disposed || !filename) return;
-        const name = filename.toString();
-        if (directory && !directory.includes('/') && ['src', 'dist', 'test'].includes(name)) {
-          // build 清空并重建 dist 后重新挂接，并补发重建期间可能遗漏的文件变化。
-          installWatcher(directory + '/' + name);
-          rescan.add(resolve(folder, name));
+      const watcher = watchDirectory(
+        folder,
+        { recursive: directory.includes('/') },
+        (_event, filename) => {
+          if (disposed || !filename) return;
+          const name = filename.toString();
+          if (
+            directory &&
+            !directory.includes('/') &&
+            ['src', 'dist', 'test', 'compiler'].includes(name)
+          ) {
+            // build 清空并重建 dist 后重新挂接，并补发重建期间可能遗漏的文件变化。
+            installWatcher(directory + '/' + name);
+            rescan.add(resolve(folder, name));
+            schedule();
+            return;
+          }
+          if (!relevant.test(name)) return;
+          notifyFile(resolve(folder, name));
           schedule();
-          return;
-        }
-        if (!relevant.test(name)) return;
-        notifyFile(resolve(folder, name));
-        schedule();
-      });
-      watcher.on('error', (error) => {
-        if (!disposed && !['ENOENT', 'EPERM'].includes(error.code))
-          process.stderr.write('Language watcher: ' + error.message + '\n');
-      });
-      watchers.set(directory, watcher);
+        },
+        (error) => {
+          if (!disposed) process.stderr.write('Language watcher: ' + error.message + '\n');
+        },
+      );
+      if (watcher) watchers.set(directory, watcher);
     };
     for (const directory of [
       '',
+      'internal',
+      'internal/compiler',
+      'vue/compiler',
+      'svelte/compiler',
       'core',
       'svelte',
       'vue',
