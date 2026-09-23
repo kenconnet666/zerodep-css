@@ -47,8 +47,8 @@ test('Vue 项目入口使用真实 host 完整恢复主题、全局样式并在�
     const [red, blue] = await Promise.all([renderPage('red'), renderPage('blue')]);
     assert.match(red.body, /data-theme="red"/);
     assert.match(blue.body, /data-theme="blue"/);
-    assert.equal(red.manifest.globals.length, 1);
-    assert.equal(blue.manifest.globals.length, 1);
+    assert.equal(red.manifest.globals.length, 2);
+    assert.equal(blue.manifest.globals.length, 2);
     assert.match(red.head, /body\{padding:7px/);
     assert.match(blue.head, /body\{padding:7px/);
     assert(!red.html.includes('data-theme="blue"'));
@@ -111,6 +111,26 @@ test('Vue 项目入口使用真实 host 完整恢复主题、全局样式并在�
       );
     });
 
+    const sharedColor = () =>
+      page.locator('[data-shared-global-target]').evaluate((el) => getComputedStyle(el).color);
+    const leases = await page
+      .locator('[data-shared-lease]')
+      .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-shared-lease')));
+    assert.equal(leases.length, 2);
+    assert.equal(leases[0], leases[1]);
+    const activeStyles = await page.locator('style[data-zerodep="project"]').count();
+    await page.locator('[data-shared-first]').click();
+    assert.equal(await sharedColor(), 'rgb(255, 0, 0)');
+    assert.equal(await page.locator('style[data-zerodep="project"]').count(), activeStyles);
+    await page.locator('[data-shared-second]').click();
+    assert.equal(await page.locator('style[data-zerodep="project"]').count(), activeStyles - 1);
+    await page.locator('[data-shared-first]').click();
+    assert.equal(await sharedColor(), 'rgb(255, 0, 0)');
+    assert.equal(await page.locator('style[data-zerodep="project"]').count(), activeStyles);
+
+    const stoppedRuns = await page.evaluate(() => window.projectApp.disposeHostWhileMounted());
+    assert(stoppedRuns.before > 0);
+    assert.equal(stoppedRuns.after, stoppedRuns.before);
     await page.evaluate(() => window.projectApp.stop());
     assert.equal(await page.locator('style[data-zerodep="project"]').count(), 0);
     assert.equal(

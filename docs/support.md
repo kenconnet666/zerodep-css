@@ -21,7 +21,7 @@ core 根入口只提供 `Css`、`cssVar`、`defineTheme` 三个运行值和作�
 
 应用的 `styles.ts` 通过 `createStyles({ cssType?, theme? })` 固定作者类型和默认主题，并导出带类型的 `useCss`、`useTheme`、`provideTheme`、`useGlobalCss` 与 `createHost`。该模块可共享，但不得在模块顶层创建应用或请求 runtime。每个 Vue 应用或 SSR 请求、每个 Svelte 根或 SSR 请求各自调用 `createHost(options)`；服务器先渲染组件，再输出 `host.renderStyles()` 与 `host.renderManifest()`，最后在 `finally` 中 `host.dispose()`。浏览器先用 manifest 创建 host，随后 hydration，完成后调用 `host.completeHydration()`。
 
-Vue 使用 `host.install(app)`，应用卸载会释放 host；同一 host 不属于第二个 Vue 应用。Svelte 根组件初始化时调用 `host.provide()`，卸载只释放对 host 的认领，以便 HMR 重挂；应用入口在最终 `unmount` 后显式 `host.dispose()`。组件负责释放自己声明的全局槽位与订阅，不释放共享 host。当前同 key 全局样式仍按活跃 owner 唯一处理；内容相同时共享、最后一个 owner 卸载才释放是 P3 待实施合同。
+Vue 使用 `host.install(app)`，应用卸载会释放 host；同一 host 不属于第二个 Vue 应用。Svelte 根组件初始化时调用 `host.provide()`，卸载只释放对 host 的认领，以便 HMR 重挂；应用入口在最终 `unmount` 后显式 `host.dispose()`。组件负责释放自己声明的全局槽位与订阅，不释放共享 host。同 key 同序列化内容共享，最后一个 owner 卸载才释放；多个 owner 存活时禁止改值，剩单个 owner 才能更新。动态全局在根组件声明一次，或为各组件选不同稳定 key。提前 host.dispose 也会停止已登记的全局 watcher/effect；完整组件卸载仍由框架负责。
 
 ## 值、组合与编译边界
 

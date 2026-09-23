@@ -9,5 +9,6 @@ export function installStyleContext(app: App, context: StyleContext): void {
 export function resolveContext(explicit?: StyleContext): StyleContext {
   const context = explicit ?? (hasInjectionContext() ? inject(key, undefined) : undefined);
   if (!context) throw new Error('Provide a style context by installing a style host.');
+  context.assertActive();
   return context;
 }

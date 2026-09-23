@@ -625,6 +625,32 @@ export async function runBrowserTests(browser, baseUrl, ssr, output, match) {
     assert.equal(result.records, 3);
     return result;
   });
+  await scenario('全局共享失败不新增租约，外部删除不能被同内容掩盖', async (page) => {
+    const result = await page.evaluate(() => {
+      const context = window.z.createStyleContext({ namespace: 'shared-invalid' });
+      const factory = (g) => g.rule('body', (s) => s.color.red);
+      try {
+        const first = context.mountGlobal('shared', factory);
+        document.querySelector(`style[data-zerodep-id="${first.id}"]`).remove();
+        let error = '';
+        try {
+          context.mountGlobal('shared', factory);
+        } catch (cause) {
+          error = cause.message;
+        }
+        first.dispose();
+        const count = context.snapshot().globals.length;
+        const next = context.mountGlobal('shared', factory);
+        return { error, count, newSlot: next.id !== first.id };
+      } finally {
+        context.dispose();
+      }
+    });
+    assert(result.error.length > 0);
+    assert.equal(result.count, 0);
+    assert.equal(result.newSlot, true);
+    return result;
+  });
   await scenario('缓存命中不会掩盖被宿主移除的样式', async (page) => {
     const result = await page.evaluate(() => {
       const r = window.z.createRuntime({ namespace: 'removed' });

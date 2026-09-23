@@ -50,7 +50,7 @@ export const { useCss, useTheme, provideTheme, useGlobalCss, createHost } = crea
 
 `defineTheme` 持有冻结的 defaults、schema 和稳定 token 身份，不持有请求值。项目可从 `Css` 自行扩展，也可从 `ThemeCss extends Css` 增加内置预设关键字后再扩展。默认主题在没有同名 provider 时也会生成有效主题变量类；同名 provider 优先。`provideTheme` 接受静态覆盖对象、getter、`null`；局部 `null`/`undefined` 继承父值，传入 `definition.defaults` 才恢复预设。Vue computed 与 Svelte `$derived` 持有有效值，主题沿组件逻辑树继承，不依赖 Portal/Teleport 的 DOM 位置。
 
-`useGlobalCss(key, factory)` 管理组件声明的全局槽位、更新和卸载；普通 class 与共享动画留到 host 释放。当前同 key 只允许一个活跃 owner；相同内容多 owner 共享是 P3 待实施。CSSOM 事务先验证冲突与所有待写规则，再更新记录；失败不留下半成品。计算缓存可淘汰，已注册规则不能随缓存淘汰直接删除。
+`useGlobalCss(key, factory)` 管理组件声明的全局槽位、更新和卸载；普通 class 与共享动画留到 host 释放。同 key 同序列化内容共享一个槽位；最后一个 owner 卸载才释放。多个 owner 存活时只接受同内容更新，仅剩一个才允许改值；动态全局推荐由根组件声明一次。host 提前 dispose 会停止所有已登记的全局订阅，避免释放后继续求值工厂。CSSOM 事务先验证冲突与所有待写规则，再更新记录；失败不留下半成品。计算缓存可淘汰，已注册规则不能随缓存淘汰直接删除。
 
 可选 `cssPlugin` 当前只识别同一 SFC 内能直接追踪的 `createStyles`/`useCss` 来源，包括直接链式调用。项目 `styles.ts` 跨文件导出的绑定方法保持完整运行时行为，尚不做跨模块编译证明。变量绑定会在原求值点读取动态输入，复杂回调或派生作者类保守回退；优化失败不改变合法作者代码的执行、错误和 SSR 合同。
 

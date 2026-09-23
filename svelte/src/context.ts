@@ -8,5 +8,6 @@ export function provideStyleContext(context: StyleContext): void {
 export function resolveContext(explicit?: StyleContext): StyleContext {
   const context = explicit ?? getContext<StyleContext | undefined>(key);
   if (!context) throw new Error('Provide a style context or pass one explicitly.');
+  context.assertActive();
   return context;
 }

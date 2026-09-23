@@ -93,8 +93,9 @@ export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
   return Object.freeze({
     ...projectThemes,
     useCss(): CssFunction<C> {
+      const context = resolveContext();
       const scope = projectThemeScope(theme, getCurrentThemeScope());
-      return createRuntimeView(resolveContext().runtime, scope, authorType).css as CssFunction<C>;
+      return createRuntimeView(context.runtime, scope, authorType).css as CssFunction<C>;
     },
     useGlobalCss(identity: string, factory: StylesheetFactory<C>) {
       return baseUseGlobalCss(identity, factory, undefined, authorType);

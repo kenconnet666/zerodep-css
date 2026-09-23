@@ -25,7 +25,7 @@ Svelte 项目把入口改为 `@zerodep-css/svelte`。默认使用系统 `Css`；
 
 - `useStyleRuntime()` 或 `useStyleRuntime(options)` 改为 `styles.useCss()`。从项目模块导入 hook 可正常运行；自动编译只有在同一组件文件内能直接证明 `createStyles` 与 `useCss` 绑定时才优化，跨模块写法保留 runtime。
 - 独立 `provideTheme`、`useTheme` 改为 `styles.provideTheme(...)`、`styles.useTheme(...)`。有默认主题时可省略定义；额外主题仍显式传入定义。`null`/`undefined` 继承，`theme.defaults` 显式重置。
-- standalone `useGlobalCss` 改为 `styles.useGlobalCss(key, factory)`，在组件 setup 中调用一次。key 在同 host 的活跃挂载中唯一；同 key 多组件共享尚未提供。
+- standalone `useGlobalCss` 改为 `styles.useGlobalCss(key, factory)`，在组件 setup 中调用一次。同 key 同序列化内容可跨组件共享，最后一个组件卸载才释放。共享期间不能改值；动态全局在根组件声明一次。
 - standalone `globalCss` 不再是适配器根入口。全局定义写在 `useGlobalCss` 的工厂中。
 - `provideStyleContext` 与手动 context props 不再是适配器业务 API；host 安装样式 context。
 

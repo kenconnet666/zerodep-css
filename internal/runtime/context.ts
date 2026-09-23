@@ -20,8 +20,11 @@ export interface StyleContextOptions extends Omit<RuntimeOptions, 'hydrate'> {
 export interface StyleContext {
   readonly runtime: StyleRuntime;
   readonly server: boolean;
-  /** 同一 key 同时只允许一个活跃挂载；释放后可以重新使用。 */
+  /** 同 key 同当前内容共享；最后一个租约释放时才移除样式槽位。 */
   mountGlobal(key: string, value: StylesheetDefinition | StylesheetFactory): GlobalStyleHandle;
+  assertActive(): void;
+  /** 内部 owner 生命周期桥；宿主提前销毁时先停止框架订阅。 */
+  onDispose(cleanup: () => void): () => void;
   snapshot(): StyleContextManifest;
   renderStyles(): string;
   renderManifest(): string;
@@ -33,11 +36,11 @@ export interface StyleContext {
 
 export function createStyleContext(options: StyleContextOptions = {}): StyleContext {
   const { hydrate, ...runtimeOptions } = options;
-  // keys 同时保存待认领和已活跃的槽位；pending/active 分别控制恢复与重复挂载。
+  // keys 同时保存待认领和已活跃的槽位；refcount 只存在于当前应用/请求。
   // 使用稳定 key 查找，允许客户端组件的初始化顺序与服务端不同。
   const keys = new Map<string, string>();
   const pending = new Set<string>();
-  const active = new Set<string>();
+  const active = new Map<string, { handle: GlobalStyleHandle; owners: number }>();
   if (hydrate) {
     if (
       hydrate.version !== 1 ||
@@ -65,6 +68,7 @@ export function createStyleContext(options: StyleContextOptions = {}): StyleCont
   }
   const runtime = createRuntime({ ...runtimeOptions, hydrate: hydrate?.runtime });
   let disposed = false;
+  const cleanups = new Set<() => void>();
   const alive = () => {
     if (disposed) throw new Error('Style context has been disposed.');
   };
@@ -72,30 +76,52 @@ export function createStyleContext(options: StyleContextOptions = {}): StyleCont
     runtime,
     server:
       options.target === null || (options.target === undefined && typeof document === 'undefined'),
+    assertActive: alive,
+    onDispose(cleanup) {
+      alive();
+      if (typeof cleanup !== 'function') throw new TypeError('Expected a style owner cleanup.');
+      cleanups.add(cleanup);
+      return () => cleanups.delete(cleanup);
+    },
     mountGlobal(key, value) {
       alive();
       if (typeof key !== 'string' || !key.trim())
         throw new TypeError('Global style key must be non-empty.');
-      if (active.has(key)) throw new Error('Global style key is already active: ' + key);
-      // claimGlobal 内部先事务更新再认领；成功返回后才推进上下文状态。
-      // 若构建或 CSSOM 写入失败，pending 保持不变，调用方仍可修正后重试。
-      const handle = pending.has(key)
-        ? runtime.claimGlobal(keys.get(key)!, value)
-        : runtime.mountGlobal(value);
-      keys.set(key, handle.id);
-      pending.delete(key);
-      active.add(key);
+      let entry = active.get(key);
+      if (entry) {
+        // 候选样式在 runtime 内只编译一次；冲突或宿主损坏均不新增 owner。
+        entry.handle.update(value, key);
+        entry.owners++;
+      } else {
+        // claimGlobal 内部先事务更新再认领；成功返回后才推进上下文状态。
+        // 若构建或 CSSOM 写入失败，pending 保持不变，调用方仍可修正后重试。
+        const handle = pending.has(key)
+          ? runtime.claimGlobal(keys.get(key)!, value)
+          : runtime.mountGlobal(value);
+        entry = { handle, owners: 1 };
+        keys.set(key, handle.id);
+        pending.delete(key);
+        active.set(key, entry);
+      }
+      const owner = entry;
       let closed = false;
       return Object.freeze({
-        id: handle.id,
-        update: handle.update,
+        id: owner.handle.id,
+        update(value: StylesheetDefinition | StylesheetFactory) {
+          alive();
+          if (closed || active.get(key) !== owner)
+            throw new Error('Global style lease is no longer active: ' + key);
+          owner.handle.update(value, owner.owners > 1 ? key : undefined);
+        },
         dispose() {
-          // 防止旧句柄重复清理，误删同 key 后来重新挂载的新 owner。
           if (closed) return;
           closed = true;
-          handle.dispose();
-          keys.delete(key);
+          if (disposed || active.get(key) !== owner) return;
+          if (--owner.owners) return;
+          // 旧租约只持有旧 entry，不能删掉同 key 后来重建的 owner。
+          owner.handle.dispose();
           active.delete(key);
+          keys.delete(key);
         },
       });
     },
@@ -129,10 +155,26 @@ export function createStyleContext(options: StyleContextOptions = {}): StyleCont
     dispose() {
       if (disposed) return;
       disposed = true;
-      runtime.dispose();
-      keys.clear();
-      pending.clear();
-      active.clear();
+      const errors: unknown[] = [];
+      for (const cleanup of [...cleanups]) {
+        try {
+          cleanup();
+        } catch (error) {
+          errors.push(error);
+        }
+      }
+      cleanups.clear();
+      try {
+        runtime.dispose();
+      } catch (error) {
+        errors.push(error);
+      } finally {
+        keys.clear();
+        pending.clear();
+        active.clear();
+      }
+      if (errors.length === 1) throw errors[0];
+      if (errors.length) throw new AggregateError(errors, 'Style context cleanup failed.');
     },
   };
   return Object.freeze(context);

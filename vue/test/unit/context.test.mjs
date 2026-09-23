@@ -92,3 +92,26 @@ test('Vue 服务端不订阅状态，scope 结束后规则保留到请求输出'
     host.dispose();
   }
 });
+
+test('已释放的宿主在创建新 hook 时就拒绝，不提前执行业务工厂', () => {
+  const project = createStyles();
+  const host = project.createHost({ target: null });
+  const app = createSSRApp({ render: () => null });
+  app.use(host);
+  const css = app.runWithContext(project.useCss);
+  host.dispose();
+  let calls = 0;
+  assert.throws(() => css(() => calls++), /disposed/);
+  const scope = effectScope();
+  try {
+    scope.run(() =>
+      app.runWithContext(() => {
+        assert.throws(() => project.useCss(), /disposed/);
+        assert.throws(() => project.useGlobalCss('late', () => calls++), /disposed/);
+      }),
+    );
+    assert.equal(calls, 0);
+  } finally {
+    scope.stop();
+  }
+});

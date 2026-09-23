@@ -75,7 +75,7 @@ test('项目入口、根宿主、主题与水合使用同一请求运行时', as
     assert(blue.html.includes('data-theme="blue"'));
     assert(inherited.html.includes('data-theme="red"'));
     assert(red.html.includes('project-body'));
-    assert(red.manifest.globals.length === 1);
+    assert(red.manifest.globals.length === 2);
     assert(!red.html.includes('data-theme="blue"'));
     assert(!blue.html.includes('data-theme="red"'));
 
@@ -124,9 +124,28 @@ test('项目入口、根宿主、主题与水合使用同一请求运行时', as
       () =>
         getComputedStyle(document.querySelector('[data-project-color]')).color === 'rgb(0, 0, 255)',
     );
+    const sharedColor = () =>
+      page.locator('[data-shared-global-target]').evaluate((el) => getComputedStyle(el).color);
+    const leases = await page
+      .locator('[data-shared-lease]')
+      .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('data-shared-lease')));
+    assert.equal(leases.length, 2);
+    assert.equal(leases[0], leases[1]);
+    const activeStyles = await page.locator('style[data-zerodep]').count();
+    await page.locator('[data-shared-first]').click();
+    assert.equal(await sharedColor(), 'rgb(255, 0, 0)');
+    assert.equal(await page.locator('style[data-zerodep]').count(), activeStyles);
+    await page.locator('[data-shared-second]').click();
+    assert.equal(await page.locator('style[data-zerodep]').count(), activeStyles - 1);
+    await page.locator('[data-shared-first]').click();
+    assert.equal(await sharedColor(), 'rgb(255, 0, 0)');
+    assert.equal(await page.locator('style[data-zerodep]').count(), activeStyles);
     await page.evaluate(() => window.projectFixture.remount());
     assert.equal(await color(), 'rgb(0, 0, 255)');
     assert.equal(await page.locator('[data-project-color]').getAttribute('data-theme'), 'blue');
+    const stoppedRuns = await page.evaluate(() => window.projectFixture.disposeHostWhileMounted());
+    assert(stoppedRuns.before > 0);
+    assert.equal(stoppedRuns.after, stoppedRuns.before);
     await page.evaluate(() => window.projectFixture.stop());
     assert.equal(await page.locator('style[data-zerodep]').count(), 0);
     assert.deepEqual(errors, []);

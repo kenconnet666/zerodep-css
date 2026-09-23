@@ -61,7 +61,8 @@ export interface RuntimeOptions {
 }
 export interface GlobalStyleHandle {
   readonly id: string;
-  update(value: StylesheetDefinition | StylesheetFactory): void;
+  /** 内部共享槽位只校验同内容；仍经过宿主完整性检查。 */
+  update(value: StylesheetDefinition | StylesheetFactory, sharedKey?: string): void;
   dispose(): void;
 }
 export interface RuntimeStats {
@@ -372,10 +373,35 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
     let closed = false;
     return Object.freeze({
       id,
-      update(input: StylesheetDefinition | StylesheetFactory) {
+      update(input: StylesheetDefinition | StylesheetFactory, sharedKey?: string) {
         alive();
         if (closed || !records.has(id)) throw new Error('Global style slot is no longer active.');
-        ensure(compileGlobal(definition(input), id, config), id);
+        const compiled = compileGlobal(definition(input), id, config);
+        if (sharedKey !== undefined) {
+          const current = records.get(id)!;
+          const ids = [...current.dependencies].sort();
+          const nextIds = [...compiled.record.dependencies].sort();
+          const equal =
+            current.kind === 'global' &&
+            current.body === compiled.record.body &&
+            ids.length === nextIds.length &&
+            ids.every((name, index) => name === nextIds[index]) &&
+            compiled.dependencies.every((resource) => {
+              const existing = records.get(resource.id);
+              return (
+                existing?.kind === resource.kind &&
+                existing.body === resource.body &&
+                JSON.stringify([...existing.dependencies].sort()) ===
+                  JSON.stringify([...resource.dependencies].sort())
+              );
+            });
+          if (!equal)
+            throw new Error(
+              'Shared global style content conflicts for key "' + sharedKey + '" (' + id + ').',
+            );
+          // 不重写别的 owner；ensure 仍验证样式节点未被外部删除或禁用。
+          ensure(compiled);
+        } else ensure(compiled, id);
       },
       dispose() {
         if (closed) return;

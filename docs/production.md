@@ -108,7 +108,17 @@ createStyles 四个明确重载要求作者类、默认主题的泛型必须由�
 
 便携解析器与 core 轻量 tokenizer 在完整引擎中有少量重复代码；完整 css 入口从迁移后的 510960 B / 104874 B gzip 变为 516136 B / 106805 B gzip，增加约 1.8% gzip，换取无额外配置的 SSR 打包兼容。原始体积预算保持不变，三个完整引擎入口的 gzip 预算各增加 3000 B；Css/defineTheme/cssVar 等小入口预算不变。这不是运行速度测量，P4 仍需单独诊断。
 
-本地根 check/build、无 dist 检查、生成一致性、172 项单元、三语言类型负例与 LSP、25 个运行时浏览器场景、独立引擎共享宿主、双框架 SSR/hydration/HMR/项目宿主、独立 tarball 的 NodeNext 类型与生产构建均通过。最后统一解析器导入后另通过组合/事务/跨引擎身份定向回归、模块图和体积检查，再次完整通过两框架独立消费者。生产依赖审计无已知漏洞；成功消费者自行清理。本次失败消费者临时目录 zerodep-consumer-tBeOVK、zerodep-consumer-LsYPcY、zerodep-consumer-9E6gze 的定点清理被自动审批策略拒绝，保留在系统临时目录，不绕过拒绝。P2e 远程 CI 以提交后的实际结果为准；此前 558a27a/8f882d1 两次 raw 修复的远程 CI 均已通过。
+本地根 check/build、无 dist 检查、生成一致性、172 项单元、三语言类型负例与 LSP、25 个运行时浏览器场景、独立引擎共享宿主、双框架 SSR/hydration/HMR/项目宿主、独立 tarball 的 NodeNext 类型与生产构建均通过。最后统一解析器导入后另通过组合/事务/跨引擎身份定向回归、模块图和体积检查，再次完整通过两框架独立消费者。生产依赖审计无已知漏洞；成功消费者自行清理。本次失败消费者临时目录 zerodep-consumer-tBeOVK、zerodep-consumer-LsYPcY、zerodep-consumer-9E6gze 的定点清理被自动审批策略拒绝，保留在系统临时目录，不绕过拒绝。P2e 提交 5d46762 的远程 CI 已通过（Windows/Linux、三引擎、LSP 与独立消费者）；此前 558a27a/8f882d1 两次 raw 修复的远程 CI 也已通过。
+
+### P3a 全局共享与宿主释放
+
+同业务 key、同序列化正文及动画依赖共享一个固定槽位，组件各持独立租约；最后一个租约释放才删除规则，旧租约重复释放不会影响同 key 后来重建的槽位。SSR 只记录 key→slot，hydration 可重新建立不同数量的 owner。共享验证直接复用 runtime 的单次编译与完整宿主检查，冲突、无效 CSS 和外部 DOM 删除失败均不增加 owner。
+
+多 owner 期间只接受同内容更新，剩单 owner 后可以更新。动态全局由根组件一次声明，不为同步批量改写引入第二套调度；冲突信息包含业务 key 与槽位。raw 声明值的空白 token 保持原样，仅结构规范化一致的正文才共享。
+
+生命周期审计发现提前 host.dispose 会留下全局 watcher/effect，后续状态变化先求值工厂再报失效。现由 context 提供内部释放订阅，框架 hook 随组件或 host 的较早释放停止；正常组件卸载会退订。清理失败仍执行其它 cleanup 并释放 runtime，最终汇总错误。创建新 hook 时先检查 host 活性，失效时不执行业务工厂。
+
+本地根 check/build、177 项单元、双框架完整 SSR/hydration/HMR 与项目宿主、共享样式外部删除失败回归、体积检查和原生 LSP 通过。真实组件验证 SSR 两个声明者共享一个槽位、移除首个保留样式、移除最后一个删除、重新挂载可恢复；提前 host.dispose 后改变仅由全局工厂读取的响应式值，不再增加工厂调用次数。
 
 ### raw 数字语义补正
 

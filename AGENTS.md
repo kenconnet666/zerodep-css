@@ -19,7 +19,7 @@
 - 修改序列化、资源注册或 SSR 恢复后运行 `pnpm test:browser:runtime`；默认使用已安装 Chrome。业务样式只从项目绑定的 `useCss()` 取得，SSR 每请求独立 host，不增加服务端全局缓存。
 - 框架/上下文变更运行 `pnpm test:unit`、`pnpm test:browser:frameworks`。后者通过官方编译器构建真实组件并测试 dist，覆盖客户端与 SSR 恢复；Svelte rune 模块不能当作普通未编译 JS 执行。
 - 长时完整 LSP、生成一致性和运行时浏览器回归可交给 GitHub Actions；本地仍完成类型/构建与改动对应的关键测试。交付须区分本地通过、CI 通过或 CI 未完成，不把 workflow 文件当作运行成功。
-- 内部 createStyleContext 只由 host 拥有；业务全局样式用稳定 key，恢复后 completeHydration 检查遗漏。Vue 应用卸载释放 host；Svelte 根组件卸载只释放认领以支持 HMR，入口 unmount 后显式 host.dispose。组件只释放自己的槽位/订阅。同 key 同内容共享仍在 P3 计划中。
+- 内部 createStyleContext 只由 host 拥有；业务全局样式用稳定 key，恢复后 completeHydration 检查遗漏。Vue 应用卸载释放 host；Svelte 根组件卸载只释放认领以支持 HMR，入口 unmount 后显式 host.dispose。组件只释放自己的槽位/订阅。同 key 同序列化内容共享，多个 owner 存活时禁止改值，仅剩一个 owner 才可更新；最后一个释放才删规则。动态全局在根组件声明一次。host.dispose 同时停止已登记的全局 watcher/effect。
 - 使用项目 `zerodep_lsp` 做诊断、hover、definitions、references、completions。当前会话没有该 MCP 时，使用 `pnpm lsp:inspect <相对文件路径...>`。超时或 complete=false 不是无错误。
 - Node 编译源码放 internal/compiler 与 vue/compiler、svelte/compiler；浏览器完整运行时源码在 internal/runtime，框架接入位于各包 src。两套内部源码都用严格 TS，分别执行 pnpm check:compiler 与 pnpm check:runtime；根 check 自动包含它们，声明由根 build 生成，不手写 .d.mts 替代实现检查。
 - 修改语言服务桥或升级相关依赖后运行 `pnpm lsp:verify`，必须通过预置错误检出、修复清零和五项工具验收。WebStorm MCP 的空问题列表不能代替语义验收。

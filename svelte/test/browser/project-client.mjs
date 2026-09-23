@@ -38,5 +38,12 @@ export async function start() {
       await unmount(component);
       host.dispose();
     },
+    async disposeHostWhileMounted() {
+      const before = component.readGlobalRuns();
+      host.dispose();
+      component.bumpGlobal();
+      await tick();
+      return { before, after: component.readGlobalRuns() };
+    },
   };
 }

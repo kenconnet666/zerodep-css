@@ -24,10 +24,13 @@ export function useGlobalCss<C extends Css = Css>(
   const dispose = () => {
     if (!closed) {
       closed = true;
+      unsubscribe();
       stop();
       handle.dispose();
     }
   };
+  // 宿主可能先于组件显式释放；同时停止 watcher，避免以后再执行业务工厂。
+  const unsubscribe = context.onDispose(dispose);
   // 仅释放这个组件拥有的全局槽位，不 dispose 应用共享的 context/runtime。
   onScopeDispose(dispose);
   return Object.freeze({

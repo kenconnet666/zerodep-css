@@ -5,7 +5,7 @@
 ## 先读这些记录
 
 - [已拍板合同](runtime-first.md)：运行时 CSS 是正式能力；编译、变量绑定和缓存只做等价优化。Vue 3.5/Svelte 5、Nuxt 4/SvelteKit 2、Node SSR 与静态部署是首版目标。
-- [阶段、提交和实际验证](production.md)：P1 已完成基础阶段；P2e 引擎归位、构建、独立消费和本地回归已通过；对应提交的远程 CI 仍须确认。后续 P3–P6 尚须继续，不宣称目标已经全部完成。
+- [阶段、提交和实际验证](production.md)：P1 已完成基础阶段；P2e 引擎归位、独立消费、本地回归与提交 5d46762 的远程 CI 已通过；P3 生命周期阶段正在推进。后续 P3–P6 尚须继续，不宣称目标已经全部完成。
 - [当前公开 API 迁移](migration.md)、[支持边界](support.md)、[编译边界](compiler.md)：以这些文件和当前源码为准。历史 API/性能证据从 Git 查询。
 
 新项目使用 `createStyles` 绑定 `useCss`/`useTheme`/`provideTheme`/`useGlobalCss`，`createHost` 按应用或请求创建。Vue `app.use(host)`，Svelte 根 `host.provide()`；Vue 应用卸载释放 host，Svelte 最终 `unmount` 后由入口显式释放。SSR 都在完整输出后 `finally dispose`。core 根入口是薄作者模型；完整引擎在 `internal/runtime`，构建时复制到两个适配包。`core/internal` 与适配包 `#runtime` 是内部边界，不用于业务代码。

@@ -15,6 +15,7 @@ export function useGlobalCss<C extends Css = Css>(
   if (context.server) return context.mountGlobal(identity, globalCss(factory, cssType));
   let handle: ReturnType<StyleContext['mountGlobal']> | undefined;
   let closed = false;
+  let unsubscribe: (() => void) | undefined;
   // derived 只运行纯构建器；依赖读取留在这里，规则注册留在 effect/首次挂载中。
   const definition = $derived(globalCss(factory, cssType));
   // 独立 root 让返回句柄可以提前停止；因此必须由 onDestroy 显式回收。
@@ -33,16 +34,17 @@ export function useGlobalCss<C extends Css = Css>(
       identity,
       untrack(() => definition),
     );
+    unsubscribe = context.onDispose(dispose);
     onDestroy(dispose);
   } catch (error) {
     // 首次挂载或生命周期注册失败时，也不能留下无人负责的 effect root。
-    stop();
-    handle?.dispose();
+    dispose();
     throw error;
   }
   function dispose() {
     if (!closed) {
       closed = true;
+      unsubscribe?.();
       stop();
       handle?.dispose();
     }

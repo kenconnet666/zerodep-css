@@ -16,19 +16,36 @@ export class AppCss extends Css {
 
 export const styles = createStyles({ cssType: AppCss, theme });
 
+const SharedGlobal = defineComponent({
+  setup() {
+    const global = styles.useGlobalCss('shared-color', (g) =>
+      g.rule('[data-shared-global-target]', (s) => s.color.red),
+    );
+    return () => h('span', { 'data-shared-lease': global.id });
+  },
+});
+
 export const ProjectApp = defineComponent({
   name: 'ProjectStylesApp',
   props: {
     initial: { type: String, default: 'red' },
+    capture: Function,
   },
   setup(props) {
     const brand = ref(props.initial);
+    const globalTick = ref(0);
+    let globalRuns = 0;
+    props.capture?.({ bump: () => globalTick.value++, runs: () => globalRuns });
+    const sharedFirst = ref(true),
+      sharedSecond = ref(true);
     styles.provideTheme(() => ({ color: { brand: brand.value } }));
     const currentTheme = styles.useTheme();
     const css = styles.useCss();
-    const global = styles.useGlobalCss('project-body', (g) =>
-      g.rule('body', (s) => s.projectPadding()),
-    );
+    const global = styles.useGlobalCss('project-body', (g) => {
+      globalRuns++;
+      void globalTick.value;
+      g.rule('body', (s) => s.projectPadding());
+    });
 
     return () => {
       const brandValue = currentTheme().color.brand;
@@ -52,6 +69,19 @@ export const ProjectApp = defineComponent({
           brandValue,
         ),
         h('span', { 'data-project-global': global.id }, 'global'),
+        h(
+          'button',
+          { 'data-shared-first': '', onClick: () => (sharedFirst.value = !sharedFirst.value) },
+          'toggle first',
+        ),
+        h(
+          'button',
+          { 'data-shared-second': '', onClick: () => (sharedSecond.value = !sharedSecond.value) },
+          'toggle second',
+        ),
+        h('div', { 'data-shared-global-target': '' }, 'shared'),
+        sharedFirst.value ? h(SharedGlobal, { key: 'first' }) : null,
+        sharedSecond.value ? h(SharedGlobal, { key: 'second' }) : null,
       ]);
     };
   },

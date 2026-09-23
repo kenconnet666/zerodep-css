@@ -4,7 +4,8 @@ import { ProjectApp, styles } from '../fixtures/ProjectStyles.mjs';
 export async function start() {
   const manifest = JSON.parse(document.querySelector('#styles').textContent);
   const host = styles.createHost({ namespace: 'project', hydrate: manifest });
-  const app = createSSRApp(ProjectApp, { initial: 'red' });
+  let probe;
+  const app = createSSRApp(ProjectApp, { initial: 'red', capture: (value) => (probe = value) });
   app.use(host);
 
   let secondInstallError = '';
@@ -22,6 +23,13 @@ export async function start() {
     app,
     host,
     secondInstallError,
+    async disposeHostWhileMounted() {
+      const before = probe.runs();
+      host.dispose();
+      probe.bump();
+      await nextTick();
+      return { before, after: probe.runs() };
+    },
     async stop() {
       app.unmount();
       await nextTick();
