@@ -1,0 +1,3957 @@
+{
+  "runId": "aad42308-f28c-4c67-9d62-c2f0eeee455a",
+  "passed": true,
+  "status": "passed",
+  "browser": "153.0.8010.53",
+  "engine": "chromium",
+  "channel": "chrome",
+  "dependencies": {
+    "@emotion/css": "11.13.5",
+    "goober": "2.1.19",
+    "@vanilla-extract/css": "1.21.2",
+    "@vanilla-extract/esbuild-plugin": "2.3.22",
+    "@vanilla-extract/dynamic": "2.1.5",
+    "@unocss/core": "66.10.5",
+    "@unocss/preset-mini": "66.10.5",
+    "esbuild": "0.28.2"
+  },
+  "frameworkVersions": {
+    "vue": "3.5.43",
+    "svelte": "5.57.0"
+  },
+  "node": "v24.12.0",
+  "platform": "win32",
+  "sizes": {
+    "emotion.js": {
+      "bytes": 15589,
+      "gzipBytes": 6436
+    },
+    "goober.js": {
+      "bytes": 2329,
+      "gzipBytes": 1324
+    },
+    "vanilla.js": {
+      "bytes": 861,
+      "gzipBytes": 467
+    },
+    "vanilla.css": {
+      "bytes": 450,
+      "gzipBytes": 151
+    },
+    "uno.js": {
+      "bytes": 777,
+      "gzipBytes": 433
+    },
+    "uno.css": {
+      "bytes": 475,
+      "gzipBytes": 162
+    },
+    "dynamic.js": {
+      "bytes": 1437,
+      "gzipBytes": 782
+    }
+  },
+  "measurement": {
+    "unit": "milliseconds",
+    "mount": "framework mount, framework tick, and layout read with scripts and CSS already loaded",
+    "update": "all batches together, including framework tick and layout read",
+    "excluded": "dependency installation, bundling, network transfer, and initial script parsing",
+    "freshValues": "every row in every frame receives a distinct width; fresh cases use fewer batches",
+    "nativeTheme": "static CSS from the same lightTheme token/value tree, prepared before timing",
+    "themeLeaves": 49,
+    "records": "per-instance emitted rules; preloaded native, UnoCSS, and vanilla-extract CSS is excluded",
+    "compilerScope": "same-SFC createStyles/useCss direct bindings only; imported project hooks conservatively use runtime",
+    "factoryScope": "generated components invoke createStyles once per component setup; mount time includes this call",
+    "compilerDiagnostics": "compiler-paths.json records autoRequested, prepared, binding, and runtimeFallback per case"
+  },
+  "frameworks": {
+    "vue": {
+      "rounds": 5,
+      "elements": 200,
+      "workloads": {
+        "bounded": {
+          "batches": 30,
+          "warmupBatches": 5,
+          "distinctWidths": 16
+        },
+        "fresh": {
+          "batches": 5,
+          "warmupBatches": 1,
+          "distinctWidths": 1400
+        }
+      },
+      "samples": {
+        "native-static": [
+          {
+            "mountMs": 1.5,
+            "updateMs": 2.299999998882413,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.099999999627471,
+            "updateMs": 2.099999999627471,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 1.400000000372529,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 2.199999999254942,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.599999999627471,
+            "updateMs": 1.900000000372529,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "vanilla-static": [
+          {
+            "mountMs": 1.300000000745058,
+            "updateMs": 3,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 1.400000000372529,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.099999999627471,
+            "updateMs": 2.299999998882413,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 2.599999999627471,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.300000000745058,
+            "updateMs": 2.100000001490116,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "uno-static": [
+          {
+            "mountMs": 1.099999999627471,
+            "updateMs": 1.400000000372529,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.599999999627471,
+            "updateMs": 3.299999998882413,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "updateMs": 2.699999999254942,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.5,
+            "updateMs": 1.400000000372529,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 3.699999999254942,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-auto-static": [
+          {
+            "mountMs": 2.099999999627471,
+            "updateMs": 5.599999999627471,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.200000001117587,
+            "updateMs": 6.199999999254942,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 5.700000001117587,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.8999999985098839,
+            "updateMs": 6.199999999254942,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.700000001117587,
+            "updateMs": 5.599999999627471,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-runtime-static": [
+          {
+            "mountMs": 2.399999998509884,
+            "updateMs": 31.799999998882413,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4.200000001117587,
+            "updateMs": 31.699999999254942,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 36.90000000037253,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4.300000000745058,
+            "updateMs": 28.90000000037253,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.900000000372529,
+            "updateMs": 32.19999999925494,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-static": [
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 7.800000000745058,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.6000000014901161,
+            "updateMs": 7.099999999627471,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 8.300000000745058,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 6.199999999254942,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.5,
+            "updateMs": 7.400000000372529,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-static": [
+          {
+            "mountMs": 1.5,
+            "updateMs": 6.299999998882413,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "updateMs": 8,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.099999999627471,
+            "updateMs": 8.5,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.300000000745058,
+            "updateMs": 6.199999999254942,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.099999999627471,
+            "updateMs": 8.699999999254942,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-once-static": [
+          {
+            "mountMs": 1.799999998882413,
+            "updateMs": 1.300000000745058,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "updateMs": 2.599999999627471,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 1.5,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "updateMs": 2.199999999254942,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 2.699999999254942,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-once-static": [
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 1.400000000372529,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 2.800000000745058,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 2.699999999254942,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.3999999985098839,
+            "updateMs": 1.800000000745058,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 2.599999999627471,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-once-static": [
+          {
+            "mountMs": 1.6000000014901161,
+            "updateMs": 1.599999999627471,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.099999999627471,
+            "updateMs": 2.599999999627471,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.199999999254942,
+            "updateMs": 2.400000000372529,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.5,
+            "updateMs": 1.799999998882413,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.5,
+            "updateMs": 2.299999998882413,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "native-vars": [
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 72.80000000074506,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.200000001117587,
+            "updateMs": 92.5,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 61.69999999925494,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.5,
+            "updateMs": 59.09999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.599999999627471,
+            "updateMs": 82.09999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "vanilla-vars": [
+          {
+            "mountMs": 2.799999998882413,
+            "updateMs": 77.69999999925494,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.400000000372529,
+            "updateMs": 80.29999999888241,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 64.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.400000000372529,
+            "updateMs": 65.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.399999998509884,
+            "updateMs": 78.10000000149012,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "uno-vars": [
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 74,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.199999999254942,
+            "updateMs": 81.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.6000000014901161,
+            "updateMs": 60.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 57,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 75.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "vanilla-dynamic": [
+          {
+            "mountMs": 1.599999999627471,
+            "updateMs": 90.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.5,
+            "updateMs": 85.39999999850988,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.200000001117587,
+            "updateMs": 69,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.599999999627471,
+            "updateMs": 61.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 84.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-vars": [
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 81.79999999888241,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.700000001117587,
+            "updateMs": 56.30000000074506,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.599999999627471,
+            "updateMs": 72,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 71.5,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 83,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-vars": [
+          {
+            "mountMs": 2.299999998882413,
+            "updateMs": 69.19999999925494,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 77.30000000074506,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 64,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 89,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.699999999254942,
+            "updateMs": 78.69999999925494,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-auto": [
+          {
+            "mountMs": 5.799999998882413,
+            "updateMs": 136.89999999850988,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 5.300000000745058,
+            "updateMs": 133.7000000011176,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4.699999999254942,
+            "updateMs": 135.2000000011176,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 5.099999999627471,
+            "updateMs": 136.69999999925494,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 9,
+            "updateMs": 122.09999999962747,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "native-classes": [
+          {
+            "mountMs": 1.700000001117587,
+            "updateMs": 35.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.599999999627471,
+            "updateMs": 40.09999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.300000000745058,
+            "updateMs": 37.80000000074506,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.400000000372529,
+            "updateMs": 39.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 39.70000000111759,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "vanilla-classes": [
+          {
+            "mountMs": 2,
+            "updateMs": 34.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.199999999254942,
+            "updateMs": 37.69999999925494,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 35.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.199999999254942,
+            "updateMs": 38.79999999888241,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 37.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "uno-classes": [
+          {
+            "mountMs": 1.8999999985098839,
+            "updateMs": 36.600000001490116,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.8999999985098839,
+            "updateMs": 38.80000000074506,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.699999999254942,
+            "updateMs": 28.699999999254942,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.5,
+            "updateMs": 34.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "updateMs": 32.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-object": [
+          {
+            "mountMs": 2.5,
+            "updateMs": 47.29999999888241,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 39.399999998509884,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.799999998882413,
+            "updateMs": 34.40000000037253,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.700000001117587,
+            "updateMs": 34.69999999925494,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.100000001490116,
+            "updateMs": 46.899999998509884,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-object": [
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 44.19999999925494,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.200000001117587,
+            "updateMs": 47,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "updateMs": 39.20000000111759,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3,
+            "updateMs": 34.90000000037253,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 45,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-runtime": [
+          {
+            "mountMs": 7.5,
+            "updateMs": 72.80000000074506,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 13,
+            "updateMs": 73.19999999925494,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 7.200000001117587,
+            "updateMs": 59.59999999962747,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 5.400000000372529,
+            "updateMs": 68.40000000037253,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 8.200000001117587,
+            "updateMs": 82.5,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "native-growing-vars": [
+          {
+            "mountMs": 3.800000000745058,
+            "updateMs": 14.599999999627471,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 4,
+            "updateMs": 11.199999999254942,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.300000000745058,
+            "updateMs": 10.5,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.299999998882413,
+            "updateMs": 10.099999999627471,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 4.099999999627471,
+            "updateMs": 14.800000000745058,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "vanilla-growing-vars": [
+          {
+            "mountMs": 3.199999999254942,
+            "updateMs": 14.5,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 12.700000001117587,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 9.200000001117587,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "updateMs": 10.100000001490116,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.900000000372529,
+            "updateMs": 10.900000000372529,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "uno-growing-vars": [
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 13.800000000745058,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3,
+            "updateMs": 12.399999998509884,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 4.800000000745058,
+            "updateMs": 10.699999999254942,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 14.199999999254942,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.5,
+            "updateMs": 13.099999999627471,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "vanilla-dynamic-growing": [
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 13.300000000745058,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.799999998882413,
+            "updateMs": 15.299999998882413,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.099999999627471,
+            "updateMs": 11.700000001117587,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 12,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.300000000745058,
+            "updateMs": 14.100000001490116,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "emotion-growing": [
+          {
+            "mountMs": 4.800000000745058,
+            "updateMs": 23.200000001117587,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 5.400000000372529,
+            "updateMs": 27.100000001490116,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.300000000745058,
+            "updateMs": 18.90000000037253,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 5.199999999254942,
+            "updateMs": 24.699999999254942,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 4.699999999254942,
+            "updateMs": 25.40000000037253,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "goober-growing": [
+          {
+            "mountMs": 18,
+            "updateMs": 660.1999999992549,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 16.09999999962747,
+            "updateMs": 731.6999999992549,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 13.300000000745058,
+            "updateMs": 595.5,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 13.299999998882413,
+            "updateMs": 599.1999999992549,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 16.40000000037253,
+            "updateMs": 661,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "zerodep-growing-auto": [
+          {
+            "mountMs": 7.099999999627471,
+            "updateMs": 28.200000001117587,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 5.300000000745058,
+            "updateMs": 17.40000000037253,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 7.599999999627471,
+            "updateMs": 23.399999998509884,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 5.699999999254942,
+            "updateMs": 20.40000000037253,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 7.100000001490116,
+            "updateMs": 24.09999999962747,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "zerodep-growing-runtime": [
+          {
+            "mountMs": 27.699999999254942,
+            "updateMs": 134.2999999988824,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 28.200000001117587,
+            "updateMs": 102.09999999962747,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 24.699999999254942,
+            "updateMs": 110.40000000037253,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 23.800000000745058,
+            "updateMs": 129,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 28.90000000037253,
+            "updateMs": 137,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "native-themed-vars": [
+          {
+            "mountMs": 3,
+            "updateMs": 160,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.299999998882413,
+            "updateMs": 161.19999999925494,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 114.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.8999999985098839,
+            "updateMs": 127.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 149.09999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "native-themed-classes": [
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 49.09999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.699999999254942,
+            "updateMs": 34.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.599999999627471,
+            "updateMs": 31.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.1000000014901161,
+            "updateMs": 37,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 43.09999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-themed": [
+          {
+            "mountMs": 2.099999999627471,
+            "updateMs": 49.399999998509884,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 39.5,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.799999998882413,
+            "updateMs": 42.69999999925494,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.8999999985098839,
+            "updateMs": 51,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 45.399999998509884,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-themed": [
+          {
+            "mountMs": 3.099999999627471,
+            "updateMs": 52,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 40.899999998509884,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 47.90000000037253,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.200000001117587,
+            "updateMs": 43.80000000074506,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 50,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-scoped-auto": [
+          {
+            "mountMs": 9.099999999627471,
+            "updateMs": 226.19999999925494,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 8.100000001490116,
+            "updateMs": 181.2000000011176,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 9.300000000745058,
+            "updateMs": 158.2000000011176,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 5.099999999627471,
+            "updateMs": 166.30000000074506,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 9.200000001117587,
+            "updateMs": 196.2000000011176,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-theme-class": [
+          {
+            "mountMs": 13.700000001117587,
+            "updateMs": 177.30000000074506,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 12.399999998509884,
+            "updateMs": 166.09999999962747,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 12,
+            "updateMs": 130.09999999962747,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 13.699999999254942,
+            "updateMs": 126.19999999925494,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 12.799999998882413,
+            "updateMs": 169.19999999925494,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ]
+      },
+      "medians": {
+        "native-static": {
+          "mountMs": 1.800000000745058,
+          "updateMs": 2.099999999627471,
+          "records": 0
+        },
+        "vanilla-static": {
+          "mountMs": 1.300000000745058,
+          "updateMs": 2.299999998882413,
+          "records": 0
+        },
+        "uno-static": {
+          "mountMs": 1.599999999627471,
+          "updateMs": 2.699999999254942,
+          "records": 0
+        },
+        "zerodep-auto-static": {
+          "mountMs": 2.099999999627471,
+          "updateMs": 5.700000001117587,
+          "records": 1
+        },
+        "zerodep-runtime-static": {
+          "mountMs": 3.900000000372529,
+          "updateMs": 31.799999998882413,
+          "records": 1
+        },
+        "emotion-static": {
+          "mountMs": 2.400000000372529,
+          "updateMs": 7.400000000372529,
+          "records": 1
+        },
+        "goober-static": {
+          "mountMs": 2.099999999627471,
+          "updateMs": 8,
+          "records": 1
+        },
+        "zerodep-once-static": {
+          "mountMs": 2,
+          "updateMs": 2.199999999254942,
+          "records": 1
+        },
+        "emotion-once-static": {
+          "mountMs": 2,
+          "updateMs": 2.599999999627471,
+          "records": 1
+        },
+        "goober-once-static": {
+          "mountMs": 1.6000000014901161,
+          "updateMs": 2.299999998882413,
+          "records": 1
+        },
+        "native-vars": {
+          "mountMs": 1.800000000745058,
+          "updateMs": 72.80000000074506,
+          "records": 0
+        },
+        "vanilla-vars": {
+          "mountMs": 2.399999998509884,
+          "updateMs": 77.69999999925494,
+          "records": 0
+        },
+        "uno-vars": {
+          "mountMs": 2.199999999254942,
+          "updateMs": 74,
+          "records": 0
+        },
+        "vanilla-dynamic": {
+          "mountMs": 1.599999999627471,
+          "updateMs": 84.59999999962747,
+          "records": 0
+        },
+        "emotion-vars": {
+          "mountMs": 2.5,
+          "updateMs": 72,
+          "records": 1
+        },
+        "goober-vars": {
+          "mountMs": 2.299999998882413,
+          "updateMs": 77.30000000074506,
+          "records": 1
+        },
+        "zerodep-auto": {
+          "mountMs": 5.300000000745058,
+          "updateMs": 135.2000000011176,
+          "records": 1
+        },
+        "native-classes": {
+          "mountMs": 1.599999999627471,
+          "updateMs": 39.40000000037253,
+          "records": 0
+        },
+        "vanilla-classes": {
+          "mountMs": 2,
+          "updateMs": 37.69999999925494,
+          "records": 0
+        },
+        "uno-classes": {
+          "mountMs": 1.700000001117587,
+          "updateMs": 34.40000000037253,
+          "records": 0
+        },
+        "emotion-object": {
+          "mountMs": 2.599999999627471,
+          "updateMs": 39.399999998509884,
+          "records": 16
+        },
+        "goober-object": {
+          "mountMs": 2.200000001117587,
+          "updateMs": 44.19999999925494,
+          "records": 16
+        },
+        "zerodep-runtime": {
+          "mountMs": 7.5,
+          "updateMs": 72.80000000074506,
+          "records": 16
+        },
+        "native-growing-vars": {
+          "mountMs": 3.800000000745058,
+          "updateMs": 11.199999999254942,
+          "records": 0
+        },
+        "vanilla-growing-vars": {
+          "mountMs": 3.199999999254942,
+          "updateMs": 10.900000000372529,
+          "records": 0
+        },
+        "uno-growing-vars": {
+          "mountMs": 3.400000000372529,
+          "updateMs": 13.099999999627471,
+          "records": 0
+        },
+        "vanilla-dynamic-growing": {
+          "mountMs": 2.900000000372529,
+          "updateMs": 13.300000000745058,
+          "records": 0
+        },
+        "emotion-growing": {
+          "mountMs": 4.800000000745058,
+          "updateMs": 24.699999999254942,
+          "records": 1400
+        },
+        "goober-growing": {
+          "mountMs": 16.09999999962747,
+          "updateMs": 660.1999999992549,
+          "records": 1400
+        },
+        "zerodep-growing-auto": {
+          "mountMs": 7.099999999627471,
+          "updateMs": 23.399999998509884,
+          "records": 1
+        },
+        "zerodep-growing-runtime": {
+          "mountMs": 27.699999999254942,
+          "updateMs": 129,
+          "records": 1400
+        },
+        "native-themed-vars": {
+          "mountMs": 2.299999998882413,
+          "updateMs": 149.09999999962747,
+          "records": 0
+        },
+        "native-themed-classes": {
+          "mountMs": 1.699999999254942,
+          "updateMs": 37,
+          "records": 0
+        },
+        "emotion-themed": {
+          "mountMs": 2.099999999627471,
+          "updateMs": 45.399999998509884,
+          "records": 16
+        },
+        "goober-themed": {
+          "mountMs": 2.900000000372529,
+          "updateMs": 47.90000000037253,
+          "records": 16
+        },
+        "zerodep-scoped-auto": {
+          "mountMs": 9.099999999627471,
+          "updateMs": 181.2000000011176,
+          "records": 2
+        },
+        "zerodep-theme-class": {
+          "mountMs": 12.799999998882413,
+          "updateMs": 166.09999999962747,
+          "records": 17
+        }
+      }
+    },
+    "svelte": {
+      "rounds": 5,
+      "elements": 200,
+      "workloads": {
+        "bounded": {
+          "batches": 30,
+          "warmupBatches": 5,
+          "distinctWidths": 16
+        },
+        "fresh": {
+          "batches": 5,
+          "warmupBatches": 1,
+          "distinctWidths": 1400
+        }
+      },
+      "samples": {
+        "native-static": [
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 0.5,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 0.09999999962747097,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.099999999627471,
+            "updateMs": 0.19999999925494194,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "updateMs": 0.2000000011175871,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "updateMs": 0.19999999925494194,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "vanilla-static": [
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 0.09999999962747097,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 0.19999999925494194,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 0.19999999925494194,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 0.2999999988824129,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "updateMs": 0.40000000037252903,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "uno-static": [
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 0.19999999925494194,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "updateMs": 0.30000000074505806,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 0.2999999988824129,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2,
+            "updateMs": 0.19999999925494194,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.299999998882413,
+            "updateMs": 0.10000000149011612,
+            "records": 0,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-auto-static": [
+          {
+            "mountMs": 2.799999998882413,
+            "updateMs": 0.2000000011175871,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.200000001117587,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4.100000001490116,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 0.10000000149011612,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-runtime-static": [
+          {
+            "mountMs": 4.200000001117587,
+            "updateMs": 0.2999999988824129,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 5.5,
+            "updateMs": 0.40000000037252903,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4.699999999254942,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 6.099999999627471,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.099999999627471,
+            "updateMs": 0.2000000011175871,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-static": [
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 0.09999999962747097,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.799999998882413,
+            "updateMs": 0.10000000149011612,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 6.400000000372529,
+            "updateMs": 0.40000000037252903,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.099999999627471,
+            "updateMs": 0.2000000011175871,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-static": [
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 0.09999999962747097,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.699999999254942,
+            "updateMs": 0.40000000037252903,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 0.2000000011175871,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4,
+            "updateMs": 0.5,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.099999999627471,
+            "updateMs": 0.30000000074505806,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-once-static": [
+          {
+            "mountMs": 2.700000001117587,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.799999998882413,
+            "updateMs": 0.2000000011175871,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.899999998509884,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.099999999627471,
+            "updateMs": 0.2000000011175871,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "updateMs": 0.30000000074505806,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-once-static": [
+          {
+            "mountMs": 2.300000000745058,
+            "updateMs": 0.09999999962747097,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.199999999254942,
+            "updateMs": 0.09999999962747097,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 0.5,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 0.2000000011175871,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.399999998509884,
+            "updateMs": 0.2999999988824129,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-once-static": [
+          {
+            "mountMs": 1.400000000372529,
+            "updateMs": 0.30000000074505806,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "updateMs": 0.09999999962747097,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.399999998509884,
+            "updateMs": 0.09999999962747097,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.600000001490116,
+            "updateMs": 0.19999999925494194,
+            "records": 1,
+            "checksum": 360,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "native-vars": [
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 56.5,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.800000000745058,
+            "updateMs": 82,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.300000000745058,
+            "updateMs": 79,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.099999999627471,
+            "updateMs": 83.5,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 80.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "vanilla-vars": [
+          {
+            "mountMs": 1.700000001117587,
+            "updateMs": 56.79999999888241,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 86.80000000074506,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 76.70000000111759,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 6.900000000372529,
+            "updateMs": 88.80000000074506,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.399999998509884,
+            "updateMs": 87.69999999925494,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "uno-vars": [
+          {
+            "mountMs": 3.100000001490116,
+            "updateMs": 54.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3,
+            "updateMs": 87.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.799999998882413,
+            "updateMs": 82.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 77.69999999925494,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 81.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "vanilla-dynamic": [
+          {
+            "mountMs": 4.700000001117587,
+            "updateMs": 72.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 93.5,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.100000001490116,
+            "updateMs": 92.20000000111759,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.5,
+            "updateMs": 106,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 105.39999999850988,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-vars": [
+          {
+            "mountMs": 2.199999999254942,
+            "updateMs": 74.79999999888241,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 76,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.100000001490116,
+            "updateMs": 79.29999999888241,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 78.80000000074506,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "updateMs": 71,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-vars": [
+          {
+            "mountMs": 2.299999998882413,
+            "updateMs": 56,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.299999998882413,
+            "updateMs": 82,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 83.70000000111759,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.099999999627471,
+            "updateMs": 54.79999999888241,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 86.40000000037253,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-auto": [
+          {
+            "mountMs": 7.299999998882413,
+            "updateMs": 125.30000000074506,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 6,
+            "updateMs": 149.30000000074506,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 6.900000000372529,
+            "updateMs": 147.40000000037253,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 6.400000000372529,
+            "updateMs": 111.69999999925494,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 6,
+            "updateMs": 165.90000000037253,
+            "records": 1,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "native-classes": [
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 28.299999998882413,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.199999999254942,
+            "updateMs": 39.70000000111759,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.799999998882413,
+            "updateMs": 29.699999999254942,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4.599999999627471,
+            "updateMs": 30.699999999254942,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3,
+            "updateMs": 34.69999999925494,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "vanilla-classes": [
+          {
+            "mountMs": 1.400000000372529,
+            "updateMs": 29,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.299999998882413,
+            "updateMs": 40,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.300000000745058,
+            "updateMs": 31.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.5,
+            "updateMs": 31.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4,
+            "updateMs": 38.29999999888241,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "uno-classes": [
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 29,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.200000001117587,
+            "updateMs": 40.40000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.099999999627471,
+            "updateMs": 32.399999998509884,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.900000000372529,
+            "updateMs": 31.300000000745058,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.799999998882413,
+            "updateMs": 44.19999999925494,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-object": [
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 42.80000000074506,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.300000000745058,
+            "updateMs": 50.69999999925494,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 43.5,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 43.09999999962747,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 42.79999999888241,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-object": [
+          {
+            "mountMs": 3.5,
+            "updateMs": 45.79999999888241,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.599999999627471,
+            "updateMs": 57.80000000074506,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.199999999254942,
+            "updateMs": 39.20000000111759,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.399999998509884,
+            "updateMs": 39.30000000074506,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.799999998882413,
+            "updateMs": 48.90000000037253,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-runtime": [
+          {
+            "mountMs": 8,
+            "updateMs": 81.09999999962747,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 8.099999999627471,
+            "updateMs": 82.69999999925494,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 8.400000000372529,
+            "updateMs": 70.19999999925494,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 7.199999999254942,
+            "updateMs": 67.20000000111759,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 6.700000001117587,
+            "updateMs": 82.90000000037253,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "native-growing-vars": [
+          {
+            "mountMs": 4.900000000372529,
+            "updateMs": 9.900000000372529,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 5.400000000372529,
+            "updateMs": 14.799999998882413,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.100000001490116,
+            "updateMs": 9.200000001117587,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.5,
+            "updateMs": 10.400000000372529,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 18.100000001490116,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "vanilla-growing-vars": [
+          {
+            "mountMs": 3,
+            "updateMs": 14.600000001490116,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 5.299999998882413,
+            "updateMs": 13.399999998509884,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.5,
+            "updateMs": 8.800000000745058,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 12.299999998882413,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 9.699999999254942,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "uno-growing-vars": [
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 11.5,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 4.699999999254942,
+            "updateMs": 11,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.899999998509884,
+            "updateMs": 9.900000000372529,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.199999999254942,
+            "updateMs": 10.300000000745058,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 2.599999999627471,
+            "updateMs": 9.5,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "vanilla-dynamic-growing": [
+          {
+            "mountMs": 3.699999999254942,
+            "updateMs": 12.299999998882413,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 5.5,
+            "updateMs": 18.199999999254942,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.199999999254942,
+            "updateMs": 12,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 4.5,
+            "updateMs": 12.900000000372529,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.900000000372529,
+            "updateMs": 23,
+            "records": 0,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "emotion-growing": [
+          {
+            "mountMs": 5.599999999627471,
+            "updateMs": 21.799999998882413,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 9.400000000372529,
+            "updateMs": 24.300000000745058,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 9,
+            "updateMs": 27.90000000037253,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 6.300000000745058,
+            "updateMs": 20.90000000037253,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 3.699999999254942,
+            "updateMs": 19.40000000037253,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "goober-growing": [
+          {
+            "mountMs": 24.199999999254942,
+            "updateMs": 696.5,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 17.40000000037253,
+            "updateMs": 668.9000000003725,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 18.399999998509884,
+            "updateMs": 849.5,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 18.199999999254942,
+            "updateMs": 661.4000000003725,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 14.699999999254942,
+            "updateMs": 561.1999999992549,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "zerodep-growing-auto": [
+          {
+            "mountMs": 9.900000000372529,
+            "updateMs": 30,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 6.900000000372529,
+            "updateMs": 20.5,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 13.700000001117587,
+            "updateMs": 31.90000000037253,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 7.400000000372529,
+            "updateMs": 29.5,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 8.5,
+            "updateMs": 21,
+            "records": 1,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "zerodep-growing-runtime": [
+          {
+            "mountMs": 32.40000000037253,
+            "updateMs": 153.19999999925494,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 28.800000000745058,
+            "updateMs": 131.5,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 31,
+            "updateMs": 147.2000000011176,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 29.200000001117587,
+            "updateMs": 134.5,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          },
+          {
+            "mountMs": 24.800000000745058,
+            "updateMs": 134.40000000037253,
+            "records": 1400,
+            "checksum": 2272,
+            "batches": 5,
+            "warmupBatches": 1,
+            "frame": 6
+          }
+        ],
+        "native-themed-vars": [
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 125.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 132.10000000149012,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.900000000372529,
+            "updateMs": 151.30000000074506,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.5,
+            "updateMs": 136.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.5,
+            "updateMs": 109.90000000037253,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "native-themed-classes": [
+          {
+            "mountMs": 1.700000001117587,
+            "updateMs": 32,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "updateMs": 45.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.400000000372529,
+            "updateMs": 40.59999999962747,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.099999999627471,
+            "updateMs": 48.80000000074506,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 1.800000000745058,
+            "updateMs": 32.80000000074506,
+            "records": 0,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "emotion-themed": [
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 50.399999998509884,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.700000001117587,
+            "updateMs": 59.5,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.900000000372529,
+            "updateMs": 67.29999999888241,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.400000000372529,
+            "updateMs": 55.40000000037253,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3,
+            "updateMs": 46,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "goober-themed": [
+          {
+            "mountMs": 2.5,
+            "updateMs": 49.80000000074506,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.900000000372529,
+            "updateMs": 58.5,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 4.400000000372529,
+            "updateMs": 57.40000000037253,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 2.399999998509884,
+            "updateMs": 54.09999999962747,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 3.200000001117587,
+            "updateMs": 59.09999999962747,
+            "records": 16,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-scoped-auto": [
+          {
+            "mountMs": 14.900000000372529,
+            "updateMs": 243.19999999925494,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 9.399999998509884,
+            "updateMs": 232.80000000074506,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 11.200000001117587,
+            "updateMs": 217.80000000074506,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 8.399999998509884,
+            "updateMs": 219.89999999850988,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 9,
+            "updateMs": 215,
+            "records": 2,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ],
+        "zerodep-theme-class": [
+          {
+            "mountMs": 10.800000000745058,
+            "updateMs": 195.2999999988824,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 11.900000000372529,
+            "updateMs": 176.7999999988824,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 16.09999999962747,
+            "updateMs": 197,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 14.799999998882413,
+            "updateMs": 194.19999999925494,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          },
+          {
+            "mountMs": 16.699999999254942,
+            "updateMs": 192.09999999962747,
+            "records": 17,
+            "checksum": 520,
+            "batches": 30,
+            "warmupBatches": 5,
+            "frame": 35
+          }
+        ]
+      },
+      "medians": {
+        "native-static": {
+          "mountMs": 2.099999999627471,
+          "updateMs": 0.19999999925494194,
+          "records": 0
+        },
+        "vanilla-static": {
+          "mountMs": 2.400000000372529,
+          "updateMs": 0.19999999925494194,
+          "records": 0
+        },
+        "uno-static": {
+          "mountMs": 2.299999998882413,
+          "updateMs": 0.19999999925494194,
+          "records": 0
+        },
+        "zerodep-auto-static": {
+          "mountMs": 3.200000001117587,
+          "updateMs": 0.19999999925494194,
+          "records": 1
+        },
+        "zerodep-runtime-static": {
+          "mountMs": 4.699999999254942,
+          "updateMs": 0.2000000011175871,
+          "records": 1
+        },
+        "emotion-static": {
+          "mountMs": 3.099999999627471,
+          "updateMs": 0.19999999925494194,
+          "records": 1
+        },
+        "goober-static": {
+          "mountMs": 3.099999999627471,
+          "updateMs": 0.30000000074505806,
+          "records": 1
+        },
+        "zerodep-once-static": {
+          "mountMs": 2.799999998882413,
+          "updateMs": 0.2000000011175871,
+          "records": 1
+        },
+        "emotion-once-static": {
+          "mountMs": 2.399999998509884,
+          "updateMs": 0.2000000011175871,
+          "records": 1
+        },
+        "goober-once-static": {
+          "mountMs": 2.399999998509884,
+          "updateMs": 0.19999999925494194,
+          "records": 1
+        },
+        "native-vars": {
+          "mountMs": 2.800000000745058,
+          "updateMs": 80.59999999962747,
+          "records": 0
+        },
+        "vanilla-vars": {
+          "mountMs": 2.400000000372529,
+          "updateMs": 86.80000000074506,
+          "records": 0
+        },
+        "uno-vars": {
+          "mountMs": 3,
+          "updateMs": 81.59999999962747,
+          "records": 0
+        },
+        "vanilla-dynamic": {
+          "mountMs": 3.400000000372529,
+          "updateMs": 93.5,
+          "records": 0
+        },
+        "emotion-vars": {
+          "mountMs": 2.900000000372529,
+          "updateMs": 76,
+          "records": 1
+        },
+        "goober-vars": {
+          "mountMs": 2.5,
+          "updateMs": 82,
+          "records": 1
+        },
+        "zerodep-auto": {
+          "mountMs": 6.400000000372529,
+          "updateMs": 147.40000000037253,
+          "records": 1
+        },
+        "native-classes": {
+          "mountMs": 2.799999998882413,
+          "updateMs": 30.699999999254942,
+          "records": 0
+        },
+        "vanilla-classes": {
+          "mountMs": 2.299999998882413,
+          "updateMs": 31.40000000037253,
+          "records": 0
+        },
+        "uno-classes": {
+          "mountMs": 1.900000000372529,
+          "updateMs": 32.399999998509884,
+          "records": 0
+        },
+        "emotion-object": {
+          "mountMs": 2.699999999254942,
+          "updateMs": 43.09999999962747,
+          "records": 16
+        },
+        "goober-object": {
+          "mountMs": 3.5,
+          "updateMs": 45.79999999888241,
+          "records": 16
+        },
+        "zerodep-runtime": {
+          "mountMs": 8,
+          "updateMs": 81.09999999962747,
+          "records": 16
+        },
+        "native-growing-vars": {
+          "mountMs": 3.5,
+          "updateMs": 10.400000000372529,
+          "records": 0
+        },
+        "vanilla-growing-vars": {
+          "mountMs": 3.400000000372529,
+          "updateMs": 12.299999998882413,
+          "records": 0
+        },
+        "uno-growing-vars": {
+          "mountMs": 2.899999998509884,
+          "updateMs": 10.300000000745058,
+          "records": 0
+        },
+        "vanilla-dynamic-growing": {
+          "mountMs": 3.900000000372529,
+          "updateMs": 12.900000000372529,
+          "records": 0
+        },
+        "emotion-growing": {
+          "mountMs": 6.300000000745058,
+          "updateMs": 21.799999998882413,
+          "records": 1400
+        },
+        "goober-growing": {
+          "mountMs": 18.199999999254942,
+          "updateMs": 668.9000000003725,
+          "records": 1400
+        },
+        "zerodep-growing-auto": {
+          "mountMs": 8.5,
+          "updateMs": 29.5,
+          "records": 1
+        },
+        "zerodep-growing-runtime": {
+          "mountMs": 29.200000001117587,
+          "updateMs": 134.5,
+          "records": 1400
+        },
+        "native-themed-vars": {
+          "mountMs": 3.400000000372529,
+          "updateMs": 132.10000000149012,
+          "records": 0
+        },
+        "native-themed-classes": {
+          "mountMs": 2.099999999627471,
+          "updateMs": 40.59999999962747,
+          "records": 0
+        },
+        "emotion-themed": {
+          "mountMs": 3.400000000372529,
+          "updateMs": 55.40000000037253,
+          "records": 16
+        },
+        "goober-themed": {
+          "mountMs": 3.200000001117587,
+          "updateMs": 57.40000000037253,
+          "records": 16
+        },
+        "zerodep-scoped-auto": {
+          "mountMs": 9.399999998509884,
+          "updateMs": 219.89999999850988,
+          "records": 2
+        },
+        "zerodep-theme-class": {
+          "mountMs": 14.799999998882413,
+          "updateMs": 194.19999999925494,
+          "records": 17
+        }
+      }
+    }
+  }
+}

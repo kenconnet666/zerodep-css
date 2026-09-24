@@ -1,0 +1,594 @@
+[
+  {
+    "framework": "vue",
+    "name": "vanilla-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "zerodep-once-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "vue",
+    "name": "goober-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "uno-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "emotion-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "vanilla-dynamic",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "emotion-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "uno-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "zerodep-auto",
+    "autoRequested": true,
+    "prepared": false,
+    "binding": true,
+    "runtimeFallback": false
+  },
+  {
+    "framework": "vue",
+    "name": "vanilla-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "zerodep-auto-static",
+    "autoRequested": true,
+    "prepared": true,
+    "binding": false,
+    "runtimeFallback": false
+  },
+  {
+    "framework": "vue",
+    "name": "vanilla-classes",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "goober-object",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "zerodep-runtime",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "vue",
+    "name": "native-growing-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "vanilla-growing-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "uno-growing-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "vanilla-dynamic-growing",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "goober-once-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "uno-classes",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "emotion-object",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "emotion-growing",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "goober-growing",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "zerodep-growing-runtime",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "vue",
+    "name": "zerodep-growing-auto",
+    "autoRequested": true,
+    "prepared": false,
+    "binding": true,
+    "runtimeFallback": false
+  },
+  {
+    "framework": "vue",
+    "name": "native-themed-classes",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "goober-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "emotion-themed",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "goober-themed",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "native-themed-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "zerodep-scoped-auto",
+    "autoRequested": true,
+    "prepared": false,
+    "binding": true,
+    "runtimeFallback": false
+  },
+  {
+    "framework": "vue",
+    "name": "native-classes",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "emotion-once-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "zerodep-runtime-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "vue",
+    "name": "zerodep-theme-class",
+    "autoRequested": true,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "vue",
+    "name": "native-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "vue",
+    "name": "native-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "uno-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "vanilla-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "native-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "native-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "zerodep-once-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "svelte",
+    "name": "vanilla-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "zerodep-auto-static",
+    "autoRequested": true,
+    "prepared": true,
+    "binding": false,
+    "runtimeFallback": false
+  },
+  {
+    "framework": "svelte",
+    "name": "emotion-once-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "vanilla-dynamic",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "zerodep-runtime-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "svelte",
+    "name": "goober-once-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "emotion-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "uno-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "emotion-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "goober-static",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "zerodep-auto",
+    "autoRequested": true,
+    "prepared": false,
+    "binding": true,
+    "runtimeFallback": false
+  },
+  {
+    "framework": "svelte",
+    "name": "goober-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "native-classes",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "emotion-object",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "uno-classes",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "native-growing-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "goober-object",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "zerodep-runtime",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "svelte",
+    "name": "zerodep-growing-auto",
+    "autoRequested": true,
+    "prepared": false,
+    "binding": true,
+    "runtimeFallback": false
+  },
+  {
+    "framework": "svelte",
+    "name": "vanilla-growing-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "goober-growing",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "emotion-growing",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "uno-growing-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "vanilla-dynamic-growing",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "vanilla-classes",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "goober-themed",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "zerodep-growing-runtime",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "svelte",
+    "name": "native-themed-vars",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "native-themed-classes",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  },
+  {
+    "framework": "svelte",
+    "name": "zerodep-theme-class",
+    "autoRequested": true,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": true
+  },
+  {
+    "framework": "svelte",
+    "name": "zerodep-scoped-auto",
+    "autoRequested": true,
+    "prepared": false,
+    "binding": true,
+    "runtimeFallback": false
+  },
+  {
+    "framework": "svelte",
+    "name": "emotion-themed",
+    "autoRequested": false,
+    "prepared": false,
+    "binding": false,
+    "runtimeFallback": null
+  }
+]
