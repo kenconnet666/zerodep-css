@@ -1,5 +1,9 @@
 # 换机交接
 
+## 2026-09-24 扁平写入器研究入口
+
+纯运行时扁平写入试验在远程分支 `codex/runtime-single-writer`、提交 `89a61de`，**未合入 master**。Node 重复值配对计时有明显改善，但跨框架浏览器只完成一轮且 Vue 同轮原生/Emotion 对照漂移，尚不能决定采纳。试验代码、已通过/待运行的检查、原始样本和换机继续命令见[分支交接](https://github.com/kenconnet666/zerodep-css/blob/89a61de/.research/performance/results/2026-09-24-flat-writer-experiment/README.md)。新机器先 `git fetch origin`，再 `git switch codex/runtime-single-writer` 继续；不要将试验结果写成主分支能力。
+
 更新：2026-09-24。主分支为 `master`，远程仓库为 [kenconnet666/zerodep-css](https://github.com/kenconnet666/zerodep-css)。运行时 CSS 是正式能力；可选编译器只优化可证明等价的写法，不能把 `codex/static-css` 的强制静态合同带回主分支。`core`、`vue`、`svelte`、`nuxt`、`sveltekit` 五个产品包均为 private，尚未发布 npm。
 
 ## 当前状态
