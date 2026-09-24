@@ -1,19 +1,17 @@
 export { createStyles } from './styles.js';
 export type { StyleHost } from './styles.js';
-export { defineTheme } from '@zerodep-css/core';
-export { Css, cssVar } from '@zerodep-css/core';
+export { Css, defineTheme, cssVar } from '@zerodep-css/core';
 export { keyframes } from '#runtime';
 export type {
   CssConstructor,
-  CssConstruction,
   CssFunction,
   CssVariable,
-  StyleInput,
   StyleFactory,
+  StyleInput,
   StylesheetFactory,
   StylesOptions,
-  ThemeInput,
   ProjectThemeHooks,
+  ThemeInput,
   ThemeDefinition,
   ThemeValues,
   ThemeTokens,

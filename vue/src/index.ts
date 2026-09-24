@@ -4,18 +4,19 @@ export { Css, defineTheme, cssVar } from '@zerodep-css/core';
 export { keyframes } from '#runtime';
 export type {
   CssConstructor,
-  CssConstruction,
   CssFunction,
+  CssVariable,
+  StyleFactory,
   StyleInput,
+  StylesheetFactory,
   StylesOptions,
+  ProjectThemeHooks,
   ThemeInput,
   ThemeDefinition,
   ThemeValues,
   ThemeTokens,
   ThemeOverrides,
   ThemeTree,
-  StyleFactory,
-  StylesheetFactory,
 } from '@zerodep-css/core';
 export type {
   StyleContextOptions as StyleHostOptions,

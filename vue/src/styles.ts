@@ -44,7 +44,7 @@ export interface StylesProject<C extends Css, T extends ThemeTree> extends Proje
   createHost(options?: StyleContextOptions): StyleHost;
   useCss(): CssFunction<C>;
   useGlobalCss(
-    identity: string,
+    key: string,
     factory: StylesheetFactory<C>,
   ): { readonly id: string; dispose(): void };
 }
@@ -96,8 +96,8 @@ export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
         cssType,
       ).css;
     },
-    useGlobalCss(identity: string, factory: StylesheetFactory<C>) {
-      return mountGlobal(identity, factory, resolveContext(), cssType);
+    useGlobalCss(key: string, factory: StylesheetFactory<C>) {
+      return mountGlobal(key, factory, resolveContext(), cssType);
     },
     createHost(options?: StyleContextOptions): StyleHost {
       const prepared = theme && prepareThemeStyle(theme, theme.defaults);

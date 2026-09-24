@@ -1,6 +1,6 @@
 # 运行时优先生产实施记录
 
-决策基线：[runtime-first](runtime-first.md)。分支 codex/runtime-first，用户已授权连续实施；产品包保持 private，不自动发布 npm。
+本页记录原 `codex/runtime-first` 分支的 P1—P6 实施过程，现已合入 `master`。决策基线见[runtime-first](runtime-first.md)；当前使用合同与最新提交的验收状态分别以[支持范围](support.md)、[验证记录](validation.md)为准。产品包保持 private，未发布 npm。
 
 ## 阶段与验收
 
@@ -17,7 +17,7 @@
 
 每阶段完成相关检查后中文提交并推送。性能计时不与其他负载并行；正确性准备和独立检查可并行。调整范围或算法时记录理由，不把待验证候选写成已完成能力。
 
-## 当前进度
+## P1—P6 交付时的状态
 
 P1—P6 已完成约定范围的实施和验收，[2c51b0f 的完整远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35946894347)九个 job 全部成功：双平台基础检查、三语言/LSP、三浏览器、独立消费、Nuxt 和 SvelteKit 部署。产品修复提交 05da194，清理与交接 97d79a6，CI 测试兼容性修正 e6f9508 / 2c51b0f。最终记录提交仅更新文档，未改变已验收代码；五包保持 private，未发布 npm。旧 7756c6e 的 CI 曾为 8/9 成功，不追溯改记为全绿。
 

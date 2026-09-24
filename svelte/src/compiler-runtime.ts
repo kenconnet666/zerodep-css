@@ -3,7 +3,6 @@ export {
   withStyleSource,
   prepareStyle,
   createDeclarationBinding,
-  formatUnitValues,
   bindUnit,
   bindValue,
 } from '#runtime';

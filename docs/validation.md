@@ -25,7 +25,7 @@ Nuxt/Kit 的夹具源码位于各包 test/fixture，运行时复制到仓库外�
 
 ## 提交与验收记录
 
-最新产品与测试提交 [`e2a2d04` 的完整远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35955089598)九个 job 全部成功，覆盖 Windows/Linux、Chromium/Firefox/WebKit、三语言/LSP、独立安装及 Nuxt/Kit。此前动态绑定优化本地通过根 check/build、219 项单元、三语言类型负例、运行时与 Vue/Svelte 浏览器回归及体积门禁；`e2a2d04` 又补充了真实组件的 Vue/Svelte 无关更新计数断言。各阶段提交、修复和当时的验收状态见[实施记录](production.md)及 Git 历史，后续产品改动不得沿用旧成功摘要。
+[`e2a2d04` 的完整远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35955089598)是运行时优先方案合入主分支前的验收基线，九个 job 全部成功，覆盖 Windows/Linux、Chromium/Firefox/WebKit、三语言/LSP、独立安装及 Nuxt/Kit。此前动态绑定优化本地通过根 check/build、219 项单元、三语言类型负例、运行时与 Vue/Svelte 浏览器回归及体积门禁；`e2a2d04` 又补充了真实组件的 Vue/Svelte 无关更新计数断言。各阶段提交、修复和当时的验收状态见[实施记录](production.md)及 Git 历史；此后产品改动须查看对应提交的 Actions，不能沿用这次成功摘要。
 
 ## 性能探针
 

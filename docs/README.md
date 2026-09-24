@@ -12,4 +12,4 @@
 
 以下文件保留决策依据与实施过程，不是需要重新执行的待办清单：[运行时优先的原始决策](runtime-first.md)、[P1—P6 实施记录](production.md)、[固定版本元框架源码核对](framework-integration.md)、[性能架构取舍](performance-architecture-decision.md)、[Vue/Svelte 缓存取舍](framework-reactivity-cache-decision.md)及[版本变更记录](../CHANGELOG.md)。版本变化或真实应用出现新场景时再核对这些依据；旧强制静态方案从 Git 历史查询。
 
-最新可重复执行的测试命令和对应提交的 CI 见[验证](validation.md)。历史阶段的数字只在其原测量条件下成立，不能与当前样本直接拼接为提速比例。
+可重复执行的测试命令和历史验收基线见[验证](validation.md)；新提交的 CI 以对应 Actions 运行结果为准。历史阶段的数字只在其原测量条件下成立，不能与当前样本直接拼接为提速比例。

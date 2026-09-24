@@ -38,14 +38,11 @@ export function validateUnitValues(
   return values as readonly number[];
 }
 
-/** 编译产物的内部边界：只格式化元素变量，不注册规则、不订阅状态。 */
-export interface BindingFormat {
-  readonly unit?: string;
+/** raw/token 的声明格式；数值单位整组另由 formatUnitValues 校验，不复用旧格式器。 */
+export interface DeclarationFormat {
+  readonly property?: string;
   readonly numbers?: readonly NumericCheck[];
   readonly tokens?: readonly string[];
-}
-export interface DeclarationFormat extends Omit<BindingFormat, 'unit'> {
-  readonly property?: string;
 }
 
 /** 自动单位绑定以整组为边界，联合参数只求值和校验一次。 */
@@ -92,11 +89,9 @@ export function bindValue(
   return binding.apply(bindings, name, input);
 }
 
-function checkValue(value: unknown, format: BindingFormat): asserts value is string | number {
+function checkValue(value: unknown, format: DeclarationFormat): asserts value is string | number {
   if (typeof value !== 'string' && typeof value !== 'number')
     throw new TypeError('CSS binding expects a CSS string or number.');
-  if (format.unit !== undefined && typeof value !== 'number')
-    throw new TypeError('CSS binding unit values must be numbers.');
   if (typeof value === 'number') {
     if (
       !Number.isFinite(value) ||
@@ -333,46 +328,4 @@ export function createDeclarationBinding(name: `--${string}`, format: Declaratio
 function safeUnit(unit: string | undefined): boolean {
   // 数字与固定 CSS 单位组合不会生成其他 token；未知原始字符串仍交给完整解析器。
   return unit === undefined || unit === '' || unit === '%' || /^[a-z]+$/i.test(unit);
-}
-
-/** 兼容迁移前的生成代码；不创建跨请求的全局可变缓存。 */
-export function formatValue(value: unknown, format: BindingFormat = {}): string {
-  checkValue(value, format);
-  const result = String(value) + (format.unit ?? '');
-  if (typeof value !== 'number' || !safeUnit(format.unit)) checkSyntax(result);
-  return result;
-}
-
-/**
- * 按绑定格式初始化一次，缓存仅由该格式化器的组件/请求 owner 持有。
- * 数值不积累缓存；固定 token 预先校验；raw 只保存有限个成功结果。
- */
-export function createValueFormatter(format: BindingFormat = {}): (value: unknown) => string {
-  const snapshot: BindingFormat = Object.freeze({
-    ...format,
-    ...(format.numbers && {
-      numbers: Object.freeze(format.numbers.map((rule) => Object.freeze({ ...rule }))),
-    }),
-    ...(format.tokens && { tokens: Object.freeze([...format.tokens]) }),
-  });
-  if (!safeUnit(snapshot.unit)) throw new TypeError('Invalid CSS unit.');
-  const tokens = snapshot.tokens ? new Set(snapshot.tokens) : undefined;
-  if (tokens) for (const token of tokens) checkSyntax(token);
-  const valueFormat: BindingFormat = { unit: snapshot.unit, numbers: snapshot.numbers };
-  const cache = new StringCache<string>();
-  return (value) => {
-    checkValue(value, valueFormat);
-    if (tokens) {
-      if (typeof value !== 'string' || !tokens.has(value))
-        throw new TypeError('Invalid CSS binding token.');
-      return value;
-    }
-    if (typeof value === 'number') return String(value) + (snapshot.unit ?? '');
-    const cached = cache.get(value);
-    if (cached !== undefined) return cached;
-    checkSyntax(value);
-    // 淘汰只释放校验结果；不影响 DOM 或已注册规则。
-    cache.set(value, value);
-    return value;
-  };
 }

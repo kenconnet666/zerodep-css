@@ -5,14 +5,14 @@ import { resolveContext } from './context.js';
 
 /** 全局样式 owner：初始化挂载、原生响应式更新、提前停止或组件卸载清理。 */
 export function useGlobalCss<C extends Css = Css>(
-  identity: string,
+  key: string,
   factory: StylesheetFactory<C>,
   explicit?: StyleContext,
   cssType: CssConstructor<C> = Css as CssConstructor<C>,
 ): { readonly id: string; dispose(): void } {
   const context = resolveContext(explicit);
   // 服务端 effect 不执行；保留规则直到宿主输出并释放请求上下文。
-  if (context.server) return context.mountGlobal(identity, globalCss(factory, cssType));
+  if (context.server) return context.mountGlobal(key, globalCss(factory, cssType));
   let handle: ReturnType<StyleContext['mountGlobal']> | undefined;
   let closed = false;
   let unsubscribe: (() => void) | undefined;
@@ -31,7 +31,7 @@ export function useGlobalCss<C extends Css = Css>(
   try {
     // 同步首次挂载，保证首屏有规则；effect 之后只更新原槽位。
     handle = context.mountGlobal(
-      identity,
+      key,
       untrack(() => definition),
     );
     unsubscribe = context.onDispose(dispose);

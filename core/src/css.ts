@@ -3,7 +3,7 @@ import type { DeclarationHelpers, StyleFactory } from './builder-types.js';
 import type { CssVariable } from './values.js';
 import type { StyleConfig } from './style-metadata.js';
 
-/** Css 的构建能力由一次同步样式求值提供，实例不能脱离该求值继续写样式。 */
+/** 仅引擎通过 core/internal 使用；Css 实例只在一次同步样式求值中有效。 */
 export interface CssConstruction {
   /** 由引擎提供完整标准属性目录；作者基类不加载值校验元数据。 */
   readonly properties: readonly string[];

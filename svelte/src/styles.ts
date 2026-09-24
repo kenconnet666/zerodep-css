@@ -43,7 +43,7 @@ export interface StylesProject<C extends Css, T extends ThemeTree> extends Proje
   createHost(options?: StyleContextOptions): StyleHost;
   useCss(): CssFunction<C>;
   useGlobalCss(
-    identity: string,
+    key: string,
     factory: StylesheetFactory<C>,
   ): {
     readonly id: string;
@@ -97,8 +97,8 @@ export function createStyles<C extends Css = Css, T extends ThemeTree = never>(
       const scope = projectThemeScope(theme, getCurrentThemeScope());
       return createRuntimeView(context.runtime, scope, authorType).css as CssFunction<C>;
     },
-    useGlobalCss(identity: string, factory: StylesheetFactory<C>) {
-      return baseUseGlobalCss(identity, factory, undefined, authorType);
+    useGlobalCss(key: string, factory: StylesheetFactory<C>) {
+      return baseUseGlobalCss(key, factory, undefined, authorType);
     },
     createHost(options: StyleContextOptions = {}): StyleHost {
       const context = createStyleContext(options);

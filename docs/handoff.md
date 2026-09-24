@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-约定的 P1—P6 范围已完成。[`e2a2d04` 的九项远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35955089598)全部成功，包括 Windows/Linux、三浏览器、LSP、独立包消费和 Nuxt/SvelteKit。这个结果对应精确代码提交；本文件之后的任何产品改动仍须验证自己的提交。分阶段修复理由留在[实施记录](production.md)，当前功能和版本边界见[支持范围](support.md)。
+约定的 P1—P6 范围已完成。[`e2a2d04` 的九项远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35955089598)是原实施阶段的成功验收基线，包括 Windows/Linux、三浏览器、LSP、独立包消费和 Nuxt/SvelteKit。后续产品改动仍须查看对应提交的 Actions，不能沿用旧成功结果。分阶段修复理由留在[实施记录](production.md)，当前功能和版本边界见[支持范围](support.md)。
 
 项目的 `styles.ts` 用 `createStyles({ cssType?, theme? })` 配置作者类型与默认主题，并导出 `useCss`、`useTheme`、`provideTheme`、`useGlobalCss`、`createHost`。组件在初始化时取得 `const css = useCss()`；普通函数、`if/switch` 和真实 `Css` 继承都可运行。CSS class 字符串是调用时快照；响应式值在模板、Vue `computed` 或 Svelte `$derived` 中读取。跨模块项目 hook 保留完整运行时，尚不保证可选编译器命中。
 

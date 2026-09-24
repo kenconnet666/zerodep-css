@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { StringCache } from '../../dist/string-cache.js';
-import { createValueFormatter, createDeclarationBinding } from '../../dist/binding.js';
+import { createDeclarationBinding } from '../../dist/binding.js';
 
 test('缓存同时遵守条目与字符预算，更新不会重复计费或保留过期值', () => {
   const cache = new StringCache(3, 8);
@@ -33,7 +33,7 @@ test('缓存同时遵守条目与字符预算，更新不会重复计费或保�
     assert.throws(() => new StringCache(...budgets));
 });
 
-test('巨大合法值仍可格式化，连续不同输入不突破缓存预算', () => {
+test('巨大合法绑定值可处理，连续不同输入不突破缓存预算', () => {
   const cache = new StringCache();
   for (let index = 1; index < 300; index++) {
     const key = String(index).padEnd(index * 300, 'x');
@@ -42,12 +42,9 @@ test('巨大合法值仍可格式化，连续不同输入不突破缓存预算',
     assert(cache.characters <= 65536);
   }
   const large = `"${'a'.repeat(70000)}"`;
-  const format = createValueFormatter();
   const binding = createDeclarationBinding('--large');
-  assert.equal(format(large), large);
   assert.equal(binding.inline(large), large);
   assert.equal(binding.value(large), 'var(--large)');
-  assert.equal(format('red'), 'red');
   assert.equal(binding.inline('initial'), undefined);
   assert.throws(() => binding.value(large + ';color:red'));
 });

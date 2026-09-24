@@ -44,3 +44,5 @@ Svelte 根组件通过 `host.provide()` 安装 context，应在 `untrack(() => h
 客户端用 SSR manifest 创建同配置 host，完成框架水合和相关组件初始化后调用 `completeHydration()`。它会报告尚未认领的服务端全局槽位。[Nuxt](../nuxt/README.md) 与 [Kit](../sveltekit/README.md) 适配包负责各自的请求与恢复流程，不需要业务再手动创建第二个 host。
 
 core 根入口现在只保留 `Css`、`cssVar`、`defineTheme` 等作者能力，不再作为独立引擎入口。完整引擎源码位于 `internal/runtime`，构建后分别进入 Vue/Svelte 包的 `dist/runtime`；`@zerodep-css/core/internal` 和适配包的 `#runtime` 只供内部调用。运行时单元、类型与浏览器夹具已移到 `internal/runtime/test`，迁移后的最终验收状态见[实施记录](production.md)。
+
+`CssConstruction` 是引擎创建 `Css` 实例的内部类型，不再从 core、Vue 或 Svelte 根入口转出；业务作者继续继承 `Css` 并通过 `createStyles({ cssType })` 绑定，无需自行构造实例。旧 `formatValue`/`createValueFormatter` 是已停用的内部生成辅助；当前编译产物只依赖有声明语义保护的绑定入口。

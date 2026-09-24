@@ -1,5 +1,5 @@
 export { Css } from './css.js';
-export type { CssConstructor, CssConstruction } from './css.js';
+export type { CssConstructor } from './css.js';
 export type { StylesOptions, ThemeInput, ProjectThemeHooks } from './style-project.js';
 export type { StyleConfig, StyleSource } from './style-metadata.js';
 export { defineTheme } from './theme.js';

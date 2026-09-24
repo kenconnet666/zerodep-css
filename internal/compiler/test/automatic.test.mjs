@@ -9,8 +9,8 @@ import {
   bindUnit,
   bindValue,
   createDeclarationBinding,
-  formatUnitValues,
 } from '../../runtime/dist/compiler-runtime.js';
+import { formatUnitValues } from '../../runtime/dist/binding.js';
 import * as compilerRuntime from '../../runtime/dist/compiler-runtime.js';
 import * as adapter from '../../../vue/dist/index.js';
 import { createRuntime } from '../../runtime/dist/index.js';
