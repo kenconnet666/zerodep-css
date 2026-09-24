@@ -56,4 +56,6 @@ export interface TransformedExpression {
   code: string;
   /** 原模板表达式内的局部绑定表；动态回调在原操作位置写入它。 */
   bindingsLocal?: string;
+  /** 固定规则已提升；框架层决定组件派生值或列表局部派生值的放置。 */
+  compiledBinding?: { readonly name: `--${string}`; readonly root: boolean };
 }

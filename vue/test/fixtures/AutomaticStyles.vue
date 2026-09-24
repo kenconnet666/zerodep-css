@@ -3,6 +3,11 @@ import { ref } from 'vue';
 import { createStyles } from '@zerodep-css/vue';
 const css = createStyles().useCss();
 const width = ref(10);
+const fastRows = ref<{ id: string; width: number | null }[]>([
+  { id: 'a', width: 11 },
+  { id: 'b', width: 22 },
+  { id: 'c', width: null },
+]);
 const siblingWidth = ref(10);
 const colors = ['red', 'blue', 'initial', undefined];
 let colorIndex = 0;
@@ -54,6 +59,7 @@ const size = ref<number | null | undefined>(null);
   >
     color
   </button>
+  <div data-fast-color :class="css((s) => s.color.raw(color))"></div>
   <div
     data-auto-value
     :class="
@@ -67,6 +73,15 @@ const size = ref<number | null | undefined>(null);
     value
   </div>
   <button data-auto-change @click="width++">automatic</button>
+  <div data-fast :class="css((s) => s.width.px(width))"></div>
+  <button data-fast-row-change @click="fastRows[0]!.width = 12">fast row</button>
+  <button data-fast-null-change @click="fastRows[2]!.width = 18">fast null</button>
+  <div
+    v-for="row in fastRows"
+    :key="row.id"
+    :data-fast-row-id="row.id"
+    :class="css((s) => s.width.px(row.width))"
+  ></div>
   <div
     data-auto
     :class="

@@ -12,7 +12,7 @@ import { createHash } from 'node:crypto';
 import { relative, resolve, isAbsolute } from 'node:path';
 import { sourceMapper } from './source-map.js';
 import { automaticDeclarations } from './automatic.js';
-import { unshadowed } from './scope.js';
+import { patternNames, unshadowed } from './scope.js';
 
 export { unshadowed } from './scope.js';
 export { ts, MagicString };
@@ -105,12 +105,19 @@ export function session(
     projectFactories = new Set<string>();
   // 来源仅包装 const 直接函数值；函数声明可经 for-of/eval 改写，不做脆弱的数据流猜测。
   const knownCallbacks = new Set<string>();
+  const scriptBindings = new Set<string>();
   const used = templateIdentifiers(template);
   walk(ast, (n) => {
     if (ts.isIdentifier(n)) used.add(n.text);
   });
   for (const n of ast.statements) {
     if (ts.isImportDeclaration(n) && ts.isStringLiteral(n.moduleSpecifier)) {
+      const clause = n.importClause;
+      if (clause?.name) scriptBindings.add(clause.name.text);
+      if (clause?.namedBindings && ts.isNamespaceImport(clause.namedBindings))
+        scriptBindings.add(clause.namedBindings.name.text);
+      if (clause?.namedBindings && ts.isNamedImports(clause.namedBindings))
+        for (const item of clause.namedBindings.elements) scriptBindings.add(item.name.text);
       const module = n.moduleSpecifier.text;
       const bindings = n.importClause?.namedBindings;
       for (const item of bindings && ts.isNamedImports(bindings) ? bindings.elements : []) {
@@ -118,8 +125,10 @@ export function session(
         if (module === `@zerodep-css/${framework}` && original === 'createStyles')
           projectFactories.add(item.name.text);
       }
-    } else if (ts.isVariableStatement(n) && n.declarationList.flags & ts.NodeFlags.Const) {
+    } else if (ts.isVariableStatement(n)) {
       for (const declaration of n.declarationList.declarations) {
+        for (const name of patternNames(declaration.name.getText(ast))) scriptBindings.add(name);
+        if (!(n.declarationList.flags & ts.NodeFlags.Const)) continue;
         if (!ts.isIdentifier(declaration.name) || !declaration.initializer) continue;
         if (callbackExpression(declaration.initializer)) knownCallbacks.add(declaration.name.text);
       }
@@ -223,17 +232,63 @@ export function session(
   const valueBindingName = fresh('bind_value');
   const prepareName = fresh('prepare');
   const declarationName = fresh('declaration');
+  const compiledBindingName = fresh('compiled_binding');
+  const computedName = fresh('computed');
+  const unrefName = fresh('unref');
   const declarationBindings: string[] = [];
   const preparedBindings: string[] = [];
   let hasUnitBindings = false;
   let hasValueBindings = false;
   let hasPrepared = false;
+  let hasCompiledBinding = false;
+  let hasComputed = false;
+  let hasUnref = false;
   let hasSources = false;
   const mapper = sourceMapper(source, filename);
   const mapToOriginal = mapper.expression;
   const diagnostics: CompilerDiagnostic[] | undefined =
     (options[detailedDiagnostics] ?? options.debug === true) ? [] : undefined;
   const diagnosed = new Set<number>();
+  function singleDeclaration(
+    callback: ts.ArrowFunction | ts.FunctionExpression,
+    call: ts.CallExpression,
+  ): boolean {
+    const body = callback.body;
+    const expression = ts.isBlock(body)
+      ? body.statements.length === 1 && ts.isExpressionStatement(body.statements[0]!)
+        ? body.statements[0].expression
+        : undefined
+      : body;
+    let current = expression;
+    while (current && ts.isParenthesizedExpression(current)) current = current.expression;
+    return current === call;
+  }
+  function knownReadScope(expression: ts.Expression, locals: ReadonlySet<string>): boolean {
+    let known = true;
+    walk(expression, (node) => {
+      if (
+        ts.isIdentifier(node) &&
+        !(ts.isPropertyAccessExpression(node.parent) && node.parent.name === node) &&
+        !scriptBindings.has(node.text) &&
+        !locals.has(node.text)
+      )
+        known = false;
+    });
+    return known;
+  }
+  function vueScriptRead(expression: ts.Expression, file: ts.SourceFile): string {
+    const start = expression.getStart(file);
+    const code = new MagicString(expression.getText(file));
+    walk(expression, (node) => {
+      if (
+        ts.isIdentifier(node) &&
+        scriptBindings.has(node.text) &&
+        !(ts.isPropertyAccessExpression(node.parent) && node.parent.name === node)
+      )
+        code.overwrite(node.getStart(file) - start, node.end - start, `${unrefName}(${node.text})`);
+    });
+    return code.toString();
+  }
   function diagnose(code: CompilerDiagnosticCode, offset: number): void {
     if (!diagnostics || id.startsWith('../') || isAbsolute(id) || diagnosed.has(offset)) return;
     diagnosed.add(offset);
@@ -275,6 +330,7 @@ export function session(
     const base = offset - prefix.length;
     const edits = new MagicString(text);
     let bindingsLocal: string | undefined;
+    let compiledBinding: TransformedExpression['compiledBinding'];
     let reusedCallback: ts.Node | undefined;
     walk(file, (node) => {
       // 已提升回调的未选静态分支可能含任意代码，不能再对其子树做重叠编辑。
@@ -320,7 +376,6 @@ export function session(
       else if (options.bindings === 'runtime' && candidates?.length)
         diagnose('csp-bindings', callOffset);
       else if (!automatic) diagnose('dynamic-structure', callOffset);
-      if (automatic?.length) bindingsLocal = fresh('bindings');
       // 动态读取留在回调原操作位置；仅完全静态的回调可提前准备。
       let factorySource = callback?.getText(file);
       // 模板字符串可含 HTML 解码后的结束标签；不能把它直接插入 script setup。
@@ -348,6 +403,102 @@ export function session(
       if (!inlineCallback) return;
       const builder = inlineCallback.parameters[0]?.name;
       if (!builder || !ts.isIdentifier(builder)) return;
+      // 单条动态声明可将固定规则从列表/模板更新中移出；无法绑定时仍按原调用回退。
+      const sole = automatic?.length === 1 ? automatic[0] : undefined;
+      if (
+        sole &&
+        !options.debug &&
+        !(
+          framework === 'vue' &&
+          shadowed.size === 0 &&
+          /<\/script/iu.test(inlineCallback.getText(file))
+        ) &&
+        sole.call.arguments.every((argument) => knownReadScope(argument, shadowed)) &&
+        singleDeclaration(inlineCallback, sole.call)
+      ) {
+        const declaration = sole;
+        const declarationOffset = base + declaration.call.getStart(file);
+        const name = ('--zcss-' +
+          createHash('sha256')
+            .update(
+              id +
+                ':' +
+                declarationOffset +
+                ':' +
+                JSON.stringify(
+                  declaration.kind === 'unit'
+                    ? {
+                        unit: declaration.unit,
+                        alternatives: declaration.alternatives,
+                        separator: declaration.separator,
+                      }
+                    : declaration.format,
+                ),
+            )
+            .digest('hex')
+            .slice(0, 16)) as `--${string}`;
+        mapper.reference(name, declarationOffset);
+        const binding = fresh('fast_binding');
+        const property = declaration.property.name.text;
+        const member = declaration.call.expression;
+        if (!ts.isPropertyAccessExpression(member)) return;
+        const argumentsText = declaration.call.arguments
+          .map((arg) =>
+            framework === 'vue' && shadowed.size === 0
+              ? vueScriptRead(arg, file)
+              : arg.getText(file),
+          )
+          .join(',');
+        const key = createHash('sha256')
+          .update(id + ':' + callOffset + ':' + inlineCallback.getText(file) + ':' + name)
+          .digest('hex');
+        let format: string;
+        let fallback: string;
+        let read: string;
+        if (declaration.kind === 'unit') {
+          const plan = fresh('unit_plan');
+          const captured = declaration.call.arguments
+            .map((_, index) => `values[${index}]`)
+            .join(',');
+          declarationBindings.push(`const ${plan} = ${JSON.stringify(declaration.alternatives)};`);
+          format =
+            `(bindings, values) => ${unitBindingName}(bindings, ${JSON.stringify(name)}, values, ` +
+            `${plan}, ${JSON.stringify(declaration.unit)}, ${JSON.stringify(declaration.separator)})`;
+          fallback = `(values) => (s) => s.${property}.${member.name.text}(${captured})`;
+          read = `${binding}(() => [${argumentsText}])`;
+          hasUnitBindings = true;
+        } else {
+          const helper = fresh('binding');
+          declarationBindings.push(
+            `const ${helper} = ${declarationName}(${JSON.stringify(name)}, ${JSON.stringify(declaration.format)});`,
+          );
+          format = `(bindings, value) => ${valueBindingName}(bindings, ${JSON.stringify(name)}, ${helper}, value)`;
+          fallback = `(value) => (s) => s.${property}.${member.name.text}(value)`;
+          read = `${binding}(() => ${argumentsText})`;
+          hasValueBindings = true;
+        }
+        preparedBindings.push(
+          `const ${binding} = ${compiledBindingName}(${node.expression.text}, ` +
+            `(s) => s.${property}.raw(${JSON.stringify(`var(${name})`)}), ` +
+            `${JSON.stringify(key)}, ${JSON.stringify(name)}, ${format}, ${fallback});`,
+        );
+        hasCompiledBinding = true;
+        if (shadowed.size === 0) {
+          const result = fresh('bound');
+          if (framework === 'vue') {
+            hasComputed = true;
+            hasUnref = true;
+            preparedBindings.push(`const ${result} = ${computedName}(() => ${read});`);
+          } else preparedBindings.push(`let ${result} = $derived(${read});`);
+          edits.overwrite(node.getStart(file) - prefix.length, node.end - prefix.length, result);
+          compiledBinding = { name, root: true };
+          return;
+        }
+        edits.overwrite(node.getStart(file) - prefix.length, node.end - prefix.length, read);
+        compiledBinding = { name, root: false };
+        return;
+      }
+      if (automatic?.length) bindingsLocal = fresh('bindings');
       // 目前自动提升限定为直接模板使用点；脚本快照和派生类保留运行时合同。
       if (automatic) {
         if (automatic.length === 0) {
@@ -429,7 +580,7 @@ export function session(
         }
       }
     });
-    return { code: edits.toString(), bindingsLocal };
+    return { code: edits.toString(), bindingsLocal, compiledBinding };
   }
   return {
     source,
@@ -443,7 +594,8 @@ export function session(
     scriptEnd,
     mapToOriginal,
     finish(extra = '') {
-      const changed = hasUnitBindings || hasValueBindings || hasSources || hasPrepared;
+      const changed =
+        hasUnitBindings || hasValueBindings || hasSources || hasPrepared || hasCompiledBinding;
       if (!changed && !diagnostics?.length) return null;
       if (!changed)
         return { ...mapper.finish(output), diagnostics: Object.freeze([...diagnostics!]) };
@@ -467,7 +619,16 @@ export function session(
           scriptStart,
           `\nimport { prepareStyle as ${prepareName} } from '@zerodep-css/${framework}/compiler-runtime';\n`,
         );
-      if (declarationBindings.length)
+      if (hasCompiledBinding)
+        output.appendLeft(
+          scriptStart,
+          `\nimport { createCompiledBinding as ${compiledBindingName} } from '@zerodep-css/${framework}/compiler-runtime';\n`,
+        );
+      if (hasComputed)
+        output.appendLeft(scriptStart, `\nimport { computed as ${computedName} } from 'vue';\n`);
+      if (hasUnref)
+        output.appendLeft(scriptStart, `\nimport { unref as ${unrefName} } from 'vue';\n`);
+      if (hasValueBindings)
         output.appendLeft(
           scriptStart,
           `\nimport { createDeclarationBinding as ${declarationName} } from '@zerodep-css/${framework}/compiler-runtime';\n`,

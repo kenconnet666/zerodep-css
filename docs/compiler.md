@@ -77,9 +77,11 @@ const color = ref('red');
 ></div>
 ```
 
-完整静态值与能证明边界的动态值可分别准备或绑定。可绑定的动态声明保留在原样式位置；分支不可静态证明、CSS 值结构复杂或属性语法未知时，继续走 runtime，具体值交给浏览器判断。编译器不会因它的语法表无法证明而拒绝合法新值。
+完整静态值与能证明边界的动态值可分别准备或绑定。单条动态单位、raw 或 token 声明若能证明输入来源和声明结构，编译器在当前组件脚本中建立一次固定变量规则；Vue 组件值使用 `computed`，Svelte 组件值使用 `$derived`，Svelte keyed each 行使用 `{@const}` 派生值。模板更新只计算变量并交给框架的 class/style 绑定，不再执行原 `css` 回调。Vue 列表行仍在 `renderList` 中求值一次，当前使用整对象 `v-bind`；它尚不是每行独立的 render effect。
 
-简短箭头与语句块使用同一套检查，例如 `css(s => s.width.px(gap))`、`css(s => s.hover(h => h.width.px(gap)))`。可变参数仍在原回调位置读取一次；只把编译器自己生成的单位约束表移到组件初始化，避免每个元素、每次更新重复创建常量数组。
+固定规则首次实际使用时才向当前应用或 SSR 请求的 host 注册。缓存命中读取 class 仍检查宿主样式节点；空值和不能安全变量化的 CSS-wide/未来值回到原声明，保留 class 切换。其他多声明、嵌套、分支不可静态证明的回调继续在原样式位置绑定或完整运行时回退，具体值交给浏览器判断。编译器不会因它的语法表无法证明而拒绝合法新值。
+
+简短箭头与语句块使用同一套检查，例如 `css(s => s.width.px(gap))`、`css(s => s.hover(h => h.width.px(gap)))`。提升路径只读取动态参数一次；其余路径仍在原回调位置读取一次。编译器生成的单位约束表位于组件初始化处，避免每个元素、每次更新重复创建常量数组。Vue 只提升可从 `<script setup>` 读取的表达式；仅模板可见的 prop 留在模板原路径。Svelte 列表局部变量留在 keyed each 中，固定规则仍可共享。
 
 raw 字符串中出现负的 number、dimension 或 percentage token 时保留直接声明，不把 css-tree 的类型匹配当成完整范围证明。规范正文可能另有限制，例如 `stroke-width`、`border-width` 和 `line-height` 的负值无效；负值合法的 margin 等属性也采用同一保守回退。opacity 的有限 `raw(number)` 保留独立快速路径，因为超界值会按 CSS 规则钳制。
 

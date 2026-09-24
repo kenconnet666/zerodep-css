@@ -11,7 +11,7 @@ import {
   prepareThemeStyle,
 } from '@zerodep-css/core/internal';
 
-import type { StyleRuntime } from './runtime.js';
+import { registerCompiledCssOwner, type StyleRuntime } from './runtime.js';
 
 export { prepareThemeStyle } from '@zerodep-css/core/internal';
 export { normalizeStylesOptions, projectThemeArguments } from '@zerodep-css/core/internal';
@@ -129,5 +129,12 @@ export function createRuntimeView(
       ...(content.match(/[^ \t\n\f\r]+/gu) ?? []).filter((name) => !themed.has(name)),
     ].join(' ');
   }
+  registerCompiledCssOwner(css, {
+    runtime,
+    className(id) {
+      const names = scope?.themes.map((theme) => theme.className(runtime)) ?? [];
+      return [...names, ...(names.includes(id) ? [] : [id])].join(' ');
+    },
+  });
   return Object.freeze({ ...runtime, css });
 }

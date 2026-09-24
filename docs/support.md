@@ -33,7 +33,7 @@ Vue 使用 `host.install(app)`，应用卸载会释放 host；同一 host 不属
 
 `css(base, override)` 可从左到右组合本 host 已知 class 和回调；数组可递归展开，`false`/`null`/`undefined` 为空项，普通第三方 class 原样保留。只有本 host 掌握的样式参与属性归并，第三方规则仍由浏览器层叠。已有 class 字符串只是快照：组合时不能复制该元素原有的内联变量，动态值仍应在原组件中由原生响应式读取。HTML class 字符串的排列也不代表 CSS 覆盖顺序。
 
-自动编译目前只分析同一 SFC 中能直接追踪的 `createStyles`/`useCss` 来源，包括直接链式调用；跨项目模块的调用保守保留运行时。安全动态值可成为元素变量绑定，CSS-wide、空值及无法证明等价的结构保持原声明或运行时路径。严格 CSP 禁止元素 style 属性时，可选插件使用 `cssPlugin({ bindings: 'runtime' })` 与请求 nonce；应用自己写的 style 属性仍由应用负责。脚本中的普通 `const` class 是快照，响应式重算由 Vue computed 或 Svelte `$derived`/模板承担。
+自动编译目前只分析同一 SFC 中能直接追踪的 `createStyles`/`useCss` 来源，包括直接链式调用；跨项目模块的调用保守保留运行时。可证明的单条动态单位、raw/token 声明会在组件内共享固定规则，值变化只更新元素变量；Vue 使用原生 `computed`，Svelte 使用 `$derived` 或 keyed each 行派生。复杂结构仍在原声明位置绑定或回退运行时；CSS-wide、空值及无法证明等价的值保持原语义。严格 CSP 禁止元素 style 属性时，可选插件使用 `cssPlugin({ bindings: 'runtime' })` 与请求 nonce；应用自己写的 style 属性仍由应用负责。脚本中的普通 `const` class 是快照，未命中优化时响应式重算仍由 Vue computed 或 Svelte `$derived`/模板承担。
 
 适配器完整运行时入口的体积与 core 中 `cssVar` 等小入口不同。完整引擎包含属性数据、解析、序列化、宿主注册和缓存。普通结果缓存最多 256 项、键不超过 65,536 字符；绑定字符串缓存最多 128 项且合计不超过 65,536 个 UTF-16 字符。缓存可驱逐，但已注册规则可能仍被 DOM 或已保存的 class 字符串使用，不能随缓存淘汰删除。`name` 和 `config({ debug })` 提供按需来源诊断，不改变内容哈希；服务端与客户端恢复应使用同一构建产物。
 

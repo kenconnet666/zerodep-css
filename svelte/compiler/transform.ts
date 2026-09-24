@@ -47,7 +47,12 @@ export function transformCss(
           if (result.code !== d.initializer.getText(ctx.ast))
             ctx.output.overwrite(offset, ctx.scriptStart + d.initializer.end, result.code);
         }
-  function visit(node: unknown, restricted = false, locals = new Set<string>()): void {
+  function visit(
+    node: unknown,
+    restricted = false,
+    locals = new Set<string>(),
+    directEach = false,
+  ): void {
     if (!node || typeof node !== 'object') return;
     if (Array.isArray(node)) {
       const blockLocals = new Set(locals);
@@ -61,7 +66,7 @@ export function transformCss(
         )
           for (const declaration of child.declaration.declarations)
             if (isRecord(declaration)) addPattern(declaration.id, blockLocals);
-      for (const child of node) visit(child, restricted, blockLocals);
+      for (const child of node) visit(child, restricted, blockLocals, directEach);
       return;
     }
     if (!isRecord(node)) return;
@@ -134,6 +139,23 @@ export function transformCss(
         const code = `(()=>{const ${local}={__proto__:null};const ${className}=${result.code};let ${styleName}='';let ${hasStyle}=false;for(const ${keyName} in ${local}){${styleName}+=${keyName}+':'+${local}[${keyName}]+';';${hasStyle}=true;}return {class:${className},...(${hasStyle}?{style:${styleName}}:{})}})()`;
         // spread 留在原 class 使用点；有原 style 属性时完整回退，指令仍由 Svelte 管理。
         ctx.output.overwrite(attr.start, attr.end, `{...${code}}`);
+      } else if (result.compiledBinding) {
+        if (!hasRange(attr)) return ctx.error(expression.start, 'Missing Svelte attribute range.');
+        const binding =
+          result.compiledBinding.root || !directEach ? result.code : ctx.fresh('row_binding');
+        if (binding !== result.code) {
+          if (!hasRange(node)) return ctx.error(expression.start, 'Missing Svelte element range.');
+          // {@const} 属于 each 行作用域；Svelte 会为该行建立惰性派生值。
+          ctx.output.appendLeft(node.start, `{@const ${binding} = ${result.code}}`);
+        }
+        const name = result.compiledBinding.name;
+        ctx.output.overwrite(
+          attr.start,
+          attr.end,
+          result.compiledBinding.root || directEach
+            ? `class={${binding}.class} style:${name}={${binding}.style?.[${JSON.stringify(name)}]}`
+            : `{...${binding}}`,
+        );
       } else if (result.code !== text) {
         ctx.output.overwrite(expression.start, expression.end, result.code);
       }
@@ -160,6 +182,8 @@ export function transformCss(
           node[key],
           node.type === 'EachBlock' && key === 'fallback' ? restricted : blocked,
           childLocals,
+          (node.type === 'EachBlock' && key === 'body') ||
+            (node.type === 'Fragment' && directEach && key === 'nodes'),
         );
       }
   }

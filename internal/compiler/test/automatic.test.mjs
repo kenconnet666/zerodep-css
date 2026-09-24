@@ -9,10 +9,12 @@ import {
   bindUnit,
   bindValue,
   createDeclarationBinding,
+  createCompiledBinding,
 } from '../../runtime/dist/compiler-runtime.js';
 import { formatUnitValues } from '../../runtime/dist/binding.js';
 import * as compilerRuntime from '../../runtime/dist/compiler-runtime.js';
 import * as adapter from '../../../vue/dist/index.js';
+import * as adapterCompilerRuntime from '../../../vue/dist/compiler-runtime.js';
 import { createRuntime } from '../../runtime/dist/index.js';
 import { createRequire } from 'node:module';
 import { transform as compileJs } from 'esbuild';
@@ -422,34 +424,31 @@ for (const [framework, transform] of [
       }),
       filename,
     );
-    assert(result?.code.includes('bindUnit'));
+    assert(result?.code.includes('createCompiledBinding'));
     assert(!result.code.includes('prepareStyle'));
-    const alias = result.code.match(/bindUnit as (\w+)/)[1];
-    const evaluate = new Function(
-      'css',
-      'state',
-      alias,
-      `${unitPlanDeclarations(result)}\nreturn ${propsExpression(framework, result)}`,
-    );
     const runtime = createRuntime({ target: null });
     let reads = 0;
     try {
-      const props = evaluate(
+      const bind = createCompiledBinding(
         runtime.css,
-        {
-          get gap() {
-            reads++;
-            return 12;
-          },
-        },
-        bindUnit,
+        (s) => s.width.raw('var(--unit)'),
+        'a'.repeat(64),
+        '--unit',
+        (bindings, value) => bindUnit(bindings, '--unit', [value], [[{ min: 0 }]], 'px', ' '),
+        (value) => (s) => s.width.px(value),
+      );
+      const props = bind(
+        () =>
+          ({
+            get gap() {
+              reads++;
+              return 12;
+            },
+          }).gap,
       );
       assert.equal(reads, 1);
-      assert(
-        framework === 'vue'
-          ? Object.values(props.style).includes('12px')
-          : props.style.includes('12px'),
-      );
+      assert.equal(props.style['--unit'], '12px');
+      assert.match(props.class, /^z-c-/);
     } finally {
       runtime.dispose();
     }
@@ -461,30 +460,30 @@ for (const [framework, transform] of [
       }),
       filename,
     );
-    const alias = result.code.match(/bindUnit as (\w+)/)[1];
-    const evaluate = new Function(
-      'css',
-      'state',
-      alias,
-      `${unitPlanDeclarations(result)}\nreturn ${propsExpression(framework, result)}`,
-    );
+    assert(result?.code.includes('createCompiledBinding'));
     const runtime = createRuntime({ target: null });
     const reads = [];
     try {
-      const props = evaluate(
+      const bind = createCompiledBinding(
         runtime.css,
-        {
-          get first() {
-            reads.push('first');
-            return null;
-          },
-          get second() {
-            reads.push('second');
-            return 0;
-          },
-        },
-        bindUnit,
+        (s) => s.padding.raw('var(--padding)'),
+        'b'.repeat(64),
+        '--padding',
+        (bindings, values) =>
+          bindUnit(bindings, '--padding', values, [[{ min: 0 }, { min: 0 }]], 'px', ' '),
+        (values) => (s) => s.padding.px(values[0], values[1]),
       );
+      const state = {
+        get first() {
+          reads.push('first');
+          return null;
+        },
+        get second() {
+          reads.push('second');
+          return 0;
+        },
+      };
+      const props = bind(() => [state.first, state.second]);
       assert.deepEqual(reads, ['first', 'second']);
       assert.equal(props.style, undefined);
       assert.equal(runtime.snapshot().records[0]?.body ?? '', '');
@@ -554,36 +553,29 @@ for (const [framework, transform] of [
       }),
       filename,
     );
-    const alias = result.code.match(/bindValue as (\w+)/)[1];
-    const helper = result.code.match(/const (\w+) = \w+\("(--zcss-[a-f0-9]{16})"/);
-    const evaluate = new Function(
-      'css',
-      'state',
-      alias,
-      helper[1],
-      `return ${propsExpression(framework, result)}`,
-    );
+    assert(result?.code.includes('createCompiledBinding'));
     const runtime = createRuntime({ target: null });
     let reads = 0;
     try {
-      const props = evaluate(
+      const helper = createDeclarationBinding('--color', { property: 'color' });
+      const bind = createCompiledBinding(
         runtime.css,
-        {
-          get color() {
-            reads++;
-            return 'red';
-          },
+        (s) => s.color.raw('var(--color)'),
+        'c'.repeat(64),
+        '--color',
+        (bindings, value) => bindValue(bindings, '--color', helper, value),
+        (value) => (s) => s.color.raw(value),
+      );
+      const state = {
+        get color() {
+          reads++;
+          return 'red';
         },
-        bindValue,
-        createDeclarationBinding(helper[2], { property: 'color' }),
-      );
+      };
+      const props = bind(() => state.color);
       assert.equal(reads, 1);
-      assert(
-        framework === 'vue'
-          ? Object.values(props.style).includes('red')
-          : props.style.includes('red'),
-      );
-      assert.match(runtime.snapshot().records[0].body, /^color:var\(--zcss-/);
+      assert.equal(props.style['--color'], 'red');
+      assert.equal(runtime.snapshot().records[0].body, 'color:var(--color);');
     } finally {
       runtime.dispose();
     }
@@ -619,6 +611,7 @@ test('整组单位格式化保留联合约束、顺序和非法输入拒绝', ()
 test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async () => {
   const source = `<script setup lang="ts">import {createStyles} from '@zerodep-css/vue';defineProps<{gap:number}>();const styles=createStyles();const css=styles.useCss();const rows=[{id:'hidden',detail:null},{id:'visible',detail:{width:20}}];</script><template><div :class="css(s=>{s.padding.px(8,gap)})"/><template v-for="row in rows" :key="row.id"><span v-if="row.detail" :class="css(s=>s.width.px(row.detail.width))"/></template></template>`;
   const result = vue(source, resolve('AutomaticSSR.vue'));
+  assert(result.code.includes('bindUnit'), result.code);
   const compiled = compileScript(parse(result.code).descriptor, {
     id: 'automatic',
     inlineTemplate: true,
@@ -630,7 +623,7 @@ test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async 
   new Function('require', 'module', 'exports', js.code)(
     (id) => {
       if (id === '@zerodep-css/vue') return adapter;
-      if (id === '@zerodep-css/vue/compiler-runtime') return compilerRuntime;
+      if (id === '@zerodep-css/vue/compiler-runtime') return adapterCompilerRuntime;
       return require(id);
     },
     module,
@@ -643,8 +636,8 @@ test('自动绑定的 SSR 保留 props、隐藏行守卫与请求隔离', async 
       const app = createSSRApp(module.exports.default, { gap });
       app.use(host);
       const html = await renderToString(app);
-      assert(html.includes(`8px ${gap}px`));
-      assert(html.includes('20px'));
+      assert(html.includes(`8px ${gap}px`), html);
+      assert(html.includes('20px'), html);
       records.push(host.snapshot().runtime.records);
     } finally {
       host.dispose();

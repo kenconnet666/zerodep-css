@@ -42,7 +42,7 @@ export const { useCss, useTheme, provideTheme, useGlobalCss, createHost } = crea
   → 内容哈希、资源与宿主事务注册
   → class 字符串
 
-可选同 SFC 编译优化 → 安全值使用元素变量；其他代码继续运行时路径
+可选同 SFC 编译优化 → 单声明固定规则提升、原生响应式元素变量；其他代码继续运行时路径
 ```
 
 同一上下文、同一规范属性后写直接删除前写，包括前写带 `important` 的情况。不同简写/长属性保留原顺序，由浏览器解释。`raw` 仅检查声明结构并保留新 CSS 值的浏览器原生语义；单位多参数只要有 `null`/`undefined` 就省略整条声明。`css(base, override)` 按顺序组合本 host 已知 class 与回调，也接受普通第三方 class、数组及 `false`/`null`/`undefined` 空项。第三方 class 不反解；本 host 的 class 字符串只是样式快照，不携带元素上的内联变量值。
@@ -53,6 +53,6 @@ export const { useCss, useTheme, provideTheme, useGlobalCss, createHost } = crea
 
 `useGlobalCss(key, factory)` 管理组件声明的全局槽位、更新和卸载；普通 class 与共享动画留到 host 释放。同 key 同序列化内容共享一个槽位；最后一个 owner 卸载才释放。多个 owner 存活时只接受同内容更新，仅剩一个才允许改值；动态全局推荐由根组件声明一次。host 提前 dispose 会停止所有已登记的全局订阅，避免释放后继续求值工厂。CSSOM 事务先验证冲突与所有待写规则，再更新记录；失败不留下半成品。计算缓存可淘汰，已注册规则不能随缓存淘汰直接删除。
 
-可选 `cssPlugin` 当前只识别同一 SFC 内能直接追踪的 `createStyles`/`useCss` 来源，包括直接链式调用。项目 `styles.ts` 跨文件导出的绑定方法保持完整运行时行为，尚不做跨模块编译证明。变量绑定会在原求值点读取动态输入，复杂回调或派生作者类保守回退；优化失败不改变合法作者代码的执行、错误和 SSR 合同。
+可选 `cssPlugin` 当前只识别同一 SFC 内能直接追踪的 `createStyles`/`useCss` 来源，包括直接链式调用。项目 `styles.ts` 跨文件导出的绑定方法保持完整运行时行为，尚不做跨模块编译证明。单条可证明的动态声明将固定规则提升到组件初始化作用域，Vue 用 `computed`、Svelte 用 `$derived`/keyed each 行派生持有值；注册仍属于当前 host，并在 class 读取时验证所有权。其他动态绑定保留原求值位置，复杂回调或派生作者类保守回退；优化失败不改变合法作者代码的执行、错误和 SSR 合同。
 
 core 的小作者入口与适配器完整运行时入口体积不同；属性元数据、解析器、序列化和宿主注册仍是浏览器完整运行时所需代码。原生 CSS 特性由目标浏览器实现，本库不提供通用前缀或 polyfill。完整引擎与元框架接入均有独立消费验证；实际本地/远程状态见[生产实施记录](production.md)。

@@ -15,3 +15,4 @@ export type {
 export type { OutputConfig, StyleRecord } from './serialize.js';
 export { withStyleSource, prepareStyle } from '@zerodep-css/core/internal';
 export { createDeclarationBinding, bindUnit, bindValue } from './binding.js';
+export { createCompiledBinding } from './compiler-runtime.js';

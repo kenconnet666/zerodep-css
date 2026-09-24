@@ -295,12 +295,36 @@ try {
       assert.equal(initial.border, '2px');
       const automatic = first.locator('[data-auto]');
       const automaticClass = await automatic.getAttribute('class');
+      const fast = first.locator('[data-fast]');
+      const fastClass = await fast.getAttribute('class');
+      assert.equal(await fast.evaluate((e) => getComputedStyle(e).width), '10px');
+      assert.equal(await fast.evaluate((e) => e.style.length), 1);
+      const fastRow = first.locator('[data-fast-row-id="a"]');
+      const fastRowClass = await fastRow.getAttribute('class');
+      const absentFastRow = first.locator('[data-fast-row-id="c"]');
+      const absentFastClass = await absentFastRow.getAttribute('class');
+      assert.equal(await absentFastRow.evaluate((e) => e.style.length), 0);
       assert(automaticClass.includes('automatic-'));
       assert.equal(await automatic.evaluate((e) => getComputedStyle(e).width), '10px');
       await first.locator('[data-auto-change]').click();
       assert.equal(await automatic.evaluate((e) => getComputedStyle(e).width), '11px');
       assert.equal(await automatic.evaluate((e) => getComputedStyle(e).padding), '2px 11px');
       assert.equal(await automatic.getAttribute('class'), automaticClass);
+      assert.equal(await fast.evaluate((e) => getComputedStyle(e).width), '11px');
+      assert.equal(await fast.getAttribute('class'), fastClass);
+      assert.deepEqual((await read()).stats, initial.stats);
+      await first.locator('[data-fast-row-change]').click();
+      assert.equal(await fastRow.evaluate((e) => getComputedStyle(e).width), '12px');
+      assert.equal(await fastRow.getAttribute('class'), fastRowClass);
+      assert.equal(
+        await first.locator('[data-fast-row-id="b"]').evaluate((e) => getComputedStyle(e).width),
+        '22px',
+      );
+      assert.deepEqual((await read()).stats, initial.stats);
+      await first.locator('[data-fast-null-change]').click();
+      assert.equal(await absentFastRow.evaluate((e) => getComputedStyle(e).width), '18px');
+      assert.notEqual(await absentFastRow.getAttribute('class'), absentFastClass);
+      assert.equal(await absentFastRow.evaluate((e) => e.style.length), 1);
       assert.deepEqual((await read()).stats, initial.stats);
       assert.equal(
         await page
@@ -379,19 +403,29 @@ try {
       await first.locator('[data-nullable-change]').click();
       assert.deepEqual(await readNullable(), absent);
       const valueClass = await autoValue.getAttribute('class');
+      const fastColor = first.locator('[data-fast-color]');
+      const fastColorClass = await fastColor.getAttribute('class');
+      assert.equal(await fastColor.evaluate((e) => getComputedStyle(e).color), 'rgb(255, 0, 0)');
       const valueStats = (await read()).stats;
       assert.equal(await autoValue.evaluate((e) => getComputedStyle(e).color), 'rgb(255, 0, 0)');
       await first.locator('[data-auto-color]').click();
       assert.equal(await autoValue.evaluate((e) => getComputedStyle(e).color), 'rgb(0, 0, 255)');
+      assert.equal(await fastColor.evaluate((e) => getComputedStyle(e).color), 'rgb(0, 0, 255)');
+      assert.equal(await fastColor.getAttribute('class'), fastColorClass);
       assert.equal(await autoValue.getAttribute('class'), valueClass);
       assert.deepEqual((await read()).stats, valueStats);
       await first.locator('[data-auto-color]').click();
       assert.equal(await autoValue.evaluate((e) => getComputedStyle(e).color), 'rgb(0, 0, 0)');
+      assert.equal(await fastColor.evaluate((e) => e.style.length), 0);
+      assert.notEqual(await fastColor.getAttribute('class'), fastColorClass);
       await first.locator('[data-auto-color]').click();
       assert.equal(await autoValue.evaluate((e) => getComputedStyle(e).color), 'rgb(255, 0, 0)');
+      assert.equal(await fastColor.evaluate((e) => getComputedStyle(e).color), 'rgb(0, 0, 0)');
+      assert.equal(await fastColor.evaluate((e) => e.style.length), 0);
       assert.equal(await autoValue.evaluate((e) => e.style.length), 0);
       await first.locator('[data-auto-color]').click();
       assert.equal(await autoValue.getAttribute('class'), valueClass);
+      assert.equal(await fastColor.getAttribute('class'), fastColorClass);
       const sibling = first.locator('[data-auto-sibling]');
       assert.equal(await sibling.evaluate((element) => getComputedStyle(element).width), '10px');
       await first.locator('[data-sibling-change]').click();

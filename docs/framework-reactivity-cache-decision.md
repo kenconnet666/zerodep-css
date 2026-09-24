@@ -1,6 +1,6 @@
 # Vue/Svelte 原生响应式缓存决策
 
-日期：2026-09-24。范围：当前 `codex/runtime-first`，Vue 3.5.43、Svelte 5.57.0。结论：**不向内部再叠加通用 `computed`、`$derived`、逐元素缓存或 `v-memo`。** 保留现有两层主题派生、框架管理的全局样式更新及作者显式选择的 class 派生值。原有完整运行时仍是语义基线。
+日期：2026-09-24。范围：原 `codex/runtime-first` 阶段的 Vue 3.5.43、Svelte 5.57.0。结论：**不向任意 `css` 回调叠加通用 `computed`、`$derived`、逐元素缓存或 `v-memo`。** 后来可证明的单条动态声明在编译器中固定 CSS 规则，并使用 Vue `computed`、Svelte `$derived`/keyed each 行派生值仅计算变量；这不是缓存任意作者回调，当前边界见[编译器](compiler.md)。完整运行时仍是语义基线。
 
 ## 当前已经由框架缓存的工作
 

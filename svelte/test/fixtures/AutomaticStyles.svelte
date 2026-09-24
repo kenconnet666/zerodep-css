@@ -3,6 +3,11 @@
   const { useCss } = createStyles();
   const css = useCss();
   let width = $state(10);
+  let fastRows = $state<{ id: string; width: number | null }[]>([
+    { id: 'a', width: 11 },
+    { id: 'b', width: 22 },
+    { id: 'c', width: null },
+  ]);
   let siblingWidth = $state(10);
   const colors = ['red', 'blue', 'initial', undefined];
   let colorIndex = 0;
@@ -47,6 +52,7 @@
     color = colors[colorIndex];
   }}>color</button
 >
+<div data-fast-color class={css((s) => s.color.raw(color))}></div>
 <div
   data-auto-value
   class={css((s) => {
@@ -59,6 +65,12 @@
 </div>
 
 <button data-auto-change onclick={() => width++}>automatic</button>
+<div data-fast class={css((s) => s.width.px(width))}></div>
+<button data-fast-row-change onclick={() => (fastRows[0]!.width = 12)}>fast row</button>
+<button data-fast-null-change onclick={() => (fastRows[2]!.width = 18)}>fast null</button>
+{#each fastRows as row (row.id)}
+  <div data-fast-row-id={row.id} class={css((s) => s.width.px(row.width))}></div>
+{/each}
 <div
   data-auto
   class={css((s) => {

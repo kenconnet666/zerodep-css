@@ -119,6 +119,6 @@ host.dispose();
 
 `useCss()` 返回同步的 class 字符串函数。`css(base, override, [condition && extra])` 会在本 host 内按已知样式结构组合类；未知字符串按外部 class 透传。`false`、`null`、`undefined` 和空数组项会忽略。普通 class 字符串是快照，不会复制元素上的动态变量；要追踪状态变化，使用模板表达式或 `$derived`。
 
-普通函数适合复用样式，`if`/`switch` 适合表达条件。属性值继续使用 `token`、`raw` 和单位方法。Vite 自动编译可选启用；支持边界与回退规则见[编译说明](../docs/compiler.md)。
+普通函数适合复用样式，`if`/`switch` 适合表达条件。属性值继续使用 `token`、`raw` 和单位方法。Vite 自动编译可选启用；可证明的单条动态声明把固定 class 提升到组件内，Svelte 用 `$derived` 或 keyed each 行派生值更新元素变量。支持边界与回退规则见[编译说明](../docs/compiler.md)。
 
 适配器以 Svelte 5 runes 编写，消费者应通过官方 Svelte 编译链构建 `.svelte.js` 模块。完整字符串 SSR 与水合有真实浏览器验收；异步组件必须初始化后再调用 `completeHydration()`。

@@ -110,4 +110,4 @@ host.completeHydration();
 
 普通 class 字符串是调用时快照。字符串组合不会复制原元素上的动态绑定变量；要保持响应式，应在模板表达式或 `computed` 中调用 `css`。样式回调优先使用普通函数复用和 `if`/`switch` 表达条件。样式属性采用 `s.property.token(...)`、`s.property.raw(...)` 和 `s.property.px(...)` 等属性对象 API。
 
-Vite 自动编译可选启用；支持范围与安全回退见[编译说明](../docs/compiler.md)。
+Vite 自动编译可选启用；可证明的单条动态声明会把固定 class 提升到组件内，模板只通过 Vue `computed` 更新元素变量。列表局部值保留在 `v-for` 回调中，复杂回调仍按调用时运行。支持范围与安全回退见[编译说明](../docs/compiler.md)。

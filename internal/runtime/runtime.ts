@@ -89,7 +89,28 @@ export interface StyleRuntime<C extends Css = Css> {
   renderStyles(): string;
   renderManifest(): string;
   stats(): RuntimeStats;
+  /** 编译绑定复用已注册 class 时，仍保留宿主完整性和生命周期检查。 */
+  verifyClass(id: string): void;
+  assertActive(): void;
   dispose(): void;
+}
+
+interface CompiledCssOwner {
+  readonly runtime: StyleRuntime;
+  className(id: string): string;
+}
+
+// 只记录当前应用/请求绑定函数的宿主，不以作者回调身份缓存求值结果。
+const compiledCssOwners = new WeakMap<Function, CompiledCssOwner>();
+
+export function registerCompiledCssOwner(css: Function, owner: CompiledCssOwner): void {
+  compiledCssOwners.set(css, owner);
+}
+
+export function compiledCssOwner(css: Function): CompiledCssOwner {
+  const owner = compiledCssOwners.get(css);
+  if (!owner) throw new Error('Compiled CSS binding requires a project-bound useCss function.');
+  return owner;
 }
 
 export function assertSameRecord(previous: StyleRecord, next: StyleRecord): void {
@@ -666,6 +687,15 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
         cssCharacters: values.reduce((n, r) => n + renderRecord(r, config).length, 0),
       };
     },
+    assertActive: alive,
+    verifyClass(id) {
+      alive();
+      if (busy) throw new Error('Reentrant stylesheet mutation.');
+      const record = records.get(id);
+      if (record?.kind !== 'class') throw new Error('Unknown compiled CSS class: ' + id);
+      for (const dependency of record.dependencies) host?.verify(dependency);
+      host?.verify(id);
+    },
     dispose() {
       if (disposed) return;
       disposed = true;
@@ -680,6 +710,12 @@ export function createRuntime(options: RuntimeOptions = {}): StyleRuntime {
       if (target) releaseTarget(target, config.namespace, runtime);
     },
   };
+  registerCompiledCssOwner(runtime.css, {
+    runtime,
+    className(id) {
+      return id;
+    },
+  });
   try {
     if (restored) {
       const claims = validateClaims(

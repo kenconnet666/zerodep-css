@@ -8,6 +8,8 @@
 
 项目的 `styles.ts` 用 `createStyles({ cssType?, theme? })` 配置作者类型与默认主题，并导出 `useCss`、`useTheme`、`provideTheme`、`useGlobalCss`、`createHost`。组件在初始化时取得 `const css = useCss()`；普通函数、`if/switch` 和真实 `Css` 继承都可运行。CSS class 字符串是调用时快照；响应式值在模板、Vue `computed` 或 Svelte `$derived` 中读取。跨模块项目 hook 保留完整运行时，尚不保证可选编译器命中。
 
+可选编译器在同 SFC 直接模板调用中，对能证明固定结构的单条动态单位/raw/token 声明提升固定 class；Vue 组件使用 `computed`，Svelte 组件或 keyed each 行使用原生派生值写元素变量。值为空或无法安全变量化时保留直接声明与运行时 class 切换。Vue 列表行仍受 `renderList` 的父组件更新影响；完整边界见[编译器](compiler.md)，同机原始样本见[性能记录](performance.md)。
+
 每个浏览器应用或 SSR 请求创建自己的 host。Vue 用 `app.use(host)`；Svelte 根组件用 `host.provide()`，最终 `unmount` 后显式 `host.dispose()`。SSR 完整渲染后输出 styles/manifest，并在 `finally` 释放请求 host；客户端恢复后调用 `completeHydration()`。Nuxt/Kit 的请求接入、HMR 和 CSP 细节以各包 [Nuxt](../nuxt/README.md)、[SvelteKit](../sveltekit/README.md) README 为准。
 
 ## 新机器恢复

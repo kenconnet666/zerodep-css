@@ -131,6 +131,15 @@ export function transformCss(
           classProp.loc.end.offset,
           `v-bind="${attr(code)}"`,
         );
+      } else if (result.compiledBinding) {
+        // 组件作用域的 computed 由 Vue 缓存；列表局部值仍在 renderList 回调中求一次。
+        ctx.output.overwrite(
+          classProp.loc.start.offset,
+          classProp.loc.end.offset,
+          result.compiledBinding.root
+            ? `:class="${attr(result.code)}.class" :style="${attr(result.code)}.style"`
+            : `v-bind="${attr(result.code)}"`,
+        );
       } else if (result.code !== expression) {
         ctx.output.overwrite(
           classProp.loc.start.offset,
