@@ -4,7 +4,7 @@
 
 ## 状态与入口
 
-P1—P5 已完成作者语义、薄 core、原生响应式与主题生命周期、性能优化、Nuxt/Kit 适配。P6 已补齐编译诊断、修复 Nuxt 请求 context 别名和开发来源包装问题，清理旧探针并完成文档审核。最后提交的远程 CI 状态以 [Actions](https://github.com/kenconnet666/zerodep-css/actions?query=branch%3Acodex%2Fruntime-first) 中对应 SHA 为准；本地通过不能替代远程成功。
+P1—P5 已完成作者语义、薄 core、原生响应式与主题生命周期、性能优化、Nuxt/Kit 适配。P6 已补齐编译诊断、修复 Nuxt 请求 context 别名和开发来源包装问题，清理旧探针并完成文档审核。约定的生产范围已完成验收：[2c51b0f 的完整远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35946894347)九个 job 全部成功。最后的交接记录提交只修改文档，不改变已验收产品或测试代码。以后修改仍须按对应 SHA 核对结果。
 
 - [支持边界](support.md)、[API 迁移](migration.md)：当前公开能力和唯一推荐入口。
 - [生产实施记录](production.md)：分阶段提交、修复依据与实际验证；[已确认合同](runtime-first.md)保留产品决策。
@@ -43,7 +43,7 @@ pnpm lsp:setup
 
 ## 验证与交付
 
-本轮本地已通过根 check/build、218 项单元、三语言类型负例、Vue/Svelte 真实 SSR/hydration/HMR、Nuxt 全新隔离消费者完整流程及关键文件 LSP。Nuxt 报告 runId 为 `3e622a82-deaa-48b3-8cb4-a3edd0225236`，cleanFullPass=true，包含缓存响应、内部请求与原生路由规则刷新。Kit 在 P5 已通过独立 Node/静态/异步子组件/HMR 验收及该提交远程 CI。最终九个 CI job 的准确状态见生产实施记录。
+本轮本地已通过根 check/build、218 项单元、三语言类型负例、Vue/Svelte 真实 SSR/hydration/HMR、Nuxt 全新隔离消费者完整流程及关键文件 LSP。Nuxt 报告 runId 为 `3e622a82-deaa-48b3-8cb4-a3edd0225236`，cleanFullPass=true，包含缓存响应、内部请求与原生路由规则刷新。Kit 在 P5 已通过独立 Node/静态/异步子组件/HMR 验收及该提交远程 CI。最终 2c51b0f 的九个 CI job 全部通过，详细链接见生产实施记录。
 
 完整命令和证据入口在 [validation](validation.md)。只由一个流程 build，其余测试传 --no-build，避免并行清空 dist。类型负例运行期间不要全目录格式化或中途终止。正确性测试可并行，性能计时必须独占负载。每个阶段中文提交，推送后区分本地与对应提交的远程验收。
 

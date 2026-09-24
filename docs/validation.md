@@ -25,7 +25,7 @@ Nuxt/Kit 的夹具源码位于各包 test/fixture，运行时复制到仓库外�
 
 ## 提交与验收记录
 
-当前运行时优先主线的阶段证据集中在 [production](production.md)。P1—P4 的对应提交已通过远程验收；P5 7756c6e 的九个 job 中八个成功，Nuxt 开发用例被原生路由规则刷新打断，已在 05da194 中分开验证 HMR 与原生刷新。本轮本地 218 项单元、框架/元框架检查通过；最终状态应按 [Actions](https://github.com/kenconnet666/zerodep-css/actions?query=branch%3Acodex%2Fruntime-first) 的目标 SHA 核对，不沿用旧成功摘要。
+当前运行时优先主线的 P1—P6 阶段证据集中在 [production](production.md)。[2c51b0f 的完整远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35946894347)九个 job 全部成功，覆盖五包独立消费、Node/静态部署、双平台基础检查、三浏览器及类型/LSP。本轮本地 218 项单元、框架/元框架检查通过；最后的交接文档提交不改变验收代码。此前 Nuxt HMR、ANSI 日志和连续保存节流问题的诊断与修正均保留在 Git 与实施记录。后续变更仍须核对对应 SHA，不沿用旧成功摘要。
 
 ## 性能探针
 

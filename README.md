@@ -1,6 +1,6 @@
 # zerodep-css
 
-强类型链式 CSS 框架，保留完整运行时能力；编译、预计算、缓存和元素变量绑定都是可选优化。当前在 `codex/runtime-first` 分阶段完善生产方案，已实现范围与验收状态见[实施记录](docs/production.md)。五个产品包保持 private：core、Vue、Svelte，以及 [Nuxt 4](nuxt/README.md)/[SvelteKit 2](sveltekit/README.md) 的薄接入。core 根入口只有 `Css`、`cssVar`、`defineTheme` 三个作者运行值；Vue/Svelte 根入口提供 `createStyles`、`Css`、`defineTheme`、`cssVar`、`keyframes` 五个运行值。
+强类型链式 CSS 框架，保留完整运行时能力；编译、预计算、缓存和元素变量绑定都是可选优化。当前 `codex/runtime-first` 已完成约定生产范围的实现与验收，具体边界与证据见[实施记录](docs/production.md)。五个产品包保持 private：core、Vue、Svelte，以及 [Nuxt 4](nuxt/README.md)/[SvelteKit 2](sveltekit/README.md) 的薄接入。core 根入口只有 `Css`、`cssVar`、`defineTheme` 三个作者运行值；Vue/Svelte 根入口提供 `createStyles`、`Css`、`defineTheme`、`cssVar`、`keyframes` 五个运行值。
 
 项目统一配置，组件使用绑定的作者类型与主题：
 
@@ -35,7 +35,7 @@ sveltekit/  Kit server hook、根宿主与独立部署验收
 internal/   共用运行时源码、生成元数据、测试与严格 TypeScript 编译分析
 scripts/    数据生成、语言服务和浏览器/类型验收
 docs/       现行架构、支持、验证、迁移与换机交接
-.research/  研究探针、原始模板归档
+.research/  当前研究探针、性能原始样本与历史源码索引
 ```
 
 要求 Node 24、pnpm 10.34.5；Windows 安装脚本使用 PowerShell 7。版本统一在 pnpm-workspace.yaml 管理，五个包均保持 private。

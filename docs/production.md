@@ -19,7 +19,7 @@
 
 ## 当前进度
 
-P1—P5 已实施，P6 的目录/API/文档审核及定向修复已完成；最终交付以对应提交的九个 CI job 验收为准。产品修复提交 05da194，旧 7756c6e 的 CI 是 8/9 成功，Nuxt HMR 因原生 route-rules 刷新未通过，不能记为全绿。
+P1—P6 已完成约定范围的实施和验收，[2c51b0f 的完整远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35946894347)九个 job 全部成功：双平台基础检查、三语言/LSP、三浏览器、独立消费、Nuxt 和 SvelteKit 部署。产品修复提交 05da194，清理与交接 97d79a6，CI 测试兼容性修正 e6f9508 / 2c51b0f。最终记录提交仅更新文档，未改变已验收代码；五包保持 private，未发布 npm。旧 7756c6e 的 CI 曾为 8/9 成功，不追溯改记为全绿。
 
 ### P6 最终审核与修复
 
@@ -29,9 +29,9 @@ P1—P5 已实施，P6 的目录/API/文档审核及定向修复已完成；最�
 - Nuxt 开发测试分别验证无路由规则干扰的真实同 Document HMR，以及保留缓存规则时框架原生 route-rules 全页刷新后的恢复；不拦截刷新或把 reload 伪装成 HMR。新完整流程 runId 为 3e622a82-deaa-48b3-8cb4-a3edd0225236，cleanFullPass=true。
 - 删除 24 个不再适用的旧探针/示例文件，研究索引保留不可变 Git 源码链接，当前性能原始样本不删除。五包 README 加入文档链接验收，澄清适配器入口范围并更新交接、迁移与 changelog。
 
-本轮本地通过 check/build、218 项单元、TS/Vue/Svelte 类型正负例、双框架真实 SSR/hydration/HMR、Nuxt 独立安装/审计/类型/Node/静态/开发全流程及关键文件 complete=true 的零错误 LSP。Kit 的 P5 独立部署本地与远程已通过，本轮没有改其运行时。最终远程状态见对应提交 [Actions](https://github.com/kenconnet666/zerodep-css/actions?query=branch%3Acodex%2Fruntime-first)，未结束的 run 不能当成功。
+本轮本地通过 check/build、218 项单元、TS/Vue/Svelte 类型正负例、双框架真实 SSR/hydration/HMR、Nuxt 独立安装/审计/类型/Node/静态/开发全流程及关键文件 complete=true 的零错误 LSP。Kit 的 P5 独立部署本地与远程已通过，本轮没有改其运行时。最终远程验收见上方 2c51b0f 链接，包含本轮代码的全部九个 job。
 
-远程补充：97d79a6 的八个 job 成功，Nuxt 路由刷新日志匹配因 Linux ANSI 颜色码误判，e6f9508 改用 Node 标准控制字符清理。后续同文件脚本/模板连续保存约 54ms，接近上游 chokidar 的 50ms change 节流窗口，第二次通知丢失；测试保存需留出同路径间隔，不用失败重试或删除 HMR 断言来掩盖问题。最终结果以本节验收链接为准。
+远程补充：97d79a6 的八个 job 成功，Nuxt 路由刷新日志匹配因 Linux ANSI 颜色码误判，e6f9508 改用 Node 标准控制字符清理。后续同文件脚本/模板连续保存约 54ms，接近上游 chokidar 的 50ms change 节流窗口，证据指向第二次通知被节流；测试保存需留出同路径间隔，不用失败重试或删除 HMR 断言来掩盖问题。2c51b0f 在测试中保证同文件编辑至少间隔 120ms，保留所有 HMR 强断言，随后完整远程 CI 通过。
 
 以下为各阶段当时的实现和验证记录；“待提交/待 CI”等描述属于该段历史时点，当前状态以本节与交接文档为准。
 
