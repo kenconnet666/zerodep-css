@@ -1,0 +1,435 @@
+{
+  "passed": true,
+  "status": "passed",
+  "browser": "153.0.8010.53",
+  "engine": "chromium",
+  "channel": "chrome",
+  "note": "纯 DOM 下界；native theme 只用 defaults/tokens 直接序列化相同主题叶，不调用引擎、哈希或解析器。prepared-* 是手工调用内部 prepareStyle 的计算下界，不代表完整编译插件路径；主题样式在计时外按 prepareThemeStyle 预备一次。真实框架编译对照由 frameworks.mjs 负责。不包含 Vue/Svelte 调度、runtime 创建、网络和 JS 首次解析。挂载计时包含节点创建、初始 class/变量写入和首次布局读取；更新计时包含后续差异更新与布局读取。静态原生 CSS 没有引擎计算，基线只保留相同循环/差异检查。",
+  "nodesPerBatch": 200,
+  "batches": 50,
+  "rounds": 7,
+  "warmupBatches": 10,
+  "nativeThemeLeafCount": 49,
+  "samples": {
+    "native-static": [
+      {
+        "mountMilliseconds": 2.400000000372529,
+        "updateMilliseconds": 1,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1,
+        "updateMilliseconds": 0.40000000037252903,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 0.7999999988824129,
+        "updateMilliseconds": 0.10000000149011612,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.900000000372529,
+        "updateMilliseconds": 0.2000000011175871,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 3.5,
+        "updateMilliseconds": 0.40000000037252903,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.200000001117587,
+        "updateMilliseconds": 0.09999999962747097,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.300000000745058,
+        "updateMilliseconds": 0.30000000074505806,
+        "records": 0,
+        "checksum": 610
+      }
+    ],
+    "prepared-static": [
+      {
+        "mountMilliseconds": 25.699999999254942,
+        "updateMilliseconds": 19.200000001117587,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.700000001117587,
+        "updateMilliseconds": 10,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 2.099999999627471,
+        "updateMilliseconds": 10.400000000372529,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 2,
+        "updateMilliseconds": 15.599999999627471,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 4.699999999254942,
+        "updateMilliseconds": 40.19999999925494,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 2.299999998882413,
+        "updateMilliseconds": 15.5,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.800000000745058,
+        "updateMilliseconds": 14.799999998882413,
+        "records": 1,
+        "checksum": 610
+      }
+    ],
+    "runtime-static": [
+      {
+        "mountMilliseconds": 5.799999998882413,
+        "updateMilliseconds": 60.80000000074506,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 3.100000001490116,
+        "updateMilliseconds": 47.399999998509884,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.900000000372529,
+        "updateMilliseconds": 49.20000000111759,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.699999999254942,
+        "updateMilliseconds": 53.59999999962747,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 5.900000000372529,
+        "updateMilliseconds": 73.40000000037253,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 4.5,
+        "updateMilliseconds": 47.69999999925494,
+        "records": 1,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.900000000372529,
+        "updateMilliseconds": 54.30000000074506,
+        "records": 1,
+        "checksum": 610
+      }
+    ],
+    "native-vars": [
+      {
+        "mountMilliseconds": 1.900000000372529,
+        "updateMilliseconds": 121.70000000111759,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 1.799999998882413,
+        "updateMilliseconds": 116.40000000037253,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 1.700000001117587,
+        "updateMilliseconds": 121.79999999888241,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 1.199999999254942,
+        "updateMilliseconds": 133.59999999962747,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 2,
+        "updateMilliseconds": 174.69999999925494,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 1.900000000372529,
+        "updateMilliseconds": 149.69999999925494,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 1.800000000745058,
+        "updateMilliseconds": 135.40000000037253,
+        "records": 0,
+        "checksum": 882
+      }
+    ],
+    "prepared-vars": [
+      {
+        "mountMilliseconds": 4.099999999627471,
+        "updateMilliseconds": 143.40000000037253,
+        "records": 1,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 2.199999999254942,
+        "updateMilliseconds": 132.90000000037253,
+        "records": 1,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 3.299999998882413,
+        "updateMilliseconds": 129.40000000037253,
+        "records": 1,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 2.400000000372529,
+        "updateMilliseconds": 156.59999999962747,
+        "records": 1,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 3.699999999254942,
+        "updateMilliseconds": 191.59999999962747,
+        "records": 1,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 3.400000000372529,
+        "updateMilliseconds": 212.69999999925494,
+        "records": 1,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 2.5,
+        "updateMilliseconds": 153.80000000074506,
+        "records": 1,
+        "checksum": 882
+      }
+    ],
+    "native-classes": [
+      {
+        "mountMilliseconds": 1.599999999627471,
+        "updateMilliseconds": 58,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 0.7999999988824129,
+        "updateMilliseconds": 53.69999999925494,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 0.7999999988824129,
+        "updateMilliseconds": 48.59999999962747,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 0.8000000007450581,
+        "updateMilliseconds": 57.29999999888241,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 1.299999998882413,
+        "updateMilliseconds": 75.70000000111759,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 1.400000000372529,
+        "updateMilliseconds": 61,
+        "records": 0,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 1.299999998882413,
+        "updateMilliseconds": 62.40000000037253,
+        "records": 0,
+        "checksum": 882
+      }
+    ],
+    "runtime-classes": [
+      {
+        "mountMilliseconds": 4,
+        "updateMilliseconds": 124.80000000074506,
+        "records": 16,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 1.900000000372529,
+        "updateMilliseconds": 101.80000000074506,
+        "records": 16,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 2.900000000372529,
+        "updateMilliseconds": 100.59999999962747,
+        "records": 16,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 3.199999999254942,
+        "updateMilliseconds": 103.5,
+        "records": 16,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 3.800000000745058,
+        "updateMilliseconds": 168,
+        "records": 16,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 3.400000000372529,
+        "updateMilliseconds": 109.19999999925494,
+        "records": 16,
+        "checksum": 882
+      },
+      {
+        "mountMilliseconds": 2.599999999627471,
+        "updateMilliseconds": 133.59999999962747,
+        "records": 16,
+        "checksum": 882
+      }
+    ],
+    "native-themed": [
+      {
+        "mountMilliseconds": 0.8999999985098839,
+        "updateMilliseconds": 1.700000001117587,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 2.100000001490116,
+        "updateMilliseconds": 1.300000000745058,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 0.8999999985098839,
+        "updateMilliseconds": 2.099999999627471,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.700000001117587,
+        "updateMilliseconds": 1.599999999627471,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.299999998882413,
+        "updateMilliseconds": 1.699999999254942,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.5,
+        "updateMilliseconds": 1.5,
+        "records": 0,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 1.400000000372529,
+        "updateMilliseconds": 1.800000000745058,
+        "records": 0,
+        "checksum": 610
+      }
+    ],
+    "prepared-themed": [
+      {
+        "mountMilliseconds": 8.700000001117587,
+        "updateMilliseconds": 30.300000000745058,
+        "records": 2,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 6.800000000745058,
+        "updateMilliseconds": 29.199999999254942,
+        "records": 2,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 5.099999999627471,
+        "updateMilliseconds": 27.299999998882413,
+        "records": 2,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 5,
+        "updateMilliseconds": 28.700000001117587,
+        "records": 2,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 6.099999999627471,
+        "updateMilliseconds": 42.09999999962747,
+        "records": 2,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 5,
+        "updateMilliseconds": 26.09999999962747,
+        "records": 2,
+        "checksum": 610
+      },
+      {
+        "mountMilliseconds": 4.200000001117587,
+        "updateMilliseconds": 25.299999998882413,
+        "records": 2,
+        "checksum": 610
+      }
+    ]
+  },
+  "medians": {
+    "mount": {
+      "native-static": 1.300000000745058,
+      "prepared-static": 2.099999999627471,
+      "runtime-static": 3.100000001490116,
+      "native-vars": 1.800000000745058,
+      "prepared-vars": 3.299999998882413,
+      "native-classes": 1.299999998882413,
+      "runtime-classes": 3.199999999254942,
+      "native-themed": 1.400000000372529,
+      "prepared-themed": 5.099999999627471
+    },
+    "update": {
+      "native-static": 0.30000000074505806,
+      "prepared-static": 15.5,
+      "runtime-static": 53.59999999962747,
+      "native-vars": 133.59999999962747,
+      "prepared-vars": 153.80000000074506,
+      "native-classes": 58,
+      "runtime-classes": 109.19999999925494,
+      "native-themed": 1.699999999254942,
+      "prepared-themed": 28.700000001117587
+    }
+  }
+}

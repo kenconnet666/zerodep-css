@@ -25,7 +25,7 @@ Nuxt/Kit 的夹具源码位于各包 test/fixture，运行时复制到仓库外�
 
 ## 提交与验收记录
 
-当前运行时优先主线的 P1—P6 阶段证据集中在 [production](production.md)。[2c51b0f 的完整远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35946894347)九个 job 全部成功，覆盖五包独立消费、Node/静态部署、双平台基础检查、三浏览器及类型/LSP。本轮本地 218 项单元、框架/元框架检查通过；最后的交接文档提交不改变验收代码。此前 Nuxt HMR、ANSI 日志和连续保存节流问题的诊断与修正均保留在 Git 与实施记录。后续变更仍须核对对应 SHA，不沿用旧成功摘要。
+运行时优先主线的 P1—P6 阶段证据集中在 [production](production.md)。[2c51b0f 的完整远程 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/35946894347)九个 job 全部成功，覆盖五包独立消费、Node/静态部署、双平台基础检查、三浏览器及类型/LSP；随后 [c9621c6 的性能重测提交](https://github.com/kenconnet666/zerodep-css/actions/runs/35949229954)九个 job 也已通过。当前动态绑定优化本地通过根 check/build、219 项单元、三语言类型负例、运行时与 Vue/Svelte 浏览器回归及体积门禁；远程验收仍须以此次产品改动的提交 SHA 为准。此前 Nuxt HMR、ANSI 日志和连续保存节流问题的诊断与修正均保留在 Git 与实施记录，不沿用旧成功摘要。
 
 ## 性能探针
 
@@ -35,5 +35,6 @@ Nuxt/Kit 的夹具源码位于各包 test/fixture，运行时复制到仓库外�
 - `.research/performance/browser-native.mjs` 是不含框架调度的纯 DOM 对照，不能与组件更新总耗时混算。
 - `.research/performance/profile-runtime.mjs <label>` 仅定位 Node 计算热点，采样开销不作页面速度结论。
 - `.research/performance/cache-paired.mjs <baseline> <label> [--control]` 隔离构建两个版本，并交替计时、验证完整输出与工厂次数。基线必须采用 internal/runtime 之后的同 API 版本。
+- `.research/performance/binding-paired.mjs <baseline> <label> [--control]` 专测同输入的声明/内联绑定计算；`binding-browser.mjs` 与 `style-node-cost.mjs` 分别是隔离 DOM 变量写入和规则节点成本探针。范围与原始样本见[绑定优化探测](../.research/performance/results/2026-09-24-binding-optimization/README.md)。
 
 当前数据与范围以[性能对照](performance.md)为准。旧主题算法、预热和编译优先实验只从 Git 历史查询；当前工作树仅保留运行时主线的原始样本。旧脚本不再代表当前 API，也不能将不同基准数字拼成页面提速。

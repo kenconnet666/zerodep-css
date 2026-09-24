@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createDeclarationBinding } from '../../dist/compiler-runtime.js';
+import { bindValue, createDeclarationBinding } from '../../dist/compiler-runtime.js';
 import { createRuntime, cssVar } from '../../dist/index.js';
 
 test('普通声明自动绑定并保留 CSS-wide、空值和显式变量语义', () => {
@@ -27,6 +27,52 @@ test('普通声明自动绑定并保留 CSS-wide、空值和显式变量语义',
     assert.throws(() => binding.value(value));
   assert.equal(binding.value(''), '');
   assert.equal(binding.inline(''), undefined);
+});
+
+test('同一输入生成声明和内联变量的快照，异常不污染已有绑定', () => {
+  const color = createDeclarationBinding('--color', { property: 'color' });
+  for (const [input, expected, inline] of [
+    ['red', 'var(--color)', 'red'],
+    ['red\r', 'var(--color)', 'red\n'],
+    ['initial', 'initial', undefined],
+    [null, null, undefined],
+    [undefined, undefined, undefined],
+    ['future-color(1)', 'future-color(1)', undefined],
+  ]) {
+    const bindings = Object.create(null);
+    assert.equal(bindValue(bindings, '--color', color, input), expected);
+    assert.equal(bindings['--color'], inline);
+  }
+  const variable = cssVar('--external');
+  const bindings = Object.create(null);
+  assert.equal(bindValue(bindings, '--color', color, variable), variable);
+  const opaque = new Proxy(
+    {},
+    {
+      get() {
+        throw new Error('raw object must reach Builder without inspection');
+      },
+    },
+  );
+  assert.equal(bindValue(bindings, '--color', color, opaque), opaque);
+  assert.deepEqual(Object.keys(bindings), []);
+
+  const token = createDeclarationBinding('--display', {
+    property: 'display',
+    tokens: ['flex', 'grid', 'initial'],
+  });
+  assert.equal(bindValue(bindings, '--display', token, 'flex'), 'var(--display)');
+  assert.equal(bindings['--display'], 'flex');
+  const saved = { ...bindings };
+  for (const [binding, name, input] of [
+    [color, '--color', 'red;color:blue'],
+    [color, '--color', NaN],
+    [token, '--display', 'banana'],
+    [token, '--display', variable],
+  ]) {
+    assert.throws(() => bindValue(bindings, name, binding, input));
+    assert.deepEqual({ ...bindings }, saved);
+  }
 });
 
 test('raw 数字仅在元数据证明时变量化，未知或越界数保留直接声明', () => {

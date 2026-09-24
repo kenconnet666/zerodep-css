@@ -89,10 +89,7 @@ export function bindValue(
 ): unknown {
   // raw 的引用对象交回原 Builder 校验，避免优化器额外触发 Proxy 的属性描述符读取。
   if (input !== null && typeof input === 'object' && binding.acceptsVariables) return input;
-  const value = binding.value(input);
-  const inline = binding.inline(input);
-  if (inline !== undefined) bindings[name] = inline;
-  return value;
+  return binding.apply(bindings, name, input);
 }
 
 function checkValue(value: unknown, format: BindingFormat): asserts value is string | number {
@@ -315,6 +312,13 @@ export function createDeclarationBinding(name: `--${string}`, format: Declaratio
   }
   return Object.freeze({
     acceptsVariables: !options.tokens,
+    /** 同一个输入只做一次规范化与变量化判定；元素值和声明值共用该结果。 */
+    apply(bindings: Record<string, string>, bindingName: `--${string}`, value: unknown): unknown {
+      if (typeof value === 'string') value = normalizeCssText(value);
+      if (direct(value)) return value;
+      bindings[bindingName] = String(value);
+      return variable;
+    },
     value(value: unknown): unknown {
       if (typeof value === 'string') value = normalizeCssText(value);
       return direct(value) ? value : variable;

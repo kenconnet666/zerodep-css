@@ -43,7 +43,9 @@ pnpm lsp:setup
 
 ## 验证与交付
 
-本轮本地已通过根 check/build、218 项单元、三语言类型负例、Vue/Svelte 真实 SSR/hydration/HMR、Nuxt 全新隔离消费者完整流程及关键文件 LSP。Nuxt 报告 runId 为 `3e622a82-deaa-48b3-8cb4-a3edd0225236`，cleanFullPass=true，包含缓存响应、内部请求与原生路由规则刷新。Kit 在 P5 已通过独立 Node/静态/异步子组件/HMR 验收及该提交远程 CI。最终 2c51b0f 的九个 CI job 全部通过，详细链接见生产实施记录。
+P6 交接阶段本地曾通过根 check/build、218 项单元、三语言类型负例、Vue/Svelte 真实 SSR/hydration/HMR、Nuxt 全新隔离消费者完整流程及关键文件 LSP。Nuxt 报告 runId 为 `3e622a82-deaa-48b3-8cb4-a3edd0225236`，cleanFullPass=true，包含缓存响应、内部请求与原生路由规则刷新。Kit 在 P5 已通过独立 Node/静态/异步子组件/HMR 验收。2c51b0f 的九个 CI job 全部通过，详细链接见生产实施记录。
+
+此后新增的动态 raw/token 绑定优化本地通过根 check/build、219 项单元、三语言类型负例、运行时及 Vue/Svelte 浏览器回归、体积门禁；其计算与浏览器探针、未采用候选见[性能对照](performance.md)。Nuxt/Kit 独立部署未在这次局部改动后本地重跑，应核对对应提交的新 CI，不借用旧提交的验收结论。
 
 完整命令和证据入口在 [validation](validation.md)。只由一个流程 build，其余测试传 --no-build，避免并行清空 dist。类型负例运行期间不要全目录格式化或中途终止。正确性测试可并行，性能计时必须独占负载。每个阶段中文提交，推送后区分本地与对应提交的远程验收。
 
