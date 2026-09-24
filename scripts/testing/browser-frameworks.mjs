@@ -145,7 +145,11 @@ try {
       const baseline = await read();
       assert.equal(baseline.inline, baseline.derived);
       await page.locator('[data-unrelated]').click();
-      assert.equal((await read()).counts.derived, baseline.counts.derived);
+      const unrelated = await read();
+      assert.equal(unrelated.counts.derived, baseline.counts.derived);
+      // Vue 的组件 render 重跑模板调用；Svelte 只更新依赖 unrelated 的文本效果。
+      if (framework === 'vue') assert(unrelated.counts.inline > baseline.counts.inline);
+      else assert.equal(unrelated.counts.inline, baseline.counts.inline);
       await page.locator('[data-width]').click();
       await page.waitForFunction(
         () => getComputedStyle(document.querySelector('[data-derived]')).width === '21px',
