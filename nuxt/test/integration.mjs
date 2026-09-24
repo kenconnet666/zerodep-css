@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { stripVTControlCharacters } from 'node:util';
 import { once } from 'node:events';
 import { createRequire } from 'node:module';
+import { performance } from 'node:perf_hooks';
 import { setTimeout as delay } from 'node:timers/promises';
 import { parse } from 'yaml';
 import { launchBrowser } from '../../scripts/testing/browser-launch.mjs';
@@ -393,9 +394,22 @@ async function verifyDevelopmentHMR(folder) {
     navigations: [],
     requests: [],
     console: [],
+    edits: [],
     serverLog: '',
   };
   report.hmrDiagnostics = diagnostics;
+  const lastEditAt = new Map();
+  async function writeHmrEdit(file, contents) {
+    // chokidar 5 对同路径CHANGE做50ms节流；CI曾在约54ms内连写两次app.vue，后者被丢弃。
+    // 只为同路径下一次测试编辑留120ms事件余量，不重试HMR失败，也不推迟不同文件。
+    const previous = lastEditAt.get(file);
+    const remaining = previous === undefined ? 0 : Math.max(0, previous + 120 - performance.now());
+    if (remaining) await delay(remaining);
+    await writeFile(file, contents);
+    const at = performance.now();
+    lastEditAt.set(file, at);
+    diagnostics.edits.push({ file: basename(file), at, waitedMs: remaining });
+  }
   devServer = await startNodeServer(folder, true);
   try {
     browser ??= await launchBrowser();
@@ -462,7 +476,7 @@ async function verifyDevelopmentHMR(folder) {
 
       const changedApp = appSource.replace("'#fee2e2'", "'#fef3c7'");
       const beforeAppScript = await hmrCount();
-      await writeFile(appFile, changedApp);
+      await writeHmrEdit(appFile, changedApp);
       await waitForHmr(beforeAppScript, 'app.vue');
       await page.waitForFunction(
         () => getComputedStyle(document.body).backgroundColor === 'rgb(254, 243, 199)',
@@ -485,7 +499,7 @@ async function verifyDevelopmentHMR(folder) {
       // 纯模板更新应保留同一个setup/lease；若误触发dispose，背景会丢失。
       assert(changedApp.includes('<main data-fixture-root'));
       const beforeAppTemplate = await hmrCount();
-      await writeFile(
+      await writeHmrEdit(
         appFile,
         changedApp.replace('<main data-fixture-root', '<main data-fixture-root data-template-hot'),
       );
@@ -509,7 +523,7 @@ async function verifyDevelopmentHMR(folder) {
       // Nuxt自身可能因pages文件改动随后刷新虚拟route-rules模块；放在根HMR之后。
       const beforeIndex = await hmrCount();
       routeEditStarted = true;
-      await writeFile(
+      await writeHmrEdit(
         indexFile,
         indexSource.replace('const width = ref(80);', 'const width = ref(96);'),
       );

@@ -31,6 +31,8 @@ P1—P5 已实施，P6 的目录/API/文档审核及定向修复已完成；最�
 
 本轮本地通过 check/build、218 项单元、TS/Vue/Svelte 类型正负例、双框架真实 SSR/hydration/HMR、Nuxt 独立安装/审计/类型/Node/静态/开发全流程及关键文件 complete=true 的零错误 LSP。Kit 的 P5 独立部署本地与远程已通过，本轮没有改其运行时。最终远程状态见对应提交 [Actions](https://github.com/kenconnet666/zerodep-css/actions?query=branch%3Acodex%2Fruntime-first)，未结束的 run 不能当成功。
 
+远程补充：97d79a6 的八个 job 成功，Nuxt 路由刷新日志匹配因 Linux ANSI 颜色码误判，e6f9508 改用 Node 标准控制字符清理。后续同文件脚本/模板连续保存约 54ms，接近上游 chokidar 的 50ms change 节流窗口，第二次通知丢失；测试保存需留出同路径间隔，不用失败重试或删除 HMR 断言来掩盖问题。最终结果以本节验收链接为准。
+
 以下为各阶段当时的实现和验证记录；“待提交/待 CI”等描述属于该段历史时点，当前状态以本节与交接文档为准。
 
 ### P1b raw 结构边界
