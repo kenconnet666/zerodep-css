@@ -19,12 +19,19 @@
 
 ## 当前进度
 
-- 已完成决策讨论并进入目标模式。
-- P1—P4 已完成并经对应远程 CI 验收；P5 的 Nuxt 4 / SvelteKit 2 已完成实现及本地独立消费、Node SSR、HMR 和静态部署验证。新元框架 CI job 已接入，尚待本阶段提交运行。P6 的统一审核与最终远程验收仍待完成，不将当前进度视为全部生产交付完成。
-- P1a 本地通过 check/build、generate:check、现有单元回归、TS/Vue/Svelte 独立类型负例、19 个 core 浏览器场景、双框架 SSR/hydration/原生更新/HMR；normalize 的原生 LSP 完整零错误。最终跨平台/三引擎以对应提交 CI 为准。
-- 本页仅记录实际进度，尚未宣称新架构完成或最终 CI 通过。
-- P1b 提交 6fe37b2 与 SSR manifest 补充修复 0600d3f 均已推送且对应远程 CI 成功；P1c 的本地结果不代表尚未提交代码已通过 CI。
-- P1c 提交 574736e 的 CI 三引擎、Windows、语言服务和独立安装通过；Linux 仅因 HMR 测试的一处链式调用格式失败。P2a 同步修正并重新确认该文件格式，不把这次失败记作完整 CI 成功。
+P1—P5 已实施，P6 的目录/API/文档审核及定向修复已完成；最终交付以对应提交的九个 CI job 验收为准。产品修复提交 05da194，旧 7756c6e 的 CI 是 8/9 成功，Nuxt HMR 因原生 route-rules 刷新未通过，不能记为全绿。
+
+### P6 最终审核与修复
+
+- Nuxt 的上下文可被缓存代理共享或浅拷贝。宿主/输出改按真正的 event 持有，以 context 中的 WeakMap 维持跨打包模块身份；nonce 单独继承且已有宿主保持快照。新增 context 别名负例、实际内部请求与缓存 HTML 命中验收。
+- 开发来源包装只用于可证明的内联函数或顶层 const 函数引用；第三方 class、数组、条件表达式与空值保持原语义。不能把可变函数声明当成恒定回调。
+- 显式 debug 补齐相对文件/行列与粗粒度优化未命中原因。默认开发只保留来源，避免日志刷屏；诊断不改变原程序，也不新增业务 API。
+- Nuxt 开发测试分别验证无路由规则干扰的真实同 Document HMR，以及保留缓存规则时框架原生 route-rules 全页刷新后的恢复；不拦截刷新或把 reload 伪装成 HMR。新完整流程 runId 为 3e622a82-deaa-48b3-8cb4-a3edd0225236，cleanFullPass=true。
+- 删除 24 个不再适用的旧探针/示例文件，研究索引保留不可变 Git 源码链接，当前性能原始样本不删除。五包 README 加入文档链接验收，澄清适配器入口范围并更新交接、迁移与 changelog。
+
+本轮本地通过 check/build、218 项单元、TS/Vue/Svelte 类型正负例、双框架真实 SSR/hydration/HMR、Nuxt 独立安装/审计/类型/Node/静态/开发全流程及关键文件 complete=true 的零错误 LSP。Kit 的 P5 独立部署本地与远程已通过，本轮没有改其运行时。最终远程状态见对应提交 [Actions](https://github.com/kenconnet666/zerodep-css/actions?query=branch%3Acodex%2Fruntime-first)，未结束的 run 不能当成功。
+
+以下为各阶段当时的实现和验证记录；“待提交/待 CI”等描述属于该段历史时点，当前状态以本节与交接文档为准。
 
 ### P1b raw 结构边界
 
@@ -206,4 +213,4 @@ raw 字符串变量化也对负的 number、dimension 和 percentage token 保�
 
 初版对每个子树重复整理，单属性/三属性/嵌套 runtime 相对基线约增加 35%/21%/36%。现改为完整构建仅整理一次、无重复属性跳过上下文处理、无覆盖复用原树、语法缓存属于各 runtime 并在 dispose 清理。新功能仍有开销，不能宣称运行时性能优化已完成；后续继续分析 Builder/键/序列化的整条路径。
 
-旧版对旧版控制中 runtime 差异约 -6.8%～+2.6%，Builder 约 -10.9%～+2.6%；小差异不作稳定结论。原始 first/fast/control 样本保存在 .research/performance/results/2026-09-24-normalization-*.json，复现命令为 `node --expose-gc .research/performance/builder-paired.mjs 2db10e3 <label>`；控制组额外传 --control。计时与其他测试顺序执行。
+旧版对旧版控制中 runtime 差异约 -6.8%～+2.6%，Builder 约 -10.9%～+2.6%；小差异不作稳定结论。原始 first/fast/control 样本保存在 .research/performance/results/2026-09-24-normalization-*.json。旧 builder-paired 脚本只适用于对应历史 API，已从当前工作树清理，[清理前源码](https://github.com/kenconnet666/zerodep-css/blob/7756c6e/.research/performance/builder-paired.mjs)保留供追溯；现行复测入口见 performance.md。

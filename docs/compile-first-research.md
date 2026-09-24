@@ -8,7 +8,7 @@
 
 ## 性能对照
 
-探针 `.research/performance/compile-first.mjs` 使用真实 Vue/Svelte 官方编译器、当前运行时及已有编译插件。提取路径由夹具在构建阶段生成目标 CSS/类名/变量代码，尚未实现通用源码转换器；它验证可达到的执行成本，不代表新的编译框架已经完成。
+历史探针使用真实 Vue/Svelte 官方编译器、当时的运行时及编译插件；[源码保存在 2db10e3](https://github.com/kenconnet666/zerodep-css/blob/2db10e3/.research/performance/compile-first.mjs)，已从当前工作树移除。提取路径由夹具在构建阶段生成目标 CSS/类名/变量代码，尚未实现通用源码转换器；它验证当时实验的执行成本，不代表当前产品功能。
 
 Node 24.12.0、Chrome 153.0.8010.52；192 个元素，预热 5 批后计时 30 批更新，7 轮交替次序取中位数。静态场景 64 个不同样式；条件场景 2 个 if 状态 × 3 个 switch 状态；主题场景使用当前完整 lightTheme/darkTheme 的全部变量与相同变量名，逐元素切换主题类。没有用只切根节点的方案替代旧路径，也没有只给提取路径留下两个简化 token。
 
@@ -147,13 +147,9 @@ CSS-wide、undefined/null、未知或未来 CSS 语法也需要分别定义。�
 
 建议暂停继续优化旧运行时缓存键，把后续投入转向编译控制流、主题静态分析和 CSS 资产输出。性能证据支持这个选择，但使用范围与行为边界必须作为新架构的一部分一起确认。
 
-## 复现
+## 历史复现
 
-```sh
-pnpm build
-node .research/performance/compile-first.mjs final
-node .research/performance/compile-first.mjs control --control
-```
+旧命令仅适用于对应历史 checkout，不能在当前工作树运行。需要复核当时实验时使用提交 2db10e3 及其中的锁文件；现行复现入口见 [性能文档](performance.md)。
 
 源码与生产包不变。研究通过计算样式核对全部元素、主题颜色/间距、分支覆盖顺序、无残留样式、提取包依赖审计及变量语义反例。控制组将三种标签都运行相同旧路径。
 

@@ -116,13 +116,8 @@ template 已对不同 namespace、layer 和 debug 配置验证等价。full 依�
 
 [vanilla-extract](https://github.com/vanilla-extract-css/vanilla-extract)在构建期提取样式，[dynamic API](https://vanilla-extract.style/documentation/dynamic-api/)负责变量更新。其静态样式资产模型提供参考；本项目仍需保持实际使用点注册、runtime 配置及请求所有权，不能直接照搬为全局 CSS 文件。
 
-## 复现与原始数据
+## 历史复现与原始数据
 
-```sh
-node --expose-gc .research/performance/preheat.mjs repeat
-node .research/performance/preheat-browser.mjs repeat
-node --expose-gc .research/performance/preheat.mjs control --control
-node .research/performance/preheat-browser.mjs control --control
-```
+旧预热探针已从当前工作树清理，源码可从 [7f011ab 的研究目录](https://github.com/kenconnet666/zerodep-css/tree/7f011ab/.research/performance) 恢复。只有对应历史 checkout 和锁文件能复核当时实验；现行运行命令见 [性能文档](performance.md)。
 
-探针临时产物在忽略的 `test-results/preheat` 与 `test-results/preheat-browser`。原始样本归档为 `.research/performance/results/2026-09-23-preheat-{node,browser,node-control,browser-control}.json`。浏览器探针先读取对应 Node 探针产生的 artifacts，因此需按顺序运行。
+原始样本保留为 `.research/performance/results/2026-09-23-preheat-{node,browser,node-control,browser-control}.json`；旧实验的浏览器探针依赖当时 Node 探针产生的 artifacts，不是当前产品测试入口。

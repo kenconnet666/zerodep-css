@@ -35,7 +35,7 @@ Svelte 项目把入口改为 `@zerodep-css/svelte`。默认使用系统 `Css`；
 
 ## Host 与 SSR
 
-适配器根入口公开 `createStyles`、`Css`、`defineTheme`、`cssVar` 和 `keyframes`，以及 `StyleHostOptions`、`StyleManifest`、`StyleStats` 等类型。`styles.createHost(options)` 返回的 host 有 `stats()`、`snapshot()`、`renderStyles()`、`renderManifest()`、`completeHydration()` 和 `dispose()`。
+Vue/Svelte 适配器根入口公开 `createStyles`、`Css`、`defineTheme`、`cssVar` 和 `keyframes`，以及 `StyleHostOptions`、`StyleManifest`、`StyleStats` 等类型。`styles.createHost(options)` 返回的 host 有 `stats()`、`snapshot()`、`renderStyles()`、`renderManifest()`、`completeHydration()` 和 `dispose()`。
 
 Vue 用 `app.use(host)` 安装。客户端 `app.unmount()` 自动 dispose；SSR 每个请求用独立 `styles.createHost({ target: null })`，渲染和收集完毕后在 `finally` 中 dispose。
 

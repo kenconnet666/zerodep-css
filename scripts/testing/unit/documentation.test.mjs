@@ -9,7 +9,7 @@ test('现行文档的本地链接可解析，目录迁移不留下断链', async
     'README.md',
     'AGENTS.md',
     'CHANGELOG.md',
-    ...['core', 'vue', 'svelte'].map((name) => `${name}/README.md`),
+    ...['core', 'vue', 'svelte', 'nuxt', 'sveltekit'].map((name) => `${name}/README.md`),
   ];
   for (const entry of await readdir(resolve(root, 'docs'), {
     withFileTypes: true,

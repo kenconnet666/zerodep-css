@@ -2,7 +2,7 @@
 
 当前实现合同见 [support](support.md)，使用方式见各包 README；这里集中验收入口和可复现证据，不重复记录已完成任务的执行过程。
 
-最新停止点、实际已验证范围与尚未重跑的最终汇总状态见 [换机交接](handoff.md)。Vue/Svelte 与其他样式引擎的测量集中在 [性能对照](performance.md)。
+当前交付状态、实际已验证范围与换机恢复方式见 [换机交接](handoff.md)。Vue/Svelte 与其他样式引擎的测量集中在 [性能对照](performance.md)。
 
 ## 验证入口
 
@@ -23,15 +23,9 @@ CI 在 Windows/Linux 执行基础检查，并分别运行 Chromium、Firefox、W
 
 Nuxt/Kit 的夹具源码位于各包 test/fixture，运行时复制到仓库外的隔离消费者。校验应用与适配器解析到同一份框架及 core，再运行官方类型检查、生产审计和部署构建。Kit 的 cookie 传递依赖使用根 workspace 中的有界安全修补，并验证合法序列化及非法参数拒绝。Nuxt 的 `--resume <临时目录>`（可加 `--hmr`）仅用于诊断，不重新安装产品包；报告中的 diagnosticResume=true 不能代替默认完整流程的 cleanFullPass。
 
-## 已通过的历史基线
+## 提交与验收记录
 
-| 提交                                                                            | 验收范围                                                                |
-| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [0025950](https://github.com/kenconnet666/zerodep-css/actions/runs/35780244572) | 0.2 亮暗预设与完整七个 CI job                                           |
-| [312099a](https://github.com/kenconnet666/zerodep-css/actions/runs/35787137310) | 主题读取、配置校验、编译副作用修复                                      |
-| [8a09c05](https://github.com/kenconnet666/zerodep-css/actions/runs/35791166663) | 作者类选择、两重继承、主题一致性、解析优化与类型约束；七个 job 全部通过 |
-
-基线不表示后续提交自动通过。当前整理涉及导出、类型、模块和文档路径，须重新运行对应检查和完整 CI。
+当前运行时优先主线的阶段证据集中在 [production](production.md)。P1—P4 的对应提交已通过远程验收；P5 7756c6e 的九个 job 中八个成功，Nuxt 开发用例被原生路由规则刷新打断，已在 05da194 中分开验证 HMR 与原生刷新。本轮本地 218 项单元、框架/元框架检查通过；最终状态应按 [Actions](https://github.com/kenconnet666/zerodep-css/actions?query=branch%3Acodex%2Fruntime-first) 的目标 SHA 核对，不沿用旧成功摘要。
 
 ## 性能探针
 

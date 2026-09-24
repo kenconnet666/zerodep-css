@@ -1,18 +1,16 @@
 # 变更记录
 
-## 未发布 — 0.2 基线后维护
+## 未发布 — 运行时优先生产基线
 
-- 初始化 API 统一为 useStyleRuntime(options?)，移除旧位置参数；局部作者类型统一为 Css，删除 StyleBuilder/StyleHelpers 重复声明。
-- 框架接入桥改名 core/style-scope，不保留 theme-runtime 子路径别名；现行文档迁入 docs，旧计划与审计从 Git 历史查询。迁移方式见 [API 与目录精简](docs/migration.md)。
+五包保持 private，尚未发布 npm。当前使用方式见 [迁移说明](docs/migration.md)，锁定版本和验收边界见 [支持范围](docs/support.md)。
 
-- useStyleRuntime 的 context/theme/cssType 选项对象可一次绑定派生类，完整保留系统类、自带主题类和用户继续继承的类型。
-- Vue 的主题读取与样式视图优先采用当前组件已提供的主题，与 Svelte 一致；初始化之前捕获的作用域保持原身份。
-- 新增 focus/focusWithin/active/disabled 快捷方法，全局 rule 支持指定派生类；未知初始化类型保留运行时以保护派生行为。
-- 主题覆盖复用已验证的相同默认节点和叶值，减少重复 CSS 解析；保留输入隔离、重置与负零语义，不增加跨请求缓存。
-
-- core 新增 readTheme，Vue/Svelte 新增 useTheme，通过只读快照和原生依赖读取获取有效主题，支持无 provider 默认值、局部覆盖、重置、多主题与请求隔离。
-- 修复回调默认参数副作用被静态准备缓存跳过的问题；特殊函数签名和嵌套回调保留运行时校验与行为。
-- 局部 config 拒绝非普通对象、symbol 和隐藏的未知字段；HMR 临时项目迁入测试目录并强化失败清理。
+- core 收敛为作者模型，完整运行时归入 internal/runtime 并随 Vue/Svelte 适配器交付；createStyles 统一绑定 useCss、主题、全局样式和宿主，不保留 useStyleRuntime 等同义入口。
+- 同属性同上下文采用后写替换，包括前 important；简写/长属性保留原生关系，null/undefined 跳过整声明，raw 保留浏览器值语义。两重作者继承、亮暗主题与原生作用域继续支持。
+- 完善全局共享租约、冲突事务、应用销毁、SSR 请求隔离、hydration 和宽松增长诊断；不增加独立响应式调度器。
+- 编译优化可选，支持简短箭头与安全变量绑定；未知写法完整保留运行时。显式 debug 提供未命中原因，开发来源只包装可证明的函数，避免改变 class/数组组合语义。
+- 根据测量减少值扫描、主题字符串和新 class 注册的重复解析；Vue/Svelte 分别对照原生 CSS、Emotion、goober 与编译方案，不承诺原生 CSS 性能。
+- 新增 Nuxt 4 与 SvelteKit 2 薄适配包，验证 Node SSR、静态部署、nonce、错误恢复、SPA、异步子组件及 HMR；Nuxt 按实际 event 隔离宿主，防止共享 context 串用请求。
+- CI 扩展为九个 job；清理过时 bx/旧 API 探针和示例，保留可复现性能原始样本，更新换机交接与诊断文档。
 
 ## 0.2.0 — 2026-09-23
 
