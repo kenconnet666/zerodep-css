@@ -35,4 +35,4 @@ Vue/Svelte 业务从对应适配包导入 `createStyles`，在项目 `styles.ts`
 
 `@zerodep-css/core/internal` 是适配器使用的非业务子路径，保存跨两份引擎必须共享的 `Css` 身份、变量品牌、主题与编译元数据标记、浏览器宿主仲裁。适配包的 `#runtime` 是包内私有导入，指向自身 `dist/runtime`；不要从业务代码引用这些内部入口，也不要在模块顶层创建请求运行时。core 不依赖 Vue 或 Svelte，主题值检查仍使用 `css-tree` 的轻量 tokenizer；完整运行时的解析、序列化和 CSSOM 操作在内部引擎中。
 
-CSS 属性声明与运行时元数据同源生成：属性类型在 `core/src/generated/properties.ts`，完整运行时数据在 `internal/runtime/generated/metadata.ts`。不要手改生成文件。作者模型用 core 的类型检查验证，运行时另执行 `pnpm check:runtime` 与 `pnpm test:browser:runtime`；这些命令的最新完成状态以[实施记录](../docs/production.md)为准。
+CSS 属性声明与运行时元数据同源生成：属性类型在 `core/src/generated/properties.ts`，完整运行时数据在 `internal/runtime/generated/metadata.ts`。不要手改生成文件。作者模型用 core 的类型检查验证，运行时另执行 `pnpm check:runtime` 与 `pnpm test:browser:runtime`；最新完成状态见[验证记录](../docs/validation.md)，阶段背景见[实施记录](../docs/production.md)。

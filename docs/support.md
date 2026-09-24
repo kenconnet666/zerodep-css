@@ -1,6 +1,6 @@
 # 支持矩阵与使用边界
 
-当前版本为 0.2.0，产品包是 private 的 `@zerodep-css/core`、`@zerodep-css/vue`、`@zerodep-css/svelte`、`@zerodep-css/nuxt`、`@zerodep-css/sveltekit`。两个元框架包复用现有框架适配器，已通过本地及远程独立 Node SSR、HMR 和静态部署验收；2c51b0f 的九个 CI job 全部通过，证据见[实施记录](production.md)和[验证记录](validation.md)。这些结论只覆盖下述约定范围，后续修改需重新验证。
+当前版本为 0.2.0，产品包是 private 的 `@zerodep-css/core`、`@zerodep-css/vue`、`@zerodep-css/svelte`、`@zerodep-css/nuxt`、`@zerodep-css/sveltekit`。两个元框架包复用现有框架适配器，已通过独立 Node SSR、HMR 和静态部署验收；最新已验证的产品与测试提交及九项 CI 状态见[验证记录](validation.md)。这些结论只覆盖下述约定范围，后续产品修改需重新验证。
 
 ## 当前平台
 

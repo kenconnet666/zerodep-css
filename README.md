@@ -67,17 +67,10 @@ pnpm test:browser:frameworks
 - [core 作者模型与内部引擎边界](core/README.md)
 - [Vue 适配与 SSR](vue/README.md)
 - [Svelte 适配与 SSR](svelte/README.md)
-- [项目语言服务](docs/language-services.md)
-- [当前架构](docs/architecture.md)
-- [支持矩阵与生产使用合同](docs/support.md)
-- [验证入口、历史证据与性能测量](docs/validation.md)
-- [Vue/Svelte 与原生、Emotion、goober、vanilla-extract 的性能对照](docs/performance.md)
-- [系统亮暗主题](docs/themes.md)
-- [API 与目录迁移](docs/migration.md)
-- [版本变更记录](CHANGELOG.md)
-- [换机交接与恢复步骤](docs/handoff.md)
+- [文档导航与研究记录](docs/README.md)
+- [支持范围与生产使用合同](docs/support.md)
+- [验证入口及最新 CI](docs/validation.md)
 - [后续路线](docs/roadmap.md)
-- [正式 CSS 覆盖清单](docs/css-coverage.json)
 
 SSR 每请求创建 host，完成渲染后收集 styles/manifest，并在 finally 中释放。浏览器采用原生 CSS nesting，本地默认使用已安装 Chrome；Chromium、Firefox、WebKit 是项目矩阵，兼容范围和测试证据见[支持边界](docs/support.md)与[验证记录](docs/validation.md)。
 

@@ -56,4 +56,4 @@ export const handle = createStyleHandle({
 
 应用须自行把同一 nonce 加入响应的 `style-src`（以及如有需要的 `script-src`）策略。Kit 在 `transformPageChunk` 之前已生成自己的 CSP header 或预渲染 meta；本适配不能读取 Kit 的私有 nonce，也不会自动加入动态样式的 hash。hash-only 的内联样式策略和每请求 nonce 均不适用于无外部策略配合的静态预渲染。HTML 标记是显式模板合同，首版不解析或猜测任意 HTML 中的 `</head>`。浏览器入口通过条件导出选择 `client.js`，不会引用 `node:async_hooks`；Node SSR 入口选择 `server-provider.js`。
 
-与其他 `handle` hook 组合时，使用 Kit 官方 `sequence`，并确保本 hook 的 `transformPageChunk` 仍能看到唯一标记。`pnpm test:sveltekit` 通过独立 tarball 应用验证 Node/静态构建、SSR/异步 hydration、导航、错误隔离与 HMR；本地及远程完成状态见[实施记录](../docs/production.md)。
+与其他 `handle` hook 组合时，使用 Kit 官方 `sequence`，并确保本 hook 的 `transformPageChunk` 仍能看到唯一标记。`pnpm test:sveltekit` 通过独立 tarball 应用验证 Node/静态构建、SSR/异步 hydration、导航、错误隔离与 HMR；最新完成状态见[验证记录](../docs/validation.md)，阶段背景见[实施记录](../docs/production.md)。
