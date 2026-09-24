@@ -37,7 +37,13 @@ export function transformCss(
       for (const d of statement.declarationList.declarations)
         if (d.initializer) {
           const offset = ctx.scriptStart + d.initializer.getStart(ctx.ast);
-          const result = ctx.expression(d.initializer.getText(ctx.ast), offset);
+          const result = ctx.expression(
+            d.initializer.getText(ctx.ast),
+            offset,
+            new Set(),
+            false,
+            'script-snapshot',
+          );
           if (result.code !== d.initializer.getText(ctx.ast))
             ctx.output.overwrite(offset, ctx.scriptStart + d.initializer.end, result.code);
         }
@@ -103,14 +109,18 @@ export function transformCss(
         : undefined;
     if (expression) {
       const text = source.slice(expression.start, expression.end);
+      const ownStyle = attributes.some((a) => a.type === 'Attribute' && a.name === 'style');
+      const eligible =
+        node.type === 'RegularElement' &&
+        !blocked &&
+        !ownStyle &&
+        !attributes.some((a) => a.type === 'SpreadAttribute');
       const result = ctx.expression(
         text,
         expression.start,
         locals,
-        node.type === 'RegularElement' &&
-          !blocked &&
-          !attributes.some((a) => a.type === 'Attribute' && a.name === 'style') &&
-          !attributes.some((a) => a.type === 'SpreadAttribute'),
+        eligible,
+        eligible ? undefined : ownStyle ? 'style-attribute' : 'template-context',
       );
       if (result.bindingsLocal) {
         if (!hasRange(attr)) return ctx.error(expression.start, 'Missing Svelte attribute range.');

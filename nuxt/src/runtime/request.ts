@@ -2,7 +2,8 @@ import type { H3Event } from 'h3';
 import type { StyleHost } from '@zerodep-css/vue';
 
 // Nuxt app 与 Nitro 插件会走不同打包链；只共享键身份，状态始终留在请求 event 上。
-const requestKey = Symbol.for('@zerodep-css/nuxt@0.2/request-v1');
+const requestKey = Symbol.for('@zerodep-css/nuxt@0.2/request-v2');
+const nonceKey = Symbol.for('@zerodep-css/nuxt@0.2/style-nonce');
 export const manifestId = '__zerodep_css_manifest__';
 
 interface RenderedOutput {
@@ -17,14 +18,21 @@ interface RequestState {
   output?: RenderedOutput;
 }
 
+type RequestStates = WeakMap<H3Event, RequestState>;
+
 function current(event: H3Event): RequestState | undefined {
-  return (event.context as Record<PropertyKey, unknown>)[requestKey] as RequestState | undefined;
+  return (
+    (event.context as Record<PropertyKey, unknown>)[requestKey] as RequestStates | undefined
+  )?.get(event);
 }
 function state(event: H3Event): RequestState {
   const existing = current(event);
   if (existing) return existing;
-  const created: RequestState = {};
-  (event.context as Record<PropertyKey, unknown>)[requestKey] = created;
+  // 框架可复制或共享 context；真正的 event 才是宿主/输出的所有权边界。
+  const context = event.context as Record<PropertyKey, unknown>;
+  const states = (context[requestKey] ??= new WeakMap<H3Event, RequestState>()) as RequestStates;
+  const created: RequestState = { nonce: context[nonceKey] as string | undefined };
+  states.set(event, created);
   return created;
 }
 
@@ -35,9 +43,15 @@ export function setStyleNonce(event: H3Event, nonce: string): void {
   if (request.host || request.output)
     throw new Error('Style nonce must be set before the Nuxt app plugin runs.');
   request.nonce = nonce;
+  // nonce 是可继承配置：Nitro 缓存代理在 middleware 后创建内部 event。
+  // 每个已建宿主保留自己的快照，代理不能共享或释放另一个 event 的 host。
+  (event.context as Record<PropertyKey, unknown>)[nonceKey] = nonce;
 }
 export function styleNonce(event: H3Event): string | undefined {
-  return current(event)?.nonce;
+  const request = current(event);
+  return request
+    ? request.nonce
+    : ((event.context as Record<PropertyKey, unknown>)[nonceKey] as string | undefined);
 }
 
 export function attachHost(event: H3Event, host: StyleHost): void {

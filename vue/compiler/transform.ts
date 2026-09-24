@@ -41,7 +41,13 @@ export function transformCss(
       for (const d of statement.declarationList.declarations)
         if (d.initializer) {
           const offset = ctx.scriptStart + d.initializer.getStart(ctx.ast);
-          const result = ctx.expression(d.initializer.getText(ctx.ast), offset);
+          const result = ctx.expression(
+            d.initializer.getText(ctx.ast),
+            offset,
+            new Set(),
+            false,
+            'script-snapshot',
+          );
           if (result.code !== d.initializer.getText(ctx.ast))
             ctx.output.overwrite(offset, ctx.scriptStart + d.initializer.end, result.code);
         }
@@ -97,17 +103,20 @@ export function transformCss(
           (p.type === 6 && p.name === 'style') ||
           (p.type === 7 && p.name === 'bind' && p.arg?.type === 4 && p.arg.content === 'style'),
       );
+      const eligible =
+        !!element &&
+        element.tagType === 0 &&
+        element.tag !== 'svg' &&
+        element.ns === 0 &&
+        !scoped &&
+        existing.length === 0 &&
+        !props.some((p) => p.type === 7 && p.name === 'bind' && !p.arg);
       const result = ctx.expression(
         expression,
         classExpression.loc.start.offset,
         locals,
-        !!element &&
-          element.tagType === 0 &&
-          element.tag !== 'svg' &&
-          element.ns === 0 &&
-          !scoped &&
-          existing.length === 0 &&
-          !props.some((p) => p.type === 7 && p.name === 'bind' && !p.arg),
+        eligible,
+        eligible ? undefined : existing.length ? 'style-attribute' : 'template-context',
       );
       if (result.bindingsLocal) {
         const local = result.bindingsLocal!;

@@ -5,13 +5,21 @@ import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile } from 'svelte/compiler';
 import { transformCss as vue } from '../../../vue/dist/compiler/index.js';
 import { transformCss as svelte } from '../../../svelte/dist/compiler/index.js';
+import { createRuntime, withStyleSource } from '../../runtime/dist/index.js';
 import { TraceMap, originalPositionFor } from '@jridgewell/trace-mapping';
 
-function fixture(framework, expression) {
-  const script = `import {createStyles} from '@zerodep-css/${framework}';const styles=createStyles();const style=styles.useCss();let width=10;`;
+function fixture(framework, expression, declarations = '') {
+  const script = `import {createStyles} from '@zerodep-css/${framework}';const styles=createStyles();const style=styles.useCss();let width=10;${declarations}`;
   return framework === 'vue'
     ? `<script setup lang="ts">${script}</script><template><div :class="${expression}"/></template>`
     : `<script lang="ts">${script}</script><div class={${expression}}/>`;
+}
+function compileComponent(framework, source) {
+  if (framework === 'vue') {
+    const parsed = parse(source);
+    assert.deepEqual(parsed.errors, []);
+    compileScript(parsed.descriptor, { id: 'debug-input', inlineTemplate: true });
+  } else compile(source, { filename: 'DebugInput.svelte', generate: 'client' });
 }
 test('Vue 静态准备保留模板来源锚点，结束标签留在模板作用域', () => {
   const source = fixture('vue', 'style(s=>{s.width.px(8);})');
@@ -172,4 +180,124 @@ test('开发来源尊重 Svelte 解构循环、await 与 legacy let 的词法身
     `<Renderer let:css><div class={css(3)}/></Renderer>`,
   ])
     assert.equal(svelte(script + template, resolve('Local.svelte'), { debug: true }), null);
+});
+
+for (const [framework, transform] of [
+  ['vue', vue],
+  ['svelte', svelte],
+]) {
+  test(`${framework}：debug 只包装可证明的回调，组合、空值和未知表达式保持原样`, () => {
+    const declarations = `const base='base',override='override',flag=true,foreign='foreign';const rule=(s)=>{s.width.px(width)};const holder={get callback(){return rule}};`;
+    for (const expression of [
+      `style('foreign')`,
+      `style([base,override])`,
+      `style(flag?rule:foreign)`,
+      `style(null)`,
+      `style(undefined)`,
+      `style(false)`,
+      `style([])`,
+      `style(holder.callback)`,
+    ]) {
+      const source = fixture(framework, expression, declarations);
+      for (const debug of [false, true]) {
+        const result = transform(source, resolve(`src/NonCallback.${framework}`), {
+          debug,
+          bindings: 'runtime',
+        });
+        // 显式详细诊断可以返回 identity result，但绝不能把组合输入包成函数。
+        assert.equal(result?.code ?? source, source, `${framework}, debug=${debug}, ${expression}`);
+        if (!debug) assert.equal(result, null);
+        assert(!(result?.code ?? source).includes('withStyleSource'));
+        compileComponent(framework, result?.code ?? source);
+      }
+    }
+  });
+
+  test(`${framework}：debug 保留内联与已知 const 函数引用来源，未知输入不包装`, () => {
+    const inline = fixture(framework, `style(s=>{s.width.px(width)})`);
+    assert.equal(
+      transform(inline, resolve(`src/Inline.${framework}`), {
+        debug: false,
+        bindings: 'runtime',
+      }),
+      null,
+    );
+    const inlineDebug = transform(inline, resolve(`src/Inline.${framework}`), {
+      debug: true,
+      bindings: 'runtime',
+    });
+    assert(inlineDebug?.code.includes('withStyleSource'));
+    compileComponent(framework, inlineDebug.code);
+
+    const named = fixture(framework, `style(rule)`, `const rule=(s)=>{s.width.px(width)};`);
+    assert.equal(
+      transform(named, resolve(`src/Named.${framework}`), {
+        debug: false,
+        bindings: 'runtime',
+      }),
+      null,
+    );
+    const namedDebug = transform(named, resolve(`src/Named.${framework}`), {
+      debug: true,
+      bindings: 'runtime',
+    });
+    assert(namedDebug?.code.includes('withStyleSource'));
+    compileComponent(framework, namedDebug.code);
+
+    const declaration = fixture(framework, `style(rule)`, `function rule(s){s.width.px(width)}`);
+    const declarationDebug = transform(declaration, resolve(`src/Function.${framework}`), {
+      debug: true,
+      bindings: 'runtime',
+    });
+    assert.equal(declarationDebug?.code, declaration);
+    assert.equal(declarationDebug?.diagnostics?.[0]?.code, 'dynamic-structure');
+    compileComponent(framework, declarationDebug.code);
+
+    const reassigned = fixture(
+      framework,
+      `style(rule)`,
+      `function rule(s){s.width.px(width)}rule=foreign;const foreign='foreign';`,
+    );
+    const reassignedDebug = transform(reassigned, resolve(`src/Reassigned.${framework}`), {
+      debug: true,
+      bindings: 'runtime',
+    });
+    assert.equal(reassignedDebug?.code, reassigned);
+    for (const mutation of [
+      `function rule(s){s.width.px(width)}for(rule of ['foreign']){};`,
+      `function rule(s){s.width.px(width)}eval('rule="foreign"');`,
+    ]) {
+      const source = fixture(framework, 'style(rule)', mutation);
+      const result = transform(source, resolve(`src/Mutable.${framework}`), { debug: true });
+      assert.equal(result?.code, source);
+      assert.equal(result?.diagnostics?.[0]?.code, 'dynamic-structure');
+    }
+
+    const getter = fixture(
+      framework,
+      `style(holder.callback)`,
+      `const holder={get callback(){return rule}};const rule=(s)=>{s.width.px(width)};`,
+    );
+    const getterDebug = transform(getter, resolve(`src/Getter.${framework}`), {
+      debug: true,
+      bindings: 'runtime',
+    });
+    assert.equal(getterDebug?.code, getter);
+    assert.equal(getterDebug?.diagnostics?.[0]?.code, 'dynamic-structure');
+  });
+}
+
+test('debug 来源包装不改变已知函数或合法 CSS 组合的运行结果', () => {
+  const runtime = createRuntime({ target: null });
+  try {
+    const rule = (s) => s.width.px(12);
+    const annotated = withStyleSource(rule, { file: 'src/Panel.vue', line: 1, column: 1 });
+    assert.equal(runtime.css(annotated), runtime.css(rule));
+    assert.equal(runtime.css('foreign'), 'foreign');
+    assert.equal(runtime.css(['base', 'override']), 'base override');
+    assert.equal(runtime.css(false ? rule : 'foreign'), 'foreign');
+    assert.equal(runtime.css(null, undefined, false, []), '');
+  } finally {
+    runtime.dispose();
+  }
 });

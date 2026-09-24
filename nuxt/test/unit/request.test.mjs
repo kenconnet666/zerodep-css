@@ -88,3 +88,44 @@ test('两份独立模块实例凭 Symbol.for 访问同一请求槽', async () =>
   assert.match(takeHead(request).join(''), /shared/);
   assert.equal(current.disposed, 1);
 });
+
+for (const [name, childContext] of [
+  ['浅拷贝 context', (parent) => ({ ...parent.context })],
+  ['共享 context 对象', (parent) => parent.context],
+]) {
+  test(`Nitro 子 event ${name}不能释放父请求宿主`, () => {
+    const parent = event();
+    const current = host('parent');
+    setStyleNonce(parent, 'parent-only');
+    attachHost(parent, current);
+    const child = { context: childContext(parent) };
+
+    releaseHost(child);
+    assert.equal(current.disposed, 0, '子请求的 afterResponse 不得 dispose 外层 SSR host');
+    assert.equal(styleNonce(child), 'parent-only', '代理可继承 nonce 配置但不继承宿主所有权');
+    setStyleNonce(child, 'child-only');
+    assert.equal(styleNonce(parent), 'parent-only', '父宿主的 nonce 快照不被代理修改');
+
+    const nested = host('child');
+    attachHost(child, nested);
+    assert.equal(current.disposed, 0);
+    collectRendered(child);
+    assert.equal(nested.disposed, 1);
+    assert.match(takeHead(child).join(''), /nonce="child-only"/);
+    assert.deepEqual(takeHead(parent), []);
+    collectRendered(parent);
+    assert.match(takeHead(parent).join(''), /nonce="parent-only"/);
+    assert.equal(current.disposed, 1);
+  });
+}
+
+test('已有宿主的 undefined nonce 也是快照，不能被代理后写的配置补上', () => {
+  const parent = event();
+  const current = host('without-nonce');
+  attachHost(parent, current);
+  const child = { context: parent.context };
+  setStyleNonce(child, 'nested-nonce');
+  assert.equal(styleNonce(parent), undefined);
+  collectRendered(parent);
+  assert(!takeHead(parent).join('').includes('nonce='));
+});

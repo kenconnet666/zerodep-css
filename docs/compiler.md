@@ -17,6 +17,22 @@ Svelte 使用 `@zerodep-css/svelte/compiler` 的 `cssPlugin()`，放在官方 `s
 
 严格 CSP 禁止 style 属性时，可设置 `cssPlugin({ bindings: 'runtime' })`。该模式保留运行时 class 更新，不生成元素变量绑定；静态准备和调试来源仍可用。它不会移除业务代码自己编写的 style 属性，服务端和客户端应使用相同编译配置。
 
+## 按需诊断
+
+开发 serve 默认只添加项目相对源码位置，不输出未优化日志。显式 `cssPlugin({ debug: true })` 才通过 Vite logger.info 报告详细原因；`transformCss(source, filename, { debug: true })` 的返回值也提供可选 `diagnostics`，包含稳定 code、相对文件、1-based 行列及人可读 message。只有诊断时可返回原代码和 identity map；默认无改写仍返回 null。
+
+| code                    | 含义                               |
+| ----------------------- | ---------------------------------- |
+| custom-author           | 显式配置了作者类型，保留运行时     |
+| unknown-project-options | 项目选项无法在本文件证明           |
+| script-snapshot         | 脚本创建的 class 保持调用时快照    |
+| template-context        | 当前元素或模板作用域不支持自动绑定 |
+| style-attribute         | 原有 style 属性保持求值顺序        |
+| dynamic-structure       | 输入或回调结构不能静态证明         |
+| csp-bindings            | runtime 绑定模式关闭动态元素变量   |
+
+只诊断词法上确认的本库 css 调用，每个站点报告一个主要原因；未知同名函数与跨模块来源不猜测。没有诊断不代表所有代码都已优化，回退也不是作者错误。诊断不执行回调或 getter，日志器异常不影响转换。来源包装仅用于可证明的函数输入，class、数组、条件值、空值和未知 getter 保持原表达式；可变函数声明也不为添加来源而改变行为。
+
 ## 自动路径
 
 当前编译器识别组件同文件中的常量 `createStyles` 与 `useCss` 绑定，包括默认选项、`{ theme }` 选项和直接链式调用：
@@ -83,6 +99,6 @@ raw 数字的自动绑定只覆盖已核实语义的常用数值属性；语法�
 
 编译优化不改变框架对模板、`computed`/`$derived` 的依赖跟踪，也不跳过需保留的业务 getter 求值。把动态值存入普通局部字符串只得到一次快照；需要更新时，在模板位置调用 `css`，或使用框架派生值。
 
-`cssPlugin` 是可选工具。未安装插件时，`createStyles().useCss()` 仍可完整运行。独立编译入口为 `transformCss(source, filename, { root?, debug?, bindings? })`；没有改动时返回 `null`。
+`cssPlugin` 是可选工具。未安装插件时，`createStyles().useCss()` 仍可完整运行。独立编译入口为 `transformCss(source, filename, { root?, debug?, bindings? })`；没有改动或诊断时返回 `null`。显式 `debug: true` 若仅产生诊断，则返回原源码、identity source map 与 diagnostics。
 
 验证使用官方 Vue/Svelte 编译器构建客户端与 SSR 组件，并对生成产物进行浏览器水合测试。[Nuxt 模块](../nuxt/README.md)可通过 compiler 选项接入同一个优化器；[Kit 接入](../sveltekit/README.md)负责请求/根宿主，可选编译仍使用 Svelte 的 compiler 入口。组件 HTML 流式 SSR 不在首版范围。建议运行 `pnpm check:compiler`、`pnpm test:types` 和 `pnpm test:browser:frameworks`；元框架入口另跑对应独立消费命令。

@@ -9,6 +9,7 @@ import {
   readdir,
   realpath,
   rm,
+  rmdir,
   stat,
   writeFile,
 } from 'node:fs/promises';
@@ -126,7 +127,7 @@ async function availablePort() {
   );
   return address.port;
 }
-async function startNodeServer(folder, dev = false) {
+async function startNodeServer(folder, dev = false, isolateRouteRules = true) {
   const port = await availablePort();
   const logs = [];
   const nuxtManifestPath = dev
@@ -149,12 +150,14 @@ async function startNodeServer(folder, dev = false) {
       NITRO_PORT: String(port),
       HOST: '127.0.0.1',
       NITRO_HOST: '127.0.0.1',
-      ...(dev ? { ZERODEP_NUXT_COMPILER: '1' } : {}),
+      ...(dev
+        ? { ZERODEP_NUXT_COMPILER: '1', ZERODEP_NUXT_HMR: isolateRouteRules ? '1' : '0' }
+        : {}),
     },
     stdio: ['ignore', 'pipe', 'pipe'],
     windowsHide: true,
   });
-  const server = { child, baseURL: `http://127.0.0.1:${port}`, closed: false };
+  const server = { child, baseURL: `http://127.0.0.1:${port}`, closed: false, logs };
   server.closePromise = new Promise((done) =>
     child.once('close', () => {
       server.closed = true;
@@ -261,6 +264,45 @@ async function verifySSR(baseURL) {
   assert(content.styles.includes(`nonce="${nonce}"`));
   assert(content.marker.includes(`nonce="${nonce}"`));
   report.checks.push('nonce-ssr');
+
+  const nested = await fetchPage(baseURL, '/async?tone=blue&csp=1');
+  assert.equal(nested.status, 200);
+  assert.match(nested.html, /data-async-color="#2563eb"/);
+  const nestedOutput = extracted(nested.html);
+  assert(nestedOutput.styles.includes('#2563eb'));
+  assert(nestedOutput.manifest.globals.some((item) => item.key === 'fixture-body'));
+  const outerNonce = nested.headers.get('content-security-policy')?.match(/'nonce-([^']+)'/)?.[1];
+  assert(outerNonce, 'Nested JSON request removed the outer CSP nonce.');
+  assert(nestedOutput.styles.includes(`nonce="${outerNonce}"`));
+  assert(nestedOutput.marker.includes(`nonce="${outerNonce}"`));
+  const jsonTone = await fetchPage(baseURL, '/api/tone?tone=blue', {
+    headers: { accept: 'application/json' },
+  });
+  assert.equal(JSON.parse(jsonTone.html).color, '#2563eb');
+  assert(!jsonTone.html.includes('__zerodep_css_manifest__'));
+  report.checks.push('nested-json-ssr-request-isolation');
+
+  const cacheMiss = await fetchPage(baseURL, '/cached');
+  const cacheHit = await fetchPage(baseURL, '/cached');
+  assert.equal(cacheMiss.status, 200);
+  assert.equal(cacheHit.status, 200);
+  const firstSerial = Number(cacheMiss.html.match(/data-cache-serial="(\d+)"/)?.[1]);
+  const secondSerial = Number(cacheHit.html.match(/data-cache-serial="(\d+)"/)?.[1]);
+  assert(Number.isSafeInteger(firstSerial) && firstSerial > 0);
+  assert.equal(secondSerial, firstSerial, 'Cached page was rendered again on the second request.');
+  const firstCache = extracted(cacheMiss.html);
+  const secondCache = extracted(cacheHit.html);
+  assert.equal(firstCache.styles, secondCache.styles);
+  assert.deepEqual(firstCache.manifest, secondCache.manifest);
+  for (const page of [cacheMiss, cacheHit])
+    assert.equal(page.headers.get('content-security-policy'), "style-src 'self' 'unsafe-inline'");
+  assert(!firstCache.styles.includes(' nonce='));
+  assert(!firstCache.marker.includes(' nonce='));
+  const serialProbe = await fetchPage(baseURL, '/api/cache-serial', {
+    headers: { accept: 'application/json' },
+  });
+  assert.equal(JSON.parse(serialProbe.html).serial, firstSerial + 1);
+  report.checks.push('cached-html-manifest-hit');
 }
 async function verifyBrowser(baseURL) {
   browser = await launchBrowser();
@@ -320,6 +362,20 @@ async function verifyBrowser(baseURL) {
     assert.deepEqual(errors, []);
   });
   report.checks.push('error-hydration-no-orphan-globals');
+  await withBrowserPage(browser, output, 'nuxt-nested-json-hydration', async (page) => {
+    const errors = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.goto(baseURL + '/async?tone=blue', { waitUntil: 'networkidle' });
+    await page.locator('[data-async]').waitFor();
+    await page.waitForFunction(() => !document.getElementById('__zerodep_css_manifest__'));
+    assert.equal(await page.locator('[data-async]').getAttribute('data-async-color'), '#2563eb');
+    assert.equal(
+      await page.locator('[data-async]').evaluate((node) => getComputedStyle(node).backgroundColor),
+      'rgb(37, 99, 235)',
+    );
+    assert.deepEqual(errors, []);
+  });
+  report.checks.push('nested-json-hydration');
 }
 async function verifyDevelopmentHMR(folder) {
   const indexFile = join(folder, 'app/pages/index.vue');
@@ -330,6 +386,15 @@ async function verifyDevelopmentHMR(folder) {
   ]);
   assert(indexSource.includes('const width = ref(80);'));
   assert(appSource.includes("'#fee2e2'"));
+  const diagnostics = {
+    devRouteRulesIsolated: true,
+    signals: [],
+    navigations: [],
+    requests: [],
+    console: [],
+    serverLog: '',
+  };
+  report.hmrDiagnostics = diagnostics;
   devServer = await startNodeServer(folder, true);
   try {
     browser ??= await launchBrowser();
@@ -337,8 +402,27 @@ async function verifyDevelopmentHMR(folder) {
       const errors = [];
       const hydrationWarnings = [];
       const transformedModules = [];
+      let routeEditStarted = false;
+      let resolveRouteRefresh;
+      const routeRefresh = new Promise((resolve) => {
+        resolveRouteRefresh = resolve;
+      });
+      await page.exposeFunction('__zerodepRecordHmr', (signal) => {
+        diagnostics.signals.push(signal);
+        if (routeEditStarted && signal.event === 'beforeFullReload') resolveRouteRefresh(signal);
+      });
+      page.on('framenavigated', (frame) => {
+        if (frame === page.mainFrame())
+          diagnostics.navigations.push({ url: frame.url(), at: Date.now() });
+      });
+      page.on('request', (request) => {
+        if (request.isNavigationRequest() && request.frame() === page.mainFrame())
+          diagnostics.requests.push({ url: request.url(), at: Date.now() });
+      });
       page.on('pageerror', (error) => errors.push(error.message));
       page.on('console', (message) => {
+        if (/\[vite\]|\[nuxt\]/i.test(message.text()))
+          diagnostics.console.push({ type: message.type(), text: message.text() });
         if (message.type() === 'warning' && /hydration/i.test(message.text()))
           hydrationWarnings.push(message.text());
       });
@@ -363,23 +447,22 @@ async function verifyDevelopmentHMR(folder) {
         window.__zerodepHmrDocument = Math.random();
       });
       const documentMarker = await page.evaluate(() => window.__zerodepHmrDocument);
-
-      await writeFile(
-        indexFile,
-        indexSource.replace('const width = ref(80);', 'const width = ref(96);'),
-      );
-      await page.waitForFunction(
-        () => {
-          const node = document.querySelector('[data-auto]');
-          return node && getComputedStyle(node).width === '96px';
-        },
-        undefined,
-        { timeout: 20_000 },
-      );
-      assert.equal(await page.evaluate(() => window.__zerodepHmrDocument), documentMarker);
+      const hmrCount = () => page.evaluate(() => window.__zerodepHmrEvents?.length ?? -1);
+      const waitForHmr = (previous, file) =>
+        page.waitForFunction(
+          ({ previous, file }) =>
+            window.__zerodepHmrEvents
+              ?.slice(previous)
+              .some((paths) => paths.some((path) => path.includes(file))),
+          { previous, file },
+          { timeout: 20_000 },
+        );
+      assert((await hmrCount()) >= 0, 'Nuxt test HMR clock was not installed.');
 
       const changedApp = appSource.replace("'#fee2e2'", "'#fef3c7'");
+      const beforeAppScript = await hmrCount();
       await writeFile(appFile, changedApp);
+      await waitForHmr(beforeAppScript, 'app.vue');
       await page.waitForFunction(
         () => getComputedStyle(document.body).backgroundColor === 'rgb(254, 243, 199)',
         undefined,
@@ -400,10 +483,12 @@ async function verifyDevelopmentHMR(folder) {
 
       // 纯模板更新应保留同一个setup/lease；若误触发dispose，背景会丢失。
       assert(changedApp.includes('<main data-fixture-root'));
+      const beforeAppTemplate = await hmrCount();
       await writeFile(
         appFile,
         changedApp.replace('<main data-fixture-root', '<main data-fixture-root data-template-hot'),
       );
+      await waitForHmr(beforeAppTemplate, 'app.vue');
       await page.locator('[data-fixture-root][data-template-hot]').waitFor();
       assert.equal(await page.evaluate(() => window.__zerodepHmrDocument), documentMarker);
       assert.equal(
@@ -420,6 +505,46 @@ async function verifyDevelopmentHMR(folder) {
         styles.map((style) => style.id),
       );
 
+      // Nuxt自身可能因pages文件改动随后刷新虚拟route-rules模块；放在根HMR之后。
+      const beforeIndex = await hmrCount();
+      routeEditStarted = true;
+      await writeFile(
+        indexFile,
+        indexSource.replace('const width = ref(80);', 'const width = ref(96);'),
+      );
+      await waitForHmr(beforeIndex, 'index.vue');
+      await page.waitForFunction(
+        () => {
+          const node = document.querySelector('[data-auto]');
+          return node && getComputedStyle(node).width === '96px';
+        },
+        undefined,
+        { timeout: 20_000 },
+      );
+      const nativeRefresh = await Promise.race([
+        routeRefresh,
+        delay(5_000, undefined, { ref: false }).then(() => null),
+      ]);
+      if (nativeRefresh) {
+        assert(nativeRefresh.paths.includes('*'));
+        await page.waitForFunction(
+          (marker) => window.__zerodepHmrDocument !== marker,
+          documentMarker,
+          { timeout: 30_000 },
+        );
+        await page.locator('[data-card]').waitFor();
+        await page.waitForFunction(() => !document.getElementById('__zerodep_css_manifest__'));
+        assert.match(devServer.logs.join(''), /page reload virtual:nuxt:.*route-rules\.mjs/);
+        assert.equal(
+          await page.locator('[data-auto]').evaluate((node) => getComputedStyle(node).width),
+          '96px',
+        );
+        diagnostics.nativeRouteRefresh = true;
+      } else {
+        assert.equal(await page.evaluate(() => window.__zerodepHmrDocument), documentMarker);
+        diagnostics.nativeRouteRefresh = false;
+      }
+
       await page.reload({ waitUntil: 'networkidle' });
       await page.waitForFunction(() => !document.getElementById('__zerodep_css_manifest__'));
       assert.equal(
@@ -435,7 +560,12 @@ async function verifyDevelopmentHMR(folder) {
       writeFile(indexFile, indexSource),
       writeFile(appFile, appSource),
     ]);
-    await stopNodeServer(devServer);
+    const server = devServer;
+    try {
+      await stopNodeServer(server);
+    } finally {
+      diagnostics.serverLog = server?.logs.join('').slice(-30_000) ?? '';
+    }
     devServer = undefined;
     const failed = restores.filter((result) => result.status === 'rejected');
     if (failed.length)
@@ -445,19 +575,142 @@ async function verifyDevelopmentHMR(folder) {
       );
   }
 }
+async function verifyNativeRouteRulesRefresh(folder) {
+  const appFile = join(folder, 'app/app.vue');
+  const appSource = await readFile(appFile, 'utf8');
+  assert(appSource.includes("'#fee2e2'"));
+  const diagnostics = {
+    signals: [],
+    navigations: [],
+    errors: [],
+    nativeRouteRefresh: false,
+    serverLog: '',
+  };
+  report.nativeRouteRulesDiagnostics = diagnostics;
+  devServer = await startNodeServer(folder, true, false);
+  try {
+    browser ??= await launchBrowser();
+    await withBrowserPage(browser, output, 'nuxt-dev-route-rules-refresh', async (page) => {
+      let resolveUpdate;
+      let resolveReload;
+      let editStarted = false;
+      const updated = new Promise((resolve) => {
+        resolveUpdate = resolve;
+      });
+      const reloading = new Promise((resolve) => {
+        resolveReload = resolve;
+      });
+      await page.exposeFunction('__zerodepRecordHmr', (signal) => {
+        diagnostics.signals.push(signal);
+        if (
+          editStarted &&
+          signal.event === 'afterUpdate' &&
+          signal.paths.some((path) => path.includes('app.vue'))
+        )
+          resolveUpdate(signal);
+        if (editStarted && signal.event === 'beforeFullReload') resolveReload(signal);
+      });
+      page.on('framenavigated', (frame) => {
+        if (frame === page.mainFrame()) diagnostics.navigations.push(frame.url());
+      });
+      page.on('pageerror', (error) => diagnostics.errors.push(error.message));
+      await page.goto(devServer.baseURL + '/?tone=red', { waitUntil: 'networkidle' });
+      await page.locator('[data-card]').waitFor();
+      await page.waitForFunction(() => !document.getElementById('__zerodep_css_manifest__'));
+      await page.evaluate(() => {
+        window.__zerodepNativeDocument = Math.random();
+      });
+      const marker = await page.evaluate(() => window.__zerodepNativeDocument);
+
+      editStarted = true;
+      await writeFile(appFile, appSource.replace("'#fee2e2'", "'#fef3c7'"));
+      const first = await Promise.race([
+        updated,
+        reloading,
+        delay(20_000, undefined, { ref: false }).then(() => null),
+      ]);
+      assert(first, 'Nuxt did not report an app.vue update or native reload.');
+      const nativeReload = await Promise.race([
+        reloading,
+        delay(5_000, undefined, { ref: false }).then(() => null),
+      ]);
+      if (nativeReload) {
+        assert(nativeReload.paths.includes('*'));
+        await page.waitForFunction(
+          (previous) => window.__zerodepNativeDocument !== previous,
+          marker,
+          { timeout: 30_000 },
+        );
+        await page.waitForFunction(() => !document.getElementById('__zerodep_css_manifest__'));
+        assert.match(devServer.logs.join(''), /page reload virtual:nuxt:.*route-rules\.mjs/);
+        diagnostics.nativeRouteRefresh = true;
+      } else {
+        await updated;
+        assert.equal(await page.evaluate(() => window.__zerodepNativeDocument), marker);
+      }
+      await page.waitForFunction(
+        () => getComputedStyle(document.body).backgroundColor === 'rgb(254, 243, 199)',
+        undefined,
+        { timeout: 20_000 },
+      );
+      await page.locator('[data-grow]').click();
+      await page.waitForFunction(
+        () => getComputedStyle(document.querySelector('[data-card]')).width === '100px',
+      );
+      assert((await page.locator('style[data-zerodep="nuxt-fixture"]').count()) > 0);
+      assert.deepEqual(diagnostics.errors, []);
+    });
+    report.checks.push('nuxt-dev-native-route-rules-refresh');
+  } finally {
+    await writeFile(appFile, appSource);
+    const server = devServer;
+    try {
+      await stopNodeServer(server);
+    } finally {
+      diagnostics.serverLog = server?.logs.join('').slice(-30_000) ?? '';
+    }
+    devServer = undefined;
+  }
+}
 async function verifyResumedHMR() {
   await verifyResumeWorkspace();
   await verifyPackageIdentity(appDir);
-  const files = ['app/app.vue', 'app/pages/index.vue'];
-  const originals = await Promise.all(files.map((file) => readFile(join(appDir, file), 'utf8')));
+  const files = ['app/app.vue', 'app/pages/index.vue', 'app/plugins/hmr-clock.client.ts'];
+  const pluginsDir = join(appDir, 'app/plugins');
+  const hadPluginsDir = await stat(pluginsDir).then(
+    () => true,
+    (error) => {
+      if (error.code === 'ENOENT') return false;
+      throw error;
+    },
+  );
+  const originals = await Promise.all(
+    files.map((file) =>
+      readFile(join(appDir, file), 'utf8').catch((error) => {
+        if (error.code === 'ENOENT') return undefined;
+        throw error;
+      }),
+    ),
+  );
   try {
-    for (const file of files) await cp(join(fixture, file), join(appDir, file));
+    for (const file of files) {
+      await mkdir(dirname(join(appDir, file)), { recursive: true });
+      await cp(join(fixture, file), join(appDir, file));
+    }
     await verifyDevelopmentHMR(appDir);
     report.checks.push('diagnostic-hmr-existing-install');
   } finally {
     const restored = await Promise.allSettled(
-      files.map((file, index) => writeFile(join(appDir, file), originals[index])),
+      files.map((file, index) =>
+        originals[index] === undefined
+          ? rm(join(appDir, file), { force: true })
+          : writeFile(join(appDir, file), originals[index]),
+      ),
     );
+    if (!hadPluginsDir)
+      await rmdir(pluginsDir).catch((error) => {
+        if (error.code !== 'ENOENT') throw error;
+      });
     const failed = restored.filter((result) => result.status === 'rejected');
     if (failed.length)
       throw new AggregateError(
@@ -499,6 +752,8 @@ async function verifyGenerated(folder) {
     const html = await readFile(join(publicDir, page), 'utf8');
     extracted(html);
   }
+  for (const page of ['async/index.html', 'cached/index.html'])
+    await assert.rejects(stat(join(publicDir, page)), { code: 'ENOENT' });
   staticServer = await startStaticServer(publicDir);
   browser ??= await launchBrowser();
   await withBrowserPage(browser, output, 'nuxt-generated-hydration', async (page) => {
@@ -593,7 +848,10 @@ try {
     await verifyBrowser(nodeServer.baseURL);
     await stopNodeServer(nodeServer);
     nodeServer = undefined;
-    if (!diagnosticResume) await verifyDevelopmentHMR(appDir);
+    if (!diagnosticResume) {
+      await verifyDevelopmentHMR(appDir);
+      await verifyNativeRouteRulesRefresh(appDir);
+    }
     pnpm(['exec', 'nuxt', 'generate'], {
       cwd: appDir,
       env: { ...environment, ZERODEP_NUXT_GENERATE: '1' },

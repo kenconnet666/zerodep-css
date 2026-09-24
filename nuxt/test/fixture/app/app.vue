@@ -9,10 +9,10 @@ styles.provideTheme(() => ({ color: { brand: brand.value } }));
 // 根组件单实例专用，纯模板HMR不重跑setup，也就不会误删全局样式。
 const hot = import.meta.client ? import.meta.hot : undefined;
 hot?.data['zerodep-css:root-global']?.dispose();
-const global = styles.useGlobalCss('fixture-body', (g) =>
+const rootGlobal = styles.useGlobalCss('fixture-body', (g) =>
   g.rule('body', (s) => s.backgroundColor.raw(brand.value === '#2563eb' ? '#dbeafe' : '#fee2e2')),
 );
-if (hot) hot.data['zerodep-css:root-global'] = global;
+if (hot) hot.data['zerodep-css:root-global'] = rootGlobal;
 </script>
 
 <template>

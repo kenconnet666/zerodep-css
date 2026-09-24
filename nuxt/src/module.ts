@@ -41,7 +41,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     if (options.compiler) {
       const { cssPlugin } = await import('@zerodep-css/vue/compiler');
-      addVitePlugin(cssPlugin(options.compiler === true ? {} : options.compiler));
+      addVitePlugin(
+        cssPlugin({ debug: options.debug, ...(options.compiler === true ? {} : options.compiler) }),
+      );
     }
   },
 });
