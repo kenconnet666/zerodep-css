@@ -1,6 +1,6 @@
 # 换机交接
 
-更新：2026-09-24。主线为 `codex/runtime-first`，远程仓库为 [kenconnet666/zerodep-css](https://github.com/kenconnet666/zerodep-css)。运行时 CSS 是正式能力；可选编译器只优化可证明等价的写法，不能把 `codex/static-css` 的强制静态合同带回本分支。`core`、`vue`、`svelte`、`nuxt`、`sveltekit` 五个产品包均为 private，尚未发布 npm。
+更新：2026-09-24。主分支为 `master`，远程仓库为 [kenconnet666/zerodep-css](https://github.com/kenconnet666/zerodep-css)。运行时 CSS 是正式能力；可选编译器只优化可证明等价的写法，不能把 `codex/static-css` 的强制静态合同带回主分支。`core`、`vue`、`svelte`、`nuxt`、`sveltekit` 五个产品包均为 private，尚未发布 npm。
 
 ## 当前状态
 
@@ -17,7 +17,7 @@
 ```powershell
 git clone https://github.com/kenconnet666/zerodep-css.git
 cd zerodep-css
-git switch codex/runtime-first
+git switch master
 pnpm install --frozen-lockfile
 pnpm build
 pnpm check

@@ -1,6 +1,6 @@
 # zerodep-css
 
-强类型链式 CSS 框架，保留完整运行时能力；编译、预计算、缓存和元素变量绑定都是可选优化。当前 `codex/runtime-first` 已完成约定生产范围的实现与验收，具体边界与证据见[实施记录](docs/production.md)。五个产品包保持 private：core、Vue、Svelte，以及 [Nuxt 4](nuxt/README.md)/[SvelteKit 2](sveltekit/README.md) 的薄接入。core 根入口只有 `Css`、`cssVar`、`defineTheme` 三个作者运行值；Vue/Svelte 根入口提供 `createStyles`、`Css`、`defineTheme`、`cssVar`、`keyframes` 五个运行值。
+强类型链式 CSS 框架，保留完整运行时能力；编译、预计算、缓存和元素变量绑定都是可选优化。当前 `master` 已合入运行时优先方案并完成约定生产范围的实现与验收，具体边界与证据见[实施记录](docs/production.md)。五个产品包保持 private：core、Vue、Svelte，以及 [Nuxt 4](nuxt/README.md)/[SvelteKit 2](sveltekit/README.md) 的薄接入。core 根入口只有 `Css`、`cssVar`、`defineTheme` 三个作者运行值；Vue/Svelte 根入口提供 `createStyles`、`Css`、`defineTheme`、`cssVar`、`keyframes` 五个运行值。
 
 项目统一配置，组件使用绑定的作者类型与主题：
 
