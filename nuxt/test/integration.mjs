@@ -16,6 +16,7 @@ import {
 import { tmpdir } from 'node:os';
 import { basename, dirname, extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { stripVTControlCharacters } from 'node:util';
 import { once } from 'node:events';
 import { createRequire } from 'node:module';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -534,7 +535,10 @@ async function verifyDevelopmentHMR(folder) {
         );
         await page.locator('[data-card]').waitFor();
         await page.waitForFunction(() => !document.getElementById('__zerodep_css_manifest__'));
-        assert.match(devServer.logs.join(''), /page reload virtual:nuxt:.*route-rules\.mjs/);
+        assert.match(
+          stripVTControlCharacters(devServer.logs.join('')),
+          /page reload virtual:nuxt:.*route-rules\.mjs/,
+        );
         assert.equal(
           await page.locator('[data-auto]').evaluate((node) => getComputedStyle(node).width),
           '96px',
@@ -642,7 +646,10 @@ async function verifyNativeRouteRulesRefresh(folder) {
           { timeout: 30_000 },
         );
         await page.waitForFunction(() => !document.getElementById('__zerodep_css_manifest__'));
-        assert.match(devServer.logs.join(''), /page reload virtual:nuxt:.*route-rules\.mjs/);
+        assert.match(
+          stripVTControlCharacters(devServer.logs.join('')),
+          /page reload virtual:nuxt:.*route-rules\.mjs/,
+        );
         diagnostics.nativeRouteRefresh = true;
       } else {
         await updated;
