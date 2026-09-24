@@ -28,7 +28,7 @@
 - Node 编译源码放 internal/compiler 与 vue/compiler、svelte/compiler；浏览器完整运行时源码在 internal/runtime，框架接入位于各包 src。两套内部源码都用严格 TS，分别执行 pnpm check:compiler 与 pnpm check:runtime；根 check 自动包含它们，声明由根 build 生成，不手写 .d.mts 替代实现检查。
 - 修改语言服务桥或升级相关依赖后运行 `pnpm lsp:verify`，必须通过预置错误检出、修复清零和五项工具验收。WebStorm MCP 的空问题列表不能代替语义验收。
 - `.codex/config.toml` 由 `pnpm lsp:setup` 生成并忽略；模板和启动脚本可迁移。不要修改用户全局 Codex 配置或结束其他项目 Node 进程。
-- `.research` 保留研究探针和旧模板归档，不参与产品构建；测试夹具放所属包的 test 目录，不发布到 dist。
+- `.research` 只保留当前可运行的类型/性能探针及运行时主线原始样本，不参与产品构建；旧模板与旧实验从 Git 历史查询。测试夹具放所属包的 test 目录，不发布到 dist。
 
 - 构建与测试命令见根 README；pnpm test 汇总全部快速单元测试。CI 每 job 构建一次并使用 --no-build，不能依赖残留 dist。包入口/依赖改动运行 test:consumer，体积改动运行 size:check。
 

@@ -36,4 +36,4 @@ Nuxt/Kit 的夹具源码位于各包 test/fixture，运行时复制到仓库外�
 - `.research/performance/profile-runtime.mjs <label>` 仅定位 Node 计算热点，采样开销不作页面速度结论。
 - `.research/performance/cache-paired.mjs <baseline> <label> [--control]` 隔离构建两个版本，并交替计时、验证完整输出与工厂次数。基线必须采用 internal/runtime 之后的同 API 版本。
 
-当前数据与范围以[性能对照](performance.md)为准。旧主题算法、预热和编译优先实验保留在 Git 历史与研究原始样本中；旧脚本不再代表当前 API，也不能将不同基准数字拼成页面提速。
+当前数据与范围以[性能对照](performance.md)为准。旧主题算法、预热和编译优先实验只从 Git 历史查询；当前工作树仅保留运行时主线的原始样本。旧脚本不再代表当前 API，也不能将不同基准数字拼成页面提速。
