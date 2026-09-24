@@ -54,7 +54,7 @@ useGlobalCss('page-background', (g) => g.rule('body', (s) => s.backgroundColor.r
 
 在组件 setup 中先 `provideTheme`，再获取 `useCss` 和 `useTheme`。静态对象可直接作为覆盖值；有效主题在解析时形成冻结快照。Vue ref 必须通过 getter 读取，例如 `() => ({ color: { primary: color.value } })`，`createStyles` 不会自动解包 ref。`null` 和 `undefined` 继承父主题，显式传入 `theme.defaults` 可重置为预设默认值。
 
-`useGlobalCss` 必须在组件 setup 中调用。key 在同一个 host 的活跃挂载期间必须唯一；同 key 多组件共享尚未提供。
+`useGlobalCss` 必须在组件 setup 中调用。同 key 同序列化内容可以共享，最后一个 owner 卸载才释放；多个 owner 存活时只接受同内容，动态全局建议在根组件声明一次。Nuxt 根组件的开发热替换交接见 [Nuxt 接入](../nuxt/README.md)。
 
 ## Host、SSR 与水合
 
@@ -102,7 +102,7 @@ await nextTick();
 host.completeHydration();
 ```
 
-`StyleHostOptions`、`StyleManifest` 和 `StyleStats` 从适配器根入口导出。常用统计可通过 `host.stats()` 获取。流式 SSR、Nuxt 专用集成和 Kit 插件尚未完成。
+`StyleHostOptions`、`StyleManifest` 和 `StyleStats` 从适配器根入口导出。常用统计可通过 `host.stats()` 获取。[Nuxt 模块](../nuxt/README.md)负责其专用请求流程；组件 HTML 流式 SSR 与边缘运行环境仍不在首版范围。
 
 ## 样式组合
 

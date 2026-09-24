@@ -1,6 +1,6 @@
 # zerodep-css
 
-强类型链式 CSS 框架，保留完整运行时能力；编译、预计算、缓存和元素变量绑定都是可选优化。当前在 `codex/runtime-first` 分阶段完善生产方案，已实现范围与验收状态见[实施记录](docs/production.md)。三个产品包保持 private，Nuxt 4/SvelteKit 2 适配仍在实施计划中。core 根入口只有 `Css`、`cssVar`、`defineTheme` 三个作者运行值；Vue/Svelte 根入口提供 `createStyles`、`Css`、`defineTheme`、`cssVar`、`keyframes` 五个运行值。
+强类型链式 CSS 框架，保留完整运行时能力；编译、预计算、缓存和元素变量绑定都是可选优化。当前在 `codex/runtime-first` 分阶段完善生产方案，已实现范围与验收状态见[实施记录](docs/production.md)。五个产品包保持 private：core、Vue、Svelte，以及 [Nuxt 4](nuxt/README.md)/[SvelteKit 2](sveltekit/README.md) 的薄接入。core 根入口只有 `Css`、`cssVar`、`defineTheme` 三个作者运行值；Vue/Svelte 根入口提供 `createStyles`、`Css`、`defineTheme`、`cssVar`、`keyframes` 五个运行值。
 
 项目统一配置，组件使用绑定的作者类型与主题：
 
@@ -30,13 +30,15 @@ css 同步返回字符串；可用同一函数组合已有样式和回调。普�
 core/       薄作者模型、主题定义与跨适配器共享身份
 vue/        Vue 接入与包内 dist/runtime
 svelte/     Svelte 接入与包内 dist/runtime
+nuxt/       Nuxt 模块、请求宿主与独立部署验收
+sveltekit/  Kit server hook、根宿主与独立部署验收
 internal/   共用运行时源码、生成元数据、测试与严格 TypeScript 编译分析
 scripts/    数据生成、语言服务和浏览器/类型验收
 docs/       现行架构、支持、验证、迁移与换机交接
 .research/  研究探针、原始模板归档
 ```
 
-要求 Node 24、pnpm 10.34.5；Windows 安装脚本使用 PowerShell 7。版本统一在 pnpm-workspace.yaml 管理，三个包仍保持 private。
+要求 Node 24、pnpm 10.34.5；Windows 安装脚本使用 PowerShell 7。版本统一在 pnpm-workspace.yaml 管理，五个包均保持 private。
 
 打包使用仓库内 `pnpm pack`：`.pnpmfile.cjs` 在 tarball 清单中移除仅供本地 LSP 使用的 `zerodep-source` 条件。完整引擎从 `internal/runtime` 按模块编译并复制到两个适配包的 `dist/runtime`；适配包的 `#runtime` 是本包私有导入，`@zerodep-css/core/internal` 只供共享身份使用。独立消费者须检查导出目标、声明与内嵌源码地图，不能依赖当前机器的源目录；迁移后的检查结果以实际运行报告为准。
 
@@ -54,9 +56,13 @@ pnpm test
 pnpm test:types
 pnpm test:browser:runtime
 pnpm test:consumer
+pnpm test:nuxt
+pnpm test:sveltekit
 pnpm size:check
 pnpm test:browser:frameworks
 ```
+
+`pnpm test` 只执行单元测试；已有根构建时，独立消费和浏览器命令可加 `--no-build`，避免重复构建。
 
 - [core 作者模型与内部引擎边界](core/README.md)
 - [Vue 适配与 SSR](vue/README.md)

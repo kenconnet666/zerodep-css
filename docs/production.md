@@ -20,7 +20,7 @@
 ## 当前进度
 
 - 已完成决策讨论并进入目标模式。
-- P1—P3 已完成并经对应远程 CI 验收；P4 已完成双框架性能对照与简短回调优化，正在收尾注册解析复用。P5 的 Nuxt 原型尚未完成真实集成，SvelteKit 与 P6 仍待实施，不将当前进度视为生产交付完成。
+- P1—P4 已完成并经对应远程 CI 验收；P5 的 Nuxt 4 / SvelteKit 2 已完成实现及本地独立消费、Node SSR、HMR 和静态部署验证。新元框架 CI job 已接入，尚待本阶段提交运行。P6 的统一审核与最终远程验收仍待完成，不将当前进度视为全部生产交付完成。
 - P1a 本地通过 check/build、generate:check、现有单元回归、TS/Vue/Svelte 独立类型负例、19 个 core 浏览器场景、双框架 SSR/hydration/原生更新/HMR；normalize 的原生 LSP 完整零错误。最终跨平台/三引擎以对应提交 CI 为准。
 - 本页仅记录实际进度，尚未宣称新架构完成或最终 CI 通过。
 - P1b 提交 6fe37b2 与 SSR manifest 补充修复 0600d3f 均已推送且对应远程 CI 成功；P1c 的本地结果不代表尚未提交代码已通过 CI。
@@ -159,6 +159,22 @@ compileProgram 在同一次 AST 解析中完成结构验证；宿主判定该 ID
 本地根 check/build、195 项单元、26 个运行时浏览器场景及独立宿主/诊断场景、双框架 SSR/hydration/HMR/项目宿主通过；runtime 与 serialize 原生 LSP 均 complete=true、零错误。未改变公开 API 或 manifest 格式，当前阶段远程 CI 待提交后运行。
 
 本轮六个隔离探针目录（test-results/cache-paired 下的 p4c-*-registration）的清理被自动审批审查以 blocked by policy 拒绝，保留本地，不绕过；原始 JSON 已独立收录到研究记录，临时打包文件不提交。
+
+P4c 提交 57f3615 的完整远程 CI 已通过。
+
+### P5 元框架与独立部署
+
+新增 private 的 @zerodep-css/nuxt 与 @zerodep-css/sveltekit；它们以 peer 复用现有 Vue/Svelte 适配器，不复制另一份引擎，也不重复导出业务 CSS API。依赖精确版本由 workspace catalog 管理，根构建在 Vue/Svelte 及 compiler 之后生成元框架产物。
+
+Nuxt 4.5.2 模块注册早期 app 插件和 Nitro hook；每请求持有独立宿主，render:html 在所有 app:rendered 钩子后收集，随后释放，重定向/错误/关闭路径有清理兜底。浏览器在挂载前恢复，首次 Suspense resolve 检查认领，路由导航复用应用宿主。nonce 通过显式 setStyleNonce 中间件接入；compiler 默认关闭，开启时复用既有可选优化器。
+
+Nuxt 根 App 的 Suspense 在 HMR 时先 setup 新实例、再卸载旧实例，公开卸载钩子无法抢在新全局声明前释放。采用 README 中的客户端 hot.data 显式单根租约交接，不修改真实多 owner 冲突规则；脚本更新按卸载再挂载处理，ID/相对顺序和失败后的旧样式不承诺热替换等价。纯模板更新不进 setup，不清理；不能用无条件 hot.dispose 代替。实际脚本/模板 HMR、同 Document、CSSOM 与可选编译命中均已验证。
+
+Kit 2.70.3 使用 Node AsyncLocalStorage 和根 provideStyles。普通错误与 error(400) 都可能重渲染根布局，而后者绕过 handleError；每次新根创建新收集宿主，失败树全局样式不进入错误页。app.html 的显式 head 标记避免猜测 HTML 关闭标签。Kit 已 await 完整组件 render 后才 transform；后续 deferred chunks 仅序列化数据，因此直接返回原 Response、在收集结束后释放，不额外缓冲 body 或接管数据流。
+
+独立 tarball 应用暴露并修正了 Nuxt exports 中 null 条件不被其解析器接受、Windows 临时目录长短路径分裂、测试 Node 路由被预渲染文件遮蔽和错误响应内容协商等接入问题。Kit 的真实生产审计发现 cookie 0.6 低危参数校验漏洞，使用仅针对 Kit 的 0.7.2 override，并验证合法序列化及非法 name/path/domain 拒绝；该 override 必须由使用对应 Kit 版本的应用配置，不能宣称库会自动传播它。
+
+本地五包根 check/build、202 项单元、新包 LSP 与格式检查通过。Nuxt 的默认完整流程报告 cleanFullPass=true，覆盖独立生产审计/类型/单框架身份、并发 SSR、nonce、错误/重定向、hydration/SPA、开发 HMR 与 compiler、generate 后静态 hydration。Kit 覆盖同类独立身份/审计/类型、并发 SSR、HTTP 与普通异常隔离、异步子组件、deferred body 中止后恢复、CSR、根/页面 HMR、Node-free 浏览器产物及 adapter-static hydration。成功夹具自行清理；早期失败夹具仍保留用于本阶段诊断，不提交生成产物。
 
 ### raw 数字语义补正
 

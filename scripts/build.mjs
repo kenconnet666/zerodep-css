@@ -6,7 +6,7 @@ import { root, pnpm } from './lib/environment.mjs';
 
 // tsc 不会清除已更名模块；只清理已验证位于工作区内的生成目录。
 const boundary = await realpath(root);
-for (const name of ['core', 'vue', 'svelte', 'internal/runtime']) {
+for (const name of ['core', 'vue', 'svelte', 'nuxt', 'sveltekit', 'internal/runtime']) {
   const parent = await realpath(resolve(root, name));
   if (!parent.startsWith(boundary + sep)) throw new Error('Package path leaves the workspace.');
   const target = resolve(parent, 'dist');
@@ -72,3 +72,5 @@ for (const name of ['vue', 'svelte']) {
     resolve(output, 'types.d.ts'),
   );
 }
+// 元框架模块依赖适配包及其可选编译入口，最后生成发布文件。
+pnpm(['--filter', '@zerodep-css/nuxt', '--filter', '@zerodep-css/sveltekit', 'run', 'build']);

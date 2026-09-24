@@ -85,4 +85,4 @@ raw 数字的自动绑定只覆盖已核实语义的常用数值属性；语法�
 
 `cssPlugin` 是可选工具。未安装插件时，`createStyles().useCss()` 仍可完整运行。独立编译入口为 `transformCss(source, filename, { root?, debug?, bindings? })`；没有改动时返回 `null`。
 
-验证使用官方 Vue/Svelte 编译器构建客户端与 SSR 组件，并对生成产物进行浏览器水合测试。流式 SSR、Nuxt 专用模块和 Kit 插件不属于当前已完成范围。建议运行 `pnpm check:compiler`、`pnpm test:types` 和 `pnpm test:browser:frameworks`。
+验证使用官方 Vue/Svelte 编译器构建客户端与 SSR 组件，并对生成产物进行浏览器水合测试。[Nuxt 模块](../nuxt/README.md)可通过 compiler 选项接入同一个优化器；[Kit 接入](../sveltekit/README.md)负责请求/根宿主，可选编译仍使用 Svelte 的 compiler 入口。组件 HTML 流式 SSR 不在首版范围。建议运行 `pnpm check:compiler`、`pnpm test:types` 和 `pnpm test:browser:frameworks`；元框架入口另跑对应独立消费命令。

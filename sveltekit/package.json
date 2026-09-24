@@ -1,0 +1,50 @@
+{
+  "name": "@zerodep-css/sveltekit",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/client.d.ts",
+      "browser": "./dist/client.js",
+      "node": "./dist/server-provider.js",
+      "default": "./dist/client.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check": "tsc -p tsconfig.json",
+    "test": "node --test test/*.test.mjs"
+  },
+  "peerDependencies": {
+    "@zerodep-css/svelte": "workspace:*",
+    "@sveltejs/kit": "^2.70.3",
+    "svelte": "^5.57.0"
+  },
+  "devDependencies": {
+    "@zerodep-css/svelte": "workspace:*",
+    "@sveltejs/kit": "catalog:",
+    "@sveltejs/adapter-node": "catalog:",
+    "@sveltejs/adapter-static": "catalog:",
+    "@types/node": "catalog:",
+    "svelte": "catalog:",
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "description": "SvelteKit 请求隔离、样式恢复与静态预渲染接入",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
+    "directory": "sveltekit"
+  },
+  "homepage": "https://github.com/kenconnet666/zerodep-css"
+}

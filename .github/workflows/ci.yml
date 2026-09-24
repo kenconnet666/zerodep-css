@@ -124,3 +124,32 @@ jobs:
           name: consumer-results
           path: test-results/consumer/
           retention-days: 7
+  metaframeworks:
+    name: 元框架 SSR 与静态部署 (${{ matrix.framework }})
+    strategy:
+      fail-fast: false
+      matrix:
+        framework: [nuxt, sveltekit]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      ZERODEP_BROWSER_CHANNEL: chromium
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.5
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm build
+      - run: pnpm test:${{ matrix.framework }} --no-build
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: metaframework-${{ matrix.framework }}
+          path: test-results/${{ matrix.framework }}/
+          retention-days: 7

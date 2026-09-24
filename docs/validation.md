@@ -1,6 +1,6 @@
 # 验证与性能证据
 
-当前实现合同见 [support](support.md)，使用方式见三个包 README；这里集中验收入口和可复现证据，不重复记录已完成任务的执行过程。
+当前实现合同见 [support](support.md)，使用方式见各包 README；这里集中验收入口和可复现证据，不重复记录已完成任务的执行过程。
 
 最新停止点、实际已验证范围与尚未重跑的最终汇总状态见 [换机交接](handoff.md)。Vue/Svelte 与其他样式引擎的测量集中在 [性能对照](performance.md)。
 
@@ -13,11 +13,15 @@
 | CSSOM、资源、顺序、CSP、ShadowRoot、事务和 SSR         | `pnpm test:browser:runtime`                        |
 | 原生响应式、主题、派生类、自动绑定、SSR/hydration、HMR | `pnpm test:browser:frameworks`                     |
 | 独立 tarball、官方插件、导出、声明、地图与生产依赖审计 | `pnpm test:consumer`                               |
+| Nuxt 独立消费、Node SSR、开发 HMR、可选插件与静态部署  | `pnpm test:nuxt`                                   |
+| Kit 独立消费、Node SSR、异步 hydration、HMR 与静态部署 | `pnpm test:sveltekit`                              |
 | 生成一致性与体积                                       | `pnpm generate:check`、`pnpm size:check`           |
 
 CI 在 Windows/Linux 执行基础检查，并分别运行 Chromium、Firefox、WebKit。每个 job 只 build 一次，后续使用 --no-build。本地浏览器默认使用已安装 Chrome；本地通过不能代替其他引擎成功。实际运行状态以目标提交的 Actions 记录为准。
 
 浏览器报告带运行 ID，启动新一轮会撤销旧成功摘要；失败保留截图、trace 与日志。证据链自检刻意制造失败，其 verification.json 必须通过。独立消费者成功后清理自己的临时目录，锁文件和报告留在忽略的 test-results。
+
+Nuxt/Kit 的夹具源码位于各包 test/fixture，运行时复制到仓库外的隔离消费者。校验应用与适配器解析到同一份框架及 core，再运行官方类型检查、生产审计和部署构建。Kit 的 cookie 传递依赖使用根 workspace 中的有界安全修补，并验证合法序列化及非法参数拒绝。Nuxt 的 `--resume <临时目录>`（可加 `--hmr`）仅用于诊断，不重新安装产品包；报告中的 diagnosticResume=true 不能代替默认完整流程的 cleanFullPass。
 
 ## 已通过的历史基线
 

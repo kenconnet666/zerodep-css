@@ -53,7 +53,7 @@ export const { useCss, useTheme, provideTheme, useGlobalCss } = styles;
 
 在组件初始化中先 `provideTheme`，再获取 `useCss` 和 `useTheme`。静态对象可直接作为覆盖值；有效主题在解析时形成冻结快照。响应式覆盖使用 getter，例如 `() => ({ color: { primary: color } })`。`null` 和 `undefined` 继承父主题，显式传入 `theme.defaults` 可重置为预设默认值。
 
-`useGlobalCss` 在组件初始化时调用一次。key 在同一个 host 的活跃挂载期间必须唯一；同 key 多组件共享尚未提供。`$state` 和 `$derived` 由 Svelte 原生响应式系统管理，适配器不创建第二套 store。
+`useGlobalCss` 在组件初始化时调用一次。同 key 同序列化内容可以共享，最后一个 owner 卸载才释放；多个 owner 存活时只接受同内容，动态全局建议在根组件声明一次。`$state` 和 `$derived` 由 Svelte 原生响应式系统管理，适配器不创建第二套 store。
 
 ## Host、SSR 与水合
 
@@ -113,7 +113,7 @@ await unmount(app);
 host.dispose();
 ```
 
-`StyleHostOptions`、`StyleManifest` 和 `StyleStats` 从适配器根入口导出；`host.stats()` 返回当前记录数。流式 SSR、Nuxt 专用集成和 Kit 插件尚未完成。
+`StyleHostOptions`、`StyleManifest` 和 `StyleStats` 从适配器根入口导出；`host.stats()` 返回当前记录数。[SvelteKit 接入](../sveltekit/README.md)负责 Node 请求宿主与静态预渲染；组件 HTML 流式 SSR 与边缘运行环境仍不在首版范围。
 
 ## 样式组合与编译
 

@@ -1,6 +1,6 @@
 # 支持矩阵与使用边界
 
-当前版本为 0.2.0，产品包是 private 的 `@zerodep-css/core`、`@zerodep-css/vue`、`@zerodep-css/svelte`。Nuxt 4 与 SvelteKit 2 是首版目标矩阵，专用适配包及 Node SSR、静态预渲染验收仍在后续阶段；现有 Vue/Svelte 适配不等于元框架接入已完成。最终生产验收状态以[实施记录](production.md)和[验证记录](validation.md)为准。
+当前版本为 0.2.0，产品包是 private 的 `@zerodep-css/core`、`@zerodep-css/vue`、`@zerodep-css/svelte`、`@zerodep-css/nuxt`、`@zerodep-css/sveltekit`。两个元框架包复用现有框架适配器，已通过本地独立 Node SSR、HMR 和静态部署验收；最终生产验收状态仍以[实施记录](production.md)和[验证记录](validation.md)为准，不能将本地通过当作对应提交的远程 CI 通过。
 
 ## 当前平台
 
@@ -10,10 +10,14 @@
 | 浏览器   | 本地默认已安装 Chrome；Chromium、Firefox、WebKit 是项目验证矩阵，具体 CSS 特性由浏览器决定 |
 | Vue      | Vue 3.5；原生 computed/watch、provide/inject、Teleport、客户端与完整字符串 SSR             |
 | Svelte   | Svelte 5；原生 rune、context、客户端与完整字符串 SSR，rune 模块走官方编译器                |
+| Nuxt     | Nuxt 4.5.2 单应用、Node SSR、导航、静态生成；根全局 HMR 按包 README 显式交接               |
+| Kit      | SvelteKit 2.70.3、adapter-node 5.5.7 / adapter-static 3.0.10；根布局与显式 head 标记接入   |
 | 样式宿主 | Document、ShadowRoot、显式 insertionPoint、CSP style nonce                                 |
-| 独立消费 | 仓库构建与 tarball 检查属于验收门槛；目录迁移后的本地独立消费已通过，三个包仍 private      |
+| 独立消费 | 五包 tarball、类型、模块身份、真实生产构建及浏览器验收；各报告独立记录                     |
 
-运行时 CSS 是正式能力。`css` 的回调可使用普通函数、`if`/`switch` 和真实 `Css` 继承；`css` 执行回调后同步返回 class 字符串，可选编译插件只优化能证明等价的路径。原生 nesting、layer、scope、容器查询等不做通用前缀或 polyfill；不支持的根规则若注册失败，不会被记录为成功。完整字符串 SSR 已有基础 Vue/Svelte 接入；流式分块 SSR、Nuxt/SvelteKit 专用请求流程以及边缘运行环境尚不在当前已验收范围。
+运行时 CSS 是正式能力。`css` 的回调可使用普通函数、`if`/`switch` 和真实 `Css` 继承；`css` 执行回调后同步返回 class 字符串，可选编译插件只优化能证明等价的路径。原生 nesting、layer、scope、容器查询等不做通用前缀或 polyfill；不支持的根规则若注册失败，不会被记录为成功。首版不承诺组件 HTML 流式 SSR、Nuxt 3、多应用 Nuxt 或边缘运行环境。Kit 完整组件 HTML 之后的 deferred 数据仍走原生 Response，不由 CSS 宿主缓存。
+
+Nuxt 与 Kit 的接入步骤、CSP nonce 和开发期边界分别见对应包 README。静态 HTML 的 hash-only CSP 不能授权后续动态新样式；Kit 2.70.3 的 cookie 传递依赖修补也需要应用自己的包管理器配置，库开发工作区的 override 不会自动传播。
 
 core 根入口只提供 `Css`、`cssVar`、`defineTheme` 三个运行值和作者类型；内置预设从 `/themes` 导入。Vue/Svelte 根入口保留 `createStyles`、`Css`、`defineTheme`、`cssVar`、`keyframes` 五个运行值。完整引擎在 `internal/runtime`，构建时复制到适配包各自的 `dist/runtime`；`@zerodep-css/core/internal` 与适配包的 `#runtime` 均不是业务 API。引擎迁移后的本地类型、浏览器和独立消费已通过；跨平台结果以对应提交 CI 为准。
 
