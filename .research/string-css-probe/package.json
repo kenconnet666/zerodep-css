@@ -5,6 +5,7 @@
   "packageManager": "pnpm@10.34.5",
   "scripts": {
     "probe": "node run.mjs",
+    "probe:author-storage": "node author-storage.mjs",
     "semantics": "node semantics.mjs",
     "test:ic": "node ic-browser.mjs"
   },

@@ -36,11 +36,14 @@ s.width.raw('20px'); // 原有能力继续可用
 ```powershell
 pnpm install --frozen-lockfile
 pnpm probe
+pnpm probe:author-storage
 pnpm semantics
 pnpm test:ic
 ```
 
 `probe` 使用 Vue 3.5.43、Svelte 5.57.0 的正式编译器生成生产模式浏览器组件，在 Chrome 153 中测量每种写法的 200 个元素。每种写法在同一浏览器中测三轮、轮换执行顺序，表中数字为每轮中位数在两次完整运行中的范围。计时包含框架刷新和布局读取，不是单独的 `css()` 微基准。两次原始记录分别在 [results-a.json](results-a.json) 和 [results-b.json](results-b.json)；两次均通过 200 个元素的计算样式和规则数断言，第二次额外通过资源清理断言。
+
+`probe:author-storage` 是独立的合成微基准，用于比较 502 条属性链采用实例字段、共享原型及空 `Proxy` 时的创建与读取成本；测法、结果和局限见[代码生成审阅稿](../css-author-generation-design.md)。
 
 这两份原始计时采于代码迁入 `core` 之前。迁入后重新运行 `pnpm probe` 已通过相同正确性断言；旧计时仅用于观察方案差异，不作为新实现的性能数字。
 
