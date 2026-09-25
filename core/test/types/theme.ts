@@ -38,6 +38,7 @@ s.d.raw('path("M0 0")') satisfies string;
 s.opacity.raw(0.5) satisfies string;
 s.color.brand satisfies string;
 s.color.red satisfies string;
+s.color.red satisfies 'color:red;';
 // @ts-expect-error opacity 不接受长度单位
 s.opacity.px(0.5);
 // @ts-expect-error 普通属性只接受一个 px 参数

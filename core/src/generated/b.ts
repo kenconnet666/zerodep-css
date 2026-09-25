@@ -2,7478 +2,6206 @@
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
 import { CssProperty, LengthCssProperty } from './base.js';
-// 每条属性链只在首次使用时建立系统关键字；主题仍可继承增加成员。
+// 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
 
-function backdropFilterKeywords() {
-  return {
-    inherit: 'backdrop-filter:inherit;',
-    initial: 'backdrop-filter:initial;',
-    none: 'backdrop-filter:none;',
-    revert: 'backdrop-filter:revert;',
-    revertLayer: 'backdrop-filter:revert-layer;',
-    unset: 'backdrop-filter:unset;',
-  } as const;
-}
-
-type BackdropFilterCssKeywords = Readonly<ReturnType<typeof backdropFilterKeywords>>;
-export interface BackdropFilterCss extends BackdropFilterCssKeywords {}
 /** CSS 属性 backdrop-filter；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backdrop-filter
  */
 export class BackdropFilterCss extends CssProperty<Property.BackdropFilter> {
+  readonly inherit = 'backdrop-filter:inherit;';
+  readonly initial = 'backdrop-filter:initial;';
+  readonly none = 'backdrop-filter:none;';
+  readonly revert = 'backdrop-filter:revert;';
+  readonly revertLayer = 'backdrop-filter:revert-layer;';
+  readonly unset = 'backdrop-filter:unset;';
   constructor() {
     super('backdrop-filter');
-    initializeBackdropFilterCss();
   }
 }
-let backdropFilterReady = false;
-function initializeBackdropFilterCss(): void {
-  if (backdropFilterReady) return;
-  Object.assign(BackdropFilterCss.prototype, backdropFilterKeywords());
-  Object.freeze(BackdropFilterCss.prototype);
-  backdropFilterReady = true;
-}
 
-function backfaceVisibilityKeywords() {
-  return {
-    hidden: 'backface-visibility:hidden;',
-    inherit: 'backface-visibility:inherit;',
-    initial: 'backface-visibility:initial;',
-    revert: 'backface-visibility:revert;',
-    revertLayer: 'backface-visibility:revert-layer;',
-    unset: 'backface-visibility:unset;',
-    visible: 'backface-visibility:visible;',
-  } as const;
-}
-
-type BackfaceVisibilityCssKeywords = Readonly<ReturnType<typeof backfaceVisibilityKeywords>>;
-export interface BackfaceVisibilityCss extends BackfaceVisibilityCssKeywords {}
 /** CSS 属性 backface-visibility；初始值 visible。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backface-visibility
  */
 export class BackfaceVisibilityCss extends CssProperty<Property.BackfaceVisibility> {
+  readonly hidden = 'backface-visibility:hidden;';
+  readonly inherit = 'backface-visibility:inherit;';
+  readonly initial = 'backface-visibility:initial;';
+  readonly revert = 'backface-visibility:revert;';
+  readonly revertLayer = 'backface-visibility:revert-layer;';
+  readonly unset = 'backface-visibility:unset;';
+  readonly visible = 'backface-visibility:visible;';
   constructor() {
     super('backface-visibility');
-    initializeBackfaceVisibilityCss();
   }
 }
-let backfaceVisibilityReady = false;
-function initializeBackfaceVisibilityCss(): void {
-  if (backfaceVisibilityReady) return;
-  Object.assign(BackfaceVisibilityCss.prototype, backfaceVisibilityKeywords());
-  Object.freeze(BackfaceVisibilityCss.prototype);
-  backfaceVisibilityReady = true;
-}
 
-function backgroundKeywords() {
-  return {
-    AccentColor: 'background:AccentColor;',
-    AccentColorText: 'background:AccentColorText;',
-    ActiveBorder: 'background:ActiveBorder;',
-    ActiveCaption: 'background:ActiveCaption;',
-    ActiveText: 'background:ActiveText;',
-    AppWorkspace: 'background:AppWorkspace;',
-    Background: 'background:Background;',
-    ButtonBorder: 'background:ButtonBorder;',
-    ButtonFace: 'background:ButtonFace;',
-    ButtonHighlight: 'background:ButtonHighlight;',
-    ButtonShadow: 'background:ButtonShadow;',
-    ButtonText: 'background:ButtonText;',
-    Canvas: 'background:Canvas;',
-    CanvasText: 'background:CanvasText;',
-    CaptionText: 'background:CaptionText;',
-    Field: 'background:Field;',
-    FieldText: 'background:FieldText;',
-    GrayText: 'background:GrayText;',
-    Highlight: 'background:Highlight;',
-    HighlightText: 'background:HighlightText;',
-    InactiveBorder: 'background:InactiveBorder;',
-    InactiveCaption: 'background:InactiveCaption;',
-    InactiveCaptionText: 'background:InactiveCaptionText;',
-    InfoBackground: 'background:InfoBackground;',
-    InfoText: 'background:InfoText;',
-    LinkText: 'background:LinkText;',
-    Mark: 'background:Mark;',
-    MarkText: 'background:MarkText;',
-    Menu: 'background:Menu;',
-    MenuText: 'background:MenuText;',
-    Scrollbar: 'background:Scrollbar;',
-    SelectedItem: 'background:SelectedItem;',
-    SelectedItemText: 'background:SelectedItemText;',
-    ThreeDDarkShadow: 'background:ThreeDDarkShadow;',
-    ThreeDFace: 'background:ThreeDFace;',
-    ThreeDHighlight: 'background:ThreeDHighlight;',
-    ThreeDLightShadow: 'background:ThreeDLightShadow;',
-    ThreeDShadow: 'background:ThreeDShadow;',
-    VisitedText: 'background:VisitedText;',
-    Window: 'background:Window;',
-    WindowFrame: 'background:WindowFrame;',
-    WindowText: 'background:WindowText;',
-    aliceblue: 'background:aliceblue;',
-    antiquewhite: 'background:antiquewhite;',
-    aqua: 'background:aqua;',
-    aquamarine: 'background:aquamarine;',
-    azure: 'background:azure;',
-    beige: 'background:beige;',
-    bisque: 'background:bisque;',
-    black: 'background:black;',
-    blanchedalmond: 'background:blanchedalmond;',
-    blue: 'background:blue;',
-    blueviolet: 'background:blueviolet;',
-    borderBox: 'background:border-box;',
-    bottom: 'background:bottom;',
-    brown: 'background:brown;',
-    burlywood: 'background:burlywood;',
-    cadetblue: 'background:cadetblue;',
-    center: 'background:center;',
-    chartreuse: 'background:chartreuse;',
-    chocolate: 'background:chocolate;',
-    contentBox: 'background:content-box;',
-    coral: 'background:coral;',
-    cornflowerblue: 'background:cornflowerblue;',
-    cornsilk: 'background:cornsilk;',
-    crimson: 'background:crimson;',
-    currentColor: 'background:currentColor;',
-    cyan: 'background:cyan;',
-    darkblue: 'background:darkblue;',
-    darkcyan: 'background:darkcyan;',
-    darkgoldenrod: 'background:darkgoldenrod;',
-    darkgray: 'background:darkgray;',
-    darkgreen: 'background:darkgreen;',
-    darkgrey: 'background:darkgrey;',
-    darkkhaki: 'background:darkkhaki;',
-    darkmagenta: 'background:darkmagenta;',
-    darkolivegreen: 'background:darkolivegreen;',
-    darkorange: 'background:darkorange;',
-    darkorchid: 'background:darkorchid;',
-    darkred: 'background:darkred;',
-    darksalmon: 'background:darksalmon;',
-    darkseagreen: 'background:darkseagreen;',
-    darkslateblue: 'background:darkslateblue;',
-    darkslategray: 'background:darkslategray;',
-    darkslategrey: 'background:darkslategrey;',
-    darkturquoise: 'background:darkturquoise;',
-    darkviolet: 'background:darkviolet;',
-    deeppink: 'background:deeppink;',
-    deepskyblue: 'background:deepskyblue;',
-    dimgray: 'background:dimgray;',
-    dimgrey: 'background:dimgrey;',
-    dodgerblue: 'background:dodgerblue;',
-    firebrick: 'background:firebrick;',
-    fixed: 'background:fixed;',
-    floralwhite: 'background:floralwhite;',
-    forestgreen: 'background:forestgreen;',
-    fuchsia: 'background:fuchsia;',
-    gainsboro: 'background:gainsboro;',
-    ghostwhite: 'background:ghostwhite;',
-    gold: 'background:gold;',
-    goldenrod: 'background:goldenrod;',
-    gray: 'background:gray;',
-    green: 'background:green;',
-    greenyellow: 'background:greenyellow;',
-    grey: 'background:grey;',
-    honeydew: 'background:honeydew;',
-    hotpink: 'background:hotpink;',
-    indianred: 'background:indianred;',
-    indigo: 'background:indigo;',
-    inherit: 'background:inherit;',
-    initial: 'background:initial;',
-    ivory: 'background:ivory;',
-    khaki: 'background:khaki;',
-    lavender: 'background:lavender;',
-    lavenderblush: 'background:lavenderblush;',
-    lawngreen: 'background:lawngreen;',
-    left: 'background:left;',
-    lemonchiffon: 'background:lemonchiffon;',
-    lightblue: 'background:lightblue;',
-    lightcoral: 'background:lightcoral;',
-    lightcyan: 'background:lightcyan;',
-    lightgoldenrodyellow: 'background:lightgoldenrodyellow;',
-    lightgray: 'background:lightgray;',
-    lightgreen: 'background:lightgreen;',
-    lightgrey: 'background:lightgrey;',
-    lightpink: 'background:lightpink;',
-    lightsalmon: 'background:lightsalmon;',
-    lightseagreen: 'background:lightseagreen;',
-    lightskyblue: 'background:lightskyblue;',
-    lightslategray: 'background:lightslategray;',
-    lightslategrey: 'background:lightslategrey;',
-    lightsteelblue: 'background:lightsteelblue;',
-    lightyellow: 'background:lightyellow;',
-    lime: 'background:lime;',
-    limegreen: 'background:limegreen;',
-    linen: 'background:linen;',
-    local: 'background:local;',
-    magenta: 'background:magenta;',
-    maroon: 'background:maroon;',
-    mediumaquamarine: 'background:mediumaquamarine;',
-    mediumblue: 'background:mediumblue;',
-    mediumorchid: 'background:mediumorchid;',
-    mediumpurple: 'background:mediumpurple;',
-    mediumseagreen: 'background:mediumseagreen;',
-    mediumslateblue: 'background:mediumslateblue;',
-    mediumspringgreen: 'background:mediumspringgreen;',
-    mediumturquoise: 'background:mediumturquoise;',
-    mediumvioletred: 'background:mediumvioletred;',
-    midnightblue: 'background:midnightblue;',
-    mintcream: 'background:mintcream;',
-    mistyrose: 'background:mistyrose;',
-    moccasin: 'background:moccasin;',
-    navajowhite: 'background:navajowhite;',
-    navy: 'background:navy;',
-    noRepeat: 'background:no-repeat;',
-    none: 'background:none;',
-    oldlace: 'background:oldlace;',
-    olive: 'background:olive;',
-    olivedrab: 'background:olivedrab;',
-    orange: 'background:orange;',
-    orangered: 'background:orangered;',
-    orchid: 'background:orchid;',
-    paddingBox: 'background:padding-box;',
-    palegoldenrod: 'background:palegoldenrod;',
-    palegreen: 'background:palegreen;',
-    paleturquoise: 'background:paleturquoise;',
-    palevioletred: 'background:palevioletred;',
-    papayawhip: 'background:papayawhip;',
-    peachpuff: 'background:peachpuff;',
-    peru: 'background:peru;',
-    pink: 'background:pink;',
-    plum: 'background:plum;',
-    powderblue: 'background:powderblue;',
-    purple: 'background:purple;',
-    rebeccapurple: 'background:rebeccapurple;',
-    red: 'background:red;',
-    repeat: 'background:repeat;',
-    repeatX: 'background:repeat-x;',
-    repeatY: 'background:repeat-y;',
-    revert: 'background:revert;',
-    revertLayer: 'background:revert-layer;',
-    right: 'background:right;',
-    rosybrown: 'background:rosybrown;',
-    round: 'background:round;',
-    royalblue: 'background:royalblue;',
-    saddlebrown: 'background:saddlebrown;',
-    salmon: 'background:salmon;',
-    sandybrown: 'background:sandybrown;',
-    scroll: 'background:scroll;',
-    seagreen: 'background:seagreen;',
-    seashell: 'background:seashell;',
-    sienna: 'background:sienna;',
-    silver: 'background:silver;',
-    skyblue: 'background:skyblue;',
-    slateblue: 'background:slateblue;',
-    slategray: 'background:slategray;',
-    slategrey: 'background:slategrey;',
-    snow: 'background:snow;',
-    space: 'background:space;',
-    springgreen: 'background:springgreen;',
-    steelblue: 'background:steelblue;',
-    tan: 'background:tan;',
-    teal: 'background:teal;',
-    thistle: 'background:thistle;',
-    tomato: 'background:tomato;',
-    top: 'background:top;',
-    transparent: 'background:transparent;',
-    turquoise: 'background:turquoise;',
-    unset: 'background:unset;',
-    violet: 'background:violet;',
-    wheat: 'background:wheat;',
-    white: 'background:white;',
-    whitesmoke: 'background:whitesmoke;',
-    yellow: 'background:yellow;',
-    yellowgreen: 'background:yellowgreen;',
-  } as const;
-}
-
-type BackgroundCssKeywords = Readonly<ReturnType<typeof backgroundKeywords>>;
-export interface BackgroundCss extends BackgroundCssKeywords {}
 /** CSS 属性 background。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background
  */
 export class BackgroundCss extends LengthCssProperty<Property.Background> {
+  readonly AccentColor = 'background:AccentColor;';
+  readonly AccentColorText = 'background:AccentColorText;';
+  readonly ActiveBorder = 'background:ActiveBorder;';
+  readonly ActiveCaption = 'background:ActiveCaption;';
+  readonly ActiveText = 'background:ActiveText;';
+  readonly AppWorkspace = 'background:AppWorkspace;';
+  readonly Background = 'background:Background;';
+  readonly ButtonBorder = 'background:ButtonBorder;';
+  readonly ButtonFace = 'background:ButtonFace;';
+  readonly ButtonHighlight = 'background:ButtonHighlight;';
+  readonly ButtonShadow = 'background:ButtonShadow;';
+  readonly ButtonText = 'background:ButtonText;';
+  readonly Canvas = 'background:Canvas;';
+  readonly CanvasText = 'background:CanvasText;';
+  readonly CaptionText = 'background:CaptionText;';
+  readonly Field = 'background:Field;';
+  readonly FieldText = 'background:FieldText;';
+  readonly GrayText = 'background:GrayText;';
+  readonly Highlight = 'background:Highlight;';
+  readonly HighlightText = 'background:HighlightText;';
+  readonly InactiveBorder = 'background:InactiveBorder;';
+  readonly InactiveCaption = 'background:InactiveCaption;';
+  readonly InactiveCaptionText = 'background:InactiveCaptionText;';
+  readonly InfoBackground = 'background:InfoBackground;';
+  readonly InfoText = 'background:InfoText;';
+  readonly LinkText = 'background:LinkText;';
+  readonly Mark = 'background:Mark;';
+  readonly MarkText = 'background:MarkText;';
+  readonly Menu = 'background:Menu;';
+  readonly MenuText = 'background:MenuText;';
+  readonly Scrollbar = 'background:Scrollbar;';
+  readonly SelectedItem = 'background:SelectedItem;';
+  readonly SelectedItemText = 'background:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'background:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'background:ThreeDFace;';
+  readonly ThreeDHighlight = 'background:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'background:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'background:ThreeDShadow;';
+  readonly VisitedText = 'background:VisitedText;';
+  readonly Window = 'background:Window;';
+  readonly WindowFrame = 'background:WindowFrame;';
+  readonly WindowText = 'background:WindowText;';
+  readonly aliceblue = 'background:aliceblue;';
+  readonly antiquewhite = 'background:antiquewhite;';
+  readonly aqua = 'background:aqua;';
+  readonly aquamarine = 'background:aquamarine;';
+  readonly azure = 'background:azure;';
+  readonly beige = 'background:beige;';
+  readonly bisque = 'background:bisque;';
+  readonly black = 'background:black;';
+  readonly blanchedalmond = 'background:blanchedalmond;';
+  readonly blue = 'background:blue;';
+  readonly blueviolet = 'background:blueviolet;';
+  readonly borderBox = 'background:border-box;';
+  readonly bottom = 'background:bottom;';
+  readonly brown = 'background:brown;';
+  readonly burlywood = 'background:burlywood;';
+  readonly cadetblue = 'background:cadetblue;';
+  readonly center = 'background:center;';
+  readonly chartreuse = 'background:chartreuse;';
+  readonly chocolate = 'background:chocolate;';
+  readonly contentBox = 'background:content-box;';
+  readonly coral = 'background:coral;';
+  readonly cornflowerblue = 'background:cornflowerblue;';
+  readonly cornsilk = 'background:cornsilk;';
+  readonly crimson = 'background:crimson;';
+  readonly currentColor = 'background:currentColor;';
+  readonly cyan = 'background:cyan;';
+  readonly darkblue = 'background:darkblue;';
+  readonly darkcyan = 'background:darkcyan;';
+  readonly darkgoldenrod = 'background:darkgoldenrod;';
+  readonly darkgray = 'background:darkgray;';
+  readonly darkgreen = 'background:darkgreen;';
+  readonly darkgrey = 'background:darkgrey;';
+  readonly darkkhaki = 'background:darkkhaki;';
+  readonly darkmagenta = 'background:darkmagenta;';
+  readonly darkolivegreen = 'background:darkolivegreen;';
+  readonly darkorange = 'background:darkorange;';
+  readonly darkorchid = 'background:darkorchid;';
+  readonly darkred = 'background:darkred;';
+  readonly darksalmon = 'background:darksalmon;';
+  readonly darkseagreen = 'background:darkseagreen;';
+  readonly darkslateblue = 'background:darkslateblue;';
+  readonly darkslategray = 'background:darkslategray;';
+  readonly darkslategrey = 'background:darkslategrey;';
+  readonly darkturquoise = 'background:darkturquoise;';
+  readonly darkviolet = 'background:darkviolet;';
+  readonly deeppink = 'background:deeppink;';
+  readonly deepskyblue = 'background:deepskyblue;';
+  readonly dimgray = 'background:dimgray;';
+  readonly dimgrey = 'background:dimgrey;';
+  readonly dodgerblue = 'background:dodgerblue;';
+  readonly firebrick = 'background:firebrick;';
+  readonly fixed = 'background:fixed;';
+  readonly floralwhite = 'background:floralwhite;';
+  readonly forestgreen = 'background:forestgreen;';
+  readonly fuchsia = 'background:fuchsia;';
+  readonly gainsboro = 'background:gainsboro;';
+  readonly ghostwhite = 'background:ghostwhite;';
+  readonly gold = 'background:gold;';
+  readonly goldenrod = 'background:goldenrod;';
+  readonly gray = 'background:gray;';
+  readonly green = 'background:green;';
+  readonly greenyellow = 'background:greenyellow;';
+  readonly grey = 'background:grey;';
+  readonly honeydew = 'background:honeydew;';
+  readonly hotpink = 'background:hotpink;';
+  readonly indianred = 'background:indianred;';
+  readonly indigo = 'background:indigo;';
+  readonly inherit = 'background:inherit;';
+  readonly initial = 'background:initial;';
+  readonly ivory = 'background:ivory;';
+  readonly khaki = 'background:khaki;';
+  readonly lavender = 'background:lavender;';
+  readonly lavenderblush = 'background:lavenderblush;';
+  readonly lawngreen = 'background:lawngreen;';
+  readonly left = 'background:left;';
+  readonly lemonchiffon = 'background:lemonchiffon;';
+  readonly lightblue = 'background:lightblue;';
+  readonly lightcoral = 'background:lightcoral;';
+  readonly lightcyan = 'background:lightcyan;';
+  readonly lightgoldenrodyellow = 'background:lightgoldenrodyellow;';
+  readonly lightgray = 'background:lightgray;';
+  readonly lightgreen = 'background:lightgreen;';
+  readonly lightgrey = 'background:lightgrey;';
+  readonly lightpink = 'background:lightpink;';
+  readonly lightsalmon = 'background:lightsalmon;';
+  readonly lightseagreen = 'background:lightseagreen;';
+  readonly lightskyblue = 'background:lightskyblue;';
+  readonly lightslategray = 'background:lightslategray;';
+  readonly lightslategrey = 'background:lightslategrey;';
+  readonly lightsteelblue = 'background:lightsteelblue;';
+  readonly lightyellow = 'background:lightyellow;';
+  readonly lime = 'background:lime;';
+  readonly limegreen = 'background:limegreen;';
+  readonly linen = 'background:linen;';
+  readonly local = 'background:local;';
+  readonly magenta = 'background:magenta;';
+  readonly maroon = 'background:maroon;';
+  readonly mediumaquamarine = 'background:mediumaquamarine;';
+  readonly mediumblue = 'background:mediumblue;';
+  readonly mediumorchid = 'background:mediumorchid;';
+  readonly mediumpurple = 'background:mediumpurple;';
+  readonly mediumseagreen = 'background:mediumseagreen;';
+  readonly mediumslateblue = 'background:mediumslateblue;';
+  readonly mediumspringgreen = 'background:mediumspringgreen;';
+  readonly mediumturquoise = 'background:mediumturquoise;';
+  readonly mediumvioletred = 'background:mediumvioletred;';
+  readonly midnightblue = 'background:midnightblue;';
+  readonly mintcream = 'background:mintcream;';
+  readonly mistyrose = 'background:mistyrose;';
+  readonly moccasin = 'background:moccasin;';
+  readonly navajowhite = 'background:navajowhite;';
+  readonly navy = 'background:navy;';
+  readonly noRepeat = 'background:no-repeat;';
+  readonly none = 'background:none;';
+  readonly oldlace = 'background:oldlace;';
+  readonly olive = 'background:olive;';
+  readonly olivedrab = 'background:olivedrab;';
+  readonly orange = 'background:orange;';
+  readonly orangered = 'background:orangered;';
+  readonly orchid = 'background:orchid;';
+  readonly paddingBox = 'background:padding-box;';
+  readonly palegoldenrod = 'background:palegoldenrod;';
+  readonly palegreen = 'background:palegreen;';
+  readonly paleturquoise = 'background:paleturquoise;';
+  readonly palevioletred = 'background:palevioletred;';
+  readonly papayawhip = 'background:papayawhip;';
+  readonly peachpuff = 'background:peachpuff;';
+  readonly peru = 'background:peru;';
+  readonly pink = 'background:pink;';
+  readonly plum = 'background:plum;';
+  readonly powderblue = 'background:powderblue;';
+  readonly purple = 'background:purple;';
+  readonly rebeccapurple = 'background:rebeccapurple;';
+  readonly red = 'background:red;';
+  readonly repeat = 'background:repeat;';
+  readonly repeatX = 'background:repeat-x;';
+  readonly repeatY = 'background:repeat-y;';
+  readonly revert = 'background:revert;';
+  readonly revertLayer = 'background:revert-layer;';
+  readonly right = 'background:right;';
+  readonly rosybrown = 'background:rosybrown;';
+  readonly round = 'background:round;';
+  readonly royalblue = 'background:royalblue;';
+  readonly saddlebrown = 'background:saddlebrown;';
+  readonly salmon = 'background:salmon;';
+  readonly sandybrown = 'background:sandybrown;';
+  readonly scroll = 'background:scroll;';
+  readonly seagreen = 'background:seagreen;';
+  readonly seashell = 'background:seashell;';
+  readonly sienna = 'background:sienna;';
+  readonly silver = 'background:silver;';
+  readonly skyblue = 'background:skyblue;';
+  readonly slateblue = 'background:slateblue;';
+  readonly slategray = 'background:slategray;';
+  readonly slategrey = 'background:slategrey;';
+  readonly snow = 'background:snow;';
+  readonly space = 'background:space;';
+  readonly springgreen = 'background:springgreen;';
+  readonly steelblue = 'background:steelblue;';
+  readonly tan = 'background:tan;';
+  readonly teal = 'background:teal;';
+  readonly thistle = 'background:thistle;';
+  readonly tomato = 'background:tomato;';
+  readonly top = 'background:top;';
+  readonly transparent = 'background:transparent;';
+  readonly turquoise = 'background:turquoise;';
+  readonly unset = 'background:unset;';
+  readonly violet = 'background:violet;';
+  readonly wheat = 'background:wheat;';
+  readonly white = 'background:white;';
+  readonly whitesmoke = 'background:whitesmoke;';
+  readonly yellow = 'background:yellow;';
+  readonly yellowgreen = 'background:yellowgreen;';
   constructor() {
     super('background');
-    initializeBackgroundCss();
   }
 }
-let backgroundReady = false;
-function initializeBackgroundCss(): void {
-  if (backgroundReady) return;
-  Object.assign(BackgroundCss.prototype, backgroundKeywords());
-  Object.freeze(BackgroundCss.prototype);
-  backgroundReady = true;
-}
 
-function backgroundAttachmentKeywords() {
-  return {
-    fixed: 'background-attachment:fixed;',
-    inherit: 'background-attachment:inherit;',
-    initial: 'background-attachment:initial;',
-    local: 'background-attachment:local;',
-    revert: 'background-attachment:revert;',
-    revertLayer: 'background-attachment:revert-layer;',
-    scroll: 'background-attachment:scroll;',
-    unset: 'background-attachment:unset;',
-  } as const;
-}
-
-type BackgroundAttachmentCssKeywords = Readonly<ReturnType<typeof backgroundAttachmentKeywords>>;
-export interface BackgroundAttachmentCss extends BackgroundAttachmentCssKeywords {}
 /** CSS 属性 background-attachment；初始值 scroll。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
  */
 export class BackgroundAttachmentCss extends CssProperty<Property.BackgroundAttachment> {
+  readonly fixed = 'background-attachment:fixed;';
+  readonly inherit = 'background-attachment:inherit;';
+  readonly initial = 'background-attachment:initial;';
+  readonly local = 'background-attachment:local;';
+  readonly revert = 'background-attachment:revert;';
+  readonly revertLayer = 'background-attachment:revert-layer;';
+  readonly scroll = 'background-attachment:scroll;';
+  readonly unset = 'background-attachment:unset;';
   constructor() {
     super('background-attachment');
-    initializeBackgroundAttachmentCss();
   }
 }
-let backgroundAttachmentReady = false;
-function initializeBackgroundAttachmentCss(): void {
-  if (backgroundAttachmentReady) return;
-  Object.assign(BackgroundAttachmentCss.prototype, backgroundAttachmentKeywords());
-  Object.freeze(BackgroundAttachmentCss.prototype);
-  backgroundAttachmentReady = true;
-}
 
-function backgroundBlendModeKeywords() {
-  return {
-    color: 'background-blend-mode:color;',
-    colorBurn: 'background-blend-mode:color-burn;',
-    colorDodge: 'background-blend-mode:color-dodge;',
-    darken: 'background-blend-mode:darken;',
-    difference: 'background-blend-mode:difference;',
-    exclusion: 'background-blend-mode:exclusion;',
-    hardLight: 'background-blend-mode:hard-light;',
-    hue: 'background-blend-mode:hue;',
-    inherit: 'background-blend-mode:inherit;',
-    initial: 'background-blend-mode:initial;',
-    lighten: 'background-blend-mode:lighten;',
-    luminosity: 'background-blend-mode:luminosity;',
-    multiply: 'background-blend-mode:multiply;',
-    normal: 'background-blend-mode:normal;',
-    overlay: 'background-blend-mode:overlay;',
-    revert: 'background-blend-mode:revert;',
-    revertLayer: 'background-blend-mode:revert-layer;',
-    saturation: 'background-blend-mode:saturation;',
-    screen: 'background-blend-mode:screen;',
-    softLight: 'background-blend-mode:soft-light;',
-    unset: 'background-blend-mode:unset;',
-  } as const;
-}
-
-type BackgroundBlendModeCssKeywords = Readonly<ReturnType<typeof backgroundBlendModeKeywords>>;
-export interface BackgroundBlendModeCss extends BackgroundBlendModeCssKeywords {}
 /** CSS 属性 background-blend-mode；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-blend-mode
  */
 export class BackgroundBlendModeCss extends CssProperty<Property.BackgroundBlendMode> {
+  readonly color = 'background-blend-mode:color;';
+  readonly colorBurn = 'background-blend-mode:color-burn;';
+  readonly colorDodge = 'background-blend-mode:color-dodge;';
+  readonly darken = 'background-blend-mode:darken;';
+  readonly difference = 'background-blend-mode:difference;';
+  readonly exclusion = 'background-blend-mode:exclusion;';
+  readonly hardLight = 'background-blend-mode:hard-light;';
+  readonly hue = 'background-blend-mode:hue;';
+  readonly inherit = 'background-blend-mode:inherit;';
+  readonly initial = 'background-blend-mode:initial;';
+  readonly lighten = 'background-blend-mode:lighten;';
+  readonly luminosity = 'background-blend-mode:luminosity;';
+  readonly multiply = 'background-blend-mode:multiply;';
+  readonly normal = 'background-blend-mode:normal;';
+  readonly overlay = 'background-blend-mode:overlay;';
+  readonly revert = 'background-blend-mode:revert;';
+  readonly revertLayer = 'background-blend-mode:revert-layer;';
+  readonly saturation = 'background-blend-mode:saturation;';
+  readonly screen = 'background-blend-mode:screen;';
+  readonly softLight = 'background-blend-mode:soft-light;';
+  readonly unset = 'background-blend-mode:unset;';
   constructor() {
     super('background-blend-mode');
-    initializeBackgroundBlendModeCss();
   }
 }
-let backgroundBlendModeReady = false;
-function initializeBackgroundBlendModeCss(): void {
-  if (backgroundBlendModeReady) return;
-  Object.assign(BackgroundBlendModeCss.prototype, backgroundBlendModeKeywords());
-  Object.freeze(BackgroundBlendModeCss.prototype);
-  backgroundBlendModeReady = true;
-}
 
-function backgroundClipKeywords() {
-  return {
-    borderArea: 'background-clip:border-area;',
-    borderBox: 'background-clip:border-box;',
-    contentBox: 'background-clip:content-box;',
-    inherit: 'background-clip:inherit;',
-    initial: 'background-clip:initial;',
-    paddingBox: 'background-clip:padding-box;',
-    revert: 'background-clip:revert;',
-    revertLayer: 'background-clip:revert-layer;',
-    text: 'background-clip:text;',
-    unset: 'background-clip:unset;',
-  } as const;
-}
-
-type BackgroundClipCssKeywords = Readonly<ReturnType<typeof backgroundClipKeywords>>;
-export interface BackgroundClipCss extends BackgroundClipCssKeywords {}
 /** CSS 属性 background-clip；初始值 border-box。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-clip
  */
 export class BackgroundClipCss extends CssProperty<Property.BackgroundClip> {
+  readonly borderArea = 'background-clip:border-area;';
+  readonly borderBox = 'background-clip:border-box;';
+  readonly contentBox = 'background-clip:content-box;';
+  readonly inherit = 'background-clip:inherit;';
+  readonly initial = 'background-clip:initial;';
+  readonly paddingBox = 'background-clip:padding-box;';
+  readonly revert = 'background-clip:revert;';
+  readonly revertLayer = 'background-clip:revert-layer;';
+  readonly text = 'background-clip:text;';
+  readonly unset = 'background-clip:unset;';
   constructor() {
     super('background-clip');
-    initializeBackgroundClipCss();
   }
 }
-let backgroundClipReady = false;
-function initializeBackgroundClipCss(): void {
-  if (backgroundClipReady) return;
-  Object.assign(BackgroundClipCss.prototype, backgroundClipKeywords());
-  Object.freeze(BackgroundClipCss.prototype);
-  backgroundClipReady = true;
-}
 
-function backgroundColorKeywords() {
-  return {
-    AccentColor: 'background-color:AccentColor;',
-    AccentColorText: 'background-color:AccentColorText;',
-    ActiveBorder: 'background-color:ActiveBorder;',
-    ActiveCaption: 'background-color:ActiveCaption;',
-    ActiveText: 'background-color:ActiveText;',
-    AppWorkspace: 'background-color:AppWorkspace;',
-    Background: 'background-color:Background;',
-    ButtonBorder: 'background-color:ButtonBorder;',
-    ButtonFace: 'background-color:ButtonFace;',
-    ButtonHighlight: 'background-color:ButtonHighlight;',
-    ButtonShadow: 'background-color:ButtonShadow;',
-    ButtonText: 'background-color:ButtonText;',
-    Canvas: 'background-color:Canvas;',
-    CanvasText: 'background-color:CanvasText;',
-    CaptionText: 'background-color:CaptionText;',
-    Field: 'background-color:Field;',
-    FieldText: 'background-color:FieldText;',
-    GrayText: 'background-color:GrayText;',
-    Highlight: 'background-color:Highlight;',
-    HighlightText: 'background-color:HighlightText;',
-    InactiveBorder: 'background-color:InactiveBorder;',
-    InactiveCaption: 'background-color:InactiveCaption;',
-    InactiveCaptionText: 'background-color:InactiveCaptionText;',
-    InfoBackground: 'background-color:InfoBackground;',
-    InfoText: 'background-color:InfoText;',
-    LinkText: 'background-color:LinkText;',
-    Mark: 'background-color:Mark;',
-    MarkText: 'background-color:MarkText;',
-    Menu: 'background-color:Menu;',
-    MenuText: 'background-color:MenuText;',
-    Scrollbar: 'background-color:Scrollbar;',
-    SelectedItem: 'background-color:SelectedItem;',
-    SelectedItemText: 'background-color:SelectedItemText;',
-    ThreeDDarkShadow: 'background-color:ThreeDDarkShadow;',
-    ThreeDFace: 'background-color:ThreeDFace;',
-    ThreeDHighlight: 'background-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'background-color:ThreeDLightShadow;',
-    ThreeDShadow: 'background-color:ThreeDShadow;',
-    VisitedText: 'background-color:VisitedText;',
-    Window: 'background-color:Window;',
-    WindowFrame: 'background-color:WindowFrame;',
-    WindowText: 'background-color:WindowText;',
-    aliceblue: 'background-color:aliceblue;',
-    antiquewhite: 'background-color:antiquewhite;',
-    aqua: 'background-color:aqua;',
-    aquamarine: 'background-color:aquamarine;',
-    azure: 'background-color:azure;',
-    beige: 'background-color:beige;',
-    bisque: 'background-color:bisque;',
-    black: 'background-color:black;',
-    blanchedalmond: 'background-color:blanchedalmond;',
-    blue: 'background-color:blue;',
-    blueviolet: 'background-color:blueviolet;',
-    brown: 'background-color:brown;',
-    burlywood: 'background-color:burlywood;',
-    cadetblue: 'background-color:cadetblue;',
-    chartreuse: 'background-color:chartreuse;',
-    chocolate: 'background-color:chocolate;',
-    coral: 'background-color:coral;',
-    cornflowerblue: 'background-color:cornflowerblue;',
-    cornsilk: 'background-color:cornsilk;',
-    crimson: 'background-color:crimson;',
-    currentColor: 'background-color:currentColor;',
-    cyan: 'background-color:cyan;',
-    darkblue: 'background-color:darkblue;',
-    darkcyan: 'background-color:darkcyan;',
-    darkgoldenrod: 'background-color:darkgoldenrod;',
-    darkgray: 'background-color:darkgray;',
-    darkgreen: 'background-color:darkgreen;',
-    darkgrey: 'background-color:darkgrey;',
-    darkkhaki: 'background-color:darkkhaki;',
-    darkmagenta: 'background-color:darkmagenta;',
-    darkolivegreen: 'background-color:darkolivegreen;',
-    darkorange: 'background-color:darkorange;',
-    darkorchid: 'background-color:darkorchid;',
-    darkred: 'background-color:darkred;',
-    darksalmon: 'background-color:darksalmon;',
-    darkseagreen: 'background-color:darkseagreen;',
-    darkslateblue: 'background-color:darkslateblue;',
-    darkslategray: 'background-color:darkslategray;',
-    darkslategrey: 'background-color:darkslategrey;',
-    darkturquoise: 'background-color:darkturquoise;',
-    darkviolet: 'background-color:darkviolet;',
-    deeppink: 'background-color:deeppink;',
-    deepskyblue: 'background-color:deepskyblue;',
-    dimgray: 'background-color:dimgray;',
-    dimgrey: 'background-color:dimgrey;',
-    dodgerblue: 'background-color:dodgerblue;',
-    firebrick: 'background-color:firebrick;',
-    floralwhite: 'background-color:floralwhite;',
-    forestgreen: 'background-color:forestgreen;',
-    fuchsia: 'background-color:fuchsia;',
-    gainsboro: 'background-color:gainsboro;',
-    ghostwhite: 'background-color:ghostwhite;',
-    gold: 'background-color:gold;',
-    goldenrod: 'background-color:goldenrod;',
-    gray: 'background-color:gray;',
-    green: 'background-color:green;',
-    greenyellow: 'background-color:greenyellow;',
-    grey: 'background-color:grey;',
-    honeydew: 'background-color:honeydew;',
-    hotpink: 'background-color:hotpink;',
-    indianred: 'background-color:indianred;',
-    indigo: 'background-color:indigo;',
-    inherit: 'background-color:inherit;',
-    initial: 'background-color:initial;',
-    ivory: 'background-color:ivory;',
-    khaki: 'background-color:khaki;',
-    lavender: 'background-color:lavender;',
-    lavenderblush: 'background-color:lavenderblush;',
-    lawngreen: 'background-color:lawngreen;',
-    lemonchiffon: 'background-color:lemonchiffon;',
-    lightblue: 'background-color:lightblue;',
-    lightcoral: 'background-color:lightcoral;',
-    lightcyan: 'background-color:lightcyan;',
-    lightgoldenrodyellow: 'background-color:lightgoldenrodyellow;',
-    lightgray: 'background-color:lightgray;',
-    lightgreen: 'background-color:lightgreen;',
-    lightgrey: 'background-color:lightgrey;',
-    lightpink: 'background-color:lightpink;',
-    lightsalmon: 'background-color:lightsalmon;',
-    lightseagreen: 'background-color:lightseagreen;',
-    lightskyblue: 'background-color:lightskyblue;',
-    lightslategray: 'background-color:lightslategray;',
-    lightslategrey: 'background-color:lightslategrey;',
-    lightsteelblue: 'background-color:lightsteelblue;',
-    lightyellow: 'background-color:lightyellow;',
-    lime: 'background-color:lime;',
-    limegreen: 'background-color:limegreen;',
-    linen: 'background-color:linen;',
-    magenta: 'background-color:magenta;',
-    maroon: 'background-color:maroon;',
-    mediumaquamarine: 'background-color:mediumaquamarine;',
-    mediumblue: 'background-color:mediumblue;',
-    mediumorchid: 'background-color:mediumorchid;',
-    mediumpurple: 'background-color:mediumpurple;',
-    mediumseagreen: 'background-color:mediumseagreen;',
-    mediumslateblue: 'background-color:mediumslateblue;',
-    mediumspringgreen: 'background-color:mediumspringgreen;',
-    mediumturquoise: 'background-color:mediumturquoise;',
-    mediumvioletred: 'background-color:mediumvioletred;',
-    midnightblue: 'background-color:midnightblue;',
-    mintcream: 'background-color:mintcream;',
-    mistyrose: 'background-color:mistyrose;',
-    moccasin: 'background-color:moccasin;',
-    navajowhite: 'background-color:navajowhite;',
-    navy: 'background-color:navy;',
-    oldlace: 'background-color:oldlace;',
-    olive: 'background-color:olive;',
-    olivedrab: 'background-color:olivedrab;',
-    orange: 'background-color:orange;',
-    orangered: 'background-color:orangered;',
-    orchid: 'background-color:orchid;',
-    palegoldenrod: 'background-color:palegoldenrod;',
-    palegreen: 'background-color:palegreen;',
-    paleturquoise: 'background-color:paleturquoise;',
-    palevioletred: 'background-color:palevioletred;',
-    papayawhip: 'background-color:papayawhip;',
-    peachpuff: 'background-color:peachpuff;',
-    peru: 'background-color:peru;',
-    pink: 'background-color:pink;',
-    plum: 'background-color:plum;',
-    powderblue: 'background-color:powderblue;',
-    purple: 'background-color:purple;',
-    rebeccapurple: 'background-color:rebeccapurple;',
-    red: 'background-color:red;',
-    revert: 'background-color:revert;',
-    revertLayer: 'background-color:revert-layer;',
-    rosybrown: 'background-color:rosybrown;',
-    royalblue: 'background-color:royalblue;',
-    saddlebrown: 'background-color:saddlebrown;',
-    salmon: 'background-color:salmon;',
-    sandybrown: 'background-color:sandybrown;',
-    seagreen: 'background-color:seagreen;',
-    seashell: 'background-color:seashell;',
-    sienna: 'background-color:sienna;',
-    silver: 'background-color:silver;',
-    skyblue: 'background-color:skyblue;',
-    slateblue: 'background-color:slateblue;',
-    slategray: 'background-color:slategray;',
-    slategrey: 'background-color:slategrey;',
-    snow: 'background-color:snow;',
-    springgreen: 'background-color:springgreen;',
-    steelblue: 'background-color:steelblue;',
-    tan: 'background-color:tan;',
-    teal: 'background-color:teal;',
-    thistle: 'background-color:thistle;',
-    tomato: 'background-color:tomato;',
-    transparent: 'background-color:transparent;',
-    turquoise: 'background-color:turquoise;',
-    unset: 'background-color:unset;',
-    violet: 'background-color:violet;',
-    wheat: 'background-color:wheat;',
-    white: 'background-color:white;',
-    whitesmoke: 'background-color:whitesmoke;',
-    yellow: 'background-color:yellow;',
-    yellowgreen: 'background-color:yellowgreen;',
-  } as const;
-}
-
-type BackgroundColorCssKeywords = Readonly<ReturnType<typeof backgroundColorKeywords>>;
-export interface BackgroundColorCss extends BackgroundColorCssKeywords {}
 /** 背景颜色（CSS background-color）；初始值 transparent。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-color
  */
 export class BackgroundColorCss extends CssProperty<Property.BackgroundColor> {
+  readonly AccentColor = 'background-color:AccentColor;';
+  readonly AccentColorText = 'background-color:AccentColorText;';
+  readonly ActiveBorder = 'background-color:ActiveBorder;';
+  readonly ActiveCaption = 'background-color:ActiveCaption;';
+  readonly ActiveText = 'background-color:ActiveText;';
+  readonly AppWorkspace = 'background-color:AppWorkspace;';
+  readonly Background = 'background-color:Background;';
+  readonly ButtonBorder = 'background-color:ButtonBorder;';
+  readonly ButtonFace = 'background-color:ButtonFace;';
+  readonly ButtonHighlight = 'background-color:ButtonHighlight;';
+  readonly ButtonShadow = 'background-color:ButtonShadow;';
+  readonly ButtonText = 'background-color:ButtonText;';
+  readonly Canvas = 'background-color:Canvas;';
+  readonly CanvasText = 'background-color:CanvasText;';
+  readonly CaptionText = 'background-color:CaptionText;';
+  readonly Field = 'background-color:Field;';
+  readonly FieldText = 'background-color:FieldText;';
+  readonly GrayText = 'background-color:GrayText;';
+  readonly Highlight = 'background-color:Highlight;';
+  readonly HighlightText = 'background-color:HighlightText;';
+  readonly InactiveBorder = 'background-color:InactiveBorder;';
+  readonly InactiveCaption = 'background-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'background-color:InactiveCaptionText;';
+  readonly InfoBackground = 'background-color:InfoBackground;';
+  readonly InfoText = 'background-color:InfoText;';
+  readonly LinkText = 'background-color:LinkText;';
+  readonly Mark = 'background-color:Mark;';
+  readonly MarkText = 'background-color:MarkText;';
+  readonly Menu = 'background-color:Menu;';
+  readonly MenuText = 'background-color:MenuText;';
+  readonly Scrollbar = 'background-color:Scrollbar;';
+  readonly SelectedItem = 'background-color:SelectedItem;';
+  readonly SelectedItemText = 'background-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'background-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'background-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'background-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'background-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'background-color:ThreeDShadow;';
+  readonly VisitedText = 'background-color:VisitedText;';
+  readonly Window = 'background-color:Window;';
+  readonly WindowFrame = 'background-color:WindowFrame;';
+  readonly WindowText = 'background-color:WindowText;';
+  readonly aliceblue = 'background-color:aliceblue;';
+  readonly antiquewhite = 'background-color:antiquewhite;';
+  readonly aqua = 'background-color:aqua;';
+  readonly aquamarine = 'background-color:aquamarine;';
+  readonly azure = 'background-color:azure;';
+  readonly beige = 'background-color:beige;';
+  readonly bisque = 'background-color:bisque;';
+  readonly black = 'background-color:black;';
+  readonly blanchedalmond = 'background-color:blanchedalmond;';
+  readonly blue = 'background-color:blue;';
+  readonly blueviolet = 'background-color:blueviolet;';
+  readonly brown = 'background-color:brown;';
+  readonly burlywood = 'background-color:burlywood;';
+  readonly cadetblue = 'background-color:cadetblue;';
+  readonly chartreuse = 'background-color:chartreuse;';
+  readonly chocolate = 'background-color:chocolate;';
+  readonly coral = 'background-color:coral;';
+  readonly cornflowerblue = 'background-color:cornflowerblue;';
+  readonly cornsilk = 'background-color:cornsilk;';
+  readonly crimson = 'background-color:crimson;';
+  readonly currentColor = 'background-color:currentColor;';
+  readonly cyan = 'background-color:cyan;';
+  readonly darkblue = 'background-color:darkblue;';
+  readonly darkcyan = 'background-color:darkcyan;';
+  readonly darkgoldenrod = 'background-color:darkgoldenrod;';
+  readonly darkgray = 'background-color:darkgray;';
+  readonly darkgreen = 'background-color:darkgreen;';
+  readonly darkgrey = 'background-color:darkgrey;';
+  readonly darkkhaki = 'background-color:darkkhaki;';
+  readonly darkmagenta = 'background-color:darkmagenta;';
+  readonly darkolivegreen = 'background-color:darkolivegreen;';
+  readonly darkorange = 'background-color:darkorange;';
+  readonly darkorchid = 'background-color:darkorchid;';
+  readonly darkred = 'background-color:darkred;';
+  readonly darksalmon = 'background-color:darksalmon;';
+  readonly darkseagreen = 'background-color:darkseagreen;';
+  readonly darkslateblue = 'background-color:darkslateblue;';
+  readonly darkslategray = 'background-color:darkslategray;';
+  readonly darkslategrey = 'background-color:darkslategrey;';
+  readonly darkturquoise = 'background-color:darkturquoise;';
+  readonly darkviolet = 'background-color:darkviolet;';
+  readonly deeppink = 'background-color:deeppink;';
+  readonly deepskyblue = 'background-color:deepskyblue;';
+  readonly dimgray = 'background-color:dimgray;';
+  readonly dimgrey = 'background-color:dimgrey;';
+  readonly dodgerblue = 'background-color:dodgerblue;';
+  readonly firebrick = 'background-color:firebrick;';
+  readonly floralwhite = 'background-color:floralwhite;';
+  readonly forestgreen = 'background-color:forestgreen;';
+  readonly fuchsia = 'background-color:fuchsia;';
+  readonly gainsboro = 'background-color:gainsboro;';
+  readonly ghostwhite = 'background-color:ghostwhite;';
+  readonly gold = 'background-color:gold;';
+  readonly goldenrod = 'background-color:goldenrod;';
+  readonly gray = 'background-color:gray;';
+  readonly green = 'background-color:green;';
+  readonly greenyellow = 'background-color:greenyellow;';
+  readonly grey = 'background-color:grey;';
+  readonly honeydew = 'background-color:honeydew;';
+  readonly hotpink = 'background-color:hotpink;';
+  readonly indianred = 'background-color:indianred;';
+  readonly indigo = 'background-color:indigo;';
+  readonly inherit = 'background-color:inherit;';
+  readonly initial = 'background-color:initial;';
+  readonly ivory = 'background-color:ivory;';
+  readonly khaki = 'background-color:khaki;';
+  readonly lavender = 'background-color:lavender;';
+  readonly lavenderblush = 'background-color:lavenderblush;';
+  readonly lawngreen = 'background-color:lawngreen;';
+  readonly lemonchiffon = 'background-color:lemonchiffon;';
+  readonly lightblue = 'background-color:lightblue;';
+  readonly lightcoral = 'background-color:lightcoral;';
+  readonly lightcyan = 'background-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'background-color:lightgoldenrodyellow;';
+  readonly lightgray = 'background-color:lightgray;';
+  readonly lightgreen = 'background-color:lightgreen;';
+  readonly lightgrey = 'background-color:lightgrey;';
+  readonly lightpink = 'background-color:lightpink;';
+  readonly lightsalmon = 'background-color:lightsalmon;';
+  readonly lightseagreen = 'background-color:lightseagreen;';
+  readonly lightskyblue = 'background-color:lightskyblue;';
+  readonly lightslategray = 'background-color:lightslategray;';
+  readonly lightslategrey = 'background-color:lightslategrey;';
+  readonly lightsteelblue = 'background-color:lightsteelblue;';
+  readonly lightyellow = 'background-color:lightyellow;';
+  readonly lime = 'background-color:lime;';
+  readonly limegreen = 'background-color:limegreen;';
+  readonly linen = 'background-color:linen;';
+  readonly magenta = 'background-color:magenta;';
+  readonly maroon = 'background-color:maroon;';
+  readonly mediumaquamarine = 'background-color:mediumaquamarine;';
+  readonly mediumblue = 'background-color:mediumblue;';
+  readonly mediumorchid = 'background-color:mediumorchid;';
+  readonly mediumpurple = 'background-color:mediumpurple;';
+  readonly mediumseagreen = 'background-color:mediumseagreen;';
+  readonly mediumslateblue = 'background-color:mediumslateblue;';
+  readonly mediumspringgreen = 'background-color:mediumspringgreen;';
+  readonly mediumturquoise = 'background-color:mediumturquoise;';
+  readonly mediumvioletred = 'background-color:mediumvioletred;';
+  readonly midnightblue = 'background-color:midnightblue;';
+  readonly mintcream = 'background-color:mintcream;';
+  readonly mistyrose = 'background-color:mistyrose;';
+  readonly moccasin = 'background-color:moccasin;';
+  readonly navajowhite = 'background-color:navajowhite;';
+  readonly navy = 'background-color:navy;';
+  readonly oldlace = 'background-color:oldlace;';
+  readonly olive = 'background-color:olive;';
+  readonly olivedrab = 'background-color:olivedrab;';
+  readonly orange = 'background-color:orange;';
+  readonly orangered = 'background-color:orangered;';
+  readonly orchid = 'background-color:orchid;';
+  readonly palegoldenrod = 'background-color:palegoldenrod;';
+  readonly palegreen = 'background-color:palegreen;';
+  readonly paleturquoise = 'background-color:paleturquoise;';
+  readonly palevioletred = 'background-color:palevioletred;';
+  readonly papayawhip = 'background-color:papayawhip;';
+  readonly peachpuff = 'background-color:peachpuff;';
+  readonly peru = 'background-color:peru;';
+  readonly pink = 'background-color:pink;';
+  readonly plum = 'background-color:plum;';
+  readonly powderblue = 'background-color:powderblue;';
+  readonly purple = 'background-color:purple;';
+  readonly rebeccapurple = 'background-color:rebeccapurple;';
+  readonly red = 'background-color:red;';
+  readonly revert = 'background-color:revert;';
+  readonly revertLayer = 'background-color:revert-layer;';
+  readonly rosybrown = 'background-color:rosybrown;';
+  readonly royalblue = 'background-color:royalblue;';
+  readonly saddlebrown = 'background-color:saddlebrown;';
+  readonly salmon = 'background-color:salmon;';
+  readonly sandybrown = 'background-color:sandybrown;';
+  readonly seagreen = 'background-color:seagreen;';
+  readonly seashell = 'background-color:seashell;';
+  readonly sienna = 'background-color:sienna;';
+  readonly silver = 'background-color:silver;';
+  readonly skyblue = 'background-color:skyblue;';
+  readonly slateblue = 'background-color:slateblue;';
+  readonly slategray = 'background-color:slategray;';
+  readonly slategrey = 'background-color:slategrey;';
+  readonly snow = 'background-color:snow;';
+  readonly springgreen = 'background-color:springgreen;';
+  readonly steelblue = 'background-color:steelblue;';
+  readonly tan = 'background-color:tan;';
+  readonly teal = 'background-color:teal;';
+  readonly thistle = 'background-color:thistle;';
+  readonly tomato = 'background-color:tomato;';
+  readonly transparent = 'background-color:transparent;';
+  readonly turquoise = 'background-color:turquoise;';
+  readonly unset = 'background-color:unset;';
+  readonly violet = 'background-color:violet;';
+  readonly wheat = 'background-color:wheat;';
+  readonly white = 'background-color:white;';
+  readonly whitesmoke = 'background-color:whitesmoke;';
+  readonly yellow = 'background-color:yellow;';
+  readonly yellowgreen = 'background-color:yellowgreen;';
   constructor() {
     super('background-color');
-    initializeBackgroundColorCss();
   }
 }
-let backgroundColorReady = false;
-function initializeBackgroundColorCss(): void {
-  if (backgroundColorReady) return;
-  Object.assign(BackgroundColorCss.prototype, backgroundColorKeywords());
-  Object.freeze(BackgroundColorCss.prototype);
-  backgroundColorReady = true;
-}
 
-function backgroundImageKeywords() {
-  return {
-    inherit: 'background-image:inherit;',
-    initial: 'background-image:initial;',
-    none: 'background-image:none;',
-    revert: 'background-image:revert;',
-    revertLayer: 'background-image:revert-layer;',
-    unset: 'background-image:unset;',
-  } as const;
-}
-
-type BackgroundImageCssKeywords = Readonly<ReturnType<typeof backgroundImageKeywords>>;
-export interface BackgroundImageCss extends BackgroundImageCssKeywords {}
 /** CSS 属性 background-image；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
  */
 export class BackgroundImageCss extends CssProperty<Property.BackgroundImage> {
+  readonly inherit = 'background-image:inherit;';
+  readonly initial = 'background-image:initial;';
+  readonly none = 'background-image:none;';
+  readonly revert = 'background-image:revert;';
+  readonly revertLayer = 'background-image:revert-layer;';
+  readonly unset = 'background-image:unset;';
   constructor() {
     super('background-image');
-    initializeBackgroundImageCss();
   }
 }
-let backgroundImageReady = false;
-function initializeBackgroundImageCss(): void {
-  if (backgroundImageReady) return;
-  Object.assign(BackgroundImageCss.prototype, backgroundImageKeywords());
-  Object.freeze(BackgroundImageCss.prototype);
-  backgroundImageReady = true;
-}
 
-function backgroundOriginKeywords() {
-  return {
-    borderBox: 'background-origin:border-box;',
-    contentBox: 'background-origin:content-box;',
-    inherit: 'background-origin:inherit;',
-    initial: 'background-origin:initial;',
-    paddingBox: 'background-origin:padding-box;',
-    revert: 'background-origin:revert;',
-    revertLayer: 'background-origin:revert-layer;',
-    unset: 'background-origin:unset;',
-  } as const;
-}
-
-type BackgroundOriginCssKeywords = Readonly<ReturnType<typeof backgroundOriginKeywords>>;
-export interface BackgroundOriginCss extends BackgroundOriginCssKeywords {}
 /** CSS 属性 background-origin；初始值 padding-box。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-origin
  */
 export class BackgroundOriginCss extends CssProperty<Property.BackgroundOrigin> {
+  readonly borderBox = 'background-origin:border-box;';
+  readonly contentBox = 'background-origin:content-box;';
+  readonly inherit = 'background-origin:inherit;';
+  readonly initial = 'background-origin:initial;';
+  readonly paddingBox = 'background-origin:padding-box;';
+  readonly revert = 'background-origin:revert;';
+  readonly revertLayer = 'background-origin:revert-layer;';
+  readonly unset = 'background-origin:unset;';
   constructor() {
     super('background-origin');
-    initializeBackgroundOriginCss();
   }
 }
-let backgroundOriginReady = false;
-function initializeBackgroundOriginCss(): void {
-  if (backgroundOriginReady) return;
-  Object.assign(BackgroundOriginCss.prototype, backgroundOriginKeywords());
-  Object.freeze(BackgroundOriginCss.prototype);
-  backgroundOriginReady = true;
-}
 
-function backgroundPositionKeywords() {
-  return {
-    bottom: 'background-position:bottom;',
-    center: 'background-position:center;',
-    inherit: 'background-position:inherit;',
-    initial: 'background-position:initial;',
-    left: 'background-position:left;',
-    revert: 'background-position:revert;',
-    revertLayer: 'background-position:revert-layer;',
-    right: 'background-position:right;',
-    top: 'background-position:top;',
-    unset: 'background-position:unset;',
-  } as const;
-}
-
-type BackgroundPositionCssKeywords = Readonly<ReturnType<typeof backgroundPositionKeywords>>;
-export interface BackgroundPositionCss extends BackgroundPositionCssKeywords {}
 /** CSS 属性 background-position；初始值 0% 0%。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position
  */
 export class BackgroundPositionCss extends LengthCssProperty<Property.BackgroundPosition> {
+  readonly bottom = 'background-position:bottom;';
+  readonly center = 'background-position:center;';
+  readonly inherit = 'background-position:inherit;';
+  readonly initial = 'background-position:initial;';
+  readonly left = 'background-position:left;';
+  readonly revert = 'background-position:revert;';
+  readonly revertLayer = 'background-position:revert-layer;';
+  readonly right = 'background-position:right;';
+  readonly top = 'background-position:top;';
+  readonly unset = 'background-position:unset;';
   constructor() {
     super('background-position');
-    initializeBackgroundPositionCss();
   }
 }
-let backgroundPositionReady = false;
-function initializeBackgroundPositionCss(): void {
-  if (backgroundPositionReady) return;
-  Object.assign(BackgroundPositionCss.prototype, backgroundPositionKeywords());
-  Object.freeze(BackgroundPositionCss.prototype);
-  backgroundPositionReady = true;
-}
 
-function backgroundPositionXKeywords() {
-  return {
-    center: 'background-position-x:center;',
-    inherit: 'background-position-x:inherit;',
-    initial: 'background-position-x:initial;',
-    left: 'background-position-x:left;',
-    revert: 'background-position-x:revert;',
-    revertLayer: 'background-position-x:revert-layer;',
-    right: 'background-position-x:right;',
-    unset: 'background-position-x:unset;',
-    xEnd: 'background-position-x:x-end;',
-    xStart: 'background-position-x:x-start;',
-  } as const;
-}
-
-type BackgroundPositionXCssKeywords = Readonly<ReturnType<typeof backgroundPositionXKeywords>>;
-export interface BackgroundPositionXCss extends BackgroundPositionXCssKeywords {}
 /** CSS 属性 background-position-x；初始值 0%。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-x
  */
 export class BackgroundPositionXCss extends LengthCssProperty<Property.BackgroundPositionX> {
+  readonly center = 'background-position-x:center;';
+  readonly inherit = 'background-position-x:inherit;';
+  readonly initial = 'background-position-x:initial;';
+  readonly left = 'background-position-x:left;';
+  readonly revert = 'background-position-x:revert;';
+  readonly revertLayer = 'background-position-x:revert-layer;';
+  readonly right = 'background-position-x:right;';
+  readonly unset = 'background-position-x:unset;';
+  readonly xEnd = 'background-position-x:x-end;';
+  readonly xStart = 'background-position-x:x-start;';
   constructor() {
     super('background-position-x');
-    initializeBackgroundPositionXCss();
   }
 }
-let backgroundPositionXReady = false;
-function initializeBackgroundPositionXCss(): void {
-  if (backgroundPositionXReady) return;
-  Object.assign(BackgroundPositionXCss.prototype, backgroundPositionXKeywords());
-  Object.freeze(BackgroundPositionXCss.prototype);
-  backgroundPositionXReady = true;
-}
 
-function backgroundPositionYKeywords() {
-  return {
-    bottom: 'background-position-y:bottom;',
-    center: 'background-position-y:center;',
-    inherit: 'background-position-y:inherit;',
-    initial: 'background-position-y:initial;',
-    revert: 'background-position-y:revert;',
-    revertLayer: 'background-position-y:revert-layer;',
-    top: 'background-position-y:top;',
-    unset: 'background-position-y:unset;',
-    yEnd: 'background-position-y:y-end;',
-    yStart: 'background-position-y:y-start;',
-  } as const;
-}
-
-type BackgroundPositionYCssKeywords = Readonly<ReturnType<typeof backgroundPositionYKeywords>>;
-export interface BackgroundPositionYCss extends BackgroundPositionYCssKeywords {}
 /** CSS 属性 background-position-y；初始值 0%。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-y
  */
 export class BackgroundPositionYCss extends LengthCssProperty<Property.BackgroundPositionY> {
+  readonly bottom = 'background-position-y:bottom;';
+  readonly center = 'background-position-y:center;';
+  readonly inherit = 'background-position-y:inherit;';
+  readonly initial = 'background-position-y:initial;';
+  readonly revert = 'background-position-y:revert;';
+  readonly revertLayer = 'background-position-y:revert-layer;';
+  readonly top = 'background-position-y:top;';
+  readonly unset = 'background-position-y:unset;';
+  readonly yEnd = 'background-position-y:y-end;';
+  readonly yStart = 'background-position-y:y-start;';
   constructor() {
     super('background-position-y');
-    initializeBackgroundPositionYCss();
   }
 }
-let backgroundPositionYReady = false;
-function initializeBackgroundPositionYCss(): void {
-  if (backgroundPositionYReady) return;
-  Object.assign(BackgroundPositionYCss.prototype, backgroundPositionYKeywords());
-  Object.freeze(BackgroundPositionYCss.prototype);
-  backgroundPositionYReady = true;
-}
 
-function backgroundRepeatKeywords() {
-  return {
-    inherit: 'background-repeat:inherit;',
-    initial: 'background-repeat:initial;',
-    noRepeat: 'background-repeat:no-repeat;',
-    repeat: 'background-repeat:repeat;',
-    repeatX: 'background-repeat:repeat-x;',
-    repeatY: 'background-repeat:repeat-y;',
-    revert: 'background-repeat:revert;',
-    revertLayer: 'background-repeat:revert-layer;',
-    round: 'background-repeat:round;',
-    space: 'background-repeat:space;',
-    unset: 'background-repeat:unset;',
-  } as const;
-}
-
-type BackgroundRepeatCssKeywords = Readonly<ReturnType<typeof backgroundRepeatKeywords>>;
-export interface BackgroundRepeatCss extends BackgroundRepeatCssKeywords {}
 /** CSS 属性 background-repeat；初始值 repeat。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat
  */
 export class BackgroundRepeatCss extends CssProperty<Property.BackgroundRepeat> {
+  readonly inherit = 'background-repeat:inherit;';
+  readonly initial = 'background-repeat:initial;';
+  readonly noRepeat = 'background-repeat:no-repeat;';
+  readonly repeat = 'background-repeat:repeat;';
+  readonly repeatX = 'background-repeat:repeat-x;';
+  readonly repeatY = 'background-repeat:repeat-y;';
+  readonly revert = 'background-repeat:revert;';
+  readonly revertLayer = 'background-repeat:revert-layer;';
+  readonly round = 'background-repeat:round;';
+  readonly space = 'background-repeat:space;';
+  readonly unset = 'background-repeat:unset;';
   constructor() {
     super('background-repeat');
-    initializeBackgroundRepeatCss();
   }
 }
-let backgroundRepeatReady = false;
-function initializeBackgroundRepeatCss(): void {
-  if (backgroundRepeatReady) return;
-  Object.assign(BackgroundRepeatCss.prototype, backgroundRepeatKeywords());
-  Object.freeze(BackgroundRepeatCss.prototype);
-  backgroundRepeatReady = true;
-}
 
-function backgroundSizeKeywords() {
-  return {
-    auto: 'background-size:auto;',
-    contain: 'background-size:contain;',
-    cover: 'background-size:cover;',
-    inherit: 'background-size:inherit;',
-    initial: 'background-size:initial;',
-    revert: 'background-size:revert;',
-    revertLayer: 'background-size:revert-layer;',
-    unset: 'background-size:unset;',
-  } as const;
-}
-
-type BackgroundSizeCssKeywords = Readonly<ReturnType<typeof backgroundSizeKeywords>>;
-export interface BackgroundSizeCss extends BackgroundSizeCssKeywords {}
 /** CSS 属性 background-size；初始值 auto auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-size
  */
 export class BackgroundSizeCss extends LengthCssProperty<Property.BackgroundSize> {
+  readonly auto = 'background-size:auto;';
+  readonly contain = 'background-size:contain;';
+  readonly cover = 'background-size:cover;';
+  readonly inherit = 'background-size:inherit;';
+  readonly initial = 'background-size:initial;';
+  readonly revert = 'background-size:revert;';
+  readonly revertLayer = 'background-size:revert-layer;';
+  readonly unset = 'background-size:unset;';
   constructor() {
     super('background-size');
-    initializeBackgroundSizeCss();
   }
 }
-let backgroundSizeReady = false;
-function initializeBackgroundSizeCss(): void {
-  if (backgroundSizeReady) return;
-  Object.assign(BackgroundSizeCss.prototype, backgroundSizeKeywords());
-  Object.freeze(BackgroundSizeCss.prototype);
-  backgroundSizeReady = true;
-}
 
-function baselineShiftKeywords() {
-  return {
-    baseline: 'baseline-shift:baseline;',
-    inherit: 'baseline-shift:inherit;',
-    initial: 'baseline-shift:initial;',
-    revert: 'baseline-shift:revert;',
-    revertLayer: 'baseline-shift:revert-layer;',
-    sub: 'baseline-shift:sub;',
-    super: 'baseline-shift:super;',
-    unset: 'baseline-shift:unset;',
-  } as const;
-}
-
-type BaselineShiftCssKeywords = Readonly<ReturnType<typeof baselineShiftKeywords>>;
-export interface BaselineShiftCss extends BaselineShiftCssKeywords {}
 /** CSS 属性 baseline-shift；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
  */
 export class BaselineShiftCss extends LengthCssProperty<Property.BaselineShift> {
+  readonly baseline = 'baseline-shift:baseline;';
+  readonly inherit = 'baseline-shift:inherit;';
+  readonly initial = 'baseline-shift:initial;';
+  readonly revert = 'baseline-shift:revert;';
+  readonly revertLayer = 'baseline-shift:revert-layer;';
+  readonly sub = 'baseline-shift:sub;';
+  readonly super = 'baseline-shift:super;';
+  readonly unset = 'baseline-shift:unset;';
   constructor() {
     super('baseline-shift');
-    initializeBaselineShiftCss();
   }
 }
-let baselineShiftReady = false;
-function initializeBaselineShiftCss(): void {
-  if (baselineShiftReady) return;
-  Object.assign(BaselineShiftCss.prototype, baselineShiftKeywords());
-  Object.freeze(BaselineShiftCss.prototype);
-  baselineShiftReady = true;
-}
 
-function blockSizeKeywords() {
-  return {
-    auto: 'block-size:auto;',
-    fitContent: 'block-size:fit-content;',
-    inherit: 'block-size:inherit;',
-    initial: 'block-size:initial;',
-    maxContent: 'block-size:max-content;',
-    minContent: 'block-size:min-content;',
-    revert: 'block-size:revert;',
-    revertLayer: 'block-size:revert-layer;',
-    unset: 'block-size:unset;',
-  } as const;
-}
-
-type BlockSizeCssKeywords = Readonly<ReturnType<typeof blockSizeKeywords>>;
-export interface BlockSizeCss extends BlockSizeCssKeywords {}
 /** CSS 属性 block-size；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/block-size
  */
 export class BlockSizeCss extends LengthCssProperty<Property.BlockSize> {
+  readonly auto = 'block-size:auto;';
+  readonly fitContent = 'block-size:fit-content;';
+  readonly inherit = 'block-size:inherit;';
+  readonly initial = 'block-size:initial;';
+  readonly maxContent = 'block-size:max-content;';
+  readonly minContent = 'block-size:min-content;';
+  readonly revert = 'block-size:revert;';
+  readonly revertLayer = 'block-size:revert-layer;';
+  readonly unset = 'block-size:unset;';
   constructor() {
     super('block-size');
-    initializeBlockSizeCss();
   }
 }
-let blockSizeReady = false;
-function initializeBlockSizeCss(): void {
-  if (blockSizeReady) return;
-  Object.assign(BlockSizeCss.prototype, blockSizeKeywords());
-  Object.freeze(BlockSizeCss.prototype);
-  blockSizeReady = true;
-}
 
-function borderKeywords() {
-  return {
-    AccentColor: 'border:AccentColor;',
-    AccentColorText: 'border:AccentColorText;',
-    ActiveBorder: 'border:ActiveBorder;',
-    ActiveCaption: 'border:ActiveCaption;',
-    ActiveText: 'border:ActiveText;',
-    AppWorkspace: 'border:AppWorkspace;',
-    Background: 'border:Background;',
-    ButtonBorder: 'border:ButtonBorder;',
-    ButtonFace: 'border:ButtonFace;',
-    ButtonHighlight: 'border:ButtonHighlight;',
-    ButtonShadow: 'border:ButtonShadow;',
-    ButtonText: 'border:ButtonText;',
-    Canvas: 'border:Canvas;',
-    CanvasText: 'border:CanvasText;',
-    CaptionText: 'border:CaptionText;',
-    Field: 'border:Field;',
-    FieldText: 'border:FieldText;',
-    GrayText: 'border:GrayText;',
-    Highlight: 'border:Highlight;',
-    HighlightText: 'border:HighlightText;',
-    InactiveBorder: 'border:InactiveBorder;',
-    InactiveCaption: 'border:InactiveCaption;',
-    InactiveCaptionText: 'border:InactiveCaptionText;',
-    InfoBackground: 'border:InfoBackground;',
-    InfoText: 'border:InfoText;',
-    LinkText: 'border:LinkText;',
-    Mark: 'border:Mark;',
-    MarkText: 'border:MarkText;',
-    Menu: 'border:Menu;',
-    MenuText: 'border:MenuText;',
-    Scrollbar: 'border:Scrollbar;',
-    SelectedItem: 'border:SelectedItem;',
-    SelectedItemText: 'border:SelectedItemText;',
-    ThreeDDarkShadow: 'border:ThreeDDarkShadow;',
-    ThreeDFace: 'border:ThreeDFace;',
-    ThreeDHighlight: 'border:ThreeDHighlight;',
-    ThreeDLightShadow: 'border:ThreeDLightShadow;',
-    ThreeDShadow: 'border:ThreeDShadow;',
-    VisitedText: 'border:VisitedText;',
-    Window: 'border:Window;',
-    WindowFrame: 'border:WindowFrame;',
-    WindowText: 'border:WindowText;',
-    aliceblue: 'border:aliceblue;',
-    antiquewhite: 'border:antiquewhite;',
-    aqua: 'border:aqua;',
-    aquamarine: 'border:aquamarine;',
-    azure: 'border:azure;',
-    beige: 'border:beige;',
-    bisque: 'border:bisque;',
-    black: 'border:black;',
-    blanchedalmond: 'border:blanchedalmond;',
-    blue: 'border:blue;',
-    blueviolet: 'border:blueviolet;',
-    brown: 'border:brown;',
-    burlywood: 'border:burlywood;',
-    cadetblue: 'border:cadetblue;',
-    chartreuse: 'border:chartreuse;',
-    chocolate: 'border:chocolate;',
-    coral: 'border:coral;',
-    cornflowerblue: 'border:cornflowerblue;',
-    cornsilk: 'border:cornsilk;',
-    crimson: 'border:crimson;',
-    currentColor: 'border:currentColor;',
-    cyan: 'border:cyan;',
-    darkblue: 'border:darkblue;',
-    darkcyan: 'border:darkcyan;',
-    darkgoldenrod: 'border:darkgoldenrod;',
-    darkgray: 'border:darkgray;',
-    darkgreen: 'border:darkgreen;',
-    darkgrey: 'border:darkgrey;',
-    darkkhaki: 'border:darkkhaki;',
-    darkmagenta: 'border:darkmagenta;',
-    darkolivegreen: 'border:darkolivegreen;',
-    darkorange: 'border:darkorange;',
-    darkorchid: 'border:darkorchid;',
-    darkred: 'border:darkred;',
-    darksalmon: 'border:darksalmon;',
-    darkseagreen: 'border:darkseagreen;',
-    darkslateblue: 'border:darkslateblue;',
-    darkslategray: 'border:darkslategray;',
-    darkslategrey: 'border:darkslategrey;',
-    darkturquoise: 'border:darkturquoise;',
-    darkviolet: 'border:darkviolet;',
-    dashed: 'border:dashed;',
-    deeppink: 'border:deeppink;',
-    deepskyblue: 'border:deepskyblue;',
-    dimgray: 'border:dimgray;',
-    dimgrey: 'border:dimgrey;',
-    dodgerblue: 'border:dodgerblue;',
-    dotted: 'border:dotted;',
-    double: 'border:double;',
-    firebrick: 'border:firebrick;',
-    floralwhite: 'border:floralwhite;',
-    forestgreen: 'border:forestgreen;',
-    fuchsia: 'border:fuchsia;',
-    gainsboro: 'border:gainsboro;',
-    ghostwhite: 'border:ghostwhite;',
-    gold: 'border:gold;',
-    goldenrod: 'border:goldenrod;',
-    gray: 'border:gray;',
-    green: 'border:green;',
-    greenyellow: 'border:greenyellow;',
-    grey: 'border:grey;',
-    groove: 'border:groove;',
-    hidden: 'border:hidden;',
-    honeydew: 'border:honeydew;',
-    hotpink: 'border:hotpink;',
-    indianred: 'border:indianred;',
-    indigo: 'border:indigo;',
-    inherit: 'border:inherit;',
-    initial: 'border:initial;',
-    inset: 'border:inset;',
-    ivory: 'border:ivory;',
-    khaki: 'border:khaki;',
-    lavender: 'border:lavender;',
-    lavenderblush: 'border:lavenderblush;',
-    lawngreen: 'border:lawngreen;',
-    lemonchiffon: 'border:lemonchiffon;',
-    lightblue: 'border:lightblue;',
-    lightcoral: 'border:lightcoral;',
-    lightcyan: 'border:lightcyan;',
-    lightgoldenrodyellow: 'border:lightgoldenrodyellow;',
-    lightgray: 'border:lightgray;',
-    lightgreen: 'border:lightgreen;',
-    lightgrey: 'border:lightgrey;',
-    lightpink: 'border:lightpink;',
-    lightsalmon: 'border:lightsalmon;',
-    lightseagreen: 'border:lightseagreen;',
-    lightskyblue: 'border:lightskyblue;',
-    lightslategray: 'border:lightslategray;',
-    lightslategrey: 'border:lightslategrey;',
-    lightsteelblue: 'border:lightsteelblue;',
-    lightyellow: 'border:lightyellow;',
-    lime: 'border:lime;',
-    limegreen: 'border:limegreen;',
-    linen: 'border:linen;',
-    magenta: 'border:magenta;',
-    maroon: 'border:maroon;',
-    medium: 'border:medium;',
-    mediumaquamarine: 'border:mediumaquamarine;',
-    mediumblue: 'border:mediumblue;',
-    mediumorchid: 'border:mediumorchid;',
-    mediumpurple: 'border:mediumpurple;',
-    mediumseagreen: 'border:mediumseagreen;',
-    mediumslateblue: 'border:mediumslateblue;',
-    mediumspringgreen: 'border:mediumspringgreen;',
-    mediumturquoise: 'border:mediumturquoise;',
-    mediumvioletred: 'border:mediumvioletred;',
-    midnightblue: 'border:midnightblue;',
-    mintcream: 'border:mintcream;',
-    mistyrose: 'border:mistyrose;',
-    moccasin: 'border:moccasin;',
-    navajowhite: 'border:navajowhite;',
-    navy: 'border:navy;',
-    none: 'border:none;',
-    oldlace: 'border:oldlace;',
-    olive: 'border:olive;',
-    olivedrab: 'border:olivedrab;',
-    orange: 'border:orange;',
-    orangered: 'border:orangered;',
-    orchid: 'border:orchid;',
-    outset: 'border:outset;',
-    palegoldenrod: 'border:palegoldenrod;',
-    palegreen: 'border:palegreen;',
-    paleturquoise: 'border:paleturquoise;',
-    palevioletred: 'border:palevioletred;',
-    papayawhip: 'border:papayawhip;',
-    peachpuff: 'border:peachpuff;',
-    peru: 'border:peru;',
-    pink: 'border:pink;',
-    plum: 'border:plum;',
-    powderblue: 'border:powderblue;',
-    purple: 'border:purple;',
-    rebeccapurple: 'border:rebeccapurple;',
-    red: 'border:red;',
-    revert: 'border:revert;',
-    revertLayer: 'border:revert-layer;',
-    ridge: 'border:ridge;',
-    rosybrown: 'border:rosybrown;',
-    royalblue: 'border:royalblue;',
-    saddlebrown: 'border:saddlebrown;',
-    salmon: 'border:salmon;',
-    sandybrown: 'border:sandybrown;',
-    seagreen: 'border:seagreen;',
-    seashell: 'border:seashell;',
-    sienna: 'border:sienna;',
-    silver: 'border:silver;',
-    skyblue: 'border:skyblue;',
-    slateblue: 'border:slateblue;',
-    slategray: 'border:slategray;',
-    slategrey: 'border:slategrey;',
-    snow: 'border:snow;',
-    solid: 'border:solid;',
-    springgreen: 'border:springgreen;',
-    steelblue: 'border:steelblue;',
-    tan: 'border:tan;',
-    teal: 'border:teal;',
-    thick: 'border:thick;',
-    thin: 'border:thin;',
-    thistle: 'border:thistle;',
-    tomato: 'border:tomato;',
-    transparent: 'border:transparent;',
-    turquoise: 'border:turquoise;',
-    unset: 'border:unset;',
-    violet: 'border:violet;',
-    wheat: 'border:wheat;',
-    white: 'border:white;',
-    whitesmoke: 'border:whitesmoke;',
-    yellow: 'border:yellow;',
-    yellowgreen: 'border:yellowgreen;',
-  } as const;
-}
-
-type BorderCssKeywords = Readonly<ReturnType<typeof borderKeywords>>;
-export interface BorderCss extends BorderCssKeywords {}
 /** 边框简写（CSS border）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border
  */
 export class BorderCss extends LengthCssProperty<Property.Border> {
+  readonly AccentColor = 'border:AccentColor;';
+  readonly AccentColorText = 'border:AccentColorText;';
+  readonly ActiveBorder = 'border:ActiveBorder;';
+  readonly ActiveCaption = 'border:ActiveCaption;';
+  readonly ActiveText = 'border:ActiveText;';
+  readonly AppWorkspace = 'border:AppWorkspace;';
+  readonly Background = 'border:Background;';
+  readonly ButtonBorder = 'border:ButtonBorder;';
+  readonly ButtonFace = 'border:ButtonFace;';
+  readonly ButtonHighlight = 'border:ButtonHighlight;';
+  readonly ButtonShadow = 'border:ButtonShadow;';
+  readonly ButtonText = 'border:ButtonText;';
+  readonly Canvas = 'border:Canvas;';
+  readonly CanvasText = 'border:CanvasText;';
+  readonly CaptionText = 'border:CaptionText;';
+  readonly Field = 'border:Field;';
+  readonly FieldText = 'border:FieldText;';
+  readonly GrayText = 'border:GrayText;';
+  readonly Highlight = 'border:Highlight;';
+  readonly HighlightText = 'border:HighlightText;';
+  readonly InactiveBorder = 'border:InactiveBorder;';
+  readonly InactiveCaption = 'border:InactiveCaption;';
+  readonly InactiveCaptionText = 'border:InactiveCaptionText;';
+  readonly InfoBackground = 'border:InfoBackground;';
+  readonly InfoText = 'border:InfoText;';
+  readonly LinkText = 'border:LinkText;';
+  readonly Mark = 'border:Mark;';
+  readonly MarkText = 'border:MarkText;';
+  readonly Menu = 'border:Menu;';
+  readonly MenuText = 'border:MenuText;';
+  readonly Scrollbar = 'border:Scrollbar;';
+  readonly SelectedItem = 'border:SelectedItem;';
+  readonly SelectedItemText = 'border:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border:ThreeDFace;';
+  readonly ThreeDHighlight = 'border:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border:ThreeDShadow;';
+  readonly VisitedText = 'border:VisitedText;';
+  readonly Window = 'border:Window;';
+  readonly WindowFrame = 'border:WindowFrame;';
+  readonly WindowText = 'border:WindowText;';
+  readonly aliceblue = 'border:aliceblue;';
+  readonly antiquewhite = 'border:antiquewhite;';
+  readonly aqua = 'border:aqua;';
+  readonly aquamarine = 'border:aquamarine;';
+  readonly azure = 'border:azure;';
+  readonly beige = 'border:beige;';
+  readonly bisque = 'border:bisque;';
+  readonly black = 'border:black;';
+  readonly blanchedalmond = 'border:blanchedalmond;';
+  readonly blue = 'border:blue;';
+  readonly blueviolet = 'border:blueviolet;';
+  readonly brown = 'border:brown;';
+  readonly burlywood = 'border:burlywood;';
+  readonly cadetblue = 'border:cadetblue;';
+  readonly chartreuse = 'border:chartreuse;';
+  readonly chocolate = 'border:chocolate;';
+  readonly coral = 'border:coral;';
+  readonly cornflowerblue = 'border:cornflowerblue;';
+  readonly cornsilk = 'border:cornsilk;';
+  readonly crimson = 'border:crimson;';
+  readonly currentColor = 'border:currentColor;';
+  readonly cyan = 'border:cyan;';
+  readonly darkblue = 'border:darkblue;';
+  readonly darkcyan = 'border:darkcyan;';
+  readonly darkgoldenrod = 'border:darkgoldenrod;';
+  readonly darkgray = 'border:darkgray;';
+  readonly darkgreen = 'border:darkgreen;';
+  readonly darkgrey = 'border:darkgrey;';
+  readonly darkkhaki = 'border:darkkhaki;';
+  readonly darkmagenta = 'border:darkmagenta;';
+  readonly darkolivegreen = 'border:darkolivegreen;';
+  readonly darkorange = 'border:darkorange;';
+  readonly darkorchid = 'border:darkorchid;';
+  readonly darkred = 'border:darkred;';
+  readonly darksalmon = 'border:darksalmon;';
+  readonly darkseagreen = 'border:darkseagreen;';
+  readonly darkslateblue = 'border:darkslateblue;';
+  readonly darkslategray = 'border:darkslategray;';
+  readonly darkslategrey = 'border:darkslategrey;';
+  readonly darkturquoise = 'border:darkturquoise;';
+  readonly darkviolet = 'border:darkviolet;';
+  readonly dashed = 'border:dashed;';
+  readonly deeppink = 'border:deeppink;';
+  readonly deepskyblue = 'border:deepskyblue;';
+  readonly dimgray = 'border:dimgray;';
+  readonly dimgrey = 'border:dimgrey;';
+  readonly dodgerblue = 'border:dodgerblue;';
+  readonly dotted = 'border:dotted;';
+  readonly double = 'border:double;';
+  readonly firebrick = 'border:firebrick;';
+  readonly floralwhite = 'border:floralwhite;';
+  readonly forestgreen = 'border:forestgreen;';
+  readonly fuchsia = 'border:fuchsia;';
+  readonly gainsboro = 'border:gainsboro;';
+  readonly ghostwhite = 'border:ghostwhite;';
+  readonly gold = 'border:gold;';
+  readonly goldenrod = 'border:goldenrod;';
+  readonly gray = 'border:gray;';
+  readonly green = 'border:green;';
+  readonly greenyellow = 'border:greenyellow;';
+  readonly grey = 'border:grey;';
+  readonly groove = 'border:groove;';
+  readonly hidden = 'border:hidden;';
+  readonly honeydew = 'border:honeydew;';
+  readonly hotpink = 'border:hotpink;';
+  readonly indianred = 'border:indianred;';
+  readonly indigo = 'border:indigo;';
+  readonly inherit = 'border:inherit;';
+  readonly initial = 'border:initial;';
+  readonly inset = 'border:inset;';
+  readonly ivory = 'border:ivory;';
+  readonly khaki = 'border:khaki;';
+  readonly lavender = 'border:lavender;';
+  readonly lavenderblush = 'border:lavenderblush;';
+  readonly lawngreen = 'border:lawngreen;';
+  readonly lemonchiffon = 'border:lemonchiffon;';
+  readonly lightblue = 'border:lightblue;';
+  readonly lightcoral = 'border:lightcoral;';
+  readonly lightcyan = 'border:lightcyan;';
+  readonly lightgoldenrodyellow = 'border:lightgoldenrodyellow;';
+  readonly lightgray = 'border:lightgray;';
+  readonly lightgreen = 'border:lightgreen;';
+  readonly lightgrey = 'border:lightgrey;';
+  readonly lightpink = 'border:lightpink;';
+  readonly lightsalmon = 'border:lightsalmon;';
+  readonly lightseagreen = 'border:lightseagreen;';
+  readonly lightskyblue = 'border:lightskyblue;';
+  readonly lightslategray = 'border:lightslategray;';
+  readonly lightslategrey = 'border:lightslategrey;';
+  readonly lightsteelblue = 'border:lightsteelblue;';
+  readonly lightyellow = 'border:lightyellow;';
+  readonly lime = 'border:lime;';
+  readonly limegreen = 'border:limegreen;';
+  readonly linen = 'border:linen;';
+  readonly magenta = 'border:magenta;';
+  readonly maroon = 'border:maroon;';
+  readonly medium = 'border:medium;';
+  readonly mediumaquamarine = 'border:mediumaquamarine;';
+  readonly mediumblue = 'border:mediumblue;';
+  readonly mediumorchid = 'border:mediumorchid;';
+  readonly mediumpurple = 'border:mediumpurple;';
+  readonly mediumseagreen = 'border:mediumseagreen;';
+  readonly mediumslateblue = 'border:mediumslateblue;';
+  readonly mediumspringgreen = 'border:mediumspringgreen;';
+  readonly mediumturquoise = 'border:mediumturquoise;';
+  readonly mediumvioletred = 'border:mediumvioletred;';
+  readonly midnightblue = 'border:midnightblue;';
+  readonly mintcream = 'border:mintcream;';
+  readonly mistyrose = 'border:mistyrose;';
+  readonly moccasin = 'border:moccasin;';
+  readonly navajowhite = 'border:navajowhite;';
+  readonly navy = 'border:navy;';
+  readonly none = 'border:none;';
+  readonly oldlace = 'border:oldlace;';
+  readonly olive = 'border:olive;';
+  readonly olivedrab = 'border:olivedrab;';
+  readonly orange = 'border:orange;';
+  readonly orangered = 'border:orangered;';
+  readonly orchid = 'border:orchid;';
+  readonly outset = 'border:outset;';
+  readonly palegoldenrod = 'border:palegoldenrod;';
+  readonly palegreen = 'border:palegreen;';
+  readonly paleturquoise = 'border:paleturquoise;';
+  readonly palevioletred = 'border:palevioletred;';
+  readonly papayawhip = 'border:papayawhip;';
+  readonly peachpuff = 'border:peachpuff;';
+  readonly peru = 'border:peru;';
+  readonly pink = 'border:pink;';
+  readonly plum = 'border:plum;';
+  readonly powderblue = 'border:powderblue;';
+  readonly purple = 'border:purple;';
+  readonly rebeccapurple = 'border:rebeccapurple;';
+  readonly red = 'border:red;';
+  readonly revert = 'border:revert;';
+  readonly revertLayer = 'border:revert-layer;';
+  readonly ridge = 'border:ridge;';
+  readonly rosybrown = 'border:rosybrown;';
+  readonly royalblue = 'border:royalblue;';
+  readonly saddlebrown = 'border:saddlebrown;';
+  readonly salmon = 'border:salmon;';
+  readonly sandybrown = 'border:sandybrown;';
+  readonly seagreen = 'border:seagreen;';
+  readonly seashell = 'border:seashell;';
+  readonly sienna = 'border:sienna;';
+  readonly silver = 'border:silver;';
+  readonly skyblue = 'border:skyblue;';
+  readonly slateblue = 'border:slateblue;';
+  readonly slategray = 'border:slategray;';
+  readonly slategrey = 'border:slategrey;';
+  readonly snow = 'border:snow;';
+  readonly solid = 'border:solid;';
+  readonly springgreen = 'border:springgreen;';
+  readonly steelblue = 'border:steelblue;';
+  readonly tan = 'border:tan;';
+  readonly teal = 'border:teal;';
+  readonly thick = 'border:thick;';
+  readonly thin = 'border:thin;';
+  readonly thistle = 'border:thistle;';
+  readonly tomato = 'border:tomato;';
+  readonly transparent = 'border:transparent;';
+  readonly turquoise = 'border:turquoise;';
+  readonly unset = 'border:unset;';
+  readonly violet = 'border:violet;';
+  readonly wheat = 'border:wheat;';
+  readonly white = 'border:white;';
+  readonly whitesmoke = 'border:whitesmoke;';
+  readonly yellow = 'border:yellow;';
+  readonly yellowgreen = 'border:yellowgreen;';
   constructor() {
     super('border');
-    initializeBorderCss();
   }
 }
-let borderReady = false;
-function initializeBorderCss(): void {
-  if (borderReady) return;
-  Object.assign(BorderCss.prototype, borderKeywords());
-  Object.freeze(BorderCss.prototype);
-  borderReady = true;
-}
 
-function borderBlockKeywords() {
-  return {
-    AccentColor: 'border-block:AccentColor;',
-    AccentColorText: 'border-block:AccentColorText;',
-    ActiveBorder: 'border-block:ActiveBorder;',
-    ActiveCaption: 'border-block:ActiveCaption;',
-    ActiveText: 'border-block:ActiveText;',
-    AppWorkspace: 'border-block:AppWorkspace;',
-    Background: 'border-block:Background;',
-    ButtonBorder: 'border-block:ButtonBorder;',
-    ButtonFace: 'border-block:ButtonFace;',
-    ButtonHighlight: 'border-block:ButtonHighlight;',
-    ButtonShadow: 'border-block:ButtonShadow;',
-    ButtonText: 'border-block:ButtonText;',
-    Canvas: 'border-block:Canvas;',
-    CanvasText: 'border-block:CanvasText;',
-    CaptionText: 'border-block:CaptionText;',
-    Field: 'border-block:Field;',
-    FieldText: 'border-block:FieldText;',
-    GrayText: 'border-block:GrayText;',
-    Highlight: 'border-block:Highlight;',
-    HighlightText: 'border-block:HighlightText;',
-    InactiveBorder: 'border-block:InactiveBorder;',
-    InactiveCaption: 'border-block:InactiveCaption;',
-    InactiveCaptionText: 'border-block:InactiveCaptionText;',
-    InfoBackground: 'border-block:InfoBackground;',
-    InfoText: 'border-block:InfoText;',
-    LinkText: 'border-block:LinkText;',
-    Mark: 'border-block:Mark;',
-    MarkText: 'border-block:MarkText;',
-    Menu: 'border-block:Menu;',
-    MenuText: 'border-block:MenuText;',
-    Scrollbar: 'border-block:Scrollbar;',
-    SelectedItem: 'border-block:SelectedItem;',
-    SelectedItemText: 'border-block:SelectedItemText;',
-    ThreeDDarkShadow: 'border-block:ThreeDDarkShadow;',
-    ThreeDFace: 'border-block:ThreeDFace;',
-    ThreeDHighlight: 'border-block:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-block:ThreeDLightShadow;',
-    ThreeDShadow: 'border-block:ThreeDShadow;',
-    VisitedText: 'border-block:VisitedText;',
-    Window: 'border-block:Window;',
-    WindowFrame: 'border-block:WindowFrame;',
-    WindowText: 'border-block:WindowText;',
-    aliceblue: 'border-block:aliceblue;',
-    antiquewhite: 'border-block:antiquewhite;',
-    aqua: 'border-block:aqua;',
-    aquamarine: 'border-block:aquamarine;',
-    azure: 'border-block:azure;',
-    beige: 'border-block:beige;',
-    bisque: 'border-block:bisque;',
-    black: 'border-block:black;',
-    blanchedalmond: 'border-block:blanchedalmond;',
-    blue: 'border-block:blue;',
-    blueviolet: 'border-block:blueviolet;',
-    brown: 'border-block:brown;',
-    burlywood: 'border-block:burlywood;',
-    cadetblue: 'border-block:cadetblue;',
-    chartreuse: 'border-block:chartreuse;',
-    chocolate: 'border-block:chocolate;',
-    coral: 'border-block:coral;',
-    cornflowerblue: 'border-block:cornflowerblue;',
-    cornsilk: 'border-block:cornsilk;',
-    crimson: 'border-block:crimson;',
-    currentColor: 'border-block:currentColor;',
-    cyan: 'border-block:cyan;',
-    darkblue: 'border-block:darkblue;',
-    darkcyan: 'border-block:darkcyan;',
-    darkgoldenrod: 'border-block:darkgoldenrod;',
-    darkgray: 'border-block:darkgray;',
-    darkgreen: 'border-block:darkgreen;',
-    darkgrey: 'border-block:darkgrey;',
-    darkkhaki: 'border-block:darkkhaki;',
-    darkmagenta: 'border-block:darkmagenta;',
-    darkolivegreen: 'border-block:darkolivegreen;',
-    darkorange: 'border-block:darkorange;',
-    darkorchid: 'border-block:darkorchid;',
-    darkred: 'border-block:darkred;',
-    darksalmon: 'border-block:darksalmon;',
-    darkseagreen: 'border-block:darkseagreen;',
-    darkslateblue: 'border-block:darkslateblue;',
-    darkslategray: 'border-block:darkslategray;',
-    darkslategrey: 'border-block:darkslategrey;',
-    darkturquoise: 'border-block:darkturquoise;',
-    darkviolet: 'border-block:darkviolet;',
-    dashed: 'border-block:dashed;',
-    deeppink: 'border-block:deeppink;',
-    deepskyblue: 'border-block:deepskyblue;',
-    dimgray: 'border-block:dimgray;',
-    dimgrey: 'border-block:dimgrey;',
-    dodgerblue: 'border-block:dodgerblue;',
-    dotted: 'border-block:dotted;',
-    double: 'border-block:double;',
-    firebrick: 'border-block:firebrick;',
-    floralwhite: 'border-block:floralwhite;',
-    forestgreen: 'border-block:forestgreen;',
-    fuchsia: 'border-block:fuchsia;',
-    gainsboro: 'border-block:gainsboro;',
-    ghostwhite: 'border-block:ghostwhite;',
-    gold: 'border-block:gold;',
-    goldenrod: 'border-block:goldenrod;',
-    gray: 'border-block:gray;',
-    green: 'border-block:green;',
-    greenyellow: 'border-block:greenyellow;',
-    grey: 'border-block:grey;',
-    groove: 'border-block:groove;',
-    hidden: 'border-block:hidden;',
-    honeydew: 'border-block:honeydew;',
-    hotpink: 'border-block:hotpink;',
-    indianred: 'border-block:indianred;',
-    indigo: 'border-block:indigo;',
-    inherit: 'border-block:inherit;',
-    initial: 'border-block:initial;',
-    inset: 'border-block:inset;',
-    ivory: 'border-block:ivory;',
-    khaki: 'border-block:khaki;',
-    lavender: 'border-block:lavender;',
-    lavenderblush: 'border-block:lavenderblush;',
-    lawngreen: 'border-block:lawngreen;',
-    lemonchiffon: 'border-block:lemonchiffon;',
-    lightblue: 'border-block:lightblue;',
-    lightcoral: 'border-block:lightcoral;',
-    lightcyan: 'border-block:lightcyan;',
-    lightgoldenrodyellow: 'border-block:lightgoldenrodyellow;',
-    lightgray: 'border-block:lightgray;',
-    lightgreen: 'border-block:lightgreen;',
-    lightgrey: 'border-block:lightgrey;',
-    lightpink: 'border-block:lightpink;',
-    lightsalmon: 'border-block:lightsalmon;',
-    lightseagreen: 'border-block:lightseagreen;',
-    lightskyblue: 'border-block:lightskyblue;',
-    lightslategray: 'border-block:lightslategray;',
-    lightslategrey: 'border-block:lightslategrey;',
-    lightsteelblue: 'border-block:lightsteelblue;',
-    lightyellow: 'border-block:lightyellow;',
-    lime: 'border-block:lime;',
-    limegreen: 'border-block:limegreen;',
-    linen: 'border-block:linen;',
-    magenta: 'border-block:magenta;',
-    maroon: 'border-block:maroon;',
-    medium: 'border-block:medium;',
-    mediumaquamarine: 'border-block:mediumaquamarine;',
-    mediumblue: 'border-block:mediumblue;',
-    mediumorchid: 'border-block:mediumorchid;',
-    mediumpurple: 'border-block:mediumpurple;',
-    mediumseagreen: 'border-block:mediumseagreen;',
-    mediumslateblue: 'border-block:mediumslateblue;',
-    mediumspringgreen: 'border-block:mediumspringgreen;',
-    mediumturquoise: 'border-block:mediumturquoise;',
-    mediumvioletred: 'border-block:mediumvioletred;',
-    midnightblue: 'border-block:midnightblue;',
-    mintcream: 'border-block:mintcream;',
-    mistyrose: 'border-block:mistyrose;',
-    moccasin: 'border-block:moccasin;',
-    navajowhite: 'border-block:navajowhite;',
-    navy: 'border-block:navy;',
-    none: 'border-block:none;',
-    oldlace: 'border-block:oldlace;',
-    olive: 'border-block:olive;',
-    olivedrab: 'border-block:olivedrab;',
-    orange: 'border-block:orange;',
-    orangered: 'border-block:orangered;',
-    orchid: 'border-block:orchid;',
-    outset: 'border-block:outset;',
-    palegoldenrod: 'border-block:palegoldenrod;',
-    palegreen: 'border-block:palegreen;',
-    paleturquoise: 'border-block:paleturquoise;',
-    palevioletred: 'border-block:palevioletred;',
-    papayawhip: 'border-block:papayawhip;',
-    peachpuff: 'border-block:peachpuff;',
-    peru: 'border-block:peru;',
-    pink: 'border-block:pink;',
-    plum: 'border-block:plum;',
-    powderblue: 'border-block:powderblue;',
-    purple: 'border-block:purple;',
-    rebeccapurple: 'border-block:rebeccapurple;',
-    red: 'border-block:red;',
-    revert: 'border-block:revert;',
-    revertLayer: 'border-block:revert-layer;',
-    ridge: 'border-block:ridge;',
-    rosybrown: 'border-block:rosybrown;',
-    royalblue: 'border-block:royalblue;',
-    saddlebrown: 'border-block:saddlebrown;',
-    salmon: 'border-block:salmon;',
-    sandybrown: 'border-block:sandybrown;',
-    seagreen: 'border-block:seagreen;',
-    seashell: 'border-block:seashell;',
-    sienna: 'border-block:sienna;',
-    silver: 'border-block:silver;',
-    skyblue: 'border-block:skyblue;',
-    slateblue: 'border-block:slateblue;',
-    slategray: 'border-block:slategray;',
-    slategrey: 'border-block:slategrey;',
-    snow: 'border-block:snow;',
-    solid: 'border-block:solid;',
-    springgreen: 'border-block:springgreen;',
-    steelblue: 'border-block:steelblue;',
-    tan: 'border-block:tan;',
-    teal: 'border-block:teal;',
-    thick: 'border-block:thick;',
-    thin: 'border-block:thin;',
-    thistle: 'border-block:thistle;',
-    tomato: 'border-block:tomato;',
-    transparent: 'border-block:transparent;',
-    turquoise: 'border-block:turquoise;',
-    unset: 'border-block:unset;',
-    violet: 'border-block:violet;',
-    wheat: 'border-block:wheat;',
-    white: 'border-block:white;',
-    whitesmoke: 'border-block:whitesmoke;',
-    yellow: 'border-block:yellow;',
-    yellowgreen: 'border-block:yellowgreen;',
-  } as const;
-}
-
-type BorderBlockCssKeywords = Readonly<ReturnType<typeof borderBlockKeywords>>;
-export interface BorderBlockCss extends BorderBlockCssKeywords {}
 /** CSS 属性 border-block。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block
  */
 export class BorderBlockCss extends LengthCssProperty<Property.BorderBlock> {
+  readonly AccentColor = 'border-block:AccentColor;';
+  readonly AccentColorText = 'border-block:AccentColorText;';
+  readonly ActiveBorder = 'border-block:ActiveBorder;';
+  readonly ActiveCaption = 'border-block:ActiveCaption;';
+  readonly ActiveText = 'border-block:ActiveText;';
+  readonly AppWorkspace = 'border-block:AppWorkspace;';
+  readonly Background = 'border-block:Background;';
+  readonly ButtonBorder = 'border-block:ButtonBorder;';
+  readonly ButtonFace = 'border-block:ButtonFace;';
+  readonly ButtonHighlight = 'border-block:ButtonHighlight;';
+  readonly ButtonShadow = 'border-block:ButtonShadow;';
+  readonly ButtonText = 'border-block:ButtonText;';
+  readonly Canvas = 'border-block:Canvas;';
+  readonly CanvasText = 'border-block:CanvasText;';
+  readonly CaptionText = 'border-block:CaptionText;';
+  readonly Field = 'border-block:Field;';
+  readonly FieldText = 'border-block:FieldText;';
+  readonly GrayText = 'border-block:GrayText;';
+  readonly Highlight = 'border-block:Highlight;';
+  readonly HighlightText = 'border-block:HighlightText;';
+  readonly InactiveBorder = 'border-block:InactiveBorder;';
+  readonly InactiveCaption = 'border-block:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-block:InactiveCaptionText;';
+  readonly InfoBackground = 'border-block:InfoBackground;';
+  readonly InfoText = 'border-block:InfoText;';
+  readonly LinkText = 'border-block:LinkText;';
+  readonly Mark = 'border-block:Mark;';
+  readonly MarkText = 'border-block:MarkText;';
+  readonly Menu = 'border-block:Menu;';
+  readonly MenuText = 'border-block:MenuText;';
+  readonly Scrollbar = 'border-block:Scrollbar;';
+  readonly SelectedItem = 'border-block:SelectedItem;';
+  readonly SelectedItemText = 'border-block:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-block:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-block:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-block:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-block:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-block:ThreeDShadow;';
+  readonly VisitedText = 'border-block:VisitedText;';
+  readonly Window = 'border-block:Window;';
+  readonly WindowFrame = 'border-block:WindowFrame;';
+  readonly WindowText = 'border-block:WindowText;';
+  readonly aliceblue = 'border-block:aliceblue;';
+  readonly antiquewhite = 'border-block:antiquewhite;';
+  readonly aqua = 'border-block:aqua;';
+  readonly aquamarine = 'border-block:aquamarine;';
+  readonly azure = 'border-block:azure;';
+  readonly beige = 'border-block:beige;';
+  readonly bisque = 'border-block:bisque;';
+  readonly black = 'border-block:black;';
+  readonly blanchedalmond = 'border-block:blanchedalmond;';
+  readonly blue = 'border-block:blue;';
+  readonly blueviolet = 'border-block:blueviolet;';
+  readonly brown = 'border-block:brown;';
+  readonly burlywood = 'border-block:burlywood;';
+  readonly cadetblue = 'border-block:cadetblue;';
+  readonly chartreuse = 'border-block:chartreuse;';
+  readonly chocolate = 'border-block:chocolate;';
+  readonly coral = 'border-block:coral;';
+  readonly cornflowerblue = 'border-block:cornflowerblue;';
+  readonly cornsilk = 'border-block:cornsilk;';
+  readonly crimson = 'border-block:crimson;';
+  readonly currentColor = 'border-block:currentColor;';
+  readonly cyan = 'border-block:cyan;';
+  readonly darkblue = 'border-block:darkblue;';
+  readonly darkcyan = 'border-block:darkcyan;';
+  readonly darkgoldenrod = 'border-block:darkgoldenrod;';
+  readonly darkgray = 'border-block:darkgray;';
+  readonly darkgreen = 'border-block:darkgreen;';
+  readonly darkgrey = 'border-block:darkgrey;';
+  readonly darkkhaki = 'border-block:darkkhaki;';
+  readonly darkmagenta = 'border-block:darkmagenta;';
+  readonly darkolivegreen = 'border-block:darkolivegreen;';
+  readonly darkorange = 'border-block:darkorange;';
+  readonly darkorchid = 'border-block:darkorchid;';
+  readonly darkred = 'border-block:darkred;';
+  readonly darksalmon = 'border-block:darksalmon;';
+  readonly darkseagreen = 'border-block:darkseagreen;';
+  readonly darkslateblue = 'border-block:darkslateblue;';
+  readonly darkslategray = 'border-block:darkslategray;';
+  readonly darkslategrey = 'border-block:darkslategrey;';
+  readonly darkturquoise = 'border-block:darkturquoise;';
+  readonly darkviolet = 'border-block:darkviolet;';
+  readonly dashed = 'border-block:dashed;';
+  readonly deeppink = 'border-block:deeppink;';
+  readonly deepskyblue = 'border-block:deepskyblue;';
+  readonly dimgray = 'border-block:dimgray;';
+  readonly dimgrey = 'border-block:dimgrey;';
+  readonly dodgerblue = 'border-block:dodgerblue;';
+  readonly dotted = 'border-block:dotted;';
+  readonly double = 'border-block:double;';
+  readonly firebrick = 'border-block:firebrick;';
+  readonly floralwhite = 'border-block:floralwhite;';
+  readonly forestgreen = 'border-block:forestgreen;';
+  readonly fuchsia = 'border-block:fuchsia;';
+  readonly gainsboro = 'border-block:gainsboro;';
+  readonly ghostwhite = 'border-block:ghostwhite;';
+  readonly gold = 'border-block:gold;';
+  readonly goldenrod = 'border-block:goldenrod;';
+  readonly gray = 'border-block:gray;';
+  readonly green = 'border-block:green;';
+  readonly greenyellow = 'border-block:greenyellow;';
+  readonly grey = 'border-block:grey;';
+  readonly groove = 'border-block:groove;';
+  readonly hidden = 'border-block:hidden;';
+  readonly honeydew = 'border-block:honeydew;';
+  readonly hotpink = 'border-block:hotpink;';
+  readonly indianred = 'border-block:indianred;';
+  readonly indigo = 'border-block:indigo;';
+  readonly inherit = 'border-block:inherit;';
+  readonly initial = 'border-block:initial;';
+  readonly inset = 'border-block:inset;';
+  readonly ivory = 'border-block:ivory;';
+  readonly khaki = 'border-block:khaki;';
+  readonly lavender = 'border-block:lavender;';
+  readonly lavenderblush = 'border-block:lavenderblush;';
+  readonly lawngreen = 'border-block:lawngreen;';
+  readonly lemonchiffon = 'border-block:lemonchiffon;';
+  readonly lightblue = 'border-block:lightblue;';
+  readonly lightcoral = 'border-block:lightcoral;';
+  readonly lightcyan = 'border-block:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-block:lightgoldenrodyellow;';
+  readonly lightgray = 'border-block:lightgray;';
+  readonly lightgreen = 'border-block:lightgreen;';
+  readonly lightgrey = 'border-block:lightgrey;';
+  readonly lightpink = 'border-block:lightpink;';
+  readonly lightsalmon = 'border-block:lightsalmon;';
+  readonly lightseagreen = 'border-block:lightseagreen;';
+  readonly lightskyblue = 'border-block:lightskyblue;';
+  readonly lightslategray = 'border-block:lightslategray;';
+  readonly lightslategrey = 'border-block:lightslategrey;';
+  readonly lightsteelblue = 'border-block:lightsteelblue;';
+  readonly lightyellow = 'border-block:lightyellow;';
+  readonly lime = 'border-block:lime;';
+  readonly limegreen = 'border-block:limegreen;';
+  readonly linen = 'border-block:linen;';
+  readonly magenta = 'border-block:magenta;';
+  readonly maroon = 'border-block:maroon;';
+  readonly medium = 'border-block:medium;';
+  readonly mediumaquamarine = 'border-block:mediumaquamarine;';
+  readonly mediumblue = 'border-block:mediumblue;';
+  readonly mediumorchid = 'border-block:mediumorchid;';
+  readonly mediumpurple = 'border-block:mediumpurple;';
+  readonly mediumseagreen = 'border-block:mediumseagreen;';
+  readonly mediumslateblue = 'border-block:mediumslateblue;';
+  readonly mediumspringgreen = 'border-block:mediumspringgreen;';
+  readonly mediumturquoise = 'border-block:mediumturquoise;';
+  readonly mediumvioletred = 'border-block:mediumvioletred;';
+  readonly midnightblue = 'border-block:midnightblue;';
+  readonly mintcream = 'border-block:mintcream;';
+  readonly mistyrose = 'border-block:mistyrose;';
+  readonly moccasin = 'border-block:moccasin;';
+  readonly navajowhite = 'border-block:navajowhite;';
+  readonly navy = 'border-block:navy;';
+  readonly none = 'border-block:none;';
+  readonly oldlace = 'border-block:oldlace;';
+  readonly olive = 'border-block:olive;';
+  readonly olivedrab = 'border-block:olivedrab;';
+  readonly orange = 'border-block:orange;';
+  readonly orangered = 'border-block:orangered;';
+  readonly orchid = 'border-block:orchid;';
+  readonly outset = 'border-block:outset;';
+  readonly palegoldenrod = 'border-block:palegoldenrod;';
+  readonly palegreen = 'border-block:palegreen;';
+  readonly paleturquoise = 'border-block:paleturquoise;';
+  readonly palevioletred = 'border-block:palevioletred;';
+  readonly papayawhip = 'border-block:papayawhip;';
+  readonly peachpuff = 'border-block:peachpuff;';
+  readonly peru = 'border-block:peru;';
+  readonly pink = 'border-block:pink;';
+  readonly plum = 'border-block:plum;';
+  readonly powderblue = 'border-block:powderblue;';
+  readonly purple = 'border-block:purple;';
+  readonly rebeccapurple = 'border-block:rebeccapurple;';
+  readonly red = 'border-block:red;';
+  readonly revert = 'border-block:revert;';
+  readonly revertLayer = 'border-block:revert-layer;';
+  readonly ridge = 'border-block:ridge;';
+  readonly rosybrown = 'border-block:rosybrown;';
+  readonly royalblue = 'border-block:royalblue;';
+  readonly saddlebrown = 'border-block:saddlebrown;';
+  readonly salmon = 'border-block:salmon;';
+  readonly sandybrown = 'border-block:sandybrown;';
+  readonly seagreen = 'border-block:seagreen;';
+  readonly seashell = 'border-block:seashell;';
+  readonly sienna = 'border-block:sienna;';
+  readonly silver = 'border-block:silver;';
+  readonly skyblue = 'border-block:skyblue;';
+  readonly slateblue = 'border-block:slateblue;';
+  readonly slategray = 'border-block:slategray;';
+  readonly slategrey = 'border-block:slategrey;';
+  readonly snow = 'border-block:snow;';
+  readonly solid = 'border-block:solid;';
+  readonly springgreen = 'border-block:springgreen;';
+  readonly steelblue = 'border-block:steelblue;';
+  readonly tan = 'border-block:tan;';
+  readonly teal = 'border-block:teal;';
+  readonly thick = 'border-block:thick;';
+  readonly thin = 'border-block:thin;';
+  readonly thistle = 'border-block:thistle;';
+  readonly tomato = 'border-block:tomato;';
+  readonly transparent = 'border-block:transparent;';
+  readonly turquoise = 'border-block:turquoise;';
+  readonly unset = 'border-block:unset;';
+  readonly violet = 'border-block:violet;';
+  readonly wheat = 'border-block:wheat;';
+  readonly white = 'border-block:white;';
+  readonly whitesmoke = 'border-block:whitesmoke;';
+  readonly yellow = 'border-block:yellow;';
+  readonly yellowgreen = 'border-block:yellowgreen;';
   constructor() {
     super('border-block');
-    initializeBorderBlockCss();
   }
 }
-let borderBlockReady = false;
-function initializeBorderBlockCss(): void {
-  if (borderBlockReady) return;
-  Object.assign(BorderBlockCss.prototype, borderBlockKeywords());
-  Object.freeze(BorderBlockCss.prototype);
-  borderBlockReady = true;
-}
 
-function borderBlockColorKeywords() {
-  return {
-    AccentColor: 'border-block-color:AccentColor;',
-    AccentColorText: 'border-block-color:AccentColorText;',
-    ActiveBorder: 'border-block-color:ActiveBorder;',
-    ActiveCaption: 'border-block-color:ActiveCaption;',
-    ActiveText: 'border-block-color:ActiveText;',
-    AppWorkspace: 'border-block-color:AppWorkspace;',
-    Background: 'border-block-color:Background;',
-    ButtonBorder: 'border-block-color:ButtonBorder;',
-    ButtonFace: 'border-block-color:ButtonFace;',
-    ButtonHighlight: 'border-block-color:ButtonHighlight;',
-    ButtonShadow: 'border-block-color:ButtonShadow;',
-    ButtonText: 'border-block-color:ButtonText;',
-    Canvas: 'border-block-color:Canvas;',
-    CanvasText: 'border-block-color:CanvasText;',
-    CaptionText: 'border-block-color:CaptionText;',
-    Field: 'border-block-color:Field;',
-    FieldText: 'border-block-color:FieldText;',
-    GrayText: 'border-block-color:GrayText;',
-    Highlight: 'border-block-color:Highlight;',
-    HighlightText: 'border-block-color:HighlightText;',
-    InactiveBorder: 'border-block-color:InactiveBorder;',
-    InactiveCaption: 'border-block-color:InactiveCaption;',
-    InactiveCaptionText: 'border-block-color:InactiveCaptionText;',
-    InfoBackground: 'border-block-color:InfoBackground;',
-    InfoText: 'border-block-color:InfoText;',
-    LinkText: 'border-block-color:LinkText;',
-    Mark: 'border-block-color:Mark;',
-    MarkText: 'border-block-color:MarkText;',
-    Menu: 'border-block-color:Menu;',
-    MenuText: 'border-block-color:MenuText;',
-    Scrollbar: 'border-block-color:Scrollbar;',
-    SelectedItem: 'border-block-color:SelectedItem;',
-    SelectedItemText: 'border-block-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-block-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-block-color:ThreeDFace;',
-    ThreeDHighlight: 'border-block-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-block-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-block-color:ThreeDShadow;',
-    VisitedText: 'border-block-color:VisitedText;',
-    Window: 'border-block-color:Window;',
-    WindowFrame: 'border-block-color:WindowFrame;',
-    WindowText: 'border-block-color:WindowText;',
-    aliceblue: 'border-block-color:aliceblue;',
-    antiquewhite: 'border-block-color:antiquewhite;',
-    aqua: 'border-block-color:aqua;',
-    aquamarine: 'border-block-color:aquamarine;',
-    azure: 'border-block-color:azure;',
-    beige: 'border-block-color:beige;',
-    bisque: 'border-block-color:bisque;',
-    black: 'border-block-color:black;',
-    blanchedalmond: 'border-block-color:blanchedalmond;',
-    blue: 'border-block-color:blue;',
-    blueviolet: 'border-block-color:blueviolet;',
-    brown: 'border-block-color:brown;',
-    burlywood: 'border-block-color:burlywood;',
-    cadetblue: 'border-block-color:cadetblue;',
-    chartreuse: 'border-block-color:chartreuse;',
-    chocolate: 'border-block-color:chocolate;',
-    coral: 'border-block-color:coral;',
-    cornflowerblue: 'border-block-color:cornflowerblue;',
-    cornsilk: 'border-block-color:cornsilk;',
-    crimson: 'border-block-color:crimson;',
-    currentColor: 'border-block-color:currentColor;',
-    cyan: 'border-block-color:cyan;',
-    darkblue: 'border-block-color:darkblue;',
-    darkcyan: 'border-block-color:darkcyan;',
-    darkgoldenrod: 'border-block-color:darkgoldenrod;',
-    darkgray: 'border-block-color:darkgray;',
-    darkgreen: 'border-block-color:darkgreen;',
-    darkgrey: 'border-block-color:darkgrey;',
-    darkkhaki: 'border-block-color:darkkhaki;',
-    darkmagenta: 'border-block-color:darkmagenta;',
-    darkolivegreen: 'border-block-color:darkolivegreen;',
-    darkorange: 'border-block-color:darkorange;',
-    darkorchid: 'border-block-color:darkorchid;',
-    darkred: 'border-block-color:darkred;',
-    darksalmon: 'border-block-color:darksalmon;',
-    darkseagreen: 'border-block-color:darkseagreen;',
-    darkslateblue: 'border-block-color:darkslateblue;',
-    darkslategray: 'border-block-color:darkslategray;',
-    darkslategrey: 'border-block-color:darkslategrey;',
-    darkturquoise: 'border-block-color:darkturquoise;',
-    darkviolet: 'border-block-color:darkviolet;',
-    deeppink: 'border-block-color:deeppink;',
-    deepskyblue: 'border-block-color:deepskyblue;',
-    dimgray: 'border-block-color:dimgray;',
-    dimgrey: 'border-block-color:dimgrey;',
-    dodgerblue: 'border-block-color:dodgerblue;',
-    firebrick: 'border-block-color:firebrick;',
-    floralwhite: 'border-block-color:floralwhite;',
-    forestgreen: 'border-block-color:forestgreen;',
-    fuchsia: 'border-block-color:fuchsia;',
-    gainsboro: 'border-block-color:gainsboro;',
-    ghostwhite: 'border-block-color:ghostwhite;',
-    gold: 'border-block-color:gold;',
-    goldenrod: 'border-block-color:goldenrod;',
-    gray: 'border-block-color:gray;',
-    green: 'border-block-color:green;',
-    greenyellow: 'border-block-color:greenyellow;',
-    grey: 'border-block-color:grey;',
-    honeydew: 'border-block-color:honeydew;',
-    hotpink: 'border-block-color:hotpink;',
-    indianred: 'border-block-color:indianred;',
-    indigo: 'border-block-color:indigo;',
-    inherit: 'border-block-color:inherit;',
-    initial: 'border-block-color:initial;',
-    ivory: 'border-block-color:ivory;',
-    khaki: 'border-block-color:khaki;',
-    lavender: 'border-block-color:lavender;',
-    lavenderblush: 'border-block-color:lavenderblush;',
-    lawngreen: 'border-block-color:lawngreen;',
-    lemonchiffon: 'border-block-color:lemonchiffon;',
-    lightblue: 'border-block-color:lightblue;',
-    lightcoral: 'border-block-color:lightcoral;',
-    lightcyan: 'border-block-color:lightcyan;',
-    lightgoldenrodyellow: 'border-block-color:lightgoldenrodyellow;',
-    lightgray: 'border-block-color:lightgray;',
-    lightgreen: 'border-block-color:lightgreen;',
-    lightgrey: 'border-block-color:lightgrey;',
-    lightpink: 'border-block-color:lightpink;',
-    lightsalmon: 'border-block-color:lightsalmon;',
-    lightseagreen: 'border-block-color:lightseagreen;',
-    lightskyblue: 'border-block-color:lightskyblue;',
-    lightslategray: 'border-block-color:lightslategray;',
-    lightslategrey: 'border-block-color:lightslategrey;',
-    lightsteelblue: 'border-block-color:lightsteelblue;',
-    lightyellow: 'border-block-color:lightyellow;',
-    lime: 'border-block-color:lime;',
-    limegreen: 'border-block-color:limegreen;',
-    linen: 'border-block-color:linen;',
-    magenta: 'border-block-color:magenta;',
-    maroon: 'border-block-color:maroon;',
-    mediumaquamarine: 'border-block-color:mediumaquamarine;',
-    mediumblue: 'border-block-color:mediumblue;',
-    mediumorchid: 'border-block-color:mediumorchid;',
-    mediumpurple: 'border-block-color:mediumpurple;',
-    mediumseagreen: 'border-block-color:mediumseagreen;',
-    mediumslateblue: 'border-block-color:mediumslateblue;',
-    mediumspringgreen: 'border-block-color:mediumspringgreen;',
-    mediumturquoise: 'border-block-color:mediumturquoise;',
-    mediumvioletred: 'border-block-color:mediumvioletred;',
-    midnightblue: 'border-block-color:midnightblue;',
-    mintcream: 'border-block-color:mintcream;',
-    mistyrose: 'border-block-color:mistyrose;',
-    moccasin: 'border-block-color:moccasin;',
-    navajowhite: 'border-block-color:navajowhite;',
-    navy: 'border-block-color:navy;',
-    oldlace: 'border-block-color:oldlace;',
-    olive: 'border-block-color:olive;',
-    olivedrab: 'border-block-color:olivedrab;',
-    orange: 'border-block-color:orange;',
-    orangered: 'border-block-color:orangered;',
-    orchid: 'border-block-color:orchid;',
-    palegoldenrod: 'border-block-color:palegoldenrod;',
-    palegreen: 'border-block-color:palegreen;',
-    paleturquoise: 'border-block-color:paleturquoise;',
-    palevioletred: 'border-block-color:palevioletred;',
-    papayawhip: 'border-block-color:papayawhip;',
-    peachpuff: 'border-block-color:peachpuff;',
-    peru: 'border-block-color:peru;',
-    pink: 'border-block-color:pink;',
-    plum: 'border-block-color:plum;',
-    powderblue: 'border-block-color:powderblue;',
-    purple: 'border-block-color:purple;',
-    rebeccapurple: 'border-block-color:rebeccapurple;',
-    red: 'border-block-color:red;',
-    revert: 'border-block-color:revert;',
-    revertLayer: 'border-block-color:revert-layer;',
-    rosybrown: 'border-block-color:rosybrown;',
-    royalblue: 'border-block-color:royalblue;',
-    saddlebrown: 'border-block-color:saddlebrown;',
-    salmon: 'border-block-color:salmon;',
-    sandybrown: 'border-block-color:sandybrown;',
-    seagreen: 'border-block-color:seagreen;',
-    seashell: 'border-block-color:seashell;',
-    sienna: 'border-block-color:sienna;',
-    silver: 'border-block-color:silver;',
-    skyblue: 'border-block-color:skyblue;',
-    slateblue: 'border-block-color:slateblue;',
-    slategray: 'border-block-color:slategray;',
-    slategrey: 'border-block-color:slategrey;',
-    snow: 'border-block-color:snow;',
-    springgreen: 'border-block-color:springgreen;',
-    steelblue: 'border-block-color:steelblue;',
-    tan: 'border-block-color:tan;',
-    teal: 'border-block-color:teal;',
-    thistle: 'border-block-color:thistle;',
-    tomato: 'border-block-color:tomato;',
-    transparent: 'border-block-color:transparent;',
-    turquoise: 'border-block-color:turquoise;',
-    unset: 'border-block-color:unset;',
-    violet: 'border-block-color:violet;',
-    wheat: 'border-block-color:wheat;',
-    white: 'border-block-color:white;',
-    whitesmoke: 'border-block-color:whitesmoke;',
-    yellow: 'border-block-color:yellow;',
-    yellowgreen: 'border-block-color:yellowgreen;',
-  } as const;
-}
-
-type BorderBlockColorCssKeywords = Readonly<ReturnType<typeof borderBlockColorKeywords>>;
-export interface BorderBlockColorCss extends BorderBlockColorCssKeywords {}
 /** CSS 属性 border-block-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-color
  */
 export class BorderBlockColorCss extends CssProperty<Property.BorderBlockColor> {
+  readonly AccentColor = 'border-block-color:AccentColor;';
+  readonly AccentColorText = 'border-block-color:AccentColorText;';
+  readonly ActiveBorder = 'border-block-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-block-color:ActiveCaption;';
+  readonly ActiveText = 'border-block-color:ActiveText;';
+  readonly AppWorkspace = 'border-block-color:AppWorkspace;';
+  readonly Background = 'border-block-color:Background;';
+  readonly ButtonBorder = 'border-block-color:ButtonBorder;';
+  readonly ButtonFace = 'border-block-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-block-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-block-color:ButtonShadow;';
+  readonly ButtonText = 'border-block-color:ButtonText;';
+  readonly Canvas = 'border-block-color:Canvas;';
+  readonly CanvasText = 'border-block-color:CanvasText;';
+  readonly CaptionText = 'border-block-color:CaptionText;';
+  readonly Field = 'border-block-color:Field;';
+  readonly FieldText = 'border-block-color:FieldText;';
+  readonly GrayText = 'border-block-color:GrayText;';
+  readonly Highlight = 'border-block-color:Highlight;';
+  readonly HighlightText = 'border-block-color:HighlightText;';
+  readonly InactiveBorder = 'border-block-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-block-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-block-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-block-color:InfoBackground;';
+  readonly InfoText = 'border-block-color:InfoText;';
+  readonly LinkText = 'border-block-color:LinkText;';
+  readonly Mark = 'border-block-color:Mark;';
+  readonly MarkText = 'border-block-color:MarkText;';
+  readonly Menu = 'border-block-color:Menu;';
+  readonly MenuText = 'border-block-color:MenuText;';
+  readonly Scrollbar = 'border-block-color:Scrollbar;';
+  readonly SelectedItem = 'border-block-color:SelectedItem;';
+  readonly SelectedItemText = 'border-block-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-block-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-block-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-block-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-block-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-block-color:ThreeDShadow;';
+  readonly VisitedText = 'border-block-color:VisitedText;';
+  readonly Window = 'border-block-color:Window;';
+  readonly WindowFrame = 'border-block-color:WindowFrame;';
+  readonly WindowText = 'border-block-color:WindowText;';
+  readonly aliceblue = 'border-block-color:aliceblue;';
+  readonly antiquewhite = 'border-block-color:antiquewhite;';
+  readonly aqua = 'border-block-color:aqua;';
+  readonly aquamarine = 'border-block-color:aquamarine;';
+  readonly azure = 'border-block-color:azure;';
+  readonly beige = 'border-block-color:beige;';
+  readonly bisque = 'border-block-color:bisque;';
+  readonly black = 'border-block-color:black;';
+  readonly blanchedalmond = 'border-block-color:blanchedalmond;';
+  readonly blue = 'border-block-color:blue;';
+  readonly blueviolet = 'border-block-color:blueviolet;';
+  readonly brown = 'border-block-color:brown;';
+  readonly burlywood = 'border-block-color:burlywood;';
+  readonly cadetblue = 'border-block-color:cadetblue;';
+  readonly chartreuse = 'border-block-color:chartreuse;';
+  readonly chocolate = 'border-block-color:chocolate;';
+  readonly coral = 'border-block-color:coral;';
+  readonly cornflowerblue = 'border-block-color:cornflowerblue;';
+  readonly cornsilk = 'border-block-color:cornsilk;';
+  readonly crimson = 'border-block-color:crimson;';
+  readonly currentColor = 'border-block-color:currentColor;';
+  readonly cyan = 'border-block-color:cyan;';
+  readonly darkblue = 'border-block-color:darkblue;';
+  readonly darkcyan = 'border-block-color:darkcyan;';
+  readonly darkgoldenrod = 'border-block-color:darkgoldenrod;';
+  readonly darkgray = 'border-block-color:darkgray;';
+  readonly darkgreen = 'border-block-color:darkgreen;';
+  readonly darkgrey = 'border-block-color:darkgrey;';
+  readonly darkkhaki = 'border-block-color:darkkhaki;';
+  readonly darkmagenta = 'border-block-color:darkmagenta;';
+  readonly darkolivegreen = 'border-block-color:darkolivegreen;';
+  readonly darkorange = 'border-block-color:darkorange;';
+  readonly darkorchid = 'border-block-color:darkorchid;';
+  readonly darkred = 'border-block-color:darkred;';
+  readonly darksalmon = 'border-block-color:darksalmon;';
+  readonly darkseagreen = 'border-block-color:darkseagreen;';
+  readonly darkslateblue = 'border-block-color:darkslateblue;';
+  readonly darkslategray = 'border-block-color:darkslategray;';
+  readonly darkslategrey = 'border-block-color:darkslategrey;';
+  readonly darkturquoise = 'border-block-color:darkturquoise;';
+  readonly darkviolet = 'border-block-color:darkviolet;';
+  readonly deeppink = 'border-block-color:deeppink;';
+  readonly deepskyblue = 'border-block-color:deepskyblue;';
+  readonly dimgray = 'border-block-color:dimgray;';
+  readonly dimgrey = 'border-block-color:dimgrey;';
+  readonly dodgerblue = 'border-block-color:dodgerblue;';
+  readonly firebrick = 'border-block-color:firebrick;';
+  readonly floralwhite = 'border-block-color:floralwhite;';
+  readonly forestgreen = 'border-block-color:forestgreen;';
+  readonly fuchsia = 'border-block-color:fuchsia;';
+  readonly gainsboro = 'border-block-color:gainsboro;';
+  readonly ghostwhite = 'border-block-color:ghostwhite;';
+  readonly gold = 'border-block-color:gold;';
+  readonly goldenrod = 'border-block-color:goldenrod;';
+  readonly gray = 'border-block-color:gray;';
+  readonly green = 'border-block-color:green;';
+  readonly greenyellow = 'border-block-color:greenyellow;';
+  readonly grey = 'border-block-color:grey;';
+  readonly honeydew = 'border-block-color:honeydew;';
+  readonly hotpink = 'border-block-color:hotpink;';
+  readonly indianred = 'border-block-color:indianred;';
+  readonly indigo = 'border-block-color:indigo;';
+  readonly inherit = 'border-block-color:inherit;';
+  readonly initial = 'border-block-color:initial;';
+  readonly ivory = 'border-block-color:ivory;';
+  readonly khaki = 'border-block-color:khaki;';
+  readonly lavender = 'border-block-color:lavender;';
+  readonly lavenderblush = 'border-block-color:lavenderblush;';
+  readonly lawngreen = 'border-block-color:lawngreen;';
+  readonly lemonchiffon = 'border-block-color:lemonchiffon;';
+  readonly lightblue = 'border-block-color:lightblue;';
+  readonly lightcoral = 'border-block-color:lightcoral;';
+  readonly lightcyan = 'border-block-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-block-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-block-color:lightgray;';
+  readonly lightgreen = 'border-block-color:lightgreen;';
+  readonly lightgrey = 'border-block-color:lightgrey;';
+  readonly lightpink = 'border-block-color:lightpink;';
+  readonly lightsalmon = 'border-block-color:lightsalmon;';
+  readonly lightseagreen = 'border-block-color:lightseagreen;';
+  readonly lightskyblue = 'border-block-color:lightskyblue;';
+  readonly lightslategray = 'border-block-color:lightslategray;';
+  readonly lightslategrey = 'border-block-color:lightslategrey;';
+  readonly lightsteelblue = 'border-block-color:lightsteelblue;';
+  readonly lightyellow = 'border-block-color:lightyellow;';
+  readonly lime = 'border-block-color:lime;';
+  readonly limegreen = 'border-block-color:limegreen;';
+  readonly linen = 'border-block-color:linen;';
+  readonly magenta = 'border-block-color:magenta;';
+  readonly maroon = 'border-block-color:maroon;';
+  readonly mediumaquamarine = 'border-block-color:mediumaquamarine;';
+  readonly mediumblue = 'border-block-color:mediumblue;';
+  readonly mediumorchid = 'border-block-color:mediumorchid;';
+  readonly mediumpurple = 'border-block-color:mediumpurple;';
+  readonly mediumseagreen = 'border-block-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-block-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-block-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-block-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-block-color:mediumvioletred;';
+  readonly midnightblue = 'border-block-color:midnightblue;';
+  readonly mintcream = 'border-block-color:mintcream;';
+  readonly mistyrose = 'border-block-color:mistyrose;';
+  readonly moccasin = 'border-block-color:moccasin;';
+  readonly navajowhite = 'border-block-color:navajowhite;';
+  readonly navy = 'border-block-color:navy;';
+  readonly oldlace = 'border-block-color:oldlace;';
+  readonly olive = 'border-block-color:olive;';
+  readonly olivedrab = 'border-block-color:olivedrab;';
+  readonly orange = 'border-block-color:orange;';
+  readonly orangered = 'border-block-color:orangered;';
+  readonly orchid = 'border-block-color:orchid;';
+  readonly palegoldenrod = 'border-block-color:palegoldenrod;';
+  readonly palegreen = 'border-block-color:palegreen;';
+  readonly paleturquoise = 'border-block-color:paleturquoise;';
+  readonly palevioletred = 'border-block-color:palevioletred;';
+  readonly papayawhip = 'border-block-color:papayawhip;';
+  readonly peachpuff = 'border-block-color:peachpuff;';
+  readonly peru = 'border-block-color:peru;';
+  readonly pink = 'border-block-color:pink;';
+  readonly plum = 'border-block-color:plum;';
+  readonly powderblue = 'border-block-color:powderblue;';
+  readonly purple = 'border-block-color:purple;';
+  readonly rebeccapurple = 'border-block-color:rebeccapurple;';
+  readonly red = 'border-block-color:red;';
+  readonly revert = 'border-block-color:revert;';
+  readonly revertLayer = 'border-block-color:revert-layer;';
+  readonly rosybrown = 'border-block-color:rosybrown;';
+  readonly royalblue = 'border-block-color:royalblue;';
+  readonly saddlebrown = 'border-block-color:saddlebrown;';
+  readonly salmon = 'border-block-color:salmon;';
+  readonly sandybrown = 'border-block-color:sandybrown;';
+  readonly seagreen = 'border-block-color:seagreen;';
+  readonly seashell = 'border-block-color:seashell;';
+  readonly sienna = 'border-block-color:sienna;';
+  readonly silver = 'border-block-color:silver;';
+  readonly skyblue = 'border-block-color:skyblue;';
+  readonly slateblue = 'border-block-color:slateblue;';
+  readonly slategray = 'border-block-color:slategray;';
+  readonly slategrey = 'border-block-color:slategrey;';
+  readonly snow = 'border-block-color:snow;';
+  readonly springgreen = 'border-block-color:springgreen;';
+  readonly steelblue = 'border-block-color:steelblue;';
+  readonly tan = 'border-block-color:tan;';
+  readonly teal = 'border-block-color:teal;';
+  readonly thistle = 'border-block-color:thistle;';
+  readonly tomato = 'border-block-color:tomato;';
+  readonly transparent = 'border-block-color:transparent;';
+  readonly turquoise = 'border-block-color:turquoise;';
+  readonly unset = 'border-block-color:unset;';
+  readonly violet = 'border-block-color:violet;';
+  readonly wheat = 'border-block-color:wheat;';
+  readonly white = 'border-block-color:white;';
+  readonly whitesmoke = 'border-block-color:whitesmoke;';
+  readonly yellow = 'border-block-color:yellow;';
+  readonly yellowgreen = 'border-block-color:yellowgreen;';
   constructor() {
     super('border-block-color');
-    initializeBorderBlockColorCss();
   }
 }
-let borderBlockColorReady = false;
-function initializeBorderBlockColorCss(): void {
-  if (borderBlockColorReady) return;
-  Object.assign(BorderBlockColorCss.prototype, borderBlockColorKeywords());
-  Object.freeze(BorderBlockColorCss.prototype);
-  borderBlockColorReady = true;
-}
 
-function borderBlockEndKeywords() {
-  return {
-    AccentColor: 'border-block-end:AccentColor;',
-    AccentColorText: 'border-block-end:AccentColorText;',
-    ActiveBorder: 'border-block-end:ActiveBorder;',
-    ActiveCaption: 'border-block-end:ActiveCaption;',
-    ActiveText: 'border-block-end:ActiveText;',
-    AppWorkspace: 'border-block-end:AppWorkspace;',
-    Background: 'border-block-end:Background;',
-    ButtonBorder: 'border-block-end:ButtonBorder;',
-    ButtonFace: 'border-block-end:ButtonFace;',
-    ButtonHighlight: 'border-block-end:ButtonHighlight;',
-    ButtonShadow: 'border-block-end:ButtonShadow;',
-    ButtonText: 'border-block-end:ButtonText;',
-    Canvas: 'border-block-end:Canvas;',
-    CanvasText: 'border-block-end:CanvasText;',
-    CaptionText: 'border-block-end:CaptionText;',
-    Field: 'border-block-end:Field;',
-    FieldText: 'border-block-end:FieldText;',
-    GrayText: 'border-block-end:GrayText;',
-    Highlight: 'border-block-end:Highlight;',
-    HighlightText: 'border-block-end:HighlightText;',
-    InactiveBorder: 'border-block-end:InactiveBorder;',
-    InactiveCaption: 'border-block-end:InactiveCaption;',
-    InactiveCaptionText: 'border-block-end:InactiveCaptionText;',
-    InfoBackground: 'border-block-end:InfoBackground;',
-    InfoText: 'border-block-end:InfoText;',
-    LinkText: 'border-block-end:LinkText;',
-    Mark: 'border-block-end:Mark;',
-    MarkText: 'border-block-end:MarkText;',
-    Menu: 'border-block-end:Menu;',
-    MenuText: 'border-block-end:MenuText;',
-    Scrollbar: 'border-block-end:Scrollbar;',
-    SelectedItem: 'border-block-end:SelectedItem;',
-    SelectedItemText: 'border-block-end:SelectedItemText;',
-    ThreeDDarkShadow: 'border-block-end:ThreeDDarkShadow;',
-    ThreeDFace: 'border-block-end:ThreeDFace;',
-    ThreeDHighlight: 'border-block-end:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-block-end:ThreeDLightShadow;',
-    ThreeDShadow: 'border-block-end:ThreeDShadow;',
-    VisitedText: 'border-block-end:VisitedText;',
-    Window: 'border-block-end:Window;',
-    WindowFrame: 'border-block-end:WindowFrame;',
-    WindowText: 'border-block-end:WindowText;',
-    aliceblue: 'border-block-end:aliceblue;',
-    antiquewhite: 'border-block-end:antiquewhite;',
-    aqua: 'border-block-end:aqua;',
-    aquamarine: 'border-block-end:aquamarine;',
-    azure: 'border-block-end:azure;',
-    beige: 'border-block-end:beige;',
-    bisque: 'border-block-end:bisque;',
-    black: 'border-block-end:black;',
-    blanchedalmond: 'border-block-end:blanchedalmond;',
-    blue: 'border-block-end:blue;',
-    blueviolet: 'border-block-end:blueviolet;',
-    brown: 'border-block-end:brown;',
-    burlywood: 'border-block-end:burlywood;',
-    cadetblue: 'border-block-end:cadetblue;',
-    chartreuse: 'border-block-end:chartreuse;',
-    chocolate: 'border-block-end:chocolate;',
-    coral: 'border-block-end:coral;',
-    cornflowerblue: 'border-block-end:cornflowerblue;',
-    cornsilk: 'border-block-end:cornsilk;',
-    crimson: 'border-block-end:crimson;',
-    currentColor: 'border-block-end:currentColor;',
-    cyan: 'border-block-end:cyan;',
-    darkblue: 'border-block-end:darkblue;',
-    darkcyan: 'border-block-end:darkcyan;',
-    darkgoldenrod: 'border-block-end:darkgoldenrod;',
-    darkgray: 'border-block-end:darkgray;',
-    darkgreen: 'border-block-end:darkgreen;',
-    darkgrey: 'border-block-end:darkgrey;',
-    darkkhaki: 'border-block-end:darkkhaki;',
-    darkmagenta: 'border-block-end:darkmagenta;',
-    darkolivegreen: 'border-block-end:darkolivegreen;',
-    darkorange: 'border-block-end:darkorange;',
-    darkorchid: 'border-block-end:darkorchid;',
-    darkred: 'border-block-end:darkred;',
-    darksalmon: 'border-block-end:darksalmon;',
-    darkseagreen: 'border-block-end:darkseagreen;',
-    darkslateblue: 'border-block-end:darkslateblue;',
-    darkslategray: 'border-block-end:darkslategray;',
-    darkslategrey: 'border-block-end:darkslategrey;',
-    darkturquoise: 'border-block-end:darkturquoise;',
-    darkviolet: 'border-block-end:darkviolet;',
-    dashed: 'border-block-end:dashed;',
-    deeppink: 'border-block-end:deeppink;',
-    deepskyblue: 'border-block-end:deepskyblue;',
-    dimgray: 'border-block-end:dimgray;',
-    dimgrey: 'border-block-end:dimgrey;',
-    dodgerblue: 'border-block-end:dodgerblue;',
-    dotted: 'border-block-end:dotted;',
-    double: 'border-block-end:double;',
-    firebrick: 'border-block-end:firebrick;',
-    floralwhite: 'border-block-end:floralwhite;',
-    forestgreen: 'border-block-end:forestgreen;',
-    fuchsia: 'border-block-end:fuchsia;',
-    gainsboro: 'border-block-end:gainsboro;',
-    ghostwhite: 'border-block-end:ghostwhite;',
-    gold: 'border-block-end:gold;',
-    goldenrod: 'border-block-end:goldenrod;',
-    gray: 'border-block-end:gray;',
-    green: 'border-block-end:green;',
-    greenyellow: 'border-block-end:greenyellow;',
-    grey: 'border-block-end:grey;',
-    groove: 'border-block-end:groove;',
-    hidden: 'border-block-end:hidden;',
-    honeydew: 'border-block-end:honeydew;',
-    hotpink: 'border-block-end:hotpink;',
-    indianred: 'border-block-end:indianred;',
-    indigo: 'border-block-end:indigo;',
-    inherit: 'border-block-end:inherit;',
-    initial: 'border-block-end:initial;',
-    inset: 'border-block-end:inset;',
-    ivory: 'border-block-end:ivory;',
-    khaki: 'border-block-end:khaki;',
-    lavender: 'border-block-end:lavender;',
-    lavenderblush: 'border-block-end:lavenderblush;',
-    lawngreen: 'border-block-end:lawngreen;',
-    lemonchiffon: 'border-block-end:lemonchiffon;',
-    lightblue: 'border-block-end:lightblue;',
-    lightcoral: 'border-block-end:lightcoral;',
-    lightcyan: 'border-block-end:lightcyan;',
-    lightgoldenrodyellow: 'border-block-end:lightgoldenrodyellow;',
-    lightgray: 'border-block-end:lightgray;',
-    lightgreen: 'border-block-end:lightgreen;',
-    lightgrey: 'border-block-end:lightgrey;',
-    lightpink: 'border-block-end:lightpink;',
-    lightsalmon: 'border-block-end:lightsalmon;',
-    lightseagreen: 'border-block-end:lightseagreen;',
-    lightskyblue: 'border-block-end:lightskyblue;',
-    lightslategray: 'border-block-end:lightslategray;',
-    lightslategrey: 'border-block-end:lightslategrey;',
-    lightsteelblue: 'border-block-end:lightsteelblue;',
-    lightyellow: 'border-block-end:lightyellow;',
-    lime: 'border-block-end:lime;',
-    limegreen: 'border-block-end:limegreen;',
-    linen: 'border-block-end:linen;',
-    magenta: 'border-block-end:magenta;',
-    maroon: 'border-block-end:maroon;',
-    medium: 'border-block-end:medium;',
-    mediumaquamarine: 'border-block-end:mediumaquamarine;',
-    mediumblue: 'border-block-end:mediumblue;',
-    mediumorchid: 'border-block-end:mediumorchid;',
-    mediumpurple: 'border-block-end:mediumpurple;',
-    mediumseagreen: 'border-block-end:mediumseagreen;',
-    mediumslateblue: 'border-block-end:mediumslateblue;',
-    mediumspringgreen: 'border-block-end:mediumspringgreen;',
-    mediumturquoise: 'border-block-end:mediumturquoise;',
-    mediumvioletred: 'border-block-end:mediumvioletred;',
-    midnightblue: 'border-block-end:midnightblue;',
-    mintcream: 'border-block-end:mintcream;',
-    mistyrose: 'border-block-end:mistyrose;',
-    moccasin: 'border-block-end:moccasin;',
-    navajowhite: 'border-block-end:navajowhite;',
-    navy: 'border-block-end:navy;',
-    none: 'border-block-end:none;',
-    oldlace: 'border-block-end:oldlace;',
-    olive: 'border-block-end:olive;',
-    olivedrab: 'border-block-end:olivedrab;',
-    orange: 'border-block-end:orange;',
-    orangered: 'border-block-end:orangered;',
-    orchid: 'border-block-end:orchid;',
-    outset: 'border-block-end:outset;',
-    palegoldenrod: 'border-block-end:palegoldenrod;',
-    palegreen: 'border-block-end:palegreen;',
-    paleturquoise: 'border-block-end:paleturquoise;',
-    palevioletred: 'border-block-end:palevioletred;',
-    papayawhip: 'border-block-end:papayawhip;',
-    peachpuff: 'border-block-end:peachpuff;',
-    peru: 'border-block-end:peru;',
-    pink: 'border-block-end:pink;',
-    plum: 'border-block-end:plum;',
-    powderblue: 'border-block-end:powderblue;',
-    purple: 'border-block-end:purple;',
-    rebeccapurple: 'border-block-end:rebeccapurple;',
-    red: 'border-block-end:red;',
-    revert: 'border-block-end:revert;',
-    revertLayer: 'border-block-end:revert-layer;',
-    ridge: 'border-block-end:ridge;',
-    rosybrown: 'border-block-end:rosybrown;',
-    royalblue: 'border-block-end:royalblue;',
-    saddlebrown: 'border-block-end:saddlebrown;',
-    salmon: 'border-block-end:salmon;',
-    sandybrown: 'border-block-end:sandybrown;',
-    seagreen: 'border-block-end:seagreen;',
-    seashell: 'border-block-end:seashell;',
-    sienna: 'border-block-end:sienna;',
-    silver: 'border-block-end:silver;',
-    skyblue: 'border-block-end:skyblue;',
-    slateblue: 'border-block-end:slateblue;',
-    slategray: 'border-block-end:slategray;',
-    slategrey: 'border-block-end:slategrey;',
-    snow: 'border-block-end:snow;',
-    solid: 'border-block-end:solid;',
-    springgreen: 'border-block-end:springgreen;',
-    steelblue: 'border-block-end:steelblue;',
-    tan: 'border-block-end:tan;',
-    teal: 'border-block-end:teal;',
-    thick: 'border-block-end:thick;',
-    thin: 'border-block-end:thin;',
-    thistle: 'border-block-end:thistle;',
-    tomato: 'border-block-end:tomato;',
-    transparent: 'border-block-end:transparent;',
-    turquoise: 'border-block-end:turquoise;',
-    unset: 'border-block-end:unset;',
-    violet: 'border-block-end:violet;',
-    wheat: 'border-block-end:wheat;',
-    white: 'border-block-end:white;',
-    whitesmoke: 'border-block-end:whitesmoke;',
-    yellow: 'border-block-end:yellow;',
-    yellowgreen: 'border-block-end:yellowgreen;',
-  } as const;
-}
-
-type BorderBlockEndCssKeywords = Readonly<ReturnType<typeof borderBlockEndKeywords>>;
-export interface BorderBlockEndCss extends BorderBlockEndCssKeywords {}
 /** CSS 属性 border-block-end。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end
  */
 export class BorderBlockEndCss extends LengthCssProperty<Property.BorderBlockEnd> {
+  readonly AccentColor = 'border-block-end:AccentColor;';
+  readonly AccentColorText = 'border-block-end:AccentColorText;';
+  readonly ActiveBorder = 'border-block-end:ActiveBorder;';
+  readonly ActiveCaption = 'border-block-end:ActiveCaption;';
+  readonly ActiveText = 'border-block-end:ActiveText;';
+  readonly AppWorkspace = 'border-block-end:AppWorkspace;';
+  readonly Background = 'border-block-end:Background;';
+  readonly ButtonBorder = 'border-block-end:ButtonBorder;';
+  readonly ButtonFace = 'border-block-end:ButtonFace;';
+  readonly ButtonHighlight = 'border-block-end:ButtonHighlight;';
+  readonly ButtonShadow = 'border-block-end:ButtonShadow;';
+  readonly ButtonText = 'border-block-end:ButtonText;';
+  readonly Canvas = 'border-block-end:Canvas;';
+  readonly CanvasText = 'border-block-end:CanvasText;';
+  readonly CaptionText = 'border-block-end:CaptionText;';
+  readonly Field = 'border-block-end:Field;';
+  readonly FieldText = 'border-block-end:FieldText;';
+  readonly GrayText = 'border-block-end:GrayText;';
+  readonly Highlight = 'border-block-end:Highlight;';
+  readonly HighlightText = 'border-block-end:HighlightText;';
+  readonly InactiveBorder = 'border-block-end:InactiveBorder;';
+  readonly InactiveCaption = 'border-block-end:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-block-end:InactiveCaptionText;';
+  readonly InfoBackground = 'border-block-end:InfoBackground;';
+  readonly InfoText = 'border-block-end:InfoText;';
+  readonly LinkText = 'border-block-end:LinkText;';
+  readonly Mark = 'border-block-end:Mark;';
+  readonly MarkText = 'border-block-end:MarkText;';
+  readonly Menu = 'border-block-end:Menu;';
+  readonly MenuText = 'border-block-end:MenuText;';
+  readonly Scrollbar = 'border-block-end:Scrollbar;';
+  readonly SelectedItem = 'border-block-end:SelectedItem;';
+  readonly SelectedItemText = 'border-block-end:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-block-end:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-block-end:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-block-end:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-block-end:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-block-end:ThreeDShadow;';
+  readonly VisitedText = 'border-block-end:VisitedText;';
+  readonly Window = 'border-block-end:Window;';
+  readonly WindowFrame = 'border-block-end:WindowFrame;';
+  readonly WindowText = 'border-block-end:WindowText;';
+  readonly aliceblue = 'border-block-end:aliceblue;';
+  readonly antiquewhite = 'border-block-end:antiquewhite;';
+  readonly aqua = 'border-block-end:aqua;';
+  readonly aquamarine = 'border-block-end:aquamarine;';
+  readonly azure = 'border-block-end:azure;';
+  readonly beige = 'border-block-end:beige;';
+  readonly bisque = 'border-block-end:bisque;';
+  readonly black = 'border-block-end:black;';
+  readonly blanchedalmond = 'border-block-end:blanchedalmond;';
+  readonly blue = 'border-block-end:blue;';
+  readonly blueviolet = 'border-block-end:blueviolet;';
+  readonly brown = 'border-block-end:brown;';
+  readonly burlywood = 'border-block-end:burlywood;';
+  readonly cadetblue = 'border-block-end:cadetblue;';
+  readonly chartreuse = 'border-block-end:chartreuse;';
+  readonly chocolate = 'border-block-end:chocolate;';
+  readonly coral = 'border-block-end:coral;';
+  readonly cornflowerblue = 'border-block-end:cornflowerblue;';
+  readonly cornsilk = 'border-block-end:cornsilk;';
+  readonly crimson = 'border-block-end:crimson;';
+  readonly currentColor = 'border-block-end:currentColor;';
+  readonly cyan = 'border-block-end:cyan;';
+  readonly darkblue = 'border-block-end:darkblue;';
+  readonly darkcyan = 'border-block-end:darkcyan;';
+  readonly darkgoldenrod = 'border-block-end:darkgoldenrod;';
+  readonly darkgray = 'border-block-end:darkgray;';
+  readonly darkgreen = 'border-block-end:darkgreen;';
+  readonly darkgrey = 'border-block-end:darkgrey;';
+  readonly darkkhaki = 'border-block-end:darkkhaki;';
+  readonly darkmagenta = 'border-block-end:darkmagenta;';
+  readonly darkolivegreen = 'border-block-end:darkolivegreen;';
+  readonly darkorange = 'border-block-end:darkorange;';
+  readonly darkorchid = 'border-block-end:darkorchid;';
+  readonly darkred = 'border-block-end:darkred;';
+  readonly darksalmon = 'border-block-end:darksalmon;';
+  readonly darkseagreen = 'border-block-end:darkseagreen;';
+  readonly darkslateblue = 'border-block-end:darkslateblue;';
+  readonly darkslategray = 'border-block-end:darkslategray;';
+  readonly darkslategrey = 'border-block-end:darkslategrey;';
+  readonly darkturquoise = 'border-block-end:darkturquoise;';
+  readonly darkviolet = 'border-block-end:darkviolet;';
+  readonly dashed = 'border-block-end:dashed;';
+  readonly deeppink = 'border-block-end:deeppink;';
+  readonly deepskyblue = 'border-block-end:deepskyblue;';
+  readonly dimgray = 'border-block-end:dimgray;';
+  readonly dimgrey = 'border-block-end:dimgrey;';
+  readonly dodgerblue = 'border-block-end:dodgerblue;';
+  readonly dotted = 'border-block-end:dotted;';
+  readonly double = 'border-block-end:double;';
+  readonly firebrick = 'border-block-end:firebrick;';
+  readonly floralwhite = 'border-block-end:floralwhite;';
+  readonly forestgreen = 'border-block-end:forestgreen;';
+  readonly fuchsia = 'border-block-end:fuchsia;';
+  readonly gainsboro = 'border-block-end:gainsboro;';
+  readonly ghostwhite = 'border-block-end:ghostwhite;';
+  readonly gold = 'border-block-end:gold;';
+  readonly goldenrod = 'border-block-end:goldenrod;';
+  readonly gray = 'border-block-end:gray;';
+  readonly green = 'border-block-end:green;';
+  readonly greenyellow = 'border-block-end:greenyellow;';
+  readonly grey = 'border-block-end:grey;';
+  readonly groove = 'border-block-end:groove;';
+  readonly hidden = 'border-block-end:hidden;';
+  readonly honeydew = 'border-block-end:honeydew;';
+  readonly hotpink = 'border-block-end:hotpink;';
+  readonly indianred = 'border-block-end:indianred;';
+  readonly indigo = 'border-block-end:indigo;';
+  readonly inherit = 'border-block-end:inherit;';
+  readonly initial = 'border-block-end:initial;';
+  readonly inset = 'border-block-end:inset;';
+  readonly ivory = 'border-block-end:ivory;';
+  readonly khaki = 'border-block-end:khaki;';
+  readonly lavender = 'border-block-end:lavender;';
+  readonly lavenderblush = 'border-block-end:lavenderblush;';
+  readonly lawngreen = 'border-block-end:lawngreen;';
+  readonly lemonchiffon = 'border-block-end:lemonchiffon;';
+  readonly lightblue = 'border-block-end:lightblue;';
+  readonly lightcoral = 'border-block-end:lightcoral;';
+  readonly lightcyan = 'border-block-end:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-block-end:lightgoldenrodyellow;';
+  readonly lightgray = 'border-block-end:lightgray;';
+  readonly lightgreen = 'border-block-end:lightgreen;';
+  readonly lightgrey = 'border-block-end:lightgrey;';
+  readonly lightpink = 'border-block-end:lightpink;';
+  readonly lightsalmon = 'border-block-end:lightsalmon;';
+  readonly lightseagreen = 'border-block-end:lightseagreen;';
+  readonly lightskyblue = 'border-block-end:lightskyblue;';
+  readonly lightslategray = 'border-block-end:lightslategray;';
+  readonly lightslategrey = 'border-block-end:lightslategrey;';
+  readonly lightsteelblue = 'border-block-end:lightsteelblue;';
+  readonly lightyellow = 'border-block-end:lightyellow;';
+  readonly lime = 'border-block-end:lime;';
+  readonly limegreen = 'border-block-end:limegreen;';
+  readonly linen = 'border-block-end:linen;';
+  readonly magenta = 'border-block-end:magenta;';
+  readonly maroon = 'border-block-end:maroon;';
+  readonly medium = 'border-block-end:medium;';
+  readonly mediumaquamarine = 'border-block-end:mediumaquamarine;';
+  readonly mediumblue = 'border-block-end:mediumblue;';
+  readonly mediumorchid = 'border-block-end:mediumorchid;';
+  readonly mediumpurple = 'border-block-end:mediumpurple;';
+  readonly mediumseagreen = 'border-block-end:mediumseagreen;';
+  readonly mediumslateblue = 'border-block-end:mediumslateblue;';
+  readonly mediumspringgreen = 'border-block-end:mediumspringgreen;';
+  readonly mediumturquoise = 'border-block-end:mediumturquoise;';
+  readonly mediumvioletred = 'border-block-end:mediumvioletred;';
+  readonly midnightblue = 'border-block-end:midnightblue;';
+  readonly mintcream = 'border-block-end:mintcream;';
+  readonly mistyrose = 'border-block-end:mistyrose;';
+  readonly moccasin = 'border-block-end:moccasin;';
+  readonly navajowhite = 'border-block-end:navajowhite;';
+  readonly navy = 'border-block-end:navy;';
+  readonly none = 'border-block-end:none;';
+  readonly oldlace = 'border-block-end:oldlace;';
+  readonly olive = 'border-block-end:olive;';
+  readonly olivedrab = 'border-block-end:olivedrab;';
+  readonly orange = 'border-block-end:orange;';
+  readonly orangered = 'border-block-end:orangered;';
+  readonly orchid = 'border-block-end:orchid;';
+  readonly outset = 'border-block-end:outset;';
+  readonly palegoldenrod = 'border-block-end:palegoldenrod;';
+  readonly palegreen = 'border-block-end:palegreen;';
+  readonly paleturquoise = 'border-block-end:paleturquoise;';
+  readonly palevioletred = 'border-block-end:palevioletred;';
+  readonly papayawhip = 'border-block-end:papayawhip;';
+  readonly peachpuff = 'border-block-end:peachpuff;';
+  readonly peru = 'border-block-end:peru;';
+  readonly pink = 'border-block-end:pink;';
+  readonly plum = 'border-block-end:plum;';
+  readonly powderblue = 'border-block-end:powderblue;';
+  readonly purple = 'border-block-end:purple;';
+  readonly rebeccapurple = 'border-block-end:rebeccapurple;';
+  readonly red = 'border-block-end:red;';
+  readonly revert = 'border-block-end:revert;';
+  readonly revertLayer = 'border-block-end:revert-layer;';
+  readonly ridge = 'border-block-end:ridge;';
+  readonly rosybrown = 'border-block-end:rosybrown;';
+  readonly royalblue = 'border-block-end:royalblue;';
+  readonly saddlebrown = 'border-block-end:saddlebrown;';
+  readonly salmon = 'border-block-end:salmon;';
+  readonly sandybrown = 'border-block-end:sandybrown;';
+  readonly seagreen = 'border-block-end:seagreen;';
+  readonly seashell = 'border-block-end:seashell;';
+  readonly sienna = 'border-block-end:sienna;';
+  readonly silver = 'border-block-end:silver;';
+  readonly skyblue = 'border-block-end:skyblue;';
+  readonly slateblue = 'border-block-end:slateblue;';
+  readonly slategray = 'border-block-end:slategray;';
+  readonly slategrey = 'border-block-end:slategrey;';
+  readonly snow = 'border-block-end:snow;';
+  readonly solid = 'border-block-end:solid;';
+  readonly springgreen = 'border-block-end:springgreen;';
+  readonly steelblue = 'border-block-end:steelblue;';
+  readonly tan = 'border-block-end:tan;';
+  readonly teal = 'border-block-end:teal;';
+  readonly thick = 'border-block-end:thick;';
+  readonly thin = 'border-block-end:thin;';
+  readonly thistle = 'border-block-end:thistle;';
+  readonly tomato = 'border-block-end:tomato;';
+  readonly transparent = 'border-block-end:transparent;';
+  readonly turquoise = 'border-block-end:turquoise;';
+  readonly unset = 'border-block-end:unset;';
+  readonly violet = 'border-block-end:violet;';
+  readonly wheat = 'border-block-end:wheat;';
+  readonly white = 'border-block-end:white;';
+  readonly whitesmoke = 'border-block-end:whitesmoke;';
+  readonly yellow = 'border-block-end:yellow;';
+  readonly yellowgreen = 'border-block-end:yellowgreen;';
   constructor() {
     super('border-block-end');
-    initializeBorderBlockEndCss();
   }
 }
-let borderBlockEndReady = false;
-function initializeBorderBlockEndCss(): void {
-  if (borderBlockEndReady) return;
-  Object.assign(BorderBlockEndCss.prototype, borderBlockEndKeywords());
-  Object.freeze(BorderBlockEndCss.prototype);
-  borderBlockEndReady = true;
-}
 
-function borderBlockEndColorKeywords() {
-  return {
-    AccentColor: 'border-block-end-color:AccentColor;',
-    AccentColorText: 'border-block-end-color:AccentColorText;',
-    ActiveBorder: 'border-block-end-color:ActiveBorder;',
-    ActiveCaption: 'border-block-end-color:ActiveCaption;',
-    ActiveText: 'border-block-end-color:ActiveText;',
-    AppWorkspace: 'border-block-end-color:AppWorkspace;',
-    Background: 'border-block-end-color:Background;',
-    ButtonBorder: 'border-block-end-color:ButtonBorder;',
-    ButtonFace: 'border-block-end-color:ButtonFace;',
-    ButtonHighlight: 'border-block-end-color:ButtonHighlight;',
-    ButtonShadow: 'border-block-end-color:ButtonShadow;',
-    ButtonText: 'border-block-end-color:ButtonText;',
-    Canvas: 'border-block-end-color:Canvas;',
-    CanvasText: 'border-block-end-color:CanvasText;',
-    CaptionText: 'border-block-end-color:CaptionText;',
-    Field: 'border-block-end-color:Field;',
-    FieldText: 'border-block-end-color:FieldText;',
-    GrayText: 'border-block-end-color:GrayText;',
-    Highlight: 'border-block-end-color:Highlight;',
-    HighlightText: 'border-block-end-color:HighlightText;',
-    InactiveBorder: 'border-block-end-color:InactiveBorder;',
-    InactiveCaption: 'border-block-end-color:InactiveCaption;',
-    InactiveCaptionText: 'border-block-end-color:InactiveCaptionText;',
-    InfoBackground: 'border-block-end-color:InfoBackground;',
-    InfoText: 'border-block-end-color:InfoText;',
-    LinkText: 'border-block-end-color:LinkText;',
-    Mark: 'border-block-end-color:Mark;',
-    MarkText: 'border-block-end-color:MarkText;',
-    Menu: 'border-block-end-color:Menu;',
-    MenuText: 'border-block-end-color:MenuText;',
-    Scrollbar: 'border-block-end-color:Scrollbar;',
-    SelectedItem: 'border-block-end-color:SelectedItem;',
-    SelectedItemText: 'border-block-end-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-block-end-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-block-end-color:ThreeDFace;',
-    ThreeDHighlight: 'border-block-end-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-block-end-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-block-end-color:ThreeDShadow;',
-    VisitedText: 'border-block-end-color:VisitedText;',
-    Window: 'border-block-end-color:Window;',
-    WindowFrame: 'border-block-end-color:WindowFrame;',
-    WindowText: 'border-block-end-color:WindowText;',
-    aliceblue: 'border-block-end-color:aliceblue;',
-    antiquewhite: 'border-block-end-color:antiquewhite;',
-    aqua: 'border-block-end-color:aqua;',
-    aquamarine: 'border-block-end-color:aquamarine;',
-    azure: 'border-block-end-color:azure;',
-    beige: 'border-block-end-color:beige;',
-    bisque: 'border-block-end-color:bisque;',
-    black: 'border-block-end-color:black;',
-    blanchedalmond: 'border-block-end-color:blanchedalmond;',
-    blue: 'border-block-end-color:blue;',
-    blueviolet: 'border-block-end-color:blueviolet;',
-    brown: 'border-block-end-color:brown;',
-    burlywood: 'border-block-end-color:burlywood;',
-    cadetblue: 'border-block-end-color:cadetblue;',
-    chartreuse: 'border-block-end-color:chartreuse;',
-    chocolate: 'border-block-end-color:chocolate;',
-    coral: 'border-block-end-color:coral;',
-    cornflowerblue: 'border-block-end-color:cornflowerblue;',
-    cornsilk: 'border-block-end-color:cornsilk;',
-    crimson: 'border-block-end-color:crimson;',
-    currentColor: 'border-block-end-color:currentColor;',
-    cyan: 'border-block-end-color:cyan;',
-    darkblue: 'border-block-end-color:darkblue;',
-    darkcyan: 'border-block-end-color:darkcyan;',
-    darkgoldenrod: 'border-block-end-color:darkgoldenrod;',
-    darkgray: 'border-block-end-color:darkgray;',
-    darkgreen: 'border-block-end-color:darkgreen;',
-    darkgrey: 'border-block-end-color:darkgrey;',
-    darkkhaki: 'border-block-end-color:darkkhaki;',
-    darkmagenta: 'border-block-end-color:darkmagenta;',
-    darkolivegreen: 'border-block-end-color:darkolivegreen;',
-    darkorange: 'border-block-end-color:darkorange;',
-    darkorchid: 'border-block-end-color:darkorchid;',
-    darkred: 'border-block-end-color:darkred;',
-    darksalmon: 'border-block-end-color:darksalmon;',
-    darkseagreen: 'border-block-end-color:darkseagreen;',
-    darkslateblue: 'border-block-end-color:darkslateblue;',
-    darkslategray: 'border-block-end-color:darkslategray;',
-    darkslategrey: 'border-block-end-color:darkslategrey;',
-    darkturquoise: 'border-block-end-color:darkturquoise;',
-    darkviolet: 'border-block-end-color:darkviolet;',
-    deeppink: 'border-block-end-color:deeppink;',
-    deepskyblue: 'border-block-end-color:deepskyblue;',
-    dimgray: 'border-block-end-color:dimgray;',
-    dimgrey: 'border-block-end-color:dimgrey;',
-    dodgerblue: 'border-block-end-color:dodgerblue;',
-    firebrick: 'border-block-end-color:firebrick;',
-    floralwhite: 'border-block-end-color:floralwhite;',
-    forestgreen: 'border-block-end-color:forestgreen;',
-    fuchsia: 'border-block-end-color:fuchsia;',
-    gainsboro: 'border-block-end-color:gainsboro;',
-    ghostwhite: 'border-block-end-color:ghostwhite;',
-    gold: 'border-block-end-color:gold;',
-    goldenrod: 'border-block-end-color:goldenrod;',
-    gray: 'border-block-end-color:gray;',
-    green: 'border-block-end-color:green;',
-    greenyellow: 'border-block-end-color:greenyellow;',
-    grey: 'border-block-end-color:grey;',
-    honeydew: 'border-block-end-color:honeydew;',
-    hotpink: 'border-block-end-color:hotpink;',
-    indianred: 'border-block-end-color:indianred;',
-    indigo: 'border-block-end-color:indigo;',
-    inherit: 'border-block-end-color:inherit;',
-    initial: 'border-block-end-color:initial;',
-    ivory: 'border-block-end-color:ivory;',
-    khaki: 'border-block-end-color:khaki;',
-    lavender: 'border-block-end-color:lavender;',
-    lavenderblush: 'border-block-end-color:lavenderblush;',
-    lawngreen: 'border-block-end-color:lawngreen;',
-    lemonchiffon: 'border-block-end-color:lemonchiffon;',
-    lightblue: 'border-block-end-color:lightblue;',
-    lightcoral: 'border-block-end-color:lightcoral;',
-    lightcyan: 'border-block-end-color:lightcyan;',
-    lightgoldenrodyellow: 'border-block-end-color:lightgoldenrodyellow;',
-    lightgray: 'border-block-end-color:lightgray;',
-    lightgreen: 'border-block-end-color:lightgreen;',
-    lightgrey: 'border-block-end-color:lightgrey;',
-    lightpink: 'border-block-end-color:lightpink;',
-    lightsalmon: 'border-block-end-color:lightsalmon;',
-    lightseagreen: 'border-block-end-color:lightseagreen;',
-    lightskyblue: 'border-block-end-color:lightskyblue;',
-    lightslategray: 'border-block-end-color:lightslategray;',
-    lightslategrey: 'border-block-end-color:lightslategrey;',
-    lightsteelblue: 'border-block-end-color:lightsteelblue;',
-    lightyellow: 'border-block-end-color:lightyellow;',
-    lime: 'border-block-end-color:lime;',
-    limegreen: 'border-block-end-color:limegreen;',
-    linen: 'border-block-end-color:linen;',
-    magenta: 'border-block-end-color:magenta;',
-    maroon: 'border-block-end-color:maroon;',
-    mediumaquamarine: 'border-block-end-color:mediumaquamarine;',
-    mediumblue: 'border-block-end-color:mediumblue;',
-    mediumorchid: 'border-block-end-color:mediumorchid;',
-    mediumpurple: 'border-block-end-color:mediumpurple;',
-    mediumseagreen: 'border-block-end-color:mediumseagreen;',
-    mediumslateblue: 'border-block-end-color:mediumslateblue;',
-    mediumspringgreen: 'border-block-end-color:mediumspringgreen;',
-    mediumturquoise: 'border-block-end-color:mediumturquoise;',
-    mediumvioletred: 'border-block-end-color:mediumvioletred;',
-    midnightblue: 'border-block-end-color:midnightblue;',
-    mintcream: 'border-block-end-color:mintcream;',
-    mistyrose: 'border-block-end-color:mistyrose;',
-    moccasin: 'border-block-end-color:moccasin;',
-    navajowhite: 'border-block-end-color:navajowhite;',
-    navy: 'border-block-end-color:navy;',
-    oldlace: 'border-block-end-color:oldlace;',
-    olive: 'border-block-end-color:olive;',
-    olivedrab: 'border-block-end-color:olivedrab;',
-    orange: 'border-block-end-color:orange;',
-    orangered: 'border-block-end-color:orangered;',
-    orchid: 'border-block-end-color:orchid;',
-    palegoldenrod: 'border-block-end-color:palegoldenrod;',
-    palegreen: 'border-block-end-color:palegreen;',
-    paleturquoise: 'border-block-end-color:paleturquoise;',
-    palevioletred: 'border-block-end-color:palevioletred;',
-    papayawhip: 'border-block-end-color:papayawhip;',
-    peachpuff: 'border-block-end-color:peachpuff;',
-    peru: 'border-block-end-color:peru;',
-    pink: 'border-block-end-color:pink;',
-    plum: 'border-block-end-color:plum;',
-    powderblue: 'border-block-end-color:powderblue;',
-    purple: 'border-block-end-color:purple;',
-    rebeccapurple: 'border-block-end-color:rebeccapurple;',
-    red: 'border-block-end-color:red;',
-    revert: 'border-block-end-color:revert;',
-    revertLayer: 'border-block-end-color:revert-layer;',
-    rosybrown: 'border-block-end-color:rosybrown;',
-    royalblue: 'border-block-end-color:royalblue;',
-    saddlebrown: 'border-block-end-color:saddlebrown;',
-    salmon: 'border-block-end-color:salmon;',
-    sandybrown: 'border-block-end-color:sandybrown;',
-    seagreen: 'border-block-end-color:seagreen;',
-    seashell: 'border-block-end-color:seashell;',
-    sienna: 'border-block-end-color:sienna;',
-    silver: 'border-block-end-color:silver;',
-    skyblue: 'border-block-end-color:skyblue;',
-    slateblue: 'border-block-end-color:slateblue;',
-    slategray: 'border-block-end-color:slategray;',
-    slategrey: 'border-block-end-color:slategrey;',
-    snow: 'border-block-end-color:snow;',
-    springgreen: 'border-block-end-color:springgreen;',
-    steelblue: 'border-block-end-color:steelblue;',
-    tan: 'border-block-end-color:tan;',
-    teal: 'border-block-end-color:teal;',
-    thistle: 'border-block-end-color:thistle;',
-    tomato: 'border-block-end-color:tomato;',
-    transparent: 'border-block-end-color:transparent;',
-    turquoise: 'border-block-end-color:turquoise;',
-    unset: 'border-block-end-color:unset;',
-    violet: 'border-block-end-color:violet;',
-    wheat: 'border-block-end-color:wheat;',
-    white: 'border-block-end-color:white;',
-    whitesmoke: 'border-block-end-color:whitesmoke;',
-    yellow: 'border-block-end-color:yellow;',
-    yellowgreen: 'border-block-end-color:yellowgreen;',
-  } as const;
-}
-
-type BorderBlockEndColorCssKeywords = Readonly<ReturnType<typeof borderBlockEndColorKeywords>>;
-export interface BorderBlockEndColorCss extends BorderBlockEndColorCssKeywords {}
 /** CSS 属性 border-block-end-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-color
  */
 export class BorderBlockEndColorCss extends CssProperty<Property.BorderBlockEndColor> {
+  readonly AccentColor = 'border-block-end-color:AccentColor;';
+  readonly AccentColorText = 'border-block-end-color:AccentColorText;';
+  readonly ActiveBorder = 'border-block-end-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-block-end-color:ActiveCaption;';
+  readonly ActiveText = 'border-block-end-color:ActiveText;';
+  readonly AppWorkspace = 'border-block-end-color:AppWorkspace;';
+  readonly Background = 'border-block-end-color:Background;';
+  readonly ButtonBorder = 'border-block-end-color:ButtonBorder;';
+  readonly ButtonFace = 'border-block-end-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-block-end-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-block-end-color:ButtonShadow;';
+  readonly ButtonText = 'border-block-end-color:ButtonText;';
+  readonly Canvas = 'border-block-end-color:Canvas;';
+  readonly CanvasText = 'border-block-end-color:CanvasText;';
+  readonly CaptionText = 'border-block-end-color:CaptionText;';
+  readonly Field = 'border-block-end-color:Field;';
+  readonly FieldText = 'border-block-end-color:FieldText;';
+  readonly GrayText = 'border-block-end-color:GrayText;';
+  readonly Highlight = 'border-block-end-color:Highlight;';
+  readonly HighlightText = 'border-block-end-color:HighlightText;';
+  readonly InactiveBorder = 'border-block-end-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-block-end-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-block-end-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-block-end-color:InfoBackground;';
+  readonly InfoText = 'border-block-end-color:InfoText;';
+  readonly LinkText = 'border-block-end-color:LinkText;';
+  readonly Mark = 'border-block-end-color:Mark;';
+  readonly MarkText = 'border-block-end-color:MarkText;';
+  readonly Menu = 'border-block-end-color:Menu;';
+  readonly MenuText = 'border-block-end-color:MenuText;';
+  readonly Scrollbar = 'border-block-end-color:Scrollbar;';
+  readonly SelectedItem = 'border-block-end-color:SelectedItem;';
+  readonly SelectedItemText = 'border-block-end-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-block-end-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-block-end-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-block-end-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-block-end-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-block-end-color:ThreeDShadow;';
+  readonly VisitedText = 'border-block-end-color:VisitedText;';
+  readonly Window = 'border-block-end-color:Window;';
+  readonly WindowFrame = 'border-block-end-color:WindowFrame;';
+  readonly WindowText = 'border-block-end-color:WindowText;';
+  readonly aliceblue = 'border-block-end-color:aliceblue;';
+  readonly antiquewhite = 'border-block-end-color:antiquewhite;';
+  readonly aqua = 'border-block-end-color:aqua;';
+  readonly aquamarine = 'border-block-end-color:aquamarine;';
+  readonly azure = 'border-block-end-color:azure;';
+  readonly beige = 'border-block-end-color:beige;';
+  readonly bisque = 'border-block-end-color:bisque;';
+  readonly black = 'border-block-end-color:black;';
+  readonly blanchedalmond = 'border-block-end-color:blanchedalmond;';
+  readonly blue = 'border-block-end-color:blue;';
+  readonly blueviolet = 'border-block-end-color:blueviolet;';
+  readonly brown = 'border-block-end-color:brown;';
+  readonly burlywood = 'border-block-end-color:burlywood;';
+  readonly cadetblue = 'border-block-end-color:cadetblue;';
+  readonly chartreuse = 'border-block-end-color:chartreuse;';
+  readonly chocolate = 'border-block-end-color:chocolate;';
+  readonly coral = 'border-block-end-color:coral;';
+  readonly cornflowerblue = 'border-block-end-color:cornflowerblue;';
+  readonly cornsilk = 'border-block-end-color:cornsilk;';
+  readonly crimson = 'border-block-end-color:crimson;';
+  readonly currentColor = 'border-block-end-color:currentColor;';
+  readonly cyan = 'border-block-end-color:cyan;';
+  readonly darkblue = 'border-block-end-color:darkblue;';
+  readonly darkcyan = 'border-block-end-color:darkcyan;';
+  readonly darkgoldenrod = 'border-block-end-color:darkgoldenrod;';
+  readonly darkgray = 'border-block-end-color:darkgray;';
+  readonly darkgreen = 'border-block-end-color:darkgreen;';
+  readonly darkgrey = 'border-block-end-color:darkgrey;';
+  readonly darkkhaki = 'border-block-end-color:darkkhaki;';
+  readonly darkmagenta = 'border-block-end-color:darkmagenta;';
+  readonly darkolivegreen = 'border-block-end-color:darkolivegreen;';
+  readonly darkorange = 'border-block-end-color:darkorange;';
+  readonly darkorchid = 'border-block-end-color:darkorchid;';
+  readonly darkred = 'border-block-end-color:darkred;';
+  readonly darksalmon = 'border-block-end-color:darksalmon;';
+  readonly darkseagreen = 'border-block-end-color:darkseagreen;';
+  readonly darkslateblue = 'border-block-end-color:darkslateblue;';
+  readonly darkslategray = 'border-block-end-color:darkslategray;';
+  readonly darkslategrey = 'border-block-end-color:darkslategrey;';
+  readonly darkturquoise = 'border-block-end-color:darkturquoise;';
+  readonly darkviolet = 'border-block-end-color:darkviolet;';
+  readonly deeppink = 'border-block-end-color:deeppink;';
+  readonly deepskyblue = 'border-block-end-color:deepskyblue;';
+  readonly dimgray = 'border-block-end-color:dimgray;';
+  readonly dimgrey = 'border-block-end-color:dimgrey;';
+  readonly dodgerblue = 'border-block-end-color:dodgerblue;';
+  readonly firebrick = 'border-block-end-color:firebrick;';
+  readonly floralwhite = 'border-block-end-color:floralwhite;';
+  readonly forestgreen = 'border-block-end-color:forestgreen;';
+  readonly fuchsia = 'border-block-end-color:fuchsia;';
+  readonly gainsboro = 'border-block-end-color:gainsboro;';
+  readonly ghostwhite = 'border-block-end-color:ghostwhite;';
+  readonly gold = 'border-block-end-color:gold;';
+  readonly goldenrod = 'border-block-end-color:goldenrod;';
+  readonly gray = 'border-block-end-color:gray;';
+  readonly green = 'border-block-end-color:green;';
+  readonly greenyellow = 'border-block-end-color:greenyellow;';
+  readonly grey = 'border-block-end-color:grey;';
+  readonly honeydew = 'border-block-end-color:honeydew;';
+  readonly hotpink = 'border-block-end-color:hotpink;';
+  readonly indianred = 'border-block-end-color:indianred;';
+  readonly indigo = 'border-block-end-color:indigo;';
+  readonly inherit = 'border-block-end-color:inherit;';
+  readonly initial = 'border-block-end-color:initial;';
+  readonly ivory = 'border-block-end-color:ivory;';
+  readonly khaki = 'border-block-end-color:khaki;';
+  readonly lavender = 'border-block-end-color:lavender;';
+  readonly lavenderblush = 'border-block-end-color:lavenderblush;';
+  readonly lawngreen = 'border-block-end-color:lawngreen;';
+  readonly lemonchiffon = 'border-block-end-color:lemonchiffon;';
+  readonly lightblue = 'border-block-end-color:lightblue;';
+  readonly lightcoral = 'border-block-end-color:lightcoral;';
+  readonly lightcyan = 'border-block-end-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-block-end-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-block-end-color:lightgray;';
+  readonly lightgreen = 'border-block-end-color:lightgreen;';
+  readonly lightgrey = 'border-block-end-color:lightgrey;';
+  readonly lightpink = 'border-block-end-color:lightpink;';
+  readonly lightsalmon = 'border-block-end-color:lightsalmon;';
+  readonly lightseagreen = 'border-block-end-color:lightseagreen;';
+  readonly lightskyblue = 'border-block-end-color:lightskyblue;';
+  readonly lightslategray = 'border-block-end-color:lightslategray;';
+  readonly lightslategrey = 'border-block-end-color:lightslategrey;';
+  readonly lightsteelblue = 'border-block-end-color:lightsteelblue;';
+  readonly lightyellow = 'border-block-end-color:lightyellow;';
+  readonly lime = 'border-block-end-color:lime;';
+  readonly limegreen = 'border-block-end-color:limegreen;';
+  readonly linen = 'border-block-end-color:linen;';
+  readonly magenta = 'border-block-end-color:magenta;';
+  readonly maroon = 'border-block-end-color:maroon;';
+  readonly mediumaquamarine = 'border-block-end-color:mediumaquamarine;';
+  readonly mediumblue = 'border-block-end-color:mediumblue;';
+  readonly mediumorchid = 'border-block-end-color:mediumorchid;';
+  readonly mediumpurple = 'border-block-end-color:mediumpurple;';
+  readonly mediumseagreen = 'border-block-end-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-block-end-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-block-end-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-block-end-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-block-end-color:mediumvioletred;';
+  readonly midnightblue = 'border-block-end-color:midnightblue;';
+  readonly mintcream = 'border-block-end-color:mintcream;';
+  readonly mistyrose = 'border-block-end-color:mistyrose;';
+  readonly moccasin = 'border-block-end-color:moccasin;';
+  readonly navajowhite = 'border-block-end-color:navajowhite;';
+  readonly navy = 'border-block-end-color:navy;';
+  readonly oldlace = 'border-block-end-color:oldlace;';
+  readonly olive = 'border-block-end-color:olive;';
+  readonly olivedrab = 'border-block-end-color:olivedrab;';
+  readonly orange = 'border-block-end-color:orange;';
+  readonly orangered = 'border-block-end-color:orangered;';
+  readonly orchid = 'border-block-end-color:orchid;';
+  readonly palegoldenrod = 'border-block-end-color:palegoldenrod;';
+  readonly palegreen = 'border-block-end-color:palegreen;';
+  readonly paleturquoise = 'border-block-end-color:paleturquoise;';
+  readonly palevioletred = 'border-block-end-color:palevioletred;';
+  readonly papayawhip = 'border-block-end-color:papayawhip;';
+  readonly peachpuff = 'border-block-end-color:peachpuff;';
+  readonly peru = 'border-block-end-color:peru;';
+  readonly pink = 'border-block-end-color:pink;';
+  readonly plum = 'border-block-end-color:plum;';
+  readonly powderblue = 'border-block-end-color:powderblue;';
+  readonly purple = 'border-block-end-color:purple;';
+  readonly rebeccapurple = 'border-block-end-color:rebeccapurple;';
+  readonly red = 'border-block-end-color:red;';
+  readonly revert = 'border-block-end-color:revert;';
+  readonly revertLayer = 'border-block-end-color:revert-layer;';
+  readonly rosybrown = 'border-block-end-color:rosybrown;';
+  readonly royalblue = 'border-block-end-color:royalblue;';
+  readonly saddlebrown = 'border-block-end-color:saddlebrown;';
+  readonly salmon = 'border-block-end-color:salmon;';
+  readonly sandybrown = 'border-block-end-color:sandybrown;';
+  readonly seagreen = 'border-block-end-color:seagreen;';
+  readonly seashell = 'border-block-end-color:seashell;';
+  readonly sienna = 'border-block-end-color:sienna;';
+  readonly silver = 'border-block-end-color:silver;';
+  readonly skyblue = 'border-block-end-color:skyblue;';
+  readonly slateblue = 'border-block-end-color:slateblue;';
+  readonly slategray = 'border-block-end-color:slategray;';
+  readonly slategrey = 'border-block-end-color:slategrey;';
+  readonly snow = 'border-block-end-color:snow;';
+  readonly springgreen = 'border-block-end-color:springgreen;';
+  readonly steelblue = 'border-block-end-color:steelblue;';
+  readonly tan = 'border-block-end-color:tan;';
+  readonly teal = 'border-block-end-color:teal;';
+  readonly thistle = 'border-block-end-color:thistle;';
+  readonly tomato = 'border-block-end-color:tomato;';
+  readonly transparent = 'border-block-end-color:transparent;';
+  readonly turquoise = 'border-block-end-color:turquoise;';
+  readonly unset = 'border-block-end-color:unset;';
+  readonly violet = 'border-block-end-color:violet;';
+  readonly wheat = 'border-block-end-color:wheat;';
+  readonly white = 'border-block-end-color:white;';
+  readonly whitesmoke = 'border-block-end-color:whitesmoke;';
+  readonly yellow = 'border-block-end-color:yellow;';
+  readonly yellowgreen = 'border-block-end-color:yellowgreen;';
   constructor() {
     super('border-block-end-color');
-    initializeBorderBlockEndColorCss();
   }
 }
-let borderBlockEndColorReady = false;
-function initializeBorderBlockEndColorCss(): void {
-  if (borderBlockEndColorReady) return;
-  Object.assign(BorderBlockEndColorCss.prototype, borderBlockEndColorKeywords());
-  Object.freeze(BorderBlockEndColorCss.prototype);
-  borderBlockEndColorReady = true;
-}
 
-function borderBlockEndStyleKeywords() {
-  return {
-    dashed: 'border-block-end-style:dashed;',
-    dotted: 'border-block-end-style:dotted;',
-    double: 'border-block-end-style:double;',
-    groove: 'border-block-end-style:groove;',
-    hidden: 'border-block-end-style:hidden;',
-    inherit: 'border-block-end-style:inherit;',
-    initial: 'border-block-end-style:initial;',
-    inset: 'border-block-end-style:inset;',
-    none: 'border-block-end-style:none;',
-    outset: 'border-block-end-style:outset;',
-    revert: 'border-block-end-style:revert;',
-    revertLayer: 'border-block-end-style:revert-layer;',
-    ridge: 'border-block-end-style:ridge;',
-    solid: 'border-block-end-style:solid;',
-    unset: 'border-block-end-style:unset;',
-  } as const;
-}
-
-type BorderBlockEndStyleCssKeywords = Readonly<ReturnType<typeof borderBlockEndStyleKeywords>>;
-export interface BorderBlockEndStyleCss extends BorderBlockEndStyleCssKeywords {}
 /** CSS 属性 border-block-end-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-style
  */
 export class BorderBlockEndStyleCss extends CssProperty<Property.BorderBlockEndStyle> {
+  readonly dashed = 'border-block-end-style:dashed;';
+  readonly dotted = 'border-block-end-style:dotted;';
+  readonly double = 'border-block-end-style:double;';
+  readonly groove = 'border-block-end-style:groove;';
+  readonly hidden = 'border-block-end-style:hidden;';
+  readonly inherit = 'border-block-end-style:inherit;';
+  readonly initial = 'border-block-end-style:initial;';
+  readonly inset = 'border-block-end-style:inset;';
+  readonly none = 'border-block-end-style:none;';
+  readonly outset = 'border-block-end-style:outset;';
+  readonly revert = 'border-block-end-style:revert;';
+  readonly revertLayer = 'border-block-end-style:revert-layer;';
+  readonly ridge = 'border-block-end-style:ridge;';
+  readonly solid = 'border-block-end-style:solid;';
+  readonly unset = 'border-block-end-style:unset;';
   constructor() {
     super('border-block-end-style');
-    initializeBorderBlockEndStyleCss();
   }
 }
-let borderBlockEndStyleReady = false;
-function initializeBorderBlockEndStyleCss(): void {
-  if (borderBlockEndStyleReady) return;
-  Object.assign(BorderBlockEndStyleCss.prototype, borderBlockEndStyleKeywords());
-  Object.freeze(BorderBlockEndStyleCss.prototype);
-  borderBlockEndStyleReady = true;
-}
 
-function borderBlockEndWidthKeywords() {
-  return {
-    inherit: 'border-block-end-width:inherit;',
-    initial: 'border-block-end-width:initial;',
-    medium: 'border-block-end-width:medium;',
-    revert: 'border-block-end-width:revert;',
-    revertLayer: 'border-block-end-width:revert-layer;',
-    thick: 'border-block-end-width:thick;',
-    thin: 'border-block-end-width:thin;',
-    unset: 'border-block-end-width:unset;',
-  } as const;
-}
-
-type BorderBlockEndWidthCssKeywords = Readonly<ReturnType<typeof borderBlockEndWidthKeywords>>;
-export interface BorderBlockEndWidthCss extends BorderBlockEndWidthCssKeywords {}
 /** CSS 属性 border-block-end-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-width
  */
 export class BorderBlockEndWidthCss extends LengthCssProperty<Property.BorderBlockEndWidth> {
+  readonly inherit = 'border-block-end-width:inherit;';
+  readonly initial = 'border-block-end-width:initial;';
+  readonly medium = 'border-block-end-width:medium;';
+  readonly revert = 'border-block-end-width:revert;';
+  readonly revertLayer = 'border-block-end-width:revert-layer;';
+  readonly thick = 'border-block-end-width:thick;';
+  readonly thin = 'border-block-end-width:thin;';
+  readonly unset = 'border-block-end-width:unset;';
   constructor() {
     super('border-block-end-width');
-    initializeBorderBlockEndWidthCss();
   }
 }
-let borderBlockEndWidthReady = false;
-function initializeBorderBlockEndWidthCss(): void {
-  if (borderBlockEndWidthReady) return;
-  Object.assign(BorderBlockEndWidthCss.prototype, borderBlockEndWidthKeywords());
-  Object.freeze(BorderBlockEndWidthCss.prototype);
-  borderBlockEndWidthReady = true;
-}
 
-function borderBlockStartKeywords() {
-  return {
-    AccentColor: 'border-block-start:AccentColor;',
-    AccentColorText: 'border-block-start:AccentColorText;',
-    ActiveBorder: 'border-block-start:ActiveBorder;',
-    ActiveCaption: 'border-block-start:ActiveCaption;',
-    ActiveText: 'border-block-start:ActiveText;',
-    AppWorkspace: 'border-block-start:AppWorkspace;',
-    Background: 'border-block-start:Background;',
-    ButtonBorder: 'border-block-start:ButtonBorder;',
-    ButtonFace: 'border-block-start:ButtonFace;',
-    ButtonHighlight: 'border-block-start:ButtonHighlight;',
-    ButtonShadow: 'border-block-start:ButtonShadow;',
-    ButtonText: 'border-block-start:ButtonText;',
-    Canvas: 'border-block-start:Canvas;',
-    CanvasText: 'border-block-start:CanvasText;',
-    CaptionText: 'border-block-start:CaptionText;',
-    Field: 'border-block-start:Field;',
-    FieldText: 'border-block-start:FieldText;',
-    GrayText: 'border-block-start:GrayText;',
-    Highlight: 'border-block-start:Highlight;',
-    HighlightText: 'border-block-start:HighlightText;',
-    InactiveBorder: 'border-block-start:InactiveBorder;',
-    InactiveCaption: 'border-block-start:InactiveCaption;',
-    InactiveCaptionText: 'border-block-start:InactiveCaptionText;',
-    InfoBackground: 'border-block-start:InfoBackground;',
-    InfoText: 'border-block-start:InfoText;',
-    LinkText: 'border-block-start:LinkText;',
-    Mark: 'border-block-start:Mark;',
-    MarkText: 'border-block-start:MarkText;',
-    Menu: 'border-block-start:Menu;',
-    MenuText: 'border-block-start:MenuText;',
-    Scrollbar: 'border-block-start:Scrollbar;',
-    SelectedItem: 'border-block-start:SelectedItem;',
-    SelectedItemText: 'border-block-start:SelectedItemText;',
-    ThreeDDarkShadow: 'border-block-start:ThreeDDarkShadow;',
-    ThreeDFace: 'border-block-start:ThreeDFace;',
-    ThreeDHighlight: 'border-block-start:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-block-start:ThreeDLightShadow;',
-    ThreeDShadow: 'border-block-start:ThreeDShadow;',
-    VisitedText: 'border-block-start:VisitedText;',
-    Window: 'border-block-start:Window;',
-    WindowFrame: 'border-block-start:WindowFrame;',
-    WindowText: 'border-block-start:WindowText;',
-    aliceblue: 'border-block-start:aliceblue;',
-    antiquewhite: 'border-block-start:antiquewhite;',
-    aqua: 'border-block-start:aqua;',
-    aquamarine: 'border-block-start:aquamarine;',
-    azure: 'border-block-start:azure;',
-    beige: 'border-block-start:beige;',
-    bisque: 'border-block-start:bisque;',
-    black: 'border-block-start:black;',
-    blanchedalmond: 'border-block-start:blanchedalmond;',
-    blue: 'border-block-start:blue;',
-    blueviolet: 'border-block-start:blueviolet;',
-    brown: 'border-block-start:brown;',
-    burlywood: 'border-block-start:burlywood;',
-    cadetblue: 'border-block-start:cadetblue;',
-    chartreuse: 'border-block-start:chartreuse;',
-    chocolate: 'border-block-start:chocolate;',
-    coral: 'border-block-start:coral;',
-    cornflowerblue: 'border-block-start:cornflowerblue;',
-    cornsilk: 'border-block-start:cornsilk;',
-    crimson: 'border-block-start:crimson;',
-    currentColor: 'border-block-start:currentColor;',
-    cyan: 'border-block-start:cyan;',
-    darkblue: 'border-block-start:darkblue;',
-    darkcyan: 'border-block-start:darkcyan;',
-    darkgoldenrod: 'border-block-start:darkgoldenrod;',
-    darkgray: 'border-block-start:darkgray;',
-    darkgreen: 'border-block-start:darkgreen;',
-    darkgrey: 'border-block-start:darkgrey;',
-    darkkhaki: 'border-block-start:darkkhaki;',
-    darkmagenta: 'border-block-start:darkmagenta;',
-    darkolivegreen: 'border-block-start:darkolivegreen;',
-    darkorange: 'border-block-start:darkorange;',
-    darkorchid: 'border-block-start:darkorchid;',
-    darkred: 'border-block-start:darkred;',
-    darksalmon: 'border-block-start:darksalmon;',
-    darkseagreen: 'border-block-start:darkseagreen;',
-    darkslateblue: 'border-block-start:darkslateblue;',
-    darkslategray: 'border-block-start:darkslategray;',
-    darkslategrey: 'border-block-start:darkslategrey;',
-    darkturquoise: 'border-block-start:darkturquoise;',
-    darkviolet: 'border-block-start:darkviolet;',
-    dashed: 'border-block-start:dashed;',
-    deeppink: 'border-block-start:deeppink;',
-    deepskyblue: 'border-block-start:deepskyblue;',
-    dimgray: 'border-block-start:dimgray;',
-    dimgrey: 'border-block-start:dimgrey;',
-    dodgerblue: 'border-block-start:dodgerblue;',
-    dotted: 'border-block-start:dotted;',
-    double: 'border-block-start:double;',
-    firebrick: 'border-block-start:firebrick;',
-    floralwhite: 'border-block-start:floralwhite;',
-    forestgreen: 'border-block-start:forestgreen;',
-    fuchsia: 'border-block-start:fuchsia;',
-    gainsboro: 'border-block-start:gainsboro;',
-    ghostwhite: 'border-block-start:ghostwhite;',
-    gold: 'border-block-start:gold;',
-    goldenrod: 'border-block-start:goldenrod;',
-    gray: 'border-block-start:gray;',
-    green: 'border-block-start:green;',
-    greenyellow: 'border-block-start:greenyellow;',
-    grey: 'border-block-start:grey;',
-    groove: 'border-block-start:groove;',
-    hidden: 'border-block-start:hidden;',
-    honeydew: 'border-block-start:honeydew;',
-    hotpink: 'border-block-start:hotpink;',
-    indianred: 'border-block-start:indianred;',
-    indigo: 'border-block-start:indigo;',
-    inherit: 'border-block-start:inherit;',
-    initial: 'border-block-start:initial;',
-    inset: 'border-block-start:inset;',
-    ivory: 'border-block-start:ivory;',
-    khaki: 'border-block-start:khaki;',
-    lavender: 'border-block-start:lavender;',
-    lavenderblush: 'border-block-start:lavenderblush;',
-    lawngreen: 'border-block-start:lawngreen;',
-    lemonchiffon: 'border-block-start:lemonchiffon;',
-    lightblue: 'border-block-start:lightblue;',
-    lightcoral: 'border-block-start:lightcoral;',
-    lightcyan: 'border-block-start:lightcyan;',
-    lightgoldenrodyellow: 'border-block-start:lightgoldenrodyellow;',
-    lightgray: 'border-block-start:lightgray;',
-    lightgreen: 'border-block-start:lightgreen;',
-    lightgrey: 'border-block-start:lightgrey;',
-    lightpink: 'border-block-start:lightpink;',
-    lightsalmon: 'border-block-start:lightsalmon;',
-    lightseagreen: 'border-block-start:lightseagreen;',
-    lightskyblue: 'border-block-start:lightskyblue;',
-    lightslategray: 'border-block-start:lightslategray;',
-    lightslategrey: 'border-block-start:lightslategrey;',
-    lightsteelblue: 'border-block-start:lightsteelblue;',
-    lightyellow: 'border-block-start:lightyellow;',
-    lime: 'border-block-start:lime;',
-    limegreen: 'border-block-start:limegreen;',
-    linen: 'border-block-start:linen;',
-    magenta: 'border-block-start:magenta;',
-    maroon: 'border-block-start:maroon;',
-    medium: 'border-block-start:medium;',
-    mediumaquamarine: 'border-block-start:mediumaquamarine;',
-    mediumblue: 'border-block-start:mediumblue;',
-    mediumorchid: 'border-block-start:mediumorchid;',
-    mediumpurple: 'border-block-start:mediumpurple;',
-    mediumseagreen: 'border-block-start:mediumseagreen;',
-    mediumslateblue: 'border-block-start:mediumslateblue;',
-    mediumspringgreen: 'border-block-start:mediumspringgreen;',
-    mediumturquoise: 'border-block-start:mediumturquoise;',
-    mediumvioletred: 'border-block-start:mediumvioletred;',
-    midnightblue: 'border-block-start:midnightblue;',
-    mintcream: 'border-block-start:mintcream;',
-    mistyrose: 'border-block-start:mistyrose;',
-    moccasin: 'border-block-start:moccasin;',
-    navajowhite: 'border-block-start:navajowhite;',
-    navy: 'border-block-start:navy;',
-    none: 'border-block-start:none;',
-    oldlace: 'border-block-start:oldlace;',
-    olive: 'border-block-start:olive;',
-    olivedrab: 'border-block-start:olivedrab;',
-    orange: 'border-block-start:orange;',
-    orangered: 'border-block-start:orangered;',
-    orchid: 'border-block-start:orchid;',
-    outset: 'border-block-start:outset;',
-    palegoldenrod: 'border-block-start:palegoldenrod;',
-    palegreen: 'border-block-start:palegreen;',
-    paleturquoise: 'border-block-start:paleturquoise;',
-    palevioletred: 'border-block-start:palevioletred;',
-    papayawhip: 'border-block-start:papayawhip;',
-    peachpuff: 'border-block-start:peachpuff;',
-    peru: 'border-block-start:peru;',
-    pink: 'border-block-start:pink;',
-    plum: 'border-block-start:plum;',
-    powderblue: 'border-block-start:powderblue;',
-    purple: 'border-block-start:purple;',
-    rebeccapurple: 'border-block-start:rebeccapurple;',
-    red: 'border-block-start:red;',
-    revert: 'border-block-start:revert;',
-    revertLayer: 'border-block-start:revert-layer;',
-    ridge: 'border-block-start:ridge;',
-    rosybrown: 'border-block-start:rosybrown;',
-    royalblue: 'border-block-start:royalblue;',
-    saddlebrown: 'border-block-start:saddlebrown;',
-    salmon: 'border-block-start:salmon;',
-    sandybrown: 'border-block-start:sandybrown;',
-    seagreen: 'border-block-start:seagreen;',
-    seashell: 'border-block-start:seashell;',
-    sienna: 'border-block-start:sienna;',
-    silver: 'border-block-start:silver;',
-    skyblue: 'border-block-start:skyblue;',
-    slateblue: 'border-block-start:slateblue;',
-    slategray: 'border-block-start:slategray;',
-    slategrey: 'border-block-start:slategrey;',
-    snow: 'border-block-start:snow;',
-    solid: 'border-block-start:solid;',
-    springgreen: 'border-block-start:springgreen;',
-    steelblue: 'border-block-start:steelblue;',
-    tan: 'border-block-start:tan;',
-    teal: 'border-block-start:teal;',
-    thick: 'border-block-start:thick;',
-    thin: 'border-block-start:thin;',
-    thistle: 'border-block-start:thistle;',
-    tomato: 'border-block-start:tomato;',
-    transparent: 'border-block-start:transparent;',
-    turquoise: 'border-block-start:turquoise;',
-    unset: 'border-block-start:unset;',
-    violet: 'border-block-start:violet;',
-    wheat: 'border-block-start:wheat;',
-    white: 'border-block-start:white;',
-    whitesmoke: 'border-block-start:whitesmoke;',
-    yellow: 'border-block-start:yellow;',
-    yellowgreen: 'border-block-start:yellowgreen;',
-  } as const;
-}
-
-type BorderBlockStartCssKeywords = Readonly<ReturnType<typeof borderBlockStartKeywords>>;
-export interface BorderBlockStartCss extends BorderBlockStartCssKeywords {}
 /** CSS 属性 border-block-start。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start
  */
 export class BorderBlockStartCss extends LengthCssProperty<Property.BorderBlockStart> {
+  readonly AccentColor = 'border-block-start:AccentColor;';
+  readonly AccentColorText = 'border-block-start:AccentColorText;';
+  readonly ActiveBorder = 'border-block-start:ActiveBorder;';
+  readonly ActiveCaption = 'border-block-start:ActiveCaption;';
+  readonly ActiveText = 'border-block-start:ActiveText;';
+  readonly AppWorkspace = 'border-block-start:AppWorkspace;';
+  readonly Background = 'border-block-start:Background;';
+  readonly ButtonBorder = 'border-block-start:ButtonBorder;';
+  readonly ButtonFace = 'border-block-start:ButtonFace;';
+  readonly ButtonHighlight = 'border-block-start:ButtonHighlight;';
+  readonly ButtonShadow = 'border-block-start:ButtonShadow;';
+  readonly ButtonText = 'border-block-start:ButtonText;';
+  readonly Canvas = 'border-block-start:Canvas;';
+  readonly CanvasText = 'border-block-start:CanvasText;';
+  readonly CaptionText = 'border-block-start:CaptionText;';
+  readonly Field = 'border-block-start:Field;';
+  readonly FieldText = 'border-block-start:FieldText;';
+  readonly GrayText = 'border-block-start:GrayText;';
+  readonly Highlight = 'border-block-start:Highlight;';
+  readonly HighlightText = 'border-block-start:HighlightText;';
+  readonly InactiveBorder = 'border-block-start:InactiveBorder;';
+  readonly InactiveCaption = 'border-block-start:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-block-start:InactiveCaptionText;';
+  readonly InfoBackground = 'border-block-start:InfoBackground;';
+  readonly InfoText = 'border-block-start:InfoText;';
+  readonly LinkText = 'border-block-start:LinkText;';
+  readonly Mark = 'border-block-start:Mark;';
+  readonly MarkText = 'border-block-start:MarkText;';
+  readonly Menu = 'border-block-start:Menu;';
+  readonly MenuText = 'border-block-start:MenuText;';
+  readonly Scrollbar = 'border-block-start:Scrollbar;';
+  readonly SelectedItem = 'border-block-start:SelectedItem;';
+  readonly SelectedItemText = 'border-block-start:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-block-start:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-block-start:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-block-start:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-block-start:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-block-start:ThreeDShadow;';
+  readonly VisitedText = 'border-block-start:VisitedText;';
+  readonly Window = 'border-block-start:Window;';
+  readonly WindowFrame = 'border-block-start:WindowFrame;';
+  readonly WindowText = 'border-block-start:WindowText;';
+  readonly aliceblue = 'border-block-start:aliceblue;';
+  readonly antiquewhite = 'border-block-start:antiquewhite;';
+  readonly aqua = 'border-block-start:aqua;';
+  readonly aquamarine = 'border-block-start:aquamarine;';
+  readonly azure = 'border-block-start:azure;';
+  readonly beige = 'border-block-start:beige;';
+  readonly bisque = 'border-block-start:bisque;';
+  readonly black = 'border-block-start:black;';
+  readonly blanchedalmond = 'border-block-start:blanchedalmond;';
+  readonly blue = 'border-block-start:blue;';
+  readonly blueviolet = 'border-block-start:blueviolet;';
+  readonly brown = 'border-block-start:brown;';
+  readonly burlywood = 'border-block-start:burlywood;';
+  readonly cadetblue = 'border-block-start:cadetblue;';
+  readonly chartreuse = 'border-block-start:chartreuse;';
+  readonly chocolate = 'border-block-start:chocolate;';
+  readonly coral = 'border-block-start:coral;';
+  readonly cornflowerblue = 'border-block-start:cornflowerblue;';
+  readonly cornsilk = 'border-block-start:cornsilk;';
+  readonly crimson = 'border-block-start:crimson;';
+  readonly currentColor = 'border-block-start:currentColor;';
+  readonly cyan = 'border-block-start:cyan;';
+  readonly darkblue = 'border-block-start:darkblue;';
+  readonly darkcyan = 'border-block-start:darkcyan;';
+  readonly darkgoldenrod = 'border-block-start:darkgoldenrod;';
+  readonly darkgray = 'border-block-start:darkgray;';
+  readonly darkgreen = 'border-block-start:darkgreen;';
+  readonly darkgrey = 'border-block-start:darkgrey;';
+  readonly darkkhaki = 'border-block-start:darkkhaki;';
+  readonly darkmagenta = 'border-block-start:darkmagenta;';
+  readonly darkolivegreen = 'border-block-start:darkolivegreen;';
+  readonly darkorange = 'border-block-start:darkorange;';
+  readonly darkorchid = 'border-block-start:darkorchid;';
+  readonly darkred = 'border-block-start:darkred;';
+  readonly darksalmon = 'border-block-start:darksalmon;';
+  readonly darkseagreen = 'border-block-start:darkseagreen;';
+  readonly darkslateblue = 'border-block-start:darkslateblue;';
+  readonly darkslategray = 'border-block-start:darkslategray;';
+  readonly darkslategrey = 'border-block-start:darkslategrey;';
+  readonly darkturquoise = 'border-block-start:darkturquoise;';
+  readonly darkviolet = 'border-block-start:darkviolet;';
+  readonly dashed = 'border-block-start:dashed;';
+  readonly deeppink = 'border-block-start:deeppink;';
+  readonly deepskyblue = 'border-block-start:deepskyblue;';
+  readonly dimgray = 'border-block-start:dimgray;';
+  readonly dimgrey = 'border-block-start:dimgrey;';
+  readonly dodgerblue = 'border-block-start:dodgerblue;';
+  readonly dotted = 'border-block-start:dotted;';
+  readonly double = 'border-block-start:double;';
+  readonly firebrick = 'border-block-start:firebrick;';
+  readonly floralwhite = 'border-block-start:floralwhite;';
+  readonly forestgreen = 'border-block-start:forestgreen;';
+  readonly fuchsia = 'border-block-start:fuchsia;';
+  readonly gainsboro = 'border-block-start:gainsboro;';
+  readonly ghostwhite = 'border-block-start:ghostwhite;';
+  readonly gold = 'border-block-start:gold;';
+  readonly goldenrod = 'border-block-start:goldenrod;';
+  readonly gray = 'border-block-start:gray;';
+  readonly green = 'border-block-start:green;';
+  readonly greenyellow = 'border-block-start:greenyellow;';
+  readonly grey = 'border-block-start:grey;';
+  readonly groove = 'border-block-start:groove;';
+  readonly hidden = 'border-block-start:hidden;';
+  readonly honeydew = 'border-block-start:honeydew;';
+  readonly hotpink = 'border-block-start:hotpink;';
+  readonly indianred = 'border-block-start:indianred;';
+  readonly indigo = 'border-block-start:indigo;';
+  readonly inherit = 'border-block-start:inherit;';
+  readonly initial = 'border-block-start:initial;';
+  readonly inset = 'border-block-start:inset;';
+  readonly ivory = 'border-block-start:ivory;';
+  readonly khaki = 'border-block-start:khaki;';
+  readonly lavender = 'border-block-start:lavender;';
+  readonly lavenderblush = 'border-block-start:lavenderblush;';
+  readonly lawngreen = 'border-block-start:lawngreen;';
+  readonly lemonchiffon = 'border-block-start:lemonchiffon;';
+  readonly lightblue = 'border-block-start:lightblue;';
+  readonly lightcoral = 'border-block-start:lightcoral;';
+  readonly lightcyan = 'border-block-start:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-block-start:lightgoldenrodyellow;';
+  readonly lightgray = 'border-block-start:lightgray;';
+  readonly lightgreen = 'border-block-start:lightgreen;';
+  readonly lightgrey = 'border-block-start:lightgrey;';
+  readonly lightpink = 'border-block-start:lightpink;';
+  readonly lightsalmon = 'border-block-start:lightsalmon;';
+  readonly lightseagreen = 'border-block-start:lightseagreen;';
+  readonly lightskyblue = 'border-block-start:lightskyblue;';
+  readonly lightslategray = 'border-block-start:lightslategray;';
+  readonly lightslategrey = 'border-block-start:lightslategrey;';
+  readonly lightsteelblue = 'border-block-start:lightsteelblue;';
+  readonly lightyellow = 'border-block-start:lightyellow;';
+  readonly lime = 'border-block-start:lime;';
+  readonly limegreen = 'border-block-start:limegreen;';
+  readonly linen = 'border-block-start:linen;';
+  readonly magenta = 'border-block-start:magenta;';
+  readonly maroon = 'border-block-start:maroon;';
+  readonly medium = 'border-block-start:medium;';
+  readonly mediumaquamarine = 'border-block-start:mediumaquamarine;';
+  readonly mediumblue = 'border-block-start:mediumblue;';
+  readonly mediumorchid = 'border-block-start:mediumorchid;';
+  readonly mediumpurple = 'border-block-start:mediumpurple;';
+  readonly mediumseagreen = 'border-block-start:mediumseagreen;';
+  readonly mediumslateblue = 'border-block-start:mediumslateblue;';
+  readonly mediumspringgreen = 'border-block-start:mediumspringgreen;';
+  readonly mediumturquoise = 'border-block-start:mediumturquoise;';
+  readonly mediumvioletred = 'border-block-start:mediumvioletred;';
+  readonly midnightblue = 'border-block-start:midnightblue;';
+  readonly mintcream = 'border-block-start:mintcream;';
+  readonly mistyrose = 'border-block-start:mistyrose;';
+  readonly moccasin = 'border-block-start:moccasin;';
+  readonly navajowhite = 'border-block-start:navajowhite;';
+  readonly navy = 'border-block-start:navy;';
+  readonly none = 'border-block-start:none;';
+  readonly oldlace = 'border-block-start:oldlace;';
+  readonly olive = 'border-block-start:olive;';
+  readonly olivedrab = 'border-block-start:olivedrab;';
+  readonly orange = 'border-block-start:orange;';
+  readonly orangered = 'border-block-start:orangered;';
+  readonly orchid = 'border-block-start:orchid;';
+  readonly outset = 'border-block-start:outset;';
+  readonly palegoldenrod = 'border-block-start:palegoldenrod;';
+  readonly palegreen = 'border-block-start:palegreen;';
+  readonly paleturquoise = 'border-block-start:paleturquoise;';
+  readonly palevioletred = 'border-block-start:palevioletred;';
+  readonly papayawhip = 'border-block-start:papayawhip;';
+  readonly peachpuff = 'border-block-start:peachpuff;';
+  readonly peru = 'border-block-start:peru;';
+  readonly pink = 'border-block-start:pink;';
+  readonly plum = 'border-block-start:plum;';
+  readonly powderblue = 'border-block-start:powderblue;';
+  readonly purple = 'border-block-start:purple;';
+  readonly rebeccapurple = 'border-block-start:rebeccapurple;';
+  readonly red = 'border-block-start:red;';
+  readonly revert = 'border-block-start:revert;';
+  readonly revertLayer = 'border-block-start:revert-layer;';
+  readonly ridge = 'border-block-start:ridge;';
+  readonly rosybrown = 'border-block-start:rosybrown;';
+  readonly royalblue = 'border-block-start:royalblue;';
+  readonly saddlebrown = 'border-block-start:saddlebrown;';
+  readonly salmon = 'border-block-start:salmon;';
+  readonly sandybrown = 'border-block-start:sandybrown;';
+  readonly seagreen = 'border-block-start:seagreen;';
+  readonly seashell = 'border-block-start:seashell;';
+  readonly sienna = 'border-block-start:sienna;';
+  readonly silver = 'border-block-start:silver;';
+  readonly skyblue = 'border-block-start:skyblue;';
+  readonly slateblue = 'border-block-start:slateblue;';
+  readonly slategray = 'border-block-start:slategray;';
+  readonly slategrey = 'border-block-start:slategrey;';
+  readonly snow = 'border-block-start:snow;';
+  readonly solid = 'border-block-start:solid;';
+  readonly springgreen = 'border-block-start:springgreen;';
+  readonly steelblue = 'border-block-start:steelblue;';
+  readonly tan = 'border-block-start:tan;';
+  readonly teal = 'border-block-start:teal;';
+  readonly thick = 'border-block-start:thick;';
+  readonly thin = 'border-block-start:thin;';
+  readonly thistle = 'border-block-start:thistle;';
+  readonly tomato = 'border-block-start:tomato;';
+  readonly transparent = 'border-block-start:transparent;';
+  readonly turquoise = 'border-block-start:turquoise;';
+  readonly unset = 'border-block-start:unset;';
+  readonly violet = 'border-block-start:violet;';
+  readonly wheat = 'border-block-start:wheat;';
+  readonly white = 'border-block-start:white;';
+  readonly whitesmoke = 'border-block-start:whitesmoke;';
+  readonly yellow = 'border-block-start:yellow;';
+  readonly yellowgreen = 'border-block-start:yellowgreen;';
   constructor() {
     super('border-block-start');
-    initializeBorderBlockStartCss();
   }
 }
-let borderBlockStartReady = false;
-function initializeBorderBlockStartCss(): void {
-  if (borderBlockStartReady) return;
-  Object.assign(BorderBlockStartCss.prototype, borderBlockStartKeywords());
-  Object.freeze(BorderBlockStartCss.prototype);
-  borderBlockStartReady = true;
-}
 
-function borderBlockStartColorKeywords() {
-  return {
-    AccentColor: 'border-block-start-color:AccentColor;',
-    AccentColorText: 'border-block-start-color:AccentColorText;',
-    ActiveBorder: 'border-block-start-color:ActiveBorder;',
-    ActiveCaption: 'border-block-start-color:ActiveCaption;',
-    ActiveText: 'border-block-start-color:ActiveText;',
-    AppWorkspace: 'border-block-start-color:AppWorkspace;',
-    Background: 'border-block-start-color:Background;',
-    ButtonBorder: 'border-block-start-color:ButtonBorder;',
-    ButtonFace: 'border-block-start-color:ButtonFace;',
-    ButtonHighlight: 'border-block-start-color:ButtonHighlight;',
-    ButtonShadow: 'border-block-start-color:ButtonShadow;',
-    ButtonText: 'border-block-start-color:ButtonText;',
-    Canvas: 'border-block-start-color:Canvas;',
-    CanvasText: 'border-block-start-color:CanvasText;',
-    CaptionText: 'border-block-start-color:CaptionText;',
-    Field: 'border-block-start-color:Field;',
-    FieldText: 'border-block-start-color:FieldText;',
-    GrayText: 'border-block-start-color:GrayText;',
-    Highlight: 'border-block-start-color:Highlight;',
-    HighlightText: 'border-block-start-color:HighlightText;',
-    InactiveBorder: 'border-block-start-color:InactiveBorder;',
-    InactiveCaption: 'border-block-start-color:InactiveCaption;',
-    InactiveCaptionText: 'border-block-start-color:InactiveCaptionText;',
-    InfoBackground: 'border-block-start-color:InfoBackground;',
-    InfoText: 'border-block-start-color:InfoText;',
-    LinkText: 'border-block-start-color:LinkText;',
-    Mark: 'border-block-start-color:Mark;',
-    MarkText: 'border-block-start-color:MarkText;',
-    Menu: 'border-block-start-color:Menu;',
-    MenuText: 'border-block-start-color:MenuText;',
-    Scrollbar: 'border-block-start-color:Scrollbar;',
-    SelectedItem: 'border-block-start-color:SelectedItem;',
-    SelectedItemText: 'border-block-start-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-block-start-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-block-start-color:ThreeDFace;',
-    ThreeDHighlight: 'border-block-start-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-block-start-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-block-start-color:ThreeDShadow;',
-    VisitedText: 'border-block-start-color:VisitedText;',
-    Window: 'border-block-start-color:Window;',
-    WindowFrame: 'border-block-start-color:WindowFrame;',
-    WindowText: 'border-block-start-color:WindowText;',
-    aliceblue: 'border-block-start-color:aliceblue;',
-    antiquewhite: 'border-block-start-color:antiquewhite;',
-    aqua: 'border-block-start-color:aqua;',
-    aquamarine: 'border-block-start-color:aquamarine;',
-    azure: 'border-block-start-color:azure;',
-    beige: 'border-block-start-color:beige;',
-    bisque: 'border-block-start-color:bisque;',
-    black: 'border-block-start-color:black;',
-    blanchedalmond: 'border-block-start-color:blanchedalmond;',
-    blue: 'border-block-start-color:blue;',
-    blueviolet: 'border-block-start-color:blueviolet;',
-    brown: 'border-block-start-color:brown;',
-    burlywood: 'border-block-start-color:burlywood;',
-    cadetblue: 'border-block-start-color:cadetblue;',
-    chartreuse: 'border-block-start-color:chartreuse;',
-    chocolate: 'border-block-start-color:chocolate;',
-    coral: 'border-block-start-color:coral;',
-    cornflowerblue: 'border-block-start-color:cornflowerblue;',
-    cornsilk: 'border-block-start-color:cornsilk;',
-    crimson: 'border-block-start-color:crimson;',
-    currentColor: 'border-block-start-color:currentColor;',
-    cyan: 'border-block-start-color:cyan;',
-    darkblue: 'border-block-start-color:darkblue;',
-    darkcyan: 'border-block-start-color:darkcyan;',
-    darkgoldenrod: 'border-block-start-color:darkgoldenrod;',
-    darkgray: 'border-block-start-color:darkgray;',
-    darkgreen: 'border-block-start-color:darkgreen;',
-    darkgrey: 'border-block-start-color:darkgrey;',
-    darkkhaki: 'border-block-start-color:darkkhaki;',
-    darkmagenta: 'border-block-start-color:darkmagenta;',
-    darkolivegreen: 'border-block-start-color:darkolivegreen;',
-    darkorange: 'border-block-start-color:darkorange;',
-    darkorchid: 'border-block-start-color:darkorchid;',
-    darkred: 'border-block-start-color:darkred;',
-    darksalmon: 'border-block-start-color:darksalmon;',
-    darkseagreen: 'border-block-start-color:darkseagreen;',
-    darkslateblue: 'border-block-start-color:darkslateblue;',
-    darkslategray: 'border-block-start-color:darkslategray;',
-    darkslategrey: 'border-block-start-color:darkslategrey;',
-    darkturquoise: 'border-block-start-color:darkturquoise;',
-    darkviolet: 'border-block-start-color:darkviolet;',
-    deeppink: 'border-block-start-color:deeppink;',
-    deepskyblue: 'border-block-start-color:deepskyblue;',
-    dimgray: 'border-block-start-color:dimgray;',
-    dimgrey: 'border-block-start-color:dimgrey;',
-    dodgerblue: 'border-block-start-color:dodgerblue;',
-    firebrick: 'border-block-start-color:firebrick;',
-    floralwhite: 'border-block-start-color:floralwhite;',
-    forestgreen: 'border-block-start-color:forestgreen;',
-    fuchsia: 'border-block-start-color:fuchsia;',
-    gainsboro: 'border-block-start-color:gainsboro;',
-    ghostwhite: 'border-block-start-color:ghostwhite;',
-    gold: 'border-block-start-color:gold;',
-    goldenrod: 'border-block-start-color:goldenrod;',
-    gray: 'border-block-start-color:gray;',
-    green: 'border-block-start-color:green;',
-    greenyellow: 'border-block-start-color:greenyellow;',
-    grey: 'border-block-start-color:grey;',
-    honeydew: 'border-block-start-color:honeydew;',
-    hotpink: 'border-block-start-color:hotpink;',
-    indianred: 'border-block-start-color:indianred;',
-    indigo: 'border-block-start-color:indigo;',
-    inherit: 'border-block-start-color:inherit;',
-    initial: 'border-block-start-color:initial;',
-    ivory: 'border-block-start-color:ivory;',
-    khaki: 'border-block-start-color:khaki;',
-    lavender: 'border-block-start-color:lavender;',
-    lavenderblush: 'border-block-start-color:lavenderblush;',
-    lawngreen: 'border-block-start-color:lawngreen;',
-    lemonchiffon: 'border-block-start-color:lemonchiffon;',
-    lightblue: 'border-block-start-color:lightblue;',
-    lightcoral: 'border-block-start-color:lightcoral;',
-    lightcyan: 'border-block-start-color:lightcyan;',
-    lightgoldenrodyellow: 'border-block-start-color:lightgoldenrodyellow;',
-    lightgray: 'border-block-start-color:lightgray;',
-    lightgreen: 'border-block-start-color:lightgreen;',
-    lightgrey: 'border-block-start-color:lightgrey;',
-    lightpink: 'border-block-start-color:lightpink;',
-    lightsalmon: 'border-block-start-color:lightsalmon;',
-    lightseagreen: 'border-block-start-color:lightseagreen;',
-    lightskyblue: 'border-block-start-color:lightskyblue;',
-    lightslategray: 'border-block-start-color:lightslategray;',
-    lightslategrey: 'border-block-start-color:lightslategrey;',
-    lightsteelblue: 'border-block-start-color:lightsteelblue;',
-    lightyellow: 'border-block-start-color:lightyellow;',
-    lime: 'border-block-start-color:lime;',
-    limegreen: 'border-block-start-color:limegreen;',
-    linen: 'border-block-start-color:linen;',
-    magenta: 'border-block-start-color:magenta;',
-    maroon: 'border-block-start-color:maroon;',
-    mediumaquamarine: 'border-block-start-color:mediumaquamarine;',
-    mediumblue: 'border-block-start-color:mediumblue;',
-    mediumorchid: 'border-block-start-color:mediumorchid;',
-    mediumpurple: 'border-block-start-color:mediumpurple;',
-    mediumseagreen: 'border-block-start-color:mediumseagreen;',
-    mediumslateblue: 'border-block-start-color:mediumslateblue;',
-    mediumspringgreen: 'border-block-start-color:mediumspringgreen;',
-    mediumturquoise: 'border-block-start-color:mediumturquoise;',
-    mediumvioletred: 'border-block-start-color:mediumvioletred;',
-    midnightblue: 'border-block-start-color:midnightblue;',
-    mintcream: 'border-block-start-color:mintcream;',
-    mistyrose: 'border-block-start-color:mistyrose;',
-    moccasin: 'border-block-start-color:moccasin;',
-    navajowhite: 'border-block-start-color:navajowhite;',
-    navy: 'border-block-start-color:navy;',
-    oldlace: 'border-block-start-color:oldlace;',
-    olive: 'border-block-start-color:olive;',
-    olivedrab: 'border-block-start-color:olivedrab;',
-    orange: 'border-block-start-color:orange;',
-    orangered: 'border-block-start-color:orangered;',
-    orchid: 'border-block-start-color:orchid;',
-    palegoldenrod: 'border-block-start-color:palegoldenrod;',
-    palegreen: 'border-block-start-color:palegreen;',
-    paleturquoise: 'border-block-start-color:paleturquoise;',
-    palevioletred: 'border-block-start-color:palevioletred;',
-    papayawhip: 'border-block-start-color:papayawhip;',
-    peachpuff: 'border-block-start-color:peachpuff;',
-    peru: 'border-block-start-color:peru;',
-    pink: 'border-block-start-color:pink;',
-    plum: 'border-block-start-color:plum;',
-    powderblue: 'border-block-start-color:powderblue;',
-    purple: 'border-block-start-color:purple;',
-    rebeccapurple: 'border-block-start-color:rebeccapurple;',
-    red: 'border-block-start-color:red;',
-    revert: 'border-block-start-color:revert;',
-    revertLayer: 'border-block-start-color:revert-layer;',
-    rosybrown: 'border-block-start-color:rosybrown;',
-    royalblue: 'border-block-start-color:royalblue;',
-    saddlebrown: 'border-block-start-color:saddlebrown;',
-    salmon: 'border-block-start-color:salmon;',
-    sandybrown: 'border-block-start-color:sandybrown;',
-    seagreen: 'border-block-start-color:seagreen;',
-    seashell: 'border-block-start-color:seashell;',
-    sienna: 'border-block-start-color:sienna;',
-    silver: 'border-block-start-color:silver;',
-    skyblue: 'border-block-start-color:skyblue;',
-    slateblue: 'border-block-start-color:slateblue;',
-    slategray: 'border-block-start-color:slategray;',
-    slategrey: 'border-block-start-color:slategrey;',
-    snow: 'border-block-start-color:snow;',
-    springgreen: 'border-block-start-color:springgreen;',
-    steelblue: 'border-block-start-color:steelblue;',
-    tan: 'border-block-start-color:tan;',
-    teal: 'border-block-start-color:teal;',
-    thistle: 'border-block-start-color:thistle;',
-    tomato: 'border-block-start-color:tomato;',
-    transparent: 'border-block-start-color:transparent;',
-    turquoise: 'border-block-start-color:turquoise;',
-    unset: 'border-block-start-color:unset;',
-    violet: 'border-block-start-color:violet;',
-    wheat: 'border-block-start-color:wheat;',
-    white: 'border-block-start-color:white;',
-    whitesmoke: 'border-block-start-color:whitesmoke;',
-    yellow: 'border-block-start-color:yellow;',
-    yellowgreen: 'border-block-start-color:yellowgreen;',
-  } as const;
-}
-
-type BorderBlockStartColorCssKeywords = Readonly<ReturnType<typeof borderBlockStartColorKeywords>>;
-export interface BorderBlockStartColorCss extends BorderBlockStartColorCssKeywords {}
 /** CSS 属性 border-block-start-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-color
  */
 export class BorderBlockStartColorCss extends CssProperty<Property.BorderBlockStartColor> {
+  readonly AccentColor = 'border-block-start-color:AccentColor;';
+  readonly AccentColorText = 'border-block-start-color:AccentColorText;';
+  readonly ActiveBorder = 'border-block-start-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-block-start-color:ActiveCaption;';
+  readonly ActiveText = 'border-block-start-color:ActiveText;';
+  readonly AppWorkspace = 'border-block-start-color:AppWorkspace;';
+  readonly Background = 'border-block-start-color:Background;';
+  readonly ButtonBorder = 'border-block-start-color:ButtonBorder;';
+  readonly ButtonFace = 'border-block-start-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-block-start-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-block-start-color:ButtonShadow;';
+  readonly ButtonText = 'border-block-start-color:ButtonText;';
+  readonly Canvas = 'border-block-start-color:Canvas;';
+  readonly CanvasText = 'border-block-start-color:CanvasText;';
+  readonly CaptionText = 'border-block-start-color:CaptionText;';
+  readonly Field = 'border-block-start-color:Field;';
+  readonly FieldText = 'border-block-start-color:FieldText;';
+  readonly GrayText = 'border-block-start-color:GrayText;';
+  readonly Highlight = 'border-block-start-color:Highlight;';
+  readonly HighlightText = 'border-block-start-color:HighlightText;';
+  readonly InactiveBorder = 'border-block-start-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-block-start-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-block-start-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-block-start-color:InfoBackground;';
+  readonly InfoText = 'border-block-start-color:InfoText;';
+  readonly LinkText = 'border-block-start-color:LinkText;';
+  readonly Mark = 'border-block-start-color:Mark;';
+  readonly MarkText = 'border-block-start-color:MarkText;';
+  readonly Menu = 'border-block-start-color:Menu;';
+  readonly MenuText = 'border-block-start-color:MenuText;';
+  readonly Scrollbar = 'border-block-start-color:Scrollbar;';
+  readonly SelectedItem = 'border-block-start-color:SelectedItem;';
+  readonly SelectedItemText = 'border-block-start-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-block-start-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-block-start-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-block-start-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-block-start-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-block-start-color:ThreeDShadow;';
+  readonly VisitedText = 'border-block-start-color:VisitedText;';
+  readonly Window = 'border-block-start-color:Window;';
+  readonly WindowFrame = 'border-block-start-color:WindowFrame;';
+  readonly WindowText = 'border-block-start-color:WindowText;';
+  readonly aliceblue = 'border-block-start-color:aliceblue;';
+  readonly antiquewhite = 'border-block-start-color:antiquewhite;';
+  readonly aqua = 'border-block-start-color:aqua;';
+  readonly aquamarine = 'border-block-start-color:aquamarine;';
+  readonly azure = 'border-block-start-color:azure;';
+  readonly beige = 'border-block-start-color:beige;';
+  readonly bisque = 'border-block-start-color:bisque;';
+  readonly black = 'border-block-start-color:black;';
+  readonly blanchedalmond = 'border-block-start-color:blanchedalmond;';
+  readonly blue = 'border-block-start-color:blue;';
+  readonly blueviolet = 'border-block-start-color:blueviolet;';
+  readonly brown = 'border-block-start-color:brown;';
+  readonly burlywood = 'border-block-start-color:burlywood;';
+  readonly cadetblue = 'border-block-start-color:cadetblue;';
+  readonly chartreuse = 'border-block-start-color:chartreuse;';
+  readonly chocolate = 'border-block-start-color:chocolate;';
+  readonly coral = 'border-block-start-color:coral;';
+  readonly cornflowerblue = 'border-block-start-color:cornflowerblue;';
+  readonly cornsilk = 'border-block-start-color:cornsilk;';
+  readonly crimson = 'border-block-start-color:crimson;';
+  readonly currentColor = 'border-block-start-color:currentColor;';
+  readonly cyan = 'border-block-start-color:cyan;';
+  readonly darkblue = 'border-block-start-color:darkblue;';
+  readonly darkcyan = 'border-block-start-color:darkcyan;';
+  readonly darkgoldenrod = 'border-block-start-color:darkgoldenrod;';
+  readonly darkgray = 'border-block-start-color:darkgray;';
+  readonly darkgreen = 'border-block-start-color:darkgreen;';
+  readonly darkgrey = 'border-block-start-color:darkgrey;';
+  readonly darkkhaki = 'border-block-start-color:darkkhaki;';
+  readonly darkmagenta = 'border-block-start-color:darkmagenta;';
+  readonly darkolivegreen = 'border-block-start-color:darkolivegreen;';
+  readonly darkorange = 'border-block-start-color:darkorange;';
+  readonly darkorchid = 'border-block-start-color:darkorchid;';
+  readonly darkred = 'border-block-start-color:darkred;';
+  readonly darksalmon = 'border-block-start-color:darksalmon;';
+  readonly darkseagreen = 'border-block-start-color:darkseagreen;';
+  readonly darkslateblue = 'border-block-start-color:darkslateblue;';
+  readonly darkslategray = 'border-block-start-color:darkslategray;';
+  readonly darkslategrey = 'border-block-start-color:darkslategrey;';
+  readonly darkturquoise = 'border-block-start-color:darkturquoise;';
+  readonly darkviolet = 'border-block-start-color:darkviolet;';
+  readonly deeppink = 'border-block-start-color:deeppink;';
+  readonly deepskyblue = 'border-block-start-color:deepskyblue;';
+  readonly dimgray = 'border-block-start-color:dimgray;';
+  readonly dimgrey = 'border-block-start-color:dimgrey;';
+  readonly dodgerblue = 'border-block-start-color:dodgerblue;';
+  readonly firebrick = 'border-block-start-color:firebrick;';
+  readonly floralwhite = 'border-block-start-color:floralwhite;';
+  readonly forestgreen = 'border-block-start-color:forestgreen;';
+  readonly fuchsia = 'border-block-start-color:fuchsia;';
+  readonly gainsboro = 'border-block-start-color:gainsboro;';
+  readonly ghostwhite = 'border-block-start-color:ghostwhite;';
+  readonly gold = 'border-block-start-color:gold;';
+  readonly goldenrod = 'border-block-start-color:goldenrod;';
+  readonly gray = 'border-block-start-color:gray;';
+  readonly green = 'border-block-start-color:green;';
+  readonly greenyellow = 'border-block-start-color:greenyellow;';
+  readonly grey = 'border-block-start-color:grey;';
+  readonly honeydew = 'border-block-start-color:honeydew;';
+  readonly hotpink = 'border-block-start-color:hotpink;';
+  readonly indianred = 'border-block-start-color:indianred;';
+  readonly indigo = 'border-block-start-color:indigo;';
+  readonly inherit = 'border-block-start-color:inherit;';
+  readonly initial = 'border-block-start-color:initial;';
+  readonly ivory = 'border-block-start-color:ivory;';
+  readonly khaki = 'border-block-start-color:khaki;';
+  readonly lavender = 'border-block-start-color:lavender;';
+  readonly lavenderblush = 'border-block-start-color:lavenderblush;';
+  readonly lawngreen = 'border-block-start-color:lawngreen;';
+  readonly lemonchiffon = 'border-block-start-color:lemonchiffon;';
+  readonly lightblue = 'border-block-start-color:lightblue;';
+  readonly lightcoral = 'border-block-start-color:lightcoral;';
+  readonly lightcyan = 'border-block-start-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-block-start-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-block-start-color:lightgray;';
+  readonly lightgreen = 'border-block-start-color:lightgreen;';
+  readonly lightgrey = 'border-block-start-color:lightgrey;';
+  readonly lightpink = 'border-block-start-color:lightpink;';
+  readonly lightsalmon = 'border-block-start-color:lightsalmon;';
+  readonly lightseagreen = 'border-block-start-color:lightseagreen;';
+  readonly lightskyblue = 'border-block-start-color:lightskyblue;';
+  readonly lightslategray = 'border-block-start-color:lightslategray;';
+  readonly lightslategrey = 'border-block-start-color:lightslategrey;';
+  readonly lightsteelblue = 'border-block-start-color:lightsteelblue;';
+  readonly lightyellow = 'border-block-start-color:lightyellow;';
+  readonly lime = 'border-block-start-color:lime;';
+  readonly limegreen = 'border-block-start-color:limegreen;';
+  readonly linen = 'border-block-start-color:linen;';
+  readonly magenta = 'border-block-start-color:magenta;';
+  readonly maroon = 'border-block-start-color:maroon;';
+  readonly mediumaquamarine = 'border-block-start-color:mediumaquamarine;';
+  readonly mediumblue = 'border-block-start-color:mediumblue;';
+  readonly mediumorchid = 'border-block-start-color:mediumorchid;';
+  readonly mediumpurple = 'border-block-start-color:mediumpurple;';
+  readonly mediumseagreen = 'border-block-start-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-block-start-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-block-start-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-block-start-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-block-start-color:mediumvioletred;';
+  readonly midnightblue = 'border-block-start-color:midnightblue;';
+  readonly mintcream = 'border-block-start-color:mintcream;';
+  readonly mistyrose = 'border-block-start-color:mistyrose;';
+  readonly moccasin = 'border-block-start-color:moccasin;';
+  readonly navajowhite = 'border-block-start-color:navajowhite;';
+  readonly navy = 'border-block-start-color:navy;';
+  readonly oldlace = 'border-block-start-color:oldlace;';
+  readonly olive = 'border-block-start-color:olive;';
+  readonly olivedrab = 'border-block-start-color:olivedrab;';
+  readonly orange = 'border-block-start-color:orange;';
+  readonly orangered = 'border-block-start-color:orangered;';
+  readonly orchid = 'border-block-start-color:orchid;';
+  readonly palegoldenrod = 'border-block-start-color:palegoldenrod;';
+  readonly palegreen = 'border-block-start-color:palegreen;';
+  readonly paleturquoise = 'border-block-start-color:paleturquoise;';
+  readonly palevioletred = 'border-block-start-color:palevioletred;';
+  readonly papayawhip = 'border-block-start-color:papayawhip;';
+  readonly peachpuff = 'border-block-start-color:peachpuff;';
+  readonly peru = 'border-block-start-color:peru;';
+  readonly pink = 'border-block-start-color:pink;';
+  readonly plum = 'border-block-start-color:plum;';
+  readonly powderblue = 'border-block-start-color:powderblue;';
+  readonly purple = 'border-block-start-color:purple;';
+  readonly rebeccapurple = 'border-block-start-color:rebeccapurple;';
+  readonly red = 'border-block-start-color:red;';
+  readonly revert = 'border-block-start-color:revert;';
+  readonly revertLayer = 'border-block-start-color:revert-layer;';
+  readonly rosybrown = 'border-block-start-color:rosybrown;';
+  readonly royalblue = 'border-block-start-color:royalblue;';
+  readonly saddlebrown = 'border-block-start-color:saddlebrown;';
+  readonly salmon = 'border-block-start-color:salmon;';
+  readonly sandybrown = 'border-block-start-color:sandybrown;';
+  readonly seagreen = 'border-block-start-color:seagreen;';
+  readonly seashell = 'border-block-start-color:seashell;';
+  readonly sienna = 'border-block-start-color:sienna;';
+  readonly silver = 'border-block-start-color:silver;';
+  readonly skyblue = 'border-block-start-color:skyblue;';
+  readonly slateblue = 'border-block-start-color:slateblue;';
+  readonly slategray = 'border-block-start-color:slategray;';
+  readonly slategrey = 'border-block-start-color:slategrey;';
+  readonly snow = 'border-block-start-color:snow;';
+  readonly springgreen = 'border-block-start-color:springgreen;';
+  readonly steelblue = 'border-block-start-color:steelblue;';
+  readonly tan = 'border-block-start-color:tan;';
+  readonly teal = 'border-block-start-color:teal;';
+  readonly thistle = 'border-block-start-color:thistle;';
+  readonly tomato = 'border-block-start-color:tomato;';
+  readonly transparent = 'border-block-start-color:transparent;';
+  readonly turquoise = 'border-block-start-color:turquoise;';
+  readonly unset = 'border-block-start-color:unset;';
+  readonly violet = 'border-block-start-color:violet;';
+  readonly wheat = 'border-block-start-color:wheat;';
+  readonly white = 'border-block-start-color:white;';
+  readonly whitesmoke = 'border-block-start-color:whitesmoke;';
+  readonly yellow = 'border-block-start-color:yellow;';
+  readonly yellowgreen = 'border-block-start-color:yellowgreen;';
   constructor() {
     super('border-block-start-color');
-    initializeBorderBlockStartColorCss();
   }
 }
-let borderBlockStartColorReady = false;
-function initializeBorderBlockStartColorCss(): void {
-  if (borderBlockStartColorReady) return;
-  Object.assign(BorderBlockStartColorCss.prototype, borderBlockStartColorKeywords());
-  Object.freeze(BorderBlockStartColorCss.prototype);
-  borderBlockStartColorReady = true;
-}
 
-function borderBlockStartStyleKeywords() {
-  return {
-    dashed: 'border-block-start-style:dashed;',
-    dotted: 'border-block-start-style:dotted;',
-    double: 'border-block-start-style:double;',
-    groove: 'border-block-start-style:groove;',
-    hidden: 'border-block-start-style:hidden;',
-    inherit: 'border-block-start-style:inherit;',
-    initial: 'border-block-start-style:initial;',
-    inset: 'border-block-start-style:inset;',
-    none: 'border-block-start-style:none;',
-    outset: 'border-block-start-style:outset;',
-    revert: 'border-block-start-style:revert;',
-    revertLayer: 'border-block-start-style:revert-layer;',
-    ridge: 'border-block-start-style:ridge;',
-    solid: 'border-block-start-style:solid;',
-    unset: 'border-block-start-style:unset;',
-  } as const;
-}
-
-type BorderBlockStartStyleCssKeywords = Readonly<ReturnType<typeof borderBlockStartStyleKeywords>>;
-export interface BorderBlockStartStyleCss extends BorderBlockStartStyleCssKeywords {}
 /** CSS 属性 border-block-start-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-style
  */
 export class BorderBlockStartStyleCss extends CssProperty<Property.BorderBlockStartStyle> {
+  readonly dashed = 'border-block-start-style:dashed;';
+  readonly dotted = 'border-block-start-style:dotted;';
+  readonly double = 'border-block-start-style:double;';
+  readonly groove = 'border-block-start-style:groove;';
+  readonly hidden = 'border-block-start-style:hidden;';
+  readonly inherit = 'border-block-start-style:inherit;';
+  readonly initial = 'border-block-start-style:initial;';
+  readonly inset = 'border-block-start-style:inset;';
+  readonly none = 'border-block-start-style:none;';
+  readonly outset = 'border-block-start-style:outset;';
+  readonly revert = 'border-block-start-style:revert;';
+  readonly revertLayer = 'border-block-start-style:revert-layer;';
+  readonly ridge = 'border-block-start-style:ridge;';
+  readonly solid = 'border-block-start-style:solid;';
+  readonly unset = 'border-block-start-style:unset;';
   constructor() {
     super('border-block-start-style');
-    initializeBorderBlockStartStyleCss();
   }
 }
-let borderBlockStartStyleReady = false;
-function initializeBorderBlockStartStyleCss(): void {
-  if (borderBlockStartStyleReady) return;
-  Object.assign(BorderBlockStartStyleCss.prototype, borderBlockStartStyleKeywords());
-  Object.freeze(BorderBlockStartStyleCss.prototype);
-  borderBlockStartStyleReady = true;
-}
 
-function borderBlockStartWidthKeywords() {
-  return {
-    inherit: 'border-block-start-width:inherit;',
-    initial: 'border-block-start-width:initial;',
-    medium: 'border-block-start-width:medium;',
-    revert: 'border-block-start-width:revert;',
-    revertLayer: 'border-block-start-width:revert-layer;',
-    thick: 'border-block-start-width:thick;',
-    thin: 'border-block-start-width:thin;',
-    unset: 'border-block-start-width:unset;',
-  } as const;
-}
-
-type BorderBlockStartWidthCssKeywords = Readonly<ReturnType<typeof borderBlockStartWidthKeywords>>;
-export interface BorderBlockStartWidthCss extends BorderBlockStartWidthCssKeywords {}
 /** CSS 属性 border-block-start-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-width
  */
 export class BorderBlockStartWidthCss extends LengthCssProperty<Property.BorderBlockStartWidth> {
+  readonly inherit = 'border-block-start-width:inherit;';
+  readonly initial = 'border-block-start-width:initial;';
+  readonly medium = 'border-block-start-width:medium;';
+  readonly revert = 'border-block-start-width:revert;';
+  readonly revertLayer = 'border-block-start-width:revert-layer;';
+  readonly thick = 'border-block-start-width:thick;';
+  readonly thin = 'border-block-start-width:thin;';
+  readonly unset = 'border-block-start-width:unset;';
   constructor() {
     super('border-block-start-width');
-    initializeBorderBlockStartWidthCss();
   }
 }
-let borderBlockStartWidthReady = false;
-function initializeBorderBlockStartWidthCss(): void {
-  if (borderBlockStartWidthReady) return;
-  Object.assign(BorderBlockStartWidthCss.prototype, borderBlockStartWidthKeywords());
-  Object.freeze(BorderBlockStartWidthCss.prototype);
-  borderBlockStartWidthReady = true;
-}
 
-function borderBlockStyleKeywords() {
-  return {
-    dashed: 'border-block-style:dashed;',
-    dotted: 'border-block-style:dotted;',
-    double: 'border-block-style:double;',
-    groove: 'border-block-style:groove;',
-    hidden: 'border-block-style:hidden;',
-    inherit: 'border-block-style:inherit;',
-    initial: 'border-block-style:initial;',
-    inset: 'border-block-style:inset;',
-    none: 'border-block-style:none;',
-    outset: 'border-block-style:outset;',
-    revert: 'border-block-style:revert;',
-    revertLayer: 'border-block-style:revert-layer;',
-    ridge: 'border-block-style:ridge;',
-    solid: 'border-block-style:solid;',
-    unset: 'border-block-style:unset;',
-  } as const;
-}
-
-type BorderBlockStyleCssKeywords = Readonly<ReturnType<typeof borderBlockStyleKeywords>>;
-export interface BorderBlockStyleCss extends BorderBlockStyleCssKeywords {}
 /** CSS 属性 border-block-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-style
  */
 export class BorderBlockStyleCss extends CssProperty<Property.BorderBlockStyle> {
+  readonly dashed = 'border-block-style:dashed;';
+  readonly dotted = 'border-block-style:dotted;';
+  readonly double = 'border-block-style:double;';
+  readonly groove = 'border-block-style:groove;';
+  readonly hidden = 'border-block-style:hidden;';
+  readonly inherit = 'border-block-style:inherit;';
+  readonly initial = 'border-block-style:initial;';
+  readonly inset = 'border-block-style:inset;';
+  readonly none = 'border-block-style:none;';
+  readonly outset = 'border-block-style:outset;';
+  readonly revert = 'border-block-style:revert;';
+  readonly revertLayer = 'border-block-style:revert-layer;';
+  readonly ridge = 'border-block-style:ridge;';
+  readonly solid = 'border-block-style:solid;';
+  readonly unset = 'border-block-style:unset;';
   constructor() {
     super('border-block-style');
-    initializeBorderBlockStyleCss();
   }
 }
-let borderBlockStyleReady = false;
-function initializeBorderBlockStyleCss(): void {
-  if (borderBlockStyleReady) return;
-  Object.assign(BorderBlockStyleCss.prototype, borderBlockStyleKeywords());
-  Object.freeze(BorderBlockStyleCss.prototype);
-  borderBlockStyleReady = true;
-}
 
-function borderBlockWidthKeywords() {
-  return {
-    inherit: 'border-block-width:inherit;',
-    initial: 'border-block-width:initial;',
-    medium: 'border-block-width:medium;',
-    revert: 'border-block-width:revert;',
-    revertLayer: 'border-block-width:revert-layer;',
-    thick: 'border-block-width:thick;',
-    thin: 'border-block-width:thin;',
-    unset: 'border-block-width:unset;',
-  } as const;
-}
-
-type BorderBlockWidthCssKeywords = Readonly<ReturnType<typeof borderBlockWidthKeywords>>;
-export interface BorderBlockWidthCss extends BorderBlockWidthCssKeywords {}
 /** CSS 属性 border-block-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-width
  */
 export class BorderBlockWidthCss extends LengthCssProperty<Property.BorderBlockWidth> {
+  readonly inherit = 'border-block-width:inherit;';
+  readonly initial = 'border-block-width:initial;';
+  readonly medium = 'border-block-width:medium;';
+  readonly revert = 'border-block-width:revert;';
+  readonly revertLayer = 'border-block-width:revert-layer;';
+  readonly thick = 'border-block-width:thick;';
+  readonly thin = 'border-block-width:thin;';
+  readonly unset = 'border-block-width:unset;';
   constructor() {
     super('border-block-width');
-    initializeBorderBlockWidthCss();
   }
 }
-let borderBlockWidthReady = false;
-function initializeBorderBlockWidthCss(): void {
-  if (borderBlockWidthReady) return;
-  Object.assign(BorderBlockWidthCss.prototype, borderBlockWidthKeywords());
-  Object.freeze(BorderBlockWidthCss.prototype);
-  borderBlockWidthReady = true;
-}
 
-function borderBottomKeywords() {
-  return {
-    AccentColor: 'border-bottom:AccentColor;',
-    AccentColorText: 'border-bottom:AccentColorText;',
-    ActiveBorder: 'border-bottom:ActiveBorder;',
-    ActiveCaption: 'border-bottom:ActiveCaption;',
-    ActiveText: 'border-bottom:ActiveText;',
-    AppWorkspace: 'border-bottom:AppWorkspace;',
-    Background: 'border-bottom:Background;',
-    ButtonBorder: 'border-bottom:ButtonBorder;',
-    ButtonFace: 'border-bottom:ButtonFace;',
-    ButtonHighlight: 'border-bottom:ButtonHighlight;',
-    ButtonShadow: 'border-bottom:ButtonShadow;',
-    ButtonText: 'border-bottom:ButtonText;',
-    Canvas: 'border-bottom:Canvas;',
-    CanvasText: 'border-bottom:CanvasText;',
-    CaptionText: 'border-bottom:CaptionText;',
-    Field: 'border-bottom:Field;',
-    FieldText: 'border-bottom:FieldText;',
-    GrayText: 'border-bottom:GrayText;',
-    Highlight: 'border-bottom:Highlight;',
-    HighlightText: 'border-bottom:HighlightText;',
-    InactiveBorder: 'border-bottom:InactiveBorder;',
-    InactiveCaption: 'border-bottom:InactiveCaption;',
-    InactiveCaptionText: 'border-bottom:InactiveCaptionText;',
-    InfoBackground: 'border-bottom:InfoBackground;',
-    InfoText: 'border-bottom:InfoText;',
-    LinkText: 'border-bottom:LinkText;',
-    Mark: 'border-bottom:Mark;',
-    MarkText: 'border-bottom:MarkText;',
-    Menu: 'border-bottom:Menu;',
-    MenuText: 'border-bottom:MenuText;',
-    Scrollbar: 'border-bottom:Scrollbar;',
-    SelectedItem: 'border-bottom:SelectedItem;',
-    SelectedItemText: 'border-bottom:SelectedItemText;',
-    ThreeDDarkShadow: 'border-bottom:ThreeDDarkShadow;',
-    ThreeDFace: 'border-bottom:ThreeDFace;',
-    ThreeDHighlight: 'border-bottom:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-bottom:ThreeDLightShadow;',
-    ThreeDShadow: 'border-bottom:ThreeDShadow;',
-    VisitedText: 'border-bottom:VisitedText;',
-    Window: 'border-bottom:Window;',
-    WindowFrame: 'border-bottom:WindowFrame;',
-    WindowText: 'border-bottom:WindowText;',
-    aliceblue: 'border-bottom:aliceblue;',
-    antiquewhite: 'border-bottom:antiquewhite;',
-    aqua: 'border-bottom:aqua;',
-    aquamarine: 'border-bottom:aquamarine;',
-    azure: 'border-bottom:azure;',
-    beige: 'border-bottom:beige;',
-    bisque: 'border-bottom:bisque;',
-    black: 'border-bottom:black;',
-    blanchedalmond: 'border-bottom:blanchedalmond;',
-    blue: 'border-bottom:blue;',
-    blueviolet: 'border-bottom:blueviolet;',
-    brown: 'border-bottom:brown;',
-    burlywood: 'border-bottom:burlywood;',
-    cadetblue: 'border-bottom:cadetblue;',
-    chartreuse: 'border-bottom:chartreuse;',
-    chocolate: 'border-bottom:chocolate;',
-    coral: 'border-bottom:coral;',
-    cornflowerblue: 'border-bottom:cornflowerblue;',
-    cornsilk: 'border-bottom:cornsilk;',
-    crimson: 'border-bottom:crimson;',
-    currentColor: 'border-bottom:currentColor;',
-    cyan: 'border-bottom:cyan;',
-    darkblue: 'border-bottom:darkblue;',
-    darkcyan: 'border-bottom:darkcyan;',
-    darkgoldenrod: 'border-bottom:darkgoldenrod;',
-    darkgray: 'border-bottom:darkgray;',
-    darkgreen: 'border-bottom:darkgreen;',
-    darkgrey: 'border-bottom:darkgrey;',
-    darkkhaki: 'border-bottom:darkkhaki;',
-    darkmagenta: 'border-bottom:darkmagenta;',
-    darkolivegreen: 'border-bottom:darkolivegreen;',
-    darkorange: 'border-bottom:darkorange;',
-    darkorchid: 'border-bottom:darkorchid;',
-    darkred: 'border-bottom:darkred;',
-    darksalmon: 'border-bottom:darksalmon;',
-    darkseagreen: 'border-bottom:darkseagreen;',
-    darkslateblue: 'border-bottom:darkslateblue;',
-    darkslategray: 'border-bottom:darkslategray;',
-    darkslategrey: 'border-bottom:darkslategrey;',
-    darkturquoise: 'border-bottom:darkturquoise;',
-    darkviolet: 'border-bottom:darkviolet;',
-    dashed: 'border-bottom:dashed;',
-    deeppink: 'border-bottom:deeppink;',
-    deepskyblue: 'border-bottom:deepskyblue;',
-    dimgray: 'border-bottom:dimgray;',
-    dimgrey: 'border-bottom:dimgrey;',
-    dodgerblue: 'border-bottom:dodgerblue;',
-    dotted: 'border-bottom:dotted;',
-    double: 'border-bottom:double;',
-    firebrick: 'border-bottom:firebrick;',
-    floralwhite: 'border-bottom:floralwhite;',
-    forestgreen: 'border-bottom:forestgreen;',
-    fuchsia: 'border-bottom:fuchsia;',
-    gainsboro: 'border-bottom:gainsboro;',
-    ghostwhite: 'border-bottom:ghostwhite;',
-    gold: 'border-bottom:gold;',
-    goldenrod: 'border-bottom:goldenrod;',
-    gray: 'border-bottom:gray;',
-    green: 'border-bottom:green;',
-    greenyellow: 'border-bottom:greenyellow;',
-    grey: 'border-bottom:grey;',
-    groove: 'border-bottom:groove;',
-    hidden: 'border-bottom:hidden;',
-    honeydew: 'border-bottom:honeydew;',
-    hotpink: 'border-bottom:hotpink;',
-    indianred: 'border-bottom:indianred;',
-    indigo: 'border-bottom:indigo;',
-    inherit: 'border-bottom:inherit;',
-    initial: 'border-bottom:initial;',
-    inset: 'border-bottom:inset;',
-    ivory: 'border-bottom:ivory;',
-    khaki: 'border-bottom:khaki;',
-    lavender: 'border-bottom:lavender;',
-    lavenderblush: 'border-bottom:lavenderblush;',
-    lawngreen: 'border-bottom:lawngreen;',
-    lemonchiffon: 'border-bottom:lemonchiffon;',
-    lightblue: 'border-bottom:lightblue;',
-    lightcoral: 'border-bottom:lightcoral;',
-    lightcyan: 'border-bottom:lightcyan;',
-    lightgoldenrodyellow: 'border-bottom:lightgoldenrodyellow;',
-    lightgray: 'border-bottom:lightgray;',
-    lightgreen: 'border-bottom:lightgreen;',
-    lightgrey: 'border-bottom:lightgrey;',
-    lightpink: 'border-bottom:lightpink;',
-    lightsalmon: 'border-bottom:lightsalmon;',
-    lightseagreen: 'border-bottom:lightseagreen;',
-    lightskyblue: 'border-bottom:lightskyblue;',
-    lightslategray: 'border-bottom:lightslategray;',
-    lightslategrey: 'border-bottom:lightslategrey;',
-    lightsteelblue: 'border-bottom:lightsteelblue;',
-    lightyellow: 'border-bottom:lightyellow;',
-    lime: 'border-bottom:lime;',
-    limegreen: 'border-bottom:limegreen;',
-    linen: 'border-bottom:linen;',
-    magenta: 'border-bottom:magenta;',
-    maroon: 'border-bottom:maroon;',
-    medium: 'border-bottom:medium;',
-    mediumaquamarine: 'border-bottom:mediumaquamarine;',
-    mediumblue: 'border-bottom:mediumblue;',
-    mediumorchid: 'border-bottom:mediumorchid;',
-    mediumpurple: 'border-bottom:mediumpurple;',
-    mediumseagreen: 'border-bottom:mediumseagreen;',
-    mediumslateblue: 'border-bottom:mediumslateblue;',
-    mediumspringgreen: 'border-bottom:mediumspringgreen;',
-    mediumturquoise: 'border-bottom:mediumturquoise;',
-    mediumvioletred: 'border-bottom:mediumvioletred;',
-    midnightblue: 'border-bottom:midnightblue;',
-    mintcream: 'border-bottom:mintcream;',
-    mistyrose: 'border-bottom:mistyrose;',
-    moccasin: 'border-bottom:moccasin;',
-    navajowhite: 'border-bottom:navajowhite;',
-    navy: 'border-bottom:navy;',
-    none: 'border-bottom:none;',
-    oldlace: 'border-bottom:oldlace;',
-    olive: 'border-bottom:olive;',
-    olivedrab: 'border-bottom:olivedrab;',
-    orange: 'border-bottom:orange;',
-    orangered: 'border-bottom:orangered;',
-    orchid: 'border-bottom:orchid;',
-    outset: 'border-bottom:outset;',
-    palegoldenrod: 'border-bottom:palegoldenrod;',
-    palegreen: 'border-bottom:palegreen;',
-    paleturquoise: 'border-bottom:paleturquoise;',
-    palevioletred: 'border-bottom:palevioletred;',
-    papayawhip: 'border-bottom:papayawhip;',
-    peachpuff: 'border-bottom:peachpuff;',
-    peru: 'border-bottom:peru;',
-    pink: 'border-bottom:pink;',
-    plum: 'border-bottom:plum;',
-    powderblue: 'border-bottom:powderblue;',
-    purple: 'border-bottom:purple;',
-    rebeccapurple: 'border-bottom:rebeccapurple;',
-    red: 'border-bottom:red;',
-    revert: 'border-bottom:revert;',
-    revertLayer: 'border-bottom:revert-layer;',
-    ridge: 'border-bottom:ridge;',
-    rosybrown: 'border-bottom:rosybrown;',
-    royalblue: 'border-bottom:royalblue;',
-    saddlebrown: 'border-bottom:saddlebrown;',
-    salmon: 'border-bottom:salmon;',
-    sandybrown: 'border-bottom:sandybrown;',
-    seagreen: 'border-bottom:seagreen;',
-    seashell: 'border-bottom:seashell;',
-    sienna: 'border-bottom:sienna;',
-    silver: 'border-bottom:silver;',
-    skyblue: 'border-bottom:skyblue;',
-    slateblue: 'border-bottom:slateblue;',
-    slategray: 'border-bottom:slategray;',
-    slategrey: 'border-bottom:slategrey;',
-    snow: 'border-bottom:snow;',
-    solid: 'border-bottom:solid;',
-    springgreen: 'border-bottom:springgreen;',
-    steelblue: 'border-bottom:steelblue;',
-    tan: 'border-bottom:tan;',
-    teal: 'border-bottom:teal;',
-    thick: 'border-bottom:thick;',
-    thin: 'border-bottom:thin;',
-    thistle: 'border-bottom:thistle;',
-    tomato: 'border-bottom:tomato;',
-    transparent: 'border-bottom:transparent;',
-    turquoise: 'border-bottom:turquoise;',
-    unset: 'border-bottom:unset;',
-    violet: 'border-bottom:violet;',
-    wheat: 'border-bottom:wheat;',
-    white: 'border-bottom:white;',
-    whitesmoke: 'border-bottom:whitesmoke;',
-    yellow: 'border-bottom:yellow;',
-    yellowgreen: 'border-bottom:yellowgreen;',
-  } as const;
-}
-
-type BorderBottomCssKeywords = Readonly<ReturnType<typeof borderBottomKeywords>>;
-export interface BorderBottomCss extends BorderBottomCssKeywords {}
 /** CSS 属性 border-bottom。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom
  */
 export class BorderBottomCss extends LengthCssProperty<Property.BorderBottom> {
+  readonly AccentColor = 'border-bottom:AccentColor;';
+  readonly AccentColorText = 'border-bottom:AccentColorText;';
+  readonly ActiveBorder = 'border-bottom:ActiveBorder;';
+  readonly ActiveCaption = 'border-bottom:ActiveCaption;';
+  readonly ActiveText = 'border-bottom:ActiveText;';
+  readonly AppWorkspace = 'border-bottom:AppWorkspace;';
+  readonly Background = 'border-bottom:Background;';
+  readonly ButtonBorder = 'border-bottom:ButtonBorder;';
+  readonly ButtonFace = 'border-bottom:ButtonFace;';
+  readonly ButtonHighlight = 'border-bottom:ButtonHighlight;';
+  readonly ButtonShadow = 'border-bottom:ButtonShadow;';
+  readonly ButtonText = 'border-bottom:ButtonText;';
+  readonly Canvas = 'border-bottom:Canvas;';
+  readonly CanvasText = 'border-bottom:CanvasText;';
+  readonly CaptionText = 'border-bottom:CaptionText;';
+  readonly Field = 'border-bottom:Field;';
+  readonly FieldText = 'border-bottom:FieldText;';
+  readonly GrayText = 'border-bottom:GrayText;';
+  readonly Highlight = 'border-bottom:Highlight;';
+  readonly HighlightText = 'border-bottom:HighlightText;';
+  readonly InactiveBorder = 'border-bottom:InactiveBorder;';
+  readonly InactiveCaption = 'border-bottom:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-bottom:InactiveCaptionText;';
+  readonly InfoBackground = 'border-bottom:InfoBackground;';
+  readonly InfoText = 'border-bottom:InfoText;';
+  readonly LinkText = 'border-bottom:LinkText;';
+  readonly Mark = 'border-bottom:Mark;';
+  readonly MarkText = 'border-bottom:MarkText;';
+  readonly Menu = 'border-bottom:Menu;';
+  readonly MenuText = 'border-bottom:MenuText;';
+  readonly Scrollbar = 'border-bottom:Scrollbar;';
+  readonly SelectedItem = 'border-bottom:SelectedItem;';
+  readonly SelectedItemText = 'border-bottom:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-bottom:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-bottom:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-bottom:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-bottom:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-bottom:ThreeDShadow;';
+  readonly VisitedText = 'border-bottom:VisitedText;';
+  readonly Window = 'border-bottom:Window;';
+  readonly WindowFrame = 'border-bottom:WindowFrame;';
+  readonly WindowText = 'border-bottom:WindowText;';
+  readonly aliceblue = 'border-bottom:aliceblue;';
+  readonly antiquewhite = 'border-bottom:antiquewhite;';
+  readonly aqua = 'border-bottom:aqua;';
+  readonly aquamarine = 'border-bottom:aquamarine;';
+  readonly azure = 'border-bottom:azure;';
+  readonly beige = 'border-bottom:beige;';
+  readonly bisque = 'border-bottom:bisque;';
+  readonly black = 'border-bottom:black;';
+  readonly blanchedalmond = 'border-bottom:blanchedalmond;';
+  readonly blue = 'border-bottom:blue;';
+  readonly blueviolet = 'border-bottom:blueviolet;';
+  readonly brown = 'border-bottom:brown;';
+  readonly burlywood = 'border-bottom:burlywood;';
+  readonly cadetblue = 'border-bottom:cadetblue;';
+  readonly chartreuse = 'border-bottom:chartreuse;';
+  readonly chocolate = 'border-bottom:chocolate;';
+  readonly coral = 'border-bottom:coral;';
+  readonly cornflowerblue = 'border-bottom:cornflowerblue;';
+  readonly cornsilk = 'border-bottom:cornsilk;';
+  readonly crimson = 'border-bottom:crimson;';
+  readonly currentColor = 'border-bottom:currentColor;';
+  readonly cyan = 'border-bottom:cyan;';
+  readonly darkblue = 'border-bottom:darkblue;';
+  readonly darkcyan = 'border-bottom:darkcyan;';
+  readonly darkgoldenrod = 'border-bottom:darkgoldenrod;';
+  readonly darkgray = 'border-bottom:darkgray;';
+  readonly darkgreen = 'border-bottom:darkgreen;';
+  readonly darkgrey = 'border-bottom:darkgrey;';
+  readonly darkkhaki = 'border-bottom:darkkhaki;';
+  readonly darkmagenta = 'border-bottom:darkmagenta;';
+  readonly darkolivegreen = 'border-bottom:darkolivegreen;';
+  readonly darkorange = 'border-bottom:darkorange;';
+  readonly darkorchid = 'border-bottom:darkorchid;';
+  readonly darkred = 'border-bottom:darkred;';
+  readonly darksalmon = 'border-bottom:darksalmon;';
+  readonly darkseagreen = 'border-bottom:darkseagreen;';
+  readonly darkslateblue = 'border-bottom:darkslateblue;';
+  readonly darkslategray = 'border-bottom:darkslategray;';
+  readonly darkslategrey = 'border-bottom:darkslategrey;';
+  readonly darkturquoise = 'border-bottom:darkturquoise;';
+  readonly darkviolet = 'border-bottom:darkviolet;';
+  readonly dashed = 'border-bottom:dashed;';
+  readonly deeppink = 'border-bottom:deeppink;';
+  readonly deepskyblue = 'border-bottom:deepskyblue;';
+  readonly dimgray = 'border-bottom:dimgray;';
+  readonly dimgrey = 'border-bottom:dimgrey;';
+  readonly dodgerblue = 'border-bottom:dodgerblue;';
+  readonly dotted = 'border-bottom:dotted;';
+  readonly double = 'border-bottom:double;';
+  readonly firebrick = 'border-bottom:firebrick;';
+  readonly floralwhite = 'border-bottom:floralwhite;';
+  readonly forestgreen = 'border-bottom:forestgreen;';
+  readonly fuchsia = 'border-bottom:fuchsia;';
+  readonly gainsboro = 'border-bottom:gainsboro;';
+  readonly ghostwhite = 'border-bottom:ghostwhite;';
+  readonly gold = 'border-bottom:gold;';
+  readonly goldenrod = 'border-bottom:goldenrod;';
+  readonly gray = 'border-bottom:gray;';
+  readonly green = 'border-bottom:green;';
+  readonly greenyellow = 'border-bottom:greenyellow;';
+  readonly grey = 'border-bottom:grey;';
+  readonly groove = 'border-bottom:groove;';
+  readonly hidden = 'border-bottom:hidden;';
+  readonly honeydew = 'border-bottom:honeydew;';
+  readonly hotpink = 'border-bottom:hotpink;';
+  readonly indianred = 'border-bottom:indianred;';
+  readonly indigo = 'border-bottom:indigo;';
+  readonly inherit = 'border-bottom:inherit;';
+  readonly initial = 'border-bottom:initial;';
+  readonly inset = 'border-bottom:inset;';
+  readonly ivory = 'border-bottom:ivory;';
+  readonly khaki = 'border-bottom:khaki;';
+  readonly lavender = 'border-bottom:lavender;';
+  readonly lavenderblush = 'border-bottom:lavenderblush;';
+  readonly lawngreen = 'border-bottom:lawngreen;';
+  readonly lemonchiffon = 'border-bottom:lemonchiffon;';
+  readonly lightblue = 'border-bottom:lightblue;';
+  readonly lightcoral = 'border-bottom:lightcoral;';
+  readonly lightcyan = 'border-bottom:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-bottom:lightgoldenrodyellow;';
+  readonly lightgray = 'border-bottom:lightgray;';
+  readonly lightgreen = 'border-bottom:lightgreen;';
+  readonly lightgrey = 'border-bottom:lightgrey;';
+  readonly lightpink = 'border-bottom:lightpink;';
+  readonly lightsalmon = 'border-bottom:lightsalmon;';
+  readonly lightseagreen = 'border-bottom:lightseagreen;';
+  readonly lightskyblue = 'border-bottom:lightskyblue;';
+  readonly lightslategray = 'border-bottom:lightslategray;';
+  readonly lightslategrey = 'border-bottom:lightslategrey;';
+  readonly lightsteelblue = 'border-bottom:lightsteelblue;';
+  readonly lightyellow = 'border-bottom:lightyellow;';
+  readonly lime = 'border-bottom:lime;';
+  readonly limegreen = 'border-bottom:limegreen;';
+  readonly linen = 'border-bottom:linen;';
+  readonly magenta = 'border-bottom:magenta;';
+  readonly maroon = 'border-bottom:maroon;';
+  readonly medium = 'border-bottom:medium;';
+  readonly mediumaquamarine = 'border-bottom:mediumaquamarine;';
+  readonly mediumblue = 'border-bottom:mediumblue;';
+  readonly mediumorchid = 'border-bottom:mediumorchid;';
+  readonly mediumpurple = 'border-bottom:mediumpurple;';
+  readonly mediumseagreen = 'border-bottom:mediumseagreen;';
+  readonly mediumslateblue = 'border-bottom:mediumslateblue;';
+  readonly mediumspringgreen = 'border-bottom:mediumspringgreen;';
+  readonly mediumturquoise = 'border-bottom:mediumturquoise;';
+  readonly mediumvioletred = 'border-bottom:mediumvioletred;';
+  readonly midnightblue = 'border-bottom:midnightblue;';
+  readonly mintcream = 'border-bottom:mintcream;';
+  readonly mistyrose = 'border-bottom:mistyrose;';
+  readonly moccasin = 'border-bottom:moccasin;';
+  readonly navajowhite = 'border-bottom:navajowhite;';
+  readonly navy = 'border-bottom:navy;';
+  readonly none = 'border-bottom:none;';
+  readonly oldlace = 'border-bottom:oldlace;';
+  readonly olive = 'border-bottom:olive;';
+  readonly olivedrab = 'border-bottom:olivedrab;';
+  readonly orange = 'border-bottom:orange;';
+  readonly orangered = 'border-bottom:orangered;';
+  readonly orchid = 'border-bottom:orchid;';
+  readonly outset = 'border-bottom:outset;';
+  readonly palegoldenrod = 'border-bottom:palegoldenrod;';
+  readonly palegreen = 'border-bottom:palegreen;';
+  readonly paleturquoise = 'border-bottom:paleturquoise;';
+  readonly palevioletred = 'border-bottom:palevioletred;';
+  readonly papayawhip = 'border-bottom:papayawhip;';
+  readonly peachpuff = 'border-bottom:peachpuff;';
+  readonly peru = 'border-bottom:peru;';
+  readonly pink = 'border-bottom:pink;';
+  readonly plum = 'border-bottom:plum;';
+  readonly powderblue = 'border-bottom:powderblue;';
+  readonly purple = 'border-bottom:purple;';
+  readonly rebeccapurple = 'border-bottom:rebeccapurple;';
+  readonly red = 'border-bottom:red;';
+  readonly revert = 'border-bottom:revert;';
+  readonly revertLayer = 'border-bottom:revert-layer;';
+  readonly ridge = 'border-bottom:ridge;';
+  readonly rosybrown = 'border-bottom:rosybrown;';
+  readonly royalblue = 'border-bottom:royalblue;';
+  readonly saddlebrown = 'border-bottom:saddlebrown;';
+  readonly salmon = 'border-bottom:salmon;';
+  readonly sandybrown = 'border-bottom:sandybrown;';
+  readonly seagreen = 'border-bottom:seagreen;';
+  readonly seashell = 'border-bottom:seashell;';
+  readonly sienna = 'border-bottom:sienna;';
+  readonly silver = 'border-bottom:silver;';
+  readonly skyblue = 'border-bottom:skyblue;';
+  readonly slateblue = 'border-bottom:slateblue;';
+  readonly slategray = 'border-bottom:slategray;';
+  readonly slategrey = 'border-bottom:slategrey;';
+  readonly snow = 'border-bottom:snow;';
+  readonly solid = 'border-bottom:solid;';
+  readonly springgreen = 'border-bottom:springgreen;';
+  readonly steelblue = 'border-bottom:steelblue;';
+  readonly tan = 'border-bottom:tan;';
+  readonly teal = 'border-bottom:teal;';
+  readonly thick = 'border-bottom:thick;';
+  readonly thin = 'border-bottom:thin;';
+  readonly thistle = 'border-bottom:thistle;';
+  readonly tomato = 'border-bottom:tomato;';
+  readonly transparent = 'border-bottom:transparent;';
+  readonly turquoise = 'border-bottom:turquoise;';
+  readonly unset = 'border-bottom:unset;';
+  readonly violet = 'border-bottom:violet;';
+  readonly wheat = 'border-bottom:wheat;';
+  readonly white = 'border-bottom:white;';
+  readonly whitesmoke = 'border-bottom:whitesmoke;';
+  readonly yellow = 'border-bottom:yellow;';
+  readonly yellowgreen = 'border-bottom:yellowgreen;';
   constructor() {
     super('border-bottom');
-    initializeBorderBottomCss();
   }
 }
-let borderBottomReady = false;
-function initializeBorderBottomCss(): void {
-  if (borderBottomReady) return;
-  Object.assign(BorderBottomCss.prototype, borderBottomKeywords());
-  Object.freeze(BorderBottomCss.prototype);
-  borderBottomReady = true;
-}
 
-function borderBottomColorKeywords() {
-  return {
-    AccentColor: 'border-bottom-color:AccentColor;',
-    AccentColorText: 'border-bottom-color:AccentColorText;',
-    ActiveBorder: 'border-bottom-color:ActiveBorder;',
-    ActiveCaption: 'border-bottom-color:ActiveCaption;',
-    ActiveText: 'border-bottom-color:ActiveText;',
-    AppWorkspace: 'border-bottom-color:AppWorkspace;',
-    Background: 'border-bottom-color:Background;',
-    ButtonBorder: 'border-bottom-color:ButtonBorder;',
-    ButtonFace: 'border-bottom-color:ButtonFace;',
-    ButtonHighlight: 'border-bottom-color:ButtonHighlight;',
-    ButtonShadow: 'border-bottom-color:ButtonShadow;',
-    ButtonText: 'border-bottom-color:ButtonText;',
-    Canvas: 'border-bottom-color:Canvas;',
-    CanvasText: 'border-bottom-color:CanvasText;',
-    CaptionText: 'border-bottom-color:CaptionText;',
-    Field: 'border-bottom-color:Field;',
-    FieldText: 'border-bottom-color:FieldText;',
-    GrayText: 'border-bottom-color:GrayText;',
-    Highlight: 'border-bottom-color:Highlight;',
-    HighlightText: 'border-bottom-color:HighlightText;',
-    InactiveBorder: 'border-bottom-color:InactiveBorder;',
-    InactiveCaption: 'border-bottom-color:InactiveCaption;',
-    InactiveCaptionText: 'border-bottom-color:InactiveCaptionText;',
-    InfoBackground: 'border-bottom-color:InfoBackground;',
-    InfoText: 'border-bottom-color:InfoText;',
-    LinkText: 'border-bottom-color:LinkText;',
-    Mark: 'border-bottom-color:Mark;',
-    MarkText: 'border-bottom-color:MarkText;',
-    Menu: 'border-bottom-color:Menu;',
-    MenuText: 'border-bottom-color:MenuText;',
-    Scrollbar: 'border-bottom-color:Scrollbar;',
-    SelectedItem: 'border-bottom-color:SelectedItem;',
-    SelectedItemText: 'border-bottom-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-bottom-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-bottom-color:ThreeDFace;',
-    ThreeDHighlight: 'border-bottom-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-bottom-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-bottom-color:ThreeDShadow;',
-    VisitedText: 'border-bottom-color:VisitedText;',
-    Window: 'border-bottom-color:Window;',
-    WindowFrame: 'border-bottom-color:WindowFrame;',
-    WindowText: 'border-bottom-color:WindowText;',
-    aliceblue: 'border-bottom-color:aliceblue;',
-    antiquewhite: 'border-bottom-color:antiquewhite;',
-    aqua: 'border-bottom-color:aqua;',
-    aquamarine: 'border-bottom-color:aquamarine;',
-    azure: 'border-bottom-color:azure;',
-    beige: 'border-bottom-color:beige;',
-    bisque: 'border-bottom-color:bisque;',
-    black: 'border-bottom-color:black;',
-    blanchedalmond: 'border-bottom-color:blanchedalmond;',
-    blue: 'border-bottom-color:blue;',
-    blueviolet: 'border-bottom-color:blueviolet;',
-    brown: 'border-bottom-color:brown;',
-    burlywood: 'border-bottom-color:burlywood;',
-    cadetblue: 'border-bottom-color:cadetblue;',
-    chartreuse: 'border-bottom-color:chartreuse;',
-    chocolate: 'border-bottom-color:chocolate;',
-    coral: 'border-bottom-color:coral;',
-    cornflowerblue: 'border-bottom-color:cornflowerblue;',
-    cornsilk: 'border-bottom-color:cornsilk;',
-    crimson: 'border-bottom-color:crimson;',
-    currentColor: 'border-bottom-color:currentColor;',
-    cyan: 'border-bottom-color:cyan;',
-    darkblue: 'border-bottom-color:darkblue;',
-    darkcyan: 'border-bottom-color:darkcyan;',
-    darkgoldenrod: 'border-bottom-color:darkgoldenrod;',
-    darkgray: 'border-bottom-color:darkgray;',
-    darkgreen: 'border-bottom-color:darkgreen;',
-    darkgrey: 'border-bottom-color:darkgrey;',
-    darkkhaki: 'border-bottom-color:darkkhaki;',
-    darkmagenta: 'border-bottom-color:darkmagenta;',
-    darkolivegreen: 'border-bottom-color:darkolivegreen;',
-    darkorange: 'border-bottom-color:darkorange;',
-    darkorchid: 'border-bottom-color:darkorchid;',
-    darkred: 'border-bottom-color:darkred;',
-    darksalmon: 'border-bottom-color:darksalmon;',
-    darkseagreen: 'border-bottom-color:darkseagreen;',
-    darkslateblue: 'border-bottom-color:darkslateblue;',
-    darkslategray: 'border-bottom-color:darkslategray;',
-    darkslategrey: 'border-bottom-color:darkslategrey;',
-    darkturquoise: 'border-bottom-color:darkturquoise;',
-    darkviolet: 'border-bottom-color:darkviolet;',
-    deeppink: 'border-bottom-color:deeppink;',
-    deepskyblue: 'border-bottom-color:deepskyblue;',
-    dimgray: 'border-bottom-color:dimgray;',
-    dimgrey: 'border-bottom-color:dimgrey;',
-    dodgerblue: 'border-bottom-color:dodgerblue;',
-    firebrick: 'border-bottom-color:firebrick;',
-    floralwhite: 'border-bottom-color:floralwhite;',
-    forestgreen: 'border-bottom-color:forestgreen;',
-    fuchsia: 'border-bottom-color:fuchsia;',
-    gainsboro: 'border-bottom-color:gainsboro;',
-    ghostwhite: 'border-bottom-color:ghostwhite;',
-    gold: 'border-bottom-color:gold;',
-    goldenrod: 'border-bottom-color:goldenrod;',
-    gray: 'border-bottom-color:gray;',
-    green: 'border-bottom-color:green;',
-    greenyellow: 'border-bottom-color:greenyellow;',
-    grey: 'border-bottom-color:grey;',
-    honeydew: 'border-bottom-color:honeydew;',
-    hotpink: 'border-bottom-color:hotpink;',
-    indianred: 'border-bottom-color:indianred;',
-    indigo: 'border-bottom-color:indigo;',
-    inherit: 'border-bottom-color:inherit;',
-    initial: 'border-bottom-color:initial;',
-    ivory: 'border-bottom-color:ivory;',
-    khaki: 'border-bottom-color:khaki;',
-    lavender: 'border-bottom-color:lavender;',
-    lavenderblush: 'border-bottom-color:lavenderblush;',
-    lawngreen: 'border-bottom-color:lawngreen;',
-    lemonchiffon: 'border-bottom-color:lemonchiffon;',
-    lightblue: 'border-bottom-color:lightblue;',
-    lightcoral: 'border-bottom-color:lightcoral;',
-    lightcyan: 'border-bottom-color:lightcyan;',
-    lightgoldenrodyellow: 'border-bottom-color:lightgoldenrodyellow;',
-    lightgray: 'border-bottom-color:lightgray;',
-    lightgreen: 'border-bottom-color:lightgreen;',
-    lightgrey: 'border-bottom-color:lightgrey;',
-    lightpink: 'border-bottom-color:lightpink;',
-    lightsalmon: 'border-bottom-color:lightsalmon;',
-    lightseagreen: 'border-bottom-color:lightseagreen;',
-    lightskyblue: 'border-bottom-color:lightskyblue;',
-    lightslategray: 'border-bottom-color:lightslategray;',
-    lightslategrey: 'border-bottom-color:lightslategrey;',
-    lightsteelblue: 'border-bottom-color:lightsteelblue;',
-    lightyellow: 'border-bottom-color:lightyellow;',
-    lime: 'border-bottom-color:lime;',
-    limegreen: 'border-bottom-color:limegreen;',
-    linen: 'border-bottom-color:linen;',
-    magenta: 'border-bottom-color:magenta;',
-    maroon: 'border-bottom-color:maroon;',
-    mediumaquamarine: 'border-bottom-color:mediumaquamarine;',
-    mediumblue: 'border-bottom-color:mediumblue;',
-    mediumorchid: 'border-bottom-color:mediumorchid;',
-    mediumpurple: 'border-bottom-color:mediumpurple;',
-    mediumseagreen: 'border-bottom-color:mediumseagreen;',
-    mediumslateblue: 'border-bottom-color:mediumslateblue;',
-    mediumspringgreen: 'border-bottom-color:mediumspringgreen;',
-    mediumturquoise: 'border-bottom-color:mediumturquoise;',
-    mediumvioletred: 'border-bottom-color:mediumvioletred;',
-    midnightblue: 'border-bottom-color:midnightblue;',
-    mintcream: 'border-bottom-color:mintcream;',
-    mistyrose: 'border-bottom-color:mistyrose;',
-    moccasin: 'border-bottom-color:moccasin;',
-    navajowhite: 'border-bottom-color:navajowhite;',
-    navy: 'border-bottom-color:navy;',
-    oldlace: 'border-bottom-color:oldlace;',
-    olive: 'border-bottom-color:olive;',
-    olivedrab: 'border-bottom-color:olivedrab;',
-    orange: 'border-bottom-color:orange;',
-    orangered: 'border-bottom-color:orangered;',
-    orchid: 'border-bottom-color:orchid;',
-    palegoldenrod: 'border-bottom-color:palegoldenrod;',
-    palegreen: 'border-bottom-color:palegreen;',
-    paleturquoise: 'border-bottom-color:paleturquoise;',
-    palevioletred: 'border-bottom-color:palevioletred;',
-    papayawhip: 'border-bottom-color:papayawhip;',
-    peachpuff: 'border-bottom-color:peachpuff;',
-    peru: 'border-bottom-color:peru;',
-    pink: 'border-bottom-color:pink;',
-    plum: 'border-bottom-color:plum;',
-    powderblue: 'border-bottom-color:powderblue;',
-    purple: 'border-bottom-color:purple;',
-    rebeccapurple: 'border-bottom-color:rebeccapurple;',
-    red: 'border-bottom-color:red;',
-    revert: 'border-bottom-color:revert;',
-    revertLayer: 'border-bottom-color:revert-layer;',
-    rosybrown: 'border-bottom-color:rosybrown;',
-    royalblue: 'border-bottom-color:royalblue;',
-    saddlebrown: 'border-bottom-color:saddlebrown;',
-    salmon: 'border-bottom-color:salmon;',
-    sandybrown: 'border-bottom-color:sandybrown;',
-    seagreen: 'border-bottom-color:seagreen;',
-    seashell: 'border-bottom-color:seashell;',
-    sienna: 'border-bottom-color:sienna;',
-    silver: 'border-bottom-color:silver;',
-    skyblue: 'border-bottom-color:skyblue;',
-    slateblue: 'border-bottom-color:slateblue;',
-    slategray: 'border-bottom-color:slategray;',
-    slategrey: 'border-bottom-color:slategrey;',
-    snow: 'border-bottom-color:snow;',
-    springgreen: 'border-bottom-color:springgreen;',
-    steelblue: 'border-bottom-color:steelblue;',
-    tan: 'border-bottom-color:tan;',
-    teal: 'border-bottom-color:teal;',
-    thistle: 'border-bottom-color:thistle;',
-    tomato: 'border-bottom-color:tomato;',
-    transparent: 'border-bottom-color:transparent;',
-    turquoise: 'border-bottom-color:turquoise;',
-    unset: 'border-bottom-color:unset;',
-    violet: 'border-bottom-color:violet;',
-    wheat: 'border-bottom-color:wheat;',
-    white: 'border-bottom-color:white;',
-    whitesmoke: 'border-bottom-color:whitesmoke;',
-    yellow: 'border-bottom-color:yellow;',
-    yellowgreen: 'border-bottom-color:yellowgreen;',
-  } as const;
-}
-
-type BorderBottomColorCssKeywords = Readonly<ReturnType<typeof borderBottomColorKeywords>>;
-export interface BorderBottomColorCss extends BorderBottomColorCssKeywords {}
 /** CSS 属性 border-bottom-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-color
  */
 export class BorderBottomColorCss extends CssProperty<Property.BorderBottomColor> {
+  readonly AccentColor = 'border-bottom-color:AccentColor;';
+  readonly AccentColorText = 'border-bottom-color:AccentColorText;';
+  readonly ActiveBorder = 'border-bottom-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-bottom-color:ActiveCaption;';
+  readonly ActiveText = 'border-bottom-color:ActiveText;';
+  readonly AppWorkspace = 'border-bottom-color:AppWorkspace;';
+  readonly Background = 'border-bottom-color:Background;';
+  readonly ButtonBorder = 'border-bottom-color:ButtonBorder;';
+  readonly ButtonFace = 'border-bottom-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-bottom-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-bottom-color:ButtonShadow;';
+  readonly ButtonText = 'border-bottom-color:ButtonText;';
+  readonly Canvas = 'border-bottom-color:Canvas;';
+  readonly CanvasText = 'border-bottom-color:CanvasText;';
+  readonly CaptionText = 'border-bottom-color:CaptionText;';
+  readonly Field = 'border-bottom-color:Field;';
+  readonly FieldText = 'border-bottom-color:FieldText;';
+  readonly GrayText = 'border-bottom-color:GrayText;';
+  readonly Highlight = 'border-bottom-color:Highlight;';
+  readonly HighlightText = 'border-bottom-color:HighlightText;';
+  readonly InactiveBorder = 'border-bottom-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-bottom-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-bottom-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-bottom-color:InfoBackground;';
+  readonly InfoText = 'border-bottom-color:InfoText;';
+  readonly LinkText = 'border-bottom-color:LinkText;';
+  readonly Mark = 'border-bottom-color:Mark;';
+  readonly MarkText = 'border-bottom-color:MarkText;';
+  readonly Menu = 'border-bottom-color:Menu;';
+  readonly MenuText = 'border-bottom-color:MenuText;';
+  readonly Scrollbar = 'border-bottom-color:Scrollbar;';
+  readonly SelectedItem = 'border-bottom-color:SelectedItem;';
+  readonly SelectedItemText = 'border-bottom-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-bottom-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-bottom-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-bottom-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-bottom-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-bottom-color:ThreeDShadow;';
+  readonly VisitedText = 'border-bottom-color:VisitedText;';
+  readonly Window = 'border-bottom-color:Window;';
+  readonly WindowFrame = 'border-bottom-color:WindowFrame;';
+  readonly WindowText = 'border-bottom-color:WindowText;';
+  readonly aliceblue = 'border-bottom-color:aliceblue;';
+  readonly antiquewhite = 'border-bottom-color:antiquewhite;';
+  readonly aqua = 'border-bottom-color:aqua;';
+  readonly aquamarine = 'border-bottom-color:aquamarine;';
+  readonly azure = 'border-bottom-color:azure;';
+  readonly beige = 'border-bottom-color:beige;';
+  readonly bisque = 'border-bottom-color:bisque;';
+  readonly black = 'border-bottom-color:black;';
+  readonly blanchedalmond = 'border-bottom-color:blanchedalmond;';
+  readonly blue = 'border-bottom-color:blue;';
+  readonly blueviolet = 'border-bottom-color:blueviolet;';
+  readonly brown = 'border-bottom-color:brown;';
+  readonly burlywood = 'border-bottom-color:burlywood;';
+  readonly cadetblue = 'border-bottom-color:cadetblue;';
+  readonly chartreuse = 'border-bottom-color:chartreuse;';
+  readonly chocolate = 'border-bottom-color:chocolate;';
+  readonly coral = 'border-bottom-color:coral;';
+  readonly cornflowerblue = 'border-bottom-color:cornflowerblue;';
+  readonly cornsilk = 'border-bottom-color:cornsilk;';
+  readonly crimson = 'border-bottom-color:crimson;';
+  readonly currentColor = 'border-bottom-color:currentColor;';
+  readonly cyan = 'border-bottom-color:cyan;';
+  readonly darkblue = 'border-bottom-color:darkblue;';
+  readonly darkcyan = 'border-bottom-color:darkcyan;';
+  readonly darkgoldenrod = 'border-bottom-color:darkgoldenrod;';
+  readonly darkgray = 'border-bottom-color:darkgray;';
+  readonly darkgreen = 'border-bottom-color:darkgreen;';
+  readonly darkgrey = 'border-bottom-color:darkgrey;';
+  readonly darkkhaki = 'border-bottom-color:darkkhaki;';
+  readonly darkmagenta = 'border-bottom-color:darkmagenta;';
+  readonly darkolivegreen = 'border-bottom-color:darkolivegreen;';
+  readonly darkorange = 'border-bottom-color:darkorange;';
+  readonly darkorchid = 'border-bottom-color:darkorchid;';
+  readonly darkred = 'border-bottom-color:darkred;';
+  readonly darksalmon = 'border-bottom-color:darksalmon;';
+  readonly darkseagreen = 'border-bottom-color:darkseagreen;';
+  readonly darkslateblue = 'border-bottom-color:darkslateblue;';
+  readonly darkslategray = 'border-bottom-color:darkslategray;';
+  readonly darkslategrey = 'border-bottom-color:darkslategrey;';
+  readonly darkturquoise = 'border-bottom-color:darkturquoise;';
+  readonly darkviolet = 'border-bottom-color:darkviolet;';
+  readonly deeppink = 'border-bottom-color:deeppink;';
+  readonly deepskyblue = 'border-bottom-color:deepskyblue;';
+  readonly dimgray = 'border-bottom-color:dimgray;';
+  readonly dimgrey = 'border-bottom-color:dimgrey;';
+  readonly dodgerblue = 'border-bottom-color:dodgerblue;';
+  readonly firebrick = 'border-bottom-color:firebrick;';
+  readonly floralwhite = 'border-bottom-color:floralwhite;';
+  readonly forestgreen = 'border-bottom-color:forestgreen;';
+  readonly fuchsia = 'border-bottom-color:fuchsia;';
+  readonly gainsboro = 'border-bottom-color:gainsboro;';
+  readonly ghostwhite = 'border-bottom-color:ghostwhite;';
+  readonly gold = 'border-bottom-color:gold;';
+  readonly goldenrod = 'border-bottom-color:goldenrod;';
+  readonly gray = 'border-bottom-color:gray;';
+  readonly green = 'border-bottom-color:green;';
+  readonly greenyellow = 'border-bottom-color:greenyellow;';
+  readonly grey = 'border-bottom-color:grey;';
+  readonly honeydew = 'border-bottom-color:honeydew;';
+  readonly hotpink = 'border-bottom-color:hotpink;';
+  readonly indianred = 'border-bottom-color:indianred;';
+  readonly indigo = 'border-bottom-color:indigo;';
+  readonly inherit = 'border-bottom-color:inherit;';
+  readonly initial = 'border-bottom-color:initial;';
+  readonly ivory = 'border-bottom-color:ivory;';
+  readonly khaki = 'border-bottom-color:khaki;';
+  readonly lavender = 'border-bottom-color:lavender;';
+  readonly lavenderblush = 'border-bottom-color:lavenderblush;';
+  readonly lawngreen = 'border-bottom-color:lawngreen;';
+  readonly lemonchiffon = 'border-bottom-color:lemonchiffon;';
+  readonly lightblue = 'border-bottom-color:lightblue;';
+  readonly lightcoral = 'border-bottom-color:lightcoral;';
+  readonly lightcyan = 'border-bottom-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-bottom-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-bottom-color:lightgray;';
+  readonly lightgreen = 'border-bottom-color:lightgreen;';
+  readonly lightgrey = 'border-bottom-color:lightgrey;';
+  readonly lightpink = 'border-bottom-color:lightpink;';
+  readonly lightsalmon = 'border-bottom-color:lightsalmon;';
+  readonly lightseagreen = 'border-bottom-color:lightseagreen;';
+  readonly lightskyblue = 'border-bottom-color:lightskyblue;';
+  readonly lightslategray = 'border-bottom-color:lightslategray;';
+  readonly lightslategrey = 'border-bottom-color:lightslategrey;';
+  readonly lightsteelblue = 'border-bottom-color:lightsteelblue;';
+  readonly lightyellow = 'border-bottom-color:lightyellow;';
+  readonly lime = 'border-bottom-color:lime;';
+  readonly limegreen = 'border-bottom-color:limegreen;';
+  readonly linen = 'border-bottom-color:linen;';
+  readonly magenta = 'border-bottom-color:magenta;';
+  readonly maroon = 'border-bottom-color:maroon;';
+  readonly mediumaquamarine = 'border-bottom-color:mediumaquamarine;';
+  readonly mediumblue = 'border-bottom-color:mediumblue;';
+  readonly mediumorchid = 'border-bottom-color:mediumorchid;';
+  readonly mediumpurple = 'border-bottom-color:mediumpurple;';
+  readonly mediumseagreen = 'border-bottom-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-bottom-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-bottom-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-bottom-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-bottom-color:mediumvioletred;';
+  readonly midnightblue = 'border-bottom-color:midnightblue;';
+  readonly mintcream = 'border-bottom-color:mintcream;';
+  readonly mistyrose = 'border-bottom-color:mistyrose;';
+  readonly moccasin = 'border-bottom-color:moccasin;';
+  readonly navajowhite = 'border-bottom-color:navajowhite;';
+  readonly navy = 'border-bottom-color:navy;';
+  readonly oldlace = 'border-bottom-color:oldlace;';
+  readonly olive = 'border-bottom-color:olive;';
+  readonly olivedrab = 'border-bottom-color:olivedrab;';
+  readonly orange = 'border-bottom-color:orange;';
+  readonly orangered = 'border-bottom-color:orangered;';
+  readonly orchid = 'border-bottom-color:orchid;';
+  readonly palegoldenrod = 'border-bottom-color:palegoldenrod;';
+  readonly palegreen = 'border-bottom-color:palegreen;';
+  readonly paleturquoise = 'border-bottom-color:paleturquoise;';
+  readonly palevioletred = 'border-bottom-color:palevioletred;';
+  readonly papayawhip = 'border-bottom-color:papayawhip;';
+  readonly peachpuff = 'border-bottom-color:peachpuff;';
+  readonly peru = 'border-bottom-color:peru;';
+  readonly pink = 'border-bottom-color:pink;';
+  readonly plum = 'border-bottom-color:plum;';
+  readonly powderblue = 'border-bottom-color:powderblue;';
+  readonly purple = 'border-bottom-color:purple;';
+  readonly rebeccapurple = 'border-bottom-color:rebeccapurple;';
+  readonly red = 'border-bottom-color:red;';
+  readonly revert = 'border-bottom-color:revert;';
+  readonly revertLayer = 'border-bottom-color:revert-layer;';
+  readonly rosybrown = 'border-bottom-color:rosybrown;';
+  readonly royalblue = 'border-bottom-color:royalblue;';
+  readonly saddlebrown = 'border-bottom-color:saddlebrown;';
+  readonly salmon = 'border-bottom-color:salmon;';
+  readonly sandybrown = 'border-bottom-color:sandybrown;';
+  readonly seagreen = 'border-bottom-color:seagreen;';
+  readonly seashell = 'border-bottom-color:seashell;';
+  readonly sienna = 'border-bottom-color:sienna;';
+  readonly silver = 'border-bottom-color:silver;';
+  readonly skyblue = 'border-bottom-color:skyblue;';
+  readonly slateblue = 'border-bottom-color:slateblue;';
+  readonly slategray = 'border-bottom-color:slategray;';
+  readonly slategrey = 'border-bottom-color:slategrey;';
+  readonly snow = 'border-bottom-color:snow;';
+  readonly springgreen = 'border-bottom-color:springgreen;';
+  readonly steelblue = 'border-bottom-color:steelblue;';
+  readonly tan = 'border-bottom-color:tan;';
+  readonly teal = 'border-bottom-color:teal;';
+  readonly thistle = 'border-bottom-color:thistle;';
+  readonly tomato = 'border-bottom-color:tomato;';
+  readonly transparent = 'border-bottom-color:transparent;';
+  readonly turquoise = 'border-bottom-color:turquoise;';
+  readonly unset = 'border-bottom-color:unset;';
+  readonly violet = 'border-bottom-color:violet;';
+  readonly wheat = 'border-bottom-color:wheat;';
+  readonly white = 'border-bottom-color:white;';
+  readonly whitesmoke = 'border-bottom-color:whitesmoke;';
+  readonly yellow = 'border-bottom-color:yellow;';
+  readonly yellowgreen = 'border-bottom-color:yellowgreen;';
   constructor() {
     super('border-bottom-color');
-    initializeBorderBottomColorCss();
   }
 }
-let borderBottomColorReady = false;
-function initializeBorderBottomColorCss(): void {
-  if (borderBottomColorReady) return;
-  Object.assign(BorderBottomColorCss.prototype, borderBottomColorKeywords());
-  Object.freeze(BorderBottomColorCss.prototype);
-  borderBottomColorReady = true;
-}
 
-function borderBottomLeftRadiusKeywords() {
-  return {
-    inherit: 'border-bottom-left-radius:inherit;',
-    initial: 'border-bottom-left-radius:initial;',
-    revert: 'border-bottom-left-radius:revert;',
-    revertLayer: 'border-bottom-left-radius:revert-layer;',
-    unset: 'border-bottom-left-radius:unset;',
-  } as const;
-}
-
-type BorderBottomLeftRadiusCssKeywords = Readonly<
-  ReturnType<typeof borderBottomLeftRadiusKeywords>
->;
-export interface BorderBottomLeftRadiusCss extends BorderBottomLeftRadiusCssKeywords {}
 /** CSS 属性 border-bottom-left-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
  */
 export class BorderBottomLeftRadiusCss extends LengthCssProperty<Property.BorderBottomLeftRadius> {
+  readonly inherit = 'border-bottom-left-radius:inherit;';
+  readonly initial = 'border-bottom-left-radius:initial;';
+  readonly revert = 'border-bottom-left-radius:revert;';
+  readonly revertLayer = 'border-bottom-left-radius:revert-layer;';
+  readonly unset = 'border-bottom-left-radius:unset;';
   constructor() {
     super('border-bottom-left-radius');
-    initializeBorderBottomLeftRadiusCss();
   }
 }
-let borderBottomLeftRadiusReady = false;
-function initializeBorderBottomLeftRadiusCss(): void {
-  if (borderBottomLeftRadiusReady) return;
-  Object.assign(BorderBottomLeftRadiusCss.prototype, borderBottomLeftRadiusKeywords());
-  Object.freeze(BorderBottomLeftRadiusCss.prototype);
-  borderBottomLeftRadiusReady = true;
-}
 
-function borderBottomRightRadiusKeywords() {
-  return {
-    inherit: 'border-bottom-right-radius:inherit;',
-    initial: 'border-bottom-right-radius:initial;',
-    revert: 'border-bottom-right-radius:revert;',
-    revertLayer: 'border-bottom-right-radius:revert-layer;',
-    unset: 'border-bottom-right-radius:unset;',
-  } as const;
-}
-
-type BorderBottomRightRadiusCssKeywords = Readonly<
-  ReturnType<typeof borderBottomRightRadiusKeywords>
->;
-export interface BorderBottomRightRadiusCss extends BorderBottomRightRadiusCssKeywords {}
 /** CSS 属性 border-bottom-right-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
  */
 export class BorderBottomRightRadiusCss extends LengthCssProperty<Property.BorderBottomRightRadius> {
+  readonly inherit = 'border-bottom-right-radius:inherit;';
+  readonly initial = 'border-bottom-right-radius:initial;';
+  readonly revert = 'border-bottom-right-radius:revert;';
+  readonly revertLayer = 'border-bottom-right-radius:revert-layer;';
+  readonly unset = 'border-bottom-right-radius:unset;';
   constructor() {
     super('border-bottom-right-radius');
-    initializeBorderBottomRightRadiusCss();
   }
 }
-let borderBottomRightRadiusReady = false;
-function initializeBorderBottomRightRadiusCss(): void {
-  if (borderBottomRightRadiusReady) return;
-  Object.assign(BorderBottomRightRadiusCss.prototype, borderBottomRightRadiusKeywords());
-  Object.freeze(BorderBottomRightRadiusCss.prototype);
-  borderBottomRightRadiusReady = true;
-}
 
-function borderBottomStyleKeywords() {
-  return {
-    dashed: 'border-bottom-style:dashed;',
-    dotted: 'border-bottom-style:dotted;',
-    double: 'border-bottom-style:double;',
-    groove: 'border-bottom-style:groove;',
-    hidden: 'border-bottom-style:hidden;',
-    inherit: 'border-bottom-style:inherit;',
-    initial: 'border-bottom-style:initial;',
-    inset: 'border-bottom-style:inset;',
-    none: 'border-bottom-style:none;',
-    outset: 'border-bottom-style:outset;',
-    revert: 'border-bottom-style:revert;',
-    revertLayer: 'border-bottom-style:revert-layer;',
-    ridge: 'border-bottom-style:ridge;',
-    solid: 'border-bottom-style:solid;',
-    unset: 'border-bottom-style:unset;',
-  } as const;
-}
-
-type BorderBottomStyleCssKeywords = Readonly<ReturnType<typeof borderBottomStyleKeywords>>;
-export interface BorderBottomStyleCss extends BorderBottomStyleCssKeywords {}
 /** CSS 属性 border-bottom-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-style
  */
 export class BorderBottomStyleCss extends CssProperty<Property.BorderBottomStyle> {
+  readonly dashed = 'border-bottom-style:dashed;';
+  readonly dotted = 'border-bottom-style:dotted;';
+  readonly double = 'border-bottom-style:double;';
+  readonly groove = 'border-bottom-style:groove;';
+  readonly hidden = 'border-bottom-style:hidden;';
+  readonly inherit = 'border-bottom-style:inherit;';
+  readonly initial = 'border-bottom-style:initial;';
+  readonly inset = 'border-bottom-style:inset;';
+  readonly none = 'border-bottom-style:none;';
+  readonly outset = 'border-bottom-style:outset;';
+  readonly revert = 'border-bottom-style:revert;';
+  readonly revertLayer = 'border-bottom-style:revert-layer;';
+  readonly ridge = 'border-bottom-style:ridge;';
+  readonly solid = 'border-bottom-style:solid;';
+  readonly unset = 'border-bottom-style:unset;';
   constructor() {
     super('border-bottom-style');
-    initializeBorderBottomStyleCss();
   }
 }
-let borderBottomStyleReady = false;
-function initializeBorderBottomStyleCss(): void {
-  if (borderBottomStyleReady) return;
-  Object.assign(BorderBottomStyleCss.prototype, borderBottomStyleKeywords());
-  Object.freeze(BorderBottomStyleCss.prototype);
-  borderBottomStyleReady = true;
-}
 
-function borderBottomWidthKeywords() {
-  return {
-    inherit: 'border-bottom-width:inherit;',
-    initial: 'border-bottom-width:initial;',
-    medium: 'border-bottom-width:medium;',
-    revert: 'border-bottom-width:revert;',
-    revertLayer: 'border-bottom-width:revert-layer;',
-    thick: 'border-bottom-width:thick;',
-    thin: 'border-bottom-width:thin;',
-    unset: 'border-bottom-width:unset;',
-  } as const;
-}
-
-type BorderBottomWidthCssKeywords = Readonly<ReturnType<typeof borderBottomWidthKeywords>>;
-export interface BorderBottomWidthCss extends BorderBottomWidthCssKeywords {}
 /** CSS 属性 border-bottom-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-width
  */
 export class BorderBottomWidthCss extends LengthCssProperty<Property.BorderBottomWidth> {
+  readonly inherit = 'border-bottom-width:inherit;';
+  readonly initial = 'border-bottom-width:initial;';
+  readonly medium = 'border-bottom-width:medium;';
+  readonly revert = 'border-bottom-width:revert;';
+  readonly revertLayer = 'border-bottom-width:revert-layer;';
+  readonly thick = 'border-bottom-width:thick;';
+  readonly thin = 'border-bottom-width:thin;';
+  readonly unset = 'border-bottom-width:unset;';
   constructor() {
     super('border-bottom-width');
-    initializeBorderBottomWidthCss();
   }
 }
-let borderBottomWidthReady = false;
-function initializeBorderBottomWidthCss(): void {
-  if (borderBottomWidthReady) return;
-  Object.assign(BorderBottomWidthCss.prototype, borderBottomWidthKeywords());
-  Object.freeze(BorderBottomWidthCss.prototype);
-  borderBottomWidthReady = true;
-}
 
-function borderCollapseKeywords() {
-  return {
-    collapse: 'border-collapse:collapse;',
-    inherit: 'border-collapse:inherit;',
-    initial: 'border-collapse:initial;',
-    revert: 'border-collapse:revert;',
-    revertLayer: 'border-collapse:revert-layer;',
-    separate: 'border-collapse:separate;',
-    unset: 'border-collapse:unset;',
-  } as const;
-}
-
-type BorderCollapseCssKeywords = Readonly<ReturnType<typeof borderCollapseKeywords>>;
-export interface BorderCollapseCss extends BorderCollapseCssKeywords {}
 /** CSS 属性 border-collapse；初始值 separate。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-collapse
  */
 export class BorderCollapseCss extends CssProperty<Property.BorderCollapse> {
+  readonly collapse = 'border-collapse:collapse;';
+  readonly inherit = 'border-collapse:inherit;';
+  readonly initial = 'border-collapse:initial;';
+  readonly revert = 'border-collapse:revert;';
+  readonly revertLayer = 'border-collapse:revert-layer;';
+  readonly separate = 'border-collapse:separate;';
+  readonly unset = 'border-collapse:unset;';
   constructor() {
     super('border-collapse');
-    initializeBorderCollapseCss();
   }
 }
-let borderCollapseReady = false;
-function initializeBorderCollapseCss(): void {
-  if (borderCollapseReady) return;
-  Object.assign(BorderCollapseCss.prototype, borderCollapseKeywords());
-  Object.freeze(BorderCollapseCss.prototype);
-  borderCollapseReady = true;
-}
 
-function borderColorKeywords() {
-  return {
-    AccentColor: 'border-color:AccentColor;',
-    AccentColorText: 'border-color:AccentColorText;',
-    ActiveBorder: 'border-color:ActiveBorder;',
-    ActiveCaption: 'border-color:ActiveCaption;',
-    ActiveText: 'border-color:ActiveText;',
-    AppWorkspace: 'border-color:AppWorkspace;',
-    Background: 'border-color:Background;',
-    ButtonBorder: 'border-color:ButtonBorder;',
-    ButtonFace: 'border-color:ButtonFace;',
-    ButtonHighlight: 'border-color:ButtonHighlight;',
-    ButtonShadow: 'border-color:ButtonShadow;',
-    ButtonText: 'border-color:ButtonText;',
-    Canvas: 'border-color:Canvas;',
-    CanvasText: 'border-color:CanvasText;',
-    CaptionText: 'border-color:CaptionText;',
-    Field: 'border-color:Field;',
-    FieldText: 'border-color:FieldText;',
-    GrayText: 'border-color:GrayText;',
-    Highlight: 'border-color:Highlight;',
-    HighlightText: 'border-color:HighlightText;',
-    InactiveBorder: 'border-color:InactiveBorder;',
-    InactiveCaption: 'border-color:InactiveCaption;',
-    InactiveCaptionText: 'border-color:InactiveCaptionText;',
-    InfoBackground: 'border-color:InfoBackground;',
-    InfoText: 'border-color:InfoText;',
-    LinkText: 'border-color:LinkText;',
-    Mark: 'border-color:Mark;',
-    MarkText: 'border-color:MarkText;',
-    Menu: 'border-color:Menu;',
-    MenuText: 'border-color:MenuText;',
-    Scrollbar: 'border-color:Scrollbar;',
-    SelectedItem: 'border-color:SelectedItem;',
-    SelectedItemText: 'border-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-color:ThreeDFace;',
-    ThreeDHighlight: 'border-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-color:ThreeDShadow;',
-    VisitedText: 'border-color:VisitedText;',
-    Window: 'border-color:Window;',
-    WindowFrame: 'border-color:WindowFrame;',
-    WindowText: 'border-color:WindowText;',
-    aliceblue: 'border-color:aliceblue;',
-    antiquewhite: 'border-color:antiquewhite;',
-    aqua: 'border-color:aqua;',
-    aquamarine: 'border-color:aquamarine;',
-    azure: 'border-color:azure;',
-    beige: 'border-color:beige;',
-    bisque: 'border-color:bisque;',
-    black: 'border-color:black;',
-    blanchedalmond: 'border-color:blanchedalmond;',
-    blue: 'border-color:blue;',
-    blueviolet: 'border-color:blueviolet;',
-    brown: 'border-color:brown;',
-    burlywood: 'border-color:burlywood;',
-    cadetblue: 'border-color:cadetblue;',
-    chartreuse: 'border-color:chartreuse;',
-    chocolate: 'border-color:chocolate;',
-    coral: 'border-color:coral;',
-    cornflowerblue: 'border-color:cornflowerblue;',
-    cornsilk: 'border-color:cornsilk;',
-    crimson: 'border-color:crimson;',
-    currentColor: 'border-color:currentColor;',
-    cyan: 'border-color:cyan;',
-    darkblue: 'border-color:darkblue;',
-    darkcyan: 'border-color:darkcyan;',
-    darkgoldenrod: 'border-color:darkgoldenrod;',
-    darkgray: 'border-color:darkgray;',
-    darkgreen: 'border-color:darkgreen;',
-    darkgrey: 'border-color:darkgrey;',
-    darkkhaki: 'border-color:darkkhaki;',
-    darkmagenta: 'border-color:darkmagenta;',
-    darkolivegreen: 'border-color:darkolivegreen;',
-    darkorange: 'border-color:darkorange;',
-    darkorchid: 'border-color:darkorchid;',
-    darkred: 'border-color:darkred;',
-    darksalmon: 'border-color:darksalmon;',
-    darkseagreen: 'border-color:darkseagreen;',
-    darkslateblue: 'border-color:darkslateblue;',
-    darkslategray: 'border-color:darkslategray;',
-    darkslategrey: 'border-color:darkslategrey;',
-    darkturquoise: 'border-color:darkturquoise;',
-    darkviolet: 'border-color:darkviolet;',
-    deeppink: 'border-color:deeppink;',
-    deepskyblue: 'border-color:deepskyblue;',
-    dimgray: 'border-color:dimgray;',
-    dimgrey: 'border-color:dimgrey;',
-    dodgerblue: 'border-color:dodgerblue;',
-    firebrick: 'border-color:firebrick;',
-    floralwhite: 'border-color:floralwhite;',
-    forestgreen: 'border-color:forestgreen;',
-    fuchsia: 'border-color:fuchsia;',
-    gainsboro: 'border-color:gainsboro;',
-    ghostwhite: 'border-color:ghostwhite;',
-    gold: 'border-color:gold;',
-    goldenrod: 'border-color:goldenrod;',
-    gray: 'border-color:gray;',
-    green: 'border-color:green;',
-    greenyellow: 'border-color:greenyellow;',
-    grey: 'border-color:grey;',
-    honeydew: 'border-color:honeydew;',
-    hotpink: 'border-color:hotpink;',
-    indianred: 'border-color:indianred;',
-    indigo: 'border-color:indigo;',
-    inherit: 'border-color:inherit;',
-    initial: 'border-color:initial;',
-    ivory: 'border-color:ivory;',
-    khaki: 'border-color:khaki;',
-    lavender: 'border-color:lavender;',
-    lavenderblush: 'border-color:lavenderblush;',
-    lawngreen: 'border-color:lawngreen;',
-    lemonchiffon: 'border-color:lemonchiffon;',
-    lightblue: 'border-color:lightblue;',
-    lightcoral: 'border-color:lightcoral;',
-    lightcyan: 'border-color:lightcyan;',
-    lightgoldenrodyellow: 'border-color:lightgoldenrodyellow;',
-    lightgray: 'border-color:lightgray;',
-    lightgreen: 'border-color:lightgreen;',
-    lightgrey: 'border-color:lightgrey;',
-    lightpink: 'border-color:lightpink;',
-    lightsalmon: 'border-color:lightsalmon;',
-    lightseagreen: 'border-color:lightseagreen;',
-    lightskyblue: 'border-color:lightskyblue;',
-    lightslategray: 'border-color:lightslategray;',
-    lightslategrey: 'border-color:lightslategrey;',
-    lightsteelblue: 'border-color:lightsteelblue;',
-    lightyellow: 'border-color:lightyellow;',
-    lime: 'border-color:lime;',
-    limegreen: 'border-color:limegreen;',
-    linen: 'border-color:linen;',
-    magenta: 'border-color:magenta;',
-    maroon: 'border-color:maroon;',
-    mediumaquamarine: 'border-color:mediumaquamarine;',
-    mediumblue: 'border-color:mediumblue;',
-    mediumorchid: 'border-color:mediumorchid;',
-    mediumpurple: 'border-color:mediumpurple;',
-    mediumseagreen: 'border-color:mediumseagreen;',
-    mediumslateblue: 'border-color:mediumslateblue;',
-    mediumspringgreen: 'border-color:mediumspringgreen;',
-    mediumturquoise: 'border-color:mediumturquoise;',
-    mediumvioletred: 'border-color:mediumvioletred;',
-    midnightblue: 'border-color:midnightblue;',
-    mintcream: 'border-color:mintcream;',
-    mistyrose: 'border-color:mistyrose;',
-    moccasin: 'border-color:moccasin;',
-    navajowhite: 'border-color:navajowhite;',
-    navy: 'border-color:navy;',
-    oldlace: 'border-color:oldlace;',
-    olive: 'border-color:olive;',
-    olivedrab: 'border-color:olivedrab;',
-    orange: 'border-color:orange;',
-    orangered: 'border-color:orangered;',
-    orchid: 'border-color:orchid;',
-    palegoldenrod: 'border-color:palegoldenrod;',
-    palegreen: 'border-color:palegreen;',
-    paleturquoise: 'border-color:paleturquoise;',
-    palevioletred: 'border-color:palevioletred;',
-    papayawhip: 'border-color:papayawhip;',
-    peachpuff: 'border-color:peachpuff;',
-    peru: 'border-color:peru;',
-    pink: 'border-color:pink;',
-    plum: 'border-color:plum;',
-    powderblue: 'border-color:powderblue;',
-    purple: 'border-color:purple;',
-    rebeccapurple: 'border-color:rebeccapurple;',
-    red: 'border-color:red;',
-    revert: 'border-color:revert;',
-    revertLayer: 'border-color:revert-layer;',
-    rosybrown: 'border-color:rosybrown;',
-    royalblue: 'border-color:royalblue;',
-    saddlebrown: 'border-color:saddlebrown;',
-    salmon: 'border-color:salmon;',
-    sandybrown: 'border-color:sandybrown;',
-    seagreen: 'border-color:seagreen;',
-    seashell: 'border-color:seashell;',
-    sienna: 'border-color:sienna;',
-    silver: 'border-color:silver;',
-    skyblue: 'border-color:skyblue;',
-    slateblue: 'border-color:slateblue;',
-    slategray: 'border-color:slategray;',
-    slategrey: 'border-color:slategrey;',
-    snow: 'border-color:snow;',
-    springgreen: 'border-color:springgreen;',
-    steelblue: 'border-color:steelblue;',
-    tan: 'border-color:tan;',
-    teal: 'border-color:teal;',
-    thistle: 'border-color:thistle;',
-    tomato: 'border-color:tomato;',
-    transparent: 'border-color:transparent;',
-    turquoise: 'border-color:turquoise;',
-    unset: 'border-color:unset;',
-    violet: 'border-color:violet;',
-    wheat: 'border-color:wheat;',
-    white: 'border-color:white;',
-    whitesmoke: 'border-color:whitesmoke;',
-    yellow: 'border-color:yellow;',
-    yellowgreen: 'border-color:yellowgreen;',
-  } as const;
-}
-
-type BorderColorCssKeywords = Readonly<ReturnType<typeof borderColorKeywords>>;
-export interface BorderColorCss extends BorderColorCssKeywords {}
 /** CSS 属性 border-color。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-color
  */
 export class BorderColorCss extends CssProperty<Property.BorderColor> {
+  readonly AccentColor = 'border-color:AccentColor;';
+  readonly AccentColorText = 'border-color:AccentColorText;';
+  readonly ActiveBorder = 'border-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-color:ActiveCaption;';
+  readonly ActiveText = 'border-color:ActiveText;';
+  readonly AppWorkspace = 'border-color:AppWorkspace;';
+  readonly Background = 'border-color:Background;';
+  readonly ButtonBorder = 'border-color:ButtonBorder;';
+  readonly ButtonFace = 'border-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-color:ButtonShadow;';
+  readonly ButtonText = 'border-color:ButtonText;';
+  readonly Canvas = 'border-color:Canvas;';
+  readonly CanvasText = 'border-color:CanvasText;';
+  readonly CaptionText = 'border-color:CaptionText;';
+  readonly Field = 'border-color:Field;';
+  readonly FieldText = 'border-color:FieldText;';
+  readonly GrayText = 'border-color:GrayText;';
+  readonly Highlight = 'border-color:Highlight;';
+  readonly HighlightText = 'border-color:HighlightText;';
+  readonly InactiveBorder = 'border-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-color:InfoBackground;';
+  readonly InfoText = 'border-color:InfoText;';
+  readonly LinkText = 'border-color:LinkText;';
+  readonly Mark = 'border-color:Mark;';
+  readonly MarkText = 'border-color:MarkText;';
+  readonly Menu = 'border-color:Menu;';
+  readonly MenuText = 'border-color:MenuText;';
+  readonly Scrollbar = 'border-color:Scrollbar;';
+  readonly SelectedItem = 'border-color:SelectedItem;';
+  readonly SelectedItemText = 'border-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-color:ThreeDShadow;';
+  readonly VisitedText = 'border-color:VisitedText;';
+  readonly Window = 'border-color:Window;';
+  readonly WindowFrame = 'border-color:WindowFrame;';
+  readonly WindowText = 'border-color:WindowText;';
+  readonly aliceblue = 'border-color:aliceblue;';
+  readonly antiquewhite = 'border-color:antiquewhite;';
+  readonly aqua = 'border-color:aqua;';
+  readonly aquamarine = 'border-color:aquamarine;';
+  readonly azure = 'border-color:azure;';
+  readonly beige = 'border-color:beige;';
+  readonly bisque = 'border-color:bisque;';
+  readonly black = 'border-color:black;';
+  readonly blanchedalmond = 'border-color:blanchedalmond;';
+  readonly blue = 'border-color:blue;';
+  readonly blueviolet = 'border-color:blueviolet;';
+  readonly brown = 'border-color:brown;';
+  readonly burlywood = 'border-color:burlywood;';
+  readonly cadetblue = 'border-color:cadetblue;';
+  readonly chartreuse = 'border-color:chartreuse;';
+  readonly chocolate = 'border-color:chocolate;';
+  readonly coral = 'border-color:coral;';
+  readonly cornflowerblue = 'border-color:cornflowerblue;';
+  readonly cornsilk = 'border-color:cornsilk;';
+  readonly crimson = 'border-color:crimson;';
+  readonly currentColor = 'border-color:currentColor;';
+  readonly cyan = 'border-color:cyan;';
+  readonly darkblue = 'border-color:darkblue;';
+  readonly darkcyan = 'border-color:darkcyan;';
+  readonly darkgoldenrod = 'border-color:darkgoldenrod;';
+  readonly darkgray = 'border-color:darkgray;';
+  readonly darkgreen = 'border-color:darkgreen;';
+  readonly darkgrey = 'border-color:darkgrey;';
+  readonly darkkhaki = 'border-color:darkkhaki;';
+  readonly darkmagenta = 'border-color:darkmagenta;';
+  readonly darkolivegreen = 'border-color:darkolivegreen;';
+  readonly darkorange = 'border-color:darkorange;';
+  readonly darkorchid = 'border-color:darkorchid;';
+  readonly darkred = 'border-color:darkred;';
+  readonly darksalmon = 'border-color:darksalmon;';
+  readonly darkseagreen = 'border-color:darkseagreen;';
+  readonly darkslateblue = 'border-color:darkslateblue;';
+  readonly darkslategray = 'border-color:darkslategray;';
+  readonly darkslategrey = 'border-color:darkslategrey;';
+  readonly darkturquoise = 'border-color:darkturquoise;';
+  readonly darkviolet = 'border-color:darkviolet;';
+  readonly deeppink = 'border-color:deeppink;';
+  readonly deepskyblue = 'border-color:deepskyblue;';
+  readonly dimgray = 'border-color:dimgray;';
+  readonly dimgrey = 'border-color:dimgrey;';
+  readonly dodgerblue = 'border-color:dodgerblue;';
+  readonly firebrick = 'border-color:firebrick;';
+  readonly floralwhite = 'border-color:floralwhite;';
+  readonly forestgreen = 'border-color:forestgreen;';
+  readonly fuchsia = 'border-color:fuchsia;';
+  readonly gainsboro = 'border-color:gainsboro;';
+  readonly ghostwhite = 'border-color:ghostwhite;';
+  readonly gold = 'border-color:gold;';
+  readonly goldenrod = 'border-color:goldenrod;';
+  readonly gray = 'border-color:gray;';
+  readonly green = 'border-color:green;';
+  readonly greenyellow = 'border-color:greenyellow;';
+  readonly grey = 'border-color:grey;';
+  readonly honeydew = 'border-color:honeydew;';
+  readonly hotpink = 'border-color:hotpink;';
+  readonly indianred = 'border-color:indianred;';
+  readonly indigo = 'border-color:indigo;';
+  readonly inherit = 'border-color:inherit;';
+  readonly initial = 'border-color:initial;';
+  readonly ivory = 'border-color:ivory;';
+  readonly khaki = 'border-color:khaki;';
+  readonly lavender = 'border-color:lavender;';
+  readonly lavenderblush = 'border-color:lavenderblush;';
+  readonly lawngreen = 'border-color:lawngreen;';
+  readonly lemonchiffon = 'border-color:lemonchiffon;';
+  readonly lightblue = 'border-color:lightblue;';
+  readonly lightcoral = 'border-color:lightcoral;';
+  readonly lightcyan = 'border-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-color:lightgray;';
+  readonly lightgreen = 'border-color:lightgreen;';
+  readonly lightgrey = 'border-color:lightgrey;';
+  readonly lightpink = 'border-color:lightpink;';
+  readonly lightsalmon = 'border-color:lightsalmon;';
+  readonly lightseagreen = 'border-color:lightseagreen;';
+  readonly lightskyblue = 'border-color:lightskyblue;';
+  readonly lightslategray = 'border-color:lightslategray;';
+  readonly lightslategrey = 'border-color:lightslategrey;';
+  readonly lightsteelblue = 'border-color:lightsteelblue;';
+  readonly lightyellow = 'border-color:lightyellow;';
+  readonly lime = 'border-color:lime;';
+  readonly limegreen = 'border-color:limegreen;';
+  readonly linen = 'border-color:linen;';
+  readonly magenta = 'border-color:magenta;';
+  readonly maroon = 'border-color:maroon;';
+  readonly mediumaquamarine = 'border-color:mediumaquamarine;';
+  readonly mediumblue = 'border-color:mediumblue;';
+  readonly mediumorchid = 'border-color:mediumorchid;';
+  readonly mediumpurple = 'border-color:mediumpurple;';
+  readonly mediumseagreen = 'border-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-color:mediumvioletred;';
+  readonly midnightblue = 'border-color:midnightblue;';
+  readonly mintcream = 'border-color:mintcream;';
+  readonly mistyrose = 'border-color:mistyrose;';
+  readonly moccasin = 'border-color:moccasin;';
+  readonly navajowhite = 'border-color:navajowhite;';
+  readonly navy = 'border-color:navy;';
+  readonly oldlace = 'border-color:oldlace;';
+  readonly olive = 'border-color:olive;';
+  readonly olivedrab = 'border-color:olivedrab;';
+  readonly orange = 'border-color:orange;';
+  readonly orangered = 'border-color:orangered;';
+  readonly orchid = 'border-color:orchid;';
+  readonly palegoldenrod = 'border-color:palegoldenrod;';
+  readonly palegreen = 'border-color:palegreen;';
+  readonly paleturquoise = 'border-color:paleturquoise;';
+  readonly palevioletred = 'border-color:palevioletred;';
+  readonly papayawhip = 'border-color:papayawhip;';
+  readonly peachpuff = 'border-color:peachpuff;';
+  readonly peru = 'border-color:peru;';
+  readonly pink = 'border-color:pink;';
+  readonly plum = 'border-color:plum;';
+  readonly powderblue = 'border-color:powderblue;';
+  readonly purple = 'border-color:purple;';
+  readonly rebeccapurple = 'border-color:rebeccapurple;';
+  readonly red = 'border-color:red;';
+  readonly revert = 'border-color:revert;';
+  readonly revertLayer = 'border-color:revert-layer;';
+  readonly rosybrown = 'border-color:rosybrown;';
+  readonly royalblue = 'border-color:royalblue;';
+  readonly saddlebrown = 'border-color:saddlebrown;';
+  readonly salmon = 'border-color:salmon;';
+  readonly sandybrown = 'border-color:sandybrown;';
+  readonly seagreen = 'border-color:seagreen;';
+  readonly seashell = 'border-color:seashell;';
+  readonly sienna = 'border-color:sienna;';
+  readonly silver = 'border-color:silver;';
+  readonly skyblue = 'border-color:skyblue;';
+  readonly slateblue = 'border-color:slateblue;';
+  readonly slategray = 'border-color:slategray;';
+  readonly slategrey = 'border-color:slategrey;';
+  readonly snow = 'border-color:snow;';
+  readonly springgreen = 'border-color:springgreen;';
+  readonly steelblue = 'border-color:steelblue;';
+  readonly tan = 'border-color:tan;';
+  readonly teal = 'border-color:teal;';
+  readonly thistle = 'border-color:thistle;';
+  readonly tomato = 'border-color:tomato;';
+  readonly transparent = 'border-color:transparent;';
+  readonly turquoise = 'border-color:turquoise;';
+  readonly unset = 'border-color:unset;';
+  readonly violet = 'border-color:violet;';
+  readonly wheat = 'border-color:wheat;';
+  readonly white = 'border-color:white;';
+  readonly whitesmoke = 'border-color:whitesmoke;';
+  readonly yellow = 'border-color:yellow;';
+  readonly yellowgreen = 'border-color:yellowgreen;';
   constructor() {
     super('border-color');
-    initializeBorderColorCss();
   }
 }
-let borderColorReady = false;
-function initializeBorderColorCss(): void {
-  if (borderColorReady) return;
-  Object.assign(BorderColorCss.prototype, borderColorKeywords());
-  Object.freeze(BorderColorCss.prototype);
-  borderColorReady = true;
-}
 
-function borderEndEndRadiusKeywords() {
-  return {
-    inherit: 'border-end-end-radius:inherit;',
-    initial: 'border-end-end-radius:initial;',
-    revert: 'border-end-end-radius:revert;',
-    revertLayer: 'border-end-end-radius:revert-layer;',
-    unset: 'border-end-end-radius:unset;',
-  } as const;
-}
-
-type BorderEndEndRadiusCssKeywords = Readonly<ReturnType<typeof borderEndEndRadiusKeywords>>;
-export interface BorderEndEndRadiusCss extends BorderEndEndRadiusCssKeywords {}
 /** CSS 属性 border-end-end-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
  */
 export class BorderEndEndRadiusCss extends LengthCssProperty<Property.BorderEndEndRadius> {
+  readonly inherit = 'border-end-end-radius:inherit;';
+  readonly initial = 'border-end-end-radius:initial;';
+  readonly revert = 'border-end-end-radius:revert;';
+  readonly revertLayer = 'border-end-end-radius:revert-layer;';
+  readonly unset = 'border-end-end-radius:unset;';
   constructor() {
     super('border-end-end-radius');
-    initializeBorderEndEndRadiusCss();
   }
 }
-let borderEndEndRadiusReady = false;
-function initializeBorderEndEndRadiusCss(): void {
-  if (borderEndEndRadiusReady) return;
-  Object.assign(BorderEndEndRadiusCss.prototype, borderEndEndRadiusKeywords());
-  Object.freeze(BorderEndEndRadiusCss.prototype);
-  borderEndEndRadiusReady = true;
-}
 
-function borderEndStartRadiusKeywords() {
-  return {
-    inherit: 'border-end-start-radius:inherit;',
-    initial: 'border-end-start-radius:initial;',
-    revert: 'border-end-start-radius:revert;',
-    revertLayer: 'border-end-start-radius:revert-layer;',
-    unset: 'border-end-start-radius:unset;',
-  } as const;
-}
-
-type BorderEndStartRadiusCssKeywords = Readonly<ReturnType<typeof borderEndStartRadiusKeywords>>;
-export interface BorderEndStartRadiusCss extends BorderEndStartRadiusCssKeywords {}
 /** CSS 属性 border-end-start-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
  */
 export class BorderEndStartRadiusCss extends LengthCssProperty<Property.BorderEndStartRadius> {
+  readonly inherit = 'border-end-start-radius:inherit;';
+  readonly initial = 'border-end-start-radius:initial;';
+  readonly revert = 'border-end-start-radius:revert;';
+  readonly revertLayer = 'border-end-start-radius:revert-layer;';
+  readonly unset = 'border-end-start-radius:unset;';
   constructor() {
     super('border-end-start-radius');
-    initializeBorderEndStartRadiusCss();
   }
 }
-let borderEndStartRadiusReady = false;
-function initializeBorderEndStartRadiusCss(): void {
-  if (borderEndStartRadiusReady) return;
-  Object.assign(BorderEndStartRadiusCss.prototype, borderEndStartRadiusKeywords());
-  Object.freeze(BorderEndStartRadiusCss.prototype);
-  borderEndStartRadiusReady = true;
-}
 
-function borderImageKeywords() {
-  return {
-    inherit: 'border-image:inherit;',
-    initial: 'border-image:initial;',
-    none: 'border-image:none;',
-    repeat: 'border-image:repeat;',
-    revert: 'border-image:revert;',
-    revertLayer: 'border-image:revert-layer;',
-    round: 'border-image:round;',
-    space: 'border-image:space;',
-    stretch: 'border-image:stretch;',
-    unset: 'border-image:unset;',
-  } as const;
-}
-
-type BorderImageCssKeywords = Readonly<ReturnType<typeof borderImageKeywords>>;
-export interface BorderImageCss extends BorderImageCssKeywords {}
 /** CSS 属性 border-image。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image
  */
 export class BorderImageCss extends CssProperty<Property.BorderImage> {
+  readonly inherit = 'border-image:inherit;';
+  readonly initial = 'border-image:initial;';
+  readonly none = 'border-image:none;';
+  readonly repeat = 'border-image:repeat;';
+  readonly revert = 'border-image:revert;';
+  readonly revertLayer = 'border-image:revert-layer;';
+  readonly round = 'border-image:round;';
+  readonly space = 'border-image:space;';
+  readonly stretch = 'border-image:stretch;';
+  readonly unset = 'border-image:unset;';
   constructor() {
     super('border-image');
-    initializeBorderImageCss();
   }
 }
-let borderImageReady = false;
-function initializeBorderImageCss(): void {
-  if (borderImageReady) return;
-  Object.assign(BorderImageCss.prototype, borderImageKeywords());
-  Object.freeze(BorderImageCss.prototype);
-  borderImageReady = true;
-}
 
-function borderImageOutsetKeywords() {
-  return {
-    inherit: 'border-image-outset:inherit;',
-    initial: 'border-image-outset:initial;',
-    revert: 'border-image-outset:revert;',
-    revertLayer: 'border-image-outset:revert-layer;',
-    unset: 'border-image-outset:unset;',
-  } as const;
-}
-
-type BorderImageOutsetCssKeywords = Readonly<ReturnType<typeof borderImageOutsetKeywords>>;
-export interface BorderImageOutsetCss extends BorderImageOutsetCssKeywords {}
 /** CSS 属性 border-image-outset；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-outset
  */
 export class BorderImageOutsetCss extends LengthCssProperty<Property.BorderImageOutset> {
+  readonly inherit = 'border-image-outset:inherit;';
+  readonly initial = 'border-image-outset:initial;';
+  readonly revert = 'border-image-outset:revert;';
+  readonly revertLayer = 'border-image-outset:revert-layer;';
+  readonly unset = 'border-image-outset:unset;';
   constructor() {
     super('border-image-outset');
-    initializeBorderImageOutsetCss();
   }
 }
-let borderImageOutsetReady = false;
-function initializeBorderImageOutsetCss(): void {
-  if (borderImageOutsetReady) return;
-  Object.assign(BorderImageOutsetCss.prototype, borderImageOutsetKeywords());
-  Object.freeze(BorderImageOutsetCss.prototype);
-  borderImageOutsetReady = true;
-}
 
-function borderImageRepeatKeywords() {
-  return {
-    inherit: 'border-image-repeat:inherit;',
-    initial: 'border-image-repeat:initial;',
-    repeat: 'border-image-repeat:repeat;',
-    revert: 'border-image-repeat:revert;',
-    revertLayer: 'border-image-repeat:revert-layer;',
-    round: 'border-image-repeat:round;',
-    space: 'border-image-repeat:space;',
-    stretch: 'border-image-repeat:stretch;',
-    unset: 'border-image-repeat:unset;',
-  } as const;
-}
-
-type BorderImageRepeatCssKeywords = Readonly<ReturnType<typeof borderImageRepeatKeywords>>;
-export interface BorderImageRepeatCss extends BorderImageRepeatCssKeywords {}
 /** CSS 属性 border-image-repeat；初始值 stretch。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-repeat
  */
 export class BorderImageRepeatCss extends CssProperty<Property.BorderImageRepeat> {
+  readonly inherit = 'border-image-repeat:inherit;';
+  readonly initial = 'border-image-repeat:initial;';
+  readonly repeat = 'border-image-repeat:repeat;';
+  readonly revert = 'border-image-repeat:revert;';
+  readonly revertLayer = 'border-image-repeat:revert-layer;';
+  readonly round = 'border-image-repeat:round;';
+  readonly space = 'border-image-repeat:space;';
+  readonly stretch = 'border-image-repeat:stretch;';
+  readonly unset = 'border-image-repeat:unset;';
   constructor() {
     super('border-image-repeat');
-    initializeBorderImageRepeatCss();
   }
 }
-let borderImageRepeatReady = false;
-function initializeBorderImageRepeatCss(): void {
-  if (borderImageRepeatReady) return;
-  Object.assign(BorderImageRepeatCss.prototype, borderImageRepeatKeywords());
-  Object.freeze(BorderImageRepeatCss.prototype);
-  borderImageRepeatReady = true;
-}
 
-function borderImageSliceKeywords() {
-  return {
-    inherit: 'border-image-slice:inherit;',
-    initial: 'border-image-slice:initial;',
-    revert: 'border-image-slice:revert;',
-    revertLayer: 'border-image-slice:revert-layer;',
-    unset: 'border-image-slice:unset;',
-  } as const;
-}
-
-type BorderImageSliceCssKeywords = Readonly<ReturnType<typeof borderImageSliceKeywords>>;
-export interface BorderImageSliceCss extends BorderImageSliceCssKeywords {}
 /** CSS 属性 border-image-slice；初始值 100%。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-slice
  */
 export class BorderImageSliceCss extends CssProperty<Property.BorderImageSlice> {
+  readonly inherit = 'border-image-slice:inherit;';
+  readonly initial = 'border-image-slice:initial;';
+  readonly revert = 'border-image-slice:revert;';
+  readonly revertLayer = 'border-image-slice:revert-layer;';
+  readonly unset = 'border-image-slice:unset;';
   constructor() {
     super('border-image-slice');
-    initializeBorderImageSliceCss();
   }
 }
-let borderImageSliceReady = false;
-function initializeBorderImageSliceCss(): void {
-  if (borderImageSliceReady) return;
-  Object.assign(BorderImageSliceCss.prototype, borderImageSliceKeywords());
-  Object.freeze(BorderImageSliceCss.prototype);
-  borderImageSliceReady = true;
-}
 
-function borderImageSourceKeywords() {
-  return {
-    inherit: 'border-image-source:inherit;',
-    initial: 'border-image-source:initial;',
-    none: 'border-image-source:none;',
-    revert: 'border-image-source:revert;',
-    revertLayer: 'border-image-source:revert-layer;',
-    unset: 'border-image-source:unset;',
-  } as const;
-}
-
-type BorderImageSourceCssKeywords = Readonly<ReturnType<typeof borderImageSourceKeywords>>;
-export interface BorderImageSourceCss extends BorderImageSourceCssKeywords {}
 /** CSS 属性 border-image-source；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-source
  */
 export class BorderImageSourceCss extends CssProperty<Property.BorderImageSource> {
+  readonly inherit = 'border-image-source:inherit;';
+  readonly initial = 'border-image-source:initial;';
+  readonly none = 'border-image-source:none;';
+  readonly revert = 'border-image-source:revert;';
+  readonly revertLayer = 'border-image-source:revert-layer;';
+  readonly unset = 'border-image-source:unset;';
   constructor() {
     super('border-image-source');
-    initializeBorderImageSourceCss();
   }
 }
-let borderImageSourceReady = false;
-function initializeBorderImageSourceCss(): void {
-  if (borderImageSourceReady) return;
-  Object.assign(BorderImageSourceCss.prototype, borderImageSourceKeywords());
-  Object.freeze(BorderImageSourceCss.prototype);
-  borderImageSourceReady = true;
-}
 
-function borderImageWidthKeywords() {
-  return {
-    auto: 'border-image-width:auto;',
-    inherit: 'border-image-width:inherit;',
-    initial: 'border-image-width:initial;',
-    revert: 'border-image-width:revert;',
-    revertLayer: 'border-image-width:revert-layer;',
-    unset: 'border-image-width:unset;',
-  } as const;
-}
-
-type BorderImageWidthCssKeywords = Readonly<ReturnType<typeof borderImageWidthKeywords>>;
-export interface BorderImageWidthCss extends BorderImageWidthCssKeywords {}
 /** CSS 属性 border-image-width；初始值 1。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-width
  */
 export class BorderImageWidthCss extends LengthCssProperty<Property.BorderImageWidth> {
+  readonly auto = 'border-image-width:auto;';
+  readonly inherit = 'border-image-width:inherit;';
+  readonly initial = 'border-image-width:initial;';
+  readonly revert = 'border-image-width:revert;';
+  readonly revertLayer = 'border-image-width:revert-layer;';
+  readonly unset = 'border-image-width:unset;';
   constructor() {
     super('border-image-width');
-    initializeBorderImageWidthCss();
   }
 }
-let borderImageWidthReady = false;
-function initializeBorderImageWidthCss(): void {
-  if (borderImageWidthReady) return;
-  Object.assign(BorderImageWidthCss.prototype, borderImageWidthKeywords());
-  Object.freeze(BorderImageWidthCss.prototype);
-  borderImageWidthReady = true;
-}
 
-function borderInlineKeywords() {
-  return {
-    AccentColor: 'border-inline:AccentColor;',
-    AccentColorText: 'border-inline:AccentColorText;',
-    ActiveBorder: 'border-inline:ActiveBorder;',
-    ActiveCaption: 'border-inline:ActiveCaption;',
-    ActiveText: 'border-inline:ActiveText;',
-    AppWorkspace: 'border-inline:AppWorkspace;',
-    Background: 'border-inline:Background;',
-    ButtonBorder: 'border-inline:ButtonBorder;',
-    ButtonFace: 'border-inline:ButtonFace;',
-    ButtonHighlight: 'border-inline:ButtonHighlight;',
-    ButtonShadow: 'border-inline:ButtonShadow;',
-    ButtonText: 'border-inline:ButtonText;',
-    Canvas: 'border-inline:Canvas;',
-    CanvasText: 'border-inline:CanvasText;',
-    CaptionText: 'border-inline:CaptionText;',
-    Field: 'border-inline:Field;',
-    FieldText: 'border-inline:FieldText;',
-    GrayText: 'border-inline:GrayText;',
-    Highlight: 'border-inline:Highlight;',
-    HighlightText: 'border-inline:HighlightText;',
-    InactiveBorder: 'border-inline:InactiveBorder;',
-    InactiveCaption: 'border-inline:InactiveCaption;',
-    InactiveCaptionText: 'border-inline:InactiveCaptionText;',
-    InfoBackground: 'border-inline:InfoBackground;',
-    InfoText: 'border-inline:InfoText;',
-    LinkText: 'border-inline:LinkText;',
-    Mark: 'border-inline:Mark;',
-    MarkText: 'border-inline:MarkText;',
-    Menu: 'border-inline:Menu;',
-    MenuText: 'border-inline:MenuText;',
-    Scrollbar: 'border-inline:Scrollbar;',
-    SelectedItem: 'border-inline:SelectedItem;',
-    SelectedItemText: 'border-inline:SelectedItemText;',
-    ThreeDDarkShadow: 'border-inline:ThreeDDarkShadow;',
-    ThreeDFace: 'border-inline:ThreeDFace;',
-    ThreeDHighlight: 'border-inline:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-inline:ThreeDLightShadow;',
-    ThreeDShadow: 'border-inline:ThreeDShadow;',
-    VisitedText: 'border-inline:VisitedText;',
-    Window: 'border-inline:Window;',
-    WindowFrame: 'border-inline:WindowFrame;',
-    WindowText: 'border-inline:WindowText;',
-    aliceblue: 'border-inline:aliceblue;',
-    antiquewhite: 'border-inline:antiquewhite;',
-    aqua: 'border-inline:aqua;',
-    aquamarine: 'border-inline:aquamarine;',
-    azure: 'border-inline:azure;',
-    beige: 'border-inline:beige;',
-    bisque: 'border-inline:bisque;',
-    black: 'border-inline:black;',
-    blanchedalmond: 'border-inline:blanchedalmond;',
-    blue: 'border-inline:blue;',
-    blueviolet: 'border-inline:blueviolet;',
-    brown: 'border-inline:brown;',
-    burlywood: 'border-inline:burlywood;',
-    cadetblue: 'border-inline:cadetblue;',
-    chartreuse: 'border-inline:chartreuse;',
-    chocolate: 'border-inline:chocolate;',
-    coral: 'border-inline:coral;',
-    cornflowerblue: 'border-inline:cornflowerblue;',
-    cornsilk: 'border-inline:cornsilk;',
-    crimson: 'border-inline:crimson;',
-    currentColor: 'border-inline:currentColor;',
-    cyan: 'border-inline:cyan;',
-    darkblue: 'border-inline:darkblue;',
-    darkcyan: 'border-inline:darkcyan;',
-    darkgoldenrod: 'border-inline:darkgoldenrod;',
-    darkgray: 'border-inline:darkgray;',
-    darkgreen: 'border-inline:darkgreen;',
-    darkgrey: 'border-inline:darkgrey;',
-    darkkhaki: 'border-inline:darkkhaki;',
-    darkmagenta: 'border-inline:darkmagenta;',
-    darkolivegreen: 'border-inline:darkolivegreen;',
-    darkorange: 'border-inline:darkorange;',
-    darkorchid: 'border-inline:darkorchid;',
-    darkred: 'border-inline:darkred;',
-    darksalmon: 'border-inline:darksalmon;',
-    darkseagreen: 'border-inline:darkseagreen;',
-    darkslateblue: 'border-inline:darkslateblue;',
-    darkslategray: 'border-inline:darkslategray;',
-    darkslategrey: 'border-inline:darkslategrey;',
-    darkturquoise: 'border-inline:darkturquoise;',
-    darkviolet: 'border-inline:darkviolet;',
-    dashed: 'border-inline:dashed;',
-    deeppink: 'border-inline:deeppink;',
-    deepskyblue: 'border-inline:deepskyblue;',
-    dimgray: 'border-inline:dimgray;',
-    dimgrey: 'border-inline:dimgrey;',
-    dodgerblue: 'border-inline:dodgerblue;',
-    dotted: 'border-inline:dotted;',
-    double: 'border-inline:double;',
-    firebrick: 'border-inline:firebrick;',
-    floralwhite: 'border-inline:floralwhite;',
-    forestgreen: 'border-inline:forestgreen;',
-    fuchsia: 'border-inline:fuchsia;',
-    gainsboro: 'border-inline:gainsboro;',
-    ghostwhite: 'border-inline:ghostwhite;',
-    gold: 'border-inline:gold;',
-    goldenrod: 'border-inline:goldenrod;',
-    gray: 'border-inline:gray;',
-    green: 'border-inline:green;',
-    greenyellow: 'border-inline:greenyellow;',
-    grey: 'border-inline:grey;',
-    groove: 'border-inline:groove;',
-    hidden: 'border-inline:hidden;',
-    honeydew: 'border-inline:honeydew;',
-    hotpink: 'border-inline:hotpink;',
-    indianred: 'border-inline:indianred;',
-    indigo: 'border-inline:indigo;',
-    inherit: 'border-inline:inherit;',
-    initial: 'border-inline:initial;',
-    inset: 'border-inline:inset;',
-    ivory: 'border-inline:ivory;',
-    khaki: 'border-inline:khaki;',
-    lavender: 'border-inline:lavender;',
-    lavenderblush: 'border-inline:lavenderblush;',
-    lawngreen: 'border-inline:lawngreen;',
-    lemonchiffon: 'border-inline:lemonchiffon;',
-    lightblue: 'border-inline:lightblue;',
-    lightcoral: 'border-inline:lightcoral;',
-    lightcyan: 'border-inline:lightcyan;',
-    lightgoldenrodyellow: 'border-inline:lightgoldenrodyellow;',
-    lightgray: 'border-inline:lightgray;',
-    lightgreen: 'border-inline:lightgreen;',
-    lightgrey: 'border-inline:lightgrey;',
-    lightpink: 'border-inline:lightpink;',
-    lightsalmon: 'border-inline:lightsalmon;',
-    lightseagreen: 'border-inline:lightseagreen;',
-    lightskyblue: 'border-inline:lightskyblue;',
-    lightslategray: 'border-inline:lightslategray;',
-    lightslategrey: 'border-inline:lightslategrey;',
-    lightsteelblue: 'border-inline:lightsteelblue;',
-    lightyellow: 'border-inline:lightyellow;',
-    lime: 'border-inline:lime;',
-    limegreen: 'border-inline:limegreen;',
-    linen: 'border-inline:linen;',
-    magenta: 'border-inline:magenta;',
-    maroon: 'border-inline:maroon;',
-    medium: 'border-inline:medium;',
-    mediumaquamarine: 'border-inline:mediumaquamarine;',
-    mediumblue: 'border-inline:mediumblue;',
-    mediumorchid: 'border-inline:mediumorchid;',
-    mediumpurple: 'border-inline:mediumpurple;',
-    mediumseagreen: 'border-inline:mediumseagreen;',
-    mediumslateblue: 'border-inline:mediumslateblue;',
-    mediumspringgreen: 'border-inline:mediumspringgreen;',
-    mediumturquoise: 'border-inline:mediumturquoise;',
-    mediumvioletred: 'border-inline:mediumvioletred;',
-    midnightblue: 'border-inline:midnightblue;',
-    mintcream: 'border-inline:mintcream;',
-    mistyrose: 'border-inline:mistyrose;',
-    moccasin: 'border-inline:moccasin;',
-    navajowhite: 'border-inline:navajowhite;',
-    navy: 'border-inline:navy;',
-    none: 'border-inline:none;',
-    oldlace: 'border-inline:oldlace;',
-    olive: 'border-inline:olive;',
-    olivedrab: 'border-inline:olivedrab;',
-    orange: 'border-inline:orange;',
-    orangered: 'border-inline:orangered;',
-    orchid: 'border-inline:orchid;',
-    outset: 'border-inline:outset;',
-    palegoldenrod: 'border-inline:palegoldenrod;',
-    palegreen: 'border-inline:palegreen;',
-    paleturquoise: 'border-inline:paleturquoise;',
-    palevioletred: 'border-inline:palevioletred;',
-    papayawhip: 'border-inline:papayawhip;',
-    peachpuff: 'border-inline:peachpuff;',
-    peru: 'border-inline:peru;',
-    pink: 'border-inline:pink;',
-    plum: 'border-inline:plum;',
-    powderblue: 'border-inline:powderblue;',
-    purple: 'border-inline:purple;',
-    rebeccapurple: 'border-inline:rebeccapurple;',
-    red: 'border-inline:red;',
-    revert: 'border-inline:revert;',
-    revertLayer: 'border-inline:revert-layer;',
-    ridge: 'border-inline:ridge;',
-    rosybrown: 'border-inline:rosybrown;',
-    royalblue: 'border-inline:royalblue;',
-    saddlebrown: 'border-inline:saddlebrown;',
-    salmon: 'border-inline:salmon;',
-    sandybrown: 'border-inline:sandybrown;',
-    seagreen: 'border-inline:seagreen;',
-    seashell: 'border-inline:seashell;',
-    sienna: 'border-inline:sienna;',
-    silver: 'border-inline:silver;',
-    skyblue: 'border-inline:skyblue;',
-    slateblue: 'border-inline:slateblue;',
-    slategray: 'border-inline:slategray;',
-    slategrey: 'border-inline:slategrey;',
-    snow: 'border-inline:snow;',
-    solid: 'border-inline:solid;',
-    springgreen: 'border-inline:springgreen;',
-    steelblue: 'border-inline:steelblue;',
-    tan: 'border-inline:tan;',
-    teal: 'border-inline:teal;',
-    thick: 'border-inline:thick;',
-    thin: 'border-inline:thin;',
-    thistle: 'border-inline:thistle;',
-    tomato: 'border-inline:tomato;',
-    transparent: 'border-inline:transparent;',
-    turquoise: 'border-inline:turquoise;',
-    unset: 'border-inline:unset;',
-    violet: 'border-inline:violet;',
-    wheat: 'border-inline:wheat;',
-    white: 'border-inline:white;',
-    whitesmoke: 'border-inline:whitesmoke;',
-    yellow: 'border-inline:yellow;',
-    yellowgreen: 'border-inline:yellowgreen;',
-  } as const;
-}
-
-type BorderInlineCssKeywords = Readonly<ReturnType<typeof borderInlineKeywords>>;
-export interface BorderInlineCss extends BorderInlineCssKeywords {}
 /** CSS 属性 border-inline。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline
  */
 export class BorderInlineCss extends LengthCssProperty<Property.BorderInline> {
+  readonly AccentColor = 'border-inline:AccentColor;';
+  readonly AccentColorText = 'border-inline:AccentColorText;';
+  readonly ActiveBorder = 'border-inline:ActiveBorder;';
+  readonly ActiveCaption = 'border-inline:ActiveCaption;';
+  readonly ActiveText = 'border-inline:ActiveText;';
+  readonly AppWorkspace = 'border-inline:AppWorkspace;';
+  readonly Background = 'border-inline:Background;';
+  readonly ButtonBorder = 'border-inline:ButtonBorder;';
+  readonly ButtonFace = 'border-inline:ButtonFace;';
+  readonly ButtonHighlight = 'border-inline:ButtonHighlight;';
+  readonly ButtonShadow = 'border-inline:ButtonShadow;';
+  readonly ButtonText = 'border-inline:ButtonText;';
+  readonly Canvas = 'border-inline:Canvas;';
+  readonly CanvasText = 'border-inline:CanvasText;';
+  readonly CaptionText = 'border-inline:CaptionText;';
+  readonly Field = 'border-inline:Field;';
+  readonly FieldText = 'border-inline:FieldText;';
+  readonly GrayText = 'border-inline:GrayText;';
+  readonly Highlight = 'border-inline:Highlight;';
+  readonly HighlightText = 'border-inline:HighlightText;';
+  readonly InactiveBorder = 'border-inline:InactiveBorder;';
+  readonly InactiveCaption = 'border-inline:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-inline:InactiveCaptionText;';
+  readonly InfoBackground = 'border-inline:InfoBackground;';
+  readonly InfoText = 'border-inline:InfoText;';
+  readonly LinkText = 'border-inline:LinkText;';
+  readonly Mark = 'border-inline:Mark;';
+  readonly MarkText = 'border-inline:MarkText;';
+  readonly Menu = 'border-inline:Menu;';
+  readonly MenuText = 'border-inline:MenuText;';
+  readonly Scrollbar = 'border-inline:Scrollbar;';
+  readonly SelectedItem = 'border-inline:SelectedItem;';
+  readonly SelectedItemText = 'border-inline:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-inline:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-inline:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-inline:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-inline:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-inline:ThreeDShadow;';
+  readonly VisitedText = 'border-inline:VisitedText;';
+  readonly Window = 'border-inline:Window;';
+  readonly WindowFrame = 'border-inline:WindowFrame;';
+  readonly WindowText = 'border-inline:WindowText;';
+  readonly aliceblue = 'border-inline:aliceblue;';
+  readonly antiquewhite = 'border-inline:antiquewhite;';
+  readonly aqua = 'border-inline:aqua;';
+  readonly aquamarine = 'border-inline:aquamarine;';
+  readonly azure = 'border-inline:azure;';
+  readonly beige = 'border-inline:beige;';
+  readonly bisque = 'border-inline:bisque;';
+  readonly black = 'border-inline:black;';
+  readonly blanchedalmond = 'border-inline:blanchedalmond;';
+  readonly blue = 'border-inline:blue;';
+  readonly blueviolet = 'border-inline:blueviolet;';
+  readonly brown = 'border-inline:brown;';
+  readonly burlywood = 'border-inline:burlywood;';
+  readonly cadetblue = 'border-inline:cadetblue;';
+  readonly chartreuse = 'border-inline:chartreuse;';
+  readonly chocolate = 'border-inline:chocolate;';
+  readonly coral = 'border-inline:coral;';
+  readonly cornflowerblue = 'border-inline:cornflowerblue;';
+  readonly cornsilk = 'border-inline:cornsilk;';
+  readonly crimson = 'border-inline:crimson;';
+  readonly currentColor = 'border-inline:currentColor;';
+  readonly cyan = 'border-inline:cyan;';
+  readonly darkblue = 'border-inline:darkblue;';
+  readonly darkcyan = 'border-inline:darkcyan;';
+  readonly darkgoldenrod = 'border-inline:darkgoldenrod;';
+  readonly darkgray = 'border-inline:darkgray;';
+  readonly darkgreen = 'border-inline:darkgreen;';
+  readonly darkgrey = 'border-inline:darkgrey;';
+  readonly darkkhaki = 'border-inline:darkkhaki;';
+  readonly darkmagenta = 'border-inline:darkmagenta;';
+  readonly darkolivegreen = 'border-inline:darkolivegreen;';
+  readonly darkorange = 'border-inline:darkorange;';
+  readonly darkorchid = 'border-inline:darkorchid;';
+  readonly darkred = 'border-inline:darkred;';
+  readonly darksalmon = 'border-inline:darksalmon;';
+  readonly darkseagreen = 'border-inline:darkseagreen;';
+  readonly darkslateblue = 'border-inline:darkslateblue;';
+  readonly darkslategray = 'border-inline:darkslategray;';
+  readonly darkslategrey = 'border-inline:darkslategrey;';
+  readonly darkturquoise = 'border-inline:darkturquoise;';
+  readonly darkviolet = 'border-inline:darkviolet;';
+  readonly dashed = 'border-inline:dashed;';
+  readonly deeppink = 'border-inline:deeppink;';
+  readonly deepskyblue = 'border-inline:deepskyblue;';
+  readonly dimgray = 'border-inline:dimgray;';
+  readonly dimgrey = 'border-inline:dimgrey;';
+  readonly dodgerblue = 'border-inline:dodgerblue;';
+  readonly dotted = 'border-inline:dotted;';
+  readonly double = 'border-inline:double;';
+  readonly firebrick = 'border-inline:firebrick;';
+  readonly floralwhite = 'border-inline:floralwhite;';
+  readonly forestgreen = 'border-inline:forestgreen;';
+  readonly fuchsia = 'border-inline:fuchsia;';
+  readonly gainsboro = 'border-inline:gainsboro;';
+  readonly ghostwhite = 'border-inline:ghostwhite;';
+  readonly gold = 'border-inline:gold;';
+  readonly goldenrod = 'border-inline:goldenrod;';
+  readonly gray = 'border-inline:gray;';
+  readonly green = 'border-inline:green;';
+  readonly greenyellow = 'border-inline:greenyellow;';
+  readonly grey = 'border-inline:grey;';
+  readonly groove = 'border-inline:groove;';
+  readonly hidden = 'border-inline:hidden;';
+  readonly honeydew = 'border-inline:honeydew;';
+  readonly hotpink = 'border-inline:hotpink;';
+  readonly indianred = 'border-inline:indianred;';
+  readonly indigo = 'border-inline:indigo;';
+  readonly inherit = 'border-inline:inherit;';
+  readonly initial = 'border-inline:initial;';
+  readonly inset = 'border-inline:inset;';
+  readonly ivory = 'border-inline:ivory;';
+  readonly khaki = 'border-inline:khaki;';
+  readonly lavender = 'border-inline:lavender;';
+  readonly lavenderblush = 'border-inline:lavenderblush;';
+  readonly lawngreen = 'border-inline:lawngreen;';
+  readonly lemonchiffon = 'border-inline:lemonchiffon;';
+  readonly lightblue = 'border-inline:lightblue;';
+  readonly lightcoral = 'border-inline:lightcoral;';
+  readonly lightcyan = 'border-inline:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-inline:lightgoldenrodyellow;';
+  readonly lightgray = 'border-inline:lightgray;';
+  readonly lightgreen = 'border-inline:lightgreen;';
+  readonly lightgrey = 'border-inline:lightgrey;';
+  readonly lightpink = 'border-inline:lightpink;';
+  readonly lightsalmon = 'border-inline:lightsalmon;';
+  readonly lightseagreen = 'border-inline:lightseagreen;';
+  readonly lightskyblue = 'border-inline:lightskyblue;';
+  readonly lightslategray = 'border-inline:lightslategray;';
+  readonly lightslategrey = 'border-inline:lightslategrey;';
+  readonly lightsteelblue = 'border-inline:lightsteelblue;';
+  readonly lightyellow = 'border-inline:lightyellow;';
+  readonly lime = 'border-inline:lime;';
+  readonly limegreen = 'border-inline:limegreen;';
+  readonly linen = 'border-inline:linen;';
+  readonly magenta = 'border-inline:magenta;';
+  readonly maroon = 'border-inline:maroon;';
+  readonly medium = 'border-inline:medium;';
+  readonly mediumaquamarine = 'border-inline:mediumaquamarine;';
+  readonly mediumblue = 'border-inline:mediumblue;';
+  readonly mediumorchid = 'border-inline:mediumorchid;';
+  readonly mediumpurple = 'border-inline:mediumpurple;';
+  readonly mediumseagreen = 'border-inline:mediumseagreen;';
+  readonly mediumslateblue = 'border-inline:mediumslateblue;';
+  readonly mediumspringgreen = 'border-inline:mediumspringgreen;';
+  readonly mediumturquoise = 'border-inline:mediumturquoise;';
+  readonly mediumvioletred = 'border-inline:mediumvioletred;';
+  readonly midnightblue = 'border-inline:midnightblue;';
+  readonly mintcream = 'border-inline:mintcream;';
+  readonly mistyrose = 'border-inline:mistyrose;';
+  readonly moccasin = 'border-inline:moccasin;';
+  readonly navajowhite = 'border-inline:navajowhite;';
+  readonly navy = 'border-inline:navy;';
+  readonly none = 'border-inline:none;';
+  readonly oldlace = 'border-inline:oldlace;';
+  readonly olive = 'border-inline:olive;';
+  readonly olivedrab = 'border-inline:olivedrab;';
+  readonly orange = 'border-inline:orange;';
+  readonly orangered = 'border-inline:orangered;';
+  readonly orchid = 'border-inline:orchid;';
+  readonly outset = 'border-inline:outset;';
+  readonly palegoldenrod = 'border-inline:palegoldenrod;';
+  readonly palegreen = 'border-inline:palegreen;';
+  readonly paleturquoise = 'border-inline:paleturquoise;';
+  readonly palevioletred = 'border-inline:palevioletred;';
+  readonly papayawhip = 'border-inline:papayawhip;';
+  readonly peachpuff = 'border-inline:peachpuff;';
+  readonly peru = 'border-inline:peru;';
+  readonly pink = 'border-inline:pink;';
+  readonly plum = 'border-inline:plum;';
+  readonly powderblue = 'border-inline:powderblue;';
+  readonly purple = 'border-inline:purple;';
+  readonly rebeccapurple = 'border-inline:rebeccapurple;';
+  readonly red = 'border-inline:red;';
+  readonly revert = 'border-inline:revert;';
+  readonly revertLayer = 'border-inline:revert-layer;';
+  readonly ridge = 'border-inline:ridge;';
+  readonly rosybrown = 'border-inline:rosybrown;';
+  readonly royalblue = 'border-inline:royalblue;';
+  readonly saddlebrown = 'border-inline:saddlebrown;';
+  readonly salmon = 'border-inline:salmon;';
+  readonly sandybrown = 'border-inline:sandybrown;';
+  readonly seagreen = 'border-inline:seagreen;';
+  readonly seashell = 'border-inline:seashell;';
+  readonly sienna = 'border-inline:sienna;';
+  readonly silver = 'border-inline:silver;';
+  readonly skyblue = 'border-inline:skyblue;';
+  readonly slateblue = 'border-inline:slateblue;';
+  readonly slategray = 'border-inline:slategray;';
+  readonly slategrey = 'border-inline:slategrey;';
+  readonly snow = 'border-inline:snow;';
+  readonly solid = 'border-inline:solid;';
+  readonly springgreen = 'border-inline:springgreen;';
+  readonly steelblue = 'border-inline:steelblue;';
+  readonly tan = 'border-inline:tan;';
+  readonly teal = 'border-inline:teal;';
+  readonly thick = 'border-inline:thick;';
+  readonly thin = 'border-inline:thin;';
+  readonly thistle = 'border-inline:thistle;';
+  readonly tomato = 'border-inline:tomato;';
+  readonly transparent = 'border-inline:transparent;';
+  readonly turquoise = 'border-inline:turquoise;';
+  readonly unset = 'border-inline:unset;';
+  readonly violet = 'border-inline:violet;';
+  readonly wheat = 'border-inline:wheat;';
+  readonly white = 'border-inline:white;';
+  readonly whitesmoke = 'border-inline:whitesmoke;';
+  readonly yellow = 'border-inline:yellow;';
+  readonly yellowgreen = 'border-inline:yellowgreen;';
   constructor() {
     super('border-inline');
-    initializeBorderInlineCss();
   }
 }
-let borderInlineReady = false;
-function initializeBorderInlineCss(): void {
-  if (borderInlineReady) return;
-  Object.assign(BorderInlineCss.prototype, borderInlineKeywords());
-  Object.freeze(BorderInlineCss.prototype);
-  borderInlineReady = true;
-}
 
-function borderInlineColorKeywords() {
-  return {
-    AccentColor: 'border-inline-color:AccentColor;',
-    AccentColorText: 'border-inline-color:AccentColorText;',
-    ActiveBorder: 'border-inline-color:ActiveBorder;',
-    ActiveCaption: 'border-inline-color:ActiveCaption;',
-    ActiveText: 'border-inline-color:ActiveText;',
-    AppWorkspace: 'border-inline-color:AppWorkspace;',
-    Background: 'border-inline-color:Background;',
-    ButtonBorder: 'border-inline-color:ButtonBorder;',
-    ButtonFace: 'border-inline-color:ButtonFace;',
-    ButtonHighlight: 'border-inline-color:ButtonHighlight;',
-    ButtonShadow: 'border-inline-color:ButtonShadow;',
-    ButtonText: 'border-inline-color:ButtonText;',
-    Canvas: 'border-inline-color:Canvas;',
-    CanvasText: 'border-inline-color:CanvasText;',
-    CaptionText: 'border-inline-color:CaptionText;',
-    Field: 'border-inline-color:Field;',
-    FieldText: 'border-inline-color:FieldText;',
-    GrayText: 'border-inline-color:GrayText;',
-    Highlight: 'border-inline-color:Highlight;',
-    HighlightText: 'border-inline-color:HighlightText;',
-    InactiveBorder: 'border-inline-color:InactiveBorder;',
-    InactiveCaption: 'border-inline-color:InactiveCaption;',
-    InactiveCaptionText: 'border-inline-color:InactiveCaptionText;',
-    InfoBackground: 'border-inline-color:InfoBackground;',
-    InfoText: 'border-inline-color:InfoText;',
-    LinkText: 'border-inline-color:LinkText;',
-    Mark: 'border-inline-color:Mark;',
-    MarkText: 'border-inline-color:MarkText;',
-    Menu: 'border-inline-color:Menu;',
-    MenuText: 'border-inline-color:MenuText;',
-    Scrollbar: 'border-inline-color:Scrollbar;',
-    SelectedItem: 'border-inline-color:SelectedItem;',
-    SelectedItemText: 'border-inline-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-inline-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-inline-color:ThreeDFace;',
-    ThreeDHighlight: 'border-inline-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-inline-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-inline-color:ThreeDShadow;',
-    VisitedText: 'border-inline-color:VisitedText;',
-    Window: 'border-inline-color:Window;',
-    WindowFrame: 'border-inline-color:WindowFrame;',
-    WindowText: 'border-inline-color:WindowText;',
-    aliceblue: 'border-inline-color:aliceblue;',
-    antiquewhite: 'border-inline-color:antiquewhite;',
-    aqua: 'border-inline-color:aqua;',
-    aquamarine: 'border-inline-color:aquamarine;',
-    azure: 'border-inline-color:azure;',
-    beige: 'border-inline-color:beige;',
-    bisque: 'border-inline-color:bisque;',
-    black: 'border-inline-color:black;',
-    blanchedalmond: 'border-inline-color:blanchedalmond;',
-    blue: 'border-inline-color:blue;',
-    blueviolet: 'border-inline-color:blueviolet;',
-    brown: 'border-inline-color:brown;',
-    burlywood: 'border-inline-color:burlywood;',
-    cadetblue: 'border-inline-color:cadetblue;',
-    chartreuse: 'border-inline-color:chartreuse;',
-    chocolate: 'border-inline-color:chocolate;',
-    coral: 'border-inline-color:coral;',
-    cornflowerblue: 'border-inline-color:cornflowerblue;',
-    cornsilk: 'border-inline-color:cornsilk;',
-    crimson: 'border-inline-color:crimson;',
-    currentColor: 'border-inline-color:currentColor;',
-    cyan: 'border-inline-color:cyan;',
-    darkblue: 'border-inline-color:darkblue;',
-    darkcyan: 'border-inline-color:darkcyan;',
-    darkgoldenrod: 'border-inline-color:darkgoldenrod;',
-    darkgray: 'border-inline-color:darkgray;',
-    darkgreen: 'border-inline-color:darkgreen;',
-    darkgrey: 'border-inline-color:darkgrey;',
-    darkkhaki: 'border-inline-color:darkkhaki;',
-    darkmagenta: 'border-inline-color:darkmagenta;',
-    darkolivegreen: 'border-inline-color:darkolivegreen;',
-    darkorange: 'border-inline-color:darkorange;',
-    darkorchid: 'border-inline-color:darkorchid;',
-    darkred: 'border-inline-color:darkred;',
-    darksalmon: 'border-inline-color:darksalmon;',
-    darkseagreen: 'border-inline-color:darkseagreen;',
-    darkslateblue: 'border-inline-color:darkslateblue;',
-    darkslategray: 'border-inline-color:darkslategray;',
-    darkslategrey: 'border-inline-color:darkslategrey;',
-    darkturquoise: 'border-inline-color:darkturquoise;',
-    darkviolet: 'border-inline-color:darkviolet;',
-    deeppink: 'border-inline-color:deeppink;',
-    deepskyblue: 'border-inline-color:deepskyblue;',
-    dimgray: 'border-inline-color:dimgray;',
-    dimgrey: 'border-inline-color:dimgrey;',
-    dodgerblue: 'border-inline-color:dodgerblue;',
-    firebrick: 'border-inline-color:firebrick;',
-    floralwhite: 'border-inline-color:floralwhite;',
-    forestgreen: 'border-inline-color:forestgreen;',
-    fuchsia: 'border-inline-color:fuchsia;',
-    gainsboro: 'border-inline-color:gainsboro;',
-    ghostwhite: 'border-inline-color:ghostwhite;',
-    gold: 'border-inline-color:gold;',
-    goldenrod: 'border-inline-color:goldenrod;',
-    gray: 'border-inline-color:gray;',
-    green: 'border-inline-color:green;',
-    greenyellow: 'border-inline-color:greenyellow;',
-    grey: 'border-inline-color:grey;',
-    honeydew: 'border-inline-color:honeydew;',
-    hotpink: 'border-inline-color:hotpink;',
-    indianred: 'border-inline-color:indianred;',
-    indigo: 'border-inline-color:indigo;',
-    inherit: 'border-inline-color:inherit;',
-    initial: 'border-inline-color:initial;',
-    ivory: 'border-inline-color:ivory;',
-    khaki: 'border-inline-color:khaki;',
-    lavender: 'border-inline-color:lavender;',
-    lavenderblush: 'border-inline-color:lavenderblush;',
-    lawngreen: 'border-inline-color:lawngreen;',
-    lemonchiffon: 'border-inline-color:lemonchiffon;',
-    lightblue: 'border-inline-color:lightblue;',
-    lightcoral: 'border-inline-color:lightcoral;',
-    lightcyan: 'border-inline-color:lightcyan;',
-    lightgoldenrodyellow: 'border-inline-color:lightgoldenrodyellow;',
-    lightgray: 'border-inline-color:lightgray;',
-    lightgreen: 'border-inline-color:lightgreen;',
-    lightgrey: 'border-inline-color:lightgrey;',
-    lightpink: 'border-inline-color:lightpink;',
-    lightsalmon: 'border-inline-color:lightsalmon;',
-    lightseagreen: 'border-inline-color:lightseagreen;',
-    lightskyblue: 'border-inline-color:lightskyblue;',
-    lightslategray: 'border-inline-color:lightslategray;',
-    lightslategrey: 'border-inline-color:lightslategrey;',
-    lightsteelblue: 'border-inline-color:lightsteelblue;',
-    lightyellow: 'border-inline-color:lightyellow;',
-    lime: 'border-inline-color:lime;',
-    limegreen: 'border-inline-color:limegreen;',
-    linen: 'border-inline-color:linen;',
-    magenta: 'border-inline-color:magenta;',
-    maroon: 'border-inline-color:maroon;',
-    mediumaquamarine: 'border-inline-color:mediumaquamarine;',
-    mediumblue: 'border-inline-color:mediumblue;',
-    mediumorchid: 'border-inline-color:mediumorchid;',
-    mediumpurple: 'border-inline-color:mediumpurple;',
-    mediumseagreen: 'border-inline-color:mediumseagreen;',
-    mediumslateblue: 'border-inline-color:mediumslateblue;',
-    mediumspringgreen: 'border-inline-color:mediumspringgreen;',
-    mediumturquoise: 'border-inline-color:mediumturquoise;',
-    mediumvioletred: 'border-inline-color:mediumvioletred;',
-    midnightblue: 'border-inline-color:midnightblue;',
-    mintcream: 'border-inline-color:mintcream;',
-    mistyrose: 'border-inline-color:mistyrose;',
-    moccasin: 'border-inline-color:moccasin;',
-    navajowhite: 'border-inline-color:navajowhite;',
-    navy: 'border-inline-color:navy;',
-    oldlace: 'border-inline-color:oldlace;',
-    olive: 'border-inline-color:olive;',
-    olivedrab: 'border-inline-color:olivedrab;',
-    orange: 'border-inline-color:orange;',
-    orangered: 'border-inline-color:orangered;',
-    orchid: 'border-inline-color:orchid;',
-    palegoldenrod: 'border-inline-color:palegoldenrod;',
-    palegreen: 'border-inline-color:palegreen;',
-    paleturquoise: 'border-inline-color:paleturquoise;',
-    palevioletred: 'border-inline-color:palevioletred;',
-    papayawhip: 'border-inline-color:papayawhip;',
-    peachpuff: 'border-inline-color:peachpuff;',
-    peru: 'border-inline-color:peru;',
-    pink: 'border-inline-color:pink;',
-    plum: 'border-inline-color:plum;',
-    powderblue: 'border-inline-color:powderblue;',
-    purple: 'border-inline-color:purple;',
-    rebeccapurple: 'border-inline-color:rebeccapurple;',
-    red: 'border-inline-color:red;',
-    revert: 'border-inline-color:revert;',
-    revertLayer: 'border-inline-color:revert-layer;',
-    rosybrown: 'border-inline-color:rosybrown;',
-    royalblue: 'border-inline-color:royalblue;',
-    saddlebrown: 'border-inline-color:saddlebrown;',
-    salmon: 'border-inline-color:salmon;',
-    sandybrown: 'border-inline-color:sandybrown;',
-    seagreen: 'border-inline-color:seagreen;',
-    seashell: 'border-inline-color:seashell;',
-    sienna: 'border-inline-color:sienna;',
-    silver: 'border-inline-color:silver;',
-    skyblue: 'border-inline-color:skyblue;',
-    slateblue: 'border-inline-color:slateblue;',
-    slategray: 'border-inline-color:slategray;',
-    slategrey: 'border-inline-color:slategrey;',
-    snow: 'border-inline-color:snow;',
-    springgreen: 'border-inline-color:springgreen;',
-    steelblue: 'border-inline-color:steelblue;',
-    tan: 'border-inline-color:tan;',
-    teal: 'border-inline-color:teal;',
-    thistle: 'border-inline-color:thistle;',
-    tomato: 'border-inline-color:tomato;',
-    transparent: 'border-inline-color:transparent;',
-    turquoise: 'border-inline-color:turquoise;',
-    unset: 'border-inline-color:unset;',
-    violet: 'border-inline-color:violet;',
-    wheat: 'border-inline-color:wheat;',
-    white: 'border-inline-color:white;',
-    whitesmoke: 'border-inline-color:whitesmoke;',
-    yellow: 'border-inline-color:yellow;',
-    yellowgreen: 'border-inline-color:yellowgreen;',
-  } as const;
-}
-
-type BorderInlineColorCssKeywords = Readonly<ReturnType<typeof borderInlineColorKeywords>>;
-export interface BorderInlineColorCss extends BorderInlineColorCssKeywords {}
 /** CSS 属性 border-inline-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-color
  */
 export class BorderInlineColorCss extends CssProperty<Property.BorderInlineColor> {
+  readonly AccentColor = 'border-inline-color:AccentColor;';
+  readonly AccentColorText = 'border-inline-color:AccentColorText;';
+  readonly ActiveBorder = 'border-inline-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-inline-color:ActiveCaption;';
+  readonly ActiveText = 'border-inline-color:ActiveText;';
+  readonly AppWorkspace = 'border-inline-color:AppWorkspace;';
+  readonly Background = 'border-inline-color:Background;';
+  readonly ButtonBorder = 'border-inline-color:ButtonBorder;';
+  readonly ButtonFace = 'border-inline-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-inline-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-inline-color:ButtonShadow;';
+  readonly ButtonText = 'border-inline-color:ButtonText;';
+  readonly Canvas = 'border-inline-color:Canvas;';
+  readonly CanvasText = 'border-inline-color:CanvasText;';
+  readonly CaptionText = 'border-inline-color:CaptionText;';
+  readonly Field = 'border-inline-color:Field;';
+  readonly FieldText = 'border-inline-color:FieldText;';
+  readonly GrayText = 'border-inline-color:GrayText;';
+  readonly Highlight = 'border-inline-color:Highlight;';
+  readonly HighlightText = 'border-inline-color:HighlightText;';
+  readonly InactiveBorder = 'border-inline-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-inline-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-inline-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-inline-color:InfoBackground;';
+  readonly InfoText = 'border-inline-color:InfoText;';
+  readonly LinkText = 'border-inline-color:LinkText;';
+  readonly Mark = 'border-inline-color:Mark;';
+  readonly MarkText = 'border-inline-color:MarkText;';
+  readonly Menu = 'border-inline-color:Menu;';
+  readonly MenuText = 'border-inline-color:MenuText;';
+  readonly Scrollbar = 'border-inline-color:Scrollbar;';
+  readonly SelectedItem = 'border-inline-color:SelectedItem;';
+  readonly SelectedItemText = 'border-inline-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-inline-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-inline-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-inline-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-inline-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-inline-color:ThreeDShadow;';
+  readonly VisitedText = 'border-inline-color:VisitedText;';
+  readonly Window = 'border-inline-color:Window;';
+  readonly WindowFrame = 'border-inline-color:WindowFrame;';
+  readonly WindowText = 'border-inline-color:WindowText;';
+  readonly aliceblue = 'border-inline-color:aliceblue;';
+  readonly antiquewhite = 'border-inline-color:antiquewhite;';
+  readonly aqua = 'border-inline-color:aqua;';
+  readonly aquamarine = 'border-inline-color:aquamarine;';
+  readonly azure = 'border-inline-color:azure;';
+  readonly beige = 'border-inline-color:beige;';
+  readonly bisque = 'border-inline-color:bisque;';
+  readonly black = 'border-inline-color:black;';
+  readonly blanchedalmond = 'border-inline-color:blanchedalmond;';
+  readonly blue = 'border-inline-color:blue;';
+  readonly blueviolet = 'border-inline-color:blueviolet;';
+  readonly brown = 'border-inline-color:brown;';
+  readonly burlywood = 'border-inline-color:burlywood;';
+  readonly cadetblue = 'border-inline-color:cadetblue;';
+  readonly chartreuse = 'border-inline-color:chartreuse;';
+  readonly chocolate = 'border-inline-color:chocolate;';
+  readonly coral = 'border-inline-color:coral;';
+  readonly cornflowerblue = 'border-inline-color:cornflowerblue;';
+  readonly cornsilk = 'border-inline-color:cornsilk;';
+  readonly crimson = 'border-inline-color:crimson;';
+  readonly currentColor = 'border-inline-color:currentColor;';
+  readonly cyan = 'border-inline-color:cyan;';
+  readonly darkblue = 'border-inline-color:darkblue;';
+  readonly darkcyan = 'border-inline-color:darkcyan;';
+  readonly darkgoldenrod = 'border-inline-color:darkgoldenrod;';
+  readonly darkgray = 'border-inline-color:darkgray;';
+  readonly darkgreen = 'border-inline-color:darkgreen;';
+  readonly darkgrey = 'border-inline-color:darkgrey;';
+  readonly darkkhaki = 'border-inline-color:darkkhaki;';
+  readonly darkmagenta = 'border-inline-color:darkmagenta;';
+  readonly darkolivegreen = 'border-inline-color:darkolivegreen;';
+  readonly darkorange = 'border-inline-color:darkorange;';
+  readonly darkorchid = 'border-inline-color:darkorchid;';
+  readonly darkred = 'border-inline-color:darkred;';
+  readonly darksalmon = 'border-inline-color:darksalmon;';
+  readonly darkseagreen = 'border-inline-color:darkseagreen;';
+  readonly darkslateblue = 'border-inline-color:darkslateblue;';
+  readonly darkslategray = 'border-inline-color:darkslategray;';
+  readonly darkslategrey = 'border-inline-color:darkslategrey;';
+  readonly darkturquoise = 'border-inline-color:darkturquoise;';
+  readonly darkviolet = 'border-inline-color:darkviolet;';
+  readonly deeppink = 'border-inline-color:deeppink;';
+  readonly deepskyblue = 'border-inline-color:deepskyblue;';
+  readonly dimgray = 'border-inline-color:dimgray;';
+  readonly dimgrey = 'border-inline-color:dimgrey;';
+  readonly dodgerblue = 'border-inline-color:dodgerblue;';
+  readonly firebrick = 'border-inline-color:firebrick;';
+  readonly floralwhite = 'border-inline-color:floralwhite;';
+  readonly forestgreen = 'border-inline-color:forestgreen;';
+  readonly fuchsia = 'border-inline-color:fuchsia;';
+  readonly gainsboro = 'border-inline-color:gainsboro;';
+  readonly ghostwhite = 'border-inline-color:ghostwhite;';
+  readonly gold = 'border-inline-color:gold;';
+  readonly goldenrod = 'border-inline-color:goldenrod;';
+  readonly gray = 'border-inline-color:gray;';
+  readonly green = 'border-inline-color:green;';
+  readonly greenyellow = 'border-inline-color:greenyellow;';
+  readonly grey = 'border-inline-color:grey;';
+  readonly honeydew = 'border-inline-color:honeydew;';
+  readonly hotpink = 'border-inline-color:hotpink;';
+  readonly indianred = 'border-inline-color:indianred;';
+  readonly indigo = 'border-inline-color:indigo;';
+  readonly inherit = 'border-inline-color:inherit;';
+  readonly initial = 'border-inline-color:initial;';
+  readonly ivory = 'border-inline-color:ivory;';
+  readonly khaki = 'border-inline-color:khaki;';
+  readonly lavender = 'border-inline-color:lavender;';
+  readonly lavenderblush = 'border-inline-color:lavenderblush;';
+  readonly lawngreen = 'border-inline-color:lawngreen;';
+  readonly lemonchiffon = 'border-inline-color:lemonchiffon;';
+  readonly lightblue = 'border-inline-color:lightblue;';
+  readonly lightcoral = 'border-inline-color:lightcoral;';
+  readonly lightcyan = 'border-inline-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-inline-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-inline-color:lightgray;';
+  readonly lightgreen = 'border-inline-color:lightgreen;';
+  readonly lightgrey = 'border-inline-color:lightgrey;';
+  readonly lightpink = 'border-inline-color:lightpink;';
+  readonly lightsalmon = 'border-inline-color:lightsalmon;';
+  readonly lightseagreen = 'border-inline-color:lightseagreen;';
+  readonly lightskyblue = 'border-inline-color:lightskyblue;';
+  readonly lightslategray = 'border-inline-color:lightslategray;';
+  readonly lightslategrey = 'border-inline-color:lightslategrey;';
+  readonly lightsteelblue = 'border-inline-color:lightsteelblue;';
+  readonly lightyellow = 'border-inline-color:lightyellow;';
+  readonly lime = 'border-inline-color:lime;';
+  readonly limegreen = 'border-inline-color:limegreen;';
+  readonly linen = 'border-inline-color:linen;';
+  readonly magenta = 'border-inline-color:magenta;';
+  readonly maroon = 'border-inline-color:maroon;';
+  readonly mediumaquamarine = 'border-inline-color:mediumaquamarine;';
+  readonly mediumblue = 'border-inline-color:mediumblue;';
+  readonly mediumorchid = 'border-inline-color:mediumorchid;';
+  readonly mediumpurple = 'border-inline-color:mediumpurple;';
+  readonly mediumseagreen = 'border-inline-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-inline-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-inline-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-inline-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-inline-color:mediumvioletred;';
+  readonly midnightblue = 'border-inline-color:midnightblue;';
+  readonly mintcream = 'border-inline-color:mintcream;';
+  readonly mistyrose = 'border-inline-color:mistyrose;';
+  readonly moccasin = 'border-inline-color:moccasin;';
+  readonly navajowhite = 'border-inline-color:navajowhite;';
+  readonly navy = 'border-inline-color:navy;';
+  readonly oldlace = 'border-inline-color:oldlace;';
+  readonly olive = 'border-inline-color:olive;';
+  readonly olivedrab = 'border-inline-color:olivedrab;';
+  readonly orange = 'border-inline-color:orange;';
+  readonly orangered = 'border-inline-color:orangered;';
+  readonly orchid = 'border-inline-color:orchid;';
+  readonly palegoldenrod = 'border-inline-color:palegoldenrod;';
+  readonly palegreen = 'border-inline-color:palegreen;';
+  readonly paleturquoise = 'border-inline-color:paleturquoise;';
+  readonly palevioletred = 'border-inline-color:palevioletred;';
+  readonly papayawhip = 'border-inline-color:papayawhip;';
+  readonly peachpuff = 'border-inline-color:peachpuff;';
+  readonly peru = 'border-inline-color:peru;';
+  readonly pink = 'border-inline-color:pink;';
+  readonly plum = 'border-inline-color:plum;';
+  readonly powderblue = 'border-inline-color:powderblue;';
+  readonly purple = 'border-inline-color:purple;';
+  readonly rebeccapurple = 'border-inline-color:rebeccapurple;';
+  readonly red = 'border-inline-color:red;';
+  readonly revert = 'border-inline-color:revert;';
+  readonly revertLayer = 'border-inline-color:revert-layer;';
+  readonly rosybrown = 'border-inline-color:rosybrown;';
+  readonly royalblue = 'border-inline-color:royalblue;';
+  readonly saddlebrown = 'border-inline-color:saddlebrown;';
+  readonly salmon = 'border-inline-color:salmon;';
+  readonly sandybrown = 'border-inline-color:sandybrown;';
+  readonly seagreen = 'border-inline-color:seagreen;';
+  readonly seashell = 'border-inline-color:seashell;';
+  readonly sienna = 'border-inline-color:sienna;';
+  readonly silver = 'border-inline-color:silver;';
+  readonly skyblue = 'border-inline-color:skyblue;';
+  readonly slateblue = 'border-inline-color:slateblue;';
+  readonly slategray = 'border-inline-color:slategray;';
+  readonly slategrey = 'border-inline-color:slategrey;';
+  readonly snow = 'border-inline-color:snow;';
+  readonly springgreen = 'border-inline-color:springgreen;';
+  readonly steelblue = 'border-inline-color:steelblue;';
+  readonly tan = 'border-inline-color:tan;';
+  readonly teal = 'border-inline-color:teal;';
+  readonly thistle = 'border-inline-color:thistle;';
+  readonly tomato = 'border-inline-color:tomato;';
+  readonly transparent = 'border-inline-color:transparent;';
+  readonly turquoise = 'border-inline-color:turquoise;';
+  readonly unset = 'border-inline-color:unset;';
+  readonly violet = 'border-inline-color:violet;';
+  readonly wheat = 'border-inline-color:wheat;';
+  readonly white = 'border-inline-color:white;';
+  readonly whitesmoke = 'border-inline-color:whitesmoke;';
+  readonly yellow = 'border-inline-color:yellow;';
+  readonly yellowgreen = 'border-inline-color:yellowgreen;';
   constructor() {
     super('border-inline-color');
-    initializeBorderInlineColorCss();
   }
 }
-let borderInlineColorReady = false;
-function initializeBorderInlineColorCss(): void {
-  if (borderInlineColorReady) return;
-  Object.assign(BorderInlineColorCss.prototype, borderInlineColorKeywords());
-  Object.freeze(BorderInlineColorCss.prototype);
-  borderInlineColorReady = true;
-}
 
-function borderInlineEndKeywords() {
-  return {
-    AccentColor: 'border-inline-end:AccentColor;',
-    AccentColorText: 'border-inline-end:AccentColorText;',
-    ActiveBorder: 'border-inline-end:ActiveBorder;',
-    ActiveCaption: 'border-inline-end:ActiveCaption;',
-    ActiveText: 'border-inline-end:ActiveText;',
-    AppWorkspace: 'border-inline-end:AppWorkspace;',
-    Background: 'border-inline-end:Background;',
-    ButtonBorder: 'border-inline-end:ButtonBorder;',
-    ButtonFace: 'border-inline-end:ButtonFace;',
-    ButtonHighlight: 'border-inline-end:ButtonHighlight;',
-    ButtonShadow: 'border-inline-end:ButtonShadow;',
-    ButtonText: 'border-inline-end:ButtonText;',
-    Canvas: 'border-inline-end:Canvas;',
-    CanvasText: 'border-inline-end:CanvasText;',
-    CaptionText: 'border-inline-end:CaptionText;',
-    Field: 'border-inline-end:Field;',
-    FieldText: 'border-inline-end:FieldText;',
-    GrayText: 'border-inline-end:GrayText;',
-    Highlight: 'border-inline-end:Highlight;',
-    HighlightText: 'border-inline-end:HighlightText;',
-    InactiveBorder: 'border-inline-end:InactiveBorder;',
-    InactiveCaption: 'border-inline-end:InactiveCaption;',
-    InactiveCaptionText: 'border-inline-end:InactiveCaptionText;',
-    InfoBackground: 'border-inline-end:InfoBackground;',
-    InfoText: 'border-inline-end:InfoText;',
-    LinkText: 'border-inline-end:LinkText;',
-    Mark: 'border-inline-end:Mark;',
-    MarkText: 'border-inline-end:MarkText;',
-    Menu: 'border-inline-end:Menu;',
-    MenuText: 'border-inline-end:MenuText;',
-    Scrollbar: 'border-inline-end:Scrollbar;',
-    SelectedItem: 'border-inline-end:SelectedItem;',
-    SelectedItemText: 'border-inline-end:SelectedItemText;',
-    ThreeDDarkShadow: 'border-inline-end:ThreeDDarkShadow;',
-    ThreeDFace: 'border-inline-end:ThreeDFace;',
-    ThreeDHighlight: 'border-inline-end:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-inline-end:ThreeDLightShadow;',
-    ThreeDShadow: 'border-inline-end:ThreeDShadow;',
-    VisitedText: 'border-inline-end:VisitedText;',
-    Window: 'border-inline-end:Window;',
-    WindowFrame: 'border-inline-end:WindowFrame;',
-    WindowText: 'border-inline-end:WindowText;',
-    aliceblue: 'border-inline-end:aliceblue;',
-    antiquewhite: 'border-inline-end:antiquewhite;',
-    aqua: 'border-inline-end:aqua;',
-    aquamarine: 'border-inline-end:aquamarine;',
-    azure: 'border-inline-end:azure;',
-    beige: 'border-inline-end:beige;',
-    bisque: 'border-inline-end:bisque;',
-    black: 'border-inline-end:black;',
-    blanchedalmond: 'border-inline-end:blanchedalmond;',
-    blue: 'border-inline-end:blue;',
-    blueviolet: 'border-inline-end:blueviolet;',
-    brown: 'border-inline-end:brown;',
-    burlywood: 'border-inline-end:burlywood;',
-    cadetblue: 'border-inline-end:cadetblue;',
-    chartreuse: 'border-inline-end:chartreuse;',
-    chocolate: 'border-inline-end:chocolate;',
-    coral: 'border-inline-end:coral;',
-    cornflowerblue: 'border-inline-end:cornflowerblue;',
-    cornsilk: 'border-inline-end:cornsilk;',
-    crimson: 'border-inline-end:crimson;',
-    currentColor: 'border-inline-end:currentColor;',
-    cyan: 'border-inline-end:cyan;',
-    darkblue: 'border-inline-end:darkblue;',
-    darkcyan: 'border-inline-end:darkcyan;',
-    darkgoldenrod: 'border-inline-end:darkgoldenrod;',
-    darkgray: 'border-inline-end:darkgray;',
-    darkgreen: 'border-inline-end:darkgreen;',
-    darkgrey: 'border-inline-end:darkgrey;',
-    darkkhaki: 'border-inline-end:darkkhaki;',
-    darkmagenta: 'border-inline-end:darkmagenta;',
-    darkolivegreen: 'border-inline-end:darkolivegreen;',
-    darkorange: 'border-inline-end:darkorange;',
-    darkorchid: 'border-inline-end:darkorchid;',
-    darkred: 'border-inline-end:darkred;',
-    darksalmon: 'border-inline-end:darksalmon;',
-    darkseagreen: 'border-inline-end:darkseagreen;',
-    darkslateblue: 'border-inline-end:darkslateblue;',
-    darkslategray: 'border-inline-end:darkslategray;',
-    darkslategrey: 'border-inline-end:darkslategrey;',
-    darkturquoise: 'border-inline-end:darkturquoise;',
-    darkviolet: 'border-inline-end:darkviolet;',
-    dashed: 'border-inline-end:dashed;',
-    deeppink: 'border-inline-end:deeppink;',
-    deepskyblue: 'border-inline-end:deepskyblue;',
-    dimgray: 'border-inline-end:dimgray;',
-    dimgrey: 'border-inline-end:dimgrey;',
-    dodgerblue: 'border-inline-end:dodgerblue;',
-    dotted: 'border-inline-end:dotted;',
-    double: 'border-inline-end:double;',
-    firebrick: 'border-inline-end:firebrick;',
-    floralwhite: 'border-inline-end:floralwhite;',
-    forestgreen: 'border-inline-end:forestgreen;',
-    fuchsia: 'border-inline-end:fuchsia;',
-    gainsboro: 'border-inline-end:gainsboro;',
-    ghostwhite: 'border-inline-end:ghostwhite;',
-    gold: 'border-inline-end:gold;',
-    goldenrod: 'border-inline-end:goldenrod;',
-    gray: 'border-inline-end:gray;',
-    green: 'border-inline-end:green;',
-    greenyellow: 'border-inline-end:greenyellow;',
-    grey: 'border-inline-end:grey;',
-    groove: 'border-inline-end:groove;',
-    hidden: 'border-inline-end:hidden;',
-    honeydew: 'border-inline-end:honeydew;',
-    hotpink: 'border-inline-end:hotpink;',
-    indianred: 'border-inline-end:indianred;',
-    indigo: 'border-inline-end:indigo;',
-    inherit: 'border-inline-end:inherit;',
-    initial: 'border-inline-end:initial;',
-    inset: 'border-inline-end:inset;',
-    ivory: 'border-inline-end:ivory;',
-    khaki: 'border-inline-end:khaki;',
-    lavender: 'border-inline-end:lavender;',
-    lavenderblush: 'border-inline-end:lavenderblush;',
-    lawngreen: 'border-inline-end:lawngreen;',
-    lemonchiffon: 'border-inline-end:lemonchiffon;',
-    lightblue: 'border-inline-end:lightblue;',
-    lightcoral: 'border-inline-end:lightcoral;',
-    lightcyan: 'border-inline-end:lightcyan;',
-    lightgoldenrodyellow: 'border-inline-end:lightgoldenrodyellow;',
-    lightgray: 'border-inline-end:lightgray;',
-    lightgreen: 'border-inline-end:lightgreen;',
-    lightgrey: 'border-inline-end:lightgrey;',
-    lightpink: 'border-inline-end:lightpink;',
-    lightsalmon: 'border-inline-end:lightsalmon;',
-    lightseagreen: 'border-inline-end:lightseagreen;',
-    lightskyblue: 'border-inline-end:lightskyblue;',
-    lightslategray: 'border-inline-end:lightslategray;',
-    lightslategrey: 'border-inline-end:lightslategrey;',
-    lightsteelblue: 'border-inline-end:lightsteelblue;',
-    lightyellow: 'border-inline-end:lightyellow;',
-    lime: 'border-inline-end:lime;',
-    limegreen: 'border-inline-end:limegreen;',
-    linen: 'border-inline-end:linen;',
-    magenta: 'border-inline-end:magenta;',
-    maroon: 'border-inline-end:maroon;',
-    medium: 'border-inline-end:medium;',
-    mediumaquamarine: 'border-inline-end:mediumaquamarine;',
-    mediumblue: 'border-inline-end:mediumblue;',
-    mediumorchid: 'border-inline-end:mediumorchid;',
-    mediumpurple: 'border-inline-end:mediumpurple;',
-    mediumseagreen: 'border-inline-end:mediumseagreen;',
-    mediumslateblue: 'border-inline-end:mediumslateblue;',
-    mediumspringgreen: 'border-inline-end:mediumspringgreen;',
-    mediumturquoise: 'border-inline-end:mediumturquoise;',
-    mediumvioletred: 'border-inline-end:mediumvioletred;',
-    midnightblue: 'border-inline-end:midnightblue;',
-    mintcream: 'border-inline-end:mintcream;',
-    mistyrose: 'border-inline-end:mistyrose;',
-    moccasin: 'border-inline-end:moccasin;',
-    navajowhite: 'border-inline-end:navajowhite;',
-    navy: 'border-inline-end:navy;',
-    none: 'border-inline-end:none;',
-    oldlace: 'border-inline-end:oldlace;',
-    olive: 'border-inline-end:olive;',
-    olivedrab: 'border-inline-end:olivedrab;',
-    orange: 'border-inline-end:orange;',
-    orangered: 'border-inline-end:orangered;',
-    orchid: 'border-inline-end:orchid;',
-    outset: 'border-inline-end:outset;',
-    palegoldenrod: 'border-inline-end:palegoldenrod;',
-    palegreen: 'border-inline-end:palegreen;',
-    paleturquoise: 'border-inline-end:paleturquoise;',
-    palevioletred: 'border-inline-end:palevioletred;',
-    papayawhip: 'border-inline-end:papayawhip;',
-    peachpuff: 'border-inline-end:peachpuff;',
-    peru: 'border-inline-end:peru;',
-    pink: 'border-inline-end:pink;',
-    plum: 'border-inline-end:plum;',
-    powderblue: 'border-inline-end:powderblue;',
-    purple: 'border-inline-end:purple;',
-    rebeccapurple: 'border-inline-end:rebeccapurple;',
-    red: 'border-inline-end:red;',
-    revert: 'border-inline-end:revert;',
-    revertLayer: 'border-inline-end:revert-layer;',
-    ridge: 'border-inline-end:ridge;',
-    rosybrown: 'border-inline-end:rosybrown;',
-    royalblue: 'border-inline-end:royalblue;',
-    saddlebrown: 'border-inline-end:saddlebrown;',
-    salmon: 'border-inline-end:salmon;',
-    sandybrown: 'border-inline-end:sandybrown;',
-    seagreen: 'border-inline-end:seagreen;',
-    seashell: 'border-inline-end:seashell;',
-    sienna: 'border-inline-end:sienna;',
-    silver: 'border-inline-end:silver;',
-    skyblue: 'border-inline-end:skyblue;',
-    slateblue: 'border-inline-end:slateblue;',
-    slategray: 'border-inline-end:slategray;',
-    slategrey: 'border-inline-end:slategrey;',
-    snow: 'border-inline-end:snow;',
-    solid: 'border-inline-end:solid;',
-    springgreen: 'border-inline-end:springgreen;',
-    steelblue: 'border-inline-end:steelblue;',
-    tan: 'border-inline-end:tan;',
-    teal: 'border-inline-end:teal;',
-    thick: 'border-inline-end:thick;',
-    thin: 'border-inline-end:thin;',
-    thistle: 'border-inline-end:thistle;',
-    tomato: 'border-inline-end:tomato;',
-    transparent: 'border-inline-end:transparent;',
-    turquoise: 'border-inline-end:turquoise;',
-    unset: 'border-inline-end:unset;',
-    violet: 'border-inline-end:violet;',
-    wheat: 'border-inline-end:wheat;',
-    white: 'border-inline-end:white;',
-    whitesmoke: 'border-inline-end:whitesmoke;',
-    yellow: 'border-inline-end:yellow;',
-    yellowgreen: 'border-inline-end:yellowgreen;',
-  } as const;
-}
-
-type BorderInlineEndCssKeywords = Readonly<ReturnType<typeof borderInlineEndKeywords>>;
-export interface BorderInlineEndCss extends BorderInlineEndCssKeywords {}
 /** CSS 属性 border-inline-end。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end
  */
 export class BorderInlineEndCss extends LengthCssProperty<Property.BorderInlineEnd> {
+  readonly AccentColor = 'border-inline-end:AccentColor;';
+  readonly AccentColorText = 'border-inline-end:AccentColorText;';
+  readonly ActiveBorder = 'border-inline-end:ActiveBorder;';
+  readonly ActiveCaption = 'border-inline-end:ActiveCaption;';
+  readonly ActiveText = 'border-inline-end:ActiveText;';
+  readonly AppWorkspace = 'border-inline-end:AppWorkspace;';
+  readonly Background = 'border-inline-end:Background;';
+  readonly ButtonBorder = 'border-inline-end:ButtonBorder;';
+  readonly ButtonFace = 'border-inline-end:ButtonFace;';
+  readonly ButtonHighlight = 'border-inline-end:ButtonHighlight;';
+  readonly ButtonShadow = 'border-inline-end:ButtonShadow;';
+  readonly ButtonText = 'border-inline-end:ButtonText;';
+  readonly Canvas = 'border-inline-end:Canvas;';
+  readonly CanvasText = 'border-inline-end:CanvasText;';
+  readonly CaptionText = 'border-inline-end:CaptionText;';
+  readonly Field = 'border-inline-end:Field;';
+  readonly FieldText = 'border-inline-end:FieldText;';
+  readonly GrayText = 'border-inline-end:GrayText;';
+  readonly Highlight = 'border-inline-end:Highlight;';
+  readonly HighlightText = 'border-inline-end:HighlightText;';
+  readonly InactiveBorder = 'border-inline-end:InactiveBorder;';
+  readonly InactiveCaption = 'border-inline-end:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-inline-end:InactiveCaptionText;';
+  readonly InfoBackground = 'border-inline-end:InfoBackground;';
+  readonly InfoText = 'border-inline-end:InfoText;';
+  readonly LinkText = 'border-inline-end:LinkText;';
+  readonly Mark = 'border-inline-end:Mark;';
+  readonly MarkText = 'border-inline-end:MarkText;';
+  readonly Menu = 'border-inline-end:Menu;';
+  readonly MenuText = 'border-inline-end:MenuText;';
+  readonly Scrollbar = 'border-inline-end:Scrollbar;';
+  readonly SelectedItem = 'border-inline-end:SelectedItem;';
+  readonly SelectedItemText = 'border-inline-end:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-inline-end:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-inline-end:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-inline-end:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-inline-end:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-inline-end:ThreeDShadow;';
+  readonly VisitedText = 'border-inline-end:VisitedText;';
+  readonly Window = 'border-inline-end:Window;';
+  readonly WindowFrame = 'border-inline-end:WindowFrame;';
+  readonly WindowText = 'border-inline-end:WindowText;';
+  readonly aliceblue = 'border-inline-end:aliceblue;';
+  readonly antiquewhite = 'border-inline-end:antiquewhite;';
+  readonly aqua = 'border-inline-end:aqua;';
+  readonly aquamarine = 'border-inline-end:aquamarine;';
+  readonly azure = 'border-inline-end:azure;';
+  readonly beige = 'border-inline-end:beige;';
+  readonly bisque = 'border-inline-end:bisque;';
+  readonly black = 'border-inline-end:black;';
+  readonly blanchedalmond = 'border-inline-end:blanchedalmond;';
+  readonly blue = 'border-inline-end:blue;';
+  readonly blueviolet = 'border-inline-end:blueviolet;';
+  readonly brown = 'border-inline-end:brown;';
+  readonly burlywood = 'border-inline-end:burlywood;';
+  readonly cadetblue = 'border-inline-end:cadetblue;';
+  readonly chartreuse = 'border-inline-end:chartreuse;';
+  readonly chocolate = 'border-inline-end:chocolate;';
+  readonly coral = 'border-inline-end:coral;';
+  readonly cornflowerblue = 'border-inline-end:cornflowerblue;';
+  readonly cornsilk = 'border-inline-end:cornsilk;';
+  readonly crimson = 'border-inline-end:crimson;';
+  readonly currentColor = 'border-inline-end:currentColor;';
+  readonly cyan = 'border-inline-end:cyan;';
+  readonly darkblue = 'border-inline-end:darkblue;';
+  readonly darkcyan = 'border-inline-end:darkcyan;';
+  readonly darkgoldenrod = 'border-inline-end:darkgoldenrod;';
+  readonly darkgray = 'border-inline-end:darkgray;';
+  readonly darkgreen = 'border-inline-end:darkgreen;';
+  readonly darkgrey = 'border-inline-end:darkgrey;';
+  readonly darkkhaki = 'border-inline-end:darkkhaki;';
+  readonly darkmagenta = 'border-inline-end:darkmagenta;';
+  readonly darkolivegreen = 'border-inline-end:darkolivegreen;';
+  readonly darkorange = 'border-inline-end:darkorange;';
+  readonly darkorchid = 'border-inline-end:darkorchid;';
+  readonly darkred = 'border-inline-end:darkred;';
+  readonly darksalmon = 'border-inline-end:darksalmon;';
+  readonly darkseagreen = 'border-inline-end:darkseagreen;';
+  readonly darkslateblue = 'border-inline-end:darkslateblue;';
+  readonly darkslategray = 'border-inline-end:darkslategray;';
+  readonly darkslategrey = 'border-inline-end:darkslategrey;';
+  readonly darkturquoise = 'border-inline-end:darkturquoise;';
+  readonly darkviolet = 'border-inline-end:darkviolet;';
+  readonly dashed = 'border-inline-end:dashed;';
+  readonly deeppink = 'border-inline-end:deeppink;';
+  readonly deepskyblue = 'border-inline-end:deepskyblue;';
+  readonly dimgray = 'border-inline-end:dimgray;';
+  readonly dimgrey = 'border-inline-end:dimgrey;';
+  readonly dodgerblue = 'border-inline-end:dodgerblue;';
+  readonly dotted = 'border-inline-end:dotted;';
+  readonly double = 'border-inline-end:double;';
+  readonly firebrick = 'border-inline-end:firebrick;';
+  readonly floralwhite = 'border-inline-end:floralwhite;';
+  readonly forestgreen = 'border-inline-end:forestgreen;';
+  readonly fuchsia = 'border-inline-end:fuchsia;';
+  readonly gainsboro = 'border-inline-end:gainsboro;';
+  readonly ghostwhite = 'border-inline-end:ghostwhite;';
+  readonly gold = 'border-inline-end:gold;';
+  readonly goldenrod = 'border-inline-end:goldenrod;';
+  readonly gray = 'border-inline-end:gray;';
+  readonly green = 'border-inline-end:green;';
+  readonly greenyellow = 'border-inline-end:greenyellow;';
+  readonly grey = 'border-inline-end:grey;';
+  readonly groove = 'border-inline-end:groove;';
+  readonly hidden = 'border-inline-end:hidden;';
+  readonly honeydew = 'border-inline-end:honeydew;';
+  readonly hotpink = 'border-inline-end:hotpink;';
+  readonly indianred = 'border-inline-end:indianred;';
+  readonly indigo = 'border-inline-end:indigo;';
+  readonly inherit = 'border-inline-end:inherit;';
+  readonly initial = 'border-inline-end:initial;';
+  readonly inset = 'border-inline-end:inset;';
+  readonly ivory = 'border-inline-end:ivory;';
+  readonly khaki = 'border-inline-end:khaki;';
+  readonly lavender = 'border-inline-end:lavender;';
+  readonly lavenderblush = 'border-inline-end:lavenderblush;';
+  readonly lawngreen = 'border-inline-end:lawngreen;';
+  readonly lemonchiffon = 'border-inline-end:lemonchiffon;';
+  readonly lightblue = 'border-inline-end:lightblue;';
+  readonly lightcoral = 'border-inline-end:lightcoral;';
+  readonly lightcyan = 'border-inline-end:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-inline-end:lightgoldenrodyellow;';
+  readonly lightgray = 'border-inline-end:lightgray;';
+  readonly lightgreen = 'border-inline-end:lightgreen;';
+  readonly lightgrey = 'border-inline-end:lightgrey;';
+  readonly lightpink = 'border-inline-end:lightpink;';
+  readonly lightsalmon = 'border-inline-end:lightsalmon;';
+  readonly lightseagreen = 'border-inline-end:lightseagreen;';
+  readonly lightskyblue = 'border-inline-end:lightskyblue;';
+  readonly lightslategray = 'border-inline-end:lightslategray;';
+  readonly lightslategrey = 'border-inline-end:lightslategrey;';
+  readonly lightsteelblue = 'border-inline-end:lightsteelblue;';
+  readonly lightyellow = 'border-inline-end:lightyellow;';
+  readonly lime = 'border-inline-end:lime;';
+  readonly limegreen = 'border-inline-end:limegreen;';
+  readonly linen = 'border-inline-end:linen;';
+  readonly magenta = 'border-inline-end:magenta;';
+  readonly maroon = 'border-inline-end:maroon;';
+  readonly medium = 'border-inline-end:medium;';
+  readonly mediumaquamarine = 'border-inline-end:mediumaquamarine;';
+  readonly mediumblue = 'border-inline-end:mediumblue;';
+  readonly mediumorchid = 'border-inline-end:mediumorchid;';
+  readonly mediumpurple = 'border-inline-end:mediumpurple;';
+  readonly mediumseagreen = 'border-inline-end:mediumseagreen;';
+  readonly mediumslateblue = 'border-inline-end:mediumslateblue;';
+  readonly mediumspringgreen = 'border-inline-end:mediumspringgreen;';
+  readonly mediumturquoise = 'border-inline-end:mediumturquoise;';
+  readonly mediumvioletred = 'border-inline-end:mediumvioletred;';
+  readonly midnightblue = 'border-inline-end:midnightblue;';
+  readonly mintcream = 'border-inline-end:mintcream;';
+  readonly mistyrose = 'border-inline-end:mistyrose;';
+  readonly moccasin = 'border-inline-end:moccasin;';
+  readonly navajowhite = 'border-inline-end:navajowhite;';
+  readonly navy = 'border-inline-end:navy;';
+  readonly none = 'border-inline-end:none;';
+  readonly oldlace = 'border-inline-end:oldlace;';
+  readonly olive = 'border-inline-end:olive;';
+  readonly olivedrab = 'border-inline-end:olivedrab;';
+  readonly orange = 'border-inline-end:orange;';
+  readonly orangered = 'border-inline-end:orangered;';
+  readonly orchid = 'border-inline-end:orchid;';
+  readonly outset = 'border-inline-end:outset;';
+  readonly palegoldenrod = 'border-inline-end:palegoldenrod;';
+  readonly palegreen = 'border-inline-end:palegreen;';
+  readonly paleturquoise = 'border-inline-end:paleturquoise;';
+  readonly palevioletred = 'border-inline-end:palevioletred;';
+  readonly papayawhip = 'border-inline-end:papayawhip;';
+  readonly peachpuff = 'border-inline-end:peachpuff;';
+  readonly peru = 'border-inline-end:peru;';
+  readonly pink = 'border-inline-end:pink;';
+  readonly plum = 'border-inline-end:plum;';
+  readonly powderblue = 'border-inline-end:powderblue;';
+  readonly purple = 'border-inline-end:purple;';
+  readonly rebeccapurple = 'border-inline-end:rebeccapurple;';
+  readonly red = 'border-inline-end:red;';
+  readonly revert = 'border-inline-end:revert;';
+  readonly revertLayer = 'border-inline-end:revert-layer;';
+  readonly ridge = 'border-inline-end:ridge;';
+  readonly rosybrown = 'border-inline-end:rosybrown;';
+  readonly royalblue = 'border-inline-end:royalblue;';
+  readonly saddlebrown = 'border-inline-end:saddlebrown;';
+  readonly salmon = 'border-inline-end:salmon;';
+  readonly sandybrown = 'border-inline-end:sandybrown;';
+  readonly seagreen = 'border-inline-end:seagreen;';
+  readonly seashell = 'border-inline-end:seashell;';
+  readonly sienna = 'border-inline-end:sienna;';
+  readonly silver = 'border-inline-end:silver;';
+  readonly skyblue = 'border-inline-end:skyblue;';
+  readonly slateblue = 'border-inline-end:slateblue;';
+  readonly slategray = 'border-inline-end:slategray;';
+  readonly slategrey = 'border-inline-end:slategrey;';
+  readonly snow = 'border-inline-end:snow;';
+  readonly solid = 'border-inline-end:solid;';
+  readonly springgreen = 'border-inline-end:springgreen;';
+  readonly steelblue = 'border-inline-end:steelblue;';
+  readonly tan = 'border-inline-end:tan;';
+  readonly teal = 'border-inline-end:teal;';
+  readonly thick = 'border-inline-end:thick;';
+  readonly thin = 'border-inline-end:thin;';
+  readonly thistle = 'border-inline-end:thistle;';
+  readonly tomato = 'border-inline-end:tomato;';
+  readonly transparent = 'border-inline-end:transparent;';
+  readonly turquoise = 'border-inline-end:turquoise;';
+  readonly unset = 'border-inline-end:unset;';
+  readonly violet = 'border-inline-end:violet;';
+  readonly wheat = 'border-inline-end:wheat;';
+  readonly white = 'border-inline-end:white;';
+  readonly whitesmoke = 'border-inline-end:whitesmoke;';
+  readonly yellow = 'border-inline-end:yellow;';
+  readonly yellowgreen = 'border-inline-end:yellowgreen;';
   constructor() {
     super('border-inline-end');
-    initializeBorderInlineEndCss();
   }
 }
-let borderInlineEndReady = false;
-function initializeBorderInlineEndCss(): void {
-  if (borderInlineEndReady) return;
-  Object.assign(BorderInlineEndCss.prototype, borderInlineEndKeywords());
-  Object.freeze(BorderInlineEndCss.prototype);
-  borderInlineEndReady = true;
-}
 
-function borderInlineEndColorKeywords() {
-  return {
-    AccentColor: 'border-inline-end-color:AccentColor;',
-    AccentColorText: 'border-inline-end-color:AccentColorText;',
-    ActiveBorder: 'border-inline-end-color:ActiveBorder;',
-    ActiveCaption: 'border-inline-end-color:ActiveCaption;',
-    ActiveText: 'border-inline-end-color:ActiveText;',
-    AppWorkspace: 'border-inline-end-color:AppWorkspace;',
-    Background: 'border-inline-end-color:Background;',
-    ButtonBorder: 'border-inline-end-color:ButtonBorder;',
-    ButtonFace: 'border-inline-end-color:ButtonFace;',
-    ButtonHighlight: 'border-inline-end-color:ButtonHighlight;',
-    ButtonShadow: 'border-inline-end-color:ButtonShadow;',
-    ButtonText: 'border-inline-end-color:ButtonText;',
-    Canvas: 'border-inline-end-color:Canvas;',
-    CanvasText: 'border-inline-end-color:CanvasText;',
-    CaptionText: 'border-inline-end-color:CaptionText;',
-    Field: 'border-inline-end-color:Field;',
-    FieldText: 'border-inline-end-color:FieldText;',
-    GrayText: 'border-inline-end-color:GrayText;',
-    Highlight: 'border-inline-end-color:Highlight;',
-    HighlightText: 'border-inline-end-color:HighlightText;',
-    InactiveBorder: 'border-inline-end-color:InactiveBorder;',
-    InactiveCaption: 'border-inline-end-color:InactiveCaption;',
-    InactiveCaptionText: 'border-inline-end-color:InactiveCaptionText;',
-    InfoBackground: 'border-inline-end-color:InfoBackground;',
-    InfoText: 'border-inline-end-color:InfoText;',
-    LinkText: 'border-inline-end-color:LinkText;',
-    Mark: 'border-inline-end-color:Mark;',
-    MarkText: 'border-inline-end-color:MarkText;',
-    Menu: 'border-inline-end-color:Menu;',
-    MenuText: 'border-inline-end-color:MenuText;',
-    Scrollbar: 'border-inline-end-color:Scrollbar;',
-    SelectedItem: 'border-inline-end-color:SelectedItem;',
-    SelectedItemText: 'border-inline-end-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-inline-end-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-inline-end-color:ThreeDFace;',
-    ThreeDHighlight: 'border-inline-end-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-inline-end-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-inline-end-color:ThreeDShadow;',
-    VisitedText: 'border-inline-end-color:VisitedText;',
-    Window: 'border-inline-end-color:Window;',
-    WindowFrame: 'border-inline-end-color:WindowFrame;',
-    WindowText: 'border-inline-end-color:WindowText;',
-    aliceblue: 'border-inline-end-color:aliceblue;',
-    antiquewhite: 'border-inline-end-color:antiquewhite;',
-    aqua: 'border-inline-end-color:aqua;',
-    aquamarine: 'border-inline-end-color:aquamarine;',
-    azure: 'border-inline-end-color:azure;',
-    beige: 'border-inline-end-color:beige;',
-    bisque: 'border-inline-end-color:bisque;',
-    black: 'border-inline-end-color:black;',
-    blanchedalmond: 'border-inline-end-color:blanchedalmond;',
-    blue: 'border-inline-end-color:blue;',
-    blueviolet: 'border-inline-end-color:blueviolet;',
-    brown: 'border-inline-end-color:brown;',
-    burlywood: 'border-inline-end-color:burlywood;',
-    cadetblue: 'border-inline-end-color:cadetblue;',
-    chartreuse: 'border-inline-end-color:chartreuse;',
-    chocolate: 'border-inline-end-color:chocolate;',
-    coral: 'border-inline-end-color:coral;',
-    cornflowerblue: 'border-inline-end-color:cornflowerblue;',
-    cornsilk: 'border-inline-end-color:cornsilk;',
-    crimson: 'border-inline-end-color:crimson;',
-    currentColor: 'border-inline-end-color:currentColor;',
-    cyan: 'border-inline-end-color:cyan;',
-    darkblue: 'border-inline-end-color:darkblue;',
-    darkcyan: 'border-inline-end-color:darkcyan;',
-    darkgoldenrod: 'border-inline-end-color:darkgoldenrod;',
-    darkgray: 'border-inline-end-color:darkgray;',
-    darkgreen: 'border-inline-end-color:darkgreen;',
-    darkgrey: 'border-inline-end-color:darkgrey;',
-    darkkhaki: 'border-inline-end-color:darkkhaki;',
-    darkmagenta: 'border-inline-end-color:darkmagenta;',
-    darkolivegreen: 'border-inline-end-color:darkolivegreen;',
-    darkorange: 'border-inline-end-color:darkorange;',
-    darkorchid: 'border-inline-end-color:darkorchid;',
-    darkred: 'border-inline-end-color:darkred;',
-    darksalmon: 'border-inline-end-color:darksalmon;',
-    darkseagreen: 'border-inline-end-color:darkseagreen;',
-    darkslateblue: 'border-inline-end-color:darkslateblue;',
-    darkslategray: 'border-inline-end-color:darkslategray;',
-    darkslategrey: 'border-inline-end-color:darkslategrey;',
-    darkturquoise: 'border-inline-end-color:darkturquoise;',
-    darkviolet: 'border-inline-end-color:darkviolet;',
-    deeppink: 'border-inline-end-color:deeppink;',
-    deepskyblue: 'border-inline-end-color:deepskyblue;',
-    dimgray: 'border-inline-end-color:dimgray;',
-    dimgrey: 'border-inline-end-color:dimgrey;',
-    dodgerblue: 'border-inline-end-color:dodgerblue;',
-    firebrick: 'border-inline-end-color:firebrick;',
-    floralwhite: 'border-inline-end-color:floralwhite;',
-    forestgreen: 'border-inline-end-color:forestgreen;',
-    fuchsia: 'border-inline-end-color:fuchsia;',
-    gainsboro: 'border-inline-end-color:gainsboro;',
-    ghostwhite: 'border-inline-end-color:ghostwhite;',
-    gold: 'border-inline-end-color:gold;',
-    goldenrod: 'border-inline-end-color:goldenrod;',
-    gray: 'border-inline-end-color:gray;',
-    green: 'border-inline-end-color:green;',
-    greenyellow: 'border-inline-end-color:greenyellow;',
-    grey: 'border-inline-end-color:grey;',
-    honeydew: 'border-inline-end-color:honeydew;',
-    hotpink: 'border-inline-end-color:hotpink;',
-    indianred: 'border-inline-end-color:indianred;',
-    indigo: 'border-inline-end-color:indigo;',
-    inherit: 'border-inline-end-color:inherit;',
-    initial: 'border-inline-end-color:initial;',
-    ivory: 'border-inline-end-color:ivory;',
-    khaki: 'border-inline-end-color:khaki;',
-    lavender: 'border-inline-end-color:lavender;',
-    lavenderblush: 'border-inline-end-color:lavenderblush;',
-    lawngreen: 'border-inline-end-color:lawngreen;',
-    lemonchiffon: 'border-inline-end-color:lemonchiffon;',
-    lightblue: 'border-inline-end-color:lightblue;',
-    lightcoral: 'border-inline-end-color:lightcoral;',
-    lightcyan: 'border-inline-end-color:lightcyan;',
-    lightgoldenrodyellow: 'border-inline-end-color:lightgoldenrodyellow;',
-    lightgray: 'border-inline-end-color:lightgray;',
-    lightgreen: 'border-inline-end-color:lightgreen;',
-    lightgrey: 'border-inline-end-color:lightgrey;',
-    lightpink: 'border-inline-end-color:lightpink;',
-    lightsalmon: 'border-inline-end-color:lightsalmon;',
-    lightseagreen: 'border-inline-end-color:lightseagreen;',
-    lightskyblue: 'border-inline-end-color:lightskyblue;',
-    lightslategray: 'border-inline-end-color:lightslategray;',
-    lightslategrey: 'border-inline-end-color:lightslategrey;',
-    lightsteelblue: 'border-inline-end-color:lightsteelblue;',
-    lightyellow: 'border-inline-end-color:lightyellow;',
-    lime: 'border-inline-end-color:lime;',
-    limegreen: 'border-inline-end-color:limegreen;',
-    linen: 'border-inline-end-color:linen;',
-    magenta: 'border-inline-end-color:magenta;',
-    maroon: 'border-inline-end-color:maroon;',
-    mediumaquamarine: 'border-inline-end-color:mediumaquamarine;',
-    mediumblue: 'border-inline-end-color:mediumblue;',
-    mediumorchid: 'border-inline-end-color:mediumorchid;',
-    mediumpurple: 'border-inline-end-color:mediumpurple;',
-    mediumseagreen: 'border-inline-end-color:mediumseagreen;',
-    mediumslateblue: 'border-inline-end-color:mediumslateblue;',
-    mediumspringgreen: 'border-inline-end-color:mediumspringgreen;',
-    mediumturquoise: 'border-inline-end-color:mediumturquoise;',
-    mediumvioletred: 'border-inline-end-color:mediumvioletred;',
-    midnightblue: 'border-inline-end-color:midnightblue;',
-    mintcream: 'border-inline-end-color:mintcream;',
-    mistyrose: 'border-inline-end-color:mistyrose;',
-    moccasin: 'border-inline-end-color:moccasin;',
-    navajowhite: 'border-inline-end-color:navajowhite;',
-    navy: 'border-inline-end-color:navy;',
-    oldlace: 'border-inline-end-color:oldlace;',
-    olive: 'border-inline-end-color:olive;',
-    olivedrab: 'border-inline-end-color:olivedrab;',
-    orange: 'border-inline-end-color:orange;',
-    orangered: 'border-inline-end-color:orangered;',
-    orchid: 'border-inline-end-color:orchid;',
-    palegoldenrod: 'border-inline-end-color:palegoldenrod;',
-    palegreen: 'border-inline-end-color:palegreen;',
-    paleturquoise: 'border-inline-end-color:paleturquoise;',
-    palevioletred: 'border-inline-end-color:palevioletred;',
-    papayawhip: 'border-inline-end-color:papayawhip;',
-    peachpuff: 'border-inline-end-color:peachpuff;',
-    peru: 'border-inline-end-color:peru;',
-    pink: 'border-inline-end-color:pink;',
-    plum: 'border-inline-end-color:plum;',
-    powderblue: 'border-inline-end-color:powderblue;',
-    purple: 'border-inline-end-color:purple;',
-    rebeccapurple: 'border-inline-end-color:rebeccapurple;',
-    red: 'border-inline-end-color:red;',
-    revert: 'border-inline-end-color:revert;',
-    revertLayer: 'border-inline-end-color:revert-layer;',
-    rosybrown: 'border-inline-end-color:rosybrown;',
-    royalblue: 'border-inline-end-color:royalblue;',
-    saddlebrown: 'border-inline-end-color:saddlebrown;',
-    salmon: 'border-inline-end-color:salmon;',
-    sandybrown: 'border-inline-end-color:sandybrown;',
-    seagreen: 'border-inline-end-color:seagreen;',
-    seashell: 'border-inline-end-color:seashell;',
-    sienna: 'border-inline-end-color:sienna;',
-    silver: 'border-inline-end-color:silver;',
-    skyblue: 'border-inline-end-color:skyblue;',
-    slateblue: 'border-inline-end-color:slateblue;',
-    slategray: 'border-inline-end-color:slategray;',
-    slategrey: 'border-inline-end-color:slategrey;',
-    snow: 'border-inline-end-color:snow;',
-    springgreen: 'border-inline-end-color:springgreen;',
-    steelblue: 'border-inline-end-color:steelblue;',
-    tan: 'border-inline-end-color:tan;',
-    teal: 'border-inline-end-color:teal;',
-    thistle: 'border-inline-end-color:thistle;',
-    tomato: 'border-inline-end-color:tomato;',
-    transparent: 'border-inline-end-color:transparent;',
-    turquoise: 'border-inline-end-color:turquoise;',
-    unset: 'border-inline-end-color:unset;',
-    violet: 'border-inline-end-color:violet;',
-    wheat: 'border-inline-end-color:wheat;',
-    white: 'border-inline-end-color:white;',
-    whitesmoke: 'border-inline-end-color:whitesmoke;',
-    yellow: 'border-inline-end-color:yellow;',
-    yellowgreen: 'border-inline-end-color:yellowgreen;',
-  } as const;
-}
-
-type BorderInlineEndColorCssKeywords = Readonly<ReturnType<typeof borderInlineEndColorKeywords>>;
-export interface BorderInlineEndColorCss extends BorderInlineEndColorCssKeywords {}
 /** CSS 属性 border-inline-end-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-color
  */
 export class BorderInlineEndColorCss extends CssProperty<Property.BorderInlineEndColor> {
+  readonly AccentColor = 'border-inline-end-color:AccentColor;';
+  readonly AccentColorText = 'border-inline-end-color:AccentColorText;';
+  readonly ActiveBorder = 'border-inline-end-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-inline-end-color:ActiveCaption;';
+  readonly ActiveText = 'border-inline-end-color:ActiveText;';
+  readonly AppWorkspace = 'border-inline-end-color:AppWorkspace;';
+  readonly Background = 'border-inline-end-color:Background;';
+  readonly ButtonBorder = 'border-inline-end-color:ButtonBorder;';
+  readonly ButtonFace = 'border-inline-end-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-inline-end-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-inline-end-color:ButtonShadow;';
+  readonly ButtonText = 'border-inline-end-color:ButtonText;';
+  readonly Canvas = 'border-inline-end-color:Canvas;';
+  readonly CanvasText = 'border-inline-end-color:CanvasText;';
+  readonly CaptionText = 'border-inline-end-color:CaptionText;';
+  readonly Field = 'border-inline-end-color:Field;';
+  readonly FieldText = 'border-inline-end-color:FieldText;';
+  readonly GrayText = 'border-inline-end-color:GrayText;';
+  readonly Highlight = 'border-inline-end-color:Highlight;';
+  readonly HighlightText = 'border-inline-end-color:HighlightText;';
+  readonly InactiveBorder = 'border-inline-end-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-inline-end-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-inline-end-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-inline-end-color:InfoBackground;';
+  readonly InfoText = 'border-inline-end-color:InfoText;';
+  readonly LinkText = 'border-inline-end-color:LinkText;';
+  readonly Mark = 'border-inline-end-color:Mark;';
+  readonly MarkText = 'border-inline-end-color:MarkText;';
+  readonly Menu = 'border-inline-end-color:Menu;';
+  readonly MenuText = 'border-inline-end-color:MenuText;';
+  readonly Scrollbar = 'border-inline-end-color:Scrollbar;';
+  readonly SelectedItem = 'border-inline-end-color:SelectedItem;';
+  readonly SelectedItemText = 'border-inline-end-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-inline-end-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-inline-end-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-inline-end-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-inline-end-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-inline-end-color:ThreeDShadow;';
+  readonly VisitedText = 'border-inline-end-color:VisitedText;';
+  readonly Window = 'border-inline-end-color:Window;';
+  readonly WindowFrame = 'border-inline-end-color:WindowFrame;';
+  readonly WindowText = 'border-inline-end-color:WindowText;';
+  readonly aliceblue = 'border-inline-end-color:aliceblue;';
+  readonly antiquewhite = 'border-inline-end-color:antiquewhite;';
+  readonly aqua = 'border-inline-end-color:aqua;';
+  readonly aquamarine = 'border-inline-end-color:aquamarine;';
+  readonly azure = 'border-inline-end-color:azure;';
+  readonly beige = 'border-inline-end-color:beige;';
+  readonly bisque = 'border-inline-end-color:bisque;';
+  readonly black = 'border-inline-end-color:black;';
+  readonly blanchedalmond = 'border-inline-end-color:blanchedalmond;';
+  readonly blue = 'border-inline-end-color:blue;';
+  readonly blueviolet = 'border-inline-end-color:blueviolet;';
+  readonly brown = 'border-inline-end-color:brown;';
+  readonly burlywood = 'border-inline-end-color:burlywood;';
+  readonly cadetblue = 'border-inline-end-color:cadetblue;';
+  readonly chartreuse = 'border-inline-end-color:chartreuse;';
+  readonly chocolate = 'border-inline-end-color:chocolate;';
+  readonly coral = 'border-inline-end-color:coral;';
+  readonly cornflowerblue = 'border-inline-end-color:cornflowerblue;';
+  readonly cornsilk = 'border-inline-end-color:cornsilk;';
+  readonly crimson = 'border-inline-end-color:crimson;';
+  readonly currentColor = 'border-inline-end-color:currentColor;';
+  readonly cyan = 'border-inline-end-color:cyan;';
+  readonly darkblue = 'border-inline-end-color:darkblue;';
+  readonly darkcyan = 'border-inline-end-color:darkcyan;';
+  readonly darkgoldenrod = 'border-inline-end-color:darkgoldenrod;';
+  readonly darkgray = 'border-inline-end-color:darkgray;';
+  readonly darkgreen = 'border-inline-end-color:darkgreen;';
+  readonly darkgrey = 'border-inline-end-color:darkgrey;';
+  readonly darkkhaki = 'border-inline-end-color:darkkhaki;';
+  readonly darkmagenta = 'border-inline-end-color:darkmagenta;';
+  readonly darkolivegreen = 'border-inline-end-color:darkolivegreen;';
+  readonly darkorange = 'border-inline-end-color:darkorange;';
+  readonly darkorchid = 'border-inline-end-color:darkorchid;';
+  readonly darkred = 'border-inline-end-color:darkred;';
+  readonly darksalmon = 'border-inline-end-color:darksalmon;';
+  readonly darkseagreen = 'border-inline-end-color:darkseagreen;';
+  readonly darkslateblue = 'border-inline-end-color:darkslateblue;';
+  readonly darkslategray = 'border-inline-end-color:darkslategray;';
+  readonly darkslategrey = 'border-inline-end-color:darkslategrey;';
+  readonly darkturquoise = 'border-inline-end-color:darkturquoise;';
+  readonly darkviolet = 'border-inline-end-color:darkviolet;';
+  readonly deeppink = 'border-inline-end-color:deeppink;';
+  readonly deepskyblue = 'border-inline-end-color:deepskyblue;';
+  readonly dimgray = 'border-inline-end-color:dimgray;';
+  readonly dimgrey = 'border-inline-end-color:dimgrey;';
+  readonly dodgerblue = 'border-inline-end-color:dodgerblue;';
+  readonly firebrick = 'border-inline-end-color:firebrick;';
+  readonly floralwhite = 'border-inline-end-color:floralwhite;';
+  readonly forestgreen = 'border-inline-end-color:forestgreen;';
+  readonly fuchsia = 'border-inline-end-color:fuchsia;';
+  readonly gainsboro = 'border-inline-end-color:gainsboro;';
+  readonly ghostwhite = 'border-inline-end-color:ghostwhite;';
+  readonly gold = 'border-inline-end-color:gold;';
+  readonly goldenrod = 'border-inline-end-color:goldenrod;';
+  readonly gray = 'border-inline-end-color:gray;';
+  readonly green = 'border-inline-end-color:green;';
+  readonly greenyellow = 'border-inline-end-color:greenyellow;';
+  readonly grey = 'border-inline-end-color:grey;';
+  readonly honeydew = 'border-inline-end-color:honeydew;';
+  readonly hotpink = 'border-inline-end-color:hotpink;';
+  readonly indianred = 'border-inline-end-color:indianred;';
+  readonly indigo = 'border-inline-end-color:indigo;';
+  readonly inherit = 'border-inline-end-color:inherit;';
+  readonly initial = 'border-inline-end-color:initial;';
+  readonly ivory = 'border-inline-end-color:ivory;';
+  readonly khaki = 'border-inline-end-color:khaki;';
+  readonly lavender = 'border-inline-end-color:lavender;';
+  readonly lavenderblush = 'border-inline-end-color:lavenderblush;';
+  readonly lawngreen = 'border-inline-end-color:lawngreen;';
+  readonly lemonchiffon = 'border-inline-end-color:lemonchiffon;';
+  readonly lightblue = 'border-inline-end-color:lightblue;';
+  readonly lightcoral = 'border-inline-end-color:lightcoral;';
+  readonly lightcyan = 'border-inline-end-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-inline-end-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-inline-end-color:lightgray;';
+  readonly lightgreen = 'border-inline-end-color:lightgreen;';
+  readonly lightgrey = 'border-inline-end-color:lightgrey;';
+  readonly lightpink = 'border-inline-end-color:lightpink;';
+  readonly lightsalmon = 'border-inline-end-color:lightsalmon;';
+  readonly lightseagreen = 'border-inline-end-color:lightseagreen;';
+  readonly lightskyblue = 'border-inline-end-color:lightskyblue;';
+  readonly lightslategray = 'border-inline-end-color:lightslategray;';
+  readonly lightslategrey = 'border-inline-end-color:lightslategrey;';
+  readonly lightsteelblue = 'border-inline-end-color:lightsteelblue;';
+  readonly lightyellow = 'border-inline-end-color:lightyellow;';
+  readonly lime = 'border-inline-end-color:lime;';
+  readonly limegreen = 'border-inline-end-color:limegreen;';
+  readonly linen = 'border-inline-end-color:linen;';
+  readonly magenta = 'border-inline-end-color:magenta;';
+  readonly maroon = 'border-inline-end-color:maroon;';
+  readonly mediumaquamarine = 'border-inline-end-color:mediumaquamarine;';
+  readonly mediumblue = 'border-inline-end-color:mediumblue;';
+  readonly mediumorchid = 'border-inline-end-color:mediumorchid;';
+  readonly mediumpurple = 'border-inline-end-color:mediumpurple;';
+  readonly mediumseagreen = 'border-inline-end-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-inline-end-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-inline-end-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-inline-end-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-inline-end-color:mediumvioletred;';
+  readonly midnightblue = 'border-inline-end-color:midnightblue;';
+  readonly mintcream = 'border-inline-end-color:mintcream;';
+  readonly mistyrose = 'border-inline-end-color:mistyrose;';
+  readonly moccasin = 'border-inline-end-color:moccasin;';
+  readonly navajowhite = 'border-inline-end-color:navajowhite;';
+  readonly navy = 'border-inline-end-color:navy;';
+  readonly oldlace = 'border-inline-end-color:oldlace;';
+  readonly olive = 'border-inline-end-color:olive;';
+  readonly olivedrab = 'border-inline-end-color:olivedrab;';
+  readonly orange = 'border-inline-end-color:orange;';
+  readonly orangered = 'border-inline-end-color:orangered;';
+  readonly orchid = 'border-inline-end-color:orchid;';
+  readonly palegoldenrod = 'border-inline-end-color:palegoldenrod;';
+  readonly palegreen = 'border-inline-end-color:palegreen;';
+  readonly paleturquoise = 'border-inline-end-color:paleturquoise;';
+  readonly palevioletred = 'border-inline-end-color:palevioletred;';
+  readonly papayawhip = 'border-inline-end-color:papayawhip;';
+  readonly peachpuff = 'border-inline-end-color:peachpuff;';
+  readonly peru = 'border-inline-end-color:peru;';
+  readonly pink = 'border-inline-end-color:pink;';
+  readonly plum = 'border-inline-end-color:plum;';
+  readonly powderblue = 'border-inline-end-color:powderblue;';
+  readonly purple = 'border-inline-end-color:purple;';
+  readonly rebeccapurple = 'border-inline-end-color:rebeccapurple;';
+  readonly red = 'border-inline-end-color:red;';
+  readonly revert = 'border-inline-end-color:revert;';
+  readonly revertLayer = 'border-inline-end-color:revert-layer;';
+  readonly rosybrown = 'border-inline-end-color:rosybrown;';
+  readonly royalblue = 'border-inline-end-color:royalblue;';
+  readonly saddlebrown = 'border-inline-end-color:saddlebrown;';
+  readonly salmon = 'border-inline-end-color:salmon;';
+  readonly sandybrown = 'border-inline-end-color:sandybrown;';
+  readonly seagreen = 'border-inline-end-color:seagreen;';
+  readonly seashell = 'border-inline-end-color:seashell;';
+  readonly sienna = 'border-inline-end-color:sienna;';
+  readonly silver = 'border-inline-end-color:silver;';
+  readonly skyblue = 'border-inline-end-color:skyblue;';
+  readonly slateblue = 'border-inline-end-color:slateblue;';
+  readonly slategray = 'border-inline-end-color:slategray;';
+  readonly slategrey = 'border-inline-end-color:slategrey;';
+  readonly snow = 'border-inline-end-color:snow;';
+  readonly springgreen = 'border-inline-end-color:springgreen;';
+  readonly steelblue = 'border-inline-end-color:steelblue;';
+  readonly tan = 'border-inline-end-color:tan;';
+  readonly teal = 'border-inline-end-color:teal;';
+  readonly thistle = 'border-inline-end-color:thistle;';
+  readonly tomato = 'border-inline-end-color:tomato;';
+  readonly transparent = 'border-inline-end-color:transparent;';
+  readonly turquoise = 'border-inline-end-color:turquoise;';
+  readonly unset = 'border-inline-end-color:unset;';
+  readonly violet = 'border-inline-end-color:violet;';
+  readonly wheat = 'border-inline-end-color:wheat;';
+  readonly white = 'border-inline-end-color:white;';
+  readonly whitesmoke = 'border-inline-end-color:whitesmoke;';
+  readonly yellow = 'border-inline-end-color:yellow;';
+  readonly yellowgreen = 'border-inline-end-color:yellowgreen;';
   constructor() {
     super('border-inline-end-color');
-    initializeBorderInlineEndColorCss();
   }
 }
-let borderInlineEndColorReady = false;
-function initializeBorderInlineEndColorCss(): void {
-  if (borderInlineEndColorReady) return;
-  Object.assign(BorderInlineEndColorCss.prototype, borderInlineEndColorKeywords());
-  Object.freeze(BorderInlineEndColorCss.prototype);
-  borderInlineEndColorReady = true;
-}
 
-function borderInlineEndStyleKeywords() {
-  return {
-    dashed: 'border-inline-end-style:dashed;',
-    dotted: 'border-inline-end-style:dotted;',
-    double: 'border-inline-end-style:double;',
-    groove: 'border-inline-end-style:groove;',
-    hidden: 'border-inline-end-style:hidden;',
-    inherit: 'border-inline-end-style:inherit;',
-    initial: 'border-inline-end-style:initial;',
-    inset: 'border-inline-end-style:inset;',
-    none: 'border-inline-end-style:none;',
-    outset: 'border-inline-end-style:outset;',
-    revert: 'border-inline-end-style:revert;',
-    revertLayer: 'border-inline-end-style:revert-layer;',
-    ridge: 'border-inline-end-style:ridge;',
-    solid: 'border-inline-end-style:solid;',
-    unset: 'border-inline-end-style:unset;',
-  } as const;
-}
-
-type BorderInlineEndStyleCssKeywords = Readonly<ReturnType<typeof borderInlineEndStyleKeywords>>;
-export interface BorderInlineEndStyleCss extends BorderInlineEndStyleCssKeywords {}
 /** CSS 属性 border-inline-end-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-style
  */
 export class BorderInlineEndStyleCss extends CssProperty<Property.BorderInlineEndStyle> {
+  readonly dashed = 'border-inline-end-style:dashed;';
+  readonly dotted = 'border-inline-end-style:dotted;';
+  readonly double = 'border-inline-end-style:double;';
+  readonly groove = 'border-inline-end-style:groove;';
+  readonly hidden = 'border-inline-end-style:hidden;';
+  readonly inherit = 'border-inline-end-style:inherit;';
+  readonly initial = 'border-inline-end-style:initial;';
+  readonly inset = 'border-inline-end-style:inset;';
+  readonly none = 'border-inline-end-style:none;';
+  readonly outset = 'border-inline-end-style:outset;';
+  readonly revert = 'border-inline-end-style:revert;';
+  readonly revertLayer = 'border-inline-end-style:revert-layer;';
+  readonly ridge = 'border-inline-end-style:ridge;';
+  readonly solid = 'border-inline-end-style:solid;';
+  readonly unset = 'border-inline-end-style:unset;';
   constructor() {
     super('border-inline-end-style');
-    initializeBorderInlineEndStyleCss();
   }
 }
-let borderInlineEndStyleReady = false;
-function initializeBorderInlineEndStyleCss(): void {
-  if (borderInlineEndStyleReady) return;
-  Object.assign(BorderInlineEndStyleCss.prototype, borderInlineEndStyleKeywords());
-  Object.freeze(BorderInlineEndStyleCss.prototype);
-  borderInlineEndStyleReady = true;
-}
 
-function borderInlineEndWidthKeywords() {
-  return {
-    inherit: 'border-inline-end-width:inherit;',
-    initial: 'border-inline-end-width:initial;',
-    medium: 'border-inline-end-width:medium;',
-    revert: 'border-inline-end-width:revert;',
-    revertLayer: 'border-inline-end-width:revert-layer;',
-    thick: 'border-inline-end-width:thick;',
-    thin: 'border-inline-end-width:thin;',
-    unset: 'border-inline-end-width:unset;',
-  } as const;
-}
-
-type BorderInlineEndWidthCssKeywords = Readonly<ReturnType<typeof borderInlineEndWidthKeywords>>;
-export interface BorderInlineEndWidthCss extends BorderInlineEndWidthCssKeywords {}
 /** CSS 属性 border-inline-end-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
  */
 export class BorderInlineEndWidthCss extends LengthCssProperty<Property.BorderInlineEndWidth> {
+  readonly inherit = 'border-inline-end-width:inherit;';
+  readonly initial = 'border-inline-end-width:initial;';
+  readonly medium = 'border-inline-end-width:medium;';
+  readonly revert = 'border-inline-end-width:revert;';
+  readonly revertLayer = 'border-inline-end-width:revert-layer;';
+  readonly thick = 'border-inline-end-width:thick;';
+  readonly thin = 'border-inline-end-width:thin;';
+  readonly unset = 'border-inline-end-width:unset;';
   constructor() {
     super('border-inline-end-width');
-    initializeBorderInlineEndWidthCss();
   }
 }
-let borderInlineEndWidthReady = false;
-function initializeBorderInlineEndWidthCss(): void {
-  if (borderInlineEndWidthReady) return;
-  Object.assign(BorderInlineEndWidthCss.prototype, borderInlineEndWidthKeywords());
-  Object.freeze(BorderInlineEndWidthCss.prototype);
-  borderInlineEndWidthReady = true;
-}
 
-function borderInlineStartKeywords() {
-  return {
-    AccentColor: 'border-inline-start:AccentColor;',
-    AccentColorText: 'border-inline-start:AccentColorText;',
-    ActiveBorder: 'border-inline-start:ActiveBorder;',
-    ActiveCaption: 'border-inline-start:ActiveCaption;',
-    ActiveText: 'border-inline-start:ActiveText;',
-    AppWorkspace: 'border-inline-start:AppWorkspace;',
-    Background: 'border-inline-start:Background;',
-    ButtonBorder: 'border-inline-start:ButtonBorder;',
-    ButtonFace: 'border-inline-start:ButtonFace;',
-    ButtonHighlight: 'border-inline-start:ButtonHighlight;',
-    ButtonShadow: 'border-inline-start:ButtonShadow;',
-    ButtonText: 'border-inline-start:ButtonText;',
-    Canvas: 'border-inline-start:Canvas;',
-    CanvasText: 'border-inline-start:CanvasText;',
-    CaptionText: 'border-inline-start:CaptionText;',
-    Field: 'border-inline-start:Field;',
-    FieldText: 'border-inline-start:FieldText;',
-    GrayText: 'border-inline-start:GrayText;',
-    Highlight: 'border-inline-start:Highlight;',
-    HighlightText: 'border-inline-start:HighlightText;',
-    InactiveBorder: 'border-inline-start:InactiveBorder;',
-    InactiveCaption: 'border-inline-start:InactiveCaption;',
-    InactiveCaptionText: 'border-inline-start:InactiveCaptionText;',
-    InfoBackground: 'border-inline-start:InfoBackground;',
-    InfoText: 'border-inline-start:InfoText;',
-    LinkText: 'border-inline-start:LinkText;',
-    Mark: 'border-inline-start:Mark;',
-    MarkText: 'border-inline-start:MarkText;',
-    Menu: 'border-inline-start:Menu;',
-    MenuText: 'border-inline-start:MenuText;',
-    Scrollbar: 'border-inline-start:Scrollbar;',
-    SelectedItem: 'border-inline-start:SelectedItem;',
-    SelectedItemText: 'border-inline-start:SelectedItemText;',
-    ThreeDDarkShadow: 'border-inline-start:ThreeDDarkShadow;',
-    ThreeDFace: 'border-inline-start:ThreeDFace;',
-    ThreeDHighlight: 'border-inline-start:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-inline-start:ThreeDLightShadow;',
-    ThreeDShadow: 'border-inline-start:ThreeDShadow;',
-    VisitedText: 'border-inline-start:VisitedText;',
-    Window: 'border-inline-start:Window;',
-    WindowFrame: 'border-inline-start:WindowFrame;',
-    WindowText: 'border-inline-start:WindowText;',
-    aliceblue: 'border-inline-start:aliceblue;',
-    antiquewhite: 'border-inline-start:antiquewhite;',
-    aqua: 'border-inline-start:aqua;',
-    aquamarine: 'border-inline-start:aquamarine;',
-    azure: 'border-inline-start:azure;',
-    beige: 'border-inline-start:beige;',
-    bisque: 'border-inline-start:bisque;',
-    black: 'border-inline-start:black;',
-    blanchedalmond: 'border-inline-start:blanchedalmond;',
-    blue: 'border-inline-start:blue;',
-    blueviolet: 'border-inline-start:blueviolet;',
-    brown: 'border-inline-start:brown;',
-    burlywood: 'border-inline-start:burlywood;',
-    cadetblue: 'border-inline-start:cadetblue;',
-    chartreuse: 'border-inline-start:chartreuse;',
-    chocolate: 'border-inline-start:chocolate;',
-    coral: 'border-inline-start:coral;',
-    cornflowerblue: 'border-inline-start:cornflowerblue;',
-    cornsilk: 'border-inline-start:cornsilk;',
-    crimson: 'border-inline-start:crimson;',
-    currentColor: 'border-inline-start:currentColor;',
-    cyan: 'border-inline-start:cyan;',
-    darkblue: 'border-inline-start:darkblue;',
-    darkcyan: 'border-inline-start:darkcyan;',
-    darkgoldenrod: 'border-inline-start:darkgoldenrod;',
-    darkgray: 'border-inline-start:darkgray;',
-    darkgreen: 'border-inline-start:darkgreen;',
-    darkgrey: 'border-inline-start:darkgrey;',
-    darkkhaki: 'border-inline-start:darkkhaki;',
-    darkmagenta: 'border-inline-start:darkmagenta;',
-    darkolivegreen: 'border-inline-start:darkolivegreen;',
-    darkorange: 'border-inline-start:darkorange;',
-    darkorchid: 'border-inline-start:darkorchid;',
-    darkred: 'border-inline-start:darkred;',
-    darksalmon: 'border-inline-start:darksalmon;',
-    darkseagreen: 'border-inline-start:darkseagreen;',
-    darkslateblue: 'border-inline-start:darkslateblue;',
-    darkslategray: 'border-inline-start:darkslategray;',
-    darkslategrey: 'border-inline-start:darkslategrey;',
-    darkturquoise: 'border-inline-start:darkturquoise;',
-    darkviolet: 'border-inline-start:darkviolet;',
-    dashed: 'border-inline-start:dashed;',
-    deeppink: 'border-inline-start:deeppink;',
-    deepskyblue: 'border-inline-start:deepskyblue;',
-    dimgray: 'border-inline-start:dimgray;',
-    dimgrey: 'border-inline-start:dimgrey;',
-    dodgerblue: 'border-inline-start:dodgerblue;',
-    dotted: 'border-inline-start:dotted;',
-    double: 'border-inline-start:double;',
-    firebrick: 'border-inline-start:firebrick;',
-    floralwhite: 'border-inline-start:floralwhite;',
-    forestgreen: 'border-inline-start:forestgreen;',
-    fuchsia: 'border-inline-start:fuchsia;',
-    gainsboro: 'border-inline-start:gainsboro;',
-    ghostwhite: 'border-inline-start:ghostwhite;',
-    gold: 'border-inline-start:gold;',
-    goldenrod: 'border-inline-start:goldenrod;',
-    gray: 'border-inline-start:gray;',
-    green: 'border-inline-start:green;',
-    greenyellow: 'border-inline-start:greenyellow;',
-    grey: 'border-inline-start:grey;',
-    groove: 'border-inline-start:groove;',
-    hidden: 'border-inline-start:hidden;',
-    honeydew: 'border-inline-start:honeydew;',
-    hotpink: 'border-inline-start:hotpink;',
-    indianred: 'border-inline-start:indianred;',
-    indigo: 'border-inline-start:indigo;',
-    inherit: 'border-inline-start:inherit;',
-    initial: 'border-inline-start:initial;',
-    inset: 'border-inline-start:inset;',
-    ivory: 'border-inline-start:ivory;',
-    khaki: 'border-inline-start:khaki;',
-    lavender: 'border-inline-start:lavender;',
-    lavenderblush: 'border-inline-start:lavenderblush;',
-    lawngreen: 'border-inline-start:lawngreen;',
-    lemonchiffon: 'border-inline-start:lemonchiffon;',
-    lightblue: 'border-inline-start:lightblue;',
-    lightcoral: 'border-inline-start:lightcoral;',
-    lightcyan: 'border-inline-start:lightcyan;',
-    lightgoldenrodyellow: 'border-inline-start:lightgoldenrodyellow;',
-    lightgray: 'border-inline-start:lightgray;',
-    lightgreen: 'border-inline-start:lightgreen;',
-    lightgrey: 'border-inline-start:lightgrey;',
-    lightpink: 'border-inline-start:lightpink;',
-    lightsalmon: 'border-inline-start:lightsalmon;',
-    lightseagreen: 'border-inline-start:lightseagreen;',
-    lightskyblue: 'border-inline-start:lightskyblue;',
-    lightslategray: 'border-inline-start:lightslategray;',
-    lightslategrey: 'border-inline-start:lightslategrey;',
-    lightsteelblue: 'border-inline-start:lightsteelblue;',
-    lightyellow: 'border-inline-start:lightyellow;',
-    lime: 'border-inline-start:lime;',
-    limegreen: 'border-inline-start:limegreen;',
-    linen: 'border-inline-start:linen;',
-    magenta: 'border-inline-start:magenta;',
-    maroon: 'border-inline-start:maroon;',
-    medium: 'border-inline-start:medium;',
-    mediumaquamarine: 'border-inline-start:mediumaquamarine;',
-    mediumblue: 'border-inline-start:mediumblue;',
-    mediumorchid: 'border-inline-start:mediumorchid;',
-    mediumpurple: 'border-inline-start:mediumpurple;',
-    mediumseagreen: 'border-inline-start:mediumseagreen;',
-    mediumslateblue: 'border-inline-start:mediumslateblue;',
-    mediumspringgreen: 'border-inline-start:mediumspringgreen;',
-    mediumturquoise: 'border-inline-start:mediumturquoise;',
-    mediumvioletred: 'border-inline-start:mediumvioletred;',
-    midnightblue: 'border-inline-start:midnightblue;',
-    mintcream: 'border-inline-start:mintcream;',
-    mistyrose: 'border-inline-start:mistyrose;',
-    moccasin: 'border-inline-start:moccasin;',
-    navajowhite: 'border-inline-start:navajowhite;',
-    navy: 'border-inline-start:navy;',
-    none: 'border-inline-start:none;',
-    oldlace: 'border-inline-start:oldlace;',
-    olive: 'border-inline-start:olive;',
-    olivedrab: 'border-inline-start:olivedrab;',
-    orange: 'border-inline-start:orange;',
-    orangered: 'border-inline-start:orangered;',
-    orchid: 'border-inline-start:orchid;',
-    outset: 'border-inline-start:outset;',
-    palegoldenrod: 'border-inline-start:palegoldenrod;',
-    palegreen: 'border-inline-start:palegreen;',
-    paleturquoise: 'border-inline-start:paleturquoise;',
-    palevioletred: 'border-inline-start:palevioletred;',
-    papayawhip: 'border-inline-start:papayawhip;',
-    peachpuff: 'border-inline-start:peachpuff;',
-    peru: 'border-inline-start:peru;',
-    pink: 'border-inline-start:pink;',
-    plum: 'border-inline-start:plum;',
-    powderblue: 'border-inline-start:powderblue;',
-    purple: 'border-inline-start:purple;',
-    rebeccapurple: 'border-inline-start:rebeccapurple;',
-    red: 'border-inline-start:red;',
-    revert: 'border-inline-start:revert;',
-    revertLayer: 'border-inline-start:revert-layer;',
-    ridge: 'border-inline-start:ridge;',
-    rosybrown: 'border-inline-start:rosybrown;',
-    royalblue: 'border-inline-start:royalblue;',
-    saddlebrown: 'border-inline-start:saddlebrown;',
-    salmon: 'border-inline-start:salmon;',
-    sandybrown: 'border-inline-start:sandybrown;',
-    seagreen: 'border-inline-start:seagreen;',
-    seashell: 'border-inline-start:seashell;',
-    sienna: 'border-inline-start:sienna;',
-    silver: 'border-inline-start:silver;',
-    skyblue: 'border-inline-start:skyblue;',
-    slateblue: 'border-inline-start:slateblue;',
-    slategray: 'border-inline-start:slategray;',
-    slategrey: 'border-inline-start:slategrey;',
-    snow: 'border-inline-start:snow;',
-    solid: 'border-inline-start:solid;',
-    springgreen: 'border-inline-start:springgreen;',
-    steelblue: 'border-inline-start:steelblue;',
-    tan: 'border-inline-start:tan;',
-    teal: 'border-inline-start:teal;',
-    thick: 'border-inline-start:thick;',
-    thin: 'border-inline-start:thin;',
-    thistle: 'border-inline-start:thistle;',
-    tomato: 'border-inline-start:tomato;',
-    transparent: 'border-inline-start:transparent;',
-    turquoise: 'border-inline-start:turquoise;',
-    unset: 'border-inline-start:unset;',
-    violet: 'border-inline-start:violet;',
-    wheat: 'border-inline-start:wheat;',
-    white: 'border-inline-start:white;',
-    whitesmoke: 'border-inline-start:whitesmoke;',
-    yellow: 'border-inline-start:yellow;',
-    yellowgreen: 'border-inline-start:yellowgreen;',
-  } as const;
-}
-
-type BorderInlineStartCssKeywords = Readonly<ReturnType<typeof borderInlineStartKeywords>>;
-export interface BorderInlineStartCss extends BorderInlineStartCssKeywords {}
 /** CSS 属性 border-inline-start。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start
  */
 export class BorderInlineStartCss extends LengthCssProperty<Property.BorderInlineStart> {
+  readonly AccentColor = 'border-inline-start:AccentColor;';
+  readonly AccentColorText = 'border-inline-start:AccentColorText;';
+  readonly ActiveBorder = 'border-inline-start:ActiveBorder;';
+  readonly ActiveCaption = 'border-inline-start:ActiveCaption;';
+  readonly ActiveText = 'border-inline-start:ActiveText;';
+  readonly AppWorkspace = 'border-inline-start:AppWorkspace;';
+  readonly Background = 'border-inline-start:Background;';
+  readonly ButtonBorder = 'border-inline-start:ButtonBorder;';
+  readonly ButtonFace = 'border-inline-start:ButtonFace;';
+  readonly ButtonHighlight = 'border-inline-start:ButtonHighlight;';
+  readonly ButtonShadow = 'border-inline-start:ButtonShadow;';
+  readonly ButtonText = 'border-inline-start:ButtonText;';
+  readonly Canvas = 'border-inline-start:Canvas;';
+  readonly CanvasText = 'border-inline-start:CanvasText;';
+  readonly CaptionText = 'border-inline-start:CaptionText;';
+  readonly Field = 'border-inline-start:Field;';
+  readonly FieldText = 'border-inline-start:FieldText;';
+  readonly GrayText = 'border-inline-start:GrayText;';
+  readonly Highlight = 'border-inline-start:Highlight;';
+  readonly HighlightText = 'border-inline-start:HighlightText;';
+  readonly InactiveBorder = 'border-inline-start:InactiveBorder;';
+  readonly InactiveCaption = 'border-inline-start:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-inline-start:InactiveCaptionText;';
+  readonly InfoBackground = 'border-inline-start:InfoBackground;';
+  readonly InfoText = 'border-inline-start:InfoText;';
+  readonly LinkText = 'border-inline-start:LinkText;';
+  readonly Mark = 'border-inline-start:Mark;';
+  readonly MarkText = 'border-inline-start:MarkText;';
+  readonly Menu = 'border-inline-start:Menu;';
+  readonly MenuText = 'border-inline-start:MenuText;';
+  readonly Scrollbar = 'border-inline-start:Scrollbar;';
+  readonly SelectedItem = 'border-inline-start:SelectedItem;';
+  readonly SelectedItemText = 'border-inline-start:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-inline-start:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-inline-start:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-inline-start:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-inline-start:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-inline-start:ThreeDShadow;';
+  readonly VisitedText = 'border-inline-start:VisitedText;';
+  readonly Window = 'border-inline-start:Window;';
+  readonly WindowFrame = 'border-inline-start:WindowFrame;';
+  readonly WindowText = 'border-inline-start:WindowText;';
+  readonly aliceblue = 'border-inline-start:aliceblue;';
+  readonly antiquewhite = 'border-inline-start:antiquewhite;';
+  readonly aqua = 'border-inline-start:aqua;';
+  readonly aquamarine = 'border-inline-start:aquamarine;';
+  readonly azure = 'border-inline-start:azure;';
+  readonly beige = 'border-inline-start:beige;';
+  readonly bisque = 'border-inline-start:bisque;';
+  readonly black = 'border-inline-start:black;';
+  readonly blanchedalmond = 'border-inline-start:blanchedalmond;';
+  readonly blue = 'border-inline-start:blue;';
+  readonly blueviolet = 'border-inline-start:blueviolet;';
+  readonly brown = 'border-inline-start:brown;';
+  readonly burlywood = 'border-inline-start:burlywood;';
+  readonly cadetblue = 'border-inline-start:cadetblue;';
+  readonly chartreuse = 'border-inline-start:chartreuse;';
+  readonly chocolate = 'border-inline-start:chocolate;';
+  readonly coral = 'border-inline-start:coral;';
+  readonly cornflowerblue = 'border-inline-start:cornflowerblue;';
+  readonly cornsilk = 'border-inline-start:cornsilk;';
+  readonly crimson = 'border-inline-start:crimson;';
+  readonly currentColor = 'border-inline-start:currentColor;';
+  readonly cyan = 'border-inline-start:cyan;';
+  readonly darkblue = 'border-inline-start:darkblue;';
+  readonly darkcyan = 'border-inline-start:darkcyan;';
+  readonly darkgoldenrod = 'border-inline-start:darkgoldenrod;';
+  readonly darkgray = 'border-inline-start:darkgray;';
+  readonly darkgreen = 'border-inline-start:darkgreen;';
+  readonly darkgrey = 'border-inline-start:darkgrey;';
+  readonly darkkhaki = 'border-inline-start:darkkhaki;';
+  readonly darkmagenta = 'border-inline-start:darkmagenta;';
+  readonly darkolivegreen = 'border-inline-start:darkolivegreen;';
+  readonly darkorange = 'border-inline-start:darkorange;';
+  readonly darkorchid = 'border-inline-start:darkorchid;';
+  readonly darkred = 'border-inline-start:darkred;';
+  readonly darksalmon = 'border-inline-start:darksalmon;';
+  readonly darkseagreen = 'border-inline-start:darkseagreen;';
+  readonly darkslateblue = 'border-inline-start:darkslateblue;';
+  readonly darkslategray = 'border-inline-start:darkslategray;';
+  readonly darkslategrey = 'border-inline-start:darkslategrey;';
+  readonly darkturquoise = 'border-inline-start:darkturquoise;';
+  readonly darkviolet = 'border-inline-start:darkviolet;';
+  readonly dashed = 'border-inline-start:dashed;';
+  readonly deeppink = 'border-inline-start:deeppink;';
+  readonly deepskyblue = 'border-inline-start:deepskyblue;';
+  readonly dimgray = 'border-inline-start:dimgray;';
+  readonly dimgrey = 'border-inline-start:dimgrey;';
+  readonly dodgerblue = 'border-inline-start:dodgerblue;';
+  readonly dotted = 'border-inline-start:dotted;';
+  readonly double = 'border-inline-start:double;';
+  readonly firebrick = 'border-inline-start:firebrick;';
+  readonly floralwhite = 'border-inline-start:floralwhite;';
+  readonly forestgreen = 'border-inline-start:forestgreen;';
+  readonly fuchsia = 'border-inline-start:fuchsia;';
+  readonly gainsboro = 'border-inline-start:gainsboro;';
+  readonly ghostwhite = 'border-inline-start:ghostwhite;';
+  readonly gold = 'border-inline-start:gold;';
+  readonly goldenrod = 'border-inline-start:goldenrod;';
+  readonly gray = 'border-inline-start:gray;';
+  readonly green = 'border-inline-start:green;';
+  readonly greenyellow = 'border-inline-start:greenyellow;';
+  readonly grey = 'border-inline-start:grey;';
+  readonly groove = 'border-inline-start:groove;';
+  readonly hidden = 'border-inline-start:hidden;';
+  readonly honeydew = 'border-inline-start:honeydew;';
+  readonly hotpink = 'border-inline-start:hotpink;';
+  readonly indianred = 'border-inline-start:indianred;';
+  readonly indigo = 'border-inline-start:indigo;';
+  readonly inherit = 'border-inline-start:inherit;';
+  readonly initial = 'border-inline-start:initial;';
+  readonly inset = 'border-inline-start:inset;';
+  readonly ivory = 'border-inline-start:ivory;';
+  readonly khaki = 'border-inline-start:khaki;';
+  readonly lavender = 'border-inline-start:lavender;';
+  readonly lavenderblush = 'border-inline-start:lavenderblush;';
+  readonly lawngreen = 'border-inline-start:lawngreen;';
+  readonly lemonchiffon = 'border-inline-start:lemonchiffon;';
+  readonly lightblue = 'border-inline-start:lightblue;';
+  readonly lightcoral = 'border-inline-start:lightcoral;';
+  readonly lightcyan = 'border-inline-start:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-inline-start:lightgoldenrodyellow;';
+  readonly lightgray = 'border-inline-start:lightgray;';
+  readonly lightgreen = 'border-inline-start:lightgreen;';
+  readonly lightgrey = 'border-inline-start:lightgrey;';
+  readonly lightpink = 'border-inline-start:lightpink;';
+  readonly lightsalmon = 'border-inline-start:lightsalmon;';
+  readonly lightseagreen = 'border-inline-start:lightseagreen;';
+  readonly lightskyblue = 'border-inline-start:lightskyblue;';
+  readonly lightslategray = 'border-inline-start:lightslategray;';
+  readonly lightslategrey = 'border-inline-start:lightslategrey;';
+  readonly lightsteelblue = 'border-inline-start:lightsteelblue;';
+  readonly lightyellow = 'border-inline-start:lightyellow;';
+  readonly lime = 'border-inline-start:lime;';
+  readonly limegreen = 'border-inline-start:limegreen;';
+  readonly linen = 'border-inline-start:linen;';
+  readonly magenta = 'border-inline-start:magenta;';
+  readonly maroon = 'border-inline-start:maroon;';
+  readonly medium = 'border-inline-start:medium;';
+  readonly mediumaquamarine = 'border-inline-start:mediumaquamarine;';
+  readonly mediumblue = 'border-inline-start:mediumblue;';
+  readonly mediumorchid = 'border-inline-start:mediumorchid;';
+  readonly mediumpurple = 'border-inline-start:mediumpurple;';
+  readonly mediumseagreen = 'border-inline-start:mediumseagreen;';
+  readonly mediumslateblue = 'border-inline-start:mediumslateblue;';
+  readonly mediumspringgreen = 'border-inline-start:mediumspringgreen;';
+  readonly mediumturquoise = 'border-inline-start:mediumturquoise;';
+  readonly mediumvioletred = 'border-inline-start:mediumvioletred;';
+  readonly midnightblue = 'border-inline-start:midnightblue;';
+  readonly mintcream = 'border-inline-start:mintcream;';
+  readonly mistyrose = 'border-inline-start:mistyrose;';
+  readonly moccasin = 'border-inline-start:moccasin;';
+  readonly navajowhite = 'border-inline-start:navajowhite;';
+  readonly navy = 'border-inline-start:navy;';
+  readonly none = 'border-inline-start:none;';
+  readonly oldlace = 'border-inline-start:oldlace;';
+  readonly olive = 'border-inline-start:olive;';
+  readonly olivedrab = 'border-inline-start:olivedrab;';
+  readonly orange = 'border-inline-start:orange;';
+  readonly orangered = 'border-inline-start:orangered;';
+  readonly orchid = 'border-inline-start:orchid;';
+  readonly outset = 'border-inline-start:outset;';
+  readonly palegoldenrod = 'border-inline-start:palegoldenrod;';
+  readonly palegreen = 'border-inline-start:palegreen;';
+  readonly paleturquoise = 'border-inline-start:paleturquoise;';
+  readonly palevioletred = 'border-inline-start:palevioletred;';
+  readonly papayawhip = 'border-inline-start:papayawhip;';
+  readonly peachpuff = 'border-inline-start:peachpuff;';
+  readonly peru = 'border-inline-start:peru;';
+  readonly pink = 'border-inline-start:pink;';
+  readonly plum = 'border-inline-start:plum;';
+  readonly powderblue = 'border-inline-start:powderblue;';
+  readonly purple = 'border-inline-start:purple;';
+  readonly rebeccapurple = 'border-inline-start:rebeccapurple;';
+  readonly red = 'border-inline-start:red;';
+  readonly revert = 'border-inline-start:revert;';
+  readonly revertLayer = 'border-inline-start:revert-layer;';
+  readonly ridge = 'border-inline-start:ridge;';
+  readonly rosybrown = 'border-inline-start:rosybrown;';
+  readonly royalblue = 'border-inline-start:royalblue;';
+  readonly saddlebrown = 'border-inline-start:saddlebrown;';
+  readonly salmon = 'border-inline-start:salmon;';
+  readonly sandybrown = 'border-inline-start:sandybrown;';
+  readonly seagreen = 'border-inline-start:seagreen;';
+  readonly seashell = 'border-inline-start:seashell;';
+  readonly sienna = 'border-inline-start:sienna;';
+  readonly silver = 'border-inline-start:silver;';
+  readonly skyblue = 'border-inline-start:skyblue;';
+  readonly slateblue = 'border-inline-start:slateblue;';
+  readonly slategray = 'border-inline-start:slategray;';
+  readonly slategrey = 'border-inline-start:slategrey;';
+  readonly snow = 'border-inline-start:snow;';
+  readonly solid = 'border-inline-start:solid;';
+  readonly springgreen = 'border-inline-start:springgreen;';
+  readonly steelblue = 'border-inline-start:steelblue;';
+  readonly tan = 'border-inline-start:tan;';
+  readonly teal = 'border-inline-start:teal;';
+  readonly thick = 'border-inline-start:thick;';
+  readonly thin = 'border-inline-start:thin;';
+  readonly thistle = 'border-inline-start:thistle;';
+  readonly tomato = 'border-inline-start:tomato;';
+  readonly transparent = 'border-inline-start:transparent;';
+  readonly turquoise = 'border-inline-start:turquoise;';
+  readonly unset = 'border-inline-start:unset;';
+  readonly violet = 'border-inline-start:violet;';
+  readonly wheat = 'border-inline-start:wheat;';
+  readonly white = 'border-inline-start:white;';
+  readonly whitesmoke = 'border-inline-start:whitesmoke;';
+  readonly yellow = 'border-inline-start:yellow;';
+  readonly yellowgreen = 'border-inline-start:yellowgreen;';
   constructor() {
     super('border-inline-start');
-    initializeBorderInlineStartCss();
   }
 }
-let borderInlineStartReady = false;
-function initializeBorderInlineStartCss(): void {
-  if (borderInlineStartReady) return;
-  Object.assign(BorderInlineStartCss.prototype, borderInlineStartKeywords());
-  Object.freeze(BorderInlineStartCss.prototype);
-  borderInlineStartReady = true;
-}
 
-function borderInlineStartColorKeywords() {
-  return {
-    AccentColor: 'border-inline-start-color:AccentColor;',
-    AccentColorText: 'border-inline-start-color:AccentColorText;',
-    ActiveBorder: 'border-inline-start-color:ActiveBorder;',
-    ActiveCaption: 'border-inline-start-color:ActiveCaption;',
-    ActiveText: 'border-inline-start-color:ActiveText;',
-    AppWorkspace: 'border-inline-start-color:AppWorkspace;',
-    Background: 'border-inline-start-color:Background;',
-    ButtonBorder: 'border-inline-start-color:ButtonBorder;',
-    ButtonFace: 'border-inline-start-color:ButtonFace;',
-    ButtonHighlight: 'border-inline-start-color:ButtonHighlight;',
-    ButtonShadow: 'border-inline-start-color:ButtonShadow;',
-    ButtonText: 'border-inline-start-color:ButtonText;',
-    Canvas: 'border-inline-start-color:Canvas;',
-    CanvasText: 'border-inline-start-color:CanvasText;',
-    CaptionText: 'border-inline-start-color:CaptionText;',
-    Field: 'border-inline-start-color:Field;',
-    FieldText: 'border-inline-start-color:FieldText;',
-    GrayText: 'border-inline-start-color:GrayText;',
-    Highlight: 'border-inline-start-color:Highlight;',
-    HighlightText: 'border-inline-start-color:HighlightText;',
-    InactiveBorder: 'border-inline-start-color:InactiveBorder;',
-    InactiveCaption: 'border-inline-start-color:InactiveCaption;',
-    InactiveCaptionText: 'border-inline-start-color:InactiveCaptionText;',
-    InfoBackground: 'border-inline-start-color:InfoBackground;',
-    InfoText: 'border-inline-start-color:InfoText;',
-    LinkText: 'border-inline-start-color:LinkText;',
-    Mark: 'border-inline-start-color:Mark;',
-    MarkText: 'border-inline-start-color:MarkText;',
-    Menu: 'border-inline-start-color:Menu;',
-    MenuText: 'border-inline-start-color:MenuText;',
-    Scrollbar: 'border-inline-start-color:Scrollbar;',
-    SelectedItem: 'border-inline-start-color:SelectedItem;',
-    SelectedItemText: 'border-inline-start-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-inline-start-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-inline-start-color:ThreeDFace;',
-    ThreeDHighlight: 'border-inline-start-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-inline-start-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-inline-start-color:ThreeDShadow;',
-    VisitedText: 'border-inline-start-color:VisitedText;',
-    Window: 'border-inline-start-color:Window;',
-    WindowFrame: 'border-inline-start-color:WindowFrame;',
-    WindowText: 'border-inline-start-color:WindowText;',
-    aliceblue: 'border-inline-start-color:aliceblue;',
-    antiquewhite: 'border-inline-start-color:antiquewhite;',
-    aqua: 'border-inline-start-color:aqua;',
-    aquamarine: 'border-inline-start-color:aquamarine;',
-    azure: 'border-inline-start-color:azure;',
-    beige: 'border-inline-start-color:beige;',
-    bisque: 'border-inline-start-color:bisque;',
-    black: 'border-inline-start-color:black;',
-    blanchedalmond: 'border-inline-start-color:blanchedalmond;',
-    blue: 'border-inline-start-color:blue;',
-    blueviolet: 'border-inline-start-color:blueviolet;',
-    brown: 'border-inline-start-color:brown;',
-    burlywood: 'border-inline-start-color:burlywood;',
-    cadetblue: 'border-inline-start-color:cadetblue;',
-    chartreuse: 'border-inline-start-color:chartreuse;',
-    chocolate: 'border-inline-start-color:chocolate;',
-    coral: 'border-inline-start-color:coral;',
-    cornflowerblue: 'border-inline-start-color:cornflowerblue;',
-    cornsilk: 'border-inline-start-color:cornsilk;',
-    crimson: 'border-inline-start-color:crimson;',
-    currentColor: 'border-inline-start-color:currentColor;',
-    cyan: 'border-inline-start-color:cyan;',
-    darkblue: 'border-inline-start-color:darkblue;',
-    darkcyan: 'border-inline-start-color:darkcyan;',
-    darkgoldenrod: 'border-inline-start-color:darkgoldenrod;',
-    darkgray: 'border-inline-start-color:darkgray;',
-    darkgreen: 'border-inline-start-color:darkgreen;',
-    darkgrey: 'border-inline-start-color:darkgrey;',
-    darkkhaki: 'border-inline-start-color:darkkhaki;',
-    darkmagenta: 'border-inline-start-color:darkmagenta;',
-    darkolivegreen: 'border-inline-start-color:darkolivegreen;',
-    darkorange: 'border-inline-start-color:darkorange;',
-    darkorchid: 'border-inline-start-color:darkorchid;',
-    darkred: 'border-inline-start-color:darkred;',
-    darksalmon: 'border-inline-start-color:darksalmon;',
-    darkseagreen: 'border-inline-start-color:darkseagreen;',
-    darkslateblue: 'border-inline-start-color:darkslateblue;',
-    darkslategray: 'border-inline-start-color:darkslategray;',
-    darkslategrey: 'border-inline-start-color:darkslategrey;',
-    darkturquoise: 'border-inline-start-color:darkturquoise;',
-    darkviolet: 'border-inline-start-color:darkviolet;',
-    deeppink: 'border-inline-start-color:deeppink;',
-    deepskyblue: 'border-inline-start-color:deepskyblue;',
-    dimgray: 'border-inline-start-color:dimgray;',
-    dimgrey: 'border-inline-start-color:dimgrey;',
-    dodgerblue: 'border-inline-start-color:dodgerblue;',
-    firebrick: 'border-inline-start-color:firebrick;',
-    floralwhite: 'border-inline-start-color:floralwhite;',
-    forestgreen: 'border-inline-start-color:forestgreen;',
-    fuchsia: 'border-inline-start-color:fuchsia;',
-    gainsboro: 'border-inline-start-color:gainsboro;',
-    ghostwhite: 'border-inline-start-color:ghostwhite;',
-    gold: 'border-inline-start-color:gold;',
-    goldenrod: 'border-inline-start-color:goldenrod;',
-    gray: 'border-inline-start-color:gray;',
-    green: 'border-inline-start-color:green;',
-    greenyellow: 'border-inline-start-color:greenyellow;',
-    grey: 'border-inline-start-color:grey;',
-    honeydew: 'border-inline-start-color:honeydew;',
-    hotpink: 'border-inline-start-color:hotpink;',
-    indianred: 'border-inline-start-color:indianred;',
-    indigo: 'border-inline-start-color:indigo;',
-    inherit: 'border-inline-start-color:inherit;',
-    initial: 'border-inline-start-color:initial;',
-    ivory: 'border-inline-start-color:ivory;',
-    khaki: 'border-inline-start-color:khaki;',
-    lavender: 'border-inline-start-color:lavender;',
-    lavenderblush: 'border-inline-start-color:lavenderblush;',
-    lawngreen: 'border-inline-start-color:lawngreen;',
-    lemonchiffon: 'border-inline-start-color:lemonchiffon;',
-    lightblue: 'border-inline-start-color:lightblue;',
-    lightcoral: 'border-inline-start-color:lightcoral;',
-    lightcyan: 'border-inline-start-color:lightcyan;',
-    lightgoldenrodyellow: 'border-inline-start-color:lightgoldenrodyellow;',
-    lightgray: 'border-inline-start-color:lightgray;',
-    lightgreen: 'border-inline-start-color:lightgreen;',
-    lightgrey: 'border-inline-start-color:lightgrey;',
-    lightpink: 'border-inline-start-color:lightpink;',
-    lightsalmon: 'border-inline-start-color:lightsalmon;',
-    lightseagreen: 'border-inline-start-color:lightseagreen;',
-    lightskyblue: 'border-inline-start-color:lightskyblue;',
-    lightslategray: 'border-inline-start-color:lightslategray;',
-    lightslategrey: 'border-inline-start-color:lightslategrey;',
-    lightsteelblue: 'border-inline-start-color:lightsteelblue;',
-    lightyellow: 'border-inline-start-color:lightyellow;',
-    lime: 'border-inline-start-color:lime;',
-    limegreen: 'border-inline-start-color:limegreen;',
-    linen: 'border-inline-start-color:linen;',
-    magenta: 'border-inline-start-color:magenta;',
-    maroon: 'border-inline-start-color:maroon;',
-    mediumaquamarine: 'border-inline-start-color:mediumaquamarine;',
-    mediumblue: 'border-inline-start-color:mediumblue;',
-    mediumorchid: 'border-inline-start-color:mediumorchid;',
-    mediumpurple: 'border-inline-start-color:mediumpurple;',
-    mediumseagreen: 'border-inline-start-color:mediumseagreen;',
-    mediumslateblue: 'border-inline-start-color:mediumslateblue;',
-    mediumspringgreen: 'border-inline-start-color:mediumspringgreen;',
-    mediumturquoise: 'border-inline-start-color:mediumturquoise;',
-    mediumvioletred: 'border-inline-start-color:mediumvioletred;',
-    midnightblue: 'border-inline-start-color:midnightblue;',
-    mintcream: 'border-inline-start-color:mintcream;',
-    mistyrose: 'border-inline-start-color:mistyrose;',
-    moccasin: 'border-inline-start-color:moccasin;',
-    navajowhite: 'border-inline-start-color:navajowhite;',
-    navy: 'border-inline-start-color:navy;',
-    oldlace: 'border-inline-start-color:oldlace;',
-    olive: 'border-inline-start-color:olive;',
-    olivedrab: 'border-inline-start-color:olivedrab;',
-    orange: 'border-inline-start-color:orange;',
-    orangered: 'border-inline-start-color:orangered;',
-    orchid: 'border-inline-start-color:orchid;',
-    palegoldenrod: 'border-inline-start-color:palegoldenrod;',
-    palegreen: 'border-inline-start-color:palegreen;',
-    paleturquoise: 'border-inline-start-color:paleturquoise;',
-    palevioletred: 'border-inline-start-color:palevioletred;',
-    papayawhip: 'border-inline-start-color:papayawhip;',
-    peachpuff: 'border-inline-start-color:peachpuff;',
-    peru: 'border-inline-start-color:peru;',
-    pink: 'border-inline-start-color:pink;',
-    plum: 'border-inline-start-color:plum;',
-    powderblue: 'border-inline-start-color:powderblue;',
-    purple: 'border-inline-start-color:purple;',
-    rebeccapurple: 'border-inline-start-color:rebeccapurple;',
-    red: 'border-inline-start-color:red;',
-    revert: 'border-inline-start-color:revert;',
-    revertLayer: 'border-inline-start-color:revert-layer;',
-    rosybrown: 'border-inline-start-color:rosybrown;',
-    royalblue: 'border-inline-start-color:royalblue;',
-    saddlebrown: 'border-inline-start-color:saddlebrown;',
-    salmon: 'border-inline-start-color:salmon;',
-    sandybrown: 'border-inline-start-color:sandybrown;',
-    seagreen: 'border-inline-start-color:seagreen;',
-    seashell: 'border-inline-start-color:seashell;',
-    sienna: 'border-inline-start-color:sienna;',
-    silver: 'border-inline-start-color:silver;',
-    skyblue: 'border-inline-start-color:skyblue;',
-    slateblue: 'border-inline-start-color:slateblue;',
-    slategray: 'border-inline-start-color:slategray;',
-    slategrey: 'border-inline-start-color:slategrey;',
-    snow: 'border-inline-start-color:snow;',
-    springgreen: 'border-inline-start-color:springgreen;',
-    steelblue: 'border-inline-start-color:steelblue;',
-    tan: 'border-inline-start-color:tan;',
-    teal: 'border-inline-start-color:teal;',
-    thistle: 'border-inline-start-color:thistle;',
-    tomato: 'border-inline-start-color:tomato;',
-    transparent: 'border-inline-start-color:transparent;',
-    turquoise: 'border-inline-start-color:turquoise;',
-    unset: 'border-inline-start-color:unset;',
-    violet: 'border-inline-start-color:violet;',
-    wheat: 'border-inline-start-color:wheat;',
-    white: 'border-inline-start-color:white;',
-    whitesmoke: 'border-inline-start-color:whitesmoke;',
-    yellow: 'border-inline-start-color:yellow;',
-    yellowgreen: 'border-inline-start-color:yellowgreen;',
-  } as const;
-}
-
-type BorderInlineStartColorCssKeywords = Readonly<
-  ReturnType<typeof borderInlineStartColorKeywords>
->;
-export interface BorderInlineStartColorCss extends BorderInlineStartColorCssKeywords {}
 /** CSS 属性 border-inline-start-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-color
  */
 export class BorderInlineStartColorCss extends CssProperty<Property.BorderInlineStartColor> {
+  readonly AccentColor = 'border-inline-start-color:AccentColor;';
+  readonly AccentColorText = 'border-inline-start-color:AccentColorText;';
+  readonly ActiveBorder = 'border-inline-start-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-inline-start-color:ActiveCaption;';
+  readonly ActiveText = 'border-inline-start-color:ActiveText;';
+  readonly AppWorkspace = 'border-inline-start-color:AppWorkspace;';
+  readonly Background = 'border-inline-start-color:Background;';
+  readonly ButtonBorder = 'border-inline-start-color:ButtonBorder;';
+  readonly ButtonFace = 'border-inline-start-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-inline-start-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-inline-start-color:ButtonShadow;';
+  readonly ButtonText = 'border-inline-start-color:ButtonText;';
+  readonly Canvas = 'border-inline-start-color:Canvas;';
+  readonly CanvasText = 'border-inline-start-color:CanvasText;';
+  readonly CaptionText = 'border-inline-start-color:CaptionText;';
+  readonly Field = 'border-inline-start-color:Field;';
+  readonly FieldText = 'border-inline-start-color:FieldText;';
+  readonly GrayText = 'border-inline-start-color:GrayText;';
+  readonly Highlight = 'border-inline-start-color:Highlight;';
+  readonly HighlightText = 'border-inline-start-color:HighlightText;';
+  readonly InactiveBorder = 'border-inline-start-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-inline-start-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-inline-start-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-inline-start-color:InfoBackground;';
+  readonly InfoText = 'border-inline-start-color:InfoText;';
+  readonly LinkText = 'border-inline-start-color:LinkText;';
+  readonly Mark = 'border-inline-start-color:Mark;';
+  readonly MarkText = 'border-inline-start-color:MarkText;';
+  readonly Menu = 'border-inline-start-color:Menu;';
+  readonly MenuText = 'border-inline-start-color:MenuText;';
+  readonly Scrollbar = 'border-inline-start-color:Scrollbar;';
+  readonly SelectedItem = 'border-inline-start-color:SelectedItem;';
+  readonly SelectedItemText = 'border-inline-start-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-inline-start-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-inline-start-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-inline-start-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-inline-start-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-inline-start-color:ThreeDShadow;';
+  readonly VisitedText = 'border-inline-start-color:VisitedText;';
+  readonly Window = 'border-inline-start-color:Window;';
+  readonly WindowFrame = 'border-inline-start-color:WindowFrame;';
+  readonly WindowText = 'border-inline-start-color:WindowText;';
+  readonly aliceblue = 'border-inline-start-color:aliceblue;';
+  readonly antiquewhite = 'border-inline-start-color:antiquewhite;';
+  readonly aqua = 'border-inline-start-color:aqua;';
+  readonly aquamarine = 'border-inline-start-color:aquamarine;';
+  readonly azure = 'border-inline-start-color:azure;';
+  readonly beige = 'border-inline-start-color:beige;';
+  readonly bisque = 'border-inline-start-color:bisque;';
+  readonly black = 'border-inline-start-color:black;';
+  readonly blanchedalmond = 'border-inline-start-color:blanchedalmond;';
+  readonly blue = 'border-inline-start-color:blue;';
+  readonly blueviolet = 'border-inline-start-color:blueviolet;';
+  readonly brown = 'border-inline-start-color:brown;';
+  readonly burlywood = 'border-inline-start-color:burlywood;';
+  readonly cadetblue = 'border-inline-start-color:cadetblue;';
+  readonly chartreuse = 'border-inline-start-color:chartreuse;';
+  readonly chocolate = 'border-inline-start-color:chocolate;';
+  readonly coral = 'border-inline-start-color:coral;';
+  readonly cornflowerblue = 'border-inline-start-color:cornflowerblue;';
+  readonly cornsilk = 'border-inline-start-color:cornsilk;';
+  readonly crimson = 'border-inline-start-color:crimson;';
+  readonly currentColor = 'border-inline-start-color:currentColor;';
+  readonly cyan = 'border-inline-start-color:cyan;';
+  readonly darkblue = 'border-inline-start-color:darkblue;';
+  readonly darkcyan = 'border-inline-start-color:darkcyan;';
+  readonly darkgoldenrod = 'border-inline-start-color:darkgoldenrod;';
+  readonly darkgray = 'border-inline-start-color:darkgray;';
+  readonly darkgreen = 'border-inline-start-color:darkgreen;';
+  readonly darkgrey = 'border-inline-start-color:darkgrey;';
+  readonly darkkhaki = 'border-inline-start-color:darkkhaki;';
+  readonly darkmagenta = 'border-inline-start-color:darkmagenta;';
+  readonly darkolivegreen = 'border-inline-start-color:darkolivegreen;';
+  readonly darkorange = 'border-inline-start-color:darkorange;';
+  readonly darkorchid = 'border-inline-start-color:darkorchid;';
+  readonly darkred = 'border-inline-start-color:darkred;';
+  readonly darksalmon = 'border-inline-start-color:darksalmon;';
+  readonly darkseagreen = 'border-inline-start-color:darkseagreen;';
+  readonly darkslateblue = 'border-inline-start-color:darkslateblue;';
+  readonly darkslategray = 'border-inline-start-color:darkslategray;';
+  readonly darkslategrey = 'border-inline-start-color:darkslategrey;';
+  readonly darkturquoise = 'border-inline-start-color:darkturquoise;';
+  readonly darkviolet = 'border-inline-start-color:darkviolet;';
+  readonly deeppink = 'border-inline-start-color:deeppink;';
+  readonly deepskyblue = 'border-inline-start-color:deepskyblue;';
+  readonly dimgray = 'border-inline-start-color:dimgray;';
+  readonly dimgrey = 'border-inline-start-color:dimgrey;';
+  readonly dodgerblue = 'border-inline-start-color:dodgerblue;';
+  readonly firebrick = 'border-inline-start-color:firebrick;';
+  readonly floralwhite = 'border-inline-start-color:floralwhite;';
+  readonly forestgreen = 'border-inline-start-color:forestgreen;';
+  readonly fuchsia = 'border-inline-start-color:fuchsia;';
+  readonly gainsboro = 'border-inline-start-color:gainsboro;';
+  readonly ghostwhite = 'border-inline-start-color:ghostwhite;';
+  readonly gold = 'border-inline-start-color:gold;';
+  readonly goldenrod = 'border-inline-start-color:goldenrod;';
+  readonly gray = 'border-inline-start-color:gray;';
+  readonly green = 'border-inline-start-color:green;';
+  readonly greenyellow = 'border-inline-start-color:greenyellow;';
+  readonly grey = 'border-inline-start-color:grey;';
+  readonly honeydew = 'border-inline-start-color:honeydew;';
+  readonly hotpink = 'border-inline-start-color:hotpink;';
+  readonly indianred = 'border-inline-start-color:indianred;';
+  readonly indigo = 'border-inline-start-color:indigo;';
+  readonly inherit = 'border-inline-start-color:inherit;';
+  readonly initial = 'border-inline-start-color:initial;';
+  readonly ivory = 'border-inline-start-color:ivory;';
+  readonly khaki = 'border-inline-start-color:khaki;';
+  readonly lavender = 'border-inline-start-color:lavender;';
+  readonly lavenderblush = 'border-inline-start-color:lavenderblush;';
+  readonly lawngreen = 'border-inline-start-color:lawngreen;';
+  readonly lemonchiffon = 'border-inline-start-color:lemonchiffon;';
+  readonly lightblue = 'border-inline-start-color:lightblue;';
+  readonly lightcoral = 'border-inline-start-color:lightcoral;';
+  readonly lightcyan = 'border-inline-start-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-inline-start-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-inline-start-color:lightgray;';
+  readonly lightgreen = 'border-inline-start-color:lightgreen;';
+  readonly lightgrey = 'border-inline-start-color:lightgrey;';
+  readonly lightpink = 'border-inline-start-color:lightpink;';
+  readonly lightsalmon = 'border-inline-start-color:lightsalmon;';
+  readonly lightseagreen = 'border-inline-start-color:lightseagreen;';
+  readonly lightskyblue = 'border-inline-start-color:lightskyblue;';
+  readonly lightslategray = 'border-inline-start-color:lightslategray;';
+  readonly lightslategrey = 'border-inline-start-color:lightslategrey;';
+  readonly lightsteelblue = 'border-inline-start-color:lightsteelblue;';
+  readonly lightyellow = 'border-inline-start-color:lightyellow;';
+  readonly lime = 'border-inline-start-color:lime;';
+  readonly limegreen = 'border-inline-start-color:limegreen;';
+  readonly linen = 'border-inline-start-color:linen;';
+  readonly magenta = 'border-inline-start-color:magenta;';
+  readonly maroon = 'border-inline-start-color:maroon;';
+  readonly mediumaquamarine = 'border-inline-start-color:mediumaquamarine;';
+  readonly mediumblue = 'border-inline-start-color:mediumblue;';
+  readonly mediumorchid = 'border-inline-start-color:mediumorchid;';
+  readonly mediumpurple = 'border-inline-start-color:mediumpurple;';
+  readonly mediumseagreen = 'border-inline-start-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-inline-start-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-inline-start-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-inline-start-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-inline-start-color:mediumvioletred;';
+  readonly midnightblue = 'border-inline-start-color:midnightblue;';
+  readonly mintcream = 'border-inline-start-color:mintcream;';
+  readonly mistyrose = 'border-inline-start-color:mistyrose;';
+  readonly moccasin = 'border-inline-start-color:moccasin;';
+  readonly navajowhite = 'border-inline-start-color:navajowhite;';
+  readonly navy = 'border-inline-start-color:navy;';
+  readonly oldlace = 'border-inline-start-color:oldlace;';
+  readonly olive = 'border-inline-start-color:olive;';
+  readonly olivedrab = 'border-inline-start-color:olivedrab;';
+  readonly orange = 'border-inline-start-color:orange;';
+  readonly orangered = 'border-inline-start-color:orangered;';
+  readonly orchid = 'border-inline-start-color:orchid;';
+  readonly palegoldenrod = 'border-inline-start-color:palegoldenrod;';
+  readonly palegreen = 'border-inline-start-color:palegreen;';
+  readonly paleturquoise = 'border-inline-start-color:paleturquoise;';
+  readonly palevioletred = 'border-inline-start-color:palevioletred;';
+  readonly papayawhip = 'border-inline-start-color:papayawhip;';
+  readonly peachpuff = 'border-inline-start-color:peachpuff;';
+  readonly peru = 'border-inline-start-color:peru;';
+  readonly pink = 'border-inline-start-color:pink;';
+  readonly plum = 'border-inline-start-color:plum;';
+  readonly powderblue = 'border-inline-start-color:powderblue;';
+  readonly purple = 'border-inline-start-color:purple;';
+  readonly rebeccapurple = 'border-inline-start-color:rebeccapurple;';
+  readonly red = 'border-inline-start-color:red;';
+  readonly revert = 'border-inline-start-color:revert;';
+  readonly revertLayer = 'border-inline-start-color:revert-layer;';
+  readonly rosybrown = 'border-inline-start-color:rosybrown;';
+  readonly royalblue = 'border-inline-start-color:royalblue;';
+  readonly saddlebrown = 'border-inline-start-color:saddlebrown;';
+  readonly salmon = 'border-inline-start-color:salmon;';
+  readonly sandybrown = 'border-inline-start-color:sandybrown;';
+  readonly seagreen = 'border-inline-start-color:seagreen;';
+  readonly seashell = 'border-inline-start-color:seashell;';
+  readonly sienna = 'border-inline-start-color:sienna;';
+  readonly silver = 'border-inline-start-color:silver;';
+  readonly skyblue = 'border-inline-start-color:skyblue;';
+  readonly slateblue = 'border-inline-start-color:slateblue;';
+  readonly slategray = 'border-inline-start-color:slategray;';
+  readonly slategrey = 'border-inline-start-color:slategrey;';
+  readonly snow = 'border-inline-start-color:snow;';
+  readonly springgreen = 'border-inline-start-color:springgreen;';
+  readonly steelblue = 'border-inline-start-color:steelblue;';
+  readonly tan = 'border-inline-start-color:tan;';
+  readonly teal = 'border-inline-start-color:teal;';
+  readonly thistle = 'border-inline-start-color:thistle;';
+  readonly tomato = 'border-inline-start-color:tomato;';
+  readonly transparent = 'border-inline-start-color:transparent;';
+  readonly turquoise = 'border-inline-start-color:turquoise;';
+  readonly unset = 'border-inline-start-color:unset;';
+  readonly violet = 'border-inline-start-color:violet;';
+  readonly wheat = 'border-inline-start-color:wheat;';
+  readonly white = 'border-inline-start-color:white;';
+  readonly whitesmoke = 'border-inline-start-color:whitesmoke;';
+  readonly yellow = 'border-inline-start-color:yellow;';
+  readonly yellowgreen = 'border-inline-start-color:yellowgreen;';
   constructor() {
     super('border-inline-start-color');
-    initializeBorderInlineStartColorCss();
   }
 }
-let borderInlineStartColorReady = false;
-function initializeBorderInlineStartColorCss(): void {
-  if (borderInlineStartColorReady) return;
-  Object.assign(BorderInlineStartColorCss.prototype, borderInlineStartColorKeywords());
-  Object.freeze(BorderInlineStartColorCss.prototype);
-  borderInlineStartColorReady = true;
-}
 
-function borderInlineStartStyleKeywords() {
-  return {
-    dashed: 'border-inline-start-style:dashed;',
-    dotted: 'border-inline-start-style:dotted;',
-    double: 'border-inline-start-style:double;',
-    groove: 'border-inline-start-style:groove;',
-    hidden: 'border-inline-start-style:hidden;',
-    inherit: 'border-inline-start-style:inherit;',
-    initial: 'border-inline-start-style:initial;',
-    inset: 'border-inline-start-style:inset;',
-    none: 'border-inline-start-style:none;',
-    outset: 'border-inline-start-style:outset;',
-    revert: 'border-inline-start-style:revert;',
-    revertLayer: 'border-inline-start-style:revert-layer;',
-    ridge: 'border-inline-start-style:ridge;',
-    solid: 'border-inline-start-style:solid;',
-    unset: 'border-inline-start-style:unset;',
-  } as const;
-}
-
-type BorderInlineStartStyleCssKeywords = Readonly<
-  ReturnType<typeof borderInlineStartStyleKeywords>
->;
-export interface BorderInlineStartStyleCss extends BorderInlineStartStyleCssKeywords {}
 /** CSS 属性 border-inline-start-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-style
  */
 export class BorderInlineStartStyleCss extends CssProperty<Property.BorderInlineStartStyle> {
+  readonly dashed = 'border-inline-start-style:dashed;';
+  readonly dotted = 'border-inline-start-style:dotted;';
+  readonly double = 'border-inline-start-style:double;';
+  readonly groove = 'border-inline-start-style:groove;';
+  readonly hidden = 'border-inline-start-style:hidden;';
+  readonly inherit = 'border-inline-start-style:inherit;';
+  readonly initial = 'border-inline-start-style:initial;';
+  readonly inset = 'border-inline-start-style:inset;';
+  readonly none = 'border-inline-start-style:none;';
+  readonly outset = 'border-inline-start-style:outset;';
+  readonly revert = 'border-inline-start-style:revert;';
+  readonly revertLayer = 'border-inline-start-style:revert-layer;';
+  readonly ridge = 'border-inline-start-style:ridge;';
+  readonly solid = 'border-inline-start-style:solid;';
+  readonly unset = 'border-inline-start-style:unset;';
   constructor() {
     super('border-inline-start-style');
-    initializeBorderInlineStartStyleCss();
   }
 }
-let borderInlineStartStyleReady = false;
-function initializeBorderInlineStartStyleCss(): void {
-  if (borderInlineStartStyleReady) return;
-  Object.assign(BorderInlineStartStyleCss.prototype, borderInlineStartStyleKeywords());
-  Object.freeze(BorderInlineStartStyleCss.prototype);
-  borderInlineStartStyleReady = true;
-}
 
-function borderInlineStartWidthKeywords() {
-  return {
-    inherit: 'border-inline-start-width:inherit;',
-    initial: 'border-inline-start-width:initial;',
-    medium: 'border-inline-start-width:medium;',
-    revert: 'border-inline-start-width:revert;',
-    revertLayer: 'border-inline-start-width:revert-layer;',
-    thick: 'border-inline-start-width:thick;',
-    thin: 'border-inline-start-width:thin;',
-    unset: 'border-inline-start-width:unset;',
-  } as const;
-}
-
-type BorderInlineStartWidthCssKeywords = Readonly<
-  ReturnType<typeof borderInlineStartWidthKeywords>
->;
-export interface BorderInlineStartWidthCss extends BorderInlineStartWidthCssKeywords {}
 /** CSS 属性 border-inline-start-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
  */
 export class BorderInlineStartWidthCss extends LengthCssProperty<Property.BorderInlineStartWidth> {
+  readonly inherit = 'border-inline-start-width:inherit;';
+  readonly initial = 'border-inline-start-width:initial;';
+  readonly medium = 'border-inline-start-width:medium;';
+  readonly revert = 'border-inline-start-width:revert;';
+  readonly revertLayer = 'border-inline-start-width:revert-layer;';
+  readonly thick = 'border-inline-start-width:thick;';
+  readonly thin = 'border-inline-start-width:thin;';
+  readonly unset = 'border-inline-start-width:unset;';
   constructor() {
     super('border-inline-start-width');
-    initializeBorderInlineStartWidthCss();
   }
 }
-let borderInlineStartWidthReady = false;
-function initializeBorderInlineStartWidthCss(): void {
-  if (borderInlineStartWidthReady) return;
-  Object.assign(BorderInlineStartWidthCss.prototype, borderInlineStartWidthKeywords());
-  Object.freeze(BorderInlineStartWidthCss.prototype);
-  borderInlineStartWidthReady = true;
-}
 
-function borderInlineStyleKeywords() {
-  return {
-    dashed: 'border-inline-style:dashed;',
-    dotted: 'border-inline-style:dotted;',
-    double: 'border-inline-style:double;',
-    groove: 'border-inline-style:groove;',
-    hidden: 'border-inline-style:hidden;',
-    inherit: 'border-inline-style:inherit;',
-    initial: 'border-inline-style:initial;',
-    inset: 'border-inline-style:inset;',
-    none: 'border-inline-style:none;',
-    outset: 'border-inline-style:outset;',
-    revert: 'border-inline-style:revert;',
-    revertLayer: 'border-inline-style:revert-layer;',
-    ridge: 'border-inline-style:ridge;',
-    solid: 'border-inline-style:solid;',
-    unset: 'border-inline-style:unset;',
-  } as const;
-}
-
-type BorderInlineStyleCssKeywords = Readonly<ReturnType<typeof borderInlineStyleKeywords>>;
-export interface BorderInlineStyleCss extends BorderInlineStyleCssKeywords {}
 /** CSS 属性 border-inline-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-style
  */
 export class BorderInlineStyleCss extends CssProperty<Property.BorderInlineStyle> {
+  readonly dashed = 'border-inline-style:dashed;';
+  readonly dotted = 'border-inline-style:dotted;';
+  readonly double = 'border-inline-style:double;';
+  readonly groove = 'border-inline-style:groove;';
+  readonly hidden = 'border-inline-style:hidden;';
+  readonly inherit = 'border-inline-style:inherit;';
+  readonly initial = 'border-inline-style:initial;';
+  readonly inset = 'border-inline-style:inset;';
+  readonly none = 'border-inline-style:none;';
+  readonly outset = 'border-inline-style:outset;';
+  readonly revert = 'border-inline-style:revert;';
+  readonly revertLayer = 'border-inline-style:revert-layer;';
+  readonly ridge = 'border-inline-style:ridge;';
+  readonly solid = 'border-inline-style:solid;';
+  readonly unset = 'border-inline-style:unset;';
   constructor() {
     super('border-inline-style');
-    initializeBorderInlineStyleCss();
   }
 }
-let borderInlineStyleReady = false;
-function initializeBorderInlineStyleCss(): void {
-  if (borderInlineStyleReady) return;
-  Object.assign(BorderInlineStyleCss.prototype, borderInlineStyleKeywords());
-  Object.freeze(BorderInlineStyleCss.prototype);
-  borderInlineStyleReady = true;
-}
 
-function borderInlineWidthKeywords() {
-  return {
-    inherit: 'border-inline-width:inherit;',
-    initial: 'border-inline-width:initial;',
-    medium: 'border-inline-width:medium;',
-    revert: 'border-inline-width:revert;',
-    revertLayer: 'border-inline-width:revert-layer;',
-    thick: 'border-inline-width:thick;',
-    thin: 'border-inline-width:thin;',
-    unset: 'border-inline-width:unset;',
-  } as const;
-}
-
-type BorderInlineWidthCssKeywords = Readonly<ReturnType<typeof borderInlineWidthKeywords>>;
-export interface BorderInlineWidthCss extends BorderInlineWidthCssKeywords {}
 /** CSS 属性 border-inline-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-width
  */
 export class BorderInlineWidthCss extends LengthCssProperty<Property.BorderInlineWidth> {
+  readonly inherit = 'border-inline-width:inherit;';
+  readonly initial = 'border-inline-width:initial;';
+  readonly medium = 'border-inline-width:medium;';
+  readonly revert = 'border-inline-width:revert;';
+  readonly revertLayer = 'border-inline-width:revert-layer;';
+  readonly thick = 'border-inline-width:thick;';
+  readonly thin = 'border-inline-width:thin;';
+  readonly unset = 'border-inline-width:unset;';
   constructor() {
     super('border-inline-width');
-    initializeBorderInlineWidthCss();
   }
 }
-let borderInlineWidthReady = false;
-function initializeBorderInlineWidthCss(): void {
-  if (borderInlineWidthReady) return;
-  Object.assign(BorderInlineWidthCss.prototype, borderInlineWidthKeywords());
-  Object.freeze(BorderInlineWidthCss.prototype);
-  borderInlineWidthReady = true;
-}
 
-function borderLeftKeywords() {
-  return {
-    AccentColor: 'border-left:AccentColor;',
-    AccentColorText: 'border-left:AccentColorText;',
-    ActiveBorder: 'border-left:ActiveBorder;',
-    ActiveCaption: 'border-left:ActiveCaption;',
-    ActiveText: 'border-left:ActiveText;',
-    AppWorkspace: 'border-left:AppWorkspace;',
-    Background: 'border-left:Background;',
-    ButtonBorder: 'border-left:ButtonBorder;',
-    ButtonFace: 'border-left:ButtonFace;',
-    ButtonHighlight: 'border-left:ButtonHighlight;',
-    ButtonShadow: 'border-left:ButtonShadow;',
-    ButtonText: 'border-left:ButtonText;',
-    Canvas: 'border-left:Canvas;',
-    CanvasText: 'border-left:CanvasText;',
-    CaptionText: 'border-left:CaptionText;',
-    Field: 'border-left:Field;',
-    FieldText: 'border-left:FieldText;',
-    GrayText: 'border-left:GrayText;',
-    Highlight: 'border-left:Highlight;',
-    HighlightText: 'border-left:HighlightText;',
-    InactiveBorder: 'border-left:InactiveBorder;',
-    InactiveCaption: 'border-left:InactiveCaption;',
-    InactiveCaptionText: 'border-left:InactiveCaptionText;',
-    InfoBackground: 'border-left:InfoBackground;',
-    InfoText: 'border-left:InfoText;',
-    LinkText: 'border-left:LinkText;',
-    Mark: 'border-left:Mark;',
-    MarkText: 'border-left:MarkText;',
-    Menu: 'border-left:Menu;',
-    MenuText: 'border-left:MenuText;',
-    Scrollbar: 'border-left:Scrollbar;',
-    SelectedItem: 'border-left:SelectedItem;',
-    SelectedItemText: 'border-left:SelectedItemText;',
-    ThreeDDarkShadow: 'border-left:ThreeDDarkShadow;',
-    ThreeDFace: 'border-left:ThreeDFace;',
-    ThreeDHighlight: 'border-left:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-left:ThreeDLightShadow;',
-    ThreeDShadow: 'border-left:ThreeDShadow;',
-    VisitedText: 'border-left:VisitedText;',
-    Window: 'border-left:Window;',
-    WindowFrame: 'border-left:WindowFrame;',
-    WindowText: 'border-left:WindowText;',
-    aliceblue: 'border-left:aliceblue;',
-    antiquewhite: 'border-left:antiquewhite;',
-    aqua: 'border-left:aqua;',
-    aquamarine: 'border-left:aquamarine;',
-    azure: 'border-left:azure;',
-    beige: 'border-left:beige;',
-    bisque: 'border-left:bisque;',
-    black: 'border-left:black;',
-    blanchedalmond: 'border-left:blanchedalmond;',
-    blue: 'border-left:blue;',
-    blueviolet: 'border-left:blueviolet;',
-    brown: 'border-left:brown;',
-    burlywood: 'border-left:burlywood;',
-    cadetblue: 'border-left:cadetblue;',
-    chartreuse: 'border-left:chartreuse;',
-    chocolate: 'border-left:chocolate;',
-    coral: 'border-left:coral;',
-    cornflowerblue: 'border-left:cornflowerblue;',
-    cornsilk: 'border-left:cornsilk;',
-    crimson: 'border-left:crimson;',
-    currentColor: 'border-left:currentColor;',
-    cyan: 'border-left:cyan;',
-    darkblue: 'border-left:darkblue;',
-    darkcyan: 'border-left:darkcyan;',
-    darkgoldenrod: 'border-left:darkgoldenrod;',
-    darkgray: 'border-left:darkgray;',
-    darkgreen: 'border-left:darkgreen;',
-    darkgrey: 'border-left:darkgrey;',
-    darkkhaki: 'border-left:darkkhaki;',
-    darkmagenta: 'border-left:darkmagenta;',
-    darkolivegreen: 'border-left:darkolivegreen;',
-    darkorange: 'border-left:darkorange;',
-    darkorchid: 'border-left:darkorchid;',
-    darkred: 'border-left:darkred;',
-    darksalmon: 'border-left:darksalmon;',
-    darkseagreen: 'border-left:darkseagreen;',
-    darkslateblue: 'border-left:darkslateblue;',
-    darkslategray: 'border-left:darkslategray;',
-    darkslategrey: 'border-left:darkslategrey;',
-    darkturquoise: 'border-left:darkturquoise;',
-    darkviolet: 'border-left:darkviolet;',
-    dashed: 'border-left:dashed;',
-    deeppink: 'border-left:deeppink;',
-    deepskyblue: 'border-left:deepskyblue;',
-    dimgray: 'border-left:dimgray;',
-    dimgrey: 'border-left:dimgrey;',
-    dodgerblue: 'border-left:dodgerblue;',
-    dotted: 'border-left:dotted;',
-    double: 'border-left:double;',
-    firebrick: 'border-left:firebrick;',
-    floralwhite: 'border-left:floralwhite;',
-    forestgreen: 'border-left:forestgreen;',
-    fuchsia: 'border-left:fuchsia;',
-    gainsboro: 'border-left:gainsboro;',
-    ghostwhite: 'border-left:ghostwhite;',
-    gold: 'border-left:gold;',
-    goldenrod: 'border-left:goldenrod;',
-    gray: 'border-left:gray;',
-    green: 'border-left:green;',
-    greenyellow: 'border-left:greenyellow;',
-    grey: 'border-left:grey;',
-    groove: 'border-left:groove;',
-    hidden: 'border-left:hidden;',
-    honeydew: 'border-left:honeydew;',
-    hotpink: 'border-left:hotpink;',
-    indianred: 'border-left:indianred;',
-    indigo: 'border-left:indigo;',
-    inherit: 'border-left:inherit;',
-    initial: 'border-left:initial;',
-    inset: 'border-left:inset;',
-    ivory: 'border-left:ivory;',
-    khaki: 'border-left:khaki;',
-    lavender: 'border-left:lavender;',
-    lavenderblush: 'border-left:lavenderblush;',
-    lawngreen: 'border-left:lawngreen;',
-    lemonchiffon: 'border-left:lemonchiffon;',
-    lightblue: 'border-left:lightblue;',
-    lightcoral: 'border-left:lightcoral;',
-    lightcyan: 'border-left:lightcyan;',
-    lightgoldenrodyellow: 'border-left:lightgoldenrodyellow;',
-    lightgray: 'border-left:lightgray;',
-    lightgreen: 'border-left:lightgreen;',
-    lightgrey: 'border-left:lightgrey;',
-    lightpink: 'border-left:lightpink;',
-    lightsalmon: 'border-left:lightsalmon;',
-    lightseagreen: 'border-left:lightseagreen;',
-    lightskyblue: 'border-left:lightskyblue;',
-    lightslategray: 'border-left:lightslategray;',
-    lightslategrey: 'border-left:lightslategrey;',
-    lightsteelblue: 'border-left:lightsteelblue;',
-    lightyellow: 'border-left:lightyellow;',
-    lime: 'border-left:lime;',
-    limegreen: 'border-left:limegreen;',
-    linen: 'border-left:linen;',
-    magenta: 'border-left:magenta;',
-    maroon: 'border-left:maroon;',
-    medium: 'border-left:medium;',
-    mediumaquamarine: 'border-left:mediumaquamarine;',
-    mediumblue: 'border-left:mediumblue;',
-    mediumorchid: 'border-left:mediumorchid;',
-    mediumpurple: 'border-left:mediumpurple;',
-    mediumseagreen: 'border-left:mediumseagreen;',
-    mediumslateblue: 'border-left:mediumslateblue;',
-    mediumspringgreen: 'border-left:mediumspringgreen;',
-    mediumturquoise: 'border-left:mediumturquoise;',
-    mediumvioletred: 'border-left:mediumvioletred;',
-    midnightblue: 'border-left:midnightblue;',
-    mintcream: 'border-left:mintcream;',
-    mistyrose: 'border-left:mistyrose;',
-    moccasin: 'border-left:moccasin;',
-    navajowhite: 'border-left:navajowhite;',
-    navy: 'border-left:navy;',
-    none: 'border-left:none;',
-    oldlace: 'border-left:oldlace;',
-    olive: 'border-left:olive;',
-    olivedrab: 'border-left:olivedrab;',
-    orange: 'border-left:orange;',
-    orangered: 'border-left:orangered;',
-    orchid: 'border-left:orchid;',
-    outset: 'border-left:outset;',
-    palegoldenrod: 'border-left:palegoldenrod;',
-    palegreen: 'border-left:palegreen;',
-    paleturquoise: 'border-left:paleturquoise;',
-    palevioletred: 'border-left:palevioletred;',
-    papayawhip: 'border-left:papayawhip;',
-    peachpuff: 'border-left:peachpuff;',
-    peru: 'border-left:peru;',
-    pink: 'border-left:pink;',
-    plum: 'border-left:plum;',
-    powderblue: 'border-left:powderblue;',
-    purple: 'border-left:purple;',
-    rebeccapurple: 'border-left:rebeccapurple;',
-    red: 'border-left:red;',
-    revert: 'border-left:revert;',
-    revertLayer: 'border-left:revert-layer;',
-    ridge: 'border-left:ridge;',
-    rosybrown: 'border-left:rosybrown;',
-    royalblue: 'border-left:royalblue;',
-    saddlebrown: 'border-left:saddlebrown;',
-    salmon: 'border-left:salmon;',
-    sandybrown: 'border-left:sandybrown;',
-    seagreen: 'border-left:seagreen;',
-    seashell: 'border-left:seashell;',
-    sienna: 'border-left:sienna;',
-    silver: 'border-left:silver;',
-    skyblue: 'border-left:skyblue;',
-    slateblue: 'border-left:slateblue;',
-    slategray: 'border-left:slategray;',
-    slategrey: 'border-left:slategrey;',
-    snow: 'border-left:snow;',
-    solid: 'border-left:solid;',
-    springgreen: 'border-left:springgreen;',
-    steelblue: 'border-left:steelblue;',
-    tan: 'border-left:tan;',
-    teal: 'border-left:teal;',
-    thick: 'border-left:thick;',
-    thin: 'border-left:thin;',
-    thistle: 'border-left:thistle;',
-    tomato: 'border-left:tomato;',
-    transparent: 'border-left:transparent;',
-    turquoise: 'border-left:turquoise;',
-    unset: 'border-left:unset;',
-    violet: 'border-left:violet;',
-    wheat: 'border-left:wheat;',
-    white: 'border-left:white;',
-    whitesmoke: 'border-left:whitesmoke;',
-    yellow: 'border-left:yellow;',
-    yellowgreen: 'border-left:yellowgreen;',
-  } as const;
-}
-
-type BorderLeftCssKeywords = Readonly<ReturnType<typeof borderLeftKeywords>>;
-export interface BorderLeftCss extends BorderLeftCssKeywords {}
 /** CSS 属性 border-left。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left
  */
 export class BorderLeftCss extends LengthCssProperty<Property.BorderLeft> {
+  readonly AccentColor = 'border-left:AccentColor;';
+  readonly AccentColorText = 'border-left:AccentColorText;';
+  readonly ActiveBorder = 'border-left:ActiveBorder;';
+  readonly ActiveCaption = 'border-left:ActiveCaption;';
+  readonly ActiveText = 'border-left:ActiveText;';
+  readonly AppWorkspace = 'border-left:AppWorkspace;';
+  readonly Background = 'border-left:Background;';
+  readonly ButtonBorder = 'border-left:ButtonBorder;';
+  readonly ButtonFace = 'border-left:ButtonFace;';
+  readonly ButtonHighlight = 'border-left:ButtonHighlight;';
+  readonly ButtonShadow = 'border-left:ButtonShadow;';
+  readonly ButtonText = 'border-left:ButtonText;';
+  readonly Canvas = 'border-left:Canvas;';
+  readonly CanvasText = 'border-left:CanvasText;';
+  readonly CaptionText = 'border-left:CaptionText;';
+  readonly Field = 'border-left:Field;';
+  readonly FieldText = 'border-left:FieldText;';
+  readonly GrayText = 'border-left:GrayText;';
+  readonly Highlight = 'border-left:Highlight;';
+  readonly HighlightText = 'border-left:HighlightText;';
+  readonly InactiveBorder = 'border-left:InactiveBorder;';
+  readonly InactiveCaption = 'border-left:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-left:InactiveCaptionText;';
+  readonly InfoBackground = 'border-left:InfoBackground;';
+  readonly InfoText = 'border-left:InfoText;';
+  readonly LinkText = 'border-left:LinkText;';
+  readonly Mark = 'border-left:Mark;';
+  readonly MarkText = 'border-left:MarkText;';
+  readonly Menu = 'border-left:Menu;';
+  readonly MenuText = 'border-left:MenuText;';
+  readonly Scrollbar = 'border-left:Scrollbar;';
+  readonly SelectedItem = 'border-left:SelectedItem;';
+  readonly SelectedItemText = 'border-left:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-left:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-left:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-left:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-left:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-left:ThreeDShadow;';
+  readonly VisitedText = 'border-left:VisitedText;';
+  readonly Window = 'border-left:Window;';
+  readonly WindowFrame = 'border-left:WindowFrame;';
+  readonly WindowText = 'border-left:WindowText;';
+  readonly aliceblue = 'border-left:aliceblue;';
+  readonly antiquewhite = 'border-left:antiquewhite;';
+  readonly aqua = 'border-left:aqua;';
+  readonly aquamarine = 'border-left:aquamarine;';
+  readonly azure = 'border-left:azure;';
+  readonly beige = 'border-left:beige;';
+  readonly bisque = 'border-left:bisque;';
+  readonly black = 'border-left:black;';
+  readonly blanchedalmond = 'border-left:blanchedalmond;';
+  readonly blue = 'border-left:blue;';
+  readonly blueviolet = 'border-left:blueviolet;';
+  readonly brown = 'border-left:brown;';
+  readonly burlywood = 'border-left:burlywood;';
+  readonly cadetblue = 'border-left:cadetblue;';
+  readonly chartreuse = 'border-left:chartreuse;';
+  readonly chocolate = 'border-left:chocolate;';
+  readonly coral = 'border-left:coral;';
+  readonly cornflowerblue = 'border-left:cornflowerblue;';
+  readonly cornsilk = 'border-left:cornsilk;';
+  readonly crimson = 'border-left:crimson;';
+  readonly currentColor = 'border-left:currentColor;';
+  readonly cyan = 'border-left:cyan;';
+  readonly darkblue = 'border-left:darkblue;';
+  readonly darkcyan = 'border-left:darkcyan;';
+  readonly darkgoldenrod = 'border-left:darkgoldenrod;';
+  readonly darkgray = 'border-left:darkgray;';
+  readonly darkgreen = 'border-left:darkgreen;';
+  readonly darkgrey = 'border-left:darkgrey;';
+  readonly darkkhaki = 'border-left:darkkhaki;';
+  readonly darkmagenta = 'border-left:darkmagenta;';
+  readonly darkolivegreen = 'border-left:darkolivegreen;';
+  readonly darkorange = 'border-left:darkorange;';
+  readonly darkorchid = 'border-left:darkorchid;';
+  readonly darkred = 'border-left:darkred;';
+  readonly darksalmon = 'border-left:darksalmon;';
+  readonly darkseagreen = 'border-left:darkseagreen;';
+  readonly darkslateblue = 'border-left:darkslateblue;';
+  readonly darkslategray = 'border-left:darkslategray;';
+  readonly darkslategrey = 'border-left:darkslategrey;';
+  readonly darkturquoise = 'border-left:darkturquoise;';
+  readonly darkviolet = 'border-left:darkviolet;';
+  readonly dashed = 'border-left:dashed;';
+  readonly deeppink = 'border-left:deeppink;';
+  readonly deepskyblue = 'border-left:deepskyblue;';
+  readonly dimgray = 'border-left:dimgray;';
+  readonly dimgrey = 'border-left:dimgrey;';
+  readonly dodgerblue = 'border-left:dodgerblue;';
+  readonly dotted = 'border-left:dotted;';
+  readonly double = 'border-left:double;';
+  readonly firebrick = 'border-left:firebrick;';
+  readonly floralwhite = 'border-left:floralwhite;';
+  readonly forestgreen = 'border-left:forestgreen;';
+  readonly fuchsia = 'border-left:fuchsia;';
+  readonly gainsboro = 'border-left:gainsboro;';
+  readonly ghostwhite = 'border-left:ghostwhite;';
+  readonly gold = 'border-left:gold;';
+  readonly goldenrod = 'border-left:goldenrod;';
+  readonly gray = 'border-left:gray;';
+  readonly green = 'border-left:green;';
+  readonly greenyellow = 'border-left:greenyellow;';
+  readonly grey = 'border-left:grey;';
+  readonly groove = 'border-left:groove;';
+  readonly hidden = 'border-left:hidden;';
+  readonly honeydew = 'border-left:honeydew;';
+  readonly hotpink = 'border-left:hotpink;';
+  readonly indianred = 'border-left:indianred;';
+  readonly indigo = 'border-left:indigo;';
+  readonly inherit = 'border-left:inherit;';
+  readonly initial = 'border-left:initial;';
+  readonly inset = 'border-left:inset;';
+  readonly ivory = 'border-left:ivory;';
+  readonly khaki = 'border-left:khaki;';
+  readonly lavender = 'border-left:lavender;';
+  readonly lavenderblush = 'border-left:lavenderblush;';
+  readonly lawngreen = 'border-left:lawngreen;';
+  readonly lemonchiffon = 'border-left:lemonchiffon;';
+  readonly lightblue = 'border-left:lightblue;';
+  readonly lightcoral = 'border-left:lightcoral;';
+  readonly lightcyan = 'border-left:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-left:lightgoldenrodyellow;';
+  readonly lightgray = 'border-left:lightgray;';
+  readonly lightgreen = 'border-left:lightgreen;';
+  readonly lightgrey = 'border-left:lightgrey;';
+  readonly lightpink = 'border-left:lightpink;';
+  readonly lightsalmon = 'border-left:lightsalmon;';
+  readonly lightseagreen = 'border-left:lightseagreen;';
+  readonly lightskyblue = 'border-left:lightskyblue;';
+  readonly lightslategray = 'border-left:lightslategray;';
+  readonly lightslategrey = 'border-left:lightslategrey;';
+  readonly lightsteelblue = 'border-left:lightsteelblue;';
+  readonly lightyellow = 'border-left:lightyellow;';
+  readonly lime = 'border-left:lime;';
+  readonly limegreen = 'border-left:limegreen;';
+  readonly linen = 'border-left:linen;';
+  readonly magenta = 'border-left:magenta;';
+  readonly maroon = 'border-left:maroon;';
+  readonly medium = 'border-left:medium;';
+  readonly mediumaquamarine = 'border-left:mediumaquamarine;';
+  readonly mediumblue = 'border-left:mediumblue;';
+  readonly mediumorchid = 'border-left:mediumorchid;';
+  readonly mediumpurple = 'border-left:mediumpurple;';
+  readonly mediumseagreen = 'border-left:mediumseagreen;';
+  readonly mediumslateblue = 'border-left:mediumslateblue;';
+  readonly mediumspringgreen = 'border-left:mediumspringgreen;';
+  readonly mediumturquoise = 'border-left:mediumturquoise;';
+  readonly mediumvioletred = 'border-left:mediumvioletred;';
+  readonly midnightblue = 'border-left:midnightblue;';
+  readonly mintcream = 'border-left:mintcream;';
+  readonly mistyrose = 'border-left:mistyrose;';
+  readonly moccasin = 'border-left:moccasin;';
+  readonly navajowhite = 'border-left:navajowhite;';
+  readonly navy = 'border-left:navy;';
+  readonly none = 'border-left:none;';
+  readonly oldlace = 'border-left:oldlace;';
+  readonly olive = 'border-left:olive;';
+  readonly olivedrab = 'border-left:olivedrab;';
+  readonly orange = 'border-left:orange;';
+  readonly orangered = 'border-left:orangered;';
+  readonly orchid = 'border-left:orchid;';
+  readonly outset = 'border-left:outset;';
+  readonly palegoldenrod = 'border-left:palegoldenrod;';
+  readonly palegreen = 'border-left:palegreen;';
+  readonly paleturquoise = 'border-left:paleturquoise;';
+  readonly palevioletred = 'border-left:palevioletred;';
+  readonly papayawhip = 'border-left:papayawhip;';
+  readonly peachpuff = 'border-left:peachpuff;';
+  readonly peru = 'border-left:peru;';
+  readonly pink = 'border-left:pink;';
+  readonly plum = 'border-left:plum;';
+  readonly powderblue = 'border-left:powderblue;';
+  readonly purple = 'border-left:purple;';
+  readonly rebeccapurple = 'border-left:rebeccapurple;';
+  readonly red = 'border-left:red;';
+  readonly revert = 'border-left:revert;';
+  readonly revertLayer = 'border-left:revert-layer;';
+  readonly ridge = 'border-left:ridge;';
+  readonly rosybrown = 'border-left:rosybrown;';
+  readonly royalblue = 'border-left:royalblue;';
+  readonly saddlebrown = 'border-left:saddlebrown;';
+  readonly salmon = 'border-left:salmon;';
+  readonly sandybrown = 'border-left:sandybrown;';
+  readonly seagreen = 'border-left:seagreen;';
+  readonly seashell = 'border-left:seashell;';
+  readonly sienna = 'border-left:sienna;';
+  readonly silver = 'border-left:silver;';
+  readonly skyblue = 'border-left:skyblue;';
+  readonly slateblue = 'border-left:slateblue;';
+  readonly slategray = 'border-left:slategray;';
+  readonly slategrey = 'border-left:slategrey;';
+  readonly snow = 'border-left:snow;';
+  readonly solid = 'border-left:solid;';
+  readonly springgreen = 'border-left:springgreen;';
+  readonly steelblue = 'border-left:steelblue;';
+  readonly tan = 'border-left:tan;';
+  readonly teal = 'border-left:teal;';
+  readonly thick = 'border-left:thick;';
+  readonly thin = 'border-left:thin;';
+  readonly thistle = 'border-left:thistle;';
+  readonly tomato = 'border-left:tomato;';
+  readonly transparent = 'border-left:transparent;';
+  readonly turquoise = 'border-left:turquoise;';
+  readonly unset = 'border-left:unset;';
+  readonly violet = 'border-left:violet;';
+  readonly wheat = 'border-left:wheat;';
+  readonly white = 'border-left:white;';
+  readonly whitesmoke = 'border-left:whitesmoke;';
+  readonly yellow = 'border-left:yellow;';
+  readonly yellowgreen = 'border-left:yellowgreen;';
   constructor() {
     super('border-left');
-    initializeBorderLeftCss();
   }
 }
-let borderLeftReady = false;
-function initializeBorderLeftCss(): void {
-  if (borderLeftReady) return;
-  Object.assign(BorderLeftCss.prototype, borderLeftKeywords());
-  Object.freeze(BorderLeftCss.prototype);
-  borderLeftReady = true;
-}
 
-function borderLeftColorKeywords() {
-  return {
-    AccentColor: 'border-left-color:AccentColor;',
-    AccentColorText: 'border-left-color:AccentColorText;',
-    ActiveBorder: 'border-left-color:ActiveBorder;',
-    ActiveCaption: 'border-left-color:ActiveCaption;',
-    ActiveText: 'border-left-color:ActiveText;',
-    AppWorkspace: 'border-left-color:AppWorkspace;',
-    Background: 'border-left-color:Background;',
-    ButtonBorder: 'border-left-color:ButtonBorder;',
-    ButtonFace: 'border-left-color:ButtonFace;',
-    ButtonHighlight: 'border-left-color:ButtonHighlight;',
-    ButtonShadow: 'border-left-color:ButtonShadow;',
-    ButtonText: 'border-left-color:ButtonText;',
-    Canvas: 'border-left-color:Canvas;',
-    CanvasText: 'border-left-color:CanvasText;',
-    CaptionText: 'border-left-color:CaptionText;',
-    Field: 'border-left-color:Field;',
-    FieldText: 'border-left-color:FieldText;',
-    GrayText: 'border-left-color:GrayText;',
-    Highlight: 'border-left-color:Highlight;',
-    HighlightText: 'border-left-color:HighlightText;',
-    InactiveBorder: 'border-left-color:InactiveBorder;',
-    InactiveCaption: 'border-left-color:InactiveCaption;',
-    InactiveCaptionText: 'border-left-color:InactiveCaptionText;',
-    InfoBackground: 'border-left-color:InfoBackground;',
-    InfoText: 'border-left-color:InfoText;',
-    LinkText: 'border-left-color:LinkText;',
-    Mark: 'border-left-color:Mark;',
-    MarkText: 'border-left-color:MarkText;',
-    Menu: 'border-left-color:Menu;',
-    MenuText: 'border-left-color:MenuText;',
-    Scrollbar: 'border-left-color:Scrollbar;',
-    SelectedItem: 'border-left-color:SelectedItem;',
-    SelectedItemText: 'border-left-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-left-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-left-color:ThreeDFace;',
-    ThreeDHighlight: 'border-left-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-left-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-left-color:ThreeDShadow;',
-    VisitedText: 'border-left-color:VisitedText;',
-    Window: 'border-left-color:Window;',
-    WindowFrame: 'border-left-color:WindowFrame;',
-    WindowText: 'border-left-color:WindowText;',
-    aliceblue: 'border-left-color:aliceblue;',
-    antiquewhite: 'border-left-color:antiquewhite;',
-    aqua: 'border-left-color:aqua;',
-    aquamarine: 'border-left-color:aquamarine;',
-    azure: 'border-left-color:azure;',
-    beige: 'border-left-color:beige;',
-    bisque: 'border-left-color:bisque;',
-    black: 'border-left-color:black;',
-    blanchedalmond: 'border-left-color:blanchedalmond;',
-    blue: 'border-left-color:blue;',
-    blueviolet: 'border-left-color:blueviolet;',
-    brown: 'border-left-color:brown;',
-    burlywood: 'border-left-color:burlywood;',
-    cadetblue: 'border-left-color:cadetblue;',
-    chartreuse: 'border-left-color:chartreuse;',
-    chocolate: 'border-left-color:chocolate;',
-    coral: 'border-left-color:coral;',
-    cornflowerblue: 'border-left-color:cornflowerblue;',
-    cornsilk: 'border-left-color:cornsilk;',
-    crimson: 'border-left-color:crimson;',
-    currentColor: 'border-left-color:currentColor;',
-    cyan: 'border-left-color:cyan;',
-    darkblue: 'border-left-color:darkblue;',
-    darkcyan: 'border-left-color:darkcyan;',
-    darkgoldenrod: 'border-left-color:darkgoldenrod;',
-    darkgray: 'border-left-color:darkgray;',
-    darkgreen: 'border-left-color:darkgreen;',
-    darkgrey: 'border-left-color:darkgrey;',
-    darkkhaki: 'border-left-color:darkkhaki;',
-    darkmagenta: 'border-left-color:darkmagenta;',
-    darkolivegreen: 'border-left-color:darkolivegreen;',
-    darkorange: 'border-left-color:darkorange;',
-    darkorchid: 'border-left-color:darkorchid;',
-    darkred: 'border-left-color:darkred;',
-    darksalmon: 'border-left-color:darksalmon;',
-    darkseagreen: 'border-left-color:darkseagreen;',
-    darkslateblue: 'border-left-color:darkslateblue;',
-    darkslategray: 'border-left-color:darkslategray;',
-    darkslategrey: 'border-left-color:darkslategrey;',
-    darkturquoise: 'border-left-color:darkturquoise;',
-    darkviolet: 'border-left-color:darkviolet;',
-    deeppink: 'border-left-color:deeppink;',
-    deepskyblue: 'border-left-color:deepskyblue;',
-    dimgray: 'border-left-color:dimgray;',
-    dimgrey: 'border-left-color:dimgrey;',
-    dodgerblue: 'border-left-color:dodgerblue;',
-    firebrick: 'border-left-color:firebrick;',
-    floralwhite: 'border-left-color:floralwhite;',
-    forestgreen: 'border-left-color:forestgreen;',
-    fuchsia: 'border-left-color:fuchsia;',
-    gainsboro: 'border-left-color:gainsboro;',
-    ghostwhite: 'border-left-color:ghostwhite;',
-    gold: 'border-left-color:gold;',
-    goldenrod: 'border-left-color:goldenrod;',
-    gray: 'border-left-color:gray;',
-    green: 'border-left-color:green;',
-    greenyellow: 'border-left-color:greenyellow;',
-    grey: 'border-left-color:grey;',
-    honeydew: 'border-left-color:honeydew;',
-    hotpink: 'border-left-color:hotpink;',
-    indianred: 'border-left-color:indianred;',
-    indigo: 'border-left-color:indigo;',
-    inherit: 'border-left-color:inherit;',
-    initial: 'border-left-color:initial;',
-    ivory: 'border-left-color:ivory;',
-    khaki: 'border-left-color:khaki;',
-    lavender: 'border-left-color:lavender;',
-    lavenderblush: 'border-left-color:lavenderblush;',
-    lawngreen: 'border-left-color:lawngreen;',
-    lemonchiffon: 'border-left-color:lemonchiffon;',
-    lightblue: 'border-left-color:lightblue;',
-    lightcoral: 'border-left-color:lightcoral;',
-    lightcyan: 'border-left-color:lightcyan;',
-    lightgoldenrodyellow: 'border-left-color:lightgoldenrodyellow;',
-    lightgray: 'border-left-color:lightgray;',
-    lightgreen: 'border-left-color:lightgreen;',
-    lightgrey: 'border-left-color:lightgrey;',
-    lightpink: 'border-left-color:lightpink;',
-    lightsalmon: 'border-left-color:lightsalmon;',
-    lightseagreen: 'border-left-color:lightseagreen;',
-    lightskyblue: 'border-left-color:lightskyblue;',
-    lightslategray: 'border-left-color:lightslategray;',
-    lightslategrey: 'border-left-color:lightslategrey;',
-    lightsteelblue: 'border-left-color:lightsteelblue;',
-    lightyellow: 'border-left-color:lightyellow;',
-    lime: 'border-left-color:lime;',
-    limegreen: 'border-left-color:limegreen;',
-    linen: 'border-left-color:linen;',
-    magenta: 'border-left-color:magenta;',
-    maroon: 'border-left-color:maroon;',
-    mediumaquamarine: 'border-left-color:mediumaquamarine;',
-    mediumblue: 'border-left-color:mediumblue;',
-    mediumorchid: 'border-left-color:mediumorchid;',
-    mediumpurple: 'border-left-color:mediumpurple;',
-    mediumseagreen: 'border-left-color:mediumseagreen;',
-    mediumslateblue: 'border-left-color:mediumslateblue;',
-    mediumspringgreen: 'border-left-color:mediumspringgreen;',
-    mediumturquoise: 'border-left-color:mediumturquoise;',
-    mediumvioletred: 'border-left-color:mediumvioletred;',
-    midnightblue: 'border-left-color:midnightblue;',
-    mintcream: 'border-left-color:mintcream;',
-    mistyrose: 'border-left-color:mistyrose;',
-    moccasin: 'border-left-color:moccasin;',
-    navajowhite: 'border-left-color:navajowhite;',
-    navy: 'border-left-color:navy;',
-    oldlace: 'border-left-color:oldlace;',
-    olive: 'border-left-color:olive;',
-    olivedrab: 'border-left-color:olivedrab;',
-    orange: 'border-left-color:orange;',
-    orangered: 'border-left-color:orangered;',
-    orchid: 'border-left-color:orchid;',
-    palegoldenrod: 'border-left-color:palegoldenrod;',
-    palegreen: 'border-left-color:palegreen;',
-    paleturquoise: 'border-left-color:paleturquoise;',
-    palevioletred: 'border-left-color:palevioletred;',
-    papayawhip: 'border-left-color:papayawhip;',
-    peachpuff: 'border-left-color:peachpuff;',
-    peru: 'border-left-color:peru;',
-    pink: 'border-left-color:pink;',
-    plum: 'border-left-color:plum;',
-    powderblue: 'border-left-color:powderblue;',
-    purple: 'border-left-color:purple;',
-    rebeccapurple: 'border-left-color:rebeccapurple;',
-    red: 'border-left-color:red;',
-    revert: 'border-left-color:revert;',
-    revertLayer: 'border-left-color:revert-layer;',
-    rosybrown: 'border-left-color:rosybrown;',
-    royalblue: 'border-left-color:royalblue;',
-    saddlebrown: 'border-left-color:saddlebrown;',
-    salmon: 'border-left-color:salmon;',
-    sandybrown: 'border-left-color:sandybrown;',
-    seagreen: 'border-left-color:seagreen;',
-    seashell: 'border-left-color:seashell;',
-    sienna: 'border-left-color:sienna;',
-    silver: 'border-left-color:silver;',
-    skyblue: 'border-left-color:skyblue;',
-    slateblue: 'border-left-color:slateblue;',
-    slategray: 'border-left-color:slategray;',
-    slategrey: 'border-left-color:slategrey;',
-    snow: 'border-left-color:snow;',
-    springgreen: 'border-left-color:springgreen;',
-    steelblue: 'border-left-color:steelblue;',
-    tan: 'border-left-color:tan;',
-    teal: 'border-left-color:teal;',
-    thistle: 'border-left-color:thistle;',
-    tomato: 'border-left-color:tomato;',
-    transparent: 'border-left-color:transparent;',
-    turquoise: 'border-left-color:turquoise;',
-    unset: 'border-left-color:unset;',
-    violet: 'border-left-color:violet;',
-    wheat: 'border-left-color:wheat;',
-    white: 'border-left-color:white;',
-    whitesmoke: 'border-left-color:whitesmoke;',
-    yellow: 'border-left-color:yellow;',
-    yellowgreen: 'border-left-color:yellowgreen;',
-  } as const;
-}
-
-type BorderLeftColorCssKeywords = Readonly<ReturnType<typeof borderLeftColorKeywords>>;
-export interface BorderLeftColorCss extends BorderLeftColorCssKeywords {}
 /** CSS 属性 border-left-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-color
  */
 export class BorderLeftColorCss extends CssProperty<Property.BorderLeftColor> {
+  readonly AccentColor = 'border-left-color:AccentColor;';
+  readonly AccentColorText = 'border-left-color:AccentColorText;';
+  readonly ActiveBorder = 'border-left-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-left-color:ActiveCaption;';
+  readonly ActiveText = 'border-left-color:ActiveText;';
+  readonly AppWorkspace = 'border-left-color:AppWorkspace;';
+  readonly Background = 'border-left-color:Background;';
+  readonly ButtonBorder = 'border-left-color:ButtonBorder;';
+  readonly ButtonFace = 'border-left-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-left-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-left-color:ButtonShadow;';
+  readonly ButtonText = 'border-left-color:ButtonText;';
+  readonly Canvas = 'border-left-color:Canvas;';
+  readonly CanvasText = 'border-left-color:CanvasText;';
+  readonly CaptionText = 'border-left-color:CaptionText;';
+  readonly Field = 'border-left-color:Field;';
+  readonly FieldText = 'border-left-color:FieldText;';
+  readonly GrayText = 'border-left-color:GrayText;';
+  readonly Highlight = 'border-left-color:Highlight;';
+  readonly HighlightText = 'border-left-color:HighlightText;';
+  readonly InactiveBorder = 'border-left-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-left-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-left-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-left-color:InfoBackground;';
+  readonly InfoText = 'border-left-color:InfoText;';
+  readonly LinkText = 'border-left-color:LinkText;';
+  readonly Mark = 'border-left-color:Mark;';
+  readonly MarkText = 'border-left-color:MarkText;';
+  readonly Menu = 'border-left-color:Menu;';
+  readonly MenuText = 'border-left-color:MenuText;';
+  readonly Scrollbar = 'border-left-color:Scrollbar;';
+  readonly SelectedItem = 'border-left-color:SelectedItem;';
+  readonly SelectedItemText = 'border-left-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-left-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-left-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-left-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-left-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-left-color:ThreeDShadow;';
+  readonly VisitedText = 'border-left-color:VisitedText;';
+  readonly Window = 'border-left-color:Window;';
+  readonly WindowFrame = 'border-left-color:WindowFrame;';
+  readonly WindowText = 'border-left-color:WindowText;';
+  readonly aliceblue = 'border-left-color:aliceblue;';
+  readonly antiquewhite = 'border-left-color:antiquewhite;';
+  readonly aqua = 'border-left-color:aqua;';
+  readonly aquamarine = 'border-left-color:aquamarine;';
+  readonly azure = 'border-left-color:azure;';
+  readonly beige = 'border-left-color:beige;';
+  readonly bisque = 'border-left-color:bisque;';
+  readonly black = 'border-left-color:black;';
+  readonly blanchedalmond = 'border-left-color:blanchedalmond;';
+  readonly blue = 'border-left-color:blue;';
+  readonly blueviolet = 'border-left-color:blueviolet;';
+  readonly brown = 'border-left-color:brown;';
+  readonly burlywood = 'border-left-color:burlywood;';
+  readonly cadetblue = 'border-left-color:cadetblue;';
+  readonly chartreuse = 'border-left-color:chartreuse;';
+  readonly chocolate = 'border-left-color:chocolate;';
+  readonly coral = 'border-left-color:coral;';
+  readonly cornflowerblue = 'border-left-color:cornflowerblue;';
+  readonly cornsilk = 'border-left-color:cornsilk;';
+  readonly crimson = 'border-left-color:crimson;';
+  readonly currentColor = 'border-left-color:currentColor;';
+  readonly cyan = 'border-left-color:cyan;';
+  readonly darkblue = 'border-left-color:darkblue;';
+  readonly darkcyan = 'border-left-color:darkcyan;';
+  readonly darkgoldenrod = 'border-left-color:darkgoldenrod;';
+  readonly darkgray = 'border-left-color:darkgray;';
+  readonly darkgreen = 'border-left-color:darkgreen;';
+  readonly darkgrey = 'border-left-color:darkgrey;';
+  readonly darkkhaki = 'border-left-color:darkkhaki;';
+  readonly darkmagenta = 'border-left-color:darkmagenta;';
+  readonly darkolivegreen = 'border-left-color:darkolivegreen;';
+  readonly darkorange = 'border-left-color:darkorange;';
+  readonly darkorchid = 'border-left-color:darkorchid;';
+  readonly darkred = 'border-left-color:darkred;';
+  readonly darksalmon = 'border-left-color:darksalmon;';
+  readonly darkseagreen = 'border-left-color:darkseagreen;';
+  readonly darkslateblue = 'border-left-color:darkslateblue;';
+  readonly darkslategray = 'border-left-color:darkslategray;';
+  readonly darkslategrey = 'border-left-color:darkslategrey;';
+  readonly darkturquoise = 'border-left-color:darkturquoise;';
+  readonly darkviolet = 'border-left-color:darkviolet;';
+  readonly deeppink = 'border-left-color:deeppink;';
+  readonly deepskyblue = 'border-left-color:deepskyblue;';
+  readonly dimgray = 'border-left-color:dimgray;';
+  readonly dimgrey = 'border-left-color:dimgrey;';
+  readonly dodgerblue = 'border-left-color:dodgerblue;';
+  readonly firebrick = 'border-left-color:firebrick;';
+  readonly floralwhite = 'border-left-color:floralwhite;';
+  readonly forestgreen = 'border-left-color:forestgreen;';
+  readonly fuchsia = 'border-left-color:fuchsia;';
+  readonly gainsboro = 'border-left-color:gainsboro;';
+  readonly ghostwhite = 'border-left-color:ghostwhite;';
+  readonly gold = 'border-left-color:gold;';
+  readonly goldenrod = 'border-left-color:goldenrod;';
+  readonly gray = 'border-left-color:gray;';
+  readonly green = 'border-left-color:green;';
+  readonly greenyellow = 'border-left-color:greenyellow;';
+  readonly grey = 'border-left-color:grey;';
+  readonly honeydew = 'border-left-color:honeydew;';
+  readonly hotpink = 'border-left-color:hotpink;';
+  readonly indianred = 'border-left-color:indianred;';
+  readonly indigo = 'border-left-color:indigo;';
+  readonly inherit = 'border-left-color:inherit;';
+  readonly initial = 'border-left-color:initial;';
+  readonly ivory = 'border-left-color:ivory;';
+  readonly khaki = 'border-left-color:khaki;';
+  readonly lavender = 'border-left-color:lavender;';
+  readonly lavenderblush = 'border-left-color:lavenderblush;';
+  readonly lawngreen = 'border-left-color:lawngreen;';
+  readonly lemonchiffon = 'border-left-color:lemonchiffon;';
+  readonly lightblue = 'border-left-color:lightblue;';
+  readonly lightcoral = 'border-left-color:lightcoral;';
+  readonly lightcyan = 'border-left-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-left-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-left-color:lightgray;';
+  readonly lightgreen = 'border-left-color:lightgreen;';
+  readonly lightgrey = 'border-left-color:lightgrey;';
+  readonly lightpink = 'border-left-color:lightpink;';
+  readonly lightsalmon = 'border-left-color:lightsalmon;';
+  readonly lightseagreen = 'border-left-color:lightseagreen;';
+  readonly lightskyblue = 'border-left-color:lightskyblue;';
+  readonly lightslategray = 'border-left-color:lightslategray;';
+  readonly lightslategrey = 'border-left-color:lightslategrey;';
+  readonly lightsteelblue = 'border-left-color:lightsteelblue;';
+  readonly lightyellow = 'border-left-color:lightyellow;';
+  readonly lime = 'border-left-color:lime;';
+  readonly limegreen = 'border-left-color:limegreen;';
+  readonly linen = 'border-left-color:linen;';
+  readonly magenta = 'border-left-color:magenta;';
+  readonly maroon = 'border-left-color:maroon;';
+  readonly mediumaquamarine = 'border-left-color:mediumaquamarine;';
+  readonly mediumblue = 'border-left-color:mediumblue;';
+  readonly mediumorchid = 'border-left-color:mediumorchid;';
+  readonly mediumpurple = 'border-left-color:mediumpurple;';
+  readonly mediumseagreen = 'border-left-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-left-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-left-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-left-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-left-color:mediumvioletred;';
+  readonly midnightblue = 'border-left-color:midnightblue;';
+  readonly mintcream = 'border-left-color:mintcream;';
+  readonly mistyrose = 'border-left-color:mistyrose;';
+  readonly moccasin = 'border-left-color:moccasin;';
+  readonly navajowhite = 'border-left-color:navajowhite;';
+  readonly navy = 'border-left-color:navy;';
+  readonly oldlace = 'border-left-color:oldlace;';
+  readonly olive = 'border-left-color:olive;';
+  readonly olivedrab = 'border-left-color:olivedrab;';
+  readonly orange = 'border-left-color:orange;';
+  readonly orangered = 'border-left-color:orangered;';
+  readonly orchid = 'border-left-color:orchid;';
+  readonly palegoldenrod = 'border-left-color:palegoldenrod;';
+  readonly palegreen = 'border-left-color:palegreen;';
+  readonly paleturquoise = 'border-left-color:paleturquoise;';
+  readonly palevioletred = 'border-left-color:palevioletred;';
+  readonly papayawhip = 'border-left-color:papayawhip;';
+  readonly peachpuff = 'border-left-color:peachpuff;';
+  readonly peru = 'border-left-color:peru;';
+  readonly pink = 'border-left-color:pink;';
+  readonly plum = 'border-left-color:plum;';
+  readonly powderblue = 'border-left-color:powderblue;';
+  readonly purple = 'border-left-color:purple;';
+  readonly rebeccapurple = 'border-left-color:rebeccapurple;';
+  readonly red = 'border-left-color:red;';
+  readonly revert = 'border-left-color:revert;';
+  readonly revertLayer = 'border-left-color:revert-layer;';
+  readonly rosybrown = 'border-left-color:rosybrown;';
+  readonly royalblue = 'border-left-color:royalblue;';
+  readonly saddlebrown = 'border-left-color:saddlebrown;';
+  readonly salmon = 'border-left-color:salmon;';
+  readonly sandybrown = 'border-left-color:sandybrown;';
+  readonly seagreen = 'border-left-color:seagreen;';
+  readonly seashell = 'border-left-color:seashell;';
+  readonly sienna = 'border-left-color:sienna;';
+  readonly silver = 'border-left-color:silver;';
+  readonly skyblue = 'border-left-color:skyblue;';
+  readonly slateblue = 'border-left-color:slateblue;';
+  readonly slategray = 'border-left-color:slategray;';
+  readonly slategrey = 'border-left-color:slategrey;';
+  readonly snow = 'border-left-color:snow;';
+  readonly springgreen = 'border-left-color:springgreen;';
+  readonly steelblue = 'border-left-color:steelblue;';
+  readonly tan = 'border-left-color:tan;';
+  readonly teal = 'border-left-color:teal;';
+  readonly thistle = 'border-left-color:thistle;';
+  readonly tomato = 'border-left-color:tomato;';
+  readonly transparent = 'border-left-color:transparent;';
+  readonly turquoise = 'border-left-color:turquoise;';
+  readonly unset = 'border-left-color:unset;';
+  readonly violet = 'border-left-color:violet;';
+  readonly wheat = 'border-left-color:wheat;';
+  readonly white = 'border-left-color:white;';
+  readonly whitesmoke = 'border-left-color:whitesmoke;';
+  readonly yellow = 'border-left-color:yellow;';
+  readonly yellowgreen = 'border-left-color:yellowgreen;';
   constructor() {
     super('border-left-color');
-    initializeBorderLeftColorCss();
   }
 }
-let borderLeftColorReady = false;
-function initializeBorderLeftColorCss(): void {
-  if (borderLeftColorReady) return;
-  Object.assign(BorderLeftColorCss.prototype, borderLeftColorKeywords());
-  Object.freeze(BorderLeftColorCss.prototype);
-  borderLeftColorReady = true;
-}
 
-function borderLeftStyleKeywords() {
-  return {
-    dashed: 'border-left-style:dashed;',
-    dotted: 'border-left-style:dotted;',
-    double: 'border-left-style:double;',
-    groove: 'border-left-style:groove;',
-    hidden: 'border-left-style:hidden;',
-    inherit: 'border-left-style:inherit;',
-    initial: 'border-left-style:initial;',
-    inset: 'border-left-style:inset;',
-    none: 'border-left-style:none;',
-    outset: 'border-left-style:outset;',
-    revert: 'border-left-style:revert;',
-    revertLayer: 'border-left-style:revert-layer;',
-    ridge: 'border-left-style:ridge;',
-    solid: 'border-left-style:solid;',
-    unset: 'border-left-style:unset;',
-  } as const;
-}
-
-type BorderLeftStyleCssKeywords = Readonly<ReturnType<typeof borderLeftStyleKeywords>>;
-export interface BorderLeftStyleCss extends BorderLeftStyleCssKeywords {}
 /** CSS 属性 border-left-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-style
  */
 export class BorderLeftStyleCss extends CssProperty<Property.BorderLeftStyle> {
+  readonly dashed = 'border-left-style:dashed;';
+  readonly dotted = 'border-left-style:dotted;';
+  readonly double = 'border-left-style:double;';
+  readonly groove = 'border-left-style:groove;';
+  readonly hidden = 'border-left-style:hidden;';
+  readonly inherit = 'border-left-style:inherit;';
+  readonly initial = 'border-left-style:initial;';
+  readonly inset = 'border-left-style:inset;';
+  readonly none = 'border-left-style:none;';
+  readonly outset = 'border-left-style:outset;';
+  readonly revert = 'border-left-style:revert;';
+  readonly revertLayer = 'border-left-style:revert-layer;';
+  readonly ridge = 'border-left-style:ridge;';
+  readonly solid = 'border-left-style:solid;';
+  readonly unset = 'border-left-style:unset;';
   constructor() {
     super('border-left-style');
-    initializeBorderLeftStyleCss();
   }
 }
-let borderLeftStyleReady = false;
-function initializeBorderLeftStyleCss(): void {
-  if (borderLeftStyleReady) return;
-  Object.assign(BorderLeftStyleCss.prototype, borderLeftStyleKeywords());
-  Object.freeze(BorderLeftStyleCss.prototype);
-  borderLeftStyleReady = true;
-}
 
-function borderLeftWidthKeywords() {
-  return {
-    inherit: 'border-left-width:inherit;',
-    initial: 'border-left-width:initial;',
-    medium: 'border-left-width:medium;',
-    revert: 'border-left-width:revert;',
-    revertLayer: 'border-left-width:revert-layer;',
-    thick: 'border-left-width:thick;',
-    thin: 'border-left-width:thin;',
-    unset: 'border-left-width:unset;',
-  } as const;
-}
-
-type BorderLeftWidthCssKeywords = Readonly<ReturnType<typeof borderLeftWidthKeywords>>;
-export interface BorderLeftWidthCss extends BorderLeftWidthCssKeywords {}
 /** CSS 属性 border-left-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-width
  */
 export class BorderLeftWidthCss extends LengthCssProperty<Property.BorderLeftWidth> {
+  readonly inherit = 'border-left-width:inherit;';
+  readonly initial = 'border-left-width:initial;';
+  readonly medium = 'border-left-width:medium;';
+  readonly revert = 'border-left-width:revert;';
+  readonly revertLayer = 'border-left-width:revert-layer;';
+  readonly thick = 'border-left-width:thick;';
+  readonly thin = 'border-left-width:thin;';
+  readonly unset = 'border-left-width:unset;';
   constructor() {
     super('border-left-width');
-    initializeBorderLeftWidthCss();
   }
 }
-let borderLeftWidthReady = false;
-function initializeBorderLeftWidthCss(): void {
-  if (borderLeftWidthReady) return;
-  Object.assign(BorderLeftWidthCss.prototype, borderLeftWidthKeywords());
-  Object.freeze(BorderLeftWidthCss.prototype);
-  borderLeftWidthReady = true;
-}
 
-function borderRadiusKeywords() {
-  return {
-    inherit: 'border-radius:inherit;',
-    initial: 'border-radius:initial;',
-    revert: 'border-radius:revert;',
-    revertLayer: 'border-radius:revert-layer;',
-    unset: 'border-radius:unset;',
-  } as const;
-}
-
-type BorderRadiusCssKeywords = Readonly<ReturnType<typeof borderRadiusKeywords>>;
-export interface BorderRadiusCss extends BorderRadiusCssKeywords {}
 /** CSS 属性 border-radius。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-radius
  */
 export class BorderRadiusCss extends LengthCssProperty<Property.BorderRadius> {
+  readonly inherit = 'border-radius:inherit;';
+  readonly initial = 'border-radius:initial;';
+  readonly revert = 'border-radius:revert;';
+  readonly revertLayer = 'border-radius:revert-layer;';
+  readonly unset = 'border-radius:unset;';
   constructor() {
     super('border-radius');
-    initializeBorderRadiusCss();
   }
 }
-let borderRadiusReady = false;
-function initializeBorderRadiusCss(): void {
-  if (borderRadiusReady) return;
-  Object.assign(BorderRadiusCss.prototype, borderRadiusKeywords());
-  Object.freeze(BorderRadiusCss.prototype);
-  borderRadiusReady = true;
-}
 
-function borderRightKeywords() {
-  return {
-    AccentColor: 'border-right:AccentColor;',
-    AccentColorText: 'border-right:AccentColorText;',
-    ActiveBorder: 'border-right:ActiveBorder;',
-    ActiveCaption: 'border-right:ActiveCaption;',
-    ActiveText: 'border-right:ActiveText;',
-    AppWorkspace: 'border-right:AppWorkspace;',
-    Background: 'border-right:Background;',
-    ButtonBorder: 'border-right:ButtonBorder;',
-    ButtonFace: 'border-right:ButtonFace;',
-    ButtonHighlight: 'border-right:ButtonHighlight;',
-    ButtonShadow: 'border-right:ButtonShadow;',
-    ButtonText: 'border-right:ButtonText;',
-    Canvas: 'border-right:Canvas;',
-    CanvasText: 'border-right:CanvasText;',
-    CaptionText: 'border-right:CaptionText;',
-    Field: 'border-right:Field;',
-    FieldText: 'border-right:FieldText;',
-    GrayText: 'border-right:GrayText;',
-    Highlight: 'border-right:Highlight;',
-    HighlightText: 'border-right:HighlightText;',
-    InactiveBorder: 'border-right:InactiveBorder;',
-    InactiveCaption: 'border-right:InactiveCaption;',
-    InactiveCaptionText: 'border-right:InactiveCaptionText;',
-    InfoBackground: 'border-right:InfoBackground;',
-    InfoText: 'border-right:InfoText;',
-    LinkText: 'border-right:LinkText;',
-    Mark: 'border-right:Mark;',
-    MarkText: 'border-right:MarkText;',
-    Menu: 'border-right:Menu;',
-    MenuText: 'border-right:MenuText;',
-    Scrollbar: 'border-right:Scrollbar;',
-    SelectedItem: 'border-right:SelectedItem;',
-    SelectedItemText: 'border-right:SelectedItemText;',
-    ThreeDDarkShadow: 'border-right:ThreeDDarkShadow;',
-    ThreeDFace: 'border-right:ThreeDFace;',
-    ThreeDHighlight: 'border-right:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-right:ThreeDLightShadow;',
-    ThreeDShadow: 'border-right:ThreeDShadow;',
-    VisitedText: 'border-right:VisitedText;',
-    Window: 'border-right:Window;',
-    WindowFrame: 'border-right:WindowFrame;',
-    WindowText: 'border-right:WindowText;',
-    aliceblue: 'border-right:aliceblue;',
-    antiquewhite: 'border-right:antiquewhite;',
-    aqua: 'border-right:aqua;',
-    aquamarine: 'border-right:aquamarine;',
-    azure: 'border-right:azure;',
-    beige: 'border-right:beige;',
-    bisque: 'border-right:bisque;',
-    black: 'border-right:black;',
-    blanchedalmond: 'border-right:blanchedalmond;',
-    blue: 'border-right:blue;',
-    blueviolet: 'border-right:blueviolet;',
-    brown: 'border-right:brown;',
-    burlywood: 'border-right:burlywood;',
-    cadetblue: 'border-right:cadetblue;',
-    chartreuse: 'border-right:chartreuse;',
-    chocolate: 'border-right:chocolate;',
-    coral: 'border-right:coral;',
-    cornflowerblue: 'border-right:cornflowerblue;',
-    cornsilk: 'border-right:cornsilk;',
-    crimson: 'border-right:crimson;',
-    currentColor: 'border-right:currentColor;',
-    cyan: 'border-right:cyan;',
-    darkblue: 'border-right:darkblue;',
-    darkcyan: 'border-right:darkcyan;',
-    darkgoldenrod: 'border-right:darkgoldenrod;',
-    darkgray: 'border-right:darkgray;',
-    darkgreen: 'border-right:darkgreen;',
-    darkgrey: 'border-right:darkgrey;',
-    darkkhaki: 'border-right:darkkhaki;',
-    darkmagenta: 'border-right:darkmagenta;',
-    darkolivegreen: 'border-right:darkolivegreen;',
-    darkorange: 'border-right:darkorange;',
-    darkorchid: 'border-right:darkorchid;',
-    darkred: 'border-right:darkred;',
-    darksalmon: 'border-right:darksalmon;',
-    darkseagreen: 'border-right:darkseagreen;',
-    darkslateblue: 'border-right:darkslateblue;',
-    darkslategray: 'border-right:darkslategray;',
-    darkslategrey: 'border-right:darkslategrey;',
-    darkturquoise: 'border-right:darkturquoise;',
-    darkviolet: 'border-right:darkviolet;',
-    dashed: 'border-right:dashed;',
-    deeppink: 'border-right:deeppink;',
-    deepskyblue: 'border-right:deepskyblue;',
-    dimgray: 'border-right:dimgray;',
-    dimgrey: 'border-right:dimgrey;',
-    dodgerblue: 'border-right:dodgerblue;',
-    dotted: 'border-right:dotted;',
-    double: 'border-right:double;',
-    firebrick: 'border-right:firebrick;',
-    floralwhite: 'border-right:floralwhite;',
-    forestgreen: 'border-right:forestgreen;',
-    fuchsia: 'border-right:fuchsia;',
-    gainsboro: 'border-right:gainsboro;',
-    ghostwhite: 'border-right:ghostwhite;',
-    gold: 'border-right:gold;',
-    goldenrod: 'border-right:goldenrod;',
-    gray: 'border-right:gray;',
-    green: 'border-right:green;',
-    greenyellow: 'border-right:greenyellow;',
-    grey: 'border-right:grey;',
-    groove: 'border-right:groove;',
-    hidden: 'border-right:hidden;',
-    honeydew: 'border-right:honeydew;',
-    hotpink: 'border-right:hotpink;',
-    indianred: 'border-right:indianred;',
-    indigo: 'border-right:indigo;',
-    inherit: 'border-right:inherit;',
-    initial: 'border-right:initial;',
-    inset: 'border-right:inset;',
-    ivory: 'border-right:ivory;',
-    khaki: 'border-right:khaki;',
-    lavender: 'border-right:lavender;',
-    lavenderblush: 'border-right:lavenderblush;',
-    lawngreen: 'border-right:lawngreen;',
-    lemonchiffon: 'border-right:lemonchiffon;',
-    lightblue: 'border-right:lightblue;',
-    lightcoral: 'border-right:lightcoral;',
-    lightcyan: 'border-right:lightcyan;',
-    lightgoldenrodyellow: 'border-right:lightgoldenrodyellow;',
-    lightgray: 'border-right:lightgray;',
-    lightgreen: 'border-right:lightgreen;',
-    lightgrey: 'border-right:lightgrey;',
-    lightpink: 'border-right:lightpink;',
-    lightsalmon: 'border-right:lightsalmon;',
-    lightseagreen: 'border-right:lightseagreen;',
-    lightskyblue: 'border-right:lightskyblue;',
-    lightslategray: 'border-right:lightslategray;',
-    lightslategrey: 'border-right:lightslategrey;',
-    lightsteelblue: 'border-right:lightsteelblue;',
-    lightyellow: 'border-right:lightyellow;',
-    lime: 'border-right:lime;',
-    limegreen: 'border-right:limegreen;',
-    linen: 'border-right:linen;',
-    magenta: 'border-right:magenta;',
-    maroon: 'border-right:maroon;',
-    medium: 'border-right:medium;',
-    mediumaquamarine: 'border-right:mediumaquamarine;',
-    mediumblue: 'border-right:mediumblue;',
-    mediumorchid: 'border-right:mediumorchid;',
-    mediumpurple: 'border-right:mediumpurple;',
-    mediumseagreen: 'border-right:mediumseagreen;',
-    mediumslateblue: 'border-right:mediumslateblue;',
-    mediumspringgreen: 'border-right:mediumspringgreen;',
-    mediumturquoise: 'border-right:mediumturquoise;',
-    mediumvioletred: 'border-right:mediumvioletred;',
-    midnightblue: 'border-right:midnightblue;',
-    mintcream: 'border-right:mintcream;',
-    mistyrose: 'border-right:mistyrose;',
-    moccasin: 'border-right:moccasin;',
-    navajowhite: 'border-right:navajowhite;',
-    navy: 'border-right:navy;',
-    none: 'border-right:none;',
-    oldlace: 'border-right:oldlace;',
-    olive: 'border-right:olive;',
-    olivedrab: 'border-right:olivedrab;',
-    orange: 'border-right:orange;',
-    orangered: 'border-right:orangered;',
-    orchid: 'border-right:orchid;',
-    outset: 'border-right:outset;',
-    palegoldenrod: 'border-right:palegoldenrod;',
-    palegreen: 'border-right:palegreen;',
-    paleturquoise: 'border-right:paleturquoise;',
-    palevioletred: 'border-right:palevioletred;',
-    papayawhip: 'border-right:papayawhip;',
-    peachpuff: 'border-right:peachpuff;',
-    peru: 'border-right:peru;',
-    pink: 'border-right:pink;',
-    plum: 'border-right:plum;',
-    powderblue: 'border-right:powderblue;',
-    purple: 'border-right:purple;',
-    rebeccapurple: 'border-right:rebeccapurple;',
-    red: 'border-right:red;',
-    revert: 'border-right:revert;',
-    revertLayer: 'border-right:revert-layer;',
-    ridge: 'border-right:ridge;',
-    rosybrown: 'border-right:rosybrown;',
-    royalblue: 'border-right:royalblue;',
-    saddlebrown: 'border-right:saddlebrown;',
-    salmon: 'border-right:salmon;',
-    sandybrown: 'border-right:sandybrown;',
-    seagreen: 'border-right:seagreen;',
-    seashell: 'border-right:seashell;',
-    sienna: 'border-right:sienna;',
-    silver: 'border-right:silver;',
-    skyblue: 'border-right:skyblue;',
-    slateblue: 'border-right:slateblue;',
-    slategray: 'border-right:slategray;',
-    slategrey: 'border-right:slategrey;',
-    snow: 'border-right:snow;',
-    solid: 'border-right:solid;',
-    springgreen: 'border-right:springgreen;',
-    steelblue: 'border-right:steelblue;',
-    tan: 'border-right:tan;',
-    teal: 'border-right:teal;',
-    thick: 'border-right:thick;',
-    thin: 'border-right:thin;',
-    thistle: 'border-right:thistle;',
-    tomato: 'border-right:tomato;',
-    transparent: 'border-right:transparent;',
-    turquoise: 'border-right:turquoise;',
-    unset: 'border-right:unset;',
-    violet: 'border-right:violet;',
-    wheat: 'border-right:wheat;',
-    white: 'border-right:white;',
-    whitesmoke: 'border-right:whitesmoke;',
-    yellow: 'border-right:yellow;',
-    yellowgreen: 'border-right:yellowgreen;',
-  } as const;
-}
-
-type BorderRightCssKeywords = Readonly<ReturnType<typeof borderRightKeywords>>;
-export interface BorderRightCss extends BorderRightCssKeywords {}
 /** CSS 属性 border-right。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
  */
 export class BorderRightCss extends LengthCssProperty<Property.BorderRight> {
+  readonly AccentColor = 'border-right:AccentColor;';
+  readonly AccentColorText = 'border-right:AccentColorText;';
+  readonly ActiveBorder = 'border-right:ActiveBorder;';
+  readonly ActiveCaption = 'border-right:ActiveCaption;';
+  readonly ActiveText = 'border-right:ActiveText;';
+  readonly AppWorkspace = 'border-right:AppWorkspace;';
+  readonly Background = 'border-right:Background;';
+  readonly ButtonBorder = 'border-right:ButtonBorder;';
+  readonly ButtonFace = 'border-right:ButtonFace;';
+  readonly ButtonHighlight = 'border-right:ButtonHighlight;';
+  readonly ButtonShadow = 'border-right:ButtonShadow;';
+  readonly ButtonText = 'border-right:ButtonText;';
+  readonly Canvas = 'border-right:Canvas;';
+  readonly CanvasText = 'border-right:CanvasText;';
+  readonly CaptionText = 'border-right:CaptionText;';
+  readonly Field = 'border-right:Field;';
+  readonly FieldText = 'border-right:FieldText;';
+  readonly GrayText = 'border-right:GrayText;';
+  readonly Highlight = 'border-right:Highlight;';
+  readonly HighlightText = 'border-right:HighlightText;';
+  readonly InactiveBorder = 'border-right:InactiveBorder;';
+  readonly InactiveCaption = 'border-right:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-right:InactiveCaptionText;';
+  readonly InfoBackground = 'border-right:InfoBackground;';
+  readonly InfoText = 'border-right:InfoText;';
+  readonly LinkText = 'border-right:LinkText;';
+  readonly Mark = 'border-right:Mark;';
+  readonly MarkText = 'border-right:MarkText;';
+  readonly Menu = 'border-right:Menu;';
+  readonly MenuText = 'border-right:MenuText;';
+  readonly Scrollbar = 'border-right:Scrollbar;';
+  readonly SelectedItem = 'border-right:SelectedItem;';
+  readonly SelectedItemText = 'border-right:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-right:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-right:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-right:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-right:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-right:ThreeDShadow;';
+  readonly VisitedText = 'border-right:VisitedText;';
+  readonly Window = 'border-right:Window;';
+  readonly WindowFrame = 'border-right:WindowFrame;';
+  readonly WindowText = 'border-right:WindowText;';
+  readonly aliceblue = 'border-right:aliceblue;';
+  readonly antiquewhite = 'border-right:antiquewhite;';
+  readonly aqua = 'border-right:aqua;';
+  readonly aquamarine = 'border-right:aquamarine;';
+  readonly azure = 'border-right:azure;';
+  readonly beige = 'border-right:beige;';
+  readonly bisque = 'border-right:bisque;';
+  readonly black = 'border-right:black;';
+  readonly blanchedalmond = 'border-right:blanchedalmond;';
+  readonly blue = 'border-right:blue;';
+  readonly blueviolet = 'border-right:blueviolet;';
+  readonly brown = 'border-right:brown;';
+  readonly burlywood = 'border-right:burlywood;';
+  readonly cadetblue = 'border-right:cadetblue;';
+  readonly chartreuse = 'border-right:chartreuse;';
+  readonly chocolate = 'border-right:chocolate;';
+  readonly coral = 'border-right:coral;';
+  readonly cornflowerblue = 'border-right:cornflowerblue;';
+  readonly cornsilk = 'border-right:cornsilk;';
+  readonly crimson = 'border-right:crimson;';
+  readonly currentColor = 'border-right:currentColor;';
+  readonly cyan = 'border-right:cyan;';
+  readonly darkblue = 'border-right:darkblue;';
+  readonly darkcyan = 'border-right:darkcyan;';
+  readonly darkgoldenrod = 'border-right:darkgoldenrod;';
+  readonly darkgray = 'border-right:darkgray;';
+  readonly darkgreen = 'border-right:darkgreen;';
+  readonly darkgrey = 'border-right:darkgrey;';
+  readonly darkkhaki = 'border-right:darkkhaki;';
+  readonly darkmagenta = 'border-right:darkmagenta;';
+  readonly darkolivegreen = 'border-right:darkolivegreen;';
+  readonly darkorange = 'border-right:darkorange;';
+  readonly darkorchid = 'border-right:darkorchid;';
+  readonly darkred = 'border-right:darkred;';
+  readonly darksalmon = 'border-right:darksalmon;';
+  readonly darkseagreen = 'border-right:darkseagreen;';
+  readonly darkslateblue = 'border-right:darkslateblue;';
+  readonly darkslategray = 'border-right:darkslategray;';
+  readonly darkslategrey = 'border-right:darkslategrey;';
+  readonly darkturquoise = 'border-right:darkturquoise;';
+  readonly darkviolet = 'border-right:darkviolet;';
+  readonly dashed = 'border-right:dashed;';
+  readonly deeppink = 'border-right:deeppink;';
+  readonly deepskyblue = 'border-right:deepskyblue;';
+  readonly dimgray = 'border-right:dimgray;';
+  readonly dimgrey = 'border-right:dimgrey;';
+  readonly dodgerblue = 'border-right:dodgerblue;';
+  readonly dotted = 'border-right:dotted;';
+  readonly double = 'border-right:double;';
+  readonly firebrick = 'border-right:firebrick;';
+  readonly floralwhite = 'border-right:floralwhite;';
+  readonly forestgreen = 'border-right:forestgreen;';
+  readonly fuchsia = 'border-right:fuchsia;';
+  readonly gainsboro = 'border-right:gainsboro;';
+  readonly ghostwhite = 'border-right:ghostwhite;';
+  readonly gold = 'border-right:gold;';
+  readonly goldenrod = 'border-right:goldenrod;';
+  readonly gray = 'border-right:gray;';
+  readonly green = 'border-right:green;';
+  readonly greenyellow = 'border-right:greenyellow;';
+  readonly grey = 'border-right:grey;';
+  readonly groove = 'border-right:groove;';
+  readonly hidden = 'border-right:hidden;';
+  readonly honeydew = 'border-right:honeydew;';
+  readonly hotpink = 'border-right:hotpink;';
+  readonly indianred = 'border-right:indianred;';
+  readonly indigo = 'border-right:indigo;';
+  readonly inherit = 'border-right:inherit;';
+  readonly initial = 'border-right:initial;';
+  readonly inset = 'border-right:inset;';
+  readonly ivory = 'border-right:ivory;';
+  readonly khaki = 'border-right:khaki;';
+  readonly lavender = 'border-right:lavender;';
+  readonly lavenderblush = 'border-right:lavenderblush;';
+  readonly lawngreen = 'border-right:lawngreen;';
+  readonly lemonchiffon = 'border-right:lemonchiffon;';
+  readonly lightblue = 'border-right:lightblue;';
+  readonly lightcoral = 'border-right:lightcoral;';
+  readonly lightcyan = 'border-right:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-right:lightgoldenrodyellow;';
+  readonly lightgray = 'border-right:lightgray;';
+  readonly lightgreen = 'border-right:lightgreen;';
+  readonly lightgrey = 'border-right:lightgrey;';
+  readonly lightpink = 'border-right:lightpink;';
+  readonly lightsalmon = 'border-right:lightsalmon;';
+  readonly lightseagreen = 'border-right:lightseagreen;';
+  readonly lightskyblue = 'border-right:lightskyblue;';
+  readonly lightslategray = 'border-right:lightslategray;';
+  readonly lightslategrey = 'border-right:lightslategrey;';
+  readonly lightsteelblue = 'border-right:lightsteelblue;';
+  readonly lightyellow = 'border-right:lightyellow;';
+  readonly lime = 'border-right:lime;';
+  readonly limegreen = 'border-right:limegreen;';
+  readonly linen = 'border-right:linen;';
+  readonly magenta = 'border-right:magenta;';
+  readonly maroon = 'border-right:maroon;';
+  readonly medium = 'border-right:medium;';
+  readonly mediumaquamarine = 'border-right:mediumaquamarine;';
+  readonly mediumblue = 'border-right:mediumblue;';
+  readonly mediumorchid = 'border-right:mediumorchid;';
+  readonly mediumpurple = 'border-right:mediumpurple;';
+  readonly mediumseagreen = 'border-right:mediumseagreen;';
+  readonly mediumslateblue = 'border-right:mediumslateblue;';
+  readonly mediumspringgreen = 'border-right:mediumspringgreen;';
+  readonly mediumturquoise = 'border-right:mediumturquoise;';
+  readonly mediumvioletred = 'border-right:mediumvioletred;';
+  readonly midnightblue = 'border-right:midnightblue;';
+  readonly mintcream = 'border-right:mintcream;';
+  readonly mistyrose = 'border-right:mistyrose;';
+  readonly moccasin = 'border-right:moccasin;';
+  readonly navajowhite = 'border-right:navajowhite;';
+  readonly navy = 'border-right:navy;';
+  readonly none = 'border-right:none;';
+  readonly oldlace = 'border-right:oldlace;';
+  readonly olive = 'border-right:olive;';
+  readonly olivedrab = 'border-right:olivedrab;';
+  readonly orange = 'border-right:orange;';
+  readonly orangered = 'border-right:orangered;';
+  readonly orchid = 'border-right:orchid;';
+  readonly outset = 'border-right:outset;';
+  readonly palegoldenrod = 'border-right:palegoldenrod;';
+  readonly palegreen = 'border-right:palegreen;';
+  readonly paleturquoise = 'border-right:paleturquoise;';
+  readonly palevioletred = 'border-right:palevioletred;';
+  readonly papayawhip = 'border-right:papayawhip;';
+  readonly peachpuff = 'border-right:peachpuff;';
+  readonly peru = 'border-right:peru;';
+  readonly pink = 'border-right:pink;';
+  readonly plum = 'border-right:plum;';
+  readonly powderblue = 'border-right:powderblue;';
+  readonly purple = 'border-right:purple;';
+  readonly rebeccapurple = 'border-right:rebeccapurple;';
+  readonly red = 'border-right:red;';
+  readonly revert = 'border-right:revert;';
+  readonly revertLayer = 'border-right:revert-layer;';
+  readonly ridge = 'border-right:ridge;';
+  readonly rosybrown = 'border-right:rosybrown;';
+  readonly royalblue = 'border-right:royalblue;';
+  readonly saddlebrown = 'border-right:saddlebrown;';
+  readonly salmon = 'border-right:salmon;';
+  readonly sandybrown = 'border-right:sandybrown;';
+  readonly seagreen = 'border-right:seagreen;';
+  readonly seashell = 'border-right:seashell;';
+  readonly sienna = 'border-right:sienna;';
+  readonly silver = 'border-right:silver;';
+  readonly skyblue = 'border-right:skyblue;';
+  readonly slateblue = 'border-right:slateblue;';
+  readonly slategray = 'border-right:slategray;';
+  readonly slategrey = 'border-right:slategrey;';
+  readonly snow = 'border-right:snow;';
+  readonly solid = 'border-right:solid;';
+  readonly springgreen = 'border-right:springgreen;';
+  readonly steelblue = 'border-right:steelblue;';
+  readonly tan = 'border-right:tan;';
+  readonly teal = 'border-right:teal;';
+  readonly thick = 'border-right:thick;';
+  readonly thin = 'border-right:thin;';
+  readonly thistle = 'border-right:thistle;';
+  readonly tomato = 'border-right:tomato;';
+  readonly transparent = 'border-right:transparent;';
+  readonly turquoise = 'border-right:turquoise;';
+  readonly unset = 'border-right:unset;';
+  readonly violet = 'border-right:violet;';
+  readonly wheat = 'border-right:wheat;';
+  readonly white = 'border-right:white;';
+  readonly whitesmoke = 'border-right:whitesmoke;';
+  readonly yellow = 'border-right:yellow;';
+  readonly yellowgreen = 'border-right:yellowgreen;';
   constructor() {
     super('border-right');
-    initializeBorderRightCss();
   }
 }
-let borderRightReady = false;
-function initializeBorderRightCss(): void {
-  if (borderRightReady) return;
-  Object.assign(BorderRightCss.prototype, borderRightKeywords());
-  Object.freeze(BorderRightCss.prototype);
-  borderRightReady = true;
-}
 
-function borderRightColorKeywords() {
-  return {
-    AccentColor: 'border-right-color:AccentColor;',
-    AccentColorText: 'border-right-color:AccentColorText;',
-    ActiveBorder: 'border-right-color:ActiveBorder;',
-    ActiveCaption: 'border-right-color:ActiveCaption;',
-    ActiveText: 'border-right-color:ActiveText;',
-    AppWorkspace: 'border-right-color:AppWorkspace;',
-    Background: 'border-right-color:Background;',
-    ButtonBorder: 'border-right-color:ButtonBorder;',
-    ButtonFace: 'border-right-color:ButtonFace;',
-    ButtonHighlight: 'border-right-color:ButtonHighlight;',
-    ButtonShadow: 'border-right-color:ButtonShadow;',
-    ButtonText: 'border-right-color:ButtonText;',
-    Canvas: 'border-right-color:Canvas;',
-    CanvasText: 'border-right-color:CanvasText;',
-    CaptionText: 'border-right-color:CaptionText;',
-    Field: 'border-right-color:Field;',
-    FieldText: 'border-right-color:FieldText;',
-    GrayText: 'border-right-color:GrayText;',
-    Highlight: 'border-right-color:Highlight;',
-    HighlightText: 'border-right-color:HighlightText;',
-    InactiveBorder: 'border-right-color:InactiveBorder;',
-    InactiveCaption: 'border-right-color:InactiveCaption;',
-    InactiveCaptionText: 'border-right-color:InactiveCaptionText;',
-    InfoBackground: 'border-right-color:InfoBackground;',
-    InfoText: 'border-right-color:InfoText;',
-    LinkText: 'border-right-color:LinkText;',
-    Mark: 'border-right-color:Mark;',
-    MarkText: 'border-right-color:MarkText;',
-    Menu: 'border-right-color:Menu;',
-    MenuText: 'border-right-color:MenuText;',
-    Scrollbar: 'border-right-color:Scrollbar;',
-    SelectedItem: 'border-right-color:SelectedItem;',
-    SelectedItemText: 'border-right-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-right-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-right-color:ThreeDFace;',
-    ThreeDHighlight: 'border-right-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-right-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-right-color:ThreeDShadow;',
-    VisitedText: 'border-right-color:VisitedText;',
-    Window: 'border-right-color:Window;',
-    WindowFrame: 'border-right-color:WindowFrame;',
-    WindowText: 'border-right-color:WindowText;',
-    aliceblue: 'border-right-color:aliceblue;',
-    antiquewhite: 'border-right-color:antiquewhite;',
-    aqua: 'border-right-color:aqua;',
-    aquamarine: 'border-right-color:aquamarine;',
-    azure: 'border-right-color:azure;',
-    beige: 'border-right-color:beige;',
-    bisque: 'border-right-color:bisque;',
-    black: 'border-right-color:black;',
-    blanchedalmond: 'border-right-color:blanchedalmond;',
-    blue: 'border-right-color:blue;',
-    blueviolet: 'border-right-color:blueviolet;',
-    brown: 'border-right-color:brown;',
-    burlywood: 'border-right-color:burlywood;',
-    cadetblue: 'border-right-color:cadetblue;',
-    chartreuse: 'border-right-color:chartreuse;',
-    chocolate: 'border-right-color:chocolate;',
-    coral: 'border-right-color:coral;',
-    cornflowerblue: 'border-right-color:cornflowerblue;',
-    cornsilk: 'border-right-color:cornsilk;',
-    crimson: 'border-right-color:crimson;',
-    currentColor: 'border-right-color:currentColor;',
-    cyan: 'border-right-color:cyan;',
-    darkblue: 'border-right-color:darkblue;',
-    darkcyan: 'border-right-color:darkcyan;',
-    darkgoldenrod: 'border-right-color:darkgoldenrod;',
-    darkgray: 'border-right-color:darkgray;',
-    darkgreen: 'border-right-color:darkgreen;',
-    darkgrey: 'border-right-color:darkgrey;',
-    darkkhaki: 'border-right-color:darkkhaki;',
-    darkmagenta: 'border-right-color:darkmagenta;',
-    darkolivegreen: 'border-right-color:darkolivegreen;',
-    darkorange: 'border-right-color:darkorange;',
-    darkorchid: 'border-right-color:darkorchid;',
-    darkred: 'border-right-color:darkred;',
-    darksalmon: 'border-right-color:darksalmon;',
-    darkseagreen: 'border-right-color:darkseagreen;',
-    darkslateblue: 'border-right-color:darkslateblue;',
-    darkslategray: 'border-right-color:darkslategray;',
-    darkslategrey: 'border-right-color:darkslategrey;',
-    darkturquoise: 'border-right-color:darkturquoise;',
-    darkviolet: 'border-right-color:darkviolet;',
-    deeppink: 'border-right-color:deeppink;',
-    deepskyblue: 'border-right-color:deepskyblue;',
-    dimgray: 'border-right-color:dimgray;',
-    dimgrey: 'border-right-color:dimgrey;',
-    dodgerblue: 'border-right-color:dodgerblue;',
-    firebrick: 'border-right-color:firebrick;',
-    floralwhite: 'border-right-color:floralwhite;',
-    forestgreen: 'border-right-color:forestgreen;',
-    fuchsia: 'border-right-color:fuchsia;',
-    gainsboro: 'border-right-color:gainsboro;',
-    ghostwhite: 'border-right-color:ghostwhite;',
-    gold: 'border-right-color:gold;',
-    goldenrod: 'border-right-color:goldenrod;',
-    gray: 'border-right-color:gray;',
-    green: 'border-right-color:green;',
-    greenyellow: 'border-right-color:greenyellow;',
-    grey: 'border-right-color:grey;',
-    honeydew: 'border-right-color:honeydew;',
-    hotpink: 'border-right-color:hotpink;',
-    indianred: 'border-right-color:indianred;',
-    indigo: 'border-right-color:indigo;',
-    inherit: 'border-right-color:inherit;',
-    initial: 'border-right-color:initial;',
-    ivory: 'border-right-color:ivory;',
-    khaki: 'border-right-color:khaki;',
-    lavender: 'border-right-color:lavender;',
-    lavenderblush: 'border-right-color:lavenderblush;',
-    lawngreen: 'border-right-color:lawngreen;',
-    lemonchiffon: 'border-right-color:lemonchiffon;',
-    lightblue: 'border-right-color:lightblue;',
-    lightcoral: 'border-right-color:lightcoral;',
-    lightcyan: 'border-right-color:lightcyan;',
-    lightgoldenrodyellow: 'border-right-color:lightgoldenrodyellow;',
-    lightgray: 'border-right-color:lightgray;',
-    lightgreen: 'border-right-color:lightgreen;',
-    lightgrey: 'border-right-color:lightgrey;',
-    lightpink: 'border-right-color:lightpink;',
-    lightsalmon: 'border-right-color:lightsalmon;',
-    lightseagreen: 'border-right-color:lightseagreen;',
-    lightskyblue: 'border-right-color:lightskyblue;',
-    lightslategray: 'border-right-color:lightslategray;',
-    lightslategrey: 'border-right-color:lightslategrey;',
-    lightsteelblue: 'border-right-color:lightsteelblue;',
-    lightyellow: 'border-right-color:lightyellow;',
-    lime: 'border-right-color:lime;',
-    limegreen: 'border-right-color:limegreen;',
-    linen: 'border-right-color:linen;',
-    magenta: 'border-right-color:magenta;',
-    maroon: 'border-right-color:maroon;',
-    mediumaquamarine: 'border-right-color:mediumaquamarine;',
-    mediumblue: 'border-right-color:mediumblue;',
-    mediumorchid: 'border-right-color:mediumorchid;',
-    mediumpurple: 'border-right-color:mediumpurple;',
-    mediumseagreen: 'border-right-color:mediumseagreen;',
-    mediumslateblue: 'border-right-color:mediumslateblue;',
-    mediumspringgreen: 'border-right-color:mediumspringgreen;',
-    mediumturquoise: 'border-right-color:mediumturquoise;',
-    mediumvioletred: 'border-right-color:mediumvioletred;',
-    midnightblue: 'border-right-color:midnightblue;',
-    mintcream: 'border-right-color:mintcream;',
-    mistyrose: 'border-right-color:mistyrose;',
-    moccasin: 'border-right-color:moccasin;',
-    navajowhite: 'border-right-color:navajowhite;',
-    navy: 'border-right-color:navy;',
-    oldlace: 'border-right-color:oldlace;',
-    olive: 'border-right-color:olive;',
-    olivedrab: 'border-right-color:olivedrab;',
-    orange: 'border-right-color:orange;',
-    orangered: 'border-right-color:orangered;',
-    orchid: 'border-right-color:orchid;',
-    palegoldenrod: 'border-right-color:palegoldenrod;',
-    palegreen: 'border-right-color:palegreen;',
-    paleturquoise: 'border-right-color:paleturquoise;',
-    palevioletred: 'border-right-color:palevioletred;',
-    papayawhip: 'border-right-color:papayawhip;',
-    peachpuff: 'border-right-color:peachpuff;',
-    peru: 'border-right-color:peru;',
-    pink: 'border-right-color:pink;',
-    plum: 'border-right-color:plum;',
-    powderblue: 'border-right-color:powderblue;',
-    purple: 'border-right-color:purple;',
-    rebeccapurple: 'border-right-color:rebeccapurple;',
-    red: 'border-right-color:red;',
-    revert: 'border-right-color:revert;',
-    revertLayer: 'border-right-color:revert-layer;',
-    rosybrown: 'border-right-color:rosybrown;',
-    royalblue: 'border-right-color:royalblue;',
-    saddlebrown: 'border-right-color:saddlebrown;',
-    salmon: 'border-right-color:salmon;',
-    sandybrown: 'border-right-color:sandybrown;',
-    seagreen: 'border-right-color:seagreen;',
-    seashell: 'border-right-color:seashell;',
-    sienna: 'border-right-color:sienna;',
-    silver: 'border-right-color:silver;',
-    skyblue: 'border-right-color:skyblue;',
-    slateblue: 'border-right-color:slateblue;',
-    slategray: 'border-right-color:slategray;',
-    slategrey: 'border-right-color:slategrey;',
-    snow: 'border-right-color:snow;',
-    springgreen: 'border-right-color:springgreen;',
-    steelblue: 'border-right-color:steelblue;',
-    tan: 'border-right-color:tan;',
-    teal: 'border-right-color:teal;',
-    thistle: 'border-right-color:thistle;',
-    tomato: 'border-right-color:tomato;',
-    transparent: 'border-right-color:transparent;',
-    turquoise: 'border-right-color:turquoise;',
-    unset: 'border-right-color:unset;',
-    violet: 'border-right-color:violet;',
-    wheat: 'border-right-color:wheat;',
-    white: 'border-right-color:white;',
-    whitesmoke: 'border-right-color:whitesmoke;',
-    yellow: 'border-right-color:yellow;',
-    yellowgreen: 'border-right-color:yellowgreen;',
-  } as const;
-}
-
-type BorderRightColorCssKeywords = Readonly<ReturnType<typeof borderRightColorKeywords>>;
-export interface BorderRightColorCss extends BorderRightColorCssKeywords {}
 /** CSS 属性 border-right-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-color
  */
 export class BorderRightColorCss extends CssProperty<Property.BorderRightColor> {
+  readonly AccentColor = 'border-right-color:AccentColor;';
+  readonly AccentColorText = 'border-right-color:AccentColorText;';
+  readonly ActiveBorder = 'border-right-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-right-color:ActiveCaption;';
+  readonly ActiveText = 'border-right-color:ActiveText;';
+  readonly AppWorkspace = 'border-right-color:AppWorkspace;';
+  readonly Background = 'border-right-color:Background;';
+  readonly ButtonBorder = 'border-right-color:ButtonBorder;';
+  readonly ButtonFace = 'border-right-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-right-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-right-color:ButtonShadow;';
+  readonly ButtonText = 'border-right-color:ButtonText;';
+  readonly Canvas = 'border-right-color:Canvas;';
+  readonly CanvasText = 'border-right-color:CanvasText;';
+  readonly CaptionText = 'border-right-color:CaptionText;';
+  readonly Field = 'border-right-color:Field;';
+  readonly FieldText = 'border-right-color:FieldText;';
+  readonly GrayText = 'border-right-color:GrayText;';
+  readonly Highlight = 'border-right-color:Highlight;';
+  readonly HighlightText = 'border-right-color:HighlightText;';
+  readonly InactiveBorder = 'border-right-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-right-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-right-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-right-color:InfoBackground;';
+  readonly InfoText = 'border-right-color:InfoText;';
+  readonly LinkText = 'border-right-color:LinkText;';
+  readonly Mark = 'border-right-color:Mark;';
+  readonly MarkText = 'border-right-color:MarkText;';
+  readonly Menu = 'border-right-color:Menu;';
+  readonly MenuText = 'border-right-color:MenuText;';
+  readonly Scrollbar = 'border-right-color:Scrollbar;';
+  readonly SelectedItem = 'border-right-color:SelectedItem;';
+  readonly SelectedItemText = 'border-right-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-right-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-right-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-right-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-right-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-right-color:ThreeDShadow;';
+  readonly VisitedText = 'border-right-color:VisitedText;';
+  readonly Window = 'border-right-color:Window;';
+  readonly WindowFrame = 'border-right-color:WindowFrame;';
+  readonly WindowText = 'border-right-color:WindowText;';
+  readonly aliceblue = 'border-right-color:aliceblue;';
+  readonly antiquewhite = 'border-right-color:antiquewhite;';
+  readonly aqua = 'border-right-color:aqua;';
+  readonly aquamarine = 'border-right-color:aquamarine;';
+  readonly azure = 'border-right-color:azure;';
+  readonly beige = 'border-right-color:beige;';
+  readonly bisque = 'border-right-color:bisque;';
+  readonly black = 'border-right-color:black;';
+  readonly blanchedalmond = 'border-right-color:blanchedalmond;';
+  readonly blue = 'border-right-color:blue;';
+  readonly blueviolet = 'border-right-color:blueviolet;';
+  readonly brown = 'border-right-color:brown;';
+  readonly burlywood = 'border-right-color:burlywood;';
+  readonly cadetblue = 'border-right-color:cadetblue;';
+  readonly chartreuse = 'border-right-color:chartreuse;';
+  readonly chocolate = 'border-right-color:chocolate;';
+  readonly coral = 'border-right-color:coral;';
+  readonly cornflowerblue = 'border-right-color:cornflowerblue;';
+  readonly cornsilk = 'border-right-color:cornsilk;';
+  readonly crimson = 'border-right-color:crimson;';
+  readonly currentColor = 'border-right-color:currentColor;';
+  readonly cyan = 'border-right-color:cyan;';
+  readonly darkblue = 'border-right-color:darkblue;';
+  readonly darkcyan = 'border-right-color:darkcyan;';
+  readonly darkgoldenrod = 'border-right-color:darkgoldenrod;';
+  readonly darkgray = 'border-right-color:darkgray;';
+  readonly darkgreen = 'border-right-color:darkgreen;';
+  readonly darkgrey = 'border-right-color:darkgrey;';
+  readonly darkkhaki = 'border-right-color:darkkhaki;';
+  readonly darkmagenta = 'border-right-color:darkmagenta;';
+  readonly darkolivegreen = 'border-right-color:darkolivegreen;';
+  readonly darkorange = 'border-right-color:darkorange;';
+  readonly darkorchid = 'border-right-color:darkorchid;';
+  readonly darkred = 'border-right-color:darkred;';
+  readonly darksalmon = 'border-right-color:darksalmon;';
+  readonly darkseagreen = 'border-right-color:darkseagreen;';
+  readonly darkslateblue = 'border-right-color:darkslateblue;';
+  readonly darkslategray = 'border-right-color:darkslategray;';
+  readonly darkslategrey = 'border-right-color:darkslategrey;';
+  readonly darkturquoise = 'border-right-color:darkturquoise;';
+  readonly darkviolet = 'border-right-color:darkviolet;';
+  readonly deeppink = 'border-right-color:deeppink;';
+  readonly deepskyblue = 'border-right-color:deepskyblue;';
+  readonly dimgray = 'border-right-color:dimgray;';
+  readonly dimgrey = 'border-right-color:dimgrey;';
+  readonly dodgerblue = 'border-right-color:dodgerblue;';
+  readonly firebrick = 'border-right-color:firebrick;';
+  readonly floralwhite = 'border-right-color:floralwhite;';
+  readonly forestgreen = 'border-right-color:forestgreen;';
+  readonly fuchsia = 'border-right-color:fuchsia;';
+  readonly gainsboro = 'border-right-color:gainsboro;';
+  readonly ghostwhite = 'border-right-color:ghostwhite;';
+  readonly gold = 'border-right-color:gold;';
+  readonly goldenrod = 'border-right-color:goldenrod;';
+  readonly gray = 'border-right-color:gray;';
+  readonly green = 'border-right-color:green;';
+  readonly greenyellow = 'border-right-color:greenyellow;';
+  readonly grey = 'border-right-color:grey;';
+  readonly honeydew = 'border-right-color:honeydew;';
+  readonly hotpink = 'border-right-color:hotpink;';
+  readonly indianred = 'border-right-color:indianred;';
+  readonly indigo = 'border-right-color:indigo;';
+  readonly inherit = 'border-right-color:inherit;';
+  readonly initial = 'border-right-color:initial;';
+  readonly ivory = 'border-right-color:ivory;';
+  readonly khaki = 'border-right-color:khaki;';
+  readonly lavender = 'border-right-color:lavender;';
+  readonly lavenderblush = 'border-right-color:lavenderblush;';
+  readonly lawngreen = 'border-right-color:lawngreen;';
+  readonly lemonchiffon = 'border-right-color:lemonchiffon;';
+  readonly lightblue = 'border-right-color:lightblue;';
+  readonly lightcoral = 'border-right-color:lightcoral;';
+  readonly lightcyan = 'border-right-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-right-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-right-color:lightgray;';
+  readonly lightgreen = 'border-right-color:lightgreen;';
+  readonly lightgrey = 'border-right-color:lightgrey;';
+  readonly lightpink = 'border-right-color:lightpink;';
+  readonly lightsalmon = 'border-right-color:lightsalmon;';
+  readonly lightseagreen = 'border-right-color:lightseagreen;';
+  readonly lightskyblue = 'border-right-color:lightskyblue;';
+  readonly lightslategray = 'border-right-color:lightslategray;';
+  readonly lightslategrey = 'border-right-color:lightslategrey;';
+  readonly lightsteelblue = 'border-right-color:lightsteelblue;';
+  readonly lightyellow = 'border-right-color:lightyellow;';
+  readonly lime = 'border-right-color:lime;';
+  readonly limegreen = 'border-right-color:limegreen;';
+  readonly linen = 'border-right-color:linen;';
+  readonly magenta = 'border-right-color:magenta;';
+  readonly maroon = 'border-right-color:maroon;';
+  readonly mediumaquamarine = 'border-right-color:mediumaquamarine;';
+  readonly mediumblue = 'border-right-color:mediumblue;';
+  readonly mediumorchid = 'border-right-color:mediumorchid;';
+  readonly mediumpurple = 'border-right-color:mediumpurple;';
+  readonly mediumseagreen = 'border-right-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-right-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-right-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-right-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-right-color:mediumvioletred;';
+  readonly midnightblue = 'border-right-color:midnightblue;';
+  readonly mintcream = 'border-right-color:mintcream;';
+  readonly mistyrose = 'border-right-color:mistyrose;';
+  readonly moccasin = 'border-right-color:moccasin;';
+  readonly navajowhite = 'border-right-color:navajowhite;';
+  readonly navy = 'border-right-color:navy;';
+  readonly oldlace = 'border-right-color:oldlace;';
+  readonly olive = 'border-right-color:olive;';
+  readonly olivedrab = 'border-right-color:olivedrab;';
+  readonly orange = 'border-right-color:orange;';
+  readonly orangered = 'border-right-color:orangered;';
+  readonly orchid = 'border-right-color:orchid;';
+  readonly palegoldenrod = 'border-right-color:palegoldenrod;';
+  readonly palegreen = 'border-right-color:palegreen;';
+  readonly paleturquoise = 'border-right-color:paleturquoise;';
+  readonly palevioletred = 'border-right-color:palevioletred;';
+  readonly papayawhip = 'border-right-color:papayawhip;';
+  readonly peachpuff = 'border-right-color:peachpuff;';
+  readonly peru = 'border-right-color:peru;';
+  readonly pink = 'border-right-color:pink;';
+  readonly plum = 'border-right-color:plum;';
+  readonly powderblue = 'border-right-color:powderblue;';
+  readonly purple = 'border-right-color:purple;';
+  readonly rebeccapurple = 'border-right-color:rebeccapurple;';
+  readonly red = 'border-right-color:red;';
+  readonly revert = 'border-right-color:revert;';
+  readonly revertLayer = 'border-right-color:revert-layer;';
+  readonly rosybrown = 'border-right-color:rosybrown;';
+  readonly royalblue = 'border-right-color:royalblue;';
+  readonly saddlebrown = 'border-right-color:saddlebrown;';
+  readonly salmon = 'border-right-color:salmon;';
+  readonly sandybrown = 'border-right-color:sandybrown;';
+  readonly seagreen = 'border-right-color:seagreen;';
+  readonly seashell = 'border-right-color:seashell;';
+  readonly sienna = 'border-right-color:sienna;';
+  readonly silver = 'border-right-color:silver;';
+  readonly skyblue = 'border-right-color:skyblue;';
+  readonly slateblue = 'border-right-color:slateblue;';
+  readonly slategray = 'border-right-color:slategray;';
+  readonly slategrey = 'border-right-color:slategrey;';
+  readonly snow = 'border-right-color:snow;';
+  readonly springgreen = 'border-right-color:springgreen;';
+  readonly steelblue = 'border-right-color:steelblue;';
+  readonly tan = 'border-right-color:tan;';
+  readonly teal = 'border-right-color:teal;';
+  readonly thistle = 'border-right-color:thistle;';
+  readonly tomato = 'border-right-color:tomato;';
+  readonly transparent = 'border-right-color:transparent;';
+  readonly turquoise = 'border-right-color:turquoise;';
+  readonly unset = 'border-right-color:unset;';
+  readonly violet = 'border-right-color:violet;';
+  readonly wheat = 'border-right-color:wheat;';
+  readonly white = 'border-right-color:white;';
+  readonly whitesmoke = 'border-right-color:whitesmoke;';
+  readonly yellow = 'border-right-color:yellow;';
+  readonly yellowgreen = 'border-right-color:yellowgreen;';
   constructor() {
     super('border-right-color');
-    initializeBorderRightColorCss();
   }
 }
-let borderRightColorReady = false;
-function initializeBorderRightColorCss(): void {
-  if (borderRightColorReady) return;
-  Object.assign(BorderRightColorCss.prototype, borderRightColorKeywords());
-  Object.freeze(BorderRightColorCss.prototype);
-  borderRightColorReady = true;
-}
 
-function borderRightStyleKeywords() {
-  return {
-    dashed: 'border-right-style:dashed;',
-    dotted: 'border-right-style:dotted;',
-    double: 'border-right-style:double;',
-    groove: 'border-right-style:groove;',
-    hidden: 'border-right-style:hidden;',
-    inherit: 'border-right-style:inherit;',
-    initial: 'border-right-style:initial;',
-    inset: 'border-right-style:inset;',
-    none: 'border-right-style:none;',
-    outset: 'border-right-style:outset;',
-    revert: 'border-right-style:revert;',
-    revertLayer: 'border-right-style:revert-layer;',
-    ridge: 'border-right-style:ridge;',
-    solid: 'border-right-style:solid;',
-    unset: 'border-right-style:unset;',
-  } as const;
-}
-
-type BorderRightStyleCssKeywords = Readonly<ReturnType<typeof borderRightStyleKeywords>>;
-export interface BorderRightStyleCss extends BorderRightStyleCssKeywords {}
 /** CSS 属性 border-right-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-style
  */
 export class BorderRightStyleCss extends CssProperty<Property.BorderRightStyle> {
+  readonly dashed = 'border-right-style:dashed;';
+  readonly dotted = 'border-right-style:dotted;';
+  readonly double = 'border-right-style:double;';
+  readonly groove = 'border-right-style:groove;';
+  readonly hidden = 'border-right-style:hidden;';
+  readonly inherit = 'border-right-style:inherit;';
+  readonly initial = 'border-right-style:initial;';
+  readonly inset = 'border-right-style:inset;';
+  readonly none = 'border-right-style:none;';
+  readonly outset = 'border-right-style:outset;';
+  readonly revert = 'border-right-style:revert;';
+  readonly revertLayer = 'border-right-style:revert-layer;';
+  readonly ridge = 'border-right-style:ridge;';
+  readonly solid = 'border-right-style:solid;';
+  readonly unset = 'border-right-style:unset;';
   constructor() {
     super('border-right-style');
-    initializeBorderRightStyleCss();
   }
 }
-let borderRightStyleReady = false;
-function initializeBorderRightStyleCss(): void {
-  if (borderRightStyleReady) return;
-  Object.assign(BorderRightStyleCss.prototype, borderRightStyleKeywords());
-  Object.freeze(BorderRightStyleCss.prototype);
-  borderRightStyleReady = true;
-}
 
-function borderRightWidthKeywords() {
-  return {
-    inherit: 'border-right-width:inherit;',
-    initial: 'border-right-width:initial;',
-    medium: 'border-right-width:medium;',
-    revert: 'border-right-width:revert;',
-    revertLayer: 'border-right-width:revert-layer;',
-    thick: 'border-right-width:thick;',
-    thin: 'border-right-width:thin;',
-    unset: 'border-right-width:unset;',
-  } as const;
-}
-
-type BorderRightWidthCssKeywords = Readonly<ReturnType<typeof borderRightWidthKeywords>>;
-export interface BorderRightWidthCss extends BorderRightWidthCssKeywords {}
 /** CSS 属性 border-right-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-width
  */
 export class BorderRightWidthCss extends LengthCssProperty<Property.BorderRightWidth> {
+  readonly inherit = 'border-right-width:inherit;';
+  readonly initial = 'border-right-width:initial;';
+  readonly medium = 'border-right-width:medium;';
+  readonly revert = 'border-right-width:revert;';
+  readonly revertLayer = 'border-right-width:revert-layer;';
+  readonly thick = 'border-right-width:thick;';
+  readonly thin = 'border-right-width:thin;';
+  readonly unset = 'border-right-width:unset;';
   constructor() {
     super('border-right-width');
-    initializeBorderRightWidthCss();
   }
 }
-let borderRightWidthReady = false;
-function initializeBorderRightWidthCss(): void {
-  if (borderRightWidthReady) return;
-  Object.assign(BorderRightWidthCss.prototype, borderRightWidthKeywords());
-  Object.freeze(BorderRightWidthCss.prototype);
-  borderRightWidthReady = true;
-}
 
-function borderSpacingKeywords() {
-  return {
-    inherit: 'border-spacing:inherit;',
-    initial: 'border-spacing:initial;',
-    revert: 'border-spacing:revert;',
-    revertLayer: 'border-spacing:revert-layer;',
-    unset: 'border-spacing:unset;',
-  } as const;
-}
-
-type BorderSpacingCssKeywords = Readonly<ReturnType<typeof borderSpacingKeywords>>;
-export interface BorderSpacingCss extends BorderSpacingCssKeywords {}
 /** CSS 属性 border-spacing；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-spacing
  */
 export class BorderSpacingCss extends LengthCssProperty<Property.BorderSpacing> {
+  readonly inherit = 'border-spacing:inherit;';
+  readonly initial = 'border-spacing:initial;';
+  readonly revert = 'border-spacing:revert;';
+  readonly revertLayer = 'border-spacing:revert-layer;';
+  readonly unset = 'border-spacing:unset;';
   constructor() {
     super('border-spacing');
-    initializeBorderSpacingCss();
   }
 }
-let borderSpacingReady = false;
-function initializeBorderSpacingCss(): void {
-  if (borderSpacingReady) return;
-  Object.assign(BorderSpacingCss.prototype, borderSpacingKeywords());
-  Object.freeze(BorderSpacingCss.prototype);
-  borderSpacingReady = true;
-}
 
-function borderStartEndRadiusKeywords() {
-  return {
-    inherit: 'border-start-end-radius:inherit;',
-    initial: 'border-start-end-radius:initial;',
-    revert: 'border-start-end-radius:revert;',
-    revertLayer: 'border-start-end-radius:revert-layer;',
-    unset: 'border-start-end-radius:unset;',
-  } as const;
-}
-
-type BorderStartEndRadiusCssKeywords = Readonly<ReturnType<typeof borderStartEndRadiusKeywords>>;
-export interface BorderStartEndRadiusCss extends BorderStartEndRadiusCssKeywords {}
 /** CSS 属性 border-start-end-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
  */
 export class BorderStartEndRadiusCss extends LengthCssProperty<Property.BorderStartEndRadius> {
+  readonly inherit = 'border-start-end-radius:inherit;';
+  readonly initial = 'border-start-end-radius:initial;';
+  readonly revert = 'border-start-end-radius:revert;';
+  readonly revertLayer = 'border-start-end-radius:revert-layer;';
+  readonly unset = 'border-start-end-radius:unset;';
   constructor() {
     super('border-start-end-radius');
-    initializeBorderStartEndRadiusCss();
   }
 }
-let borderStartEndRadiusReady = false;
-function initializeBorderStartEndRadiusCss(): void {
-  if (borderStartEndRadiusReady) return;
-  Object.assign(BorderStartEndRadiusCss.prototype, borderStartEndRadiusKeywords());
-  Object.freeze(BorderStartEndRadiusCss.prototype);
-  borderStartEndRadiusReady = true;
-}
 
-function borderStartStartRadiusKeywords() {
-  return {
-    inherit: 'border-start-start-radius:inherit;',
-    initial: 'border-start-start-radius:initial;',
-    revert: 'border-start-start-radius:revert;',
-    revertLayer: 'border-start-start-radius:revert-layer;',
-    unset: 'border-start-start-radius:unset;',
-  } as const;
-}
-
-type BorderStartStartRadiusCssKeywords = Readonly<
-  ReturnType<typeof borderStartStartRadiusKeywords>
->;
-export interface BorderStartStartRadiusCss extends BorderStartStartRadiusCssKeywords {}
 /** CSS 属性 border-start-start-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
  */
 export class BorderStartStartRadiusCss extends LengthCssProperty<Property.BorderStartStartRadius> {
+  readonly inherit = 'border-start-start-radius:inherit;';
+  readonly initial = 'border-start-start-radius:initial;';
+  readonly revert = 'border-start-start-radius:revert;';
+  readonly revertLayer = 'border-start-start-radius:revert-layer;';
+  readonly unset = 'border-start-start-radius:unset;';
   constructor() {
     super('border-start-start-radius');
-    initializeBorderStartStartRadiusCss();
   }
 }
-let borderStartStartRadiusReady = false;
-function initializeBorderStartStartRadiusCss(): void {
-  if (borderStartStartRadiusReady) return;
-  Object.assign(BorderStartStartRadiusCss.prototype, borderStartStartRadiusKeywords());
-  Object.freeze(BorderStartStartRadiusCss.prototype);
-  borderStartStartRadiusReady = true;
-}
 
-function borderStyleKeywords() {
-  return {
-    dashed: 'border-style:dashed;',
-    dotted: 'border-style:dotted;',
-    double: 'border-style:double;',
-    groove: 'border-style:groove;',
-    hidden: 'border-style:hidden;',
-    inherit: 'border-style:inherit;',
-    initial: 'border-style:initial;',
-    inset: 'border-style:inset;',
-    none: 'border-style:none;',
-    outset: 'border-style:outset;',
-    revert: 'border-style:revert;',
-    revertLayer: 'border-style:revert-layer;',
-    ridge: 'border-style:ridge;',
-    solid: 'border-style:solid;',
-    unset: 'border-style:unset;',
-  } as const;
-}
-
-type BorderStyleCssKeywords = Readonly<ReturnType<typeof borderStyleKeywords>>;
-export interface BorderStyleCss extends BorderStyleCssKeywords {}
 /** CSS 属性 border-style。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-style
  */
 export class BorderStyleCss extends CssProperty<Property.BorderStyle> {
+  readonly dashed = 'border-style:dashed;';
+  readonly dotted = 'border-style:dotted;';
+  readonly double = 'border-style:double;';
+  readonly groove = 'border-style:groove;';
+  readonly hidden = 'border-style:hidden;';
+  readonly inherit = 'border-style:inherit;';
+  readonly initial = 'border-style:initial;';
+  readonly inset = 'border-style:inset;';
+  readonly none = 'border-style:none;';
+  readonly outset = 'border-style:outset;';
+  readonly revert = 'border-style:revert;';
+  readonly revertLayer = 'border-style:revert-layer;';
+  readonly ridge = 'border-style:ridge;';
+  readonly solid = 'border-style:solid;';
+  readonly unset = 'border-style:unset;';
   constructor() {
     super('border-style');
-    initializeBorderStyleCss();
   }
 }
-let borderStyleReady = false;
-function initializeBorderStyleCss(): void {
-  if (borderStyleReady) return;
-  Object.assign(BorderStyleCss.prototype, borderStyleKeywords());
-  Object.freeze(BorderStyleCss.prototype);
-  borderStyleReady = true;
-}
 
-function borderTopKeywords() {
-  return {
-    AccentColor: 'border-top:AccentColor;',
-    AccentColorText: 'border-top:AccentColorText;',
-    ActiveBorder: 'border-top:ActiveBorder;',
-    ActiveCaption: 'border-top:ActiveCaption;',
-    ActiveText: 'border-top:ActiveText;',
-    AppWorkspace: 'border-top:AppWorkspace;',
-    Background: 'border-top:Background;',
-    ButtonBorder: 'border-top:ButtonBorder;',
-    ButtonFace: 'border-top:ButtonFace;',
-    ButtonHighlight: 'border-top:ButtonHighlight;',
-    ButtonShadow: 'border-top:ButtonShadow;',
-    ButtonText: 'border-top:ButtonText;',
-    Canvas: 'border-top:Canvas;',
-    CanvasText: 'border-top:CanvasText;',
-    CaptionText: 'border-top:CaptionText;',
-    Field: 'border-top:Field;',
-    FieldText: 'border-top:FieldText;',
-    GrayText: 'border-top:GrayText;',
-    Highlight: 'border-top:Highlight;',
-    HighlightText: 'border-top:HighlightText;',
-    InactiveBorder: 'border-top:InactiveBorder;',
-    InactiveCaption: 'border-top:InactiveCaption;',
-    InactiveCaptionText: 'border-top:InactiveCaptionText;',
-    InfoBackground: 'border-top:InfoBackground;',
-    InfoText: 'border-top:InfoText;',
-    LinkText: 'border-top:LinkText;',
-    Mark: 'border-top:Mark;',
-    MarkText: 'border-top:MarkText;',
-    Menu: 'border-top:Menu;',
-    MenuText: 'border-top:MenuText;',
-    Scrollbar: 'border-top:Scrollbar;',
-    SelectedItem: 'border-top:SelectedItem;',
-    SelectedItemText: 'border-top:SelectedItemText;',
-    ThreeDDarkShadow: 'border-top:ThreeDDarkShadow;',
-    ThreeDFace: 'border-top:ThreeDFace;',
-    ThreeDHighlight: 'border-top:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-top:ThreeDLightShadow;',
-    ThreeDShadow: 'border-top:ThreeDShadow;',
-    VisitedText: 'border-top:VisitedText;',
-    Window: 'border-top:Window;',
-    WindowFrame: 'border-top:WindowFrame;',
-    WindowText: 'border-top:WindowText;',
-    aliceblue: 'border-top:aliceblue;',
-    antiquewhite: 'border-top:antiquewhite;',
-    aqua: 'border-top:aqua;',
-    aquamarine: 'border-top:aquamarine;',
-    azure: 'border-top:azure;',
-    beige: 'border-top:beige;',
-    bisque: 'border-top:bisque;',
-    black: 'border-top:black;',
-    blanchedalmond: 'border-top:blanchedalmond;',
-    blue: 'border-top:blue;',
-    blueviolet: 'border-top:blueviolet;',
-    brown: 'border-top:brown;',
-    burlywood: 'border-top:burlywood;',
-    cadetblue: 'border-top:cadetblue;',
-    chartreuse: 'border-top:chartreuse;',
-    chocolate: 'border-top:chocolate;',
-    coral: 'border-top:coral;',
-    cornflowerblue: 'border-top:cornflowerblue;',
-    cornsilk: 'border-top:cornsilk;',
-    crimson: 'border-top:crimson;',
-    currentColor: 'border-top:currentColor;',
-    cyan: 'border-top:cyan;',
-    darkblue: 'border-top:darkblue;',
-    darkcyan: 'border-top:darkcyan;',
-    darkgoldenrod: 'border-top:darkgoldenrod;',
-    darkgray: 'border-top:darkgray;',
-    darkgreen: 'border-top:darkgreen;',
-    darkgrey: 'border-top:darkgrey;',
-    darkkhaki: 'border-top:darkkhaki;',
-    darkmagenta: 'border-top:darkmagenta;',
-    darkolivegreen: 'border-top:darkolivegreen;',
-    darkorange: 'border-top:darkorange;',
-    darkorchid: 'border-top:darkorchid;',
-    darkred: 'border-top:darkred;',
-    darksalmon: 'border-top:darksalmon;',
-    darkseagreen: 'border-top:darkseagreen;',
-    darkslateblue: 'border-top:darkslateblue;',
-    darkslategray: 'border-top:darkslategray;',
-    darkslategrey: 'border-top:darkslategrey;',
-    darkturquoise: 'border-top:darkturquoise;',
-    darkviolet: 'border-top:darkviolet;',
-    dashed: 'border-top:dashed;',
-    deeppink: 'border-top:deeppink;',
-    deepskyblue: 'border-top:deepskyblue;',
-    dimgray: 'border-top:dimgray;',
-    dimgrey: 'border-top:dimgrey;',
-    dodgerblue: 'border-top:dodgerblue;',
-    dotted: 'border-top:dotted;',
-    double: 'border-top:double;',
-    firebrick: 'border-top:firebrick;',
-    floralwhite: 'border-top:floralwhite;',
-    forestgreen: 'border-top:forestgreen;',
-    fuchsia: 'border-top:fuchsia;',
-    gainsboro: 'border-top:gainsboro;',
-    ghostwhite: 'border-top:ghostwhite;',
-    gold: 'border-top:gold;',
-    goldenrod: 'border-top:goldenrod;',
-    gray: 'border-top:gray;',
-    green: 'border-top:green;',
-    greenyellow: 'border-top:greenyellow;',
-    grey: 'border-top:grey;',
-    groove: 'border-top:groove;',
-    hidden: 'border-top:hidden;',
-    honeydew: 'border-top:honeydew;',
-    hotpink: 'border-top:hotpink;',
-    indianred: 'border-top:indianred;',
-    indigo: 'border-top:indigo;',
-    inherit: 'border-top:inherit;',
-    initial: 'border-top:initial;',
-    inset: 'border-top:inset;',
-    ivory: 'border-top:ivory;',
-    khaki: 'border-top:khaki;',
-    lavender: 'border-top:lavender;',
-    lavenderblush: 'border-top:lavenderblush;',
-    lawngreen: 'border-top:lawngreen;',
-    lemonchiffon: 'border-top:lemonchiffon;',
-    lightblue: 'border-top:lightblue;',
-    lightcoral: 'border-top:lightcoral;',
-    lightcyan: 'border-top:lightcyan;',
-    lightgoldenrodyellow: 'border-top:lightgoldenrodyellow;',
-    lightgray: 'border-top:lightgray;',
-    lightgreen: 'border-top:lightgreen;',
-    lightgrey: 'border-top:lightgrey;',
-    lightpink: 'border-top:lightpink;',
-    lightsalmon: 'border-top:lightsalmon;',
-    lightseagreen: 'border-top:lightseagreen;',
-    lightskyblue: 'border-top:lightskyblue;',
-    lightslategray: 'border-top:lightslategray;',
-    lightslategrey: 'border-top:lightslategrey;',
-    lightsteelblue: 'border-top:lightsteelblue;',
-    lightyellow: 'border-top:lightyellow;',
-    lime: 'border-top:lime;',
-    limegreen: 'border-top:limegreen;',
-    linen: 'border-top:linen;',
-    magenta: 'border-top:magenta;',
-    maroon: 'border-top:maroon;',
-    medium: 'border-top:medium;',
-    mediumaquamarine: 'border-top:mediumaquamarine;',
-    mediumblue: 'border-top:mediumblue;',
-    mediumorchid: 'border-top:mediumorchid;',
-    mediumpurple: 'border-top:mediumpurple;',
-    mediumseagreen: 'border-top:mediumseagreen;',
-    mediumslateblue: 'border-top:mediumslateblue;',
-    mediumspringgreen: 'border-top:mediumspringgreen;',
-    mediumturquoise: 'border-top:mediumturquoise;',
-    mediumvioletred: 'border-top:mediumvioletred;',
-    midnightblue: 'border-top:midnightblue;',
-    mintcream: 'border-top:mintcream;',
-    mistyrose: 'border-top:mistyrose;',
-    moccasin: 'border-top:moccasin;',
-    navajowhite: 'border-top:navajowhite;',
-    navy: 'border-top:navy;',
-    none: 'border-top:none;',
-    oldlace: 'border-top:oldlace;',
-    olive: 'border-top:olive;',
-    olivedrab: 'border-top:olivedrab;',
-    orange: 'border-top:orange;',
-    orangered: 'border-top:orangered;',
-    orchid: 'border-top:orchid;',
-    outset: 'border-top:outset;',
-    palegoldenrod: 'border-top:palegoldenrod;',
-    palegreen: 'border-top:palegreen;',
-    paleturquoise: 'border-top:paleturquoise;',
-    palevioletred: 'border-top:palevioletred;',
-    papayawhip: 'border-top:papayawhip;',
-    peachpuff: 'border-top:peachpuff;',
-    peru: 'border-top:peru;',
-    pink: 'border-top:pink;',
-    plum: 'border-top:plum;',
-    powderblue: 'border-top:powderblue;',
-    purple: 'border-top:purple;',
-    rebeccapurple: 'border-top:rebeccapurple;',
-    red: 'border-top:red;',
-    revert: 'border-top:revert;',
-    revertLayer: 'border-top:revert-layer;',
-    ridge: 'border-top:ridge;',
-    rosybrown: 'border-top:rosybrown;',
-    royalblue: 'border-top:royalblue;',
-    saddlebrown: 'border-top:saddlebrown;',
-    salmon: 'border-top:salmon;',
-    sandybrown: 'border-top:sandybrown;',
-    seagreen: 'border-top:seagreen;',
-    seashell: 'border-top:seashell;',
-    sienna: 'border-top:sienna;',
-    silver: 'border-top:silver;',
-    skyblue: 'border-top:skyblue;',
-    slateblue: 'border-top:slateblue;',
-    slategray: 'border-top:slategray;',
-    slategrey: 'border-top:slategrey;',
-    snow: 'border-top:snow;',
-    solid: 'border-top:solid;',
-    springgreen: 'border-top:springgreen;',
-    steelblue: 'border-top:steelblue;',
-    tan: 'border-top:tan;',
-    teal: 'border-top:teal;',
-    thick: 'border-top:thick;',
-    thin: 'border-top:thin;',
-    thistle: 'border-top:thistle;',
-    tomato: 'border-top:tomato;',
-    transparent: 'border-top:transparent;',
-    turquoise: 'border-top:turquoise;',
-    unset: 'border-top:unset;',
-    violet: 'border-top:violet;',
-    wheat: 'border-top:wheat;',
-    white: 'border-top:white;',
-    whitesmoke: 'border-top:whitesmoke;',
-    yellow: 'border-top:yellow;',
-    yellowgreen: 'border-top:yellowgreen;',
-  } as const;
-}
-
-type BorderTopCssKeywords = Readonly<ReturnType<typeof borderTopKeywords>>;
-export interface BorderTopCss extends BorderTopCssKeywords {}
 /** CSS 属性 border-top。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
  */
 export class BorderTopCss extends LengthCssProperty<Property.BorderTop> {
+  readonly AccentColor = 'border-top:AccentColor;';
+  readonly AccentColorText = 'border-top:AccentColorText;';
+  readonly ActiveBorder = 'border-top:ActiveBorder;';
+  readonly ActiveCaption = 'border-top:ActiveCaption;';
+  readonly ActiveText = 'border-top:ActiveText;';
+  readonly AppWorkspace = 'border-top:AppWorkspace;';
+  readonly Background = 'border-top:Background;';
+  readonly ButtonBorder = 'border-top:ButtonBorder;';
+  readonly ButtonFace = 'border-top:ButtonFace;';
+  readonly ButtonHighlight = 'border-top:ButtonHighlight;';
+  readonly ButtonShadow = 'border-top:ButtonShadow;';
+  readonly ButtonText = 'border-top:ButtonText;';
+  readonly Canvas = 'border-top:Canvas;';
+  readonly CanvasText = 'border-top:CanvasText;';
+  readonly CaptionText = 'border-top:CaptionText;';
+  readonly Field = 'border-top:Field;';
+  readonly FieldText = 'border-top:FieldText;';
+  readonly GrayText = 'border-top:GrayText;';
+  readonly Highlight = 'border-top:Highlight;';
+  readonly HighlightText = 'border-top:HighlightText;';
+  readonly InactiveBorder = 'border-top:InactiveBorder;';
+  readonly InactiveCaption = 'border-top:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-top:InactiveCaptionText;';
+  readonly InfoBackground = 'border-top:InfoBackground;';
+  readonly InfoText = 'border-top:InfoText;';
+  readonly LinkText = 'border-top:LinkText;';
+  readonly Mark = 'border-top:Mark;';
+  readonly MarkText = 'border-top:MarkText;';
+  readonly Menu = 'border-top:Menu;';
+  readonly MenuText = 'border-top:MenuText;';
+  readonly Scrollbar = 'border-top:Scrollbar;';
+  readonly SelectedItem = 'border-top:SelectedItem;';
+  readonly SelectedItemText = 'border-top:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-top:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-top:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-top:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-top:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-top:ThreeDShadow;';
+  readonly VisitedText = 'border-top:VisitedText;';
+  readonly Window = 'border-top:Window;';
+  readonly WindowFrame = 'border-top:WindowFrame;';
+  readonly WindowText = 'border-top:WindowText;';
+  readonly aliceblue = 'border-top:aliceblue;';
+  readonly antiquewhite = 'border-top:antiquewhite;';
+  readonly aqua = 'border-top:aqua;';
+  readonly aquamarine = 'border-top:aquamarine;';
+  readonly azure = 'border-top:azure;';
+  readonly beige = 'border-top:beige;';
+  readonly bisque = 'border-top:bisque;';
+  readonly black = 'border-top:black;';
+  readonly blanchedalmond = 'border-top:blanchedalmond;';
+  readonly blue = 'border-top:blue;';
+  readonly blueviolet = 'border-top:blueviolet;';
+  readonly brown = 'border-top:brown;';
+  readonly burlywood = 'border-top:burlywood;';
+  readonly cadetblue = 'border-top:cadetblue;';
+  readonly chartreuse = 'border-top:chartreuse;';
+  readonly chocolate = 'border-top:chocolate;';
+  readonly coral = 'border-top:coral;';
+  readonly cornflowerblue = 'border-top:cornflowerblue;';
+  readonly cornsilk = 'border-top:cornsilk;';
+  readonly crimson = 'border-top:crimson;';
+  readonly currentColor = 'border-top:currentColor;';
+  readonly cyan = 'border-top:cyan;';
+  readonly darkblue = 'border-top:darkblue;';
+  readonly darkcyan = 'border-top:darkcyan;';
+  readonly darkgoldenrod = 'border-top:darkgoldenrod;';
+  readonly darkgray = 'border-top:darkgray;';
+  readonly darkgreen = 'border-top:darkgreen;';
+  readonly darkgrey = 'border-top:darkgrey;';
+  readonly darkkhaki = 'border-top:darkkhaki;';
+  readonly darkmagenta = 'border-top:darkmagenta;';
+  readonly darkolivegreen = 'border-top:darkolivegreen;';
+  readonly darkorange = 'border-top:darkorange;';
+  readonly darkorchid = 'border-top:darkorchid;';
+  readonly darkred = 'border-top:darkred;';
+  readonly darksalmon = 'border-top:darksalmon;';
+  readonly darkseagreen = 'border-top:darkseagreen;';
+  readonly darkslateblue = 'border-top:darkslateblue;';
+  readonly darkslategray = 'border-top:darkslategray;';
+  readonly darkslategrey = 'border-top:darkslategrey;';
+  readonly darkturquoise = 'border-top:darkturquoise;';
+  readonly darkviolet = 'border-top:darkviolet;';
+  readonly dashed = 'border-top:dashed;';
+  readonly deeppink = 'border-top:deeppink;';
+  readonly deepskyblue = 'border-top:deepskyblue;';
+  readonly dimgray = 'border-top:dimgray;';
+  readonly dimgrey = 'border-top:dimgrey;';
+  readonly dodgerblue = 'border-top:dodgerblue;';
+  readonly dotted = 'border-top:dotted;';
+  readonly double = 'border-top:double;';
+  readonly firebrick = 'border-top:firebrick;';
+  readonly floralwhite = 'border-top:floralwhite;';
+  readonly forestgreen = 'border-top:forestgreen;';
+  readonly fuchsia = 'border-top:fuchsia;';
+  readonly gainsboro = 'border-top:gainsboro;';
+  readonly ghostwhite = 'border-top:ghostwhite;';
+  readonly gold = 'border-top:gold;';
+  readonly goldenrod = 'border-top:goldenrod;';
+  readonly gray = 'border-top:gray;';
+  readonly green = 'border-top:green;';
+  readonly greenyellow = 'border-top:greenyellow;';
+  readonly grey = 'border-top:grey;';
+  readonly groove = 'border-top:groove;';
+  readonly hidden = 'border-top:hidden;';
+  readonly honeydew = 'border-top:honeydew;';
+  readonly hotpink = 'border-top:hotpink;';
+  readonly indianred = 'border-top:indianred;';
+  readonly indigo = 'border-top:indigo;';
+  readonly inherit = 'border-top:inherit;';
+  readonly initial = 'border-top:initial;';
+  readonly inset = 'border-top:inset;';
+  readonly ivory = 'border-top:ivory;';
+  readonly khaki = 'border-top:khaki;';
+  readonly lavender = 'border-top:lavender;';
+  readonly lavenderblush = 'border-top:lavenderblush;';
+  readonly lawngreen = 'border-top:lawngreen;';
+  readonly lemonchiffon = 'border-top:lemonchiffon;';
+  readonly lightblue = 'border-top:lightblue;';
+  readonly lightcoral = 'border-top:lightcoral;';
+  readonly lightcyan = 'border-top:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-top:lightgoldenrodyellow;';
+  readonly lightgray = 'border-top:lightgray;';
+  readonly lightgreen = 'border-top:lightgreen;';
+  readonly lightgrey = 'border-top:lightgrey;';
+  readonly lightpink = 'border-top:lightpink;';
+  readonly lightsalmon = 'border-top:lightsalmon;';
+  readonly lightseagreen = 'border-top:lightseagreen;';
+  readonly lightskyblue = 'border-top:lightskyblue;';
+  readonly lightslategray = 'border-top:lightslategray;';
+  readonly lightslategrey = 'border-top:lightslategrey;';
+  readonly lightsteelblue = 'border-top:lightsteelblue;';
+  readonly lightyellow = 'border-top:lightyellow;';
+  readonly lime = 'border-top:lime;';
+  readonly limegreen = 'border-top:limegreen;';
+  readonly linen = 'border-top:linen;';
+  readonly magenta = 'border-top:magenta;';
+  readonly maroon = 'border-top:maroon;';
+  readonly medium = 'border-top:medium;';
+  readonly mediumaquamarine = 'border-top:mediumaquamarine;';
+  readonly mediumblue = 'border-top:mediumblue;';
+  readonly mediumorchid = 'border-top:mediumorchid;';
+  readonly mediumpurple = 'border-top:mediumpurple;';
+  readonly mediumseagreen = 'border-top:mediumseagreen;';
+  readonly mediumslateblue = 'border-top:mediumslateblue;';
+  readonly mediumspringgreen = 'border-top:mediumspringgreen;';
+  readonly mediumturquoise = 'border-top:mediumturquoise;';
+  readonly mediumvioletred = 'border-top:mediumvioletred;';
+  readonly midnightblue = 'border-top:midnightblue;';
+  readonly mintcream = 'border-top:mintcream;';
+  readonly mistyrose = 'border-top:mistyrose;';
+  readonly moccasin = 'border-top:moccasin;';
+  readonly navajowhite = 'border-top:navajowhite;';
+  readonly navy = 'border-top:navy;';
+  readonly none = 'border-top:none;';
+  readonly oldlace = 'border-top:oldlace;';
+  readonly olive = 'border-top:olive;';
+  readonly olivedrab = 'border-top:olivedrab;';
+  readonly orange = 'border-top:orange;';
+  readonly orangered = 'border-top:orangered;';
+  readonly orchid = 'border-top:orchid;';
+  readonly outset = 'border-top:outset;';
+  readonly palegoldenrod = 'border-top:palegoldenrod;';
+  readonly palegreen = 'border-top:palegreen;';
+  readonly paleturquoise = 'border-top:paleturquoise;';
+  readonly palevioletred = 'border-top:palevioletred;';
+  readonly papayawhip = 'border-top:papayawhip;';
+  readonly peachpuff = 'border-top:peachpuff;';
+  readonly peru = 'border-top:peru;';
+  readonly pink = 'border-top:pink;';
+  readonly plum = 'border-top:plum;';
+  readonly powderblue = 'border-top:powderblue;';
+  readonly purple = 'border-top:purple;';
+  readonly rebeccapurple = 'border-top:rebeccapurple;';
+  readonly red = 'border-top:red;';
+  readonly revert = 'border-top:revert;';
+  readonly revertLayer = 'border-top:revert-layer;';
+  readonly ridge = 'border-top:ridge;';
+  readonly rosybrown = 'border-top:rosybrown;';
+  readonly royalblue = 'border-top:royalblue;';
+  readonly saddlebrown = 'border-top:saddlebrown;';
+  readonly salmon = 'border-top:salmon;';
+  readonly sandybrown = 'border-top:sandybrown;';
+  readonly seagreen = 'border-top:seagreen;';
+  readonly seashell = 'border-top:seashell;';
+  readonly sienna = 'border-top:sienna;';
+  readonly silver = 'border-top:silver;';
+  readonly skyblue = 'border-top:skyblue;';
+  readonly slateblue = 'border-top:slateblue;';
+  readonly slategray = 'border-top:slategray;';
+  readonly slategrey = 'border-top:slategrey;';
+  readonly snow = 'border-top:snow;';
+  readonly solid = 'border-top:solid;';
+  readonly springgreen = 'border-top:springgreen;';
+  readonly steelblue = 'border-top:steelblue;';
+  readonly tan = 'border-top:tan;';
+  readonly teal = 'border-top:teal;';
+  readonly thick = 'border-top:thick;';
+  readonly thin = 'border-top:thin;';
+  readonly thistle = 'border-top:thistle;';
+  readonly tomato = 'border-top:tomato;';
+  readonly transparent = 'border-top:transparent;';
+  readonly turquoise = 'border-top:turquoise;';
+  readonly unset = 'border-top:unset;';
+  readonly violet = 'border-top:violet;';
+  readonly wheat = 'border-top:wheat;';
+  readonly white = 'border-top:white;';
+  readonly whitesmoke = 'border-top:whitesmoke;';
+  readonly yellow = 'border-top:yellow;';
+  readonly yellowgreen = 'border-top:yellowgreen;';
   constructor() {
     super('border-top');
-    initializeBorderTopCss();
   }
 }
-let borderTopReady = false;
-function initializeBorderTopCss(): void {
-  if (borderTopReady) return;
-  Object.assign(BorderTopCss.prototype, borderTopKeywords());
-  Object.freeze(BorderTopCss.prototype);
-  borderTopReady = true;
-}
 
-function borderTopColorKeywords() {
-  return {
-    AccentColor: 'border-top-color:AccentColor;',
-    AccentColorText: 'border-top-color:AccentColorText;',
-    ActiveBorder: 'border-top-color:ActiveBorder;',
-    ActiveCaption: 'border-top-color:ActiveCaption;',
-    ActiveText: 'border-top-color:ActiveText;',
-    AppWorkspace: 'border-top-color:AppWorkspace;',
-    Background: 'border-top-color:Background;',
-    ButtonBorder: 'border-top-color:ButtonBorder;',
-    ButtonFace: 'border-top-color:ButtonFace;',
-    ButtonHighlight: 'border-top-color:ButtonHighlight;',
-    ButtonShadow: 'border-top-color:ButtonShadow;',
-    ButtonText: 'border-top-color:ButtonText;',
-    Canvas: 'border-top-color:Canvas;',
-    CanvasText: 'border-top-color:CanvasText;',
-    CaptionText: 'border-top-color:CaptionText;',
-    Field: 'border-top-color:Field;',
-    FieldText: 'border-top-color:FieldText;',
-    GrayText: 'border-top-color:GrayText;',
-    Highlight: 'border-top-color:Highlight;',
-    HighlightText: 'border-top-color:HighlightText;',
-    InactiveBorder: 'border-top-color:InactiveBorder;',
-    InactiveCaption: 'border-top-color:InactiveCaption;',
-    InactiveCaptionText: 'border-top-color:InactiveCaptionText;',
-    InfoBackground: 'border-top-color:InfoBackground;',
-    InfoText: 'border-top-color:InfoText;',
-    LinkText: 'border-top-color:LinkText;',
-    Mark: 'border-top-color:Mark;',
-    MarkText: 'border-top-color:MarkText;',
-    Menu: 'border-top-color:Menu;',
-    MenuText: 'border-top-color:MenuText;',
-    Scrollbar: 'border-top-color:Scrollbar;',
-    SelectedItem: 'border-top-color:SelectedItem;',
-    SelectedItemText: 'border-top-color:SelectedItemText;',
-    ThreeDDarkShadow: 'border-top-color:ThreeDDarkShadow;',
-    ThreeDFace: 'border-top-color:ThreeDFace;',
-    ThreeDHighlight: 'border-top-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'border-top-color:ThreeDLightShadow;',
-    ThreeDShadow: 'border-top-color:ThreeDShadow;',
-    VisitedText: 'border-top-color:VisitedText;',
-    Window: 'border-top-color:Window;',
-    WindowFrame: 'border-top-color:WindowFrame;',
-    WindowText: 'border-top-color:WindowText;',
-    aliceblue: 'border-top-color:aliceblue;',
-    antiquewhite: 'border-top-color:antiquewhite;',
-    aqua: 'border-top-color:aqua;',
-    aquamarine: 'border-top-color:aquamarine;',
-    azure: 'border-top-color:azure;',
-    beige: 'border-top-color:beige;',
-    bisque: 'border-top-color:bisque;',
-    black: 'border-top-color:black;',
-    blanchedalmond: 'border-top-color:blanchedalmond;',
-    blue: 'border-top-color:blue;',
-    blueviolet: 'border-top-color:blueviolet;',
-    brown: 'border-top-color:brown;',
-    burlywood: 'border-top-color:burlywood;',
-    cadetblue: 'border-top-color:cadetblue;',
-    chartreuse: 'border-top-color:chartreuse;',
-    chocolate: 'border-top-color:chocolate;',
-    coral: 'border-top-color:coral;',
-    cornflowerblue: 'border-top-color:cornflowerblue;',
-    cornsilk: 'border-top-color:cornsilk;',
-    crimson: 'border-top-color:crimson;',
-    currentColor: 'border-top-color:currentColor;',
-    cyan: 'border-top-color:cyan;',
-    darkblue: 'border-top-color:darkblue;',
-    darkcyan: 'border-top-color:darkcyan;',
-    darkgoldenrod: 'border-top-color:darkgoldenrod;',
-    darkgray: 'border-top-color:darkgray;',
-    darkgreen: 'border-top-color:darkgreen;',
-    darkgrey: 'border-top-color:darkgrey;',
-    darkkhaki: 'border-top-color:darkkhaki;',
-    darkmagenta: 'border-top-color:darkmagenta;',
-    darkolivegreen: 'border-top-color:darkolivegreen;',
-    darkorange: 'border-top-color:darkorange;',
-    darkorchid: 'border-top-color:darkorchid;',
-    darkred: 'border-top-color:darkred;',
-    darksalmon: 'border-top-color:darksalmon;',
-    darkseagreen: 'border-top-color:darkseagreen;',
-    darkslateblue: 'border-top-color:darkslateblue;',
-    darkslategray: 'border-top-color:darkslategray;',
-    darkslategrey: 'border-top-color:darkslategrey;',
-    darkturquoise: 'border-top-color:darkturquoise;',
-    darkviolet: 'border-top-color:darkviolet;',
-    deeppink: 'border-top-color:deeppink;',
-    deepskyblue: 'border-top-color:deepskyblue;',
-    dimgray: 'border-top-color:dimgray;',
-    dimgrey: 'border-top-color:dimgrey;',
-    dodgerblue: 'border-top-color:dodgerblue;',
-    firebrick: 'border-top-color:firebrick;',
-    floralwhite: 'border-top-color:floralwhite;',
-    forestgreen: 'border-top-color:forestgreen;',
-    fuchsia: 'border-top-color:fuchsia;',
-    gainsboro: 'border-top-color:gainsboro;',
-    ghostwhite: 'border-top-color:ghostwhite;',
-    gold: 'border-top-color:gold;',
-    goldenrod: 'border-top-color:goldenrod;',
-    gray: 'border-top-color:gray;',
-    green: 'border-top-color:green;',
-    greenyellow: 'border-top-color:greenyellow;',
-    grey: 'border-top-color:grey;',
-    honeydew: 'border-top-color:honeydew;',
-    hotpink: 'border-top-color:hotpink;',
-    indianred: 'border-top-color:indianred;',
-    indigo: 'border-top-color:indigo;',
-    inherit: 'border-top-color:inherit;',
-    initial: 'border-top-color:initial;',
-    ivory: 'border-top-color:ivory;',
-    khaki: 'border-top-color:khaki;',
-    lavender: 'border-top-color:lavender;',
-    lavenderblush: 'border-top-color:lavenderblush;',
-    lawngreen: 'border-top-color:lawngreen;',
-    lemonchiffon: 'border-top-color:lemonchiffon;',
-    lightblue: 'border-top-color:lightblue;',
-    lightcoral: 'border-top-color:lightcoral;',
-    lightcyan: 'border-top-color:lightcyan;',
-    lightgoldenrodyellow: 'border-top-color:lightgoldenrodyellow;',
-    lightgray: 'border-top-color:lightgray;',
-    lightgreen: 'border-top-color:lightgreen;',
-    lightgrey: 'border-top-color:lightgrey;',
-    lightpink: 'border-top-color:lightpink;',
-    lightsalmon: 'border-top-color:lightsalmon;',
-    lightseagreen: 'border-top-color:lightseagreen;',
-    lightskyblue: 'border-top-color:lightskyblue;',
-    lightslategray: 'border-top-color:lightslategray;',
-    lightslategrey: 'border-top-color:lightslategrey;',
-    lightsteelblue: 'border-top-color:lightsteelblue;',
-    lightyellow: 'border-top-color:lightyellow;',
-    lime: 'border-top-color:lime;',
-    limegreen: 'border-top-color:limegreen;',
-    linen: 'border-top-color:linen;',
-    magenta: 'border-top-color:magenta;',
-    maroon: 'border-top-color:maroon;',
-    mediumaquamarine: 'border-top-color:mediumaquamarine;',
-    mediumblue: 'border-top-color:mediumblue;',
-    mediumorchid: 'border-top-color:mediumorchid;',
-    mediumpurple: 'border-top-color:mediumpurple;',
-    mediumseagreen: 'border-top-color:mediumseagreen;',
-    mediumslateblue: 'border-top-color:mediumslateblue;',
-    mediumspringgreen: 'border-top-color:mediumspringgreen;',
-    mediumturquoise: 'border-top-color:mediumturquoise;',
-    mediumvioletred: 'border-top-color:mediumvioletred;',
-    midnightblue: 'border-top-color:midnightblue;',
-    mintcream: 'border-top-color:mintcream;',
-    mistyrose: 'border-top-color:mistyrose;',
-    moccasin: 'border-top-color:moccasin;',
-    navajowhite: 'border-top-color:navajowhite;',
-    navy: 'border-top-color:navy;',
-    oldlace: 'border-top-color:oldlace;',
-    olive: 'border-top-color:olive;',
-    olivedrab: 'border-top-color:olivedrab;',
-    orange: 'border-top-color:orange;',
-    orangered: 'border-top-color:orangered;',
-    orchid: 'border-top-color:orchid;',
-    palegoldenrod: 'border-top-color:palegoldenrod;',
-    palegreen: 'border-top-color:palegreen;',
-    paleturquoise: 'border-top-color:paleturquoise;',
-    palevioletred: 'border-top-color:palevioletred;',
-    papayawhip: 'border-top-color:papayawhip;',
-    peachpuff: 'border-top-color:peachpuff;',
-    peru: 'border-top-color:peru;',
-    pink: 'border-top-color:pink;',
-    plum: 'border-top-color:plum;',
-    powderblue: 'border-top-color:powderblue;',
-    purple: 'border-top-color:purple;',
-    rebeccapurple: 'border-top-color:rebeccapurple;',
-    red: 'border-top-color:red;',
-    revert: 'border-top-color:revert;',
-    revertLayer: 'border-top-color:revert-layer;',
-    rosybrown: 'border-top-color:rosybrown;',
-    royalblue: 'border-top-color:royalblue;',
-    saddlebrown: 'border-top-color:saddlebrown;',
-    salmon: 'border-top-color:salmon;',
-    sandybrown: 'border-top-color:sandybrown;',
-    seagreen: 'border-top-color:seagreen;',
-    seashell: 'border-top-color:seashell;',
-    sienna: 'border-top-color:sienna;',
-    silver: 'border-top-color:silver;',
-    skyblue: 'border-top-color:skyblue;',
-    slateblue: 'border-top-color:slateblue;',
-    slategray: 'border-top-color:slategray;',
-    slategrey: 'border-top-color:slategrey;',
-    snow: 'border-top-color:snow;',
-    springgreen: 'border-top-color:springgreen;',
-    steelblue: 'border-top-color:steelblue;',
-    tan: 'border-top-color:tan;',
-    teal: 'border-top-color:teal;',
-    thistle: 'border-top-color:thistle;',
-    tomato: 'border-top-color:tomato;',
-    transparent: 'border-top-color:transparent;',
-    turquoise: 'border-top-color:turquoise;',
-    unset: 'border-top-color:unset;',
-    violet: 'border-top-color:violet;',
-    wheat: 'border-top-color:wheat;',
-    white: 'border-top-color:white;',
-    whitesmoke: 'border-top-color:whitesmoke;',
-    yellow: 'border-top-color:yellow;',
-    yellowgreen: 'border-top-color:yellowgreen;',
-  } as const;
-}
-
-type BorderTopColorCssKeywords = Readonly<ReturnType<typeof borderTopColorKeywords>>;
-export interface BorderTopColorCss extends BorderTopColorCssKeywords {}
 /** CSS 属性 border-top-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-color
  */
 export class BorderTopColorCss extends CssProperty<Property.BorderTopColor> {
+  readonly AccentColor = 'border-top-color:AccentColor;';
+  readonly AccentColorText = 'border-top-color:AccentColorText;';
+  readonly ActiveBorder = 'border-top-color:ActiveBorder;';
+  readonly ActiveCaption = 'border-top-color:ActiveCaption;';
+  readonly ActiveText = 'border-top-color:ActiveText;';
+  readonly AppWorkspace = 'border-top-color:AppWorkspace;';
+  readonly Background = 'border-top-color:Background;';
+  readonly ButtonBorder = 'border-top-color:ButtonBorder;';
+  readonly ButtonFace = 'border-top-color:ButtonFace;';
+  readonly ButtonHighlight = 'border-top-color:ButtonHighlight;';
+  readonly ButtonShadow = 'border-top-color:ButtonShadow;';
+  readonly ButtonText = 'border-top-color:ButtonText;';
+  readonly Canvas = 'border-top-color:Canvas;';
+  readonly CanvasText = 'border-top-color:CanvasText;';
+  readonly CaptionText = 'border-top-color:CaptionText;';
+  readonly Field = 'border-top-color:Field;';
+  readonly FieldText = 'border-top-color:FieldText;';
+  readonly GrayText = 'border-top-color:GrayText;';
+  readonly Highlight = 'border-top-color:Highlight;';
+  readonly HighlightText = 'border-top-color:HighlightText;';
+  readonly InactiveBorder = 'border-top-color:InactiveBorder;';
+  readonly InactiveCaption = 'border-top-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'border-top-color:InactiveCaptionText;';
+  readonly InfoBackground = 'border-top-color:InfoBackground;';
+  readonly InfoText = 'border-top-color:InfoText;';
+  readonly LinkText = 'border-top-color:LinkText;';
+  readonly Mark = 'border-top-color:Mark;';
+  readonly MarkText = 'border-top-color:MarkText;';
+  readonly Menu = 'border-top-color:Menu;';
+  readonly MenuText = 'border-top-color:MenuText;';
+  readonly Scrollbar = 'border-top-color:Scrollbar;';
+  readonly SelectedItem = 'border-top-color:SelectedItem;';
+  readonly SelectedItemText = 'border-top-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'border-top-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'border-top-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'border-top-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'border-top-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'border-top-color:ThreeDShadow;';
+  readonly VisitedText = 'border-top-color:VisitedText;';
+  readonly Window = 'border-top-color:Window;';
+  readonly WindowFrame = 'border-top-color:WindowFrame;';
+  readonly WindowText = 'border-top-color:WindowText;';
+  readonly aliceblue = 'border-top-color:aliceblue;';
+  readonly antiquewhite = 'border-top-color:antiquewhite;';
+  readonly aqua = 'border-top-color:aqua;';
+  readonly aquamarine = 'border-top-color:aquamarine;';
+  readonly azure = 'border-top-color:azure;';
+  readonly beige = 'border-top-color:beige;';
+  readonly bisque = 'border-top-color:bisque;';
+  readonly black = 'border-top-color:black;';
+  readonly blanchedalmond = 'border-top-color:blanchedalmond;';
+  readonly blue = 'border-top-color:blue;';
+  readonly blueviolet = 'border-top-color:blueviolet;';
+  readonly brown = 'border-top-color:brown;';
+  readonly burlywood = 'border-top-color:burlywood;';
+  readonly cadetblue = 'border-top-color:cadetblue;';
+  readonly chartreuse = 'border-top-color:chartreuse;';
+  readonly chocolate = 'border-top-color:chocolate;';
+  readonly coral = 'border-top-color:coral;';
+  readonly cornflowerblue = 'border-top-color:cornflowerblue;';
+  readonly cornsilk = 'border-top-color:cornsilk;';
+  readonly crimson = 'border-top-color:crimson;';
+  readonly currentColor = 'border-top-color:currentColor;';
+  readonly cyan = 'border-top-color:cyan;';
+  readonly darkblue = 'border-top-color:darkblue;';
+  readonly darkcyan = 'border-top-color:darkcyan;';
+  readonly darkgoldenrod = 'border-top-color:darkgoldenrod;';
+  readonly darkgray = 'border-top-color:darkgray;';
+  readonly darkgreen = 'border-top-color:darkgreen;';
+  readonly darkgrey = 'border-top-color:darkgrey;';
+  readonly darkkhaki = 'border-top-color:darkkhaki;';
+  readonly darkmagenta = 'border-top-color:darkmagenta;';
+  readonly darkolivegreen = 'border-top-color:darkolivegreen;';
+  readonly darkorange = 'border-top-color:darkorange;';
+  readonly darkorchid = 'border-top-color:darkorchid;';
+  readonly darkred = 'border-top-color:darkred;';
+  readonly darksalmon = 'border-top-color:darksalmon;';
+  readonly darkseagreen = 'border-top-color:darkseagreen;';
+  readonly darkslateblue = 'border-top-color:darkslateblue;';
+  readonly darkslategray = 'border-top-color:darkslategray;';
+  readonly darkslategrey = 'border-top-color:darkslategrey;';
+  readonly darkturquoise = 'border-top-color:darkturquoise;';
+  readonly darkviolet = 'border-top-color:darkviolet;';
+  readonly deeppink = 'border-top-color:deeppink;';
+  readonly deepskyblue = 'border-top-color:deepskyblue;';
+  readonly dimgray = 'border-top-color:dimgray;';
+  readonly dimgrey = 'border-top-color:dimgrey;';
+  readonly dodgerblue = 'border-top-color:dodgerblue;';
+  readonly firebrick = 'border-top-color:firebrick;';
+  readonly floralwhite = 'border-top-color:floralwhite;';
+  readonly forestgreen = 'border-top-color:forestgreen;';
+  readonly fuchsia = 'border-top-color:fuchsia;';
+  readonly gainsboro = 'border-top-color:gainsboro;';
+  readonly ghostwhite = 'border-top-color:ghostwhite;';
+  readonly gold = 'border-top-color:gold;';
+  readonly goldenrod = 'border-top-color:goldenrod;';
+  readonly gray = 'border-top-color:gray;';
+  readonly green = 'border-top-color:green;';
+  readonly greenyellow = 'border-top-color:greenyellow;';
+  readonly grey = 'border-top-color:grey;';
+  readonly honeydew = 'border-top-color:honeydew;';
+  readonly hotpink = 'border-top-color:hotpink;';
+  readonly indianred = 'border-top-color:indianred;';
+  readonly indigo = 'border-top-color:indigo;';
+  readonly inherit = 'border-top-color:inherit;';
+  readonly initial = 'border-top-color:initial;';
+  readonly ivory = 'border-top-color:ivory;';
+  readonly khaki = 'border-top-color:khaki;';
+  readonly lavender = 'border-top-color:lavender;';
+  readonly lavenderblush = 'border-top-color:lavenderblush;';
+  readonly lawngreen = 'border-top-color:lawngreen;';
+  readonly lemonchiffon = 'border-top-color:lemonchiffon;';
+  readonly lightblue = 'border-top-color:lightblue;';
+  readonly lightcoral = 'border-top-color:lightcoral;';
+  readonly lightcyan = 'border-top-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'border-top-color:lightgoldenrodyellow;';
+  readonly lightgray = 'border-top-color:lightgray;';
+  readonly lightgreen = 'border-top-color:lightgreen;';
+  readonly lightgrey = 'border-top-color:lightgrey;';
+  readonly lightpink = 'border-top-color:lightpink;';
+  readonly lightsalmon = 'border-top-color:lightsalmon;';
+  readonly lightseagreen = 'border-top-color:lightseagreen;';
+  readonly lightskyblue = 'border-top-color:lightskyblue;';
+  readonly lightslategray = 'border-top-color:lightslategray;';
+  readonly lightslategrey = 'border-top-color:lightslategrey;';
+  readonly lightsteelblue = 'border-top-color:lightsteelblue;';
+  readonly lightyellow = 'border-top-color:lightyellow;';
+  readonly lime = 'border-top-color:lime;';
+  readonly limegreen = 'border-top-color:limegreen;';
+  readonly linen = 'border-top-color:linen;';
+  readonly magenta = 'border-top-color:magenta;';
+  readonly maroon = 'border-top-color:maroon;';
+  readonly mediumaquamarine = 'border-top-color:mediumaquamarine;';
+  readonly mediumblue = 'border-top-color:mediumblue;';
+  readonly mediumorchid = 'border-top-color:mediumorchid;';
+  readonly mediumpurple = 'border-top-color:mediumpurple;';
+  readonly mediumseagreen = 'border-top-color:mediumseagreen;';
+  readonly mediumslateblue = 'border-top-color:mediumslateblue;';
+  readonly mediumspringgreen = 'border-top-color:mediumspringgreen;';
+  readonly mediumturquoise = 'border-top-color:mediumturquoise;';
+  readonly mediumvioletred = 'border-top-color:mediumvioletred;';
+  readonly midnightblue = 'border-top-color:midnightblue;';
+  readonly mintcream = 'border-top-color:mintcream;';
+  readonly mistyrose = 'border-top-color:mistyrose;';
+  readonly moccasin = 'border-top-color:moccasin;';
+  readonly navajowhite = 'border-top-color:navajowhite;';
+  readonly navy = 'border-top-color:navy;';
+  readonly oldlace = 'border-top-color:oldlace;';
+  readonly olive = 'border-top-color:olive;';
+  readonly olivedrab = 'border-top-color:olivedrab;';
+  readonly orange = 'border-top-color:orange;';
+  readonly orangered = 'border-top-color:orangered;';
+  readonly orchid = 'border-top-color:orchid;';
+  readonly palegoldenrod = 'border-top-color:palegoldenrod;';
+  readonly palegreen = 'border-top-color:palegreen;';
+  readonly paleturquoise = 'border-top-color:paleturquoise;';
+  readonly palevioletred = 'border-top-color:palevioletred;';
+  readonly papayawhip = 'border-top-color:papayawhip;';
+  readonly peachpuff = 'border-top-color:peachpuff;';
+  readonly peru = 'border-top-color:peru;';
+  readonly pink = 'border-top-color:pink;';
+  readonly plum = 'border-top-color:plum;';
+  readonly powderblue = 'border-top-color:powderblue;';
+  readonly purple = 'border-top-color:purple;';
+  readonly rebeccapurple = 'border-top-color:rebeccapurple;';
+  readonly red = 'border-top-color:red;';
+  readonly revert = 'border-top-color:revert;';
+  readonly revertLayer = 'border-top-color:revert-layer;';
+  readonly rosybrown = 'border-top-color:rosybrown;';
+  readonly royalblue = 'border-top-color:royalblue;';
+  readonly saddlebrown = 'border-top-color:saddlebrown;';
+  readonly salmon = 'border-top-color:salmon;';
+  readonly sandybrown = 'border-top-color:sandybrown;';
+  readonly seagreen = 'border-top-color:seagreen;';
+  readonly seashell = 'border-top-color:seashell;';
+  readonly sienna = 'border-top-color:sienna;';
+  readonly silver = 'border-top-color:silver;';
+  readonly skyblue = 'border-top-color:skyblue;';
+  readonly slateblue = 'border-top-color:slateblue;';
+  readonly slategray = 'border-top-color:slategray;';
+  readonly slategrey = 'border-top-color:slategrey;';
+  readonly snow = 'border-top-color:snow;';
+  readonly springgreen = 'border-top-color:springgreen;';
+  readonly steelblue = 'border-top-color:steelblue;';
+  readonly tan = 'border-top-color:tan;';
+  readonly teal = 'border-top-color:teal;';
+  readonly thistle = 'border-top-color:thistle;';
+  readonly tomato = 'border-top-color:tomato;';
+  readonly transparent = 'border-top-color:transparent;';
+  readonly turquoise = 'border-top-color:turquoise;';
+  readonly unset = 'border-top-color:unset;';
+  readonly violet = 'border-top-color:violet;';
+  readonly wheat = 'border-top-color:wheat;';
+  readonly white = 'border-top-color:white;';
+  readonly whitesmoke = 'border-top-color:whitesmoke;';
+  readonly yellow = 'border-top-color:yellow;';
+  readonly yellowgreen = 'border-top-color:yellowgreen;';
   constructor() {
     super('border-top-color');
-    initializeBorderTopColorCss();
   }
 }
-let borderTopColorReady = false;
-function initializeBorderTopColorCss(): void {
-  if (borderTopColorReady) return;
-  Object.assign(BorderTopColorCss.prototype, borderTopColorKeywords());
-  Object.freeze(BorderTopColorCss.prototype);
-  borderTopColorReady = true;
-}
 
-function borderTopLeftRadiusKeywords() {
-  return {
-    inherit: 'border-top-left-radius:inherit;',
-    initial: 'border-top-left-radius:initial;',
-    revert: 'border-top-left-radius:revert;',
-    revertLayer: 'border-top-left-radius:revert-layer;',
-    unset: 'border-top-left-radius:unset;',
-  } as const;
-}
-
-type BorderTopLeftRadiusCssKeywords = Readonly<ReturnType<typeof borderTopLeftRadiusKeywords>>;
-export interface BorderTopLeftRadiusCss extends BorderTopLeftRadiusCssKeywords {}
 /** CSS 属性 border-top-left-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
  */
 export class BorderTopLeftRadiusCss extends LengthCssProperty<Property.BorderTopLeftRadius> {
+  readonly inherit = 'border-top-left-radius:inherit;';
+  readonly initial = 'border-top-left-radius:initial;';
+  readonly revert = 'border-top-left-radius:revert;';
+  readonly revertLayer = 'border-top-left-radius:revert-layer;';
+  readonly unset = 'border-top-left-radius:unset;';
   constructor() {
     super('border-top-left-radius');
-    initializeBorderTopLeftRadiusCss();
   }
 }
-let borderTopLeftRadiusReady = false;
-function initializeBorderTopLeftRadiusCss(): void {
-  if (borderTopLeftRadiusReady) return;
-  Object.assign(BorderTopLeftRadiusCss.prototype, borderTopLeftRadiusKeywords());
-  Object.freeze(BorderTopLeftRadiusCss.prototype);
-  borderTopLeftRadiusReady = true;
-}
 
-function borderTopRightRadiusKeywords() {
-  return {
-    inherit: 'border-top-right-radius:inherit;',
-    initial: 'border-top-right-radius:initial;',
-    revert: 'border-top-right-radius:revert;',
-    revertLayer: 'border-top-right-radius:revert-layer;',
-    unset: 'border-top-right-radius:unset;',
-  } as const;
-}
-
-type BorderTopRightRadiusCssKeywords = Readonly<ReturnType<typeof borderTopRightRadiusKeywords>>;
-export interface BorderTopRightRadiusCss extends BorderTopRightRadiusCssKeywords {}
 /** CSS 属性 border-top-right-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
  */
 export class BorderTopRightRadiusCss extends LengthCssProperty<Property.BorderTopRightRadius> {
+  readonly inherit = 'border-top-right-radius:inherit;';
+  readonly initial = 'border-top-right-radius:initial;';
+  readonly revert = 'border-top-right-radius:revert;';
+  readonly revertLayer = 'border-top-right-radius:revert-layer;';
+  readonly unset = 'border-top-right-radius:unset;';
   constructor() {
     super('border-top-right-radius');
-    initializeBorderTopRightRadiusCss();
   }
 }
-let borderTopRightRadiusReady = false;
-function initializeBorderTopRightRadiusCss(): void {
-  if (borderTopRightRadiusReady) return;
-  Object.assign(BorderTopRightRadiusCss.prototype, borderTopRightRadiusKeywords());
-  Object.freeze(BorderTopRightRadiusCss.prototype);
-  borderTopRightRadiusReady = true;
-}
 
-function borderTopStyleKeywords() {
-  return {
-    dashed: 'border-top-style:dashed;',
-    dotted: 'border-top-style:dotted;',
-    double: 'border-top-style:double;',
-    groove: 'border-top-style:groove;',
-    hidden: 'border-top-style:hidden;',
-    inherit: 'border-top-style:inherit;',
-    initial: 'border-top-style:initial;',
-    inset: 'border-top-style:inset;',
-    none: 'border-top-style:none;',
-    outset: 'border-top-style:outset;',
-    revert: 'border-top-style:revert;',
-    revertLayer: 'border-top-style:revert-layer;',
-    ridge: 'border-top-style:ridge;',
-    solid: 'border-top-style:solid;',
-    unset: 'border-top-style:unset;',
-  } as const;
-}
-
-type BorderTopStyleCssKeywords = Readonly<ReturnType<typeof borderTopStyleKeywords>>;
-export interface BorderTopStyleCss extends BorderTopStyleCssKeywords {}
 /** CSS 属性 border-top-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-style
  */
 export class BorderTopStyleCss extends CssProperty<Property.BorderTopStyle> {
+  readonly dashed = 'border-top-style:dashed;';
+  readonly dotted = 'border-top-style:dotted;';
+  readonly double = 'border-top-style:double;';
+  readonly groove = 'border-top-style:groove;';
+  readonly hidden = 'border-top-style:hidden;';
+  readonly inherit = 'border-top-style:inherit;';
+  readonly initial = 'border-top-style:initial;';
+  readonly inset = 'border-top-style:inset;';
+  readonly none = 'border-top-style:none;';
+  readonly outset = 'border-top-style:outset;';
+  readonly revert = 'border-top-style:revert;';
+  readonly revertLayer = 'border-top-style:revert-layer;';
+  readonly ridge = 'border-top-style:ridge;';
+  readonly solid = 'border-top-style:solid;';
+  readonly unset = 'border-top-style:unset;';
   constructor() {
     super('border-top-style');
-    initializeBorderTopStyleCss();
   }
 }
-let borderTopStyleReady = false;
-function initializeBorderTopStyleCss(): void {
-  if (borderTopStyleReady) return;
-  Object.assign(BorderTopStyleCss.prototype, borderTopStyleKeywords());
-  Object.freeze(BorderTopStyleCss.prototype);
-  borderTopStyleReady = true;
-}
 
-function borderTopWidthKeywords() {
-  return {
-    inherit: 'border-top-width:inherit;',
-    initial: 'border-top-width:initial;',
-    medium: 'border-top-width:medium;',
-    revert: 'border-top-width:revert;',
-    revertLayer: 'border-top-width:revert-layer;',
-    thick: 'border-top-width:thick;',
-    thin: 'border-top-width:thin;',
-    unset: 'border-top-width:unset;',
-  } as const;
-}
-
-type BorderTopWidthCssKeywords = Readonly<ReturnType<typeof borderTopWidthKeywords>>;
-export interface BorderTopWidthCss extends BorderTopWidthCssKeywords {}
 /** CSS 属性 border-top-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-width
  */
 export class BorderTopWidthCss extends LengthCssProperty<Property.BorderTopWidth> {
+  readonly inherit = 'border-top-width:inherit;';
+  readonly initial = 'border-top-width:initial;';
+  readonly medium = 'border-top-width:medium;';
+  readonly revert = 'border-top-width:revert;';
+  readonly revertLayer = 'border-top-width:revert-layer;';
+  readonly thick = 'border-top-width:thick;';
+  readonly thin = 'border-top-width:thin;';
+  readonly unset = 'border-top-width:unset;';
   constructor() {
     super('border-top-width');
-    initializeBorderTopWidthCss();
   }
 }
-let borderTopWidthReady = false;
-function initializeBorderTopWidthCss(): void {
-  if (borderTopWidthReady) return;
-  Object.assign(BorderTopWidthCss.prototype, borderTopWidthKeywords());
-  Object.freeze(BorderTopWidthCss.prototype);
-  borderTopWidthReady = true;
-}
 
-function borderWidthKeywords() {
-  return {
-    inherit: 'border-width:inherit;',
-    initial: 'border-width:initial;',
-    medium: 'border-width:medium;',
-    revert: 'border-width:revert;',
-    revertLayer: 'border-width:revert-layer;',
-    thick: 'border-width:thick;',
-    thin: 'border-width:thin;',
-    unset: 'border-width:unset;',
-  } as const;
-}
-
-type BorderWidthCssKeywords = Readonly<ReturnType<typeof borderWidthKeywords>>;
-export interface BorderWidthCss extends BorderWidthCssKeywords {}
 /** CSS 属性 border-width。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-width
  */
 export class BorderWidthCss extends LengthCssProperty<Property.BorderWidth> {
+  readonly inherit = 'border-width:inherit;';
+  readonly initial = 'border-width:initial;';
+  readonly medium = 'border-width:medium;';
+  readonly revert = 'border-width:revert;';
+  readonly revertLayer = 'border-width:revert-layer;';
+  readonly thick = 'border-width:thick;';
+  readonly thin = 'border-width:thin;';
+  readonly unset = 'border-width:unset;';
   constructor() {
     super('border-width');
-    initializeBorderWidthCss();
   }
 }
-let borderWidthReady = false;
-function initializeBorderWidthCss(): void {
-  if (borderWidthReady) return;
-  Object.assign(BorderWidthCss.prototype, borderWidthKeywords());
-  Object.freeze(BorderWidthCss.prototype);
-  borderWidthReady = true;
-}
 
-function bottomKeywords() {
-  return {
-    auto: 'bottom:auto;',
-    inherit: 'bottom:inherit;',
-    initial: 'bottom:initial;',
-    revert: 'bottom:revert;',
-    revertLayer: 'bottom:revert-layer;',
-    unset: 'bottom:unset;',
-  } as const;
-}
-
-type BottomCssKeywords = Readonly<ReturnType<typeof bottomKeywords>>;
-export interface BottomCss extends BottomCssKeywords {}
 /** CSS 属性 bottom；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/bottom
  */
 export class BottomCss extends LengthCssProperty<Property.Bottom> {
+  readonly auto = 'bottom:auto;';
+  readonly inherit = 'bottom:inherit;';
+  readonly initial = 'bottom:initial;';
+  readonly revert = 'bottom:revert;';
+  readonly revertLayer = 'bottom:revert-layer;';
+  readonly unset = 'bottom:unset;';
   constructor() {
     super('bottom');
-    initializeBottomCss();
   }
 }
-let bottomReady = false;
-function initializeBottomCss(): void {
-  if (bottomReady) return;
-  Object.assign(BottomCss.prototype, bottomKeywords());
-  Object.freeze(BottomCss.prototype);
-  bottomReady = true;
-}
 
-function boxDecorationBreakKeywords() {
-  return {
-    clone: 'box-decoration-break:clone;',
-    inherit: 'box-decoration-break:inherit;',
-    initial: 'box-decoration-break:initial;',
-    revert: 'box-decoration-break:revert;',
-    revertLayer: 'box-decoration-break:revert-layer;',
-    slice: 'box-decoration-break:slice;',
-    unset: 'box-decoration-break:unset;',
-  } as const;
-}
-
-type BoxDecorationBreakCssKeywords = Readonly<ReturnType<typeof boxDecorationBreakKeywords>>;
-export interface BoxDecorationBreakCss extends BoxDecorationBreakCssKeywords {}
 /** CSS 属性 box-decoration-break；初始值 slice。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-decoration-break
  */
 export class BoxDecorationBreakCss extends CssProperty<Property.BoxDecorationBreak> {
+  readonly clone = 'box-decoration-break:clone;';
+  readonly inherit = 'box-decoration-break:inherit;';
+  readonly initial = 'box-decoration-break:initial;';
+  readonly revert = 'box-decoration-break:revert;';
+  readonly revertLayer = 'box-decoration-break:revert-layer;';
+  readonly slice = 'box-decoration-break:slice;';
+  readonly unset = 'box-decoration-break:unset;';
   constructor() {
     super('box-decoration-break');
-    initializeBoxDecorationBreakCss();
   }
 }
-let boxDecorationBreakReady = false;
-function initializeBoxDecorationBreakCss(): void {
-  if (boxDecorationBreakReady) return;
-  Object.assign(BoxDecorationBreakCss.prototype, boxDecorationBreakKeywords());
-  Object.freeze(BoxDecorationBreakCss.prototype);
-  boxDecorationBreakReady = true;
-}
 
-function boxShadowKeywords() {
-  return {
-    inherit: 'box-shadow:inherit;',
-    initial: 'box-shadow:initial;',
-    none: 'box-shadow:none;',
-    revert: 'box-shadow:revert;',
-    revertLayer: 'box-shadow:revert-layer;',
-    unset: 'box-shadow:unset;',
-  } as const;
-}
-
-type BoxShadowCssKeywords = Readonly<ReturnType<typeof boxShadowKeywords>>;
-export interface BoxShadowCss extends BoxShadowCssKeywords {}
 /** CSS 属性 box-shadow；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-shadow
  */
 export class BoxShadowCss extends CssProperty<Property.BoxShadow> {
+  readonly inherit = 'box-shadow:inherit;';
+  readonly initial = 'box-shadow:initial;';
+  readonly none = 'box-shadow:none;';
+  readonly revert = 'box-shadow:revert;';
+  readonly revertLayer = 'box-shadow:revert-layer;';
+  readonly unset = 'box-shadow:unset;';
   constructor() {
     super('box-shadow');
-    initializeBoxShadowCss();
   }
 }
-let boxShadowReady = false;
-function initializeBoxShadowCss(): void {
-  if (boxShadowReady) return;
-  Object.assign(BoxShadowCss.prototype, boxShadowKeywords());
-  Object.freeze(BoxShadowCss.prototype);
-  boxShadowReady = true;
-}
 
-function boxSizingKeywords() {
-  return {
-    borderBox: 'box-sizing:border-box;',
-    contentBox: 'box-sizing:content-box;',
-    inherit: 'box-sizing:inherit;',
-    initial: 'box-sizing:initial;',
-    revert: 'box-sizing:revert;',
-    revertLayer: 'box-sizing:revert-layer;',
-    unset: 'box-sizing:unset;',
-  } as const;
-}
-
-type BoxSizingCssKeywords = Readonly<ReturnType<typeof boxSizingKeywords>>;
-export interface BoxSizingCss extends BoxSizingCssKeywords {}
 /** CSS 属性 box-sizing；初始值 content-box。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-sizing
  */
 export class BoxSizingCss extends CssProperty<Property.BoxSizing> {
+  readonly borderBox = 'box-sizing:border-box;';
+  readonly contentBox = 'box-sizing:content-box;';
+  readonly inherit = 'box-sizing:inherit;';
+  readonly initial = 'box-sizing:initial;';
+  readonly revert = 'box-sizing:revert;';
+  readonly revertLayer = 'box-sizing:revert-layer;';
+  readonly unset = 'box-sizing:unset;';
   constructor() {
     super('box-sizing');
-    initializeBoxSizingCss();
   }
 }
-let boxSizingReady = false;
-function initializeBoxSizingCss(): void {
-  if (boxSizingReady) return;
-  Object.assign(BoxSizingCss.prototype, boxSizingKeywords());
-  Object.freeze(BoxSizingCss.prototype);
-  boxSizingReady = true;
-}
 
-function breakAfterKeywords() {
-  return {
-    all: 'break-after:all;',
-    always: 'break-after:always;',
-    auto: 'break-after:auto;',
-    avoid: 'break-after:avoid;',
-    avoidColumn: 'break-after:avoid-column;',
-    avoidPage: 'break-after:avoid-page;',
-    avoidRegion: 'break-after:avoid-region;',
-    column: 'break-after:column;',
-    inherit: 'break-after:inherit;',
-    initial: 'break-after:initial;',
-    left: 'break-after:left;',
-    page: 'break-after:page;',
-    recto: 'break-after:recto;',
-    region: 'break-after:region;',
-    revert: 'break-after:revert;',
-    revertLayer: 'break-after:revert-layer;',
-    right: 'break-after:right;',
-    unset: 'break-after:unset;',
-    verso: 'break-after:verso;',
-  } as const;
-}
-
-type BreakAfterCssKeywords = Readonly<ReturnType<typeof breakAfterKeywords>>;
-export interface BreakAfterCss extends BreakAfterCssKeywords {}
 /** CSS 属性 break-after；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-after
  */
 export class BreakAfterCss extends CssProperty<Property.BreakAfter> {
+  readonly all = 'break-after:all;';
+  readonly always = 'break-after:always;';
+  readonly auto = 'break-after:auto;';
+  readonly avoid = 'break-after:avoid;';
+  readonly avoidColumn = 'break-after:avoid-column;';
+  readonly avoidPage = 'break-after:avoid-page;';
+  readonly avoidRegion = 'break-after:avoid-region;';
+  readonly column = 'break-after:column;';
+  readonly inherit = 'break-after:inherit;';
+  readonly initial = 'break-after:initial;';
+  readonly left = 'break-after:left;';
+  readonly page = 'break-after:page;';
+  readonly recto = 'break-after:recto;';
+  readonly region = 'break-after:region;';
+  readonly revert = 'break-after:revert;';
+  readonly revertLayer = 'break-after:revert-layer;';
+  readonly right = 'break-after:right;';
+  readonly unset = 'break-after:unset;';
+  readonly verso = 'break-after:verso;';
   constructor() {
     super('break-after');
-    initializeBreakAfterCss();
   }
 }
-let breakAfterReady = false;
-function initializeBreakAfterCss(): void {
-  if (breakAfterReady) return;
-  Object.assign(BreakAfterCss.prototype, breakAfterKeywords());
-  Object.freeze(BreakAfterCss.prototype);
-  breakAfterReady = true;
-}
 
-function breakBeforeKeywords() {
-  return {
-    all: 'break-before:all;',
-    always: 'break-before:always;',
-    auto: 'break-before:auto;',
-    avoid: 'break-before:avoid;',
-    avoidColumn: 'break-before:avoid-column;',
-    avoidPage: 'break-before:avoid-page;',
-    avoidRegion: 'break-before:avoid-region;',
-    column: 'break-before:column;',
-    inherit: 'break-before:inherit;',
-    initial: 'break-before:initial;',
-    left: 'break-before:left;',
-    page: 'break-before:page;',
-    recto: 'break-before:recto;',
-    region: 'break-before:region;',
-    revert: 'break-before:revert;',
-    revertLayer: 'break-before:revert-layer;',
-    right: 'break-before:right;',
-    unset: 'break-before:unset;',
-    verso: 'break-before:verso;',
-  } as const;
-}
-
-type BreakBeforeCssKeywords = Readonly<ReturnType<typeof breakBeforeKeywords>>;
-export interface BreakBeforeCss extends BreakBeforeCssKeywords {}
 /** CSS 属性 break-before；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-before
  */
 export class BreakBeforeCss extends CssProperty<Property.BreakBefore> {
+  readonly all = 'break-before:all;';
+  readonly always = 'break-before:always;';
+  readonly auto = 'break-before:auto;';
+  readonly avoid = 'break-before:avoid;';
+  readonly avoidColumn = 'break-before:avoid-column;';
+  readonly avoidPage = 'break-before:avoid-page;';
+  readonly avoidRegion = 'break-before:avoid-region;';
+  readonly column = 'break-before:column;';
+  readonly inherit = 'break-before:inherit;';
+  readonly initial = 'break-before:initial;';
+  readonly left = 'break-before:left;';
+  readonly page = 'break-before:page;';
+  readonly recto = 'break-before:recto;';
+  readonly region = 'break-before:region;';
+  readonly revert = 'break-before:revert;';
+  readonly revertLayer = 'break-before:revert-layer;';
+  readonly right = 'break-before:right;';
+  readonly unset = 'break-before:unset;';
+  readonly verso = 'break-before:verso;';
   constructor() {
     super('break-before');
-    initializeBreakBeforeCss();
   }
 }
-let breakBeforeReady = false;
-function initializeBreakBeforeCss(): void {
-  if (breakBeforeReady) return;
-  Object.assign(BreakBeforeCss.prototype, breakBeforeKeywords());
-  Object.freeze(BreakBeforeCss.prototype);
-  breakBeforeReady = true;
-}
 
-function breakInsideKeywords() {
-  return {
-    auto: 'break-inside:auto;',
-    avoid: 'break-inside:avoid;',
-    avoidColumn: 'break-inside:avoid-column;',
-    avoidPage: 'break-inside:avoid-page;',
-    avoidRegion: 'break-inside:avoid-region;',
-    inherit: 'break-inside:inherit;',
-    initial: 'break-inside:initial;',
-    revert: 'break-inside:revert;',
-    revertLayer: 'break-inside:revert-layer;',
-    unset: 'break-inside:unset;',
-  } as const;
-}
-
-type BreakInsideCssKeywords = Readonly<ReturnType<typeof breakInsideKeywords>>;
-export interface BreakInsideCss extends BreakInsideCssKeywords {}
 /** CSS 属性 break-inside；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-inside
  */
 export class BreakInsideCss extends CssProperty<Property.BreakInside> {
+  readonly auto = 'break-inside:auto;';
+  readonly avoid = 'break-inside:avoid;';
+  readonly avoidColumn = 'break-inside:avoid-column;';
+  readonly avoidPage = 'break-inside:avoid-page;';
+  readonly avoidRegion = 'break-inside:avoid-region;';
+  readonly inherit = 'break-inside:inherit;';
+  readonly initial = 'break-inside:initial;';
+  readonly revert = 'break-inside:revert;';
+  readonly revertLayer = 'break-inside:revert-layer;';
+  readonly unset = 'break-inside:unset;';
   constructor() {
     super('break-inside');
-    initializeBreakInsideCss();
   }
-}
-let breakInsideReady = false;
-function initializeBreakInsideCss(): void {
-  if (breakInsideReady) return;
-  Object.assign(BreakInsideCss.prototype, breakInsideKeywords());
-  Object.freeze(BreakInsideCss.prototype);
-  breakInsideReady = true;
 }

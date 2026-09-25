@@ -129,7 +129,7 @@ const groupLines = new Map(
       ...header,
       "import type { Property } from 'csstype';",
       "import { CssProperty, LengthCssProperty } from './base.js';",
-      '// 每条属性链只在首次使用时建立系统关键字；主题仍可继承增加成员。',
+      '// 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。',
     ],
   ]),
 );
@@ -159,8 +159,6 @@ for (const name of names) {
   const { member, cssName } = found;
   const type = propertyType(member);
   const className = `${setting.name[0].toUpperCase()}${setting.name.slice(1)}Css`;
-  const keywordObject = `${setting.name}Keywords`;
-  const initialize = `initialize${className}`;
   const keywords = keywordsOf(member);
   const documentation = commentOf(member, setting.description, cssName);
   keywordCount += keywords.length;
@@ -171,17 +169,14 @@ for (const name of names) {
   if (!group) throw new Error(`No generated group for ${name}.`);
   const lines = groupLines.get(group);
   const alias = `group${groups.indexOf(group)}`;
-  lines.push('', `function ${keywordObject}() {`, '  return {');
-  for (const [name, value] of keywords)
-    lines.push(`  ${name}: ${JSON.stringify(`${cssName}:${value};`)},`);
-  lines.push('  } as const;', '}', '');
-  lines.push(`type ${className}Keywords = Readonly<ReturnType<typeof ${keywordObject}>>;`);
-  lines.push(`export interface ${className} extends ${className}Keywords {}`);
-  lines.push(documentation);
   lines.push(
+    '',
+    documentation,
     `export class ${className} extends ${hasLength ? 'LengthCssProperty' : 'CssProperty'}<Property.${type}> {`,
-    `  constructor() { super(${JSON.stringify(cssName)}); ${initialize}(); }`,
   );
+  for (const [keyword, value] of keywords)
+    lines.push(`  readonly ${keyword} = ${JSON.stringify(`${cssName}:${value};`)};`);
+  lines.push(`  constructor() { super(${JSON.stringify(cssName)}); }`);
   if (setting.maxPxArguments) {
     for (let count = 1; count <= setting.maxPxArguments; count++)
       lines.push(
@@ -193,13 +188,6 @@ for (const name of names) {
       '  }',
     );
   }
-  lines.push('}');
-  lines.push(`let ${setting.name}Ready = false;`);
-  lines.push(`function ${initialize}(): void {`);
-  lines.push(`  if (${setting.name}Ready) return;`);
-  lines.push(`  Object.assign(${className}.prototype, ${keywordObject}());`);
-  lines.push(`  Object.freeze(${className}.prototype);`);
-  lines.push(`  ${setting.name}Ready = true;`);
   lines.push('}');
   systemFields.push(documentation, `  declare readonly ${setting.name}: ${alias}.${className};`);
   systemCreators.push(

@@ -1,10 +1,10 @@
 # 运行时写法与性能方向复核
 
-这份记录针对当前 `codex/runtime-css-research` 实现。优化应保留 `s.color.red` 返回声明字符串、`css(...parts)` 运行时注册、原生 CSS 层叠以及无法静态识别时的运行时回退。
+这份记录最初针对惰性原型版；直接字段试验及新的取舍见[关键字直接字段试验](direct-keyword-fields-probe.md)。优化应保留 `s.color.red` 返回声明字符串、`css(...parts)` 运行时注册、原生 CSS 层叠以及无法静态识别时的运行时回退。
 
 ## 当前一次调用做了什么
 
-根组件创建一个 `AppCss extends Css` 并提供给上下文，后代的 `useCss()` 在组件初始化时读取同一个实例。`Css` 的 502 个系统属性在原型上有 getter；首次读到 `s.color` 时才创建共享的 `ColorCss`，把该属性的关键字字符串放入并冻结其原型。之后 `s.color.red` 是普通属性读取，得到已生成的 `color:red;` 字符串；`raw()`、`px()` 和 `ic()` 只拼字符串，不解析 CSS。
+根组件创建一个 `AppCss extends Css` 并提供给上下文，后代的 `useCss()` 在组件初始化时读取同一个实例。`Css` 的 502 个系统属性在原型上有 getter；首次读到 `s.color` 时才创建并缓存共享的 `ColorCss`。当前生成的 `ColorCss` 用只读实例字段保存关键字声明；此前的惰性原型版把它们放在类原型上。之后 `s.color.red` 是普通属性读取，得到已生成的 `color:red;` 字符串；`raw()`、`px()` 和 `ic()` 只拼字符串，不解析 CSS。
 
 浏览器 `css(...parts)` 在当前 `Document` 的规则注册器中拼接声明、查 `Map`。命中时直接返回旧类名；未命中时计算哈希、通过 `CSSStyleSheet.insertRule()` 插入并记录正反向映射。正反向映射同时用于检查类名哈希冲突，不宜为了少一张表而删除。服务端由 `AsyncLocalStorage` 把相同调用路由到每个请求的收集器；hydration 预热已有规则。动态值若不断变化，会产生新的声明组合和新规则。
 
@@ -26,9 +26,9 @@
 
 另一个一次性 Chrome 153 探针在 200 个元素、1,400 条新规则下，五次新页面测量的中位数为：逐条 `insertRule()` 写入约 3.2 ms，预拼好 CSS 后一次设置 `style.textContent` 约 1.6 ms；随后强制布局约 1.8／1.9 ms。这只比较规则写入方式，不含框架和 `css()`，也不支持在每次新值出现时重写整张样式表。批量写入至多是后续大批量首次注册的候选，不是当前更新差距的完整答案。
 
-## 推荐顺序
+## 当时的建议与后续方向
 
-1. **先试生成器的延迟注册。** 把 502 次原型 getter 注册放到 `Css` 首次构造时执行一次，保留每条属性首次读取时才创建关键字对象的现状。验证类继承覆盖、多个作者实例、浏览器／Node SSR、hydration、条件导出和完整作者路径冷启动；收益主要是按需导入与非作者页面的加载成本。
+1. **已实现的延迟注册。** 502 次系统属性 getter 注册移到了 `Css` 首次构造时，属性链在首次读取时创建。后来关键字又试改为直接类字段，相关收益与代价见[新探针](direct-keyword-fields-probe.md)。延迟注册的收益主要是按需导入与非作者页面的加载成本。
 2. **按值的形态使用框架能力。** 有限状态预注册少数类，再用纯表达式选择类名：Vue 用 `computed(() => classes[state.value])`，Svelte 用 `$derived(classes[state])`；结构性 `if`／`switch` 仍可返回不同已注册类。当前探针中这一路径接近预声明原生类。持续新值则值得把稳定声明写成 `var(--x)`，在目标元素绑定值；Vue 可用元素 `:style`，Svelte 可用 `style:--x`。Vue SFC 的 [`v-bind()`](https://vuejs.org/api/sfc-css-features.html#v-bind-in-css) 是编译成静态 CSS 变量的参考，但它默认作用于组件根，列表中各元素独立取值时仍需元素级绑定。Svelte 的 [`style:` 指令](https://svelte.dev/docs/svelte/style)直接支持自定义属性。变量路径应是可选的编译优化，未识别表达式继续运行时注册。
 3. **不要普遍把 `css()` 包进派生值。** `css()` 会写 CSSOM 或收集 SSR 规则；Vue [computed](https://vuejs.org/guide/essentials/computed#best-practices) 与 Svelte [`$derived`](https://svelte.dev/docs/svelte/%24derived) 都建议派生表达式无副作用。旧探针证明 Vue `computed` 能避开无关更新中的重复调用，但不能据此把它做成适配器默认写法。纯粹的“从已注册类表中选一个字符串”才适合派生值。Svelte 5 的模板在该探针中对无关更新本来就没有重复调用，尤其没有理由统一套 `$derived`。
 4. **后续再做静态表达式编译。** 可识别的 `css(s.color.red, s.width._md)` 或有限 `if`／`switch` 分支，可以在构建时生成规则和类名，省掉首次注册；复杂表达式继续原样调用运行时 `css()`。需要先定义 SSR 样式归属、源码变更和类名稳定性的边界，避免为了优化破坏作者写法。

@@ -2,1061 +2,682 @@
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
 import { CssProperty, LengthCssProperty } from './base.js';
-// 每条属性链只在首次使用时建立系统关键字；主题仍可继承增加成员。
+// 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
 
-function accentColorKeywords() {
-  return {
-    AccentColor: 'accent-color:AccentColor;',
-    AccentColorText: 'accent-color:AccentColorText;',
-    ActiveBorder: 'accent-color:ActiveBorder;',
-    ActiveCaption: 'accent-color:ActiveCaption;',
-    ActiveText: 'accent-color:ActiveText;',
-    AppWorkspace: 'accent-color:AppWorkspace;',
-    Background: 'accent-color:Background;',
-    ButtonBorder: 'accent-color:ButtonBorder;',
-    ButtonFace: 'accent-color:ButtonFace;',
-    ButtonHighlight: 'accent-color:ButtonHighlight;',
-    ButtonShadow: 'accent-color:ButtonShadow;',
-    ButtonText: 'accent-color:ButtonText;',
-    Canvas: 'accent-color:Canvas;',
-    CanvasText: 'accent-color:CanvasText;',
-    CaptionText: 'accent-color:CaptionText;',
-    Field: 'accent-color:Field;',
-    FieldText: 'accent-color:FieldText;',
-    GrayText: 'accent-color:GrayText;',
-    Highlight: 'accent-color:Highlight;',
-    HighlightText: 'accent-color:HighlightText;',
-    InactiveBorder: 'accent-color:InactiveBorder;',
-    InactiveCaption: 'accent-color:InactiveCaption;',
-    InactiveCaptionText: 'accent-color:InactiveCaptionText;',
-    InfoBackground: 'accent-color:InfoBackground;',
-    InfoText: 'accent-color:InfoText;',
-    LinkText: 'accent-color:LinkText;',
-    Mark: 'accent-color:Mark;',
-    MarkText: 'accent-color:MarkText;',
-    Menu: 'accent-color:Menu;',
-    MenuText: 'accent-color:MenuText;',
-    Scrollbar: 'accent-color:Scrollbar;',
-    SelectedItem: 'accent-color:SelectedItem;',
-    SelectedItemText: 'accent-color:SelectedItemText;',
-    ThreeDDarkShadow: 'accent-color:ThreeDDarkShadow;',
-    ThreeDFace: 'accent-color:ThreeDFace;',
-    ThreeDHighlight: 'accent-color:ThreeDHighlight;',
-    ThreeDLightShadow: 'accent-color:ThreeDLightShadow;',
-    ThreeDShadow: 'accent-color:ThreeDShadow;',
-    VisitedText: 'accent-color:VisitedText;',
-    Window: 'accent-color:Window;',
-    WindowFrame: 'accent-color:WindowFrame;',
-    WindowText: 'accent-color:WindowText;',
-    aliceblue: 'accent-color:aliceblue;',
-    antiquewhite: 'accent-color:antiquewhite;',
-    aqua: 'accent-color:aqua;',
-    aquamarine: 'accent-color:aquamarine;',
-    auto: 'accent-color:auto;',
-    azure: 'accent-color:azure;',
-    beige: 'accent-color:beige;',
-    bisque: 'accent-color:bisque;',
-    black: 'accent-color:black;',
-    blanchedalmond: 'accent-color:blanchedalmond;',
-    blue: 'accent-color:blue;',
-    blueviolet: 'accent-color:blueviolet;',
-    brown: 'accent-color:brown;',
-    burlywood: 'accent-color:burlywood;',
-    cadetblue: 'accent-color:cadetblue;',
-    chartreuse: 'accent-color:chartreuse;',
-    chocolate: 'accent-color:chocolate;',
-    coral: 'accent-color:coral;',
-    cornflowerblue: 'accent-color:cornflowerblue;',
-    cornsilk: 'accent-color:cornsilk;',
-    crimson: 'accent-color:crimson;',
-    currentColor: 'accent-color:currentColor;',
-    cyan: 'accent-color:cyan;',
-    darkblue: 'accent-color:darkblue;',
-    darkcyan: 'accent-color:darkcyan;',
-    darkgoldenrod: 'accent-color:darkgoldenrod;',
-    darkgray: 'accent-color:darkgray;',
-    darkgreen: 'accent-color:darkgreen;',
-    darkgrey: 'accent-color:darkgrey;',
-    darkkhaki: 'accent-color:darkkhaki;',
-    darkmagenta: 'accent-color:darkmagenta;',
-    darkolivegreen: 'accent-color:darkolivegreen;',
-    darkorange: 'accent-color:darkorange;',
-    darkorchid: 'accent-color:darkorchid;',
-    darkred: 'accent-color:darkred;',
-    darksalmon: 'accent-color:darksalmon;',
-    darkseagreen: 'accent-color:darkseagreen;',
-    darkslateblue: 'accent-color:darkslateblue;',
-    darkslategray: 'accent-color:darkslategray;',
-    darkslategrey: 'accent-color:darkslategrey;',
-    darkturquoise: 'accent-color:darkturquoise;',
-    darkviolet: 'accent-color:darkviolet;',
-    deeppink: 'accent-color:deeppink;',
-    deepskyblue: 'accent-color:deepskyblue;',
-    dimgray: 'accent-color:dimgray;',
-    dimgrey: 'accent-color:dimgrey;',
-    dodgerblue: 'accent-color:dodgerblue;',
-    firebrick: 'accent-color:firebrick;',
-    floralwhite: 'accent-color:floralwhite;',
-    forestgreen: 'accent-color:forestgreen;',
-    fuchsia: 'accent-color:fuchsia;',
-    gainsboro: 'accent-color:gainsboro;',
-    ghostwhite: 'accent-color:ghostwhite;',
-    gold: 'accent-color:gold;',
-    goldenrod: 'accent-color:goldenrod;',
-    gray: 'accent-color:gray;',
-    green: 'accent-color:green;',
-    greenyellow: 'accent-color:greenyellow;',
-    grey: 'accent-color:grey;',
-    honeydew: 'accent-color:honeydew;',
-    hotpink: 'accent-color:hotpink;',
-    indianred: 'accent-color:indianred;',
-    indigo: 'accent-color:indigo;',
-    inherit: 'accent-color:inherit;',
-    initial: 'accent-color:initial;',
-    ivory: 'accent-color:ivory;',
-    khaki: 'accent-color:khaki;',
-    lavender: 'accent-color:lavender;',
-    lavenderblush: 'accent-color:lavenderblush;',
-    lawngreen: 'accent-color:lawngreen;',
-    lemonchiffon: 'accent-color:lemonchiffon;',
-    lightblue: 'accent-color:lightblue;',
-    lightcoral: 'accent-color:lightcoral;',
-    lightcyan: 'accent-color:lightcyan;',
-    lightgoldenrodyellow: 'accent-color:lightgoldenrodyellow;',
-    lightgray: 'accent-color:lightgray;',
-    lightgreen: 'accent-color:lightgreen;',
-    lightgrey: 'accent-color:lightgrey;',
-    lightpink: 'accent-color:lightpink;',
-    lightsalmon: 'accent-color:lightsalmon;',
-    lightseagreen: 'accent-color:lightseagreen;',
-    lightskyblue: 'accent-color:lightskyblue;',
-    lightslategray: 'accent-color:lightslategray;',
-    lightslategrey: 'accent-color:lightslategrey;',
-    lightsteelblue: 'accent-color:lightsteelblue;',
-    lightyellow: 'accent-color:lightyellow;',
-    lime: 'accent-color:lime;',
-    limegreen: 'accent-color:limegreen;',
-    linen: 'accent-color:linen;',
-    magenta: 'accent-color:magenta;',
-    maroon: 'accent-color:maroon;',
-    mediumaquamarine: 'accent-color:mediumaquamarine;',
-    mediumblue: 'accent-color:mediumblue;',
-    mediumorchid: 'accent-color:mediumorchid;',
-    mediumpurple: 'accent-color:mediumpurple;',
-    mediumseagreen: 'accent-color:mediumseagreen;',
-    mediumslateblue: 'accent-color:mediumslateblue;',
-    mediumspringgreen: 'accent-color:mediumspringgreen;',
-    mediumturquoise: 'accent-color:mediumturquoise;',
-    mediumvioletred: 'accent-color:mediumvioletred;',
-    midnightblue: 'accent-color:midnightblue;',
-    mintcream: 'accent-color:mintcream;',
-    mistyrose: 'accent-color:mistyrose;',
-    moccasin: 'accent-color:moccasin;',
-    navajowhite: 'accent-color:navajowhite;',
-    navy: 'accent-color:navy;',
-    oldlace: 'accent-color:oldlace;',
-    olive: 'accent-color:olive;',
-    olivedrab: 'accent-color:olivedrab;',
-    orange: 'accent-color:orange;',
-    orangered: 'accent-color:orangered;',
-    orchid: 'accent-color:orchid;',
-    palegoldenrod: 'accent-color:palegoldenrod;',
-    palegreen: 'accent-color:palegreen;',
-    paleturquoise: 'accent-color:paleturquoise;',
-    palevioletred: 'accent-color:palevioletred;',
-    papayawhip: 'accent-color:papayawhip;',
-    peachpuff: 'accent-color:peachpuff;',
-    peru: 'accent-color:peru;',
-    pink: 'accent-color:pink;',
-    plum: 'accent-color:plum;',
-    powderblue: 'accent-color:powderblue;',
-    purple: 'accent-color:purple;',
-    rebeccapurple: 'accent-color:rebeccapurple;',
-    red: 'accent-color:red;',
-    revert: 'accent-color:revert;',
-    revertLayer: 'accent-color:revert-layer;',
-    rosybrown: 'accent-color:rosybrown;',
-    royalblue: 'accent-color:royalblue;',
-    saddlebrown: 'accent-color:saddlebrown;',
-    salmon: 'accent-color:salmon;',
-    sandybrown: 'accent-color:sandybrown;',
-    seagreen: 'accent-color:seagreen;',
-    seashell: 'accent-color:seashell;',
-    sienna: 'accent-color:sienna;',
-    silver: 'accent-color:silver;',
-    skyblue: 'accent-color:skyblue;',
-    slateblue: 'accent-color:slateblue;',
-    slategray: 'accent-color:slategray;',
-    slategrey: 'accent-color:slategrey;',
-    snow: 'accent-color:snow;',
-    springgreen: 'accent-color:springgreen;',
-    steelblue: 'accent-color:steelblue;',
-    tan: 'accent-color:tan;',
-    teal: 'accent-color:teal;',
-    thistle: 'accent-color:thistle;',
-    tomato: 'accent-color:tomato;',
-    transparent: 'accent-color:transparent;',
-    turquoise: 'accent-color:turquoise;',
-    unset: 'accent-color:unset;',
-    violet: 'accent-color:violet;',
-    wheat: 'accent-color:wheat;',
-    white: 'accent-color:white;',
-    whitesmoke: 'accent-color:whitesmoke;',
-    yellow: 'accent-color:yellow;',
-    yellowgreen: 'accent-color:yellowgreen;',
-  } as const;
-}
-
-type AccentColorCssKeywords = Readonly<ReturnType<typeof accentColorKeywords>>;
-export interface AccentColorCss extends AccentColorCssKeywords {}
 /** CSS 属性 accent-color；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color
  */
 export class AccentColorCss extends CssProperty<Property.AccentColor> {
+  readonly AccentColor = 'accent-color:AccentColor;';
+  readonly AccentColorText = 'accent-color:AccentColorText;';
+  readonly ActiveBorder = 'accent-color:ActiveBorder;';
+  readonly ActiveCaption = 'accent-color:ActiveCaption;';
+  readonly ActiveText = 'accent-color:ActiveText;';
+  readonly AppWorkspace = 'accent-color:AppWorkspace;';
+  readonly Background = 'accent-color:Background;';
+  readonly ButtonBorder = 'accent-color:ButtonBorder;';
+  readonly ButtonFace = 'accent-color:ButtonFace;';
+  readonly ButtonHighlight = 'accent-color:ButtonHighlight;';
+  readonly ButtonShadow = 'accent-color:ButtonShadow;';
+  readonly ButtonText = 'accent-color:ButtonText;';
+  readonly Canvas = 'accent-color:Canvas;';
+  readonly CanvasText = 'accent-color:CanvasText;';
+  readonly CaptionText = 'accent-color:CaptionText;';
+  readonly Field = 'accent-color:Field;';
+  readonly FieldText = 'accent-color:FieldText;';
+  readonly GrayText = 'accent-color:GrayText;';
+  readonly Highlight = 'accent-color:Highlight;';
+  readonly HighlightText = 'accent-color:HighlightText;';
+  readonly InactiveBorder = 'accent-color:InactiveBorder;';
+  readonly InactiveCaption = 'accent-color:InactiveCaption;';
+  readonly InactiveCaptionText = 'accent-color:InactiveCaptionText;';
+  readonly InfoBackground = 'accent-color:InfoBackground;';
+  readonly InfoText = 'accent-color:InfoText;';
+  readonly LinkText = 'accent-color:LinkText;';
+  readonly Mark = 'accent-color:Mark;';
+  readonly MarkText = 'accent-color:MarkText;';
+  readonly Menu = 'accent-color:Menu;';
+  readonly MenuText = 'accent-color:MenuText;';
+  readonly Scrollbar = 'accent-color:Scrollbar;';
+  readonly SelectedItem = 'accent-color:SelectedItem;';
+  readonly SelectedItemText = 'accent-color:SelectedItemText;';
+  readonly ThreeDDarkShadow = 'accent-color:ThreeDDarkShadow;';
+  readonly ThreeDFace = 'accent-color:ThreeDFace;';
+  readonly ThreeDHighlight = 'accent-color:ThreeDHighlight;';
+  readonly ThreeDLightShadow = 'accent-color:ThreeDLightShadow;';
+  readonly ThreeDShadow = 'accent-color:ThreeDShadow;';
+  readonly VisitedText = 'accent-color:VisitedText;';
+  readonly Window = 'accent-color:Window;';
+  readonly WindowFrame = 'accent-color:WindowFrame;';
+  readonly WindowText = 'accent-color:WindowText;';
+  readonly aliceblue = 'accent-color:aliceblue;';
+  readonly antiquewhite = 'accent-color:antiquewhite;';
+  readonly aqua = 'accent-color:aqua;';
+  readonly aquamarine = 'accent-color:aquamarine;';
+  readonly auto = 'accent-color:auto;';
+  readonly azure = 'accent-color:azure;';
+  readonly beige = 'accent-color:beige;';
+  readonly bisque = 'accent-color:bisque;';
+  readonly black = 'accent-color:black;';
+  readonly blanchedalmond = 'accent-color:blanchedalmond;';
+  readonly blue = 'accent-color:blue;';
+  readonly blueviolet = 'accent-color:blueviolet;';
+  readonly brown = 'accent-color:brown;';
+  readonly burlywood = 'accent-color:burlywood;';
+  readonly cadetblue = 'accent-color:cadetblue;';
+  readonly chartreuse = 'accent-color:chartreuse;';
+  readonly chocolate = 'accent-color:chocolate;';
+  readonly coral = 'accent-color:coral;';
+  readonly cornflowerblue = 'accent-color:cornflowerblue;';
+  readonly cornsilk = 'accent-color:cornsilk;';
+  readonly crimson = 'accent-color:crimson;';
+  readonly currentColor = 'accent-color:currentColor;';
+  readonly cyan = 'accent-color:cyan;';
+  readonly darkblue = 'accent-color:darkblue;';
+  readonly darkcyan = 'accent-color:darkcyan;';
+  readonly darkgoldenrod = 'accent-color:darkgoldenrod;';
+  readonly darkgray = 'accent-color:darkgray;';
+  readonly darkgreen = 'accent-color:darkgreen;';
+  readonly darkgrey = 'accent-color:darkgrey;';
+  readonly darkkhaki = 'accent-color:darkkhaki;';
+  readonly darkmagenta = 'accent-color:darkmagenta;';
+  readonly darkolivegreen = 'accent-color:darkolivegreen;';
+  readonly darkorange = 'accent-color:darkorange;';
+  readonly darkorchid = 'accent-color:darkorchid;';
+  readonly darkred = 'accent-color:darkred;';
+  readonly darksalmon = 'accent-color:darksalmon;';
+  readonly darkseagreen = 'accent-color:darkseagreen;';
+  readonly darkslateblue = 'accent-color:darkslateblue;';
+  readonly darkslategray = 'accent-color:darkslategray;';
+  readonly darkslategrey = 'accent-color:darkslategrey;';
+  readonly darkturquoise = 'accent-color:darkturquoise;';
+  readonly darkviolet = 'accent-color:darkviolet;';
+  readonly deeppink = 'accent-color:deeppink;';
+  readonly deepskyblue = 'accent-color:deepskyblue;';
+  readonly dimgray = 'accent-color:dimgray;';
+  readonly dimgrey = 'accent-color:dimgrey;';
+  readonly dodgerblue = 'accent-color:dodgerblue;';
+  readonly firebrick = 'accent-color:firebrick;';
+  readonly floralwhite = 'accent-color:floralwhite;';
+  readonly forestgreen = 'accent-color:forestgreen;';
+  readonly fuchsia = 'accent-color:fuchsia;';
+  readonly gainsboro = 'accent-color:gainsboro;';
+  readonly ghostwhite = 'accent-color:ghostwhite;';
+  readonly gold = 'accent-color:gold;';
+  readonly goldenrod = 'accent-color:goldenrod;';
+  readonly gray = 'accent-color:gray;';
+  readonly green = 'accent-color:green;';
+  readonly greenyellow = 'accent-color:greenyellow;';
+  readonly grey = 'accent-color:grey;';
+  readonly honeydew = 'accent-color:honeydew;';
+  readonly hotpink = 'accent-color:hotpink;';
+  readonly indianred = 'accent-color:indianred;';
+  readonly indigo = 'accent-color:indigo;';
+  readonly inherit = 'accent-color:inherit;';
+  readonly initial = 'accent-color:initial;';
+  readonly ivory = 'accent-color:ivory;';
+  readonly khaki = 'accent-color:khaki;';
+  readonly lavender = 'accent-color:lavender;';
+  readonly lavenderblush = 'accent-color:lavenderblush;';
+  readonly lawngreen = 'accent-color:lawngreen;';
+  readonly lemonchiffon = 'accent-color:lemonchiffon;';
+  readonly lightblue = 'accent-color:lightblue;';
+  readonly lightcoral = 'accent-color:lightcoral;';
+  readonly lightcyan = 'accent-color:lightcyan;';
+  readonly lightgoldenrodyellow = 'accent-color:lightgoldenrodyellow;';
+  readonly lightgray = 'accent-color:lightgray;';
+  readonly lightgreen = 'accent-color:lightgreen;';
+  readonly lightgrey = 'accent-color:lightgrey;';
+  readonly lightpink = 'accent-color:lightpink;';
+  readonly lightsalmon = 'accent-color:lightsalmon;';
+  readonly lightseagreen = 'accent-color:lightseagreen;';
+  readonly lightskyblue = 'accent-color:lightskyblue;';
+  readonly lightslategray = 'accent-color:lightslategray;';
+  readonly lightslategrey = 'accent-color:lightslategrey;';
+  readonly lightsteelblue = 'accent-color:lightsteelblue;';
+  readonly lightyellow = 'accent-color:lightyellow;';
+  readonly lime = 'accent-color:lime;';
+  readonly limegreen = 'accent-color:limegreen;';
+  readonly linen = 'accent-color:linen;';
+  readonly magenta = 'accent-color:magenta;';
+  readonly maroon = 'accent-color:maroon;';
+  readonly mediumaquamarine = 'accent-color:mediumaquamarine;';
+  readonly mediumblue = 'accent-color:mediumblue;';
+  readonly mediumorchid = 'accent-color:mediumorchid;';
+  readonly mediumpurple = 'accent-color:mediumpurple;';
+  readonly mediumseagreen = 'accent-color:mediumseagreen;';
+  readonly mediumslateblue = 'accent-color:mediumslateblue;';
+  readonly mediumspringgreen = 'accent-color:mediumspringgreen;';
+  readonly mediumturquoise = 'accent-color:mediumturquoise;';
+  readonly mediumvioletred = 'accent-color:mediumvioletred;';
+  readonly midnightblue = 'accent-color:midnightblue;';
+  readonly mintcream = 'accent-color:mintcream;';
+  readonly mistyrose = 'accent-color:mistyrose;';
+  readonly moccasin = 'accent-color:moccasin;';
+  readonly navajowhite = 'accent-color:navajowhite;';
+  readonly navy = 'accent-color:navy;';
+  readonly oldlace = 'accent-color:oldlace;';
+  readonly olive = 'accent-color:olive;';
+  readonly olivedrab = 'accent-color:olivedrab;';
+  readonly orange = 'accent-color:orange;';
+  readonly orangered = 'accent-color:orangered;';
+  readonly orchid = 'accent-color:orchid;';
+  readonly palegoldenrod = 'accent-color:palegoldenrod;';
+  readonly palegreen = 'accent-color:palegreen;';
+  readonly paleturquoise = 'accent-color:paleturquoise;';
+  readonly palevioletred = 'accent-color:palevioletred;';
+  readonly papayawhip = 'accent-color:papayawhip;';
+  readonly peachpuff = 'accent-color:peachpuff;';
+  readonly peru = 'accent-color:peru;';
+  readonly pink = 'accent-color:pink;';
+  readonly plum = 'accent-color:plum;';
+  readonly powderblue = 'accent-color:powderblue;';
+  readonly purple = 'accent-color:purple;';
+  readonly rebeccapurple = 'accent-color:rebeccapurple;';
+  readonly red = 'accent-color:red;';
+  readonly revert = 'accent-color:revert;';
+  readonly revertLayer = 'accent-color:revert-layer;';
+  readonly rosybrown = 'accent-color:rosybrown;';
+  readonly royalblue = 'accent-color:royalblue;';
+  readonly saddlebrown = 'accent-color:saddlebrown;';
+  readonly salmon = 'accent-color:salmon;';
+  readonly sandybrown = 'accent-color:sandybrown;';
+  readonly seagreen = 'accent-color:seagreen;';
+  readonly seashell = 'accent-color:seashell;';
+  readonly sienna = 'accent-color:sienna;';
+  readonly silver = 'accent-color:silver;';
+  readonly skyblue = 'accent-color:skyblue;';
+  readonly slateblue = 'accent-color:slateblue;';
+  readonly slategray = 'accent-color:slategray;';
+  readonly slategrey = 'accent-color:slategrey;';
+  readonly snow = 'accent-color:snow;';
+  readonly springgreen = 'accent-color:springgreen;';
+  readonly steelblue = 'accent-color:steelblue;';
+  readonly tan = 'accent-color:tan;';
+  readonly teal = 'accent-color:teal;';
+  readonly thistle = 'accent-color:thistle;';
+  readonly tomato = 'accent-color:tomato;';
+  readonly transparent = 'accent-color:transparent;';
+  readonly turquoise = 'accent-color:turquoise;';
+  readonly unset = 'accent-color:unset;';
+  readonly violet = 'accent-color:violet;';
+  readonly wheat = 'accent-color:wheat;';
+  readonly white = 'accent-color:white;';
+  readonly whitesmoke = 'accent-color:whitesmoke;';
+  readonly yellow = 'accent-color:yellow;';
+  readonly yellowgreen = 'accent-color:yellowgreen;';
   constructor() {
     super('accent-color');
-    initializeAccentColorCss();
   }
 }
-let accentColorReady = false;
-function initializeAccentColorCss(): void {
-  if (accentColorReady) return;
-  Object.assign(AccentColorCss.prototype, accentColorKeywords());
-  Object.freeze(AccentColorCss.prototype);
-  accentColorReady = true;
-}
 
-function alignContentKeywords() {
-  return {
-    baseline: 'align-content:baseline;',
-    center: 'align-content:center;',
-    end: 'align-content:end;',
-    flexEnd: 'align-content:flex-end;',
-    flexStart: 'align-content:flex-start;',
-    inherit: 'align-content:inherit;',
-    initial: 'align-content:initial;',
-    normal: 'align-content:normal;',
-    revert: 'align-content:revert;',
-    revertLayer: 'align-content:revert-layer;',
-    spaceAround: 'align-content:space-around;',
-    spaceBetween: 'align-content:space-between;',
-    spaceEvenly: 'align-content:space-evenly;',
-    start: 'align-content:start;',
-    stretch: 'align-content:stretch;',
-    unset: 'align-content:unset;',
-  } as const;
-}
-
-type AlignContentCssKeywords = Readonly<ReturnType<typeof alignContentKeywords>>;
-export interface AlignContentCss extends AlignContentCssKeywords {}
 /** CSS 属性 align-content；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-content
  */
 export class AlignContentCss extends CssProperty<Property.AlignContent> {
+  readonly baseline = 'align-content:baseline;';
+  readonly center = 'align-content:center;';
+  readonly end = 'align-content:end;';
+  readonly flexEnd = 'align-content:flex-end;';
+  readonly flexStart = 'align-content:flex-start;';
+  readonly inherit = 'align-content:inherit;';
+  readonly initial = 'align-content:initial;';
+  readonly normal = 'align-content:normal;';
+  readonly revert = 'align-content:revert;';
+  readonly revertLayer = 'align-content:revert-layer;';
+  readonly spaceAround = 'align-content:space-around;';
+  readonly spaceBetween = 'align-content:space-between;';
+  readonly spaceEvenly = 'align-content:space-evenly;';
+  readonly start = 'align-content:start;';
+  readonly stretch = 'align-content:stretch;';
+  readonly unset = 'align-content:unset;';
   constructor() {
     super('align-content');
-    initializeAlignContentCss();
   }
 }
-let alignContentReady = false;
-function initializeAlignContentCss(): void {
-  if (alignContentReady) return;
-  Object.assign(AlignContentCss.prototype, alignContentKeywords());
-  Object.freeze(AlignContentCss.prototype);
-  alignContentReady = true;
-}
 
-function alignItemsKeywords() {
-  return {
-    anchorCenter: 'align-items:anchor-center;',
-    baseline: 'align-items:baseline;',
-    center: 'align-items:center;',
-    end: 'align-items:end;',
-    flexEnd: 'align-items:flex-end;',
-    flexStart: 'align-items:flex-start;',
-    inherit: 'align-items:inherit;',
-    initial: 'align-items:initial;',
-    normal: 'align-items:normal;',
-    revert: 'align-items:revert;',
-    revertLayer: 'align-items:revert-layer;',
-    selfEnd: 'align-items:self-end;',
-    selfStart: 'align-items:self-start;',
-    start: 'align-items:start;',
-    stretch: 'align-items:stretch;',
-    unset: 'align-items:unset;',
-  } as const;
-}
-
-type AlignItemsCssKeywords = Readonly<ReturnType<typeof alignItemsKeywords>>;
-export interface AlignItemsCss extends AlignItemsCssKeywords {}
 /** CSS 属性 align-items；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-items
  */
 export class AlignItemsCss extends CssProperty<Property.AlignItems> {
+  readonly anchorCenter = 'align-items:anchor-center;';
+  readonly baseline = 'align-items:baseline;';
+  readonly center = 'align-items:center;';
+  readonly end = 'align-items:end;';
+  readonly flexEnd = 'align-items:flex-end;';
+  readonly flexStart = 'align-items:flex-start;';
+  readonly inherit = 'align-items:inherit;';
+  readonly initial = 'align-items:initial;';
+  readonly normal = 'align-items:normal;';
+  readonly revert = 'align-items:revert;';
+  readonly revertLayer = 'align-items:revert-layer;';
+  readonly selfEnd = 'align-items:self-end;';
+  readonly selfStart = 'align-items:self-start;';
+  readonly start = 'align-items:start;';
+  readonly stretch = 'align-items:stretch;';
+  readonly unset = 'align-items:unset;';
   constructor() {
     super('align-items');
-    initializeAlignItemsCss();
   }
 }
-let alignItemsReady = false;
-function initializeAlignItemsCss(): void {
-  if (alignItemsReady) return;
-  Object.assign(AlignItemsCss.prototype, alignItemsKeywords());
-  Object.freeze(AlignItemsCss.prototype);
-  alignItemsReady = true;
-}
 
-function alignSelfKeywords() {
-  return {
-    anchorCenter: 'align-self:anchor-center;',
-    auto: 'align-self:auto;',
-    baseline: 'align-self:baseline;',
-    center: 'align-self:center;',
-    end: 'align-self:end;',
-    flexEnd: 'align-self:flex-end;',
-    flexStart: 'align-self:flex-start;',
-    inherit: 'align-self:inherit;',
-    initial: 'align-self:initial;',
-    normal: 'align-self:normal;',
-    revert: 'align-self:revert;',
-    revertLayer: 'align-self:revert-layer;',
-    selfEnd: 'align-self:self-end;',
-    selfStart: 'align-self:self-start;',
-    start: 'align-self:start;',
-    stretch: 'align-self:stretch;',
-    unset: 'align-self:unset;',
-  } as const;
-}
-
-type AlignSelfCssKeywords = Readonly<ReturnType<typeof alignSelfKeywords>>;
-export interface AlignSelfCss extends AlignSelfCssKeywords {}
 /** CSS 属性 align-self；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-self
  */
 export class AlignSelfCss extends CssProperty<Property.AlignSelf> {
+  readonly anchorCenter = 'align-self:anchor-center;';
+  readonly auto = 'align-self:auto;';
+  readonly baseline = 'align-self:baseline;';
+  readonly center = 'align-self:center;';
+  readonly end = 'align-self:end;';
+  readonly flexEnd = 'align-self:flex-end;';
+  readonly flexStart = 'align-self:flex-start;';
+  readonly inherit = 'align-self:inherit;';
+  readonly initial = 'align-self:initial;';
+  readonly normal = 'align-self:normal;';
+  readonly revert = 'align-self:revert;';
+  readonly revertLayer = 'align-self:revert-layer;';
+  readonly selfEnd = 'align-self:self-end;';
+  readonly selfStart = 'align-self:self-start;';
+  readonly start = 'align-self:start;';
+  readonly stretch = 'align-self:stretch;';
+  readonly unset = 'align-self:unset;';
   constructor() {
     super('align-self');
-    initializeAlignSelfCss();
   }
 }
-let alignSelfReady = false;
-function initializeAlignSelfCss(): void {
-  if (alignSelfReady) return;
-  Object.assign(AlignSelfCss.prototype, alignSelfKeywords());
-  Object.freeze(AlignSelfCss.prototype);
-  alignSelfReady = true;
-}
 
-function alignTracksKeywords() {
-  return {
-    baseline: 'align-tracks:baseline;',
-    center: 'align-tracks:center;',
-    end: 'align-tracks:end;',
-    flexEnd: 'align-tracks:flex-end;',
-    flexStart: 'align-tracks:flex-start;',
-    inherit: 'align-tracks:inherit;',
-    initial: 'align-tracks:initial;',
-    normal: 'align-tracks:normal;',
-    revert: 'align-tracks:revert;',
-    revertLayer: 'align-tracks:revert-layer;',
-    spaceAround: 'align-tracks:space-around;',
-    spaceBetween: 'align-tracks:space-between;',
-    spaceEvenly: 'align-tracks:space-evenly;',
-    start: 'align-tracks:start;',
-    stretch: 'align-tracks:stretch;',
-    unset: 'align-tracks:unset;',
-  } as const;
-}
-
-type AlignTracksCssKeywords = Readonly<ReturnType<typeof alignTracksKeywords>>;
-export interface AlignTracksCss extends AlignTracksCssKeywords {}
 /** CSS 属性 align-tracks；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-tracks
  */
 export class AlignTracksCss extends CssProperty<Property.AlignTracks> {
+  readonly baseline = 'align-tracks:baseline;';
+  readonly center = 'align-tracks:center;';
+  readonly end = 'align-tracks:end;';
+  readonly flexEnd = 'align-tracks:flex-end;';
+  readonly flexStart = 'align-tracks:flex-start;';
+  readonly inherit = 'align-tracks:inherit;';
+  readonly initial = 'align-tracks:initial;';
+  readonly normal = 'align-tracks:normal;';
+  readonly revert = 'align-tracks:revert;';
+  readonly revertLayer = 'align-tracks:revert-layer;';
+  readonly spaceAround = 'align-tracks:space-around;';
+  readonly spaceBetween = 'align-tracks:space-between;';
+  readonly spaceEvenly = 'align-tracks:space-evenly;';
+  readonly start = 'align-tracks:start;';
+  readonly stretch = 'align-tracks:stretch;';
+  readonly unset = 'align-tracks:unset;';
   constructor() {
     super('align-tracks');
-    initializeAlignTracksCss();
   }
 }
-let alignTracksReady = false;
-function initializeAlignTracksCss(): void {
-  if (alignTracksReady) return;
-  Object.assign(AlignTracksCss.prototype, alignTracksKeywords());
-  Object.freeze(AlignTracksCss.prototype);
-  alignTracksReady = true;
-}
 
-function alignmentBaselineKeywords() {
-  return {
-    alphabetic: 'alignment-baseline:alphabetic;',
-    baseline: 'alignment-baseline:baseline;',
-    central: 'alignment-baseline:central;',
-    ideographic: 'alignment-baseline:ideographic;',
-    inherit: 'alignment-baseline:inherit;',
-    initial: 'alignment-baseline:initial;',
-    mathematical: 'alignment-baseline:mathematical;',
-    middle: 'alignment-baseline:middle;',
-    revert: 'alignment-baseline:revert;',
-    revertLayer: 'alignment-baseline:revert-layer;',
-    textAfterEdge: 'alignment-baseline:text-after-edge;',
-    textBeforeEdge: 'alignment-baseline:text-before-edge;',
-    unset: 'alignment-baseline:unset;',
-  } as const;
-}
-
-type AlignmentBaselineCssKeywords = Readonly<ReturnType<typeof alignmentBaselineKeywords>>;
-export interface AlignmentBaselineCss extends AlignmentBaselineCssKeywords {}
 /** CSS 属性 alignment-baseline；初始值 baseline。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/alignment-baseline
  */
 export class AlignmentBaselineCss extends CssProperty<Property.AlignmentBaseline> {
+  readonly alphabetic = 'alignment-baseline:alphabetic;';
+  readonly baseline = 'alignment-baseline:baseline;';
+  readonly central = 'alignment-baseline:central;';
+  readonly ideographic = 'alignment-baseline:ideographic;';
+  readonly inherit = 'alignment-baseline:inherit;';
+  readonly initial = 'alignment-baseline:initial;';
+  readonly mathematical = 'alignment-baseline:mathematical;';
+  readonly middle = 'alignment-baseline:middle;';
+  readonly revert = 'alignment-baseline:revert;';
+  readonly revertLayer = 'alignment-baseline:revert-layer;';
+  readonly textAfterEdge = 'alignment-baseline:text-after-edge;';
+  readonly textBeforeEdge = 'alignment-baseline:text-before-edge;';
+  readonly unset = 'alignment-baseline:unset;';
   constructor() {
     super('alignment-baseline');
-    initializeAlignmentBaselineCss();
   }
 }
-let alignmentBaselineReady = false;
-function initializeAlignmentBaselineCss(): void {
-  if (alignmentBaselineReady) return;
-  Object.assign(AlignmentBaselineCss.prototype, alignmentBaselineKeywords());
-  Object.freeze(AlignmentBaselineCss.prototype);
-  alignmentBaselineReady = true;
-}
 
-function allKeywords() {
-  return {
-    inherit: 'all:inherit;',
-    initial: 'all:initial;',
-    revert: 'all:revert;',
-    revertLayer: 'all:revert-layer;',
-    unset: 'all:unset;',
-  } as const;
-}
-
-type AllCssKeywords = Readonly<ReturnType<typeof allKeywords>>;
-export interface AllCss extends AllCssKeywords {}
 /** CSS 属性 all。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/all
  */
 export class AllCss extends CssProperty<Property.All> {
+  readonly inherit = 'all:inherit;';
+  readonly initial = 'all:initial;';
+  readonly revert = 'all:revert;';
+  readonly revertLayer = 'all:revert-layer;';
+  readonly unset = 'all:unset;';
   constructor() {
     super('all');
-    initializeAllCss();
   }
 }
-let allReady = false;
-function initializeAllCss(): void {
-  if (allReady) return;
-  Object.assign(AllCss.prototype, allKeywords());
-  Object.freeze(AllCss.prototype);
-  allReady = true;
-}
 
-function anchorNameKeywords() {
-  return {
-    inherit: 'anchor-name:inherit;',
-    initial: 'anchor-name:initial;',
-    none: 'anchor-name:none;',
-    revert: 'anchor-name:revert;',
-    revertLayer: 'anchor-name:revert-layer;',
-    unset: 'anchor-name:unset;',
-  } as const;
-}
-
-type AnchorNameCssKeywords = Readonly<ReturnType<typeof anchorNameKeywords>>;
-export interface AnchorNameCss extends AnchorNameCssKeywords {}
 /** CSS 属性 anchor-name；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-name
  */
 export class AnchorNameCss extends CssProperty<Property.AnchorName> {
+  readonly inherit = 'anchor-name:inherit;';
+  readonly initial = 'anchor-name:initial;';
+  readonly none = 'anchor-name:none;';
+  readonly revert = 'anchor-name:revert;';
+  readonly revertLayer = 'anchor-name:revert-layer;';
+  readonly unset = 'anchor-name:unset;';
   constructor() {
     super('anchor-name');
-    initializeAnchorNameCss();
   }
 }
-let anchorNameReady = false;
-function initializeAnchorNameCss(): void {
-  if (anchorNameReady) return;
-  Object.assign(AnchorNameCss.prototype, anchorNameKeywords());
-  Object.freeze(AnchorNameCss.prototype);
-  anchorNameReady = true;
-}
 
-function anchorScopeKeywords() {
-  return {
-    all: 'anchor-scope:all;',
-    inherit: 'anchor-scope:inherit;',
-    initial: 'anchor-scope:initial;',
-    none: 'anchor-scope:none;',
-    revert: 'anchor-scope:revert;',
-    revertLayer: 'anchor-scope:revert-layer;',
-    unset: 'anchor-scope:unset;',
-  } as const;
-}
-
-type AnchorScopeCssKeywords = Readonly<ReturnType<typeof anchorScopeKeywords>>;
-export interface AnchorScopeCss extends AnchorScopeCssKeywords {}
 /** CSS 属性 anchor-scope；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-scope
  */
 export class AnchorScopeCss extends CssProperty<Property.AnchorScope> {
+  readonly all = 'anchor-scope:all;';
+  readonly inherit = 'anchor-scope:inherit;';
+  readonly initial = 'anchor-scope:initial;';
+  readonly none = 'anchor-scope:none;';
+  readonly revert = 'anchor-scope:revert;';
+  readonly revertLayer = 'anchor-scope:revert-layer;';
+  readonly unset = 'anchor-scope:unset;';
   constructor() {
     super('anchor-scope');
-    initializeAnchorScopeCss();
   }
 }
-let anchorScopeReady = false;
-function initializeAnchorScopeCss(): void {
-  if (anchorScopeReady) return;
-  Object.assign(AnchorScopeCss.prototype, anchorScopeKeywords());
-  Object.freeze(AnchorScopeCss.prototype);
-  anchorScopeReady = true;
-}
 
-function animationKeywords() {
-  return {
-    alternate: 'animation:alternate;',
-    alternateReverse: 'animation:alternate-reverse;',
-    auto: 'animation:auto;',
-    backwards: 'animation:backwards;',
-    both: 'animation:both;',
-    ease: 'animation:ease;',
-    easeIn: 'animation:ease-in;',
-    easeInOut: 'animation:ease-in-out;',
-    easeOut: 'animation:ease-out;',
-    forwards: 'animation:forwards;',
-    infinite: 'animation:infinite;',
-    inherit: 'animation:inherit;',
-    initial: 'animation:initial;',
-    linear: 'animation:linear;',
-    none: 'animation:none;',
-    normal: 'animation:normal;',
-    paused: 'animation:paused;',
-    reverse: 'animation:reverse;',
-    revert: 'animation:revert;',
-    revertLayer: 'animation:revert-layer;',
-    running: 'animation:running;',
-    stepEnd: 'animation:step-end;',
-    stepStart: 'animation:step-start;',
-    unset: 'animation:unset;',
-  } as const;
-}
-
-type AnimationCssKeywords = Readonly<ReturnType<typeof animationKeywords>>;
-export interface AnimationCss extends AnimationCssKeywords {}
 /** CSS 属性 animation。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation
  */
 export class AnimationCss extends CssProperty<Property.Animation> {
+  readonly alternate = 'animation:alternate;';
+  readonly alternateReverse = 'animation:alternate-reverse;';
+  readonly auto = 'animation:auto;';
+  readonly backwards = 'animation:backwards;';
+  readonly both = 'animation:both;';
+  readonly ease = 'animation:ease;';
+  readonly easeIn = 'animation:ease-in;';
+  readonly easeInOut = 'animation:ease-in-out;';
+  readonly easeOut = 'animation:ease-out;';
+  readonly forwards = 'animation:forwards;';
+  readonly infinite = 'animation:infinite;';
+  readonly inherit = 'animation:inherit;';
+  readonly initial = 'animation:initial;';
+  readonly linear = 'animation:linear;';
+  readonly none = 'animation:none;';
+  readonly normal = 'animation:normal;';
+  readonly paused = 'animation:paused;';
+  readonly reverse = 'animation:reverse;';
+  readonly revert = 'animation:revert;';
+  readonly revertLayer = 'animation:revert-layer;';
+  readonly running = 'animation:running;';
+  readonly stepEnd = 'animation:step-end;';
+  readonly stepStart = 'animation:step-start;';
+  readonly unset = 'animation:unset;';
   constructor() {
     super('animation');
-    initializeAnimationCss();
   }
 }
-let animationReady = false;
-function initializeAnimationCss(): void {
-  if (animationReady) return;
-  Object.assign(AnimationCss.prototype, animationKeywords());
-  Object.freeze(AnimationCss.prototype);
-  animationReady = true;
-}
 
-function animationCompositionKeywords() {
-  return {
-    accumulate: 'animation-composition:accumulate;',
-    add: 'animation-composition:add;',
-    inherit: 'animation-composition:inherit;',
-    initial: 'animation-composition:initial;',
-    replace: 'animation-composition:replace;',
-    revert: 'animation-composition:revert;',
-    revertLayer: 'animation-composition:revert-layer;',
-    unset: 'animation-composition:unset;',
-  } as const;
-}
-
-type AnimationCompositionCssKeywords = Readonly<ReturnType<typeof animationCompositionKeywords>>;
-export interface AnimationCompositionCss extends AnimationCompositionCssKeywords {}
 /** CSS 属性 animation-composition；初始值 replace。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-composition
  */
 export class AnimationCompositionCss extends CssProperty<Property.AnimationComposition> {
+  readonly accumulate = 'animation-composition:accumulate;';
+  readonly add = 'animation-composition:add;';
+  readonly inherit = 'animation-composition:inherit;';
+  readonly initial = 'animation-composition:initial;';
+  readonly replace = 'animation-composition:replace;';
+  readonly revert = 'animation-composition:revert;';
+  readonly revertLayer = 'animation-composition:revert-layer;';
+  readonly unset = 'animation-composition:unset;';
   constructor() {
     super('animation-composition');
-    initializeAnimationCompositionCss();
   }
 }
-let animationCompositionReady = false;
-function initializeAnimationCompositionCss(): void {
-  if (animationCompositionReady) return;
-  Object.assign(AnimationCompositionCss.prototype, animationCompositionKeywords());
-  Object.freeze(AnimationCompositionCss.prototype);
-  animationCompositionReady = true;
-}
 
-function animationDelayKeywords() {
-  return {
-    inherit: 'animation-delay:inherit;',
-    initial: 'animation-delay:initial;',
-    revert: 'animation-delay:revert;',
-    revertLayer: 'animation-delay:revert-layer;',
-    unset: 'animation-delay:unset;',
-  } as const;
-}
-
-type AnimationDelayCssKeywords = Readonly<ReturnType<typeof animationDelayKeywords>>;
-export interface AnimationDelayCss extends AnimationDelayCssKeywords {}
 /** CSS 属性 animation-delay；初始值 0s。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-delay
  */
 export class AnimationDelayCss extends CssProperty<Property.AnimationDelay> {
+  readonly inherit = 'animation-delay:inherit;';
+  readonly initial = 'animation-delay:initial;';
+  readonly revert = 'animation-delay:revert;';
+  readonly revertLayer = 'animation-delay:revert-layer;';
+  readonly unset = 'animation-delay:unset;';
   constructor() {
     super('animation-delay');
-    initializeAnimationDelayCss();
   }
 }
-let animationDelayReady = false;
-function initializeAnimationDelayCss(): void {
-  if (animationDelayReady) return;
-  Object.assign(AnimationDelayCss.prototype, animationDelayKeywords());
-  Object.freeze(AnimationDelayCss.prototype);
-  animationDelayReady = true;
-}
 
-function animationDirectionKeywords() {
-  return {
-    alternate: 'animation-direction:alternate;',
-    alternateReverse: 'animation-direction:alternate-reverse;',
-    inherit: 'animation-direction:inherit;',
-    initial: 'animation-direction:initial;',
-    normal: 'animation-direction:normal;',
-    reverse: 'animation-direction:reverse;',
-    revert: 'animation-direction:revert;',
-    revertLayer: 'animation-direction:revert-layer;',
-    unset: 'animation-direction:unset;',
-  } as const;
-}
-
-type AnimationDirectionCssKeywords = Readonly<ReturnType<typeof animationDirectionKeywords>>;
-export interface AnimationDirectionCss extends AnimationDirectionCssKeywords {}
 /** CSS 属性 animation-direction；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-direction
  */
 export class AnimationDirectionCss extends CssProperty<Property.AnimationDirection> {
+  readonly alternate = 'animation-direction:alternate;';
+  readonly alternateReverse = 'animation-direction:alternate-reverse;';
+  readonly inherit = 'animation-direction:inherit;';
+  readonly initial = 'animation-direction:initial;';
+  readonly normal = 'animation-direction:normal;';
+  readonly reverse = 'animation-direction:reverse;';
+  readonly revert = 'animation-direction:revert;';
+  readonly revertLayer = 'animation-direction:revert-layer;';
+  readonly unset = 'animation-direction:unset;';
   constructor() {
     super('animation-direction');
-    initializeAnimationDirectionCss();
   }
 }
-let animationDirectionReady = false;
-function initializeAnimationDirectionCss(): void {
-  if (animationDirectionReady) return;
-  Object.assign(AnimationDirectionCss.prototype, animationDirectionKeywords());
-  Object.freeze(AnimationDirectionCss.prototype);
-  animationDirectionReady = true;
-}
 
-function animationDurationKeywords() {
-  return {
-    auto: 'animation-duration:auto;',
-    inherit: 'animation-duration:inherit;',
-    initial: 'animation-duration:initial;',
-    revert: 'animation-duration:revert;',
-    revertLayer: 'animation-duration:revert-layer;',
-    unset: 'animation-duration:unset;',
-  } as const;
-}
-
-type AnimationDurationCssKeywords = Readonly<ReturnType<typeof animationDurationKeywords>>;
-export interface AnimationDurationCss extends AnimationDurationCssKeywords {}
 /** CSS 属性 animation-duration；初始值 0s。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-duration
  */
 export class AnimationDurationCss extends CssProperty<Property.AnimationDuration> {
+  readonly auto = 'animation-duration:auto;';
+  readonly inherit = 'animation-duration:inherit;';
+  readonly initial = 'animation-duration:initial;';
+  readonly revert = 'animation-duration:revert;';
+  readonly revertLayer = 'animation-duration:revert-layer;';
+  readonly unset = 'animation-duration:unset;';
   constructor() {
     super('animation-duration');
-    initializeAnimationDurationCss();
   }
 }
-let animationDurationReady = false;
-function initializeAnimationDurationCss(): void {
-  if (animationDurationReady) return;
-  Object.assign(AnimationDurationCss.prototype, animationDurationKeywords());
-  Object.freeze(AnimationDurationCss.prototype);
-  animationDurationReady = true;
-}
 
-function animationFillModeKeywords() {
-  return {
-    backwards: 'animation-fill-mode:backwards;',
-    both: 'animation-fill-mode:both;',
-    forwards: 'animation-fill-mode:forwards;',
-    inherit: 'animation-fill-mode:inherit;',
-    initial: 'animation-fill-mode:initial;',
-    none: 'animation-fill-mode:none;',
-    revert: 'animation-fill-mode:revert;',
-    revertLayer: 'animation-fill-mode:revert-layer;',
-    unset: 'animation-fill-mode:unset;',
-  } as const;
-}
-
-type AnimationFillModeCssKeywords = Readonly<ReturnType<typeof animationFillModeKeywords>>;
-export interface AnimationFillModeCss extends AnimationFillModeCssKeywords {}
 /** CSS 属性 animation-fill-mode；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-fill-mode
  */
 export class AnimationFillModeCss extends CssProperty<Property.AnimationFillMode> {
+  readonly backwards = 'animation-fill-mode:backwards;';
+  readonly both = 'animation-fill-mode:both;';
+  readonly forwards = 'animation-fill-mode:forwards;';
+  readonly inherit = 'animation-fill-mode:inherit;';
+  readonly initial = 'animation-fill-mode:initial;';
+  readonly none = 'animation-fill-mode:none;';
+  readonly revert = 'animation-fill-mode:revert;';
+  readonly revertLayer = 'animation-fill-mode:revert-layer;';
+  readonly unset = 'animation-fill-mode:unset;';
   constructor() {
     super('animation-fill-mode');
-    initializeAnimationFillModeCss();
   }
 }
-let animationFillModeReady = false;
-function initializeAnimationFillModeCss(): void {
-  if (animationFillModeReady) return;
-  Object.assign(AnimationFillModeCss.prototype, animationFillModeKeywords());
-  Object.freeze(AnimationFillModeCss.prototype);
-  animationFillModeReady = true;
-}
 
-function animationIterationCountKeywords() {
-  return {
-    infinite: 'animation-iteration-count:infinite;',
-    inherit: 'animation-iteration-count:inherit;',
-    initial: 'animation-iteration-count:initial;',
-    revert: 'animation-iteration-count:revert;',
-    revertLayer: 'animation-iteration-count:revert-layer;',
-    unset: 'animation-iteration-count:unset;',
-  } as const;
-}
-
-type AnimationIterationCountCssKeywords = Readonly<
-  ReturnType<typeof animationIterationCountKeywords>
->;
-export interface AnimationIterationCountCss extends AnimationIterationCountCssKeywords {}
 /** CSS 属性 animation-iteration-count；初始值 1。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-iteration-count
  */
 export class AnimationIterationCountCss extends CssProperty<Property.AnimationIterationCount> {
+  readonly infinite = 'animation-iteration-count:infinite;';
+  readonly inherit = 'animation-iteration-count:inherit;';
+  readonly initial = 'animation-iteration-count:initial;';
+  readonly revert = 'animation-iteration-count:revert;';
+  readonly revertLayer = 'animation-iteration-count:revert-layer;';
+  readonly unset = 'animation-iteration-count:unset;';
   constructor() {
     super('animation-iteration-count');
-    initializeAnimationIterationCountCss();
   }
 }
-let animationIterationCountReady = false;
-function initializeAnimationIterationCountCss(): void {
-  if (animationIterationCountReady) return;
-  Object.assign(AnimationIterationCountCss.prototype, animationIterationCountKeywords());
-  Object.freeze(AnimationIterationCountCss.prototype);
-  animationIterationCountReady = true;
-}
 
-function animationNameKeywords() {
-  return {
-    inherit: 'animation-name:inherit;',
-    initial: 'animation-name:initial;',
-    none: 'animation-name:none;',
-    revert: 'animation-name:revert;',
-    revertLayer: 'animation-name:revert-layer;',
-    unset: 'animation-name:unset;',
-  } as const;
-}
-
-type AnimationNameCssKeywords = Readonly<ReturnType<typeof animationNameKeywords>>;
-export interface AnimationNameCss extends AnimationNameCssKeywords {}
 /** CSS 属性 animation-name；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-name
  */
 export class AnimationNameCss extends CssProperty<Property.AnimationName> {
+  readonly inherit = 'animation-name:inherit;';
+  readonly initial = 'animation-name:initial;';
+  readonly none = 'animation-name:none;';
+  readonly revert = 'animation-name:revert;';
+  readonly revertLayer = 'animation-name:revert-layer;';
+  readonly unset = 'animation-name:unset;';
   constructor() {
     super('animation-name');
-    initializeAnimationNameCss();
   }
 }
-let animationNameReady = false;
-function initializeAnimationNameCss(): void {
-  if (animationNameReady) return;
-  Object.assign(AnimationNameCss.prototype, animationNameKeywords());
-  Object.freeze(AnimationNameCss.prototype);
-  animationNameReady = true;
-}
 
-function animationPlayStateKeywords() {
-  return {
-    inherit: 'animation-play-state:inherit;',
-    initial: 'animation-play-state:initial;',
-    paused: 'animation-play-state:paused;',
-    revert: 'animation-play-state:revert;',
-    revertLayer: 'animation-play-state:revert-layer;',
-    running: 'animation-play-state:running;',
-    unset: 'animation-play-state:unset;',
-  } as const;
-}
-
-type AnimationPlayStateCssKeywords = Readonly<ReturnType<typeof animationPlayStateKeywords>>;
-export interface AnimationPlayStateCss extends AnimationPlayStateCssKeywords {}
 /** CSS 属性 animation-play-state；初始值 running。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-play-state
  */
 export class AnimationPlayStateCss extends CssProperty<Property.AnimationPlayState> {
+  readonly inherit = 'animation-play-state:inherit;';
+  readonly initial = 'animation-play-state:initial;';
+  readonly paused = 'animation-play-state:paused;';
+  readonly revert = 'animation-play-state:revert;';
+  readonly revertLayer = 'animation-play-state:revert-layer;';
+  readonly running = 'animation-play-state:running;';
+  readonly unset = 'animation-play-state:unset;';
   constructor() {
     super('animation-play-state');
-    initializeAnimationPlayStateCss();
   }
 }
-let animationPlayStateReady = false;
-function initializeAnimationPlayStateCss(): void {
-  if (animationPlayStateReady) return;
-  Object.assign(AnimationPlayStateCss.prototype, animationPlayStateKeywords());
-  Object.freeze(AnimationPlayStateCss.prototype);
-  animationPlayStateReady = true;
-}
 
-function animationRangeKeywords() {
-  return {
-    contain: 'animation-range:contain;',
-    cover: 'animation-range:cover;',
-    entry: 'animation-range:entry;',
-    entryCrossing: 'animation-range:entry-crossing;',
-    exit: 'animation-range:exit;',
-    exitCrossing: 'animation-range:exit-crossing;',
-    inherit: 'animation-range:inherit;',
-    initial: 'animation-range:initial;',
-    normal: 'animation-range:normal;',
-    revert: 'animation-range:revert;',
-    revertLayer: 'animation-range:revert-layer;',
-    unset: 'animation-range:unset;',
-  } as const;
-}
-
-type AnimationRangeCssKeywords = Readonly<ReturnType<typeof animationRangeKeywords>>;
-export interface AnimationRangeCss extends AnimationRangeCssKeywords {}
 /** CSS 属性 animation-range。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range
  */
 export class AnimationRangeCss extends LengthCssProperty<Property.AnimationRange> {
+  readonly contain = 'animation-range:contain;';
+  readonly cover = 'animation-range:cover;';
+  readonly entry = 'animation-range:entry;';
+  readonly entryCrossing = 'animation-range:entry-crossing;';
+  readonly exit = 'animation-range:exit;';
+  readonly exitCrossing = 'animation-range:exit-crossing;';
+  readonly inherit = 'animation-range:inherit;';
+  readonly initial = 'animation-range:initial;';
+  readonly normal = 'animation-range:normal;';
+  readonly revert = 'animation-range:revert;';
+  readonly revertLayer = 'animation-range:revert-layer;';
+  readonly unset = 'animation-range:unset;';
   constructor() {
     super('animation-range');
-    initializeAnimationRangeCss();
   }
 }
-let animationRangeReady = false;
-function initializeAnimationRangeCss(): void {
-  if (animationRangeReady) return;
-  Object.assign(AnimationRangeCss.prototype, animationRangeKeywords());
-  Object.freeze(AnimationRangeCss.prototype);
-  animationRangeReady = true;
-}
 
-function animationRangeEndKeywords() {
-  return {
-    contain: 'animation-range-end:contain;',
-    cover: 'animation-range-end:cover;',
-    entry: 'animation-range-end:entry;',
-    entryCrossing: 'animation-range-end:entry-crossing;',
-    exit: 'animation-range-end:exit;',
-    exitCrossing: 'animation-range-end:exit-crossing;',
-    inherit: 'animation-range-end:inherit;',
-    initial: 'animation-range-end:initial;',
-    normal: 'animation-range-end:normal;',
-    revert: 'animation-range-end:revert;',
-    revertLayer: 'animation-range-end:revert-layer;',
-    unset: 'animation-range-end:unset;',
-  } as const;
-}
-
-type AnimationRangeEndCssKeywords = Readonly<ReturnType<typeof animationRangeEndKeywords>>;
-export interface AnimationRangeEndCss extends AnimationRangeEndCssKeywords {}
 /** CSS 属性 animation-range-end；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-end
  */
 export class AnimationRangeEndCss extends LengthCssProperty<Property.AnimationRangeEnd> {
+  readonly contain = 'animation-range-end:contain;';
+  readonly cover = 'animation-range-end:cover;';
+  readonly entry = 'animation-range-end:entry;';
+  readonly entryCrossing = 'animation-range-end:entry-crossing;';
+  readonly exit = 'animation-range-end:exit;';
+  readonly exitCrossing = 'animation-range-end:exit-crossing;';
+  readonly inherit = 'animation-range-end:inherit;';
+  readonly initial = 'animation-range-end:initial;';
+  readonly normal = 'animation-range-end:normal;';
+  readonly revert = 'animation-range-end:revert;';
+  readonly revertLayer = 'animation-range-end:revert-layer;';
+  readonly unset = 'animation-range-end:unset;';
   constructor() {
     super('animation-range-end');
-    initializeAnimationRangeEndCss();
   }
 }
-let animationRangeEndReady = false;
-function initializeAnimationRangeEndCss(): void {
-  if (animationRangeEndReady) return;
-  Object.assign(AnimationRangeEndCss.prototype, animationRangeEndKeywords());
-  Object.freeze(AnimationRangeEndCss.prototype);
-  animationRangeEndReady = true;
-}
 
-function animationRangeStartKeywords() {
-  return {
-    contain: 'animation-range-start:contain;',
-    cover: 'animation-range-start:cover;',
-    entry: 'animation-range-start:entry;',
-    entryCrossing: 'animation-range-start:entry-crossing;',
-    exit: 'animation-range-start:exit;',
-    exitCrossing: 'animation-range-start:exit-crossing;',
-    inherit: 'animation-range-start:inherit;',
-    initial: 'animation-range-start:initial;',
-    normal: 'animation-range-start:normal;',
-    revert: 'animation-range-start:revert;',
-    revertLayer: 'animation-range-start:revert-layer;',
-    unset: 'animation-range-start:unset;',
-  } as const;
-}
-
-type AnimationRangeStartCssKeywords = Readonly<ReturnType<typeof animationRangeStartKeywords>>;
-export interface AnimationRangeStartCss extends AnimationRangeStartCssKeywords {}
 /** CSS 属性 animation-range-start；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-start
  */
 export class AnimationRangeStartCss extends LengthCssProperty<Property.AnimationRangeStart> {
+  readonly contain = 'animation-range-start:contain;';
+  readonly cover = 'animation-range-start:cover;';
+  readonly entry = 'animation-range-start:entry;';
+  readonly entryCrossing = 'animation-range-start:entry-crossing;';
+  readonly exit = 'animation-range-start:exit;';
+  readonly exitCrossing = 'animation-range-start:exit-crossing;';
+  readonly inherit = 'animation-range-start:inherit;';
+  readonly initial = 'animation-range-start:initial;';
+  readonly normal = 'animation-range-start:normal;';
+  readonly revert = 'animation-range-start:revert;';
+  readonly revertLayer = 'animation-range-start:revert-layer;';
+  readonly unset = 'animation-range-start:unset;';
   constructor() {
     super('animation-range-start');
-    initializeAnimationRangeStartCss();
   }
 }
-let animationRangeStartReady = false;
-function initializeAnimationRangeStartCss(): void {
-  if (animationRangeStartReady) return;
-  Object.assign(AnimationRangeStartCss.prototype, animationRangeStartKeywords());
-  Object.freeze(AnimationRangeStartCss.prototype);
-  animationRangeStartReady = true;
-}
 
-function animationTimelineKeywords() {
-  return {
-    auto: 'animation-timeline:auto;',
-    inherit: 'animation-timeline:inherit;',
-    initial: 'animation-timeline:initial;',
-    none: 'animation-timeline:none;',
-    revert: 'animation-timeline:revert;',
-    revertLayer: 'animation-timeline:revert-layer;',
-    unset: 'animation-timeline:unset;',
-  } as const;
-}
-
-type AnimationTimelineCssKeywords = Readonly<ReturnType<typeof animationTimelineKeywords>>;
-export interface AnimationTimelineCss extends AnimationTimelineCssKeywords {}
 /** CSS 属性 animation-timeline；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timeline
  */
 export class AnimationTimelineCss extends CssProperty<Property.AnimationTimeline> {
+  readonly auto = 'animation-timeline:auto;';
+  readonly inherit = 'animation-timeline:inherit;';
+  readonly initial = 'animation-timeline:initial;';
+  readonly none = 'animation-timeline:none;';
+  readonly revert = 'animation-timeline:revert;';
+  readonly revertLayer = 'animation-timeline:revert-layer;';
+  readonly unset = 'animation-timeline:unset;';
   constructor() {
     super('animation-timeline');
-    initializeAnimationTimelineCss();
   }
 }
-let animationTimelineReady = false;
-function initializeAnimationTimelineCss(): void {
-  if (animationTimelineReady) return;
-  Object.assign(AnimationTimelineCss.prototype, animationTimelineKeywords());
-  Object.freeze(AnimationTimelineCss.prototype);
-  animationTimelineReady = true;
-}
 
-function animationTimingFunctionKeywords() {
-  return {
-    ease: 'animation-timing-function:ease;',
-    easeIn: 'animation-timing-function:ease-in;',
-    easeInOut: 'animation-timing-function:ease-in-out;',
-    easeOut: 'animation-timing-function:ease-out;',
-    inherit: 'animation-timing-function:inherit;',
-    initial: 'animation-timing-function:initial;',
-    linear: 'animation-timing-function:linear;',
-    revert: 'animation-timing-function:revert;',
-    revertLayer: 'animation-timing-function:revert-layer;',
-    stepEnd: 'animation-timing-function:step-end;',
-    stepStart: 'animation-timing-function:step-start;',
-    unset: 'animation-timing-function:unset;',
-  } as const;
-}
-
-type AnimationTimingFunctionCssKeywords = Readonly<
-  ReturnType<typeof animationTimingFunctionKeywords>
->;
-export interface AnimationTimingFunctionCss extends AnimationTimingFunctionCssKeywords {}
 /** CSS 属性 animation-timing-function；初始值 ease。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timing-function
  */
 export class AnimationTimingFunctionCss extends CssProperty<Property.AnimationTimingFunction> {
+  readonly ease = 'animation-timing-function:ease;';
+  readonly easeIn = 'animation-timing-function:ease-in;';
+  readonly easeInOut = 'animation-timing-function:ease-in-out;';
+  readonly easeOut = 'animation-timing-function:ease-out;';
+  readonly inherit = 'animation-timing-function:inherit;';
+  readonly initial = 'animation-timing-function:initial;';
+  readonly linear = 'animation-timing-function:linear;';
+  readonly revert = 'animation-timing-function:revert;';
+  readonly revertLayer = 'animation-timing-function:revert-layer;';
+  readonly stepEnd = 'animation-timing-function:step-end;';
+  readonly stepStart = 'animation-timing-function:step-start;';
+  readonly unset = 'animation-timing-function:unset;';
   constructor() {
     super('animation-timing-function');
-    initializeAnimationTimingFunctionCss();
   }
 }
-let animationTimingFunctionReady = false;
-function initializeAnimationTimingFunctionCss(): void {
-  if (animationTimingFunctionReady) return;
-  Object.assign(AnimationTimingFunctionCss.prototype, animationTimingFunctionKeywords());
-  Object.freeze(AnimationTimingFunctionCss.prototype);
-  animationTimingFunctionReady = true;
-}
 
-function appearanceKeywords() {
-  return {
-    auto: 'appearance:auto;',
-    button: 'appearance:button;',
-    checkbox: 'appearance:checkbox;',
-    inherit: 'appearance:inherit;',
-    initial: 'appearance:initial;',
-    listbox: 'appearance:listbox;',
-    menulist: 'appearance:menulist;',
-    menulistButton: 'appearance:menulist-button;',
-    meter: 'appearance:meter;',
-    none: 'appearance:none;',
-    progressBar: 'appearance:progress-bar;',
-    radio: 'appearance:radio;',
-    revert: 'appearance:revert;',
-    revertLayer: 'appearance:revert-layer;',
-    searchfield: 'appearance:searchfield;',
-    textarea: 'appearance:textarea;',
-    textfield: 'appearance:textfield;',
-    unset: 'appearance:unset;',
-  } as const;
-}
-
-type AppearanceCssKeywords = Readonly<ReturnType<typeof appearanceKeywords>>;
-export interface AppearanceCss extends AppearanceCssKeywords {}
 /** CSS 属性 appearance；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/appearance
  */
 export class AppearanceCss extends CssProperty<Property.Appearance> {
+  readonly auto = 'appearance:auto;';
+  readonly button = 'appearance:button;';
+  readonly checkbox = 'appearance:checkbox;';
+  readonly inherit = 'appearance:inherit;';
+  readonly initial = 'appearance:initial;';
+  readonly listbox = 'appearance:listbox;';
+  readonly menulist = 'appearance:menulist;';
+  readonly menulistButton = 'appearance:menulist-button;';
+  readonly meter = 'appearance:meter;';
+  readonly none = 'appearance:none;';
+  readonly progressBar = 'appearance:progress-bar;';
+  readonly radio = 'appearance:radio;';
+  readonly revert = 'appearance:revert;';
+  readonly revertLayer = 'appearance:revert-layer;';
+  readonly searchfield = 'appearance:searchfield;';
+  readonly textarea = 'appearance:textarea;';
+  readonly textfield = 'appearance:textfield;';
+  readonly unset = 'appearance:unset;';
   constructor() {
     super('appearance');
-    initializeAppearanceCss();
   }
 }
-let appearanceReady = false;
-function initializeAppearanceCss(): void {
-  if (appearanceReady) return;
-  Object.assign(AppearanceCss.prototype, appearanceKeywords());
-  Object.freeze(AppearanceCss.prototype);
-  appearanceReady = true;
-}
 
-function aspectRatioKeywords() {
-  return {
-    auto: 'aspect-ratio:auto;',
-    inherit: 'aspect-ratio:inherit;',
-    initial: 'aspect-ratio:initial;',
-    revert: 'aspect-ratio:revert;',
-    revertLayer: 'aspect-ratio:revert-layer;',
-    unset: 'aspect-ratio:unset;',
-  } as const;
-}
-
-type AspectRatioCssKeywords = Readonly<ReturnType<typeof aspectRatioKeywords>>;
-export interface AspectRatioCss extends AspectRatioCssKeywords {}
 /** CSS 属性 aspect-ratio；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/aspect-ratio
  */
 export class AspectRatioCss extends CssProperty<Property.AspectRatio> {
+  readonly auto = 'aspect-ratio:auto;';
+  readonly inherit = 'aspect-ratio:inherit;';
+  readonly initial = 'aspect-ratio:initial;';
+  readonly revert = 'aspect-ratio:revert;';
+  readonly revertLayer = 'aspect-ratio:revert-layer;';
+  readonly unset = 'aspect-ratio:unset;';
   constructor() {
     super('aspect-ratio');
-    initializeAspectRatioCss();
   }
-}
-let aspectRatioReady = false;
-function initializeAspectRatioCss(): void {
-  if (aspectRatioReady) return;
-  Object.assign(AspectRatioCss.prototype, aspectRatioKeywords());
-  Object.freeze(AspectRatioCss.prototype);
-  aspectRatioReady = true;
 }

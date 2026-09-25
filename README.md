@@ -33,3 +33,4 @@ class 对象写法、浏览器规则注册和 Node 请求隔离已有最小可�
 当前 Vue/Svelte 工作区包的调用和手工 Node SSR 接入见 [最小用法](docs/minimum-usage.md)；两轮真实适配器的[性能记录](.research/minimum-usable-performance.md)与原始样本在 `.research/string-css-probe/`。
 包类型入口、生成文件与命名整理的证据见[本轮实施记录](.research/type-layout-next-stage.md)。
 运行时成本、Vue/Svelte 派生值使用边界和下一步性能选择见[性能方向复核](.research/runtime-performance-review.md)。
+关键字直接字段的试验结果和取舍见[直接字段报告](.research/direct-keyword-fields-probe.md)。
