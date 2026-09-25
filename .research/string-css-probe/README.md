@@ -49,6 +49,8 @@ pnpm test:mup:exports
 
 `probe:author-storage` 是独立的合成微基准，用于比较 502 条属性链采用实例字段、共享原型及空 `Proxy` 时的创建与读取成本；测法、结果和局限见[代码生成审阅稿](../css-author-generation-design.md)。
 
+`probe:static-fields` 只用 TypeScript AST 提取生成类中的固定声明，展示条件分支和 `ic()` 的候选规则以及动态值回退；它不改写组件，局限与后续方向见[直接字段优化研究](../direct-field-optimization-research.md)。
+
 `test:mup:*` 使用当前 Vue/Svelte 适配器，分别验证浏览器上下文、两个 Node SSR 请求的规则隔离、客户端 hydration 去重及条件导出。它们是最小可用验收，不替代后续的 Nuxt/SvelteKit 集成测试。
 
 设置 `MUP_DIST=1` 后，MUP 浏览器、SSR、hydration 和性能脚本改用仓库根 `pnpm build` 生成的包入口；不设置时读取工作区源码。性能原始样本与[阶段报告](../minimum-usable-performance.md)分开保存，旧的 `results-a/b.json` 不代表当前适配器。

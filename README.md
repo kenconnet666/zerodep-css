@@ -34,3 +34,4 @@ class 对象写法、浏览器规则注册和 Node 请求隔离已有最小可�
 包类型入口、生成文件与命名整理的证据见[本轮实施记录](.research/type-layout-next-stage.md)。
 运行时成本、Vue/Svelte 派生值使用边界和下一步性能选择见[性能方向复核](.research/runtime-performance-review.md)。
 关键字直接字段的试验结果和取舍见[直接字段报告](.research/direct-keyword-fields-probe.md)。
+直接字段可用的缓存与静态分支优化候选见[优化研究](.research/direct-field-optimization-research.md)。

@@ -10,6 +10,7 @@
     "test:mup:exports": "node mup-exports.mjs",
     "probe:mup": "node mup-performance.mjs",
     "probe:mup:cold": "node mup-cold.mjs",
+    "probe:static-fields": "node static-field-probe.mjs",
     "probe": "node legacy/run.mjs",
     "probe:author-storage": "node legacy/author-storage.mjs",
     "semantics": "node legacy/semantics.mjs",
