@@ -1,5 +1,7 @@
 # 直接字段版的优化研究
 
+后续方向已改为先研究[运行时同步快路径、并行与 SIMD](runtime-parallel-simd-research.md)；下文的静态类名提取仍是可选候选，不是必做的编译器路线。
+
 本轮只研究候选实现与静态分析，未改产品运行时代码。基线是[直接字段试验](direct-keyword-fields-probe.md)：固定声明为 `readonly red = 'color:red;'`；`css(...parts)` 已对完整字符串组合缓存，未命中才哈希和注册规则。保持类继承、`raw()`、`px()`、`ic()` 与无法静态确定时的运行时路径。
 
 ## 字段存储与冷成本

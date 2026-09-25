@@ -51,6 +51,8 @@ pnpm test:mup:exports
 
 `probe:static-fields` 只用 TypeScript AST 提取生成类中的固定声明，展示条件分支和 `ic()` 的候选规则以及动态值回退；它不改写组件，局限与后续方向见[直接字段优化研究](../direct-field-optimization-research.md)。
 
+`probe:runtime` 在 Chrome 中分段测量当前规则注册器的命中、哈希、短声明编码、CSSOM 写入与已启动 Worker 的消息往返；这不是 CI 性能门槛，结果和适用边界见[并行与 SIMD 研究](../runtime-parallel-simd-research.md)。
+
 `test:mup:*` 使用当前 Vue/Svelte 适配器，分别验证浏览器上下文、两个 Node SSR 请求的规则隔离、客户端 hydration 去重及条件导出。它们是最小可用验收，不替代后续的 Nuxt/SvelteKit 集成测试。
 
 设置 `MUP_DIST=1` 后，MUP 浏览器、SSR、hydration 和性能脚本改用仓库根 `pnpm build` 生成的包入口；不设置时读取工作区源码。性能原始样本与[阶段报告](../minimum-usable-performance.md)分开保存，旧的 `results-a/b.json` 不代表当前适配器。
