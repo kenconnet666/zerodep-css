@@ -37,9 +37,11 @@ pnpm semantics
 
 ## 响应式 CSS 变量绑定规划
 
-保留直接 `css(...)` 的运行时路径；Vue 可以在 `<script setup>` 中把重复使用的类计算放入 `computed`，Svelte 可按需用 `$derived`。可选编译器识别模板类绑定中结构固定、只有声明值变化的 `css(s.color.red, s.width.raw(width))`，把静态规则注册一次，并将动态值绑定在目标元素上。例如输出方向是固定类 `.z-...{color:red;width:var(--z-width-...);}`，以及 Vue `:style` / Svelte `style:--z-width-...` 的响应式绑定。变量名按源码位置与声明位置稳定生成；必须合并用户已有的类和 style，并使服务端 HTML、客户端首帧、hydration 使用同一名称与初值。编译器尚未覆盖的条件分支、动态属性名或复杂表达式继续执行运行时 `css(...)`，以后可逐步扩大可编译范围。
+Vue SFC 的 [`v-bind()`](https://vuejs.org/api/sfc-css-features.html#v-bind-in-css) 可以直接作为参照。用当前安装的 Vue 3.5.43 编译 `.box{width:v-bind(width)}`，得到 `.box[data-v-probe]{width:var(--probe-width)}`；脚本生成 `useCssVars` 读取 `width.value`。Vue 运行时把该变量写到组件根元素的内联样式，响应式值变化时更新。它没有为每个值重新生成 CSS 规则。
 
-`pnpm semantics` 记录了浏览器的正常行为：`color:red;color:blue` 最终为蓝色；`width:12px;width:invalid` 最终为 `12px`，但 `width:12px;width:var(--width)` 且 `--width:invalid` 在该页面中最终为自动宽度 `1264px`。直接写入的无效声明在解析时被丢弃，通过 CSS 变量得到的无效值则在计算值阶段失效。这不需要框架检查值是否合法，也不需要模拟另一种回退。若编译器把响应式值改写成 `var()`，就遵循原生 CSS 变量语义；运行时直接拼声明则遵循原生直接声明语义。文档应说明这项改写的语义，不能把两种结果描述成完全相同。后续测试重点是绑定与原有样式合并、SSR/hydration，以及不同条件下的性能。
+我们的编译器沿用这个简单机制：把可识别的响应式声明值替换为稳定的 `var(--...)`，静态类只生成一次，再通过 Vue `:style` 或 Svelte 的 style 指令把当前值绑定到使用该类的元素。Vue 的 SFC `v-bind()` 将变量放在组件根元素；我们的 `v-for` 中每项可以有不同值，因此绑定位置是各项自己的元素。无需检查 CSS 值是否合法或模拟级联；编译后按浏览器原生 CSS 变量语义执行。编译器尚未覆盖的结构性变化继续调用运行时 `css(...)`。Vue 可用 `computed`、Svelte 可用 `$derived` 避免重复计算，但它们不是绑定变量的必要条件。
+
+`pnpm semantics` 只记录直接声明和 CSS 变量在无效值下各自的原生行为，不作为绑定转换的限制条件。实现时需要让生成的变量名稳定，并与元素已有的 `class`、`style` 一起工作。
 
 导入式 `css(...)` 还需要明确规则注册归属：浏览器端可以有当前应用宿主，服务端则不能依赖全局可变“当前宿主”，否则并发请求可能交叉。正式实现前先确定请求隔离及样式收集方式，再验证 Nuxt 4 与 SvelteKit 2 的 SSR、预渲染和 hydration。
 
