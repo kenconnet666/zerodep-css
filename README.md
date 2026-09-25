@@ -22,3 +22,5 @@ pnpm lsp:verify
 `lsp:setup` 按当前机器的 Node 与项目目录生成被忽略的 `.codex/config.toml`；信任项目并重载 Codex 后，使用 `zerodep_lsp` 的 diagnostics、hover、definitions、references 和 completions。需要验证 Codex 实际解析的项目配置时，在 PowerShell 7 运行 `pwsh -NoProfile -File scripts/language-services/setup.ps1 -Verify -SkipInstall`。Codex MCP 不可用时，可运行 `pnpm lsp:inspect <项目相对路径>`。
 
 下一步先讨论 class 对象写法、纯字符串片段、运行时规则注册、主题和响应式边界，再决定公开 API 与实现。这里的空入口只是语言与依赖骨架，不能用于业务样式。
+
+字符串作者写法及响应式 CSS 变量绑定的独立测量见 [研究探针](.research/string-css-probe/README.md)。

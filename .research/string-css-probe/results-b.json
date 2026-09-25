@@ -1,0 +1,719 @@
+{
+  "runId": "c7e6b9bf-46d8-497d-91f7-258d1edfd5b9",
+  "status": "passed",
+  "passed": true,
+  "environment": {
+    "node": "v24.18.0",
+    "rows": 200,
+    "rounds": 3,
+    "browser": "153.0.8010.54"
+  },
+  "frameworks": {
+    "vue": {
+      "direct-false": {
+        "samples": [
+          {
+            "mountMs": 12.199999999254942,
+            "noiseMs": 15.699999999254942,
+            "updateMs": 44.5,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.199999999254942,
+            "noiseMs": 7.300000000745058,
+            "updateMs": 39.80000000074506,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 0.900000000372529,
+            "noiseMs": 6.099999999627471,
+            "updateMs": 39.09999999962747,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 1.199999999254942,
+          "noiseMs": 7.300000000745058,
+          "updateMs": 39.80000000074506,
+          "noiseCalls": 4000,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "memo-false": {
+        "samples": [
+          {
+            "mountMs": 3,
+            "noiseMs": 6.399999998509884,
+            "updateMs": 43.90000000037253,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.200000001117587,
+            "noiseMs": 3.799999998882413,
+            "updateMs": 40.20000000111759,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 0.900000000372529,
+            "noiseMs": 3.5,
+            "updateMs": 39,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 1.200000001117587,
+          "noiseMs": 3.799999998882413,
+          "updateMs": 40.20000000111759,
+          "noiseCalls": 0,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "table-false": {
+        "samples": [
+          {
+            "mountMs": 1.6000000014901161,
+            "noiseMs": 5.699999999254942,
+            "updateMs": 38.79999999888241,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1,
+            "noiseMs": 5.299999998882413,
+            "updateMs": 39.09999999962747,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1,
+            "noiseMs": 5.299999998882413,
+            "updateMs": 37.29999999888241,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 1,
+          "noiseMs": 5.299999998882413,
+          "updateMs": 38.79999999888241,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 16
+        }
+      },
+      "variable-false": {
+        "samples": [
+          {
+            "mountMs": 2,
+            "noiseMs": 12.099999999627471,
+            "updateMs": 85.80000000074506,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.299999998882413,
+            "noiseMs": 10.5,
+            "updateMs": 83.60000000149012,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.199999999254942,
+            "noiseMs": 9.900000000372529,
+            "updateMs": 84.5,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 1.299999998882413,
+          "noiseMs": 10.5,
+          "updateMs": 84.5,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 1
+        }
+      },
+      "emotion-false": {
+        "samples": [
+          {
+            "mountMs": 5.5,
+            "noiseMs": 14.199999999254942,
+            "updateMs": 53.19999999925494,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.5,
+            "noiseMs": 13.900000000372529,
+            "updateMs": 51.40000000037253,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.5,
+            "noiseMs": 12,
+            "updateMs": 49.59999999962747,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 1.5,
+          "noiseMs": 13.900000000372529,
+          "updateMs": 51.40000000037253,
+          "noiseCalls": 4000,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "direct-true": {
+        "samples": [
+          {
+            "mountMs": 2.299999998882413,
+            "noiseMs": 2.200000001117587,
+            "updateMs": 21.700000001117587,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "noiseMs": 1.699999999254942,
+            "updateMs": 19.199999999254942,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "noiseMs": 1.799999998882413,
+            "updateMs": 23.5,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 2.299999998882413,
+          "noiseMs": 1.799999998882413,
+          "updateMs": 21.700000001117587,
+          "noiseCalls": 1000,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      },
+      "memo-true": {
+        "samples": [
+          {
+            "mountMs": 1.8999999985098839,
+            "noiseMs": 1.099999999627471,
+            "updateMs": 19.90000000037253,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "noiseMs": 0.900000000372529,
+            "updateMs": 19.09999999962747,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "noiseMs": 1,
+            "updateMs": 18,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 1.700000001117587,
+          "noiseMs": 1,
+          "updateMs": 19.09999999962747,
+          "noiseCalls": 0,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      },
+      "variable-true": {
+        "samples": [
+          {
+            "mountMs": 1.6000000014901161,
+            "noiseMs": 2.900000000372529,
+            "updateMs": 16.200000001117587,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 1.400000000372529,
+            "noiseMs": 2.599999999627471,
+            "updateMs": 14.400000000372529,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 1.099999999627471,
+            "noiseMs": 2.5,
+            "updateMs": 13.199999999254942,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 1.400000000372529,
+          "noiseMs": 2.599999999627471,
+          "updateMs": 14.400000000372529,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 1
+        }
+      },
+      "emotion-true": {
+        "samples": [
+          {
+            "mountMs": 5.5,
+            "noiseMs": 4.099999999627471,
+            "updateMs": 27.300000000745058,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "noiseMs": 3.400000000372529,
+            "updateMs": 25.700000001117587,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 2.800000000745058,
+            "noiseMs": 3.800000000745058,
+            "updateMs": 24.09999999962747,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 2.800000000745058,
+          "noiseMs": 3.800000000745058,
+          "updateMs": 25.700000001117587,
+          "noiseCalls": 1000,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      }
+    },
+    "svelte": {
+      "direct-false": {
+        "samples": [
+          {
+            "mountMs": 11.599999999627471,
+            "noiseMs": 2.099999999627471,
+            "updateMs": 42.59999999962747,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.300000000745058,
+            "noiseMs": 0.19999999925494194,
+            "updateMs": 38.79999999888241,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.400000000372529,
+            "noiseMs": 0.19999999925494194,
+            "updateMs": 43.5,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 1.400000000372529,
+          "noiseMs": 0.19999999925494194,
+          "updateMs": 42.59999999962747,
+          "noiseCalls": 0,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "memo-false": {
+        "samples": [
+          {
+            "mountMs": 4,
+            "noiseMs": 0.599999999627471,
+            "updateMs": 45,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.5,
+            "noiseMs": 0.40000000037252903,
+            "updateMs": 48.5,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.5,
+            "noiseMs": 0.2000000011175871,
+            "updateMs": 43.29999999888241,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 1.5,
+          "noiseMs": 0.40000000037252903,
+          "updateMs": 45,
+          "noiseCalls": 0,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "table-false": {
+        "samples": [
+          {
+            "mountMs": 3.699999999254942,
+            "noiseMs": 0.30000000074505806,
+            "updateMs": 40.30000000074506,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.5,
+            "noiseMs": 0.2999999988824129,
+            "updateMs": 36.399999998509884,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.1000000014901161,
+            "noiseMs": 0.19999999925494194,
+            "updateMs": 35.5,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 1.5,
+          "noiseMs": 0.2999999988824129,
+          "updateMs": 36.399999998509884,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 16
+        }
+      },
+      "variable-false": {
+        "samples": [
+          {
+            "mountMs": 2.5,
+            "noiseMs": 0.3999999985098839,
+            "updateMs": 116.40000000037253,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "noiseMs": 0.40000000037252903,
+            "updateMs": 82.30000000074506,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          },
+          {
+            "mountMs": 1.599999999627471,
+            "noiseMs": 0.2000000011175871,
+            "updateMs": 78.30000000074506,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 1.700000001117587,
+          "noiseMs": 0.3999999985098839,
+          "updateMs": 82.30000000074506,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 1
+        }
+      },
+      "emotion-false": {
+        "samples": [
+          {
+            "mountMs": 8.099999999627471,
+            "noiseMs": 0.2999999988824129,
+            "updateMs": 53.90000000037253,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 2.099999999627471,
+            "noiseMs": 0.2999999988824129,
+            "updateMs": 51,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 7.599999999627471,
+            "noiseMs": 0.30000000074505806,
+            "updateMs": 46.29999999888241,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 7.599999999627471,
+          "noiseMs": 0.2999999988824129,
+          "updateMs": 51,
+          "noiseCalls": 0,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "direct-true": {
+        "samples": [
+          {
+            "mountMs": 3.800000000745058,
+            "noiseMs": 0.19999999925494194,
+            "updateMs": 21.199999999254942,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 2.800000000745058,
+            "noiseMs": 0.09999999962747097,
+            "updateMs": 22.300000000745058,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 2.699999999254942,
+            "noiseMs": 0,
+            "updateMs": 18.40000000037253,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 2.800000000745058,
+          "noiseMs": 0.09999999962747097,
+          "updateMs": 21.199999999254942,
+          "noiseCalls": 0,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      },
+      "memo-true": {
+        "samples": [
+          {
+            "mountMs": 2.5,
+            "noiseMs": 0.2000000011175871,
+            "updateMs": 21.90000000037253,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 2,
+            "noiseMs": 0.09999999962747097,
+            "updateMs": 26.59999999962747,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 2.300000000745058,
+            "noiseMs": 0.09999999962747097,
+            "updateMs": 19,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 2.300000000745058,
+          "noiseMs": 0.09999999962747097,
+          "updateMs": 21.90000000037253,
+          "noiseCalls": 0,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      },
+      "variable-true": {
+        "samples": [
+          {
+            "mountMs": 2.400000000372529,
+            "noiseMs": 0.2999999988824129,
+            "updateMs": 15.799999998882413,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 1.799999998882413,
+            "noiseMs": 0,
+            "updateMs": 14.099999999627471,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 1.700000001117587,
+            "noiseMs": 0.09999999962747097,
+            "updateMs": 14.400000000372529,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 1.799999998882413,
+          "noiseMs": 0.09999999962747097,
+          "updateMs": 14.400000000372529,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 1
+        }
+      },
+      "emotion-true": {
+        "samples": [
+          {
+            "mountMs": 9.400000000372529,
+            "noiseMs": 0.19999999925494194,
+            "updateMs": 29.300000000745058,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 3.699999999254942,
+            "noiseMs": 0.09999999962747097,
+            "updateMs": 26.40000000037253,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 4.599999999627471,
+            "noiseMs": 0.09999999962747097,
+            "updateMs": 28.90000000037253,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 4.599999999627471,
+          "noiseMs": 0.09999999962747097,
+          "updateMs": 28.90000000037253,
+          "noiseCalls": 0,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      }
+    }
+  }
+}

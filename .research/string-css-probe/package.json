@@ -1,0 +1,17 @@
+{
+  "name": "string-css-probe",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.5",
+  "scripts": {
+    "probe": "node run.mjs",
+    "semantics": "node semantics.mjs"
+  },
+  "devDependencies": {
+    "@emotion/css": "11.13.5",
+    "@playwright/test": "1.63.0",
+    "esbuild": "0.28.2",
+    "svelte": "5.57.0",
+    "vue": "3.5.43"
+  }
+}
