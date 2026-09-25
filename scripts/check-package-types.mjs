@@ -21,6 +21,7 @@ class ThemeWidth extends WidthCss { readonly _md = this.raw('48rem'); }
 class ThemeCss extends Css { override readonly width = new ThemeWidth(); }
 class AppCss extends ThemeCss { readonly brand = 'brand'; }
 const s = new AppCss();
+const base = new Css();
 const { provideCss, useCss } = createCssContext<AppCss>();
 useCss().width._md satisfies string;
 provideCss(s);
@@ -33,6 +34,7 @@ s.padding.px(4, 8);
 s.textDecorationLine.underline;
 s.userSelect.none;
 s.fill.red satisfies string;
+base.width.auto satisfies string;
 s.opacity.raw(0.5);
 const rule: CssRule = { className: 'z-example', body: 'color:red;' };
 // @ts-expect-error opacity 不是长度
@@ -66,6 +68,30 @@ function check(file, node) {
     };
     throw new Error(ts.formatDiagnosticsWithColorAndContext(errors, host));
   }
+
+  const expectedDocs = new Map([
+    ['s.display', '显示类型'],
+    ['s.fill', 'CSS 属性 fill'],
+    ['base.width', '宽度'],
+  ]);
+  const checker = program.getTypeChecker();
+  function visit(item) {
+    if (ts.isPropertyAccessExpression(item) && ts.isIdentifier(item.expression)) {
+      const key = `${item.expression.text}.${item.name.text}`;
+      const expected = expectedDocs.get(key);
+      if (expected) {
+        const docs = ts.displayPartsToString(
+          checker.getSymbolAtLocation(item.name)?.getDocumentationComment(checker),
+        );
+        if (!docs.includes(expected)) throw new Error(`Missing package documentation for ${key}.`);
+        expectedDocs.delete(key);
+      }
+    }
+    ts.forEachChild(item, visit);
+  }
+  visit(program.getSourceFile(file));
+  if (expectedDocs.size)
+    throw new Error(`Unresolved documentation checks: ${[...expectedDocs.keys()]}`);
 }
 
 try {

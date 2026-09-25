@@ -162,6 +162,7 @@ for (const name of names) {
   const keywordObject = `${setting.name}Keywords`;
   const initialize = `initialize${className}`;
   const keywords = keywordsOf(member);
+  const documentation = commentOf(member, setting.description, cssName);
   keywordCount += keywords.length;
   const hasLength = member.type.getText(source).includes('TLength');
   if (setting.maxPxArguments && (!hasLength || setting.maxPxArguments < 2))
@@ -176,7 +177,7 @@ for (const name of names) {
   lines.push('  } as const;', '}', '');
   lines.push(`type ${className}Keywords = Readonly<ReturnType<typeof ${keywordObject}>>;`);
   lines.push(`export interface ${className} extends ${className}Keywords {}`);
-  lines.push(commentOf(member, setting.description, cssName));
+  lines.push(documentation);
   lines.push(
     `export class ${className} extends ${hasLength ? 'LengthCssProperty' : 'CssProperty'}<Property.${type}> {`,
     `  constructor() { super(${JSON.stringify(cssName)}); ${initialize}(); }`,
@@ -200,7 +201,7 @@ for (const name of names) {
   lines.push(`  Object.freeze(${className}.prototype);`);
   lines.push(`  ${setting.name}Ready = true;`);
   lines.push('}');
-  systemFields.push(`  declare readonly ${setting.name}: ${alias}.${className};`);
+  systemFields.push(documentation, `  declare readonly ${setting.name}: ${alias}.${className};`);
   systemCreators.push(
     `defineSystemProperty(${JSON.stringify(setting.name)}, () => new ${alias}.${className}());`,
   );
