@@ -1,51 +1,22 @@
 {
   "name": "@zerodep-css/nuxt",
-  "version": "0.2.0",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
-  "files": [
-    "dist"
-  ],
   "exports": {
-    ".": {
-      "types": "./dist/module.d.ts",
-      "default": "./dist/module.js"
-    },
-    "./server": {
-      "types": "./dist/server.d.ts",
-      "default": "./dist/server.js"
-    }
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "catalog:",
-    "@nuxt/schema": "catalog:",
-    "h3": "catalog:",
-    "nitropack": "catalog:"
+    "@zerodep-css/vue": "workspace:*"
   },
   "peerDependencies": {
-    "@zerodep-css/vue": "workspace:*",
-    "nuxt": "^4.5.2"
+    "nuxt": "^4.0.0"
   },
   "devDependencies": {
-    "@zerodep-css/vue": "workspace:*",
-    "@nuxt/nitro-server": "catalog:",
-    "@types/node": "catalog:",
-    "nuxt": "catalog:",
-    "typescript": "catalog:",
-    "vue": "catalog:"
-  },
-  "description": "Nuxt 4 module for request-local zerodep-css styles",
-  "engines": {
-    "node": ">=24 <25"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
-    "directory": "nuxt"
-  },
-  "homepage": "https://github.com/kenconnet666/zerodep-css"
+    "@nuxt/kit": "catalog:",
+    "nuxt": "catalog:"
+  }
 }

@@ -1,22 +1,19 @@
-name: 验证工作区
+name: 基础工作区检查
+
 on:
   push:
   pull_request:
-  workflow_dispatch:
+
 permissions:
   contents: read
-concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+
 jobs:
-  checks:
-    name: 基础检查 (${{ matrix.os }})
+  foundation:
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -28,128 +25,5 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm format:check
-        if: runner.os == 'Linux'
-      - run: pnpm generate:check
-        if: runner.os == 'Linux'
       - run: pnpm check
-      - run: pnpm build
-      - run: pnpm test:unit --no-build
-      - run: pnpm size:check --no-build
-        if: runner.os == 'Linux'
-      - uses: actions/upload-artifact@v4
-        if: always() && runner.os == 'Linux'
-        with:
-          name: bundle-size
-          path: test-results/bundle/
-          retention-days: 7
-  language-services:
-    name: 三种语言的诊断与补全
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.34.5
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
       - run: pnpm lsp:verify
-      - run: pnpm test:types --no-build
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: language-services
-          path: |
-            test-results/language-services/
-            test-results/types/
-          retention-days: 7
-  browsers:
-    name: 样式与框架回归 (${{ matrix.engine }})
-    strategy:
-      fail-fast: false
-      matrix:
-        engine: [chromium, firefox, webkit]
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    env:
-      ZERODEP_BROWSER_CHANNEL: chromium
-      ZERODEP_BROWSER_ENGINE: ${{ matrix.engine }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.34.5
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps ${{ matrix.engine }}
-      - run: pnpm build
-      - run: pnpm test:browser:frameworks --no-build
-      - run: pnpm test:browser:runtime --no-build
-        if: success() || failure()
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: browser-results-${{ matrix.engine }}
-          path: test-results/
-          retention-days: 7
-  consumers:
-    name: 独立安装与官方构建插件
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    env:
-      ZERODEP_BROWSER_CHANNEL: chromium
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.34.5
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm build
-      - run: pnpm test:consumer --no-build
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: consumer-results
-          path: test-results/consumer/
-          retention-days: 7
-  metaframeworks:
-    name: 元框架 SSR 与静态部署 (${{ matrix.framework }})
-    strategy:
-      fail-fast: false
-      matrix:
-        framework: [nuxt, sveltekit]
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    env:
-      ZERODEP_BROWSER_CHANNEL: chromium
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.34.5
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm build
-      - run: pnpm test:${{ matrix.framework }} --no-build
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: metaframework-${{ matrix.framework }}
-          path: test-results/${{ matrix.framework }}/
-          retention-days: 7

@@ -6,50 +6,23 @@ packages:
   - sveltekit
 
 catalog:
-  nuxt: 4.5.2
-  '@nuxt/kit': 4.5.2
-  '@nuxt/schema': 4.5.2
-  '@nuxt/nitro-server': 4.5.2
-  nitropack: 2.13.4
-  h3: 1.15.11
-  esm-env: 1.2.2
-  yaml: 2.9.1
-  magic-string: 0.30.21
-  '@jridgewell/sourcemap-codec': 1.6.0
-  '@jridgewell/trace-mapping': 0.3.31
-  '@playwright/test': 1.63.0
-  '@vitejs/plugin-vue': 6.0.9
-  '@sveltejs/vite-plugin-svelte': 7.3.0
-  '@sveltejs/kit': 2.70.3
-  '@sveltejs/adapter-node': 5.5.7
-  '@sveltejs/adapter-static': 3.0.10
-  vite: 8.3.0
-  '@types/css-tree': 3.2.0
-  '@sveltejs/package': 2.5.8
   '@types/node': 24.13.5
-  '@webref/css': 8.7.5
-  css-tree: 3.2.1
-  esbuild: 0.28.2
+  '@nuxt/kit': 4.5.2
+  '@sveltejs/kit': 2.70.3
+  '@sveltejs/vite-plugin-svelte': 7.3.0
   csstype: 3.2.3
+  nuxt: 4.5.2
   prettier: 3.9.7
   prettier-plugin-svelte: 4.1.1
   svelte: 5.57.0
   svelte-check: 4.7.6
   typescript: 6.0.3
+  vite: 8.3.0
   vue: 3.5.43
 
 catalogs:
-  benchmark:
-    '@emotion/css': 11.13.5
-    goober: 2.1.19
-    '@vanilla-extract/css': 1.21.2
-    '@vanilla-extract/esbuild-plugin': 2.3.22
-    '@vanilla-extract/dynamic': 2.1.5
-    '@unocss/core': 66.10.5
-    '@unocss/preset-mini': 66.10.5
   languageServices:
     '@modelcontextprotocol/sdk': 1.30.0
-    '@sveltejs/mcp': 0.1.26
     '@vue/language-server': 3.3.11
     '@vue/typescript-plugin': 3.3.11
     svelte-language-server: 0.18.4
@@ -64,10 +37,9 @@ linkWorkspacePackages: false
 sharedWorkspaceLockfile: true
 strictPeerDependencies: true
 autoInstallPeers: false
-
 onlyBuiltDependencies:
   - esbuild
 
-# Kit 2.70.3 仍锁 cookie 0.6；仅修补此依赖的非法 cookie 参数序列化。
+# Kit 2.70.3 的传递依赖仍需要局部的 cookie 参数校验修补。
 overrides:
   '@sveltejs/kit>cookie@<0.7.0': 0.7.2

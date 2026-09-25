@@ -14,7 +14,7 @@ for (const configuration of JSON.parse(input.replace(/^\uFEFF/u, ''))) {
   try {
     await client.connect(transport, { timeout: 30000 });
     const { tools } = await client.listTools();
-    const expected = configuration.name === 'zerodep_lsp' ? 'diagnostics' : 'svelte-autofixer';
+    const expected = 'diagnostics';
     assert(
       tools.some((tool) => tool.name === expected),
       `Missing ${expected}`,

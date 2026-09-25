@@ -1,9 +1,6 @@
 node_modules
-**/dist
-**/.svelte-kit
-.research/**/report.json
-.research/**/expressiveness-report.json
-pnpm-lock.yaml
+dist
+.nuxt
+.svelte-kit
 test-results
-.codex/config.toml
-docs/css-coverage.json
+pnpm-lock.yaml

@@ -223,11 +223,7 @@ async function start(kind) {
         (_event, filename) => {
           if (disposed || !filename) return;
           const name = filename.toString();
-          if (
-            directory &&
-            !directory.includes('/') &&
-            ['src', 'dist', 'test', 'compiler'].includes(name)
-          ) {
+          if (directory && !directory.includes('/') && ['src', 'test'].includes(name)) {
             // build 清空并重建 dist 后重新挂接，并补发重建期间可能遗漏的文件变化。
             installWatcher(directory + '/' + name);
             rescan.add(resolve(folder, name));
@@ -246,22 +242,18 @@ async function start(kind) {
     };
     for (const directory of [
       '',
-      'internal',
-      'internal/compiler',
-      'internal/runtime',
-      'vue/compiler',
-      'svelte/compiler',
       'core',
-      'svelte',
       'vue',
+      'svelte',
+      'nuxt',
+      'sveltekit',
       'core/src',
-      'core/dist',
-      'svelte/src',
-      'svelte/dist',
-      'svelte/test',
       'vue/src',
-      'vue/dist',
       'vue/test',
+      'svelte/src',
+      'svelte/test',
+      'nuxt/src',
+      'sveltekit/src',
     ])
       installWatcher(directory);
     const versions = new Map();

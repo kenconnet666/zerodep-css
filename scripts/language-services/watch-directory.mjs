@@ -2,7 +2,7 @@ import { watch, realpathSync } from 'node:fs';
 
 const transient = new Set(['ENOENT', 'EPERM']);
 
-/** 构建会删除并重建 dist；目录在检查后消失时，不能让同步 watch 异常终止 MCP。 */
+/** 探针或目录重建期间路径可能消失；不能让同步 watch 异常终止 MCP。 */
 export function watchDirectory(folder, options, listener, report) {
   let watcher;
   try {

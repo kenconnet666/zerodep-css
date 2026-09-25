@@ -1,10 +1,4 @@
 {
   "extends": "../tsconfig.base.json",
-  "compilerOptions": {
-    "noEmit": true,
-    "types": ["node", "svelte"],
-    "customConditions": ["zerodep-source"],
-    "paths": { "#runtime": ["../internal/runtime/index.ts"] }
-  },
   "include": ["src/**/*.ts"]
 }

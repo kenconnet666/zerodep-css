@@ -10,6 +10,8 @@ const paths = [
   'core/src/__lsp_probe__.ts',
   'vue/src/__LspProbe.vue',
   'svelte/src/__LspProbe.svelte',
+  'nuxt/src/__lsp_probe__.ts',
+  'sveltekit/src/__lsp_probe__.ts',
 ];
 for (const file of paths) {
   try {
@@ -69,7 +71,10 @@ async function position(filePath, needle, offset = 0) {
 }
 function fixture(file, valid) {
   const isTs = file.endsWith('.ts');
-  const body = `import { tokens, pixels } from '${isTs ? './__lsp_shared__.js' : '../../core/src/__lsp_shared__.js'}';
+  const shared = file.startsWith('core/')
+    ? './__lsp_shared__.js'
+    : '../../core/src/__lsp_shared__.js';
+  const body = `import { tokens, pixels } from '${shared}';
 ${isTs ? '' : "import '@zerodep-css/core';"}
 const count: number = ${valid ? '1' : "'wrong'"};
 const tone = tokens.${valid ? 'primary' : 'missing'};
@@ -134,6 +139,8 @@ try {
     'core/src/index.ts',
     'vue/src/index.ts',
     'svelte/src/index.ts',
+    'nuxt/src/index.ts',
+    'sveltekit/src/index.ts',
     'vue/test/types/LanguageFixture.vue',
     'svelte/test/types/LanguageFixture.svelte',
   ]) {

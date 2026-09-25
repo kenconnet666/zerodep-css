@@ -1,15 +1,8 @@
-# setup.ps1 生成本机 Node 和工作目录；入口参数相对 cwd，不要原样复制模板。
+# setup.ps1 将本机 Node 和项目目录写入被忽略的 config.toml。
 # BEGIN ZERODEP LANGUAGE SERVICES
 [mcp_servers.zerodep_lsp]
 command = __NODE__
 args = ["scripts/language-services/server.mjs", "."]
-cwd = __ROOT__
-startup_timeout_sec = 30
-tool_timeout_sec = 90
-
-[mcp_servers.zerodep_svelte_docs]
-command = __NODE__
-args = ["node_modules/@sveltejs/mcp/dist/index.mjs"]
 cwd = __ROOT__
 startup_timeout_sec = 30
 tool_timeout_sec = 90

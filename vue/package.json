@@ -1,63 +1,22 @@
 {
   "name": "@zerodep-css/vue",
-  "version": "0.2.0",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
-  "files": [
-    "dist"
-  ],
   "exports": {
-    "./themes": {
-      "zerodep-source": "./src/themes.ts",
-      "types": "./dist/themes.d.ts",
-      "default": "./dist/themes.js"
-    },
-    ".": {
-      "zerodep-source": "./src/index.ts",
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./compiler": {
-      "types": "./dist/compiler/index.d.ts",
-      "default": "./dist/compiler/index.js"
-    },
-    "./compiler-runtime": {
-      "types": "./dist/compiler-runtime.d.ts",
-      "default": "./dist/compiler-runtime.js"
-    }
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
     "check": "vue-tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@zerodep-css/core": "workspace:^",
-    "magic-string": "catalog:",
-    "typescript": "catalog:",
-    "@jridgewell/sourcemap-codec": "catalog:",
-    "css-tree": "catalog:",
-    "esm-env": "catalog:"
+    "@zerodep-css/core": "workspace:*"
   },
   "peerDependencies": {
-    "vue": "^3.5.43"
+    "vue": "^3.5.0"
   },
   "devDependencies": {
-    "vue": "catalog:"
-  },
-  "description": "Vue 原生响应式 CSS 与自动编译接入",
-  "engines": {
-    "node": ">=24 <25"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
-    "directory": "vue"
-  },
-  "homepage": "https://github.com/kenconnet666/zerodep-css",
-  "imports": {
-    "#runtime": {
-      "types": "./dist/runtime/index.d.ts",
-      "default": "./dist/runtime/index.js"
-    }
+    "vue": "catalog:",
+    "vue-tsc": "catalog:languageServices"
   }
 }

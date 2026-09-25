@@ -14,9 +14,6 @@ if (-not $SkipInstall) {
     & $pnpmExecutable --dir $repoPath install --frozen-lockfile
     if ($LASTEXITCODE -ne 0) { throw '项目语言服务依赖安装失败。' }
 }
-& $pnpmExecutable --dir $repoPath run build
-if ($LASTEXITCODE -ne 0) { throw '库声明构建失败。' }
-
 $configPath = Join-Path $repoPath '.codex/config.toml'
 $template = Get-Content -LiteralPath (Join-Path $repoPath '.codex/config.example.toml') -Raw -Encoding utf8
 $paths = @{
@@ -32,7 +29,7 @@ $managed = [regex]::Match($template, $managedPattern).Value
 $existing = if (Test-Path -LiteralPath $configPath) { Get-Content -LiteralPath $configPath -Raw -Encoding utf8 } else { '' }
 if ($existing -match $managedPattern) {
     $updated = [regex]::Replace($existing, $managedPattern, [System.Text.RegularExpressions.MatchEvaluator]{ param($match) $managed })
-} elseif ($existing -match '(?m)^\[mcp_servers\.(zerodep_lsp|zerodep_svelte_docs)(\]|\.)') {
+} elseif ($existing -match '(?m)^\[mcp_servers\.zerodep_lsp(\]|\.)') {
     throw '现有配置包含未由脚本管理的同名服务；请先处理冲突。其他设置保持不变。'
 } else {
     $updated = $existing.TrimEnd() + "`n" + $managed + "`n"
@@ -43,15 +40,13 @@ if ($Verify) {
     # 读取 Codex 真正解析的配置，而非另构造一套能成功的启动参数。
     Push-Location $repoPath
     try {
-        $configurations = foreach ($name in @('zerodep_lsp', 'zerodep_svelte_docs')) {
-            $json = & codex mcp get $name --json
-            if ($LASTEXITCODE -ne 0) { throw "Codex 未识别 $name；请检查项目是否受信任。" }
-            $json | ConvertFrom-Json
-        }
+        $json = & codex mcp get zerodep_lsp --json
+        if ($LASTEXITCODE -ne 0) { throw 'Codex 未识别 zerodep_lsp；请检查项目是否受信任。' }
+        $configurations = @($json | ConvertFrom-Json)
         ConvertTo-Json -InputObject @($configurations) -Depth 10 -Compress | & $nodeExecutable (Join-Path $PSScriptRoot 'smoke.mjs')
         if ($LASTEXITCODE -ne 0) { throw 'Codex 配置的 MCP 启动验收失败。' }
     } finally { Pop-Location }
     & $nodeExecutable (Join-Path $PSScriptRoot 'verify.mjs') $repoPath
     if ($LASTEXITCODE -ne 0) { throw '项目语言服务验收失败。' }
 }
-Write-Host '已生成本机项目配置并构建库声明。信任本项目后重载 Codex；当前任务工具列表仍需重载后验证。'
+Write-Host '已生成本机项目语言服务配置。信任本项目后重载 Codex；当前任务工具列表仍需重载后验证。'

@@ -1,44 +1,16 @@
 {
   "name": "@zerodep-css/core",
-  "version": "0.2.0",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
-  "files": [
-    "dist",
-    "THIRD_PARTY_NOTICES.md"
-  ],
   "exports": {
-    "./themes": {
-      "zerodep-source": "./src/themes.ts",
-      "types": "./dist/themes.d.ts",
-      "default": "./dist/themes.js"
-    },
-    ".": {
-      "zerodep-source": "./src/index.ts",
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./internal": {
-      "zerodep-source": "./src/internal.ts",
-      "types": "./dist/internal.d.ts",
-      "default": "./dist/internal.js"
-    }
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit"
   },
-  "dependencies": {
-    "css-tree": "catalog:"
-  },
-  "description": "共享 CSS 作者类型、主题定义与框架内部身份",
-  "engines": {
-    "node": ">=24 <25"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
-    "directory": "core"
-  },
-  "homepage": "https://github.com/kenconnet666/zerodep-css"
+  "devDependencies": {
+    "csstype": "catalog:",
+    "typescript": "catalog:"
+  }
 }
