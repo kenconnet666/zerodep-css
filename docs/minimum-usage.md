@@ -25,7 +25,7 @@ const s = useCss(); // 取得上层的同一个 AppCss 实例
 const className = css(s.display.flex, s.width._md, ic('&:hover', s.color.red));
 ```
 
-Vue 动态值可放在模板表达式或 `computed` 中；Svelte 5 可放在模板或 `$derived` 中。`css(s.width.px(width))` 在宽度变化时会按值生成并缓存类；编译成元素 CSS 变量是后续优化，当前不需要编译器。`raw()` 原样拼接字符串，浏览器按原生 CSS 处理值和层叠。
+`css(s.width.px(width))` 可直接放在 Vue/Svelte 模板表达式中；宽度变化时按值生成并缓存类。有限取值可在组件初始化时预注册类表，再用 Vue `computed` 或 Svelte `$derived` **只选择类名**。`css()` 本身会注册规则，不建议把它普遍放进派生表达式。连续变化的值可以手写一条使用 `var(--...)` 的规则并在目标元素绑定变量；自动改写属于后续编译优化。`raw()` 原样拼接字符串，浏览器按原生 CSS 处理值和层叠。两种值形态的测量与取舍见[性能方向复核](../.research/runtime-performance-review.md)。
 
 ## 手工 Node SSR 接入边界
 
