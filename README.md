@@ -24,3 +24,4 @@ pnpm lsp:verify
 下一步继续验证 class 对象写法、运行时规则归属、主题和响应式绑定，再决定正式公开 API。当前试验实现不能用于业务样式。
 
 字符串作者写法及响应式 CSS 变量绑定的独立测量见 [研究探针](.research/string-css-probe/README.md)。
+完整属性链与关键字生成的审阅稿见 [生成设计](.research/css-author-generation-design.md)。
