@@ -1,6 +1,6 @@
 # zerodep-css 研究工作区
 
-- 当前已有五包 pnpm 基础配置、Codex LSP、`core` 的 10 属性生成原型，以及 Vue/Svelte 浏览器与 Node SSR 适配原型。502 属性全量生成、元框架封装和响应式绑定编译器尚未实现；不要把研究探针当作正式 API。
+- 当前已有五包 pnpm 基础配置、Codex LSP、`core` 的 502 属性生成结果，以及 Vue/Svelte 浏览器与 Node SSR 适配原型。元框架封装和响应式绑定编译器尚未实现；不要把研究探针当作正式 API。
 - `core` 保持框架无关；`vue`、`svelte`、`nuxt`、`sveltekit` 各自负责未来适配。五包保持 private，包间使用 `workspace:*`。
 - 使用 Node 24、pnpm 10.34.5 和工作区固定依赖；不要升级全局工具。修改基础配置后运行 `pnpm check`，修改 LSP 桥后运行 `pnpm lsp:verify`。
 - `core/src/generated/` 只由 `pnpm css:generate` 更新；`pnpm check` 必须通过生成结果一致性与各包类型检查。

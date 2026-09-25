@@ -7,7 +7,7 @@ import ts from 'typescript';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const input = resolve(root, 'core/node_modules/csstype/index.d.ts');
 const output = resolve(root, 'core/src/generated/author.ts');
-const config = JSON.parse(await readFile(resolve(root, 'scripts/css-author-pilot.json'), 'utf8'));
+const config = JSON.parse(await readFile(resolve(root, 'scripts/css-author-notes.json'), 'utf8'));
 const version = JSON.parse(
   await readFile(resolve(root, 'core/node_modules/csstype/package.json'), 'utf8'),
 ).version;
@@ -102,7 +102,7 @@ function commentOf(member, description, cssName) {
   const docs = member.jsDoc?.map((item) => item.getFullText(source)).join('\n') ?? '';
   const initial = docs.match(/\*\*Initial value\*\*: `([^`]+)`/)?.[1];
   const url = docs.match(/@see (https:\/\/[^\s*]+)/)?.[1];
-  return `/** ${description}（CSS ${cssName}）${initial ? `；初始值 ${initial}` : ''}。\n * @see ${url ?? `https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/${cssName}`}\n */`;
+  return `/** ${description ? `${description}（CSS ${cssName}）` : `CSS 属性 ${cssName}`}${initial ? `；初始值 ${initial}` : ''}。\n * @see ${url ?? `https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/${cssName}`}\n */`;
 }
 
 const lines = [
@@ -122,9 +122,15 @@ const lines = [
 ];
 const systemFields = [];
 let keywordCount = 0;
-for (const setting of config.properties) {
-  const found = properties.get(setting.name);
-  if (!found) throw new Error(`Unknown CSS property ${setting.name}.`);
+const notes = new Map(config.properties.map((setting) => [setting.name, setting]));
+for (const name of notes.keys())
+  if (!properties.has(name)) throw new Error(`Unknown CSS property ${name}.`);
+const names = [...properties.keys()].sort((left, right) =>
+  left < right ? -1 : left > right ? 1 : 0,
+);
+for (const name of names) {
+  const setting = notes.get(name) ?? { name };
+  const found = properties.get(name);
   const { member, cssName } = found;
   const type = propertyType(member);
   const className = `${setting.name[0].toUpperCase()}${setting.name.slice(1)}Css`;
@@ -181,5 +187,5 @@ if (mode === '--check') {
   await writeFile(output, result);
 }
 console.log(
-  `${mode === '--check' ? 'Checked' : 'Generated'} ${config.properties.length} properties and ${keywordCount} keywords.`,
+  `${mode === '--check' ? 'Checked' : 'Generated'} ${names.length} properties and ${keywordCount} keywords.`,
 );
