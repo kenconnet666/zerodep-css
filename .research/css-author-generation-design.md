@@ -1,4 +1,4 @@
-# CSS 作者链代码生成设计（按新写法调整，待审核）
+# CSS 作者链生成与上下文设计（讨论稿）
 
 本文件只提出生成方案，不实现生成器。已确定的范围是 **502 个标准与独有 SVG 属性**；包体积不是筛选关键字的理由，优先保证写法自然。每个属性是一条链，常见用法直接产出声明字符串：
 
@@ -9,7 +9,7 @@ s.width.px(24); // 'width:24px;'
 s.width.raw('calc(100% - 2rem)'); // 'width:calc(100% - 2rem);'
 ```
 
-系统关键字、`px(number)` 和 `raw(value)` 是同一属性链上的三种输入。`raw('xx')` 是逃生舱：直接拼成 `width:xx;`，不解析、不校验、不补单位，浏览器决定该声明是否生效。它的类型仍提示本属性已知值，同时允许任意普通字符串。主题关键字通过继承属性链添加，例如 `s.width._md`，不需要另一套关键字 API。当前手写的三条属性链只是原型，实现生成器时再替换。
+系统关键字、`px(number)` 和 `raw(value)` 是同一属性链上的三种输入。`raw('xx')` 是逃生舱：直接拼成 `width:xx;`，不解析、不校验、不补单位，浏览器决定该声明是否生效。若能直接沿用属性值类型，就附带已知值提示；任意普通字符串始终可用。主题关键字通过继承属性链添加，例如 `s.width._md`，不需要另一套关键字 API。当前手写的三条属性链只是原型，实现生成器时再替换。
 
 ## 先看用户实际怎么写
 
@@ -23,30 +23,47 @@ s.width.raw('calc(100% - 2rem)'); // 'width:calc(100% - 2rem);'
 
 这些都是普通字符串片段，可传给 `css(s.display.flex, s.width.px(24))`。`css(s.color.red, s.color.blue)` 会保留两条声明，由浏览器按原生层叠得到蓝色，不做属性去重。生成 1.25 万个关键字字符串**不意味着向页面插入 1.25 万条 CSS 规则**；只有调用外层 `css(...)` 组合并注册时，宿主才写入用到的规则。
 
-## 请审阅的四个具体选择
+## 已确定的写法，不再作为审核题
 
-**1．哪些属性应出现 `px()`？** 推荐只在属性类型表明可接收长度时提供。例如 `s.width.px(24)`、`s.marginTop.px(8)` 可用；`s.opacity.px(0.5)` 没有意义，编辑器就不提示它。当前 `csstype` 给出 177 个候选，生成器还会列出最终清单与例外供检查。`px()` 只拼 `${number}px`；即使传入浏览器不接受的数字，也不在框架里加运行时校验。[CSSType 对长度参数及零值的解释](https://github.com/frenic/csstype#generics)说明了为什么普通数字不能自动当作长度。
+- `px(number)` 只出现在接受 CSS 长度的属性链上。一般属性只接收一个数字：`s.width.px(24)` 得到 `width:24px;`。少数简写按自身语法单独处理，例如 `s.padding.px(8, 16)` 得到 `padding:8px 16px;`，`s.gap.px(8, 12)` 得到 `gap:8px 12px;`。[Padding](https://drafts.csswg.org/css-box/#padding)与 [gap](https://drafts.csswg.org/css-gaps-1/#gap-shorthand)各有自己的参数规则；不做一个可接收任意数字个数的通用简写实现。
+- `raw()` 始终是原样拼接的逃生舱。系统值提示若能直接沿用 `csstype`，就保留；无论提示是否齐全，`s.width.raw('anything')` 这种普通字符串必须可写。`_md` 一类用户关键字由用户自己的 `WidthCss` 子类声明，生成器只提供继承基础，不替用户猜补全词。
+- 502 个标准与独有 SVG 属性及其可命名系统关键字都生成。体积不用于删减作者写法；生成器另行报告模块启动与 IDE 补全成本。
 
-**2．简写属性的 `px()` 能接几个数字？** 单值容易理解：`s.padding.px(8)` 得到 `padding:8px;`。旧项目里 `s.padding.px(8, 16)` 很顺手，在新字符串 API 中也可以得到 `padding:8px 16px;`；CSS 的 [padding 规则](https://drafts.csswg.org/css-box/#padding)规定了 1～4 个值的位置。`s.gap.px(8, 12)` 可得到 `gap:8px 12px;`，前后分别是行间距和列间距，[gap 规则](https://drafts.csswg.org/css-gaps-1/#gap-shorthand)允许两个值。推荐只给 `padding`、`margin`、`gap` 等**每个位置都是长度**的简写添加相应参数个数，不把 `border.px(1, 2)` 这样的混合值简写也做成通用多参数函数。未覆盖的组合一直可用 `raw('8px 16px')`。
+## `useCss()` 的含义：读取已注入的实例
 
-**3．`raw()` 遇到数字怎么提示？** 推荐按属性区别对待：`s.opacity.raw(0.5)` 合理，写出 `opacity:0.5;`；`s.width.raw(24)` 会写出没有单位的 `width:24;`，所以在生成版中给出类型错误，引导写 `s.width.px(24)`。`s.width.raw('24')` 仍完全允许，而且运行时仍原样拼成 `width:24;`，框架不阻止它。这里的“类型错误”只帮助作者避免无意漏掉单位，不改变 `raw()` 对任意字符串的逃生能力。当前三属性原型允许 `width.raw(24)`，因此这是一个明确的类型调整。
+建议把它理解成一个**有类型的 Context/依赖注入读取函数**，而不是 `new Css()` 的快捷写法。下面是概念 API，名称尚未实现：
 
-**4．`useCss()` 是否还需要空 `Proxy`？** 目前它的处理器是 `{}`，没有拦截行为。做了一个只为比较结构的 Chrome 153 探针：模拟 502 条属性链、每条 25 个关键字；每种方式创建 2,000 个对象，再连续读取 900 万次。三轮中位数如下，单位毫秒：
+```ts
+// 项目入口：只创建有类型的上下文，不在模块顶层创建作者实例
+class ThemeWidthCss extends WidthCss {
+  readonly _md = this.raw('48rem');
+}
+class AppCss extends Css {
+  override readonly width = new ThemeWidthCss();
+}
+export const { provideCss, useCss } = createCssContext<AppCss>();
 
-| 属性链存放方式                    | 创建 2,000 个对象 | 900 万次读取 |
-| --------------------------------- | ----------------: | -----------: |
-| 每实例有 502 个自有引用，直接对象 |              69.4 |        152.6 |
-| 共享原型上的属性链，直接对象      |               0.1 |        138.5 |
-| 每实例有自有引用，外包空 `Proxy`  |              72.8 |        291.8 |
-| 共享原型，外包空 `Proxy`          |               0.1 |        549.5 |
+// 应用根组件或每次 SSR 请求的根部
+provideCss(new AppCss()); // 这里创建并提供一次
 
-可在 `.research/string-css-probe` 运行 `pnpm probe:author-storage` 重测。这是合成微基准，不含真实组件渲染、CSS 注册、浏览器布局或最终生成代码中的冻结操作；900 万次读取也远高于正常页面的一次更新。数字只说明**当前空 Proxy 与存放位置会改变成本**。已确定的字段字符串、主题继承、`raw()`、`px()` 和后续编译器变量绑定都不需要当前这个空 `get` 拦截；因此推荐首版让 `useCss()` 返回普通类实例，系统关键字链共享在原型上。主题仍可用子类实例字段覆盖 `width`。如果后续确有需要拦截的行为，再针对那个行为重新测 Proxy。
+// 任意后代组件的初始化阶段
+const s = useCss(); // 注入同一个 AppCss 实例；自动得到 AppCss 类型
+s.width._md;
+```
 
-## 另外两条性能边界
+这样既允许调用方传入自己创建的泛型实例，也只在项目入口写一次 `AppCss` 类型。组件不需要 `useCss<AppCss>()`，否则任意组件都能声称自己拿到另一个类型，运行时注入键却未必匹配。Vue 适配器可用 [带泛型的 `InjectionKey`](https://vuejs.org/guide/typescript/composition-api.html#typing-provide-inject)，Svelte 5 适配器可用 [`createContext<AppCss>()`](https://svelte.dev/docs/svelte/context) 做同样的事。找不到提供者时明确报错，不偷偷创建实例；子树再次提供时由较近的提供者覆盖。模块顶层只保存类型化上下文定义，SSR 中的实例属于各自请求，不跨请求共享。
 
-**动态值不等于生成器的问题。** `css(s.width.px(width))` 在纯运行时模式下，宽度出现新值时可能生成新的规则；缓存只避免重复值再次插入。可选组件编译器可仿照 Vue `v-bind()`，把它变成一次注册的 `width:var(--w);`，在目标元素上响应式绑定 `--w:24px`。嵌套在 `ic('&:hover', s.width.px(width))` 时也一样：hover 由浏览器匹配，变量值变化才更新绑定。生成器负责属性与方法，编译器负责这一优化，不能把两者混成同一个脚本。
+这也修正了当前原型：`core` 中的 `useCss()` 现在每调用一次就 `new Proxy(new Css(), {})`。正式形态应把作者实例的创建放到根部、把 `useCss()` 放在 Vue/Svelte 适配器作为上下文读取；`core` 保留框架无关的 `Css` 类。当前空 `Proxy` 没有提供能力，不应仅为注入而保留。
 
-**共享对象需要防止意外写坏所有实例。** TypeScript 的 `readonly` 不会在运行时冻结对象。如果系统关键字原型和默认属性链被共享，生成器应在初始化时冻结这些系统对象；主题子类另建实例，仍能增加 `_md` 或覆盖整条 `width` 链。模块加载时解析约 1.25 万个常量、IDE 补全 502 个属性的代价也要在真实生成后量测；包体积不设硬门槛，启动与编辑体验仍需检查。
+**需要另外解决的真正边界：**按已定写法，`css(...strings)` 仍是导入函数。两个并发 SSR 请求都调用 `css('color:red;')` 时，它单看字符串无法判断该把规则收入哪一个请求的样式宿主；作者实例的注入不能自动解决规则写入归属。建议保持用户写法，先探针验证由适配器维护活动宿主：浏览器按文档共享规则表，Node SSR 通过请求异步上下文隔离收集。没有活动宿主时明确报错；模块顶层调用 `css()` 的归属需要另行界定。如果这种内部方案在并发 SSR 或性能上不成立，再讨论是否需要组件初始化时取一次绑定的 `css` 函数，而不是提前改变作者 API。
+
+## 性能与延期项
+
+每个组件调用 `useCss()` 只查一次上下文，**不创建作者类或 Proxy**。系统关键字字符串可以在模块装载时准备，502 条属性链所引用的系统对象可共享；每个应用或 SSR 请求只创建其自己的 `AppCss` 实例。TypeScript 的 `readonly` 不会在运行时冻结共享对象，因此默认系统对象应在初始化时冻结，子类实例仍可增加 `_md`。
+
+之前用 2,000 个作者实例比较过实例字段、共享原型与空 Proxy，探针可在 `.research/string-css-probe` 用 `pnpm probe:author-storage` 重跑。**按现在的“根部创建一次”生命周期，这个创建次数不代表实际使用**，不再用它决定公开 API；它只提示空 Proxy 的读取成本值得在真实组件中测量。正式生成后更应测模块首次装载、一次请求的构造、常用属性读取、IDE 补全和实际用到的规则注册。
+
+响应式变量绑定的编译优化先记录、不进入当前生成阶段：纯运行时 `css(s.width.px(width))` 仍按值生成并缓存类；以后若做 Vue/Svelte 编译器，再考虑把可识别的值改写成静态 `var(--w)` 规则和元素上的响应式绑定。当前不因这项未来优化限制 `raw()`、`px()` 或运行时回退。
 
 ## 数据来源与实测规模
 
@@ -61,15 +78,15 @@ s.width.raw('calc(100% - 2rem)'); // 'width:calc(100% - 2rem);'
 ## 生成规则
 
 - 从 `StandardLonghandProperties`、`StandardShorthandProperties` 与 SVG 接口取得属性及 `Property.*` 类型；与对应的 `*PropertiesHyphen` 接口对齐以获取准确的 CSS 属性名。当前版本的三组接口分别是 421/421、76/76、60/60，逐项类型一致。以后若数量、顺序或类型不符，生成失败并报告，不猜测名称。
-- 用 TypeScript 类型检查器展开每个属性类型，收集字符串字面量作为候选快捷值。`(string & {})`、数值、函数语法、任意长度和时间值不是固定关键字。每条链的 `raw()` 使用对应的 `Property.* | (string & {})`：有字面量补全，也接纳普通字符串。数字仅按该属性类型允许的情况接纳；例如 `opacity.raw(0.5)` 可直接输出 `opacity:0.5;`，长度值优先使用 `width.px(24)`，`width.raw('24px')` 仍可用。这会把当前试验版允许的 `width.raw(24)` 收紧为类型错误；应改用 `width.px(24)`，运行时 `raw()` 仍只是原样拼接。
+- 用 TypeScript 类型检查器展开每个属性类型，收集字符串字面量作为候选快捷值。`(string & {})`、数值、函数语法、任意长度和时间值不是固定关键字。每条链的 `raw()` 至少接纳任意字符串，直接拼接；若沿用对应的 `Property.* | (string & {})` 能轻松保留系统值提示，就一并提供。数字输入按属性本身的值类型处理，例如 `opacity.raw(0.5)` 可输出 `opacity:0.5;`；`width` 这类长度属性的数字走 `px(24)`，任意手写值仍可走 `raw('24px')`。不为了补全引入 CSS 解析器。
 - 对允许 CSS 长度的属性生成 `px(value: number)`，只执行 `property:${value}px;` 的字符串拼接。当前 `csstype` 中标准属性有 177 个引用 `TLength` 泛型，可作为候选清单；生成器将清单和例外输出供审核，不由字段名猜测。首轮只提供 `px` 这一种单位方法，其他单位和 `calc()` 等组合值可用 `raw()`。
 - CSS 值名转成 JS 成员名，例如 `space-between → spaceBetween`、`revert-layer → revertLayer`。跳过厂商私有关键字和不能无歧义映射的值；遇到 `raw`、`constructor`、`then` 等成员冲突，或两种值映射成同一名称，生成失败并在报告中列出，供人决定是否只经 `raw()` 提供。
 - 每个系统关键字成员的值是**预先生成的完整声明字符串**，不会在 `s.width.auto` 读取时解析、验证或拼接 CSS。`px()` 和 `raw()` 是薄字符串函数，不共享旧版回调式写入状态。浏览器仍负责值语义；数据更新后由生成差异供人审查。
-- 保留现有公开名称 `ColorCss`、`WidthCss`、`OpacityCss`、`Css` 与 `useCss`；新增属性链按同一命名规则生成，不同时保留另一套同义 API。主题或应用成员写在手工代码里，不进入生成文件。
+- 保留现有 `ColorCss`、`WidthCss`、`OpacityCss`、`Css` 命名；新增属性链按同一规则生成，不同时保留另一套同义 API。主题或应用成员写在手工代码里，不进入生成文件。`useCss()` 是 Vue/Svelte 适配器中的上下文读取，当前 `core` 里的每次新建原型需在实施时迁移。
 
 ## 输出形态与实例化
 
-不能照当前试验代码为每个 `new Css()` 执行约 502 次 `new PropertyCss()`，更不能为每次调用重建约 1.25 万个关键字字符串。建议让生成的关键字对象只在模块装载时创建一次，并挂到属性链类的原型；系统 `Css` 的属性链引用也挂在原型上。TypeScript 使用 `declare readonly` 声明公开成员，实例不产生对应字段，子类仍可覆盖属性链。已用当前 TypeScript 6 验证这种声明允许 `override readonly width = new ThemeWidthCss()`。
+一个根部或 SSR 请求只创建一个作者实例，不需要为“每个组件新建 502 条链”设计复杂的惰性机制。仍应避免**每次请求重建约 1.25 万个关键字字符串**：生成的系统属性链对象和关键字可以在模块装载时共享并冻结，`Css` 实例只持有指向这些对象的引用。主题子类覆盖其中一条链时才创建自己的属性链实例。先用 10 个属性的样例验证这种简单形态，若真实请求构造或导入成本明显，再考虑更深的原型优化。
 
 下面只是输出结构示意，不是准备手写的最终文件：
 
@@ -90,14 +107,13 @@ export class WidthCss extends LengthPropertyCss<Property.Width> {
 Object.assign(WidthCss.prototype, widthKeywords);
 Object.freeze(WidthCss.prototype);
 
+const systemWidth = Object.freeze(new WidthCss());
 export class Css {
-  declare readonly width: WidthCss;
+  readonly width = systemWidth;
 }
-Object.assign(Css.prototype, { width: Object.freeze(new WidthCss()) });
-Object.freeze(Css.prototype);
 ```
 
-`CssProperty<T>.raw(value: T | (string & {}))` 只拼接原始值；`LengthPropertyCss<T>.px(value: number)` 只拼接 `px`。已用当前 TypeScript 6 的语言服务验证：这种泛型 `raw()` 仍提示 `auto`、`min-content`，而任意普通字符串没有诊断。属性快捷字符串共享，主题仍可继承 `WidthCss` 增加 `_md`，再继承 `Css` 覆盖 `width`。生成前先拿 10 个高频属性做小探针，比较模块加载、`useCss()` 实例化、`s.color.red` 读取和构建体积；性能只帮助选择内部存储结构，不用于砍掉已确定的属性和关键字。
+`CssProperty<T>.raw(value: T | (string & {}))` 只拼接原始值；`LengthPropertyCss<T>.px(value: number)` 只拼接 `px`。已用当前 TypeScript 6 的语言服务验证：这种泛型 `raw()` 能提示 `auto`、`min-content`，任意普通字符串也没有诊断；若完整生成时发现少数属性的类型推断复杂，优先保留开放字符串输入。系统关键字对象共享，主题仍可继承 `WidthCss` 增加 `_md`，再继承 `Css` 覆盖 `width`。
 
 ## 归档使用例子的借鉴范围
 
@@ -115,4 +131,4 @@ Object.freeze(Css.prototype);
 
 验证分三层：类型检查所有属性链并保留两层主题继承例子；抽样检查长属性、简写、SVG、普通字符串、关键字补全及 `px(number)` 是否只出现在长度属性上；浏览器抽样验证声明、`ic()` 嵌套与样式层叠。继续沿用性能探针观察启动、规则注册和访问成本，但不以“等同原生 CSS”为门槛。生成器不承担浏览器值合法性检查，也不实现响应式变量绑定编译。
 
-请先审阅前面的四个选择。本轮仍只改设计文档；收到意见后先做 10 属性样例与实际编译产物测量，再展开 502 属性生成。
+本轮只厘清设计，不实现生成器或适配器。后续先验证 10 属性样例、类型化上下文注入及规则宿主归属，再展开 502 属性生成；CSS 变量编译优化继续只记录、不实施。
