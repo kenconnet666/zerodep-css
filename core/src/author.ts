@@ -1,6 +1,6 @@
 import type { Property } from 'csstype';
 
-class ColorCss {
+export class ColorCss {
   readonly red = 'color:red;';
   readonly blue = 'color:blue;';
   readonly green = 'color:green;';
@@ -10,13 +10,13 @@ class ColorCss {
   }
 }
 
-class WidthCss {
+export class WidthCss {
   raw(value: Property.Width<number>): string {
     return `width:${value};`;
   }
 }
 
-class OpacityCss {
+export class OpacityCss {
   raw(value: Property.Opacity): string {
     return `opacity:${value};`;
   }

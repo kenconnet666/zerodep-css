@@ -9,6 +9,26 @@ const className = css(s.color.red, s.width.raw(`${width}px`));
 
 `raw()` 按属性提供值提示：颜色可提示 `red`、`transparent` 等，宽度可提示 `auto`、`min-content`，透明度可提示 `inherit` 等。普通字符串仍可直接传入，例如 `s.color.raw('color(display-p3 .1 .2 .3)')`、`s.width.raw('var(--size)')`；宽度和透明度也接受数字。类型提示不额外验证浏览器 CSS 值。
 
+主题关键字通过继承对应属性链添加，不需要注册另一套全局类型。例如：
+
+```ts
+import { Css, WidthCss, useCss } from '@zerodep-css/core';
+
+class ThemeWidthCss extends WidthCss {
+  readonly _md = this.raw('48rem');
+}
+
+class ThemeCss extends Css {
+  override readonly width = new ThemeWidthCss();
+}
+
+const s = useCss(ThemeCss);
+s.width._md; // 'width:48rem;'
+s.width.raw('20px'); // 原有能力继续可用
+```
+
+应用可以直接继承 `Css` 自建主题，也可以继承 `ThemeCss` 后再次扩展 `width` 属性链；对应的两层扩展示例已纳入 `core` 类型检查。
+
 ## 运行
 
 在本目录使用 Node 24、pnpm 10.34.5：
