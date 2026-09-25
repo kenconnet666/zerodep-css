@@ -5,9 +5,10 @@
   const props = $props<{
     expose: (author: AppCss) => void;
     childExpose: (author: AppCss, controls: { step(): void; preset(): void }) => void;
+    initialWidth?: number;
   }>();
   const author = provideCss(new AppCss());
   props.expose(author);
 </script>
 
-<Child expose={props.childExpose} />
+<Child expose={props.childExpose} initialWidth={props.initialWidth ?? 24} />

@@ -1,12 +1,13 @@
-import { mount, tick, unmount } from 'svelte';
+import { hydrate, mount, tick, unmount } from 'svelte';
+import { hydrateCss, type CssRule } from '@zerodep-css/svelte';
 import Component from './SvelteMup.svelte';
 import type { AppCss } from './svelte-mup-context.ts';
 
-export async function start(target: HTMLElement) {
+export async function start(target: HTMLElement, restore = false) {
   let rootAuthor: AppCss | undefined;
   let childAuthor: AppCss | undefined;
   let controls: { step(): void; preset(): void } | undefined;
-  const component = mount(Component, {
+  const component = (restore ? hydrate : mount)(Component, {
     target,
     props: {
       expose(author: AppCss) {
@@ -33,4 +34,8 @@ export async function start(target: HTMLElement) {
     author: rootAuthor,
     dispose: async () => unmount(component),
   };
+}
+
+export function restore(rules: CssRule[]): void {
+  hydrateCss(rules);
 }

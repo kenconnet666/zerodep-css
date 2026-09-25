@@ -1,5 +1,13 @@
-import { createApp, defineComponent, h, nextTick, ref } from 'vue';
-import { Css, WidthCss, createCssContext, css, ic } from '../../vue/src/index.ts';
+import { createApp, createSSRApp, defineComponent, h, nextTick, ref } from 'vue';
+import {
+  Css,
+  WidthCss,
+  createCssContext,
+  css,
+  hydrateCss,
+  ic,
+  type CssRule,
+} from '@zerodep-css/vue';
 
 class ThemeWidthCss extends WidthCss {
   readonly _md = this.px(48);
@@ -9,7 +17,7 @@ class AppCss extends Css {
 }
 const { provideCss, useCss } = createCssContext<AppCss>();
 
-export async function start(target: HTMLElement) {
+export async function start(target: HTMLElement, hydrate = false) {
   const width = ref(24);
   const preset = ref(false);
   let rootAuthor: AppCss;
@@ -38,7 +46,7 @@ export async function start(target: HTMLElement) {
       return () => h(Child);
     },
   });
-  const app = createApp(Root);
+  const app = hydrate ? createSSRApp(Root) : createApp(Root);
   app.mount(target);
   await nextTick();
   if (rootAuthor! !== childAuthor!) throw new Error('Vue CSS context changed identity.');
@@ -54,6 +62,10 @@ export async function start(target: HTMLElement) {
     author: rootAuthor!,
     dispose: () => app.unmount(),
   };
+}
+
+export function restore(rules: CssRule[]): void {
+  hydrateCss(rules);
 }
 
 export function duplicateClass(): string {
