@@ -4,6 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@10.34.5",
   "scripts": {
+    "test:mup:browser": "node mup-browser.mjs",
     "probe": "node run.mjs",
     "probe:author-storage": "node author-storage.mjs",
     "semantics": "node semantics.mjs",
