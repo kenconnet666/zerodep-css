@@ -27,6 +27,8 @@ const className = css(s.display.flex, s.width._md, ic('&:hover', s.color.red));
 
 `css(s.width.px(width))` 可直接放在 Vue/Svelte 模板表达式中；宽度变化时按值生成并缓存类。有限取值可在组件初始化时预注册类表，再用 Vue `computed` 或 Svelte `$derived` **只选择类名**。`css()` 本身会注册规则，不建议把它普遍放进派生表达式。连续变化的值可以手写一条使用 `var(--...)` 的规则并在目标元素绑定变量；自动改写属于后续编译优化。`raw()` 原样拼接字符串，浏览器按原生 CSS 处理值和层叠。两种值形态的测量与取舍见[性能方向复核](../.research/runtime-performance-review.md)。
 
+Vue/Svelte 组件初始化、有限状态选择与连续值绑定的对照写法及 SSR 边界见[框架结合研究](../.research/vue-svelte-runtime-integration.md)。
+
 ## 手工 Node SSR 接入边界
 
 目前提供底层请求宿主，还没有 Nuxt/SvelteKit 自动封装。Vue 服务器使用 `renderToString`，Svelte 服务器使用 `render`；两者都在渲染前创建宿主，并在 `withCssHost` 内执行整个渲染：

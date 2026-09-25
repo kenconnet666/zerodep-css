@@ -36,3 +36,4 @@ class 对象写法、浏览器规则注册和 Node 请求隔离已有最小可�
 关键字直接字段的试验结果和取舍见[直接字段报告](.research/direct-keyword-fields-probe.md)。
 直接字段可用的缓存与静态分支优化候选见[优化研究](.research/direct-field-optimization-research.md)。
 运行时同步快路径、Worker 与 SIMD 的实测取舍见[并行与 SIMD 研究](.research/runtime-parallel-simd-research.md)。
+Vue/Svelte 的纯派生类选择、元素变量绑定与上下文边界见[框架结合研究](.research/vue-svelte-runtime-integration.md)。
