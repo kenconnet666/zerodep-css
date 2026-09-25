@@ -2,12 +2,12 @@
 
 - 当前已有五包 pnpm 基础配置、Codex LSP、`core` 的 502 属性生成结果，以及 Vue/Svelte 浏览器与 Node SSR 适配原型。元框架封装和响应式绑定编译器尚未实现；不要把研究探针当作正式 API。
 - `core` 保持框架无关；`vue`、`svelte`、`nuxt`、`sveltekit` 各自负责未来适配。五包保持 private，包间使用 `workspace:*`。
-- 使用 Node 24、pnpm 10.34.5 和工作区固定依赖；不要升级全局工具。修改基础配置后运行 `pnpm check`，修改 LSP 桥后运行 `pnpm lsp:verify`。
+- 使用 Node 24、pnpm 10.34.5 和工作区固定依赖；不要升级全局工具。本地优先运行改动相关的检查，基础配置或包类型入口变更运行 `pnpm check`，LSP 桥变更运行 `pnpm lsp:verify`。
 - `core/src/generated/` 只由 `pnpm css:generate` 更新；`pnpm check` 必须通过生成结果一致性与各包类型检查。
 - `core`、`vue`、`svelte` 的 `dist/` 由 `pnpm build` 生成且不入 Git；改包导出或服务端入口后同时验证浏览器与 Node 构建。
 - `.codex/config.toml` 由 `pnpm lsp:setup` 按本机路径生成且不入 Git。不修改用户全局 Codex 配置，也不结束其他项目的进程。
 - 旧实现只作为本地 Git 历史和 `zerodep-css-归档` 中的参考。保持归档目录只读，不把旧 API、测试或性能结论当作新分支功能。
-- 只在本地分阶段用中文提交；在用户另行要求前，不配置或推送远程仓库。
+- 分阶段用中文提交，每次提交后推送远程。本地只做改动相关的焦点测试，完整的跨平台、浏览器、SSR 和类型验收由远程 CI 执行；未取得 CI 结果前不要宣称远程验收通过。
 
 ## 核心工程要求
 

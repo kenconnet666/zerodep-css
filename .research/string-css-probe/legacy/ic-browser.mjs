@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { chromium } from '@playwright/test';
+import { launchBrowser } from '../browser.mjs';
 import { Css } from '../../../core/dist/index.js';
 import { createRuleRegistry } from '../../../core/src/registry.ts';
 import { ic } from '../../../core/src/ic.ts';
@@ -24,7 +24,7 @@ assert.equal(registry.css(...parts), className);
 assert.equal(registry.size, 1);
 assert.equal(rules.length, 1);
 
-const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const browser = await launchBrowser();
 try {
   const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
   try {
