@@ -5,13 +5,19 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "browser": "./dist/index.js",
-      "node": "./dist/server.js",
+      "node": {
+        "types": "./dist/types/server.d.ts",
+        "default": "./dist/server.js"
+      },
+      "browser": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
     },
     "./server": {
-      "types": "./src/server.ts",
+      "types": "./dist/types/server.d.ts",
       "node": "./dist/server.js"
     }
   },

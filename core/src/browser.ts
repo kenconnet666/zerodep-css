@@ -1,4 +1,4 @@
-import { createCss, type CssRule } from './css';
+import { createCss, type CssRule } from './css.js';
 
 type BrowserHost = ReturnType<typeof createCss>;
 const hosts = new WeakMap<Document, BrowserHost>();

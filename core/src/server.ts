@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { createCss, type CssRule } from './css';
+import { createCss, type CssRule } from './css.js';
 
 export interface ServerCssHost {
   css(...parts: string[]): string;

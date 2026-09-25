@@ -1,1 +1,1 @@
-export * from './generated/author';
+export * from './generated/author.js';
