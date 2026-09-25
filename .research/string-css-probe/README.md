@@ -60,6 +60,8 @@ const buttonClass = css(
 );
 ```
 
+`selector` 在 TypeScript 中提示常见的 `&:hover`、`&:active`、`&:focus-visible`、`&::before` 等写法，也接受任意普通字符串，例如 `ic('&[data-state=open]', s.color.blue)`。提示列表不限制原生选择器或 `@` 规则。
+
 `pnpm test:ic` 用当前 Chrome 验证了嵌套规则经 CSSOM 插入后，默认、hover、active、子元素和媒体条件均生效；悬停期间更新元素上的 CSS 变量，也会立即改变样式。这个测试只覆盖浏览器原生嵌套行为；`ic()` 本身不解析或改写选择器，响应式值自动绑定仍待实现。
 
 导入式 `css(...)` 还需要明确规则注册归属：浏览器端可以有当前应用宿主，服务端则不能依赖全局可变“当前宿主”，否则并发请求可能交叉。正式实现前先确定请求隔离及样式收集方式，再验证 Nuxt 4 与 SvelteKit 2 的 SSR、预渲染和 hydration。

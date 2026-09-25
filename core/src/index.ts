@@ -1,3 +1,3 @@
 export { Css, useCss } from './author';
 export { createCss } from './css';
-export { ic } from './ic';
+export { ic, type IcSelector } from './ic';
