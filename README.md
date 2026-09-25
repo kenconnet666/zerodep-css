@@ -28,3 +28,4 @@ pnpm lsp:verify
 
 字符串作者写法及响应式 CSS 变量绑定的独立测量见 [研究探针](.research/string-css-probe/README.md)。
 完整属性链、关键字生成与上下文生命周期的讨论稿见 [作者模型设计](.research/css-author-generation-design.md)。
+下一阶段的最小可用范围与性能验收见 [实施规划](.research/next-stage-minimum-usable.md)。

@@ -12,7 +12,7 @@ const className = css(s.color.red, s.width.raw(`${width}px`));
 主题关键字通过继承对应属性链添加，不需要注册另一套全局类型。例如：
 
 ```ts
-import { Css, WidthCss, useCss } from '@zerodep-css/core';
+import { Css, WidthCss } from '@zerodep-css/core';
 
 class ThemeWidthCss extends WidthCss {
   readonly _md = this.raw('48rem');
@@ -22,7 +22,7 @@ class ThemeCss extends Css {
   override readonly width = new ThemeWidthCss();
 }
 
-const s = useCss(ThemeCss);
+const s = new ThemeCss();
 s.width._md; // 'width:48rem;'
 s.width.raw('20px'); // 原有能力继续可用
 ```
