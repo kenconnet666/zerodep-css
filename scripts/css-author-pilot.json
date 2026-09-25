@@ -1,0 +1,14 @@
+{
+  "properties": [
+    { "name": "backgroundColor", "description": "背景颜色" },
+    { "name": "border", "description": "边框简写" },
+    { "name": "color", "description": "文本前景色" },
+    { "name": "display", "description": "显示类型" },
+    { "name": "gap", "description": "行列间距", "maxPxArguments": 2 },
+    { "name": "height", "description": "高度" },
+    { "name": "margin", "description": "外边距", "maxPxArguments": 4 },
+    { "name": "opacity", "description": "不透明度" },
+    { "name": "padding", "description": "内边距", "maxPxArguments": 4 },
+    { "name": "width", "description": "宽度" }
+  ]
+}

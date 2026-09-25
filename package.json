@@ -8,7 +8,9 @@
     "pnpm": "10.34.5"
   },
   "scripts": {
-    "check": "pnpm -r run check",
+    "check": "pnpm css:generate:check && pnpm -r run check",
+    "css:generate": "node scripts/generate-css-author.mjs --write",
+    "css:generate:check": "node scripts/generate-css-author.mjs --check",
     "format:check": "prettier --check README.md AGENTS.md package.json pnpm-workspace.yaml tsconfig*.json .codex scripts/language-services core vue svelte nuxt sveltekit .github",
     "lsp:setup": "pwsh -NoProfile -File scripts/language-services/setup.ps1",
     "lsp:verify": "node scripts/language-services/verify.mjs .",

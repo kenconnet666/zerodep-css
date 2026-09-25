@@ -1,6 +1,10 @@
 import { createCss } from '../../core/src/css.ts';
+import { Css } from '../../core/src/generated/author.ts';
 
-export { useCss } from '../../core/src/author.ts';
+/** 研究探针局部实例；正式 useCss 将由适配器注入。 */
+export function useCss(): Css {
+  return new Css();
+}
 
 export function createHost(container: HTMLElement) {
   const node = document.createElement('style');

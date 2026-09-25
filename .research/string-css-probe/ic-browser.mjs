@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { chromium } from '@playwright/test';
-import { Css, useCss } from '../../core/src/author.ts';
+import { Css } from '../../core/src/generated/author.ts';
 import { createCss } from '../../core/src/css.ts';
 import { ic } from '../../core/src/ic.ts';
 
@@ -8,7 +8,7 @@ class AppCss extends Css {
   theme = { brand: 'color:purple;' };
 }
 
-const s = useCss(AppCss);
+const s = new AppCss();
 assert.equal(s.theme.brand, 'color:purple;');
 const rules = [];
 const registry = createCss((name, body) => rules.push(`.${name}{${body}}`));

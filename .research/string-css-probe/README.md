@@ -1,13 +1,13 @@
 # 字符串 CSS 作者写法探针
 
-这是试验工作区，不是稳定公开 API。它现在复用 `core` 的 `Css`、`useCss()` 和 `createCss()`：`s.color.red` 是只读声明字符串，`s.width.raw(value)` 返回拼出的声明字符串，宿主提供规则写入后，`css(...parts)` 拼接、缓存并注册规则，最后返回类名。重复属性直接留给浏览器按 CSS 层叠处理。
+这是试验工作区，不是稳定公开 API。它现在复用 `core` 生成的 `Css` 和 `createCss()`；这里的 `useCss()` 只是探针内部的局部辅助函数，正式的同名函数将由 Vue/Svelte 适配器注入作者实例。`s.color.red` 是只读声明字符串，`s.width.raw(value)` 返回拼出的声明字符串，宿主提供规则写入后，`css(...parts)` 拼接、缓存并注册规则，最后返回类名。重复属性直接留给浏览器按 CSS 层叠处理。
 
 ```ts
 const s = useCss();
 const className = css(s.color.red, s.width.raw(`${width}px`));
 ```
 
-`raw()` 按属性提供值提示：颜色可提示 `red`、`transparent` 等，宽度可提示 `auto`、`min-content`，透明度可提示 `inherit` 等。普通字符串仍可直接传入，例如 `s.color.raw('color(display-p3 .1 .2 .3)')`、`s.width.raw('var(--size)')`；宽度和透明度也接受数字。类型提示不额外验证浏览器 CSS 值。
+`raw()` 按属性提供值提示：颜色可提示 `red`、`transparent` 等，宽度可提示 `auto`、`min-content`，透明度可提示 `inherit` 等。普通字符串仍可直接传入，例如 `s.color.raw('color(display-p3 .1 .2 .3)')`、`s.width.raw('var(--size)')`。宽度的非零数字用 `s.width.px(24)` 指定像素，透明度可用 `s.opacity.raw(0.5)`；类型提示不额外验证浏览器 CSS 值。
 
 主题关键字通过继承对应属性链添加，不需要注册另一套全局类型。例如：
 
