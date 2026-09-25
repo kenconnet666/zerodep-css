@@ -19,3 +19,5 @@
 4. 本地只跑生成检查、core 类型与运行时测试、包类型消费测试、WebStorm 悬停探针，以及受影响的 Vue/Svelte 浏览器和 SSR 焦点测试。每个完成阶段用中文提交并推送；远程 CI 执行 Windows／Linux 类型、格式、LSP、Chromium 浏览器、SSR、hydration、导出和 `ic()` 测试。CI 结果未返回时标记为待验收，有失败则修复并再次推送。
 
 若完整 `Css` 路径仍占主要冷启动成本，这是预期结果；本阶段不通过改名或删属性掩盖。之后再用 Vue/Svelte 两轮负载比较“静态分支提前生成类＋运行时回退”和“持续新值绑定 CSS 变量”两种可选优化，优先解决真正发生在业务更新中的成本。Nuxt/SvelteKit 封装属于独立阶段。
+
+实现与本机测量见[阶段结果](deferred-registration-results.md)。

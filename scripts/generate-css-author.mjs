@@ -206,7 +206,14 @@ for (const name of names) {
     `defineSystemProperty(${JSON.stringify(setting.name)}, () => new ${alias}.${className}());`,
   );
 }
-author.push('', '/** 系统属性链；项目可通过类继承扩展关键字。 */', 'export class Css {');
+author.push(
+  '',
+  '// 仅在首次构造作者实例时注册，避免未使用的属性链阻止按需打包。',
+  'let systemPropertiesReady = false;',
+  '/** 系统属性链；项目可通过类继承扩展关键字。 */',
+  'export class Css {',
+  '  constructor() { initializeSystemProperties(); }',
+);
 author.push(...systemFields, '}');
 author.push(
   'function defineSystemProperty<T>(name: string, create: () => T): void {',
@@ -219,7 +226,11 @@ author.push(
   '    },',
   '  });',
   '}',
+  'function initializeSystemProperties(): void {',
+  '  if (systemPropertiesReady) return;',
   ...systemCreators,
+  '  systemPropertiesReady = true;',
+  '}',
 );
 
 const files = new Map([['base', base], ...groupLines, ['author', author]]);
