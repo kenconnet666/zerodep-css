@@ -1,6 +1,6 @@
 # 字符串 CSS 作者写法探针
 
-这是独立于五个产品包的实验，不是公开 API。它检验以下假设：`useCss()` 取得作者对象，`s.color.red` 是稳定的只读声明字符串，`s.width.raw(value)` 返回拼出的声明字符串，导入的 `css(...parts)` 拼接、缓存并注册规则，最后返回类名。重复属性直接留给浏览器按 CSS 层叠处理。
+这是试验工作区，不是稳定公开 API。它现在复用 `core` 的 `Css`、`useCss()` 和 `createCss()`：`s.color.red` 是只读声明字符串，`s.width.raw(value)` 返回拼出的声明字符串，宿主提供规则写入后，`css(...parts)` 拼接、缓存并注册规则，最后返回类名。重复属性直接留给浏览器按 CSS 层叠处理。
 
 ```ts
 const s = useCss();
@@ -15,9 +15,12 @@ const className = css(s.color.red, s.width.raw(`${width}px`));
 pnpm install --frozen-lockfile
 pnpm probe
 pnpm semantics
+pnpm test:ic
 ```
 
 `probe` 使用 Vue 3.5.43、Svelte 5.57.0 的正式编译器生成生产模式浏览器组件，在 Chrome 153 中测量每种写法的 200 个元素。每种写法在同一浏览器中测三轮、轮换执行顺序，表中数字为每轮中位数在两次完整运行中的范围。计时包含框架刷新和布局读取，不是单独的 `css()` 微基准。两次原始记录分别在 [results-a.json](results-a.json) 和 [results-b.json](results-b.json)；两次均通过 200 个元素的计算样式和规则数断言，第二次额外通过资源清理断言。
+
+这两份原始计时采于代码迁入 `core` 之前。迁入后重新运行 `pnpm probe` 已通过相同正确性断言；旧计时仅用于观察方案差异，不作为新实现的性能数字。
 
 ## 结果
 
@@ -43,6 +46,22 @@ Vue SFC 的 [`v-bind()`](https://vuejs.org/api/sfc-css-features.html#v-bind-in-c
 
 `pnpm semantics` 只记录直接声明和 CSS 变量在无效值下各自的原生行为，不作为绑定转换的限制条件。实现时需要让生成的变量名稳定，并与元素已有的 `class`、`style` 一起工作。
 
+## 选择器片段试验
+
+`ic(selector, ...parts)` 只返回嵌套 CSS 字符串，外层 `css()` 仍只注册一次规则。它同时用于伪类、子元素和媒体条件，不需要给每一种条件提供专用入口：
+
+```ts
+const s = useCss();
+const buttonClass = css(
+  s.color.red,
+  ic('&:hover', s.color.blue),
+  ic('&:active', s.color.green),
+  ic('& > .icon', s.opacity.raw('0.6')),
+);
+```
+
+`pnpm test:ic` 用当前 Chrome 验证了嵌套规则经 CSSOM 插入后，默认、hover、active、子元素和媒体条件均生效；悬停期间更新元素上的 CSS 变量，也会立即改变样式。这个测试只覆盖浏览器原生嵌套行为；`ic()` 本身不解析或改写选择器，响应式值自动绑定仍待实现。
+
 导入式 `css(...)` 还需要明确规则注册归属：浏览器端可以有当前应用宿主，服务端则不能依赖全局可变“当前宿主”，否则并发请求可能交叉。正式实现前先确定请求隔离及样式收集方式，再验证 Nuxt 4 与 SvelteKit 2 的 SSR、预渲染和 hydration。
 
-下一阶段应先实现最小字符串作者对象、缓存和浏览器宿主，并对规则去重、碰撞、生命周期及原生覆盖顺序做测试；随后做 Vue/Svelte 适配与服务端归属设计；最后把 CSS 变量编译作为可回退的优化，沿用本探针的有限值、新值两组场景重新比较。正式产品包当前仍是空入口。
+下一阶段要补全浏览器宿主与规则生命周期测试，再做 Vue/Svelte 适配与服务端归属设计；最后把 CSS 变量编译作为可回退的优化，沿用本探针的有限值、新值两组场景重新比较。当前只有 `core` 的局部原型，其他产品包仍是空入口。
