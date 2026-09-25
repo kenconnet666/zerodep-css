@@ -13,7 +13,11 @@ export async function bundle(framework, platform, entry, options = {}) {
   const dist = options.dist ?? process.env.MUP_DIST === '1';
   const result = await build({
     entryPoints: [
-      resolve(directory, entry ?? `${framework}-mup-${browser ? 'driver' : 'server'}.ts`),
+      resolve(
+        directory,
+        'fixtures',
+        entry ?? `${framework}-mup-${browser ? 'driver' : 'server'}.ts`,
+      ),
     ],
     bundle: true,
     minify: options.minify ?? false,

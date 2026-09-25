@@ -11,7 +11,7 @@ function hash(text: string): string {
 }
 
 /** 规则写入由宿主负责；core 只组合片段、命名并去重。 */
-export function createCss(insert: (className: string, body: string) => void) {
+export function createRuleRegistry(insert: (className: string, body: string) => void) {
   let classes = new Map<string, string>();
   let bodies = new Map<string, string>();
 

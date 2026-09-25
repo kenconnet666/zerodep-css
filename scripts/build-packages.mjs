@@ -1,8 +1,23 @@
-import { resolve } from 'node:path';
+import { lstat, rm } from 'node:fs/promises';
+import { resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
+// 只清理由本脚本生成的三个 dist，避免重命名后旧声明混入发布产物。
+for (const name of ['core', 'vue', 'svelte']) {
+  const dist = resolve(root, name, 'dist');
+  if (!dist.startsWith(root + sep)) throw new Error(`Unsafe build path: ${dist}`);
+  const current = await lstat(dist).catch((error) => {
+    if (error.code === 'ENOENT') return null;
+    throw error;
+  });
+  if (current) {
+    if (!current.isDirectory() || current.isSymbolicLink())
+      throw new Error(`Build output is not a directory: ${dist}`);
+    await rm(dist, { recursive: true });
+  }
+}
 for (const [name, entries, external] of [
   ['core', ['index', 'browser', 'server'], []],
   ['vue', ['index', 'server'], ['@zerodep-css/core', '@zerodep-css/core/*', 'vue']],

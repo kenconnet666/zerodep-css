@@ -9,7 +9,7 @@ import { parse, compileScript } from 'vue/compiler-sfc';
 import { compile } from 'svelte/compiler';
 
 const directory = dirname(fileURLToPath(import.meta.url));
-const output = resolve(directory, '../../test-results/string-css-probe');
+const output = resolve(directory, '../../../test-results/string-css-probe');
 await mkdir(output, { recursive: true });
 const report = {
   runId: randomUUID(),

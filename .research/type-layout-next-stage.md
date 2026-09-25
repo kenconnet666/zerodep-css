@@ -1,6 +1,6 @@
 # 下一阶段：补齐类型交付并整理生成代码
 
-本轮先规划，不改动试验 API。当前脚本已从固定的 `csstype@3.2.3` 生成 **502 条标准与独有 SVG 属性链、12,586 个可命名关键字**。`raw()` 允许任意字符串并提供已知值提示；接受长度的属性才有 `px()`；Vue/Svelte 可通过 `class AppCss extends Css` 和 `createCssContext<AppCss>()` 保留主题类型。这达到了此前约定的**属性生成范围**，但尚未达到“外部项目拿来就有完整可靠类型”的交付标准。
+本轮已按下述顺序实施；审计表保留整理前的证据。脚本从固定的 `csstype@3.2.3` 生成 **502 条标准与独有 SVG 属性链、12,586 个可命名关键字**。`raw()` 允许任意字符串并提供已知值提示；接受长度的属性才有 `px()`；Vue/Svelte 可通过 `class AppCss extends Css` 和 `createCssContext<AppCss>()` 保留主题类型。此前的主要缺口是正式包入口的类型交付。
 
 ## 核对出的缺口
 
@@ -30,3 +30,4 @@
 - 类型入口已改用 `dist/types`，Vue/Svelte 的 Node 条件使用服务端声明。临时外部消费目录中的 Bundler 与 NodeNext 类型夹具均通过；临时目录由检查脚本在结束时移除。
 - 生成结果按稳定名称区间分成八个属性文件，加一个共享基类文件与汇总入口。`--check` 仍逐文件核对确定性输出，属性与关键字数量保持 502／12,586。
 - 同机单次测量：生成检查从约 7.54 秒到 7.21 秒；core 类型检查从约 6.03 秒到 6.16 秒。微小差异不足以判定性能变化。`core/dist/index.js` 拆分前后均为 590,172 字节；LSP 在拆分后仍能补出 `s.width.px`。Vue/Svelte 的浏览器、Node SSR 和 hydration 产物测试通过。
+- 内部 `createCss` 改为 `createRuleRegistry` 并从公开入口移除，手写的单行 `author.ts` 转发文件已删除。探针分成 `fixtures/`、`legacy/`、`results/`，移动后源代码与构建产物的 Vue/Svelte 测试、早期探针和 `ic()` 浏览器测试均通过。构建前只清理三个包自己的 `dist`，避免旧声明文件残留。

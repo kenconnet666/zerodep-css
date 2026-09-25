@@ -1,3 +1,3 @@
-export * from './author.js';
-export { createCss, type CssRule } from './css.js';
+export * from './generated/author.js';
+export type { CssRule } from './registry.js';
 export { ic, type IcSelector } from './ic.js';

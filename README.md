@@ -23,11 +23,12 @@ pnpm lsp:verify
 
 `lsp:setup` 按当前机器的 Node 与项目目录生成被忽略的 `.codex/config.toml`；信任项目并重载 Codex 后，使用 `zerodep_lsp` 的 diagnostics、hover、definitions、references 和 completions。需要验证 Codex 实际解析的项目配置时，在 PowerShell 7 运行 `pwsh -NoProfile -File scripts/language-services/setup.ps1 -Verify -SkipInstall`。Codex MCP 不可用时，可运行 `pnpm lsp:inspect <项目相对路径>`。
 
-下一步继续验证 class 对象写法、运行时规则归属、主题和响应式绑定，再决定正式公开 API。当前试验实现不能用于业务样式。
+class 对象写法、浏览器规则注册和 Node 请求隔离已有最小可用验证。下一步仍需 Nuxt/SvelteKit 封装、响应式绑定优化和生产环境审计；当前试验 API 尚未定稿。
 
-生成内容在 [core/src/generated/author.ts](core/src/generated/author.ts)，使用 `pnpm css:generate` 更新；`pnpm check` 会核对生成结果并检查五个包。现阶段 `core` 不导出 `useCss()`：它将在框架适配器中作为注入读取函数实现。
+生成内容在 [core/src/generated](core/src/generated)，使用 `pnpm css:generate` 更新；`pnpm check` 会核对生成结果、检查五个包，并验证 Bundler/NodeNext 包类型入口。`useCss()` 由 Vue/Svelte 适配器提供，`core` 只提供作者类型与规则基础。
 
 字符串作者写法及响应式 CSS 变量绑定的独立测量见 [研究探针](.research/string-css-probe/README.md)。
 完整属性链、关键字生成与上下文生命周期的讨论稿见 [作者模型设计](.research/css-author-generation-design.md)。
 下一阶段的最小可用范围与性能验收见 [实施规划](.research/next-stage-minimum-usable.md)。
 当前 Vue/Svelte 工作区包的调用和手工 Node SSR 接入见 [最小用法](docs/minimum-usage.md)；两轮真实适配器的[性能记录](.research/minimum-usable-performance.md)与原始样本在 `.research/string-css-probe/`。
+包类型入口、生成文件与命名整理的证据见[本轮实施记录](.research/type-layout-next-stage.md)。

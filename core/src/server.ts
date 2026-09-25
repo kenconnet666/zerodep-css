@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { createCss, type CssRule } from './css.js';
+import { createRuleRegistry, type CssRule } from './registry.js';
 
 export interface ServerCssHost {
   css(...parts: string[]): string;
@@ -10,7 +10,7 @@ export interface ServerCssHost {
 const current = new AsyncLocalStorage<ServerCssHost>();
 
 export function createServerCssHost(): ServerCssHost {
-  const registry = createCss(() => {});
+  const registry = createRuleRegistry(() => {});
   return {
     css: registry.css,
     rules: registry.rules,

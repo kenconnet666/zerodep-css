@@ -14,6 +14,9 @@ function sourceFor(name, server) {
     : `import { Css, WidthCss, createCssContext, css, hydrateCss } from '@zerodep-css/${name}';`;
   return `${imports}
 import { ic } from '@zerodep-css/core';
+import type { CssRule } from '@zerodep-css/core';
+// @ts-expect-error 规则注册器不是公开作者 API
+import { createCss } from '@zerodep-css/core';
 class ThemeWidth extends WidthCss { readonly _md = this.raw('48rem'); }
 class ThemeCss extends Css { override readonly width = new ThemeWidth(); }
 class AppCss extends ThemeCss { readonly brand = 'brand'; }
@@ -23,8 +26,15 @@ useCss().width._md satisfies string;
 provideCss(s);
 css(s.color.red, s.width.px(20), s.width.raw('calc(100% - 2rem)'), ic('&:hover', s.display.flex));
 s.margin.px(4, 8);
+s.alignItems.center;
+s.borderTopWidth.px(1);
+s.gridTemplateColumns.raw('1fr 2fr');
+s.padding.px(4, 8);
+s.textDecorationLine.underline;
+s.userSelect.none;
 s.fill.red satisfies string;
 s.opacity.raw(0.5);
+const rule: CssRule = { className: 'z-example', body: 'color:red;' };
 // @ts-expect-error opacity 不是长度
 s.opacity.px(0.5);
 // @ts-expect-error width 只接受一个 px 参数

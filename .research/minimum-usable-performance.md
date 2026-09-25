@@ -1,6 +1,6 @@
 # 最小可用阶段性能记录
 
-这轮测量使用已构建的 `core`、Vue、Svelte 包入口，不沿用最初单宿主探针的速度结论。Windows、Node 24.18.0、Chrome 153.0.8010.54；Vue 3.5.43、Svelte 5.57.0、Emotion CSS 11.13.5。Vue 与 Svelte 分开测，每种场景有 200 个元素、三轮交错顺序；整套测试独立执行两次。表中是每次运行三轮中位数构成的范围，单位毫秒，越低越好。每个用例使用新浏览器页面，并验证全部元素的计算样式与规则数量。原始数据见 [dist 第一轮](string-css-probe/results-mup-dist-a.json)、[dist 第二轮](string-css-probe/results-mup-dist-b.json) 和[冷加载数据](string-css-probe/results-mup-dist-cold.json)。
+这轮测量使用已构建的 `core`、Vue、Svelte 包入口，不沿用最初单宿主探针的速度结论。Windows、Node 24.18.0、Chrome 153.0.8010.54；Vue 3.5.43、Svelte 5.57.0、Emotion CSS 11.13.5。Vue 与 Svelte 分开测，每种场景有 200 个元素、三轮交错顺序；整套测试独立执行两次。表中是每次运行三轮中位数构成的范围，单位毫秒，越低越好。每个用例使用新浏览器页面，并验证全部元素的计算样式与规则数量。原始数据见 [dist 第一轮](string-css-probe/results/results-mup-dist-a.json)、[dist 第二轮](string-css-probe/results/results-mup-dist-b.json) 和[冷加载数据](string-css-probe/results/results-mup-dist-cold.json)。
 
 | 场景与写法                           | Vue 更新耗时 | Svelte 更新耗时 | 更新结束后新增规则 |
 | ------------------------------------ | -----------: | --------------: | -----------------: |

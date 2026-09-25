@@ -1,6 +1,6 @@
-import { createCss, type CssRule } from './css.js';
+import { createRuleRegistry, type CssRule } from './registry.js';
 
-type BrowserHost = ReturnType<typeof createCss>;
+type BrowserHost = ReturnType<typeof createRuleRegistry>;
 const hosts = new WeakMap<Document, BrowserHost>();
 
 function getHost(target: Document): BrowserHost {
@@ -13,7 +13,7 @@ function getHost(target: Document): BrowserHost {
     style.dataset.zerodepCss = '';
     target.head.append(style);
   }
-  const host = createCss((className, body) => {
+  const host = createRuleRegistry((className, body) => {
     const sheet = style.sheet;
     if (!sheet) throw new Error('CSS stylesheet is unavailable.');
     sheet.insertRule(`.${className}{${body}}`, sheet.cssRules.length);

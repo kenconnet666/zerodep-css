@@ -1,5 +1,5 @@
-import { createCss } from '../../core/src/css.ts';
-import { Css } from '../../core/src/generated/author.ts';
+import { createRuleRegistry } from '../../../core/src/registry.ts';
+import { Css } from '../../../core/src/generated/author.ts';
 
 /** 研究探针局部实例；正式 useCss 将由适配器注入。 */
 export function useCss(): Css {
@@ -9,7 +9,7 @@ export function useCss(): Css {
 export function createHost(container: HTMLElement) {
   const node = document.createElement('style');
   container.append(node);
-  const registry = createCss((className, body) => {
+  const registry = createRuleRegistry((className, body) => {
     node.sheet!.insertRule(`.${className}{${body}}`, node.sheet!.cssRules.length);
   });
   let calls = 0;

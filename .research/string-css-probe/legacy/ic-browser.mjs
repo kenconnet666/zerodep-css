@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { chromium } from '@playwright/test';
-import { Css } from '../../core/src/generated/author.ts';
-import { createCss } from '../../core/src/css.ts';
-import { ic } from '../../core/src/ic.ts';
+import { Css } from '../../../core/dist/index.js';
+import { createRuleRegistry } from '../../../core/src/registry.ts';
+import { ic } from '../../../core/src/ic.ts';
 
 class AppCss extends Css {
   theme = { brand: 'color:purple;' };
@@ -11,7 +11,7 @@ class AppCss extends Css {
 const s = new AppCss();
 assert.equal(s.theme.brand, 'color:purple;');
 const rules = [];
-const registry = createCss((name, body) => rules.push(`.${name}{${body}}`));
+const registry = createRuleRegistry((name, body) => rules.push(`.${name}{${body}}`));
 const parts = [
   s.color.red,
   ic('&:hover', s.color.raw('var(--hover-color)')),
