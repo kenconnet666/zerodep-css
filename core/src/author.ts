@@ -1,21 +1,23 @@
+import type { Property } from 'csstype';
+
 class ColorCss {
   readonly red = 'color:red;';
   readonly blue = 'color:blue;';
   readonly green = 'color:green;';
 
-  raw(value: string): string {
+  raw(value: Property.Color): string {
     return `color:${value};`;
   }
 }
 
 class WidthCss {
-  raw(value: string | number): string {
+  raw(value: Property.Width<number>): string {
     return `width:${value};`;
   }
 }
 
 class OpacityCss {
-  raw(value: string | number): string {
+  raw(value: Property.Opacity): string {
     return `opacity:${value};`;
   }
 }

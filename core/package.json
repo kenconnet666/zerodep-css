@@ -9,8 +9,10 @@
   "scripts": {
     "check": "tsc -p tsconfig.json --noEmit"
   },
+  "dependencies": {
+    "csstype": "catalog:"
+  },
   "devDependencies": {
-    "csstype": "catalog:",
     "typescript": "catalog:"
   }
 }
