@@ -6,7 +6,7 @@ import ts from 'typescript';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const input = resolve(root, 'core/node_modules/csstype/index.d.ts');
-const output = resolve(root, 'core/src/generated/author.ts');
+const outputDir = resolve(root, 'core/src/generated');
 const config = JSON.parse(await readFile(resolve(root, 'scripts/css-author-notes.json'), 'utf8'));
 const version = JSON.parse(
   await readFile(resolve(root, 'core/node_modules/csstype/package.json'), 'utf8'),
@@ -105,21 +105,45 @@ function commentOf(member, description, cssName) {
   return `/** ${description ? `${description}（CSS ${cssName}）` : `CSS 属性 ${cssName}`}${initial ? `；初始值 ${initial}` : ''}。\n * @see ${url ?? `https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/${cssName}`}\n */`;
 }
 
-const lines = [
+const header = [
   `// 由 scripts/generate-css-author.mjs 从 csstype@${version} 生成；请勿手改。`,
   '// 来源许可见 core/THIRD_PARTY_NOTICES.md。',
-  "import type { Property } from 'csstype';",
+];
+const base = [
+  ...header,
   '',
-  'class CssProperty<T> {',
+  'export class CssProperty<T> {',
   '  protected readonly name: string;',
   '  constructor(name: string) { this.name = name; }',
   '  raw(value: T | (string & {})): string { return `${this.name}:${value};`; }',
   '}',
-  'class LengthCssProperty<T> extends CssProperty<T> {',
+  'export class LengthCssProperty<T> extends CssProperty<T> {',
   '  px(value: number): string { return `${this.name}:${value}px;`; }',
   '}',
-  '// 每条属性链只在首次使用时建立系统关键字；主题仍可继承增加成员。',
 ];
+const groups = ['a', 'b', 'c-f', 'g-l', 'm-o', 'p-r', 's-t', 'u-z'];
+const groupLines = new Map(
+  groups.map((group) => [
+    group,
+    [
+      ...header,
+      "import type { Property } from 'csstype';",
+      "import { CssProperty, LengthCssProperty } from './base.js';",
+      '// 每条属性链只在首次使用时建立系统关键字；主题仍可继承增加成员。',
+    ],
+  ]),
+);
+const author = [...header];
+for (const [index, group] of groups.entries()) {
+  author.push(`import * as group${index} from './${group}.js';`);
+}
+for (const group of groups) author.push(`export * from './${group}.js';`);
+
+function groupFor(name) {
+  const first = name[0].toLowerCase();
+  return groups.find((group) => first >= group[0] && first <= group.at(-1));
+}
+
 const systemFields = [];
 const systemCreators = [];
 let keywordCount = 0;
@@ -142,6 +166,10 @@ for (const name of names) {
   const hasLength = member.type.getText(source).includes('TLength');
   if (setting.maxPxArguments && (!hasLength || setting.maxPxArguments < 2))
     throw new Error(`Invalid px arity for ${setting.name}.`);
+  const group = groupFor(name);
+  if (!group) throw new Error(`No generated group for ${name}.`);
+  const lines = groupLines.get(group);
+  const alias = `group${groups.indexOf(group)}`;
   lines.push('', `function ${keywordObject}() {`, '  return {');
   for (const [name, value] of keywords)
     lines.push(`  ${name}: ${JSON.stringify(`${cssName}:${value};`)},`);
@@ -172,14 +200,14 @@ for (const name of names) {
   lines.push(`  Object.freeze(${className}.prototype);`);
   lines.push(`  ${setting.name}Ready = true;`);
   lines.push('}');
-  systemFields.push(`  declare readonly ${setting.name}: ${className};`);
+  systemFields.push(`  declare readonly ${setting.name}: ${alias}.${className};`);
   systemCreators.push(
-    `defineSystemProperty(${JSON.stringify(setting.name)}, () => new ${className}());`,
+    `defineSystemProperty(${JSON.stringify(setting.name)}, () => new ${alias}.${className}());`,
   );
 }
-lines.push('', '/** 系统属性链；项目可通过类继承扩展关键字。 */', 'export class Css {');
-lines.push(...systemFields, '}');
-lines.push(
+author.push('', '/** 系统属性链；项目可通过类继承扩展关键字。 */', 'export class Css {');
+author.push(...systemFields, '}');
+author.push(
   'function defineSystemProperty<T>(name: string, create: () => T): void {',
   '  Object.defineProperty(Css.prototype, name, {',
   '    configurable: true,',
@@ -193,19 +221,23 @@ lines.push(
   ...systemCreators,
 );
 
-const result = await prettier.format(lines.join('\n') + '\n', {
-  ...(await prettier.resolveConfig(output)),
-  filepath: output,
-});
-if (mode === '--check') {
-  const existing = await readFile(output, 'utf8').catch((error) => {
-    if (error.code === 'ENOENT') return '';
-    throw error;
+const files = new Map([['base', base], ...groupLines, ['author', author]]);
+for (const [name, lines] of files) {
+  const output = resolve(outputDir, `${name}.ts`);
+  const result = await prettier.format(lines.join('\n') + '\n', {
+    ...(await prettier.resolveConfig(output)),
+    filepath: output,
   });
-  if (existing !== result) throw new Error('CSS author output is stale; run pnpm css:generate.');
-} else {
-  await mkdir(dirname(output), { recursive: true });
-  await writeFile(output, result);
+  if (mode === '--check') {
+    const existing = await readFile(output, 'utf8').catch((error) => {
+      if (error.code === 'ENOENT') return '';
+      throw error;
+    });
+    if (existing !== result) throw new Error(`CSS author output ${name}.ts is stale.`);
+  } else {
+    await mkdir(dirname(output), { recursive: true });
+    await writeFile(output, result);
+  }
 }
 console.log(
   `${mode === '--check' ? 'Checked' : 'Generated'} ${names.length} properties and ${keywordCount} keywords.`,
