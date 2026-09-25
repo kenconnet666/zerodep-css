@@ -8,6 +8,8 @@
     "test:mup:server": "node mup-server.mjs",
     "test:mup:hydration": "node mup-hydration.mjs",
     "test:mup:exports": "node mup-exports.mjs",
+    "probe:mup": "node mup-performance.mjs",
+    "probe:mup:cold": "node mup-cold.mjs",
     "probe": "node run.mjs",
     "probe:author-storage": "node author-storage.mjs",
     "semantics": "node semantics.mjs",

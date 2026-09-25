@@ -4,14 +4,19 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { compile } from 'svelte/compiler';
+import { parse, compileScript } from 'vue/compiler-sfc';
 
 const directory = dirname(fileURLToPath(import.meta.url));
 
-export async function bundle(framework, platform) {
+export async function bundle(framework, platform, entry, options = {}) {
   const browser = platform === 'browser';
+  const dist = options.dist ?? process.env.MUP_DIST === '1';
   const result = await build({
-    entryPoints: [resolve(directory, `${framework}-mup-${browser ? 'driver' : 'server'}.ts`)],
+    entryPoints: [
+      resolve(directory, entry ?? `${framework}-mup-${browser ? 'driver' : 'server'}.ts`),
+    ],
     bundle: true,
+    minify: options.minify ?? false,
     write: false,
     format: browser ? 'iife' : 'esm',
     ...(browser ? { globalName: 'mupBundle' } : {}),
@@ -19,7 +24,7 @@ export async function bundle(framework, platform) {
     alias: {
       [framework === 'vue' ? '@zerodep-css/vue' : '@zerodep-css/svelte']: resolve(
         directory,
-        `../../${framework}/src/${browser ? 'index' : 'server'}.ts`,
+        `../../${framework}/${dist ? 'dist' : 'src'}/${browser ? 'index' : 'server'}.${dist ? 'js' : 'ts'}`,
       ),
     },
     target: 'es2023',
@@ -65,7 +70,27 @@ export async function bundle(framework, platform) {
               },
             },
           ]
-        : [],
+        : [
+            {
+              name: 'vue-compiler',
+              setup(bundler) {
+                bundler.onLoad({ filter: /\.vue$/ }, async ({ path }) => {
+                  const source = await readFile(path, 'utf8');
+                  const { descriptor, errors } = parse(source, { filename: path });
+                  assert.deepEqual(errors, []);
+                  return {
+                    contents: compileScript(descriptor, {
+                      id: 'mup-performance',
+                      isProd: true,
+                      inlineTemplate: true,
+                    }).content,
+                    loader: 'ts',
+                    resolveDir: dirname(path),
+                  };
+                });
+              },
+            },
+          ],
   });
   return result.outputFiles[0].text;
 }

@@ -27,3 +27,27 @@ jobs:
       - run: pnpm format:check
       - run: pnpm check
       - run: pnpm lsp:verify
+
+  integration:
+    runs-on: ubuntu-latest
+    env:
+      CSS_PROBE_BROWSER_CHANNEL: chromium
+      MUP_DIST: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.5
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm --dir .research/string-css-probe install --frozen-lockfile
+      - run: pnpm --dir .research/string-css-probe exec playwright install --with-deps chromium
+      - run: pnpm --filter @zerodep-css/core test
+      - run: pnpm --dir .research/string-css-probe test:mup:browser
+      - run: pnpm --dir .research/string-css-probe test:mup:server
+      - run: pnpm --dir .research/string-css-probe test:mup:hydration
+      - run: pnpm --dir .research/string-css-probe test:mup:exports

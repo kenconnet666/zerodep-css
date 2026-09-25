@@ -118,9 +118,10 @@ const lines = [
   'class LengthCssProperty<T> extends CssProperty<T> {',
   '  px(value: number): string { return `${this.name}:${value}px;`; }',
   '}',
-  '// 系统关键字在模块装载时共享，主题用子类增加自己的成员。',
+  '// 每条属性链只在首次使用时建立系统关键字；主题仍可继承增加成员。',
 ];
 const systemFields = [];
+const systemCreators = [];
 let keywordCount = 0;
 const notes = new Map(config.properties.map((setting) => [setting.name, setting]));
 for (const name of notes.keys())
@@ -135,22 +136,22 @@ for (const name of names) {
   const type = propertyType(member);
   const className = `${setting.name[0].toUpperCase()}${setting.name.slice(1)}Css`;
   const keywordObject = `${setting.name}Keywords`;
-  const systemObject = `system${setting.name[0].toUpperCase()}${setting.name.slice(1)}`;
+  const initialize = `initialize${className}`;
   const keywords = keywordsOf(member);
   keywordCount += keywords.length;
   const hasLength = member.type.getText(source).includes('TLength');
   if (setting.maxPxArguments && (!hasLength || setting.maxPxArguments < 2))
     throw new Error(`Invalid px arity for ${setting.name}.`);
-  lines.push('', `const ${keywordObject} = {`);
+  lines.push('', `function ${keywordObject}() {`, '  return {');
   for (const [name, value] of keywords)
     lines.push(`  ${name}: ${JSON.stringify(`${cssName}:${value};`)},`);
-  lines.push('} as const;', '');
-  lines.push(`type ${className}Keywords = Readonly<typeof ${keywordObject}>;`);
+  lines.push('  } as const;', '}', '');
+  lines.push(`type ${className}Keywords = Readonly<ReturnType<typeof ${keywordObject}>>;`);
   lines.push(`export interface ${className} extends ${className}Keywords {}`);
   lines.push(commentOf(member, setting.description, cssName));
   lines.push(
     `export class ${className} extends ${hasLength ? 'LengthCssProperty' : 'CssProperty'}<Property.${type}> {`,
-    `  constructor() { super(${JSON.stringify(cssName)}); }`,
+    `  constructor() { super(${JSON.stringify(cssName)}); ${initialize}(); }`,
   );
   if (setting.maxPxArguments) {
     for (let count = 1; count <= setting.maxPxArguments; count++)
@@ -164,13 +165,33 @@ for (const name of names) {
     );
   }
   lines.push('}');
-  lines.push(`Object.assign(${className}.prototype, ${keywordObject});`);
-  lines.push(`Object.freeze(${className}.prototype);`);
-  lines.push(`const ${systemObject} = Object.freeze(new ${className}());`);
-  systemFields.push(`  readonly ${setting.name} = ${systemObject};`);
+  lines.push(`let ${setting.name}Ready = false;`);
+  lines.push(`function ${initialize}(): void {`);
+  lines.push(`  if (${setting.name}Ready) return;`);
+  lines.push(`  Object.assign(${className}.prototype, ${keywordObject}());`);
+  lines.push(`  Object.freeze(${className}.prototype);`);
+  lines.push(`  ${setting.name}Ready = true;`);
+  lines.push('}');
+  systemFields.push(`  declare readonly ${setting.name}: ${className};`);
+  systemCreators.push(
+    `defineSystemProperty(${JSON.stringify(setting.name)}, () => new ${className}());`,
+  );
 }
 lines.push('', '/** 系统属性链；项目可通过类继承扩展关键字。 */', 'export class Css {');
 lines.push(...systemFields, '}');
+lines.push(
+  'function defineSystemProperty<T>(name: string, create: () => T): void {',
+  '  Object.defineProperty(Css.prototype, name, {',
+  '    configurable: true,',
+  '    get() {',
+  '      const value = Object.freeze(create());',
+  '      Object.defineProperty(Css.prototype, name, { value, enumerable: true });',
+  '      return value;',
+  '    },',
+  '  });',
+  '}',
+  ...systemCreators,
+);
 
 const result = await prettier.format(lines.join('\n') + '\n', {
   ...(await prettier.resolveConfig(output)),

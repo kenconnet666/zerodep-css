@@ -21,7 +21,7 @@ const { provideCss, useCss } = createCssContext<AppCss>();
 export async function renderPage(width: number, delay = 0) {
   const host = createServerCssHost();
   return withCssHost(host, async () => {
-    await new Promise((done) => setTimeout(done, delay));
+    if (delay) await new Promise((done) => setTimeout(done, delay));
     const Child = defineComponent({
       setup() {
         const s = useCss();

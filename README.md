@@ -16,6 +16,7 @@
 pnpm install --frozen-lockfile
 pnpm css:generate:check
 pnpm check
+pnpm build
 pnpm lsp:setup
 pnpm lsp:verify
 ```
@@ -29,3 +30,4 @@ pnpm lsp:verify
 字符串作者写法及响应式 CSS 变量绑定的独立测量见 [研究探针](.research/string-css-probe/README.md)。
 完整属性链、关键字生成与上下文生命周期的讨论稿见 [作者模型设计](.research/css-author-generation-design.md)。
 下一阶段的最小可用范围与性能验收见 [实施规划](.research/next-stage-minimum-usable.md)。
+当前 Vue/Svelte 工作区包的调用和手工 Node SSR 接入见 [最小用法](docs/minimum-usage.md)；两轮真实适配器的[性能记录](.research/minimum-usable-performance.md)与原始样本在 `.research/string-css-probe/`。

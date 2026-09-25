@@ -21,6 +21,9 @@ catalogs:
     csstype:
       specifier: 3.2.3
       version: 3.2.3
+    esbuild:
+      specifier: 0.28.2
+      version: 0.28.2
     nuxt:
       specifier: 4.5.2
       version: 4.5.2
@@ -93,6 +96,9 @@ importers:
       '@vue/typescript-plugin':
         specifier: catalog:languageServices
         version: 3.3.11(typescript@6.0.3)
+      esbuild:
+        specifier: 'catalog:'
+        version: 0.28.2
       prettier:
         specifier: 'catalog:'
         version: 3.9.7

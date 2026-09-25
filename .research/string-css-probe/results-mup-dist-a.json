@@ -1,0 +1,882 @@
+{
+  "runId": "b37ff359-558a-47aa-8532-01926f64cf07",
+  "status": "passed",
+  "environment": {
+    "node": "v24.18.0",
+    "rows": 200,
+    "rounds": 3,
+    "browser": "153.0.8010.54"
+  },
+  "bundles": {
+    "vue": {
+      "bytes": 663983
+    },
+    "svelte": {
+      "bytes": 652225
+    }
+  },
+  "frameworks": {
+    "vue": {
+      "direct-false": {
+        "samples": [
+          {
+            "mountMs": 15.199999995529652,
+            "noiseMs": 20.100000001490116,
+            "updateMs": 52.29999999701977,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 14.300000004470348,
+            "noiseMs": 14.899999998509884,
+            "updateMs": 45.100000001490116,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 15.199999995529652,
+            "noiseMs": 16.299999997019768,
+            "updateMs": 44.5,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 15.199999995529652,
+          "noiseMs": 16.299999997019768,
+          "updateMs": 45.100000001490116,
+          "noiseCalls": 4000,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "memo-false": {
+        "samples": [
+          {
+            "mountMs": 20.100000001490116,
+            "noiseMs": 19.5,
+            "updateMs": 43.79999999701977,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 14.599999994039536,
+            "noiseMs": 14.299999997019768,
+            "updateMs": 42.79999999701977,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 16.799999997019768,
+            "noiseMs": 15.700000002980232,
+            "updateMs": 48.29999999701977,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 16.799999997019768,
+          "noiseMs": 15.700000002980232,
+          "updateMs": 43.79999999701977,
+          "noiseCalls": 0,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "table-false": {
+        "samples": [
+          {
+            "mountMs": 22.100000001490116,
+            "noiseMs": 23.299999997019768,
+            "updateMs": 62.399999998509884,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 15,
+            "noiseMs": 14.100000001490116,
+            "updateMs": 41.399999998509884,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 15.799999997019768,
+            "noiseMs": 12.799999997019768,
+            "updateMs": 38.5,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 15.799999997019768,
+          "noiseMs": 14.100000001490116,
+          "updateMs": 41.399999998509884,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 16
+        }
+      },
+      "variable-false": {
+        "samples": [
+          {
+            "mountMs": 19.19999999552965,
+            "noiseMs": 21.600000001490116,
+            "updateMs": 89.89999999850988,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          },
+          {
+            "mountMs": 15.5,
+            "noiseMs": 23.5,
+            "updateMs": 96.10000000149012,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          },
+          {
+            "mountMs": 14.200000002980232,
+            "noiseMs": 21.19999999552965,
+            "updateMs": 93.40000000596046,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 15.5,
+          "noiseMs": 21.600000001490116,
+          "updateMs": 93.40000000596046,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 1
+        }
+      },
+      "native-table-false": {
+        "samples": [
+          {
+            "mountMs": 14.899999998509884,
+            "noiseMs": 12.899999998509884,
+            "updateMs": 42.900000005960464,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 730
+          },
+          {
+            "mountMs": 11.699999995529652,
+            "noiseMs": 12.799999997019768,
+            "updateMs": 47.5,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 730
+          },
+          {
+            "mountMs": 12.199999995529652,
+            "noiseMs": 13.600000001490116,
+            "updateMs": 38.5,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 12.199999995529652,
+          "noiseMs": 12.899999998509884,
+          "updateMs": 42.900000005960464,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 0
+        }
+      },
+      "emotion-false": {
+        "samples": [
+          {
+            "mountMs": 18.799999997019768,
+            "noiseMs": 20.700000002980232,
+            "updateMs": 100.30000000447035,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 17,
+            "noiseMs": 25.5,
+            "updateMs": 66.89999999850988,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 21.200000002980232,
+            "noiseMs": 27.799999997019768,
+            "updateMs": 58.600000001490116,
+            "noiseCalls": 4000,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 18.799999997019768,
+          "noiseMs": 25.5,
+          "updateMs": 66.89999999850988,
+          "noiseCalls": 4000,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "direct-true": {
+        "samples": [
+          {
+            "mountMs": 17.400000005960464,
+            "noiseMs": 8.5,
+            "updateMs": 28.399999998509884,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 16.600000001490116,
+            "noiseMs": 7.899999998509884,
+            "updateMs": 39.79999999701977,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 16.5,
+            "noiseMs": 7.100000001490116,
+            "updateMs": 31.299999997019768,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 16.600000001490116,
+          "noiseMs": 7.899999998509884,
+          "updateMs": 31.299999997019768,
+          "noiseCalls": 1000,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      },
+      "memo-true": {
+        "samples": [
+          {
+            "mountMs": 19.200000002980232,
+            "noiseMs": 10.600000001490116,
+            "updateMs": 52.5,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 62.5,
+            "noiseMs": 9.200000002980232,
+            "updateMs": 29,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 19.69999999552965,
+            "noiseMs": 7,
+            "updateMs": 28.799999997019768,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 19.69999999552965,
+          "noiseMs": 9.200000002980232,
+          "updateMs": 29,
+          "noiseCalls": 0,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      },
+      "variable-true": {
+        "samples": [
+          {
+            "mountMs": 16.399999998509884,
+            "noiseMs": 11.100000001490116,
+            "updateMs": 25,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 16.600000001490116,
+            "noiseMs": 8.299999997019768,
+            "updateMs": 21.299999997019768,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 15.300000004470348,
+            "noiseMs": 7.799999997019768,
+            "updateMs": 18.600000001490116,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 16.399999998509884,
+          "noiseMs": 8.299999997019768,
+          "updateMs": 21.299999997019768,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 1
+        }
+      },
+      "native-var-true": {
+        "samples": [
+          {
+            "mountMs": 16.899999998509884,
+            "noiseMs": 9.799999997019768,
+            "updateMs": 24.799999997019768,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 24,
+            "noiseMs": 10.5,
+            "updateMs": 21.400000005960464,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 12.700000002980232,
+            "noiseMs": 8.299999997019768,
+            "updateMs": 31.899999998509884,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 16.899999998509884,
+          "noiseMs": 9.799999997019768,
+          "updateMs": 24.799999997019768,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 0
+        }
+      },
+      "emotion-true": {
+        "samples": [
+          {
+            "mountMs": 25.299999997019768,
+            "noiseMs": 8.599999994039536,
+            "updateMs": 31.80000000447035,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 25.5,
+            "noiseMs": 8.100000001490116,
+            "updateMs": 35,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 23.400000005960464,
+            "noiseMs": 12.100000001490116,
+            "updateMs": 39.29999999701977,
+            "noiseCalls": 1000,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 25.299999997019768,
+          "noiseMs": 8.599999994039536,
+          "updateMs": 35,
+          "noiseCalls": 1000,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      }
+    },
+    "svelte": {
+      "direct-false": {
+        "samples": [
+          {
+            "mountMs": 17.600000001490116,
+            "noiseMs": 3.100000001490116,
+            "updateMs": 52.600000001490116,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 17.80000000447035,
+            "noiseMs": 1.8999999985098839,
+            "updateMs": 64.10000000149012,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 15,
+            "noiseMs": 2.2000000029802322,
+            "updateMs": 52.5,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 17.600000001490116,
+          "noiseMs": 2.2000000029802322,
+          "updateMs": 52.600000001490116,
+          "noiseCalls": 0,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "memo-false": {
+        "samples": [
+          {
+            "mountMs": 23.5,
+            "noiseMs": 1.7000000029802322,
+            "updateMs": 65.30000000447035,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 15.699999995529652,
+            "noiseMs": 1.6999999955296516,
+            "updateMs": 50.100000001490116,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 17.700000002980232,
+            "noiseMs": 1.5,
+            "updateMs": 48.79999999701977,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 17.700000002980232,
+          "noiseMs": 1.6999999955296516,
+          "updateMs": 50.100000001490116,
+          "noiseCalls": 0,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "table-false": {
+        "samples": [
+          {
+            "mountMs": 19.599999994039536,
+            "noiseMs": 2.5999999940395355,
+            "updateMs": 45.399999998509884,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 18.900000005960464,
+            "noiseMs": 2.2000000029802322,
+            "updateMs": 42.80000000447035,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 25.399999998509884,
+            "noiseMs": 2.399999998509884,
+            "updateMs": 55.19999999552965,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 19.599999994039536,
+          "noiseMs": 2.399999998509884,
+          "updateMs": 45.399999998509884,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 16
+        }
+      },
+      "variable-false": {
+        "samples": [
+          {
+            "mountMs": 19.900000005960464,
+            "noiseMs": 1.8000000044703484,
+            "updateMs": 88,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          },
+          {
+            "mountMs": 18.200000002980232,
+            "noiseMs": 2,
+            "updateMs": 92.29999999701977,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          },
+          {
+            "mountMs": 19.299999997019768,
+            "noiseMs": 1.8000000044703484,
+            "updateMs": 118.89999999850988,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 19.299999997019768,
+          "noiseMs": 1.8000000044703484,
+          "updateMs": 92.29999999701977,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 1
+        }
+      },
+      "native-table-false": {
+        "samples": [
+          {
+            "mountMs": 12.5,
+            "noiseMs": 1.7000000029802322,
+            "updateMs": 43.80000000447035,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 730
+          },
+          {
+            "mountMs": 17.299999997019768,
+            "noiseMs": 2.2999999970197678,
+            "updateMs": 76.29999999701977,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 730
+          },
+          {
+            "mountMs": 18.399999998509884,
+            "noiseMs": 2.2000000029802322,
+            "updateMs": 59.900000005960464,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 17.299999997019768,
+          "noiseMs": 2.2000000029802322,
+          "updateMs": 59.900000005960464,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 0
+        }
+      },
+      "emotion-false": {
+        "samples": [
+          {
+            "mountMs": 21.700000002980232,
+            "noiseMs": 1.6000000014901161,
+            "updateMs": 58.099999994039536,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 23.299999997019768,
+            "noiseMs": 1.5999999940395355,
+            "updateMs": 66.60000000149012,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          },
+          {
+            "mountMs": 31.100000001490116,
+            "noiseMs": 2,
+            "updateMs": 59.100000001490116,
+            "noiseCalls": 0,
+            "updateCalls": 6000,
+            "records": 16,
+            "checksum": 730
+          }
+        ],
+        "median": {
+          "mountMs": 23.299999997019768,
+          "noiseMs": 1.6000000014901161,
+          "updateMs": 59.100000001490116,
+          "noiseCalls": 0,
+          "updateCalls": 6000,
+          "records": 16
+        }
+      },
+      "direct-true": {
+        "samples": [
+          {
+            "mountMs": 21,
+            "noiseMs": 1,
+            "updateMs": 29.200000002980232,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 18.299999997019768,
+            "noiseMs": 0.8999999985098839,
+            "updateMs": 26.19999999552965,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 22.19999999552965,
+            "noiseMs": 1.5,
+            "updateMs": 28.399999998509884,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 21,
+          "noiseMs": 1,
+          "updateMs": 28.399999998509884,
+          "noiseCalls": 0,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      },
+      "memo-true": {
+        "samples": [
+          {
+            "mountMs": 36.600000001490116,
+            "noiseMs": 1.2999999970197678,
+            "updateMs": 30.700000002980232,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 19.899999998509884,
+            "noiseMs": 1,
+            "updateMs": 31,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 21.799999997019768,
+            "noiseMs": 3.0999999940395355,
+            "updateMs": 27.299999997019768,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 21.799999997019768,
+          "noiseMs": 1.2999999970197678,
+          "updateMs": 30.700000002980232,
+          "noiseCalls": 0,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      },
+      "variable-true": {
+        "samples": [
+          {
+            "mountMs": 16,
+            "noiseMs": 0.8999999985098839,
+            "updateMs": 19.899999998509884,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 20.899999998509884,
+            "noiseMs": 1.2000000029802322,
+            "updateMs": 22.399999998509884,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 17.400000005960464,
+            "noiseMs": 0.8999999985098839,
+            "updateMs": 19.700000002980232,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 1,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 17.400000005960464,
+          "noiseMs": 0.8999999985098839,
+          "updateMs": 19.899999998509884,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 1
+        }
+      },
+      "native-var-true": {
+        "samples": [
+          {
+            "mountMs": 14.199999995529652,
+            "noiseMs": 1.3000000044703484,
+            "updateMs": 17.100000001490116,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 14.5,
+            "noiseMs": 1,
+            "updateMs": 20.5,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 31.700000002980232,
+            "noiseMs": 1.2999999970197678,
+            "updateMs": 24.5,
+            "noiseCalls": 0,
+            "updateCalls": 0,
+            "records": 0,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 14.5,
+          "noiseMs": 1.2999999970197678,
+          "updateMs": 20.5,
+          "noiseCalls": 0,
+          "updateCalls": 0,
+          "records": 0
+        }
+      },
+      "emotion-true": {
+        "samples": [
+          {
+            "mountMs": 25.899999998509884,
+            "noiseMs": 1,
+            "updateMs": 43.19999999552965,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 28.899999998509884,
+            "noiseMs": 0.9000000059604645,
+            "updateMs": 42.100000001490116,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          },
+          {
+            "mountMs": 33.600000001490116,
+            "noiseMs": 1,
+            "updateMs": 41.80000000447035,
+            "noiseCalls": 0,
+            "updateCalls": 1000,
+            "records": 1400,
+            "checksum": 2408
+          }
+        ],
+        "median": {
+          "mountMs": 28.899999998509884,
+          "noiseMs": 1,
+          "updateMs": 42.100000001490116,
+          "noiseCalls": 0,
+          "updateCalls": 1000,
+          "records": 1400
+        }
+      }
+    }
+  }
+}

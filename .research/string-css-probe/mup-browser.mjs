@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { chromium } from '@playwright/test';
+import { launchBrowser } from './browser.mjs';
 import { bundle } from './mup-bundle.mjs';
 
-const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const browser = await launchBrowser();
 try {
   for (const framework of ['vue', 'svelte']) {
     const page = await browser.newPage();

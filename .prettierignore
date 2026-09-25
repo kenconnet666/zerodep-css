@@ -4,3 +4,4 @@ dist
 .svelte-kit
 test-results
 pnpm-lock.yaml
+.research/**/results-*.json
