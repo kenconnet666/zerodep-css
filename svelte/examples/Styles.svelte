@@ -7,6 +7,7 @@
   let width = $state(s.initialWidth);
   let runtimeWidth = $state(s.initialWidth);
   let noise = $state(0);
+  let overridden = $state(true);
   const base = s.display.block + s.color._text;
   const staticClass = css(base, s.width._initial);
   const sizes = { small: css(base, s.width.px(24)), large: css(base, s.width.px(48)) };
@@ -28,12 +29,19 @@
   <button data-action="width" onclick={() => width++}>增加宽度</button>
   <button data-action="runtime" onclick={() => runtimeWidth++}>运行时新值</button>
   <button data-action="noise" onclick={() => noise++}>无关状态</button>
+  <button data-action="subtree" onclick={() => (overridden = !overridden)}>切换子树覆盖</button>
   <div data-sample="static" class={staticClass}>静态样式</div>
   <div data-sample="finite" class={finiteClass}>有限状态</div>
   <div data-sample="runtime" class={runtimeClass()}>运行时分支</div>
   <div data-sample="variable" class={variableClass} style:--demo-width={`${width}px`}>连续值</div>
   <div data-sample="root-theme" class={themeClass}>父级主题</div>
-  <div style="--demo-text: #dc2626; --demo-hover: #7c3aed">
+  <div data-sample="variable-other" class={variableClass} style:--demo-width={`${width + 5}px`}>
+    另一个元素的连续值
+  </div>
+  <div
+    style:--demo-text={overridden ? '#dc2626' : undefined}
+    style:--demo-hover={overridden ? '#7c3aed' : undefined}
+  >
     <div data-sample="nested-theme" class={themeClass}>子树覆盖</div>
   </div>
   <div data-sample="sibling-theme" class={themeClass}>兄弟仍继承父级</div>

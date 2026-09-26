@@ -59,6 +59,8 @@ pnpm test:mup:exports
 
 `test:mup:*` 使用当前 Vue/Svelte 适配器，分别验证浏览器上下文、两个 Node SSR 请求的规则隔离、客户端 hydration 去重及条件导出。它们是最小可用验收，不替代后续的 Nuxt/SvelteKit 集成测试。
 
+`test:examples:browser` 和 `test:examples:hydration` 直接编译包内的[框架用法示例](../../docs/framework-examples.md)，验证纯派生类选择、开放运行时分支、逐元素变量、子树主题、hover/media、并发 Node SSR、恢复去重及重新挂载。这些用例已接入远程 CI，不用历史性能夹具代替正式推荐写法。
+
 设置 `MUP_DIST=1` 后，MUP 浏览器、SSR、hydration 和性能脚本改用仓库根 `pnpm build` 生成的包入口；不设置时读取工作区源码。性能原始样本与[阶段报告](../minimum-usable-performance.md)分开保存，旧的 `results-a/b.json` 不代表当前适配器。
 
 这两份原始计时采于代码迁入 `core` 之前。迁入后重新运行 `pnpm probe` 已通过相同正确性断言；旧计时仅用于观察方案差异，不作为新实现的性能数字。

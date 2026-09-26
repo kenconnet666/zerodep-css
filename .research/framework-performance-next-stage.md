@@ -2,6 +2,8 @@
 
 日期：2026-09-26。承接[字符串拼接研究](string-concatenation-research.md)和[框架结合研究](vue-svelte-runtime-integration.md)。
 
+实施更新：下文规划的可执行组件、Node SSR/hydration 和子树主题验证已落实，入口见[框架用法示例](../docs/framework-examples.md)。本页保留形成决策时的性能记录；当前下一批工作为 Nuxt/SvelteKit 接入。
+
 ## 本轮决定
 
 保留产品注册器的 `join('')`。`+=` 在短字符串注册器微基准中有优势，但真实组件更新没有表现出跨负载的稳定收益，不值得据此改动默认实现。继续保留该候选，本阶段停止扩展拼接、Worker、SIMD 和编译提取研究，转向框架使用体验与生命周期验收。
@@ -87,4 +89,6 @@ Vue/Svelte 分别覆盖静态样式、少量条件状态、开放动态值、连
 
 ## 交付边界
 
-本轮仅完善研究脚本、保存结果和更新规划。下一阶段上述示例、主题与集成用例尚未实施。保留用户的 `core/test/types/theme.ts` 未提交修改；本地执行焦点验证，完整跨平台与 SSR 等既有验收由远程 CI 执行。
+性能研究轮次只完善研究脚本、保存结果和更新规划。后续实施已增加 `core/examples`、`vue/examples`、`svelte/examples`，文档与测试共用同一份组件；浏览器与并发 Node SSR/hydration 用例已接入 CI。产品 API、`join` 注册器和生成属性链未改动。
+
+本地 `pnpm check`、Vue/Svelte 浏览器焦点用例及两套新示例验收通过。测试构建现在统一 Vue/Svelte 运行时解析，避免包内示例和探针驱动各加载一份 Vue 响应式运行时。保留用户的 `core/test/types/theme.ts` 未提交修改；完整跨平台与集成验收以各提交的远程 CI 结果为准。

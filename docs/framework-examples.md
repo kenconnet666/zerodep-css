@@ -26,7 +26,7 @@ Vue 的[计算属性约束](https://vuejs.org/guide/essentials/computed)与 Svel
 
 作者关键字 `_text` / `_hover` 是稳定的 `color:var(--demo-text);` 等字符串；应用根元素设置变量，子树只覆盖自己的变量，兄弟继续继承根元素。切换亮暗色只更新变量，不替换作者实例，不生成新的主题类名。
 
-`ic('&:hover', s.color._hover)` 由浏览器处理选择器，`ic('@media (max-width: 600px)', ...)` 由浏览器处理条件。主题变量可沿 DOM 继承到 hover 分支。实际 DOM 移到主题边界外时不会自动保留原边界变量，这个示例不承诺 Teleport / portal 的主题转移。
+`ic('&:hover', s.color._hover)` 由浏览器处理选择器，`ic('@media (max-width: 600px)', ...)` 由浏览器处理条件。主题变量可沿 DOM 继承到 hover 分支；撤销子树覆盖后，其常态色和 hover 色重新继承父级。两个连续值元素共用同一个类名，但各自的变量值互不影响。实际 DOM 移到主题边界外时不会自动保留原边界变量，这个示例不承诺 Teleport / portal 的主题转移。
 
 `initialWidth` 与 `initialTheme` 是挂载 / SSR 的初始输入，不是受控 props；后续按钮操作修改组件内状态。模块顶层只保存类型化 context 和固定主题数据，作者实例与完整类名在活动组件 / 请求内创建。
 
@@ -36,8 +36,19 @@ Vue 的[计算属性约束](https://vuejs.org/guide/essentials/computed)与 Svel
 
 ```powershell
 pnpm --dir .research/string-css-probe test:examples:browser
+pnpm --dir .research/string-css-probe test:examples:hydration
 ```
 
 默认使用本机 Chrome；CI 使用 `CSS_PROBE_BROWSER_CHANNEL=chromium`。测试直接加载上述组件，覆盖静态值、有限状态切换、运行时新值、无关状态更新、连续变量、子树主题隔离、hover 与 media。两个包的类型检查也包含示例。
 
-本阶段浏览器用例通过；同一批组件的并发 SSR 与 hydration 验收接下来补充。Nuxt/SvelteKit 的自动接入仍未提供。
+`test:examples:hydration` 在两个并发 Node 请求中分别渲染亮色 / 24px 和暗色 / 40px，再分别恢复客户端并执行与浏览器用例相同的交互。它验证：
+
+- 客户端脚本运行前，服务端 HTML、主题变量、声明与计算样式已经正确。
+- 并发请求不混入其他请求特有的声明，重复请求生成同一份规则清单。
+- hydration 复用原 DOM 元素，不出现告警，不创建第二张样式表，不重复插入已有规则。
+- 首次更新与重复分支切换结果正确；有限状态预热后不继续增加规则，连续变量与主题切换不增加规则，开放动态新值按需增加规则。
+- 卸载后重新挂载复用同一文档规则；新组件回到自己的初始状态，不继承上一个组件的临时状态。
+
+测试使用[Vue 服务端驱动](../.research/string-css-probe/fixtures/vue-examples-server.ts)和[Svelte 服务端驱动](../.research/string-css-probe/fixtures/svelte-examples-server.ts)。完整组件渲染必须包在 `withCssHost()` 的请求生命周期内；浏览器必须先收到服务端样式，再在首次挂载前调用一次 `hydrateCss(rules)`。同一文档的普通后续挂载不重复调用 `hydrateCss()`。
+
+测试结果不代表生产化已经全部完成。Nuxt/SvelteKit 的自动接入、流式 SSR、HTML 安全序列化、CSP/nonce、Teleport / portal 和 HMR 仍需要各自的接入与验收。
