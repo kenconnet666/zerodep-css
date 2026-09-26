@@ -59,3 +59,17 @@ test('消费端只导入少数能力时移除完整作者模型', async () => {
   assert.ok(bytes.color < bytes.full / 4, JSON.stringify(bytes));
   console.log(JSON.stringify(bytes));
 });
+
+test('单位与颜色数学方法保持声明字符串与简写参数含义', () => {
+  const s = new Css();
+  assert.equal(s.width.rem(1.5), 'width:1.5rem;');
+  assert.equal(s.padding.rem(0.5, 1), 'padding:0.5rem 1rem;');
+  assert.equal(s.gap.em(1, 2), 'gap:1em 2em;');
+  assert.equal(s.width.percent(50), 'width:50%;');
+  assert.equal(s.animationDuration.ms(180), 'animation-duration:180ms;');
+  assert.equal(s.rotate.turn(0.5), 'rotate:0.5turn;');
+  assert.equal(s.color.rgb(255, 0, 0, 0.5), 'color:rgb(255 0 0 / 0.5);');
+  assert.equal(s.color.hsl(200, 60, 50), 'color:hsl(200 60% 50%);');
+  assert.equal(s.width.clamp('16rem', '50vw', '40rem'), 'width:clamp(16rem, 50vw, 40rem);');
+  assert.equal(s.textBox.cap, 'text-box:cap;');
+});

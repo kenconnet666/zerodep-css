@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import prettier from 'prettier';
 import ts from 'typescript';
+import { units, extraUnits, unitMethod, valueMethods } from './css-author-methods.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const input = resolve(root, 'core/node_modules/csstype/index.d.ts');
@@ -118,8 +119,9 @@ const base = [
   '  raw(value: T | (string & {})): string { return `${this.name}:${value};`; }',
   '}',
   'export class LengthCssProperty<T> extends CssProperty<T> {',
-  '  px(value: number): string { return `${this.name}:${value}px;`; }',
+  ...Object.entries(units).flatMap(([name, suffix]) => unitMethod(name, suffix)),
   '}',
+  `export const unitSuffix: Readonly<Record<string, string>> = ${JSON.stringify({ ...units, ...extraUnits })};`,
 ];
 const groups = ['a', 'b', 'c-f', 'g-l', 'm-o', 'p-r', 's-t', 'u-z'];
 const groupLines = new Map(
@@ -163,6 +165,39 @@ for (const name of names) {
   const documentation = commentOf(member, setting.description, cssName);
   keywordCount += keywords.length;
   const hasLength = member.type.getText(source).includes('TLength');
+  const syntax =
+    member.jsDoc
+      ?.map((item) => item.getFullText(source))
+      .join('\n')
+      .match(/\*\*Syntax\*\*: `([^`]+)`/)?.[1] ?? '';
+  const maxArgs =
+    setting.maxArguments ??
+    setting.maxPxArguments ??
+    Number(syntax.match(/\{1,([234])\}/)?.[1] ?? 1);
+  const hasPercent =
+    setting.percentage ??
+    /<(?:length-percentage|percentage|alpha-value|opacity-value)(?:\s[^>]*)?>/.test(syntax);
+  const hasTime = member.type.getText(source).includes('TTime');
+  const hasAngle = /<angle(?:\s[^>]*)?>/.test(syntax);
+  const hasColor = keywords.some(([name]) => name === 'red');
+  const resolved = checker.getTypeAtLocation(member.type);
+  const isNumber = (type) =>
+    Boolean(type.flags & ts.TypeFlags.NumberLike) ||
+    Boolean(type.isUnionOrIntersection() && type.types.some(isNumber));
+  const hasNumber = isNumber(resolved);
+  const methodNames = [
+    ...(hasLength ? Object.keys(units) : []),
+    ...(hasPercent ? ['percent'] : []),
+    ...(hasTime ? ['ms', 's'] : []),
+    ...(hasAngle ? ['deg', 'grad', 'rad', 'turn'] : []),
+    ...(hasColor ? ['rgb', 'hsl'] : []),
+    ...(hasLength || hasPercent || hasTime || hasAngle || hasNumber
+      ? ['calc', 'min', 'max', 'clamp']
+      : []),
+  ];
+  for (const method of methodNames)
+    if (keywords.some(([name]) => name === method))
+      throw new Error(`CSS method conflicts with keyword: ${name}.${method}`);
   if (setting.maxPxArguments && (!hasLength || setting.maxPxArguments < 2))
     throw new Error(`Invalid px arity for ${setting.name}.`);
   const group = groupFor(name);
@@ -177,17 +212,16 @@ for (const name of names) {
   for (const [keyword, value] of keywords)
     lines.push(`  readonly ${keyword} = ${JSON.stringify(`${cssName}:${value};`)};`);
   lines.push(`  constructor() { super(${JSON.stringify(cssName)}); }`);
-  if (setting.maxPxArguments) {
-    for (let count = 1; count <= setting.maxPxArguments; count++)
-      lines.push(
-        `  px(${Array.from({ length: count }, (_, index) => `value${index + 1}: number`).join(', ')}): string;`,
-      );
-    lines.push(
-      '  override px(...values: number[]): string {',
-      "    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;",
-      '  }',
-    );
-  }
+  if (hasLength && maxArgs > 1)
+    for (const [name, suffix] of Object.entries(units))
+      lines.push(...unitMethod(name, suffix, 1, maxArgs, true));
+  if (hasPercent) lines.push(...unitMethod('percent', '%', 1, maxArgs));
+  if (hasTime) for (const name of ['ms', 's']) lines.push(...unitMethod(name, name));
+  if (hasAngle)
+    for (const name of ['deg', 'grad', 'rad', 'turn']) lines.push(...unitMethod(name, name));
+  lines.push(
+    ...valueMethods(type, hasColor, hasLength || hasPercent || hasTime || hasAngle || hasNumber),
+  );
   lines.push('}');
   systemFields.push(documentation, `  declare readonly ${setting.name}: ${alias}.${className};`);
   systemCreators.push(

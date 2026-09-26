@@ -25,4 +25,25 @@ globalCss('theme');
 
 若主样式标签意外被移除，下一次调用会根据宿主缓存重建。全局块标签的移除在下次操作该块时重建，不注册全页面 MutationObserver。已有挂载元素需要在宿主销毁前退出；显式 dispose 后不会猜测哪些类还在被外部 DOM 使用。
 
-单位、颜色 / 数学方法以及隐式绑定仍按[阶段计划](../.research/next-phase-authoring-and-bindings.md)继续实现。本文记录当前已落地的登记基础和 API。
+## 单位与值方法
+
+```ts
+s.width.rem(20);
+s.height.dvh(100);
+s.width.cqw(50);
+s.padding.rem(0.5, 1, 2, 3);
+s.gap.em(0.5, 1);
+s.width.percent(50);
+s.animationDuration.ms(180);
+s.rotate.turn(0.5);
+s.color.rgb(255, 0, 0, 0.5);
+s.color.hsl(200, 60, 50);
+s.width.clamp('16rem', '50vw', '40rem');
+s.opacity.clamp(0, 0.5, 1);
+```
+
+长度属性提供绝对、字体、视口（含 s/l/d 家族）、容器单位。百分比、时间、角度按属性的类型和语法生成；数学方法为 calc/min/max/clamp，颜色方法为 rgb/hsl。所有方法仍返回完整声明字符串，没有公开 var 方法，没有 pct/percentage 或 rgba 同义入口。
+
+普通单位方法收一个数字；padding/margin、gap、逻辑边距、背景尺寸等根据元数据提供合适的参数数量。混合单位、斜线分组和特殊值继续使用 raw。类型提示只约束作者入口，不做浏览器值域校验。单位名不会挤掉无关属性的系统关键字，例如 textBox.cap、textBoxEdge.ex 仍是字符串字段。
+
+隐式绑定按[阶段计划](../.research/next-phase-authoring-and-bindings.md)继续实现。本文记录当前已落地的登记基础与作者方法。

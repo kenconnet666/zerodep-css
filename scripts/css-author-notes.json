@@ -4,11 +4,18 @@
     { "name": "border", "description": "边框简写" },
     { "name": "color", "description": "文本前景色" },
     { "name": "display", "description": "显示类型" },
-    { "name": "gap", "description": "行列间距", "maxPxArguments": 2 },
+    { "name": "gap", "description": "行列间距", "maxArguments": 2, "percentage": true },
     { "name": "height", "description": "高度" },
-    { "name": "margin", "description": "外边距", "maxPxArguments": 4 },
+    { "name": "margin", "description": "外边距", "maxArguments": 4, "percentage": true },
     { "name": "opacity", "description": "不透明度" },
-    { "name": "padding", "description": "内边距", "maxPxArguments": 4 },
+    { "name": "padding", "description": "内边距", "maxArguments": 4, "percentage": true },
+    { "name": "borderSpacing", "maxArguments": 2 },
+    { "name": "backgroundPosition", "maxArguments": 2, "percentage": true },
+    { "name": "backgroundSize", "maxArguments": 2, "percentage": true },
+    { "name": "marginBlock", "maxArguments": 2, "percentage": true },
+    { "name": "marginInline", "maxArguments": 2, "percentage": true },
+    { "name": "paddingBlock", "maxArguments": 2, "percentage": true },
+    { "name": "paddingInline", "maxArguments": 2, "percentage": true },
     { "name": "width", "description": "宽度" }
   ]
 }

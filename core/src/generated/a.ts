@@ -209,6 +209,16 @@ export class AccentColorCss extends CssProperty<Property.AccentColor> {
   constructor() {
     super('accent-color');
   }
+  /** RGB 通道与可选 alpha；不隐式截断数值。 */
+  rgb(red: number, green: number, blue: number, alpha?: number): string {
+    return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
+  }
+  /** 色相用度数，饱和度和明度用百分数。 */
+  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+    return this.raw(
+      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
 }
 
 /** CSS 属性 align-content；初始值 normal。
@@ -410,6 +420,37 @@ export class AnimationCss extends CssProperty<Property.Animation> {
   constructor() {
     super('animation');
   }
+  /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
+  ms(value: number): string {
+    return `${this.name}:${value}ms;`;
+  }
+  /** 使用 s 单位生成声明；数值合法性由浏览器处理。 */
+  s(value: number): string {
+    return `${this.name}:${value}s;`;
+  }
+  /** 数学表达式原样交给浏览器。 */
+  calc(expression: string): string {
+    return this.raw(`calc(${expression})`);
+  }
+  min(
+    value: Extract<Property.Animation, number> | (string & {}),
+    ...others: (Extract<Property.Animation, number> | (string & {}))[]
+  ): string {
+    return this.raw(`min(${[value, ...others].join(', ')})`);
+  }
+  max(
+    value: Extract<Property.Animation, number> | (string & {}),
+    ...others: (Extract<Property.Animation, number> | (string & {}))[]
+  ): string {
+    return this.raw(`max(${[value, ...others].join(', ')})`);
+  }
+  clamp(
+    minimum: Extract<Property.Animation, number> | (string & {}),
+    preferred: Extract<Property.Animation, number> | (string & {}),
+    maximum: Extract<Property.Animation, number> | (string & {}),
+  ): string {
+    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+  }
 }
 
 /** CSS 属性 animation-composition；初始值 replace。
@@ -440,6 +481,37 @@ export class AnimationDelayCss extends CssProperty<Property.AnimationDelay> {
   readonly unset = 'animation-delay:unset;';
   constructor() {
     super('animation-delay');
+  }
+  /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
+  ms(value: number): string {
+    return `${this.name}:${value}ms;`;
+  }
+  /** 使用 s 单位生成声明；数值合法性由浏览器处理。 */
+  s(value: number): string {
+    return `${this.name}:${value}s;`;
+  }
+  /** 数学表达式原样交给浏览器。 */
+  calc(expression: string): string {
+    return this.raw(`calc(${expression})`);
+  }
+  min(
+    value: Extract<Property.AnimationDelay, number> | (string & {}),
+    ...others: (Extract<Property.AnimationDelay, number> | (string & {}))[]
+  ): string {
+    return this.raw(`min(${[value, ...others].join(', ')})`);
+  }
+  max(
+    value: Extract<Property.AnimationDelay, number> | (string & {}),
+    ...others: (Extract<Property.AnimationDelay, number> | (string & {}))[]
+  ): string {
+    return this.raw(`max(${[value, ...others].join(', ')})`);
+  }
+  clamp(
+    minimum: Extract<Property.AnimationDelay, number> | (string & {}),
+    preferred: Extract<Property.AnimationDelay, number> | (string & {}),
+    maximum: Extract<Property.AnimationDelay, number> | (string & {}),
+  ): string {
+    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
   }
 }
 
@@ -474,6 +546,37 @@ export class AnimationDurationCss extends CssProperty<Property.AnimationDuration
   constructor() {
     super('animation-duration');
   }
+  /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
+  ms(value: number): string {
+    return `${this.name}:${value}ms;`;
+  }
+  /** 使用 s 单位生成声明；数值合法性由浏览器处理。 */
+  s(value: number): string {
+    return `${this.name}:${value}s;`;
+  }
+  /** 数学表达式原样交给浏览器。 */
+  calc(expression: string): string {
+    return this.raw(`calc(${expression})`);
+  }
+  min(
+    value: Extract<Property.AnimationDuration, number> | (string & {}),
+    ...others: (Extract<Property.AnimationDuration, number> | (string & {}))[]
+  ): string {
+    return this.raw(`min(${[value, ...others].join(', ')})`);
+  }
+  max(
+    value: Extract<Property.AnimationDuration, number> | (string & {}),
+    ...others: (Extract<Property.AnimationDuration, number> | (string & {}))[]
+  ): string {
+    return this.raw(`max(${[value, ...others].join(', ')})`);
+  }
+  clamp(
+    minimum: Extract<Property.AnimationDuration, number> | (string & {}),
+    preferred: Extract<Property.AnimationDuration, number> | (string & {}),
+    maximum: Extract<Property.AnimationDuration, number> | (string & {}),
+  ): string {
+    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+  }
 }
 
 /** CSS 属性 animation-fill-mode；初始值 none。
@@ -506,6 +609,29 @@ export class AnimationIterationCountCss extends CssProperty<Property.AnimationIt
   readonly unset = 'animation-iteration-count:unset;';
   constructor() {
     super('animation-iteration-count');
+  }
+  /** 数学表达式原样交给浏览器。 */
+  calc(expression: string): string {
+    return this.raw(`calc(${expression})`);
+  }
+  min(
+    value: Extract<Property.AnimationIterationCount, number> | (string & {}),
+    ...others: (Extract<Property.AnimationIterationCount, number> | (string & {}))[]
+  ): string {
+    return this.raw(`min(${[value, ...others].join(', ')})`);
+  }
+  max(
+    value: Extract<Property.AnimationIterationCount, number> | (string & {}),
+    ...others: (Extract<Property.AnimationIterationCount, number> | (string & {}))[]
+  ): string {
+    return this.raw(`max(${[value, ...others].join(', ')})`);
+  }
+  clamp(
+    minimum: Extract<Property.AnimationIterationCount, number> | (string & {}),
+    preferred: Extract<Property.AnimationIterationCount, number> | (string & {}),
+    maximum: Extract<Property.AnimationIterationCount, number> | (string & {}),
+  ): string {
+    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
   }
 }
 
@@ -559,6 +685,29 @@ export class AnimationRangeCss extends LengthCssProperty<Property.AnimationRange
   constructor() {
     super('animation-range');
   }
+  /** 数学表达式原样交给浏览器。 */
+  calc(expression: string): string {
+    return this.raw(`calc(${expression})`);
+  }
+  min(
+    value: Extract<Property.AnimationRange, number> | (string & {}),
+    ...others: (Extract<Property.AnimationRange, number> | (string & {}))[]
+  ): string {
+    return this.raw(`min(${[value, ...others].join(', ')})`);
+  }
+  max(
+    value: Extract<Property.AnimationRange, number> | (string & {}),
+    ...others: (Extract<Property.AnimationRange, number> | (string & {}))[]
+  ): string {
+    return this.raw(`max(${[value, ...others].join(', ')})`);
+  }
+  clamp(
+    minimum: Extract<Property.AnimationRange, number> | (string & {}),
+    preferred: Extract<Property.AnimationRange, number> | (string & {}),
+    maximum: Extract<Property.AnimationRange, number> | (string & {}),
+  ): string {
+    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+  }
 }
 
 /** CSS 属性 animation-range-end；初始值 normal。
@@ -580,6 +729,33 @@ export class AnimationRangeEndCss extends LengthCssProperty<Property.AnimationRa
   constructor() {
     super('animation-range-end');
   }
+  /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
+  percent(value: number): string {
+    return `${this.name}:${value}%;`;
+  }
+  /** 数学表达式原样交给浏览器。 */
+  calc(expression: string): string {
+    return this.raw(`calc(${expression})`);
+  }
+  min(
+    value: Extract<Property.AnimationRangeEnd, number> | (string & {}),
+    ...others: (Extract<Property.AnimationRangeEnd, number> | (string & {}))[]
+  ): string {
+    return this.raw(`min(${[value, ...others].join(', ')})`);
+  }
+  max(
+    value: Extract<Property.AnimationRangeEnd, number> | (string & {}),
+    ...others: (Extract<Property.AnimationRangeEnd, number> | (string & {}))[]
+  ): string {
+    return this.raw(`max(${[value, ...others].join(', ')})`);
+  }
+  clamp(
+    minimum: Extract<Property.AnimationRangeEnd, number> | (string & {}),
+    preferred: Extract<Property.AnimationRangeEnd, number> | (string & {}),
+    maximum: Extract<Property.AnimationRangeEnd, number> | (string & {}),
+  ): string {
+    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+  }
 }
 
 /** CSS 属性 animation-range-start；初始值 normal。
@@ -600,6 +776,33 @@ export class AnimationRangeStartCss extends LengthCssProperty<Property.Animation
   readonly unset = 'animation-range-start:unset;';
   constructor() {
     super('animation-range-start');
+  }
+  /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
+  percent(value: number): string {
+    return `${this.name}:${value}%;`;
+  }
+  /** 数学表达式原样交给浏览器。 */
+  calc(expression: string): string {
+    return this.raw(`calc(${expression})`);
+  }
+  min(
+    value: Extract<Property.AnimationRangeStart, number> | (string & {}),
+    ...others: (Extract<Property.AnimationRangeStart, number> | (string & {}))[]
+  ): string {
+    return this.raw(`min(${[value, ...others].join(', ')})`);
+  }
+  max(
+    value: Extract<Property.AnimationRangeStart, number> | (string & {}),
+    ...others: (Extract<Property.AnimationRangeStart, number> | (string & {}))[]
+  ): string {
+    return this.raw(`max(${[value, ...others].join(', ')})`);
+  }
+  clamp(
+    minimum: Extract<Property.AnimationRangeStart, number> | (string & {}),
+    preferred: Extract<Property.AnimationRangeStart, number> | (string & {}),
+    maximum: Extract<Property.AnimationRangeStart, number> | (string & {}),
+  ): string {
+    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
   }
 }
 
@@ -679,5 +882,28 @@ export class AspectRatioCss extends CssProperty<Property.AspectRatio> {
   readonly unset = 'aspect-ratio:unset;';
   constructor() {
     super('aspect-ratio');
+  }
+  /** 数学表达式原样交给浏览器。 */
+  calc(expression: string): string {
+    return this.raw(`calc(${expression})`);
+  }
+  min(
+    value: Extract<Property.AspectRatio, number> | (string & {}),
+    ...others: (Extract<Property.AspectRatio, number> | (string & {}))[]
+  ): string {
+    return this.raw(`min(${[value, ...others].join(', ')})`);
+  }
+  max(
+    value: Extract<Property.AspectRatio, number> | (string & {}),
+    ...others: (Extract<Property.AspectRatio, number> | (string & {}))[]
+  ): string {
+    return this.raw(`max(${[value, ...others].join(', ')})`);
+  }
+  clamp(
+    minimum: Extract<Property.AspectRatio, number> | (string & {}),
+    preferred: Extract<Property.AspectRatio, number> | (string & {}),
+    maximum: Extract<Property.AspectRatio, number> | (string & {}),
+  ): string {
+    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
   }
 }
