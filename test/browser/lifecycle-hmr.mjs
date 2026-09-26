@@ -20,7 +20,12 @@ try {
     let server;
     const page = await browser.newPage();
     const errors = [];
+    const events = [];
     page.on('pageerror', (error) => errors.push(error.message));
+    page.on('console', (message) => {
+      if (message.type() === 'error' || /vite|hmr/i.test(message.text()))
+        events.push(message.text());
+    });
     try {
       const ext = framework === 'vue' ? 'vue' : 'svelte';
       const fixture = new URL('./fixtures/lifecycle/', import.meta.url);
@@ -155,6 +160,23 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
         hmr: 'passed',
         mountCycles: 30,
       });
+    } catch (error) {
+      const state = await page
+        .evaluate(() => ({
+          text: document.querySelector('[data-probe]')?.textContent,
+          width:
+            document.querySelector('[data-probe]') &&
+            getComputedStyle(document.querySelector('[data-probe]')).width,
+          stats: window.control?.stats(),
+          identity: window.hmrIdentity,
+        }))
+        .catch(() => null);
+      await writeFile(
+        join(results, `lifecycle-failure-${framework}.json`),
+        JSON.stringify({ state, events, errors, error: String(error) }, null, 2),
+      );
+      console.error(JSON.stringify({ framework, state, events, errors }));
+      throw error;
     } finally {
       await page.close();
       await server?.close();

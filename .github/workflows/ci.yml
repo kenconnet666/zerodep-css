@@ -76,4 +76,5 @@ jobs:
           name: runtime-diagnostics
           path: |
             test-results/lifecycle-hmr.json
+            test-results/lifecycle-failure-*.json
             test-results/binding-performance/results.json
