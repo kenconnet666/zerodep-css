@@ -1,0 +1,35 @@
+{
+  "browser": "153.0.8010.54",
+  "versions": {
+    "@emotion/css": "11.13.5",
+    "@emotion/cache": "11.14.0",
+    "@emotion/hash": "0.9.2",
+    "@emotion/serialize": "1.3.3"
+  },
+  "missHashes": 2,
+  "hitHashes": 0,
+  "unicode": {
+    "own": {
+      "classes": ["z-7zcrvy", "z-k9bhv2"],
+      "contents": ["\"Ā\"", "\"Ȁ\""]
+    },
+    "emotion": {
+      "classes": ["css-ronb0k", "css-ronb0k"],
+      "contents": ["\"Ā\"", "\"Ā\""]
+    }
+  },
+  "nesting": {
+    "own": "rgb(0, 0, 0)",
+    "emotion": "rgb(1, 2, 3)"
+  },
+  "collision": {
+    "hash": "12d34fj",
+    "bodies": ["--probe:28fx-1rqasrx;", "--probe:28vj-gi2s3j;"],
+    "error": "CSS class hash collision."
+  },
+  "detachedHost": {
+    "sameClass": true,
+    "beforeRemoval": "rgb(4, 5, 6)",
+    "afterRemoval": "rgb(0, 0, 0)"
+  }
+}

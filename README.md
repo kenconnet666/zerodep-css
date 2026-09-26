@@ -39,3 +39,4 @@ class 对象写法、浏览器注册、Node 请求隔离及元框架接入已有
 直接字段可用的缓存与静态分支优化候选见[优化研究](.research/direct-field-optimization-research.md)。
 运行时同步快路径、Worker 与 SIMD 的实测取舍见[并行与 SIMD 研究](.research/runtime-parallel-simd-research.md)。
 Vue/Svelte 的纯派生类选择、元素变量绑定与上下文边界见[框架结合研究](.research/vue-svelte-runtime-integration.md)。
+Emotion 源码对照、可复现缺口和下一阶段取舍见[运行时库审查](.research/runtime-library-tradeoffs.md)。

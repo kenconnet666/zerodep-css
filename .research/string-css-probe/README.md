@@ -57,6 +57,8 @@ pnpm test:mup:exports
 
 `probe:concat-components` 在同一份源码上构建 `join` 与 `+=` 两个版本，用 Vue/Svelte 真实组件比较有限值、新值和无关更新；`MUP_ROUNDS` 控制轮数。`probe:static-prefix` 对比相邻静态片段提前组合与完整类名复用。这两项不改运行时算法，结果及下一阶段建议见[组件复测与规划](../framework-performance-next-stage.md)。
 
+`probe:library-review` 是当前实现的缺口快照，记录重复哈希、哈希碰撞、Unicode、原生嵌套与宿主标签移除行为；不会修改产品源码，也不把期望缺陷持续存在设为 CI 门槛。对照来源与取舍见[运行时库审查](../runtime-library-tradeoffs.md)。
+
 `test:mup:*` 使用当前 Vue/Svelte 适配器，分别验证浏览器上下文、两个 Node SSR 请求的规则隔离、客户端 hydration 去重及条件导出。它们是最小可用验收，不替代后续的 Nuxt/SvelteKit 集成测试。
 
 `test:examples:browser` 和 `test:examples:hydration` 直接编译包内的[框架用法示例](../../docs/framework-examples.md)，验证纯派生类选择、开放运行时分支、逐元素变量、子树主题、hover/media、并发 Node SSR、恢复去重及重新挂载。这些用例已接入远程 CI，不用历史性能夹具代替正式推荐写法。
