@@ -51,6 +51,7 @@ export function createBindingTransform(
   );
   const aliases = new Map<string, string>();
   const namespaces = new Set<string>();
+  const vueNamespaces = new Set<string>();
   const dynamic = new Set<string>();
   const warnings = new Set<string>();
   let scope = '__zc';
@@ -64,6 +65,12 @@ export function createBindingTransform(
     else for (const part of node.elements) if (ts.isBindingElement(part)) bindings(part.name, into);
   }
   function callName(node: ts.Expression): string {
+    if (
+      ts.isPropertyAccessExpression(node) &&
+      ts.isIdentifier(node.expression) &&
+      vueNamespaces.has(node.expression.text)
+    )
+      return node.name.text;
     return ts.isIdentifier(node)
       ? (aliases.get(node.text) ?? node.text)
       : node.getText(source).split('.')[0]!;
@@ -76,6 +83,7 @@ export function createBindingTransform(
     const imports = node.importClause?.namedBindings;
     if (imports && ts.isNamespaceImport(imports)) {
       if (cssModule) namespaces.add(imports.name.text);
+      if (node.moduleSpecifier.text === 'vue') vueNamespaces.add(imports.name.text);
     } else if (imports)
       for (const item of imports.elements) {
         const name = item.propertyName?.text ?? item.name.text;
@@ -156,6 +164,16 @@ export function createBindingTransform(
     disabled = false,
     bindingContext = false,
   ): string {
+    if (ts.isCatchClause(node) && node.variableDeclaration) {
+      local = new Set(local);
+      bindings(node.variableDeclaration.name, local);
+    }
+    if (ts.isForStatement(node) || ts.isForOfStatement(node) || ts.isForInStatement(node)) {
+      if (node.initializer && ts.isVariableDeclarationList(node.initializer)) {
+        local = new Set(local);
+        for (const declaration of node.initializer.declarations) bindings(declaration.name, local);
+      }
+    }
     if (ts.isFunctionLike(node)) {
       params = new Set(params);
       local = new Set(local);
@@ -165,16 +183,19 @@ export function createBindingTransform(
         bindings(parameter.name, local);
       }
     }
-    if (ts.isBlock(node)) {
+    if (ts.isBlock(node) || ts.isCaseBlock(node)) {
       local = new Set(local);
       params = new Set(params);
-      for (const statement of node.statements)
+      const statements = ts.isBlock(node)
+        ? node.statements
+        : node.clauses.flatMap((clause) => [...clause.statements]);
+      for (const statement of statements)
         if (
           (ts.isFunctionDeclaration(statement) || ts.isClassDeclaration(statement)) &&
           statement.name
         )
           local.add(statement.name.text);
-      for (const statement of node.statements)
+      for (const statement of statements)
         if (ts.isVariableStatement(statement))
           for (const declaration of statement.declarationList.declarations) {
             bindings(declaration.name, local);
@@ -188,7 +209,12 @@ export function createBindingTransform(
       const text = node.expression.getText(sf);
       if (
         ['computed', '$derived', '$derived.by'].includes(text) ||
-        aliases.get(text) === 'computed'
+        aliases.get(text) === 'computed' ||
+        (ts.isPropertyAccessExpression(node.expression) &&
+          ts.isIdentifier(node.expression.expression) &&
+          vueNamespaces.has(node.expression.expression.text) &&
+          !local.has(node.expression.expression.text) &&
+          node.expression.name.text === 'computed')
       ) {
         const containsCss = (item: ts.Node): boolean =>
           (ts.isCallExpression(item) && Boolean(api(item.expression, local, sf))) ||

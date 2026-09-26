@@ -11,6 +11,22 @@ const transform = (text) =>
     'vue',
   );
 
+test('循环、catch 和 switch 的局部同名函数不被误认作 css', () => {
+  for (const body of [
+    'for (const css of handlers) { css(s.width.px(width.value)); }',
+    'try {} catch (css) { css(s.width.px(width.value)); }',
+    'switch (mode) { case 1: const css = handler; css(s.width.px(width.value)); }',
+  ])
+    assert.equal(transform(body).used, false, body);
+  const result = createBindingTransform(
+    "import {css} from '@zerodep-css/vue'; import * as Vue from 'vue'; const c = Vue.computed(() => css(s.width.px(width.value)));",
+    'namespace.vue',
+    'vue',
+  );
+  assert.equal(result.used, false);
+  assert.equal(result.warnings.size, 1);
+});
+
 test('转换保留快照、覆写与非响应式普通路径，并支持多参数和局部别名', () => {
   const result = transform(
     'const snapshot = width.value; const a = css(s.width.px(snapshot)); const b = css(s.padding.px(width.value, 4)); function rowCss(row) { const size = row.width; return css(s.width.px(size)); }',
