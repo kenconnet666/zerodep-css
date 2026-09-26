@@ -1,12 +1,9 @@
 import {
   NodeTypes as N,
-  NORMALIZE_CLASS,
   createSimpleExpression as expression,
   createCompoundExpression,
   createBlockStatement as block,
   createArrayExpression as array,
-  createCallExpression as call,
-  processExpression,
   type NodeTransform,
   type RootNode,
   type ElementNode,
@@ -66,9 +63,25 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
       parts.push(tail.trimEnd().slice(0, -1), `, ${cache}, ${index})`);
       return createCompoundExpression(parts, value.loc);
     }
-    function owner(node: Node): string | undefined {
-      const name = marker(node)?.scope;
-      if (name) return name;
+    function receiver(value: ExpressionNode, name: string): ExpressionNode | undefined {
+      if (value.type === N.SIMPLE_EXPRESSION && value.content.startsWith(`${name}.template(`))
+        return expression(name, false, value.loc);
+      if (value.type === N.COMPOUND_EXPRESSION) {
+        // Vue 可能把点号和成员名拆成不同节点；按原始标识符位置复用已改写的接收者。
+        const first = value.children[0];
+        if (
+          first &&
+          typeof first === 'object' &&
+          first.type === N.SIMPLE_EXPRESSION &&
+          first.loc.source === name
+        )
+          return first;
+      }
+    }
+    function owner(node: Node): { name: string; access: ExpressionNode } | undefined {
+      const mark = marker(node);
+      const access = mark && receiver(mark.value, mark.scope);
+      if (mark && access) return { name: mark.scope, access };
       if ('children' in node)
         for (const child of node.children) {
           if (!container(child)) continue;
@@ -81,13 +94,28 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
           if (found) return found;
         }
     }
-    function replaceClass(props: VNodeCall['props'], value: ExpressionNode): void {
+    function replaceClass(
+      props: VNodeCall['props'],
+      original: ExpressionNode,
+      value: ExpressionNode,
+    ): void {
+      function replace(current: unknown): unknown {
+        if (current === original) return value;
+        if (Array.isArray(current)) return current.map(replace);
+        if (current && typeof current === 'object') {
+          const node = current as { arguments?: unknown; elements?: unknown; children?: unknown };
+          for (const key of ['arguments', 'elements', 'children'] as const)
+            if (node[key]) node[key] = replace(node[key]);
+        }
+        return current;
+      }
       if (!props || typeof props === 'string') return;
       if (props.type === N.JS_OBJECT_EXPRESSION) {
         const prop = (props as ObjectExpression).properties.find(
           (prop) => prop.key.type === N.SIMPLE_EXPRESSION && prop.key.content === 'class',
         );
-        if (prop) prop.value = call(context.helper(NORMALIZE_CLASS), [value]);
+        // 只替换标记本身，保留静态 class 合并，以及当前编译器自己的 helper Symbol。
+        if (prop) prop.value = replace(prop.value) as typeof prop.value;
       } else if (props.type === N.JS_CALL_EXPRESSION) {
         // mergeProps / normalizeProps 的对象参数仍可局部处理，其他属性保持原样。
         for (const arg of props.arguments)
@@ -96,7 +124,7 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
             !Array.isArray(arg) &&
             (arg.type === N.JS_OBJECT_EXPRESSION || arg.type === N.JS_CALL_EXPRESSION)
           )
-            replaceClass(arg, value);
+            replaceClass(arg, original, value);
       }
     }
     function visit(node: Node, scope: Scope) {
@@ -121,7 +149,7 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
           typeof render === 'object' && render.type === N.JS_FUNCTION_EXPRESSION
             ? render.returns
             : undefined;
-        const name = owner(node);
+        const ownerScope = owner(node);
         if (
           list &&
           typeof render === 'object' &&
@@ -130,7 +158,7 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
           vnode &&
           !Array.isArray(vnode) &&
           vnode.type === N.VNODE_CALL &&
-          name
+          ownerScope
         ) {
           const key =
             vnode.props?.type === N.JS_OBJECT_EXPRESSION
@@ -139,13 +167,13 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
                 )
               : undefined;
           {
+            const { name, access } = ownerScope;
             const id = serial++,
               record = `${name}_row${id}`,
               previous = `${name}_previous${id}`,
               rowKey = `${name}_key${id}`;
             const keyValue = key?.value ?? expression('null', false);
             if (key) key.value = expression(rowKey, false);
-            const access = processExpression(expression(name, false), context);
             while (render.params.length < 3)
               render.params.push(expression(`${name}_unused${id}_${render.params.length}`, false));
             render.params.push(expression(previous, false));
@@ -181,7 +209,7 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
           const cached = appendCache(mark.value, scope.cache ?? '_cache', index);
           if (cached) {
             if (!scope.cache) context.cached.push(null);
-            replaceClass(node.codegenNode.props, cached);
+            replaceClass(node.codegenNode.props, mark.value, cached);
           }
         }
       }

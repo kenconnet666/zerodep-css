@@ -125,6 +125,23 @@ test('自动安装 Vue AST 扩展，保留用户转换且重复配置不叠加',
   assert.equal(vue.api.options.template.compilerOptions.nodeTransforms.length, 2);
 });
 
+test('静态 class 与对象形式 class 合并不丢失，也不改写普通 class', async () => {
+  await run(
+    `<div data-box class="fixed" :class="{[makeCss(s.color.red)]:state.show, active:state.compact}"></div>`,
+    async (p) => {
+      const initial = find(p.root, 'data-box')[0].props.class;
+      assert.match(initial, /fixed/);
+      assert.match(initial, /z-/);
+      await p.update((s) => s.noise++);
+      assert.equal(p.calls(), 1);
+      await p.update((s) => (s.compact = true));
+      assert.match(find(p.root, 'data-box')[0].props.class, /active/);
+      await p.update((s) => (s.show = false));
+      assert.equal(find(p.root, 'data-box')[0].props.class, 'fixed active');
+    },
+  );
+});
+
 test('v-for 的多元素和嵌套样式分别缓存，重排、同 key 替换、删除正确', async () => {
   await run(
     `<template v-for="(item,index) in state.items" :key="item.id">

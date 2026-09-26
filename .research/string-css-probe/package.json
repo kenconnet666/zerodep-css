@@ -4,6 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@10.34.5",
   "scripts": {
+    "test:compiler-instances": "node --test compiler-instances.test.mjs",
     "test:vfor-style": "node --test vfor-style-cache.test.mjs",
     "probe:vfor-style": "node vfor-style-performance.mjs",
     "probe:template-conditional": "node template-conditional.mjs",

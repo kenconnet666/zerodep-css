@@ -51,6 +51,7 @@ jobs:
       - run: pnpm test:theme
       - run: pnpm test:bindings
       - run: pnpm test:compiler
+      - run: pnpm --dir .research/string-css-probe test:compiler-instances
       - run: pnpm --dir .research/string-css-probe probe:static-fields
       - run: pnpm --dir .research/string-css-probe test:selectors
       - run: pnpm --dir .research/string-css-probe test:mup:browser
