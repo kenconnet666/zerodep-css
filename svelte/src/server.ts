@@ -1,6 +1,9 @@
 export * from '@zerodep-css/core';
 export {
   css,
+  cx,
+  keyframes,
+  globalCss,
   createServerCssHost,
   withCssHost,
   serializeCssRules,

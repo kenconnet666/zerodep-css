@@ -1,20 +1,29 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { createRuleRegistry, type CssRule } from './registry.js';
+import type { ClassNames } from './class-names.js';
 import { serializeStyleRules } from './serialization.js';
 export { serializeCssRules } from './serialization.js';
 
 export interface ServerCssHost {
   css(...parts: string[]): string;
+  cx(...values: ClassNames[]): string;
+  keyframes(...parts: string[]): string;
+  globalCss(key: string, ...parts: string[]): void;
+  readonly nonce?: string;
   rules(): CssRule[];
   cssText(): string;
 }
 
 const current = new AsyncLocalStorage<ServerCssHost>();
 
-export function createServerCssHost(): ServerCssHost {
+export function createServerCssHost(options: { nonce?: string } = {}): ServerCssHost {
   const registry = createRuleRegistry(() => {});
   return {
     css: registry.css,
+    cx: registry.cx,
+    keyframes: registry.keyframes,
+    globalCss: registry.globalCss,
+    nonce: options.nonce,
     rules: registry.rules,
     cssText: () => serializeStyleRules(registry.rules()),
   };
@@ -30,3 +39,13 @@ export function css(...parts: string[]): string {
   if (!host) throw new Error('CSS server host is unavailable.');
   return host.css(...parts);
 }
+
+function requireHost(): ServerCssHost {
+  const host = current.getStore();
+  if (!host) throw new Error('CSS server host is unavailable.');
+  return host;
+}
+export const cx = (...values: ClassNames[]): string => requireHost().cx(...values);
+export const keyframes = (...parts: string[]): string => requireHost().keyframes(...parts);
+export const globalCss = (key: string, ...parts: string[]): void =>
+  requireHost().globalCss(key, ...parts);

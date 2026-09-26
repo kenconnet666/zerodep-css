@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createRuleRegistry } from '../../src/registry.ts';
+import { createRuleRegistry } from './runtime.mjs';
 
 test('相同声明复用类名，且只写入一次', () => {
   const writes = [];

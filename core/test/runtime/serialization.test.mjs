@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { serializeCssRules } from '../../src/serialization.ts';
+import { serializeCssRules } from './runtime.mjs';
 
 test('SSR 清单阻止 HTML 标签截断，并保持原始声明供哈希恢复', () => {
   const rules = [

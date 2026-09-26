@@ -1,24 +1,87 @@
-import { createRuleRegistry, type CssRule } from './registry.js';
+import { createRuleRegistry, ruleText, type CssRule } from './registry.js';
+import type { ClassNames } from './class-names.js';
 import { serializeStyleRules } from './serialization.js';
 
-type BrowserHost = ReturnType<typeof createRuleRegistry>;
-const hosts = new WeakMap<Document, BrowserHost>();
+export interface BrowserCssOptions {
+  nonce?: string;
+  insertionPoint?: HTMLElement;
+}
+const options = new WeakMap<Document, BrowserCssOptions>();
+const hosts = new WeakMap<Document, ReturnType<typeof createHost>>();
 
-function getHost(target: Document): BrowserHost {
-  const existing = hosts.get(target);
-  if (existing) return existing;
+/** 在应用首次登记 / 恢复前配置一次；insertionPoint 指定插在该节点后面。 */
+export function configureCss(value: BrowserCssOptions, target: Document = document): void {
+  if (hosts.has(target)) throw new Error('Configure CSS before registration or hydration.');
+  if (value.insertionPoint && value.insertionPoint.parentNode !== target.head)
+    throw new Error('CSS insertion point must belong to this document head.');
+  options.set(target, { ...value });
+}
 
+function createHost(target: Document) {
+  const config = options.get(target) ?? {};
   let style = target.querySelector<HTMLStyleElement>('style[data-zerodep-css]');
-  if (!style) {
-    style = target.createElement('style');
-    style.dataset.zerodepCss = '';
-    target.head.append(style);
+  const nonce = config.nonce ?? style?.nonce;
+  const globals = new Map<string, HTMLStyleElement>();
+  function tag() {
+    const node = target.createElement('style');
+    if (nonce) node.nonce = nonce;
+    return node;
   }
-  const host = createRuleRegistry((className, body) => {
-    const sheet = style.sheet;
+  function main() {
+    const node = tag();
+    node.dataset.zerodepCss = '';
+    const marker = config.insertionPoint;
+    target.head.insertBefore(node, marker?.parentNode === target.head ? marker.nextSibling : null);
+    return node;
+  }
+  style ??= main();
+  function updateGlobal(key: string, rule?: CssRule) {
+    if (!rule) {
+      globals.get(key)?.remove();
+      globals.delete(key);
+      return;
+    }
+    let node = globals.get(key);
+    if (!node?.isConnected) {
+      node = tag();
+      node.dataset.zerodepGlobal = rule.className;
+      target.head.insertBefore(node, style);
+      globals.set(key, node);
+    }
+    node.textContent = rule.body;
+  }
+  const registry = createRuleRegistry((_name, _body, rule) => {
+    const sheet = style!.sheet;
     if (!sheet) throw new Error('CSS stylesheet is unavailable.');
-    sheet.insertRule(`.${className}{${body}}`, sheet.cssRules.length);
-  });
+    sheet.insertRule(ruleText(rule), sheet.cssRules.length);
+  }, updateGlobal);
+
+  function rebuild() {
+    if (!style!.isConnected) style = main();
+    const rules = registry.rules();
+    // 全局块位于普通类之前；更新自身文本不重写普通类所在样式表。
+    style!.textContent = serializeStyleRules(rules.filter((rule) => rule.kind !== 'global'));
+    for (const node of globals.values()) node.remove();
+    globals.clear();
+    for (const rule of rules) if (rule.kind === 'global') updateGlobal(rule.key!, rule);
+  }
+  return {
+    registry,
+    rebuild,
+    globals,
+    get style() {
+      return style!;
+    },
+  };
+}
+
+function getHost(target: Document) {
+  const existing = hosts.get(target);
+  if (existing) {
+    if (!existing.style.isConnected) existing.rebuild();
+    return existing;
+  }
+  const host = createHost(target);
   hosts.set(target, host);
   return host;
 }
@@ -26,7 +89,33 @@ function getHost(target: Document): BrowserHost {
 /** 浏览器文档共享规则；每次调用只注册尚未出现的声明组合。 */
 export function css(...parts: string[]): string {
   if (typeof document === 'undefined') throw new Error('CSS browser host is unavailable.');
-  return getHost(document).css(...parts);
+  return getHost(document).registry.css(...parts);
+}
+
+export const cx = (...values: ClassNames[]): string => getHost(document).registry.cx(...values);
+export const keyframes = (...parts: string[]): string =>
+  getHost(document).registry.keyframes(...parts);
+export function globalCss(key: string, ...parts: string[]): void {
+  const host = getHost(document);
+  if (host.globals.has(key) && !host.globals.get(key)!.isConnected) host.rebuild();
+  host.registry.globalCss(key, ...parts);
+}
+
+/** 仅用于整个应用宿主退出；不能在任意子组件卸载时调用。 */
+export function disposeCss(target: Document = document): void {
+  const host = hosts.get(target);
+  host?.style.remove();
+  if (host) for (const node of host.globals.values()) node.remove();
+  hosts.delete(target);
+  options.delete(target);
+}
+export function cssStats(target: Document = document) {
+  const host = hosts.get(target);
+  return {
+    rules: host?.registry.size ?? 0,
+    globals: host?.globals.size ?? 0,
+    connected: host?.style.isConnected ?? false,
+  };
 }
 
 /** 必须先把服务端的 style[data-zerodep-css] 放入页面，再登记其规则。 */
@@ -54,7 +143,9 @@ export function hydrateCss(rules?: readonly CssRule[], target: Document = docume
   if (style.textContent !== expected)
     throw new Error('CSS hydration manifest does not match styles.');
   try {
-    getHost(target).hydrate(rules);
+    const host = getHost(target);
+    host.registry.hydrate(rules);
+    if (rules.some((rule) => rule.kind === 'global')) host.rebuild();
   } catch (error) {
     // 清单校验失败不占用文档宿主，修正清单后仍可重新恢复。
     hosts.delete(target);

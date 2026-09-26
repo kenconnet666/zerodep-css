@@ -1,60 +1,116 @@
+import { hash } from './names.js';
+import { classNames, type ClassNames } from './class-names.js';
+
 export interface CssRule {
   className: string;
   body: string;
+  kind?: 'class' | 'keyframes' | 'global';
+  key?: string;
 }
 
-function hash(text: string): string {
-  let value = 2166136261;
-  for (let index = 0; index < text.length; index++)
-    value = Math.imul(value ^ text.charCodeAt(index), 16777619);
-  return (value >>> 0).toString(36);
+export function ruleText(rule: CssRule): string {
+  if (rule.kind === 'global') return rule.body;
+  if (rule.kind === 'keyframes') return `@keyframes ${rule.className}{${rule.body}}`;
+  return `.${rule.className}{${rule.body}}`;
 }
 
-/** 规则写入由宿主负责；core 只组合片段、命名并去重。 */
-export function createRuleRegistry(insert: (className: string, body: string) => void) {
-  let classes = new Map<string, string>();
-  let bodies = new Map<string, string>();
+function ruleName(kind: CssRule['kind'], body: string, key?: string): string {
+  return `${kind === 'keyframes' ? 'zk' : kind === 'global' ? 'zg' : 'z'}-${hash(kind === 'global' ? key! : body)}`;
+}
 
-  function remember(
-    { className, body }: CssRule,
-    knownClasses = classes,
-    knownBodies = bodies,
-  ): void {
-    if (className !== `z-${hash(body)}`) throw new Error('CSS class does not match its body.');
-    if (knownClasses.has(body) && knownClasses.get(body) !== className)
-      throw new Error('CSS body has a conflicting class.');
-    if (knownBodies.has(className) && knownBodies.get(className) !== body)
-      throw new Error('CSS class hash collision.');
-    knownClasses.set(body, className);
-    knownBodies.set(className, body);
+/** 普通类与动画内容不可变；全局块按 key 更新，保留 Map 中的原有次序。 */
+export function createRuleRegistry(
+  insert: (className: string, body: string, rule: CssRule) => void,
+  updateGlobal: (key: string, rule?: CssRule) => void = () => {},
+) {
+  let byContent = { class: new Map<string, string>(), keyframes: new Map<string, string>() };
+  let byName = new Map<string, CssRule>();
+  let globals = new Map<string, CssRule>();
+
+  function register(body: string, kind: 'class' | 'keyframes'): string {
+    const content = byContent[kind];
+    const existing = content.get(body);
+    if (existing) return existing;
+    const name = ruleName(kind, body);
+    if (byName.has(name)) throw new Error('CSS class hash collision.');
+    const rule: CssRule =
+      kind === 'class' ? { className: name, body } : { className: name, body, kind };
+    insert(name, body, rule);
+    // 已知名字由上面生成；成功写入后直接登记，不再重复计算哈希。
+    content.set(body, name);
+    byName.set(name, rule);
+    return name;
   }
 
+  const css = (...parts: string[]) => {
+    const body = parts.join('');
+    return register(body, 'class');
+  };
   return {
-    css(...parts: string[]): string {
+    css,
+    keyframes: (...parts: string[]) => register(parts.join(''), 'keyframes'),
+    cx(...values: ClassNames[]): string {
+      const names = classNames(values);
+      const registered: string[] = [];
+      const external: string[] = [];
+      for (const name of names.split(/\s+/)) {
+        if (!name) continue;
+        const rule = byName.get(name);
+        if (rule && (!rule.kind || rule.kind === 'class')) registered.push(rule.body);
+        else external.push(name);
+      }
+      return registered.length < 2 ? names : [...external, css(...registered)].join(' ');
+    },
+    globalCss(key: string, ...parts: string[]): void {
+      if (!parts.length) {
+        if (globals.has(key)) {
+          updateGlobal(key);
+          globals.delete(key);
+        }
+        return;
+      }
       const body = parts.join('');
-      const existing = classes.get(body);
-      if (existing) return existing;
-
-      const className = `z-${hash(body)}`;
-      if (bodies.has(className) && bodies.get(className) !== body)
-        throw new Error('CSS class hash collision.');
-
-      insert(className, body);
-      remember({ className, body });
-      return className;
+      if (globals.get(key)?.body === body) return;
+      const rule: CssRule = { kind: 'global', key, className: ruleName('global', body, key), body };
+      updateGlobal(key, rule);
+      globals.set(key, rule);
     },
     hydrate(rules: readonly CssRule[]): void {
-      const nextClasses = new Map(classes);
-      const nextBodies = new Map(bodies);
-      for (const rule of rules) remember(rule, nextClasses, nextBodies);
-      classes = nextClasses;
-      bodies = nextBodies;
+      const nextContent = {
+        class: new Map(byContent.class),
+        keyframes: new Map(byContent.keyframes),
+      };
+      const nextNames = new Map(byName);
+      const nextGlobals = new Map(globals);
+      for (const rule of rules) {
+        const kind = rule.kind ?? 'class';
+        if (
+          !['class', 'keyframes', 'global'].includes(kind) ||
+          typeof rule.body !== 'string' ||
+          (kind === 'global' && typeof rule.key !== 'string') ||
+          rule.className !== ruleName(kind, rule.body, rule.key)
+        )
+          throw new Error('CSS class does not match its body.');
+        if (kind === 'global') {
+          if (nextGlobals.has(rule.key!) && nextGlobals.get(rule.key!)?.body !== rule.body)
+            throw new Error('CSS global key has conflicting content.');
+          nextGlobals.set(rule.key!, { ...rule });
+        } else {
+          if (nextNames.has(rule.className) && nextNames.get(rule.className)?.body !== rule.body)
+            throw new Error('CSS class hash collision.');
+          nextContent[kind].set(rule.body, rule.className);
+          nextNames.set(rule.className, { ...rule });
+        }
+      }
+      byContent = nextContent;
+      byName = nextNames;
+      globals = nextGlobals;
     },
     rules(): CssRule[] {
-      return [...classes].map(([body, className]) => ({ className, body }));
+      return [...globals.values(), ...byName.values()].map((rule) => ({ ...rule }));
     },
-    get size(): number {
-      return classes.size;
+    get size() {
+      return byName.size + globals.size;
     },
   };
 }
