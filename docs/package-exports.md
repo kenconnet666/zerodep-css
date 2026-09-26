@@ -15,6 +15,8 @@
 
 core 的三个路径供适配器明确选择底层依赖，普通业务组件不必同时导入它们。服务端实现依赖 `node:async_hooks`，不能直接放进浏览器入口。`types` 指向类型声明；`default` 是解析条件的后备项，不是 JavaScript 的默认导出。
 
+可选 `@zerodep-css/core/theme` 提供 `ThemeCss`、主题属性类及 `themes.light/dark` 声明字符串，浏览器 / Node 共用。系统主入口不反向导入主题；用法见[主题说明](themes.md)。
+
 已删除与后备项完全相同的 `browser` 条件：core 的 `/browser` 保留类型与默认目标；Vue/Svelte 根入口先匹配 Node，否则使用浏览器产物。`/server` 继续限定 Node 条件。入口的类型和 JavaScript 目标通过 Bundler / NodeNext 与两种构建平台验收。
 
 元框架包也已生成 JS 和声明产物：`@zerodep-css/nuxt` 主入口是 Node 构建时注册的 Nuxt module；`@zerodep-css/sveltekit` 主入口提供客户端 `init`，其 `/server` 提供请求 `handle`。业务组件继续从 Vue/Svelte 包导入作者 API，元框架包不重复导出这些符号。配置见[元框架接入](metaframeworks.md)。

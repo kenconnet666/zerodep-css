@@ -5,6 +5,7 @@ import prettier from 'prettier';
 import ts from 'typescript';
 import { units, extraUnits, unitMethod, valueMethods } from './css-author-methods.mjs';
 import { selectorShortcuts } from '../core/src/selectors.ts';
+import { themePalette, themeVariable } from '../core/src/theme-palette.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const input = resolve(root, 'core/node_modules/csstype/index.d.ts');
@@ -268,6 +269,38 @@ author.push(
 );
 
 const files = new Map([['base', base], ...groupLines, ['author', author]]);
+// 可选预设单独导出，不能从纯系统作者入口反向导入主题。
+const themeProperties = {
+  color: 'ColorCss',
+  backgroundColor: 'BackgroundColorCss',
+  borderColor: 'BorderColorCss',
+  outlineColor: 'OutlineColorCss',
+  fill: 'FillCss',
+  stroke: 'StrokeCss',
+};
+const themeLines = [
+  '// 由 scripts/generate-css-author.mjs 生成；请勿手改。',
+  `import { Css, ${Object.values(themeProperties).join(', ')} } from './author.js';`,
+];
+for (const [property, type] of Object.entries(themeProperties)) {
+  const entry = properties.get(property);
+  if (!entry) throw new Error(`Unknown themed property: ${property}`);
+  themeLines.push(`export class Theme${type} extends ${type} {`);
+  for (const [name, [label]] of Object.entries(themePalette))
+    themeLines.push(
+      `/** ${label}；继承所在 DOM 作用域的主题变量。 */`,
+      `readonly _${name}: string = ${JSON.stringify(`${entry.cssName}:var(${themeVariable(name)});`)};`,
+    );
+  themeLines.push('}');
+}
+themeLines.push(
+  '/** 可选亮暗主题作者类；仍可继续继承属性类添加项目关键字。 */',
+  'export class ThemeCss extends Css {',
+);
+for (const [property, type] of Object.entries(themeProperties))
+  themeLines.push(`override readonly ${property} = new Theme${type}();`);
+themeLines.push('}');
+files.set('theme', themeLines);
 for (const [name, lines] of files) {
   const output = resolve(outputDir, `${name}.ts`);
   const result = await prettier.format(lines.join('\n') + '\n', {

@@ -2,10 +2,12 @@
 import { AppCss } from '../../../core/examples/theme.js';
 import { provideCss } from '../../../vue/examples/context.js';
 import Component from './VueImplicit.vue';
+import Theme from '../../../vue/examples/Theme.vue';
 provideCss(new AppCss());
 const controls: Array<{ step(): void; reorder(): void }> = [];
 </script>
 <template>
+  <Theme />
   <div data-global="24"></div>
   <div data-global="40"></div>
   <button data-binding-step @click="controls[0]!.step()">更新绑定</button>

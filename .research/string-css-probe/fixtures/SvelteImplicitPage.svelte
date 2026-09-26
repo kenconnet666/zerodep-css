@@ -1,7 +1,10 @@
 <script lang="ts">
   import Root from './SvelteImplicitRoot.svelte';
+  import Theme from '../../../svelte/examples/Theme.svelte';
   const controls: Array<{ step(): void; reorder(): void }> = [];
 </script>
+
+<Theme />
 
 <div data-global="24"></div>
 <div data-global="40"></div>

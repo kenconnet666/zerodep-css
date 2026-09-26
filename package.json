@@ -11,6 +11,7 @@
     "check": "pnpm css:generate:check && pnpm -r run build:types && pnpm -r run check && pnpm test:types",
     "build": "node scripts/build-packages.mjs && pnpm -r run build:types",
     "test:author": "node --test core/test/package/author.test.mjs",
+    "test:theme": "node --test core/test/package/theme.test.mjs",
     "test:bindings": "node --test core/test/package/bindings.test.mjs",
     "test:compiler": "node --test test/compiler-diagnostics.test.mjs",
     "test:lifecycle": "node test/browser/lifecycle-hmr.mjs",

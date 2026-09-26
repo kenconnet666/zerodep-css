@@ -17,7 +17,27 @@ export async function assertBindings(page, update = true) {
     }));
   const before = await inspect();
   assert.deepEqual(before.widths, ['24px', '40px']);
+  const color = (label) =>
+    page.locator(`[data-theme-sample="${label}"]`).evaluate((node) => getComputedStyle(node).color);
+  assert.equal(await color('root'), 'rgb(17, 24, 39)');
+  assert.equal(await color('nested'), 'rgb(192, 38, 211)');
+  assert.equal(await color('sibling'), 'rgb(17, 24, 39)');
   if (!update) return;
+  await page.locator('[data-theme-toggle]').click();
+  await page.waitForFunction(
+    () =>
+      getComputedStyle(document.querySelector('[data-theme-sample="root"]')).color ===
+      'rgb(249, 250, 251)',
+  );
+  assert.equal(await color('nested'), 'rgb(192, 38, 211)');
+  assert.equal(await color('sibling'), 'rgb(249, 250, 251)');
+  await page.locator('[data-theme-override]').click();
+  assert.equal(await color('nested'), 'rgb(249, 250, 251)');
+  assert.equal(
+    await page.locator('[data-theme-brand]').evaluate((node) => getComputedStyle(node).color),
+    'rgb(192, 38, 211)',
+  );
+  assert.equal((await inspect()).count, before.count);
   await page.locator('[data-binding-step]').click();
   await page.waitForFunction(
     () => getComputedStyle(document.querySelector('[data-bound="box"]')).width === '25px',

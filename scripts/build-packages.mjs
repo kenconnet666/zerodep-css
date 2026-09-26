@@ -21,7 +21,7 @@ for (const name of ['core', 'vue', 'svelte', 'nuxt', 'sveltekit']) {
 for (const [name, entries, external] of [
   [
     'core',
-    ['index', 'browser', 'server', 'bindings', 'compiler'],
+    ['index', 'browser', 'server', 'bindings', 'compiler', 'theme'],
     ['node:*', 'typescript', 'magic-string'],
   ],
   [

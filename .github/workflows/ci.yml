@@ -48,6 +48,7 @@ jobs:
       - run: pnpm --dir .research/string-css-probe exec playwright install --with-deps chromium
       - run: pnpm --filter @zerodep-css/core test
       - run: pnpm test:author
+      - run: pnpm test:theme
       - run: pnpm test:bindings
       - run: pnpm test:compiler
       - run: pnpm --dir .research/string-css-probe probe:static-fields
