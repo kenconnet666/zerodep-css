@@ -9,10 +9,6 @@
         "types": "./dist/types/server.d.ts",
         "default": "./dist/server.js"
       },
-      "browser": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/index.js"
-      },
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
     },
