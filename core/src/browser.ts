@@ -39,6 +39,14 @@ function createHost(target: Document) {
     if (nonce) node.nonce = nonce;
     return node;
   }
+  function removeRules(
+    sheet: CSSStyleSheet | null | undefined,
+    matches: (rule: CSSRule) => boolean,
+  ) {
+    if (!sheet) return;
+    for (let index = sheet.cssRules.length - 1; index >= 0; index--)
+      if (matches(sheet.cssRules[index]!)) sheet.deleteRule(index);
+  }
   function main() {
     const node = tag();
     node.dataset.zerodepCss = '';
@@ -119,6 +127,18 @@ function createHost(target: Document) {
             );
           }
         },
+    (names) => {
+      const expired = new Set(names);
+      removeRules(style!.sheet, (rule) => {
+        const name =
+          'selectorText' in rule
+            ? (rule as CSSStyleRule).selectorText.slice(1)
+            : 'name' in rule
+              ? (rule as CSSKeyframesRule).name
+              : '';
+        return expired.has(name);
+      });
+    },
   );
 
   function rebuild() {
@@ -141,6 +161,13 @@ function createHost(target: Document) {
     registry,
     rebuild,
     globals,
+    releaseBindings(keys: readonly string[]) {
+      // 组件可能拥有上千个组。先批量删除值规则，避免每组卸载都扫描整张表。
+      const expired = new Set(keys.map((key) => bindingRules.get(`bindings:${key}`)?.css));
+      removeRules(bindingStyle?.sheet, (rule) => expired.has(rule as CSSStyleRule));
+      for (const key of keys) bindingRules.delete(`bindings:${key}`);
+      registry.releaseBindings(keys);
+    },
     get bindingStyle() {
       return bindingStyle;
     },
@@ -238,3 +265,7 @@ export function setBindings(key: string, body: string | null): void {
   getHost(document).registry.setBindings(key, body);
 }
 export const bindingId = (owner: object): number => getHost(document).registry.bindingId(owner);
+/** 内部组件生命周期入口；绑定类不能在所有者销毁后继续使用。 */
+export function releaseBindings(keys: readonly string[]): void {
+  if (hosts.has(document)) getHost(document).releaseBindings(keys);
+}

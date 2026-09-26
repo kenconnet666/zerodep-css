@@ -8,6 +8,7 @@ export interface ServerCssHost {
   keyframes(...parts: CssInput[]): string;
   globalCss(key: string, ...parts: CssInput[]): void;
   setBindings(key: string, body: string | null): void;
+  releaseBindings(keys: readonly string[]): void;
   bindingId(owner: object): number;
   readonly nonce?: string;
   rules(): CssRule[];
@@ -23,6 +24,7 @@ export function createServerCssHost(options: { nonce?: string } = {}): ServerCss
     keyframes: registry.keyframes,
     globalCss: registry.globalCss,
     setBindings: registry.setBindings,
+    releaseBindings: registry.releaseBindings,
     bindingId: registry.bindingId,
     nonce: options.nonce,
     rules: registry.rules,

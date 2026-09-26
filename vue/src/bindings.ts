@@ -1,4 +1,4 @@
-import { bindingId, setBindings } from '@zerodep-css/core/browser';
+import { bindingId, setBindings, releaseBindings } from '@zerodep-css/core/browser';
 import { createVueBindings } from './binding-runtime.js';
 export const useBindings = (file: string, locations?: Readonly<Record<string, string>>) =>
-  createVueBindings(file, { bindingId, setBindings }, locations);
+  createVueBindings(file, { bindingId, setBindings, releaseBindings }, locations);

@@ -33,6 +33,7 @@ export function createRuleRegistry(
   insert: (className: string, body: string, rule: CssRule) => void,
   updateGlobal: (key: string, rule?: CssRule, kind?: 'global' | 'bindings') => void = () => {},
   onGrowth?: (size: number) => void,
+  remove: (names: readonly string[]) => void = () => {},
 ) {
   let byContent = { class: new Map<string, string>(), keyframes: new Map<string, string>() };
   let byName = new Map<string, CssRule>();
@@ -77,7 +78,7 @@ export function createRuleRegistry(
     const existing = content.get(body);
     if (existing) {
       const refs = references.get(existing);
-      if (refs) attachBindings(existing, refs.ids, refs.root);
+      if (kind === 'class' && refs) attachBindings(existing, refs.ids, refs.root);
       return existing;
     }
     const name = ruleName(kind, body);
@@ -85,12 +86,12 @@ export function createRuleRegistry(
     const rule: CssRule =
       kind === 'class' ? { className: name, body } : { className: name, body, kind };
     insert(name, body, rule);
-    if (kind === 'class') {
+    {
       const refs = referencedBindings(body);
       // 兄弟 / 选择器列表可能越过目标元素；私有且实例唯一的变量可扩大到文档根。
       const root = /[+,~|][^{};]*\{/.test(body);
       if (refs.length) {
-        attachBindings(name, refs, root);
+        if (kind === 'class') attachBindings(name, refs, root);
         references.set(name, { ids: refs, root });
       }
     }
@@ -166,6 +167,31 @@ export function createRuleRegistry(
       bindingNames.set(key, name);
       if (!previous) grew();
     },
+    /** 绑定类随其所有者失效；普通静态规则继续缓存，仍有活动绑定的组合也保留。 */
+    releaseBindings(keys: readonly string[]): void {
+      if (!keys.length) return;
+      const released = new Set(
+        keys.map((key) => bindingNames.get(key) ?? ruleName('bindings', '', key)),
+      );
+      for (const key of keys) {
+        const name = bindingNames.get(key);
+        if (!name) continue;
+        updateGlobal(`bindings:${key}`, undefined, 'bindings');
+        bindings.delete(name);
+        bindingNames.delete(key);
+      }
+      const expired: string[] = [];
+      for (const [name, refs] of references) {
+        if (!refs.ids.some((id) => released.has(id))) continue;
+        if (refs.ids.some((id) => bindings.has(id))) continue;
+        const rule = byName.get(name)!;
+        byContent[rule.kind === 'keyframes' ? 'keyframes' : 'class'].delete(rule.body);
+        byName.delete(name);
+        references.delete(name);
+        expired.push(name);
+      }
+      if (expired.length) remove(expired);
+    },
     hydrate(rules: readonly CssRule[]): void {
       const nextContent = {
         class: new Map(byContent.class),
@@ -212,7 +238,7 @@ export function createRuleRegistry(
       bindingNames = new Map([...bindings.values()].map((rule) => [rule.key!, rule.className]));
       grew();
       for (const rule of byName.values()) {
-        if (!rule.kind || rule.kind === 'class') {
+        if (!rule.kind || rule.kind === 'class' || rule.kind === 'keyframes') {
           const refs = referencedBindings(rule.body);
           if (refs.length)
             references.set(rule.className, { ids: refs, root: /[+,~|][^{};]*\{/.test(rule.body) });

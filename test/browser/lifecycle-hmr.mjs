@@ -159,6 +159,7 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
       await page.evaluate(() => window.control.bump());
       await page.waitForTimeout(30);
       assert.equal((await stats()).bindings, 0);
+      const retainedStatic = (await stats()).classes;
       for (let i = 0; i < 30; i++) {
         await page.locator('[data-toggle]').click();
         await page.locator('[data-probe]').waitFor();
@@ -167,6 +168,11 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
         await page.waitForFunction(() => !document.querySelector('[data-probe]'));
         assert.equal((await stats()).bindings, 0);
       }
+      assert.equal(
+        (await stats()).classes,
+        retainedStatic,
+        'Repeated mounts must not retain private classes',
+      );
       assert.deepEqual(errors, []);
       report.push({
         framework,

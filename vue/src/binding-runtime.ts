@@ -7,6 +7,7 @@ export function createVueBindings(
   host: {
     bindingId(owner: object): number;
     setBindings(key: string, body: string | null): void;
+    releaseBindings(keys: readonly string[]): void;
   },
   locations?: Readonly<Record<string, string>>,
 ) {
@@ -18,6 +19,7 @@ export function createVueBindings(
     host.setBindings,
     (run) => watchEffect(run),
     locations,
+    host.releaseBindings,
   );
   onUnmounted(scope.dispose);
   return Object.assign(scope, createTemplateCache());

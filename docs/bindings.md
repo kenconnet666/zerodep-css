@@ -64,9 +64,9 @@ Vue scoped slot 支持 bx，各次调用按参数身份隔离；优先传递有�
 
 ## 选择器、组合和生命周期
 
-`s._hover(s.opacity.raw(bx(alpha)))`、`s._selector`、动画帧和命名全局块都使用相同规则。`css(boundClass, s.color.red)` 会把合成类关联到对应变量；类名可传给子组件。keyframes 返回的动画名称保持稳定，引用动画的样式类关联其变量。
+`s._hover(s.opacity.raw(bx(alpha)))`、`s._selector`、动画帧和命名全局块都使用相同规则。`css(boundClass, s.color.red)` 会把合成类关联到对应变量；类名可传给子组件，在绑定所有者存活期间有效；所有依赖的绑定都销毁后，私有类和动画会被回收。keyframes 返回的动画名称保持稳定，引用动画的样式类关联其变量。
 
-`globalCss('theme', s._selector('body', s.color.raw(bx(color))))` 更新变量，不再自动重跑整块 globalCss。key、选择器、if/switch 等结构按普通 JS 求值；需要动态结构时由模板、computed/$derived 或显式调用控制。组件卸载清理自己的值规则和订阅，全局块本身仍属宿主，需要删除时调用 `globalCss('theme')`。
+`globalCss('theme', s._selector('body', s.color.raw(bx(color))))` 更新变量，不再自动重跑整块 globalCss。key、选择器、if/switch 等结构按普通 JS 求值；需要动态结构时由模板、computed/$derived 或显式调用控制。组件卸载清理自己的值规则、订阅及不再拥有活动绑定的私有类/动画，全局块本身仍属宿主，需要删除时调用 `globalCss('theme')`。
 
 组件 setup 中的 bx 创建框架订阅；模板/派生帧由当前框架求值追踪读取。绑定帧按调用位置和列表 key 复用，直到所属组件卸载。无限新增列表 key、反复在事件中创建独立绑定会增加资源，不应把 bx 当成任意位置的临时字符串格式化函数。普通运行时 css 不受此限制。
 

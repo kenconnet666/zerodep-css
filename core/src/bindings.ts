@@ -30,6 +30,7 @@ export function createBindings(
   write: Writer,
   schedule: Schedule,
   locations?: Readonly<Record<string, string>>,
+  release?: (keys: readonly string[]) => void,
 ) {
   const groups = new Map<string, Group>();
   const definitionCounts = new Map<string, number>();
@@ -192,9 +193,10 @@ export function createBindings(
       disposed = true;
       for (const group of groups.values()) {
         group.stop?.();
-        // 条件分支可能已清空 readers，曾经登记的值仍需随组件清理。
-        write(group.key, null);
+        if (!release) write(group.key, null);
       }
+      // 一次释放组件的全部组，宿主可以批量回收引用它们的 CSSOM 规则。
+      release?.([...groups.keys()]);
       groups.clear();
       frames.clear();
       definitionCounts.clear();

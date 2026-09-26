@@ -14,11 +14,17 @@ const transform = (text) =>
 function fixture() {
   const host = createServerCssHost(),
     tasks = [];
-  const scope = createBindings('test', host.setBindings, (run) => {
-    run();
-    tasks.push(run);
-    return () => tasks.splice(tasks.indexOf(run), 1);
-  });
+  const scope = createBindings(
+    'test',
+    host.setBindings,
+    (run) => {
+      run();
+      tasks.push(run);
+      return () => tasks.splice(tasks.indexOf(run), 1);
+    },
+    undefined,
+    host.releaseBindings,
+  );
   return { host, scope, tasks, s: new Css() };
 }
 

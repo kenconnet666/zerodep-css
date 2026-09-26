@@ -157,6 +157,44 @@ try {
   });
   assert.deepEqual(diagnostics, { rejected: true, classes: 3 });
   assert.equal(warnings.length, 1);
+  const identities = Array.from({ length: 10 }, (_, i) => {
+    const key = 'owner-' + i,
+      host = createServerCssHost();
+    host.setBindings(key, '');
+    return { key, name: host.rules()[0].className };
+  });
+  const released = await page.evaluate((identities) => {
+    api.disposeCss();
+    const baseline = api.css('color:red;');
+    const widths = [];
+    for (const { key, name } of identities) {
+      const variable = '--' + name + '-0';
+      api.setBindings(key, variable + ':12px;');
+      const animation = api.keyframes('to{width:var(' + variable + ');}');
+      const node = document.createElement('div');
+      node.className = api.css('width:var(' + variable + ');animation-name:' + animation + ';');
+      document.body.append(node);
+      widths.push(getComputedStyle(node).width);
+      node.remove();
+      api.releaseBindings([key]);
+    }
+    return {
+      classes: api.cssStats().classes,
+      bindings: api.cssStats().bindings,
+      animations: api.cssStats().animations,
+      rules: document.querySelector('style[data-zerodep-css]').sheet.cssRules.length,
+      widths,
+      same: api.css('color:red;') === baseline,
+    };
+  }, identities);
+  assert.deepEqual(released, {
+    classes: 1,
+    bindings: 0,
+    animations: 0,
+    rules: 1,
+    widths: Array(10).fill('12px'),
+    same: true,
+  });
 
   console.log(
     JSON.stringify({ authorApi: 'passed', recovery: 'passed', nonceAndPlacement: 'passed' }),

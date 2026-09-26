@@ -91,6 +91,7 @@ try {
                 sibling: getComputedStyle(root.querySelector('[data-bound="sibling"]')).marginLeft,
                 forwarded: getComputedStyle(root.querySelector('[data-bound="forward"]')).width,
                 snapshot: getComputedStyle(root.querySelector('[data-bound="snapshot"]')).height,
+                snapshotClass: root.querySelector('[data-bound="snapshot"]').className,
                 snippets: [...root.querySelectorAll('[data-snippet]')].map((node) => ({
                   className: node.className,
                   width: getComputedStyle(node).width,
@@ -170,6 +171,14 @@ try {
         assert.deepEqual(await page.evaluate(() => window.cspFailures), []);
         await page.evaluate(() => window.control.dispose());
         assert.equal(await page.locator('[data-instance]').count(), 0);
+        const released = await page.evaluate(() => window.mupBundle.stats());
+        assert.equal(released.bindings, 0);
+        assert.equal(released.animations, 0);
+        assert.equal(
+          released.classes,
+          new Set(initial.nodes.map((node) => node.snapshotClass)).size,
+          'Only the unbound snapshot classes should survive disposal',
+        );
         console.log(
           JSON.stringify({
             framework,
