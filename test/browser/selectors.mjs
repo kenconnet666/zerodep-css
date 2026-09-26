@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { launchBrowser } from './browser.mjs';
+import { launchBrowser } from '../../.research/string-css-probe/browser.mjs';
 import { Css } from '../../core/dist/index.js';
 import { createRuleRegistry } from '../../core/test/runtime/runtime.mjs';
 

@@ -6,19 +6,25 @@ export async function start(target: HTMLElement, mode: string, count: number) {
   const emotion =
     mode === 'emotion' ? createEmotion({ key: 'binding-perf', speedy: true }) : undefined;
   let update!: () => void;
+  let changeNoise!: () => void;
   const app = mount(Component, {
     target,
     props: {
       mode,
       count,
       emit: (...parts: string[]) => emotion!.css(...parts),
-      expose: (step: () => void) => {
+      expose: (step: () => void, noise: () => void) => {
         update = step;
+        changeNoise = noise;
       },
     },
   });
   await tick();
   return {
+    async noise() {
+      changeNoise();
+      await tick();
+    },
     async step() {
       update();
       await tick();

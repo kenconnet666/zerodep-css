@@ -4,10 +4,11 @@
     mode: string;
     count: number;
     emit: (...parts: string[]) => string;
-    expose: (step: () => void) => void;
+    expose: (step: () => void, noise: () => void) => void;
   }>();
   const s = new Css();
   let iteration = $state(0);
+  let unrelated = $state(0);
   const rows = Array.from({ length: count }, (_, i) => i);
   const shared = mode === 'manual' ? css(s.color.red, s.width.raw('var(--width)')) : '';
   function classFor(row: number) {
@@ -16,12 +17,17 @@
     if (mode === 'emotion') return emit(s.color.red, s.width.px(value));
     return css(s.color.red, s.width.px(value));
   }
-  expose(() => {
-    iteration++;
-  });
+  expose(
+    () => {
+      iteration++;
+    },
+    () => {
+      unrelated++;
+    },
+  );
 </script>
 
-<div class="rows">
+<div class="rows" data-noise={unrelated}>
   {#each rows as row (row)}<div
       data-row
       class={classFor(row)}

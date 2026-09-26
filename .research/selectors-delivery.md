@@ -11,3 +11,5 @@
 本地针对性验证覆盖生成一致性、五包类型 / 构建、旧入口移除、中文提示、原型共享、子类扩展和覆写回退；浏览器覆盖九种快捷方法、子元素、media，以及 Vue/Svelte 的动态 hover、动态子元素、动画和 SSR 恢复。原浏览器探针已从 `legacy/ic-browser.mjs` 整理为 `selectors-browser.mjs`，命令为 `test:selectors`，CI 已同步。
 
 当前 API 见 [作者说明](../docs/author-api.md)。较早研究记录中的 `ic` 是当时的历史名称，不构成兼容入口。每阶段按要求提交并推送，完整矩阵由当前提交的远程 CI 验收。
+
+后续目录整理：稳定浏览器用例现位于 `test/browser/selectors.mjs`，`test:selectors` 命令保持不变。

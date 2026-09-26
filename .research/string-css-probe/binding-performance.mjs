@@ -5,7 +5,7 @@ import sveltePlugin from '../../svelte/dist/vite.js';
 import { bundle } from './mup-bundle.mjs';
 import { launchBrowser } from './browser.mjs';
 
-const count = 200,
+const count = Number(process.env.BINDING_ROWS ?? 200),
   updates = 20,
   rounds = Number(process.env.BINDING_ROUNDS ?? 3);
 const result = { node: process.version, count, updates, rounds, samples: {} };
@@ -42,6 +42,30 @@ try {
               const initialRules = control.stats();
               let height = target.offsetHeight;
               const mountMs = performance.now() - start;
+              let noiseWrites = 0;
+              const descriptor = Object.getOwnPropertyDescriptor(
+                CSSStyleDeclaration.prototype,
+                'cssText',
+              );
+              const noiseStart = performance.now();
+              try {
+                Object.defineProperty(CSSStyleDeclaration.prototype, 'cssText', {
+                  ...descriptor,
+                  set(value) {
+                    noiseWrites++;
+                    descriptor.set.call(this, value);
+                  },
+                });
+                for (let i = 0; i < 10; i++) {
+                  await control.noise();
+                  height += target.offsetHeight;
+                }
+              } finally {
+                Object.defineProperty(CSSStyleDeclaration.prototype, 'cssText', descriptor);
+              }
+              const noiseMs = performance.now() - noiseStart;
+              if (control.stats() !== initialRules)
+                throw new Error('Unrelated state registered rules.');
               const begin = performance.now();
               for (let i = 0; i < updates; i++) {
                 await control.step();
@@ -53,7 +77,16 @@ try {
               );
               const finalRules = control.stats();
               await control.dispose();
-              return { mountMs, updateMs, initialRules, finalRules, widths, height };
+              return {
+                mountMs,
+                updateMs,
+                noiseMs,
+                noiseWrites,
+                initialRules,
+                finalRules,
+                widths,
+                height,
+              };
             },
             { mode, count, updates },
           );
@@ -63,6 +96,7 @@ try {
           );
           if (mode === 'implicit' || mode === 'manual')
             assert.equal(sample.finalRules, sample.initialRules);
+          if (mode === 'implicit') assert.equal(sample.noiseWrites, 0);
           delete sample.widths;
           (result.samples[`${framework}-${mode}`] ??= []).push(sample);
         } finally {
@@ -76,7 +110,7 @@ try {
 }
 const output = new URL('../../test-results/binding-performance/', import.meta.url);
 await mkdir(output, { recursive: true });
-await writeFile(new URL('results.json', output), JSON.stringify(result, null, 2) + '\n');
+await writeFile(new URL(`results-${count}.json`, output), JSON.stringify(result, null, 2) + '\n');
 for (const [name, samples] of Object.entries(result.samples)) {
   const median = (key) =>
     samples.map((s) => s[key]).sort((a, b) => a - b)[Math.floor(samples.length / 2)];
@@ -85,6 +119,8 @@ for (const [name, samples] of Object.entries(result.samples)) {
       name,
       mountMs: median('mountMs'),
       updateMs: median('updateMs'),
+      noiseMs: median('noiseMs'),
+      noiseWrites: samples[0].noiseWrites,
       initialRules: samples[0].initialRules,
       finalRules: samples[0].finalRules,
     }),
