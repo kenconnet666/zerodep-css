@@ -114,3 +114,11 @@ const a=make(plain),b=make('24px');</script><div class={a()}></div><div class={b
   assert.ok(values.some((r) => r.body.includes(':24px;')));
   assert.ok(values.some((r) => r.body.includes(':0.5;')));
 });
+
+test('derived.by 引用命名 getter 时仍使用派生实例作用域', () => {
+  const result = inspect(
+    `<script>import {Css,css,bx} from '@zerodep-css/svelte';const s=new Css();let width=$state(12);function read(){return css(s.width.raw(bx(width+'px')))} const box=$derived.by(read);</script><div class={box}></div>`,
+  );
+  assert.match(result.transformed, /\$derived.by\(__zc.derived/);
+  assert.match(result.rules.find((r) => r.kind === 'bindings').body, /:12px;/);
+});

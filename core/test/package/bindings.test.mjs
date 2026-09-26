@@ -190,3 +190,62 @@ test('同名全局块被覆盖后，重新执行带 bx 的调用会恢复原块'
   assert.equal(host.rules().find((r) => r.key === 'theme').body, first);
   scope.dispose();
 });
+
+test('常量生成变量但不创建订阅，动态读取和清理仍完整', () => {
+  const { host, scope, tasks, s } = fixture();
+  const constant = scope.bind('constant', () => 12, true);
+  host.css(s.opacity.raw(constant));
+  assert.equal(tasks.length, 0);
+  assert.match(host.rules().find((r) => r.kind === 'bindings').body, /:12;/);
+  scope.bind('dynamic', () => 24);
+  assert.equal(tasks.length, 1);
+  const queued = tasks[0];
+  scope.dispose();
+  scope.dispose();
+  queued();
+  assert.equal(tasks.length, 0);
+  assert.equal(
+    host.rules().some((r) => r.kind === 'bindings'),
+    false,
+  );
+  assert.throws(() => scope.bind('late', () => 1), /disposed/);
+});
+
+test('绑定表达式和登记失败均撤回订阅，现有组恢复后仍可重试', () => {
+  const { host, scope, tasks, s } = fixture();
+  assert.throws(
+    () =>
+      scope.capture(
+        'bad',
+        () => {
+          throw new Error('write failed');
+        },
+        () => [s.width.raw(scope.bind('x', () => '12px'))],
+      ),
+    /write failed/,
+  );
+  assert.equal(tasks.length, 0);
+  assert.equal(
+    host.rules().some((r) => r.kind === 'bindings'),
+    false,
+  );
+  let fail = false,
+    value = '12px';
+  const draw = () =>
+    scope.frame('row', [], () =>
+      scope.capture('good', host.css, () => {
+        const part = s.width.raw(scope.bind('x', () => value));
+        if (fail) throw new Error('read failed');
+        return [part];
+      }),
+    );
+  const initial = draw();
+  fail = true;
+  value = '24px';
+  assert.throws(draw, /read failed/);
+  assert.match(host.rules().find((r) => r.kind === 'bindings').body, /:12px;/);
+  fail = false;
+  assert.equal(draw(), initial);
+  assert.match(host.rules().find((r) => r.kind === 'bindings').body, /:24px;/);
+  scope.dispose();
+});

@@ -23,7 +23,7 @@ const box = css(
 
 每次 bx 调用返回形如 `var(--zv-xxx-0)` 的字符串。`bx(24)` 对应变量值 `24`，不会变成 `24px`。需要长度可以传 `bx(width + 'px')`，或者写 `s.width.raw('calc(' + bx(width) + ' * 1px)')`。不要写 `var(--x)px`；CSS 不会把这两个 token 拼成长度。
 
-一条声明可以包含任意多个 bx，也可先 `const size = bx(width.value + 'px')` 再在多个声明复用 size。`const snapshot = width.value; bx(snapshot)` 会生成变量，但 snapshot 本身仍是快照。表达式应无副作用，框架追踪时可能重复读取。
+一条声明可以包含任意多个 bx，也可先 `const size = bx(width.value + 'px')` 再在多个声明复用 size。`const snapshot = width.value; bx(snapshot)` 会生成变量，但 snapshot 本身仍是快照。字面常量直接初始化变量而不创建响应式订阅；普通表达式按框架追踪。表达式应无副作用，框架追踪时可能重复读取。
 
 ## 接入
 
@@ -58,9 +58,9 @@ Vue 插件通过官方 AST 扩展缓存可分析的 class 表达式，只缓存�
 
 未知函数、覆写方法、不可追踪普通数据等不强求缓存；这些方法仍按用户实现执行，包括传给它们的 var 字符串。与旧方案不同，bx 不再根据方法身份退回真实值，也不会判断 raw、px 或选择器是否为系统实现。
 
-Svelte 利用原生模板派生，支持 each、const tag、await then/catch 和组件内 snippet 的局部参数。每次 snippet 调用有独立绑定身份。手写 Vue computed getter、Svelte $derived / $derived.by 同样使用绑定帧，不在派生求值期间创建额外订阅。异步 getter 不支持此保证。
+Svelte 利用原生模板派生，支持 each、const tag、await then/catch 和组件内 snippet 的局部参数。每次 snippet 调用有独立绑定身份。手写 Vue computed（含命名 getter 和可写形式）、Svelte $derived / $derived.by（含命名 getter）同样使用绑定帧，不在派生求值期间创建额外订阅。异步 getter 不支持此保证。
 
-Vue slot 参数及被遮蔽的嵌套循环作用域仍不支持 bx；使用普通运行时 CSS 或将 bx 提到组件 setup。模块引用/导出的 Svelte snippet 不转换 bx，不能引用组件实例宿主。普通无 bx 写法仍可在这些位置使用。
+Vue scoped slot 支持 bx，各次调用按参数身份隔离；优先传递有稳定身份的 item 对象，连续变化的原始值参数会建立新的绑定帧。被遮蔽的嵌套循环作用域仍需使用普通运行时 CSS 或将 bx 提到独立行组件。模块引用/导出的 Svelte snippet 不转换 bx，不能引用组件实例宿主。普通无 bx 写法仍可在这些位置使用。
 
 ## 选择器、组合和生命周期
 

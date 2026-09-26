@@ -256,7 +256,24 @@ export function createBindingTransform(
           );
         used = true;
         valueCount++;
-        return scope + '.bind(' + site(node, sf) + ', () => (' + value.getText(sf) + '))';
+        const constant = (node: ts.Node): boolean =>
+          ts.isStringLiteral(node) ||
+          ts.isNumericLiteral(node) ||
+          ts.isNoSubstitutionTemplateLiteral(node) ||
+          node.kind === ts.SyntaxKind.NullKeyword ||
+          (ts.isParenthesizedExpression(node) && constant(node.expression)) ||
+          (ts.isPrefixUnaryExpression(node) &&
+            [ts.SyntaxKind.PlusToken, ts.SyntaxKind.MinusToken].includes(node.operator) &&
+            ts.isNumericLiteral(node.operand));
+        return (
+          scope +
+          '.bind(' +
+          site(node, sf) +
+          ', () => (' +
+          value.getText(sf) +
+          ')' +
+          (constant(value) ? ', true)' : ')')
+        );
       }
       if (name === 'css' || name === 'keyframes' || name === 'globalCss') {
         const before = valueCount;
@@ -277,7 +294,10 @@ export function createBindingTransform(
       const text = node.expression.getText(sf);
       const derived =
         (!local.has(text) &&
-          (text === '$derived' || text === '$derived.by' || aliases.get(text) === 'computed')) ||
+          ((framework === 'svelte' &&
+            !local.has('$derived') &&
+            (text === '$derived' || text === '$derived.by')) ||
+            aliases.get(text) === 'computed')) ||
         (ts.isPropertyAccessExpression(node.expression) &&
           ts.isIdentifier(node.expression.expression) &&
           vueNamespaces.has(node.expression.expression.text) &&
@@ -290,13 +310,7 @@ export function createBindingTransform(
             return (
               scope + '.derived(' + site(node, sf) + ', () => (' + render(arg, sf, local) + '))'
             );
-          if (
-            (ts.isArrowFunction(arg) || ts.isFunctionExpression(arg)) &&
-            !arg.modifiers?.some((mod) => mod.kind === ts.SyntaxKind.AsyncKeyword) &&
-            !('asteriskToken' in arg && arg.asteriskToken)
-          )
-            return scope + '.derived(' + site(arg, sf) + ', ' + render(arg, sf, local) + ')';
-          return render(arg, sf, local);
+          return scope + '.derived(' + site(arg, sf) + ', ' + render(arg, sf, local) + ')';
         });
         return (text === '$derived' ? '$derived.by' : text) + '(' + args.join(', ') + ')';
       }

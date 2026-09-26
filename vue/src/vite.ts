@@ -52,7 +52,13 @@ export default function cssBindings(options: { templateCache?: boolean } = {}) {
       const html = (value: string) =>
         value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
       type Template = NonNullable<typeof descriptor.template.ast>['children'][number];
-      function visit(node: Template, keys: string[], locals: string[], fallback = false) {
+      function visit(
+        node: Template,
+        keys: string[],
+        locals: string[],
+        fallback = false,
+        inSlot = false,
+      ) {
         if (node.type !== 1) return;
         let nextKeys = [...keys];
         let nextLocals = [...locals];
@@ -92,8 +98,11 @@ export default function cssBindings(options: { templateCache?: boolean } = {}) {
         }
         const slot = node.props.find((prop) => prop.type === 7 && prop.name === 'slot');
         if (slot?.type === 7 && slot.exp?.type === 4) {
-          nextLocals.push(...bindingNames(slot.exp.content));
-          fallback = true;
+          const names = bindingNames(slot.exp.content);
+          nextLocals.push(...names);
+          // 插槽参数是调用身份；不把多个调用合成同一份变量，也不强求缓存插槽内容。
+          nextKeys.push(...names);
+          inSlot = true;
         }
         for (const prop of node.props) {
           if (
@@ -110,7 +119,7 @@ export default function cssBindings(options: { templateCache?: boolean } = {}) {
             prop.exp.loc.start.offset,
           );
           const guards =
-            !fallback && options.templateCache !== false
+            !fallback && !inSlot && options.templateCache !== false
               ? model.templateGuards(prop.exp.content, nextLocals)
               : undefined;
           const site = JSON.stringify(`element${serial++}`);
@@ -129,9 +138,9 @@ export default function cssBindings(options: { templateCache?: boolean } = {}) {
         if (fallback)
           model.warnAt(
             node.loc.start.offset,
-            'Slot props or shadowed loop bindings use the ordinary runtime CSS path.',
+            'Shadowed loop bindings use the ordinary runtime CSS path.',
           );
-        for (const child of node.children) visit(child, nextKeys, nextLocals, fallback);
+        for (const child of node.children) visit(child, nextKeys, nextLocals, fallback, inSlot);
       }
       for (const node of descriptor.template.ast.children) visit(node, [], []);
       for (const warning of model.warnings) this.warn(warning);

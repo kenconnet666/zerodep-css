@@ -7,6 +7,8 @@ interface Group {
   key: string;
   name: string;
   readers: Array<() => BxValue>;
+  live: boolean;
+  body?: string;
   stop?: () => void;
   cached?: { register: unknown; parts: unknown[]; result: unknown };
 }
@@ -35,8 +37,10 @@ export function createBindings(
   let runtimeOnly = false;
   let frame: Frame | undefined;
   let current: Group | undefined;
+  let disposed = false;
 
   function update(group: Group) {
+    if (disposed) return;
     const body = group.readers
       .map((read, index) => {
         const value = read();
@@ -45,15 +49,26 @@ export function createBindings(
       .join('');
     // 空值清空声明但保留关联，恢复值时不必重新登记目标类。
     write(group.key, body);
+    group.body = body;
   }
 
   const api = {
-    derived<Args extends unknown[], Result>(
-      site: string,
-      read: (...args: Args) => Result,
-    ): (...args: Args) => Result {
-      // 同一工厂创建的多个派生值也必须隔离；读取函数身份在派生创建时固定。
-      return (...args: Args): Result => api.frame(site, [read], () => read(...args));
+    derived<T>(site: string, source: T): T {
+      // 身份属于派生实例。同一 getter 被 computed() 多次使用时也不能串用 previous 值。
+      const owner = {};
+      const wrap =
+        (read: Function) =>
+        (...args: unknown[]) =>
+          api.frame(site, [owner], () => read(...args));
+      if (typeof source === 'function') return wrap(source) as T;
+      if (
+        source &&
+        typeof source === 'object' &&
+        'get' in source &&
+        typeof source.get === 'function'
+      )
+        return { ...source, get: wrap(source.get) } as T;
+      return source;
     },
     runtime<T>(run: () => T): T {
       const previous = runtimeOnly;
@@ -65,6 +80,7 @@ export function createBindings(
       }
     },
     frame<T>(site: string, keys: unknown[], run: () => T): T {
+      if (disposed) throw new Error('CSS binding scope has been disposed.');
       const previous = frame;
       let node: FrameNode = frames.get(site) ?? { children: new Map() };
       if (!frames.has(site)) frames.set(site, node);
@@ -95,6 +111,7 @@ export function createBindings(
       produce: () => Part[],
       reuseResult = true,
     ): Result {
+      if (disposed) throw new Error('CSS binding scope has been disposed.');
       const counts = frame?.counts ?? definitionCounts;
       const count = counts.get(site) ?? 0;
       counts.set(site, count + 1);
@@ -103,43 +120,59 @@ export function createBindings(
       const fresh = !group;
       if (!group) {
         const key = `${prefix}:${frame ? `frame:${frame.site}:${frame.id}` : 'setup'}:${site}:${count}`;
-        group = { key, name: `zv-${hash(key)}`, readers: [] };
+        group = { key, name: `zv-${hash(key)}`, readers: [], live: false };
         groups.set(key, group);
         if (frame) {
           entries[count] = group;
           frame.groups.set(site, entries);
         }
       }
+      const previousReaders = group.readers,
+        previousLive = group.live,
+        previousBody = group.body;
       group.readers = [];
+      group.live = false;
       const previous = current;
       current = group;
-      let parts: Part[];
       try {
-        parts = produce();
+        const parts = produce();
+        // 常量也生成变量，只是无需订阅。模板/派生帧使用框架本次求值的追踪。
+        if (group.readers.length || previousBody !== undefined) {
+          if (fresh && !frame && group.live) group.stop = schedule(() => update(group!));
+          else update(group);
+        }
+        const cached = reuseResult ? group.cached : undefined;
+        if (
+          cached?.register === register &&
+          parts.length === cached.parts.length &&
+          parts.every((part, index) => part === cached.parts[index])
+        )
+          return cached.result as Result;
+        const result = register(...parts);
+        // 只缓存平铺字符串，避免数组原地修改误命中；globalCss 必须保留调用顺序。
+        group.cached =
+          reuseResult && parts.every((part) => typeof part === 'string')
+            ? { register, parts: parts.slice(), result }
+            : undefined;
+        return result;
+      } catch (error) {
+        // 表达式或宿主登记失败时撤回本次绑定，避免半成品订阅和变量继续存活。
+        group.readers = previousReaders;
+        group.live = previousLive;
+        if (fresh) {
+          group.stop?.();
+          groups.delete(group.key);
+          if (frame) entries.pop();
+          counts.set(site, count);
+        }
+        write(group.key, previousBody ?? null);
+        group.body = previousBody;
+        throw error;
       } finally {
         current = previous;
       }
-      if (group.readers.length) {
-        if (fresh && !frame) group.stop = schedule(() => update(group!));
-        else update(group);
-      }
-      // 值变化时模板字符串通常不变。只缓存平铺字符串，避免可变数组的别名误命中。
-      // 命名全局块可被其他调用覆盖，必须再次交给宿主处理覆盖顺序。
-      const cached = reuseResult ? group.cached : undefined;
-      if (
-        cached?.register === register &&
-        parts.length === cached.parts.length &&
-        parts.every((part, index) => part === cached.parts[index])
-      )
-        return cached.result as Result;
-      const result = register(...parts);
-      group.cached =
-        reuseResult && parts.every((part) => typeof part === 'string')
-          ? { register, parts: parts.slice(), result }
-          : undefined;
-      return result;
     },
-    bind(site: string, read: () => BxValue): string {
+    bind(site: string, read: () => BxValue, constant = false): string {
       if (runtimeOnly)
         throw new Error(
           `${locations?.[site] ?? 'bx'}: bx() is not supported in this template scope; bind in setup or use an ordinary CSS value.`,
@@ -148,12 +181,15 @@ export function createBindings(
         return api.capture(
           site,
           (value: string) => value,
-          () => [api.bind(site, read)],
+          () => [api.bind(site, read, constant)],
         );
+      if (!constant) current.live = true;
       const slot = current.readers.push(read) - 1;
       return `var(--${current.name}-${slot})`;
     },
     dispose() {
+      if (disposed) return;
+      disposed = true;
       for (const group of groups.values()) {
         group.stop?.();
         // 条件分支可能已清空 readers，曾经登记的值仍需随组件清理。
@@ -161,6 +197,7 @@ export function createBindings(
       }
       groups.clear();
       frames.clear();
+      definitionCounts.clear();
     },
   };
   return api;

@@ -385,3 +385,41 @@ test('setup 常量 bx 与同一工厂的多个 computed 相互隔离', async () 
     "import {computed} from 'vue'; const opacity=bx(0.5); function make(factor){return computed(()=>makeCss(s.opacity.raw(opacity),s.width.raw(bx(state.width*factor+'px'))));} const a=make(1), b=make(2);",
   );
 });
+
+test('命名 getter 与可写 computed 使用稳定绑定帧并保留 setter', async () => {
+  await run(
+    '<div data-box :class="named"></div><div data-write :class="writable"></div>',
+    async (p) => {
+      const names = find(p.root, 'data-box').map((n) => n.props.class);
+      const count = p.host.rules().length;
+      for (let i = 0; i < 5; i++) await p.update((s) => s.width++);
+      assert.deepEqual(
+        find(p.root, 'data-box').map((n) => n.props.class),
+        names,
+      );
+      assert.equal(p.host.rules().length, count);
+      assert.ok(p.host.rules().some((r) => r.kind === 'bindings' && r.body.includes('25px')));
+    },
+    "import {computed} from 'vue'; function read(){return makeCss(s.width.raw(bx(state.width+'px')))} const named=computed(read); const writable=computed({get:read,set(value){state.width=Number(value)}}); writable.value='20';",
+  );
+});
+
+test('scoped slot 多次调用隔离参数，保留文本更新和绑定值', async () => {
+  await run(
+    '<SlotRows :items="state.items"><template #default="{item}"><div data-slot :class="makeCss(s.width.raw(bx(item.width + `px`)))">{{item.label}}</div></template></SlotRows>',
+    async (p) => {
+      const nodes = () => find(p.root, 'data-slot');
+      assert.equal(nodes().length, 2);
+      assert.notEqual(nodes()[0].props.class, nodes()[1].props.class);
+      const first = nodes()[0].props.class;
+      await p.update((s) => {
+        s.items[0].width = 77;
+        s.items[0].label = 'slot updated';
+      });
+      assert.equal(nodes()[0].text, 'slot updated');
+      assert.equal(nodes()[0].props.class, first);
+      assert.ok(p.host.rules().some((r) => r.kind === 'bindings' && r.body.includes('77px')));
+    },
+    "import {defineComponent,h} from 'vue'; const SlotRows=defineComponent({props:['items'],setup(props,{slots}){return ()=>h('section',props.items.map(item=>slots.default({item})))}});",
+  );
+});

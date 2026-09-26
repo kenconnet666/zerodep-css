@@ -19,15 +19,9 @@ export function bindingCacheVariant(enabled) {
       build.onLoad({ filter: /[\\/]core[\\/]src[\\/]bindings\.ts$/ }, async ({ path }) => {
         let contents = (await readFile(path, 'utf8')).replace(/\r\n/g, '\n');
         loaded++;
-        const start = contents.indexOf('      // 值变化时模板字符串通常不变');
-        const end = contents.indexOf('\n    },\n    bind(', start);
-        assert.ok(
-          start >= 0 && end > start,
-          'Binding cache probe must find the current implementation',
-        );
-        if (!enabled)
-          contents =
-            contents.slice(0, start) + '      return register(...parts);' + contents.slice(end);
+        const marker = 'reuseResult = true';
+        assert.equal(contents.split(marker).length, 2, 'Binding cache probe must find its opt-out');
+        if (!enabled) contents = contents.replace(marker, 'reuseResult = false');
         return { contents, loader: 'ts' };
       });
       build.onEnd(() => assert.equal(loaded, 1));
