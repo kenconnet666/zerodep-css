@@ -15,6 +15,7 @@ test('循环、catch 和 switch 的局部同名函数不被误认作 css', () =>
   for (const body of [
     'for (const css of handlers) { css(s.width.px(width.value)); }',
     'try {} catch (css) { css(s.width.px(width.value)); }',
+    'function example() { if (ready) { var css = custom; } return css(s.width.px(width.value)); }',
     'switch (mode) { case 1: const css = handler; css(s.width.px(width.value)); }',
   ])
     assert.equal(transform(body).used, false, body);

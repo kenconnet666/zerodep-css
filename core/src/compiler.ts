@@ -192,6 +192,14 @@ export function createBindingTransform(
     if (ts.isFunctionLike(node)) {
       params = new Set(params);
       local = new Set(local);
+      // var 在函数内提升，即使声明写在 if / 循环里，也会遮蔽外部导入。
+      const collectVars = (child: ts.Node) => {
+        if (ts.isFunctionLike(child) || ts.isClassLike(child)) return;
+        if (ts.isVariableDeclarationList(child) && !(child.flags & ts.NodeFlags.BlockScoped))
+          for (const declaration of child.declarations) bindings(declaration.name, local);
+        ts.forEachChild(child, collectVars);
+      };
+      ts.forEachChild(node, collectVars);
       if ('name' in node && node.name && ts.isIdentifier(node.name)) local.add(node.name.text);
       for (const parameter of node.parameters) {
         bindings(parameter.name, params);
