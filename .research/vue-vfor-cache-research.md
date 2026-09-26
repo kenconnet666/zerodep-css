@@ -108,3 +108,23 @@ node .research/string-css-probe/vfor-style-performance.mjs --compile-only
 浏览器探针由 CI 执行：200 行、21 次无关更新、21 次样式更新、五轮计时；另设独立调用计数轮，不把计数开销混进计时。浏览器断言检查实际 padding/width、文本、重排、对象替换与清空。输出 `runtime-diagnostics/vfor-style/`。时间无硬阈值；需要结合挂载与真实样式更新成本判断是否默认启用。
 
 实现文件：[编译原型](string-css-probe/vfor-style-compiler.mjs)、[小型缓存](string-css-probe/vfor-style-cache.mjs)、[焦点测试](string-css-probe/vfor-style-cache.test.mjs)、[CI 性能探针](string-css-probe/vfor-style-performance.mjs)。
+
+## 已取得的 CI 结果
+
+代码提交 `7b0b235` 的 [CI 36239497834](https://github.com/kenconnet666/zerodep-css/actions/runs/36239497834) 已全部通过，包含 Windows / Ubuntu 基础检查、浏览器探针与项目其余完整验收。下表为同一次 CI 的五轮中位数，单位 ms；200 行批量更新，包含 Vue 刷新和布局读取。
+
+| 方案                | 挂载 | 21 次无关更新 | 21 次全部样式变化 |
+| ------------------- | ---: | ------------: | ----------------: |
+| 原模板运行时        | 17.4 |          17.1 |              40.0 |
+| 每行 class computed | 17.5 |           8.7 |              45.5 |
+
+独立计数轮：
+
+| 场景              | 原模板 css 调用 | 每行 computed css 调用 |
+| ----------------- | --------------: | ---------------------: |
+| 挂载              |             200 |                    200 |
+| 21 次无关更新     |           4,200 |                      0 |
+| 21 次全部样式变化 |           4,200 |                  4,200 |
+| 全列表反转        |             200 |                    200 |
+
+当前证据支持技术可行性，也显示实际取舍：无关更新明显受益，而每次全部样式都变时，额外 computed 与缓存管理使本次样本变慢。不能据此宣布所有列表都更快。原型可以作为下一阶段 Vue 循环优化的候选，默认启用范围还需结合隐式绑定、SSR/HMR 和更复杂列表测量决定。
