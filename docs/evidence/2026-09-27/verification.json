@@ -1,0 +1,14 @@
+{
+  "commit": "30e1ed8a9fe7f6fe194ddcdce2e2d1a2dd8dda48",
+  "run": 36257653775,
+  "url": "https://github.com/kenconnet666/zerodep-css/actions/runs/36257653775",
+  "tasksPassed": 15,
+  "coverage": {
+    "linesHit": 548,
+    "linesFound": 579,
+    "branchesHit": 194,
+    "branchesFound": 224,
+    "functionsHit": 54,
+    "functionsFound": 60
+  }
+}

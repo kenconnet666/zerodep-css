@@ -1,0 +1,357 @@
+{
+  "node": "v24.21.0",
+  "count": 200,
+  "updates": 20,
+  "rounds": 3,
+  "samples": {
+    "vue-bx": [
+      {
+        "mountMs": 20.60000000000582,
+        "updateMs": 37.5,
+        "noiseMs": 11.19999999999709,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 20.19999999999709,
+        "updateMs": 40.19999999999709,
+        "noiseMs": 11.60000000000582,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 17.5,
+        "updateMs": 41.30000000000291,
+        "noiseMs": 10.5,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      }
+    ],
+    "vue-bx-uncached": [
+      {
+        "mountMs": 20.39999999999418,
+        "updateMs": 44.39999999999418,
+        "noiseMs": 13.80000000000291,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 19,
+        "updateMs": 38.59999999999127,
+        "noiseMs": 11.30000000000291,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 19.10000000000582,
+        "updateMs": 40.30000000000291,
+        "noiseMs": 12.799999999988358,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      }
+    ],
+    "vue-runtime": [
+      {
+        "mountMs": 13.10000000000582,
+        "updateMs": 54.10000000000582,
+        "noiseMs": 6.399999999994179,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      },
+      {
+        "mountMs": 13.30000000000291,
+        "updateMs": 54.80000000000291,
+        "noiseMs": 5.899999999994179,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      },
+      {
+        "mountMs": 13.19999999999709,
+        "updateMs": 54.69999999999709,
+        "noiseMs": 6.5,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      }
+    ],
+    "vue-manual": [
+      {
+        "mountMs": 15.700000000011642,
+        "updateMs": 24.80000000000291,
+        "noiseMs": 6.69999999999709,
+        "noiseWrites": 0,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 8552
+      },
+      {
+        "mountMs": 12,
+        "updateMs": 24.69999999999709,
+        "noiseMs": 6.600000000005821,
+        "noiseWrites": 0,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 8552
+      },
+      {
+        "mountMs": 15.5,
+        "updateMs": 25.09999999999127,
+        "noiseMs": 6.5,
+        "noiseWrites": 0,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 8552
+      }
+    ],
+    "vue-emotion": [
+      {
+        "mountMs": 16.19999999999709,
+        "updateMs": 66.19999999999709,
+        "noiseMs": 7.600000000005821,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      },
+      {
+        "mountMs": 16.19999999999709,
+        "updateMs": 62.80000000000291,
+        "noiseMs": 7.5,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      },
+      {
+        "mountMs": 18.30000000000291,
+        "updateMs": 63.70000000001164,
+        "noiseMs": 7.599999999991269,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      }
+    ],
+    "vue-bx-template": [
+      {
+        "mountMs": 21.89999999999418,
+        "updateMs": 38.19999999999709,
+        "noiseMs": 9,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 21.09999999999127,
+        "updateMs": 36.60000000000582,
+        "noiseMs": 12.30000000000291,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 22,
+        "updateMs": 38.29999999998836,
+        "noiseMs": 9.400000000008731,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      }
+    ],
+    "vue-bx-template-uncached": [
+      {
+        "mountMs": 17,
+        "updateMs": 36.19999999999709,
+        "noiseMs": 10.60000000000582,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 17.5,
+        "updateMs": 36.19999999999709,
+        "noiseMs": 10.80000000000291,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 16.90000000000873,
+        "updateMs": 36.5,
+        "noiseMs": 11.89999999999418,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      }
+    ],
+    "svelte-bx": [
+      {
+        "mountMs": 19.19999999999709,
+        "updateMs": 38.39999999999418,
+        "noiseMs": 1,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 21.39999999999418,
+        "updateMs": 38.69999999999709,
+        "noiseMs": 0.9000000000087311,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 20.10000000000582,
+        "updateMs": 40.69999999999709,
+        "noiseMs": 1,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      }
+    ],
+    "svelte-bx-uncached": [
+      {
+        "mountMs": 22.09999999999127,
+        "updateMs": 41.70000000001164,
+        "noiseMs": 1,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 22.39999999999418,
+        "updateMs": 49.89999999999418,
+        "noiseMs": 1,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      },
+      {
+        "mountMs": 24.80000000000291,
+        "updateMs": 44.69999999999709,
+        "noiseMs": 1,
+        "noiseWrites": 0,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 8552
+      }
+    ],
+    "svelte-runtime": [
+      {
+        "mountMs": 13.400000000008731,
+        "updateMs": 56.80000000000291,
+        "noiseMs": 0.7999999999883585,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      },
+      {
+        "mountMs": 14.10000000000582,
+        "updateMs": 57.30000000000291,
+        "noiseMs": 1,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      },
+      {
+        "mountMs": 13.5,
+        "updateMs": 56.89999999999418,
+        "noiseMs": 0.6999999999970896,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      }
+    ],
+    "svelte-manual": [
+      {
+        "mountMs": 12.89999999999418,
+        "updateMs": 26.5,
+        "noiseMs": 1,
+        "noiseWrites": 0,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 8552
+      },
+      {
+        "mountMs": 14.299999999988358,
+        "updateMs": 25,
+        "noiseMs": 0.8999999999941792,
+        "noiseWrites": 0,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 8552
+      },
+      {
+        "mountMs": 13.39999999999418,
+        "updateMs": 26.19999999999709,
+        "noiseMs": 1,
+        "noiseWrites": 0,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 8552
+      }
+    ],
+    "svelte-emotion": [
+      {
+        "mountMs": 16.30000000000291,
+        "updateMs": 68.80000000000291,
+        "noiseMs": 0.6999999999970896,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      },
+      {
+        "mountMs": 18.5,
+        "updateMs": 70.69999999999709,
+        "noiseMs": 0.8999999999941792,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      },
+      {
+        "mountMs": 18.80000000000291,
+        "updateMs": 71.89999999999418,
+        "noiseMs": 0.8999999999941792,
+        "noiseWrites": 0,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 8552
+      }
+    ]
+  },
+  "browser": "153.0.8010.12"
+}

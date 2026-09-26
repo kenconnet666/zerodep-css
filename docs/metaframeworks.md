@@ -58,7 +58,7 @@ export { init } from '@zerodep-css/sveltekit';
 
 CSS handle 在请求作用域内执行 `resolve()`，通过 `transformPageChunk` 缓冲 HTML 到渲染结束，再替换标记。显式标记避免依赖 HTML 字符串中某个 `</head>` 恰好是目标位置。JSON/API 响应不执行 HTML 替换。缺少标记时会明确报错。
 
-首版使用完整 HTML 缓冲，不能保留流式首字节收益；不要把渲染结束后才继续产生 CSS 的延迟任务当作已支持的流式方案。普通同步组件、等待数据后渲染的页面、预渲染均已验证。
+Node 接入使用完整 HTML 缓冲，不能保留流式首字节收益；不要把渲染结束后才继续产生 CSS 的延迟任务当作已支持的流式方案。普通同步组件、等待数据后渲染的页面、预渲染均已验证。
 
 可运行夹具：[app.html](../sveltekit/test/app/src/app.html)、[页面](../sveltekit/test/app/src/routes/+page.svelte)。
 

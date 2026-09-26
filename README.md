@@ -29,6 +29,8 @@ class 对象写法、浏览器注册、Node 请求隔离及元框架接入已有
 
 ## 使用文档
 
+- [生产使用与支持范围](docs/production.md)；[交接](docs/handoff.md)；[当前性能](docs/performance.md)。
+
 - [开始使用](docs/getting-started.md)：Vue/Svelte 组件、上下文与手工 SSR。
 - [作者 API](docs/author-api.md)：声明组合、选择器、动画、全局规则和单位/颜色方法。
 - [bx 绑定](docs/bindings.md)：显式变量、模板缓存、列表、派生值与支持边界。

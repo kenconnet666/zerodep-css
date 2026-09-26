@@ -1,0 +1,91 @@
+{
+  "node": "v24.21.0",
+  "browser": "26.6",
+  "commit": "30e1ed8a9fe7f6fe194ddcdce2e2d1a2dd8dda48",
+  "cases": [
+    {
+      "framework": "vue",
+      "hydrate": false,
+      "status": "passed",
+      "initial": {
+        "rules": 38,
+        "classes": 18,
+        "animations": 2,
+        "globals": 2,
+        "bindings": 16,
+        "connected": true
+      },
+      "released": {
+        "rules": 4,
+        "classes": 2,
+        "animations": 0,
+        "globals": 2,
+        "bindings": 0,
+        "connected": true
+      }
+    },
+    {
+      "framework": "vue",
+      "hydrate": true,
+      "status": "passed",
+      "initial": {
+        "rules": 38,
+        "classes": 18,
+        "animations": 2,
+        "globals": 2,
+        "bindings": 16,
+        "connected": true
+      },
+      "released": {
+        "rules": 4,
+        "classes": 2,
+        "animations": 0,
+        "globals": 2,
+        "bindings": 0,
+        "connected": true
+      }
+    },
+    {
+      "framework": "svelte",
+      "hydrate": false,
+      "status": "passed",
+      "initial": {
+        "rules": 54,
+        "classes": 26,
+        "animations": 2,
+        "globals": 2,
+        "bindings": 24,
+        "connected": true
+      },
+      "released": {
+        "rules": 4,
+        "classes": 2,
+        "animations": 0,
+        "globals": 2,
+        "bindings": 0,
+        "connected": true
+      }
+    },
+    {
+      "framework": "svelte",
+      "hydrate": true,
+      "status": "passed",
+      "initial": {
+        "rules": 54,
+        "classes": 26,
+        "animations": 2,
+        "globals": 2,
+        "bindings": 24,
+        "connected": true
+      },
+      "released": {
+        "rules": 4,
+        "classes": 2,
+        "animations": 0,
+        "globals": 2,
+        "bindings": 0,
+        "connected": true
+      }
+    }
+  ]
+}

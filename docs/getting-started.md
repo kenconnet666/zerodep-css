@@ -1,4 +1,4 @@
-# Vue 与 Svelte 最小用法
+# Vue 与 Svelte 开始使用
 
 五个包仍是工作区 private 包。先运行 `pnpm install --frozen-lockfile` 与 `pnpm build`；浏览器构建使用主入口的默认 DOM 实现，Node SSR 按 `node` 条件使用请求宿主。Nuxt/SvelteKit 已有[专用接入](metaframeworks.md)，[bx 绑定](bindings.md)、[全局规则与动画](author-api.md)、CSP/nonce 均已提供，支持边界见对应文档。
 

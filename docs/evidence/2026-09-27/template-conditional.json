@@ -1,0 +1,747 @@
+{
+  "node": "v24.21.0",
+  "browser": "153.0.8010.12",
+  "count": 200,
+  "updates": 21,
+  "rounds": 5,
+  "samples": {
+    "vue-template": [
+      {
+        "mountMs": 16.5,
+        "noiseMs": 15.39999999999418,
+        "updateMs": 22.89999999999418,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 15.60000000000582,
+        "noiseMs": 11.39999999999418,
+        "updateMs": 20.400000000023283,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 12.699999999982538,
+        "noiseMs": 10.800000000017462,
+        "updateMs": 20.099999999976717,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 15,
+        "noiseMs": 10.800000000017462,
+        "updateMs": 20.39999999999418,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 14,
+        "noiseMs": 12.39999999999418,
+        "updateMs": 22.300000000017462,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      }
+    ],
+    "vue-template-shared": [
+      {
+        "mountMs": 20,
+        "noiseMs": 18.300000000017462,
+        "updateMs": 35.60000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 17.20000000001164,
+        "noiseMs": 16.20000000001164,
+        "updateMs": 31.599999999976717,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 16.39999999999418,
+        "noiseMs": 17.60000000000582,
+        "updateMs": 36.79999999998836,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 16.60000000000582,
+        "noiseMs": 17.5,
+        "updateMs": 36,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 15.199999999982538,
+        "noiseMs": 16.39999999999418,
+        "updateMs": 31.5,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      }
+    ],
+    "vue-derived": [
+      {
+        "mountMs": 13.10000000000582,
+        "noiseMs": 8.799999999988358,
+        "updateMs": 20.39999999999418,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 13.10000000000582,
+        "noiseMs": 9,
+        "updateMs": 20.10000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 17.199999999982538,
+        "noiseMs": 9.700000000011642,
+        "updateMs": 22,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 12.89999999999418,
+        "noiseMs": 9.200000000011642,
+        "updateMs": 20,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 13.5,
+        "noiseMs": 9.900000000023283,
+        "updateMs": 24.599999999976717,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      }
+    ],
+    "vue-derived-shared": [
+      {
+        "mountMs": 17.60000000000582,
+        "noiseMs": 11.700000000011642,
+        "updateMs": 32.5,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 18.70000000001164,
+        "noiseMs": 12.5,
+        "updateMs": 32.5,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 17.39999999999418,
+        "noiseMs": 11.699999999982538,
+        "updateMs": 31.60000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 16.70000000001164,
+        "noiseMs": 11.799999999988358,
+        "updateMs": 31.39999999999418,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 16.39999999999418,
+        "noiseMs": 12.200000000011642,
+        "updateMs": 40.5,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      }
+    ],
+    "svelte-template": [
+      {
+        "mountMs": 13.599999999976717,
+        "noiseMs": 6.300000000017462,
+        "updateMs": 22,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 12.89999999999418,
+        "noiseMs": 5.899999999994179,
+        "updateMs": 20.10000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 21.099999999976717,
+        "noiseMs": 9.60000000000582,
+        "updateMs": 18.20000000001164,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 13.60000000000582,
+        "noiseMs": 5.300000000017462,
+        "updateMs": 17.199999999982538,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 10.5,
+        "noiseMs": 5.7999999999883585,
+        "updateMs": 22.10000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      }
+    ],
+    "svelte-template-shared": [
+      {
+        "mountMs": 14.10000000000582,
+        "noiseMs": 6.2000000000116415,
+        "updateMs": 32.19999999998254,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 14.89999999999418,
+        "noiseMs": 6.899999999994179,
+        "updateMs": 34,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 11.89999999999418,
+        "noiseMs": 6.7999999999883585,
+        "updateMs": 33.60000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 12.299999999988358,
+        "noiseMs": 7.900000000023283,
+        "updateMs": 34,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 13,
+        "noiseMs": 8,
+        "updateMs": 36.19999999998254,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      }
+    ],
+    "svelte-derived": [
+      {
+        "mountMs": 10.60000000000582,
+        "noiseMs": 5.199999999982538,
+        "updateMs": 17.5,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 10.89999999999418,
+        "noiseMs": 5.600000000005821,
+        "updateMs": 20.39999999999418,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 11.5,
+        "noiseMs": 6,
+        "updateMs": 20.10000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 10.39999999999418,
+        "noiseMs": 4.899999999994179,
+        "updateMs": 17.5,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      },
+      {
+        "mountMs": 10.400000000023283,
+        "noiseMs": 5.599999999976717,
+        "updateMs": 17.60000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 231000
+      }
+    ],
+    "svelte-derived-shared": [
+      {
+        "mountMs": 11.89999999999418,
+        "noiseMs": 7.699999999982538,
+        "updateMs": 30.60000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 11.799999999988358,
+        "noiseMs": 6.899999999994179,
+        "updateMs": 27.20000000001164,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 12.299999999988358,
+        "noiseMs": 6.600000000005821,
+        "updateMs": 26.89999999999418,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 11.5,
+        "noiseMs": 6.099999999976717,
+        "updateMs": 26.900000000023283,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      },
+      {
+        "mountMs": 12.39999999999418,
+        "noiseMs": 7,
+        "updateMs": 27.10000000000582,
+        "mountCalls": 0,
+        "noiseCalls": 0,
+        "updateCalls": 0,
+        "stats": {
+          "rules": 2,
+          "classes": 2,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "layout": 462000
+      }
+    ]
+  },
+  "calls": {
+    "vue-template": {
+      "mount": 200,
+      "noise": 4200,
+      "update": 4200
+    },
+    "vue-template-shared": {
+      "mount": 400,
+      "noise": 8400,
+      "update": 8400
+    },
+    "vue-derived": {
+      "mount": 200,
+      "noise": 0,
+      "update": 4200
+    },
+    "vue-derived-shared": {
+      "mount": 200,
+      "noise": 0,
+      "update": 4200
+    },
+    "svelte-template": {
+      "mount": 200,
+      "noise": 0,
+      "update": 4200
+    },
+    "svelte-template-shared": {
+      "mount": 400,
+      "noise": 0,
+      "update": 8400
+    },
+    "svelte-derived": {
+      "mount": 200,
+      "noise": 0,
+      "update": 4200
+    },
+    "svelte-derived-shared": {
+      "mount": 200,
+      "noise": 0,
+      "update": 4200
+    }
+  }
+}

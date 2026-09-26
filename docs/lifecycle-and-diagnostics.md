@@ -18,7 +18,7 @@ const stats = cssStats();
 
 当前耗时验收由 CI 执行：真实 HMR、30 次挂卸、列表 key 轮换、200 / 1,000 项性能对照、Nuxt / Kit 的 SSR 与静态部署。按任务命名的 `lifecycle-*`、`browser-*`、`performance-*` artifact 保存计数与计时。时间只供比较和选型，不作为硬阈值；不能把“未重复写 CSSOM”解释为“完全不再执行 JS”。
 
-详细样本与本轮结论见[稳定性与主题交付记录](../.research/stability-and-theme-delivery.md)。
+当前样本和资源回收结论见[性能与资源验收](performance.md)；历史记录保留在 .research，不代替当前行为。
 
 核心源码覆盖率由 `pnpm test:coverage` 生成，LCOV 文件作为 `runtime-coverage` artifact 上传。范围是核心注册器、绑定运行时、SSR 和序列化源码；不把这个比例误当成 Vue/Svelte 编译器或浏览器整体覆盖率。框架和浏览器用例独立验收。
 
