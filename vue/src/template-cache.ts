@@ -50,11 +50,20 @@ function inputsFor(guards: readonly Guard[]): unknown[] | undefined {
     if (!entry || (entry.get && entry.get !== descriptor(Css.prototype, property)?.get)) return;
     const target = Reflect.get(author, property) as object;
     if (!target || typeof target !== 'object') return;
+    const reference = Reflect.get((system ??= new Css()), property);
+    // 共享系统属性已冻结，常见路径直接取值，避免每行重复遍历属性方法的继承链。
+    // 自定义属性实例仍走下面的完整检查；方法身份也进入签名，替换时会失效。
+    if (target === reference && Object.isFrozen(target)) {
+      const value = Reflect.get(target, member);
+      if (typeof value !== 'string' && typeof value !== 'function') return;
+      inputs.push(author, target, value);
+      if (typeof value === 'function') inputs.push(reference.raw, reference.declaration);
+      continue;
+    }
     const own = descriptor(target, member);
     if (!own || !('value' in own)) return;
     inputs.push(author, target, own.value);
     if (typeof own.value === 'string') continue;
-    const reference = Reflect.get((system ??= new Css()), property);
     if (
       typeof own.value !== 'function' ||
       own.value !== reference?.[member] ||
