@@ -4,6 +4,7 @@ import vuePlugin from '../../vue/dist/vite.js';
 import sveltePlugin from '../../svelte/dist/vite.js';
 import { bundle } from './mup-bundle.mjs';
 import { launchBrowser } from './browser.mjs';
+import { bindingCacheVariant } from './binding-cache-variant.mjs';
 
 const count = Number(process.env.BINDING_ROWS ?? 200),
   updates = 20,
@@ -20,20 +21,35 @@ try {
       `${framework}-binding-performance-driver.ts`,
       { dist: true, minify: true },
     );
-    const bound = await bundle(framework, 'browser', `${framework}-binding-performance-driver.ts`, {
-      dist: true,
+    const options = {
+      dist: false,
       minify: true,
       transformSfc: (code, id) => plugin.transform.call({ warn() {} }, code, id)?.code ?? code,
+    };
+    const bound = await bundle(framework, 'browser', `${framework}-binding-performance-driver.ts`, {
+      ...options,
+      plugins: [bindingCacheVariant(true)],
     });
+    const uncached = await bundle(
+      framework,
+      'browser',
+      `${framework}-binding-performance-driver.ts`,
+      { ...options, plugins: [bindingCacheVariant(false)] },
+    );
     for (let round = 0; round < rounds; round++) {
-      const modes = ['implicit', 'runtime', 'manual', 'emotion'];
-      for (const mode of [...modes.slice(round % 4), ...modes.slice(0, round % 4)]) {
+      const modes = ['implicit', 'implicit-uncached', 'runtime', 'manual', 'emotion'];
+      for (const mode of [
+        ...modes.slice(round % modes.length),
+        ...modes.slice(0, round % modes.length),
+      ]) {
         const page = await browser.newPage();
         try {
           await page.setContent(
             '<style>.rows{display:flex;flex-wrap:wrap;width:800px;contain:layout}.rows>div{height:2px;flex:none}</style><main></main>',
           );
-          await page.addScriptTag({ content: mode === 'implicit' ? bound : source });
+          await page.addScriptTag({
+            content: mode === 'implicit' ? bound : mode === 'implicit-uncached' ? uncached : source,
+          });
           const sample = await page.evaluate(
             async ({ mode, count, updates }) => {
               const target = document.querySelector('main');
@@ -94,9 +110,9 @@ try {
             sample.widths,
             Array.from({ length: count }, (_, i) => `${20 + updates * count + i}px`),
           );
-          if (mode === 'implicit' || mode === 'manual')
+          if (mode.startsWith('implicit') || mode === 'manual')
             assert.equal(sample.finalRules, sample.initialRules);
-          if (mode === 'implicit') assert.equal(sample.noiseWrites, 0);
+          if (mode.startsWith('implicit')) assert.equal(sample.noiseWrites, 0);
           delete sample.widths;
           (result.samples[`${framework}-${mode}`] ??= []).push(sample);
         } finally {
