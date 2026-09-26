@@ -31,6 +31,8 @@ s.width.raw('20px'); // 原有能力继续可用
 
 ## 运行
 
+`test:vfor-style` 用真实 Vue 编译产物验证循环中每行的 class computed 缓存；`probe:vfor-style` 在 CI 比较浏览器更新与调用次数。原生 renderList 缓存复用、重排与嵌套边界见[v-for 缓存研究](../vue-vfor-cache-research.md)。
+
 `probe:template-derived` 对比 Vue/Svelte 模板运行时、派生缓存、模板隐式绑定与 setup 稳定绑定，耗时测量只在 CI 执行；候选语法、作用域限制与测法见[模板派生研究](../template-derived-research.md)。
 
 `probe:template-conditional` 针对模板中的 `css(..., compact ? ... : ...)`，比较单元素与双元素共享派生，并用独立计数轮核实调用次数；编译前后转换的取舍也记录在上述研究中。

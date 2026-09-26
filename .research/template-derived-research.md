@@ -56,6 +56,8 @@ derived 模式不启动隐式绑定；现有插件本来也会让派生内部的
 
 ## 显式 css 条件调用：后续研究结论
 
+更新：v-for 已有可运行的局部派生缓存原型，复用 Vue renderList / VNode 缓存，无需强制拆组件。此前关于循环提升的保守建议应结合[v-for 专项研究](vue-vfor-cache-research.md)阅读；普通循环变量仍不能直接搬到组件 setup。
+
 当前推荐保持普通 JavaScript 参数，不把表达式写进反引号字符串：
 
 ```svelte

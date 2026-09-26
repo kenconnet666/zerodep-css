@@ -66,6 +66,8 @@ jobs:
       - run: pnpm --dir .research/string-css-probe probe:keywords
       - run: pnpm --dir .research/string-css-probe probe:template-derived
       - run: pnpm --dir .research/string-css-probe probe:template-conditional
+      - run: pnpm --dir .research/string-css-probe test:vfor-style
+      - run: pnpm --dir .research/string-css-probe probe:vfor-style
       - run: node test/browser/lifecycle-hmr.mjs
       - run: pnpm --dir .research/string-css-probe probe:bindings
         env:
@@ -91,3 +93,4 @@ jobs:
             test-results/keyword-representation/*.json
             test-results/template-derived/*.json
             test-results/template-conditional/*
+            test-results/vfor-style/*

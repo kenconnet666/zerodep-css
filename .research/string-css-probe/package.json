@@ -4,6 +4,8 @@
   "type": "module",
   "packageManager": "pnpm@10.34.5",
   "scripts": {
+    "test:vfor-style": "node --test vfor-style-cache.test.mjs",
+    "probe:vfor-style": "node vfor-style-performance.mjs",
     "probe:template-conditional": "node template-conditional.mjs",
     "probe:template-derived": "node template-derived.mjs",
     "probe:keywords": "node keyword-representation.mjs",
