@@ -19,9 +19,21 @@ for (const name of ['core', 'vue', 'svelte', 'nuxt', 'sveltekit']) {
   }
 }
 for (const [name, entries, external] of [
-  ['core', ['index', 'browser', 'server'], []],
-  ['vue', ['index', 'server'], ['@zerodep-css/core', '@zerodep-css/core/*', 'vue']],
-  ['svelte', ['index', 'server'], ['@zerodep-css/core', '@zerodep-css/core/*', 'svelte']],
+  [
+    'core',
+    ['index', 'browser', 'server', 'bindings', 'compiler'],
+    ['node:*', 'typescript', 'magic-string'],
+  ],
+  [
+    'vue',
+    ['index', 'server', 'bindings', 'bindings-server', 'vite'],
+    ['node:*', '@zerodep-css/core', '@zerodep-css/core/*', 'vue'],
+  ],
+  [
+    'svelte',
+    ['index', 'server', 'bindings', 'bindings-server', 'vite'],
+    ['node:*', '@zerodep-css/core', '@zerodep-css/core/*', 'svelte'],
+  ],
   [
     'nuxt',
     ['index', 'runtime/server', 'runtime/client'],
@@ -29,6 +41,21 @@ for (const [name, entries, external] of [
   ],
   ['sveltekit', ['index', 'server'], ['@zerodep-css/svelte', '@zerodep-css/svelte/*']],
 ]) {
+  if (['core', 'vue', 'svelte'].includes(name)) {
+    // 多入口共用作者原型与宿主状态，避免 bindings 入口复制另一份类定义。
+    await build({
+      entryPoints: entries.map((entry) => resolve(root, name, 'src', `${entry}.ts`)),
+      outdir: resolve(root, name, 'dist'),
+      bundle: true,
+      splitting: true,
+      minify: true,
+      format: 'esm',
+      platform: 'neutral',
+      target: 'es2023',
+      external,
+    });
+    continue;
+  }
   for (const entry of entries) {
     await build({
       entryPoints: [resolve(root, name, 'src', `${entry}.ts`)],

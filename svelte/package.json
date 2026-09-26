@@ -4,6 +4,18 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./vite": {
+      "types": "./dist/types/vite.d.ts",
+      "node": "./dist/vite.js"
+    },
+    "./bindings": {
+      "node": {
+        "types": "./dist/types/bindings-server.d.ts",
+        "default": "./dist/bindings-server.js"
+      },
+      "types": "./dist/types/bindings.d.ts",
+      "default": "./dist/bindings.js"
+    },
     ".": {
       "node": {
         "types": "./dist/types/server.d.ts",
@@ -25,7 +37,7 @@
     "@zerodep-css/core": "workspace:*"
   },
   "peerDependencies": {
-    "svelte": "^5.0.0"
+    "svelte": "^5.20.0"
   },
   "devDependencies": {
     "@types/node": "catalog:",

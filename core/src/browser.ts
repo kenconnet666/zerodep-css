@@ -22,6 +22,11 @@ function createHost(target: Document) {
   let style = target.querySelector<HTMLStyleElement>('style[data-zerodep-css]');
   const nonce = config.nonce ?? style?.nonce;
   const globals = new Map<string, HTMLStyleElement>();
+  let bindingStyle: HTMLStyleElement | undefined;
+  const bindingRules = new Map<
+    string,
+    { css: CSSStyleRule; targets: string[] | undefined; root: boolean | undefined }
+  >();
   function tag() {
     const node = target.createElement('style');
     if (nonce) node.nonce = nonce;
@@ -35,7 +40,47 @@ function createHost(target: Document) {
     return node;
   }
   style ??= main();
-  function updateGlobal(key: string, rule?: CssRule) {
+  function updateGlobal(key: string, rule?: CssRule, kind: 'global' | 'bindings' = 'global') {
+    if (kind === 'bindings') {
+      const previous = bindingRules.get(key);
+      if (!rule) {
+        if (previous && bindingStyle?.sheet) {
+          const rules = Array.from(bindingStyle.sheet.cssRules);
+          const index = rules.indexOf(previous.css);
+          if (index >= 0) bindingStyle.sheet.deleteRule(index);
+        }
+        bindingRules.delete(key);
+        return;
+      }
+      if (!rule.targets?.length && !rule.root) return;
+      if (!bindingStyle?.isConnected) {
+        bindingStyle = tag();
+        bindingStyle.dataset.zerodepBindings = '';
+        target.head.insertBefore(bindingStyle, style);
+      }
+      if (previous) {
+        // 普通值更新不重写选择器，避免无意义的选择器解析和样式失效。
+        if (previous.targets !== rule.targets || previous.root !== rule.root) {
+          previous.css.selectorText = [
+            ...(rule.root ? [':root'] : []),
+            ...(rule.targets ?? []).map((name) => `.${name}`),
+          ].join(',');
+          previous.targets = rule.targets;
+          previous.root = rule.root;
+        }
+        previous.css.style.cssText = rule.body;
+      } else {
+        const sheet = bindingStyle.sheet;
+        if (!sheet) throw new Error('CSS binding stylesheet is unavailable.');
+        const index = sheet.insertRule(ruleText(rule), sheet.cssRules.length);
+        bindingRules.set(key, {
+          css: sheet.cssRules[index] as CSSStyleRule,
+          targets: rule.targets,
+          root: rule.root,
+        });
+      }
+      return;
+    }
     if (!rule) {
       globals.get(key)?.remove();
       globals.delete(key);
@@ -60,15 +105,25 @@ function createHost(target: Document) {
     if (!style!.isConnected) style = main();
     const rules = registry.rules();
     // 全局块位于普通类之前；更新自身文本不重写普通类所在样式表。
-    style!.textContent = serializeStyleRules(rules.filter((rule) => rule.kind !== 'global'));
+    style!.textContent = serializeStyleRules(
+      rules.filter((rule) => rule.kind !== 'global' && rule.kind !== 'bindings'),
+    );
+    bindingStyle?.remove();
+    bindingStyle = undefined;
+    bindingRules.clear();
     for (const node of globals.values()) node.remove();
     globals.clear();
     for (const rule of rules) if (rule.kind === 'global') updateGlobal(rule.key!, rule);
+    for (const rule of rules)
+      if (rule.kind === 'bindings') updateGlobal(`bindings:${rule.key}`, rule, 'bindings');
   }
   return {
     registry,
     rebuild,
     globals,
+    get bindingStyle() {
+      return bindingStyle;
+    },
     get style() {
       return style!;
     },
@@ -78,7 +133,11 @@ function createHost(target: Document) {
 function getHost(target: Document) {
   const existing = hosts.get(target);
   if (existing) {
-    if (!existing.style.isConnected) existing.rebuild();
+    if (
+      !existing.style.isConnected ||
+      (existing.bindingStyle && !existing.bindingStyle.isConnected)
+    )
+      existing.rebuild();
     return existing;
   }
   const host = createHost(target);
@@ -105,6 +164,7 @@ export function globalCss(key: string, ...parts: string[]): void {
 export function disposeCss(target: Document = document): void {
   const host = hosts.get(target);
   host?.style.remove();
+  host?.bindingStyle?.remove();
   if (host) for (const node of host.globals.values()) node.remove();
   hosts.delete(target);
   options.delete(target);
@@ -145,7 +205,7 @@ export function hydrateCss(rules?: readonly CssRule[], target: Document = docume
   try {
     const host = getHost(target);
     host.registry.hydrate(rules);
-    if (rules.some((rule) => rule.kind === 'global')) host.rebuild();
+    if (rules.some((rule) => rule.kind === 'global' || rule.kind === 'bindings')) host.rebuild();
   } catch (error) {
     // 清单校验失败不占用文档宿主，修正清单后仍可重新恢复。
     hosts.delete(target);
@@ -153,3 +213,10 @@ export function hydrateCss(rules?: readonly CssRule[], target: Document = docume
   }
   manifest?.remove();
 }
+
+/** 内部编译运行时使用；常规组件 API 不导出此入口。 */
+export function setBindings(key: string, body: string | null): void {
+  if (body === null && !hosts.has(document)) return;
+  getHost(document).registry.setBindings(key, body);
+}
+export const bindingId = (owner: object): number => getHost(document).registry.bindingId(owner);

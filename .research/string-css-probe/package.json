@@ -5,6 +5,8 @@
   "packageManager": "pnpm@10.34.5",
   "scripts": {
     "test:author-api": "node author-api-browser.mjs",
+    "test:bindings": "node implicit-bindings.mjs",
+    "probe:bindings": "node binding-performance.mjs",
     "probe:library-review": "node runtime-library-review.mjs",
     "test:metaframeworks": "node metaframeworks.mjs",
     "test:transport": "node hydration-transport.mjs",

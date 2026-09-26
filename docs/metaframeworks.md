@@ -2,7 +2,7 @@
 
 五个包仍为 private 工作区包。先构建包产物，普通组件继续从 `@zerodep-css/vue` / `@zerodep-css/svelte` 使用原有 API；元框架包负责宿主生命周期，不重新导出一套作者 API。
 
-本阶段验收 Nuxt 4.5.2、SvelteKit 2.70.3、Vue 3.5.43、Svelte 5.57.0，运行环境为 Node 24 和 Chromium。覆盖标准 Node SSR、客户端导航、静态预渲染页面及其恢复。没有实现响应式变量编译器。
+本阶段验收 Nuxt 4.5.2、SvelteKit 2.70.3、Vue 3.5.43、Svelte 5.57.0，运行环境为 Node 24 和 Chromium。覆盖标准 Node SSR、客户端导航、静态预渲染页面及其恢复，包含[隐式多变量绑定](implicit-bindings.md)。
 
 ## Nuxt
 
@@ -16,6 +16,8 @@ export default defineNuxtConfig({
 
 应用仍自行定义 `createCssContext<AppCss>()` 并在根组件 `provideCss(new AppCss())`，使用方式见[组件示例](framework-examples.md)。模块不猜测用户的作者类或主题。
 
+模块默认安装绑定转换；`modules: [['@zerodep-css/nuxt', { bindings: false }]]` 可以关闭。动态 nonce 从 `event.context.zerodepCssNonce` 读取，应用在前置服务器 middleware 中生成并设置匹配的 CSP 响应头。
+
 模块注册两个插件：服务端为每个 Nuxt Vue 应用创建独立宿主，组件渲染结束后向 head 输出样式和 JSON 清单；客户端在组件创建前恢复清单。组件内同步调用和异步 setup 恢复上下文后的 `css()` 都使用当前应用宿主。脱离组件上下文的任意服务器任务不会自动获得这个宿主，手工 SSR 仍可使用 `withCssHost()`。
 
 Vue `/server` 新增 `provideCssHost(app, host)`，用于由元框架掌握渲染调度的场景。它是应用级依赖注入，不调用全局 `AsyncLocalStorage.enterWith()`；原有请求路径继续可用。
@@ -24,14 +26,20 @@ Vue `/server` 新增 `provideCssHost(app, host)`，用于由元框架掌握渲�
 
 ## SvelteKit
 
-在三个标准接入点各加一处配置：
+先在 Vite 中启用转换，再配置宿主：
+
+```ts
+import cssBindings from '@zerodep-css/svelte/vite';
+import { sveltekit } from '@sveltejs/kit/vite';
+export default { plugins: [cssBindings(), sveltekit()] };
+```
 
 ```ts
 // src/hooks.server.ts
 export { handle } from '@zerodep-css/sveltekit/server';
 ```
 
-已有服务器 hook 时用 Kit 的 `sequence` 组合；[夹具](../sveltekit/test/app/src/hooks.server.ts)验证了组合后的自定义响应头仍然保留。把 CSS handle 放在外层，让它最终输出完整样式。
+已有服务器 hook 时用 Kit 的 `sequence` 组合；[夹具](../sveltekit/test/app/src/hooks.server.ts)验证了组合后的自定义响应头仍然保留。需要 nonce 时，由前置 hook 设置 `event.locals.zerodepCssNonce` 和匹配的 CSP 响应头，再进入 CSS handle。
 
 ```ts
 // src/hooks.client.ts
@@ -64,7 +72,7 @@ CSS handle 在请求作用域内执行 `resolve()`，通过 `transformPageChunk`
 - 已消费清单不会在后续导航时重复恢复；新组件按原注册器规则复用类名。
 - 校验失败不占用文档宿主，修正清单后可以重试。
 
-这只解决 CSS 与清单嵌入 HTML 的边界，不代表 `raw()` 会过滤任意 CSS。CSP/nonce、边缘运行环境、流式 SSR 尚未验收。
+这解决 CSS 与清单嵌入 HTML 的边界，不代表 `raw()` 会过滤任意 CSS。请求独立 nonce 由 `/bindings-live` 夹具验收；Nuxt 禁止所有内联 style，Kit 仅为其自身的容器和播报节点添加固定内容的 CSP 哈希许可，库的绑定不使用内联 style。`/bindings` 验证静态部署。边缘运行环境、流式 SSR 尚未验收。
 
 ## 焦点验收
 

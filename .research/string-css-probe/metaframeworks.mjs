@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { launchBrowser } from './browser.mjs';
 import { startNode, startStatic } from './framework-server.mjs';
 import { assertInitial, exerciseExample, ruleCount } from './example-assertions.mjs';
+import { assertBindings } from './binding-assertions.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const targets = {
@@ -18,6 +19,35 @@ try {
     try {
       const health = await fetch(`${server.url}/${name === 'nuxt' ? 'api/health' : 'health'}`);
       assert.equal(await health.text(), 'ok');
+      const firstBindings = await browser.newPage({ javaScriptEnabled: false });
+      try {
+        await firstBindings.goto(`${server.url}/bindings-live`);
+        await assertBindings(firstBindings, false);
+      } finally {
+        await firstBindings.close();
+      }
+      const liveBindings = await browser.newPage();
+      const bindingErrors = [];
+      liveBindings.on('pageerror', (error) => bindingErrors.push(error.message));
+      liveBindings.on('console', (message) => {
+        if (/hydration/i.test(message.text())) bindingErrors.push(message.text());
+      });
+      try {
+        await liveBindings.addInitScript(() => {
+          window.cspFailures = [];
+          document.addEventListener('securitypolicyviolation', (event) =>
+            window.cspFailures.push(event.violatedDirective),
+          );
+        });
+        const response = await liveBindings.goto(`${server.url}/bindings-live`);
+        assert.match(response.headers()['content-security-policy'], /style-src 'nonce-/);
+        await liveBindings.locator('[data-ready="true"]').waitFor();
+        await assertBindings(liveBindings);
+        assert.deepEqual(bindingErrors, []);
+        assert.deepEqual(await liveBindings.evaluate(() => window.cspFailures), []);
+      } finally {
+        await liveBindings.close();
+      }
       const requests = [
         { width: 24, theme: 'light' },
         { width: 40, theme: 'dark' },
@@ -65,8 +95,8 @@ try {
           assert.equal(await page.locator('script[data-zerodep-css]').count(), 0);
           assert.equal(await page.locator('style[data-zerodep-css]').count(), 1);
           const initial = await ruleCount(page);
-          await exerciseExample(page, props.width, props.theme);
-          assert.equal(await ruleCount(page), initial + 2);
+          await exerciseExample(page, props.width, props.theme, true);
+          assert.equal(await ruleCount(page), initial + 1);
           await page.evaluate(() => {
             window.navigationMarker = true;
           });
@@ -91,7 +121,10 @@ try {
       await page.goto(`${files.url}/prerender`);
       await page.locator('[data-ready="true"]').waitFor();
       await assertInitial(page, 32, 'dark');
-      await exerciseExample(page, 32, 'dark');
+      await exerciseExample(page, 32, 'dark', true);
+      await page.goto(`${files.url}/bindings`);
+      await page.locator('[data-ready="true"]').waitFor();
+      await assertBindings(page);
       assert.deepEqual(errors, []);
     } finally {
       await page.close();

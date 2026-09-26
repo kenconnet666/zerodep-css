@@ -26,6 +26,10 @@ export async function bundle(framework, platform, entry, options = {}) {
     ...(browser ? { globalName: 'mupBundle' } : {}),
     platform,
     alias: {
+      [`@zerodep-css/${framework}/bindings`]: resolve(
+        directory,
+        `../../${framework}/${dist ? 'dist' : 'src'}/${browser ? 'bindings' : 'bindings-server'}.${dist ? 'js' : 'ts'}`,
+      ),
       [framework === 'vue' ? '@zerodep-css/vue' : '@zerodep-css/svelte']: resolve(
         directory,
         `../../${framework}/${dist ? 'dist' : 'src'}/${browser ? 'index' : 'server'}.${dist ? 'js' : 'ts'}`,
@@ -34,6 +38,7 @@ export async function bundle(framework, platform, entry, options = {}) {
     target: 'es2023',
     define: {
       'process.env.NODE_ENV': '"production"',
+      'import.meta.env.DEV': 'false',
       __VUE_OPTIONS_API__: 'true',
       __VUE_PROD_DEVTOOLS__: 'false',
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false',
@@ -61,7 +66,8 @@ export async function bundle(framework, platform, entry, options = {}) {
               name: 'svelte-compiler',
               setup(bundler) {
                 bundler.onLoad({ filter: /\.svelte$/ }, async ({ path }) => {
-                  const source = await readFile(path, 'utf8');
+                  const raw = await readFile(path, 'utf8');
+                  const source = options.transformSfc ? options.transformSfc(raw, path) : raw;
                   const result = compile(source, {
                     filename: path,
                     generate: browser ? 'client' : 'server',
@@ -81,7 +87,8 @@ export async function bundle(framework, platform, entry, options = {}) {
               name: 'vue-compiler',
               setup(bundler) {
                 bundler.onLoad({ filter: /\.vue$/ }, async ({ path }) => {
-                  const source = await readFile(path, 'utf8');
+                  const raw = await readFile(path, 'utf8');
+                  const source = options.transformSfc ? options.transformSfc(raw, path) : raw;
                   const { descriptor, errors } = parse(source, { filename: path });
                   assert.deepEqual(errors, []);
                   return {

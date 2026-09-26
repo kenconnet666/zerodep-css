@@ -1,3 +1,4 @@
 import { defineConfig } from 'vite';
 import { sveltekit } from '@sveltejs/kit/vite';
-export default defineConfig({ plugins: [sveltekit()] });
+import cssBindings from '@zerodep-css/svelte/vite';
+export default defineConfig({ plugins: [cssBindings(), sveltekit()] });

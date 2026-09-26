@@ -4,6 +4,14 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./compiler": {
+      "types": "./dist/types/compiler.d.ts",
+      "node": "./dist/compiler.js"
+    },
+    "./bindings": {
+      "types": "./dist/types/bindings.d.ts",
+      "default": "./dist/bindings.js"
+    },
     ".": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
@@ -26,7 +34,20 @@
     "csstype": "catalog:"
   },
   "devDependencies": {
+    "magic-string": "catalog:",
     "@types/node": "catalog:",
     "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.4 <7",
+    "magic-string": "^1.4.2"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    },
+    "magic-string": {
+      "optional": true
+    }
   }
 }

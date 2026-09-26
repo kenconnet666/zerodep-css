@@ -10,9 +10,14 @@ export function serializeStyleRules(rules: readonly CssRule[]): string {
     .replace(/\0/g, '\uFFFD');
 }
 
-export function serializeCssRules(rules: readonly CssRule[]) {
+export function serializeCssRules(rules: readonly CssRule[], options: { nonce?: string } = {}) {
+  const nonce = options.nonce?.replace(
+    /[&"<>]/g,
+    (value) => ({ '&': '&amp;', '"': '&quot;', '<': '&lt;', '>': '&gt;' })[value]!,
+  );
   return {
     cssText: serializeStyleRules(rules),
     manifest: JSON.stringify(rules).replace(/</g, '\\u003c'),
+    nonceAttribute: nonce === undefined ? '' : ` nonce="${nonce}"`,
   };
 }

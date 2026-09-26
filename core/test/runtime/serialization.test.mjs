@@ -13,3 +13,10 @@ test('SSR 清单阻止 HTML 标签截断，并保持原始声明供哈希恢复'
   assert.ok(cssText.includes('<\\/StYlE>'));
   assert.equal(cssText.includes('\r'), false);
 });
+
+test('nonce 属性安全编码，不影响规则清单', () => {
+  assert.equal(
+    serializeCssRules([], { nonce: 'a"&<' }).nonceAttribute,
+    ' nonce="a&quot;&amp;&lt;"',
+  );
+});

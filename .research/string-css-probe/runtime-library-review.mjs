@@ -18,7 +18,8 @@ for (const name of ['@emotion/css', '@emotion/cache', '@emotion/hash', '@emotion
 const { outputFiles } = await build({
   stdin: {
     contents: `import { css as own } from '../../core/src/browser.ts';
-      import { createRuleRegistry, probeHash } from '../../core/src/registry.ts';
+      import { createRuleRegistry } from '../../core/src/registry.ts';
+      import { hash as probeHash } from '../../core/src/names.ts';
       import { css as emotion } from '@emotion/css';
       globalThis.libraryProbe = { own, emotion, createRuleRegistry, probeHash };`,
     resolveDir: dirname(fileURLToPath(import.meta.url)),
@@ -33,17 +34,16 @@ const { outputFiles } = await build({
     {
       name: 'count-registry-hashes',
       setup(bundler) {
-        bundler.onLoad({ filter: /[\\/]core[\\/]src[\\/]registry\.ts$/ }, async ({ path }) => {
+        bundler.onLoad({ filter: /[\\/]core[\\/]src[\\/]names\.ts$/ }, async ({ path }) => {
           const source = await readFile(path, 'utf8');
           const marker = 'function hash(text: string): string {';
           assert.equal(source.split(marker).length, 2);
           return {
             loader: 'ts',
-            contents:
-              source.replace(
-                marker,
-                marker + '\nglobalThis.hashCalls = (globalThis.hashCalls ?? 0) + 1;',
-              ) + '\nexport { hash as probeHash };',
+            contents: source.replace(
+              marker,
+              marker + '\nglobalThis.hashCalls = (globalThis.hashCalls ?? 0) + 1;',
+            ),
           };
         });
       },
@@ -129,13 +129,12 @@ try {
       detachedHost: { sameClass: cachedClass === known, beforeRemoval, afterRemoval },
     };
   });
-  assert.equal(result.missHashes, 2);
+  assert.equal(result.missHashes, 1);
   assert.equal(result.hitHashes, 0);
   assert.notEqual(result.unicode.own.classes[0], result.unicode.own.classes[1]);
   assert.equal(result.unicode.emotion.classes[0], result.unicode.emotion.classes[1]);
-  assert.ok(result.collision);
-  assert.equal(result.collision.error, 'CSS class hash collision.');
-  assert.notEqual(result.detachedHost.beforeRemoval, result.detachedHost.afterRemoval);
+  assert.equal(result.collision, null);
+  assert.equal(result.detachedHost.beforeRemoval, result.detachedHost.afterRemoval);
   console.log(JSON.stringify({ browser: browser.version(), versions, ...result }, null, 2));
 } finally {
   await browser.close();

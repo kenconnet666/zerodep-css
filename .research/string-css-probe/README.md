@@ -31,6 +31,8 @@ s.width.raw('20px'); // 原有能力继续可用
 
 ## 运行
 
+本轮新增 `test:bindings`（Vue/Svelte 客户端、SSR、CSP、多实例与列表）、`probe:bindings`（200 行连续值、手工变量和 Emotion 对照）。先在仓库根 `pnpm build`。`probe:library-review` 已改为检查修复后的单次 miss 哈希、Unicode、碰撞样本及失联宿主恢复；旧研究报告里的缺陷描述是修复前的历史证据。
+
 在本目录使用 Node 24、pnpm 10.34.5：
 
 ```powershell

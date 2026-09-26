@@ -1,6 +1,6 @@
 # zerodep-css 研究工作区
 
-- 当前已有五包 pnpm 配置、Codex LSP、`core` 的 502 属性生成结果、Vue/Svelte 适配器及 Nuxt 4 / SvelteKit 2 的 Node SSR 与预渲染接入。响应式绑定编译器、流式 SSR 和边缘部署尚未实现或验收；不要把研究探针当作正式 API。
+- 当前已有五包配置、502 属性生成器、作者 API、Vue/Svelte 隐式绑定插件和 Nuxt 4 / SvelteKit 2 的 Node SSR / 预渲染接入。转换范围见 `docs/implicit-bindings.md`；流式 SSR、边缘部署未验收，不要把研究探针当作正式 API。
 - `core` 保持框架无关；`vue`、`svelte`、`nuxt`、`sveltekit` 各自负责适配。五包保持 private，包间使用 `workspace:*`。
 - 使用 Node 24、pnpm 10.34.5 和工作区固定依赖；不要升级全局工具。本地优先运行改动相关的检查，基础配置或包类型入口变更运行 `pnpm check`，LSP 桥变更运行 `pnpm lsp:verify`。
 - `core/src/generated/` 只由 `pnpm css:generate` 更新；`pnpm check` 必须通过生成结果一致性与各包类型检查。

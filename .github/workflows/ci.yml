@@ -48,6 +48,7 @@ jobs:
       - run: pnpm --dir .research/string-css-probe exec playwright install --with-deps chromium
       - run: pnpm --filter @zerodep-css/core test
       - run: pnpm test:author
+      - run: pnpm test:bindings
       - run: pnpm --dir .research/string-css-probe probe:static-fields
       - run: pnpm --dir .research/string-css-probe test:ic
       - run: pnpm --dir .research/string-css-probe test:mup:browser
@@ -58,6 +59,10 @@ jobs:
       - run: pnpm --dir .research/string-css-probe test:examples:hydration
       - run: pnpm --dir .research/string-css-probe test:transport
       - run: pnpm --dir .research/string-css-probe test:author-api
+      - run: pnpm --dir .research/string-css-probe test:bindings
+      - run: pnpm --dir .research/string-css-probe probe:bindings
+        env:
+          BINDING_ROUNDS: '1'
       - run: node scripts/prepare-framework-fixtures.mjs
       - run: node ../../node_modules/nuxt/bin/nuxt.mjs build
         working-directory: nuxt/test/app

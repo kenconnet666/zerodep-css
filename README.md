@@ -1,6 +1,6 @@
 # zerodep-css：运行时 CSS 重新研究
 
-这是运行时 CSS 工作区，包含五个 private 包、类型检查和 Codex 语言服务。`core` 从固定的 `csstype` 生成 502 条属性链与 12,586 个关键字，并提供 `ic()` 片段和规则去重；Vue/Svelte 提供浏览器上下文、Node 请求宿主及 hydration，Nuxt 4 / SvelteKit 2 已接入标准 Node SSR、客户端恢复和预渲染。**响应式绑定编译器、流式 SSR 与边缘部署尚未实现或验收，包尚未公开发布**。旧方案可从本地 Git 历史或另存归档查询，不作为本分支实现。
+这是运行时 CSS 工作区，包含五个 private 包、类型检查和 Codex 语言服务。`core` 从固定的 `csstype` 生成 502 条属性链与 12,586 个关键字，提供单位 / 颜色 / 数学方法、`ic`、类合并、动画及命名全局块。Vue/Svelte 提供上下文、Node 请求宿主、hydration 和可选隐式响应式绑定；Nuxt 4 / SvelteKit 2 接入标准 Node SSR、客户端恢复和预渲染。**流式 SSR、边缘部署尚未验收，包尚未公开发布**。旧方案可从本地 Git 历史或另存归档查询，不作为本分支实现。
 
 | 子项目      | 预留职责             |
 | ----------- | -------------------- |
@@ -40,4 +40,4 @@ class 对象写法、浏览器注册、Node 请求隔离及元框架接入已有
 运行时同步快路径、Worker 与 SIMD 的实测取舍见[并行与 SIMD 研究](.research/runtime-parallel-simd-research.md)。
 Vue/Svelte 的纯派生类选择、元素变量绑定与上下文边界见[框架结合研究](.research/vue-svelte-runtime-integration.md)。
 Emotion 源码对照、可复现缺口和下一阶段取舍见[运行时库审查](.research/runtime-library-tradeoffs.md)。
-最新讨论确认的 API 与隐式多变量绑定范围见[下一阶段计划](.research/next-phase-authoring-and-bindings.md)，其中新能力尚未实现。
+新增作者方法见[作者 API](docs/author-api.md)，框架插件、自然响应式写法、SSR/CSP 和回退边界见[隐式绑定](docs/implicit-bindings.md)。[阶段计划](.research/next-phase-authoring-and-bindings.md)保留本轮决策依据。

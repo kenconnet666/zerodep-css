@@ -52,7 +52,7 @@ import { render } from 'svelte/server';
 import { createServerCssHost, withCssHost } from '@zerodep-css/svelte/server';
 
 const host = createServerCssHost();
-const { body } = withCssHost(host, () => render(Root));
+const body = withCssHost(host, () => render(Root).body);
 const cssText = host.cssText();
 const rules = host.rules();
 ```

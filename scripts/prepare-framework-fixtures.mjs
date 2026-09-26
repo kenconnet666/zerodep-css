@@ -3,8 +3,13 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-for (const name of ['nuxt', 'sveltekit']) {
-  const scope = join(root, name, 'test/app/node_modules/@zerodep-css');
+for (const [directory, name] of [
+  ['nuxt/test/app', 'nuxt'],
+  ['sveltekit/test/app', 'sveltekit'],
+  ['.research/string-css-probe', 'vue'],
+  ['.research/string-css-probe', 'svelte'],
+]) {
+  const scope = join(root, directory, 'node_modules/@zerodep-css');
   await mkdir(scope, { recursive: true });
   const link = join(scope, name);
   const target = join(root, name);

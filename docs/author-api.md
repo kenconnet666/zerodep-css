@@ -46,4 +46,4 @@ s.opacity.clamp(0, 0.5, 1);
 
 普通单位方法收一个数字；padding/margin、gap、逻辑边距、背景尺寸等根据元数据提供合适的参数数量。混合单位、斜线分组和特殊值继续使用 raw。类型提示只约束作者入口，不做浏览器值域校验。单位名不会挤掉无关属性的系统关键字，例如 textBox.cap、textBoxEdge.ex 仍是字符串字段。
 
-隐式绑定按[阶段计划](../.research/next-phase-authoring-and-bindings.md)继续实现。本文记录当前已落地的登记基础与作者方法。
+Vue / Svelte 已提供可选的[隐式绑定转换](implicit-bindings.md)，支持多参数、复杂 raw 表达式、cx 与动画，保留原有运行时求值路径。SSR 和宿主 nonce 接入见[元框架说明](metaframeworks.md)。

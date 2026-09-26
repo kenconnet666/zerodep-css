@@ -9,6 +9,8 @@ export interface ServerCssHost {
   cx(...values: ClassNames[]): string;
   keyframes(...parts: string[]): string;
   globalCss(key: string, ...parts: string[]): void;
+  setBindings(key: string, body: string | null): void;
+  bindingId(owner: object): number;
   readonly nonce?: string;
   rules(): CssRule[];
   cssText(): string;
@@ -23,6 +25,8 @@ export function createServerCssHost(options: { nonce?: string } = {}): ServerCss
     cx: registry.cx,
     keyframes: registry.keyframes,
     globalCss: registry.globalCss,
+    setBindings: registry.setBindings,
+    bindingId: registry.bindingId,
     nonce: options.nonce,
     rules: registry.rules,
     cssText: () => serializeStyleRules(registry.rules()),
@@ -40,7 +44,7 @@ export function css(...parts: string[]): string {
   return host.css(...parts);
 }
 
-function requireHost(): ServerCssHost {
+export function requireHost(): ServerCssHost {
   const host = current.getStore();
   if (!host) throw new Error('CSS server host is unavailable.');
   return host;

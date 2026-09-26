@@ -5,6 +5,6 @@ export default defineNuxtConfig({
   modules: ['@zerodep-css/nuxt'],
   alias: { '@example': fileURLToPath(new URL('../../../vue/examples/App.vue', import.meta.url)) },
   devtools: { enabled: false },
-  nitro: { preset: 'node-server', prerender: { routes: ['/prerender'] } },
+  nitro: { preset: 'node-server', prerender: { routes: ['/prerender', '/bindings'] } },
   compatibilityDate: '2026-09-26',
 });
