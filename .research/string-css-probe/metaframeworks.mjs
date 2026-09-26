@@ -96,7 +96,8 @@ try {
           assert.equal(await page.locator('style[data-zerodep-css]').count(), 1);
           const initial = await ruleCount(page);
           await exerciseExample(page, props.width, props.theme);
-          assert.equal(await ruleCount(page), initial + 1);
+          // 普通运行时路径分别为尺寸分支和新的宽度值登记一条规则；bx 更新另行验收。
+          assert.equal(await ruleCount(page), initial + 2);
           await page.evaluate(() => {
             window.navigationMarker = true;
           });
