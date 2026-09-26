@@ -10,8 +10,8 @@ const fixture = await mkdtemp(join(results, 'package-types-'));
 
 function sourceFor(name, server) {
   const imports = server
-    ? `import { Css, WidthCss, createCssContext, css, createServerCssHost, withCssHost } from '@zerodep-css/${name}';`
-    : `import { Css, WidthCss, createCssContext, css, hydrateCss } from '@zerodep-css/${name}';`;
+    ? `import { Css, WidthCss, createCssContext, css, bx, createServerCssHost, withCssHost } from '@zerodep-css/${name}';`
+    : `import { Css, WidthCss, createCssContext, css, bx, hydrateCss } from '@zerodep-css/${name}';`;
   return `${imports}
 import type { CssRule } from '@zerodep-css/core';
 import type { CssInput } from '@zerodep-css/core';
@@ -39,6 +39,14 @@ s._selector(42, s.color.red);
 // @ts-expect-error 条件对象不属于声明片段
 s._hover({ active: true });
 const base = new Css();
+bx(12) satisfies string;
+bx('20px') satisfies string;
+bx(null); bx(undefined);
+s.width.raw(bx('20px'));
+// @ts-expect-error bx 返回 CSS 值字符串，px 只接受数字
+s.width.px(bx(12));
+// @ts-expect-error 显式绑定恰好一个值
+bx();
 const custom: CssString = 'var(--project-size)';
 s.width.raw(custom);
 s.animationPlayState.raw('running');

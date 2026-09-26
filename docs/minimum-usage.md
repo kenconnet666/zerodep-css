@@ -1,6 +1,6 @@
 # Vue 与 Svelte 最小用法
 
-五个包仍是工作区 private 包。先运行 `pnpm install --frozen-lockfile` 与 `pnpm build`；浏览器构建使用主入口的默认 DOM 实现，Node SSR 按 `node` 条件使用请求宿主。Nuxt/SvelteKit 已有[专用接入](metaframeworks.md)，[隐式绑定](implicit-bindings.md)、[全局规则与动画](author-api.md)、CSP/nonce 均已提供，支持边界见对应文档。
+五个包仍是工作区 private 包。先运行 `pnpm install --frozen-lockfile` 与 `pnpm build`；浏览器构建使用主入口的默认 DOM 实现，Node SSR 按 `node` 条件使用请求宿主。Nuxt/SvelteKit 已有[专用接入](metaframeworks.md)，[bx 绑定](bindings.md)、[全局规则与动画](author-api.md)、CSP/nonce 均已提供，支持边界见对应文档。
 
 ## 作者类型与组件
 
@@ -25,7 +25,7 @@ const s = useCss(); // 取得上层的同一个 AppCss 实例
 const className = css(s.display.flex, s.width._md, s._hover(s.color.red));
 ```
 
-`css(s.width.px(width))` 可直接放在 Vue/Svelte 模板表达式中。不开启转换时按值生成并缓存类；启用[隐式绑定插件](implicit-bindings.md)后，可识别的动态值使用 CSS 变量。有限取值仍可预注册类表，通过 Vue `computed` 或 Svelte `$derived` 选择类名。`css(baseClass, active && s.color.red, [s.padding.px(8)])` 统一处理声明和已登记类的组合，始终返回一个样式类名；外部 class 和独立标记交给模板组合。`raw()` 原样拼接字符串，浏览器按原生 CSS 处理值和层叠。
+`css(s.width.px(width))` 可直接放在 Vue/Svelte 模板表达式中。不开启转换时按值生成并缓存类；启用[bx 绑定插件](bindings.md)后，只有显式 bx(value) 使用 CSS 变量，常量也会转换。有限取值仍可预注册类表，通过 Vue `computed` 或 Svelte `$derived` 选择类名。`css(baseClass, active && s.color.red, [s.padding.px(8)])` 统一处理声明和已登记类的组合，始终返回一个样式类名；外部 class 和独立标记交给模板组合。`raw()` 原样拼接字符串，浏览器按原生 CSS 处理值和层叠。
 
 Vue/Svelte 组件初始化、有限状态选择与连续值绑定的对照写法及 SSR 边界见[框架结合研究](../.research/vue-svelte-runtime-integration.md)。
 

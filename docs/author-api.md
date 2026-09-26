@@ -46,7 +46,7 @@ const button = css(
 
 快捷方法为 `_hover`、`_active`、`_focus`、`_focusVisible`、`_focusWithin`、`_disabled`、`_checked`、`_before`、`_after`，分别对应原生伪类 / 伪元素。全部共享原型方法，不提供无前缀别名。`_selector(selector, ...parts)` 用 `CssSelector` 提供常见选择器、@ 规则、from/to 的补全，并允许任意字符串；没有对浏览器语法另做限制。
 
-快捷方法调用 `this._selector`，用户可以通过继承扩展自己的方法。系统方法内部的动态属性值参与隐式绑定；覆写快捷方法或 `_selector` 时，编译运行时会保留整个片段的原始求值并在开发模式提示，避免字符串加工逻辑收到变量占位符。
+快捷方法调用 `this._selector`，用户可以通过继承扩展自己的方法。仅显式 bx 表达式生成 CSS 变量；覆写快捷方法或 `_selector` 仍按用户实现执行，并接收原有声明字符串（其中可包含 var 引用）。
 
 `s.width.ic(1)` 仍是原生 CSS 的 ic 长度单位；本次移除的是原来的独立 `ic()` 选择器函数，不改变单位 API。
 
@@ -79,4 +79,4 @@ s.opacity.clamp(0, 0.5, 1);
 
 普通单位方法收一个数字；padding/margin、gap、逻辑边距、背景尺寸等根据元数据提供合适的参数数量。混合单位、斜线分组和特殊值继续使用 raw。类型提示只约束作者入口，不做浏览器值域校验。单位名不会挤掉无关属性的系统关键字，例如 textBox.cap、textBoxEdge.ex 仍是字符串字段。
 
-Vue / Svelte 已提供可选的[隐式绑定转换](implicit-bindings.md)，支持多参数、复杂 raw 表达式、声明 / 类组合与动画，保留原有运行时求值路径。SSR 和宿主 nonce 接入见[元框架说明](metaframeworks.md)。
+Vue / Svelte 已提供可选的[bx 绑定转换](bindings.md)，常量和动态表达式统一转为变量，支持一条声明中的多个 bx、复杂 raw 表达式、声明 / 类组合与动画，保留原有运行时求值路径。SSR 和宿主 nonce 接入见[元框架说明](metaframeworks.md)。

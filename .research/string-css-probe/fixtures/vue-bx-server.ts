@@ -3,7 +3,7 @@ import { renderToString } from 'vue/server-renderer';
 import { createServerCssHost, withCssHost, serializeCssRules } from '@zerodep-css/vue';
 import { AppCss } from '../../../core/examples/theme.js';
 import { provideCss } from '../../../vue/examples/context.js';
-import Component from './VueImplicit.vue';
+import Component from './VueBx.vue';
 export async function renderPage() {
   const host = createServerCssHost();
   const Root = defineComponent({

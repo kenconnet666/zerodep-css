@@ -1,6 +1,6 @@
 # 生命周期和定位
 
-组件的隐式绑定由 Vue / Svelte 生命周期管理。卸载时停止订阅并删除该组件的私有值规则；named globalCss 块和普通样式类属于文档 / 请求宿主，组件卸载不自动删除它们。
+组件的 bx 绑定由 Vue / Svelte 生命周期管理。卸载时停止订阅并删除该组件的私有值规则；named globalCss 块和普通样式类属于文档 / 请求宿主，组件卸载不自动删除它们。
 
 ```ts
 const stats = cssStats();

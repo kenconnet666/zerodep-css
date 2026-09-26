@@ -2,7 +2,7 @@ import { createApp, createSSRApp, defineComponent, h, nextTick } from 'vue';
 import { hydrateCss, cssStats, configureCss } from '@zerodep-css/vue';
 import { AppCss } from '../../../core/examples/theme.js';
 import { provideCss } from '../../../vue/examples/context.js';
-import Component from './VueImplicit.vue';
+import Component from './VueBx.vue';
 export { hydrateCss as restore, cssStats as stats, configureCss as configure };
 export async function start(target: HTMLElement, restore = false) {
   const controls: Array<{ step(): void; reorder(): void }> = [];

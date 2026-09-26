@@ -5,6 +5,7 @@ import { unitSuffix } from './generated/base.js';
 import { selectorShortcuts } from './selectors.js';
 const selectors = new Set(['_selector', ...Object.keys(selectorShortcuts)]);
 
+// 以下方法表仅用于模板缓存的纯度检查，不再决定变量绑定。
 const methods = new Set([
   'raw',
   'rgb',
@@ -88,9 +89,6 @@ export function createBindingTransform(
     if (options.dev) locations[id] = location((offsets.get(sf) ?? 0) + node.getStart(sf));
     return JSON.stringify(id);
   }
-  function warn(node: ts.Node, sf: ts.SourceFile, message: string) {
-    warnings.add(`${location((offsets.get(sf) ?? 0) + node.getStart(sf))}: ${message}`);
-  }
 
   function bindings(node: ts.BindingName, into: Set<string>) {
     if (ts.isIdentifier(node)) into.add(node.text);
@@ -109,6 +107,7 @@ export function createBindingTransform(
   }
   for (const node of source.statements) {
     if (!ts.isImportDeclaration(node) || !ts.isStringLiteral(node.moduleSpecifier)) continue;
+    if (node.importClause?.isTypeOnly) continue;
     const cssModule = /^@zerodep-css\/(vue|svelte|core)(\/server|\/browser)?$/.test(
       node.moduleSpecifier.text,
     );
@@ -118,8 +117,9 @@ export function createBindingTransform(
       if (node.moduleSpecifier.text === 'vue') vueNamespaces.add(imports.name.text);
     } else if (imports)
       for (const item of imports.elements) {
+        if (item.isTypeOnly) continue;
         const name = item.propertyName?.text ?? item.name.text;
-        if (cssModule && ['css', 'keyframes', 'globalCss'].includes(name))
+        if (cssModule && ['css', 'keyframes', 'globalCss', 'bx'].includes(name))
           aliases.set(item.name.text, name);
         else if (node.moduleSpecifier.text === 'vue') aliases.set(item.name.text, name);
         else if (!item.isTypeOnly) dynamic.add(item.name.text);
@@ -155,12 +155,12 @@ export function createBindingTransform(
   collect(source);
   const enabled =
     namespaces.size > 0 ||
-    [...aliases.values()].some((name) => ['css', 'keyframes', 'globalCss'].includes(name));
+    [...aliases.values()].some((name) => ['css', 'keyframes', 'globalCss', 'bx'].includes(name));
 
   function api(node: ts.Expression, local: Set<string>, sf: ts.SourceFile): string | undefined {
     if (ts.isIdentifier(node) && !local.has(node.text)) {
       const name = aliases.get(node.text);
-      return name && ['css', 'keyframes', 'globalCss'].includes(name) ? name : undefined;
+      return name && ['css', 'keyframes', 'globalCss', 'bx'].includes(name) ? name : undefined;
     }
     if (
       ts.isPropertyAccessExpression(node) &&
@@ -168,20 +168,10 @@ export function createBindingTransform(
       namespaces.has(node.expression.text) &&
       !local.has(node.expression.text)
     )
-      return ['css', 'keyframes', 'globalCss'].includes(node.name.text)
+      return ['css', 'keyframes', 'globalCss', 'bx'].includes(node.name.text)
         ? node.name.text
         : undefined;
     return undefined;
-  }
-  function isDynamic(node: ts.Node, params: Set<string>): boolean {
-    if (
-      ts.isIdentifier(node) &&
-      !(ts.isPropertyAccessExpression(node.parent) && node.parent.name === node) &&
-      (dynamic.has(node.text) || params.has(node.text))
-    )
-      return true;
-    if (ts.isPropertyAccessExpression(node) && node.name.text === 'value') return true;
-    return Boolean(ts.forEachChild(node, (child) => isDynamic(child, params) || undefined));
   }
   function safe(node: ts.Node): boolean {
     if (
@@ -204,14 +194,7 @@ export function createBindingTransform(
     return !ts.forEachChild(node, (child) => !safe(child) || undefined);
   }
 
-  function render(
-    node: ts.Node,
-    sf: ts.SourceFile,
-    params: Set<string>,
-    local: Set<string>,
-    disabled = false,
-    bindingContext = false,
-  ): string {
+  function render(node: ts.Node, sf: ts.SourceFile, local: Set<string>): string {
     if (ts.isCatchClause(node) && node.variableDeclaration) {
       local = new Set(local);
       bindings(node.variableDeclaration.name, local);
@@ -223,9 +206,7 @@ export function createBindingTransform(
       }
     }
     if (ts.isFunctionLike(node)) {
-      params = new Set(params);
       local = new Set(local);
-      // var 在函数内提升，即使声明写在 if / 循环里，也会遮蔽外部导入。
       const collectVars = (child: ts.Node) => {
         if (ts.isFunctionLike(child) || ts.isClassLike(child)) return;
         if (ts.isVariableDeclarationList(child) && !(child.flags & ts.NodeFlags.BlockScoped))
@@ -234,165 +215,101 @@ export function createBindingTransform(
       };
       ts.forEachChild(node, collectVars);
       if ('name' in node && node.name && ts.isIdentifier(node.name)) local.add(node.name.text);
-      for (const parameter of node.parameters) {
-        bindings(parameter.name, params);
-        bindings(parameter.name, local);
-      }
+      for (const parameter of node.parameters) bindings(parameter.name, local);
     }
     if (ts.isBlock(node) || ts.isCaseBlock(node)) {
       local = new Set(local);
-      params = new Set(params);
       const statements = ts.isBlock(node)
         ? node.statements
         : node.clauses.flatMap((clause) => [...clause.statements]);
-      for (const statement of statements)
+      for (const statement of statements) {
         if (
           (ts.isFunctionDeclaration(statement) || ts.isClassDeclaration(statement)) &&
           statement.name
         )
           local.add(statement.name.text);
-      for (const statement of statements)
         if (ts.isVariableStatement(statement))
-          for (const declaration of statement.declarationList.declarations) {
+          for (const declaration of statement.declarationList.declarations)
             bindings(declaration.name, local);
-            // 函数每次调用都会重新求值，局部别名随该次调用绑定；模块 / setup 快照不扩张。
-            if (declaration.initializer && isDynamic(declaration.initializer, params))
-              bindings(declaration.name, params);
-          }
+      }
     }
     if (ts.isCallExpression(node)) {
       const name = api(node.expression, local, sf);
+      if (name === 'bx') {
+        const value = node.arguments[0];
+        if (!value || node.arguments.length !== 1 || ts.isSpreadElement(value))
+          throw new Error(
+            location((offsets.get(sf) ?? 0) + node.getStart(sf)) +
+              ': bx() expects one value expression.',
+          );
+        const unsupported = (child: ts.Node): boolean =>
+          ts.isAwaitExpression(child) ||
+          ts.isYieldExpression(child) ||
+          (ts.isCallExpression(child) && api(child.expression, local, sf) === 'bx') ||
+          Boolean(ts.forEachChild(child, (next) => unsupported(next) || undefined));
+        if (unsupported(value))
+          throw new Error(
+            location((offsets.get(sf) ?? 0) + node.getStart(sf)) +
+              ': resolve await/yield or nested bx before binding.',
+          );
+        used = true;
+        valueCount++;
+        return scope + '.bind(' + site(node, sf) + ', () => (' + value.getText(sf) + '))';
+      }
+      if (name === 'css' || name === 'keyframes' || name === 'globalCss') {
+        const before = valueCount;
+        const args = node.arguments.map((arg) => render(arg, sf, local));
+        if (before !== valueCount)
+          return (
+            scope +
+            '.capture(' +
+            site(node, sf) +
+            ', ' +
+            node.expression.getText(sf) +
+            ', () => [' +
+            args.join(', ') +
+            '])'
+          );
+        return node.expression.getText(sf) + '(' + args.join(', ') + ')';
+      }
       const text = node.expression.getText(sf);
-      if (
-        ['computed', '$derived', '$derived.by'].includes(text) ||
-        aliases.get(text) === 'computed' ||
+      const derived =
+        (!local.has(text) &&
+          (text === '$derived' || text === '$derived.by' || aliases.get(text) === 'computed')) ||
         (ts.isPropertyAccessExpression(node.expression) &&
           ts.isIdentifier(node.expression.expression) &&
           vueNamespaces.has(node.expression.expression.text) &&
           !local.has(node.expression.expression.text) &&
-          node.expression.name.text === 'computed')
-      ) {
-        const containsCss = (item: ts.Node): boolean =>
-          (ts.isCallExpression(item) && Boolean(api(item.expression, local, sf))) ||
-          Boolean(ts.forEachChild(item, (child) => containsCss(child) || undefined));
-        if (containsCss(node))
-          warn(
-            node,
-            sf,
-            'CSS calls inside computed/$derived retain their ordinary runtime evaluation; define a bound css() in setup for implicit value binding.',
-          );
-        return node.getText(sf);
-      }
-      if (!disabled && (name === 'css' || name === 'keyframes')) {
-        const before = valueCount;
-        const args = node.arguments.map((arg) => render(arg, sf, params, local, false, true));
-        if (valueCount === before) return node.getText(sf);
-        return `${scope}.capture(${site(node, sf)}, ${text}, () => [${args.join(', ')}])`;
-      }
-      if (name === 'globalCss') {
-        // 全局块按 key 整块更新，不能把值误绑定到局部组件根。
-        if (node.arguments.some((arg) => ts.isSpreadElement(arg) || !safe(arg))) {
-          warn(
-            node,
-            sf,
-            'Global CSS with spread or side-effecting arguments retains runtime evaluation.',
-          );
-          return node.getText(sf);
-        }
-        if (
-          ts.isExpressionStatement(node.parent) &&
-          node.parent.parent === sf &&
-          node.arguments.some((arg) => isDynamic(arg, params))
-        ) {
-          used = true;
-          valueCount++;
-          return `${scope}.effect(() => ${node.getText(sf)})`;
-        }
-        return node.getText(sf);
-      }
-      if (
-        enabled &&
-        bindingContext &&
-        !disabled &&
-        ts.isPropertyAccessExpression(node.expression) &&
-        ts.isPropertyAccessExpression(node.expression.expression)
-      ) {
-        const property = node.expression.expression;
-        const method = node.expression.name.text;
-        if (methods.has(method) && node.arguments.some((arg) => isDynamic(arg, params))) {
-          if (node.arguments.some((arg) => ts.isSpreadElement(arg) || !safe(arg))) {
-            warn(
-              node,
-              sf,
-              `Implicit binding skipped for ${property.name.text}.${method}: spread or side-effecting arguments retain runtime evaluation.`,
+          node.expression.name.text === 'computed');
+      if (derived && node.arguments.length) {
+        const args = node.arguments.map((arg, index) => {
+          if (index !== 0) return render(arg, sf, local);
+          if (text === '$derived')
+            return (
+              scope + '.derived(' + site(node, sf) + ', () => (' + render(arg, sf, local) + '))'
             );
-            return node.getText(sf);
-          }
-          used = true;
-          valueCount++;
-          const args = node.arguments.map((arg) =>
-            isDynamic(arg, params) ? `() => (${arg.getText(sf)})` : arg.getText(sf),
-          );
-          return `${scope}.value(${site(node, sf)}, ${JSON.stringify(property.name.text)}, ${property.getText(sf)}, ${JSON.stringify(method)}, [${args.join(', ')}])`;
-        }
-      }
-      if (
-        enabled &&
-        bindingContext &&
-        ts.isPropertyAccessExpression(node.expression) &&
-        selectors.has(node.expression.name.text)
-      ) {
-        const before = valueCount;
-        const method = node.expression.name.text;
-        const args = node.arguments.map((arg, index) =>
-          render(arg, sf, params, local, false, method !== '_selector' || index !== 0),
-        );
-        if (before === valueCount) return node.getText(sf);
-        return `${scope}.selector(${site(node, sf)}, ${node.expression.expression.getText(sf)}, ${JSON.stringify(method)}, () => [${args.join(', ')}])`;
-      }
-      if (bindingContext && !name) {
-        if (isDynamic(node, params))
-          warn(
-            node,
-            sf,
-            `Composition call ${text} retains runtime evaluation; its string manipulation is not rewritten.`,
-          );
-        return node.getText(sf);
+          if (
+            (ts.isArrowFunction(arg) || ts.isFunctionExpression(arg)) &&
+            !arg.modifiers?.some((mod) => mod.kind === ts.SyntaxKind.AsyncKeyword) &&
+            !('asteriskToken' in arg && arg.asteriskToken)
+          )
+            return scope + '.derived(' + site(arg, sf) + ', ' + render(arg, sf, local) + ')';
+          return render(arg, sf, local);
+        });
+        return (text === '$derived' ? '$derived.by' : text) + '(' + args.join(', ') + ')';
       }
     }
-    const start = node.getStart(sf);
-    let cursor = start;
-    let result = '';
+    let cursor = node.getStart(sf),
+      result = '';
     ts.forEachChild(node, (child) => {
-      const childStart = child.getStart(sf);
-      const conditionalValue =
-        ts.isBinaryExpression(node) &&
-        child === node.right &&
-        [
-          ts.SyntaxKind.AmpersandAmpersandToken,
-          ts.SyntaxKind.BarBarToken,
-          ts.SyntaxKind.QuestionQuestionToken,
-        ].includes(node.operatorToken.kind);
-      const context =
-        ts.isConditionalExpression(node) && child === node.condition
-          ? false
-          : ts.isBinaryExpression(node) &&
-              node.operatorToken.kind !== ts.SyntaxKind.PlusToken &&
-              !conditionalValue
-            ? false
-            : bindingContext;
-      result +=
-        sf.text.slice(cursor, childStart) + render(child, sf, params, local, disabled, context);
+      result += sf.text.slice(cursor, child.getStart(sf)) + render(child, sf, local);
       cursor = child.end;
     });
     return result + sf.text.slice(cursor, node.end);
   }
 
   const transformed = source.statements
-    .map(
-      (node) =>
-        script.slice(node.pos, node.getStart(source)) + render(node, source, new Set(), new Set()),
-    )
+    .map((node) => script.slice(node.pos, node.getStart(source)) + render(node, source, new Set()))
     .join('');
   return {
     scope,
@@ -447,6 +364,7 @@ export function createBindingTransform(
         )
           return false;
         if (ts.isCallExpression(node)) {
+          if (api(node.expression, local, sf) === 'bx') return true;
           if (api(node.expression, local, sf) === 'css') {
             found = true;
             return node.arguments.every((arg) => visit(arg, true));
@@ -508,7 +426,7 @@ export function createBindingTransform(
       const statement = sf.statements[0];
       offsets.set(sf, offset - 1);
       if (!statement || !ts.isExpressionStatement(statement)) return text;
-      return render(statement.expression, sf, new Set(locals), new Set(locals)).slice(1, -1);
+      return render(statement.expression, sf, new Set(locals)).slice(1, -1);
     },
     framework,
   };

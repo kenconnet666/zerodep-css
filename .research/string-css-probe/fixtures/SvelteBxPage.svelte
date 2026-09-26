@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Root from './SvelteImplicitRoot.svelte';
+  import Root from './SvelteBxRoot.svelte';
   import Theme from '../../../svelte/examples/Theme.svelte';
   const controls: Array<{ step(): void; reorder(): void }> = [];
 </script>

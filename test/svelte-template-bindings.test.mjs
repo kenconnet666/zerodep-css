@@ -35,7 +35,7 @@ function component(source) {
   );
   return { component: module.exports.default, transformed, warnings };
 }
-const script = `<script>import {Css,css} from '@zerodep-css/svelte'; const s=new Css(); let width=$state(12);</script>`;
+const script = `<script>import {Css,css,bx} from '@zerodep-css/svelte'; const s=new Css(); let width=$state(12);</script>`;
 function inspect(source) {
   const result = component(source),
     host = adapter.createServerCssHost();
@@ -47,7 +47,7 @@ test('snippet 多次调用具有独立变量值，const tag 解构别名参与�
   const result = inspect(`${script}
 {#snippet card(value)}
  {@const {size}=value}
- <div class={css(s.width.px(size),s.padding.px(size,width))}></div>
+ <div class={css(s.width.raw(bx(size+'px')),s.padding.raw(bx(size+'px')+' '+bx(width+'px')))}></div>
 {/snippet}
 {@render card({size:10})}{@render card({size:30})}`);
   assert.deepEqual(result.warnings, []);
@@ -64,7 +64,7 @@ test('each 中的 const tag 不漏绑定，同名 css 局部声明不被误当�
   const result = inspect(`${script}
 {#each [{id:1,width:20},{id:2,width:40}] as row (row.id)}
  {@const size=row.width}
- <div class={css(s.width.px(size))}></div>
+ <div class={css(s.width.raw(bx(size+'px')))}></div>
 {/each}
 {#if true}{@const css=()=> 'external'}<div class={css(s.width.px(width))}></div>{/if}`);
   assert.equal(result.rules.filter((rule) => rule.kind === 'bindings').length, 2);
@@ -73,9 +73,9 @@ test('each 中的 const tag 不漏绑定，同名 css 局部声明不被误当�
 
 test('const tag 中直接构建 CSS 或调用样式辅助函数，都拥有模板绑定帧', () => {
   const result =
-    inspect(`<script>import {Css,css} from '@zerodep-css/svelte';const s=new Css();let width=$state(12);
-function style(value){return css(s.width.px(value));}</script>
-{#if true}{@const first=css(s.height.px(width))}{@const second=style(width)}
+    inspect(`<script>import {Css,css,bx} from '@zerodep-css/svelte';const s=new Css();let width=$state(12);
+function style(value){return css(s.width.raw(bx(value+'px')));}</script>
+{#if true}{@const first=css(s.height.raw(bx(width+'px')))}{@const second=style(width)}
 <div class={first}></div><div class={second}></div>{/if}`);
   assert.equal(result.rules.filter((rule) => rule.kind === 'bindings').length, 2);
   assert.ok(
@@ -87,7 +87,7 @@ function style(value){return css(s.width.px(value));}</script>
 
 test('await then/catch 变量进入各自作用域，普通值的 then 分支可绑定', () => {
   const result = inspect(`${script}
-{#await {size:32} then item}<div class={css(s.width.px(item.size))}></div>{:catch css}<div class={css(s.width.px(width))}></div>{/await}`);
+{#await {size:32} then item}<div class={css(s.width.raw(bx(item.size+'px')))}></div>{:catch css}<div class={css(s.width.px(width))}></div>{/await}`);
   assert.match(result.rules.find((rule) => rule.kind === 'bindings').body, /32px/);
   assert.match(result.transformed, /\.runtime|\.frame/);
   assert.match(result.transformed, /css\(s.width.px\(width\)\)/);
@@ -96,9 +96,21 @@ test('await then/catch 变量进入各自作用域，普通值的 then 分支可
 test('模块导出的 snippet 保持可导出，不捕获组件实例宿主', () => {
   const result =
     inspect(`<script module>import {Css,css} from '@zerodep-css/svelte';const s=new Css();export {card};</script>
-<script>import {css as makeCss} from '@zerodep-css/svelte';let width=$state(12);const box=makeCss(s.width.px(width));</script>
+<script>import {css as makeCss,bx} from '@zerodep-css/svelte';let width=$state(12);const box=makeCss(s.width.raw(bx(width+'px')));</script>
 {#snippet card(value)}<div class={css(s.width.px(value))}></div>{/snippet}
 <div class={box}></div>{@render card(20)}`);
   assert.equal(result.rules.filter((rule) => rule.kind === 'bindings').length, 1);
   assert.ok(result.rules.some((rule) => rule.body === 'width:20px;'));
+});
+
+test('常量与普通变量 bx 也生成变量，derived.by 工厂隔离各次创建', () => {
+  const result = inspect(`<script>import {Css,css,bx} from '@zerodep-css/svelte'; const s=new Css();
+const plain='12px';const opacity=bx(0.5);
+function make(value){const name=$derived(css(s.opacity.raw(opacity),s.width.raw(bx(value))));return ()=>name;}
+const a=make(plain),b=make('24px');</script><div class={a()}></div><div class={b()}></div>`);
+  const values = result.rules.filter((r) => r.kind === 'bindings');
+  assert.equal(values.length, 3);
+  assert.ok(values.some((r) => r.body.includes(':12px;')));
+  assert.ok(values.some((r) => r.body.includes(':24px;')));
+  assert.ok(values.some((r) => r.body.includes(':0.5;')));
 });

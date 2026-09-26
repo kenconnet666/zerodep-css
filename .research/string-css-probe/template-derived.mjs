@@ -95,7 +95,7 @@ if (process.argv.includes('--compile-only')) {
           );
           assert.ok(sample.colors.every((color) => color === 'rgb(255, 0, 0)'));
           assert.deepEqual(sample.afterNoise, sample.initial);
-          const bound = /-(implicit|hoisted)$/.test(name);
+          const bound = /-(bx|hoisted)$/.test(name);
           assert.equal(sample.classChanges, bound ? 0 : count);
           if (bound) {
             assert.equal(sample.final.rules, sample.initial.rules);

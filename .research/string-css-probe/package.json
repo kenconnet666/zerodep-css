@@ -12,7 +12,7 @@
     "probe:keywords": "node keyword-representation.mjs",
     "test:keyword-variants": "node --test keyword-variant.test.mjs",
     "test:author-api": "node ../../test/browser/author-api.mjs",
-    "test:bindings": "node ../../test/browser/implicit-bindings.mjs",
+    "test:bindings": "node ../../test/browser/bx-bindings.mjs",
     "probe:bindings": "node binding-performance.mjs",
     "probe:library-review": "node runtime-library-review.mjs",
     "test:metaframeworks": "node metaframeworks.mjs",

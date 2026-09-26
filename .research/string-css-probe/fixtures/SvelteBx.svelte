@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { css, globalCss, keyframes } from '@zerodep-css/svelte';
+  import { bx, css, globalCss, keyframes } from '@zerodep-css/svelte';
   import { useCss } from '../../../svelte/examples/context.js';
   import Plain from './SveltePlainClass.svelte';
   let {
@@ -17,28 +17,45 @@
     { id: 'b', width: 22 },
   ]);
   const fade = keyframes(
-    s._selector('from', s.opacity.raw(alpha / 2)),
-    s._selector('to', s.opacity.raw(alpha)),
+    s._selector('from', s.opacity.raw(bx(alpha / 2))),
+    s._selector('to', s.opacity.raw(bx(alpha))),
   );
   const box = css(
-    s.width.px(width),
-    s.padding.px(side, width),
-    s.color.rgb(red, 20, 30, alpha),
-    s.transform.raw(`translate(${width}px, ${side}px) rotate(${red}deg)`),
-    s._hover(s.opacity.raw(alpha)),
-    s._selector('& > .child', [s.display.block, s.height.px(side)]),
+    s.width.raw(bx(width + 'px')),
+    s.padding.raw(bx(side + 'px') + ' ' + bx(width + 'px')),
+    s.color.raw('rgba(' + bx(red) + ',' + bx(20) + ',' + bx(30) + ',' + bx(alpha) + ')'),
+    s.transform.raw(
+      'translate(' +
+        bx(width + 'px') +
+        ', ' +
+        bx(side + 'px') +
+        ') rotate(' +
+        bx(red + 'deg') +
+        ')',
+    ),
+    s._hover(s.opacity.raw(bx(alpha))),
+    s._selector('& > .child', [s.display.block, s.height.raw(bx(side + 'px'))]),
   );
   const animated = css(s.animationName.raw(fade), s.animationDuration.ms(1000));
   const combined = css(box, [false, s.backgroundColor.blue]);
   const fixed = css(s.height.px(snapshot));
-  const dual = css([null, side > 0 && s.width.px(side), [s.height.rem(side)]]);
-  const sibling = css(s._selector('& + [data-bound="sibling"]', s.marginLeft.px(width)));
+  const dual = css([
+    null,
+    side > 0 && s.width.raw(bx(side + 'px')),
+    [s.height.raw(bx(side + 'rem'))],
+  ]);
+  const sibling = css(
+    s._selector('& + [data-bound="sibling"]', s.marginLeft.raw(bx(width + 'px'))),
+  );
   function heightClass(value: number) {
-    return css(s.height.px(value));
+    return css(s.height.raw(bx(value + 'px')));
   }
   globalCss(
-    `implicit-${initial}`,
-    s._selector(`[data-global="${initial}"]`, s.color.rgb(red, 0, 0)),
+    `bx-${initial}`,
+    s._selector(
+      `[data-global="${initial}"]`,
+      s.color.raw('rgba(' + bx(red) + ',' + bx(0) + ',' + bx(0) + ',1)'),
+    ),
   );
   expose({
     step() {
@@ -57,7 +74,13 @@
 
 {#snippet sized(value: { width: number })}
   {@const { width: size } = value}
-  <div data-snippet class={css(s.width.px(size), s.padding.px(side, size))}></div>
+  <div
+    data-snippet
+    class={css(
+      s.width.raw(bx(size + 'px')),
+      s.padding.raw(bx(side + 'px') + ' ' + bx(size + 'px')),
+    )}
+  ></div>
 {/snippet}
 
 <section data-instance={initial}>
@@ -75,10 +98,10 @@
     <div data-const-style class={localClass}></div>
   {/if}
   {#await width then resolved}
-    <div data-await class={css(s.width.px(resolved))}></div>
+    <div data-await class={css(s.width.raw(bx(resolved + 'px')))}></div>
   {/await}
   {#each rows as row (row.id)}
     {@const rowWidth = row.width}
-    <div data-row={row.id} class={css(s.width.px(rowWidth))}></div>
+    <div data-row={row.id} class={css(s.width.raw(bx(rowWidth + 'px')))}></div>
   {/each}
 </section>

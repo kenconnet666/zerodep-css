@@ -2,236 +2,125 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createBindingTransform, replacePropsId } from '../../dist/compiler.js';
 import { createBindings } from '../../dist/bindings.js';
-import { Css, WidthCss } from '../../dist/index.js';
+import { Css, WidthCss, bx } from '../../dist/index.js';
 import { createServerCssHost } from '../../dist/server.js';
 const transform = (text) =>
   createBindingTransform(
-    `import { css } from '@zerodep-css/vue'; import { ref } from 'vue'; const s = new Css(); const width = ref(12); ${text}`,
+    "import { css, bx, globalCss, keyframes } from '@zerodep-css/vue'; import { computed } from 'vue'; " +
+      text,
     'test.vue',
     'vue',
   );
+function fixture() {
+  const host = createServerCssHost(),
+    tasks = [];
+  const scope = createBindings('test', host.setBindings, (run) => {
+    run();
+    tasks.push(run);
+    return () => tasks.splice(tasks.indexOf(run), 1);
+  });
+  return { host, scope, tasks, s: new Css() };
+}
 
-test('循环、catch 和 switch 的局部同名函数不被误认作 css', () => {
-  for (const body of [
-    'for (const css of handlers) { css(s.width.px(width.value)); }',
-    'try {} catch (css) { css(s.width.px(width.value)); }',
-    'function example() { if (ready) { var css = custom; } return css(s.width.px(width.value)); }',
-    'switch (mode) { case 1: const css = handler; css(s.width.px(width.value)); }',
-  ])
-    assert.equal(transform(body).used, false, body);
-  const result = createBindingTransform(
-    "import {css} from '@zerodep-css/vue'; import * as Vue from 'vue'; const c = Vue.computed(() => css(s.width.px(width.value)));",
-    'namespace.vue',
-    'vue',
+test('bx 显式绑定常量、普通值与响应式表达式；未标记调用保持原样', () => {
+  const result = transform(
+    "const a=css(s.width.raw(bx('12px')), s.opacity.raw(bx(0.5)), s.height.raw(bx(value)), s.color.raw(bx(color.value))); const b=css(s.width.px(width.value));",
   );
-  assert.equal(result.used, false);
-  assert.equal(result.warnings.size, 1);
+  assert.equal(result.used, true);
+  assert.equal((result.script.match(/\.bind\(/g) ?? []).length, 4);
+  assert.match(result.script, /\(\) => \('12px'\)/);
+  assert.match(result.script, /css\(s.width.px\(width.value\)\)/);
+  assert.equal(transform('const b=css(s.width.px(width.value));').used, false);
+  assert.throws(() => bx('12px'), /compiler plugin/);
 });
 
-test('转换保留快照、覆写与非响应式普通路径，并支持多参数和局部别名', () => {
-  const result = transform(
-    'const snapshot = width.value; const a = css(s.width.px(snapshot)); const b = css(s.padding.px(width.value, 4)); function rowCss(row) { const size = row.width; return css(s.width.px(size)); }',
+test('别名、命名空间及多变量字符串被转换，局部同名 bx 不转换', () => {
+  const result = createBindingTransform(
+    "import {bx as bind} from '@zerodep-css/vue'; import * as z from '@zerodep-css/core'; const a=bind(12); const b=z.bx('red');",
+    'a.vue',
+    'vue',
   );
-  assert.match(result.script, /css\(s.width.px\(snapshot\)\)/);
-  assert.match(result.script, /"padding", s.padding, "px", \[\(\) => \(width.value\), 4\]/);
-  assert.match(result.script, /"width", s.width, "px", \[\(\) => \(size\)\]/);
-  assert.match(
-    transform('function example(css) { return css(s.width.px(width.value)); }').script,
-    /return css\(s.width.px\(width.value\)\)/,
+  assert.equal((result.script.match(/\.bind\(/g) ?? []).length, 2);
+  for (const text of [
+    'function run(bx){return bx(12)}',
+    'for(const bx of handlers){bx(12)}',
+    'try{}catch(bx){bx(12)}',
+    'function run(){if(ok){var bx=custom;}return bx(12)}',
+    'switch(mode){case 1:const bx=custom;bx(12)}',
+  ])
+    assert.equal(transform(text).used, false, text);
+  assert.equal(
+    createBindingTransform("import type {bx} from '@zerodep-css/core'; bx(12)", 'a.vue', 'vue')
+      .used,
+    false,
   );
-  const unsupported = transform(
-    'const a = computed(() => css(s.width.px(width.value))); const b = css(s.width.px(width.value++));',
-  );
-  assert.equal(unsupported.used, false);
-  assert.equal(unsupported.warnings.size, 2);
   assert.equal(
     replacePropsId('const id = $props.id(); const text = "$props.id()";', 'saved'),
     'const id = saved; const text = "$props.id()";',
   );
 });
 
-test('绑定多参数、声明组合、动画引用、SSR 清单及生命周期', () => {
-  const host = createServerCssHost();
-  assert.equal('cx' in host, false);
-  const tasks = [];
-  const scope = createBindings('test', host.setBindings, (update) => {
-    update();
-    tasks.push(update);
-    return () => tasks.splice(tasks.indexOf(update), 1);
-  });
-  const s = new Css();
+test('显式值允许自定义格式化；多变量声明、组合类和生命周期保持关联', () => {
+  const { host, scope, tasks, s } = fixture();
   let x = 2;
-  const bound = scope.capture('box', host.css, () => [
-    scope.value('padding', 'padding', s.padding, 'px', [() => x, () => x * 2]),
+  const name = scope.capture('box', host.css, () => [
+    s.padding.raw(scope.bind('x', () => x + 'px') + ' ' + scope.bind('y', () => x * 2 + 'px')),
+    s.opacity.raw(scope.bind('constant', () => 0.5)),
   ]);
-  const combined = host.css(bound, [false, s.color.red]);
-  const rules = host.rules();
-  const variable = rules.find((rule) => rule.kind === 'bindings');
-  assert.deepEqual(variable.targets, [bound, combined]);
-  assert.match(variable.body, /:2px;.*:4px;/);
+  const combined = host.css(name, s.color.red);
+  const first = host.rules().find((r) => r.kind === 'bindings');
+  assert.deepEqual(first.targets, [name, combined]);
+  assert.match(first.body, /:2px;.*:4px;.*:0.5;/);
   x = 8;
-  tasks.forEach((update) => update());
-  assert.match(host.rules().find((rule) => rule.kind === 'bindings').body, /:8px;.*:16px;/);
-  assert.equal(host.rules().length, rules.length);
+  tasks.forEach((run) => run());
+  assert.match(host.rules().find((r) => r.kind === 'bindings').body, /:8px;.*:16px;/);
   scope.dispose();
   assert.equal(tasks.length, 0);
   assert.equal(
-    host.rules().some((rule) => rule.kind === 'bindings'),
+    host.rules().some((r) => r.kind === 'bindings'),
     false,
   );
 });
 
-test('用户覆写 raw 不被已知单位转换绕过；挂载后普通调用继续原始求值', () => {
-  const host = createServerCssHost();
-  const scope = createBindings('override', host.setBindings, (update) => {
-    update();
-    return () => {};
-  });
-  const s = new Css();
-  const custom = { raw: s.width.raw, px: (value) => `width:${value * 2}px;` };
-  const name = scope.capture('custom', host.css, () => [
-    scope.value('x', 'width', custom, 'px', [() => 3]),
-  ]);
-  assert.equal(host.rules().find((rule) => rule.className === name).body, 'width:6px;');
-  scope.finishSetup();
-  const plain = scope.capture('plain', host.css, () => [
-    scope.value('x', 'width', s.width, 'px', [() => 5]),
-  ]);
-  assert.equal(host.rules().find((rule) => rule.className === plain).body, 'width:5px;');
+test('独立 bx 可复用，空值恢复关联，不自动补单位或判断 CSS 有效性', () => {
+  const { host, scope, tasks, s } = fixture();
+  let value = 12;
+  const ref = scope.bind('value', () => value);
+  const a = host.css(s.width.raw(ref)),
+    b = host.css(s.height.raw(ref));
+  const body = () => host.rules().find((r) => r.kind === 'bindings');
+  assert.match(body().body, /:12;/);
+  assert.deepEqual(body().targets, [a, b]);
+  value = null;
+  tasks.forEach((run) => run());
+  assert.equal(body().body, '');
+  value = 'invalid';
+  tasks.forEach((run) => run());
+  assert.match(body().body, /:invalid;/);
+  value = 0;
+  tasks.forEach((run) => run());
+  assert.match(body().body, /:0;/);
+  scope.dispose();
 });
 
-test('框架模板帧隔离列表键，重排不重建绑定规则', () => {
-  const host = createServerCssHost();
-  const scope = createBindings('rows', host.setBindings, (update) => {
-    update();
-    return () => {};
-  });
-  const s = new Css();
-  scope.finishSetup();
-  const draw = (key, width) =>
+test('帧内按列表 key 复用，多变量更新不重复注册；可变数组不误命中', () => {
+  const { host, scope, s } = fixture();
+  let calls = 0;
+  const register = (...parts) => {
+    calls++;
+    return host.css(...parts);
+  };
+  const draw = (key, value) =>
     scope.frame('row', [key], () =>
-      scope.capture('style', host.css, () => [
-        scope.value('width', 'width', s.width, 'px', [() => width]),
-      ]),
+      scope.capture('css', register, () => [s.width.raw(scope.bind('width', () => value + 'px'))]),
     );
   const a = draw('a', 10),
     b = draw('b', 20);
   assert.notEqual(a, b);
   assert.equal(draw('b', 30), b);
   assert.equal(draw('a', 40), a);
+  assert.equal(calls, 2);
   assert.equal(host.rules().length, 4);
-});
-
-test('静态全局块不创建响应式订阅，动态全局块按整体更新', () => {
-  const fixed = createBindingTransform(
-    "import { globalCss } from '@zerodep-css/vue'; globalCss('base', s._selector('body', 'margin:0;'));",
-    'static.vue',
-    'vue',
-  );
-  assert.equal(fixed.used, false);
-  const dynamic = createBindingTransform(
-    "import { globalCss } from '@zerodep-css/vue'; import { ref } from 'vue'; const color = ref('red'); globalCss('theme', s._selector('body', `color:${color.value};`));",
-    'theme.vue',
-    'vue',
-  );
-  assert.equal(dynamic.used, true);
-  assert.match(dynamic.script, /\.effect\(/);
-  const shadowed = transform(
-    'function outer() { function css(value) { return value; } return css(s.width.px(width.value)); }',
-  );
-  assert.equal(shadowed.used, false);
-});
-
-test('声明数组和逻辑分支保留动态值转换，清理曾经启用的绑定', () => {
-  const result = transform('const a = css([false, [width.value > 0 && s.width.px(width.value)]]);');
-  assert.match(result.script, /width.value > 0 && __zc.value/);
-  const host = createServerCssHost();
-  const scope = createBindings('conditional', host.setBindings, (run) => {
-    run();
-    return () => {};
-  });
-  const s = new Css();
-  const render = (active) =>
-    scope.frame('element', [], () =>
-      scope.capture('css', host.css, () => [
-        active && scope.value('width', 'width', s.width, 'px', [() => 12]),
-      ]),
-    );
-  render(true);
-  assert.equal(host.rules().filter((rule) => rule.kind === 'bindings').length, 1);
-  render(false);
-  scope.dispose();
-  assert.equal(host.rules().filter((rule) => rule.kind === 'bindings').length, 0);
-});
-
-test('系统选择器支持嵌套动态声明，覆写选择器时整个片段回退', () => {
-  const result = transform(
-    "const box = css(s._hover([s.width.px(width.value), s._selector('& > span', s.height.px(width.value))]));",
-  );
-  assert.match(result.script, /\.selector\(/);
-  assert.match(result.script, /\.value\(/);
-  const host = createServerCssHost();
-  const scope = createBindings('selector', host.setBindings, (run) => {
-    run();
-    return () => {};
-  });
-  const s = new Css();
-  const draw = (author) =>
-    scope.capture('box', host.css, () => [
-      scope.selector('hover', author, '_hover', () => [
-        scope.value('width', 'width', author.width, 'px', [() => 12]),
-      ]),
-    ]);
-  const original = draw(s);
-  assert.match(
-    host.rules().find((rule) => rule.className === original).body,
-    /&:hover\{width:var\(/,
-  );
-  class OverrideHover extends Css {
-    _hover(...parts) {
-      return super._hover(...parts).replace('12px', '24px');
-    }
-  }
-  const custom = draw(new OverrideHover());
-  assert.equal(host.rules().find((rule) => rule.className === custom).body, '&:hover{width:24px;}');
-  class OverrideSelector extends Css {
-    _selector(selector, ...parts) {
-      return super._selector(selector, ...parts).replace('12px', '36px');
-    }
-  }
-  const wrapped = draw(new OverrideSelector());
-  assert.equal(
-    host.rules().find((rule) => rule.className === wrapped).body,
-    '&:hover{width:36px;}',
-  );
-  assert.equal(host.rules().filter((rule) => rule.kind === 'bindings').length, 1);
-  scope.dispose();
-});
-
-test('模板未变时更新变量但不重复登记，可变声明数组仍重新求值', () => {
-  const host = createServerCssHost();
-  const scope = createBindings('cache', host.setBindings, (run) => {
-    run();
-    return () => {};
-  });
-  const s = new Css();
-  let calls = 0,
-    width = 12;
-  const register = (...parts) => {
-    calls++;
-    return host.css(...parts);
-  };
-  const draw = () =>
-    scope.frame('box', [], () =>
-      scope.capture('style', register, () => [
-        scope.value('w', 'width', s.width, 'px', [() => width]),
-      ]),
-    );
-  const first = draw();
-  width = 24;
-  assert.equal(draw(), first);
-  assert.equal(calls, 1);
-  assert.match(host.rules().find((rule) => rule.kind === 'bindings').body, /:24px;/);
   const parts = [s.color.red];
   const array = () =>
     scope.frame('array', [], () => scope.capture('style', register, () => [parts]));
@@ -241,25 +130,43 @@ test('模板未变时更新变量但不重复登记，可变声明数组仍重�
   scope.dispose();
 });
 
-test('覆写共享声明格式化时，隐式绑定保持用户实现', () => {
-  class ProjectWidth extends WidthCss {
-    declaration(value) {
-      return super.declaration(`calc(${value} * 2)`);
+test('动画、全局样式、选择器和覆写方法共用显式变量语义', () => {
+  const { host, scope, s } = fixture();
+  const animation = scope.capture('frames', host.keyframes, () => [
+    s._selector('to', s.opacity.raw(scope.bind('alpha', () => 0.5))),
+  ]);
+  const animated = host.css(s.animationName.raw(animation));
+  assert.ok(host.rules().some((r) => r.kind === 'bindings' && r.targets.includes(animated)));
+  scope.capture('global', host.globalCss, () => [
+    'theme',
+    s._selector('body', s.color.raw(scope.bind('color', () => 'red'))),
+  ]);
+  assert.ok(host.rules().some((r) => r.kind === 'bindings' && r.root));
+  class CustomWidth extends WidthCss {
+    raw(value) {
+      return super.raw('calc(' + value + ' * 2)');
     }
   }
-  const width = new ProjectWidth();
-  const host = createServerCssHost();
-  const scope = createBindings('formatter', host.setBindings, (run) => {
-    run();
-    return () => {};
-  });
-  const name = scope.capture('raw', host.css, () => [
-    scope.value('width', 'width', width, 'raw', [() => '12px']),
+  const name = scope.capture('custom', host.css, () => [
+    s._hover(new CustomWidth().raw(scope.bind('width', () => '12px'))),
   ]);
-  assert.equal(host.rules().find((rule) => rule.className === name).body, 'width:calc(12px * 2);');
-  assert.equal(
-    host.rules().some((rule) => rule.kind === 'bindings'),
-    false,
+  assert.match(host.rules().find((r) => r.className === name).body, /&:hover\{width:calc\(var\(/);
+  scope.dispose();
+});
+
+test('手写 computed 与 Svelte derived 复用绑定帧', () => {
+  const vue = transform("const box=computed(()=>css(s.width.raw(bx(width.value+'px'))));");
+  assert.match(vue.script, /computed\(__zc.derived/);
+  assert.match(vue.script, /\.capture\(/);
+  const svelte = createBindingTransform(
+    "import {css,bx} from '@zerodep-css/svelte'; const box=$derived(css(s.width.raw(bx(width+'px'))));",
+    'a.svelte',
+    'svelte',
   );
+  assert.match(svelte.script, /\$derived.by\(__zc.derived/);
+  for (const text of ['bx()', 'bx(1,2)', 'bx(...values)', 'bx(bx(1))', 'bx(await value)'])
+    assert.throws(() => transform(text), /bx|binding/);
+  const { scope } = fixture();
+  assert.throws(() => scope.runtime(() => scope.bind('x', () => 1)), /not supported/);
   scope.dispose();
 });

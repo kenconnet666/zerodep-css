@@ -16,7 +16,7 @@ function compile(template, extra = '', options = {}) {
   const instance = plugin(options);
   const source = `<script setup lang="ts">
 import {reactive} from 'vue';
-import {Css,css as makeCss,WidthCss} from '@zerodep-css/vue';
+import {Css,css as makeCss,WidthCss,bx} from '@zerodep-css/vue';
 const state = reactive({noise:0,width:20,compact:false,show:true,items:[{id:'a',compact:false,width:10,label:'A'},{id:'b',compact:true,width:30,label:'B'}]});
 const s = new Css();
 ${extra}
@@ -187,10 +187,10 @@ test('v-for 的多元素和嵌套样式分别缓存，重排、同 key 替换、
   );
 });
 
-test('模板 computed 与单行多变量隐式绑定配合，类稳定且变量持续更新', async () => {
+test('模板 computed 与单行多变量 bx 绑定配合，类稳定且变量持续更新', async () => {
   await run(
-    `<div data-box :class="[makeCss(s.width.px(state.width),s.padding.px(state.width,2)), 'fixed']"></div>
-<div v-for="item in state.items" :key="item.id" data-row :class="makeCss(s.width.px(item.width))">{{item.label}}</div>`,
+    `<div data-box :class="[makeCss(s.width.raw(bx(state.width+'px')),s.padding.raw(bx(state.width+'px')+' '+bx('2px'))), 'fixed']"></div>
+<div v-for="item in state.items" :key="item.id" data-row :class="makeCss(s.width.raw(bx(item.width+'px')))">{{item.label}}</div>`,
     async (p) => {
       const initial = find(p.root, 'data-row').map((n) => n.props.class);
       const count = p.calls();
@@ -261,7 +261,7 @@ class AppCss extends Css { override readonly width = new Width(); } const custom
 
 test('SSR 使用相同声明与变量绑定协议，不创建客户端列表缓存', async () => {
   const result = compile(
-    `<div v-for="item in state.items" :key="item.id" :class="makeCss(s.width.px(item.width))"></div>`,
+    `<div v-for="item in state.items" :key="item.id" :class="makeCss(s.width.raw(bx(item.width+'px')))"></div>`,
     '',
     { ssr: true },
   );
@@ -326,7 +326,6 @@ test('浅 ref 内普通对象及内联 getter 不会被错误冻结', async () =
       assert.match(
         p.host
           .rules()
-          .filter((r) => r.kind === 'bindings')
           .map((r) => r.body)
           .join(''),
         /33px/,
@@ -358,5 +357,31 @@ test('嵌套循环与分支保持各自局部变量，同 key 不串行', async 
       await p.update((s) => (s.show = true));
       assert.equal(find(p.root, 'data-row').length, 4);
     },
+  );
+});
+
+test('setup 常量 bx 与同一工厂的多个 computed 相互隔离', async () => {
+  await run(
+    '<div data-a :class="a"></div><div data-b :class="b"></div>',
+    async (p) => {
+      const a = find(p.root, 'data-a')[0].props.class,
+        b = find(p.root, 'data-b')[0].props.class;
+      assert.notEqual(a, b);
+      const bodies = () =>
+        p.host
+          .rules()
+          .filter((r) => r.kind === 'bindings')
+          .map((r) => r.body)
+          .join('');
+      assert.match(bodies(), /:20px;/);
+      assert.match(bodies(), /:40px;/);
+      assert.match(bodies(), /:0.5;/);
+      await p.update((s) => (s.width = 30));
+      assert.match(bodies(), /:30px;/);
+      assert.match(bodies(), /:60px;/);
+      assert.equal(find(p.root, 'data-a')[0].props.class, a);
+      assert.equal(find(p.root, 'data-b')[0].props.class, b);
+    },
+    "import {computed} from 'vue'; const opacity=bx(0.5); function make(factor){return computed(()=>makeCss(s.opacity.raw(opacity),s.width.raw(bx(state.width*factor+'px'))));} const a=make(1), b=make(2);",
   );
 });

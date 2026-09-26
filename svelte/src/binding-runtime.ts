@@ -1,4 +1,4 @@
-import { onDestroy, onMount } from 'svelte';
+import { onDestroy } from 'svelte';
 import { createBindings } from '@zerodep-css/core/bindings';
 import { getBindingOwner } from './context.js';
 
@@ -18,9 +18,6 @@ export function createSvelteBindings(
     schedule,
     locations,
   );
-  onMount(() => {
-    scope.finishSetup();
-  });
   // SSR 的 onDestroy 会在取出规则之前执行，不能删除首屏值。
   if (typeof document !== 'undefined') onDestroy(scope.dispose);
   return scope;

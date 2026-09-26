@@ -33,7 +33,7 @@ s.width.raw('20px'); // 原有能力继续可用
 
 `test:vfor-style` 用真实 Vue 编译产物验证循环中每行的 class computed 缓存；`probe:vfor-style` 在 CI 比较浏览器更新与调用次数。原生 renderList 缓存复用、重排与嵌套边界见[v-for 缓存研究](../vue-vfor-cache-research.md)。
 
-`probe:template-derived` 对比 Vue/Svelte 模板运行时、派生缓存、模板隐式绑定与 setup 稳定绑定，耗时测量只在 CI 执行；候选语法、作用域限制与测法见[模板派生研究](../template-derived-research.md)。
+`probe:template-derived` 对比 Vue/Svelte 模板运行时、派生缓存、模板bx 绑定与 setup 稳定绑定，耗时测量只在 CI 执行；候选语法、作用域限制与测法见[模板派生研究](../template-derived-research.md)。
 
 `probe:template-conditional` 针对模板中的 `css(..., compact ? ... : ...)`，比较单元素与双元素共享派生，并用独立计数轮核实调用次数；编译前后转换的取舍也记录在上述研究中。
 
@@ -41,7 +41,7 @@ s.width.raw('20px'); // 原有能力继续可用
 
 `probe:keywords` 比较完整声明字段、初始化拼接、共用全局关键字、getter 和缓存 Proxy，包含 minified / gzip / Brotli、全部关键字校验、浏览器微基准及 Vue/Svelte 组件用例。只改内存研究副本，正式生成结果不变，耗时测量由 CI 执行；结论见[前缀与关键字分离研究](../keyword-prefix-research.md)。
 
-稳定的作者 API、选择器、隐式绑定浏览器验收已归入根目录 `test/browser/`，本工具包的原命令继续指向这些文件；共享编译夹具和纯性能探针仍留在本目录。耗时场景由 CI 执行：200 / 1,000 行各三轮，并记录十次无关状态更新、首次挂载、连续更新和规则数量。结果上传为 `runtime-diagnostics`，时间不作硬阈值。
+稳定的作者 API、选择器、bx 绑定浏览器验收已归入根目录 `test/browser/`，本工具包的原命令继续指向这些文件；共享编译夹具和纯性能探针仍留在本目录。耗时场景由 CI 执行：200 / 1,000 行各三轮，并记录十次无关状态更新、首次挂载、连续更新和规则数量。结果上传为 `runtime-diagnostics`，时间不作硬阈值。
 
 在本目录使用 Node 24、pnpm 10.34.5：
 
@@ -121,4 +121,4 @@ const buttonClass = css(
 
 `pnpm test:selectors` 用当前 Chrome 验证 CSSOM 嵌套规则、状态、伪元素、子元素和媒体条件；悬停期间更新 CSS 变量也会立即改变样式。`s._selector()` 本身不解析选择器。`test:bindings` 额外验证框架自动绑定、动画及 SSR 恢复。
 
-当前 Vue/Svelte 适配器、Nuxt 4 / SvelteKit 2 封装及隐式绑定均有浏览器、Node SSR 和 hydration 验收。旧探针中的单宿主性能数字不能代替当前适配器的[性能记录](../author-bindings-delivery.md)。
+当前 Vue/Svelte 适配器、Nuxt 4 / SvelteKit 2 封装及bx 绑定均有浏览器、Node SSR 和 hydration 验收。旧探针中的单宿主性能数字不能代替当前适配器的[性能记录](../author-bindings-delivery.md)。

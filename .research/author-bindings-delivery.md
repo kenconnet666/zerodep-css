@@ -16,7 +16,7 @@
 - 更宽的完整 UTF-16 哈希，miss 只计算一次，命中不计算；保留碰撞诊断。旧复现碰撞样本分离，30 万条顺序样本未发现新碰撞，不代表数学上无碰撞。
 - nonce / 插入位置、失联主标签和变量标签重建、显式宿主清理、统计信息。Kit 自带两个固定内联样式需要精确 CSP 哈希许可，未放宽任意内联样式。
 
-公开写法与回退边界见 [API](../docs/author-api.md)、[隐式绑定](../docs/implicit-bindings.md)、[元框架接入](../docs/metaframeworks.md)。未知字符串加工、用户覆写、派生 css 调用、slot/snippet 参数等保留原有求值；不会把一次性 const 初始化回退宣传成自动响应。
+公开写法与回退边界见 [API](../docs/author-api.md)、[隐式绑定](../docs/bindings.md)、[元框架接入](../docs/metaframeworks.md)。未知字符串加工、用户覆写、派生 css 调用、slot/snippet 参数等保留原有求值；不会把一次性 const 初始化回退宣传成自动响应。
 
 ## 性能诊断
 

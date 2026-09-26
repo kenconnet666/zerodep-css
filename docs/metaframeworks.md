@@ -2,7 +2,7 @@
 
 五个包仍为 private 工作区包。先构建包产物，普通组件继续从 `@zerodep-css/vue` / `@zerodep-css/svelte` 使用原有 API；元框架包负责宿主生命周期，不重新导出一套作者 API。
 
-本阶段验收 Nuxt 4.5.2、SvelteKit 2.70.3、Vue 3.5.43、Svelte 5.57.0，运行环境为 Node 24 和 Chromium。覆盖标准 Node SSR、客户端导航、静态预渲染页面及其恢复，包含[隐式多变量绑定](implicit-bindings.md)。
+本阶段验收 Nuxt 4.5.2、SvelteKit 2.70.3、Vue 3.5.43、Svelte 5.57.0，运行环境为 Node 24 和 Chromium。覆盖标准 Node SSR、客户端导航、静态预渲染页面及其恢复，包含[bx 多变量绑定](bindings.md)。
 
 ## Nuxt
 

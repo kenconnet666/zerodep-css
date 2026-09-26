@@ -1,7 +1,7 @@
 <script lang="ts">
   import { AppCss } from '../../../core/examples/theme.js';
   import { provideCss } from '../../../svelte/examples/context.js';
-  import Component from './SvelteImplicit.svelte';
+  import Component from './SvelteBx.svelte';
   let { expose } = $props<{
     expose: (index: number, control: { step(): void; reorder(): void }) => void;
   }>();

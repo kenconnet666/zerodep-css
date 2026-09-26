@@ -110,7 +110,7 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
       assert.equal((await stats()).bindings, 21);
       const changed = original
         .replace('>initial<', '>edited<')
-        .replace('s.width.px(width.value)', 's.width.px(width.value + 1)')
+        .replace("s.width.raw(bx(width.value + 'px'))", "s.width.raw(bx(width.value + 1 + 'px'))")
         .replace('s.color.blue', 's.color.red');
       await updateChild(changed);
       await page.waitForFunction(
@@ -131,7 +131,7 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
       );
       await updateChild(
         changed
-          .replace('s.width.px(width.value + 1)', 's.width.px(30)')
+          .replace("s.width.raw(bx(width.value + 1 + 'px'))", 's.width.px(30)')
           .replace('>edited<', '>removed<'),
       );
       await page.waitForFunction(

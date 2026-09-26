@@ -10,10 +10,12 @@ test('插件和消费方各自安装 Vue 编译器时，模板缓存仍生成有
     dist: true,
     vueCompilerOptions: plugin.api.compilerOptions,
     transformSfc(code, id) {
-      const source = code.replace(
-        ':class="classFor(row)"',
-        ':class="css(s.color.red, s.width.px(20 + iteration * props.count + row))"',
-      );
+      const source = code
+        .replace('Css, css', 'Css, css, bx')
+        .replace(
+          ':class="classFor(row)"',
+          ':class="css(s.color.red, s.width.raw(bx((20 + iteration * props.count + row) + `px`)))"',
+        );
       assert.notEqual(source, code);
       return plugin.transform.call({ warn() {} }, source, id)?.code ?? source;
     },

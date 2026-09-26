@@ -1,6 +1,6 @@
 import { mount, hydrate, tick, unmount } from 'svelte';
 import { hydrateCss, cssStats, configureCss } from '@zerodep-css/svelte';
-import Root from './SvelteImplicitRoot.svelte';
+import Root from './SvelteBxRoot.svelte';
 export { hydrateCss as restore, cssStats as stats, configureCss as configure };
 export async function start(target: HTMLElement, restore = false) {
   const controls: Array<{ step(): void; reorder(): void }> = [];

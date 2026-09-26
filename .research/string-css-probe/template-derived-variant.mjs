@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import vuePlugin from '../../vue/dist/vite.js';
 import sveltePlugin from '../../svelte/dist/vite.js';
 
-export const modes = ['runtime', 'derived', 'implicit', 'hoisted'];
+export const modes = ['runtime', 'derived', 'bx', 'hoisted'];
 
 /** 固定夹具的四种生成结果；不是识别任意模板的正式编译器。 */
 export function templateVariant(framework, mode) {
@@ -23,13 +23,20 @@ export function templateVariant(framework, mode) {
     let code = source
       .replace('/* DERIVED_DECLARATION */', declaration)
       .replace(array, mode === 'derived' || mode === 'hoisted' ? 'derivedClass' : templateCall);
-    if (mode === 'implicit' || mode === 'hoisted') {
+    if (mode === 'bx' || mode === 'hoisted') {
+      code = code
+        .replace(
+          /import \{([^}]+)\} from '(@zerodep-css\/(?:vue|svelte))';/,
+          (_, names, from) => 'import { bx,' + names + "} from '" + from + "';",
+        )
+        .replaceAll('s.width.px(width.value)', "s.width.raw(bx(width.value + 'px'))")
+        .replaceAll('s.width.px(width)', "s.width.raw(bx(width + 'px'))");
       const warnings = [];
       code =
         plugin.transform.call({ warn: (message) => warnings.push(message) }, code, id)?.code ??
         code;
       assert.deepEqual(warnings, []);
-      assert.ok(code.includes('/bindings'), 'Expected actual implicit variable conversion');
+      assert.ok(code.includes('/bindings'), 'Expected actual bx variable conversion');
     }
     return code;
   };

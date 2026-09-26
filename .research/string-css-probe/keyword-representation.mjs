@@ -137,7 +137,15 @@ try {
           dist: false,
           minify: true,
           plugins: [keywordVariant(variant)],
-          transformSfc: (code, id) => plugin.transform.call({ warn() {} }, code, id)?.code ?? code,
+          transformSfc(code, id) {
+            const explicit = code
+              .replace('Css, css', 'Css, css, bx')
+              .replace(
+                'return css(s.color.red, s.width.px(value));',
+                "return css(s.color.red, s.width.raw(bx(value + 'px')));",
+              );
+            return plugin.transform.call({ warn() {} }, explicit, id)?.code ?? explicit;
+          },
         },
       );
       const samples = [];
@@ -151,7 +159,7 @@ try {
           const result = await page.evaluate(async () => {
             const target = document.querySelector('main'),
               start = performance.now();
-            const control = await window.mupBundle.start(target, 'implicit', 200);
+            const control = await window.mupBundle.start(target, 'bx', 200);
             let checksum = target.offsetHeight;
             const mountMs = performance.now() - start,
               before = control.stats(),

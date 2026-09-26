@@ -9,7 +9,7 @@
 | `@zerodep-css/core/server`                           | Node 请求宿主                              |
 | `@zerodep-css/vue` / `@zerodep-css/svelte`           | 组件使用的统一入口                         |
 | 对应适配包的 `/server`                               | 手工 SSR 或元框架集成使用的明确服务端入口  |
-| `@zerodep-css/vue/vite` / `@zerodep-css/svelte/vite` | 可选隐式绑定构建插件，仅 Node 构建环境使用 |
+| `@zerodep-css/vue/vite` / `@zerodep-css/svelte/vite` | 可选 bx 绑定构建插件，仅 Node 构建环境使用 |
 
 `core/compiler` 和各包的 `bindings` 子路径是插件使用的内部协议，不是业务组件的并行作者 API。运行时产物通过拆分共享 chunk 保持同一作者类 / 宿主身份，浏览器不会引入 TypeScript 编译器。
 

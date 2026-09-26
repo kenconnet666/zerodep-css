@@ -22,7 +22,7 @@ export async function assertInitial(page, width = 24, theme = 'light') {
 }
 
 /** 文档示例和 SSR 恢复后的组件共用同一组交互验收。 */
-export async function exerciseExample(page, width = 24, theme = 'light', implicit = false) {
+export async function exerciseExample(page, width = 24, theme = 'light') {
   const click = async (action) => {
     await page.locator(`[data-action="${action}"]`).click();
     await page.evaluate(() => window.exampleControl?.flush());
@@ -56,7 +56,7 @@ export async function exerciseExample(page, width = 24, theme = 'light', implici
   await click('runtime');
   assert.equal(await style(page, 'runtime', 'width'), `${width + 1}px`);
   assert.equal(await style(page, 'static', 'width'), `${width}px`);
-  assert.equal(await ruleCount(page), warmRules + (implicit ? 0 : 1));
+  assert.equal(await ruleCount(page), warmRules + 1);
 
   const beforeTheme = await ruleCount(page);
   await click('theme');

@@ -7,7 +7,7 @@ import { bundle } from '../../.research/string-css-probe/mup-bundle.mjs';
 import { launchBrowser } from '../../.research/string-css-probe/browser.mjs';
 
 const browser = await launchBrowser();
-const output = new URL('../../test-results/implicit-bindings/', import.meta.url);
+const output = new URL('../../test-results/bx-bindings/', import.meta.url);
 await mkdir(output, { recursive: true });
 try {
   for (const framework of ['vue', 'svelte']) {
@@ -18,8 +18,8 @@ try {
       transformSfc: (code, id) =>
         plugin.transform.call({ warn: (message) => console.log(message) }, code, id)?.code ?? code,
     };
-    const source = await bundle(framework, 'browser', `${framework}-implicit-driver.ts`, options);
-    const serverCode = await bundle(framework, 'node', `${framework}-implicit-server.ts`, options);
+    const source = await bundle(framework, 'browser', `${framework}-bx-driver.ts`, options);
+    const serverCode = await bundle(framework, 'node', `${framework}-bx-server.ts`, options);
     const serverFile = new URL(`${framework}-server.mjs`, output);
     await writeFile(serverFile, serverCode);
     const server = await import(serverFile.href);
@@ -174,7 +174,7 @@ try {
           JSON.stringify({
             framework,
             hydrate,
-            implicitBindings: 'passed',
+            bxBindings: 'passed',
             rules: initial.stats.rules,
           }),
         );

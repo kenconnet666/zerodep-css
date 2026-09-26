@@ -1,4 +1,4 @@
-import { getCurrentInstance, onMounted, onUnmounted, useId, watchEffect } from 'vue';
+import { getCurrentInstance, onUnmounted, useId, watchEffect } from 'vue';
 import { createBindings } from '@zerodep-css/core/bindings';
 import { createTemplateCache } from './template-cache.js';
 
@@ -19,7 +19,6 @@ export function createVueBindings(
     (run) => watchEffect(run),
     locations,
   );
-  onMounted(scope.finishSetup);
   onUnmounted(scope.dispose);
   return Object.assign(scope, createTemplateCache());
 }

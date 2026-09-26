@@ -24,7 +24,15 @@ try {
     const options = {
       dist: false,
       minify: true,
-      transformSfc: (code, id) => plugin.transform.call({ warn() {} }, code, id)?.code ?? code,
+      transformSfc(code, id) {
+        const explicit = code
+          .replace('Css, css', 'Css, css, bx')
+          .replace(
+            'return css(s.color.red, s.width.px(value));',
+            "return css(s.color.red, s.width.raw(bx(value + 'px')));",
+          );
+        return plugin.transform.call({ warn() {} }, explicit, id)?.code ?? explicit;
+      },
     };
     const bound = await bundle(framework, 'browser', `${framework}-binding-performance-driver.ts`, {
       ...options,
@@ -40,25 +48,31 @@ try {
     if (framework === 'vue')
       for (const templateCache of [true, false]) {
         const templatePlugin = vuePlugin({ templateCache });
-        templates[templateCache ? 'implicit-template' : 'implicit-template-uncached'] =
-          await bundle(framework, 'browser', `${framework}-binding-performance-driver.ts`, {
+        templates[templateCache ? 'bx-template' : 'bx-template-uncached'] = await bundle(
+          framework,
+          'browser',
+          `${framework}-binding-performance-driver.ts`,
+          {
             dist: true,
             minify: true,
             vueCompilerOptions: templatePlugin.api.compilerOptions,
             transformSfc(code, id) {
-              const direct = code.replace(
-                ':class="classFor(row)"',
-                ':class="css(s.color.red, s.width.px(20 + iteration * props.count + row))"',
-              );
+              const direct = code
+                .replace('Css, css', 'Css, css, bx')
+                .replace(
+                  ':class="classFor(row)"',
+                  ':class="css(s.color.red, s.width.raw(bx((20 + iteration * props.count + row) + `px`)))"',
+                );
               assert.notEqual(direct, code, 'Template benchmark fixture changed');
               return templatePlugin.transform.call({ warn() {} }, direct, id)?.code ?? direct;
             },
-          });
+          },
+        );
       }
     for (let round = 0; round < rounds; round++) {
       const modes = [
-        'implicit',
-        'implicit-uncached',
+        'bx',
+        'bx-uncached',
         'runtime',
         'manual',
         'emotion',
@@ -76,7 +90,7 @@ try {
           await page.addScriptTag({
             content:
               templates[mode] ??
-              (mode === 'implicit' ? bound : mode === 'implicit-uncached' ? uncached : source),
+              (mode === 'bx' ? bound : mode === 'bx-uncached' ? uncached : source),
           });
           const sample = await page.evaluate(
             async ({ mode, count, updates }) => {
@@ -138,9 +152,9 @@ try {
             sample.widths,
             Array.from({ length: count }, (_, i) => `${20 + updates * count + i}px`),
           );
-          if (mode.startsWith('implicit') || mode === 'manual')
+          if (mode.startsWith('bx') || mode === 'manual')
             assert.equal(sample.finalRules, sample.initialRules);
-          if (mode.startsWith('implicit')) assert.equal(sample.noiseWrites, 0);
+          if (mode.startsWith('bx')) assert.equal(sample.noiseWrites, 0);
           delete sample.widths;
           (result.samples[`${framework}-${mode}`] ??= []).push(sample);
         } finally {

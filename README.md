@@ -1,6 +1,6 @@
 # zerodep-css：运行时 CSS 重新研究
 
-这是运行时 CSS 工作区，包含五个 private 包、类型检查和 Codex 语言服务。`core` 从固定的 `csstype` 生成 502 条属性链与 12,586 个关键字，提供单位 / 颜色 / 数学方法、`s._hover` / `s._selector` 选择器、类组合、动画及命名全局块。Vue/Svelte 提供上下文、Node 请求宿主、hydration 和可选隐式响应式绑定；Nuxt 4 / SvelteKit 2 接入标准 Node SSR、客户端恢复和预渲染。**流式 SSR、边缘部署尚未验收，包尚未公开发布**。旧方案可从本地 Git 历史或另存归档查询，不作为本分支实现。
+这是运行时 CSS 工作区，包含五个 private 包、类型检查和 Codex 语言服务。`core` 从固定的 `csstype` 生成 502 条属性链与 12,586 个关键字，提供单位 / 颜色 / 数学方法、`s._hover` / `s._selector` 选择器、类组合、动画及命名全局块。Vue/Svelte 提供上下文、Node 请求宿主、hydration 和可选显式 bx 绑定；Nuxt 4 / SvelteKit 2 接入标准 Node SSR、客户端恢复和预渲染。**流式 SSR、边缘部署尚未验收，包尚未公开发布**。旧方案可从本地 Git 历史或另存归档查询，不作为本分支实现。
 
 | 子项目      | 预留职责             |
 | ----------- | -------------------- |
@@ -40,7 +40,7 @@ class 对象写法、浏览器注册、Node 请求隔离及元框架接入已有
 运行时同步快路径、Worker 与 SIMD 的实测取舍见[并行与 SIMD 研究](.research/runtime-parallel-simd-research.md)。
 Vue/Svelte 的纯派生类选择、元素变量绑定与上下文边界见[框架结合研究](.research/vue-svelte-runtime-integration.md)。
 Emotion 源码对照、可复现缺口和下一阶段取舍见[运行时库审查](.research/runtime-library-tradeoffs.md)。
-新增作者方法见[作者 API](docs/author-api.md)，框架插件、自然响应式写法、SSR/CSP 和回退边界见[隐式绑定](docs/implicit-bindings.md)。[阶段计划](.research/next-phase-authoring-and-bindings.md)保留本轮决策依据。
+新增作者方法见[作者 API](docs/author-api.md)，框架插件、显式变量绑定写法、SSR/CSP 和回退边界见[bx 绑定](docs/bindings.md)。[阶段计划](.research/next-phase-authoring-and-bindings.md)保留本轮决策依据。
 本阶段交付内容和 Vue/Svelte 对照 Emotion、手工变量的测量见[实施与性能记录](.research/author-bindings-delivery.md)。
 
 可选亮暗预设、两层继承和子树主题覆盖见[主题用法](docs/themes.md)。
@@ -51,6 +51,6 @@ Emotion 源码对照、可复现缺口和下一阶段取舍见[运行时库审�
 
 作者类型以可读性为先：使用非泛型基类、明确的方法签名和普通 readonly 字段，见[类型结构](docs/author-types.md)。
 
-Vue 模板可直接使用 `:class="css(...)"`：插件通过 Vue AST 扩展自动缓存普通元素和 v-for 的样式计算，同时保留隐式 CSS 变量绑定。支持范围与运行时回退见[模板自动缓存](docs/implicit-bindings.md#模板直接调用与自动缓存)。
+Vue 模板可直接使用 `:class="css(...)"`：插件通过 Vue AST 扩展自动缓存普通元素和 v-for 的样式计算，同时保留显式 bx CSS 变量绑定。支持范围与运行时回退见[模板自动缓存](docs/bindings.md#模板直接调用与自动缓存)。
 
-Svelte 直接使用模板派生；隐式变量绑定支持 each、模板 const、await 分支和组件内 snippet，并区分每次 snippet 调用的变量值。
+Svelte 直接使用模板派生；bx 变量绑定支持 each、模板 const、await 分支和组件内 snippet，并区分每次 snippet 调用的变量值。

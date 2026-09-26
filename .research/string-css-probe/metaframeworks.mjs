@@ -95,7 +95,7 @@ try {
           assert.equal(await page.locator('script[data-zerodep-css]').count(), 0);
           assert.equal(await page.locator('style[data-zerodep-css]').count(), 1);
           const initial = await ruleCount(page);
-          await exerciseExample(page, props.width, props.theme, true);
+          await exerciseExample(page, props.width, props.theme);
           assert.equal(await ruleCount(page), initial + 1);
           await page.evaluate(() => {
             window.navigationMarker = true;
@@ -121,7 +121,7 @@ try {
       await page.goto(`${files.url}/prerender`);
       await page.locator('[data-ready="true"]').waitFor();
       await assertInitial(page, 32, 'dark');
-      await exerciseExample(page, 32, 'dark', true);
+      await exerciseExample(page, 32, 'dark');
       await page.goto(`${files.url}/bindings`);
       await page.locator('[data-ready="true"]').waitFor();
       await assertBindings(page);
