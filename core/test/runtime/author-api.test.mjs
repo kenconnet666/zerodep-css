@@ -102,3 +102,22 @@ test('动画与全局块接受嵌套条件片段，空块更新与删除语义�
   registry.globalCss('literal', name);
   assert.equal(registry.rules().find((r) => r.key === 'literal').body, name);
 });
+
+test('增长诊断只跟随成功增加或恢复，缓存命中和更新不重复计算增长', () => {
+  const sizes = [];
+  const registry = createRuleRegistry(
+    () => {},
+    () => {},
+    (size) => sizes.push(size),
+  );
+  registry.css('color:red;');
+  registry.css('color:red;');
+  registry.globalCss('theme', 'body{color:red;}');
+  registry.globalCss('theme', 'body{color:blue;}');
+  registry.setBindings('binding', '--size:1;');
+  registry.setBindings('binding', '--size:2;');
+  assert.deepEqual(sizes, [1, 2, 3]);
+  registry.globalCss('theme');
+  registry.setBindings('binding', null);
+  assert.equal(registry.size, 1);
+});

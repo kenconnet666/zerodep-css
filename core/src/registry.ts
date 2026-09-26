@@ -32,6 +32,7 @@ function ruleName(kind: CssRule['kind'], body: string, key?: string): string {
 export function createRuleRegistry(
   insert: (className: string, body: string, rule: CssRule) => void,
   updateGlobal: (key: string, rule?: CssRule, kind?: 'global' | 'bindings') => void = () => {},
+  onGrowth?: (size: number) => void,
 ) {
   let byContent = { class: new Map<string, string>(), keyframes: new Map<string, string>() };
   let byName = new Map<string, CssRule>();
@@ -41,6 +42,7 @@ export function createRuleRegistry(
   const references = new Map<string, { ids: string[]; root: boolean }>();
   const owners = new WeakMap<object, number>();
   let ownerCount = 0;
+  const grew = () => onGrowth?.(byName.size + globals.size + bindings.size);
 
   function referencedBindings(body: string): string[] {
     const result = new Set<string>();
@@ -95,6 +97,7 @@ export function createRuleRegistry(
     // 已知名字由上面生成；成功写入后直接登记，不再重复计算哈希。
     content.set(body, name);
     byName.set(name, rule);
+    grew();
     return name;
   }
 
@@ -132,7 +135,9 @@ export function createRuleRegistry(
       const rule: CssRule = { kind: 'global', key, className: ruleName('global', body, key), body };
       updateGlobal(key, rule);
       attachBindings('', referencedBindings(body), true);
+      const added = !globals.has(key);
       globals.set(key, rule);
+      if (added) grew();
     },
     /** 编译适配器专用：值与目标类分开更新，不改变普通 css() 的字符串结果。 */
     setBindings(key: string, body: string | null): void {
@@ -159,6 +164,7 @@ export function createRuleRegistry(
       updateGlobal(`bindings:${key}`, rule, 'bindings');
       bindings.set(name, rule);
       bindingNames.set(key, name);
+      if (!previous) grew();
     },
     hydrate(rules: readonly CssRule[]): void {
       const nextContent = {
@@ -204,6 +210,7 @@ export function createRuleRegistry(
       globals = nextGlobals;
       bindings = nextBindings;
       bindingNames = new Map([...bindings.values()].map((rule) => [rule.key!, rule.className]));
+      grew();
       for (const rule of byName.values()) {
         if (!rule.kind || rule.kind === 'class') {
           const refs = referencedBindings(rule.body);

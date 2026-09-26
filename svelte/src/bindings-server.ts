@@ -5,4 +5,4 @@ export const useBindings = (
   id: string,
   schedule: (run: () => void) => () => void,
   locations?: Readonly<Record<string, string>>,
-) => createSvelteBindings(file, id, schedule, requireHost(), locations);
+) => createSvelteBindings(file, id, schedule, requireHost(), locations, true);

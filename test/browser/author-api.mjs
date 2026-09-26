@@ -135,6 +135,29 @@ try {
     );
   });
   assert.equal(placement, true);
+  const warnings = [];
+  page.on('console', (message) => {
+    if (message.type() === 'warning' && message.text().includes('[zerodep-css]'))
+      warnings.push(message.text());
+  });
+  const diagnostics = await page.evaluate(() => {
+    api.disposeCss();
+    let rejected = false;
+    try {
+      api.configureCss({ warnAfter: 0 });
+    } catch {
+      rejected = true;
+    }
+    api.configureCss({ warnAfter: 2 });
+    api.css('color:red;');
+    api.css('color:blue;');
+    api.css('color:blue;');
+    api.css('color:green;');
+    return { rejected, classes: api.cssStats().classes };
+  });
+  assert.deepEqual(diagnostics, { rejected: true, classes: 3 });
+  assert.equal(warnings.length, 1);
+
   console.log(
     JSON.stringify({ authorApi: 'passed', recovery: 'passed', nonceAndPlacement: 'passed' }),
   );

@@ -4,6 +4,8 @@ import { serializeStyleRules } from './serialization.js';
 export interface BrowserCssOptions {
   nonce?: string;
   insertionPoint?: HTMLElement;
+  /** 可选规则数量提示线；只提示一次，不拒绝登记，也不删除规则。 */
+  warnAfter?: number;
 }
 const options = new WeakMap<Document, BrowserCssOptions>();
 const hosts = new WeakMap<Document, ReturnType<typeof createHost>>();
@@ -11,6 +13,11 @@ const hosts = new WeakMap<Document, ReturnType<typeof createHost>>();
 /** 在应用首次登记 / 恢复前配置一次；insertionPoint 指定插在该节点后面。 */
 export function configureCss(value: BrowserCssOptions, target: Document = document): void {
   if (hosts.has(target)) throw new Error('Configure CSS before registration or hydration.');
+  if (
+    value.warnAfter !== undefined &&
+    (!Number.isSafeInteger(value.warnAfter) || value.warnAfter < 1)
+  )
+    throw new Error('CSS warnAfter must be a positive safe integer.');
   if (value.insertionPoint && value.insertionPoint.parentNode !== target.head)
     throw new Error('CSS insertion point must belong to this document head.');
   options.set(target, { ...value });
@@ -21,6 +28,7 @@ function createHost(target: Document) {
   let style = target.querySelector<HTMLStyleElement>('style[data-zerodep-css]');
   const nonce = config.nonce ?? style?.nonce;
   const globals = new Map<string, HTMLStyleElement>();
+  let warned = false;
   let bindingStyle: HTMLStyleElement | undefined;
   const bindingRules = new Map<
     string,
@@ -94,11 +102,24 @@ function createHost(target: Document) {
     }
     node.textContent = rule.body;
   }
-  const registry = createRuleRegistry((_name, _body, rule) => {
-    const sheet = style!.sheet;
-    if (!sheet) throw new Error('CSS stylesheet is unavailable.');
-    sheet.insertRule(ruleText(rule), sheet.cssRules.length);
-  }, updateGlobal);
+  const registry = createRuleRegistry(
+    (_name, _body, rule) => {
+      const sheet = style!.sheet;
+      if (!sheet) throw new Error('CSS stylesheet is unavailable.');
+      sheet.insertRule(ruleText(rule), sheet.cssRules.length);
+    },
+    updateGlobal,
+    config.warnAfter === undefined
+      ? undefined
+      : (size) => {
+          if (!warned && size >= config.warnAfter!) {
+            warned = true;
+            console.warn(
+              `[zerodep-css] ${size} rules registered. Inspect cssStats() and use bx for continuously changing values.`,
+            );
+          }
+        },
+  );
 
   function rebuild() {
     if (!style!.isConnected) style = main();

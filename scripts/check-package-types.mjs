@@ -11,7 +11,7 @@ const fixture = await mkdtemp(join(results, 'package-types-'));
 function sourceFor(name, server) {
   const imports = server
     ? `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, createServerCssHost, withCssHost } from '@zerodep-css/${name}';`
-    : `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, hydrateCss } from '@zerodep-css/${name}';`;
+    : `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, hydrateCss, configureCss } from '@zerodep-css/${name}';`;
   return `${imports}
 import type { CssRule } from '@zerodep-css/core';
 import type { CssInput } from '@zerodep-css/core';
@@ -81,7 +81,7 @@ const rule: CssRule = { className: 'z-example', body: 'color:red;' };
 s.opacity.px(0.5);
 // @ts-expect-error width 只接受一个 px 参数
 s.width.px(4, 8);
-${server ? 'createServerCssHost(); withCssHost(createServerCssHost(), () => css(s.color.blue));' : 'hydrateCss([]);'}
+${server ? 'createServerCssHost(); withCssHost(createServerCssHost(), () => css(s.color.blue));' : 'configureCss({ warnAfter: 50_000 }); hydrateCss([]);'}
 // @ts-expect-error 根入口必须与当前运行条件一致
 ${server ? 'hydrateCss([]);' : 'createServerCssHost();'}
 `;

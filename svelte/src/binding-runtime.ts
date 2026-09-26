@@ -11,6 +11,7 @@ export function createSvelteBindings(
     setBindings(key: string, body: string | null): void;
   },
   locations?: Readonly<Record<string, string>>,
+  server = false,
 ) {
   const scope = createBindings(
     `${file}:${host.bindingId(getBindingOwner())}:${id}`,
@@ -18,7 +19,7 @@ export function createSvelteBindings(
     schedule,
     locations,
   );
-  // SSR 的 onDestroy 会在取出规则之前执行，不能删除首屏值。
-  if (typeof document !== 'undefined') onDestroy(scope.dispose);
+  // 按包入口决定 SSR 语义，避免 DOM 模拟环境把服务端清单提前清空。
+  if (!server) onDestroy(scope.dispose);
   return scope;
 }

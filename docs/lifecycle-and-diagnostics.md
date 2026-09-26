@@ -21,3 +21,7 @@ const stats = cssStats();
 详细样本与本轮结论见[稳定性与主题交付记录](../.research/stability-and-theme-delivery.md)。
 
 核心源码覆盖率由 `pnpm test:coverage` 生成，LCOV 文件作为 `runtime-coverage` artifact 上传。范围是核心注册器、绑定运行时、SSR 和序列化源码；不把这个比例误当成 Vue/Svelte 编译器或浏览器整体覆盖率。框架和浏览器用例独立验收。
+
+可以在首次登记前配置 `configureCss({ warnAfter: 50_000 })`，总规则数达到提示线时只警告一次。此选项默认关闭，不阻止继续登记，不删除历史类；按项目实际规模设定，结合 `cssStats()` 区分普通类和活动绑定。无意义状态更新、相同内容命中和变量值更新不会被误算作增长。
+
+Vue KeepAlive 停用期间保留该实例的绑定，重新激活复用规则，最终卸载时清理。Svelte SSR 的保留/清理由服务端包入口决定，不受测试环境是否模拟 document 影响。

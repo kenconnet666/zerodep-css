@@ -41,3 +41,35 @@ test('系统入口不会引入可选主题变量或调色板', async () => {
   });
   assert.equal(result.outputFiles[0].text.includes('--z-theme-'), false);
 });
+
+test('亮暗预设的文字与强调色默认配对保持可读对比度', () => {
+  const luminance = (hex) => {
+    const channels = hex
+      .slice(1)
+      .match(/../g)
+      .map((value) => parseInt(value, 16) / 255)
+      .map((value) => (value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4));
+    return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+  };
+  for (const [mode, declarations] of Object.entries(themes)) {
+    const palette = Object.fromEntries(
+      [...declarations.matchAll(/--z-theme-([\w-]+):(#[\da-f]+);/g)].map((match) => [
+        match[1],
+        match[2],
+      ]),
+    );
+    for (const [foreground, background] of [
+      ['text', 'background'],
+      ['text', 'surface'],
+      ['muted', 'background'],
+      ['on-accent', 'accent'],
+    ]) {
+      const a = luminance(palette[foreground]),
+        b = luminance(palette[background]);
+      assert.ok(
+        (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05) >= 4.5,
+        mode + ': ' + foreground + '/' + background,
+      );
+    }
+  }
+});

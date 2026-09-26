@@ -153,3 +153,13 @@ jobs:
             test-results/template-derived/
             test-results/template-conditional/
             test-results/vfor-style/
+
+  dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          build: 'false'
+          research: 'false'
+      - run: pnpm audit --prod --audit-level=high

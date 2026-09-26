@@ -122,3 +122,16 @@ test('derived.by 引用命名 getter 时仍使用派生实例作用域', () => {
   assert.match(result.transformed, /\$derived.by\(__zc.derived/);
   assert.match(result.rules.find((r) => r.kind === 'bindings').body, /:12px;/);
 });
+
+test('SSR 由服务端入口决定，不受测试环境中 document 全局影响', () => {
+  const previous = Object.getOwnPropertyDescriptor(globalThis, 'document');
+  Object.defineProperty(globalThis, 'document', { value: {}, configurable: true });
+  try {
+    const result = inspect(`${script}<div class={css(s.width.raw(bx(width+'px')))}></div>`);
+    assert.equal(result.rules.filter((r) => r.kind === 'bindings').length, 1);
+    assert.match(result.rules.find((r) => r.kind === 'bindings').body, /:12px;/);
+  } finally {
+    if (previous) Object.defineProperty(globalThis, 'document', previous);
+    else delete globalThis.document;
+  }
+});

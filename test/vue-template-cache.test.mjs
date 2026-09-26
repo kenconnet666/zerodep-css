@@ -423,3 +423,44 @@ test('scoped slot 多次调用隔离参数，保留文本更新和绑定值', as
     "import {defineComponent,h} from 'vue'; const SlotRows=defineComponent({props:['items'],setup(props,{slots}){return ()=>h('section',props.items.map(item=>slots.default({item})))}});",
   );
 });
+
+test('KeepAlive 保留绑定并在最终卸载清理，重新激活不增加规则', async () => {
+  const compiled = compile(
+    '<div data-kept :class="makeCss(s.width.raw(bx(state.width + `px`)))"></div>',
+  );
+  const host = adapter.createServerCssHost(),
+    visible = Vue.ref(true),
+    child = Vue.ref();
+  const parent = Vue.defineComponent({
+    setup() {
+      return () =>
+        Vue.h(Vue.KeepAlive, null, {
+          default: () => (visible.value ? Vue.h(compiled.component, { ref: child }) : null),
+        });
+    },
+  });
+  await adapter.withCssHost(host, async () => {
+    const root = element('root'),
+      app = renderer.createApp(parent);
+    adapter.provideCssHost(app, host);
+    app.mount(root);
+    try {
+      const exposed = child.value,
+        initial = find(root, 'data-kept')[0].props.class,
+        count = host.rules().length;
+      visible.value = false;
+      await Vue.nextTick();
+      assert.equal(find(root, 'data-kept').length, 0);
+      exposed.state.width = 42;
+      await Vue.nextTick();
+      visible.value = true;
+      await Vue.nextTick();
+      assert.equal(find(root, 'data-kept')[0].props.class, initial);
+      assert.equal(host.rules().length, count);
+      assert.ok(host.rules().some((r) => r.kind === 'bindings' && r.body.includes('42px')));
+    } finally {
+      app.unmount();
+    }
+    assert.equal(host.rules().filter((r) => r.kind === 'bindings').length, 0);
+  });
+});
