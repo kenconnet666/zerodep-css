@@ -113,7 +113,20 @@ try {
             }),
           }));
         const initial = await inspect();
-        if (hydrate) assert.equal(initial.stats.rules, rendered.rules.length);
+        if (hydrate) {
+          // Svelte 的 effect 在浏览器启动：每实例增加一个值规则和一个类；SSR 初值仍复用快照类。
+          const clientEffects = framework === 'svelte' ? initial.nodes.length : 0;
+          assert.equal(initial.stats.rules, rendered.rules.length + clientEffects * 2);
+          assert.equal(
+            initial.stats.bindings,
+            rendered.rules.filter((rule) => rule.kind === 'bindings').length + clientEffects,
+          );
+          assert.equal(
+            initial.stats.classes,
+            rendered.rules.filter((rule) => !rule.kind || rule.kind === 'class').length +
+              clientEffects,
+          );
+        }
         assert.equal(initial.nodes[0].width, '24px');
         assert.equal(initial.nodes[1].width, '40px');
         for (let i = 0; i < 4; i++) await page.evaluate(() => window.control.step(0));

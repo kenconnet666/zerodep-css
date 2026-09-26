@@ -163,7 +163,9 @@ export function createBindingTransform(
         ts.forEachChild(child, collectVars);
       };
       ts.forEachChild(node, collectVars);
-      if ('name' in node && node.name && ts.isIdentifier(node.name)) local.add(node.name.text);
+      // 方法名不是词法绑定；只有具名函数会在自身作用域遮蔽同名导入。
+      if ((ts.isFunctionDeclaration(node) || ts.isFunctionExpression(node)) && node.name)
+        local.add(node.name.text);
       for (const parameter of node.parameters) collectBindings(parameter.name, local);
     }
     if (ts.isBlock(node) || ts.isCaseBlock(node)) {
@@ -263,6 +265,64 @@ export function createBindingTransform(
       if (managed && node.arguments.length > callbackIndex) {
         const args = node.arguments.map((arg, index) => {
           if (index !== callbackIndex) return render(arg, sf, local);
+          if (vueCall === 'computed' && ts.isObjectLiteralExpression(arg)) {
+            // 保留 computed 对整个选项对象的上下文类型，只包装 getter，setter 仍可推断参数。
+            return (
+              '{' +
+              arg.properties
+                .map((property) => {
+                  if (ts.isSpreadAssignment(property))
+                    return (
+                      '...' +
+                      scope +
+                      '.frameCallback(' +
+                      site(property, sf) +
+                      ', ' +
+                      render(property.expression, sf, local) +
+                      ')'
+                    );
+                  if (
+                    'name' in property &&
+                    property.name &&
+                    (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name)) &&
+                    property.name.text === 'get'
+                  ) {
+                    let getter: string | undefined;
+                    if (ts.isPropertyAssignment(property))
+                      getter = render(property.initializer, sf, local);
+                    else if (ts.isShorthandPropertyAssignment(property))
+                      getter = property.name.text;
+                    else if (ts.isMethodDeclaration(property)) {
+                      const asyncPrefix = property.modifiers?.some(
+                        (mod) => mod.kind === ts.SyntaxKind.AsyncKeyword,
+                      )
+                        ? 'async '
+                        : '';
+                      getter =
+                        asyncPrefix +
+                        'function' +
+                        (property.asteriskToken ? '*' : '') +
+                        render(property, sf, local).slice(
+                          property.name.end - property.getStart(sf),
+                        );
+                    }
+                    if (getter)
+                      return (
+                        'get: ' +
+                        scope +
+                        '.frameCallback(' +
+                        site(property, sf) +
+                        ', ' +
+                        getter +
+                        ')'
+                      );
+                  }
+                  return render(property, sf, local);
+                })
+                .join(', ') +
+              '}'
+            );
+          }
           if (text === '$derived')
             return (
               scope +

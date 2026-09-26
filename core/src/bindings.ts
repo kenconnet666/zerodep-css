@@ -106,10 +106,11 @@ export function createBindings(
         frame = previous;
       }
     },
-    capture<Part, Result>(
+    capture<const Args extends unknown[], Result>(
       site: string,
-      register: (...parts: Part[]) => Result,
-      produce: () => Part[],
+      register: (...parts: Args) => Result,
+      // 保留元组与 false 字面量，同时兼容 globalCss 的首个 key 参数。
+      produce: () => Args,
       reuseResult = true,
     ): Result {
       if (disposed) throw new Error('CSS binding scope has been disposed.');
@@ -182,7 +183,7 @@ export function createBindings(
         return api.capture(
           site,
           (value: string) => value,
-          () => [api.bind(site, read, constant)],
+          (): [string] => [api.bind(site, read, constant)],
         );
       if (!constant) current.live = true;
       const slot = current.readers.push(read) - 1;

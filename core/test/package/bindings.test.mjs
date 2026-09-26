@@ -255,3 +255,8 @@ test('绑定表达式和登记失败均撤回订阅，现有组恢复后仍可�
   assert.match(host.rules().find((r) => r.kind === 'bindings').body, /:24px;/);
   scope.dispose();
 });
+
+test('对象方法名不遮蔽同名 bx 导入，具名函数仍遵循词法遮蔽', () => {
+  assert.equal(transform('const helpers={bx(value){return bx(value)}};').used, true);
+  assert.equal(transform('const run=function bx(value){return bx(value)};').used, false);
+});
