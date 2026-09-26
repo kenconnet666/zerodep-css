@@ -40,3 +40,4 @@ class 对象写法、浏览器注册、Node 请求隔离及元框架接入已有
 运行时同步快路径、Worker 与 SIMD 的实测取舍见[并行与 SIMD 研究](.research/runtime-parallel-simd-research.md)。
 Vue/Svelte 的纯派生类选择、元素变量绑定与上下文边界见[框架结合研究](.research/vue-svelte-runtime-integration.md)。
 Emotion 源码对照、可复现缺口和下一阶段取舍见[运行时库审查](.research/runtime-library-tradeoffs.md)。
+最新讨论确认的 API 与隐式多变量绑定范围见[下一阶段计划](.research/next-phase-authoring-and-bindings.md)，其中新能力尚未实现。
