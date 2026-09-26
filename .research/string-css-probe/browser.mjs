@@ -1,6 +1,9 @@
-import { chromium } from '@playwright/test';
+import { chromium, firefox, webkit } from '@playwright/test';
 
 export function launchBrowser() {
   const channel = process.env.CSS_PROBE_BROWSER_CHANNEL ?? 'chrome';
-  return chromium.launch(channel === 'chromium' ? { headless: true } : { channel, headless: true });
+  const browser = { chromium, firefox, webkit }[channel];
+  return browser
+    ? browser.launch({ headless: true })
+    : chromium.launch({ channel, headless: true });
 }

@@ -1,4 +1,4 @@
-name: 基础工作区检查
+name: 生产验收
 
 on:
   push:
@@ -6,6 +6,10 @@ on:
 
 permissions:
   contents: read
+
+env:
+  MUP_DIST: '1'
+  CSS_PROBE_BROWSER_CHANNEL: chromium
 
 jobs:
   foundation:
@@ -16,82 +20,131 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: ./.github/actions/setup
         with:
-          version: 10.34.5
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          build: 'false'
+          research: 'false'
       - run: pnpm format:check
       - run: pnpm check
       - run: pnpm lsp:verify
 
-  integration:
+  unit:
     runs-on: ubuntu-latest
-    env:
-      CSS_PROBE_BROWSER_CHANNEL: chromium
-      MUP_DIST: '1'
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.34.5
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: pnpm --dir .research/string-css-probe install --frozen-lockfile
-      - run: pnpm --dir .research/string-css-probe exec playwright install --with-deps chromium
+      - uses: ./.github/actions/setup
       - run: pnpm --filter @zerodep-css/core test
       - run: pnpm test:author
       - run: pnpm test:theme
       - run: pnpm test:bindings
       - run: pnpm test:compiler
       - run: pnpm --dir .research/string-css-probe test:compiler-instances
-      - run: pnpm --dir .research/string-css-probe probe:static-fields
+      - run: pnpm --dir .research/string-css-probe test:keyword-variants
+      - run: pnpm --dir .research/string-css-probe test:vfor-style
+      - run: pnpm --dir .research/string-css-probe test:mup:server
+      - run: pnpm --dir .research/string-css-probe test:mup:exports
+
+  browser:
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    runs-on: ubuntu-latest
+    env:
+      CSS_PROBE_BROWSER_CHANNEL: ${{ matrix.browser }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          browser: ${{ matrix.browser }}
       - run: pnpm --dir .research/string-css-probe test:selectors
       - run: pnpm --dir .research/string-css-probe test:mup:browser
-      - run: pnpm --dir .research/string-css-probe test:mup:server
       - run: pnpm --dir .research/string-css-probe test:mup:hydration
-      - run: pnpm --dir .research/string-css-probe test:mup:exports
       - run: pnpm --dir .research/string-css-probe test:examples:browser
       - run: pnpm --dir .research/string-css-probe test:examples:hydration
       - run: pnpm --dir .research/string-css-probe test:transport
       - run: pnpm --dir .research/string-css-probe test:author-api
       - run: pnpm --dir .research/string-css-probe test:bindings
-      - run: pnpm --dir .research/string-css-probe test:keyword-variants
-      - run: pnpm --dir .research/string-css-probe probe:keywords
-      - run: pnpm --dir .research/string-css-probe probe:template-derived
-      - run: pnpm --dir .research/string-css-probe probe:template-conditional
-      - run: pnpm --dir .research/string-css-probe test:vfor-style
-      - run: pnpm --dir .research/string-css-probe probe:vfor-style
-      - run: node test/browser/lifecycle-hmr.mjs
-      - run: pnpm --dir .research/string-css-probe probe:bindings
-        env:
-          BINDING_ROUNDS: '3'
-      - run: pnpm --dir .research/string-css-probe probe:bindings
-        env:
-          BINDING_ROUNDS: '3'
-          BINDING_ROWS: '1000'
-      - run: node scripts/prepare-framework-fixtures.mjs
-      - run: node ../../node_modules/nuxt/bin/nuxt.mjs build
-        working-directory: nuxt/test/app
-      - run: node ../../node_modules/vite/bin/vite.js build
-        working-directory: sveltekit/test/app
-      - run: pnpm --dir .research/string-css-probe test:metaframeworks
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: runtime-diagnostics
+          name: browser-${{ matrix.browser }}
+          path: test-results/bx-bindings/
+
+  lifecycle:
+    strategy:
+      fail-fast: false
+      matrix:
+        framework: [vue, svelte]
+    runs-on: ubuntu-latest
+    env:
+      CSS_TEST_FRAMEWORK: ${{ matrix.framework }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          browser: chromium
+      - run: pnpm test:lifecycle
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lifecycle-${{ matrix.framework }}
+          path: test-results/lifecycle-*.json
+
+  metaframework:
+    strategy:
+      fail-fast: false
+      matrix:
+        framework: [nuxt, sveltekit]
+    runs-on: ubuntu-latest
+    env:
+      CSS_TEST_FRAMEWORK: ${{ matrix.framework }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          browser: chromium
+      - run: node scripts/prepare-framework-fixtures.mjs
+      - if: matrix.framework == 'nuxt'
+        run: node ../../node_modules/nuxt/bin/nuxt.mjs build
+        working-directory: nuxt/test/app
+      - if: matrix.framework == 'sveltekit'
+        run: node ../../node_modules/vite/bin/vite.js build
+        working-directory: sveltekit/test/app
+      - run: pnpm --dir .research/string-css-probe test:metaframeworks
+
+  performance:
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [bindings-200, bindings-1000, author, templates]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          browser: chromium
+      - if: startsWith(matrix.suite, 'bindings-')
+        run: pnpm --dir .research/string-css-probe probe:bindings
+        env:
+          BINDING_ROUNDS: '3'
+          BINDING_ROWS: ${{ matrix.suite == 'bindings-1000' && '1000' || '200' }}
+      - if: matrix.suite == 'author'
+        run: |
+          pnpm --dir .research/string-css-probe probe:static-fields
+          pnpm --dir .research/string-css-probe probe:keywords
+      - if: matrix.suite == 'templates'
+        run: |
+          pnpm --dir .research/string-css-probe probe:template-derived
+          pnpm --dir .research/string-css-probe probe:template-conditional
+          pnpm --dir .research/string-css-probe probe:vfor-style
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: performance-${{ matrix.suite }}
           path: |
-            test-results/lifecycle-hmr.json
-            test-results/lifecycle-failure-*.json
-            test-results/binding-performance/*.json
-            test-results/keyword-representation/*.json
-            test-results/template-derived/*.json
-            test-results/template-conditional/*
-            test-results/vfor-style/*
+            test-results/binding-performance/
+            test-results/keyword-representation/
+            test-results/template-derived/
+            test-results/template-conditional/
+            test-results/vfor-style/

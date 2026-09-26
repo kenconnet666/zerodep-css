@@ -1,0 +1,33 @@
+name: 准备工作区
+description: 固定工具链、安装依赖，并按任务需要准备产物和浏览器。
+inputs:
+  build:
+    default: 'true'
+    description: 构建五包产物
+  research:
+    default: 'true'
+    description: 安装浏览器与性能验收工具
+  browser:
+    default: ''
+    description: Playwright 浏览器名称
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 10.34.5
+    - uses: actions/setup-node@v4
+      with:
+        node-version-file: .node-version
+        cache: pnpm
+    - run: pnpm install --frozen-lockfile
+      shell: bash
+    - if: inputs.build == 'true'
+      run: pnpm build
+      shell: bash
+    - if: inputs.research == 'true'
+      run: pnpm --dir .research/string-css-probe install --frozen-lockfile
+      shell: bash
+    - if: inputs.browser != ''
+      run: pnpm --dir .research/string-css-probe exec playwright install --with-deps ${{ inputs.browser }}
+      shell: bash

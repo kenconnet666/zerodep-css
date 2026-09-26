@@ -11,9 +11,12 @@ const targets = {
   nuxt: { entry: '.output/server/index.mjs', staticRoots: ['.output/public'] },
   sveltekit: { entry: 'build/index.js', staticRoots: ['build/prerendered', 'build/client'] },
 };
+const selected = process.env.CSS_TEST_FRAMEWORK;
+if (selected && !(selected in targets)) throw new Error('Unknown metaframework: ' + selected);
 const browser = await launchBrowser();
 try {
   for (const [name, target] of Object.entries(targets)) {
+    if (selected && name !== selected) continue;
     const cwd = resolve(root, name, 'test/app');
     const server = await startNode(target.entry, cwd);
     try {

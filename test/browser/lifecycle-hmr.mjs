@@ -18,7 +18,10 @@ await mkdir(workspaces, { recursive: true });
 const browser = await launchBrowser();
 const report = [];
 try {
-  for (const framework of ['vue', 'svelte']) {
+  const selected = process.env.CSS_TEST_FRAMEWORK;
+  if (selected && !['vue', 'svelte'].includes(selected))
+    throw new Error('Unknown lifecycle framework: ' + selected);
+  for (const framework of selected ? [selected] : ['vue', 'svelte']) {
     const directory = await mkdtemp(join(workspaces, 'lifecycle-'));
     let server;
     const page = await browser.newPage();
