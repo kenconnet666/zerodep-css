@@ -3,5 +3,11 @@
   "compilerOptions": {
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "src/**/*.vue", "test/types/**/*.vue"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "test/types/**/*.vue",
+    "examples/**/*.ts",
+    "examples/**/*.vue"
+  ]
 }

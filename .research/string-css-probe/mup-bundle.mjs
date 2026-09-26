@@ -40,22 +40,23 @@ export async function bundle(framework, platform, entry, options = {}) {
     },
     plugins: [
       ...(options.plugins ?? []),
+      {
+        name: 'single-framework-runtime',
+        setup(bundler) {
+          // 示例位于包内、驱动位于探针目录；两者必须使用同一份响应式运行时。
+          bundler.onResolve({ filter: new RegExp(`^${framework}(?:/.*)?$`) }, async (args) => {
+            if (args.pluginData?.singleFramework) return;
+            const result = await bundler.resolve(args.path, {
+              resolveDir: directory,
+              kind: args.kind,
+              pluginData: { singleFramework: true },
+            });
+            return { path: result.path, errors: result.errors };
+          });
+        },
+      },
       ...(framework === 'svelte'
         ? [
-            {
-              name: 'single-svelte-runtime',
-              setup(bundler) {
-                bundler.onResolve({ filter: /^svelte(?:\/.*)?$/ }, async (args) => {
-                  if (args.pluginData?.singleSvelte) return;
-                  const result = await bundler.resolve(args.path, {
-                    resolveDir: directory,
-                    kind: args.kind,
-                    pluginData: { singleSvelte: true },
-                  });
-                  return { path: result.path, errors: result.errors };
-                });
-              },
-            },
             {
               name: 'svelte-compiler',
               setup(bundler) {

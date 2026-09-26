@@ -29,6 +29,8 @@ const className = css(s.display.flex, s.width._md, ic('&:hover', s.color.red));
 
 Vue/Svelte 组件初始化、有限状态选择与连续值绑定的对照写法及 SSR 边界见[框架结合研究](../.research/vue-svelte-runtime-integration.md)。
 
+可直接阅读和测试的组件位于[框架用法示例](framework-examples.md)，测试与文档引用同一份 Vue/Svelte 组件。
+
 ## 手工 Node SSR 接入边界
 
 目前提供底层请求宿主，还没有 Nuxt/SvelteKit 自动封装。Vue 服务器使用 `renderToString`，Svelte 服务器使用 `render`；两者都在渲染前创建宿主，并在 `withCssHost` 内执行整个渲染：

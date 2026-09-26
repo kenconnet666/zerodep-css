@@ -4,6 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@10.34.5",
   "scripts": {
+    "test:examples:browser": "node examples-browser.mjs",
     "test:mup:browser": "node mup-browser.mjs",
     "test:mup:server": "node mup-server.mjs",
     "test:mup:hydration": "node mup-hydration.mjs",

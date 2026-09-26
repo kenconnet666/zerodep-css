@@ -54,3 +54,4 @@ jobs:
       - run: pnpm --dir .research/string-css-probe test:mup:server
       - run: pnpm --dir .research/string-css-probe test:mup:hydration
       - run: pnpm --dir .research/string-css-probe test:mup:exports
+      - run: pnpm --dir .research/string-css-probe test:examples:browser
