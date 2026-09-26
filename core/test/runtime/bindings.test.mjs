@@ -35,7 +35,7 @@ test('动画与组合类保留变量引用，越过子树的选择器使用私�
   registry.setBindings(key, `${variable}:0.5;`);
   const animation = registry.keyframes(`from{opacity:var(${variable});}to{opacity:1;}`);
   const a = registry.css(`animation:${animation} 1s;`);
-  const merged = registry.cx(a, registry.css('color:red;'));
+  const merged = registry.css(a, 'color:red;');
   registry.css(`& + span{opacity:var(${variable});}`);
   const rule = registry.rules().find((item) => item.kind === 'bindings');
   assert.ok(rule.targets.includes(a));

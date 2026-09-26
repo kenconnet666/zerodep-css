@@ -1,5 +1,7 @@
 import { hash } from './names.js';
-import { classNames, type ClassNames } from './class-names.js';
+
+/** 声明或当前宿主的样式类；条件空项省略，数组按原顺序展开。 */
+export type CssInput = string | false | null | undefined | readonly CssInput[];
 
 export interface CssRule {
   className: string;
@@ -97,7 +99,17 @@ export function createRuleRegistry(
     return name;
   }
 
-  const css = (...parts: string[]) => {
+  function resolvePart(input: CssInput): string {
+    if (typeof input === 'string') {
+      // 仅本库样式类使用 z- 前缀，仍以登记表精确匹配为准。
+      return (input.startsWith('z-') ? byName.get(input)?.body : undefined) ?? input;
+    }
+    return input ? input.map(resolvePart).join('') : '';
+  }
+
+  const css = (...parts: CssInput[]) => {
+    // rest 数组归本次调用所有；复用它，普通字符串路径不另建展开数组。
+    for (let index = 0; index < parts.length; index++) parts[index] = resolvePart(parts[index]);
     const body = parts.join('');
     return register(body, 'class');
   };
@@ -108,18 +120,6 @@ export function createRuleRegistry(
     },
     css,
     keyframes: (...parts: string[]) => register(parts.join(''), 'keyframes'),
-    cx(...values: ClassNames[]): string {
-      const names = classNames(values);
-      const registered: string[] = [];
-      const external: string[] = [];
-      for (const name of names.split(/\s+/)) {
-        if (!name) continue;
-        const rule = byName.get(name);
-        if (rule && (!rule.kind || rule.kind === 'class')) registered.push(rule.body);
-        else external.push(name);
-      }
-      return registered.length < 2 ? names : [...external, css(...registered)].join(' ');
-    },
     globalCss(key: string, ...parts: string[]): void {
       if (!parts.length) {
         if (globals.has(key)) {

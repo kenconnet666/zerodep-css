@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { css, cx, globalCss, ic, keyframes } from '@zerodep-css/svelte';
+  import { css, globalCss, ic, keyframes } from '@zerodep-css/svelte';
   import { useCss } from '../../../svelte/examples/context.js';
   import Plain from './SveltePlainClass.svelte';
   let {
@@ -24,9 +24,9 @@
     s.transform.raw(`translate(${width}px, ${side}px) rotate(${red}deg)`),
   );
   const animated = css(s.animationName.raw(fade), s.animationDuration.ms(1000));
-  const combined = cx(box, css(s.backgroundColor.blue));
+  const combined = css(box, [false, s.backgroundColor.blue]);
   const fixed = css(s.height.px(snapshot));
-  const dual = css(s.width.px(side), s.height.rem(side));
+  const dual = css([null, side > 0 && s.width.px(side), [s.height.rem(side)]]);
   const sibling = css(ic('& + [data-bound="sibling"]', s.marginLeft.px(width)));
   function rowClass(row: { width: number }) {
     return css(s.width.px(row.width));

@@ -1,5 +1,4 @@
-import { createRuleRegistry, ruleText, type CssRule } from './registry.js';
-import type { ClassNames } from './class-names.js';
+import { createRuleRegistry, ruleText, type CssRule, type CssInput } from './registry.js';
 import { serializeStyleRules } from './serialization.js';
 
 export interface BrowserCssOptions {
@@ -146,12 +145,11 @@ function getHost(target: Document) {
 }
 
 /** 浏览器文档共享规则；每次调用只注册尚未出现的声明组合。 */
-export function css(...parts: string[]): string {
+export function css(...parts: CssInput[]): string {
   if (typeof document === 'undefined') throw new Error('CSS browser host is unavailable.');
   return getHost(document).registry.css(...parts);
 }
 
-export const cx = (...values: ClassNames[]): string => getHost(document).registry.cx(...values);
 export const keyframes = (...parts: string[]): string =>
   getHost(document).registry.keyframes(...parts);
 export function globalCss(key: string, ...parts: string[]): void {

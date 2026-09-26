@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { css, cx, globalCss, ic, keyframes } from '@zerodep-css/vue';
+import { css, globalCss, ic, keyframes } from '@zerodep-css/vue';
 import { useCss } from '../../../vue/examples/context.js';
 import Plain from './VuePlainClass.vue';
 const props = defineProps<{
@@ -28,9 +28,9 @@ const box = css(
   s.transform.raw(`translate(${width.value}px, ${side.value}px) rotate(${red.value}deg)`),
 );
 const animated = css(s.animationName.raw(fade), s.animationDuration.ms(1000));
-const combined = cx(box, css(s.backgroundColor.blue));
+const combined = css(box, [false, s.backgroundColor.blue]);
 const fixed = css(s.height.px(snapshot));
-const dual = css(s.width.px(side.value), s.height.rem(side.value));
+const dual = css([null, side.value > 0 && s.width.px(side.value), [s.height.rem(side.value)]]);
 const sibling = css(ic('& + [data-bound="sibling"]', s.marginLeft.px(width.value)));
 function rowClass(row: { width: number }) {
   return css(s.width.px(row.width));

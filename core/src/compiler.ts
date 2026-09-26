@@ -265,10 +265,20 @@ export function createBindingTransform(
     let result = '';
     ts.forEachChild(node, (child) => {
       const childStart = child.getStart(sf);
+      const conditionalValue =
+        ts.isBinaryExpression(node) &&
+        child === node.right &&
+        [
+          ts.SyntaxKind.AmpersandAmpersandToken,
+          ts.SyntaxKind.BarBarToken,
+          ts.SyntaxKind.QuestionQuestionToken,
+        ].includes(node.operatorToken.kind);
       const context =
         ts.isConditionalExpression(node) && child === node.condition
           ? false
-          : ts.isBinaryExpression(node) && node.operatorToken.kind !== ts.SyntaxKind.PlusToken
+          : ts.isBinaryExpression(node) &&
+              node.operatorToken.kind !== ts.SyntaxKind.PlusToken &&
+              !conditionalValue
             ? false
             : bindingContext;
       result +=

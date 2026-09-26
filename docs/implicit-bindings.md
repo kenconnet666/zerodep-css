@@ -49,7 +49,7 @@ const box = css(
 
 ## 组合、动画与全局块
 
-`cx(bound, anotherClass)` 会将合成类加入原有变量的目标选择器。类名可以作为字符串传给子组件；不要求在该子组件再运行转换。
+`css(bound, anotherClass)` 或 `css(bound, s.color.red)` 会将合成类加入原有变量的目标选择器，无需先给追加声明生成一个中间类。`css` 的嵌套数组及逻辑条件右侧也参与绑定转换；条件本身继续按原有 JS 求值时机选择结构。类名可以作为字符串传给子组件；不要求在该子组件再运行转换。
 
 `keyframes(ic('from', s.opacity.raw(alpha / 2)), ic('to', s.opacity.raw(alpha)))` 支持动态帧值。动画名称不随连续值变化；通过 `animationName.raw(name)` 或 animation 简写使用该名称的类会关联对应变量。
 

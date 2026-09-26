@@ -1,12 +1,10 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { createRuleRegistry, type CssRule } from './registry.js';
-import type { ClassNames } from './class-names.js';
+import { createRuleRegistry, type CssRule, type CssInput } from './registry.js';
 import { serializeStyleRules } from './serialization.js';
 export { serializeCssRules } from './serialization.js';
 
 export interface ServerCssHost {
-  css(...parts: string[]): string;
-  cx(...values: ClassNames[]): string;
+  css(...parts: CssInput[]): string;
   keyframes(...parts: string[]): string;
   globalCss(key: string, ...parts: string[]): void;
   setBindings(key: string, body: string | null): void;
@@ -22,7 +20,6 @@ export function createServerCssHost(options: { nonce?: string } = {}): ServerCss
   const registry = createRuleRegistry(() => {});
   return {
     css: registry.css,
-    cx: registry.cx,
     keyframes: registry.keyframes,
     globalCss: registry.globalCss,
     setBindings: registry.setBindings,
@@ -38,7 +35,7 @@ export function withCssHost<T>(host: ServerCssHost, render: () => T): T {
   return current.run(host, render);
 }
 
-export function css(...parts: string[]): string {
+export function css(...parts: CssInput[]): string {
   const host = current.getStore();
   if (!host) throw new Error('CSS server host is unavailable.');
   return host.css(...parts);
@@ -49,7 +46,6 @@ export function requireHost(): ServerCssHost {
   if (!host) throw new Error('CSS server host is unavailable.');
   return host;
 }
-export const cx = (...values: ClassNames[]): string => requireHost().cx(...values);
 export const keyframes = (...parts: string[]): string => requireHost().keyframes(...parts);
 export const globalCss = (key: string, ...parts: string[]): void =>
   requireHost().globalCss(key, ...parts);

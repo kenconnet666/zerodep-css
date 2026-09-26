@@ -87,10 +87,10 @@ export function createBindings(prefix: string, write: Writer, schedule: Schedule
         frame = previous;
       }
     },
-    capture(
+    capture<Part>(
       site: string,
-      register: (...parts: string[]) => string,
-      produce: () => string[],
+      register: (...parts: Part[]) => string,
+      produce: () => Part[],
     ): string {
       if (runtimeOnly || (!setup && !frame)) return register(...produce());
       const counts = frame?.counts ?? definitionCounts;
@@ -111,7 +111,7 @@ export function createBindings(prefix: string, write: Writer, schedule: Schedule
       group.readers = [];
       const previous = current;
       current = group;
-      let parts: string[];
+      let parts: Part[];
       try {
         parts = produce();
       } finally {
@@ -175,7 +175,8 @@ export function createBindings(prefix: string, write: Writer, schedule: Schedule
       effects.forEach((stop) => stop());
       for (const group of groups.values()) {
         group.stop?.();
-        if (group.readers.length) write(group.key, null);
+        // 条件分支可能已清空 readers，曾经登记的值仍需随组件清理。
+        write(group.key, null);
       }
       groups.clear();
       frames.clear();

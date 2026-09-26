@@ -2,6 +2,8 @@
 
 日期：2026-09-26。范围来自[本阶段计划](next-phase-authoring-and-bindings.md)。运行时 CSS 保留，编译器只为可识别的响应式值生成绑定，不要求全项目预生成类名。
 
+后续 API 简化：原 `cx` 已取消，样式组合并入 `css`；当前用法以 [作者 API](../docs/author-api.md) 为准。下文是 `5f56f88` 阶段的实现与性能记录，保留当时的名称和原始样本，不作为旧 API 兼容承诺。
+
 ## 已落实
 
 - 声明字符串不变；`cx`、`className`、`keyframes`、命名可更新 / 移除的 `globalCss` 已接入浏览器、Node SSR 和恢复清单。

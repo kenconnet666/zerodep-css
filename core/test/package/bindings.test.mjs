@@ -33,8 +33,9 @@ test('转换保留快照、覆写与非响应式普通路径，并支持多参�
   );
 });
 
-test('绑定多参数、cx、动画引用、SSR 清单及生命周期', () => {
+test('绑定多参数、声明组合、动画引用、SSR 清单及生命周期', () => {
   const host = createServerCssHost();
+  assert.equal('cx' in host, false);
   const tasks = [];
   const scope = createBindings('test', host.setBindings, (update) => {
     update();
@@ -46,7 +47,7 @@ test('绑定多参数、cx、动画引用、SSR 清单及生命周期', () => {
   const bound = scope.capture('box', host.css, () => [
     scope.value('padding', 'padding', s.padding, 'px', [() => x, () => x * 2]),
   ]);
-  const combined = host.cx(bound, host.css(s.color.red));
+  const combined = host.css(bound, [false, s.color.red]);
   const rules = host.rules();
   const variable = rules.find((rule) => rule.kind === 'bindings');
   assert.deepEqual(variable.targets, [bound, combined]);
@@ -122,4 +123,26 @@ test('静态全局块不创建响应式订阅，动态全局块按整体更新',
     'function outer() { function css(value) { return value; } return css(s.width.px(width.value)); }',
   );
   assert.equal(shadowed.used, false);
+});
+
+test('声明数组和逻辑分支保留动态值转换，清理曾经启用的绑定', () => {
+  const result = transform('const a = css([false, [width.value > 0 && s.width.px(width.value)]]);');
+  assert.match(result.script, /width.value > 0 && __zc.value/);
+  const host = createServerCssHost();
+  const scope = createBindings('conditional', host.setBindings, (run) => {
+    run();
+    return () => {};
+  });
+  const s = new Css();
+  const render = (active) =>
+    scope.frame('element', [], () =>
+      scope.capture('css', host.css, () => [
+        active && scope.value('width', 'width', s.width, 'px', [() => 12]),
+      ]),
+    );
+  render(true);
+  assert.equal(host.rules().filter((rule) => rule.kind === 'bindings').length, 1);
+  render(false);
+  scope.dispose();
+  assert.equal(host.rules().filter((rule) => rule.kind === 'bindings').length, 0);
 });

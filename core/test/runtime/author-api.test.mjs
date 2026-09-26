@@ -11,17 +11,35 @@ test('Unicode 与已知旧哈希碰撞均生成不同类，标记不占规则', 
   assert.equal(registry.size, 4);
 });
 
-test('cx 按顺序合并已登记类并保留条件输入、标记和外部类', () => {
+test('css 按顺序合并已登记类、声明和嵌套数组，省略条件空项', () => {
   const registry = createRuleRegistry(() => {});
   const a = registry.css('color:red!important;padding:1px;');
   const b = registry.css('color:blue;padding-left:2px;');
-  const marker = className('title');
-  assert.equal(registry.cx(a, false, [null, { external: true }]), `${a} external`);
+  assert.equal(registry.css(a, false, [null, undefined]), a);
   assert.equal(registry.size, 2);
-  const merged = registry.cx(marker, [a, { [b]: true }], 'external');
+  const merged = registry.css([a, [false, b]], undefined);
   const combined = registry.css('color:red!important;padding:1px;color:blue;padding-left:2px;');
-  assert.equal(merged, `${marker} external ${combined}`);
+  assert.equal(merged, combined);
   assert.equal(registry.size, 3);
+  assert.notEqual(registry.css(b, a), merged);
+  assert.equal(registry.css(), registry.css(false, null, [undefined, []]));
+  // 任意片段仍原样拼接，不靠标点猜测 class，更不拆开 CSS 值内的空格。
+  const fragments = registry.css('color:', 'red', ';', 'font-family:Open Sans;');
+  assert.equal(
+    registry.rules().find((rule) => rule.className === fragments).body,
+    'color:red;font-family:Open Sans;',
+  );
+  const raw = registry.css('external');
+  assert.equal(registry.rules().find((rule) => rule.className === raw).body, 'external');
+  const unknown = registry.css('z-not-registered');
+  assert.equal(
+    registry.rules().find((rule) => rule.className === unknown).body,
+    'z-not-registered',
+  );
+  const immutable = Object.freeze([a, Object.freeze([false, b])]);
+  assert.equal(registry.css(immutable), merged);
+  assert.deepEqual(immutable, [a, [false, b]]);
+  assert.equal('cx' in registry, false);
 });
 
 test('动画去重、全局块原位更新移除、恢复清单整体回滚', () => {

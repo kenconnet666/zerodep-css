@@ -15,6 +15,9 @@ function sourceFor(name, server) {
   return `${imports}
 import { ic } from '@zerodep-css/core';
 import type { CssRule } from '@zerodep-css/core';
+import type { CssInput } from '@zerodep-css/core';
+// @ts-expect-error cx 已移除，组合统一使用 css
+import { cx } from '@zerodep-css/${name}';
 // @ts-expect-error 规则注册器不是公开作者 API
 import { createCss } from '@zerodep-css/core';
 class ThemeWidth extends WidthCss { readonly _md = this.raw('48rem'); }
@@ -26,6 +29,14 @@ const { provideCss, useCss } = createCssContext<AppCss>();
 useCss().width._md satisfies string;
 provideCss(s);
 css(s.color.red, s.width.px(20), s.width.raw('calc(100% - 2rem)'), ic('&:hover', s.display.flex));
+const fragments = [s.color.red, [false, null, undefined, s.padding.px(4)]] as const satisfies readonly CssInput[];
+css(css(s.display.flex), fragments, Math.random() > 0.5 && s.opacity.raw(0.5));
+// @ts-expect-error 条件对象交给框架 class，不是 CSS 声明
+css({ active: true });
+// @ts-expect-error 数字必须由属性方法转成声明
+css(24);
+// @ts-expect-error true 不是声明或条件空项
+css(true);
 s.margin.px(4, 8);
 s.alignItems.center;
 s.borderTopWidth.px(1);

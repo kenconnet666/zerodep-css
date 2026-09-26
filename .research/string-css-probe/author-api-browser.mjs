@@ -10,7 +10,7 @@ host.globalCss('reset', 'body{margin:0;}');
 const animation = host.keyframes('from{opacity:0;}to{opacity:1;}');
 const a = host.css('color:red!important;padding:8px;');
 const b = host.css('color:blue;padding-left:4px;');
-const combined = host.cx('marker', a, b);
+const combined = host.css(a, b);
 const animated = host.css(`animation-name:${animation};animation-duration:0s;`);
 const { cssText, manifest } = serializeCssRules(host.rules());
 const { outputFiles } = await build({
@@ -31,13 +31,14 @@ try {
   const result = await page.evaluate(
     ({ a, b, combined, animation }) => {
       api.hydrateCss();
+      if ('cx' in api) throw new Error('Removed cx export is still present.');
       const box = document.querySelector('#box');
       const before = {
         color: getComputedStyle(box).color,
         padding: getComputedStyle(box).paddingLeft,
         animation: getComputedStyle(document.querySelector('#animated')).animationName,
       };
-      const same = api.cx('marker', [a, false, { [b]: true }]) === combined;
+      const same = api.css([a, false, [null, b]]) === combined;
       const count = api.cssStats().rules;
       api.globalCss('theme', 'body{color:blue;}');
       const blue = getComputedStyle(document.body).color;
