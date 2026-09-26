@@ -44,3 +44,5 @@ Emotion 源码对照、可复现缺口和下一阶段取舍见[运行时库审�
 本阶段交付内容和 Vue/Svelte 对照 Emotion、手工变量的测量见[实施与性能记录](.research/author-bindings-delivery.md)。
 
 可选亮暗预设、两层继承和子树主题覆盖见[主题用法](docs/themes.md)。
+
+最新[稳定性与主题交付记录](.research/stability-and-theme-delivery.md)包含远程 CI 的 HMR、挂卸、200 / 1,000 项性能数据和实际资源保留边界；使用时参考[生命周期与诊断](docs/lifecycle-and-diagnostics.md)。

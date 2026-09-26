@@ -5,6 +5,7 @@
 </script>
 
 <Theme />
+<Theme initialDark={true} />
 
 <div data-global="24"></div>
 <div data-global="40"></div>

@@ -17,7 +17,7 @@ export function bindingCacheVariant(enabled) {
         }),
       );
       build.onLoad({ filter: /[\\/]core[\\/]src[\\/]bindings\.ts$/ }, async ({ path }) => {
-        let contents = await readFile(path, 'utf8');
+        let contents = (await readFile(path, 'utf8')).replace(/\r\n/g, '\n');
         loaded++;
         const start = contents.indexOf('      // 值变化时模板字符串通常不变');
         const end = contents.indexOf('\n    },\n    selector(', start);

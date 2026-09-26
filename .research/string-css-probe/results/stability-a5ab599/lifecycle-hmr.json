@@ -1,0 +1,60 @@
+[
+  {
+    "framework": "vue",
+    "initial": {
+      "rules": 43,
+      "classes": 22,
+      "animations": 0,
+      "globals": 0,
+      "bindings": 21,
+      "connected": true
+    },
+    "replaced": {
+      "rules": 506,
+      "classes": 285,
+      "animations": 0,
+      "globals": 0,
+      "bindings": 221,
+      "connected": true
+    },
+    "afterUnmount": {
+      "rules": 915,
+      "classes": 915,
+      "animations": 0,
+      "globals": 0,
+      "bindings": 0,
+      "connected": true
+    },
+    "hmr": "passed",
+    "mountCycles": 30
+  },
+  {
+    "framework": "svelte",
+    "initial": {
+      "rules": 43,
+      "classes": 22,
+      "animations": 0,
+      "globals": 0,
+      "bindings": 21,
+      "connected": true
+    },
+    "replaced": {
+      "rules": 527,
+      "classes": 306,
+      "animations": 0,
+      "globals": 0,
+      "bindings": 221,
+      "connected": true
+    },
+    "afterUnmount": {
+      "rules": 936,
+      "classes": 936,
+      "animations": 0,
+      "globals": 0,
+      "bindings": 0,
+      "connected": true
+    },
+    "hmr": "passed",
+    "mountCycles": 30
+  }
+]
