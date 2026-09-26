@@ -157,6 +157,7 @@ export function createBindingTransform(
     if (ts.isFunctionLike(node)) {
       params = new Set(params);
       local = new Set(local);
+      if ('name' in node && node.name && ts.isIdentifier(node.name)) local.add(node.name.text);
       for (const parameter of node.parameters) {
         bindings(parameter.name, params);
         bindings(parameter.name, local);
@@ -165,6 +166,12 @@ export function createBindingTransform(
     if (ts.isBlock(node)) {
       local = new Set(local);
       params = new Set(params);
+      for (const statement of node.statements)
+        if (
+          (ts.isFunctionDeclaration(statement) || ts.isClassDeclaration(statement)) &&
+          statement.name
+        )
+          local.add(statement.name.text);
       for (const statement of node.statements)
         if (ts.isVariableStatement(statement))
           for (const declaration of statement.declarationList.declarations) {
@@ -198,7 +205,17 @@ export function createBindingTransform(
       }
       if (name === 'globalCss') {
         // 全局块按 key 整块更新，不能把值误绑定到局部组件根。
-        if (ts.isExpressionStatement(node.parent) && node.parent.parent === sf) {
+        if (node.arguments.some((arg) => ts.isSpreadElement(arg) || !safe(arg))) {
+          warnings.add(
+            'Global CSS with spread or side-effecting arguments retains runtime evaluation.',
+          );
+          return node.getText(sf);
+        }
+        if (
+          ts.isExpressionStatement(node.parent) &&
+          node.parent.parent === sf &&
+          node.arguments.some((arg) => isDynamic(arg, params))
+        ) {
           used = true;
           valueCount++;
           return `${scope}.effect(() => ${node.getText(sf)})`;

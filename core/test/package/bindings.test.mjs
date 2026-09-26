@@ -103,3 +103,23 @@ test('框架模板帧隔离列表键，重排不重建绑定规则', () => {
   assert.equal(draw('a', 40), a);
   assert.equal(host.rules().length, 4);
 });
+
+test('静态全局块不创建响应式订阅，动态全局块按整体更新', () => {
+  const fixed = createBindingTransform(
+    "import { globalCss, ic } from '@zerodep-css/vue'; globalCss('base', ic('body', 'margin:0;'));",
+    'static.vue',
+    'vue',
+  );
+  assert.equal(fixed.used, false);
+  const dynamic = createBindingTransform(
+    "import { globalCss, ic } from '@zerodep-css/vue'; import { ref } from 'vue'; const color = ref('red'); globalCss('theme', ic('body', `color:${color.value};`));",
+    'theme.vue',
+    'vue',
+  );
+  assert.equal(dynamic.used, true);
+  assert.match(dynamic.script, /\.effect\(/);
+  const shadowed = transform(
+    'function outer() { function css(value) { return value; } return css(s.width.px(width.value)); }',
+  );
+  assert.equal(shadowed.used, false);
+});

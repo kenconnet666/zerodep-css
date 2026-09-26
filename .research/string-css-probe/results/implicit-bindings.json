@@ -1,0 +1,193 @@
+{
+  "node": "v24.18.0",
+  "count": 200,
+  "updates": 20,
+  "rounds": 3,
+  "samples": {
+    "vue-implicit": [
+      {
+        "mountMs": 29.100000008940697,
+        "updateMs": 81.70000000298023,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 7872
+      },
+      {
+        "mountMs": 29.099999994039536,
+        "updateMs": 83.20000000298023,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 7872
+      },
+      {
+        "mountMs": 32.8999999910593,
+        "updateMs": 81.1000000089407,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 7872
+      }
+    ],
+    "vue-runtime": [
+      {
+        "mountMs": 23.899999991059303,
+        "updateMs": 103.5,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      },
+      {
+        "mountMs": 23.900000005960464,
+        "updateMs": 105,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      },
+      {
+        "mountMs": 26,
+        "updateMs": 113.90000000596046,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      }
+    ],
+    "vue-manual": [
+      {
+        "mountMs": 23.399999991059303,
+        "updateMs": 60.6000000089407,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 7872
+      },
+      {
+        "mountMs": 19.799999997019768,
+        "updateMs": 56.70000000298023,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 7872
+      },
+      {
+        "mountMs": 21.5,
+        "updateMs": 56.3999999910593,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 7872
+      }
+    ],
+    "vue-emotion": [
+      {
+        "mountMs": 27.799999997019768,
+        "updateMs": 127.09999999403954,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      },
+      {
+        "mountMs": 27.399999991059303,
+        "updateMs": 117.1000000089407,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      },
+      {
+        "mountMs": 30,
+        "updateMs": 137.20000000298023,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      }
+    ],
+    "svelte-implicit": [
+      {
+        "mountMs": 32.79999999701977,
+        "updateMs": 76.79999999701977,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 7872
+      },
+      {
+        "mountMs": 34.20000000298023,
+        "updateMs": 74.69999998807907,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 7872
+      },
+      {
+        "mountMs": 34,
+        "updateMs": 83.79999999701977,
+        "initialRules": 400,
+        "finalRules": 400,
+        "height": 7872
+      }
+    ],
+    "svelte-runtime": [
+      {
+        "mountMs": 25.400000005960464,
+        "updateMs": 109,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      },
+      {
+        "mountMs": 23.900000005960464,
+        "updateMs": 102.59999999403954,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      },
+      {
+        "mountMs": 22,
+        "updateMs": 102.6000000089407,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      }
+    ],
+    "svelte-manual": [
+      {
+        "mountMs": 23.600000008940697,
+        "updateMs": 52.8999999910593,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 7872
+      },
+      {
+        "mountMs": 23.200000002980232,
+        "updateMs": 55,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 7872
+      },
+      {
+        "mountMs": 22.399999991059303,
+        "updateMs": 48.29999999701977,
+        "initialRules": 1,
+        "finalRules": 1,
+        "height": 7872
+      }
+    ],
+    "svelte-emotion": [
+      {
+        "mountMs": 31.19999998807907,
+        "updateMs": 128.70000000298023,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      },
+      {
+        "mountMs": 29,
+        "updateMs": 127.59999999403954,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      },
+      {
+        "mountMs": 40.8999999910593,
+        "updateMs": 146,
+        "initialRules": 200,
+        "finalRules": 4200,
+        "height": 7872
+      }
+    ]
+  },
+  "browser": "153.0.8010.54"
+}

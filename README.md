@@ -41,3 +41,4 @@ class 对象写法、浏览器注册、Node 请求隔离及元框架接入已有
 Vue/Svelte 的纯派生类选择、元素变量绑定与上下文边界见[框架结合研究](.research/vue-svelte-runtime-integration.md)。
 Emotion 源码对照、可复现缺口和下一阶段取舍见[运行时库审查](.research/runtime-library-tradeoffs.md)。
 新增作者方法见[作者 API](docs/author-api.md)，框架插件、自然响应式写法、SSR/CSP 和回退边界见[隐式绑定](docs/implicit-bindings.md)。[阶段计划](.research/next-phase-authoring-and-bindings.md)保留本轮决策依据。
+本阶段交付内容和 Vue/Svelte 对照 Emotion、手工变量的测量见[实施与性能记录](.research/author-bindings-delivery.md)。
