@@ -53,6 +53,8 @@ pnpm test:mup:exports
 
 `probe:runtime` 在 Chrome 中分段测量当前规则注册器的命中、哈希、短声明编码、CSSOM 写入与已启动 Worker 的消息往返；这不是 CI 性能门槛，结果和适用边界见[并行与 SIMD 研究](../runtime-parallel-simd-research.md)。
 
+`probe:string-concat` 只替换内存中的注册器拼接语句，对比 `join`、`+=`、`concat`、`reduce` 和少量参数特化；测量缓存命中及 CSSOM 新规则写入，不改产品实现。方法与结果见[字符串拼接研究](../string-concatenation-research.md)。
+
 `test:mup:*` 使用当前 Vue/Svelte 适配器，分别验证浏览器上下文、两个 Node SSR 请求的规则隔离、客户端 hydration 去重及条件导出。它们是最小可用验收，不替代后续的 Nuxt/SvelteKit 集成测试。
 
 设置 `MUP_DIST=1` 后，MUP 浏览器、SSR、hydration 和性能脚本改用仓库根 `pnpm build` 生成的包入口；不设置时读取工作区源码。性能原始样本与[阶段报告](../minimum-usable-performance.md)分开保存，旧的 `results-a/b.json` 不代表当前适配器。

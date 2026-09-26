@@ -12,6 +12,7 @@
     "probe:mup:cold": "node mup-cold.mjs",
     "probe:static-fields": "node static-field-probe.mjs",
     "probe:runtime": "node runtime-hot-path.mjs",
+    "probe:string-concat": "node string-concat.mjs",
     "probe": "node legacy/run.mjs",
     "probe:author-storage": "node legacy/author-storage.mjs",
     "semantics": "node legacy/semantics.mjs",
