@@ -17,7 +17,7 @@ import {
   type ObjectExpression,
   type VNodeCall,
   type CompilerOptions,
-  type SourceLocation,
+  type ExpressionNode,
 } from '@vue/compiler-dom';
 import { bindingNames } from '@zerodep-css/core/compiler';
 
@@ -44,15 +44,7 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
   if (root.type !== N.ROOT || context.inSSR) return;
   return () => {
     let serial = 0;
-    function parsed(text: string, locals: string[], loc?: SourceLocation) {
-      for (const name of locals) context.addIdentifiers(name);
-      try {
-        return processExpression(expression(text, false, loc), context);
-      } finally {
-        for (const name of locals) context.removeIdentifiers(name);
-      }
-    }
-    function marker(node: Node): { source: string; loc: SourceLocation } | undefined {
+    function marker(node: Node): { scope: string; value: ExpressionNode } | undefined {
       if (node.type !== N.ELEMENT) return;
       const prop = node.props.find(
         (prop) =>
@@ -61,22 +53,22 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
           prop.arg?.type === N.SIMPLE_EXPRESSION &&
           prop.arg.content === 'class',
       );
-      // loc.source 保留 HTML 实体；只还原源码层标记所使用的三种转义。
-      const source =
-        prop?.type === N.DIRECTIVE
-          ? prop.exp?.loc.source
-              .trim()
-              .replace(/&quot;/g, '"')
-              .replace(/&lt;/g, '<')
-              .replace(/&amp;/g, '&')
-          : undefined;
-      return source && /^__zc_*\.template\(/.test(source) && prop?.type === N.DIRECTIVE && prop.exp
-        ? { source, loc: prop.exp.loc }
-        : undefined;
+      if (prop?.type !== N.DIRECTIVE || !prop.exp) return;
+      const match = /^\s*(__zc_*)\.template\(/.exec(prop.exp.loc.source);
+      return match ? { scope: match[1]!, value: prop.exp } : undefined;
+    }
+    function appendCache(value: ExpressionNode, cache: string, index: number) {
+      // 复用 Vue 已解析和改写过的表达式节点，只在内部标记调用末尾追加缓存参数。
+      // 不重新解析 class，不自行还原模板 ref/HTML 实体，也保留原节点的 source map。
+      const parts = value.type === N.COMPOUND_EXPRESSION ? [...value.children] : [value.content];
+      const tail = parts.pop();
+      if (typeof tail !== 'string' || !tail.trimEnd().endsWith(')')) return;
+      parts.push(tail.trimEnd().slice(0, -1), `, ${cache}, ${index})`);
+      return createCompoundExpression(parts, value.loc);
     }
     function owner(node: Node): string | undefined {
-      const source = marker(node)?.source;
-      if (source) return source.slice(0, source.indexOf('.'));
+      const name = marker(node)?.scope;
+      if (name) return name;
       if ('children' in node)
         for (const child of node.children) {
           if (!container(child)) continue;
@@ -89,7 +81,7 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
           if (found) return found;
         }
     }
-    function replaceClass(props: VNodeCall['props'], value: ReturnType<typeof parsed>): void {
+    function replaceClass(props: VNodeCall['props'], value: ExpressionNode): void {
       if (!props || typeof props === 'string') return;
       if (props.type === N.JS_OBJECT_EXPRESSION) {
         const prop = (props as ObjectExpression).properties.find(
@@ -153,7 +145,7 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
               rowKey = `${name}_key${id}`;
             const keyValue = key?.value ?? expression('null', false);
             if (key) key.value = expression(rowKey, false);
-            const access = parsed(name, []);
+            const access = processExpression(expression(name, false), context);
             while (render.params.length < 3)
               render.params.push(expression(`${name}_unused${id}_${render.params.length}`, false));
             render.params.push(expression(previous, false));
@@ -186,16 +178,11 @@ export const templateCacheTransform: NodeTransform = (root, context) => {
         const mark = marker(node);
         if (mark && (!scope.inLoop || scope.cache)) {
           const index = scope.cache ? serial++ : context.cached.length;
-          if (!scope.cache) context.cached.push(null);
-          const cached = `${mark.source.slice(0, -1)}, ${scope.cache ?? '_cache'}, ${index})`;
-          replaceClass(
-            node.codegenNode.props,
-            parsed(
-              cached,
-              [...scope.locals, '_cache', ...(scope.cache ? [scope.cache.split('.')[0]!] : [])],
-              mark.loc,
-            ),
-          );
+          const cached = appendCache(mark.value, scope.cache ?? '_cache', index);
+          if (cached) {
+            if (!scope.cache) context.cached.push(null);
+            replaceClass(node.codegenNode.props, cached);
+          }
         }
       }
       if ('children' in node)

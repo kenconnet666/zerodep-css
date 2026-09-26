@@ -52,7 +52,7 @@ Svelte 继续直接写 `class={css(...)}`，利用其模板调用已有的派生
 
 ### 编译阶段的取舍
 
-Vue 的模板缓存已进入官方 `nodeTransforms` 扩展点，可以复用框架处理过的循环和标识符作用域。隐式绑定同时需要分析 script 内的响应式声明、注入 useBindings 和调度初始化；模板钩子不能单独替代这些工作。本轮保留共享源码转换，并让绑定转换与模板缓存分析复用同一份表达式 AST，避免重复解析和跨文件缓存。
+Vue 的模板缓存已进入官方 `nodeTransforms` 扩展点，直接复用框架已处理过的 class 表达式 AST，追加内部缓存参数，不重新解析整段 class、不自行还原模板 ref 解包。隐式绑定同时需要分析 script 内的响应式声明、注入 useBindings 和调度初始化；模板钩子不能单独替代这些工作。本轮保留共享源码转换，并让绑定转换与模板缓存分析复用同一份表达式 AST；普通循环别名也省去额外解析，解构仍交给解析器。没有添加跨文件 AST 缓存。
 
 Svelte 5 当前公开的是 `preprocess`、`parse`、`compile` 和编译选项；vite-plugin-svelte 的 dynamicCompileOptions 也只修改选项，没有 Vue 同等的通用 codegen AST 钩子。当前预处理已使用官方 parse 获取模板作用域。改挂 markup preprocessor 本身不会省掉正式编译器的再次解析，因此暂不为接口位置重写处理层，也不依赖 Svelte 内部编译阶段。
 

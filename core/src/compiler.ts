@@ -495,6 +495,8 @@ export function createBindingTransform(
 }
 
 export function bindingNames(pattern: string): string[] {
+  // 最常见的循环别名无需再构建一份 TypeScript AST；解构形式仍交给解析器。
+  if (/^[A-Za-z_$][\w$]*$/.test(pattern)) return [pattern];
   const sf = ts.createSourceFile(
     'pattern.ts',
     `let ${pattern} = null;`,
