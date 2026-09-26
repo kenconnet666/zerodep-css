@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { launchBrowser } from '../browser.mjs';
 import { Css } from '../../../core/dist/index.js';
-import { createRuleRegistry } from '../../../core/src/registry.ts';
+import { createRuleRegistry } from '../../../core/test/runtime/runtime.mjs';
 import { ic } from '../../../core/src/ic.ts';
 
 class AppCss extends Css {

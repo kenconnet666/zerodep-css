@@ -3,7 +3,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
-import { createRuleRegistry } from '../../core/src/registry.ts';
+import { createRuleRegistry } from '../../core/test/runtime/runtime.mjs';
 
 // 只验证固定表达式的可提取性；产品编译器还需确认符号来源和主题覆盖。
 const generated = resolve(dirname(fileURLToPath(import.meta.url)), '../../core/src/generated');
