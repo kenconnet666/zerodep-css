@@ -9,4 +9,6 @@ const panel = css(
   s._hover(s.backgroundColor._surfaceHover),
 );
 </script>
-<div :data-theme-sample="label" :class="panel">主题内容</div>
+<template>
+  <div :data-theme-sample="label" :class="panel">主题内容</div>
+</template>
