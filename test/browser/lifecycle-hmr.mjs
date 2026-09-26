@@ -102,6 +102,12 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
       await page.evaluate(() => {
         window.hmrIdentity = 'preserved';
       });
+      await updateChild(original.replace('>initial<', '>template-only<'));
+      await page.waitForFunction(
+        () => document.querySelector('[data-probe]')?.textContent === 'template-only',
+      );
+      assert.equal(await width(), '24px');
+      assert.equal((await stats()).bindings, 21);
       const changed = original
         .replace('>initial<', '>edited<')
         .replace('s.width.px(width.value)', 's.width.px(width.value + 1)')
