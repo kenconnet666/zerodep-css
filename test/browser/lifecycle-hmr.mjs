@@ -34,6 +34,11 @@ try {
       const fixture = new URL('./fixtures/lifecycle/', import.meta.url);
       const original = await readFile(new URL(`Child.${ext}`, fixture), 'utf8');
       const child = join(directory, `Child.${ext}`);
+      const updateChild = async (code) => {
+        // 连续人工编辑不会在同一 watcher 节流窗口内完成；自动化需分隔文件事件。
+        await new Promise((done) => setTimeout(done, 150));
+        await writeFile(child, code);
+      };
       await writeFile(child, original);
       await writeFile(
         join(directory, `Root.${ext}`),
@@ -101,7 +106,7 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
         .replace('>initial<', '>edited<')
         .replace('s.width.px(width.value)', 's.width.px(width.value + 1)')
         .replace('s.color.blue', 's.color.red');
-      await writeFile(child, changed);
+      await updateChild(changed);
       await page.waitForFunction(
         () =>
           document.querySelector('[data-probe]')?.textContent === 'edited' &&
@@ -118,8 +123,7 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
         await page.locator('[data-sibling]').evaluate((node) => getComputedStyle(node).height),
         '32px',
       );
-      await writeFile(
-        child,
+      await updateChild(
         changed
           .replace('s.width.px(width.value + 1)', 's.width.px(30)')
           .replace('>edited<', '>removed<'),
@@ -130,7 +134,7 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
           getComputedStyle(document.querySelector('[data-probe]')).width === '30px',
       );
       assert.equal((await stats()).bindings, 20);
-      await writeFile(child, original);
+      await updateChild(original);
       await page.waitForFunction(
         () =>
           document.querySelector('[data-probe]')?.textContent === 'initial' &&
