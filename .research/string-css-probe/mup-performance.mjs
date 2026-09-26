@@ -5,21 +5,31 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { launchBrowser } from './browser.mjs';
 import { bundle } from './mup-bundle.mjs';
+import { concatVariant } from './concat-variant.mjs';
 
 const directory = dirname(fileURLToPath(import.meta.url));
-const output = resolve(directory, '../../test-results/mup-performance/results.json');
+const compareConcat = process.argv.includes('--compare-concat');
+const output = resolve(
+  directory,
+  `../../test-results/${compareConcat ? 'concat-performance' : 'mup-performance'}/results.json`,
+);
 await mkdir(dirname(output), { recursive: true });
 const report = {
   runId: randomUUID(),
   status: 'running',
-  environment: { node: process.version, rows: 200, rounds: Number(process.env.MUP_ROUNDS ?? 3) },
+  environment: {
+    node: process.version,
+    rows: 200,
+    rounds: Number(process.env.MUP_ROUNDS ?? 3),
+    compareConcat,
+  },
   bundles: {},
   frameworks: {},
 };
 const save = () => writeFile(output, JSON.stringify(report, null, 2) + '\n');
 await save();
 
-const variants = [
+const modes = [
   ...['direct', 'memo', 'table', 'variable', 'native-table', 'emotion'].map((mode) => ({
     mode,
     unique: false,
@@ -29,6 +39,13 @@ const variants = [
     unique: true,
   })),
 ];
+// 拼接实验只测相关路径；表与变量作为不会重复调用注册器的对照。
+const variants = compareConcat
+  ? modes
+      .filter(({ mode }) => ['direct', 'table', 'variable'].includes(mode))
+      .flatMap((item) => ['join', 'loop'].map((concat) => ({ ...item, concat })))
+  : modes;
+const variantKey = ({ mode, unique, concat }) => `${concat ? `${concat}-` : ''}${mode}-${unique}`;
 const nativeRules = Array.from(
   { length: 16 },
   (_, index) => `.native-${index + 20}{color:red;width:${index + 20}px}`,
@@ -40,27 +57,30 @@ let browser;
 try {
   const bundles = {};
   for (const framework of ['vue', 'svelte']) {
-    const source = await bundle(framework, 'browser', `${framework}-mup-performance-driver.ts`, {
-      minify: true,
-    });
-    bundles[framework] = source;
-    report.bundles[framework] = { bytes: Buffer.byteLength(source) };
+    for (const concat of compareConcat ? ['join', 'loop'] : ['default']) {
+      const key = `${framework}-${concat}`;
+      const source = await bundle(framework, 'browser', `${framework}-mup-performance-driver.ts`, {
+        minify: true,
+        ...(compareConcat ? { dist: false, plugins: [concatVariant(concat)] } : {}),
+      });
+      bundles[key] = source;
+      report.bundles[compareConcat ? key : framework] = { bytes: Buffer.byteLength(source) };
+    }
   }
   browser = await launchBrowser();
   report.environment.browser = browser.version();
   for (const framework of ['vue', 'svelte']) {
-    const samples = Object.fromEntries(
-      variants.map(({ mode, unique }) => [`${mode}-${unique}`, []]),
-    );
+    const samples = Object.fromEntries(variants.map((item) => [variantKey(item), []]));
     for (let round = 0; round < report.environment.rounds; round++) {
       const order = [...variants.slice(round), ...variants.slice(0, round)];
-      for (const { mode, unique } of order) {
+      for (const item of order) {
+        const { mode, unique, concat = 'default' } = item;
         const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
         const errors = [];
         page.on('pageerror', (error) => errors.push(error.message));
         try {
           await page.setContent(baseStyle);
-          await page.addScriptTag({ content: bundles[framework] });
+          await page.addScriptTag({ content: bundles[`${framework}-${concat}`] });
           const sample = await page.evaluate(
             async ({ mode, unique }) => {
               const rows = 200;
@@ -142,7 +162,7 @@ try {
             { mode, unique },
           );
           assert.deepEqual(errors, []);
-          samples[`${mode}-${unique}`].push(sample);
+          samples[variantKey(item)].push(sample);
         } finally {
           await page.close();
         }

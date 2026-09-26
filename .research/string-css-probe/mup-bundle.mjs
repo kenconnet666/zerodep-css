@@ -38,8 +38,9 @@ export async function bundle(framework, platform, entry, options = {}) {
       __VUE_PROD_DEVTOOLS__: 'false',
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false',
     },
-    plugins:
-      framework === 'svelte'
+    plugins: [
+      ...(options.plugins ?? []),
+      ...(framework === 'svelte'
         ? [
             {
               name: 'single-svelte-runtime',
@@ -94,7 +95,8 @@ export async function bundle(framework, platform, entry, options = {}) {
                 });
               },
             },
-          ],
+          ]),
+    ],
   });
   return result.outputFiles[0].text;
 }

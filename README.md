@@ -29,7 +29,8 @@ class 对象写法、浏览器规则注册和 Node 请求隔离已有最小可�
 
 字符串作者写法及响应式 CSS 变量绑定的独立测量见 [研究探针](.research/string-css-probe/README.md)。
 完整属性链、关键字生成与上下文生命周期的讨论稿见 [作者模型设计](.research/css-author-generation-design.md)。
-下一阶段的最小可用范围与性能验收见 [实施规划](.research/next-stage-minimum-usable.md)。
+已完成阶段的最小可用范围与性能验收见 [实施规划](.research/next-stage-minimum-usable.md)。
+当前下一阶段建议见[组件性能复测与框架用法规划](.research/framework-performance-next-stage.md)。
 当前 Vue/Svelte 工作区包的调用和手工 Node SSR 接入见 [最小用法](docs/minimum-usage.md)；两轮真实适配器的[性能记录](.research/minimum-usable-performance.md)与原始样本在 `.research/string-css-probe/`。
 包类型入口、生成文件与命名整理的证据见[本轮实施记录](.research/type-layout-next-stage.md)。
 运行时成本、Vue/Svelte 派生值使用边界和下一步性能选择见[性能方向复核](.research/runtime-performance-review.md)。
