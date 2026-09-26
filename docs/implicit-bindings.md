@@ -22,6 +22,42 @@ export default { plugins: [cssBindings(), svelte()] };
 
 SvelteKit 把上面的 `svelte()` 换成 `sveltekit()`，并保留 [Kit 的三个宿主接入点](metaframeworks.md)。Nuxt 模块默认安装 Vue 转换；可用 `modules: [['@zerodep-css/nuxt', { bindings: false }]]` 关闭。构建环境需要工作区固定的 TypeScript 和 magic-string；它们不会进入浏览器运行时。
 
+## 模板直接调用与自动缓存
+
+Vue 插件默认把可分析的模板 `css()` 表达式接入 Vue 编译器的 AST 扩展点，不要求用户手写 computed：
+
+```vue
+<div
+  v-for="item in items"
+  :key="item.id"
+  :class="
+    css(s.display.flex, item.compact ? s.padding.px(4) : s.padding.px(16), s.width.px(item.width))
+  "
+>
+  {{ item.label }}
+</div>
+```
+
+条件部分决定类内容，宽度仍由隐式 CSS 变量更新。只有声明值变化时类名可保持不变；条件分支改变时按新声明生成或复用类。组件因为其他状态重新渲染时，class 的 computed 可以复用结果，文字和其他属性继续正常更新。
+
+- 普通元素使用组件 render cache；`v-for` 借用 Vue 的列表缓存和上一 VNode 保存逐行结果。多元素 template v-for、循环内嵌套元素、数组/条件组合、解构与无 key 循环都可处理。仍推荐稳定 key。
+- key、对象身份或捕获的解构/索引值变化时保守重建，避免同 key 替换对象后读取旧闭包。重排不承诺命中缓存；嵌套循环可能有较低命中率。
+- 系统字段和方法、普通声明字符串可缓存。未知函数、带副作用的表达式、自定义 getter/覆写方法、普通可变对象等保留逐次求值；slot 参数和变量遮蔽沿用原有回退。
+- 只缓存 class，不使用 v-memo 冻结整行。已有 v-memo/v-once 的语义继续由 Vue 负责。
+- SSR 执行相同声明/变量生成，不额外建立客户端 render cache；开发模板热更新由 Vue 清空对应缓存。
+
+需要对照原求值路径时使用 `cssBindings({ templateCache: false })`，隐式变量绑定仍保留。正常 Vite/Nuxt 接入无需另改 Vue 插件选项；直接调用 compiler-sfc 的内部测试工具需要传递插件 `api.compilerOptions`。这不是新的作者 API。
+
+Svelte 继续直接写 `class={css(...)}`，利用其模板调用已有的派生缓存，不重复增加 `$derived`。多个元素共享结果时仍可手动提取派生。
+
+### 编译阶段的取舍
+
+Vue 的模板缓存已进入官方 `nodeTransforms` 扩展点，可以复用框架处理过的循环和标识符作用域。隐式绑定同时需要分析 script 内的响应式声明、注入 useBindings 和调度初始化；模板钩子不能单独替代这些工作。本轮保留共享源码转换，并让绑定转换与模板缓存分析复用同一份表达式 AST，避免重复解析和跨文件缓存。
+
+Svelte 5 当前公开的是 `preprocess`、`parse`、`compile` 和编译选项；vite-plugin-svelte 的 dynamicCompileOptions 也只修改选项，没有 Vue 同等的通用 codegen AST 钩子。当前预处理已使用官方 parse 获取模板作用域。改挂 markup preprocessor 本身不会省掉正式编译器的再次解析，因此暂不为接口位置重写处理层，也不依赖 Svelte 内部编译阶段。
+
+焦点验收在 `test/vue-template-cache.test.mjs`。CI 的隐式绑定浏览器测试传入正式 AST 扩展，真实 Vite HMR、Nuxt SSR/预渲染沿用正常插件配置。性能探针比较 `implicit-template` 与 `implicit-template-uncached`，覆盖 200/1,000 行；实际收益以本次 CI 为准，不沿用研究原型的计时。
+
 ## 组件写法
 
 Vue `<script setup>` 中先从自己的 context 取得 `s`：

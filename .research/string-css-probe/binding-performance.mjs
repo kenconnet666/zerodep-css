@@ -36,8 +36,34 @@ try {
       `${framework}-binding-performance-driver.ts`,
       { ...options, plugins: [bindingCacheVariant(false)] },
     );
+    const templates = {};
+    if (framework === 'vue')
+      for (const templateCache of [true, false]) {
+        const templatePlugin = vuePlugin({ templateCache });
+        templates[templateCache ? 'implicit-template' : 'implicit-template-uncached'] =
+          await bundle(framework, 'browser', `${framework}-binding-performance-driver.ts`, {
+            dist: true,
+            minify: true,
+            vueCompilerOptions: templatePlugin.api.compilerOptions,
+            transformSfc(code, id) {
+              const direct = code.replace(
+                ':class="classFor(row)"',
+                ':class="css(s.color.red, s.width.px(20 + iteration * props.count + row))"',
+              );
+              assert.notEqual(direct, code, 'Template benchmark fixture changed');
+              return templatePlugin.transform.call({ warn() {} }, direct, id)?.code ?? direct;
+            },
+          });
+      }
     for (let round = 0; round < rounds; round++) {
-      const modes = ['implicit', 'implicit-uncached', 'runtime', 'manual', 'emotion'];
+      const modes = [
+        'implicit',
+        'implicit-uncached',
+        'runtime',
+        'manual',
+        'emotion',
+        ...Object.keys(templates),
+      ];
       for (const mode of [
         ...modes.slice(round % modes.length),
         ...modes.slice(0, round % modes.length),
@@ -48,7 +74,9 @@ try {
             '<style>.rows{display:flex;flex-wrap:wrap;width:800px;contain:layout}.rows>div{height:2px;flex:none}</style><main></main>',
           );
           await page.addScriptTag({
-            content: mode === 'implicit' ? bound : mode === 'implicit-uncached' ? uncached : source,
+            content:
+              templates[mode] ??
+              (mode === 'implicit' ? bound : mode === 'implicit-uncached' ? uncached : source),
           });
           const sample = await page.evaluate(
             async ({ mode, count, updates }) => {

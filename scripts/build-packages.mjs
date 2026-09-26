@@ -27,7 +27,7 @@ for (const [name, entries, external] of [
   [
     'vue',
     ['index', 'server', 'bindings', 'bindings-server', 'vite'],
-    ['node:*', '@zerodep-css/core', '@zerodep-css/core/*', 'vue'],
+    ['node:*', '@zerodep-css/core', '@zerodep-css/core/*', 'vue', '@vue/compiler-dom'],
   ],
   [
     'svelte',

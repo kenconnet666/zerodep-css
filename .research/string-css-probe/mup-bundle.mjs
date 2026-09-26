@@ -96,6 +96,7 @@ export async function bundle(framework, platform, entry, options = {}) {
                       id: 'mup-performance',
                       isProd: true,
                       inlineTemplate: true,
+                      templateOptions: { compilerOptions: options.vueCompilerOptions },
                     }).content,
                     loader: 'ts',
                     resolveDir: dirname(path),

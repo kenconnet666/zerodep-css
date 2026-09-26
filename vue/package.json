@@ -34,6 +34,7 @@
     "check": "vue-tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@vue/compiler-dom": "catalog:",
     "@zerodep-css/core": "workspace:*"
   },
   "peerDependencies": {

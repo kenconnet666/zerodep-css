@@ -6,6 +6,7 @@ packages:
   - sveltekit
 
 catalog:
+  '@vue/compiler-dom': 3.5.43
   '@types/node': 24.13.5
   '@vitejs/plugin-vue': 6.0.9
   '@jridgewell/trace-mapping': 0.3.31

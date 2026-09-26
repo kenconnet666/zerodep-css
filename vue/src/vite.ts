@@ -1,5 +1,7 @@
 import { relative } from 'node:path';
 import { parse } from 'vue/compiler-sfc';
+import { withTemplateCache } from './template-compiler.js';
+import type { CompilerOptions } from '@vue/compiler-dom';
 import {
   applyEdits,
   bindingNames,
@@ -9,15 +11,31 @@ import {
 } from '@zerodep-css/core/compiler';
 
 /** 放在 Vue 插件之前，仅处理 script setup；普通运行时写法仍可单独使用。 */
-export default function cssBindings() {
+export default function cssBindings(options: { templateCache?: boolean } = {}) {
   let root = process.cwd();
   let dev = false;
   return {
     name: 'zerodep-css:vue-bindings',
     enforce: 'pre' as const,
-    configResolved(config: { root: string; isProduction?: boolean }) {
+    api: { compilerOptions: options.templateCache === false ? {} : withTemplateCache() },
+    configResolved(config: {
+      root: string;
+      isProduction?: boolean;
+      plugins?: ReadonlyArray<{
+        name: string;
+        api?: { options?: { template?: { compilerOptions?: CompilerOptions } } };
+      }>;
+    }) {
       root = config.root;
       dev = !config.isProduction;
+      const vue = config.plugins?.find((plugin) => plugin.name === 'vite:vue')?.api;
+      if (vue?.options && options.templateCache !== false) {
+        const template = vue.options.template ?? {};
+        vue.options.template = {
+          ...template,
+          compilerOptions: withTemplateCache(template.compilerOptions),
+        };
+      }
     },
     transform(this: { warn(message: string): void }, code: string, id: string) {
       if (!id.endsWith('.vue') || id.includes('?')) return;
@@ -91,13 +109,21 @@ export default function cssBindings() {
             nextLocals,
             prop.exp.loc.start.offset,
           );
+          const guards =
+            !fallback && options.templateCache !== false
+              ? model.templateGuards(prop.exp.content, nextLocals)
+              : undefined;
+          const site = JSON.stringify(`element${serial++}`);
           const wrapped = fallback
             ? `${model.scope}.runtime(() => (${expression}))`
-            : `${model.scope}.frame(${JSON.stringify(`element${serial++}`)}, [${nextKeys.join(',')}], () => (${expression}))`;
+            : `${model.scope}.frame(${site}, [${nextKeys.join(',')}], () => (${expression}))`;
+          const cached = guards
+            ? `${model.scope}.template(${site}, ${guards}, () => (${expression.includes(`${model.scope}.`) ? wrapped : expression}))`
+            : wrapped;
           edits.push({
             start: prop.loc.start.offset,
             end: prop.loc.end.offset,
-            text: `:class="${html(wrapped)}"`,
+            text: `:class="${html(cached)}"`,
           });
         }
         if (fallback)

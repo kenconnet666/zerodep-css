@@ -27,6 +27,9 @@ catalogs:
     '@vitejs/plugin-vue':
       specifier: 6.0.9
       version: 6.0.9
+    '@vue/compiler-dom':
+      specifier: 3.5.43
+      version: 3.5.43
     csstype:
       specifier: 3.2.3
       version: 3.2.3
@@ -229,6 +232,9 @@ importers:
 
   vue:
     dependencies:
+      '@vue/compiler-dom':
+        specifier: 'catalog:'
+        version: 3.5.43
       '@zerodep-css/core':
         specifier: workspace:*
         version: link:../core

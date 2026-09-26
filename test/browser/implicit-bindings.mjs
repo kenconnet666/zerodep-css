@@ -14,6 +14,7 @@ try {
     const plugin = framework === 'vue' ? vuePlugin() : sveltePlugin();
     const options = {
       dist: true,
+      vueCompilerOptions: framework === 'vue' ? plugin.api.compilerOptions : undefined,
       transformSfc: (code, id) =>
         plugin.transform.call({ warn: (message) => console.log(message) }, code, id)?.code ?? code,
     };

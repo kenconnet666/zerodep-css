@@ -62,6 +62,22 @@ export function createBindingTransform(
   let serial = 0;
   const locations: Record<string, string> = {};
   const offsets = new Map<ts.SourceFile, number>([[source, options.scriptOffset ?? 0]]);
+  let lastExpression: { text: string; source: ts.SourceFile } | undefined;
+  // 模板绑定和缓存分析读取同一份 AST；只保留最近一次，避免跨文件缓存和失效管理。
+  function expressionSource(text: string) {
+    if (lastExpression?.text !== text)
+      lastExpression = {
+        text,
+        source: ts.createSourceFile(
+          'expression.ts',
+          `(${text})`,
+          ts.ScriptTarget.Latest,
+          true,
+          ts.ScriptKind.TS,
+        ),
+      };
+    return lastExpression.source;
+  }
   function location(offset: number): string {
     const prefix = reserved.slice(0, offset);
     return `${file.replace(/\\/g, '/')}:${prefix.split('\n').length}:${offset - prefix.lastIndexOf('\n')}`;
@@ -373,15 +389,102 @@ export function createBindingTransform(
       warnings.add(`${location(offset)}: ${message}`);
     },
     enabled,
+    /** 仅标记直接可分析的模板 CSS；未知函数和普通可变变量继续逐次执行。 */
+    templateGuards(text: string, locals: string[] = []): string | undefined {
+      const sf = expressionSource(text);
+      const statement = sf.statements[0];
+      if (!statement || !ts.isExpressionStatement(statement)) return;
+      const local = new Set(locals),
+        guards = new Set<string>();
+      const mutable = new Set<string>();
+      for (const entry of source.statements)
+        if (ts.isVariableStatement(entry) && !(entry.declarationList.flags & ts.NodeFlags.Const))
+          for (const declaration of entry.declarationList.declarations)
+            bindings(declaration.name, mutable);
+      let found = false;
+      function visit(node: ts.Node, part = false): boolean {
+        if (
+          ts.isAsExpression(node) ||
+          ts.isTypeAssertionExpression(node) ||
+          ts.isSatisfiesExpression(node) ||
+          ts.isNonNullExpression(node) ||
+          ts.isParenthesizedExpression(node)
+        )
+          return visit(node.expression, part);
+        if (ts.isPropertyAssignment(node))
+          return (
+            (!ts.isComputedPropertyName(node.name) || visit(node.name.expression, part)) &&
+            visit(node.initializer, part)
+          );
+        if (
+          !safe(node) ||
+          ts.isSpreadElement(node) ||
+          ts.isSpreadAssignment(node) ||
+          ts.isTypeOfExpression(node) ||
+          ts.isArrowFunction(node) ||
+          ts.isFunctionExpression(node) ||
+          ts.isNewExpression(node)
+        )
+          return false;
+        if (ts.isCallExpression(node)) {
+          if (api(node.expression, local, sf) === 'css') {
+            found = true;
+            return node.arguments.every((arg) => visit(arg, true));
+          }
+          if (!part || !ts.isPropertyAccessExpression(node.expression)) return false;
+          const access = node.expression;
+          if (ts.isIdentifier(access.expression) && selectors.has(access.name.text)) {
+            guards.add(`[${access.expression.text}, "", ${JSON.stringify(access.name.text)}]`);
+            return node.arguments.every((arg) => visit(arg, true));
+          }
+          if (
+            ts.isPropertyAccessExpression(access.expression) &&
+            ts.isIdentifier(access.expression.expression) &&
+            methods.has(access.name.text)
+          ) {
+            guards.add(
+              `[${access.expression.expression.text}, ${JSON.stringify(access.expression.name.text)}, ${JSON.stringify(access.name.text)}]`,
+            );
+            return node.arguments.every((arg) => visit(arg));
+          }
+          return false;
+        }
+        if (
+          part &&
+          ts.isPropertyAccessExpression(node) &&
+          ts.isPropertyAccessExpression(node.expression) &&
+          ts.isIdentifier(node.expression.expression)
+        ) {
+          guards.add(
+            `[${node.expression.expression.text}, ${JSON.stringify(node.expression.name.text)}, ${JSON.stringify(node.name.text)}]`,
+          );
+          return true;
+        }
+        if (ts.isConditionalExpression(node))
+          return visit(node.condition) && visit(node.whenTrue, part) && visit(node.whenFalse, part);
+        if (ts.isPropertyAccessExpression(node) || ts.isElementAccessExpression(node)) {
+          let root: ts.Expression = node.expression;
+          while (ts.isPropertyAccessExpression(root) || ts.isElementAccessExpression(root))
+            root = root.expression;
+          if (ts.isIdentifier(root)) guards.add(`[${root.text}]`);
+          return (
+            visit(node.expression) &&
+            (!ts.isElementAccessExpression(node) || visit(node.argumentExpression))
+          );
+        }
+        if (ts.isIdentifier(node)) {
+          guards.add(`[${node.text}]`);
+          return !mutable.has(node.text) || dynamic.has(node.text) || local.has(node.text);
+        }
+        return !ts.forEachChild(node, (child) => !visit(child, part) || undefined);
+      }
+      if (!visit(statement.expression) || !found) return;
+      used = true;
+      return `[${[...guards].join(', ')}]`;
+    },
     script: transformed + script.slice(source.statements.at(-1)?.end ?? 0),
     expression(text: string, locals: string[] = [], offset = 0): string {
-      const sf = ts.createSourceFile(
-        'expression.ts',
-        `(${text})`,
-        ts.ScriptTarget.Latest,
-        true,
-        ts.ScriptKind.TS,
-      );
+      const sf = expressionSource(text);
       const statement = sf.statements[0];
       offsets.set(sf, offset - 1);
       if (!statement || !ts.isExpressionStatement(statement)) return text;
