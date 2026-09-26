@@ -414,7 +414,9 @@ export function createBindingTransform(
       const local = new Set(locals),
         guards = new Set<string>();
       const guardValue = (name: string) =>
-        guards.add(`[${name}${stableReactive.has(name) && !local.has(name) ? ', true' : ''}]`);
+        guards.add(
+          stableReactive.has(name) && !local.has(name) ? `[() => ${name}, true]` : `[${name}]`,
+        );
       const mutable = new Set<string>();
       for (const entry of source.statements)
         if (ts.isVariableStatement(entry) && !(entry.declarationList.flags & ts.NodeFlags.Const))
@@ -440,8 +442,7 @@ export function createBindingTransform(
           ts.isSpreadElement(node) ||
           ts.isSpreadAssignment(node) ||
           ts.isTypeOfExpression(node) ||
-          ts.isArrowFunction(node) ||
-          ts.isFunctionExpression(node) ||
+          ts.isFunctionLike(node) ||
           ts.isNewExpression(node)
         )
           return false;

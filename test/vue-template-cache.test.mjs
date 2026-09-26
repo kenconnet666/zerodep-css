@@ -66,7 +66,8 @@ defineExpose({state});
 async function run(template, callback, extra = '', options = {}) {
   const compiled = compile(template, extra, options);
   const base = adapter.createServerCssHost();
-  let calls = 0;
+  let calls = 0,
+    renders = 0;
   const host = {
     ...base,
     css(...parts) {
@@ -75,8 +76,26 @@ async function run(template, callback, extra = '', options = {}) {
     },
   };
   await adapter.withCssHost(host, async () => {
+    const component = { ...compiled.component };
+    const setup = component.setup;
+    component.setup = (props, context) => {
+      const result = setup(props, context);
+      return typeof result === 'function'
+        ? (...args) => {
+            renders++;
+            return result(...args);
+          }
+        : result;
+    };
+    if (component.render) {
+      const render = component.render;
+      component.render = function (...args) {
+        renders++;
+        return render.apply(this, args);
+      };
+    }
     const root = element('root'),
-      app = renderer.createApp(compiled.component);
+      app = renderer.createApp(component);
     adapter.provideCssHost(app, host);
     const exposed = app.mount(root);
     try {
@@ -86,6 +105,7 @@ async function run(template, callback, extra = '', options = {}) {
         host,
         compiled,
         calls: () => calls,
+        renders: () => renders,
         async update(fn) {
           fn(exposed.state);
           await Vue.nextTick();
@@ -169,11 +189,12 @@ test('v-for 的多元素和嵌套样式分别缓存，重排、同 key 替换、
 
 test('模板 computed 与单行多变量隐式绑定配合，类稳定且变量持续更新', async () => {
   await run(
-    `<div data-box :class="makeCss(s.width.px(state.width),s.padding.px(state.width,2))"></div>
+    `<div data-box :class="[makeCss(s.width.px(state.width),s.padding.px(state.width,2)), 'fixed']"></div>
 <div v-for="item in state.items" :key="item.id" data-row :class="makeCss(s.width.px(item.width))">{{item.label}}</div>`,
     async (p) => {
       const initial = find(p.root, 'data-row').map((n) => n.props.class);
       const count = p.calls();
+      const renders = p.renders();
       await p.update((s) => {
         s.width = 45;
         s.items[0].width = 11;
@@ -183,6 +204,7 @@ test('模板 computed 与单行多变量隐式绑定配合，类稳定且变量�
         initial,
       );
       assert.equal(p.calls(), count);
+      assert.equal(p.renders(), renders, '只有变量值变化时不应重新渲染组件');
       const values = p.host
         .rules()
         .filter((r) => r.kind === 'bindings')
@@ -290,6 +312,35 @@ test('纯 CSS 字符串可缓存，普通对象读取与自定义 getter 保持�
       assert.equal(p.calls(), 2);
     },
     `class AppCss extends Css { get width(){ return new WidthCss(); } } const custom=new AppCss();`,
+  );
+});
+
+test('浅 ref 内普通对象及内联 getter 不会被错误冻结', async () => {
+  await run(
+    `<div :class="makeCss(s.width.px(plain.width))"></div>`,
+    async (p) => {
+      await p.update((s) => {
+        s.plain.width = 33;
+        s.noise++;
+      });
+      assert.match(
+        p.host
+          .rules()
+          .filter((r) => r.kind === 'bindings')
+          .map((r) => r.body)
+          .join(''),
+        /33px/,
+      );
+    },
+    `import {shallowRef} from 'vue'; const plain=shallowRef({width:12}); Object.assign(state,{plain:plain.value});`,
+  );
+  await run(
+    `<div data-box :class="{[makeCss(s.color.red)]:true,get active(){return state.compact}}"></div>`,
+    async (p) => {
+      await p.update((s) => (s.compact = true));
+      assert.match(find(p.root, 'data-box')[0].props.class, /active/);
+      assert.doesNotMatch(p.compiled.transformed, /\.template\(/);
+    },
   );
 });
 
