@@ -10,7 +10,7 @@ test('研究变体保持样例值、大小写、单位与继承，不修改正�
     const output = await build({
       stdin: {
         contents:
-          "export {AnimationPlayStateCss,ColorInterpolationCss,WidthCss} from '@zerodep-css/core';",
+          "export {AnimationPlayStateCss,ColorInterpolationCss,WidthCss,ImageRenderingCss,ShapeRenderingCss} from '@zerodep-css/core';",
         resolveDir: fileURLToPath(new URL('../../core', import.meta.url)),
       },
       bundle: true,
@@ -26,6 +26,8 @@ test('研究变体保持样例值、大小写、单位与继承，不修改正�
     assert.equal(play.revertLayer, 'animation-play-state:revert-layer;');
     assert.equal(new api.ColorInterpolationCss().sRGB, 'color-interpolation:sRGB;');
     assert.equal(new api.WidthCss().px(12), 'width:12px;');
+    assert.equal(new api.ImageRenderingCss().crispEdges, 'image-rendering:crisp-edges;');
+    assert.equal(new api.ShapeRenderingCss().crispEdges, 'shape-rendering:crispEdges;');
     class Custom extends api.AnimationPlayStateCss {
       _hold = this.raw('paused');
     }

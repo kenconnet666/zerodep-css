@@ -8,6 +8,7 @@ const groups = ['a', 'b', 'c-f', 'g-l', 'm-o', 'p-r', 's-t', 'u-z'];
 const originals = new Map();
 export const properties = [];
 const exceptions = {};
+const propertyExceptions = {};
 const kebab = (value) => value.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 const globals = {
   inherit: 'inherit',
@@ -33,10 +34,6 @@ for (const group of groups) {
         split = text.indexOf(':');
       const keyword = text.slice(split + 1, -1),
         name = field.name.getText(ast);
-      if (kebab(name) !== keyword) {
-        if (exceptions[name]) assert.equal(exceptions[name], keyword);
-        exceptions[name] = keyword;
-      }
       return {
         name,
         keyword,
@@ -56,15 +53,27 @@ for (const group of groups) {
   }
 }
 assert.equal(properties.length, 502);
+const spellings = new Map();
+for (const field of properties.flatMap((property) => property.keywords)) {
+  if (!spellings.has(field.name)) spellings.set(field.name, new Set());
+  spellings.get(field.name).add(field.keyword);
+}
+for (const field of properties.flatMap((property) => property.keywords)) {
+  if (kebab(field.name) === field.keyword) continue;
+  if (spellings.get(field.name).size === 1) exceptions[field.name] = field.keyword;
+  else (propertyExceptions[field.property] ??= {})[field.name] = field.keyword;
+}
 export const summary = {
   properties: properties.length,
   keywords: properties.reduce((n, p) => n + p.keywords.length, 0),
   uniqueKeywords: new Set(properties.flatMap((p) => p.keywords.map((k) => k.keyword))).size,
   exceptions,
+  propertyExceptions,
 };
 
 const proxySupport = `
 const keywordExceptions: Record<string,string> = ${JSON.stringify(exceptions)};
+const propertyKeywordExceptions: Record<string,Record<string,string>> = ${JSON.stringify(propertyExceptions)};
 const cache = new WeakMap<object, Map<string,string>>();
 const keywordHandler: ProxyHandler<object> = {
   get(target, key, receiver) {
@@ -72,8 +81,9 @@ const keywordHandler: ProxyHandler<object> = {
     let values=cache.get(target);
     if (!values) { values=new Map(); cache.set(target,values); }
     if (!values.has(key)) {
-      const keyword=keywordExceptions[key] ?? key.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
-      values.set(key, Reflect.get(target,'name') + ':' + keyword + ';');
+      const property=Reflect.get(target,'name');
+      const keyword=propertyKeywordExceptions[property]?.[key] ?? keywordExceptions[key] ?? key.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
+      values.set(key, property + ':' + keyword + ';');
     }
     return values.get(key);
   }
