@@ -7,6 +7,8 @@ packages:
 
 catalog:
   '@types/node': 24.13.5
+  '@vitejs/plugin-vue': 6.0.9
+  '@jridgewell/trace-mapping': 0.3.31
   '@nuxt/kit': 4.5.2
   '@sveltejs/kit': 2.70.3
   '@sveltejs/adapter-node': 5.5.7

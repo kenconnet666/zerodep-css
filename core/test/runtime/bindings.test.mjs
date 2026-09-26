@@ -23,6 +23,13 @@ test('绑定恢复原子校验，移除后缓存类可重新关联新值', () =>
   target.setBindings(key, `--${name}-0:24px;`);
   target.css(body);
   assert.deepEqual(target.rules().find((rule) => rule.kind === 'bindings').targets, [cls]);
+  assert.deepEqual(target.stats(), {
+    rules: 2,
+    classes: 1,
+    animations: 0,
+    globals: 0,
+    bindings: 1,
+  });
   const snapshot = target.rules();
   snapshot.find((rule) => rule.kind === 'bindings').targets.push('external');
   assert.deepEqual(target.rules().find((rule) => rule.kind === 'bindings').targets, [cls]);

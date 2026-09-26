@@ -222,5 +222,14 @@ export function createRuleRegistry(
     get size() {
       return byName.size + globals.size + bindings.size;
     },
+    stats() {
+      return {
+        rules: byName.size + globals.size + bindings.size,
+        classes: byContent.class.size,
+        animations: byContent.keyframes.size,
+        globals: globals.size,
+        bindings: bindings.size,
+      };
+    },
   };
 }

@@ -170,8 +170,7 @@ export function disposeCss(target: Document = document): void {
 export function cssStats(target: Document = document) {
   const host = hosts.get(target);
   return {
-    rules: host?.registry.size ?? 0,
-    globals: host?.globals.size ?? 0,
+    ...(host?.registry.stats() ?? { rules: 0, classes: 0, animations: 0, globals: 0, bindings: 0 }),
     connected: host?.style.isConnected ?? false,
   };
 }

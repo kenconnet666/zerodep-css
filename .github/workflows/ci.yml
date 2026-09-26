@@ -60,6 +60,7 @@ jobs:
       - run: pnpm --dir .research/string-css-probe test:transport
       - run: pnpm --dir .research/string-css-probe test:author-api
       - run: pnpm --dir .research/string-css-probe test:bindings
+      - run: node test/browser/lifecycle-hmr.mjs
       - run: pnpm --dir .research/string-css-probe probe:bindings
         env:
           BINDING_ROUNDS: '1'
@@ -69,3 +70,10 @@ jobs:
       - run: node ../../node_modules/vite/bin/vite.js build
         working-directory: sveltekit/test/app
       - run: pnpm --dir .research/string-css-probe test:metaframeworks
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: runtime-diagnostics
+          path: |
+            test-results/lifecycle-hmr.json
+            test-results/binding-performance/results.json
