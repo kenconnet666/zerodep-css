@@ -51,7 +51,9 @@ const box = css(
 
 `css(bound, anotherClass)` 或 `css(bound, s.color.red)` 会将合成类加入原有变量的目标选择器，无需先给追加声明生成一个中间类。`css` 的嵌套数组及逻辑条件右侧也参与绑定转换；条件本身继续按原有 JS 求值时机选择结构。类名可以作为字符串传给子组件；不要求在该子组件再运行转换。
 
-`keyframes(ic('from', s.opacity.raw(alpha / 2)), ic('to', s.opacity.raw(alpha)))` 支持动态帧值。动画名称不随连续值变化；通过 `animationName.raw(name)` 或 animation 简写使用该名称的类会关联对应变量。
+`css(s._hover(s.width.px(width)))`、`s._selector` 内的动态声明支持相同转换。选择器快捷方法均以下划线开头，声明片段可以使用数组和条件空项。用户覆写快捷方法或 `_selector` 时，整个片段回退为原始求值；在 `css` / `keyframes` 外提前计算的独立片段仍遵循原有快照语义。
+
+`keyframes(s._selector('from', s.opacity.raw(alpha / 2)), s._selector('to', s.opacity.raw(alpha)))` 支持动态帧值。动画名称不随连续值变化；通过 `animationName.raw(name)` 或 animation 简写使用该名称的类会关联对应变量。
 
 顶层 `globalCss('theme', ...rules)` 使用框架响应式 effect 更新整个命名块。它沿用显式 API 的宿主所有权，组件卸载时停止 effect，但不自动删除同名全局块；需要移除时调用 `globalCss('theme')`。全局 key 应明确、稳定，多个组件写同一个 key 仍遵循后一次调用替换的约定。
 

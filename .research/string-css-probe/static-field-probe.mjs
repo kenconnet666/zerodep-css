@@ -4,6 +4,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 import { createRuleRegistry } from '../../core/test/runtime/runtime.mjs';
+import { selectorShortcuts } from '../../core/src/selectors.ts';
 
 // 只验证固定表达式的可提取性；产品编译器还需确认符号来源和主题覆盖。
 const generated = resolve(dirname(fileURLToPath(import.meta.url)), '../../core/src/generated');
@@ -68,10 +69,15 @@ function staticValues(expression) {
   }
   if (
     ts.isCallExpression(expression) &&
-    ts.isIdentifier(expression.expression) &&
-    expression.expression.text === 'ic'
+    ts.isPropertyAccessExpression(expression.expression) &&
+    ts.isIdentifier(expression.expression.expression) &&
+    expression.expression.expression.text === 's'
   ) {
-    const [selectors, ...parts] = expression.arguments.map(staticValues);
+    const method = expression.expression.name.text;
+    if (method !== '_selector' && !Object.hasOwn(selectorShortcuts, method)) return null;
+    const args = expression.arguments.map(staticValues);
+    const selectors = method === '_selector' ? args.shift() : [selectorShortcuts[method]];
+    const parts = args;
     const bodies = combinations(parts);
     return selectors && bodies
       ? combinations([selectors, bodies.map((body) => `{${body}}`)])
@@ -96,7 +102,7 @@ const cases = [
     expected: [['display:flex;color:red;', 'display:flex;color:blue;']],
   },
   {
-    code: "css(s.display.flex, ic('&:hover', s.color.blue));",
+    code: 'css(s.display.flex, s._hover(s.color.blue));',
     expected: [['display:flex;&:hover{color:blue;}']],
   },
   {

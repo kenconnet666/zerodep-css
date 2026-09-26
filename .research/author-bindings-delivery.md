@@ -4,6 +4,8 @@
 
 后续 API 简化：原 `cx` 已取消，样式组合并入 `css`；当前用法以 [作者 API](../docs/author-api.md) 为准。下文是 `5f56f88` 阶段的实现与性能记录，保留当时的名称和原始样本，不作为旧 API 兼容承诺。
 
+选择器后续改为 `s._hover` / `s._selector`，原 `ic` 名称同样只保留为历史记录，见[选择器实施记录](selectors-delivery.md)。
+
 ## 已落实
 
 - 声明字符串不变；`cx`、`className`、`keyframes`、命名可更新 / 移除的 `globalCss` 已接入浏览器、Node SSR 和恢复清单。

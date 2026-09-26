@@ -16,6 +16,8 @@ export * from './m-o.js';
 export * from './p-r.js';
 export * from './s-t.js';
 export * from './u-z.js';
+import { selectorRule, type CssSelector } from '../selectors.js';
+import type { CssInput } from '../registry.js';
 
 // 仅在首次构造作者实例时注册，避免未使用的属性链阻止按需打包。
 let systemPropertiesReady = false;
@@ -23,6 +25,46 @@ let systemPropertiesReady = false;
 export class Css {
   constructor() {
     initializeSystemProperties();
+  }
+  /** 原生选择器 / @ 规则 / 动画帧；展开声明数组并省略条件空项。 */
+  _selector(selector: CssSelector, ...parts: CssInput[]): string {
+    return selectorRule(selector, parts);
+  }
+  /** 生成 &:hover 嵌套规则；返回声明片段，不登记样式。 */
+  _hover(...parts: CssInput[]): string {
+    return this._selector('&:hover', ...parts);
+  }
+  /** 生成 &:active 嵌套规则；返回声明片段，不登记样式。 */
+  _active(...parts: CssInput[]): string {
+    return this._selector('&:active', ...parts);
+  }
+  /** 生成 &:focus 嵌套规则；返回声明片段，不登记样式。 */
+  _focus(...parts: CssInput[]): string {
+    return this._selector('&:focus', ...parts);
+  }
+  /** 生成 &:focus-visible 嵌套规则；返回声明片段，不登记样式。 */
+  _focusVisible(...parts: CssInput[]): string {
+    return this._selector('&:focus-visible', ...parts);
+  }
+  /** 生成 &:focus-within 嵌套规则；返回声明片段，不登记样式。 */
+  _focusWithin(...parts: CssInput[]): string {
+    return this._selector('&:focus-within', ...parts);
+  }
+  /** 生成 &:disabled 嵌套规则；返回声明片段，不登记样式。 */
+  _disabled(...parts: CssInput[]): string {
+    return this._selector('&:disabled', ...parts);
+  }
+  /** 生成 &:checked 嵌套规则；返回声明片段，不登记样式。 */
+  _checked(...parts: CssInput[]): string {
+    return this._selector('&:checked', ...parts);
+  }
+  /** 生成 &::before 嵌套规则；返回声明片段，不登记样式。 */
+  _before(...parts: CssInput[]): string {
+    return this._selector('&::before', ...parts);
+  }
+  /** 生成 &::after 嵌套规则；返回声明片段，不登记样式。 */
+  _after(...parts: CssInput[]): string {
+    return this._selector('&::after', ...parts);
   }
   /** CSS 属性 accent-color；初始值 auto。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color

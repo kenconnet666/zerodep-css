@@ -26,7 +26,7 @@ Vue 的[计算属性约束](https://vuejs.org/guide/essentials/computed)与 Svel
 
 作者关键字 `_text` / `_hover` 是稳定的 `color:var(--demo-text);` 等字符串；应用根元素设置变量，子树只覆盖自己的变量，兄弟继续继承根元素。切换亮暗色只更新变量，不替换作者实例，不生成新的主题类名。
 
-`ic('&:hover', s.color._hover)` 由浏览器处理选择器，`ic('@media (max-width: 600px)', ...)` 由浏览器处理条件。主题变量可沿 DOM 继承到 hover 分支；撤销子树覆盖后，其常态色和 hover 色重新继承父级。两个连续值元素共用同一个类名，但各自的变量值互不影响。实际 DOM 移到主题边界外时不会自动保留原边界变量，这个示例不承诺 Teleport / portal 的主题转移。
+`s._hover(s.color._hover)` 由浏览器处理选择器，`s._selector('@media (max-width: 600px)', ...)` 由浏览器处理条件。主题变量可沿 DOM 继承到 hover 分支；撤销子树覆盖后，其常态色和 hover 色重新继承父级。两个连续值元素共用同一个类名，但各自的变量值互不影响。实际 DOM 移到主题边界外时不会自动保留原边界变量，这个示例不承诺 Teleport / portal 的主题转移。
 
 `initialWidth` 与 `initialTheme` 是挂载 / SSR 的初始输入，不是受控 props；后续按钮操作修改组件内状态。模块顶层只保存类型化 context 和固定主题数据，作者实例与完整类名在活动组件 / 请求内创建。
 

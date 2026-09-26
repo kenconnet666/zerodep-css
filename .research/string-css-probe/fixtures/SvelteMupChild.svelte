@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { css, ic } from '@zerodep-css/svelte';
+  import { css } from '@zerodep-css/svelte';
   import { useCss, type AppCss } from './svelte-mup-context.ts';
 
   const props = $props<{
@@ -22,7 +22,7 @@
       s.display.flex,
       usePreset ? s.width._md : s.width.px(width),
       s.color.red,
-      ic('&:hover', s.color.blue),
+      s._hover(s.color.blue),
     ),
   );
 </script>

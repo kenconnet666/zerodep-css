@@ -2,6 +2,8 @@ import ts from 'typescript';
 import MagicString from 'magic-string';
 import { hash } from './names.js';
 import { unitSuffix } from './generated/base.js';
+import { selectorShortcuts } from './selectors.js';
+const selectors = new Set(['_selector', ...Object.keys(selectorShortcuts)]);
 
 const methods = new Set([
   'raw',
@@ -77,7 +79,7 @@ export function createBindingTransform(
     } else if (imports)
       for (const item of imports.elements) {
         const name = item.propertyName?.text ?? item.name.text;
-        if (cssModule && ['css', 'keyframes', 'globalCss', 'ic'].includes(name))
+        if (cssModule && ['css', 'keyframes', 'globalCss'].includes(name))
           aliases.set(item.name.text, name);
         else if (node.moduleSpecifier.text === 'vue') aliases.set(item.name.text, name);
         else if (!item.isTypeOnly) dynamic.add(item.name.text);
@@ -246,13 +248,21 @@ export function createBindingTransform(
           return `${scope}.value(${JSON.stringify(String(serial++))}, ${JSON.stringify(property.name.text)}, ${property.getText(sf)}, ${JSON.stringify(method)}, [${args.join(', ')}])`;
         }
       }
-      const safeComposition = ts.isIdentifier(node.expression)
-        ? aliases.get(text) === 'ic'
-        : ts.isPropertyAccessExpression(node.expression) &&
-          ts.isIdentifier(node.expression.expression) &&
-          namespaces.has(node.expression.expression.text) &&
-          node.expression.name.text === 'ic';
-      if (bindingContext && !safeComposition && !name) {
+      if (
+        enabled &&
+        bindingContext &&
+        ts.isPropertyAccessExpression(node.expression) &&
+        selectors.has(node.expression.name.text)
+      ) {
+        const before = valueCount;
+        const method = node.expression.name.text;
+        const args = node.arguments.map((arg, index) =>
+          render(arg, sf, params, local, false, method !== '_selector' || index !== 0),
+        );
+        if (before === valueCount) return node.getText(sf);
+        return `${scope}.selector(${JSON.stringify(String(serial++))}, ${node.expression.expression.getText(sf)}, ${JSON.stringify(method)}, () => [${args.join(', ')}])`;
+      }
+      if (bindingContext && !name) {
         if (isDynamic(node, params))
           warnings.add(
             `Composition call ${text} retains runtime evaluation; its string manipulation is not rewritten.`,

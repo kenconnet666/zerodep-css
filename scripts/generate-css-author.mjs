@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import prettier from 'prettier';
 import ts from 'typescript';
 import { units, extraUnits, unitMethod, valueMethods } from './css-author-methods.mjs';
+import { selectorShortcuts } from '../core/src/selectors.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const input = resolve(root, 'core/node_modules/csstype/index.d.ts');
@@ -228,13 +229,24 @@ for (const name of names) {
     `defineSystemProperty(${JSON.stringify(setting.name)}, () => new ${alias}.${className}());`,
   );
 }
+for (const name of ['_selector', ...Object.keys(selectorShortcuts)]) {
+  if (properties.has(name)) throw new Error(`CSS selector method conflicts with property: ${name}`);
+}
 author.push(
+  "import { selectorRule, type CssSelector } from '../selectors.js';",
+  "import type { CssInput } from '../registry.js';",
   '',
   '// 仅在首次构造作者实例时注册，避免未使用的属性链阻止按需打包。',
   'let systemPropertiesReady = false;',
   '/** 系统属性链；项目可通过类继承扩展关键字。 */',
   'export class Css {',
   '  constructor() { initializeSystemProperties(); }',
+  '/** 原生选择器 / @ 规则 / 动画帧；展开声明数组并省略条件空项。 */',
+  '_selector(selector: CssSelector, ...parts: CssInput[]): string { return selectorRule(selector, parts); }',
+  ...Object.entries(selectorShortcuts).flatMap(([name, selector]) => [
+    `/** 生成 ${selector} 嵌套规则；返回声明片段，不登记样式。 */`,
+    `${name}(...parts: CssInput[]): string { return this._selector(${JSON.stringify(selector)}, ...parts); }`,
+  ]),
 );
 author.push(...systemFields, '}');
 author.push(

@@ -6,7 +6,6 @@ import {
   createCssContext,
   createServerCssHost,
   css,
-  ic,
   withCssHost,
 } from '@zerodep-css/vue';
 
@@ -29,12 +28,7 @@ export async function renderPage(width: number, delay = 0) {
           h(
             'button',
             {
-              class: css(
-                s.display.flex,
-                s.width.px(width),
-                s.color.red,
-                ic('&:hover', s.color.blue),
-              ),
+              class: css(s.display.flex, s.width.px(width), s.color.red, s._hover(s.color.blue)),
             },
             'Vue',
           );

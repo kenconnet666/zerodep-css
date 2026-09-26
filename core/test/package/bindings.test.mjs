@@ -6,7 +6,7 @@ import { Css } from '../../dist/index.js';
 import { createServerCssHost } from '../../dist/server.js';
 const transform = (text) =>
   createBindingTransform(
-    `import { css, ic } from '@zerodep-css/vue'; import { ref } from 'vue'; const s = new Css(); const width = ref(12); ${text}`,
+    `import { css } from '@zerodep-css/vue'; import { ref } from 'vue'; const s = new Css(); const width = ref(12); ${text}`,
     'test.vue',
     'vue',
   );
@@ -107,13 +107,13 @@ test('框架模板帧隔离列表键，重排不重建绑定规则', () => {
 
 test('静态全局块不创建响应式订阅，动态全局块按整体更新', () => {
   const fixed = createBindingTransform(
-    "import { globalCss, ic } from '@zerodep-css/vue'; globalCss('base', ic('body', 'margin:0;'));",
+    "import { globalCss } from '@zerodep-css/vue'; globalCss('base', s._selector('body', 'margin:0;'));",
     'static.vue',
     'vue',
   );
   assert.equal(fixed.used, false);
   const dynamic = createBindingTransform(
-    "import { globalCss, ic } from '@zerodep-css/vue'; import { ref } from 'vue'; const color = ref('red'); globalCss('theme', ic('body', `color:${color.value};`));",
+    "import { globalCss } from '@zerodep-css/vue'; import { ref } from 'vue'; const color = ref('red'); globalCss('theme', s._selector('body', `color:${color.value};`));",
     'theme.vue',
     'vue',
   );
@@ -145,4 +145,48 @@ test('声明数组和逻辑分支保留动态值转换，清理曾经启用的�
   render(false);
   scope.dispose();
   assert.equal(host.rules().filter((rule) => rule.kind === 'bindings').length, 0);
+});
+
+test('系统选择器支持嵌套动态声明，覆写选择器时整个片段回退', () => {
+  const result = transform(
+    "const box = css(s._hover([s.width.px(width.value), s._selector('& > span', s.height.px(width.value))]));",
+  );
+  assert.match(result.script, /\.selector\(/);
+  assert.match(result.script, /\.value\(/);
+  const host = createServerCssHost();
+  const scope = createBindings('selector', host.setBindings, (run) => {
+    run();
+    return () => {};
+  });
+  const s = new Css();
+  const draw = (author) =>
+    scope.capture('box', host.css, () => [
+      scope.selector('hover', author, '_hover', () => [
+        scope.value('width', 'width', author.width, 'px', [() => 12]),
+      ]),
+    ]);
+  const original = draw(s);
+  assert.match(
+    host.rules().find((rule) => rule.className === original).body,
+    /&:hover\{width:var\(/,
+  );
+  class OverrideHover extends Css {
+    _hover(...parts) {
+      return super._hover(...parts).replace('12px', '24px');
+    }
+  }
+  const custom = draw(new OverrideHover());
+  assert.equal(host.rules().find((rule) => rule.className === custom).body, '&:hover{width:24px;}');
+  class OverrideSelector extends Css {
+    _selector(selector, ...parts) {
+      return super._selector(selector, ...parts).replace('12px', '36px');
+    }
+  }
+  const wrapped = draw(new OverrideSelector());
+  assert.equal(
+    host.rules().find((rule) => rule.className === wrapped).body,
+    '&:hover{width:36px;}',
+  );
+  assert.equal(host.rules().filter((rule) => rule.kind === 'bindings').length, 1);
+  scope.dispose();
 });

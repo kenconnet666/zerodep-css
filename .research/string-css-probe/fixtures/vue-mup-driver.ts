@@ -1,13 +1,5 @@
 import { createApp, createSSRApp, defineComponent, h, nextTick, ref } from 'vue';
-import {
-  Css,
-  WidthCss,
-  createCssContext,
-  css,
-  hydrateCss,
-  ic,
-  type CssRule,
-} from '@zerodep-css/vue';
+import { Css, WidthCss, createCssContext, css, hydrateCss, type CssRule } from '@zerodep-css/vue';
 
 class ThemeWidthCss extends WidthCss {
   readonly _md = this.px(48);
@@ -33,7 +25,7 @@ export async function start(target: HTMLElement, hydrate = false) {
               childAuthor.display.flex,
               preset.value ? childAuthor.width._md : childAuthor.width.px(width.value),
               childAuthor.color.red,
-              ic('&:hover', childAuthor.color.blue),
+              childAuthor._hover(childAuthor.color.blue),
             ),
           },
           'Vue',

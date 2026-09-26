@@ -114,6 +114,16 @@ try {
         assert.equal(changed.nodes[0].forwarded, '28px');
         assert.equal(changed.nodes[0].frameValue, 0.375);
         assert.equal(changed.nodes[0].animationName, initial.nodes[0].animationName);
+        const box = page.locator('[data-instance="24"] [data-bound="box"]');
+        await box.hover();
+        assert.equal(await box.evaluate((node) => getComputedStyle(node).opacity), '0.75');
+        assert.equal(
+          await box
+            .locator('[data-bound="child"]')
+            .evaluate((node) => getComputedStyle(node).height),
+          '7px',
+        );
+        await page.mouse.move(0, 0);
         assert.deepEqual(changed.nodes[1], initial.nodes[1]);
         assert.equal(changed.nodes[0].className, initial.nodes[0].className);
         assert.equal(changed.stats.rules, initial.stats.rules);

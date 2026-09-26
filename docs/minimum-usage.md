@@ -4,7 +4,7 @@
 
 ## 作者类型与组件
 
-Vue 项目从 `@zerodep-css/vue`、Svelte 项目从 `@zerodep-css/svelte` 导入相同名字的 `Css`、`WidthCss`、`createCssContext`、`css` 和 `ic`。项目模块只创建类型化上下文，实际作者实例由根组件提供：
+Vue 项目从 `@zerodep-css/vue`、Svelte 项目从 `@zerodep-css/svelte` 导入相同名字的 `Css`、`WidthCss`、`createCssContext` 和 `css`。选择器直接使用 `s._hover` / `s._selector`。项目模块只创建类型化上下文，实际作者实例由根组件提供：
 
 ```ts
 import { Css, WidthCss, createCssContext } from '@zerodep-css/vue';
@@ -22,7 +22,7 @@ export const { provideCss, useCss } = createCssContext<AppCss>();
 
 ```ts
 const s = useCss(); // 取得上层的同一个 AppCss 实例
-const className = css(s.display.flex, s.width._md, ic('&:hover', s.color.red));
+const className = css(s.display.flex, s.width._md, s._hover(s.color.red));
 ```
 
 `css(s.width.px(width))` 可直接放在 Vue/Svelte 模板表达式中。不开启转换时按值生成并缓存类；启用[隐式绑定插件](implicit-bindings.md)后，可识别的动态值使用 CSS 变量。有限取值仍可预注册类表，通过 Vue `computed` 或 Svelte `$derived` 选择类名。`css(baseClass, active && s.color.red, [s.padding.px(8)])` 统一处理声明和已登记类的组合，始终返回一个样式类名；外部 class 和独立标记交给模板组合。`raw()` 原样拼接字符串，浏览器按原生 CSS 处理值和层叠。

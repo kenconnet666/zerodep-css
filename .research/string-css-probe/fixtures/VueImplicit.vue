@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { css, globalCss, ic, keyframes } from '@zerodep-css/vue';
+import { css, globalCss, keyframes } from '@zerodep-css/vue';
 import { useCss } from '../../../vue/examples/context.js';
 import Plain from './VuePlainClass.vue';
 const props = defineProps<{
@@ -18,26 +18,28 @@ const rows = ref([
   { id: 'b', width: 22 },
 ]);
 const fade = keyframes(
-  ic('from', s.opacity.raw(alpha.value / 2)),
-  ic('to', s.opacity.raw(alpha.value)),
+  s._selector('from', s.opacity.raw(alpha.value / 2)),
+  s._selector('to', s.opacity.raw(alpha.value)),
 );
 const box = css(
   s.width.px(width.value),
   s.padding.px(side.value, width.value),
   s.color.rgb(red.value, 20, 30, alpha.value),
   s.transform.raw(`translate(${width.value}px, ${side.value}px) rotate(${red.value}deg)`),
+  s._hover(s.opacity.raw(alpha.value)),
+  s._selector('& > .child', [s.display.block, s.height.px(side.value)]),
 );
 const animated = css(s.animationName.raw(fade), s.animationDuration.ms(1000));
 const combined = css(box, [false, s.backgroundColor.blue]);
 const fixed = css(s.height.px(snapshot));
 const dual = css([null, side.value > 0 && s.width.px(side.value), [s.height.rem(side.value)]]);
-const sibling = css(ic('& + [data-bound="sibling"]', s.marginLeft.px(width.value)));
+const sibling = css(s._selector('& + [data-bound="sibling"]', s.marginLeft.px(width.value)));
 function rowClass(row: { width: number }) {
   return css(s.width.px(row.width));
 }
 globalCss(
   `implicit-${props.initial}`,
-  ic(`[data-global="${props.initial}"]`, s.color.rgb(red.value, 0, 0)),
+  s._selector(`[data-global="${props.initial}"]`, s.color.rgb(red.value, 0, 0)),
 );
 props.expose({
   step() {
@@ -54,7 +56,7 @@ props.expose({
 </script>
 <template>
   <section :data-instance="props.initial">
-    <div data-bound="box" :class="combined"></div>
+    <div data-bound="box" :class="combined"><span class="child" data-bound="child"></span></div>
     <div data-bound="animated" :class="animated"></div>
     <div data-bound="snapshot" :class="fixed"></div>
     <div data-bound="dual" :class="dual"></div>

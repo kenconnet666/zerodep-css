@@ -123,6 +123,26 @@ export function createBindings(prefix: string, write: Writer, schedule: Schedule
       }
       return register(...parts);
     },
+    selector(site: string, author: unknown, method: string, produce: () => unknown[]): string {
+      const target = author as Property;
+      const invoke = target[method] as (...args: unknown[]) => string;
+      const trusted =
+        invoke === Reflect.get(Css.prototype, method) &&
+        target._selector === Css.prototype._selector;
+      if (
+        !trusted &&
+        (import.meta as ImportMeta & { env?: { DEV?: boolean } }).env?.DEV &&
+        !warned.has(site)
+      ) {
+        warned.add(site);
+        console.warn(
+          `[zerodep-css] ${method} is overridden; selector arguments retain their original runtime evaluation.`,
+        );
+      }
+      // 用户覆写可能加工声明文本；此时让内部属性方法也保留原始值。
+      const run = () => invoke.apply(author, produce());
+      return trusted ? run() : api.runtime(run);
+    },
     value(
       site: string,
       propertyName: string,

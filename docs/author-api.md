@@ -1,19 +1,19 @@
 # 声明、类名与顶层规则
 
-Vue/Svelte 的主入口提供 `css`、`keyframes`、`globalCss`，并继续导出 `ic`、`className` 和作者类。样式组合统一由 `css` 处理，原 `cx` 及其类型已移除。浏览器与 Node 使用相同写法；服务端调用仍需活动宿主。
+Vue/Svelte 的主入口提供 `css`、`keyframes`、`globalCss`、`className` 和作者类。样式组合统一由 `css` 处理，选择器使用作者对象的下划线方法；原 `cx`、独立 `ic` 及其旧类型已移除。浏览器与 Node 使用相同写法；服务端调用仍需活动宿主。
 
 ```ts
 const title = className('Card.title');
-const base = css(s.color.red, ic(`& > .${title}`, s.fontWeight.bold));
+const base = css(s.color.red, s._selector(`& > .${title}`, s.fontWeight.bold));
 const active = css(s.color.blue);
 const combined = css(base, enabled && active, [s.padding.rem(1), null]);
 
-const fade = keyframes(ic('from', s.opacity.raw(0)), ic('to', s.opacity.raw(1)));
+const fade = keyframes(s._selector('from', s.opacity.raw(0)), s._selector('to', s.opacity.raw(1)));
 const animated = css(s.animationName.raw(fade), s.animationDuration.raw('180ms'));
 
-globalCss('reset', ic('html, body', s.margin.px(0)));
-globalCss('theme', ic(':root', '--brand:red;'));
-globalCss('theme', ic(':root', '--brand:blue;'));
+globalCss('reset', s._selector('html, body', s.margin.px(0)));
+globalCss('theme', s._selector(':root', '--brand:red;'));
+globalCss('theme', s._selector(':root', '--brand:blue;'));
 globalCss('theme');
 ```
 
@@ -25,9 +25,28 @@ globalCss('theme');
 
 声明不做属性去重，important、简写、长属性和无效声明继续服从原生 CSS。条件表达式按普通 JS 的执行时机选择结构；需要随状态变化时在模板或框架派生求值中执行，而不是让一次性的 setup 条件自动订阅。
 
-`ic` 使用浏览器原生 CSS 嵌套，不引入 Stylis。需要选择独立子元素时使用上例的 `className` 标记；Emotion 的 `&-child` 字符串后缀展开不属于原生嵌套，不能直接套用。
+`s._selector` 使用浏览器原生 CSS 嵌套，不引入 Stylis。需要选择独立子元素时使用上例的 `className` 标记；Emotion 的 `&-child` 字符串后缀展开不属于原生嵌套，不能直接套用。
 
-`ic`、`keyframes`、`globalCss` 的片段参数仍为字符串；本次扩展仅针对 `css`。它们不负责取回类名对应的声明。
+选择器方法接受声明字符串、嵌套只读数组和 `false/null/undefined` 空项，不查询宿主，不展开已生成的类名。`keyframes`、`globalCss` 的片段参数继续为字符串，登记职责不变。
+
+## 选择器方法
+
+```ts
+const button = css(
+  s.color.black,
+  s._hover(s.color.blue, [enabled && s.opacity.raw(0.9)]),
+  s._active(s.opacity.raw(0.8)),
+  s._focusVisible(s.outlineWidth.px(2), s.outlineStyle.solid),
+  s._selector('&:hover:not(:disabled)', s.cursor.pointer),
+  s._selector('@media (width >= 60rem)', s.padding.rem(2)),
+);
+```
+
+快捷方法为 `_hover`、`_active`、`_focus`、`_focusVisible`、`_focusWithin`、`_disabled`、`_checked`、`_before`、`_after`，分别对应原生伪类 / 伪元素。全部共享原型方法，不提供无前缀别名。`_selector(selector, ...parts)` 用 `CssSelector` 提供常见选择器、@ 规则、from/to 的补全，并允许任意字符串；没有对浏览器语法另做限制。
+
+快捷方法调用 `this._selector`，用户可以通过继承扩展自己的方法。系统方法内部的动态属性值参与隐式绑定；覆写快捷方法或 `_selector` 时，编译运行时会保留整个片段的原始求值并在开发模式提示，避免字符串加工逻辑收到变量占位符。
+
+`s.width.ic(1)` 仍是原生 CSS 的 ic 长度单位；本次移除的是原来的独立 `ic()` 选择器函数，不改变单位 API。
 
 全局块放在普通类样式之前，块之间按创建顺序排列。同名更新保留位置，移除再创建放在全局块末尾。更新全局块不会重写普通类的 CSSOM。动画与普通类按内容命名和复用，采用完整 UTF-16 的更宽哈希，仍保留冲突诊断。
 

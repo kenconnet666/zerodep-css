@@ -40,7 +40,7 @@ pnpm install --frozen-lockfile
 pnpm probe
 pnpm probe:author-storage
 pnpm semantics
-pnpm test:ic
+pnpm test:selectors
 pnpm test:mup:browser
 pnpm test:mup:server
 pnpm test:mup:hydration
@@ -51,7 +51,7 @@ pnpm test:mup:exports
 
 `probe:author-storage` 是独立的合成微基准，用于比较 502 条属性链采用实例字段、共享原型及空 `Proxy` 时的创建与读取成本；测法、结果和局限见[代码生成审阅稿](../css-author-generation-design.md)。
 
-`probe:static-fields` 只用 TypeScript AST 提取生成类中的固定声明，展示条件分支和 `ic()` 的候选规则以及动态值回退；它不改写组件，局限与后续方向见[直接字段优化研究](../direct-field-optimization-research.md)。
+`probe:static-fields` 只用 TypeScript AST 提取生成类中的固定声明，展示条件分支和 `s._selector()` 的候选规则以及动态值回退；它不改写组件，局限与后续方向见[直接字段优化研究](../direct-field-optimization-research.md)。
 
 `probe:runtime` 在 Chrome 中分段测量当前规则注册器的命中、哈希、短声明编码、CSSOM 写入与已启动 Worker 的消息往返；这不是 CI 性能门槛，结果和适用边界见[并行与 SIMD 研究](../runtime-parallel-simd-research.md)。
 
@@ -95,20 +95,20 @@ Vue SFC 的 [`v-bind()`](https://vuejs.org/api/sfc-css-features.html#v-bind-in-c
 
 ## 选择器片段试验
 
-`ic(selector, ...parts)` 只返回嵌套 CSS 字符串，外层 `css()` 仍只注册一次规则。它同时用于伪类、子元素和媒体条件，不需要给每一种条件提供专用入口：
+`s._selector(selector, ...parts)` 只返回嵌套 CSS 字符串，外层 `css()` 仍只注册一次规则。常用状态使用 `_hover`、`_active` 等快捷方法，其他伪类、子元素和媒体条件使用 `_selector`：
 
 ```ts
 const s = useCss();
 const buttonClass = css(
   s.color.red,
-  ic('&:hover', s.color.blue),
-  ic('&:active', s.color.green),
-  ic('& > .icon', s.opacity.raw('0.6')),
+  s._hover(s.color.blue),
+  s._active(s.color.green),
+  s._selector('& > .icon', s.opacity.raw('0.6')),
 );
 ```
 
-`selector` 在 TypeScript 中提示常见的 `&:hover`、`&:active`、`&:focus-visible`、`&::before` 等写法，也接受任意普通字符串，例如 `ic('&[data-state=open]', s.color.blue)`。提示列表不限制原生选择器或 `@` 规则。
+`_selector` 在 TypeScript 中提示常见的 `&:hover`、`&:active`、`&:focus-visible`、`&::before` 等写法，也接受任意普通字符串，例如 `s._selector('&[data-state=open]', s.color.blue)`。提示列表不限制原生选择器或 `@` 规则。
 
-`pnpm test:ic` 用当前 Chrome 验证了嵌套规则经 CSSOM 插入后，默认、hover、active、子元素和媒体条件均生效；悬停期间更新元素上的 CSS 变量，也会立即改变样式。这个测试只覆盖浏览器原生嵌套行为；`ic()` 本身不解析或改写选择器，响应式值自动绑定仍待实现。
+`pnpm test:selectors` 用当前 Chrome 验证 CSSOM 嵌套规则、状态、伪元素、子元素和媒体条件；悬停期间更新 CSS 变量也会立即改变样式。`s._selector()` 本身不解析选择器。`test:bindings` 额外验证框架自动绑定、动画及 SSR 恢复。
 
-当前 Vue/Svelte 适配器已有浏览器文档宿主、Node 请求隔离和 hydration 测试。Nuxt 4、SvelteKit 2 专用封装及响应式 CSS 变量编译仍待实现；旧探针中的单宿主性能数字不能代替当前适配器的[性能记录](../minimum-usable-performance.md)。
+当前 Vue/Svelte 适配器、Nuxt 4 / SvelteKit 2 封装及隐式绑定均有浏览器、Node SSR 和 hydration 验收。旧探针中的单宿主性能数字不能代替当前适配器的[性能记录](../author-bindings-delivery.md)。

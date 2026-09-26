@@ -13,9 +13,11 @@ function sourceFor(name, server) {
     ? `import { Css, WidthCss, createCssContext, css, createServerCssHost, withCssHost } from '@zerodep-css/${name}';`
     : `import { Css, WidthCss, createCssContext, css, hydrateCss } from '@zerodep-css/${name}';`;
   return `${imports}
-import { ic } from '@zerodep-css/core';
 import type { CssRule } from '@zerodep-css/core';
 import type { CssInput } from '@zerodep-css/core';
+import type { CssSelector } from '@zerodep-css/core';
+// @ts-expect-error 独立 ic 已移除，选择器入口在作者对象
+import { ic } from '@zerodep-css/${name}';
 // @ts-expect-error cx 已移除，组合统一使用 css
 import { cx } from '@zerodep-css/${name}';
 // @ts-expect-error 规则注册器不是公开作者 API
@@ -24,11 +26,22 @@ class ThemeWidth extends WidthCss { readonly _md = this.raw('48rem'); }
 class ThemeCss extends Css { override readonly width = new ThemeWidth(); }
 class AppCss extends ThemeCss { readonly brand = 'brand'; }
 const s = new AppCss();
+const selector: CssSelector = '& > .custom[data-open]';
+s._selector(selector, [s.color.red, false, [null, undefined]]);
+s._hover(s._active(s.color.blue));
+s._focus(s._focusVisible(s._focusWithin(s.color.red)));
+s._disabled(s._checked(s._before(s._after(s.color.red))));
+// @ts-expect-error 快捷方法只有下划线命名，不提供重复入口
+s.hover(s.color.red);
+// @ts-expect-error 选择器必须是字符串
+s._selector(42, s.color.red);
+// @ts-expect-error 条件对象不属于声明片段
+s._hover({ active: true });
 const base = new Css();
 const { provideCss, useCss } = createCssContext<AppCss>();
 useCss().width._md satisfies string;
 provideCss(s);
-css(s.color.red, s.width.px(20), s.width.raw('calc(100% - 2rem)'), ic('&:hover', s.display.flex));
+css(s.color.red, s.width.px(20), s.width.raw('calc(100% - 2rem)'), s._hover(s.display.flex));
 const fragments = [s.color.red, [false, null, undefined, s.padding.px(4)]] as const satisfies readonly CssInput[];
 css(css(s.display.flex), fragments, Math.random() > 0.5 && s.opacity.raw(0.5));
 // @ts-expect-error 条件对象交给框架 class，不是 CSS 声明
@@ -81,6 +94,8 @@ function check(file, node) {
   }
 
   const expectedDocs = new Map([
+    ['s._selector', '原生选择器'],
+    ['s._hover', '生成 &:hover'],
     ['s.display', '显示类型'],
     ['s.fill', 'CSS 属性 fill'],
     ['base.width', '宽度'],

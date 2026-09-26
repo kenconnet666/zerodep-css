@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { css, ic } from '@zerodep-css/vue';
+import { css } from '@zerodep-css/vue';
 import { useCss } from './context.js';
 
 const s = useCss();
@@ -15,8 +15,8 @@ const sizes = { small: css(base, s.width.px(24)), large: css(base, s.width.px(48
 // 派生值只选择已有类名，不在 getter 内注册规则。
 const finiteClass = computed(() => (expanded.value ? sizes.large : sizes.small));
 const variableClass = css(base, s.width._live);
-const themeClass = css(base, ic('&:hover', s.color._hover));
-const mediaClass = css(s.padding.px(4), ic('@media (max-width: 600px)', s.padding.px(8)));
+const themeClass = css(base, s._hover(s.color._hover));
+const mediaClass = css(s.padding.px(4), s._selector('@media (max-width: 600px)', s.padding.px(8)));
 
 // 开放动态值保留同步运行时路径；无需枚举全部分支。
 function runtimeClass(): string {
