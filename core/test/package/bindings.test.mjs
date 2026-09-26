@@ -162,14 +162,14 @@ test('动画、全局样式、选择器和覆写方法共用显式变量语义',
 
 test('手写 computed 与 Svelte derived 复用绑定帧', () => {
   const vue = transform("const box=computed(()=>css(s.width.raw(bx(width.value+'px'))));");
-  assert.match(vue.script, /computed\(__zc.derived/);
+  assert.match(vue.script, /computed\(__zc.frameCallback/);
   assert.match(vue.script, /\.capture\(/);
   const svelte = createBindingTransform(
     "import {css,bx} from '@zerodep-css/svelte'; const box=$derived(css(s.width.raw(bx(width+'px'))));",
     'a.svelte',
     'svelte',
   );
-  assert.match(svelte.script, /\$derived.by\(__zc.derived/);
+  assert.match(svelte.script, /\$derived.by\(__zc.frameCallback/);
   for (const text of ['bx()', 'bx(1,2)', 'bx(...values)', 'bx(bx(1))', 'bx(await value)'])
     assert.throws(() => transform(text), /bx|binding/);
   const { scope } = fixture();

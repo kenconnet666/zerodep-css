@@ -239,25 +239,40 @@ export function createBindingTransform(
         return node.expression.getText(sf) + '(' + args.join(', ') + ')';
       }
       const text = node.expression.getText(sf);
-      const derived =
-        (!local.has(text) &&
-          ((framework === 'svelte' &&
-            !local.has('$derived') &&
-            (text === '$derived' || text === '$derived.by')) ||
-            aliases.get(text) === 'computed')) ||
-        (ts.isPropertyAccessExpression(node.expression) &&
-          ts.isIdentifier(node.expression.expression) &&
-          vueNamespaces.has(node.expression.expression.text) &&
-          !local.has(node.expression.expression.text) &&
-          node.expression.name.text === 'computed');
-      if (derived && node.arguments.length) {
+      const vueCall =
+        ts.isIdentifier(node.expression) && !local.has(text)
+          ? aliases.get(text)
+          : ts.isPropertyAccessExpression(node.expression) &&
+              ts.isIdentifier(node.expression.expression) &&
+              vueNamespaces.has(node.expression.expression.text) &&
+              !local.has(node.expression.expression.text)
+            ? node.expression.name.text
+            : undefined;
+      const rune =
+        framework === 'svelte' &&
+        !local.has(text.split('.')[0]!) &&
+        ['$derived', '$derived.by', '$effect', '$effect.pre', '$effect.root'].includes(text);
+      const managed =
+        rune ||
+        (framework === 'vue' &&
+          vueCall !== undefined &&
+          ['computed', 'watch', 'watchEffect', 'watchPostEffect', 'watchSyncEffect'].includes(
+            vueCall,
+          ));
+      const callbackIndex = vueCall === 'watch' ? 1 : 0;
+      if (managed && node.arguments.length > callbackIndex) {
         const args = node.arguments.map((arg, index) => {
-          if (index !== 0) return render(arg, sf, local);
+          if (index !== callbackIndex) return render(arg, sf, local);
           if (text === '$derived')
             return (
-              scope + '.derived(' + site(node, sf) + ', () => (' + render(arg, sf, local) + '))'
+              scope +
+              '.frameCallback(' +
+              site(node, sf) +
+              ', () => (' +
+              render(arg, sf, local) +
+              '))'
             );
-          return scope + '.derived(' + site(arg, sf) + ', ' + render(arg, sf, local) + ')';
+          return scope + '.frameCallback(' + site(arg, sf) + ', ' + render(arg, sf, local) + ')';
         });
         return (text === '$derived' ? '$derived.by' : text) + '(' + args.join(', ') + ')';
       }

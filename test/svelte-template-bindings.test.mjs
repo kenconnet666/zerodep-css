@@ -119,7 +119,7 @@ test('derived.by 引用命名 getter 时仍使用派生实例作用域', () => {
   const result = inspect(
     `<script>import {Css,css,bx} from '@zerodep-css/svelte';const s=new Css();let width=$state(12);function read(){return css(s.width.raw(bx(width+'px')))} const box=$derived.by(read);</script><div class={box}></div>`,
   );
-  assert.match(result.transformed, /\$derived.by\(__zc.derived/);
+  assert.match(result.transformed, /\$derived.by\(__zc.frameCallback/);
   assert.match(result.rules.find((r) => r.kind === 'bindings').body, /:12px;/);
 });
 
@@ -134,4 +134,13 @@ test('SSR 由服务端入口决定，不受测试环境中 document 全局影响
     if (previous) Object.defineProperty(globalThis, 'document', previous);
     else delete globalThis.document;
   }
+});
+
+test('Svelte effect 回调可编译且不会提前在服务端运行', () => {
+  const result = inspect(
+    `<script>import {Css,css,bx} from '@zerodep-css/svelte';const s=new Css();let width=$state(12);let box=$state(css(s.height.px(12)));$effect(()=>{const next=width;box=css(s.height.raw(bx(next+'px')))});</script><div class={box}></div>`,
+  );
+  assert.match(result.transformed, /\$effect\(__zc.frameCallback/);
+  assert.equal(result.rules.filter((r) => r.kind === 'bindings').length, 0);
+  assert.ok(result.rules.some((r) => r.body === 'height:12px;'));
 });

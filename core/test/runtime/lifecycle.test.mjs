@@ -81,8 +81,8 @@ test('同一个读取函数建立的派生实例具有独立变量身份', () =>
     throw new Error('Unexpected effect');
   });
   const read = (n) => host.css('width:' + scope.bind('width', () => n + 'px') + ';');
-  const a = scope.derived('factory', read),
-    b = scope.derived('factory', read);
+  const a = scope.frameCallback('factory', read),
+    b = scope.frameCallback('factory', read);
   const first = a(12),
     second = b(24);
   assert.notEqual(first, second);

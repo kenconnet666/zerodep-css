@@ -39,6 +39,11 @@
   const animated = css(s.animationName.raw(fade), s.animationDuration.ms(1000));
   const combined = css(box, [false, s.backgroundColor.blue]);
   const fixed = css(s.height.px(snapshot));
+  let effectClass = $state(fixed);
+  $effect(() => {
+    const current = width;
+    effectClass = css(s.height.raw(bx(current + 'px')));
+  });
   const dual = css([
     null,
     side > 0 && s.width.raw(bx(side + 'px')),
@@ -87,6 +92,7 @@
   <div data-bound="box" class={combined}><span class="child" data-bound="child"></span></div>
   <div data-bound="animated" class={animated}></div>
   <div data-bound="snapshot" class={fixed}></div>
+  <div data-bound="effect" class={effectClass}></div>
   <div data-bound="dual" class={dual}></div>
   <div class={sibling}></div>
   <div data-bound="sibling"></div>

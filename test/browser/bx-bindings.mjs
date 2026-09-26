@@ -7,6 +7,7 @@ import { bundle } from '../../test/tools/mup-bundle.mjs';
 import { launchBrowser } from '../../test/tools/browser.mjs';
 
 const browser = await launchBrowser();
+const report = [];
 const output = new URL('../../test-results/bx-bindings/', import.meta.url);
 await mkdir(output, { recursive: true });
 try {
@@ -92,6 +93,7 @@ try {
                 forwarded: getComputedStyle(root.querySelector('[data-bound="forward"]')).width,
                 snapshot: getComputedStyle(root.querySelector('[data-bound="snapshot"]')).height,
                 snapshotClass: root.querySelector('[data-bound="snapshot"]').className,
+                effect: getComputedStyle(root.querySelector('[data-bound="effect"]')).height,
                 snippets: [...root.querySelectorAll('[data-snippet]')].map((node) => ({
                   className: node.className,
                   width: getComputedStyle(node).width,
@@ -122,6 +124,7 @@ try {
         assert.deepEqual(changed.globals, ['rgb(14, 0, 0)', 'rgb(10, 0, 0)']);
         assert.notEqual(changed.nodes[0].transform, initial.nodes[0].transform);
         assert.equal(changed.nodes[0].snapshot, '24px');
+        assert.equal(changed.nodes[0].effect, '28px');
         assert.deepEqual(changed.nodes[0].dual, ['7px', '112px']);
         assert.equal(changed.nodes[0].sibling, '28px');
         assert.equal(changed.nodes[0].forwarded, '28px');
@@ -179,6 +182,7 @@ try {
           new Set(initial.nodes.map((node) => node.snapshotClass)).size,
           'Only the unbound snapshot classes should survive disposal',
         );
+        report.push({ framework, hydrate, status: 'passed', initial: initial.stats, released });
         console.log(
           JSON.stringify({
             framework,
@@ -187,11 +191,27 @@ try {
             rules: initial.stats.rules,
           }),
         );
+      } catch (error) {
+        report.push({ framework, hydrate, status: 'failed', error: String(error), errors });
+        throw error;
       } finally {
         await page.close();
       }
     }
   }
 } finally {
+  await writeFile(
+    new URL('results.json', output),
+    JSON.stringify(
+      {
+        node: process.version,
+        browser: browser.version(),
+        commit: process.env.GITHUB_SHA,
+        cases: report,
+      },
+      null,
+      2,
+    ) + '\n',
+  );
   await browser.close();
 }

@@ -79,3 +79,5 @@ null/undefined 清空对应变量声明，0 保留。无效值交给浏览器，
 SSR 输出初始变量和规则清单，客户端先 hydrateCss 再恢复组件；Nuxt/Kit 处理顺序。nonce 接入、Kit 固定内联样式许可等见[元框架说明](metaframeworks.md)。同页多个独立 SSR 应用需要明确分配宿主身份。流式 SSR、边缘部署、Shadow DOM 尚未验收。
 
 开发构建保留文件、行列诊断；生产不包含位置字典。局部验证使用 `pnpm test:bindings` / `pnpm test:compiler`；浏览器、HMR、元框架和 200/1,000 行性能对照交给 CI，性能模式 bx 与 runtime 分别使用显式绑定和普通运行时路径。
+
+同步的 Vue watch/watchEffect（含 post/sync 变体）与 Svelte $effect/$effect.pre/$effect.root 回调也使用稳定绑定帧，避免每次回调都建立新订阅和私有类。Svelte 原生 effect 不在 SSR 执行；需要首屏样式时在 setup 提供初值。异步回调跨 await 的部分不保证同一帧，连续值优先在 setup、模板或同步框架回调中绑定。

@@ -464,3 +464,22 @@ test('KeepAlive 保留绑定并在最终卸载清理，重新激活不增加规�
     assert.equal(host.rules().filter((r) => r.kind === 'bindings').length, 0);
   });
 });
+
+test('watch 与 effect 重跑复用绑定帧，结构和值分开更新', async () => {
+  await run(
+    '<div data-watch :class="watched"></div><div data-effect :class="effect"></div>',
+    async (p) => {
+      await p.update((s) => (s.compact = true));
+      const count = p.host.rules().length;
+      for (let i = 0; i < 8; i++)
+        await p.update((s) => {
+          s.width++;
+          s.compact = !s.compact;
+        });
+      assert.equal(p.host.rules().length, count);
+      assert.equal(p.host.rules().filter((r) => r.kind === 'bindings').length, 2);
+      assert.ok(p.host.rules().some((r) => r.kind === 'bindings' && r.body.includes('28px')));
+    },
+    "import {ref,watch,watchEffect} from 'vue';const watched=ref(''),effect=ref('');watch(()=>state.width,next=>{watched.value=makeCss(s.height.raw(bx(next+'px')))},{immediate:true});watchEffect(()=>{const width=state.width;effect.value=makeCss(state.compact?s.color.red:s.color.blue,s.width.raw(bx(width+'px')))})",
+  );
+});

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { bx, css, globalCss, keyframes } from '@zerodep-css/vue';
 import { useCss } from '../../../vue/examples/context.js';
 import Plain from './VuePlainClass.vue';
@@ -40,6 +40,11 @@ const box = css(
 const animated = css(s.animationName.raw(fade), s.animationDuration.ms(1000));
 const combined = css(box, [false, s.backgroundColor.blue]);
 const fixed = css(s.height.px(snapshot));
+const effectClass = ref(fixed);
+watchEffect(() => {
+  const current = width.value;
+  effectClass.value = css(s.height.raw(bx(current + 'px')));
+});
 const dual = css([
   null,
   side.value > 0 && s.width.raw(bx(side.value + 'px')),
@@ -76,6 +81,7 @@ props.expose({
     <div data-bound="box" :class="combined"><span class="child" data-bound="child"></span></div>
     <div data-bound="animated" :class="animated"></div>
     <div data-bound="snapshot" :class="fixed"></div>
+    <div data-bound="effect" :class="effectClass"></div>
     <div data-bound="dual" :class="dual"></div>
     <div :class="sibling"></div>
     <div data-bound="sibling"></div>

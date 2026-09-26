@@ -54,8 +54,8 @@ export function createBindings(
   }
 
   const api = {
-    derived<T>(site: string, source: T): T {
-      // 身份属于派生实例。同一 getter 被 computed() 多次使用时也不能串用 previous 值。
+    frameCallback<T>(site: string, source: T): T {
+      // 每次注册框架回调拥有独立身份；同一个 getter 多次注册也不能串用 previous 值。
       const owner = {};
       const wrap =
         (read: Function) =>
