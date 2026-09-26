@@ -31,6 +31,8 @@ s.width.raw('20px'); // 原有能力继续可用
 
 ## 运行
 
+`probe:template-derived` 对比 Vue/Svelte 模板运行时、派生缓存、模板隐式绑定与 setup 稳定绑定，耗时测量只在 CI 执行；候选语法、作用域限制与测法见[模板派生研究](../template-derived-research.md)。
+
 本轮新增 `test:bindings`（Vue/Svelte 客户端、SSR、CSP、多实例与列表）、`probe:bindings`（200 行连续值、手工变量和 Emotion 对照）。先在仓库根 `pnpm build`。`probe:library-review` 已改为检查修复后的单次 miss 哈希、Unicode、碰撞样本及失联宿主恢复；旧研究报告里的缺陷描述是修复前的历史证据。
 
 `probe:keywords` 比较完整声明字段、初始化拼接、共用全局关键字、getter 和缓存 Proxy，包含 minified / gzip / Brotli、全部关键字校验、浏览器微基准及 Vue/Svelte 组件用例。只改内存研究副本，正式生成结果不变，耗时测量由 CI 执行；结论见[前缀与关键字分离研究](../keyword-prefix-research.md)。
