@@ -1,6 +1,6 @@
 # zerodep-css：运行时 CSS 重新研究
 
-这是一个从基础设施重新开始的本地研究分支。当前有 pnpm 工作区、五个 private 包、类型检查和 Codex 语言服务。`core` 已从固定的 `csstype` 生成 502 条属性链与 12,586 个关键字，并提供 `ic()` 片段和规则去重；Vue/Svelte 已有浏览器上下文、Node 请求宿主及 hydration 的可运行原型。**Nuxt/SvelteKit 封装和响应式绑定编译器尚未实现，试验 API 尚未定稿**。旧方案可从本地 Git 历史或另存的归档目录查询，不作为本分支实现。
+这是运行时 CSS 工作区，包含五个 private 包、类型检查和 Codex 语言服务。`core` 从固定的 `csstype` 生成 502 条属性链与 12,586 个关键字，并提供 `ic()` 片段和规则去重；Vue/Svelte 提供浏览器上下文、Node 请求宿主及 hydration，Nuxt 4 / SvelteKit 2 已接入标准 Node SSR、客户端恢复和预渲染。**响应式绑定编译器、流式 SSR 与边缘部署尚未实现或验收，包尚未公开发布**。旧方案可从本地 Git 历史或另存归档查询，不作为本分支实现。
 
 | 子项目      | 预留职责             |
 | ----------- | -------------------- |
@@ -23,14 +23,14 @@ pnpm lsp:verify
 
 `lsp:setup` 按当前机器的 Node 与项目目录生成被忽略的 `.codex/config.toml`；信任项目并重载 Codex 后，使用 `zerodep_lsp` 的 diagnostics、hover、definitions、references 和 completions。需要验证 Codex 实际解析的项目配置时，在 PowerShell 7 运行 `pwsh -NoProfile -File scripts/language-services/setup.ps1 -Verify -SkipInstall`。Codex MCP 不可用时，可运行 `pnpm lsp:inspect <项目相对路径>`。
 
-class 对象写法、浏览器规则注册和 Node 请求隔离已有最小可用验证。下一步仍需 Nuxt/SvelteKit 封装、响应式绑定优化和生产环境审计；当前试验 API 尚未定稿。
+class 对象写法、浏览器注册、Node 请求隔离及元框架接入已有验证。[包入口说明](docs/package-exports.md)与[Nuxt/SvelteKit 接入](docs/metaframeworks.md)记录当前使用方法和支持边界。
 
 生成内容在 [core/src/generated](core/src/generated)，使用 `pnpm css:generate` 更新；`pnpm check` 会核对生成结果、检查五个包，并验证 Bundler/NodeNext 包类型入口。`useCss()` 由 Vue/Svelte 适配器提供，`core` 只提供作者类型与规则基础。
 
 字符串作者写法及响应式 CSS 变量绑定的独立测量见 [研究探针](.research/string-css-probe/README.md)。
 完整属性链、关键字生成与上下文生命周期的讨论稿见 [作者模型设计](.research/css-author-generation-design.md)。
 已完成阶段的最小可用范围与性能验收见 [实施规划](.research/next-stage-minimum-usable.md)。
-框架用法阶段的依据与实施边界见[组件性能复测与规划](.research/framework-performance-next-stage.md)；下一批为 Nuxt/SvelteKit 接入。
+框架用法阶段的依据与实施边界见[组件性能复测与规划](.research/framework-performance-next-stage.md)。
 已落实的 Vue/Svelte 组件与主题边界示例见[可执行用法](docs/framework-examples.md)。
 当前 Vue/Svelte 工作区包的调用和手工 Node SSR 接入见 [最小用法](docs/minimum-usage.md)；两轮真实适配器的[性能记录](.research/minimum-usable-performance.md)与原始样本在 `.research/string-css-probe/`。
 包类型入口、生成文件与命名整理的证据见[本轮实施记录](.research/type-layout-next-stage.md)。

@@ -4,9 +4,17 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/types/server.d.ts",
+      "node": "./dist/server.js"
+    }
   },
   "scripts": {
+    "build:types": "tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
@@ -16,6 +24,7 @@
     "@sveltejs/kit": "^2.0.0"
   },
   "devDependencies": {
+    "@sveltejs/adapter-node": "catalog:",
     "@sveltejs/kit": "catalog:",
     "@sveltejs/vite-plugin-svelte": "catalog:",
     "svelte": "catalog:",

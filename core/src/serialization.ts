@@ -1,0 +1,18 @@
+import type { CssRule } from './registry.js';
+
+/** 只处理 HTML raw-text 边界，声明的解析与层叠仍由浏览器负责。 */
+export function serializeStyleRules(rules: readonly CssRule[]): string {
+  return rules
+    .map(({ className, body }) => `.${className}{${body}}`)
+    .join('')
+    .replace(/<\/style/gi, (value) => '<\\/' + value.slice(2))
+    .replace(/\r\n?/g, '\n')
+    .replace(/\0/g, '\uFFFD');
+}
+
+export function serializeCssRules(rules: readonly CssRule[]) {
+  return {
+    cssText: serializeStyleRules(rules),
+    manifest: JSON.stringify(rules).replace(/</g, '\\u003c'),
+  };
+}

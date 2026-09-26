@@ -4,19 +4,23 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "node": "./dist/index.js"
+    }
   },
   "scripts": {
+    "build:types": "tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@nuxt/kit": "catalog:",
     "@zerodep-css/vue": "workspace:*"
   },
   "peerDependencies": {
     "nuxt": "^4.0.0"
   },
   "devDependencies": {
-    "@nuxt/kit": "catalog:",
     "nuxt": "catalog:"
   }
 }

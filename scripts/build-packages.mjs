@@ -4,8 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
-// 只清理由本脚本生成的三个 dist，避免重命名后旧声明混入发布产物。
-for (const name of ['core', 'vue', 'svelte']) {
+// 只清理由本脚本生成的 dist，避免重命名后旧声明混入发布产物。
+for (const name of ['core', 'vue', 'svelte', 'nuxt', 'sveltekit']) {
   const dist = resolve(root, name, 'dist');
   if (!dist.startsWith(root + sep)) throw new Error(`Unsafe build path: ${dist}`);
   const current = await lstat(dist).catch((error) => {
@@ -22,6 +22,12 @@ for (const [name, entries, external] of [
   ['core', ['index', 'browser', 'server'], []],
   ['vue', ['index', 'server'], ['@zerodep-css/core', '@zerodep-css/core/*', 'vue']],
   ['svelte', ['index', 'server'], ['@zerodep-css/core', '@zerodep-css/core/*', 'svelte']],
+  [
+    'nuxt',
+    ['index', 'runtime/server', 'runtime/client'],
+    ['@zerodep-css/vue', '@zerodep-css/vue/*', '@nuxt/kit', 'nuxt/app'],
+  ],
+  ['sveltekit', ['index', 'server'], ['@zerodep-css/svelte', '@zerodep-css/svelte/*']],
 ]) {
   for (const entry of entries) {
     await build({
@@ -30,7 +36,8 @@ for (const [name, entries, external] of [
       bundle: true,
       minify: true,
       format: 'esm',
-      platform: entry === 'server' ? 'node' : 'browser',
+      platform:
+        entry.endsWith('server') || (name === 'nuxt' && entry === 'index') ? 'node' : 'browser',
       target: 'es2023',
       external,
       define: {
@@ -42,4 +49,4 @@ for (const [name, entries, external] of [
     });
   }
 }
-console.log('Built core, vue and svelte JavaScript entries.');
+console.log('Built all five package JavaScript entries.');

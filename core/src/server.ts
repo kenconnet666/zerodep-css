@@ -1,5 +1,7 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { createRuleRegistry, type CssRule } from './registry.js';
+import { serializeStyleRules } from './serialization.js';
+export { serializeCssRules } from './serialization.js';
 
 export interface ServerCssHost {
   css(...parts: string[]): string;
@@ -14,11 +16,7 @@ export function createServerCssHost(): ServerCssHost {
   return {
     css: registry.css,
     rules: registry.rules,
-    cssText: () =>
-      registry
-        .rules()
-        .map(({ className, body }) => `.${className}{${body}}`)
-        .join(''),
+    cssText: () => serializeStyleRules(registry.rules()),
   };
 }
 

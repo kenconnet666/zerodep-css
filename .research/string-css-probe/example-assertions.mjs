@@ -25,7 +25,7 @@ export async function assertInitial(page, width = 24, theme = 'light') {
 export async function exerciseExample(page, width = 24, theme = 'light') {
   const click = async (action) => {
     await page.locator(`[data-action="${action}"]`).click();
-    await page.evaluate(() => window.exampleControl.flush());
+    await page.evaluate(() => window.exampleControl?.flush());
   };
   const initialRules = await ruleCount(page);
   const classes = await page

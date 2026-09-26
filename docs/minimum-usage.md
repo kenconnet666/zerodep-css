@@ -1,6 +1,6 @@
 # Vue 与 Svelte 最小用法
 
-当前三个包仍是工作区 private 包。先运行 `pnpm install --frozen-lockfile` 与 `pnpm build`；浏览器构建按 `browser` 条件使用 DOM 宿主，Node SSR 按 `node` 条件使用请求宿主。Nuxt 与 SvelteKit 专用封装、响应式变量编译、全局规则、keyframes 和 CSP/nonce 配置尚未提供。
+五个包仍是工作区 private 包。先运行 `pnpm install --frozen-lockfile` 与 `pnpm build`；浏览器构建使用主入口的默认 DOM 实现，Node SSR 按 `node` 条件使用请求宿主。Nuxt/SvelteKit 已有[专用接入](metaframeworks.md)；响应式变量编译、全局规则、keyframes 和 CSP/nonce 配置尚未提供。
 
 ## 作者类型与组件
 
@@ -33,7 +33,7 @@ Vue/Svelte 组件初始化、有限状态选择与连续值绑定的对照写法
 
 ## 手工 Node SSR 接入边界
 
-目前提供底层请求宿主，还没有 Nuxt/SvelteKit 自动封装。Vue 服务器使用 `renderToString`，Svelte 服务器使用 `render`；两者都在渲染前创建宿主，并在 `withCssHost` 内执行整个渲染：
+以下用于不经过元框架的手工 SSR。Vue 服务器使用 `renderToString`，Svelte 服务器使用 `render`；两者都在渲染前创建宿主，并在 `withCssHost` 内执行整个渲染：
 
 ```ts
 import { renderToString } from 'vue/server-renderer';
@@ -57,6 +57,6 @@ const cssText = host.cssText();
 const rules = host.rules();
 ```
 
-每个 Node 请求创建自己的宿主和根部 `AppCss`，不能把它们放在模块级共享。浏览器 hydration 之前，把服务端的规则放在一个 `style[data-zerodep-css]` 元素中，再从适配包导入 `hydrateCss` 并调用 `hydrateCss(rules)`；它核对规则清单与样式文本并预热缓存，随后挂载或 hydrate 组件。服务端 HTML 中安全嵌入 CSS 与规则清单的序列化属于应用集成责任；当前原始 `raw()` 不做输入清理，不能把不可信数据直接拼进 HTML。
+每个 Node 请求创建自己的宿主和根部 `AppCss`，不能把它们放在模块级共享。浏览器 hydration 之前，把服务端的规则放在 `style[data-zerodep-css]` 元素中，再调用 `hydrateCss(rules)`，随后挂载或 hydrate 组件。嵌入 HTML 时使用 `/server` 的 `serializeCssRules(rules)` 输出样式和 JSON 清单；自动读取清单的方式见[元框架接入](metaframeworks.md)。原始 `raw()` 不过滤任意 CSS。
 
 研究夹具的 Vue/Svelte 浏览器、并发 Node SSR、hydration 测试与[性能记录](../.research/minimum-usable-performance.md)提供了可运行的具体示例。缺少作者提供者或服务端活动宿主时会明确抛错。

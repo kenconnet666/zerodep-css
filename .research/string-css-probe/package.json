@@ -4,6 +4,8 @@
   "type": "module",
   "packageManager": "pnpm@10.34.5",
   "scripts": {
+    "test:metaframeworks": "node metaframeworks.mjs",
+    "test:transport": "node hydration-transport.mjs",
     "test:examples:browser": "node examples-browser.mjs",
     "test:examples:hydration": "node examples-hydration.mjs",
     "test:mup:browser": "node mup-browser.mjs",

@@ -51,4 +51,4 @@ pnpm --dir .research/string-css-probe test:examples:hydration
 
 测试使用[Vue 服务端驱动](../.research/string-css-probe/fixtures/vue-examples-server.ts)和[Svelte 服务端驱动](../.research/string-css-probe/fixtures/svelte-examples-server.ts)。完整组件渲染必须包在 `withCssHost()` 的请求生命周期内；浏览器必须先收到服务端样式，再在首次挂载前调用一次 `hydrateCss(rules)`。同一文档的普通后续挂载不重复调用 `hydrateCss()`。
 
-测试结果不代表生产化已经全部完成。Nuxt/SvelteKit 的自动接入、流式 SSR、HTML 安全序列化、CSP/nonce、Teleport / portal 和 HMR 仍需要各自的接入与验收。
+后续已完成[Nuxt/SvelteKit 的 Node 接入与 HTML 清单序列化](metaframeworks.md)。流式 SSR、CSP/nonce、Teleport / portal 和 HMR 仍需各自的接入与验收；本页用例不代表生产化已全部完成。

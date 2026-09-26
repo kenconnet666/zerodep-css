@@ -56,3 +56,10 @@ jobs:
       - run: pnpm --dir .research/string-css-probe test:mup:exports
       - run: pnpm --dir .research/string-css-probe test:examples:browser
       - run: pnpm --dir .research/string-css-probe test:examples:hydration
+      - run: pnpm --dir .research/string-css-probe test:transport
+      - run: node scripts/prepare-framework-fixtures.mjs
+      - run: node ../../node_modules/nuxt/bin/nuxt.mjs build
+        working-directory: nuxt/test/app
+      - run: node ../../node_modules/vite/bin/vite.js build
+        working-directory: sveltekit/test/app
+      - run: pnpm --dir .research/string-css-probe test:metaframeworks

@@ -2,7 +2,7 @@
 
 日期：2026-09-26。承接[字符串拼接研究](string-concatenation-research.md)和[框架结合研究](vue-svelte-runtime-integration.md)。
 
-实施更新：下文规划的可执行组件、Node SSR/hydration 和子树主题验证已落实，入口见[框架用法示例](../docs/framework-examples.md)。本页保留形成决策时的性能记录；当前下一批工作为 Nuxt/SvelteKit 接入。
+实施更新：下文规划的可执行组件、Node SSR/hydration 和子树主题验证已落实，入口见[框架用法示例](../docs/framework-examples.md)。后续也已完成[Nuxt/SvelteKit 的 Node SSR 与预渲染接入](../docs/metaframeworks.md)；本页保留形成决策时的性能记录。
 
 ## 本轮决定
 

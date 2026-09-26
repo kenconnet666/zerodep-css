@@ -3,5 +3,7 @@ dist
 .nuxt
 .svelte-kit
 test-results
+nuxt/test/app/.output
+sveltekit/test/app/build
 pnpm-lock.yaml
 .research/**/results-*.json
