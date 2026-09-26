@@ -12,11 +12,14 @@ import { launchBrowser } from '../../.research/string-css-probe/browser.mjs';
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const results = resolve(root, 'test-results');
 await mkdir(results, { recursive: true });
+// Vite 默认忽略 test-results，临时开发应用必须放在可被 watcher 观察的位置。
+const workspaces = resolve(root, '.test-workspaces');
+await mkdir(workspaces, { recursive: true });
 const browser = await launchBrowser();
 const report = [];
 try {
   for (const framework of ['vue', 'svelte']) {
-    const directory = await mkdtemp(join(results, 'lifecycle-'));
+    const directory = await mkdtemp(join(workspaces, 'lifecycle-'));
     let server;
     const page = await browser.newPage();
     const errors = [];
@@ -180,7 +183,8 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
     } finally {
       await page.close();
       await server?.close();
-      if (!resolve(directory).startsWith(results + sep)) throw new Error('Unsafe fixture cleanup');
+      if (!resolve(directory).startsWith(workspaces + sep))
+        throw new Error('Unsafe fixture cleanup');
       await rm(directory, { recursive: true, force: true });
     }
   }

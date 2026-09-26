@@ -17,6 +17,7 @@ dist-ssr
 .idea
 .codex/config.toml
 test-results/
+.test-workspaces/
 *.tsbuildinfo
 .nuxt/
 .svelte-kit/
