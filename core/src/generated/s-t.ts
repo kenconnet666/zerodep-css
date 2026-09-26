@@ -1,13 +1,13 @@
 // 由 scripts/generate-css-author.mjs 从 csstype@3.2.3 生成；请勿手改。
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
-import { CssProperty, LengthCssProperty } from './base.js';
+import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
 
 /** CSS 属性 scale；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scale
  */
-export class ScaleCss extends CssProperty<Property.Scale> {
+export class ScaleCss extends CssProperty {
   readonly inherit = 'scale:inherit;';
   readonly initial = 'scale:initial;';
   readonly none = 'scale:none;';
@@ -16,6 +16,10 @@ export class ScaleCss extends CssProperty<Property.Scale> {
   readonly unset = 'scale:unset;';
   constructor() {
     super('scale');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Scale | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
@@ -28,31 +32,25 @@ export class ScaleCss extends CssProperty<Property.Scale> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Scale, number> | (string & {}),
-    ...others: (Extract<Property.Scale, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Scale | CssString, ...others: (Property.Scale | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Scale, number> | (string & {}),
-    ...others: (Extract<Property.Scale, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Scale | CssString, ...others: (Property.Scale | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Scale, number> | (string & {}),
-    preferred: Extract<Property.Scale, number> | (string & {}),
-    maximum: Extract<Property.Scale, number> | (string & {}),
+    minimum: Property.Scale | CssString,
+    preferred: Property.Scale | CssString,
+    maximum: Property.Scale | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-behavior；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-behavior
  */
-export class ScrollBehaviorCss extends CssProperty<Property.ScrollBehavior> {
+export class ScrollBehaviorCss extends CssProperty {
   readonly auto = 'scroll-behavior:auto;';
   readonly inherit = 'scroll-behavior:inherit;';
   readonly initial = 'scroll-behavior:initial;';
@@ -63,12 +61,16 @@ export class ScrollBehaviorCss extends CssProperty<Property.ScrollBehavior> {
   constructor() {
     super('scroll-behavior');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollBehavior | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scroll-initial-target；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-initial-target
  */
-export class ScrollInitialTargetCss extends CssProperty<Property.ScrollInitialTarget> {
+export class ScrollInitialTargetCss extends CssProperty {
   readonly inherit = 'scroll-initial-target:inherit;';
   readonly initial = 'scroll-initial-target:initial;';
   readonly nearest = 'scroll-initial-target:nearest;';
@@ -79,12 +81,16 @@ export class ScrollInitialTargetCss extends CssProperty<Property.ScrollInitialTa
   constructor() {
     super('scroll-initial-target');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollInitialTarget | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scroll-margin。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
  */
-export class ScrollMarginCss extends LengthCssProperty<Property.ScrollMargin> {
+export class ScrollMarginCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin:inherit;';
   readonly initial = 'scroll-margin:initial;';
   readonly revert = 'scroll-margin:revert;';
@@ -92,6 +98,10 @@ export class ScrollMarginCss extends LengthCssProperty<Property.ScrollMargin> {
   readonly unset = 'scroll-margin:unset;';
   constructor() {
     super('scroll-margin');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMargin | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -490,30 +500,30 @@ export class ScrollMarginCss extends LengthCssProperty<Property.ScrollMargin> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMargin, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMargin, number> | (string & {}))[]
+    value: Property.ScrollMargin | CssString,
+    ...others: (Property.ScrollMargin | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMargin, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMargin, number> | (string & {}))[]
+    value: Property.ScrollMargin | CssString,
+    ...others: (Property.ScrollMargin | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMargin, number> | (string & {}),
-    preferred: Extract<Property.ScrollMargin, number> | (string & {}),
-    maximum: Extract<Property.ScrollMargin, number> | (string & {}),
+    minimum: Property.ScrollMargin | CssString,
+    preferred: Property.ScrollMargin | CssString,
+    maximum: Property.ScrollMargin | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-block。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block
  */
-export class ScrollMarginBlockCss extends LengthCssProperty<Property.ScrollMarginBlock> {
+export class ScrollMarginBlockCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-block:inherit;';
   readonly initial = 'scroll-margin-block:initial;';
   readonly revert = 'scroll-margin-block:revert;';
@@ -522,6 +532,10 @@ export class ScrollMarginBlockCss extends LengthCssProperty<Property.ScrollMargi
   constructor() {
     super('scroll-margin-block');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginBlock | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
   px(value1: number, value2: number): string;
@@ -821,30 +835,30 @@ export class ScrollMarginBlockCss extends LengthCssProperty<Property.ScrollMargi
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginBlock, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBlock, number> | (string & {}))[]
+    value: Property.ScrollMarginBlock | CssString,
+    ...others: (Property.ScrollMarginBlock | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginBlock, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBlock, number> | (string & {}))[]
+    value: Property.ScrollMarginBlock | CssString,
+    ...others: (Property.ScrollMarginBlock | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginBlock, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginBlock, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginBlock, number> | (string & {}),
+    minimum: Property.ScrollMarginBlock | CssString,
+    preferred: Property.ScrollMarginBlock | CssString,
+    maximum: Property.ScrollMarginBlock | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-block-end；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-end
  */
-export class ScrollMarginBlockEndCss extends LengthCssProperty<Property.ScrollMarginBlockEnd> {
+export class ScrollMarginBlockEndCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-block-end:inherit;';
   readonly initial = 'scroll-margin-block-end:initial;';
   readonly revert = 'scroll-margin-block-end:revert;';
@@ -853,35 +867,39 @@ export class ScrollMarginBlockEndCss extends LengthCssProperty<Property.ScrollMa
   constructor() {
     super('scroll-margin-block-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginBlockEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginBlockEnd, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBlockEnd, number> | (string & {}))[]
+    value: Property.ScrollMarginBlockEnd | CssString,
+    ...others: (Property.ScrollMarginBlockEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginBlockEnd, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBlockEnd, number> | (string & {}))[]
+    value: Property.ScrollMarginBlockEnd | CssString,
+    ...others: (Property.ScrollMarginBlockEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginBlockEnd, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginBlockEnd, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginBlockEnd, number> | (string & {}),
+    minimum: Property.ScrollMarginBlockEnd | CssString,
+    preferred: Property.ScrollMarginBlockEnd | CssString,
+    maximum: Property.ScrollMarginBlockEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-block-start；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-start
  */
-export class ScrollMarginBlockStartCss extends LengthCssProperty<Property.ScrollMarginBlockStart> {
+export class ScrollMarginBlockStartCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-block-start:inherit;';
   readonly initial = 'scroll-margin-block-start:initial;';
   readonly revert = 'scroll-margin-block-start:revert;';
@@ -890,35 +908,39 @@ export class ScrollMarginBlockStartCss extends LengthCssProperty<Property.Scroll
   constructor() {
     super('scroll-margin-block-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginBlockStart | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginBlockStart, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBlockStart, number> | (string & {}))[]
+    value: Property.ScrollMarginBlockStart | CssString,
+    ...others: (Property.ScrollMarginBlockStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginBlockStart, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBlockStart, number> | (string & {}))[]
+    value: Property.ScrollMarginBlockStart | CssString,
+    ...others: (Property.ScrollMarginBlockStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginBlockStart, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginBlockStart, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginBlockStart, number> | (string & {}),
+    minimum: Property.ScrollMarginBlockStart | CssString,
+    preferred: Property.ScrollMarginBlockStart | CssString,
+    maximum: Property.ScrollMarginBlockStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-bottom；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
  */
-export class ScrollMarginBottomCss extends LengthCssProperty<Property.ScrollMarginBottom> {
+export class ScrollMarginBottomCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-bottom:inherit;';
   readonly initial = 'scroll-margin-bottom:initial;';
   readonly revert = 'scroll-margin-bottom:revert;';
@@ -927,35 +949,39 @@ export class ScrollMarginBottomCss extends LengthCssProperty<Property.ScrollMarg
   constructor() {
     super('scroll-margin-bottom');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginBottom | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginBottom, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBottom, number> | (string & {}))[]
+    value: Property.ScrollMarginBottom | CssString,
+    ...others: (Property.ScrollMarginBottom | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginBottom, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBottom, number> | (string & {}))[]
+    value: Property.ScrollMarginBottom | CssString,
+    ...others: (Property.ScrollMarginBottom | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginBottom, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginBottom, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginBottom, number> | (string & {}),
+    minimum: Property.ScrollMarginBottom | CssString,
+    preferred: Property.ScrollMarginBottom | CssString,
+    maximum: Property.ScrollMarginBottom | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-inline。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline
  */
-export class ScrollMarginInlineCss extends LengthCssProperty<Property.ScrollMarginInline> {
+export class ScrollMarginInlineCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-inline:inherit;';
   readonly initial = 'scroll-margin-inline:initial;';
   readonly revert = 'scroll-margin-inline:revert;';
@@ -963,6 +989,10 @@ export class ScrollMarginInlineCss extends LengthCssProperty<Property.ScrollMarg
   readonly unset = 'scroll-margin-inline:unset;';
   constructor() {
     super('scroll-margin-inline');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginInline | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -1263,30 +1293,30 @@ export class ScrollMarginInlineCss extends LengthCssProperty<Property.ScrollMarg
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginInline, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginInline, number> | (string & {}))[]
+    value: Property.ScrollMarginInline | CssString,
+    ...others: (Property.ScrollMarginInline | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginInline, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginInline, number> | (string & {}))[]
+    value: Property.ScrollMarginInline | CssString,
+    ...others: (Property.ScrollMarginInline | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginInline, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginInline, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginInline, number> | (string & {}),
+    minimum: Property.ScrollMarginInline | CssString,
+    preferred: Property.ScrollMarginInline | CssString,
+    maximum: Property.ScrollMarginInline | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-inline-end；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-end
  */
-export class ScrollMarginInlineEndCss extends LengthCssProperty<Property.ScrollMarginInlineEnd> {
+export class ScrollMarginInlineEndCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-inline-end:inherit;';
   readonly initial = 'scroll-margin-inline-end:initial;';
   readonly revert = 'scroll-margin-inline-end:revert;';
@@ -1295,35 +1325,39 @@ export class ScrollMarginInlineEndCss extends LengthCssProperty<Property.ScrollM
   constructor() {
     super('scroll-margin-inline-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginInlineEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginInlineEnd, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginInlineEnd, number> | (string & {}))[]
+    value: Property.ScrollMarginInlineEnd | CssString,
+    ...others: (Property.ScrollMarginInlineEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginInlineEnd, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginInlineEnd, number> | (string & {}))[]
+    value: Property.ScrollMarginInlineEnd | CssString,
+    ...others: (Property.ScrollMarginInlineEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginInlineEnd, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginInlineEnd, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginInlineEnd, number> | (string & {}),
+    minimum: Property.ScrollMarginInlineEnd | CssString,
+    preferred: Property.ScrollMarginInlineEnd | CssString,
+    maximum: Property.ScrollMarginInlineEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-inline-start；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-start
  */
-export class ScrollMarginInlineStartCss extends LengthCssProperty<Property.ScrollMarginInlineStart> {
+export class ScrollMarginInlineStartCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-inline-start:inherit;';
   readonly initial = 'scroll-margin-inline-start:initial;';
   readonly revert = 'scroll-margin-inline-start:revert;';
@@ -1332,35 +1366,39 @@ export class ScrollMarginInlineStartCss extends LengthCssProperty<Property.Scrol
   constructor() {
     super('scroll-margin-inline-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginInlineStart | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginInlineStart, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginInlineStart, number> | (string & {}))[]
+    value: Property.ScrollMarginInlineStart | CssString,
+    ...others: (Property.ScrollMarginInlineStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginInlineStart, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginInlineStart, number> | (string & {}))[]
+    value: Property.ScrollMarginInlineStart | CssString,
+    ...others: (Property.ScrollMarginInlineStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginInlineStart, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginInlineStart, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginInlineStart, number> | (string & {}),
+    minimum: Property.ScrollMarginInlineStart | CssString,
+    preferred: Property.ScrollMarginInlineStart | CssString,
+    maximum: Property.ScrollMarginInlineStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-left；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
  */
-export class ScrollMarginLeftCss extends LengthCssProperty<Property.ScrollMarginLeft> {
+export class ScrollMarginLeftCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-left:inherit;';
   readonly initial = 'scroll-margin-left:initial;';
   readonly revert = 'scroll-margin-left:revert;';
@@ -1369,35 +1407,39 @@ export class ScrollMarginLeftCss extends LengthCssProperty<Property.ScrollMargin
   constructor() {
     super('scroll-margin-left');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginLeft | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginLeft, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginLeft, number> | (string & {}))[]
+    value: Property.ScrollMarginLeft | CssString,
+    ...others: (Property.ScrollMarginLeft | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginLeft, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginLeft, number> | (string & {}))[]
+    value: Property.ScrollMarginLeft | CssString,
+    ...others: (Property.ScrollMarginLeft | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginLeft, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginLeft, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginLeft, number> | (string & {}),
+    minimum: Property.ScrollMarginLeft | CssString,
+    preferred: Property.ScrollMarginLeft | CssString,
+    maximum: Property.ScrollMarginLeft | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-right；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
  */
-export class ScrollMarginRightCss extends LengthCssProperty<Property.ScrollMarginRight> {
+export class ScrollMarginRightCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-right:inherit;';
   readonly initial = 'scroll-margin-right:initial;';
   readonly revert = 'scroll-margin-right:revert;';
@@ -1406,35 +1448,39 @@ export class ScrollMarginRightCss extends LengthCssProperty<Property.ScrollMargi
   constructor() {
     super('scroll-margin-right');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginRight | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginRight, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginRight, number> | (string & {}))[]
+    value: Property.ScrollMarginRight | CssString,
+    ...others: (Property.ScrollMarginRight | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginRight, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginRight, number> | (string & {}))[]
+    value: Property.ScrollMarginRight | CssString,
+    ...others: (Property.ScrollMarginRight | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginRight, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginRight, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginRight, number> | (string & {}),
+    minimum: Property.ScrollMarginRight | CssString,
+    preferred: Property.ScrollMarginRight | CssString,
+    maximum: Property.ScrollMarginRight | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-margin-top；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
  */
-export class ScrollMarginTopCss extends LengthCssProperty<Property.ScrollMarginTop> {
+export class ScrollMarginTopCss extends LengthCssProperty {
   readonly inherit = 'scroll-margin-top:inherit;';
   readonly initial = 'scroll-margin-top:initial;';
   readonly revert = 'scroll-margin-top:revert;';
@@ -1443,35 +1489,39 @@ export class ScrollMarginTopCss extends LengthCssProperty<Property.ScrollMarginT
   constructor() {
     super('scroll-margin-top');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginTop | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginTop, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginTop, number> | (string & {}))[]
+    value: Property.ScrollMarginTop | CssString,
+    ...others: (Property.ScrollMarginTop | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginTop, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginTop, number> | (string & {}))[]
+    value: Property.ScrollMarginTop | CssString,
+    ...others: (Property.ScrollMarginTop | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginTop, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginTop, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginTop, number> | (string & {}),
+    minimum: Property.ScrollMarginTop | CssString,
+    preferred: Property.ScrollMarginTop | CssString,
+    maximum: Property.ScrollMarginTop | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding
  */
-export class ScrollPaddingCss extends LengthCssProperty<Property.ScrollPadding> {
+export class ScrollPaddingCss extends LengthCssProperty {
   readonly auto = 'scroll-padding:auto;';
   readonly inherit = 'scroll-padding:inherit;';
   readonly initial = 'scroll-padding:initial;';
@@ -1480,6 +1530,10 @@ export class ScrollPaddingCss extends LengthCssProperty<Property.ScrollPadding> 
   readonly unset = 'scroll-padding:unset;';
   constructor() {
     super('scroll-padding');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPadding | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -1886,30 +1940,30 @@ export class ScrollPaddingCss extends LengthCssProperty<Property.ScrollPadding> 
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPadding, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPadding, number> | (string & {}))[]
+    value: Property.ScrollPadding | CssString,
+    ...others: (Property.ScrollPadding | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPadding, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPadding, number> | (string & {}))[]
+    value: Property.ScrollPadding | CssString,
+    ...others: (Property.ScrollPadding | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPadding, number> | (string & {}),
-    preferred: Extract<Property.ScrollPadding, number> | (string & {}),
-    maximum: Extract<Property.ScrollPadding, number> | (string & {}),
+    minimum: Property.ScrollPadding | CssString,
+    preferred: Property.ScrollPadding | CssString,
+    maximum: Property.ScrollPadding | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-block。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block
  */
-export class ScrollPaddingBlockCss extends LengthCssProperty<Property.ScrollPaddingBlock> {
+export class ScrollPaddingBlockCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-block:auto;';
   readonly inherit = 'scroll-padding-block:inherit;';
   readonly initial = 'scroll-padding-block:initial;';
@@ -1919,6 +1973,10 @@ export class ScrollPaddingBlockCss extends LengthCssProperty<Property.ScrollPadd
   constructor() {
     super('scroll-padding-block');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingBlock | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
   px(value1: number, value2: number): string;
@@ -2224,30 +2282,30 @@ export class ScrollPaddingBlockCss extends LengthCssProperty<Property.ScrollPadd
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingBlock, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingBlock, number> | (string & {}))[]
+    value: Property.ScrollPaddingBlock | CssString,
+    ...others: (Property.ScrollPaddingBlock | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingBlock, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingBlock, number> | (string & {}))[]
+    value: Property.ScrollPaddingBlock | CssString,
+    ...others: (Property.ScrollPaddingBlock | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingBlock, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingBlock, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingBlock, number> | (string & {}),
+    minimum: Property.ScrollPaddingBlock | CssString,
+    preferred: Property.ScrollPaddingBlock | CssString,
+    maximum: Property.ScrollPaddingBlock | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-block-end；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-end
  */
-export class ScrollPaddingBlockEndCss extends LengthCssProperty<Property.ScrollPaddingBlockEnd> {
+export class ScrollPaddingBlockEndCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-block-end:auto;';
   readonly inherit = 'scroll-padding-block-end:inherit;';
   readonly initial = 'scroll-padding-block-end:initial;';
@@ -2257,6 +2315,10 @@ export class ScrollPaddingBlockEndCss extends LengthCssProperty<Property.ScrollP
   constructor() {
     super('scroll-padding-block-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingBlockEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2266,30 +2328,30 @@ export class ScrollPaddingBlockEndCss extends LengthCssProperty<Property.ScrollP
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingBlockEnd, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingBlockEnd, number> | (string & {}))[]
+    value: Property.ScrollPaddingBlockEnd | CssString,
+    ...others: (Property.ScrollPaddingBlockEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingBlockEnd, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingBlockEnd, number> | (string & {}))[]
+    value: Property.ScrollPaddingBlockEnd | CssString,
+    ...others: (Property.ScrollPaddingBlockEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingBlockEnd, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingBlockEnd, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingBlockEnd, number> | (string & {}),
+    minimum: Property.ScrollPaddingBlockEnd | CssString,
+    preferred: Property.ScrollPaddingBlockEnd | CssString,
+    maximum: Property.ScrollPaddingBlockEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-block-start；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-start
  */
-export class ScrollPaddingBlockStartCss extends LengthCssProperty<Property.ScrollPaddingBlockStart> {
+export class ScrollPaddingBlockStartCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-block-start:auto;';
   readonly inherit = 'scroll-padding-block-start:inherit;';
   readonly initial = 'scroll-padding-block-start:initial;';
@@ -2299,6 +2361,10 @@ export class ScrollPaddingBlockStartCss extends LengthCssProperty<Property.Scrol
   constructor() {
     super('scroll-padding-block-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingBlockStart | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2308,30 +2374,30 @@ export class ScrollPaddingBlockStartCss extends LengthCssProperty<Property.Scrol
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingBlockStart, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingBlockStart, number> | (string & {}))[]
+    value: Property.ScrollPaddingBlockStart | CssString,
+    ...others: (Property.ScrollPaddingBlockStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingBlockStart, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingBlockStart, number> | (string & {}))[]
+    value: Property.ScrollPaddingBlockStart | CssString,
+    ...others: (Property.ScrollPaddingBlockStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingBlockStart, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingBlockStart, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingBlockStart, number> | (string & {}),
+    minimum: Property.ScrollPaddingBlockStart | CssString,
+    preferred: Property.ScrollPaddingBlockStart | CssString,
+    maximum: Property.ScrollPaddingBlockStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-bottom；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-bottom
  */
-export class ScrollPaddingBottomCss extends LengthCssProperty<Property.ScrollPaddingBottom> {
+export class ScrollPaddingBottomCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-bottom:auto;';
   readonly inherit = 'scroll-padding-bottom:inherit;';
   readonly initial = 'scroll-padding-bottom:initial;';
@@ -2341,6 +2407,10 @@ export class ScrollPaddingBottomCss extends LengthCssProperty<Property.ScrollPad
   constructor() {
     super('scroll-padding-bottom');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingBottom | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2350,30 +2420,30 @@ export class ScrollPaddingBottomCss extends LengthCssProperty<Property.ScrollPad
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingBottom, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingBottom, number> | (string & {}))[]
+    value: Property.ScrollPaddingBottom | CssString,
+    ...others: (Property.ScrollPaddingBottom | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingBottom, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingBottom, number> | (string & {}))[]
+    value: Property.ScrollPaddingBottom | CssString,
+    ...others: (Property.ScrollPaddingBottom | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingBottom, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingBottom, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingBottom, number> | (string & {}),
+    minimum: Property.ScrollPaddingBottom | CssString,
+    preferred: Property.ScrollPaddingBottom | CssString,
+    maximum: Property.ScrollPaddingBottom | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-inline。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline
  */
-export class ScrollPaddingInlineCss extends LengthCssProperty<Property.ScrollPaddingInline> {
+export class ScrollPaddingInlineCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-inline:auto;';
   readonly inherit = 'scroll-padding-inline:inherit;';
   readonly initial = 'scroll-padding-inline:initial;';
@@ -2382,6 +2452,10 @@ export class ScrollPaddingInlineCss extends LengthCssProperty<Property.ScrollPad
   readonly unset = 'scroll-padding-inline:unset;';
   constructor() {
     super('scroll-padding-inline');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingInline | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -2688,30 +2762,30 @@ export class ScrollPaddingInlineCss extends LengthCssProperty<Property.ScrollPad
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingInline, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingInline, number> | (string & {}))[]
+    value: Property.ScrollPaddingInline | CssString,
+    ...others: (Property.ScrollPaddingInline | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingInline, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingInline, number> | (string & {}))[]
+    value: Property.ScrollPaddingInline | CssString,
+    ...others: (Property.ScrollPaddingInline | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingInline, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingInline, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingInline, number> | (string & {}),
+    minimum: Property.ScrollPaddingInline | CssString,
+    preferred: Property.ScrollPaddingInline | CssString,
+    maximum: Property.ScrollPaddingInline | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-inline-end；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-end
  */
-export class ScrollPaddingInlineEndCss extends LengthCssProperty<Property.ScrollPaddingInlineEnd> {
+export class ScrollPaddingInlineEndCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-inline-end:auto;';
   readonly inherit = 'scroll-padding-inline-end:inherit;';
   readonly initial = 'scroll-padding-inline-end:initial;';
@@ -2721,6 +2795,10 @@ export class ScrollPaddingInlineEndCss extends LengthCssProperty<Property.Scroll
   constructor() {
     super('scroll-padding-inline-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingInlineEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2730,30 +2808,30 @@ export class ScrollPaddingInlineEndCss extends LengthCssProperty<Property.Scroll
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingInlineEnd, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingInlineEnd, number> | (string & {}))[]
+    value: Property.ScrollPaddingInlineEnd | CssString,
+    ...others: (Property.ScrollPaddingInlineEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingInlineEnd, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingInlineEnd, number> | (string & {}))[]
+    value: Property.ScrollPaddingInlineEnd | CssString,
+    ...others: (Property.ScrollPaddingInlineEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingInlineEnd, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingInlineEnd, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingInlineEnd, number> | (string & {}),
+    minimum: Property.ScrollPaddingInlineEnd | CssString,
+    preferred: Property.ScrollPaddingInlineEnd | CssString,
+    maximum: Property.ScrollPaddingInlineEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-inline-start；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-start
  */
-export class ScrollPaddingInlineStartCss extends LengthCssProperty<Property.ScrollPaddingInlineStart> {
+export class ScrollPaddingInlineStartCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-inline-start:auto;';
   readonly inherit = 'scroll-padding-inline-start:inherit;';
   readonly initial = 'scroll-padding-inline-start:initial;';
@@ -2763,6 +2841,10 @@ export class ScrollPaddingInlineStartCss extends LengthCssProperty<Property.Scro
   constructor() {
     super('scroll-padding-inline-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingInlineStart | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2772,30 +2854,30 @@ export class ScrollPaddingInlineStartCss extends LengthCssProperty<Property.Scro
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingInlineStart, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingInlineStart, number> | (string & {}))[]
+    value: Property.ScrollPaddingInlineStart | CssString,
+    ...others: (Property.ScrollPaddingInlineStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingInlineStart, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingInlineStart, number> | (string & {}))[]
+    value: Property.ScrollPaddingInlineStart | CssString,
+    ...others: (Property.ScrollPaddingInlineStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingInlineStart, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingInlineStart, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingInlineStart, number> | (string & {}),
+    minimum: Property.ScrollPaddingInlineStart | CssString,
+    preferred: Property.ScrollPaddingInlineStart | CssString,
+    maximum: Property.ScrollPaddingInlineStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-left；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-left
  */
-export class ScrollPaddingLeftCss extends LengthCssProperty<Property.ScrollPaddingLeft> {
+export class ScrollPaddingLeftCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-left:auto;';
   readonly inherit = 'scroll-padding-left:inherit;';
   readonly initial = 'scroll-padding-left:initial;';
@@ -2805,6 +2887,10 @@ export class ScrollPaddingLeftCss extends LengthCssProperty<Property.ScrollPaddi
   constructor() {
     super('scroll-padding-left');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingLeft | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2814,30 +2900,30 @@ export class ScrollPaddingLeftCss extends LengthCssProperty<Property.ScrollPaddi
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingLeft, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingLeft, number> | (string & {}))[]
+    value: Property.ScrollPaddingLeft | CssString,
+    ...others: (Property.ScrollPaddingLeft | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingLeft, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingLeft, number> | (string & {}))[]
+    value: Property.ScrollPaddingLeft | CssString,
+    ...others: (Property.ScrollPaddingLeft | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingLeft, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingLeft, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingLeft, number> | (string & {}),
+    minimum: Property.ScrollPaddingLeft | CssString,
+    preferred: Property.ScrollPaddingLeft | CssString,
+    maximum: Property.ScrollPaddingLeft | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-right；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-right
  */
-export class ScrollPaddingRightCss extends LengthCssProperty<Property.ScrollPaddingRight> {
+export class ScrollPaddingRightCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-right:auto;';
   readonly inherit = 'scroll-padding-right:inherit;';
   readonly initial = 'scroll-padding-right:initial;';
@@ -2847,6 +2933,10 @@ export class ScrollPaddingRightCss extends LengthCssProperty<Property.ScrollPadd
   constructor() {
     super('scroll-padding-right');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingRight | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2856,30 +2946,30 @@ export class ScrollPaddingRightCss extends LengthCssProperty<Property.ScrollPadd
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingRight, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingRight, number> | (string & {}))[]
+    value: Property.ScrollPaddingRight | CssString,
+    ...others: (Property.ScrollPaddingRight | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingRight, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingRight, number> | (string & {}))[]
+    value: Property.ScrollPaddingRight | CssString,
+    ...others: (Property.ScrollPaddingRight | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingRight, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingRight, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingRight, number> | (string & {}),
+    minimum: Property.ScrollPaddingRight | CssString,
+    preferred: Property.ScrollPaddingRight | CssString,
+    maximum: Property.ScrollPaddingRight | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-padding-top；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
  */
-export class ScrollPaddingTopCss extends LengthCssProperty<Property.ScrollPaddingTop> {
+export class ScrollPaddingTopCss extends LengthCssProperty {
   readonly auto = 'scroll-padding-top:auto;';
   readonly inherit = 'scroll-padding-top:inherit;';
   readonly initial = 'scroll-padding-top:initial;';
@@ -2889,6 +2979,10 @@ export class ScrollPaddingTopCss extends LengthCssProperty<Property.ScrollPaddin
   constructor() {
     super('scroll-padding-top');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollPaddingTop | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2898,30 +2992,30 @@ export class ScrollPaddingTopCss extends LengthCssProperty<Property.ScrollPaddin
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollPaddingTop, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingTop, number> | (string & {}))[]
+    value: Property.ScrollPaddingTop | CssString,
+    ...others: (Property.ScrollPaddingTop | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollPaddingTop, number> | (string & {}),
-    ...others: (Extract<Property.ScrollPaddingTop, number> | (string & {}))[]
+    value: Property.ScrollPaddingTop | CssString,
+    ...others: (Property.ScrollPaddingTop | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollPaddingTop, number> | (string & {}),
-    preferred: Extract<Property.ScrollPaddingTop, number> | (string & {}),
-    maximum: Extract<Property.ScrollPaddingTop, number> | (string & {}),
+    minimum: Property.ScrollPaddingTop | CssString,
+    preferred: Property.ScrollPaddingTop | CssString,
+    maximum: Property.ScrollPaddingTop | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-snap-align；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-align
  */
-export class ScrollSnapAlignCss extends CssProperty<Property.ScrollSnapAlign> {
+export class ScrollSnapAlignCss extends CssProperty {
   readonly center = 'scroll-snap-align:center;';
   readonly end = 'scroll-snap-align:end;';
   readonly inherit = 'scroll-snap-align:inherit;';
@@ -2934,12 +3028,16 @@ export class ScrollSnapAlignCss extends CssProperty<Property.ScrollSnapAlign> {
   constructor() {
     super('scroll-snap-align');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollSnapAlign | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scroll-snap-margin。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
  */
-export class ScrollSnapMarginCss extends LengthCssProperty<Property.ScrollMargin> {
+export class ScrollSnapMarginCss extends LengthCssProperty {
   readonly inherit = 'scroll-snap-margin:inherit;';
   readonly initial = 'scroll-snap-margin:initial;';
   readonly revert = 'scroll-snap-margin:revert;';
@@ -2947,6 +3045,10 @@ export class ScrollSnapMarginCss extends LengthCssProperty<Property.ScrollMargin
   readonly unset = 'scroll-snap-margin:unset;';
   constructor() {
     super('scroll-snap-margin');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMargin | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -3345,30 +3447,30 @@ export class ScrollSnapMarginCss extends LengthCssProperty<Property.ScrollMargin
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMargin, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMargin, number> | (string & {}))[]
+    value: Property.ScrollMargin | CssString,
+    ...others: (Property.ScrollMargin | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMargin, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMargin, number> | (string & {}))[]
+    value: Property.ScrollMargin | CssString,
+    ...others: (Property.ScrollMargin | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMargin, number> | (string & {}),
-    preferred: Extract<Property.ScrollMargin, number> | (string & {}),
-    maximum: Extract<Property.ScrollMargin, number> | (string & {}),
+    minimum: Property.ScrollMargin | CssString,
+    preferred: Property.ScrollMargin | CssString,
+    maximum: Property.ScrollMargin | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-snap-margin-bottom；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
  */
-export class ScrollSnapMarginBottomCss extends LengthCssProperty<Property.ScrollMarginBottom> {
+export class ScrollSnapMarginBottomCss extends LengthCssProperty {
   readonly inherit = 'scroll-snap-margin-bottom:inherit;';
   readonly initial = 'scroll-snap-margin-bottom:initial;';
   readonly revert = 'scroll-snap-margin-bottom:revert;';
@@ -3377,35 +3479,39 @@ export class ScrollSnapMarginBottomCss extends LengthCssProperty<Property.Scroll
   constructor() {
     super('scroll-snap-margin-bottom');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginBottom | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginBottom, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBottom, number> | (string & {}))[]
+    value: Property.ScrollMarginBottom | CssString,
+    ...others: (Property.ScrollMarginBottom | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginBottom, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginBottom, number> | (string & {}))[]
+    value: Property.ScrollMarginBottom | CssString,
+    ...others: (Property.ScrollMarginBottom | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginBottom, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginBottom, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginBottom, number> | (string & {}),
+    minimum: Property.ScrollMarginBottom | CssString,
+    preferred: Property.ScrollMarginBottom | CssString,
+    maximum: Property.ScrollMarginBottom | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-snap-margin-left；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
  */
-export class ScrollSnapMarginLeftCss extends LengthCssProperty<Property.ScrollMarginLeft> {
+export class ScrollSnapMarginLeftCss extends LengthCssProperty {
   readonly inherit = 'scroll-snap-margin-left:inherit;';
   readonly initial = 'scroll-snap-margin-left:initial;';
   readonly revert = 'scroll-snap-margin-left:revert;';
@@ -3414,35 +3520,39 @@ export class ScrollSnapMarginLeftCss extends LengthCssProperty<Property.ScrollMa
   constructor() {
     super('scroll-snap-margin-left');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginLeft | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginLeft, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginLeft, number> | (string & {}))[]
+    value: Property.ScrollMarginLeft | CssString,
+    ...others: (Property.ScrollMarginLeft | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginLeft, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginLeft, number> | (string & {}))[]
+    value: Property.ScrollMarginLeft | CssString,
+    ...others: (Property.ScrollMarginLeft | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginLeft, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginLeft, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginLeft, number> | (string & {}),
+    minimum: Property.ScrollMarginLeft | CssString,
+    preferred: Property.ScrollMarginLeft | CssString,
+    maximum: Property.ScrollMarginLeft | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-snap-margin-right；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
  */
-export class ScrollSnapMarginRightCss extends LengthCssProperty<Property.ScrollMarginRight> {
+export class ScrollSnapMarginRightCss extends LengthCssProperty {
   readonly inherit = 'scroll-snap-margin-right:inherit;';
   readonly initial = 'scroll-snap-margin-right:initial;';
   readonly revert = 'scroll-snap-margin-right:revert;';
@@ -3451,35 +3561,39 @@ export class ScrollSnapMarginRightCss extends LengthCssProperty<Property.ScrollM
   constructor() {
     super('scroll-snap-margin-right');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginRight | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginRight, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginRight, number> | (string & {}))[]
+    value: Property.ScrollMarginRight | CssString,
+    ...others: (Property.ScrollMarginRight | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginRight, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginRight, number> | (string & {}))[]
+    value: Property.ScrollMarginRight | CssString,
+    ...others: (Property.ScrollMarginRight | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginRight, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginRight, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginRight, number> | (string & {}),
+    minimum: Property.ScrollMarginRight | CssString,
+    preferred: Property.ScrollMarginRight | CssString,
+    maximum: Property.ScrollMarginRight | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-snap-margin-top；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
  */
-export class ScrollSnapMarginTopCss extends LengthCssProperty<Property.ScrollMarginTop> {
+export class ScrollSnapMarginTopCss extends LengthCssProperty {
   readonly inherit = 'scroll-snap-margin-top:inherit;';
   readonly initial = 'scroll-snap-margin-top:initial;';
   readonly revert = 'scroll-snap-margin-top:revert;';
@@ -3488,35 +3602,39 @@ export class ScrollSnapMarginTopCss extends LengthCssProperty<Property.ScrollMar
   constructor() {
     super('scroll-snap-margin-top');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollMarginTop | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ScrollMarginTop, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginTop, number> | (string & {}))[]
+    value: Property.ScrollMarginTop | CssString,
+    ...others: (Property.ScrollMarginTop | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ScrollMarginTop, number> | (string & {}),
-    ...others: (Extract<Property.ScrollMarginTop, number> | (string & {}))[]
+    value: Property.ScrollMarginTop | CssString,
+    ...others: (Property.ScrollMarginTop | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ScrollMarginTop, number> | (string & {}),
-    preferred: Extract<Property.ScrollMarginTop, number> | (string & {}),
-    maximum: Extract<Property.ScrollMarginTop, number> | (string & {}),
+    minimum: Property.ScrollMarginTop | CssString,
+    preferred: Property.ScrollMarginTop | CssString,
+    maximum: Property.ScrollMarginTop | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 scroll-snap-stop；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-stop
  */
-export class ScrollSnapStopCss extends CssProperty<Property.ScrollSnapStop> {
+export class ScrollSnapStopCss extends CssProperty {
   readonly always = 'scroll-snap-stop:always;';
   readonly inherit = 'scroll-snap-stop:inherit;';
   readonly initial = 'scroll-snap-stop:initial;';
@@ -3527,12 +3645,16 @@ export class ScrollSnapStopCss extends CssProperty<Property.ScrollSnapStop> {
   constructor() {
     super('scroll-snap-stop');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollSnapStop | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scroll-snap-type；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-type
  */
-export class ScrollSnapTypeCss extends CssProperty<Property.ScrollSnapType> {
+export class ScrollSnapTypeCss extends CssProperty {
   readonly block = 'scroll-snap-type:block;';
   readonly both = 'scroll-snap-type:both;';
   readonly inherit = 'scroll-snap-type:inherit;';
@@ -3547,12 +3669,16 @@ export class ScrollSnapTypeCss extends CssProperty<Property.ScrollSnapType> {
   constructor() {
     super('scroll-snap-type');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollSnapType | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scroll-timeline。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline
  */
-export class ScrollTimelineCss extends CssProperty<Property.ScrollTimeline> {
+export class ScrollTimelineCss extends CssProperty {
   readonly inherit = 'scroll-timeline:inherit;';
   readonly initial = 'scroll-timeline:initial;';
   readonly none = 'scroll-timeline:none;';
@@ -3562,12 +3688,16 @@ export class ScrollTimelineCss extends CssProperty<Property.ScrollTimeline> {
   constructor() {
     super('scroll-timeline');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollTimeline | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scroll-timeline-axis；初始值 block。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-axis
  */
-export class ScrollTimelineAxisCss extends CssProperty<Property.ScrollTimelineAxis> {
+export class ScrollTimelineAxisCss extends CssProperty {
   readonly block = 'scroll-timeline-axis:block;';
   readonly inherit = 'scroll-timeline-axis:inherit;';
   readonly initial = 'scroll-timeline-axis:initial;';
@@ -3580,12 +3710,16 @@ export class ScrollTimelineAxisCss extends CssProperty<Property.ScrollTimelineAx
   constructor() {
     super('scroll-timeline-axis');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollTimelineAxis | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scroll-timeline-name；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-name
  */
-export class ScrollTimelineNameCss extends CssProperty<Property.ScrollTimelineName> {
+export class ScrollTimelineNameCss extends CssProperty {
   readonly inherit = 'scroll-timeline-name:inherit;';
   readonly initial = 'scroll-timeline-name:initial;';
   readonly none = 'scroll-timeline-name:none;';
@@ -3595,12 +3729,16 @@ export class ScrollTimelineNameCss extends CssProperty<Property.ScrollTimelineNa
   constructor() {
     super('scroll-timeline-name');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollTimelineName | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scrollbar-color；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-color
  */
-export class ScrollbarColorCss extends CssProperty<Property.ScrollbarColor> {
+export class ScrollbarColorCss extends CssProperty {
   readonly auto = 'scrollbar-color:auto;';
   readonly inherit = 'scrollbar-color:inherit;';
   readonly initial = 'scrollbar-color:initial;';
@@ -3610,12 +3748,16 @@ export class ScrollbarColorCss extends CssProperty<Property.ScrollbarColor> {
   constructor() {
     super('scrollbar-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollbarColor | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scrollbar-gutter；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-gutter
  */
-export class ScrollbarGutterCss extends CssProperty<Property.ScrollbarGutter> {
+export class ScrollbarGutterCss extends CssProperty {
   readonly auto = 'scrollbar-gutter:auto;';
   readonly inherit = 'scrollbar-gutter:inherit;';
   readonly initial = 'scrollbar-gutter:initial;';
@@ -3626,12 +3768,16 @@ export class ScrollbarGutterCss extends CssProperty<Property.ScrollbarGutter> {
   constructor() {
     super('scrollbar-gutter');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollbarGutter | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 scrollbar-width；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-width
  */
-export class ScrollbarWidthCss extends CssProperty<Property.ScrollbarWidth> {
+export class ScrollbarWidthCss extends CssProperty {
   readonly auto = 'scrollbar-width:auto;';
   readonly inherit = 'scrollbar-width:inherit;';
   readonly initial = 'scrollbar-width:initial;';
@@ -3643,12 +3789,16 @@ export class ScrollbarWidthCss extends CssProperty<Property.ScrollbarWidth> {
   constructor() {
     super('scrollbar-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ScrollbarWidth | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 shape-image-threshold；初始值 0.0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-image-threshold
  */
-export class ShapeImageThresholdCss extends CssProperty<Property.ShapeImageThreshold> {
+export class ShapeImageThresholdCss extends CssProperty {
   readonly inherit = 'shape-image-threshold:inherit;';
   readonly initial = 'shape-image-threshold:initial;';
   readonly revert = 'shape-image-threshold:revert;';
@@ -3657,6 +3807,10 @@ export class ShapeImageThresholdCss extends CssProperty<Property.ShapeImageThres
   constructor() {
     super('shape-image-threshold');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ShapeImageThreshold | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -3666,30 +3820,30 @@ export class ShapeImageThresholdCss extends CssProperty<Property.ShapeImageThres
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ShapeImageThreshold, number> | (string & {}),
-    ...others: (Extract<Property.ShapeImageThreshold, number> | (string & {}))[]
+    value: Property.ShapeImageThreshold | CssString,
+    ...others: (Property.ShapeImageThreshold | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ShapeImageThreshold, number> | (string & {}),
-    ...others: (Extract<Property.ShapeImageThreshold, number> | (string & {}))[]
+    value: Property.ShapeImageThreshold | CssString,
+    ...others: (Property.ShapeImageThreshold | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ShapeImageThreshold, number> | (string & {}),
-    preferred: Extract<Property.ShapeImageThreshold, number> | (string & {}),
-    maximum: Extract<Property.ShapeImageThreshold, number> | (string & {}),
+    minimum: Property.ShapeImageThreshold | CssString,
+    preferred: Property.ShapeImageThreshold | CssString,
+    maximum: Property.ShapeImageThreshold | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 shape-margin；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-margin
  */
-export class ShapeMarginCss extends LengthCssProperty<Property.ShapeMargin> {
+export class ShapeMarginCss extends LengthCssProperty {
   readonly inherit = 'shape-margin:inherit;';
   readonly initial = 'shape-margin:initial;';
   readonly revert = 'shape-margin:revert;';
@@ -3698,6 +3852,10 @@ export class ShapeMarginCss extends LengthCssProperty<Property.ShapeMargin> {
   constructor() {
     super('shape-margin');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ShapeMargin | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -3707,30 +3865,30 @@ export class ShapeMarginCss extends LengthCssProperty<Property.ShapeMargin> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ShapeMargin, number> | (string & {}),
-    ...others: (Extract<Property.ShapeMargin, number> | (string & {}))[]
+    value: Property.ShapeMargin | CssString,
+    ...others: (Property.ShapeMargin | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ShapeMargin, number> | (string & {}),
-    ...others: (Extract<Property.ShapeMargin, number> | (string & {}))[]
+    value: Property.ShapeMargin | CssString,
+    ...others: (Property.ShapeMargin | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ShapeMargin, number> | (string & {}),
-    preferred: Extract<Property.ShapeMargin, number> | (string & {}),
-    maximum: Extract<Property.ShapeMargin, number> | (string & {}),
+    minimum: Property.ShapeMargin | CssString,
+    preferred: Property.ShapeMargin | CssString,
+    maximum: Property.ShapeMargin | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 shape-outside；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-outside
  */
-export class ShapeOutsideCss extends CssProperty<Property.ShapeOutside> {
+export class ShapeOutsideCss extends CssProperty {
   readonly borderBox = 'shape-outside:border-box;';
   readonly contentBox = 'shape-outside:content-box;';
   readonly inherit = 'shape-outside:inherit;';
@@ -3744,12 +3902,16 @@ export class ShapeOutsideCss extends CssProperty<Property.ShapeOutside> {
   constructor() {
     super('shape-outside');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ShapeOutside | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 shape-rendering；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-rendering
  */
-export class ShapeRenderingCss extends CssProperty<Property.ShapeRendering> {
+export class ShapeRenderingCss extends CssProperty {
   readonly auto = 'shape-rendering:auto;';
   readonly crispEdges = 'shape-rendering:crispEdges;';
   readonly geometricPrecision = 'shape-rendering:geometricPrecision;';
@@ -3762,12 +3924,16 @@ export class ShapeRenderingCss extends CssProperty<Property.ShapeRendering> {
   constructor() {
     super('shape-rendering');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ShapeRendering | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 speak-as；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/speak-as
  */
-export class SpeakAsCss extends CssProperty<Property.SpeakAs> {
+export class SpeakAsCss extends CssProperty {
   readonly digits = 'speak-as:digits;';
   readonly inherit = 'speak-as:inherit;';
   readonly initial = 'speak-as:initial;';
@@ -3781,12 +3947,16 @@ export class SpeakAsCss extends CssProperty<Property.SpeakAs> {
   constructor() {
     super('speak-as');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.SpeakAs | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 stop-color；初始值 black。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-color
  */
-export class StopColorCss extends CssProperty<Property.StopColor> {
+export class StopColorCss extends CssProperty {
   readonly AccentColor = 'stop-color:AccentColor;';
   readonly AccentColorText = 'stop-color:AccentColorText;';
   readonly ActiveBorder = 'stop-color:ActiveBorder;';
@@ -3987,6 +4157,10 @@ export class StopColorCss extends CssProperty<Property.StopColor> {
   constructor() {
     super('stop-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StopColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -4002,7 +4176,7 @@ export class StopColorCss extends CssProperty<Property.StopColor> {
 /** CSS 属性 stop-opacity；初始值 black。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-opacity
  */
-export class StopOpacityCss extends CssProperty<Property.StopOpacity> {
+export class StopOpacityCss extends CssProperty {
   readonly inherit = 'stop-opacity:inherit;';
   readonly initial = 'stop-opacity:initial;';
   readonly revert = 'stop-opacity:revert;';
@@ -4011,35 +4185,39 @@ export class StopOpacityCss extends CssProperty<Property.StopOpacity> {
   constructor() {
     super('stop-opacity');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StopOpacity | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.StopOpacity, number> | (string & {}),
-    ...others: (Extract<Property.StopOpacity, number> | (string & {}))[]
+    value: Property.StopOpacity | CssString,
+    ...others: (Property.StopOpacity | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.StopOpacity, number> | (string & {}),
-    ...others: (Extract<Property.StopOpacity, number> | (string & {}))[]
+    value: Property.StopOpacity | CssString,
+    ...others: (Property.StopOpacity | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.StopOpacity, number> | (string & {}),
-    preferred: Extract<Property.StopOpacity, number> | (string & {}),
-    maximum: Extract<Property.StopOpacity, number> | (string & {}),
+    minimum: Property.StopOpacity | CssString,
+    preferred: Property.StopOpacity | CssString,
+    maximum: Property.StopOpacity | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 stroke。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke
  */
-export class StrokeCss extends CssProperty<Property.Stroke> {
+export class StrokeCss extends CssProperty {
   readonly AccentColor = 'stroke:AccentColor;';
   readonly AccentColorText = 'stroke:AccentColorText;';
   readonly ActiveBorder = 'stroke:ActiveBorder;';
@@ -4243,6 +4421,10 @@ export class StrokeCss extends CssProperty<Property.Stroke> {
   constructor() {
     super('stroke');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Stroke | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -4258,7 +4440,7 @@ export class StrokeCss extends CssProperty<Property.Stroke> {
 /** CSS 属性 stroke-color；初始值 transparent。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-color
  */
-export class StrokeColorCss extends CssProperty<Property.StrokeColor> {
+export class StrokeColorCss extends CssProperty {
   readonly AccentColor = 'stroke-color:AccentColor;';
   readonly AccentColorText = 'stroke-color:AccentColorText;';
   readonly ActiveBorder = 'stroke-color:ActiveBorder;';
@@ -4459,6 +4641,10 @@ export class StrokeColorCss extends CssProperty<Property.StrokeColor> {
   constructor() {
     super('stroke-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StrokeColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -4474,7 +4660,7 @@ export class StrokeColorCss extends CssProperty<Property.StrokeColor> {
 /** CSS 属性 stroke-dasharray；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dasharray
  */
-export class StrokeDasharrayCss extends LengthCssProperty<Property.StrokeDasharray> {
+export class StrokeDasharrayCss extends LengthCssProperty {
   readonly inherit = 'stroke-dasharray:inherit;';
   readonly initial = 'stroke-dasharray:initial;';
   readonly none = 'stroke-dasharray:none;';
@@ -4484,35 +4670,39 @@ export class StrokeDasharrayCss extends LengthCssProperty<Property.StrokeDasharr
   constructor() {
     super('stroke-dasharray');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StrokeDasharray | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.StrokeDasharray, number> | (string & {}),
-    ...others: (Extract<Property.StrokeDasharray, number> | (string & {}))[]
+    value: Property.StrokeDasharray | CssString,
+    ...others: (Property.StrokeDasharray | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.StrokeDasharray, number> | (string & {}),
-    ...others: (Extract<Property.StrokeDasharray, number> | (string & {}))[]
+    value: Property.StrokeDasharray | CssString,
+    ...others: (Property.StrokeDasharray | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.StrokeDasharray, number> | (string & {}),
-    preferred: Extract<Property.StrokeDasharray, number> | (string & {}),
-    maximum: Extract<Property.StrokeDasharray, number> | (string & {}),
+    minimum: Property.StrokeDasharray | CssString,
+    preferred: Property.StrokeDasharray | CssString,
+    maximum: Property.StrokeDasharray | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 stroke-dashoffset；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dashoffset
  */
-export class StrokeDashoffsetCss extends LengthCssProperty<Property.StrokeDashoffset> {
+export class StrokeDashoffsetCss extends LengthCssProperty {
   readonly inherit = 'stroke-dashoffset:inherit;';
   readonly initial = 'stroke-dashoffset:initial;';
   readonly revert = 'stroke-dashoffset:revert;';
@@ -4520,6 +4710,10 @@ export class StrokeDashoffsetCss extends LengthCssProperty<Property.StrokeDashof
   readonly unset = 'stroke-dashoffset:unset;';
   constructor() {
     super('stroke-dashoffset');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StrokeDashoffset | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
@@ -4530,30 +4724,30 @@ export class StrokeDashoffsetCss extends LengthCssProperty<Property.StrokeDashof
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.StrokeDashoffset, number> | (string & {}),
-    ...others: (Extract<Property.StrokeDashoffset, number> | (string & {}))[]
+    value: Property.StrokeDashoffset | CssString,
+    ...others: (Property.StrokeDashoffset | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.StrokeDashoffset, number> | (string & {}),
-    ...others: (Extract<Property.StrokeDashoffset, number> | (string & {}))[]
+    value: Property.StrokeDashoffset | CssString,
+    ...others: (Property.StrokeDashoffset | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.StrokeDashoffset, number> | (string & {}),
-    preferred: Extract<Property.StrokeDashoffset, number> | (string & {}),
-    maximum: Extract<Property.StrokeDashoffset, number> | (string & {}),
+    minimum: Property.StrokeDashoffset | CssString,
+    preferred: Property.StrokeDashoffset | CssString,
+    maximum: Property.StrokeDashoffset | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 stroke-linecap；初始值 butt。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linecap
  */
-export class StrokeLinecapCss extends CssProperty<Property.StrokeLinecap> {
+export class StrokeLinecapCss extends CssProperty {
   readonly butt = 'stroke-linecap:butt;';
   readonly inherit = 'stroke-linecap:inherit;';
   readonly initial = 'stroke-linecap:initial;';
@@ -4565,12 +4759,16 @@ export class StrokeLinecapCss extends CssProperty<Property.StrokeLinecap> {
   constructor() {
     super('stroke-linecap');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StrokeLinecap | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 stroke-linejoin；初始值 miter。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linejoin
  */
-export class StrokeLinejoinCss extends CssProperty<Property.StrokeLinejoin> {
+export class StrokeLinejoinCss extends CssProperty {
   readonly arcs = 'stroke-linejoin:arcs;';
   readonly bevel = 'stroke-linejoin:bevel;';
   readonly inherit = 'stroke-linejoin:inherit;';
@@ -4584,12 +4782,16 @@ export class StrokeLinejoinCss extends CssProperty<Property.StrokeLinejoin> {
   constructor() {
     super('stroke-linejoin');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StrokeLinejoin | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 stroke-miterlimit；初始值 4。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-miterlimit
  */
-export class StrokeMiterlimitCss extends CssProperty<Property.StrokeMiterlimit> {
+export class StrokeMiterlimitCss extends CssProperty {
   readonly inherit = 'stroke-miterlimit:inherit;';
   readonly initial = 'stroke-miterlimit:initial;';
   readonly revert = 'stroke-miterlimit:revert;';
@@ -4598,35 +4800,39 @@ export class StrokeMiterlimitCss extends CssProperty<Property.StrokeMiterlimit> 
   constructor() {
     super('stroke-miterlimit');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StrokeMiterlimit | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.StrokeMiterlimit, number> | (string & {}),
-    ...others: (Extract<Property.StrokeMiterlimit, number> | (string & {}))[]
+    value: Property.StrokeMiterlimit | CssString,
+    ...others: (Property.StrokeMiterlimit | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.StrokeMiterlimit, number> | (string & {}),
-    ...others: (Extract<Property.StrokeMiterlimit, number> | (string & {}))[]
+    value: Property.StrokeMiterlimit | CssString,
+    ...others: (Property.StrokeMiterlimit | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.StrokeMiterlimit, number> | (string & {}),
-    preferred: Extract<Property.StrokeMiterlimit, number> | (string & {}),
-    maximum: Extract<Property.StrokeMiterlimit, number> | (string & {}),
+    minimum: Property.StrokeMiterlimit | CssString,
+    preferred: Property.StrokeMiterlimit | CssString,
+    maximum: Property.StrokeMiterlimit | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 stroke-opacity；初始值 1。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-opacity
  */
-export class StrokeOpacityCss extends CssProperty<Property.StrokeOpacity> {
+export class StrokeOpacityCss extends CssProperty {
   readonly inherit = 'stroke-opacity:inherit;';
   readonly initial = 'stroke-opacity:initial;';
   readonly revert = 'stroke-opacity:revert;';
@@ -4635,35 +4841,39 @@ export class StrokeOpacityCss extends CssProperty<Property.StrokeOpacity> {
   constructor() {
     super('stroke-opacity');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StrokeOpacity | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.StrokeOpacity, number> | (string & {}),
-    ...others: (Extract<Property.StrokeOpacity, number> | (string & {}))[]
+    value: Property.StrokeOpacity | CssString,
+    ...others: (Property.StrokeOpacity | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.StrokeOpacity, number> | (string & {}),
-    ...others: (Extract<Property.StrokeOpacity, number> | (string & {}))[]
+    value: Property.StrokeOpacity | CssString,
+    ...others: (Property.StrokeOpacity | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.StrokeOpacity, number> | (string & {}),
-    preferred: Extract<Property.StrokeOpacity, number> | (string & {}),
-    maximum: Extract<Property.StrokeOpacity, number> | (string & {}),
+    minimum: Property.StrokeOpacity | CssString,
+    preferred: Property.StrokeOpacity | CssString,
+    maximum: Property.StrokeOpacity | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 stroke-width；初始值 1px。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-width
  */
-export class StrokeWidthCss extends LengthCssProperty<Property.StrokeWidth> {
+export class StrokeWidthCss extends LengthCssProperty {
   readonly inherit = 'stroke-width:inherit;';
   readonly initial = 'stroke-width:initial;';
   readonly revert = 'stroke-width:revert;';
@@ -4671,6 +4881,10 @@ export class StrokeWidthCss extends LengthCssProperty<Property.StrokeWidth> {
   readonly unset = 'stroke-width:unset;';
   constructor() {
     super('stroke-width');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.StrokeWidth | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
@@ -4681,30 +4895,30 @@ export class StrokeWidthCss extends LengthCssProperty<Property.StrokeWidth> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.StrokeWidth, number> | (string & {}),
-    ...others: (Extract<Property.StrokeWidth, number> | (string & {}))[]
+    value: Property.StrokeWidth | CssString,
+    ...others: (Property.StrokeWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.StrokeWidth, number> | (string & {}),
-    ...others: (Extract<Property.StrokeWidth, number> | (string & {}))[]
+    value: Property.StrokeWidth | CssString,
+    ...others: (Property.StrokeWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.StrokeWidth, number> | (string & {}),
-    preferred: Extract<Property.StrokeWidth, number> | (string & {}),
-    maximum: Extract<Property.StrokeWidth, number> | (string & {}),
+    minimum: Property.StrokeWidth | CssString,
+    preferred: Property.StrokeWidth | CssString,
+    maximum: Property.StrokeWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 tab-size；初始值 8。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/tab-size
  */
-export class TabSizeCss extends LengthCssProperty<Property.TabSize> {
+export class TabSizeCss extends LengthCssProperty {
   readonly inherit = 'tab-size:inherit;';
   readonly initial = 'tab-size:initial;';
   readonly revert = 'tab-size:revert;';
@@ -4713,35 +4927,33 @@ export class TabSizeCss extends LengthCssProperty<Property.TabSize> {
   constructor() {
     super('tab-size');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TabSize | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.TabSize, number> | (string & {}),
-    ...others: (Extract<Property.TabSize, number> | (string & {}))[]
-  ): string {
+  min(value: Property.TabSize | CssString, ...others: (Property.TabSize | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.TabSize, number> | (string & {}),
-    ...others: (Extract<Property.TabSize, number> | (string & {}))[]
-  ): string {
+  max(value: Property.TabSize | CssString, ...others: (Property.TabSize | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.TabSize, number> | (string & {}),
-    preferred: Extract<Property.TabSize, number> | (string & {}),
-    maximum: Extract<Property.TabSize, number> | (string & {}),
+    minimum: Property.TabSize | CssString,
+    preferred: Property.TabSize | CssString,
+    maximum: Property.TabSize | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 table-layout；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/table-layout
  */
-export class TableLayoutCss extends CssProperty<Property.TableLayout> {
+export class TableLayoutCss extends CssProperty {
   readonly auto = 'table-layout:auto;';
   readonly fixed = 'table-layout:fixed;';
   readonly inherit = 'table-layout:inherit;';
@@ -4752,12 +4964,16 @@ export class TableLayoutCss extends CssProperty<Property.TableLayout> {
   constructor() {
     super('table-layout');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TableLayout | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-align；初始值 start。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align
  */
-export class TextAlignCss extends CssProperty<Property.TextAlign> {
+export class TextAlignCss extends CssProperty {
   readonly KhtmlCenter = 'text-align:-khtml-center;';
   readonly KhtmlLeft = 'text-align:-khtml-left;';
   readonly KhtmlRight = 'text-align:-khtml-right;';
@@ -4776,12 +4992,16 @@ export class TextAlignCss extends CssProperty<Property.TextAlign> {
   constructor() {
     super('text-align');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextAlign | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-align-last；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align-last
  */
-export class TextAlignLastCss extends CssProperty<Property.TextAlignLast> {
+export class TextAlignLastCss extends CssProperty {
   readonly auto = 'text-align-last:auto;';
   readonly center = 'text-align-last:center;';
   readonly end = 'text-align-last:end;';
@@ -4797,12 +5017,16 @@ export class TextAlignLastCss extends CssProperty<Property.TextAlignLast> {
   constructor() {
     super('text-align-last');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextAlignLast | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-anchor；初始值 start。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-anchor
  */
-export class TextAnchorCss extends CssProperty<Property.TextAnchor> {
+export class TextAnchorCss extends CssProperty {
   readonly end = 'text-anchor:end;';
   readonly inherit = 'text-anchor:inherit;';
   readonly initial = 'text-anchor:initial;';
@@ -4814,12 +5038,16 @@ export class TextAnchorCss extends CssProperty<Property.TextAnchor> {
   constructor() {
     super('text-anchor');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextAnchor | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-autospace；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-autospace
  */
-export class TextAutospaceCss extends CssProperty<Property.TextAutospace> {
+export class TextAutospaceCss extends CssProperty {
   readonly auto = 'text-autospace:auto;';
   readonly ideographAlpha = 'text-autospace:ideograph-alpha;';
   readonly ideographNumeric = 'text-autospace:ideograph-numeric;';
@@ -4836,12 +5064,16 @@ export class TextAutospaceCss extends CssProperty<Property.TextAutospace> {
   constructor() {
     super('text-autospace');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextAutospace | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-box；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box
  */
-export class TextBoxCss extends CssProperty<Property.TextBox> {
+export class TextBoxCss extends CssProperty {
   readonly auto = 'text-box:auto;';
   readonly cap = 'text-box:cap;';
   readonly ex = 'text-box:ex;';
@@ -4861,12 +5093,16 @@ export class TextBoxCss extends CssProperty<Property.TextBox> {
   constructor() {
     super('text-box');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextBox | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-box-edge；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-edge
  */
-export class TextBoxEdgeCss extends CssProperty<Property.TextBoxEdge> {
+export class TextBoxEdgeCss extends CssProperty {
   readonly auto = 'text-box-edge:auto;';
   readonly cap = 'text-box-edge:cap;';
   readonly ex = 'text-box-edge:ex;';
@@ -4881,12 +5117,16 @@ export class TextBoxEdgeCss extends CssProperty<Property.TextBoxEdge> {
   constructor() {
     super('text-box-edge');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextBoxEdge | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-box-trim；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-trim
  */
-export class TextBoxTrimCss extends CssProperty<Property.TextBoxTrim> {
+export class TextBoxTrimCss extends CssProperty {
   readonly inherit = 'text-box-trim:inherit;';
   readonly initial = 'text-box-trim:initial;';
   readonly none = 'text-box-trim:none;';
@@ -4899,12 +5139,16 @@ export class TextBoxTrimCss extends CssProperty<Property.TextBoxTrim> {
   constructor() {
     super('text-box-trim');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextBoxTrim | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-combine-upright；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-combine-upright
  */
-export class TextCombineUprightCss extends CssProperty<Property.TextCombineUpright> {
+export class TextCombineUprightCss extends CssProperty {
   readonly all = 'text-combine-upright:all;';
   readonly digits = 'text-combine-upright:digits;';
   readonly inherit = 'text-combine-upright:inherit;';
@@ -4916,12 +5160,16 @@ export class TextCombineUprightCss extends CssProperty<Property.TextCombineUprig
   constructor() {
     super('text-combine-upright');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextCombineUpright | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-decoration。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration
  */
-export class TextDecorationCss extends LengthCssProperty<Property.TextDecoration> {
+export class TextDecorationCss extends LengthCssProperty {
   readonly AccentColor = 'text-decoration:AccentColor;';
   readonly AccentColorText = 'text-decoration:AccentColorText;';
   readonly ActiveBorder = 'text-decoration:ActiveBorder;';
@@ -5136,6 +5384,10 @@ export class TextDecorationCss extends LengthCssProperty<Property.TextDecoration
   constructor() {
     super('text-decoration');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextDecoration | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -5151,30 +5403,30 @@ export class TextDecorationCss extends LengthCssProperty<Property.TextDecoration
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.TextDecoration, number> | (string & {}),
-    ...others: (Extract<Property.TextDecoration, number> | (string & {}))[]
+    value: Property.TextDecoration | CssString,
+    ...others: (Property.TextDecoration | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.TextDecoration, number> | (string & {}),
-    ...others: (Extract<Property.TextDecoration, number> | (string & {}))[]
+    value: Property.TextDecoration | CssString,
+    ...others: (Property.TextDecoration | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.TextDecoration, number> | (string & {}),
-    preferred: Extract<Property.TextDecoration, number> | (string & {}),
-    maximum: Extract<Property.TextDecoration, number> | (string & {}),
+    minimum: Property.TextDecoration | CssString,
+    preferred: Property.TextDecoration | CssString,
+    maximum: Property.TextDecoration | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 text-decoration-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-color
  */
-export class TextDecorationColorCss extends CssProperty<Property.TextDecorationColor> {
+export class TextDecorationColorCss extends CssProperty {
   readonly AccentColor = 'text-decoration-color:AccentColor;';
   readonly AccentColorText = 'text-decoration-color:AccentColorText;';
   readonly ActiveBorder = 'text-decoration-color:ActiveBorder;';
@@ -5375,6 +5627,10 @@ export class TextDecorationColorCss extends CssProperty<Property.TextDecorationC
   constructor() {
     super('text-decoration-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextDecorationColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -5390,7 +5646,7 @@ export class TextDecorationColorCss extends CssProperty<Property.TextDecorationC
 /** CSS 属性 text-decoration-line；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-line
  */
-export class TextDecorationLineCss extends CssProperty<Property.TextDecorationLine> {
+export class TextDecorationLineCss extends CssProperty {
   readonly blink = 'text-decoration-line:blink;';
   readonly grammarError = 'text-decoration-line:grammar-error;';
   readonly inherit = 'text-decoration-line:inherit;';
@@ -5406,12 +5662,16 @@ export class TextDecorationLineCss extends CssProperty<Property.TextDecorationLi
   constructor() {
     super('text-decoration-line');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextDecorationLine | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-decoration-skip；初始值 objects。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip
  */
-export class TextDecorationSkipCss extends CssProperty<Property.TextDecorationSkip> {
+export class TextDecorationSkipCss extends CssProperty {
   readonly boxDecoration = 'text-decoration-skip:box-decoration;';
   readonly edges = 'text-decoration-skip:edges;';
   readonly inherit = 'text-decoration-skip:inherit;';
@@ -5427,12 +5687,16 @@ export class TextDecorationSkipCss extends CssProperty<Property.TextDecorationSk
   constructor() {
     super('text-decoration-skip');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextDecorationSkip | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-decoration-skip-ink；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip-ink
  */
-export class TextDecorationSkipInkCss extends CssProperty<Property.TextDecorationSkipInk> {
+export class TextDecorationSkipInkCss extends CssProperty {
   readonly all = 'text-decoration-skip-ink:all;';
   readonly auto = 'text-decoration-skip-ink:auto;';
   readonly inherit = 'text-decoration-skip-ink:inherit;';
@@ -5444,12 +5708,16 @@ export class TextDecorationSkipInkCss extends CssProperty<Property.TextDecoratio
   constructor() {
     super('text-decoration-skip-ink');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextDecorationSkipInk | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-decoration-style；初始值 solid。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-style
  */
-export class TextDecorationStyleCss extends CssProperty<Property.TextDecorationStyle> {
+export class TextDecorationStyleCss extends CssProperty {
   readonly dashed = 'text-decoration-style:dashed;';
   readonly dotted = 'text-decoration-style:dotted;';
   readonly double = 'text-decoration-style:double;';
@@ -5463,12 +5731,16 @@ export class TextDecorationStyleCss extends CssProperty<Property.TextDecorationS
   constructor() {
     super('text-decoration-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextDecorationStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-decoration-thickness；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-thickness
  */
-export class TextDecorationThicknessCss extends LengthCssProperty<Property.TextDecorationThickness> {
+export class TextDecorationThicknessCss extends LengthCssProperty {
   readonly auto = 'text-decoration-thickness:auto;';
   readonly fromFont = 'text-decoration-thickness:from-font;';
   readonly inherit = 'text-decoration-thickness:inherit;';
@@ -5479,6 +5751,10 @@ export class TextDecorationThicknessCss extends LengthCssProperty<Property.TextD
   constructor() {
     super('text-decoration-thickness');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextDecorationThickness | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -5488,30 +5764,30 @@ export class TextDecorationThicknessCss extends LengthCssProperty<Property.TextD
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.TextDecorationThickness, number> | (string & {}),
-    ...others: (Extract<Property.TextDecorationThickness, number> | (string & {}))[]
+    value: Property.TextDecorationThickness | CssString,
+    ...others: (Property.TextDecorationThickness | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.TextDecorationThickness, number> | (string & {}),
-    ...others: (Extract<Property.TextDecorationThickness, number> | (string & {}))[]
+    value: Property.TextDecorationThickness | CssString,
+    ...others: (Property.TextDecorationThickness | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.TextDecorationThickness, number> | (string & {}),
-    preferred: Extract<Property.TextDecorationThickness, number> | (string & {}),
-    maximum: Extract<Property.TextDecorationThickness, number> | (string & {}),
+    minimum: Property.TextDecorationThickness | CssString,
+    preferred: Property.TextDecorationThickness | CssString,
+    maximum: Property.TextDecorationThickness | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 text-emphasis。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis
  */
-export class TextEmphasisCss extends CssProperty<Property.TextEmphasis> {
+export class TextEmphasisCss extends CssProperty {
   readonly AccentColor = 'text-emphasis:AccentColor;';
   readonly AccentColorText = 'text-emphasis:AccentColorText;';
   readonly ActiveBorder = 'text-emphasis:ActiveBorder;';
@@ -5720,6 +5996,10 @@ export class TextEmphasisCss extends CssProperty<Property.TextEmphasis> {
   constructor() {
     super('text-emphasis');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextEmphasis | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -5735,7 +6015,7 @@ export class TextEmphasisCss extends CssProperty<Property.TextEmphasis> {
 /** CSS 属性 text-emphasis-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-color
  */
-export class TextEmphasisColorCss extends CssProperty<Property.TextEmphasisColor> {
+export class TextEmphasisColorCss extends CssProperty {
   readonly AccentColor = 'text-emphasis-color:AccentColor;';
   readonly AccentColorText = 'text-emphasis-color:AccentColorText;';
   readonly ActiveBorder = 'text-emphasis-color:ActiveBorder;';
@@ -5936,6 +6216,10 @@ export class TextEmphasisColorCss extends CssProperty<Property.TextEmphasisColor
   constructor() {
     super('text-emphasis-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextEmphasisColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -5951,7 +6235,7 @@ export class TextEmphasisColorCss extends CssProperty<Property.TextEmphasisColor
 /** CSS 属性 text-emphasis-position；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-position
  */
-export class TextEmphasisPositionCss extends CssProperty<Property.TextEmphasisPosition> {
+export class TextEmphasisPositionCss extends CssProperty {
   readonly auto = 'text-emphasis-position:auto;';
   readonly inherit = 'text-emphasis-position:inherit;';
   readonly initial = 'text-emphasis-position:initial;';
@@ -5963,12 +6247,16 @@ export class TextEmphasisPositionCss extends CssProperty<Property.TextEmphasisPo
   constructor() {
     super('text-emphasis-position');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextEmphasisPosition | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-emphasis-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-style
  */
-export class TextEmphasisStyleCss extends CssProperty<Property.TextEmphasisStyle> {
+export class TextEmphasisStyleCss extends CssProperty {
   readonly circle = 'text-emphasis-style:circle;';
   readonly dot = 'text-emphasis-style:dot;';
   readonly doubleCircle = 'text-emphasis-style:double-circle;';
@@ -5985,12 +6273,16 @@ export class TextEmphasisStyleCss extends CssProperty<Property.TextEmphasisStyle
   constructor() {
     super('text-emphasis-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextEmphasisStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-indent；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-indent
  */
-export class TextIndentCss extends LengthCssProperty<Property.TextIndent> {
+export class TextIndentCss extends LengthCssProperty {
   readonly inherit = 'text-indent:inherit;';
   readonly initial = 'text-indent:initial;';
   readonly revert = 'text-indent:revert;';
@@ -5998,6 +6290,10 @@ export class TextIndentCss extends LengthCssProperty<Property.TextIndent> {
   readonly unset = 'text-indent:unset;';
   constructor() {
     super('text-indent');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextIndent | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
@@ -6008,30 +6304,30 @@ export class TextIndentCss extends LengthCssProperty<Property.TextIndent> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.TextIndent, number> | (string & {}),
-    ...others: (Extract<Property.TextIndent, number> | (string & {}))[]
+    value: Property.TextIndent | CssString,
+    ...others: (Property.TextIndent | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.TextIndent, number> | (string & {}),
-    ...others: (Extract<Property.TextIndent, number> | (string & {}))[]
+    value: Property.TextIndent | CssString,
+    ...others: (Property.TextIndent | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.TextIndent, number> | (string & {}),
-    preferred: Extract<Property.TextIndent, number> | (string & {}),
-    maximum: Extract<Property.TextIndent, number> | (string & {}),
+    minimum: Property.TextIndent | CssString,
+    preferred: Property.TextIndent | CssString,
+    maximum: Property.TextIndent | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 text-justify；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-justify
  */
-export class TextJustifyCss extends CssProperty<Property.TextJustify> {
+export class TextJustifyCss extends CssProperty {
   readonly auto = 'text-justify:auto;';
   readonly distribute = 'text-justify:distribute;';
   readonly inherit = 'text-justify:inherit;';
@@ -6045,12 +6341,16 @@ export class TextJustifyCss extends CssProperty<Property.TextJustify> {
   constructor() {
     super('text-justify');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextJustify | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-orientation；初始值 mixed。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-orientation
  */
-export class TextOrientationCss extends CssProperty<Property.TextOrientation> {
+export class TextOrientationCss extends CssProperty {
   readonly inherit = 'text-orientation:inherit;';
   readonly initial = 'text-orientation:initial;';
   readonly mixed = 'text-orientation:mixed;';
@@ -6063,12 +6363,16 @@ export class TextOrientationCss extends CssProperty<Property.TextOrientation> {
   constructor() {
     super('text-orientation');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextOrientation | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-overflow；初始值 clip。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-overflow
  */
-export class TextOverflowCss extends CssProperty<Property.TextOverflow> {
+export class TextOverflowCss extends CssProperty {
   readonly clip = 'text-overflow:clip;';
   readonly ellipsis = 'text-overflow:ellipsis;';
   readonly inherit = 'text-overflow:inherit;';
@@ -6079,12 +6383,16 @@ export class TextOverflowCss extends CssProperty<Property.TextOverflow> {
   constructor() {
     super('text-overflow');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextOverflow | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-rendering；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-rendering
  */
-export class TextRenderingCss extends CssProperty<Property.TextRendering> {
+export class TextRenderingCss extends CssProperty {
   readonly auto = 'text-rendering:auto;';
   readonly geometricPrecision = 'text-rendering:geometricPrecision;';
   readonly inherit = 'text-rendering:inherit;';
@@ -6097,12 +6405,16 @@ export class TextRenderingCss extends CssProperty<Property.TextRendering> {
   constructor() {
     super('text-rendering');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextRendering | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-shadow；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-shadow
  */
-export class TextShadowCss extends CssProperty<Property.TextShadow> {
+export class TextShadowCss extends CssProperty {
   readonly inherit = 'text-shadow:inherit;';
   readonly initial = 'text-shadow:initial;';
   readonly none = 'text-shadow:none;';
@@ -6112,12 +6424,16 @@ export class TextShadowCss extends CssProperty<Property.TextShadow> {
   constructor() {
     super('text-shadow');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextShadow | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-size-adjust；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-size-adjust
  */
-export class TextSizeAdjustCss extends CssProperty<Property.TextSizeAdjust> {
+export class TextSizeAdjustCss extends CssProperty {
   readonly auto = 'text-size-adjust:auto;';
   readonly inherit = 'text-size-adjust:inherit;';
   readonly initial = 'text-size-adjust:initial;';
@@ -6128,6 +6444,10 @@ export class TextSizeAdjustCss extends CssProperty<Property.TextSizeAdjust> {
   constructor() {
     super('text-size-adjust');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextSizeAdjust | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -6137,30 +6457,30 @@ export class TextSizeAdjustCss extends CssProperty<Property.TextSizeAdjust> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.TextSizeAdjust, number> | (string & {}),
-    ...others: (Extract<Property.TextSizeAdjust, number> | (string & {}))[]
+    value: Property.TextSizeAdjust | CssString,
+    ...others: (Property.TextSizeAdjust | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.TextSizeAdjust, number> | (string & {}),
-    ...others: (Extract<Property.TextSizeAdjust, number> | (string & {}))[]
+    value: Property.TextSizeAdjust | CssString,
+    ...others: (Property.TextSizeAdjust | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.TextSizeAdjust, number> | (string & {}),
-    preferred: Extract<Property.TextSizeAdjust, number> | (string & {}),
-    maximum: Extract<Property.TextSizeAdjust, number> | (string & {}),
+    minimum: Property.TextSizeAdjust | CssString,
+    preferred: Property.TextSizeAdjust | CssString,
+    maximum: Property.TextSizeAdjust | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 text-spacing-trim；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-spacing-trim
  */
-export class TextSpacingTrimCss extends CssProperty<Property.TextSpacingTrim> {
+export class TextSpacingTrimCss extends CssProperty {
   readonly inherit = 'text-spacing-trim:inherit;';
   readonly initial = 'text-spacing-trim:initial;';
   readonly normal = 'text-spacing-trim:normal;';
@@ -6173,12 +6493,16 @@ export class TextSpacingTrimCss extends CssProperty<Property.TextSpacingTrim> {
   constructor() {
     super('text-spacing-trim');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextSpacingTrim | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-transform；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-transform
  */
-export class TextTransformCss extends CssProperty<Property.TextTransform> {
+export class TextTransformCss extends CssProperty {
   readonly capitalize = 'text-transform:capitalize;';
   readonly fullSizeKana = 'text-transform:full-size-kana;';
   readonly fullWidth = 'text-transform:full-width;';
@@ -6194,12 +6518,16 @@ export class TextTransformCss extends CssProperty<Property.TextTransform> {
   constructor() {
     super('text-transform');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextTransform | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-underline-offset；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-offset
  */
-export class TextUnderlineOffsetCss extends LengthCssProperty<Property.TextUnderlineOffset> {
+export class TextUnderlineOffsetCss extends LengthCssProperty {
   readonly auto = 'text-underline-offset:auto;';
   readonly inherit = 'text-underline-offset:inherit;';
   readonly initial = 'text-underline-offset:initial;';
@@ -6208,6 +6536,10 @@ export class TextUnderlineOffsetCss extends LengthCssProperty<Property.TextUnder
   readonly unset = 'text-underline-offset:unset;';
   constructor() {
     super('text-underline-offset');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextUnderlineOffset | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
@@ -6218,30 +6550,30 @@ export class TextUnderlineOffsetCss extends LengthCssProperty<Property.TextUnder
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.TextUnderlineOffset, number> | (string & {}),
-    ...others: (Extract<Property.TextUnderlineOffset, number> | (string & {}))[]
+    value: Property.TextUnderlineOffset | CssString,
+    ...others: (Property.TextUnderlineOffset | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.TextUnderlineOffset, number> | (string & {}),
-    ...others: (Extract<Property.TextUnderlineOffset, number> | (string & {}))[]
+    value: Property.TextUnderlineOffset | CssString,
+    ...others: (Property.TextUnderlineOffset | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.TextUnderlineOffset, number> | (string & {}),
-    preferred: Extract<Property.TextUnderlineOffset, number> | (string & {}),
-    maximum: Extract<Property.TextUnderlineOffset, number> | (string & {}),
+    minimum: Property.TextUnderlineOffset | CssString,
+    preferred: Property.TextUnderlineOffset | CssString,
+    maximum: Property.TextUnderlineOffset | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 text-underline-position；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-position
  */
-export class TextUnderlinePositionCss extends CssProperty<Property.TextUnderlinePosition> {
+export class TextUnderlinePositionCss extends CssProperty {
   readonly auto = 'text-underline-position:auto;';
   readonly fromFont = 'text-underline-position:from-font;';
   readonly inherit = 'text-underline-position:inherit;';
@@ -6255,12 +6587,16 @@ export class TextUnderlinePositionCss extends CssProperty<Property.TextUnderline
   constructor() {
     super('text-underline-position');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextUnderlinePosition | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-wrap；初始值 wrap。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap
  */
-export class TextWrapCss extends CssProperty<Property.TextWrap> {
+export class TextWrapCss extends CssProperty {
   readonly auto = 'text-wrap:auto;';
   readonly balance = 'text-wrap:balance;';
   readonly inherit = 'text-wrap:inherit;';
@@ -6275,12 +6611,16 @@ export class TextWrapCss extends CssProperty<Property.TextWrap> {
   constructor() {
     super('text-wrap');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextWrap | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-wrap-mode；初始值 wrap。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-mode
  */
-export class TextWrapModeCss extends CssProperty<Property.TextWrapMode> {
+export class TextWrapModeCss extends CssProperty {
   readonly inherit = 'text-wrap-mode:inherit;';
   readonly initial = 'text-wrap-mode:initial;';
   readonly nowrap = 'text-wrap-mode:nowrap;';
@@ -6291,12 +6631,16 @@ export class TextWrapModeCss extends CssProperty<Property.TextWrapMode> {
   constructor() {
     super('text-wrap-mode');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextWrapMode | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 text-wrap-style；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-style
  */
-export class TextWrapStyleCss extends CssProperty<Property.TextWrapStyle> {
+export class TextWrapStyleCss extends CssProperty {
   readonly auto = 'text-wrap-style:auto;';
   readonly balance = 'text-wrap-style:balance;';
   readonly inherit = 'text-wrap-style:inherit;';
@@ -6309,12 +6653,16 @@ export class TextWrapStyleCss extends CssProperty<Property.TextWrapStyle> {
   constructor() {
     super('text-wrap-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TextWrapStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 timeline-scope；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/timeline-scope
  */
-export class TimelineScopeCss extends CssProperty<Property.TimelineScope> {
+export class TimelineScopeCss extends CssProperty {
   readonly inherit = 'timeline-scope:inherit;';
   readonly initial = 'timeline-scope:initial;';
   readonly none = 'timeline-scope:none;';
@@ -6324,12 +6672,16 @@ export class TimelineScopeCss extends CssProperty<Property.TimelineScope> {
   constructor() {
     super('timeline-scope');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TimelineScope | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 top；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
  */
-export class TopCss extends LengthCssProperty<Property.Top> {
+export class TopCss extends LengthCssProperty {
   readonly auto = 'top:auto;';
   readonly inherit = 'top:inherit;';
   readonly initial = 'top:initial;';
@@ -6339,6 +6691,10 @@ export class TopCss extends LengthCssProperty<Property.Top> {
   constructor() {
     super('top');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Top | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -6347,31 +6703,25 @@ export class TopCss extends LengthCssProperty<Property.Top> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Top, number> | (string & {}),
-    ...others: (Extract<Property.Top, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Top | CssString, ...others: (Property.Top | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Top, number> | (string & {}),
-    ...others: (Extract<Property.Top, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Top | CssString, ...others: (Property.Top | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Top, number> | (string & {}),
-    preferred: Extract<Property.Top, number> | (string & {}),
-    maximum: Extract<Property.Top, number> | (string & {}),
+    minimum: Property.Top | CssString,
+    preferred: Property.Top | CssString,
+    maximum: Property.Top | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 touch-action；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/touch-action
  */
-export class TouchActionCss extends CssProperty<Property.TouchAction> {
+export class TouchActionCss extends CssProperty {
   readonly auto = 'touch-action:auto;';
   readonly inherit = 'touch-action:inherit;';
   readonly initial = 'touch-action:initial;';
@@ -6390,12 +6740,16 @@ export class TouchActionCss extends CssProperty<Property.TouchAction> {
   constructor() {
     super('touch-action');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TouchAction | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 transform；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform
  */
-export class TransformCss extends CssProperty<Property.Transform> {
+export class TransformCss extends CssProperty {
   readonly inherit = 'transform:inherit;';
   readonly initial = 'transform:initial;';
   readonly none = 'transform:none;';
@@ -6405,12 +6759,16 @@ export class TransformCss extends CssProperty<Property.Transform> {
   constructor() {
     super('transform');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Transform | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 transform-box；初始值 view-box。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-box
  */
-export class TransformBoxCss extends CssProperty<Property.TransformBox> {
+export class TransformBoxCss extends CssProperty {
   readonly borderBox = 'transform-box:border-box;';
   readonly contentBox = 'transform-box:content-box;';
   readonly fillBox = 'transform-box:fill-box;';
@@ -6424,12 +6782,16 @@ export class TransformBoxCss extends CssProperty<Property.TransformBox> {
   constructor() {
     super('transform-box');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TransformBox | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 transform-origin；初始值 50% 50% 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-origin
  */
-export class TransformOriginCss extends LengthCssProperty<Property.TransformOrigin> {
+export class TransformOriginCss extends LengthCssProperty {
   readonly bottom = 'transform-origin:bottom;';
   readonly center = 'transform-origin:center;';
   readonly inherit = 'transform-origin:inherit;';
@@ -6443,6 +6805,10 @@ export class TransformOriginCss extends LengthCssProperty<Property.TransformOrig
   constructor() {
     super('transform-origin');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TransformOrigin | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -6452,30 +6818,30 @@ export class TransformOriginCss extends LengthCssProperty<Property.TransformOrig
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.TransformOrigin, number> | (string & {}),
-    ...others: (Extract<Property.TransformOrigin, number> | (string & {}))[]
+    value: Property.TransformOrigin | CssString,
+    ...others: (Property.TransformOrigin | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.TransformOrigin, number> | (string & {}),
-    ...others: (Extract<Property.TransformOrigin, number> | (string & {}))[]
+    value: Property.TransformOrigin | CssString,
+    ...others: (Property.TransformOrigin | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.TransformOrigin, number> | (string & {}),
-    preferred: Extract<Property.TransformOrigin, number> | (string & {}),
-    maximum: Extract<Property.TransformOrigin, number> | (string & {}),
+    minimum: Property.TransformOrigin | CssString,
+    preferred: Property.TransformOrigin | CssString,
+    maximum: Property.TransformOrigin | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 transform-style；初始值 flat。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-style
  */
-export class TransformStyleCss extends CssProperty<Property.TransformStyle> {
+export class TransformStyleCss extends CssProperty {
   readonly flat = 'transform-style:flat;';
   readonly inherit = 'transform-style:inherit;';
   readonly initial = 'transform-style:initial;';
@@ -6485,12 +6851,16 @@ export class TransformStyleCss extends CssProperty<Property.TransformStyle> {
   constructor() {
     super('transform-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TransformStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 transition。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition
  */
-export class TransitionCss extends CssProperty<Property.Transition> {
+export class TransitionCss extends CssProperty {
   readonly all = 'transition:all;';
   readonly allowDiscrete = 'transition:allow-discrete;';
   readonly ease = 'transition:ease;';
@@ -6510,6 +6880,10 @@ export class TransitionCss extends CssProperty<Property.Transition> {
   constructor() {
     super('transition');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Transition | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
   ms(value: number): string {
     return `${this.name}:${value}ms;`;
@@ -6523,30 +6897,30 @@ export class TransitionCss extends CssProperty<Property.Transition> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.Transition, number> | (string & {}),
-    ...others: (Extract<Property.Transition, number> | (string & {}))[]
+    value: Property.Transition | CssString,
+    ...others: (Property.Transition | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.Transition, number> | (string & {}),
-    ...others: (Extract<Property.Transition, number> | (string & {}))[]
+    value: Property.Transition | CssString,
+    ...others: (Property.Transition | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Transition, number> | (string & {}),
-    preferred: Extract<Property.Transition, number> | (string & {}),
-    maximum: Extract<Property.Transition, number> | (string & {}),
+    minimum: Property.Transition | CssString,
+    preferred: Property.Transition | CssString,
+    maximum: Property.Transition | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 transition-behavior；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-behavior
  */
-export class TransitionBehaviorCss extends CssProperty<Property.TransitionBehavior> {
+export class TransitionBehaviorCss extends CssProperty {
   readonly allowDiscrete = 'transition-behavior:allow-discrete;';
   readonly inherit = 'transition-behavior:inherit;';
   readonly initial = 'transition-behavior:initial;';
@@ -6557,12 +6931,16 @@ export class TransitionBehaviorCss extends CssProperty<Property.TransitionBehavi
   constructor() {
     super('transition-behavior');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TransitionBehavior | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 transition-delay；初始值 0s。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-delay
  */
-export class TransitionDelayCss extends CssProperty<Property.TransitionDelay> {
+export class TransitionDelayCss extends CssProperty {
   readonly inherit = 'transition-delay:inherit;';
   readonly initial = 'transition-delay:initial;';
   readonly revert = 'transition-delay:revert;';
@@ -6571,6 +6949,10 @@ export class TransitionDelayCss extends CssProperty<Property.TransitionDelay> {
   constructor() {
     super('transition-delay');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TransitionDelay | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
   ms(value: number): string {
     return `${this.name}:${value}ms;`;
@@ -6584,30 +6966,30 @@ export class TransitionDelayCss extends CssProperty<Property.TransitionDelay> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.TransitionDelay, number> | (string & {}),
-    ...others: (Extract<Property.TransitionDelay, number> | (string & {}))[]
+    value: Property.TransitionDelay | CssString,
+    ...others: (Property.TransitionDelay | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.TransitionDelay, number> | (string & {}),
-    ...others: (Extract<Property.TransitionDelay, number> | (string & {}))[]
+    value: Property.TransitionDelay | CssString,
+    ...others: (Property.TransitionDelay | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.TransitionDelay, number> | (string & {}),
-    preferred: Extract<Property.TransitionDelay, number> | (string & {}),
-    maximum: Extract<Property.TransitionDelay, number> | (string & {}),
+    minimum: Property.TransitionDelay | CssString,
+    preferred: Property.TransitionDelay | CssString,
+    maximum: Property.TransitionDelay | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 transition-duration；初始值 0s。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-duration
  */
-export class TransitionDurationCss extends CssProperty<Property.TransitionDuration> {
+export class TransitionDurationCss extends CssProperty {
   readonly inherit = 'transition-duration:inherit;';
   readonly initial = 'transition-duration:initial;';
   readonly revert = 'transition-duration:revert;';
@@ -6616,6 +6998,10 @@ export class TransitionDurationCss extends CssProperty<Property.TransitionDurati
   constructor() {
     super('transition-duration');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TransitionDuration | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
   ms(value: number): string {
     return `${this.name}:${value}ms;`;
@@ -6629,30 +7015,30 @@ export class TransitionDurationCss extends CssProperty<Property.TransitionDurati
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.TransitionDuration, number> | (string & {}),
-    ...others: (Extract<Property.TransitionDuration, number> | (string & {}))[]
+    value: Property.TransitionDuration | CssString,
+    ...others: (Property.TransitionDuration | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.TransitionDuration, number> | (string & {}),
-    ...others: (Extract<Property.TransitionDuration, number> | (string & {}))[]
+    value: Property.TransitionDuration | CssString,
+    ...others: (Property.TransitionDuration | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.TransitionDuration, number> | (string & {}),
-    preferred: Extract<Property.TransitionDuration, number> | (string & {}),
-    maximum: Extract<Property.TransitionDuration, number> | (string & {}),
+    minimum: Property.TransitionDuration | CssString,
+    preferred: Property.TransitionDuration | CssString,
+    maximum: Property.TransitionDuration | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 transition-property。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-property
  */
-export class TransitionPropertyCss extends CssProperty<Property.TransitionProperty> {
+export class TransitionPropertyCss extends CssProperty {
   readonly all = 'transition-property:all;';
   readonly inherit = 'transition-property:inherit;';
   readonly initial = 'transition-property:initial;';
@@ -6663,12 +7049,16 @@ export class TransitionPropertyCss extends CssProperty<Property.TransitionProper
   constructor() {
     super('transition-property');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TransitionProperty | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 transition-timing-function；初始值 ease。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-timing-function
  */
-export class TransitionTimingFunctionCss extends CssProperty<Property.TransitionTimingFunction> {
+export class TransitionTimingFunctionCss extends CssProperty {
   readonly ease = 'transition-timing-function:ease;';
   readonly easeIn = 'transition-timing-function:ease-in;';
   readonly easeInOut = 'transition-timing-function:ease-in-out;';
@@ -6684,12 +7074,16 @@ export class TransitionTimingFunctionCss extends CssProperty<Property.Transition
   constructor() {
     super('transition-timing-function');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.TransitionTimingFunction | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 translate；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/translate
  */
-export class TranslateCss extends LengthCssProperty<Property.Translate> {
+export class TranslateCss extends LengthCssProperty {
   readonly inherit = 'translate:inherit;';
   readonly initial = 'translate:initial;';
   readonly none = 'translate:none;';
@@ -6698,6 +7092,10 @@ export class TranslateCss extends LengthCssProperty<Property.Translate> {
   readonly unset = 'translate:unset;';
   constructor() {
     super('translate');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Translate | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
@@ -6708,22 +7106,22 @@ export class TranslateCss extends LengthCssProperty<Property.Translate> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.Translate, number> | (string & {}),
-    ...others: (Extract<Property.Translate, number> | (string & {}))[]
+    value: Property.Translate | CssString,
+    ...others: (Property.Translate | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.Translate, number> | (string & {}),
-    ...others: (Extract<Property.Translate, number> | (string & {}))[]
+    value: Property.Translate | CssString,
+    ...others: (Property.Translate | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Translate, number> | (string & {}),
-    preferred: Extract<Property.Translate, number> | (string & {}),
-    maximum: Extract<Property.Translate, number> | (string & {}),
+    minimum: Property.Translate | CssString,
+    preferred: Property.Translate | CssString,
+    maximum: Property.Translate | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }

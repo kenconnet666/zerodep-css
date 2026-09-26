@@ -1,13 +1,13 @@
 // 由 scripts/generate-css-author.mjs 从 csstype@3.2.3 生成；请勿手改。
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
-import { CssProperty, LengthCssProperty } from './base.js';
+import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
 
 /** 行列间距（CSS gap）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/gap
  */
-export class GapCss extends LengthCssProperty<Property.Gap> {
+export class GapCss extends LengthCssProperty {
   readonly inherit = 'gap:inherit;';
   readonly initial = 'gap:initial;';
   readonly normal = 'gap:normal;';
@@ -16,6 +16,10 @@ export class GapCss extends LengthCssProperty<Property.Gap> {
   readonly unset = 'gap:unset;';
   constructor() {
     super('gap');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Gap | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -321,31 +325,25 @@ export class GapCss extends LengthCssProperty<Property.Gap> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Gap, number> | (string & {}),
-    ...others: (Extract<Property.Gap, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Gap | CssString, ...others: (Property.Gap | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Gap, number> | (string & {}),
-    ...others: (Extract<Property.Gap, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Gap | CssString, ...others: (Property.Gap | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Gap, number> | (string & {}),
-    preferred: Extract<Property.Gap, number> | (string & {}),
-    maximum: Extract<Property.Gap, number> | (string & {}),
+    minimum: Property.Gap | CssString,
+    preferred: Property.Gap | CssString,
+    maximum: Property.Gap | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 glyph-orientation-vertical。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/glyph-orientation-vertical
  */
-export class GlyphOrientationVerticalCss extends CssProperty<Property.GlyphOrientationVertical> {
+export class GlyphOrientationVerticalCss extends CssProperty {
   readonly auto = 'glyph-orientation-vertical:auto;';
   readonly inherit = 'glyph-orientation-vertical:inherit;';
   readonly initial = 'glyph-orientation-vertical:initial;';
@@ -355,35 +353,39 @@ export class GlyphOrientationVerticalCss extends CssProperty<Property.GlyphOrien
   constructor() {
     super('glyph-orientation-vertical');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GlyphOrientationVertical | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GlyphOrientationVertical, number> | (string & {}),
-    ...others: (Extract<Property.GlyphOrientationVertical, number> | (string & {}))[]
+    value: Property.GlyphOrientationVertical | CssString,
+    ...others: (Property.GlyphOrientationVertical | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GlyphOrientationVertical, number> | (string & {}),
-    ...others: (Extract<Property.GlyphOrientationVertical, number> | (string & {}))[]
+    value: Property.GlyphOrientationVertical | CssString,
+    ...others: (Property.GlyphOrientationVertical | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GlyphOrientationVertical, number> | (string & {}),
-    preferred: Extract<Property.GlyphOrientationVertical, number> | (string & {}),
-    maximum: Extract<Property.GlyphOrientationVertical, number> | (string & {}),
+    minimum: Property.GlyphOrientationVertical | CssString,
+    preferred: Property.GlyphOrientationVertical | CssString,
+    maximum: Property.GlyphOrientationVertical | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid
  */
-export class GridCss extends CssProperty<Property.Grid> {
+export class GridCss extends CssProperty {
   readonly inherit = 'grid:inherit;';
   readonly initial = 'grid:initial;';
   readonly none = 'grid:none;';
@@ -393,12 +395,16 @@ export class GridCss extends CssProperty<Property.Grid> {
   constructor() {
     super('grid');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Grid | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 grid-area。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-area
  */
-export class GridAreaCss extends CssProperty<Property.GridArea> {
+export class GridAreaCss extends CssProperty {
   readonly auto = 'grid-area:auto;';
   readonly inherit = 'grid-area:inherit;';
   readonly initial = 'grid-area:initial;';
@@ -408,35 +414,33 @@ export class GridAreaCss extends CssProperty<Property.GridArea> {
   constructor() {
     super('grid-area');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridArea | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.GridArea, number> | (string & {}),
-    ...others: (Extract<Property.GridArea, number> | (string & {}))[]
-  ): string {
+  min(value: Property.GridArea | CssString, ...others: (Property.GridArea | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.GridArea, number> | (string & {}),
-    ...others: (Extract<Property.GridArea, number> | (string & {}))[]
-  ): string {
+  max(value: Property.GridArea | CssString, ...others: (Property.GridArea | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridArea, number> | (string & {}),
-    preferred: Extract<Property.GridArea, number> | (string & {}),
-    maximum: Extract<Property.GridArea, number> | (string & {}),
+    minimum: Property.GridArea | CssString,
+    preferred: Property.GridArea | CssString,
+    maximum: Property.GridArea | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-auto-columns；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-columns
  */
-export class GridAutoColumnsCss extends LengthCssProperty<Property.GridAutoColumns> {
+export class GridAutoColumnsCss extends LengthCssProperty {
   readonly auto = 'grid-auto-columns:auto;';
   readonly inherit = 'grid-auto-columns:inherit;';
   readonly initial = 'grid-auto-columns:initial;';
@@ -448,35 +452,39 @@ export class GridAutoColumnsCss extends LengthCssProperty<Property.GridAutoColum
   constructor() {
     super('grid-auto-columns');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridAutoColumns | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GridAutoColumns, number> | (string & {}),
-    ...others: (Extract<Property.GridAutoColumns, number> | (string & {}))[]
+    value: Property.GridAutoColumns | CssString,
+    ...others: (Property.GridAutoColumns | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GridAutoColumns, number> | (string & {}),
-    ...others: (Extract<Property.GridAutoColumns, number> | (string & {}))[]
+    value: Property.GridAutoColumns | CssString,
+    ...others: (Property.GridAutoColumns | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridAutoColumns, number> | (string & {}),
-    preferred: Extract<Property.GridAutoColumns, number> | (string & {}),
-    maximum: Extract<Property.GridAutoColumns, number> | (string & {}),
+    minimum: Property.GridAutoColumns | CssString,
+    preferred: Property.GridAutoColumns | CssString,
+    maximum: Property.GridAutoColumns | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-auto-flow；初始值 row。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-flow
  */
-export class GridAutoFlowCss extends CssProperty<Property.GridAutoFlow> {
+export class GridAutoFlowCss extends CssProperty {
   readonly column = 'grid-auto-flow:column;';
   readonly dense = 'grid-auto-flow:dense;';
   readonly inherit = 'grid-auto-flow:inherit;';
@@ -488,12 +496,16 @@ export class GridAutoFlowCss extends CssProperty<Property.GridAutoFlow> {
   constructor() {
     super('grid-auto-flow');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridAutoFlow | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 grid-auto-rows；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-rows
  */
-export class GridAutoRowsCss extends LengthCssProperty<Property.GridAutoRows> {
+export class GridAutoRowsCss extends LengthCssProperty {
   readonly auto = 'grid-auto-rows:auto;';
   readonly inherit = 'grid-auto-rows:inherit;';
   readonly initial = 'grid-auto-rows:initial;';
@@ -505,35 +517,39 @@ export class GridAutoRowsCss extends LengthCssProperty<Property.GridAutoRows> {
   constructor() {
     super('grid-auto-rows');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridAutoRows | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GridAutoRows, number> | (string & {}),
-    ...others: (Extract<Property.GridAutoRows, number> | (string & {}))[]
+    value: Property.GridAutoRows | CssString,
+    ...others: (Property.GridAutoRows | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GridAutoRows, number> | (string & {}),
-    ...others: (Extract<Property.GridAutoRows, number> | (string & {}))[]
+    value: Property.GridAutoRows | CssString,
+    ...others: (Property.GridAutoRows | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridAutoRows, number> | (string & {}),
-    preferred: Extract<Property.GridAutoRows, number> | (string & {}),
-    maximum: Extract<Property.GridAutoRows, number> | (string & {}),
+    minimum: Property.GridAutoRows | CssString,
+    preferred: Property.GridAutoRows | CssString,
+    maximum: Property.GridAutoRows | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-column。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column
  */
-export class GridColumnCss extends CssProperty<Property.GridColumn> {
+export class GridColumnCss extends CssProperty {
   readonly auto = 'grid-column:auto;';
   readonly inherit = 'grid-column:inherit;';
   readonly initial = 'grid-column:initial;';
@@ -543,35 +559,39 @@ export class GridColumnCss extends CssProperty<Property.GridColumn> {
   constructor() {
     super('grid-column');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridColumn | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GridColumn, number> | (string & {}),
-    ...others: (Extract<Property.GridColumn, number> | (string & {}))[]
+    value: Property.GridColumn | CssString,
+    ...others: (Property.GridColumn | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GridColumn, number> | (string & {}),
-    ...others: (Extract<Property.GridColumn, number> | (string & {}))[]
+    value: Property.GridColumn | CssString,
+    ...others: (Property.GridColumn | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridColumn, number> | (string & {}),
-    preferred: Extract<Property.GridColumn, number> | (string & {}),
-    maximum: Extract<Property.GridColumn, number> | (string & {}),
+    minimum: Property.GridColumn | CssString,
+    preferred: Property.GridColumn | CssString,
+    maximum: Property.GridColumn | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-column-end；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-end
  */
-export class GridColumnEndCss extends CssProperty<Property.GridColumnEnd> {
+export class GridColumnEndCss extends CssProperty {
   readonly auto = 'grid-column-end:auto;';
   readonly inherit = 'grid-column-end:inherit;';
   readonly initial = 'grid-column-end:initial;';
@@ -581,35 +601,39 @@ export class GridColumnEndCss extends CssProperty<Property.GridColumnEnd> {
   constructor() {
     super('grid-column-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridColumnEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GridColumnEnd, number> | (string & {}),
-    ...others: (Extract<Property.GridColumnEnd, number> | (string & {}))[]
+    value: Property.GridColumnEnd | CssString,
+    ...others: (Property.GridColumnEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GridColumnEnd, number> | (string & {}),
-    ...others: (Extract<Property.GridColumnEnd, number> | (string & {}))[]
+    value: Property.GridColumnEnd | CssString,
+    ...others: (Property.GridColumnEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridColumnEnd, number> | (string & {}),
-    preferred: Extract<Property.GridColumnEnd, number> | (string & {}),
-    maximum: Extract<Property.GridColumnEnd, number> | (string & {}),
+    minimum: Property.GridColumnEnd | CssString,
+    preferred: Property.GridColumnEnd | CssString,
+    maximum: Property.GridColumnEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-column-start；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-start
  */
-export class GridColumnStartCss extends CssProperty<Property.GridColumnStart> {
+export class GridColumnStartCss extends CssProperty {
   readonly auto = 'grid-column-start:auto;';
   readonly inherit = 'grid-column-start:inherit;';
   readonly initial = 'grid-column-start:initial;';
@@ -619,35 +643,39 @@ export class GridColumnStartCss extends CssProperty<Property.GridColumnStart> {
   constructor() {
     super('grid-column-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridColumnStart | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GridColumnStart, number> | (string & {}),
-    ...others: (Extract<Property.GridColumnStart, number> | (string & {}))[]
+    value: Property.GridColumnStart | CssString,
+    ...others: (Property.GridColumnStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GridColumnStart, number> | (string & {}),
-    ...others: (Extract<Property.GridColumnStart, number> | (string & {}))[]
+    value: Property.GridColumnStart | CssString,
+    ...others: (Property.GridColumnStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridColumnStart, number> | (string & {}),
-    preferred: Extract<Property.GridColumnStart, number> | (string & {}),
-    maximum: Extract<Property.GridColumnStart, number> | (string & {}),
+    minimum: Property.GridColumnStart | CssString,
+    preferred: Property.GridColumnStart | CssString,
+    maximum: Property.GridColumnStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-row。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row
  */
-export class GridRowCss extends CssProperty<Property.GridRow> {
+export class GridRowCss extends CssProperty {
   readonly auto = 'grid-row:auto;';
   readonly inherit = 'grid-row:inherit;';
   readonly initial = 'grid-row:initial;';
@@ -657,35 +685,33 @@ export class GridRowCss extends CssProperty<Property.GridRow> {
   constructor() {
     super('grid-row');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridRow | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.GridRow, number> | (string & {}),
-    ...others: (Extract<Property.GridRow, number> | (string & {}))[]
-  ): string {
+  min(value: Property.GridRow | CssString, ...others: (Property.GridRow | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.GridRow, number> | (string & {}),
-    ...others: (Extract<Property.GridRow, number> | (string & {}))[]
-  ): string {
+  max(value: Property.GridRow | CssString, ...others: (Property.GridRow | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridRow, number> | (string & {}),
-    preferred: Extract<Property.GridRow, number> | (string & {}),
-    maximum: Extract<Property.GridRow, number> | (string & {}),
+    minimum: Property.GridRow | CssString,
+    preferred: Property.GridRow | CssString,
+    maximum: Property.GridRow | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-row-end；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-end
  */
-export class GridRowEndCss extends CssProperty<Property.GridRowEnd> {
+export class GridRowEndCss extends CssProperty {
   readonly auto = 'grid-row-end:auto;';
   readonly inherit = 'grid-row-end:inherit;';
   readonly initial = 'grid-row-end:initial;';
@@ -695,35 +721,39 @@ export class GridRowEndCss extends CssProperty<Property.GridRowEnd> {
   constructor() {
     super('grid-row-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridRowEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GridRowEnd, number> | (string & {}),
-    ...others: (Extract<Property.GridRowEnd, number> | (string & {}))[]
+    value: Property.GridRowEnd | CssString,
+    ...others: (Property.GridRowEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GridRowEnd, number> | (string & {}),
-    ...others: (Extract<Property.GridRowEnd, number> | (string & {}))[]
+    value: Property.GridRowEnd | CssString,
+    ...others: (Property.GridRowEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridRowEnd, number> | (string & {}),
-    preferred: Extract<Property.GridRowEnd, number> | (string & {}),
-    maximum: Extract<Property.GridRowEnd, number> | (string & {}),
+    minimum: Property.GridRowEnd | CssString,
+    preferred: Property.GridRowEnd | CssString,
+    maximum: Property.GridRowEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-row-start；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-start
  */
-export class GridRowStartCss extends CssProperty<Property.GridRowStart> {
+export class GridRowStartCss extends CssProperty {
   readonly auto = 'grid-row-start:auto;';
   readonly inherit = 'grid-row-start:inherit;';
   readonly initial = 'grid-row-start:initial;';
@@ -733,35 +763,39 @@ export class GridRowStartCss extends CssProperty<Property.GridRowStart> {
   constructor() {
     super('grid-row-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridRowStart | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GridRowStart, number> | (string & {}),
-    ...others: (Extract<Property.GridRowStart, number> | (string & {}))[]
+    value: Property.GridRowStart | CssString,
+    ...others: (Property.GridRowStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GridRowStart, number> | (string & {}),
-    ...others: (Extract<Property.GridRowStart, number> | (string & {}))[]
+    value: Property.GridRowStart | CssString,
+    ...others: (Property.GridRowStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridRowStart, number> | (string & {}),
-    preferred: Extract<Property.GridRowStart, number> | (string & {}),
-    maximum: Extract<Property.GridRowStart, number> | (string & {}),
+    minimum: Property.GridRowStart | CssString,
+    preferred: Property.GridRowStart | CssString,
+    maximum: Property.GridRowStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-template。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template
  */
-export class GridTemplateCss extends CssProperty<Property.GridTemplate> {
+export class GridTemplateCss extends CssProperty {
   readonly inherit = 'grid-template:inherit;';
   readonly initial = 'grid-template:initial;';
   readonly none = 'grid-template:none;';
@@ -771,12 +805,16 @@ export class GridTemplateCss extends CssProperty<Property.GridTemplate> {
   constructor() {
     super('grid-template');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridTemplate | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 grid-template-areas；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-areas
  */
-export class GridTemplateAreasCss extends CssProperty<Property.GridTemplateAreas> {
+export class GridTemplateAreasCss extends CssProperty {
   readonly inherit = 'grid-template-areas:inherit;';
   readonly initial = 'grid-template-areas:initial;';
   readonly none = 'grid-template-areas:none;';
@@ -786,12 +824,16 @@ export class GridTemplateAreasCss extends CssProperty<Property.GridTemplateAreas
   constructor() {
     super('grid-template-areas');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridTemplateAreas | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 grid-template-columns；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-columns
  */
-export class GridTemplateColumnsCss extends LengthCssProperty<Property.GridTemplateColumns> {
+export class GridTemplateColumnsCss extends LengthCssProperty {
   readonly auto = 'grid-template-columns:auto;';
   readonly inherit = 'grid-template-columns:inherit;';
   readonly initial = 'grid-template-columns:initial;';
@@ -805,35 +847,39 @@ export class GridTemplateColumnsCss extends LengthCssProperty<Property.GridTempl
   constructor() {
     super('grid-template-columns');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridTemplateColumns | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GridTemplateColumns, number> | (string & {}),
-    ...others: (Extract<Property.GridTemplateColumns, number> | (string & {}))[]
+    value: Property.GridTemplateColumns | CssString,
+    ...others: (Property.GridTemplateColumns | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GridTemplateColumns, number> | (string & {}),
-    ...others: (Extract<Property.GridTemplateColumns, number> | (string & {}))[]
+    value: Property.GridTemplateColumns | CssString,
+    ...others: (Property.GridTemplateColumns | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridTemplateColumns, number> | (string & {}),
-    preferred: Extract<Property.GridTemplateColumns, number> | (string & {}),
-    maximum: Extract<Property.GridTemplateColumns, number> | (string & {}),
+    minimum: Property.GridTemplateColumns | CssString,
+    preferred: Property.GridTemplateColumns | CssString,
+    maximum: Property.GridTemplateColumns | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 grid-template-rows；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-rows
  */
-export class GridTemplateRowsCss extends LengthCssProperty<Property.GridTemplateRows> {
+export class GridTemplateRowsCss extends LengthCssProperty {
   readonly auto = 'grid-template-rows:auto;';
   readonly inherit = 'grid-template-rows:inherit;';
   readonly initial = 'grid-template-rows:initial;';
@@ -847,35 +893,39 @@ export class GridTemplateRowsCss extends LengthCssProperty<Property.GridTemplate
   constructor() {
     super('grid-template-rows');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.GridTemplateRows | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.GridTemplateRows, number> | (string & {}),
-    ...others: (Extract<Property.GridTemplateRows, number> | (string & {}))[]
+    value: Property.GridTemplateRows | CssString,
+    ...others: (Property.GridTemplateRows | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.GridTemplateRows, number> | (string & {}),
-    ...others: (Extract<Property.GridTemplateRows, number> | (string & {}))[]
+    value: Property.GridTemplateRows | CssString,
+    ...others: (Property.GridTemplateRows | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.GridTemplateRows, number> | (string & {}),
-    preferred: Extract<Property.GridTemplateRows, number> | (string & {}),
-    maximum: Extract<Property.GridTemplateRows, number> | (string & {}),
+    minimum: Property.GridTemplateRows | CssString,
+    preferred: Property.GridTemplateRows | CssString,
+    maximum: Property.GridTemplateRows | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 hanging-punctuation；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hanging-punctuation
  */
-export class HangingPunctuationCss extends CssProperty<Property.HangingPunctuation> {
+export class HangingPunctuationCss extends CssProperty {
   readonly allowEnd = 'hanging-punctuation:allow-end;';
   readonly first = 'hanging-punctuation:first;';
   readonly forceEnd = 'hanging-punctuation:force-end;';
@@ -889,12 +939,16 @@ export class HangingPunctuationCss extends CssProperty<Property.HangingPunctuati
   constructor() {
     super('hanging-punctuation');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.HangingPunctuation | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** 高度（CSS height）；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/height
  */
-export class HeightCss extends LengthCssProperty<Property.Height> {
+export class HeightCss extends LengthCssProperty {
   readonly auto = 'height:auto;';
   readonly fitContent = 'height:fit-content;';
   readonly inherit = 'height:inherit;';
@@ -907,6 +961,10 @@ export class HeightCss extends LengthCssProperty<Property.Height> {
   constructor() {
     super('height');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Height | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -915,31 +973,25 @@ export class HeightCss extends LengthCssProperty<Property.Height> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Height, number> | (string & {}),
-    ...others: (Extract<Property.Height, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Height | CssString, ...others: (Property.Height | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Height, number> | (string & {}),
-    ...others: (Extract<Property.Height, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Height | CssString, ...others: (Property.Height | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Height, number> | (string & {}),
-    preferred: Extract<Property.Height, number> | (string & {}),
-    maximum: Extract<Property.Height, number> | (string & {}),
+    minimum: Property.Height | CssString,
+    preferred: Property.Height | CssString,
+    maximum: Property.Height | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 hyphenate-character；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-character
  */
-export class HyphenateCharacterCss extends CssProperty<Property.HyphenateCharacter> {
+export class HyphenateCharacterCss extends CssProperty {
   readonly auto = 'hyphenate-character:auto;';
   readonly inherit = 'hyphenate-character:inherit;';
   readonly initial = 'hyphenate-character:initial;';
@@ -949,12 +1001,16 @@ export class HyphenateCharacterCss extends CssProperty<Property.HyphenateCharact
   constructor() {
     super('hyphenate-character');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.HyphenateCharacter | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 hyphenate-limit-chars；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-limit-chars
  */
-export class HyphenateLimitCharsCss extends CssProperty<Property.HyphenateLimitChars> {
+export class HyphenateLimitCharsCss extends CssProperty {
   readonly auto = 'hyphenate-limit-chars:auto;';
   readonly inherit = 'hyphenate-limit-chars:inherit;';
   readonly initial = 'hyphenate-limit-chars:initial;';
@@ -964,35 +1020,39 @@ export class HyphenateLimitCharsCss extends CssProperty<Property.HyphenateLimitC
   constructor() {
     super('hyphenate-limit-chars');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.HyphenateLimitChars | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.HyphenateLimitChars, number> | (string & {}),
-    ...others: (Extract<Property.HyphenateLimitChars, number> | (string & {}))[]
+    value: Property.HyphenateLimitChars | CssString,
+    ...others: (Property.HyphenateLimitChars | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.HyphenateLimitChars, number> | (string & {}),
-    ...others: (Extract<Property.HyphenateLimitChars, number> | (string & {}))[]
+    value: Property.HyphenateLimitChars | CssString,
+    ...others: (Property.HyphenateLimitChars | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.HyphenateLimitChars, number> | (string & {}),
-    preferred: Extract<Property.HyphenateLimitChars, number> | (string & {}),
-    maximum: Extract<Property.HyphenateLimitChars, number> | (string & {}),
+    minimum: Property.HyphenateLimitChars | CssString,
+    preferred: Property.HyphenateLimitChars | CssString,
+    maximum: Property.HyphenateLimitChars | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 hyphens；初始值 manual。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphens
  */
-export class HyphensCss extends CssProperty<Property.Hyphens> {
+export class HyphensCss extends CssProperty {
   readonly auto = 'hyphens:auto;';
   readonly inherit = 'hyphens:inherit;';
   readonly initial = 'hyphens:initial;';
@@ -1004,12 +1064,16 @@ export class HyphensCss extends CssProperty<Property.Hyphens> {
   constructor() {
     super('hyphens');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Hyphens | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 image-orientation；初始值 from-image。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-orientation
  */
-export class ImageOrientationCss extends CssProperty<Property.ImageOrientation> {
+export class ImageOrientationCss extends CssProperty {
   readonly flip = 'image-orientation:flip;';
   readonly fromImage = 'image-orientation:from-image;';
   readonly inherit = 'image-orientation:inherit;';
@@ -1019,6 +1083,10 @@ export class ImageOrientationCss extends CssProperty<Property.ImageOrientation> 
   readonly unset = 'image-orientation:unset;';
   constructor() {
     super('image-orientation');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ImageOrientation | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 deg 单位生成声明；数值合法性由浏览器处理。 */
   deg(value: number): string {
@@ -1041,30 +1109,30 @@ export class ImageOrientationCss extends CssProperty<Property.ImageOrientation> 
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ImageOrientation, number> | (string & {}),
-    ...others: (Extract<Property.ImageOrientation, number> | (string & {}))[]
+    value: Property.ImageOrientation | CssString,
+    ...others: (Property.ImageOrientation | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ImageOrientation, number> | (string & {}),
-    ...others: (Extract<Property.ImageOrientation, number> | (string & {}))[]
+    value: Property.ImageOrientation | CssString,
+    ...others: (Property.ImageOrientation | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ImageOrientation, number> | (string & {}),
-    preferred: Extract<Property.ImageOrientation, number> | (string & {}),
-    maximum: Extract<Property.ImageOrientation, number> | (string & {}),
+    minimum: Property.ImageOrientation | CssString,
+    preferred: Property.ImageOrientation | CssString,
+    maximum: Property.ImageOrientation | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 image-rendering；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-rendering
  */
-export class ImageRenderingCss extends CssProperty<Property.ImageRendering> {
+export class ImageRenderingCss extends CssProperty {
   readonly auto = 'image-rendering:auto;';
   readonly crispEdges = 'image-rendering:crisp-edges;';
   readonly inherit = 'image-rendering:inherit;';
@@ -1077,12 +1145,16 @@ export class ImageRenderingCss extends CssProperty<Property.ImageRendering> {
   constructor() {
     super('image-rendering');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ImageRendering | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 image-resolution；初始值 1dppx。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-resolution
  */
-export class ImageResolutionCss extends CssProperty<Property.ImageResolution> {
+export class ImageResolutionCss extends CssProperty {
   readonly fromImage = 'image-resolution:from-image;';
   readonly inherit = 'image-resolution:inherit;';
   readonly initial = 'image-resolution:initial;';
@@ -1092,12 +1164,16 @@ export class ImageResolutionCss extends CssProperty<Property.ImageResolution> {
   constructor() {
     super('image-resolution');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ImageResolution | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 initial-letter；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/initial-letter
  */
-export class InitialLetterCss extends CssProperty<Property.InitialLetter> {
+export class InitialLetterCss extends CssProperty {
   readonly inherit = 'initial-letter:inherit;';
   readonly initial = 'initial-letter:initial;';
   readonly normal = 'initial-letter:normal;';
@@ -1107,35 +1183,39 @@ export class InitialLetterCss extends CssProperty<Property.InitialLetter> {
   constructor() {
     super('initial-letter');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InitialLetter | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.InitialLetter, number> | (string & {}),
-    ...others: (Extract<Property.InitialLetter, number> | (string & {}))[]
+    value: Property.InitialLetter | CssString,
+    ...others: (Property.InitialLetter | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.InitialLetter, number> | (string & {}),
-    ...others: (Extract<Property.InitialLetter, number> | (string & {}))[]
+    value: Property.InitialLetter | CssString,
+    ...others: (Property.InitialLetter | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.InitialLetter, number> | (string & {}),
-    preferred: Extract<Property.InitialLetter, number> | (string & {}),
-    maximum: Extract<Property.InitialLetter, number> | (string & {}),
+    minimum: Property.InitialLetter | CssString,
+    preferred: Property.InitialLetter | CssString,
+    maximum: Property.InitialLetter | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 initial-letter-align；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/initial-letter-align
  */
-export class InitialLetterAlignCss extends CssProperty<Property.InitialLetterAlign> {
+export class InitialLetterAlignCss extends CssProperty {
   readonly alphabetic = 'initial-letter-align:alphabetic;';
   readonly auto = 'initial-letter-align:auto;';
   readonly hanging = 'initial-letter-align:hanging;';
@@ -1148,12 +1228,16 @@ export class InitialLetterAlignCss extends CssProperty<Property.InitialLetterAli
   constructor() {
     super('initial-letter-align');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InitialLetterAlign | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 inline-size；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inline-size
  */
-export class InlineSizeCss extends LengthCssProperty<Property.InlineSize> {
+export class InlineSizeCss extends LengthCssProperty {
   readonly auto = 'inline-size:auto;';
   readonly fitContent = 'inline-size:fit-content;';
   readonly inherit = 'inline-size:inherit;';
@@ -1166,35 +1250,39 @@ export class InlineSizeCss extends LengthCssProperty<Property.InlineSize> {
   constructor() {
     super('inline-size');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InlineSize | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.InlineSize, number> | (string & {}),
-    ...others: (Extract<Property.InlineSize, number> | (string & {}))[]
+    value: Property.InlineSize | CssString,
+    ...others: (Property.InlineSize | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.InlineSize, number> | (string & {}),
-    ...others: (Extract<Property.InlineSize, number> | (string & {}))[]
+    value: Property.InlineSize | CssString,
+    ...others: (Property.InlineSize | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.InlineSize, number> | (string & {}),
-    preferred: Extract<Property.InlineSize, number> | (string & {}),
-    maximum: Extract<Property.InlineSize, number> | (string & {}),
+    minimum: Property.InlineSize | CssString,
+    preferred: Property.InlineSize | CssString,
+    maximum: Property.InlineSize | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 inset。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset
  */
-export class InsetCss extends LengthCssProperty<Property.Inset> {
+export class InsetCss extends LengthCssProperty {
   readonly auto = 'inset:auto;';
   readonly inherit = 'inset:inherit;';
   readonly initial = 'inset:initial;';
@@ -1203,6 +1291,10 @@ export class InsetCss extends LengthCssProperty<Property.Inset> {
   readonly unset = 'inset:unset;';
   constructor() {
     super('inset');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Inset | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -1600,31 +1692,25 @@ export class InsetCss extends LengthCssProperty<Property.Inset> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Inset, number> | (string & {}),
-    ...others: (Extract<Property.Inset, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Inset | CssString, ...others: (Property.Inset | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Inset, number> | (string & {}),
-    ...others: (Extract<Property.Inset, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Inset | CssString, ...others: (Property.Inset | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Inset, number> | (string & {}),
-    preferred: Extract<Property.Inset, number> | (string & {}),
-    maximum: Extract<Property.Inset, number> | (string & {}),
+    minimum: Property.Inset | CssString,
+    preferred: Property.Inset | CssString,
+    maximum: Property.Inset | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 inset-block。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block
  */
-export class InsetBlockCss extends LengthCssProperty<Property.InsetBlock> {
+export class InsetBlockCss extends LengthCssProperty {
   readonly auto = 'inset-block:auto;';
   readonly inherit = 'inset-block:inherit;';
   readonly initial = 'inset-block:initial;';
@@ -1634,6 +1720,10 @@ export class InsetBlockCss extends LengthCssProperty<Property.InsetBlock> {
   constructor() {
     super('inset-block');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InsetBlock | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
   px(value1: number, value2: number): string;
@@ -1933,30 +2023,30 @@ export class InsetBlockCss extends LengthCssProperty<Property.InsetBlock> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.InsetBlock, number> | (string & {}),
-    ...others: (Extract<Property.InsetBlock, number> | (string & {}))[]
+    value: Property.InsetBlock | CssString,
+    ...others: (Property.InsetBlock | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.InsetBlock, number> | (string & {}),
-    ...others: (Extract<Property.InsetBlock, number> | (string & {}))[]
+    value: Property.InsetBlock | CssString,
+    ...others: (Property.InsetBlock | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.InsetBlock, number> | (string & {}),
-    preferred: Extract<Property.InsetBlock, number> | (string & {}),
-    maximum: Extract<Property.InsetBlock, number> | (string & {}),
+    minimum: Property.InsetBlock | CssString,
+    preferred: Property.InsetBlock | CssString,
+    maximum: Property.InsetBlock | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 inset-block-end；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-end
  */
-export class InsetBlockEndCss extends LengthCssProperty<Property.InsetBlockEnd> {
+export class InsetBlockEndCss extends LengthCssProperty {
   readonly auto = 'inset-block-end:auto;';
   readonly inherit = 'inset-block-end:inherit;';
   readonly initial = 'inset-block-end:initial;';
@@ -1966,35 +2056,39 @@ export class InsetBlockEndCss extends LengthCssProperty<Property.InsetBlockEnd> 
   constructor() {
     super('inset-block-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InsetBlockEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.InsetBlockEnd, number> | (string & {}),
-    ...others: (Extract<Property.InsetBlockEnd, number> | (string & {}))[]
+    value: Property.InsetBlockEnd | CssString,
+    ...others: (Property.InsetBlockEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.InsetBlockEnd, number> | (string & {}),
-    ...others: (Extract<Property.InsetBlockEnd, number> | (string & {}))[]
+    value: Property.InsetBlockEnd | CssString,
+    ...others: (Property.InsetBlockEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.InsetBlockEnd, number> | (string & {}),
-    preferred: Extract<Property.InsetBlockEnd, number> | (string & {}),
-    maximum: Extract<Property.InsetBlockEnd, number> | (string & {}),
+    minimum: Property.InsetBlockEnd | CssString,
+    preferred: Property.InsetBlockEnd | CssString,
+    maximum: Property.InsetBlockEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 inset-block-start；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-start
  */
-export class InsetBlockStartCss extends LengthCssProperty<Property.InsetBlockStart> {
+export class InsetBlockStartCss extends LengthCssProperty {
   readonly auto = 'inset-block-start:auto;';
   readonly inherit = 'inset-block-start:inherit;';
   readonly initial = 'inset-block-start:initial;';
@@ -2004,35 +2098,39 @@ export class InsetBlockStartCss extends LengthCssProperty<Property.InsetBlockSta
   constructor() {
     super('inset-block-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InsetBlockStart | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.InsetBlockStart, number> | (string & {}),
-    ...others: (Extract<Property.InsetBlockStart, number> | (string & {}))[]
+    value: Property.InsetBlockStart | CssString,
+    ...others: (Property.InsetBlockStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.InsetBlockStart, number> | (string & {}),
-    ...others: (Extract<Property.InsetBlockStart, number> | (string & {}))[]
+    value: Property.InsetBlockStart | CssString,
+    ...others: (Property.InsetBlockStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.InsetBlockStart, number> | (string & {}),
-    preferred: Extract<Property.InsetBlockStart, number> | (string & {}),
-    maximum: Extract<Property.InsetBlockStart, number> | (string & {}),
+    minimum: Property.InsetBlockStart | CssString,
+    preferred: Property.InsetBlockStart | CssString,
+    maximum: Property.InsetBlockStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 inset-inline。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline
  */
-export class InsetInlineCss extends LengthCssProperty<Property.InsetInline> {
+export class InsetInlineCss extends LengthCssProperty {
   readonly auto = 'inset-inline:auto;';
   readonly inherit = 'inset-inline:inherit;';
   readonly initial = 'inset-inline:initial;';
@@ -2041,6 +2139,10 @@ export class InsetInlineCss extends LengthCssProperty<Property.InsetInline> {
   readonly unset = 'inset-inline:unset;';
   constructor() {
     super('inset-inline');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InsetInline | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -2341,30 +2443,30 @@ export class InsetInlineCss extends LengthCssProperty<Property.InsetInline> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.InsetInline, number> | (string & {}),
-    ...others: (Extract<Property.InsetInline, number> | (string & {}))[]
+    value: Property.InsetInline | CssString,
+    ...others: (Property.InsetInline | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.InsetInline, number> | (string & {}),
-    ...others: (Extract<Property.InsetInline, number> | (string & {}))[]
+    value: Property.InsetInline | CssString,
+    ...others: (Property.InsetInline | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.InsetInline, number> | (string & {}),
-    preferred: Extract<Property.InsetInline, number> | (string & {}),
-    maximum: Extract<Property.InsetInline, number> | (string & {}),
+    minimum: Property.InsetInline | CssString,
+    preferred: Property.InsetInline | CssString,
+    maximum: Property.InsetInline | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 inset-inline-end；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-end
  */
-export class InsetInlineEndCss extends LengthCssProperty<Property.InsetInlineEnd> {
+export class InsetInlineEndCss extends LengthCssProperty {
   readonly auto = 'inset-inline-end:auto;';
   readonly inherit = 'inset-inline-end:inherit;';
   readonly initial = 'inset-inline-end:initial;';
@@ -2374,35 +2476,39 @@ export class InsetInlineEndCss extends LengthCssProperty<Property.InsetInlineEnd
   constructor() {
     super('inset-inline-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InsetInlineEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.InsetInlineEnd, number> | (string & {}),
-    ...others: (Extract<Property.InsetInlineEnd, number> | (string & {}))[]
+    value: Property.InsetInlineEnd | CssString,
+    ...others: (Property.InsetInlineEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.InsetInlineEnd, number> | (string & {}),
-    ...others: (Extract<Property.InsetInlineEnd, number> | (string & {}))[]
+    value: Property.InsetInlineEnd | CssString,
+    ...others: (Property.InsetInlineEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.InsetInlineEnd, number> | (string & {}),
-    preferred: Extract<Property.InsetInlineEnd, number> | (string & {}),
-    maximum: Extract<Property.InsetInlineEnd, number> | (string & {}),
+    minimum: Property.InsetInlineEnd | CssString,
+    preferred: Property.InsetInlineEnd | CssString,
+    maximum: Property.InsetInlineEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 inset-inline-start；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-start
  */
-export class InsetInlineStartCss extends LengthCssProperty<Property.InsetInlineStart> {
+export class InsetInlineStartCss extends LengthCssProperty {
   readonly auto = 'inset-inline-start:auto;';
   readonly inherit = 'inset-inline-start:inherit;';
   readonly initial = 'inset-inline-start:initial;';
@@ -2412,35 +2518,39 @@ export class InsetInlineStartCss extends LengthCssProperty<Property.InsetInlineS
   constructor() {
     super('inset-inline-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InsetInlineStart | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.InsetInlineStart, number> | (string & {}),
-    ...others: (Extract<Property.InsetInlineStart, number> | (string & {}))[]
+    value: Property.InsetInlineStart | CssString,
+    ...others: (Property.InsetInlineStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.InsetInlineStart, number> | (string & {}),
-    ...others: (Extract<Property.InsetInlineStart, number> | (string & {}))[]
+    value: Property.InsetInlineStart | CssString,
+    ...others: (Property.InsetInlineStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.InsetInlineStart, number> | (string & {}),
-    preferred: Extract<Property.InsetInlineStart, number> | (string & {}),
-    maximum: Extract<Property.InsetInlineStart, number> | (string & {}),
+    minimum: Property.InsetInlineStart | CssString,
+    preferred: Property.InsetInlineStart | CssString,
+    maximum: Property.InsetInlineStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 interpolate-size；初始值 numeric-only。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interpolate-size
  */
-export class InterpolateSizeCss extends CssProperty<Property.InterpolateSize> {
+export class InterpolateSizeCss extends CssProperty {
   readonly allowKeywords = 'interpolate-size:allow-keywords;';
   readonly inherit = 'interpolate-size:inherit;';
   readonly initial = 'interpolate-size:initial;';
@@ -2451,12 +2561,16 @@ export class InterpolateSizeCss extends CssProperty<Property.InterpolateSize> {
   constructor() {
     super('interpolate-size');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.InterpolateSize | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 isolation；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/isolation
  */
-export class IsolationCss extends CssProperty<Property.Isolation> {
+export class IsolationCss extends CssProperty {
   readonly auto = 'isolation:auto;';
   readonly inherit = 'isolation:inherit;';
   readonly initial = 'isolation:initial;';
@@ -2467,12 +2581,16 @@ export class IsolationCss extends CssProperty<Property.Isolation> {
   constructor() {
     super('isolation');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Isolation | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 justify-content；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-content
  */
-export class JustifyContentCss extends CssProperty<Property.JustifyContent> {
+export class JustifyContentCss extends CssProperty {
   readonly center = 'justify-content:center;';
   readonly end = 'justify-content:end;';
   readonly flexEnd = 'justify-content:flex-end;';
@@ -2493,12 +2611,16 @@ export class JustifyContentCss extends CssProperty<Property.JustifyContent> {
   constructor() {
     super('justify-content');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.JustifyContent | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 justify-items；初始值 legacy。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-items
  */
-export class JustifyItemsCss extends CssProperty<Property.JustifyItems> {
+export class JustifyItemsCss extends CssProperty {
   readonly anchorCenter = 'justify-items:anchor-center;';
   readonly baseline = 'justify-items:baseline;';
   readonly center = 'justify-items:center;';
@@ -2521,12 +2643,16 @@ export class JustifyItemsCss extends CssProperty<Property.JustifyItems> {
   constructor() {
     super('justify-items');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.JustifyItems | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 justify-self；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-self
  */
-export class JustifySelfCss extends CssProperty<Property.JustifySelf> {
+export class JustifySelfCss extends CssProperty {
   readonly anchorCenter = 'justify-self:anchor-center;';
   readonly auto = 'justify-self:auto;';
   readonly baseline = 'justify-self:baseline;';
@@ -2549,12 +2675,16 @@ export class JustifySelfCss extends CssProperty<Property.JustifySelf> {
   constructor() {
     super('justify-self');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.JustifySelf | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 justify-tracks；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-tracks
  */
-export class JustifyTracksCss extends CssProperty<Property.JustifyTracks> {
+export class JustifyTracksCss extends CssProperty {
   readonly center = 'justify-tracks:center;';
   readonly end = 'justify-tracks:end;';
   readonly flexEnd = 'justify-tracks:flex-end;';
@@ -2575,12 +2705,16 @@ export class JustifyTracksCss extends CssProperty<Property.JustifyTracks> {
   constructor() {
     super('justify-tracks');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.JustifyTracks | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 left；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/left
  */
-export class LeftCss extends LengthCssProperty<Property.Left> {
+export class LeftCss extends LengthCssProperty {
   readonly auto = 'left:auto;';
   readonly inherit = 'left:inherit;';
   readonly initial = 'left:initial;';
@@ -2590,6 +2724,10 @@ export class LeftCss extends LengthCssProperty<Property.Left> {
   constructor() {
     super('left');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Left | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2598,31 +2736,25 @@ export class LeftCss extends LengthCssProperty<Property.Left> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Left, number> | (string & {}),
-    ...others: (Extract<Property.Left, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Left | CssString, ...others: (Property.Left | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Left, number> | (string & {}),
-    ...others: (Extract<Property.Left, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Left | CssString, ...others: (Property.Left | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Left, number> | (string & {}),
-    preferred: Extract<Property.Left, number> | (string & {}),
-    maximum: Extract<Property.Left, number> | (string & {}),
+    minimum: Property.Left | CssString,
+    preferred: Property.Left | CssString,
+    maximum: Property.Left | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 letter-spacing；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/letter-spacing
  */
-export class LetterSpacingCss extends LengthCssProperty<Property.LetterSpacing> {
+export class LetterSpacingCss extends LengthCssProperty {
   readonly inherit = 'letter-spacing:inherit;';
   readonly initial = 'letter-spacing:initial;';
   readonly normal = 'letter-spacing:normal;';
@@ -2632,35 +2764,39 @@ export class LetterSpacingCss extends LengthCssProperty<Property.LetterSpacing> 
   constructor() {
     super('letter-spacing');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.LetterSpacing | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.LetterSpacing, number> | (string & {}),
-    ...others: (Extract<Property.LetterSpacing, number> | (string & {}))[]
+    value: Property.LetterSpacing | CssString,
+    ...others: (Property.LetterSpacing | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.LetterSpacing, number> | (string & {}),
-    ...others: (Extract<Property.LetterSpacing, number> | (string & {}))[]
+    value: Property.LetterSpacing | CssString,
+    ...others: (Property.LetterSpacing | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.LetterSpacing, number> | (string & {}),
-    preferred: Extract<Property.LetterSpacing, number> | (string & {}),
-    maximum: Extract<Property.LetterSpacing, number> | (string & {}),
+    minimum: Property.LetterSpacing | CssString,
+    preferred: Property.LetterSpacing | CssString,
+    maximum: Property.LetterSpacing | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 lighting-color；初始值 white。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/lighting-color
  */
-export class LightingColorCss extends CssProperty<Property.LightingColor> {
+export class LightingColorCss extends CssProperty {
   readonly AccentColor = 'lighting-color:AccentColor;';
   readonly AccentColorText = 'lighting-color:AccentColorText;';
   readonly ActiveBorder = 'lighting-color:ActiveBorder;';
@@ -2861,6 +2997,10 @@ export class LightingColorCss extends CssProperty<Property.LightingColor> {
   constructor() {
     super('lighting-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.LightingColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -2876,7 +3016,7 @@ export class LightingColorCss extends CssProperty<Property.LightingColor> {
 /** CSS 属性 line-break；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-break
  */
-export class LineBreakCss extends CssProperty<Property.LineBreak> {
+export class LineBreakCss extends CssProperty {
   readonly anywhere = 'line-break:anywhere;';
   readonly auto = 'line-break:auto;';
   readonly inherit = 'line-break:inherit;';
@@ -2890,12 +3030,16 @@ export class LineBreakCss extends CssProperty<Property.LineBreak> {
   constructor() {
     super('line-break');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.LineBreak | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 line-clamp；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-clamp
  */
-export class LineClampCss extends CssProperty<Property.LineClamp> {
+export class LineClampCss extends CssProperty {
   readonly inherit = 'line-clamp:inherit;';
   readonly initial = 'line-clamp:initial;';
   readonly none = 'line-clamp:none;';
@@ -2905,35 +3049,39 @@ export class LineClampCss extends CssProperty<Property.LineClamp> {
   constructor() {
     super('line-clamp');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.LineClamp | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.LineClamp, number> | (string & {}),
-    ...others: (Extract<Property.LineClamp, number> | (string & {}))[]
+    value: Property.LineClamp | CssString,
+    ...others: (Property.LineClamp | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.LineClamp, number> | (string & {}),
-    ...others: (Extract<Property.LineClamp, number> | (string & {}))[]
+    value: Property.LineClamp | CssString,
+    ...others: (Property.LineClamp | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.LineClamp, number> | (string & {}),
-    preferred: Extract<Property.LineClamp, number> | (string & {}),
-    maximum: Extract<Property.LineClamp, number> | (string & {}),
+    minimum: Property.LineClamp | CssString,
+    preferred: Property.LineClamp | CssString,
+    maximum: Property.LineClamp | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 line-height；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-height
  */
-export class LineHeightCss extends LengthCssProperty<Property.LineHeight> {
+export class LineHeightCss extends LengthCssProperty {
   readonly inherit = 'line-height:inherit;';
   readonly initial = 'line-height:initial;';
   readonly normal = 'line-height:normal;';
@@ -2942,6 +3090,10 @@ export class LineHeightCss extends LengthCssProperty<Property.LineHeight> {
   readonly unset = 'line-height:unset;';
   constructor() {
     super('line-height');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.LineHeight | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
@@ -2952,30 +3104,30 @@ export class LineHeightCss extends LengthCssProperty<Property.LineHeight> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.LineHeight, number> | (string & {}),
-    ...others: (Extract<Property.LineHeight, number> | (string & {}))[]
+    value: Property.LineHeight | CssString,
+    ...others: (Property.LineHeight | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.LineHeight, number> | (string & {}),
-    ...others: (Extract<Property.LineHeight, number> | (string & {}))[]
+    value: Property.LineHeight | CssString,
+    ...others: (Property.LineHeight | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.LineHeight, number> | (string & {}),
-    preferred: Extract<Property.LineHeight, number> | (string & {}),
-    maximum: Extract<Property.LineHeight, number> | (string & {}),
+    minimum: Property.LineHeight | CssString,
+    preferred: Property.LineHeight | CssString,
+    maximum: Property.LineHeight | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 line-height-step；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-height-step
  */
-export class LineHeightStepCss extends LengthCssProperty<Property.LineHeightStep> {
+export class LineHeightStepCss extends LengthCssProperty {
   readonly inherit = 'line-height-step:inherit;';
   readonly initial = 'line-height-step:initial;';
   readonly revert = 'line-height-step:revert;';
@@ -2984,35 +3136,39 @@ export class LineHeightStepCss extends LengthCssProperty<Property.LineHeightStep
   constructor() {
     super('line-height-step');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.LineHeightStep | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.LineHeightStep, number> | (string & {}),
-    ...others: (Extract<Property.LineHeightStep, number> | (string & {}))[]
+    value: Property.LineHeightStep | CssString,
+    ...others: (Property.LineHeightStep | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.LineHeightStep, number> | (string & {}),
-    ...others: (Extract<Property.LineHeightStep, number> | (string & {}))[]
+    value: Property.LineHeightStep | CssString,
+    ...others: (Property.LineHeightStep | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.LineHeightStep, number> | (string & {}),
-    preferred: Extract<Property.LineHeightStep, number> | (string & {}),
-    maximum: Extract<Property.LineHeightStep, number> | (string & {}),
+    minimum: Property.LineHeightStep | CssString,
+    preferred: Property.LineHeightStep | CssString,
+    maximum: Property.LineHeightStep | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 list-style。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style
  */
-export class ListStyleCss extends CssProperty<Property.ListStyle> {
+export class ListStyleCss extends CssProperty {
   readonly inherit = 'list-style:inherit;';
   readonly initial = 'list-style:initial;';
   readonly inside = 'list-style:inside;';
@@ -3024,12 +3180,16 @@ export class ListStyleCss extends CssProperty<Property.ListStyle> {
   constructor() {
     super('list-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ListStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 list-style-image；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-image
  */
-export class ListStyleImageCss extends CssProperty<Property.ListStyleImage> {
+export class ListStyleImageCss extends CssProperty {
   readonly inherit = 'list-style-image:inherit;';
   readonly initial = 'list-style-image:initial;';
   readonly none = 'list-style-image:none;';
@@ -3039,12 +3199,16 @@ export class ListStyleImageCss extends CssProperty<Property.ListStyleImage> {
   constructor() {
     super('list-style-image');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ListStyleImage | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 list-style-position；初始值 outside。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-position
  */
-export class ListStylePositionCss extends CssProperty<Property.ListStylePosition> {
+export class ListStylePositionCss extends CssProperty {
   readonly inherit = 'list-style-position:inherit;';
   readonly initial = 'list-style-position:initial;';
   readonly inside = 'list-style-position:inside;';
@@ -3055,12 +3219,16 @@ export class ListStylePositionCss extends CssProperty<Property.ListStylePosition
   constructor() {
     super('list-style-position');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ListStylePosition | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 list-style-type；初始值 disc。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-type
  */
-export class ListStyleTypeCss extends CssProperty<Property.ListStyleType> {
+export class ListStyleTypeCss extends CssProperty {
   readonly inherit = 'list-style-type:inherit;';
   readonly initial = 'list-style-type:initial;';
   readonly none = 'list-style-type:none;';
@@ -3069,5 +3237,9 @@ export class ListStyleTypeCss extends CssProperty<Property.ListStyleType> {
   readonly unset = 'list-style-type:unset;';
   constructor() {
     super('list-style-type');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ListStyleType | CssString): string {
+    return this.declaration(value);
   }
 }

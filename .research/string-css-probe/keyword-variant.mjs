@@ -110,7 +110,8 @@ export function keywordVariant(variant) {
           const group = path.replace(/\\/g, '/').split('/').at(-1).slice(0, -3);
           let contents = originals.get(group) ?? (await readFile(path, 'utf8'));
           if (variant === 'shared' && group === 'base') {
-            const declaration = 'export class CssProperty<T> {';
+            const declaration = 'export class CssProperty {';
+            assert.equal(contents.split(declaration).length, 2);
             contents = contents.replace(
               declaration,
               declaration +

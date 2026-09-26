@@ -2075,7 +2075,7 @@ export class Css {
    */
   declare readonly zoom: group7.ZoomCss;
 }
-function defineSystemProperty<T>(name: string, create: () => T): void {
+function defineSystemProperty(name: string, create: () => object): void {
   Object.defineProperty(Css.prototype, name, {
     configurable: true,
     get() {

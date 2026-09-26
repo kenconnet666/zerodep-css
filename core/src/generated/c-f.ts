@@ -1,13 +1,13 @@
 // 由 scripts/generate-css-author.mjs 从 csstype@3.2.3 生成；请勿手改。
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
-import { CssProperty, LengthCssProperty } from './base.js';
+import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
 
 /** CSS 属性 caption-side；初始值 top。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caption-side
  */
-export class CaptionSideCss extends CssProperty<Property.CaptionSide> {
+export class CaptionSideCss extends CssProperty {
   readonly bottom = 'caption-side:bottom;';
   readonly inherit = 'caption-side:inherit;';
   readonly initial = 'caption-side:initial;';
@@ -18,12 +18,16 @@ export class CaptionSideCss extends CssProperty<Property.CaptionSide> {
   constructor() {
     super('caption-side');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.CaptionSide | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 caret。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret
  */
-export class CaretCss extends CssProperty<Property.Caret> {
+export class CaretCss extends CssProperty {
   readonly AccentColor = 'caret:AccentColor;';
   readonly AccentColorText = 'caret:AccentColorText;';
   readonly ActiveBorder = 'caret:ActiveBorder;';
@@ -228,6 +232,10 @@ export class CaretCss extends CssProperty<Property.Caret> {
   constructor() {
     super('caret');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Caret | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -243,7 +251,7 @@ export class CaretCss extends CssProperty<Property.Caret> {
 /** CSS 属性 caret-color；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-color
  */
-export class CaretColorCss extends CssProperty<Property.CaretColor> {
+export class CaretColorCss extends CssProperty {
   readonly AccentColor = 'caret-color:AccentColor;';
   readonly AccentColorText = 'caret-color:AccentColorText;';
   readonly ActiveBorder = 'caret-color:ActiveBorder;';
@@ -445,6 +453,10 @@ export class CaretColorCss extends CssProperty<Property.CaretColor> {
   constructor() {
     super('caret-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.CaretColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -460,7 +472,7 @@ export class CaretColorCss extends CssProperty<Property.CaretColor> {
 /** CSS 属性 caret-shape；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-shape
  */
-export class CaretShapeCss extends CssProperty<Property.CaretShape> {
+export class CaretShapeCss extends CssProperty {
   readonly auto = 'caret-shape:auto;';
   readonly bar = 'caret-shape:bar;';
   readonly block = 'caret-shape:block;';
@@ -473,12 +485,16 @@ export class CaretShapeCss extends CssProperty<Property.CaretShape> {
   constructor() {
     super('caret-shape');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.CaretShape | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 clear；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clear
  */
-export class ClearCss extends CssProperty<Property.Clear> {
+export class ClearCss extends CssProperty {
   readonly both = 'clear:both;';
   readonly inherit = 'clear:inherit;';
   readonly initial = 'clear:initial;';
@@ -493,12 +509,16 @@ export class ClearCss extends CssProperty<Property.Clear> {
   constructor() {
     super('clear');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Clear | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 clip。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip
  */
-export class ClipCss extends CssProperty<Property.Clip> {
+export class ClipCss extends CssProperty {
   readonly auto = 'clip:auto;';
   readonly inherit = 'clip:inherit;';
   readonly initial = 'clip:initial;';
@@ -508,12 +528,16 @@ export class ClipCss extends CssProperty<Property.Clip> {
   constructor() {
     super('clip');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Clip | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 clip-path；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-path
  */
-export class ClipPathCss extends CssProperty<Property.ClipPath> {
+export class ClipPathCss extends CssProperty {
   readonly borderBox = 'clip-path:border-box;';
   readonly contentBox = 'clip-path:content-box;';
   readonly fillBox = 'clip-path:fill-box;';
@@ -530,12 +554,16 @@ export class ClipPathCss extends CssProperty<Property.ClipPath> {
   constructor() {
     super('clip-path');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ClipPath | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 clip-rule；初始值 nonzero。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-rule
  */
-export class ClipRuleCss extends CssProperty<Property.ClipRule> {
+export class ClipRuleCss extends CssProperty {
   readonly evenodd = 'clip-rule:evenodd;';
   readonly inherit = 'clip-rule:inherit;';
   readonly initial = 'clip-rule:initial;';
@@ -546,12 +574,16 @@ export class ClipRuleCss extends CssProperty<Property.ClipRule> {
   constructor() {
     super('clip-rule');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ClipRule | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** 文本前景色（CSS color）；初始值 canvastext。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color
  */
-export class ColorCss extends CssProperty<Property.Color> {
+export class ColorCss extends CssProperty {
   readonly AccentColor = 'color:AccentColor;';
   readonly AccentColorText = 'color:AccentColorText;';
   readonly ActiveBorder = 'color:ActiveBorder;';
@@ -752,6 +784,10 @@ export class ColorCss extends CssProperty<Property.Color> {
   constructor() {
     super('color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Color | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -767,7 +803,7 @@ export class ColorCss extends CssProperty<Property.Color> {
 /** CSS 属性 color-adjust；初始值 economy。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
  */
-export class ColorAdjustCss extends CssProperty<Property.PrintColorAdjust> {
+export class ColorAdjustCss extends CssProperty {
   readonly economy = 'color-adjust:economy;';
   readonly exact = 'color-adjust:exact;';
   readonly inherit = 'color-adjust:inherit;';
@@ -778,12 +814,16 @@ export class ColorAdjustCss extends CssProperty<Property.PrintColorAdjust> {
   constructor() {
     super('color-adjust');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.PrintColorAdjust | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 color-interpolation。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-interpolation
  */
-export class ColorInterpolationCss extends CssProperty<Property.ColorInterpolation> {
+export class ColorInterpolationCss extends CssProperty {
   readonly auto = 'color-interpolation:auto;';
   readonly inherit = 'color-interpolation:inherit;';
   readonly initial = 'color-interpolation:initial;';
@@ -795,12 +835,16 @@ export class ColorInterpolationCss extends CssProperty<Property.ColorInterpolati
   constructor() {
     super('color-interpolation');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColorInterpolation | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 color-interpolation-filters；初始值 linearRGB。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-interpolation-filters
  */
-export class ColorInterpolationFiltersCss extends CssProperty<Property.ColorInterpolationFilters> {
+export class ColorInterpolationFiltersCss extends CssProperty {
   readonly auto = 'color-interpolation-filters:auto;';
   readonly inherit = 'color-interpolation-filters:inherit;';
   readonly initial = 'color-interpolation-filters:initial;';
@@ -812,12 +856,16 @@ export class ColorInterpolationFiltersCss extends CssProperty<Property.ColorInte
   constructor() {
     super('color-interpolation-filters');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColorInterpolationFilters | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 color-rendering。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-rendering
  */
-export class ColorRenderingCss extends CssProperty<Property.ColorRendering> {
+export class ColorRenderingCss extends CssProperty {
   readonly auto = 'color-rendering:auto;';
   readonly inherit = 'color-rendering:inherit;';
   readonly initial = 'color-rendering:initial;';
@@ -829,12 +877,16 @@ export class ColorRenderingCss extends CssProperty<Property.ColorRendering> {
   constructor() {
     super('color-rendering');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColorRendering | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 color-scheme；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-scheme
  */
-export class ColorSchemeCss extends CssProperty<Property.ColorScheme> {
+export class ColorSchemeCss extends CssProperty {
   readonly dark = 'color-scheme:dark;';
   readonly inherit = 'color-scheme:inherit;';
   readonly initial = 'color-scheme:initial;';
@@ -846,12 +898,16 @@ export class ColorSchemeCss extends CssProperty<Property.ColorScheme> {
   constructor() {
     super('color-scheme');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColorScheme | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 column-count；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-count
  */
-export class ColumnCountCss extends CssProperty<Property.ColumnCount> {
+export class ColumnCountCss extends CssProperty {
   readonly auto = 'column-count:auto;';
   readonly inherit = 'column-count:inherit;';
   readonly initial = 'column-count:initial;';
@@ -861,35 +917,39 @@ export class ColumnCountCss extends CssProperty<Property.ColumnCount> {
   constructor() {
     super('column-count');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColumnCount | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ColumnCount, number> | (string & {}),
-    ...others: (Extract<Property.ColumnCount, number> | (string & {}))[]
+    value: Property.ColumnCount | CssString,
+    ...others: (Property.ColumnCount | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ColumnCount, number> | (string & {}),
-    ...others: (Extract<Property.ColumnCount, number> | (string & {}))[]
+    value: Property.ColumnCount | CssString,
+    ...others: (Property.ColumnCount | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ColumnCount, number> | (string & {}),
-    preferred: Extract<Property.ColumnCount, number> | (string & {}),
-    maximum: Extract<Property.ColumnCount, number> | (string & {}),
+    minimum: Property.ColumnCount | CssString,
+    preferred: Property.ColumnCount | CssString,
+    maximum: Property.ColumnCount | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 column-fill；初始值 balance。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-fill
  */
-export class ColumnFillCss extends CssProperty<Property.ColumnFill> {
+export class ColumnFillCss extends CssProperty {
   readonly auto = 'column-fill:auto;';
   readonly balance = 'column-fill:balance;';
   readonly inherit = 'column-fill:inherit;';
@@ -900,12 +960,16 @@ export class ColumnFillCss extends CssProperty<Property.ColumnFill> {
   constructor() {
     super('column-fill');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColumnFill | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 column-gap；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
  */
-export class ColumnGapCss extends LengthCssProperty<Property.ColumnGap> {
+export class ColumnGapCss extends LengthCssProperty {
   readonly inherit = 'column-gap:inherit;';
   readonly initial = 'column-gap:initial;';
   readonly normal = 'column-gap:normal;';
@@ -914,6 +978,10 @@ export class ColumnGapCss extends LengthCssProperty<Property.ColumnGap> {
   readonly unset = 'column-gap:unset;';
   constructor() {
     super('column-gap');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColumnGap | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
@@ -924,30 +992,30 @@ export class ColumnGapCss extends LengthCssProperty<Property.ColumnGap> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ColumnGap, number> | (string & {}),
-    ...others: (Extract<Property.ColumnGap, number> | (string & {}))[]
+    value: Property.ColumnGap | CssString,
+    ...others: (Property.ColumnGap | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ColumnGap, number> | (string & {}),
-    ...others: (Extract<Property.ColumnGap, number> | (string & {}))[]
+    value: Property.ColumnGap | CssString,
+    ...others: (Property.ColumnGap | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ColumnGap, number> | (string & {}),
-    preferred: Extract<Property.ColumnGap, number> | (string & {}),
-    maximum: Extract<Property.ColumnGap, number> | (string & {}),
+    minimum: Property.ColumnGap | CssString,
+    preferred: Property.ColumnGap | CssString,
+    maximum: Property.ColumnGap | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 column-rule。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule
  */
-export class ColumnRuleCss extends LengthCssProperty<Property.ColumnRule> {
+export class ColumnRuleCss extends LengthCssProperty {
   readonly AccentColor = 'column-rule:AccentColor;';
   readonly AccentColorText = 'column-rule:AccentColorText;';
   readonly ActiveBorder = 'column-rule:ActiveBorder;';
@@ -1161,6 +1229,10 @@ export class ColumnRuleCss extends LengthCssProperty<Property.ColumnRule> {
   constructor() {
     super('column-rule');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColumnRule | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -1176,30 +1248,30 @@ export class ColumnRuleCss extends LengthCssProperty<Property.ColumnRule> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ColumnRule, number> | (string & {}),
-    ...others: (Extract<Property.ColumnRule, number> | (string & {}))[]
+    value: Property.ColumnRule | CssString,
+    ...others: (Property.ColumnRule | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ColumnRule, number> | (string & {}),
-    ...others: (Extract<Property.ColumnRule, number> | (string & {}))[]
+    value: Property.ColumnRule | CssString,
+    ...others: (Property.ColumnRule | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ColumnRule, number> | (string & {}),
-    preferred: Extract<Property.ColumnRule, number> | (string & {}),
-    maximum: Extract<Property.ColumnRule, number> | (string & {}),
+    minimum: Property.ColumnRule | CssString,
+    preferred: Property.ColumnRule | CssString,
+    maximum: Property.ColumnRule | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 column-rule-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-color
  */
-export class ColumnRuleColorCss extends CssProperty<Property.ColumnRuleColor> {
+export class ColumnRuleColorCss extends CssProperty {
   readonly AccentColor = 'column-rule-color:AccentColor;';
   readonly AccentColorText = 'column-rule-color:AccentColorText;';
   readonly ActiveBorder = 'column-rule-color:ActiveBorder;';
@@ -1400,6 +1472,10 @@ export class ColumnRuleColorCss extends CssProperty<Property.ColumnRuleColor> {
   constructor() {
     super('column-rule-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColumnRuleColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -1415,7 +1491,7 @@ export class ColumnRuleColorCss extends CssProperty<Property.ColumnRuleColor> {
 /** CSS 属性 column-rule-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-style
  */
-export class ColumnRuleStyleCss extends CssProperty<Property.ColumnRuleStyle> {
+export class ColumnRuleStyleCss extends CssProperty {
   readonly dashed = 'column-rule-style:dashed;';
   readonly dotted = 'column-rule-style:dotted;';
   readonly double = 'column-rule-style:double;';
@@ -1434,12 +1510,16 @@ export class ColumnRuleStyleCss extends CssProperty<Property.ColumnRuleStyle> {
   constructor() {
     super('column-rule-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColumnRuleStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 column-rule-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-width
  */
-export class ColumnRuleWidthCss extends LengthCssProperty<Property.ColumnRuleWidth> {
+export class ColumnRuleWidthCss extends LengthCssProperty {
   readonly inherit = 'column-rule-width:inherit;';
   readonly initial = 'column-rule-width:initial;';
   readonly medium = 'column-rule-width:medium;';
@@ -1451,35 +1531,39 @@ export class ColumnRuleWidthCss extends LengthCssProperty<Property.ColumnRuleWid
   constructor() {
     super('column-rule-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColumnRuleWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ColumnRuleWidth, number> | (string & {}),
-    ...others: (Extract<Property.ColumnRuleWidth, number> | (string & {}))[]
+    value: Property.ColumnRuleWidth | CssString,
+    ...others: (Property.ColumnRuleWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ColumnRuleWidth, number> | (string & {}),
-    ...others: (Extract<Property.ColumnRuleWidth, number> | (string & {}))[]
+    value: Property.ColumnRuleWidth | CssString,
+    ...others: (Property.ColumnRuleWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ColumnRuleWidth, number> | (string & {}),
-    preferred: Extract<Property.ColumnRuleWidth, number> | (string & {}),
-    maximum: Extract<Property.ColumnRuleWidth, number> | (string & {}),
+    minimum: Property.ColumnRuleWidth | CssString,
+    preferred: Property.ColumnRuleWidth | CssString,
+    maximum: Property.ColumnRuleWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 column-span；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-span
  */
-export class ColumnSpanCss extends CssProperty<Property.ColumnSpan> {
+export class ColumnSpanCss extends CssProperty {
   readonly all = 'column-span:all;';
   readonly inherit = 'column-span:inherit;';
   readonly initial = 'column-span:initial;';
@@ -1490,12 +1574,16 @@ export class ColumnSpanCss extends CssProperty<Property.ColumnSpan> {
   constructor() {
     super('column-span');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColumnSpan | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 column-width；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-width
  */
-export class ColumnWidthCss extends LengthCssProperty<Property.ColumnWidth> {
+export class ColumnWidthCss extends LengthCssProperty {
   readonly auto = 'column-width:auto;';
   readonly inherit = 'column-width:inherit;';
   readonly initial = 'column-width:initial;';
@@ -1505,35 +1593,39 @@ export class ColumnWidthCss extends LengthCssProperty<Property.ColumnWidth> {
   constructor() {
     super('column-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ColumnWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ColumnWidth, number> | (string & {}),
-    ...others: (Extract<Property.ColumnWidth, number> | (string & {}))[]
+    value: Property.ColumnWidth | CssString,
+    ...others: (Property.ColumnWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ColumnWidth, number> | (string & {}),
-    ...others: (Extract<Property.ColumnWidth, number> | (string & {}))[]
+    value: Property.ColumnWidth | CssString,
+    ...others: (Property.ColumnWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ColumnWidth, number> | (string & {}),
-    preferred: Extract<Property.ColumnWidth, number> | (string & {}),
-    maximum: Extract<Property.ColumnWidth, number> | (string & {}),
+    minimum: Property.ColumnWidth | CssString,
+    preferred: Property.ColumnWidth | CssString,
+    maximum: Property.ColumnWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 columns。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/columns
  */
-export class ColumnsCss extends LengthCssProperty<Property.Columns> {
+export class ColumnsCss extends LengthCssProperty {
   readonly auto = 'columns:auto;';
   readonly inherit = 'columns:inherit;';
   readonly initial = 'columns:initial;';
@@ -1543,35 +1635,33 @@ export class ColumnsCss extends LengthCssProperty<Property.Columns> {
   constructor() {
     super('columns');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Columns | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Columns, number> | (string & {}),
-    ...others: (Extract<Property.Columns, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Columns | CssString, ...others: (Property.Columns | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Columns, number> | (string & {}),
-    ...others: (Extract<Property.Columns, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Columns | CssString, ...others: (Property.Columns | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Columns, number> | (string & {}),
-    preferred: Extract<Property.Columns, number> | (string & {}),
-    maximum: Extract<Property.Columns, number> | (string & {}),
+    minimum: Property.Columns | CssString,
+    preferred: Property.Columns | CssString,
+    maximum: Property.Columns | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 contain；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain
  */
-export class ContainCss extends CssProperty<Property.Contain> {
+export class ContainCss extends CssProperty {
   readonly content = 'contain:content;';
   readonly inherit = 'contain:inherit;';
   readonly initial = 'contain:initial;';
@@ -1588,12 +1678,16 @@ export class ContainCss extends CssProperty<Property.Contain> {
   constructor() {
     super('contain');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Contain | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 contain-intrinsic-block-size；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-block-size
  */
-export class ContainIntrinsicBlockSizeCss extends LengthCssProperty<Property.ContainIntrinsicBlockSize> {
+export class ContainIntrinsicBlockSizeCss extends LengthCssProperty {
   readonly inherit = 'contain-intrinsic-block-size:inherit;';
   readonly initial = 'contain-intrinsic-block-size:initial;';
   readonly none = 'contain-intrinsic-block-size:none;';
@@ -1603,35 +1697,39 @@ export class ContainIntrinsicBlockSizeCss extends LengthCssProperty<Property.Con
   constructor() {
     super('contain-intrinsic-block-size');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ContainIntrinsicBlockSize | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ContainIntrinsicBlockSize, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicBlockSize, number> | (string & {}))[]
+    value: Property.ContainIntrinsicBlockSize | CssString,
+    ...others: (Property.ContainIntrinsicBlockSize | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ContainIntrinsicBlockSize, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicBlockSize, number> | (string & {}))[]
+    value: Property.ContainIntrinsicBlockSize | CssString,
+    ...others: (Property.ContainIntrinsicBlockSize | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ContainIntrinsicBlockSize, number> | (string & {}),
-    preferred: Extract<Property.ContainIntrinsicBlockSize, number> | (string & {}),
-    maximum: Extract<Property.ContainIntrinsicBlockSize, number> | (string & {}),
+    minimum: Property.ContainIntrinsicBlockSize | CssString,
+    preferred: Property.ContainIntrinsicBlockSize | CssString,
+    maximum: Property.ContainIntrinsicBlockSize | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 contain-intrinsic-height；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-height
  */
-export class ContainIntrinsicHeightCss extends LengthCssProperty<Property.ContainIntrinsicHeight> {
+export class ContainIntrinsicHeightCss extends LengthCssProperty {
   readonly inherit = 'contain-intrinsic-height:inherit;';
   readonly initial = 'contain-intrinsic-height:initial;';
   readonly none = 'contain-intrinsic-height:none;';
@@ -1641,35 +1739,39 @@ export class ContainIntrinsicHeightCss extends LengthCssProperty<Property.Contai
   constructor() {
     super('contain-intrinsic-height');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ContainIntrinsicHeight | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ContainIntrinsicHeight, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicHeight, number> | (string & {}))[]
+    value: Property.ContainIntrinsicHeight | CssString,
+    ...others: (Property.ContainIntrinsicHeight | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ContainIntrinsicHeight, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicHeight, number> | (string & {}))[]
+    value: Property.ContainIntrinsicHeight | CssString,
+    ...others: (Property.ContainIntrinsicHeight | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ContainIntrinsicHeight, number> | (string & {}),
-    preferred: Extract<Property.ContainIntrinsicHeight, number> | (string & {}),
-    maximum: Extract<Property.ContainIntrinsicHeight, number> | (string & {}),
+    minimum: Property.ContainIntrinsicHeight | CssString,
+    preferred: Property.ContainIntrinsicHeight | CssString,
+    maximum: Property.ContainIntrinsicHeight | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 contain-intrinsic-inline-size；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-inline-size
  */
-export class ContainIntrinsicInlineSizeCss extends LengthCssProperty<Property.ContainIntrinsicInlineSize> {
+export class ContainIntrinsicInlineSizeCss extends LengthCssProperty {
   readonly inherit = 'contain-intrinsic-inline-size:inherit;';
   readonly initial = 'contain-intrinsic-inline-size:initial;';
   readonly none = 'contain-intrinsic-inline-size:none;';
@@ -1679,35 +1781,39 @@ export class ContainIntrinsicInlineSizeCss extends LengthCssProperty<Property.Co
   constructor() {
     super('contain-intrinsic-inline-size');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ContainIntrinsicInlineSize | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ContainIntrinsicInlineSize, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicInlineSize, number> | (string & {}))[]
+    value: Property.ContainIntrinsicInlineSize | CssString,
+    ...others: (Property.ContainIntrinsicInlineSize | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ContainIntrinsicInlineSize, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicInlineSize, number> | (string & {}))[]
+    value: Property.ContainIntrinsicInlineSize | CssString,
+    ...others: (Property.ContainIntrinsicInlineSize | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ContainIntrinsicInlineSize, number> | (string & {}),
-    preferred: Extract<Property.ContainIntrinsicInlineSize, number> | (string & {}),
-    maximum: Extract<Property.ContainIntrinsicInlineSize, number> | (string & {}),
+    minimum: Property.ContainIntrinsicInlineSize | CssString,
+    preferred: Property.ContainIntrinsicInlineSize | CssString,
+    maximum: Property.ContainIntrinsicInlineSize | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 contain-intrinsic-size。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-size
  */
-export class ContainIntrinsicSizeCss extends LengthCssProperty<Property.ContainIntrinsicSize> {
+export class ContainIntrinsicSizeCss extends LengthCssProperty {
   readonly inherit = 'contain-intrinsic-size:inherit;';
   readonly initial = 'contain-intrinsic-size:initial;';
   readonly none = 'contain-intrinsic-size:none;';
@@ -1716,6 +1822,10 @@ export class ContainIntrinsicSizeCss extends LengthCssProperty<Property.ContainI
   readonly unset = 'contain-intrinsic-size:unset;';
   constructor() {
     super('contain-intrinsic-size');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ContainIntrinsicSize | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -2016,30 +2126,30 @@ export class ContainIntrinsicSizeCss extends LengthCssProperty<Property.ContainI
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ContainIntrinsicSize, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicSize, number> | (string & {}))[]
+    value: Property.ContainIntrinsicSize | CssString,
+    ...others: (Property.ContainIntrinsicSize | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ContainIntrinsicSize, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicSize, number> | (string & {}))[]
+    value: Property.ContainIntrinsicSize | CssString,
+    ...others: (Property.ContainIntrinsicSize | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ContainIntrinsicSize, number> | (string & {}),
-    preferred: Extract<Property.ContainIntrinsicSize, number> | (string & {}),
-    maximum: Extract<Property.ContainIntrinsicSize, number> | (string & {}),
+    minimum: Property.ContainIntrinsicSize | CssString,
+    preferred: Property.ContainIntrinsicSize | CssString,
+    maximum: Property.ContainIntrinsicSize | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 contain-intrinsic-width；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-width
  */
-export class ContainIntrinsicWidthCss extends LengthCssProperty<Property.ContainIntrinsicWidth> {
+export class ContainIntrinsicWidthCss extends LengthCssProperty {
   readonly inherit = 'contain-intrinsic-width:inherit;';
   readonly initial = 'contain-intrinsic-width:initial;';
   readonly none = 'contain-intrinsic-width:none;';
@@ -2049,35 +2159,39 @@ export class ContainIntrinsicWidthCss extends LengthCssProperty<Property.Contain
   constructor() {
     super('contain-intrinsic-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ContainIntrinsicWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.ContainIntrinsicWidth, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicWidth, number> | (string & {}))[]
+    value: Property.ContainIntrinsicWidth | CssString,
+    ...others: (Property.ContainIntrinsicWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.ContainIntrinsicWidth, number> | (string & {}),
-    ...others: (Extract<Property.ContainIntrinsicWidth, number> | (string & {}))[]
+    value: Property.ContainIntrinsicWidth | CssString,
+    ...others: (Property.ContainIntrinsicWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.ContainIntrinsicWidth, number> | (string & {}),
-    preferred: Extract<Property.ContainIntrinsicWidth, number> | (string & {}),
-    maximum: Extract<Property.ContainIntrinsicWidth, number> | (string & {}),
+    minimum: Property.ContainIntrinsicWidth | CssString,
+    preferred: Property.ContainIntrinsicWidth | CssString,
+    maximum: Property.ContainIntrinsicWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 container。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container
  */
-export class ContainerCss extends CssProperty<Property.Container> {
+export class ContainerCss extends CssProperty {
   readonly inherit = 'container:inherit;';
   readonly initial = 'container:initial;';
   readonly none = 'container:none;';
@@ -2087,12 +2201,16 @@ export class ContainerCss extends CssProperty<Property.Container> {
   constructor() {
     super('container');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Container | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 container-name；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-name
  */
-export class ContainerNameCss extends CssProperty<Property.ContainerName> {
+export class ContainerNameCss extends CssProperty {
   readonly inherit = 'container-name:inherit;';
   readonly initial = 'container-name:initial;';
   readonly none = 'container-name:none;';
@@ -2102,12 +2220,16 @@ export class ContainerNameCss extends CssProperty<Property.ContainerName> {
   constructor() {
     super('container-name');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ContainerName | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 container-type；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-type
  */
-export class ContainerTypeCss extends CssProperty<Property.ContainerType> {
+export class ContainerTypeCss extends CssProperty {
   readonly inherit = 'container-type:inherit;';
   readonly initial = 'container-type:initial;';
   readonly inlineSize = 'container-type:inline-size;';
@@ -2120,12 +2242,16 @@ export class ContainerTypeCss extends CssProperty<Property.ContainerType> {
   constructor() {
     super('container-type');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ContainerType | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 content；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content
  */
-export class ContentCss extends CssProperty<Property.Content> {
+export class ContentCss extends CssProperty {
   readonly closeQuote = 'content:close-quote;';
   readonly inherit = 'content:inherit;';
   readonly initial = 'content:initial;';
@@ -2140,12 +2266,16 @@ export class ContentCss extends CssProperty<Property.Content> {
   constructor() {
     super('content');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Content | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 content-visibility；初始值 visible。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content-visibility
  */
-export class ContentVisibilityCss extends CssProperty<Property.ContentVisibility> {
+export class ContentVisibilityCss extends CssProperty {
   readonly auto = 'content-visibility:auto;';
   readonly hidden = 'content-visibility:hidden;';
   readonly inherit = 'content-visibility:inherit;';
@@ -2157,12 +2287,16 @@ export class ContentVisibilityCss extends CssProperty<Property.ContentVisibility
   constructor() {
     super('content-visibility');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ContentVisibility | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 counter-increment；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-increment
  */
-export class CounterIncrementCss extends CssProperty<Property.CounterIncrement> {
+export class CounterIncrementCss extends CssProperty {
   readonly inherit = 'counter-increment:inherit;';
   readonly initial = 'counter-increment:initial;';
   readonly none = 'counter-increment:none;';
@@ -2172,12 +2306,16 @@ export class CounterIncrementCss extends CssProperty<Property.CounterIncrement> 
   constructor() {
     super('counter-increment');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.CounterIncrement | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 counter-reset；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-reset
  */
-export class CounterResetCss extends CssProperty<Property.CounterReset> {
+export class CounterResetCss extends CssProperty {
   readonly inherit = 'counter-reset:inherit;';
   readonly initial = 'counter-reset:initial;';
   readonly none = 'counter-reset:none;';
@@ -2187,12 +2325,16 @@ export class CounterResetCss extends CssProperty<Property.CounterReset> {
   constructor() {
     super('counter-reset');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.CounterReset | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 counter-set；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-set
  */
-export class CounterSetCss extends CssProperty<Property.CounterSet> {
+export class CounterSetCss extends CssProperty {
   readonly inherit = 'counter-set:inherit;';
   readonly initial = 'counter-set:initial;';
   readonly none = 'counter-set:none;';
@@ -2202,12 +2344,16 @@ export class CounterSetCss extends CssProperty<Property.CounterSet> {
   constructor() {
     super('counter-set');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.CounterSet | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 cursor；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cursor
  */
-export class CursorCss extends CssProperty<Property.Cursor> {
+export class CursorCss extends CssProperty {
   readonly alias = 'cursor:alias;';
   readonly allScroll = 'cursor:all-scroll;';
   readonly auto = 'cursor:auto;';
@@ -2252,12 +2398,16 @@ export class CursorCss extends CssProperty<Property.Cursor> {
   constructor() {
     super('cursor');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Cursor | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 cx；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cx
  */
-export class CxCss extends LengthCssProperty<Property.Cx> {
+export class CxCss extends LengthCssProperty {
   readonly inherit = 'cx:inherit;';
   readonly initial = 'cx:initial;';
   readonly revert = 'cx:revert;';
@@ -2266,6 +2416,10 @@ export class CxCss extends LengthCssProperty<Property.Cx> {
   constructor() {
     super('cx');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Cx | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2274,31 +2428,25 @@ export class CxCss extends LengthCssProperty<Property.Cx> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Cx, number> | (string & {}),
-    ...others: (Extract<Property.Cx, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Cx | CssString, ...others: (Property.Cx | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Cx, number> | (string & {}),
-    ...others: (Extract<Property.Cx, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Cx | CssString, ...others: (Property.Cx | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Cx, number> | (string & {}),
-    preferred: Extract<Property.Cx, number> | (string & {}),
-    maximum: Extract<Property.Cx, number> | (string & {}),
+    minimum: Property.Cx | CssString,
+    preferred: Property.Cx | CssString,
+    maximum: Property.Cx | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 cy；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cy
  */
-export class CyCss extends LengthCssProperty<Property.Cy> {
+export class CyCss extends LengthCssProperty {
   readonly inherit = 'cy:inherit;';
   readonly initial = 'cy:initial;';
   readonly revert = 'cy:revert;';
@@ -2307,6 +2455,10 @@ export class CyCss extends LengthCssProperty<Property.Cy> {
   constructor() {
     super('cy');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Cy | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -2315,31 +2467,25 @@ export class CyCss extends LengthCssProperty<Property.Cy> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Cy, number> | (string & {}),
-    ...others: (Extract<Property.Cy, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Cy | CssString, ...others: (Property.Cy | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Cy, number> | (string & {}),
-    ...others: (Extract<Property.Cy, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Cy | CssString, ...others: (Property.Cy | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Cy, number> | (string & {}),
-    preferred: Extract<Property.Cy, number> | (string & {}),
-    maximum: Extract<Property.Cy, number> | (string & {}),
+    minimum: Property.Cy | CssString,
+    preferred: Property.Cy | CssString,
+    maximum: Property.Cy | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 d；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/d
  */
-export class DCss extends CssProperty<Property.D> {
+export class DCss extends CssProperty {
   readonly inherit = 'd:inherit;';
   readonly initial = 'd:initial;';
   readonly none = 'd:none;';
@@ -2349,12 +2495,16 @@ export class DCss extends CssProperty<Property.D> {
   constructor() {
     super('d');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.D | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 direction；初始值 ltr。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/direction
  */
-export class DirectionCss extends CssProperty<Property.Direction> {
+export class DirectionCss extends CssProperty {
   readonly inherit = 'direction:inherit;';
   readonly initial = 'direction:initial;';
   readonly ltr = 'direction:ltr;';
@@ -2365,12 +2515,16 @@ export class DirectionCss extends CssProperty<Property.Direction> {
   constructor() {
     super('direction');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Direction | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** 显示类型（CSS display）；初始值 inline。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
  */
-export class DisplayCss extends CssProperty<Property.Display> {
+export class DisplayCss extends CssProperty {
   readonly block = 'display:block;';
   readonly contents = 'display:contents;';
   readonly flex = 'display:flex;';
@@ -2408,12 +2562,16 @@ export class DisplayCss extends CssProperty<Property.Display> {
   constructor() {
     super('display');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Display | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 dominant-baseline；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/dominant-baseline
  */
-export class DominantBaselineCss extends CssProperty<Property.DominantBaseline> {
+export class DominantBaselineCss extends CssProperty {
   readonly alphabetic = 'dominant-baseline:alphabetic;';
   readonly auto = 'dominant-baseline:auto;';
   readonly central = 'dominant-baseline:central;';
@@ -2431,12 +2589,16 @@ export class DominantBaselineCss extends CssProperty<Property.DominantBaseline> 
   constructor() {
     super('dominant-baseline');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.DominantBaseline | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 empty-cells；初始值 show。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/empty-cells
  */
-export class EmptyCellsCss extends CssProperty<Property.EmptyCells> {
+export class EmptyCellsCss extends CssProperty {
   readonly hide = 'empty-cells:hide;';
   readonly inherit = 'empty-cells:inherit;';
   readonly initial = 'empty-cells:initial;';
@@ -2447,12 +2609,16 @@ export class EmptyCellsCss extends CssProperty<Property.EmptyCells> {
   constructor() {
     super('empty-cells');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.EmptyCells | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 field-sizing；初始值 fixed。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/field-sizing
  */
-export class FieldSizingCss extends CssProperty<Property.FieldSizing> {
+export class FieldSizingCss extends CssProperty {
   readonly content = 'field-sizing:content;';
   readonly fixed = 'field-sizing:fixed;';
   readonly inherit = 'field-sizing:inherit;';
@@ -2463,12 +2629,16 @@ export class FieldSizingCss extends CssProperty<Property.FieldSizing> {
   constructor() {
     super('field-sizing');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FieldSizing | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 fill；初始值 black。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill
  */
-export class FillCss extends CssProperty<Property.Fill> {
+export class FillCss extends CssProperty {
   readonly AccentColor = 'fill:AccentColor;';
   readonly AccentColorText = 'fill:AccentColorText;';
   readonly ActiveBorder = 'fill:ActiveBorder;';
@@ -2672,6 +2842,10 @@ export class FillCss extends CssProperty<Property.Fill> {
   constructor() {
     super('fill');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Fill | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -2687,7 +2861,7 @@ export class FillCss extends CssProperty<Property.Fill> {
 /** CSS 属性 fill-opacity；初始值 1。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-opacity
  */
-export class FillOpacityCss extends CssProperty<Property.FillOpacity> {
+export class FillOpacityCss extends CssProperty {
   readonly inherit = 'fill-opacity:inherit;';
   readonly initial = 'fill-opacity:initial;';
   readonly revert = 'fill-opacity:revert;';
@@ -2696,35 +2870,39 @@ export class FillOpacityCss extends CssProperty<Property.FillOpacity> {
   constructor() {
     super('fill-opacity');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FillOpacity | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.FillOpacity, number> | (string & {}),
-    ...others: (Extract<Property.FillOpacity, number> | (string & {}))[]
+    value: Property.FillOpacity | CssString,
+    ...others: (Property.FillOpacity | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.FillOpacity, number> | (string & {}),
-    ...others: (Extract<Property.FillOpacity, number> | (string & {}))[]
+    value: Property.FillOpacity | CssString,
+    ...others: (Property.FillOpacity | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FillOpacity, number> | (string & {}),
-    preferred: Extract<Property.FillOpacity, number> | (string & {}),
-    maximum: Extract<Property.FillOpacity, number> | (string & {}),
+    minimum: Property.FillOpacity | CssString,
+    preferred: Property.FillOpacity | CssString,
+    maximum: Property.FillOpacity | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 fill-rule；初始值 nonzero。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-rule
  */
-export class FillRuleCss extends CssProperty<Property.FillRule> {
+export class FillRuleCss extends CssProperty {
   readonly evenodd = 'fill-rule:evenodd;';
   readonly inherit = 'fill-rule:inherit;';
   readonly initial = 'fill-rule:initial;';
@@ -2735,12 +2913,16 @@ export class FillRuleCss extends CssProperty<Property.FillRule> {
   constructor() {
     super('fill-rule');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FillRule | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 filter；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/filter
  */
-export class FilterCss extends CssProperty<Property.Filter> {
+export class FilterCss extends CssProperty {
   readonly inherit = 'filter:inherit;';
   readonly initial = 'filter:initial;';
   readonly none = 'filter:none;';
@@ -2750,12 +2932,16 @@ export class FilterCss extends CssProperty<Property.Filter> {
   constructor() {
     super('filter');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Filter | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 flex。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex
  */
-export class FlexCss extends LengthCssProperty<Property.Flex> {
+export class FlexCss extends LengthCssProperty {
   readonly auto = 'flex:auto;';
   readonly content = 'flex:content;';
   readonly fitContent = 'flex:fit-content;';
@@ -2770,35 +2956,33 @@ export class FlexCss extends LengthCssProperty<Property.Flex> {
   constructor() {
     super('flex');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Flex | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Flex, number> | (string & {}),
-    ...others: (Extract<Property.Flex, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Flex | CssString, ...others: (Property.Flex | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Flex, number> | (string & {}),
-    ...others: (Extract<Property.Flex, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Flex | CssString, ...others: (Property.Flex | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Flex, number> | (string & {}),
-    preferred: Extract<Property.Flex, number> | (string & {}),
-    maximum: Extract<Property.Flex, number> | (string & {}),
+    minimum: Property.Flex | CssString,
+    preferred: Property.Flex | CssString,
+    maximum: Property.Flex | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 flex-basis；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-basis
  */
-export class FlexBasisCss extends LengthCssProperty<Property.FlexBasis> {
+export class FlexBasisCss extends LengthCssProperty {
   readonly auto = 'flex-basis:auto;';
   readonly content = 'flex-basis:content;';
   readonly fitContent = 'flex-basis:fit-content;';
@@ -2812,35 +2996,39 @@ export class FlexBasisCss extends LengthCssProperty<Property.FlexBasis> {
   constructor() {
     super('flex-basis');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FlexBasis | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.FlexBasis, number> | (string & {}),
-    ...others: (Extract<Property.FlexBasis, number> | (string & {}))[]
+    value: Property.FlexBasis | CssString,
+    ...others: (Property.FlexBasis | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.FlexBasis, number> | (string & {}),
-    ...others: (Extract<Property.FlexBasis, number> | (string & {}))[]
+    value: Property.FlexBasis | CssString,
+    ...others: (Property.FlexBasis | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FlexBasis, number> | (string & {}),
-    preferred: Extract<Property.FlexBasis, number> | (string & {}),
-    maximum: Extract<Property.FlexBasis, number> | (string & {}),
+    minimum: Property.FlexBasis | CssString,
+    preferred: Property.FlexBasis | CssString,
+    maximum: Property.FlexBasis | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 flex-direction；初始值 row。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-direction
  */
-export class FlexDirectionCss extends CssProperty<Property.FlexDirection> {
+export class FlexDirectionCss extends CssProperty {
   readonly column = 'flex-direction:column;';
   readonly columnReverse = 'flex-direction:column-reverse;';
   readonly inherit = 'flex-direction:inherit;';
@@ -2853,12 +3041,16 @@ export class FlexDirectionCss extends CssProperty<Property.FlexDirection> {
   constructor() {
     super('flex-direction');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FlexDirection | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 flex-flow。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-flow
  */
-export class FlexFlowCss extends CssProperty<Property.FlexFlow> {
+export class FlexFlowCss extends CssProperty {
   readonly column = 'flex-flow:column;';
   readonly columnReverse = 'flex-flow:column-reverse;';
   readonly inherit = 'flex-flow:inherit;';
@@ -2874,12 +3066,16 @@ export class FlexFlowCss extends CssProperty<Property.FlexFlow> {
   constructor() {
     super('flex-flow');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FlexFlow | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 flex-grow；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-grow
  */
-export class FlexGrowCss extends CssProperty<Property.FlexGrow> {
+export class FlexGrowCss extends CssProperty {
   readonly inherit = 'flex-grow:inherit;';
   readonly initial = 'flex-grow:initial;';
   readonly revert = 'flex-grow:revert;';
@@ -2888,35 +3084,33 @@ export class FlexGrowCss extends CssProperty<Property.FlexGrow> {
   constructor() {
     super('flex-grow');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FlexGrow | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.FlexGrow, number> | (string & {}),
-    ...others: (Extract<Property.FlexGrow, number> | (string & {}))[]
-  ): string {
+  min(value: Property.FlexGrow | CssString, ...others: (Property.FlexGrow | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.FlexGrow, number> | (string & {}),
-    ...others: (Extract<Property.FlexGrow, number> | (string & {}))[]
-  ): string {
+  max(value: Property.FlexGrow | CssString, ...others: (Property.FlexGrow | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FlexGrow, number> | (string & {}),
-    preferred: Extract<Property.FlexGrow, number> | (string & {}),
-    maximum: Extract<Property.FlexGrow, number> | (string & {}),
+    minimum: Property.FlexGrow | CssString,
+    preferred: Property.FlexGrow | CssString,
+    maximum: Property.FlexGrow | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 flex-shrink；初始值 1。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-shrink
  */
-export class FlexShrinkCss extends CssProperty<Property.FlexShrink> {
+export class FlexShrinkCss extends CssProperty {
   readonly inherit = 'flex-shrink:inherit;';
   readonly initial = 'flex-shrink:initial;';
   readonly revert = 'flex-shrink:revert;';
@@ -2925,35 +3119,39 @@ export class FlexShrinkCss extends CssProperty<Property.FlexShrink> {
   constructor() {
     super('flex-shrink');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FlexShrink | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.FlexShrink, number> | (string & {}),
-    ...others: (Extract<Property.FlexShrink, number> | (string & {}))[]
+    value: Property.FlexShrink | CssString,
+    ...others: (Property.FlexShrink | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.FlexShrink, number> | (string & {}),
-    ...others: (Extract<Property.FlexShrink, number> | (string & {}))[]
+    value: Property.FlexShrink | CssString,
+    ...others: (Property.FlexShrink | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FlexShrink, number> | (string & {}),
-    preferred: Extract<Property.FlexShrink, number> | (string & {}),
-    maximum: Extract<Property.FlexShrink, number> | (string & {}),
+    minimum: Property.FlexShrink | CssString,
+    preferred: Property.FlexShrink | CssString,
+    maximum: Property.FlexShrink | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 flex-wrap；初始值 nowrap。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-wrap
  */
-export class FlexWrapCss extends CssProperty<Property.FlexWrap> {
+export class FlexWrapCss extends CssProperty {
   readonly inherit = 'flex-wrap:inherit;';
   readonly initial = 'flex-wrap:initial;';
   readonly nowrap = 'flex-wrap:nowrap;';
@@ -2965,12 +3163,16 @@ export class FlexWrapCss extends CssProperty<Property.FlexWrap> {
   constructor() {
     super('flex-wrap');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FlexWrap | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 float；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/float
  */
-export class FloatCss extends CssProperty<Property.Float> {
+export class FloatCss extends CssProperty {
   readonly inherit = 'float:inherit;';
   readonly initial = 'float:initial;';
   readonly inlineEnd = 'float:inline-end;';
@@ -2984,12 +3186,16 @@ export class FloatCss extends CssProperty<Property.Float> {
   constructor() {
     super('float');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Float | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 flood-color；初始值 black。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-color
  */
-export class FloodColorCss extends CssProperty<Property.FloodColor> {
+export class FloodColorCss extends CssProperty {
   readonly AccentColor = 'flood-color:AccentColor;';
   readonly AccentColorText = 'flood-color:AccentColorText;';
   readonly ActiveBorder = 'flood-color:ActiveBorder;';
@@ -3190,6 +3396,10 @@ export class FloodColorCss extends CssProperty<Property.FloodColor> {
   constructor() {
     super('flood-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FloodColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -3205,7 +3415,7 @@ export class FloodColorCss extends CssProperty<Property.FloodColor> {
 /** CSS 属性 flood-opacity；初始值 black。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-opacity
  */
-export class FloodOpacityCss extends CssProperty<Property.FloodOpacity> {
+export class FloodOpacityCss extends CssProperty {
   readonly inherit = 'flood-opacity:inherit;';
   readonly initial = 'flood-opacity:initial;';
   readonly revert = 'flood-opacity:revert;';
@@ -3214,35 +3424,39 @@ export class FloodOpacityCss extends CssProperty<Property.FloodOpacity> {
   constructor() {
     super('flood-opacity');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FloodOpacity | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.FloodOpacity, number> | (string & {}),
-    ...others: (Extract<Property.FloodOpacity, number> | (string & {}))[]
+    value: Property.FloodOpacity | CssString,
+    ...others: (Property.FloodOpacity | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.FloodOpacity, number> | (string & {}),
-    ...others: (Extract<Property.FloodOpacity, number> | (string & {}))[]
+    value: Property.FloodOpacity | CssString,
+    ...others: (Property.FloodOpacity | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FloodOpacity, number> | (string & {}),
-    preferred: Extract<Property.FloodOpacity, number> | (string & {}),
-    maximum: Extract<Property.FloodOpacity, number> | (string & {}),
+    minimum: Property.FloodOpacity | CssString,
+    preferred: Property.FloodOpacity | CssString,
+    maximum: Property.FloodOpacity | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 font。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font
  */
-export class FontCss extends CssProperty<Property.Font> {
+export class FontCss extends CssProperty {
   readonly caption = 'font:caption;';
   readonly icon = 'font:icon;';
   readonly inherit = 'font:inherit;';
@@ -3257,12 +3471,16 @@ export class FontCss extends CssProperty<Property.Font> {
   constructor() {
     super('font');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Font | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-family。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-family
  */
-export class FontFamilyCss extends CssProperty<Property.FontFamily> {
+export class FontFamilyCss extends CssProperty {
   readonly AppleSystem = 'font-family:-apple-system;';
   readonly cursive = 'font-family:cursive;';
   readonly emoji = 'font-family:emoji;';
@@ -3285,12 +3503,16 @@ export class FontFamilyCss extends CssProperty<Property.FontFamily> {
   constructor() {
     super('font-family');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontFamily | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-feature-settings；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-feature-settings
  */
-export class FontFeatureSettingsCss extends CssProperty<Property.FontFeatureSettings> {
+export class FontFeatureSettingsCss extends CssProperty {
   readonly inherit = 'font-feature-settings:inherit;';
   readonly initial = 'font-feature-settings:initial;';
   readonly normal = 'font-feature-settings:normal;';
@@ -3300,12 +3522,16 @@ export class FontFeatureSettingsCss extends CssProperty<Property.FontFeatureSett
   constructor() {
     super('font-feature-settings');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontFeatureSettings | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-kerning；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-kerning
  */
-export class FontKerningCss extends CssProperty<Property.FontKerning> {
+export class FontKerningCss extends CssProperty {
   readonly auto = 'font-kerning:auto;';
   readonly inherit = 'font-kerning:inherit;';
   readonly initial = 'font-kerning:initial;';
@@ -3317,12 +3543,16 @@ export class FontKerningCss extends CssProperty<Property.FontKerning> {
   constructor() {
     super('font-kerning');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontKerning | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-language-override；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-language-override
  */
-export class FontLanguageOverrideCss extends CssProperty<Property.FontLanguageOverride> {
+export class FontLanguageOverrideCss extends CssProperty {
   readonly inherit = 'font-language-override:inherit;';
   readonly initial = 'font-language-override:initial;';
   readonly normal = 'font-language-override:normal;';
@@ -3332,12 +3562,16 @@ export class FontLanguageOverrideCss extends CssProperty<Property.FontLanguageOv
   constructor() {
     super('font-language-override');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontLanguageOverride | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-optical-sizing；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-optical-sizing
  */
-export class FontOpticalSizingCss extends CssProperty<Property.FontOpticalSizing> {
+export class FontOpticalSizingCss extends CssProperty {
   readonly auto = 'font-optical-sizing:auto;';
   readonly inherit = 'font-optical-sizing:inherit;';
   readonly initial = 'font-optical-sizing:initial;';
@@ -3348,12 +3582,16 @@ export class FontOpticalSizingCss extends CssProperty<Property.FontOpticalSizing
   constructor() {
     super('font-optical-sizing');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontOpticalSizing | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-palette；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-palette
  */
-export class FontPaletteCss extends CssProperty<Property.FontPalette> {
+export class FontPaletteCss extends CssProperty {
   readonly dark = 'font-palette:dark;';
   readonly inherit = 'font-palette:inherit;';
   readonly initial = 'font-palette:initial;';
@@ -3365,12 +3603,16 @@ export class FontPaletteCss extends CssProperty<Property.FontPalette> {
   constructor() {
     super('font-palette');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontPalette | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-size；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size
  */
-export class FontSizeCss extends LengthCssProperty<Property.FontSize> {
+export class FontSizeCss extends LengthCssProperty {
   readonly inherit = 'font-size:inherit;';
   readonly initial = 'font-size:initial;';
   readonly large = 'font-size:large;';
@@ -3390,6 +3632,10 @@ export class FontSizeCss extends LengthCssProperty<Property.FontSize> {
   constructor() {
     super('font-size');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontSize | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -3398,31 +3644,25 @@ export class FontSizeCss extends LengthCssProperty<Property.FontSize> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.FontSize, number> | (string & {}),
-    ...others: (Extract<Property.FontSize, number> | (string & {}))[]
-  ): string {
+  min(value: Property.FontSize | CssString, ...others: (Property.FontSize | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.FontSize, number> | (string & {}),
-    ...others: (Extract<Property.FontSize, number> | (string & {}))[]
-  ): string {
+  max(value: Property.FontSize | CssString, ...others: (Property.FontSize | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FontSize, number> | (string & {}),
-    preferred: Extract<Property.FontSize, number> | (string & {}),
-    maximum: Extract<Property.FontSize, number> | (string & {}),
+    minimum: Property.FontSize | CssString,
+    preferred: Property.FontSize | CssString,
+    maximum: Property.FontSize | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 font-size-adjust；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size-adjust
  */
-export class FontSizeAdjustCss extends CssProperty<Property.FontSizeAdjust> {
+export class FontSizeAdjustCss extends CssProperty {
   readonly fromFont = 'font-size-adjust:from-font;';
   readonly inherit = 'font-size-adjust:inherit;';
   readonly initial = 'font-size-adjust:initial;';
@@ -3433,35 +3673,39 @@ export class FontSizeAdjustCss extends CssProperty<Property.FontSizeAdjust> {
   constructor() {
     super('font-size-adjust');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontSizeAdjust | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.FontSizeAdjust, number> | (string & {}),
-    ...others: (Extract<Property.FontSizeAdjust, number> | (string & {}))[]
+    value: Property.FontSizeAdjust | CssString,
+    ...others: (Property.FontSizeAdjust | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.FontSizeAdjust, number> | (string & {}),
-    ...others: (Extract<Property.FontSizeAdjust, number> | (string & {}))[]
+    value: Property.FontSizeAdjust | CssString,
+    ...others: (Property.FontSizeAdjust | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FontSizeAdjust, number> | (string & {}),
-    preferred: Extract<Property.FontSizeAdjust, number> | (string & {}),
-    maximum: Extract<Property.FontSizeAdjust, number> | (string & {}),
+    minimum: Property.FontSizeAdjust | CssString,
+    preferred: Property.FontSizeAdjust | CssString,
+    maximum: Property.FontSizeAdjust | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 font-smooth；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-smooth
  */
-export class FontSmoothCss extends LengthCssProperty<Property.FontSmooth> {
+export class FontSmoothCss extends LengthCssProperty {
   readonly always = 'font-smooth:always;';
   readonly auto = 'font-smooth:auto;';
   readonly inherit = 'font-smooth:inherit;';
@@ -3481,35 +3725,39 @@ export class FontSmoothCss extends LengthCssProperty<Property.FontSmooth> {
   constructor() {
     super('font-smooth');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontSmooth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.FontSmooth, number> | (string & {}),
-    ...others: (Extract<Property.FontSmooth, number> | (string & {}))[]
+    value: Property.FontSmooth | CssString,
+    ...others: (Property.FontSmooth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.FontSmooth, number> | (string & {}),
-    ...others: (Extract<Property.FontSmooth, number> | (string & {}))[]
+    value: Property.FontSmooth | CssString,
+    ...others: (Property.FontSmooth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FontSmooth, number> | (string & {}),
-    preferred: Extract<Property.FontSmooth, number> | (string & {}),
-    maximum: Extract<Property.FontSmooth, number> | (string & {}),
+    minimum: Property.FontSmooth | CssString,
+    preferred: Property.FontSmooth | CssString,
+    maximum: Property.FontSmooth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 font-stretch。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-stretch
  */
-export class FontStretchCss extends CssProperty<Property.FontStretch> {
+export class FontStretchCss extends CssProperty {
   readonly condensed = 'font-stretch:condensed;';
   readonly expanded = 'font-stretch:expanded;';
   readonly extraCondensed = 'font-stretch:extra-condensed;';
@@ -3527,12 +3775,16 @@ export class FontStretchCss extends CssProperty<Property.FontStretch> {
   constructor() {
     super('font-stretch');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontStretch | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-style；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-style
  */
-export class FontStyleCss extends CssProperty<Property.FontStyle> {
+export class FontStyleCss extends CssProperty {
   readonly inherit = 'font-style:inherit;';
   readonly initial = 'font-style:initial;';
   readonly italic = 'font-style:italic;';
@@ -3543,6 +3795,10 @@ export class FontStyleCss extends CssProperty<Property.FontStyle> {
   readonly unset = 'font-style:unset;';
   constructor() {
     super('font-style');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontStyle | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 deg 单位生成声明；数值合法性由浏览器处理。 */
   deg(value: number): string {
@@ -3565,30 +3821,30 @@ export class FontStyleCss extends CssProperty<Property.FontStyle> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.FontStyle, number> | (string & {}),
-    ...others: (Extract<Property.FontStyle, number> | (string & {}))[]
+    value: Property.FontStyle | CssString,
+    ...others: (Property.FontStyle | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.FontStyle, number> | (string & {}),
-    ...others: (Extract<Property.FontStyle, number> | (string & {}))[]
+    value: Property.FontStyle | CssString,
+    ...others: (Property.FontStyle | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FontStyle, number> | (string & {}),
-    preferred: Extract<Property.FontStyle, number> | (string & {}),
-    maximum: Extract<Property.FontStyle, number> | (string & {}),
+    minimum: Property.FontStyle | CssString,
+    preferred: Property.FontStyle | CssString,
+    maximum: Property.FontStyle | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 font-synthesis；初始值 weight style small-caps position 。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis
  */
-export class FontSynthesisCss extends CssProperty<Property.FontSynthesis> {
+export class FontSynthesisCss extends CssProperty {
   readonly inherit = 'font-synthesis:inherit;';
   readonly initial = 'font-synthesis:initial;';
   readonly none = 'font-synthesis:none;';
@@ -3602,12 +3858,16 @@ export class FontSynthesisCss extends CssProperty<Property.FontSynthesis> {
   constructor() {
     super('font-synthesis');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontSynthesis | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-synthesis-position；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-position
  */
-export class FontSynthesisPositionCss extends CssProperty<Property.FontSynthesisPosition> {
+export class FontSynthesisPositionCss extends CssProperty {
   readonly auto = 'font-synthesis-position:auto;';
   readonly inherit = 'font-synthesis-position:inherit;';
   readonly initial = 'font-synthesis-position:initial;';
@@ -3618,12 +3878,16 @@ export class FontSynthesisPositionCss extends CssProperty<Property.FontSynthesis
   constructor() {
     super('font-synthesis-position');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontSynthesisPosition | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-synthesis-small-caps；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-small-caps
  */
-export class FontSynthesisSmallCapsCss extends CssProperty<Property.FontSynthesisSmallCaps> {
+export class FontSynthesisSmallCapsCss extends CssProperty {
   readonly auto = 'font-synthesis-small-caps:auto;';
   readonly inherit = 'font-synthesis-small-caps:inherit;';
   readonly initial = 'font-synthesis-small-caps:initial;';
@@ -3634,12 +3898,16 @@ export class FontSynthesisSmallCapsCss extends CssProperty<Property.FontSynthesi
   constructor() {
     super('font-synthesis-small-caps');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontSynthesisSmallCaps | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-synthesis-style；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-style
  */
-export class FontSynthesisStyleCss extends CssProperty<Property.FontSynthesisStyle> {
+export class FontSynthesisStyleCss extends CssProperty {
   readonly auto = 'font-synthesis-style:auto;';
   readonly inherit = 'font-synthesis-style:inherit;';
   readonly initial = 'font-synthesis-style:initial;';
@@ -3650,12 +3918,16 @@ export class FontSynthesisStyleCss extends CssProperty<Property.FontSynthesisSty
   constructor() {
     super('font-synthesis-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontSynthesisStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-synthesis-weight；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-weight
  */
-export class FontSynthesisWeightCss extends CssProperty<Property.FontSynthesisWeight> {
+export class FontSynthesisWeightCss extends CssProperty {
   readonly auto = 'font-synthesis-weight:auto;';
   readonly inherit = 'font-synthesis-weight:inherit;';
   readonly initial = 'font-synthesis-weight:initial;';
@@ -3666,12 +3938,16 @@ export class FontSynthesisWeightCss extends CssProperty<Property.FontSynthesisWe
   constructor() {
     super('font-synthesis-weight');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontSynthesisWeight | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-variant；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant
  */
-export class FontVariantCss extends CssProperty<Property.FontVariant> {
+export class FontVariantCss extends CssProperty {
   readonly allPetiteCaps = 'font-variant:all-petite-caps;';
   readonly allSmallCaps = 'font-variant:all-small-caps;';
   readonly commonLigatures = 'font-variant:common-ligatures;';
@@ -3714,12 +3990,16 @@ export class FontVariantCss extends CssProperty<Property.FontVariant> {
   constructor() {
     super('font-variant');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontVariant | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-variant-alternates；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-alternates
  */
-export class FontVariantAlternatesCss extends CssProperty<Property.FontVariantAlternates> {
+export class FontVariantAlternatesCss extends CssProperty {
   readonly historicalForms = 'font-variant-alternates:historical-forms;';
   readonly inherit = 'font-variant-alternates:inherit;';
   readonly initial = 'font-variant-alternates:initial;';
@@ -3730,12 +4010,16 @@ export class FontVariantAlternatesCss extends CssProperty<Property.FontVariantAl
   constructor() {
     super('font-variant-alternates');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontVariantAlternates | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-variant-caps；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-caps
  */
-export class FontVariantCapsCss extends CssProperty<Property.FontVariantCaps> {
+export class FontVariantCapsCss extends CssProperty {
   readonly allPetiteCaps = 'font-variant-caps:all-petite-caps;';
   readonly allSmallCaps = 'font-variant-caps:all-small-caps;';
   readonly inherit = 'font-variant-caps:inherit;';
@@ -3751,12 +4035,16 @@ export class FontVariantCapsCss extends CssProperty<Property.FontVariantCaps> {
   constructor() {
     super('font-variant-caps');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontVariantCaps | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-variant-east-asian；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-east-asian
  */
-export class FontVariantEastAsianCss extends CssProperty<Property.FontVariantEastAsian> {
+export class FontVariantEastAsianCss extends CssProperty {
   readonly fullWidth = 'font-variant-east-asian:full-width;';
   readonly inherit = 'font-variant-east-asian:inherit;';
   readonly initial = 'font-variant-east-asian:initial;';
@@ -3775,12 +4063,16 @@ export class FontVariantEastAsianCss extends CssProperty<Property.FontVariantEas
   constructor() {
     super('font-variant-east-asian');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontVariantEastAsian | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-variant-emoji；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-emoji
  */
-export class FontVariantEmojiCss extends CssProperty<Property.FontVariantEmoji> {
+export class FontVariantEmojiCss extends CssProperty {
   readonly emoji = 'font-variant-emoji:emoji;';
   readonly inherit = 'font-variant-emoji:inherit;';
   readonly initial = 'font-variant-emoji:initial;';
@@ -3793,12 +4085,16 @@ export class FontVariantEmojiCss extends CssProperty<Property.FontVariantEmoji> 
   constructor() {
     super('font-variant-emoji');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontVariantEmoji | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-variant-ligatures；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-ligatures
  */
-export class FontVariantLigaturesCss extends CssProperty<Property.FontVariantLigatures> {
+export class FontVariantLigaturesCss extends CssProperty {
   readonly commonLigatures = 'font-variant-ligatures:common-ligatures;';
   readonly contextual = 'font-variant-ligatures:contextual;';
   readonly discretionaryLigatures = 'font-variant-ligatures:discretionary-ligatures;';
@@ -3817,12 +4113,16 @@ export class FontVariantLigaturesCss extends CssProperty<Property.FontVariantLig
   constructor() {
     super('font-variant-ligatures');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontVariantLigatures | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-variant-numeric；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-numeric
  */
-export class FontVariantNumericCss extends CssProperty<Property.FontVariantNumeric> {
+export class FontVariantNumericCss extends CssProperty {
   readonly diagonalFractions = 'font-variant-numeric:diagonal-fractions;';
   readonly inherit = 'font-variant-numeric:inherit;';
   readonly initial = 'font-variant-numeric:initial;';
@@ -3840,12 +4140,16 @@ export class FontVariantNumericCss extends CssProperty<Property.FontVariantNumer
   constructor() {
     super('font-variant-numeric');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontVariantNumeric | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-variant-position；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-position
  */
-export class FontVariantPositionCss extends CssProperty<Property.FontVariantPosition> {
+export class FontVariantPositionCss extends CssProperty {
   readonly inherit = 'font-variant-position:inherit;';
   readonly initial = 'font-variant-position:initial;';
   readonly normal = 'font-variant-position:normal;';
@@ -3857,12 +4161,16 @@ export class FontVariantPositionCss extends CssProperty<Property.FontVariantPosi
   constructor() {
     super('font-variant-position');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontVariantPosition | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-variation-settings；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variation-settings
  */
-export class FontVariationSettingsCss extends CssProperty<Property.FontVariationSettings> {
+export class FontVariationSettingsCss extends CssProperty {
   readonly inherit = 'font-variation-settings:inherit;';
   readonly initial = 'font-variation-settings:initial;';
   readonly normal = 'font-variation-settings:normal;';
@@ -3872,12 +4180,16 @@ export class FontVariationSettingsCss extends CssProperty<Property.FontVariation
   constructor() {
     super('font-variation-settings');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontVariationSettings | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 font-weight；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-weight
  */
-export class FontWeightCss extends CssProperty<Property.FontWeight> {
+export class FontWeightCss extends CssProperty {
   readonly bold = 'font-weight:bold;';
   readonly bolder = 'font-weight:bolder;';
   readonly inherit = 'font-weight:inherit;';
@@ -3890,35 +4202,39 @@ export class FontWeightCss extends CssProperty<Property.FontWeight> {
   constructor() {
     super('font-weight');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontWeight | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.FontWeight, number> | (string & {}),
-    ...others: (Extract<Property.FontWeight, number> | (string & {}))[]
+    value: Property.FontWeight | CssString,
+    ...others: (Property.FontWeight | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.FontWeight, number> | (string & {}),
-    ...others: (Extract<Property.FontWeight, number> | (string & {}))[]
+    value: Property.FontWeight | CssString,
+    ...others: (Property.FontWeight | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FontWeight, number> | (string & {}),
-    preferred: Extract<Property.FontWeight, number> | (string & {}),
-    maximum: Extract<Property.FontWeight, number> | (string & {}),
+    minimum: Property.FontWeight | CssString,
+    preferred: Property.FontWeight | CssString,
+    maximum: Property.FontWeight | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 font-width；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-width
  */
-export class FontWidthCss extends CssProperty<Property.FontWidth> {
+export class FontWidthCss extends CssProperty {
   readonly condensed = 'font-width:condensed;';
   readonly expanded = 'font-width:expanded;';
   readonly extraCondensed = 'font-width:extra-condensed;';
@@ -3936,6 +4252,10 @@ export class FontWidthCss extends CssProperty<Property.FontWidth> {
   constructor() {
     super('font-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.FontWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -3945,30 +4265,30 @@ export class FontWidthCss extends CssProperty<Property.FontWidth> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.FontWidth, number> | (string & {}),
-    ...others: (Extract<Property.FontWidth, number> | (string & {}))[]
+    value: Property.FontWidth | CssString,
+    ...others: (Property.FontWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.FontWidth, number> | (string & {}),
-    ...others: (Extract<Property.FontWidth, number> | (string & {}))[]
+    value: Property.FontWidth | CssString,
+    ...others: (Property.FontWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.FontWidth, number> | (string & {}),
-    preferred: Extract<Property.FontWidth, number> | (string & {}),
-    maximum: Extract<Property.FontWidth, number> | (string & {}),
+    minimum: Property.FontWidth | CssString,
+    preferred: Property.FontWidth | CssString,
+    maximum: Property.FontWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 forced-color-adjust；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/forced-color-adjust
  */
-export class ForcedColorAdjustCss extends CssProperty<Property.ForcedColorAdjust> {
+export class ForcedColorAdjustCss extends CssProperty {
   readonly auto = 'forced-color-adjust:auto;';
   readonly inherit = 'forced-color-adjust:inherit;';
   readonly initial = 'forced-color-adjust:initial;';
@@ -3979,5 +4299,9 @@ export class ForcedColorAdjustCss extends CssProperty<Property.ForcedColorAdjust
   readonly unset = 'forced-color-adjust:unset;';
   constructor() {
     super('forced-color-adjust');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.ForcedColorAdjust | CssString): string {
+    return this.declaration(value);
   }
 }

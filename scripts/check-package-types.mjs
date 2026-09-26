@@ -15,6 +15,7 @@ function sourceFor(name, server) {
   return `${imports}
 import type { CssRule } from '@zerodep-css/core';
 import type { CssInput } from '@zerodep-css/core';
+import type { CssString } from '@zerodep-css/core';
 import type { CssSelector } from '@zerodep-css/core';
 // @ts-expect-error 独立 ic 已移除，选择器入口在作者对象
 import { ic } from '@zerodep-css/${name}';
@@ -38,6 +39,9 @@ s._selector(42, s.color.red);
 // @ts-expect-error 条件对象不属于声明片段
 s._hover({ active: true });
 const base = new Css();
+const custom: CssString = 'var(--project-size)';
+s.width.raw(custom);
+s.animationPlayState.raw('running');
 const { provideCss, useCss } = createCssContext<AppCss>();
 useCss().width._md satisfies string;
 provideCss(s);
@@ -99,12 +103,33 @@ function check(file, node) {
     ['s.display', '显示类型'],
     ['s.fill', 'CSS 属性 fill'],
     ['base.width', '宽度'],
+    ['s.width.raw', '原样生成声明'],
   ]);
   const checker = program.getTypeChecker();
+  const keywordHints = new Map([
+    ['s.width.raw', ['auto', 'min-content']],
+    ['s.animationPlayState.raw', ['paused', 'running']],
+  ]);
   function visit(item) {
-    if (ts.isPropertyAccessExpression(item) && ts.isIdentifier(item.expression)) {
-      const key = `${item.expression.text}.${item.name.text}`;
+    if (ts.isPropertyAccessExpression(item)) {
+      const key = item.getText(program.getSourceFile(file));
       const expected = expectedDocs.get(key);
+      const keywords = keywordHints.get(key);
+      if (keywords) {
+        const signature = checker.getTypeAtLocation(item).getCallSignatures()[0];
+        const parameter = signature?.parameters[0];
+        if (!parameter) throw new Error(`Missing raw parameter: ${key}`);
+        const type = checker.getTypeOfSymbolAtLocation(parameter, item);
+        const values = new Set();
+        const collect = (value) => {
+          if (value.isUnion()) value.types.forEach(collect);
+          else if (value.flags & ts.TypeFlags.StringLiteral) values.add(value.value);
+        };
+        collect(type);
+        if (!keywords.every((keyword) => values.has(keyword)))
+          throw new Error(`Lost raw keyword hints: ${key}`);
+        keywordHints.delete(key);
+      }
       if (expected) {
         const docs = ts.displayPartsToString(
           checker.getSymbolAtLocation(item.name)?.getDocumentationComment(checker),
@@ -118,6 +143,7 @@ function check(file, node) {
   visit(program.getSourceFile(file));
   if (expectedDocs.size)
     throw new Error(`Unresolved documentation checks: ${[...expectedDocs.keys()]}`);
+  if (keywordHints.size) throw new Error('Missing keyword hint fixtures.');
 }
 
 try {

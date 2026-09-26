@@ -65,6 +65,7 @@ function propertyType(member) {
 
 const reserved = new Set([
   'raw',
+  'declaration',
   'px',
   'constructor',
   'then',
@@ -115,12 +116,15 @@ const header = [
 const base = [
   ...header,
   '',
-  'export class CssProperty<T> {',
+  '/** 保留关键字补全，同时允许任意 CSS 字符串。 */',
+  'export type CssString = string & {};',
+  '',
+  'export class CssProperty {',
   '  protected readonly name: string;',
   '  constructor(name: string) { this.name = name; }',
-  '  raw(value: T | (string & {})): string { return `${this.name}:${value};`; }',
+  '  protected declaration(value: string | number): string { return `${this.name}:${value};`; }',
   '}',
-  'export class LengthCssProperty<T> extends CssProperty<T> {',
+  'export class LengthCssProperty extends CssProperty {',
   ...Object.entries(units).flatMap(([name, suffix]) => unitMethod(name, suffix)),
   '}',
   `export const unitSuffix: Readonly<Record<string, string>> = ${JSON.stringify({ ...units, ...extraUnits })};`,
@@ -132,7 +136,7 @@ const groupLines = new Map(
     [
       ...header,
       "import type { Property } from 'csstype';",
-      "import { CssProperty, LengthCssProperty } from './base.js';",
+      "import { CssProperty, LengthCssProperty, type CssString } from './base.js';",
       '// 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。',
     ],
   ]),
@@ -209,11 +213,15 @@ for (const name of names) {
   lines.push(
     '',
     documentation,
-    `export class ${className} extends ${hasLength ? 'LengthCssProperty' : 'CssProperty'}<Property.${type}> {`,
+    `export class ${className} extends ${hasLength ? 'LengthCssProperty' : 'CssProperty'} {`,
   );
   for (const [keyword, value] of keywords)
     lines.push(`  readonly ${keyword} = ${JSON.stringify(`${cssName}:${value};`)};`);
   lines.push(`  constructor() { super(${JSON.stringify(cssName)}); }`);
+  lines.push(
+    '/** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */',
+    `raw(value: Property.${type} | CssString): string { return this.declaration(value); }`,
+  );
   if (hasLength && maxArgs > 1)
     for (const [name, suffix] of Object.entries(units))
       lines.push(...unitMethod(name, suffix, 1, maxArgs, true));
@@ -251,7 +259,7 @@ author.push(
 );
 author.push(...systemFields, '}');
 author.push(
-  'function defineSystemProperty<T>(name: string, create: () => T): void {',
+  'function defineSystemProperty(name: string, create: () => object): void {',
   '  Object.defineProperty(Css.prototype, name, {',
   '    configurable: true,',
   '    get() {',

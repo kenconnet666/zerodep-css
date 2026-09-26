@@ -48,3 +48,5 @@ Emotion 源码对照、可复现缺口和下一阶段取舍见[运行时库审�
 最新[稳定性与主题交付记录](.research/stability-and-theme-delivery.md)包含远程 CI 的 HMR、挂卸、200 / 1,000 项性能数据和实际资源保留边界；使用时参考[生命周期与诊断](docs/lifecycle-and-diagnostics.md)。
 
 属性名前缀与关键字分离的最新体积对照见[研究报告](.research/keyword-prefix-research.md)。这是候选表示研究，正式实现仍保持当前直接字段模型。
+
+作者类型以可读性为先：使用非泛型基类、明确的方法签名和普通 readonly 字段，见[类型结构](docs/author-types.md)。

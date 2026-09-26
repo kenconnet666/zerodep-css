@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createBindingTransform, replacePropsId } from '../../dist/compiler.js';
 import { createBindings } from '../../dist/bindings.js';
-import { Css } from '../../dist/index.js';
+import { Css, WidthCss } from '../../dist/index.js';
 import { createServerCssHost } from '../../dist/server.js';
 const transform = (text) =>
   createBindingTransform(
@@ -238,5 +238,28 @@ test('模板未变时更新变量但不重复登记，可变声明数组仍重�
   const red = array();
   parts[0] = s.color.blue;
   assert.notEqual(array(), red);
+  scope.dispose();
+});
+
+test('覆写共享声明格式化时，隐式绑定保持用户实现', () => {
+  class ProjectWidth extends WidthCss {
+    declaration(value) {
+      return super.declaration(`calc(${value} * 2)`);
+    }
+  }
+  const width = new ProjectWidth();
+  const host = createServerCssHost();
+  const scope = createBindings('formatter', host.setBindings, (run) => {
+    run();
+    return () => {};
+  });
+  const name = scope.capture('raw', host.css, () => [
+    scope.value('width', 'width', width, 'raw', [() => '12px']),
+  ]);
+  assert.equal(host.rules().find((rule) => rule.className === name).body, 'width:calc(12px * 2);');
+  assert.equal(
+    host.rules().some((rule) => rule.kind === 'bindings'),
+    false,
+  );
   scope.dispose();
 });

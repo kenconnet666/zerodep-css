@@ -2,6 +2,8 @@
 
 Vue/Svelte 的主入口提供 `css`、`keyframes`、`globalCss`、`className` 和作者类。样式组合统一由 `css` 处理，选择器使用作者对象的下划线方法；原 `cx`、独立 `ic` 及其旧类型已移除。浏览器与 Node 使用相同写法；服务端调用仍需活动宿主。
 
+属性类的 raw / 数学方法直接声明参数类型；`CssString` 集中承接任意字符串与关键字补全。基类只复用方法，不传递值类型泛型，详见[类型结构](author-types.md)。
+
 ```ts
 const title = className('Card.title');
 const base = css(s.color.red, s._selector(`& > .${title}`, s.fontWeight.bold));

@@ -48,7 +48,8 @@ export function valueMethods(type, color, math) {
       "hsl(hue: number, saturation: number, lightness: number, alpha?: number): string { return this.raw(`hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`); }",
     );
   if (math) {
-    const value = `Extract<Property.${type}, number> | (string & {})`;
+    // CSS 属性值只含字符串与数值；开放字符串已覆盖关键字，无需再用 Extract。
+    const value = `Property.${type} | CssString`;
     lines.push(
       '/** 数学表达式原样交给浏览器。 */',
       'calc(expression: string): string { return this.raw(`calc(${expression})`); }',
@@ -57,8 +58,9 @@ export function valueMethods(type, color, math) {
       lines.push(
         `${name}(value: ${value}, ...others: (${value})[]): string { return this.raw(\`${name}(\${[value, ...others].join(', ')})\`); }`,
       );
+    // join 避免 TypeScript 为三个大型关键字联合展开模板字面量的笛卡尔积。
     lines.push(
-      `clamp(minimum: ${value}, preferred: ${value}, maximum: ${value}): string { return this.raw(\`clamp(\${minimum}, \${preferred}, \${maximum})\`); }`,
+      `clamp(minimum: ${value}, preferred: ${value}, maximum: ${value}): string { return this.raw(\`clamp(\${[minimum, preferred, maximum].join(', ')})\`); }`,
     );
   }
   return lines;

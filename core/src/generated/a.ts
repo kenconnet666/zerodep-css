@@ -1,13 +1,13 @@
 // 由 scripts/generate-css-author.mjs 从 csstype@3.2.3 生成；请勿手改。
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
-import { CssProperty, LengthCssProperty } from './base.js';
+import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
 
 /** CSS 属性 accent-color；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color
  */
-export class AccentColorCss extends CssProperty<Property.AccentColor> {
+export class AccentColorCss extends CssProperty {
   readonly AccentColor = 'accent-color:AccentColor;';
   readonly AccentColorText = 'accent-color:AccentColorText;';
   readonly ActiveBorder = 'accent-color:ActiveBorder;';
@@ -209,6 +209,10 @@ export class AccentColorCss extends CssProperty<Property.AccentColor> {
   constructor() {
     super('accent-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AccentColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -224,7 +228,7 @@ export class AccentColorCss extends CssProperty<Property.AccentColor> {
 /** CSS 属性 align-content；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-content
  */
-export class AlignContentCss extends CssProperty<Property.AlignContent> {
+export class AlignContentCss extends CssProperty {
   readonly baseline = 'align-content:baseline;';
   readonly center = 'align-content:center;';
   readonly end = 'align-content:end;';
@@ -244,12 +248,16 @@ export class AlignContentCss extends CssProperty<Property.AlignContent> {
   constructor() {
     super('align-content');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AlignContent | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 align-items；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-items
  */
-export class AlignItemsCss extends CssProperty<Property.AlignItems> {
+export class AlignItemsCss extends CssProperty {
   readonly anchorCenter = 'align-items:anchor-center;';
   readonly baseline = 'align-items:baseline;';
   readonly center = 'align-items:center;';
@@ -269,12 +277,16 @@ export class AlignItemsCss extends CssProperty<Property.AlignItems> {
   constructor() {
     super('align-items');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AlignItems | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 align-self；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-self
  */
-export class AlignSelfCss extends CssProperty<Property.AlignSelf> {
+export class AlignSelfCss extends CssProperty {
   readonly anchorCenter = 'align-self:anchor-center;';
   readonly auto = 'align-self:auto;';
   readonly baseline = 'align-self:baseline;';
@@ -295,12 +307,16 @@ export class AlignSelfCss extends CssProperty<Property.AlignSelf> {
   constructor() {
     super('align-self');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AlignSelf | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 align-tracks；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-tracks
  */
-export class AlignTracksCss extends CssProperty<Property.AlignTracks> {
+export class AlignTracksCss extends CssProperty {
   readonly baseline = 'align-tracks:baseline;';
   readonly center = 'align-tracks:center;';
   readonly end = 'align-tracks:end;';
@@ -320,12 +336,16 @@ export class AlignTracksCss extends CssProperty<Property.AlignTracks> {
   constructor() {
     super('align-tracks');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AlignTracks | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 alignment-baseline；初始值 baseline。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/alignment-baseline
  */
-export class AlignmentBaselineCss extends CssProperty<Property.AlignmentBaseline> {
+export class AlignmentBaselineCss extends CssProperty {
   readonly alphabetic = 'alignment-baseline:alphabetic;';
   readonly baseline = 'alignment-baseline:baseline;';
   readonly central = 'alignment-baseline:central;';
@@ -342,12 +362,16 @@ export class AlignmentBaselineCss extends CssProperty<Property.AlignmentBaseline
   constructor() {
     super('alignment-baseline');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AlignmentBaseline | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 all。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/all
  */
-export class AllCss extends CssProperty<Property.All> {
+export class AllCss extends CssProperty {
   readonly inherit = 'all:inherit;';
   readonly initial = 'all:initial;';
   readonly revert = 'all:revert;';
@@ -356,12 +380,16 @@ export class AllCss extends CssProperty<Property.All> {
   constructor() {
     super('all');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.All | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 anchor-name；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-name
  */
-export class AnchorNameCss extends CssProperty<Property.AnchorName> {
+export class AnchorNameCss extends CssProperty {
   readonly inherit = 'anchor-name:inherit;';
   readonly initial = 'anchor-name:initial;';
   readonly none = 'anchor-name:none;';
@@ -371,12 +399,16 @@ export class AnchorNameCss extends CssProperty<Property.AnchorName> {
   constructor() {
     super('anchor-name');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnchorName | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 anchor-scope；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-scope
  */
-export class AnchorScopeCss extends CssProperty<Property.AnchorScope> {
+export class AnchorScopeCss extends CssProperty {
   readonly all = 'anchor-scope:all;';
   readonly inherit = 'anchor-scope:inherit;';
   readonly initial = 'anchor-scope:initial;';
@@ -387,12 +419,16 @@ export class AnchorScopeCss extends CssProperty<Property.AnchorScope> {
   constructor() {
     super('anchor-scope');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnchorScope | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 animation。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation
  */
-export class AnimationCss extends CssProperty<Property.Animation> {
+export class AnimationCss extends CssProperty {
   readonly alternate = 'animation:alternate;';
   readonly alternateReverse = 'animation:alternate-reverse;';
   readonly auto = 'animation:auto;';
@@ -420,6 +456,10 @@ export class AnimationCss extends CssProperty<Property.Animation> {
   constructor() {
     super('animation');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Animation | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
   ms(value: number): string {
     return `${this.name}:${value}ms;`;
@@ -433,30 +473,30 @@ export class AnimationCss extends CssProperty<Property.Animation> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.Animation, number> | (string & {}),
-    ...others: (Extract<Property.Animation, number> | (string & {}))[]
+    value: Property.Animation | CssString,
+    ...others: (Property.Animation | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.Animation, number> | (string & {}),
-    ...others: (Extract<Property.Animation, number> | (string & {}))[]
+    value: Property.Animation | CssString,
+    ...others: (Property.Animation | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Animation, number> | (string & {}),
-    preferred: Extract<Property.Animation, number> | (string & {}),
-    maximum: Extract<Property.Animation, number> | (string & {}),
+    minimum: Property.Animation | CssString,
+    preferred: Property.Animation | CssString,
+    maximum: Property.Animation | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 animation-composition；初始值 replace。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-composition
  */
-export class AnimationCompositionCss extends CssProperty<Property.AnimationComposition> {
+export class AnimationCompositionCss extends CssProperty {
   readonly accumulate = 'animation-composition:accumulate;';
   readonly add = 'animation-composition:add;';
   readonly inherit = 'animation-composition:inherit;';
@@ -468,12 +508,16 @@ export class AnimationCompositionCss extends CssProperty<Property.AnimationCompo
   constructor() {
     super('animation-composition');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationComposition | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 animation-delay；初始值 0s。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-delay
  */
-export class AnimationDelayCss extends CssProperty<Property.AnimationDelay> {
+export class AnimationDelayCss extends CssProperty {
   readonly inherit = 'animation-delay:inherit;';
   readonly initial = 'animation-delay:initial;';
   readonly revert = 'animation-delay:revert;';
@@ -481,6 +525,10 @@ export class AnimationDelayCss extends CssProperty<Property.AnimationDelay> {
   readonly unset = 'animation-delay:unset;';
   constructor() {
     super('animation-delay');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationDelay | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
   ms(value: number): string {
@@ -495,30 +543,30 @@ export class AnimationDelayCss extends CssProperty<Property.AnimationDelay> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.AnimationDelay, number> | (string & {}),
-    ...others: (Extract<Property.AnimationDelay, number> | (string & {}))[]
+    value: Property.AnimationDelay | CssString,
+    ...others: (Property.AnimationDelay | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.AnimationDelay, number> | (string & {}),
-    ...others: (Extract<Property.AnimationDelay, number> | (string & {}))[]
+    value: Property.AnimationDelay | CssString,
+    ...others: (Property.AnimationDelay | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.AnimationDelay, number> | (string & {}),
-    preferred: Extract<Property.AnimationDelay, number> | (string & {}),
-    maximum: Extract<Property.AnimationDelay, number> | (string & {}),
+    minimum: Property.AnimationDelay | CssString,
+    preferred: Property.AnimationDelay | CssString,
+    maximum: Property.AnimationDelay | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 animation-direction；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-direction
  */
-export class AnimationDirectionCss extends CssProperty<Property.AnimationDirection> {
+export class AnimationDirectionCss extends CssProperty {
   readonly alternate = 'animation-direction:alternate;';
   readonly alternateReverse = 'animation-direction:alternate-reverse;';
   readonly inherit = 'animation-direction:inherit;';
@@ -531,12 +579,16 @@ export class AnimationDirectionCss extends CssProperty<Property.AnimationDirecti
   constructor() {
     super('animation-direction');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationDirection | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 animation-duration；初始值 0s。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-duration
  */
-export class AnimationDurationCss extends CssProperty<Property.AnimationDuration> {
+export class AnimationDurationCss extends CssProperty {
   readonly auto = 'animation-duration:auto;';
   readonly inherit = 'animation-duration:inherit;';
   readonly initial = 'animation-duration:initial;';
@@ -545,6 +597,10 @@ export class AnimationDurationCss extends CssProperty<Property.AnimationDuration
   readonly unset = 'animation-duration:unset;';
   constructor() {
     super('animation-duration');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationDuration | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
   ms(value: number): string {
@@ -559,30 +615,30 @@ export class AnimationDurationCss extends CssProperty<Property.AnimationDuration
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.AnimationDuration, number> | (string & {}),
-    ...others: (Extract<Property.AnimationDuration, number> | (string & {}))[]
+    value: Property.AnimationDuration | CssString,
+    ...others: (Property.AnimationDuration | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.AnimationDuration, number> | (string & {}),
-    ...others: (Extract<Property.AnimationDuration, number> | (string & {}))[]
+    value: Property.AnimationDuration | CssString,
+    ...others: (Property.AnimationDuration | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.AnimationDuration, number> | (string & {}),
-    preferred: Extract<Property.AnimationDuration, number> | (string & {}),
-    maximum: Extract<Property.AnimationDuration, number> | (string & {}),
+    minimum: Property.AnimationDuration | CssString,
+    preferred: Property.AnimationDuration | CssString,
+    maximum: Property.AnimationDuration | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 animation-fill-mode；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-fill-mode
  */
-export class AnimationFillModeCss extends CssProperty<Property.AnimationFillMode> {
+export class AnimationFillModeCss extends CssProperty {
   readonly backwards = 'animation-fill-mode:backwards;';
   readonly both = 'animation-fill-mode:both;';
   readonly forwards = 'animation-fill-mode:forwards;';
@@ -595,12 +651,16 @@ export class AnimationFillModeCss extends CssProperty<Property.AnimationFillMode
   constructor() {
     super('animation-fill-mode');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationFillMode | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 animation-iteration-count；初始值 1。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-iteration-count
  */
-export class AnimationIterationCountCss extends CssProperty<Property.AnimationIterationCount> {
+export class AnimationIterationCountCss extends CssProperty {
   readonly infinite = 'animation-iteration-count:infinite;';
   readonly inherit = 'animation-iteration-count:inherit;';
   readonly initial = 'animation-iteration-count:initial;';
@@ -610,35 +670,39 @@ export class AnimationIterationCountCss extends CssProperty<Property.AnimationIt
   constructor() {
     super('animation-iteration-count');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationIterationCount | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.AnimationIterationCount, number> | (string & {}),
-    ...others: (Extract<Property.AnimationIterationCount, number> | (string & {}))[]
+    value: Property.AnimationIterationCount | CssString,
+    ...others: (Property.AnimationIterationCount | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.AnimationIterationCount, number> | (string & {}),
-    ...others: (Extract<Property.AnimationIterationCount, number> | (string & {}))[]
+    value: Property.AnimationIterationCount | CssString,
+    ...others: (Property.AnimationIterationCount | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.AnimationIterationCount, number> | (string & {}),
-    preferred: Extract<Property.AnimationIterationCount, number> | (string & {}),
-    maximum: Extract<Property.AnimationIterationCount, number> | (string & {}),
+    minimum: Property.AnimationIterationCount | CssString,
+    preferred: Property.AnimationIterationCount | CssString,
+    maximum: Property.AnimationIterationCount | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 animation-name；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-name
  */
-export class AnimationNameCss extends CssProperty<Property.AnimationName> {
+export class AnimationNameCss extends CssProperty {
   readonly inherit = 'animation-name:inherit;';
   readonly initial = 'animation-name:initial;';
   readonly none = 'animation-name:none;';
@@ -648,12 +712,16 @@ export class AnimationNameCss extends CssProperty<Property.AnimationName> {
   constructor() {
     super('animation-name');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationName | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 animation-play-state；初始值 running。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-play-state
  */
-export class AnimationPlayStateCss extends CssProperty<Property.AnimationPlayState> {
+export class AnimationPlayStateCss extends CssProperty {
   readonly inherit = 'animation-play-state:inherit;';
   readonly initial = 'animation-play-state:initial;';
   readonly paused = 'animation-play-state:paused;';
@@ -664,12 +732,16 @@ export class AnimationPlayStateCss extends CssProperty<Property.AnimationPlaySta
   constructor() {
     super('animation-play-state');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationPlayState | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 animation-range。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range
  */
-export class AnimationRangeCss extends LengthCssProperty<Property.AnimationRange> {
+export class AnimationRangeCss extends LengthCssProperty {
   readonly contain = 'animation-range:contain;';
   readonly cover = 'animation-range:cover;';
   readonly entry = 'animation-range:entry;';
@@ -685,35 +757,39 @@ export class AnimationRangeCss extends LengthCssProperty<Property.AnimationRange
   constructor() {
     super('animation-range');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationRange | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.AnimationRange, number> | (string & {}),
-    ...others: (Extract<Property.AnimationRange, number> | (string & {}))[]
+    value: Property.AnimationRange | CssString,
+    ...others: (Property.AnimationRange | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.AnimationRange, number> | (string & {}),
-    ...others: (Extract<Property.AnimationRange, number> | (string & {}))[]
+    value: Property.AnimationRange | CssString,
+    ...others: (Property.AnimationRange | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.AnimationRange, number> | (string & {}),
-    preferred: Extract<Property.AnimationRange, number> | (string & {}),
-    maximum: Extract<Property.AnimationRange, number> | (string & {}),
+    minimum: Property.AnimationRange | CssString,
+    preferred: Property.AnimationRange | CssString,
+    maximum: Property.AnimationRange | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 animation-range-end；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-end
  */
-export class AnimationRangeEndCss extends LengthCssProperty<Property.AnimationRangeEnd> {
+export class AnimationRangeEndCss extends LengthCssProperty {
   readonly contain = 'animation-range-end:contain;';
   readonly cover = 'animation-range-end:cover;';
   readonly entry = 'animation-range-end:entry;';
@@ -729,6 +805,10 @@ export class AnimationRangeEndCss extends LengthCssProperty<Property.AnimationRa
   constructor() {
     super('animation-range-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationRangeEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -738,30 +818,30 @@ export class AnimationRangeEndCss extends LengthCssProperty<Property.AnimationRa
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.AnimationRangeEnd, number> | (string & {}),
-    ...others: (Extract<Property.AnimationRangeEnd, number> | (string & {}))[]
+    value: Property.AnimationRangeEnd | CssString,
+    ...others: (Property.AnimationRangeEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.AnimationRangeEnd, number> | (string & {}),
-    ...others: (Extract<Property.AnimationRangeEnd, number> | (string & {}))[]
+    value: Property.AnimationRangeEnd | CssString,
+    ...others: (Property.AnimationRangeEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.AnimationRangeEnd, number> | (string & {}),
-    preferred: Extract<Property.AnimationRangeEnd, number> | (string & {}),
-    maximum: Extract<Property.AnimationRangeEnd, number> | (string & {}),
+    minimum: Property.AnimationRangeEnd | CssString,
+    preferred: Property.AnimationRangeEnd | CssString,
+    maximum: Property.AnimationRangeEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 animation-range-start；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-start
  */
-export class AnimationRangeStartCss extends LengthCssProperty<Property.AnimationRangeStart> {
+export class AnimationRangeStartCss extends LengthCssProperty {
   readonly contain = 'animation-range-start:contain;';
   readonly cover = 'animation-range-start:cover;';
   readonly entry = 'animation-range-start:entry;';
@@ -777,6 +857,10 @@ export class AnimationRangeStartCss extends LengthCssProperty<Property.Animation
   constructor() {
     super('animation-range-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationRangeStart | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -786,30 +870,30 @@ export class AnimationRangeStartCss extends LengthCssProperty<Property.Animation
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.AnimationRangeStart, number> | (string & {}),
-    ...others: (Extract<Property.AnimationRangeStart, number> | (string & {}))[]
+    value: Property.AnimationRangeStart | CssString,
+    ...others: (Property.AnimationRangeStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.AnimationRangeStart, number> | (string & {}),
-    ...others: (Extract<Property.AnimationRangeStart, number> | (string & {}))[]
+    value: Property.AnimationRangeStart | CssString,
+    ...others: (Property.AnimationRangeStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.AnimationRangeStart, number> | (string & {}),
-    preferred: Extract<Property.AnimationRangeStart, number> | (string & {}),
-    maximum: Extract<Property.AnimationRangeStart, number> | (string & {}),
+    minimum: Property.AnimationRangeStart | CssString,
+    preferred: Property.AnimationRangeStart | CssString,
+    maximum: Property.AnimationRangeStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 animation-timeline；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timeline
  */
-export class AnimationTimelineCss extends CssProperty<Property.AnimationTimeline> {
+export class AnimationTimelineCss extends CssProperty {
   readonly auto = 'animation-timeline:auto;';
   readonly inherit = 'animation-timeline:inherit;';
   readonly initial = 'animation-timeline:initial;';
@@ -820,12 +904,16 @@ export class AnimationTimelineCss extends CssProperty<Property.AnimationTimeline
   constructor() {
     super('animation-timeline');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationTimeline | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 animation-timing-function；初始值 ease。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timing-function
  */
-export class AnimationTimingFunctionCss extends CssProperty<Property.AnimationTimingFunction> {
+export class AnimationTimingFunctionCss extends CssProperty {
   readonly ease = 'animation-timing-function:ease;';
   readonly easeIn = 'animation-timing-function:ease-in;';
   readonly easeInOut = 'animation-timing-function:ease-in-out;';
@@ -841,12 +929,16 @@ export class AnimationTimingFunctionCss extends CssProperty<Property.AnimationTi
   constructor() {
     super('animation-timing-function');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AnimationTimingFunction | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 appearance；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/appearance
  */
-export class AppearanceCss extends CssProperty<Property.Appearance> {
+export class AppearanceCss extends CssProperty {
   readonly auto = 'appearance:auto;';
   readonly button = 'appearance:button;';
   readonly checkbox = 'appearance:checkbox;';
@@ -868,12 +960,16 @@ export class AppearanceCss extends CssProperty<Property.Appearance> {
   constructor() {
     super('appearance');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Appearance | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 aspect-ratio；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/aspect-ratio
  */
-export class AspectRatioCss extends CssProperty<Property.AspectRatio> {
+export class AspectRatioCss extends CssProperty {
   readonly auto = 'aspect-ratio:auto;';
   readonly inherit = 'aspect-ratio:inherit;';
   readonly initial = 'aspect-ratio:initial;';
@@ -883,27 +979,31 @@ export class AspectRatioCss extends CssProperty<Property.AspectRatio> {
   constructor() {
     super('aspect-ratio');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.AspectRatio | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.AspectRatio, number> | (string & {}),
-    ...others: (Extract<Property.AspectRatio, number> | (string & {}))[]
+    value: Property.AspectRatio | CssString,
+    ...others: (Property.AspectRatio | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.AspectRatio, number> | (string & {}),
-    ...others: (Extract<Property.AspectRatio, number> | (string & {}))[]
+    value: Property.AspectRatio | CssString,
+    ...others: (Property.AspectRatio | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.AspectRatio, number> | (string & {}),
-    preferred: Extract<Property.AspectRatio, number> | (string & {}),
-    maximum: Extract<Property.AspectRatio, number> | (string & {}),
+    minimum: Property.AspectRatio | CssString,
+    preferred: Property.AspectRatio | CssString,
+    maximum: Property.AspectRatio | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }

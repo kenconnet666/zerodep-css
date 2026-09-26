@@ -68,6 +68,11 @@ test('消费端只导入少数能力时移除完整作者模型', async () => {
 
 test('单位与颜色数学方法保持声明字符串与简写参数含义', () => {
   const s = new Css();
+  assert.equal(Object.hasOwn(WidthCss.prototype, 'raw'), true);
+  assert.equal(s.animationPlayState.raw('paused'), 'animation-play-state:paused;');
+  assert.equal(s.width.raw('calc(100% - 2rem)'), 'width:calc(100% - 2rem);');
+  assert.equal(s.width.min(0, '10px'), 'width:min(0, 10px);');
+  assert.equal(s.opacity.max(0.25, 1), 'opacity:max(0.25, 1);');
   assert.equal(s.width.rem(1.5), 'width:1.5rem;');
   assert.equal(s.padding.rem(0.5, 1), 'padding:0.5rem 1rem;');
   assert.equal(s.gap.em(1, 2), 'gap:1em 2em;');

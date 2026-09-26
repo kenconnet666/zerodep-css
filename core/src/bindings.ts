@@ -174,7 +174,12 @@ export function createBindings(
       const reference = ((system ??= new Css()) as unknown as Record<string, Property>)[
         propertyName
       ];
-      if (!reference || reference[method] !== invoke || target.raw !== reference.raw) {
+      if (
+        !reference ||
+        reference[method] !== invoke ||
+        target.raw !== reference.raw ||
+        target.declaration !== reference.declaration
+      ) {
         if (
           (import.meta as ImportMeta & { env?: { DEV?: boolean } }).env?.DEV &&
           !warned.has(site)

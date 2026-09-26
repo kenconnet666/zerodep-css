@@ -1,13 +1,13 @@
 // 由 scripts/generate-css-author.mjs 从 csstype@3.2.3 生成；请勿手改。
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
-import { CssProperty, LengthCssProperty } from './base.js';
+import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
 
 /** CSS 属性 backdrop-filter；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backdrop-filter
  */
-export class BackdropFilterCss extends CssProperty<Property.BackdropFilter> {
+export class BackdropFilterCss extends CssProperty {
   readonly inherit = 'backdrop-filter:inherit;';
   readonly initial = 'backdrop-filter:initial;';
   readonly none = 'backdrop-filter:none;';
@@ -17,12 +17,16 @@ export class BackdropFilterCss extends CssProperty<Property.BackdropFilter> {
   constructor() {
     super('backdrop-filter');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackdropFilter | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 backface-visibility；初始值 visible。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backface-visibility
  */
-export class BackfaceVisibilityCss extends CssProperty<Property.BackfaceVisibility> {
+export class BackfaceVisibilityCss extends CssProperty {
   readonly hidden = 'backface-visibility:hidden;';
   readonly inherit = 'backface-visibility:inherit;';
   readonly initial = 'backface-visibility:initial;';
@@ -33,12 +37,16 @@ export class BackfaceVisibilityCss extends CssProperty<Property.BackfaceVisibili
   constructor() {
     super('backface-visibility');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackfaceVisibility | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 background。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background
  */
-export class BackgroundCss extends LengthCssProperty<Property.Background> {
+export class BackgroundCss extends LengthCssProperty {
   readonly AccentColor = 'background:AccentColor;';
   readonly AccentColorText = 'background:AccentColorText;';
   readonly ActiveBorder = 'background:ActiveBorder;';
@@ -257,6 +265,10 @@ export class BackgroundCss extends LengthCssProperty<Property.Background> {
   constructor() {
     super('background');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Background | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -272,30 +284,30 @@ export class BackgroundCss extends LengthCssProperty<Property.Background> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.Background, number> | (string & {}),
-    ...others: (Extract<Property.Background, number> | (string & {}))[]
+    value: Property.Background | CssString,
+    ...others: (Property.Background | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.Background, number> | (string & {}),
-    ...others: (Extract<Property.Background, number> | (string & {}))[]
+    value: Property.Background | CssString,
+    ...others: (Property.Background | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Background, number> | (string & {}),
-    preferred: Extract<Property.Background, number> | (string & {}),
-    maximum: Extract<Property.Background, number> | (string & {}),
+    minimum: Property.Background | CssString,
+    preferred: Property.Background | CssString,
+    maximum: Property.Background | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 background-attachment；初始值 scroll。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
  */
-export class BackgroundAttachmentCss extends CssProperty<Property.BackgroundAttachment> {
+export class BackgroundAttachmentCss extends CssProperty {
   readonly fixed = 'background-attachment:fixed;';
   readonly inherit = 'background-attachment:inherit;';
   readonly initial = 'background-attachment:initial;';
@@ -307,12 +319,16 @@ export class BackgroundAttachmentCss extends CssProperty<Property.BackgroundAtta
   constructor() {
     super('background-attachment');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundAttachment | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 background-blend-mode；初始值 normal。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-blend-mode
  */
-export class BackgroundBlendModeCss extends CssProperty<Property.BackgroundBlendMode> {
+export class BackgroundBlendModeCss extends CssProperty {
   readonly color = 'background-blend-mode:color;';
   readonly colorBurn = 'background-blend-mode:color-burn;';
   readonly colorDodge = 'background-blend-mode:color-dodge;';
@@ -337,12 +353,16 @@ export class BackgroundBlendModeCss extends CssProperty<Property.BackgroundBlend
   constructor() {
     super('background-blend-mode');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundBlendMode | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 background-clip；初始值 border-box。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-clip
  */
-export class BackgroundClipCss extends CssProperty<Property.BackgroundClip> {
+export class BackgroundClipCss extends CssProperty {
   readonly borderArea = 'background-clip:border-area;';
   readonly borderBox = 'background-clip:border-box;';
   readonly contentBox = 'background-clip:content-box;';
@@ -356,12 +376,16 @@ export class BackgroundClipCss extends CssProperty<Property.BackgroundClip> {
   constructor() {
     super('background-clip');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundClip | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** 背景颜色（CSS background-color）；初始值 transparent。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-color
  */
-export class BackgroundColorCss extends CssProperty<Property.BackgroundColor> {
+export class BackgroundColorCss extends CssProperty {
   readonly AccentColor = 'background-color:AccentColor;';
   readonly AccentColorText = 'background-color:AccentColorText;';
   readonly ActiveBorder = 'background-color:ActiveBorder;';
@@ -562,6 +586,10 @@ export class BackgroundColorCss extends CssProperty<Property.BackgroundColor> {
   constructor() {
     super('background-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -577,7 +605,7 @@ export class BackgroundColorCss extends CssProperty<Property.BackgroundColor> {
 /** CSS 属性 background-image；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
  */
-export class BackgroundImageCss extends CssProperty<Property.BackgroundImage> {
+export class BackgroundImageCss extends CssProperty {
   readonly inherit = 'background-image:inherit;';
   readonly initial = 'background-image:initial;';
   readonly none = 'background-image:none;';
@@ -587,12 +615,16 @@ export class BackgroundImageCss extends CssProperty<Property.BackgroundImage> {
   constructor() {
     super('background-image');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundImage | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 background-origin；初始值 padding-box。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-origin
  */
-export class BackgroundOriginCss extends CssProperty<Property.BackgroundOrigin> {
+export class BackgroundOriginCss extends CssProperty {
   readonly borderBox = 'background-origin:border-box;';
   readonly contentBox = 'background-origin:content-box;';
   readonly inherit = 'background-origin:inherit;';
@@ -604,12 +636,16 @@ export class BackgroundOriginCss extends CssProperty<Property.BackgroundOrigin> 
   constructor() {
     super('background-origin');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundOrigin | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 background-position；初始值 0% 0%。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position
  */
-export class BackgroundPositionCss extends LengthCssProperty<Property.BackgroundPosition> {
+export class BackgroundPositionCss extends LengthCssProperty {
   readonly bottom = 'background-position:bottom;';
   readonly center = 'background-position:center;';
   readonly inherit = 'background-position:inherit;';
@@ -622,6 +658,10 @@ export class BackgroundPositionCss extends LengthCssProperty<Property.Background
   readonly unset = 'background-position:unset;';
   constructor() {
     super('background-position');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundPosition | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -928,30 +968,30 @@ export class BackgroundPositionCss extends LengthCssProperty<Property.Background
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BackgroundPosition, number> | (string & {}),
-    ...others: (Extract<Property.BackgroundPosition, number> | (string & {}))[]
+    value: Property.BackgroundPosition | CssString,
+    ...others: (Property.BackgroundPosition | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BackgroundPosition, number> | (string & {}),
-    ...others: (Extract<Property.BackgroundPosition, number> | (string & {}))[]
+    value: Property.BackgroundPosition | CssString,
+    ...others: (Property.BackgroundPosition | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BackgroundPosition, number> | (string & {}),
-    preferred: Extract<Property.BackgroundPosition, number> | (string & {}),
-    maximum: Extract<Property.BackgroundPosition, number> | (string & {}),
+    minimum: Property.BackgroundPosition | CssString,
+    preferred: Property.BackgroundPosition | CssString,
+    maximum: Property.BackgroundPosition | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 background-position-x；初始值 0%。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-x
  */
-export class BackgroundPositionXCss extends LengthCssProperty<Property.BackgroundPositionX> {
+export class BackgroundPositionXCss extends LengthCssProperty {
   readonly center = 'background-position-x:center;';
   readonly inherit = 'background-position-x:inherit;';
   readonly initial = 'background-position-x:initial;';
@@ -965,6 +1005,10 @@ export class BackgroundPositionXCss extends LengthCssProperty<Property.Backgroun
   constructor() {
     super('background-position-x');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundPositionX | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -974,30 +1018,30 @@ export class BackgroundPositionXCss extends LengthCssProperty<Property.Backgroun
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BackgroundPositionX, number> | (string & {}),
-    ...others: (Extract<Property.BackgroundPositionX, number> | (string & {}))[]
+    value: Property.BackgroundPositionX | CssString,
+    ...others: (Property.BackgroundPositionX | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BackgroundPositionX, number> | (string & {}),
-    ...others: (Extract<Property.BackgroundPositionX, number> | (string & {}))[]
+    value: Property.BackgroundPositionX | CssString,
+    ...others: (Property.BackgroundPositionX | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BackgroundPositionX, number> | (string & {}),
-    preferred: Extract<Property.BackgroundPositionX, number> | (string & {}),
-    maximum: Extract<Property.BackgroundPositionX, number> | (string & {}),
+    minimum: Property.BackgroundPositionX | CssString,
+    preferred: Property.BackgroundPositionX | CssString,
+    maximum: Property.BackgroundPositionX | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 background-position-y；初始值 0%。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-y
  */
-export class BackgroundPositionYCss extends LengthCssProperty<Property.BackgroundPositionY> {
+export class BackgroundPositionYCss extends LengthCssProperty {
   readonly bottom = 'background-position-y:bottom;';
   readonly center = 'background-position-y:center;';
   readonly inherit = 'background-position-y:inherit;';
@@ -1011,6 +1055,10 @@ export class BackgroundPositionYCss extends LengthCssProperty<Property.Backgroun
   constructor() {
     super('background-position-y');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundPositionY | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -1020,30 +1068,30 @@ export class BackgroundPositionYCss extends LengthCssProperty<Property.Backgroun
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BackgroundPositionY, number> | (string & {}),
-    ...others: (Extract<Property.BackgroundPositionY, number> | (string & {}))[]
+    value: Property.BackgroundPositionY | CssString,
+    ...others: (Property.BackgroundPositionY | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BackgroundPositionY, number> | (string & {}),
-    ...others: (Extract<Property.BackgroundPositionY, number> | (string & {}))[]
+    value: Property.BackgroundPositionY | CssString,
+    ...others: (Property.BackgroundPositionY | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BackgroundPositionY, number> | (string & {}),
-    preferred: Extract<Property.BackgroundPositionY, number> | (string & {}),
-    maximum: Extract<Property.BackgroundPositionY, number> | (string & {}),
+    minimum: Property.BackgroundPositionY | CssString,
+    preferred: Property.BackgroundPositionY | CssString,
+    maximum: Property.BackgroundPositionY | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 background-repeat；初始值 repeat。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat
  */
-export class BackgroundRepeatCss extends CssProperty<Property.BackgroundRepeat> {
+export class BackgroundRepeatCss extends CssProperty {
   readonly inherit = 'background-repeat:inherit;';
   readonly initial = 'background-repeat:initial;';
   readonly noRepeat = 'background-repeat:no-repeat;';
@@ -1058,12 +1106,16 @@ export class BackgroundRepeatCss extends CssProperty<Property.BackgroundRepeat> 
   constructor() {
     super('background-repeat');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundRepeat | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 background-size；初始值 auto auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-size
  */
-export class BackgroundSizeCss extends LengthCssProperty<Property.BackgroundSize> {
+export class BackgroundSizeCss extends LengthCssProperty {
   readonly auto = 'background-size:auto;';
   readonly contain = 'background-size:contain;';
   readonly cover = 'background-size:cover;';
@@ -1074,6 +1126,10 @@ export class BackgroundSizeCss extends LengthCssProperty<Property.BackgroundSize
   readonly unset = 'background-size:unset;';
   constructor() {
     super('background-size');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BackgroundSize | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -1380,30 +1436,30 @@ export class BackgroundSizeCss extends LengthCssProperty<Property.BackgroundSize
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BackgroundSize, number> | (string & {}),
-    ...others: (Extract<Property.BackgroundSize, number> | (string & {}))[]
+    value: Property.BackgroundSize | CssString,
+    ...others: (Property.BackgroundSize | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BackgroundSize, number> | (string & {}),
-    ...others: (Extract<Property.BackgroundSize, number> | (string & {}))[]
+    value: Property.BackgroundSize | CssString,
+    ...others: (Property.BackgroundSize | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BackgroundSize, number> | (string & {}),
-    preferred: Extract<Property.BackgroundSize, number> | (string & {}),
-    maximum: Extract<Property.BackgroundSize, number> | (string & {}),
+    minimum: Property.BackgroundSize | CssString,
+    preferred: Property.BackgroundSize | CssString,
+    maximum: Property.BackgroundSize | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 baseline-shift；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
  */
-export class BaselineShiftCss extends LengthCssProperty<Property.BaselineShift> {
+export class BaselineShiftCss extends LengthCssProperty {
   readonly baseline = 'baseline-shift:baseline;';
   readonly inherit = 'baseline-shift:inherit;';
   readonly initial = 'baseline-shift:initial;';
@@ -1415,6 +1471,10 @@ export class BaselineShiftCss extends LengthCssProperty<Property.BaselineShift> 
   constructor() {
     super('baseline-shift');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BaselineShift | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -1424,30 +1484,30 @@ export class BaselineShiftCss extends LengthCssProperty<Property.BaselineShift> 
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BaselineShift, number> | (string & {}),
-    ...others: (Extract<Property.BaselineShift, number> | (string & {}))[]
+    value: Property.BaselineShift | CssString,
+    ...others: (Property.BaselineShift | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BaselineShift, number> | (string & {}),
-    ...others: (Extract<Property.BaselineShift, number> | (string & {}))[]
+    value: Property.BaselineShift | CssString,
+    ...others: (Property.BaselineShift | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BaselineShift, number> | (string & {}),
-    preferred: Extract<Property.BaselineShift, number> | (string & {}),
-    maximum: Extract<Property.BaselineShift, number> | (string & {}),
+    minimum: Property.BaselineShift | CssString,
+    preferred: Property.BaselineShift | CssString,
+    maximum: Property.BaselineShift | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 block-size；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/block-size
  */
-export class BlockSizeCss extends LengthCssProperty<Property.BlockSize> {
+export class BlockSizeCss extends LengthCssProperty {
   readonly auto = 'block-size:auto;';
   readonly fitContent = 'block-size:fit-content;';
   readonly inherit = 'block-size:inherit;';
@@ -1460,35 +1520,39 @@ export class BlockSizeCss extends LengthCssProperty<Property.BlockSize> {
   constructor() {
     super('block-size');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BlockSize | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BlockSize, number> | (string & {}),
-    ...others: (Extract<Property.BlockSize, number> | (string & {}))[]
+    value: Property.BlockSize | CssString,
+    ...others: (Property.BlockSize | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BlockSize, number> | (string & {}),
-    ...others: (Extract<Property.BlockSize, number> | (string & {}))[]
+    value: Property.BlockSize | CssString,
+    ...others: (Property.BlockSize | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BlockSize, number> | (string & {}),
-    preferred: Extract<Property.BlockSize, number> | (string & {}),
-    maximum: Extract<Property.BlockSize, number> | (string & {}),
+    minimum: Property.BlockSize | CssString,
+    preferred: Property.BlockSize | CssString,
+    maximum: Property.BlockSize | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** 边框简写（CSS border）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border
  */
-export class BorderCss extends LengthCssProperty<Property.Border> {
+export class BorderCss extends LengthCssProperty {
   readonly AccentColor = 'border:AccentColor;';
   readonly AccentColorText = 'border:AccentColorText;';
   readonly ActiveBorder = 'border:ActiveBorder;';
@@ -1702,6 +1766,10 @@ export class BorderCss extends LengthCssProperty<Property.Border> {
   constructor() {
     super('border');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Border | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -1716,31 +1784,25 @@ export class BorderCss extends LengthCssProperty<Property.Border> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Border, number> | (string & {}),
-    ...others: (Extract<Property.Border, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Border | CssString, ...others: (Property.Border | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Border, number> | (string & {}),
-    ...others: (Extract<Property.Border, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Border | CssString, ...others: (Property.Border | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Border, number> | (string & {}),
-    preferred: Extract<Property.Border, number> | (string & {}),
-    maximum: Extract<Property.Border, number> | (string & {}),
+    minimum: Property.Border | CssString,
+    preferred: Property.Border | CssString,
+    maximum: Property.Border | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-block。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block
  */
-export class BorderBlockCss extends LengthCssProperty<Property.BorderBlock> {
+export class BorderBlockCss extends LengthCssProperty {
   readonly AccentColor = 'border-block:AccentColor;';
   readonly AccentColorText = 'border-block:AccentColorText;';
   readonly ActiveBorder = 'border-block:ActiveBorder;';
@@ -1954,6 +2016,10 @@ export class BorderBlockCss extends LengthCssProperty<Property.BorderBlock> {
   constructor() {
     super('border-block');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlock | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -1969,30 +2035,30 @@ export class BorderBlockCss extends LengthCssProperty<Property.BorderBlock> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBlock, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlock, number> | (string & {}))[]
+    value: Property.BorderBlock | CssString,
+    ...others: (Property.BorderBlock | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBlock, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlock, number> | (string & {}))[]
+    value: Property.BorderBlock | CssString,
+    ...others: (Property.BorderBlock | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBlock, number> | (string & {}),
-    preferred: Extract<Property.BorderBlock, number> | (string & {}),
-    maximum: Extract<Property.BorderBlock, number> | (string & {}),
+    minimum: Property.BorderBlock | CssString,
+    preferred: Property.BorderBlock | CssString,
+    maximum: Property.BorderBlock | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-block-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-color
  */
-export class BorderBlockColorCss extends CssProperty<Property.BorderBlockColor> {
+export class BorderBlockColorCss extends CssProperty {
   readonly AccentColor = 'border-block-color:AccentColor;';
   readonly AccentColorText = 'border-block-color:AccentColorText;';
   readonly ActiveBorder = 'border-block-color:ActiveBorder;';
@@ -2193,6 +2259,10 @@ export class BorderBlockColorCss extends CssProperty<Property.BorderBlockColor> 
   constructor() {
     super('border-block-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -2208,7 +2278,7 @@ export class BorderBlockColorCss extends CssProperty<Property.BorderBlockColor> 
 /** CSS 属性 border-block-end。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end
  */
-export class BorderBlockEndCss extends LengthCssProperty<Property.BorderBlockEnd> {
+export class BorderBlockEndCss extends LengthCssProperty {
   readonly AccentColor = 'border-block-end:AccentColor;';
   readonly AccentColorText = 'border-block-end:AccentColorText;';
   readonly ActiveBorder = 'border-block-end:ActiveBorder;';
@@ -2422,6 +2492,10 @@ export class BorderBlockEndCss extends LengthCssProperty<Property.BorderBlockEnd
   constructor() {
     super('border-block-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -2437,30 +2511,30 @@ export class BorderBlockEndCss extends LengthCssProperty<Property.BorderBlockEnd
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBlockEnd, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockEnd, number> | (string & {}))[]
+    value: Property.BorderBlockEnd | CssString,
+    ...others: (Property.BorderBlockEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBlockEnd, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockEnd, number> | (string & {}))[]
+    value: Property.BorderBlockEnd | CssString,
+    ...others: (Property.BorderBlockEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBlockEnd, number> | (string & {}),
-    preferred: Extract<Property.BorderBlockEnd, number> | (string & {}),
-    maximum: Extract<Property.BorderBlockEnd, number> | (string & {}),
+    minimum: Property.BorderBlockEnd | CssString,
+    preferred: Property.BorderBlockEnd | CssString,
+    maximum: Property.BorderBlockEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-block-end-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-color
  */
-export class BorderBlockEndColorCss extends CssProperty<Property.BorderBlockEndColor> {
+export class BorderBlockEndColorCss extends CssProperty {
   readonly AccentColor = 'border-block-end-color:AccentColor;';
   readonly AccentColorText = 'border-block-end-color:AccentColorText;';
   readonly ActiveBorder = 'border-block-end-color:ActiveBorder;';
@@ -2661,6 +2735,10 @@ export class BorderBlockEndColorCss extends CssProperty<Property.BorderBlockEndC
   constructor() {
     super('border-block-end-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockEndColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -2676,7 +2754,7 @@ export class BorderBlockEndColorCss extends CssProperty<Property.BorderBlockEndC
 /** CSS 属性 border-block-end-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-style
  */
-export class BorderBlockEndStyleCss extends CssProperty<Property.BorderBlockEndStyle> {
+export class BorderBlockEndStyleCss extends CssProperty {
   readonly dashed = 'border-block-end-style:dashed;';
   readonly dotted = 'border-block-end-style:dotted;';
   readonly double = 'border-block-end-style:double;';
@@ -2695,12 +2773,16 @@ export class BorderBlockEndStyleCss extends CssProperty<Property.BorderBlockEndS
   constructor() {
     super('border-block-end-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockEndStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-block-end-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-width
  */
-export class BorderBlockEndWidthCss extends LengthCssProperty<Property.BorderBlockEndWidth> {
+export class BorderBlockEndWidthCss extends LengthCssProperty {
   readonly inherit = 'border-block-end-width:inherit;';
   readonly initial = 'border-block-end-width:initial;';
   readonly medium = 'border-block-end-width:medium;';
@@ -2712,35 +2794,39 @@ export class BorderBlockEndWidthCss extends LengthCssProperty<Property.BorderBlo
   constructor() {
     super('border-block-end-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockEndWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBlockEndWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockEndWidth, number> | (string & {}))[]
+    value: Property.BorderBlockEndWidth | CssString,
+    ...others: (Property.BorderBlockEndWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBlockEndWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockEndWidth, number> | (string & {}))[]
+    value: Property.BorderBlockEndWidth | CssString,
+    ...others: (Property.BorderBlockEndWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBlockEndWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderBlockEndWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderBlockEndWidth, number> | (string & {}),
+    minimum: Property.BorderBlockEndWidth | CssString,
+    preferred: Property.BorderBlockEndWidth | CssString,
+    maximum: Property.BorderBlockEndWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-block-start。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start
  */
-export class BorderBlockStartCss extends LengthCssProperty<Property.BorderBlockStart> {
+export class BorderBlockStartCss extends LengthCssProperty {
   readonly AccentColor = 'border-block-start:AccentColor;';
   readonly AccentColorText = 'border-block-start:AccentColorText;';
   readonly ActiveBorder = 'border-block-start:ActiveBorder;';
@@ -2954,6 +3040,10 @@ export class BorderBlockStartCss extends LengthCssProperty<Property.BorderBlockS
   constructor() {
     super('border-block-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockStart | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -2969,30 +3059,30 @@ export class BorderBlockStartCss extends LengthCssProperty<Property.BorderBlockS
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBlockStart, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockStart, number> | (string & {}))[]
+    value: Property.BorderBlockStart | CssString,
+    ...others: (Property.BorderBlockStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBlockStart, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockStart, number> | (string & {}))[]
+    value: Property.BorderBlockStart | CssString,
+    ...others: (Property.BorderBlockStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBlockStart, number> | (string & {}),
-    preferred: Extract<Property.BorderBlockStart, number> | (string & {}),
-    maximum: Extract<Property.BorderBlockStart, number> | (string & {}),
+    minimum: Property.BorderBlockStart | CssString,
+    preferred: Property.BorderBlockStart | CssString,
+    maximum: Property.BorderBlockStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-block-start-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-color
  */
-export class BorderBlockStartColorCss extends CssProperty<Property.BorderBlockStartColor> {
+export class BorderBlockStartColorCss extends CssProperty {
   readonly AccentColor = 'border-block-start-color:AccentColor;';
   readonly AccentColorText = 'border-block-start-color:AccentColorText;';
   readonly ActiveBorder = 'border-block-start-color:ActiveBorder;';
@@ -3193,6 +3283,10 @@ export class BorderBlockStartColorCss extends CssProperty<Property.BorderBlockSt
   constructor() {
     super('border-block-start-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockStartColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -3208,7 +3302,7 @@ export class BorderBlockStartColorCss extends CssProperty<Property.BorderBlockSt
 /** CSS 属性 border-block-start-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-style
  */
-export class BorderBlockStartStyleCss extends CssProperty<Property.BorderBlockStartStyle> {
+export class BorderBlockStartStyleCss extends CssProperty {
   readonly dashed = 'border-block-start-style:dashed;';
   readonly dotted = 'border-block-start-style:dotted;';
   readonly double = 'border-block-start-style:double;';
@@ -3227,12 +3321,16 @@ export class BorderBlockStartStyleCss extends CssProperty<Property.BorderBlockSt
   constructor() {
     super('border-block-start-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockStartStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-block-start-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-width
  */
-export class BorderBlockStartWidthCss extends LengthCssProperty<Property.BorderBlockStartWidth> {
+export class BorderBlockStartWidthCss extends LengthCssProperty {
   readonly inherit = 'border-block-start-width:inherit;';
   readonly initial = 'border-block-start-width:initial;';
   readonly medium = 'border-block-start-width:medium;';
@@ -3244,35 +3342,39 @@ export class BorderBlockStartWidthCss extends LengthCssProperty<Property.BorderB
   constructor() {
     super('border-block-start-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockStartWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBlockStartWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockStartWidth, number> | (string & {}))[]
+    value: Property.BorderBlockStartWidth | CssString,
+    ...others: (Property.BorderBlockStartWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBlockStartWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockStartWidth, number> | (string & {}))[]
+    value: Property.BorderBlockStartWidth | CssString,
+    ...others: (Property.BorderBlockStartWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBlockStartWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderBlockStartWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderBlockStartWidth, number> | (string & {}),
+    minimum: Property.BorderBlockStartWidth | CssString,
+    preferred: Property.BorderBlockStartWidth | CssString,
+    maximum: Property.BorderBlockStartWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-block-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-style
  */
-export class BorderBlockStyleCss extends CssProperty<Property.BorderBlockStyle> {
+export class BorderBlockStyleCss extends CssProperty {
   readonly dashed = 'border-block-style:dashed;';
   readonly dotted = 'border-block-style:dotted;';
   readonly double = 'border-block-style:double;';
@@ -3291,12 +3393,16 @@ export class BorderBlockStyleCss extends CssProperty<Property.BorderBlockStyle> 
   constructor() {
     super('border-block-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-block-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-width
  */
-export class BorderBlockWidthCss extends LengthCssProperty<Property.BorderBlockWidth> {
+export class BorderBlockWidthCss extends LengthCssProperty {
   readonly inherit = 'border-block-width:inherit;';
   readonly initial = 'border-block-width:initial;';
   readonly medium = 'border-block-width:medium;';
@@ -3307,6 +3413,10 @@ export class BorderBlockWidthCss extends LengthCssProperty<Property.BorderBlockW
   readonly unset = 'border-block-width:unset;';
   constructor() {
     super('border-block-width');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBlockWidth | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -3607,30 +3717,30 @@ export class BorderBlockWidthCss extends LengthCssProperty<Property.BorderBlockW
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBlockWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockWidth, number> | (string & {}))[]
+    value: Property.BorderBlockWidth | CssString,
+    ...others: (Property.BorderBlockWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBlockWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderBlockWidth, number> | (string & {}))[]
+    value: Property.BorderBlockWidth | CssString,
+    ...others: (Property.BorderBlockWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBlockWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderBlockWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderBlockWidth, number> | (string & {}),
+    minimum: Property.BorderBlockWidth | CssString,
+    preferred: Property.BorderBlockWidth | CssString,
+    maximum: Property.BorderBlockWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-bottom。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom
  */
-export class BorderBottomCss extends LengthCssProperty<Property.BorderBottom> {
+export class BorderBottomCss extends LengthCssProperty {
   readonly AccentColor = 'border-bottom:AccentColor;';
   readonly AccentColorText = 'border-bottom:AccentColorText;';
   readonly ActiveBorder = 'border-bottom:ActiveBorder;';
@@ -3844,6 +3954,10 @@ export class BorderBottomCss extends LengthCssProperty<Property.BorderBottom> {
   constructor() {
     super('border-bottom');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBottom | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -3859,30 +3973,30 @@ export class BorderBottomCss extends LengthCssProperty<Property.BorderBottom> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBottom, number> | (string & {}),
-    ...others: (Extract<Property.BorderBottom, number> | (string & {}))[]
+    value: Property.BorderBottom | CssString,
+    ...others: (Property.BorderBottom | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBottom, number> | (string & {}),
-    ...others: (Extract<Property.BorderBottom, number> | (string & {}))[]
+    value: Property.BorderBottom | CssString,
+    ...others: (Property.BorderBottom | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBottom, number> | (string & {}),
-    preferred: Extract<Property.BorderBottom, number> | (string & {}),
-    maximum: Extract<Property.BorderBottom, number> | (string & {}),
+    minimum: Property.BorderBottom | CssString,
+    preferred: Property.BorderBottom | CssString,
+    maximum: Property.BorderBottom | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-bottom-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-color
  */
-export class BorderBottomColorCss extends CssProperty<Property.BorderBottomColor> {
+export class BorderBottomColorCss extends CssProperty {
   readonly AccentColor = 'border-bottom-color:AccentColor;';
   readonly AccentColorText = 'border-bottom-color:AccentColorText;';
   readonly ActiveBorder = 'border-bottom-color:ActiveBorder;';
@@ -4083,6 +4197,10 @@ export class BorderBottomColorCss extends CssProperty<Property.BorderBottomColor
   constructor() {
     super('border-bottom-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBottomColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -4098,7 +4216,7 @@ export class BorderBottomColorCss extends CssProperty<Property.BorderBottomColor
 /** CSS 属性 border-bottom-left-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
  */
-export class BorderBottomLeftRadiusCss extends LengthCssProperty<Property.BorderBottomLeftRadius> {
+export class BorderBottomLeftRadiusCss extends LengthCssProperty {
   readonly inherit = 'border-bottom-left-radius:inherit;';
   readonly initial = 'border-bottom-left-radius:initial;';
   readonly revert = 'border-bottom-left-radius:revert;';
@@ -4107,6 +4225,10 @@ export class BorderBottomLeftRadiusCss extends LengthCssProperty<Property.Border
   constructor() {
     super('border-bottom-left-radius');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBottomLeftRadius | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
   px(value1: number, value2: number): string;
@@ -4412,30 +4534,30 @@ export class BorderBottomLeftRadiusCss extends LengthCssProperty<Property.Border
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBottomLeftRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderBottomLeftRadius, number> | (string & {}))[]
+    value: Property.BorderBottomLeftRadius | CssString,
+    ...others: (Property.BorderBottomLeftRadius | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBottomLeftRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderBottomLeftRadius, number> | (string & {}))[]
+    value: Property.BorderBottomLeftRadius | CssString,
+    ...others: (Property.BorderBottomLeftRadius | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBottomLeftRadius, number> | (string & {}),
-    preferred: Extract<Property.BorderBottomLeftRadius, number> | (string & {}),
-    maximum: Extract<Property.BorderBottomLeftRadius, number> | (string & {}),
+    minimum: Property.BorderBottomLeftRadius | CssString,
+    preferred: Property.BorderBottomLeftRadius | CssString,
+    maximum: Property.BorderBottomLeftRadius | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-bottom-right-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
  */
-export class BorderBottomRightRadiusCss extends LengthCssProperty<Property.BorderBottomRightRadius> {
+export class BorderBottomRightRadiusCss extends LengthCssProperty {
   readonly inherit = 'border-bottom-right-radius:inherit;';
   readonly initial = 'border-bottom-right-radius:initial;';
   readonly revert = 'border-bottom-right-radius:revert;';
@@ -4444,6 +4566,10 @@ export class BorderBottomRightRadiusCss extends LengthCssProperty<Property.Borde
   constructor() {
     super('border-bottom-right-radius');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBottomRightRadius | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
   px(value1: number, value2: number): string;
@@ -4749,30 +4875,30 @@ export class BorderBottomRightRadiusCss extends LengthCssProperty<Property.Borde
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBottomRightRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderBottomRightRadius, number> | (string & {}))[]
+    value: Property.BorderBottomRightRadius | CssString,
+    ...others: (Property.BorderBottomRightRadius | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBottomRightRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderBottomRightRadius, number> | (string & {}))[]
+    value: Property.BorderBottomRightRadius | CssString,
+    ...others: (Property.BorderBottomRightRadius | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBottomRightRadius, number> | (string & {}),
-    preferred: Extract<Property.BorderBottomRightRadius, number> | (string & {}),
-    maximum: Extract<Property.BorderBottomRightRadius, number> | (string & {}),
+    minimum: Property.BorderBottomRightRadius | CssString,
+    preferred: Property.BorderBottomRightRadius | CssString,
+    maximum: Property.BorderBottomRightRadius | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-bottom-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-style
  */
-export class BorderBottomStyleCss extends CssProperty<Property.BorderBottomStyle> {
+export class BorderBottomStyleCss extends CssProperty {
   readonly dashed = 'border-bottom-style:dashed;';
   readonly dotted = 'border-bottom-style:dotted;';
   readonly double = 'border-bottom-style:double;';
@@ -4791,12 +4917,16 @@ export class BorderBottomStyleCss extends CssProperty<Property.BorderBottomStyle
   constructor() {
     super('border-bottom-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBottomStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-bottom-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-width
  */
-export class BorderBottomWidthCss extends LengthCssProperty<Property.BorderBottomWidth> {
+export class BorderBottomWidthCss extends LengthCssProperty {
   readonly inherit = 'border-bottom-width:inherit;';
   readonly initial = 'border-bottom-width:initial;';
   readonly medium = 'border-bottom-width:medium;';
@@ -4808,35 +4938,39 @@ export class BorderBottomWidthCss extends LengthCssProperty<Property.BorderBotto
   constructor() {
     super('border-bottom-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderBottomWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderBottomWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderBottomWidth, number> | (string & {}))[]
+    value: Property.BorderBottomWidth | CssString,
+    ...others: (Property.BorderBottomWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderBottomWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderBottomWidth, number> | (string & {}))[]
+    value: Property.BorderBottomWidth | CssString,
+    ...others: (Property.BorderBottomWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderBottomWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderBottomWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderBottomWidth, number> | (string & {}),
+    minimum: Property.BorderBottomWidth | CssString,
+    preferred: Property.BorderBottomWidth | CssString,
+    maximum: Property.BorderBottomWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-collapse；初始值 separate。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-collapse
  */
-export class BorderCollapseCss extends CssProperty<Property.BorderCollapse> {
+export class BorderCollapseCss extends CssProperty {
   readonly collapse = 'border-collapse:collapse;';
   readonly inherit = 'border-collapse:inherit;';
   readonly initial = 'border-collapse:initial;';
@@ -4847,12 +4981,16 @@ export class BorderCollapseCss extends CssProperty<Property.BorderCollapse> {
   constructor() {
     super('border-collapse');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderCollapse | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-color。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-color
  */
-export class BorderColorCss extends CssProperty<Property.BorderColor> {
+export class BorderColorCss extends CssProperty {
   readonly AccentColor = 'border-color:AccentColor;';
   readonly AccentColorText = 'border-color:AccentColorText;';
   readonly ActiveBorder = 'border-color:ActiveBorder;';
@@ -5053,6 +5191,10 @@ export class BorderColorCss extends CssProperty<Property.BorderColor> {
   constructor() {
     super('border-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -5068,7 +5210,7 @@ export class BorderColorCss extends CssProperty<Property.BorderColor> {
 /** CSS 属性 border-end-end-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
  */
-export class BorderEndEndRadiusCss extends LengthCssProperty<Property.BorderEndEndRadius> {
+export class BorderEndEndRadiusCss extends LengthCssProperty {
   readonly inherit = 'border-end-end-radius:inherit;';
   readonly initial = 'border-end-end-radius:initial;';
   readonly revert = 'border-end-end-radius:revert;';
@@ -5077,35 +5219,39 @@ export class BorderEndEndRadiusCss extends LengthCssProperty<Property.BorderEndE
   constructor() {
     super('border-end-end-radius');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderEndEndRadius | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderEndEndRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderEndEndRadius, number> | (string & {}))[]
+    value: Property.BorderEndEndRadius | CssString,
+    ...others: (Property.BorderEndEndRadius | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderEndEndRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderEndEndRadius, number> | (string & {}))[]
+    value: Property.BorderEndEndRadius | CssString,
+    ...others: (Property.BorderEndEndRadius | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderEndEndRadius, number> | (string & {}),
-    preferred: Extract<Property.BorderEndEndRadius, number> | (string & {}),
-    maximum: Extract<Property.BorderEndEndRadius, number> | (string & {}),
+    minimum: Property.BorderEndEndRadius | CssString,
+    preferred: Property.BorderEndEndRadius | CssString,
+    maximum: Property.BorderEndEndRadius | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-end-start-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
  */
-export class BorderEndStartRadiusCss extends LengthCssProperty<Property.BorderEndStartRadius> {
+export class BorderEndStartRadiusCss extends LengthCssProperty {
   readonly inherit = 'border-end-start-radius:inherit;';
   readonly initial = 'border-end-start-radius:initial;';
   readonly revert = 'border-end-start-radius:revert;';
@@ -5114,35 +5260,39 @@ export class BorderEndStartRadiusCss extends LengthCssProperty<Property.BorderEn
   constructor() {
     super('border-end-start-radius');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderEndStartRadius | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderEndStartRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderEndStartRadius, number> | (string & {}))[]
+    value: Property.BorderEndStartRadius | CssString,
+    ...others: (Property.BorderEndStartRadius | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderEndStartRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderEndStartRadius, number> | (string & {}))[]
+    value: Property.BorderEndStartRadius | CssString,
+    ...others: (Property.BorderEndStartRadius | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderEndStartRadius, number> | (string & {}),
-    preferred: Extract<Property.BorderEndStartRadius, number> | (string & {}),
-    maximum: Extract<Property.BorderEndStartRadius, number> | (string & {}),
+    minimum: Property.BorderEndStartRadius | CssString,
+    preferred: Property.BorderEndStartRadius | CssString,
+    maximum: Property.BorderEndStartRadius | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-image。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image
  */
-export class BorderImageCss extends CssProperty<Property.BorderImage> {
+export class BorderImageCss extends CssProperty {
   readonly inherit = 'border-image:inherit;';
   readonly initial = 'border-image:initial;';
   readonly none = 'border-image:none;';
@@ -5156,35 +5306,39 @@ export class BorderImageCss extends CssProperty<Property.BorderImage> {
   constructor() {
     super('border-image');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderImage | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderImage, number> | (string & {}),
-    ...others: (Extract<Property.BorderImage, number> | (string & {}))[]
+    value: Property.BorderImage | CssString,
+    ...others: (Property.BorderImage | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderImage, number> | (string & {}),
-    ...others: (Extract<Property.BorderImage, number> | (string & {}))[]
+    value: Property.BorderImage | CssString,
+    ...others: (Property.BorderImage | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderImage, number> | (string & {}),
-    preferred: Extract<Property.BorderImage, number> | (string & {}),
-    maximum: Extract<Property.BorderImage, number> | (string & {}),
+    minimum: Property.BorderImage | CssString,
+    preferred: Property.BorderImage | CssString,
+    maximum: Property.BorderImage | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-image-outset；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-outset
  */
-export class BorderImageOutsetCss extends LengthCssProperty<Property.BorderImageOutset> {
+export class BorderImageOutsetCss extends LengthCssProperty {
   readonly inherit = 'border-image-outset:inherit;';
   readonly initial = 'border-image-outset:initial;';
   readonly revert = 'border-image-outset:revert;';
@@ -5192,6 +5346,10 @@ export class BorderImageOutsetCss extends LengthCssProperty<Property.BorderImage
   readonly unset = 'border-image-outset:unset;';
   constructor() {
     super('border-image-outset');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderImageOutset | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -5590,30 +5748,30 @@ export class BorderImageOutsetCss extends LengthCssProperty<Property.BorderImage
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderImageOutset, number> | (string & {}),
-    ...others: (Extract<Property.BorderImageOutset, number> | (string & {}))[]
+    value: Property.BorderImageOutset | CssString,
+    ...others: (Property.BorderImageOutset | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderImageOutset, number> | (string & {}),
-    ...others: (Extract<Property.BorderImageOutset, number> | (string & {}))[]
+    value: Property.BorderImageOutset | CssString,
+    ...others: (Property.BorderImageOutset | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderImageOutset, number> | (string & {}),
-    preferred: Extract<Property.BorderImageOutset, number> | (string & {}),
-    maximum: Extract<Property.BorderImageOutset, number> | (string & {}),
+    minimum: Property.BorderImageOutset | CssString,
+    preferred: Property.BorderImageOutset | CssString,
+    maximum: Property.BorderImageOutset | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-image-repeat；初始值 stretch。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-repeat
  */
-export class BorderImageRepeatCss extends CssProperty<Property.BorderImageRepeat> {
+export class BorderImageRepeatCss extends CssProperty {
   readonly inherit = 'border-image-repeat:inherit;';
   readonly initial = 'border-image-repeat:initial;';
   readonly repeat = 'border-image-repeat:repeat;';
@@ -5626,12 +5784,16 @@ export class BorderImageRepeatCss extends CssProperty<Property.BorderImageRepeat
   constructor() {
     super('border-image-repeat');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderImageRepeat | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-image-slice；初始值 100%。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-slice
  */
-export class BorderImageSliceCss extends CssProperty<Property.BorderImageSlice> {
+export class BorderImageSliceCss extends CssProperty {
   readonly inherit = 'border-image-slice:inherit;';
   readonly initial = 'border-image-slice:initial;';
   readonly revert = 'border-image-slice:revert;';
@@ -5639,6 +5801,10 @@ export class BorderImageSliceCss extends CssProperty<Property.BorderImageSlice> 
   readonly unset = 'border-image-slice:unset;';
   constructor() {
     super('border-image-slice');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderImageSlice | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
@@ -5653,30 +5819,30 @@ export class BorderImageSliceCss extends CssProperty<Property.BorderImageSlice> 
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderImageSlice, number> | (string & {}),
-    ...others: (Extract<Property.BorderImageSlice, number> | (string & {}))[]
+    value: Property.BorderImageSlice | CssString,
+    ...others: (Property.BorderImageSlice | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderImageSlice, number> | (string & {}),
-    ...others: (Extract<Property.BorderImageSlice, number> | (string & {}))[]
+    value: Property.BorderImageSlice | CssString,
+    ...others: (Property.BorderImageSlice | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderImageSlice, number> | (string & {}),
-    preferred: Extract<Property.BorderImageSlice, number> | (string & {}),
-    maximum: Extract<Property.BorderImageSlice, number> | (string & {}),
+    minimum: Property.BorderImageSlice | CssString,
+    preferred: Property.BorderImageSlice | CssString,
+    maximum: Property.BorderImageSlice | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-image-source；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-source
  */
-export class BorderImageSourceCss extends CssProperty<Property.BorderImageSource> {
+export class BorderImageSourceCss extends CssProperty {
   readonly inherit = 'border-image-source:inherit;';
   readonly initial = 'border-image-source:initial;';
   readonly none = 'border-image-source:none;';
@@ -5686,12 +5852,16 @@ export class BorderImageSourceCss extends CssProperty<Property.BorderImageSource
   constructor() {
     super('border-image-source');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderImageSource | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-image-width；初始值 1。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-width
  */
-export class BorderImageWidthCss extends LengthCssProperty<Property.BorderImageWidth> {
+export class BorderImageWidthCss extends LengthCssProperty {
   readonly auto = 'border-image-width:auto;';
   readonly inherit = 'border-image-width:inherit;';
   readonly initial = 'border-image-width:initial;';
@@ -5700,6 +5870,10 @@ export class BorderImageWidthCss extends LengthCssProperty<Property.BorderImageW
   readonly unset = 'border-image-width:unset;';
   constructor() {
     super('border-image-width');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderImageWidth | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -6106,30 +6280,30 @@ export class BorderImageWidthCss extends LengthCssProperty<Property.BorderImageW
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderImageWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderImageWidth, number> | (string & {}))[]
+    value: Property.BorderImageWidth | CssString,
+    ...others: (Property.BorderImageWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderImageWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderImageWidth, number> | (string & {}))[]
+    value: Property.BorderImageWidth | CssString,
+    ...others: (Property.BorderImageWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderImageWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderImageWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderImageWidth, number> | (string & {}),
+    minimum: Property.BorderImageWidth | CssString,
+    preferred: Property.BorderImageWidth | CssString,
+    maximum: Property.BorderImageWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-inline。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline
  */
-export class BorderInlineCss extends LengthCssProperty<Property.BorderInline> {
+export class BorderInlineCss extends LengthCssProperty {
   readonly AccentColor = 'border-inline:AccentColor;';
   readonly AccentColorText = 'border-inline:AccentColorText;';
   readonly ActiveBorder = 'border-inline:ActiveBorder;';
@@ -6343,6 +6517,10 @@ export class BorderInlineCss extends LengthCssProperty<Property.BorderInline> {
   constructor() {
     super('border-inline');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInline | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -6358,30 +6536,30 @@ export class BorderInlineCss extends LengthCssProperty<Property.BorderInline> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderInline, number> | (string & {}),
-    ...others: (Extract<Property.BorderInline, number> | (string & {}))[]
+    value: Property.BorderInline | CssString,
+    ...others: (Property.BorderInline | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderInline, number> | (string & {}),
-    ...others: (Extract<Property.BorderInline, number> | (string & {}))[]
+    value: Property.BorderInline | CssString,
+    ...others: (Property.BorderInline | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderInline, number> | (string & {}),
-    preferred: Extract<Property.BorderInline, number> | (string & {}),
-    maximum: Extract<Property.BorderInline, number> | (string & {}),
+    minimum: Property.BorderInline | CssString,
+    preferred: Property.BorderInline | CssString,
+    maximum: Property.BorderInline | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-inline-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-color
  */
-export class BorderInlineColorCss extends CssProperty<Property.BorderInlineColor> {
+export class BorderInlineColorCss extends CssProperty {
   readonly AccentColor = 'border-inline-color:AccentColor;';
   readonly AccentColorText = 'border-inline-color:AccentColorText;';
   readonly ActiveBorder = 'border-inline-color:ActiveBorder;';
@@ -6582,6 +6760,10 @@ export class BorderInlineColorCss extends CssProperty<Property.BorderInlineColor
   constructor() {
     super('border-inline-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -6597,7 +6779,7 @@ export class BorderInlineColorCss extends CssProperty<Property.BorderInlineColor
 /** CSS 属性 border-inline-end。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end
  */
-export class BorderInlineEndCss extends LengthCssProperty<Property.BorderInlineEnd> {
+export class BorderInlineEndCss extends LengthCssProperty {
   readonly AccentColor = 'border-inline-end:AccentColor;';
   readonly AccentColorText = 'border-inline-end:AccentColorText;';
   readonly ActiveBorder = 'border-inline-end:ActiveBorder;';
@@ -6811,6 +6993,10 @@ export class BorderInlineEndCss extends LengthCssProperty<Property.BorderInlineE
   constructor() {
     super('border-inline-end');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineEnd | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -6826,30 +7012,30 @@ export class BorderInlineEndCss extends LengthCssProperty<Property.BorderInlineE
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderInlineEnd, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineEnd, number> | (string & {}))[]
+    value: Property.BorderInlineEnd | CssString,
+    ...others: (Property.BorderInlineEnd | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderInlineEnd, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineEnd, number> | (string & {}))[]
+    value: Property.BorderInlineEnd | CssString,
+    ...others: (Property.BorderInlineEnd | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderInlineEnd, number> | (string & {}),
-    preferred: Extract<Property.BorderInlineEnd, number> | (string & {}),
-    maximum: Extract<Property.BorderInlineEnd, number> | (string & {}),
+    minimum: Property.BorderInlineEnd | CssString,
+    preferred: Property.BorderInlineEnd | CssString,
+    maximum: Property.BorderInlineEnd | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-inline-end-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-color
  */
-export class BorderInlineEndColorCss extends CssProperty<Property.BorderInlineEndColor> {
+export class BorderInlineEndColorCss extends CssProperty {
   readonly AccentColor = 'border-inline-end-color:AccentColor;';
   readonly AccentColorText = 'border-inline-end-color:AccentColorText;';
   readonly ActiveBorder = 'border-inline-end-color:ActiveBorder;';
@@ -7050,6 +7236,10 @@ export class BorderInlineEndColorCss extends CssProperty<Property.BorderInlineEn
   constructor() {
     super('border-inline-end-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineEndColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -7065,7 +7255,7 @@ export class BorderInlineEndColorCss extends CssProperty<Property.BorderInlineEn
 /** CSS 属性 border-inline-end-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-style
  */
-export class BorderInlineEndStyleCss extends CssProperty<Property.BorderInlineEndStyle> {
+export class BorderInlineEndStyleCss extends CssProperty {
   readonly dashed = 'border-inline-end-style:dashed;';
   readonly dotted = 'border-inline-end-style:dotted;';
   readonly double = 'border-inline-end-style:double;';
@@ -7084,12 +7274,16 @@ export class BorderInlineEndStyleCss extends CssProperty<Property.BorderInlineEn
   constructor() {
     super('border-inline-end-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineEndStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-inline-end-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
  */
-export class BorderInlineEndWidthCss extends LengthCssProperty<Property.BorderInlineEndWidth> {
+export class BorderInlineEndWidthCss extends LengthCssProperty {
   readonly inherit = 'border-inline-end-width:inherit;';
   readonly initial = 'border-inline-end-width:initial;';
   readonly medium = 'border-inline-end-width:medium;';
@@ -7101,35 +7295,39 @@ export class BorderInlineEndWidthCss extends LengthCssProperty<Property.BorderIn
   constructor() {
     super('border-inline-end-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineEndWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderInlineEndWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineEndWidth, number> | (string & {}))[]
+    value: Property.BorderInlineEndWidth | CssString,
+    ...others: (Property.BorderInlineEndWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderInlineEndWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineEndWidth, number> | (string & {}))[]
+    value: Property.BorderInlineEndWidth | CssString,
+    ...others: (Property.BorderInlineEndWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderInlineEndWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderInlineEndWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderInlineEndWidth, number> | (string & {}),
+    minimum: Property.BorderInlineEndWidth | CssString,
+    preferred: Property.BorderInlineEndWidth | CssString,
+    maximum: Property.BorderInlineEndWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-inline-start。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start
  */
-export class BorderInlineStartCss extends LengthCssProperty<Property.BorderInlineStart> {
+export class BorderInlineStartCss extends LengthCssProperty {
   readonly AccentColor = 'border-inline-start:AccentColor;';
   readonly AccentColorText = 'border-inline-start:AccentColorText;';
   readonly ActiveBorder = 'border-inline-start:ActiveBorder;';
@@ -7343,6 +7541,10 @@ export class BorderInlineStartCss extends LengthCssProperty<Property.BorderInlin
   constructor() {
     super('border-inline-start');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineStart | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -7358,30 +7560,30 @@ export class BorderInlineStartCss extends LengthCssProperty<Property.BorderInlin
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderInlineStart, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineStart, number> | (string & {}))[]
+    value: Property.BorderInlineStart | CssString,
+    ...others: (Property.BorderInlineStart | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderInlineStart, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineStart, number> | (string & {}))[]
+    value: Property.BorderInlineStart | CssString,
+    ...others: (Property.BorderInlineStart | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderInlineStart, number> | (string & {}),
-    preferred: Extract<Property.BorderInlineStart, number> | (string & {}),
-    maximum: Extract<Property.BorderInlineStart, number> | (string & {}),
+    minimum: Property.BorderInlineStart | CssString,
+    preferred: Property.BorderInlineStart | CssString,
+    maximum: Property.BorderInlineStart | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-inline-start-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-color
  */
-export class BorderInlineStartColorCss extends CssProperty<Property.BorderInlineStartColor> {
+export class BorderInlineStartColorCss extends CssProperty {
   readonly AccentColor = 'border-inline-start-color:AccentColor;';
   readonly AccentColorText = 'border-inline-start-color:AccentColorText;';
   readonly ActiveBorder = 'border-inline-start-color:ActiveBorder;';
@@ -7582,6 +7784,10 @@ export class BorderInlineStartColorCss extends CssProperty<Property.BorderInline
   constructor() {
     super('border-inline-start-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineStartColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -7597,7 +7803,7 @@ export class BorderInlineStartColorCss extends CssProperty<Property.BorderInline
 /** CSS 属性 border-inline-start-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-style
  */
-export class BorderInlineStartStyleCss extends CssProperty<Property.BorderInlineStartStyle> {
+export class BorderInlineStartStyleCss extends CssProperty {
   readonly dashed = 'border-inline-start-style:dashed;';
   readonly dotted = 'border-inline-start-style:dotted;';
   readonly double = 'border-inline-start-style:double;';
@@ -7616,12 +7822,16 @@ export class BorderInlineStartStyleCss extends CssProperty<Property.BorderInline
   constructor() {
     super('border-inline-start-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineStartStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-inline-start-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
  */
-export class BorderInlineStartWidthCss extends LengthCssProperty<Property.BorderInlineStartWidth> {
+export class BorderInlineStartWidthCss extends LengthCssProperty {
   readonly inherit = 'border-inline-start-width:inherit;';
   readonly initial = 'border-inline-start-width:initial;';
   readonly medium = 'border-inline-start-width:medium;';
@@ -7633,35 +7843,39 @@ export class BorderInlineStartWidthCss extends LengthCssProperty<Property.Border
   constructor() {
     super('border-inline-start-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineStartWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderInlineStartWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineStartWidth, number> | (string & {}))[]
+    value: Property.BorderInlineStartWidth | CssString,
+    ...others: (Property.BorderInlineStartWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderInlineStartWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineStartWidth, number> | (string & {}))[]
+    value: Property.BorderInlineStartWidth | CssString,
+    ...others: (Property.BorderInlineStartWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderInlineStartWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderInlineStartWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderInlineStartWidth, number> | (string & {}),
+    minimum: Property.BorderInlineStartWidth | CssString,
+    preferred: Property.BorderInlineStartWidth | CssString,
+    maximum: Property.BorderInlineStartWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-inline-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-style
  */
-export class BorderInlineStyleCss extends CssProperty<Property.BorderInlineStyle> {
+export class BorderInlineStyleCss extends CssProperty {
   readonly dashed = 'border-inline-style:dashed;';
   readonly dotted = 'border-inline-style:dotted;';
   readonly double = 'border-inline-style:double;';
@@ -7680,12 +7894,16 @@ export class BorderInlineStyleCss extends CssProperty<Property.BorderInlineStyle
   constructor() {
     super('border-inline-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-inline-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-width
  */
-export class BorderInlineWidthCss extends LengthCssProperty<Property.BorderInlineWidth> {
+export class BorderInlineWidthCss extends LengthCssProperty {
   readonly inherit = 'border-inline-width:inherit;';
   readonly initial = 'border-inline-width:initial;';
   readonly medium = 'border-inline-width:medium;';
@@ -7696,6 +7914,10 @@ export class BorderInlineWidthCss extends LengthCssProperty<Property.BorderInlin
   readonly unset = 'border-inline-width:unset;';
   constructor() {
     super('border-inline-width');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderInlineWidth | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -7996,30 +8218,30 @@ export class BorderInlineWidthCss extends LengthCssProperty<Property.BorderInlin
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderInlineWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineWidth, number> | (string & {}))[]
+    value: Property.BorderInlineWidth | CssString,
+    ...others: (Property.BorderInlineWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderInlineWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderInlineWidth, number> | (string & {}))[]
+    value: Property.BorderInlineWidth | CssString,
+    ...others: (Property.BorderInlineWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderInlineWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderInlineWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderInlineWidth, number> | (string & {}),
+    minimum: Property.BorderInlineWidth | CssString,
+    preferred: Property.BorderInlineWidth | CssString,
+    maximum: Property.BorderInlineWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-left。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left
  */
-export class BorderLeftCss extends LengthCssProperty<Property.BorderLeft> {
+export class BorderLeftCss extends LengthCssProperty {
   readonly AccentColor = 'border-left:AccentColor;';
   readonly AccentColorText = 'border-left:AccentColorText;';
   readonly ActiveBorder = 'border-left:ActiveBorder;';
@@ -8233,6 +8455,10 @@ export class BorderLeftCss extends LengthCssProperty<Property.BorderLeft> {
   constructor() {
     super('border-left');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderLeft | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -8248,30 +8474,30 @@ export class BorderLeftCss extends LengthCssProperty<Property.BorderLeft> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderLeft, number> | (string & {}),
-    ...others: (Extract<Property.BorderLeft, number> | (string & {}))[]
+    value: Property.BorderLeft | CssString,
+    ...others: (Property.BorderLeft | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderLeft, number> | (string & {}),
-    ...others: (Extract<Property.BorderLeft, number> | (string & {}))[]
+    value: Property.BorderLeft | CssString,
+    ...others: (Property.BorderLeft | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderLeft, number> | (string & {}),
-    preferred: Extract<Property.BorderLeft, number> | (string & {}),
-    maximum: Extract<Property.BorderLeft, number> | (string & {}),
+    minimum: Property.BorderLeft | CssString,
+    preferred: Property.BorderLeft | CssString,
+    maximum: Property.BorderLeft | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-left-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-color
  */
-export class BorderLeftColorCss extends CssProperty<Property.BorderLeftColor> {
+export class BorderLeftColorCss extends CssProperty {
   readonly AccentColor = 'border-left-color:AccentColor;';
   readonly AccentColorText = 'border-left-color:AccentColorText;';
   readonly ActiveBorder = 'border-left-color:ActiveBorder;';
@@ -8472,6 +8698,10 @@ export class BorderLeftColorCss extends CssProperty<Property.BorderLeftColor> {
   constructor() {
     super('border-left-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderLeftColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -8487,7 +8717,7 @@ export class BorderLeftColorCss extends CssProperty<Property.BorderLeftColor> {
 /** CSS 属性 border-left-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-style
  */
-export class BorderLeftStyleCss extends CssProperty<Property.BorderLeftStyle> {
+export class BorderLeftStyleCss extends CssProperty {
   readonly dashed = 'border-left-style:dashed;';
   readonly dotted = 'border-left-style:dotted;';
   readonly double = 'border-left-style:double;';
@@ -8506,12 +8736,16 @@ export class BorderLeftStyleCss extends CssProperty<Property.BorderLeftStyle> {
   constructor() {
     super('border-left-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderLeftStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-left-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-width
  */
-export class BorderLeftWidthCss extends LengthCssProperty<Property.BorderLeftWidth> {
+export class BorderLeftWidthCss extends LengthCssProperty {
   readonly inherit = 'border-left-width:inherit;';
   readonly initial = 'border-left-width:initial;';
   readonly medium = 'border-left-width:medium;';
@@ -8523,35 +8757,39 @@ export class BorderLeftWidthCss extends LengthCssProperty<Property.BorderLeftWid
   constructor() {
     super('border-left-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderLeftWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderLeftWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderLeftWidth, number> | (string & {}))[]
+    value: Property.BorderLeftWidth | CssString,
+    ...others: (Property.BorderLeftWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderLeftWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderLeftWidth, number> | (string & {}))[]
+    value: Property.BorderLeftWidth | CssString,
+    ...others: (Property.BorderLeftWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderLeftWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderLeftWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderLeftWidth, number> | (string & {}),
+    minimum: Property.BorderLeftWidth | CssString,
+    preferred: Property.BorderLeftWidth | CssString,
+    maximum: Property.BorderLeftWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-radius。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-radius
  */
-export class BorderRadiusCss extends LengthCssProperty<Property.BorderRadius> {
+export class BorderRadiusCss extends LengthCssProperty {
   readonly inherit = 'border-radius:inherit;';
   readonly initial = 'border-radius:initial;';
   readonly revert = 'border-radius:revert;';
@@ -8559,6 +8797,10 @@ export class BorderRadiusCss extends LengthCssProperty<Property.BorderRadius> {
   readonly unset = 'border-radius:unset;';
   constructor() {
     super('border-radius');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderRadius | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -8965,30 +9207,30 @@ export class BorderRadiusCss extends LengthCssProperty<Property.BorderRadius> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderRadius, number> | (string & {}))[]
+    value: Property.BorderRadius | CssString,
+    ...others: (Property.BorderRadius | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderRadius, number> | (string & {}))[]
+    value: Property.BorderRadius | CssString,
+    ...others: (Property.BorderRadius | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderRadius, number> | (string & {}),
-    preferred: Extract<Property.BorderRadius, number> | (string & {}),
-    maximum: Extract<Property.BorderRadius, number> | (string & {}),
+    minimum: Property.BorderRadius | CssString,
+    preferred: Property.BorderRadius | CssString,
+    maximum: Property.BorderRadius | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-right。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
  */
-export class BorderRightCss extends LengthCssProperty<Property.BorderRight> {
+export class BorderRightCss extends LengthCssProperty {
   readonly AccentColor = 'border-right:AccentColor;';
   readonly AccentColorText = 'border-right:AccentColorText;';
   readonly ActiveBorder = 'border-right:ActiveBorder;';
@@ -9202,6 +9444,10 @@ export class BorderRightCss extends LengthCssProperty<Property.BorderRight> {
   constructor() {
     super('border-right');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderRight | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -9217,30 +9463,30 @@ export class BorderRightCss extends LengthCssProperty<Property.BorderRight> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderRight, number> | (string & {}),
-    ...others: (Extract<Property.BorderRight, number> | (string & {}))[]
+    value: Property.BorderRight | CssString,
+    ...others: (Property.BorderRight | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderRight, number> | (string & {}),
-    ...others: (Extract<Property.BorderRight, number> | (string & {}))[]
+    value: Property.BorderRight | CssString,
+    ...others: (Property.BorderRight | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderRight, number> | (string & {}),
-    preferred: Extract<Property.BorderRight, number> | (string & {}),
-    maximum: Extract<Property.BorderRight, number> | (string & {}),
+    minimum: Property.BorderRight | CssString,
+    preferred: Property.BorderRight | CssString,
+    maximum: Property.BorderRight | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-right-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-color
  */
-export class BorderRightColorCss extends CssProperty<Property.BorderRightColor> {
+export class BorderRightColorCss extends CssProperty {
   readonly AccentColor = 'border-right-color:AccentColor;';
   readonly AccentColorText = 'border-right-color:AccentColorText;';
   readonly ActiveBorder = 'border-right-color:ActiveBorder;';
@@ -9441,6 +9687,10 @@ export class BorderRightColorCss extends CssProperty<Property.BorderRightColor> 
   constructor() {
     super('border-right-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderRightColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -9456,7 +9706,7 @@ export class BorderRightColorCss extends CssProperty<Property.BorderRightColor> 
 /** CSS 属性 border-right-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-style
  */
-export class BorderRightStyleCss extends CssProperty<Property.BorderRightStyle> {
+export class BorderRightStyleCss extends CssProperty {
   readonly dashed = 'border-right-style:dashed;';
   readonly dotted = 'border-right-style:dotted;';
   readonly double = 'border-right-style:double;';
@@ -9475,12 +9725,16 @@ export class BorderRightStyleCss extends CssProperty<Property.BorderRightStyle> 
   constructor() {
     super('border-right-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderRightStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-right-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-width
  */
-export class BorderRightWidthCss extends LengthCssProperty<Property.BorderRightWidth> {
+export class BorderRightWidthCss extends LengthCssProperty {
   readonly inherit = 'border-right-width:inherit;';
   readonly initial = 'border-right-width:initial;';
   readonly medium = 'border-right-width:medium;';
@@ -9492,35 +9746,39 @@ export class BorderRightWidthCss extends LengthCssProperty<Property.BorderRightW
   constructor() {
     super('border-right-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderRightWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderRightWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderRightWidth, number> | (string & {}))[]
+    value: Property.BorderRightWidth | CssString,
+    ...others: (Property.BorderRightWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderRightWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderRightWidth, number> | (string & {}))[]
+    value: Property.BorderRightWidth | CssString,
+    ...others: (Property.BorderRightWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderRightWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderRightWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderRightWidth, number> | (string & {}),
+    minimum: Property.BorderRightWidth | CssString,
+    preferred: Property.BorderRightWidth | CssString,
+    maximum: Property.BorderRightWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-spacing；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-spacing
  */
-export class BorderSpacingCss extends LengthCssProperty<Property.BorderSpacing> {
+export class BorderSpacingCss extends LengthCssProperty {
   readonly inherit = 'border-spacing:inherit;';
   readonly initial = 'border-spacing:initial;';
   readonly revert = 'border-spacing:revert;';
@@ -9528,6 +9786,10 @@ export class BorderSpacingCss extends LengthCssProperty<Property.BorderSpacing> 
   readonly unset = 'border-spacing:unset;';
   constructor() {
     super('border-spacing');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderSpacing | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -9828,30 +10090,30 @@ export class BorderSpacingCss extends LengthCssProperty<Property.BorderSpacing> 
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderSpacing, number> | (string & {}),
-    ...others: (Extract<Property.BorderSpacing, number> | (string & {}))[]
+    value: Property.BorderSpacing | CssString,
+    ...others: (Property.BorderSpacing | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderSpacing, number> | (string & {}),
-    ...others: (Extract<Property.BorderSpacing, number> | (string & {}))[]
+    value: Property.BorderSpacing | CssString,
+    ...others: (Property.BorderSpacing | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderSpacing, number> | (string & {}),
-    preferred: Extract<Property.BorderSpacing, number> | (string & {}),
-    maximum: Extract<Property.BorderSpacing, number> | (string & {}),
+    minimum: Property.BorderSpacing | CssString,
+    preferred: Property.BorderSpacing | CssString,
+    maximum: Property.BorderSpacing | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-start-end-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
  */
-export class BorderStartEndRadiusCss extends LengthCssProperty<Property.BorderStartEndRadius> {
+export class BorderStartEndRadiusCss extends LengthCssProperty {
   readonly inherit = 'border-start-end-radius:inherit;';
   readonly initial = 'border-start-end-radius:initial;';
   readonly revert = 'border-start-end-radius:revert;';
@@ -9860,35 +10122,39 @@ export class BorderStartEndRadiusCss extends LengthCssProperty<Property.BorderSt
   constructor() {
     super('border-start-end-radius');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderStartEndRadius | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderStartEndRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderStartEndRadius, number> | (string & {}))[]
+    value: Property.BorderStartEndRadius | CssString,
+    ...others: (Property.BorderStartEndRadius | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderStartEndRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderStartEndRadius, number> | (string & {}))[]
+    value: Property.BorderStartEndRadius | CssString,
+    ...others: (Property.BorderStartEndRadius | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderStartEndRadius, number> | (string & {}),
-    preferred: Extract<Property.BorderStartEndRadius, number> | (string & {}),
-    maximum: Extract<Property.BorderStartEndRadius, number> | (string & {}),
+    minimum: Property.BorderStartEndRadius | CssString,
+    preferred: Property.BorderStartEndRadius | CssString,
+    maximum: Property.BorderStartEndRadius | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-start-start-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
  */
-export class BorderStartStartRadiusCss extends LengthCssProperty<Property.BorderStartStartRadius> {
+export class BorderStartStartRadiusCss extends LengthCssProperty {
   readonly inherit = 'border-start-start-radius:inherit;';
   readonly initial = 'border-start-start-radius:initial;';
   readonly revert = 'border-start-start-radius:revert;';
@@ -9897,35 +10163,39 @@ export class BorderStartStartRadiusCss extends LengthCssProperty<Property.Border
   constructor() {
     super('border-start-start-radius');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderStartStartRadius | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderStartStartRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderStartStartRadius, number> | (string & {}))[]
+    value: Property.BorderStartStartRadius | CssString,
+    ...others: (Property.BorderStartStartRadius | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderStartStartRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderStartStartRadius, number> | (string & {}))[]
+    value: Property.BorderStartStartRadius | CssString,
+    ...others: (Property.BorderStartStartRadius | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderStartStartRadius, number> | (string & {}),
-    preferred: Extract<Property.BorderStartStartRadius, number> | (string & {}),
-    maximum: Extract<Property.BorderStartStartRadius, number> | (string & {}),
+    minimum: Property.BorderStartStartRadius | CssString,
+    preferred: Property.BorderStartStartRadius | CssString,
+    maximum: Property.BorderStartStartRadius | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-style。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-style
  */
-export class BorderStyleCss extends CssProperty<Property.BorderStyle> {
+export class BorderStyleCss extends CssProperty {
   readonly dashed = 'border-style:dashed;';
   readonly dotted = 'border-style:dotted;';
   readonly double = 'border-style:double;';
@@ -9944,12 +10214,16 @@ export class BorderStyleCss extends CssProperty<Property.BorderStyle> {
   constructor() {
     super('border-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-top。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
  */
-export class BorderTopCss extends LengthCssProperty<Property.BorderTop> {
+export class BorderTopCss extends LengthCssProperty {
   readonly AccentColor = 'border-top:AccentColor;';
   readonly AccentColorText = 'border-top:AccentColorText;';
   readonly ActiveBorder = 'border-top:ActiveBorder;';
@@ -10163,6 +10437,10 @@ export class BorderTopCss extends LengthCssProperty<Property.BorderTop> {
   constructor() {
     super('border-top');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderTop | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -10178,30 +10456,30 @@ export class BorderTopCss extends LengthCssProperty<Property.BorderTop> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderTop, number> | (string & {}),
-    ...others: (Extract<Property.BorderTop, number> | (string & {}))[]
+    value: Property.BorderTop | CssString,
+    ...others: (Property.BorderTop | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderTop, number> | (string & {}),
-    ...others: (Extract<Property.BorderTop, number> | (string & {}))[]
+    value: Property.BorderTop | CssString,
+    ...others: (Property.BorderTop | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderTop, number> | (string & {}),
-    preferred: Extract<Property.BorderTop, number> | (string & {}),
-    maximum: Extract<Property.BorderTop, number> | (string & {}),
+    minimum: Property.BorderTop | CssString,
+    preferred: Property.BorderTop | CssString,
+    maximum: Property.BorderTop | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-top-color；初始值 currentcolor。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-color
  */
-export class BorderTopColorCss extends CssProperty<Property.BorderTopColor> {
+export class BorderTopColorCss extends CssProperty {
   readonly AccentColor = 'border-top-color:AccentColor;';
   readonly AccentColorText = 'border-top-color:AccentColorText;';
   readonly ActiveBorder = 'border-top-color:ActiveBorder;';
@@ -10402,6 +10680,10 @@ export class BorderTopColorCss extends CssProperty<Property.BorderTopColor> {
   constructor() {
     super('border-top-color');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderTopColor | CssString): string {
+    return this.declaration(value);
+  }
   /** RGB 通道与可选 alpha；不隐式截断数值。 */
   rgb(red: number, green: number, blue: number, alpha?: number): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
@@ -10417,7 +10699,7 @@ export class BorderTopColorCss extends CssProperty<Property.BorderTopColor> {
 /** CSS 属性 border-top-left-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
  */
-export class BorderTopLeftRadiusCss extends LengthCssProperty<Property.BorderTopLeftRadius> {
+export class BorderTopLeftRadiusCss extends LengthCssProperty {
   readonly inherit = 'border-top-left-radius:inherit;';
   readonly initial = 'border-top-left-radius:initial;';
   readonly revert = 'border-top-left-radius:revert;';
@@ -10426,6 +10708,10 @@ export class BorderTopLeftRadiusCss extends LengthCssProperty<Property.BorderTop
   constructor() {
     super('border-top-left-radius');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderTopLeftRadius | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
   px(value1: number, value2: number): string;
@@ -10731,30 +11017,30 @@ export class BorderTopLeftRadiusCss extends LengthCssProperty<Property.BorderTop
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderTopLeftRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderTopLeftRadius, number> | (string & {}))[]
+    value: Property.BorderTopLeftRadius | CssString,
+    ...others: (Property.BorderTopLeftRadius | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderTopLeftRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderTopLeftRadius, number> | (string & {}))[]
+    value: Property.BorderTopLeftRadius | CssString,
+    ...others: (Property.BorderTopLeftRadius | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderTopLeftRadius, number> | (string & {}),
-    preferred: Extract<Property.BorderTopLeftRadius, number> | (string & {}),
-    maximum: Extract<Property.BorderTopLeftRadius, number> | (string & {}),
+    minimum: Property.BorderTopLeftRadius | CssString,
+    preferred: Property.BorderTopLeftRadius | CssString,
+    maximum: Property.BorderTopLeftRadius | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-top-right-radius；初始值 0。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
  */
-export class BorderTopRightRadiusCss extends LengthCssProperty<Property.BorderTopRightRadius> {
+export class BorderTopRightRadiusCss extends LengthCssProperty {
   readonly inherit = 'border-top-right-radius:inherit;';
   readonly initial = 'border-top-right-radius:initial;';
   readonly revert = 'border-top-right-radius:revert;';
@@ -10763,6 +11049,10 @@ export class BorderTopRightRadiusCss extends LengthCssProperty<Property.BorderTo
   constructor() {
     super('border-top-right-radius');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderTopRightRadius | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
   px(value1: number, value2: number): string;
@@ -11068,30 +11358,30 @@ export class BorderTopRightRadiusCss extends LengthCssProperty<Property.BorderTo
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderTopRightRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderTopRightRadius, number> | (string & {}))[]
+    value: Property.BorderTopRightRadius | CssString,
+    ...others: (Property.BorderTopRightRadius | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderTopRightRadius, number> | (string & {}),
-    ...others: (Extract<Property.BorderTopRightRadius, number> | (string & {}))[]
+    value: Property.BorderTopRightRadius | CssString,
+    ...others: (Property.BorderTopRightRadius | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderTopRightRadius, number> | (string & {}),
-    preferred: Extract<Property.BorderTopRightRadius, number> | (string & {}),
-    maximum: Extract<Property.BorderTopRightRadius, number> | (string & {}),
+    minimum: Property.BorderTopRightRadius | CssString,
+    preferred: Property.BorderTopRightRadius | CssString,
+    maximum: Property.BorderTopRightRadius | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-top-style；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-style
  */
-export class BorderTopStyleCss extends CssProperty<Property.BorderTopStyle> {
+export class BorderTopStyleCss extends CssProperty {
   readonly dashed = 'border-top-style:dashed;';
   readonly dotted = 'border-top-style:dotted;';
   readonly double = 'border-top-style:double;';
@@ -11110,12 +11400,16 @@ export class BorderTopStyleCss extends CssProperty<Property.BorderTopStyle> {
   constructor() {
     super('border-top-style');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderTopStyle | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 border-top-width；初始值 medium。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-width
  */
-export class BorderTopWidthCss extends LengthCssProperty<Property.BorderTopWidth> {
+export class BorderTopWidthCss extends LengthCssProperty {
   readonly inherit = 'border-top-width:inherit;';
   readonly initial = 'border-top-width:initial;';
   readonly medium = 'border-top-width:medium;';
@@ -11127,35 +11421,39 @@ export class BorderTopWidthCss extends LengthCssProperty<Property.BorderTopWidth
   constructor() {
     super('border-top-width');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderTopWidth | CssString): string {
+    return this.declaration(value);
+  }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderTopWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderTopWidth, number> | (string & {}))[]
+    value: Property.BorderTopWidth | CssString,
+    ...others: (Property.BorderTopWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderTopWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderTopWidth, number> | (string & {}))[]
+    value: Property.BorderTopWidth | CssString,
+    ...others: (Property.BorderTopWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderTopWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderTopWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderTopWidth, number> | (string & {}),
+    minimum: Property.BorderTopWidth | CssString,
+    preferred: Property.BorderTopWidth | CssString,
+    maximum: Property.BorderTopWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 border-width。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-width
  */
-export class BorderWidthCss extends LengthCssProperty<Property.BorderWidth> {
+export class BorderWidthCss extends LengthCssProperty {
   readonly inherit = 'border-width:inherit;';
   readonly initial = 'border-width:initial;';
   readonly medium = 'border-width:medium;';
@@ -11166,6 +11464,10 @@ export class BorderWidthCss extends LengthCssProperty<Property.BorderWidth> {
   readonly unset = 'border-width:unset;';
   constructor() {
     super('border-width');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BorderWidth | CssString): string {
+    return this.declaration(value);
   }
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value1: number): string;
@@ -11564,30 +11866,30 @@ export class BorderWidthCss extends LengthCssProperty<Property.BorderWidth> {
     return this.raw(`calc(${expression})`);
   }
   min(
-    value: Extract<Property.BorderWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderWidth, number> | (string & {}))[]
+    value: Property.BorderWidth | CssString,
+    ...others: (Property.BorderWidth | CssString)[]
   ): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
   max(
-    value: Extract<Property.BorderWidth, number> | (string & {}),
-    ...others: (Extract<Property.BorderWidth, number> | (string & {}))[]
+    value: Property.BorderWidth | CssString,
+    ...others: (Property.BorderWidth | CssString)[]
   ): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.BorderWidth, number> | (string & {}),
-    preferred: Extract<Property.BorderWidth, number> | (string & {}),
-    maximum: Extract<Property.BorderWidth, number> | (string & {}),
+    minimum: Property.BorderWidth | CssString,
+    preferred: Property.BorderWidth | CssString,
+    maximum: Property.BorderWidth | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 bottom；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/bottom
  */
-export class BottomCss extends LengthCssProperty<Property.Bottom> {
+export class BottomCss extends LengthCssProperty {
   readonly auto = 'bottom:auto;';
   readonly inherit = 'bottom:inherit;';
   readonly initial = 'bottom:initial;';
@@ -11597,6 +11899,10 @@ export class BottomCss extends LengthCssProperty<Property.Bottom> {
   constructor() {
     super('bottom');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.Bottom | CssString): string {
+    return this.declaration(value);
+  }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
     return `${this.name}:${value}%;`;
@@ -11605,31 +11911,25 @@ export class BottomCss extends LengthCssProperty<Property.Bottom> {
   calc(expression: string): string {
     return this.raw(`calc(${expression})`);
   }
-  min(
-    value: Extract<Property.Bottom, number> | (string & {}),
-    ...others: (Extract<Property.Bottom, number> | (string & {}))[]
-  ): string {
+  min(value: Property.Bottom | CssString, ...others: (Property.Bottom | CssString)[]): string {
     return this.raw(`min(${[value, ...others].join(', ')})`);
   }
-  max(
-    value: Extract<Property.Bottom, number> | (string & {}),
-    ...others: (Extract<Property.Bottom, number> | (string & {}))[]
-  ): string {
+  max(value: Property.Bottom | CssString, ...others: (Property.Bottom | CssString)[]): string {
     return this.raw(`max(${[value, ...others].join(', ')})`);
   }
   clamp(
-    minimum: Extract<Property.Bottom, number> | (string & {}),
-    preferred: Extract<Property.Bottom, number> | (string & {}),
-    maximum: Extract<Property.Bottom, number> | (string & {}),
+    minimum: Property.Bottom | CssString,
+    preferred: Property.Bottom | CssString,
+    maximum: Property.Bottom | CssString,
   ): string {
-    return this.raw(`clamp(${minimum}, ${preferred}, ${maximum})`);
+    return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
 
 /** CSS 属性 box-decoration-break；初始值 slice。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-decoration-break
  */
-export class BoxDecorationBreakCss extends CssProperty<Property.BoxDecorationBreak> {
+export class BoxDecorationBreakCss extends CssProperty {
   readonly clone = 'box-decoration-break:clone;';
   readonly inherit = 'box-decoration-break:inherit;';
   readonly initial = 'box-decoration-break:initial;';
@@ -11640,12 +11940,16 @@ export class BoxDecorationBreakCss extends CssProperty<Property.BoxDecorationBre
   constructor() {
     super('box-decoration-break');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BoxDecorationBreak | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 box-shadow；初始值 none。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-shadow
  */
-export class BoxShadowCss extends CssProperty<Property.BoxShadow> {
+export class BoxShadowCss extends CssProperty {
   readonly inherit = 'box-shadow:inherit;';
   readonly initial = 'box-shadow:initial;';
   readonly none = 'box-shadow:none;';
@@ -11655,12 +11959,16 @@ export class BoxShadowCss extends CssProperty<Property.BoxShadow> {
   constructor() {
     super('box-shadow');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BoxShadow | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 box-sizing；初始值 content-box。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-sizing
  */
-export class BoxSizingCss extends CssProperty<Property.BoxSizing> {
+export class BoxSizingCss extends CssProperty {
   readonly borderBox = 'box-sizing:border-box;';
   readonly contentBox = 'box-sizing:content-box;';
   readonly inherit = 'box-sizing:inherit;';
@@ -11671,12 +11979,16 @@ export class BoxSizingCss extends CssProperty<Property.BoxSizing> {
   constructor() {
     super('box-sizing');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BoxSizing | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 break-after；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-after
  */
-export class BreakAfterCss extends CssProperty<Property.BreakAfter> {
+export class BreakAfterCss extends CssProperty {
   readonly all = 'break-after:all;';
   readonly always = 'break-after:always;';
   readonly auto = 'break-after:auto;';
@@ -11699,12 +12011,16 @@ export class BreakAfterCss extends CssProperty<Property.BreakAfter> {
   constructor() {
     super('break-after');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BreakAfter | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 break-before；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-before
  */
-export class BreakBeforeCss extends CssProperty<Property.BreakBefore> {
+export class BreakBeforeCss extends CssProperty {
   readonly all = 'break-before:all;';
   readonly always = 'break-before:always;';
   readonly auto = 'break-before:auto;';
@@ -11727,12 +12043,16 @@ export class BreakBeforeCss extends CssProperty<Property.BreakBefore> {
   constructor() {
     super('break-before');
   }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BreakBefore | CssString): string {
+    return this.declaration(value);
+  }
 }
 
 /** CSS 属性 break-inside；初始值 auto。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-inside
  */
-export class BreakInsideCss extends CssProperty<Property.BreakInside> {
+export class BreakInsideCss extends CssProperty {
   readonly auto = 'break-inside:auto;';
   readonly avoid = 'break-inside:avoid;';
   readonly avoidColumn = 'break-inside:avoid-column;';
@@ -11745,5 +12065,9 @@ export class BreakInsideCss extends CssProperty<Property.BreakInside> {
   readonly unset = 'break-inside:unset;';
   constructor() {
     super('break-inside');
+  }
+  /** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */
+  raw(value: Property.BreakInside | CssString): string {
+    return this.declaration(value);
   }
 }
