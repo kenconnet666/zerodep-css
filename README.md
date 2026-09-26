@@ -52,3 +52,5 @@ Emotion 源码对照、可复现缺口和下一阶段取舍见[运行时库审�
 作者类型以可读性为先：使用非泛型基类、明确的方法签名和普通 readonly 字段，见[类型结构](docs/author-types.md)。
 
 Vue 模板可直接使用 `:class="css(...)"`：插件通过 Vue AST 扩展自动缓存普通元素和 v-for 的样式计算，同时保留隐式 CSS 变量绑定。支持范围与运行时回退见[模板自动缓存](docs/implicit-bindings.md#模板直接调用与自动缓存)。
+
+Svelte 直接使用模板派生；隐式变量绑定支持 each、模板 const、await 分支和组件内 snippet，并区分每次 snippet 调用的变量值。

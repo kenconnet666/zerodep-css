@@ -91,6 +91,17 @@ try {
                 sibling: getComputedStyle(root.querySelector('[data-bound="sibling"]')).marginLeft,
                 forwarded: getComputedStyle(root.querySelector('[data-bound="forward"]')).width,
                 snapshot: getComputedStyle(root.querySelector('[data-bound="snapshot"]')).height,
+                snippets: [...root.querySelectorAll('[data-snippet]')].map((node) => ({
+                  className: node.className,
+                  width: getComputedStyle(node).width,
+                  padding: getComputedStyle(node).padding,
+                })),
+                awaited: root.querySelector('[data-await]')
+                  ? getComputedStyle(root.querySelector('[data-await]')).width
+                  : null,
+                constStyle: root.querySelector('[data-const-style]')
+                  ? getComputedStyle(root.querySelector('[data-const-style]')).height
+                  : null,
                 rows: [...root.querySelectorAll('[data-row]')].map((node) => [
                   node.dataset.row,
                   getComputedStyle(node).width,
@@ -128,6 +139,22 @@ try {
         assert.deepEqual(changed.nodes[1], initial.nodes[1]);
         assert.equal(changed.nodes[0].className, initial.nodes[0].className);
         assert.equal(changed.stats.rules, initial.stats.rules);
+        if (framework === 'svelte') {
+          assert.equal(changed.nodes[0].awaited, '28px');
+          assert.equal(changed.nodes[0].constStyle, '28px');
+          assert.deepEqual(
+            changed.nodes[0].snippets.map((node) => node.width),
+            ['28px', '56px'],
+          );
+          assert.deepEqual(
+            changed.nodes[0].snippets.map((node) => node.padding),
+            ['7px 28px', '7px 56px'],
+          );
+          assert.deepEqual(
+            changed.nodes[0].snippets.map((node) => node.className),
+            initial.nodes[0].snippets.map((node) => node.className),
+          );
+        }
         assert.deepEqual(changed.nodes[0].rows, [
           ['a', '15px'],
           ['b', '22px'],

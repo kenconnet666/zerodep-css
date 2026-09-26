@@ -2,7 +2,9 @@ import { computed, isReactive, isRef, type ComputedRef, type VNode } from 'vue';
 import { Css } from '@zerodep-css/core';
 
 type Guard =
-  readonly [value: unknown] | readonly [author: unknown, property: string, member: string];
+  | readonly [value: unknown]
+  | readonly [reactiveValue: unknown, stable: true]
+  | readonly [author: unknown, property: string, member: string];
 export interface TemplateCacheEntry {
   inputs: unknown[];
   value: ComputedRef<unknown>;
@@ -25,11 +27,12 @@ function descriptor(value: object, name: string): PropertyDescriptor | undefined
 function inputsFor(guards: readonly Guard[]): unknown[] | undefined {
   const inputs: unknown[] = [];
   for (const guard of guards) {
-    if (guard.length === 1) {
+    if (guard.length !== 3) {
       const value = guard[0];
       if (value !== null && typeof value === 'object' && !isReactive(value) && !isRef(value))
         return;
-      inputs.push(value);
+      // const ref/computed 的标量交给 computed 自己失效，不因值变化重新创建 computed。
+      if (guard.length === 1 || (value !== null && typeof value === 'object')) inputs.push(value);
       continue;
     }
     const [author, property, member] = guard;

@@ -50,6 +50,19 @@ Vue 插件默认把可分析的模板 `css()` 表达式接入 Vue 编译器的 A
 
 Svelte 继续直接写 `class={css(...)}`，利用其模板调用已有的派生缓存，不重复增加 `$derived`。多个元素共享结果时仍可手动提取派生。
 
+Svelte 的 each、`{@const}`（包含解构）、await 的 then/catch 参数都直接从官方绑定模式 AST 读取，不再切出字符串交给 TypeScript 重复解析，局部同名 `css` 不会被当作库入口。const tag 中直接调用 css 或调用脚本样式辅助函数，也会建立模板绑定帧，避免在原生派生期间额外创建订阅。组件内 snippet 的每次调用用一个无依赖的 const tag 对象区分绑定身份；动态参数仍绑定 CSS 变量，多个调用不互相覆盖。模块引用或导出的 snippet 保持普通运行时路径，避免捕获不存在的组件宿主。snippet 的历史绑定与列表键一样，保留到所属组件卸载，不承诺提前回收所有隐藏片段。
+
+```svelte
+{#snippet row(item)}
+  {@const { width } = item}
+  <div class={css(s.display.flex, s.width.px(width))}></div>
+{/snippet}
+
+{#each items as item (item.id)}
+  {@render row(item)}
+{/each}
+```
+
 ### 编译阶段的取舍
 
 Vue 的模板缓存已进入官方 `nodeTransforms` 扩展点，直接复用框架已处理过的 class 表达式 AST，追加内部缓存参数，不重新解析整段 class、不自行还原模板 ref 解包。隐式绑定同时需要分析 script 内的响应式声明、注入 useBindings 和调度初始化；模板钩子不能单独替代这些工作。本轮保留共享源码转换，并让绑定转换与模板缓存分析复用同一份表达式 AST；普通循环别名也省去额外解析，解构仍交给解析器。没有添加跨文件 AST 缓存。
@@ -109,7 +122,7 @@ const box = css(
 - 选择器、media、if/switch 等**结构**依然由普通 JS 执行。要让结构随状态变化，放在模板调用或 computed / `$derived` 的原有运行时求值路径中；setup 中一次执行的 if 不会被改造成响应式结构。
 - computed / `$derived` 内的 **css 调用**保留运行时行为并给出构建提示，避免在纯派生阶段额外注册订阅。
 - 未知字符串加工函数、spread、自增/赋值等表达式保留原始求值并提示。编译器不能证明任意函数无副作用，传给动态声明的普通表达式函数应当纯净。
-- Vue slot 参数、被遮蔽的嵌套循环变量和 Svelte snippet 参数采用运行时回退。模板上的动态 class 字符串插值、render 函数不属于当前转换范围。
+- Vue slot 参数和被遮蔽的嵌套循环变量采用运行时回退；Svelte 模块引用或导出的 snippet 保持原有运行时行为。模板上的动态 class 字符串插值、render 函数不属于当前转换范围。
 - 用户覆写属性方法时，运行时比较方法身份，保留用户自己的实现；开发构建提示回退。原始 const 初始化的回退不会凭空获得响应性，需要作者用模板或派生求值组织更新。
 - 同一页面多个独立 SSR 应用需要明确分配 Vue `app.config.idPrefix` 等宿主身份；首版验收每页一个元框架应用，不承诺岛屿 / 微前端跨宿主合并。
 

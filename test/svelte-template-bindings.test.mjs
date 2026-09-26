@@ -1,0 +1,104 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { createRequire } from 'node:module';
+import { transformSync } from 'esbuild';
+import { compile } from 'svelte/compiler';
+import { render } from 'svelte/server';
+import * as adapter from '../svelte/dist/server.js';
+import * as bindings from '../svelte/dist/bindings-server.js';
+import plugin from '../svelte/dist/vite.js';
+
+const require = createRequire(import.meta.url);
+function component(source) {
+  const warnings = [];
+  const result = plugin().transform.call(
+    { warn: (message) => warnings.push(message) },
+    source,
+    '/test/Template.svelte',
+  );
+  const transformed = result?.code ?? source;
+  // 两套正式编译目标都必须接受转换，客户端仍由 Svelte 生成派生。
+  compile(transformed, { filename: 'Template.svelte', generate: 'client', dev: false });
+  const code = compile(transformed, { filename: 'Template.svelte', generate: 'server', dev: false })
+    .js.code;
+  const js = transformSync(code, { loader: 'js', format: 'cjs' }).code;
+  const module = { exports: {} };
+  new Function('require', 'module', 'exports', js)(
+    (name) =>
+      name === '@zerodep-css/svelte'
+        ? adapter
+        : name === '@zerodep-css/svelte/bindings'
+          ? bindings
+          : require(name),
+    module,
+    module.exports,
+  );
+  return { component: module.exports.default, transformed, warnings };
+}
+const script = `<script>import {Css,css} from '@zerodep-css/svelte'; const s=new Css(); let width=$state(12);</script>`;
+function inspect(source) {
+  const result = component(source),
+    host = adapter.createServerCssHost();
+  const html = adapter.withCssHost(host, () => render(result.component).body);
+  return { ...result, html, rules: host.rules() };
+}
+
+test('snippet 多次调用具有独立变量值，const tag 解构别名参与绑定', () => {
+  const result = inspect(`${script}
+{#snippet card(value)}
+ {@const {size}=value}
+ <div class={css(s.width.px(size),s.padding.px(size,width))}></div>
+{/snippet}
+{@render card({size:10})}{@render card({size:30})}`);
+  assert.deepEqual(result.warnings, []);
+  const values = result.rules.filter((rule) => rule.kind === 'bindings');
+  assert.equal(values.length, 2);
+  assert.notEqual(values[0].key, values[1].key);
+  assert.match(values[0].body, /10px/);
+  assert.match(values[1].body, /30px/);
+  assert.match(values[0].body, /12px/);
+  assert.match(values[1].body, /12px/);
+});
+
+test('each 中的 const tag 不漏绑定，同名 css 局部声明不被误当成库入口', () => {
+  const result = inspect(`${script}
+{#each [{id:1,width:20},{id:2,width:40}] as row (row.id)}
+ {@const size=row.width}
+ <div class={css(s.width.px(size))}></div>
+{/each}
+{#if true}{@const css=()=> 'external'}<div class={css(s.width.px(width))}></div>{/if}`);
+  assert.equal(result.rules.filter((rule) => rule.kind === 'bindings').length, 2);
+  assert.match(result.html, /class="external"/);
+});
+
+test('const tag 中直接构建 CSS 或调用样式辅助函数，都拥有模板绑定帧', () => {
+  const result =
+    inspect(`<script>import {Css,css} from '@zerodep-css/svelte';const s=new Css();let width=$state(12);
+function style(value){return css(s.width.px(value));}</script>
+{#if true}{@const first=css(s.height.px(width))}{@const second=style(width)}
+<div class={first}></div><div class={second}></div>{/if}`);
+  assert.equal(result.rules.filter((rule) => rule.kind === 'bindings').length, 2);
+  assert.ok(
+    result.rules
+      .filter((rule) => rule.kind === 'bindings')
+      .every((rule) => rule.body.includes('12px')),
+  );
+});
+
+test('await then/catch 变量进入各自作用域，普通值的 then 分支可绑定', () => {
+  const result = inspect(`${script}
+{#await {size:32} then item}<div class={css(s.width.px(item.size))}></div>{:catch css}<div class={css(s.width.px(width))}></div>{/await}`);
+  assert.match(result.rules.find((rule) => rule.kind === 'bindings').body, /32px/);
+  assert.match(result.transformed, /\.runtime|\.frame/);
+  assert.match(result.transformed, /css\(s.width.px\(width\)\)/);
+});
+
+test('模块导出的 snippet 保持可导出，不捕获组件实例宿主', () => {
+  const result =
+    inspect(`<script module>import {Css,css} from '@zerodep-css/svelte';const s=new Css();export {card};</script>
+<script>import {css as makeCss} from '@zerodep-css/svelte';let width=$state(12);const box=makeCss(s.width.px(width));</script>
+{#snippet card(value)}<div class={css(s.width.px(value))}></div>{/snippet}
+<div class={box}></div>{@render card(20)}`);
+  assert.equal(result.rules.filter((rule) => rule.kind === 'bindings').length, 1);
+  assert.ok(result.rules.some((rule) => rule.body === 'width:20px;'));
+});

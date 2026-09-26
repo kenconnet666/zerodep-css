@@ -54,6 +54,7 @@ export function createBindingTransform(
   const namespaces = new Set<string>();
   const vueNamespaces = new Set<string>();
   const dynamic = new Set<string>();
+  const stableReactive = new Set<string>();
   const warnings = new Set<string>();
   let scope = '__zc';
   while (reserved.includes(scope)) scope += '_';
@@ -132,6 +133,22 @@ export function createBindingTransform(
     ) {
       const name = callName(node.initializer.expression);
       if (reactive.has(name)) bindings(node.name, dynamic);
+      const callee = node.initializer.expression;
+      const fromVue =
+        (ts.isIdentifier(callee) && aliases.has(callee.text)) ||
+        (ts.isPropertyAccessExpression(callee) &&
+          ts.isIdentifier(callee.expression) &&
+          vueNamespaces.has(callee.expression.text));
+      if (
+        framework === 'vue' &&
+        reactive.has(name) &&
+        (fromVue || name === 'defineProps' || name === 'withDefaults') &&
+        ts.isVariableDeclarationList(node.parent) &&
+        node.parent.flags & ts.NodeFlags.Const &&
+        ts.isVariableStatement(node.parent.parent) &&
+        node.parent.parent.parent === source
+      )
+        bindings(node.name, stableReactive);
     }
     ts.forEachChild(node, collect);
   }
@@ -396,6 +413,8 @@ export function createBindingTransform(
       if (!statement || !ts.isExpressionStatement(statement)) return;
       const local = new Set(locals),
         guards = new Set<string>();
+      const guardValue = (name: string) =>
+        guards.add(`[${name}${stableReactive.has(name) && !local.has(name) ? ', true' : ''}]`);
       const mutable = new Set<string>();
       for (const entry of source.statements)
         if (ts.isVariableStatement(entry) && !(entry.declarationList.flags & ts.NodeFlags.Const))
@@ -466,14 +485,14 @@ export function createBindingTransform(
           let root: ts.Expression = node.expression;
           while (ts.isPropertyAccessExpression(root) || ts.isElementAccessExpression(root))
             root = root.expression;
-          if (ts.isIdentifier(root)) guards.add(`[${root.text}]`);
+          if (ts.isIdentifier(root)) guardValue(root.text);
           return (
             visit(node.expression) &&
             (!ts.isElementAccessExpression(node) || visit(node.argumentExpression))
           );
         }
         if (ts.isIdentifier(node)) {
-          guards.add(`[${node.text}]`);
+          guardValue(node.text);
           return !mutable.has(node.text) || dynamic.has(node.text) || local.has(node.text);
         }
         return !ts.forEachChild(node, (child) => !visit(child, part) || undefined);

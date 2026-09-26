@@ -13,7 +13,7 @@
     "test:author": "node --test core/test/package/author.test.mjs",
     "test:theme": "node --test core/test/package/theme.test.mjs",
     "test:bindings": "node --test core/test/package/bindings.test.mjs",
-    "test:compiler": "node --test test/compiler-diagnostics.test.mjs test/component-syntax.test.mjs test/vue-template-cache.test.mjs",
+    "test:compiler": "node --test test/compiler-diagnostics.test.mjs test/component-syntax.test.mjs test/vue-template-cache.test.mjs test/svelte-template-bindings.test.mjs",
     "test:lifecycle": "node test/browser/lifecycle-hmr.mjs",
     "test:types": "node scripts/check-package-types.mjs",
     "css:generate": "node scripts/generate-css-author.mjs --write",
