@@ -12,7 +12,7 @@
 
 ## 组件实测
 
-运行 `pnpm --dir .research/string-css-probe probe:concat-components`；用环境变量 `MUP_ROUNDS=5` 得到本轮配置。两次独立运行，每次 Vue/Svelte 各 5 轮，使用生产编译、200 个元素，每个样本打开独立页面，轮换执行顺序。两个候选都显式解析到当前 core 源码，只替换拼接语句，并断言替换恰好发生一次。框架用固定的 Vue 3.5.43、Svelte 5.57.0，Chrome 153.0.8010.54。
+运行 `pnpm --dir test/tools probe:concat-components`；用环境变量 `MUP_ROUNDS=5` 得到本轮配置。两次独立运行，每次 Vue/Svelte 各 5 轮，使用生产编译、200 个元素，每个样本打开独立页面，轮换执行顺序。两个候选都显式解析到当前 core 源码，只替换拼接语句，并断言替换恰好发生一次。框架用固定的 Vue 3.5.43、Svelte 5.57.0，Chrome 153.0.8010.54。
 
 计时包含状态更新、框架刷新和布局读取。有限值在 16 个宽度之间切换 30 次；新值场景更新 5 次，每次产生 200 个新宽度。它们不能横向比较总时间。挂载、无关状态更新、规则数、调用数和逐元素计算样式也分别记录或断言；性能时间没有硬门槛。
 
@@ -37,11 +37,11 @@ Svelte 有限值两次都改善，但 Vue 胜负反转，新值场景也未统�
 
 新值场景的初次渲染、预热和测量后，直接调用累计 1,400 条规则，变量路径始终 1 条。有限值类表为 16 条。变量路径在这轮有限值负载下比直接类切换更慢，不能统一把所有值都改成变量。
 
-原始结果：[首轮](string-css-probe/results/concat-components-a.json)、[复测](string-css-probe/results/concat-components-b.json)。两轮所有浏览器正确性断言通过；不代表 Nuxt/SvelteKit 或所有 SSR 场景已验收。
+原始结果：[首轮](../test/tools/results/concat-components-a.json)、[复测](../test/tools/results/concat-components-b.json)。两轮所有浏览器正确性断言通过；不代表 Nuxt/SvelteKit 或所有 SSR 场景已验收。
 
 ## 静态部分复用
 
-另外运行 `pnpm --dir .research/string-css-probe probe:static-prefix`。使用当前未改动的注册器，7 个静态声明加 1 个动态宽度，16 种组合，预热后 7 轮轮换顺序，下面是 100,000 次读取的中位数：
+另外运行 `pnpm --dir test/tools probe:static-prefix`。使用当前未改动的注册器，7 个静态声明加 1 个动态宽度，16 种组合，预热后 7 轮轮换顺序，下面是 100,000 次读取的中位数：
 
 | 路径                                      |    耗时 |
 | ----------------------------------------- | ------: |
@@ -49,7 +49,7 @@ Svelte 有限值两次都改善，但 Vue 胜负反转，新值场景也未统�
 | 静态 7 个声明提前拼好，每次传入前缀和宽度 | 24.6 ms |
 | 初始化时注册完整组合，之后只读取类名表    |  1.2 ms |
 
-三种路径验证了相同类名、相同声明顺序且只有 16 条规则。该探针只测 JS 调用，不含 DOM、框架刷新及首次注册；类表成本不能外推为整个组件加速倍数。原始记录见[静态前缀样本](string-css-probe/results/static-prefix.json)。
+三种路径验证了相同类名、相同声明顺序且只有 16 条规则。该探针只测 JS 调用，不含 DOM、框架刷新及首次注册；类表成本不能外推为整个组件加速倍数。原始记录见[静态前缀样本](../test/tools/results/static-prefix.json)。
 
 这些写法现有 API 已支持，不必增加缓存库：
 

@@ -32,7 +32,7 @@
 
 ## 直接字段让哪些静态优化变得容易
 
-[AST 探针](string-css-probe/static-field-probe.mjs)直接读取生成类的字符串字段和 `Css` 的属性类型映射，不实例化作者对象。它能把以下表达式枚举为完整声明，并用现有规则注册器核对类名：
+[AST 探针](../test/tools/static-field-probe.mjs)直接读取生成类的字符串字段和 `Css` 的属性类型映射，不实例化作者对象。它能把以下表达式枚举为完整声明，并用现有规则注册器核对类名：
 
 ```ts
 css(s.display.flex, enabled ? s.color.red : s.color.blue);

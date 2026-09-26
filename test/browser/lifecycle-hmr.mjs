@@ -7,7 +7,7 @@ import vue from '@vitejs/plugin-vue';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import vueBindings from '../../vue/dist/vite.js';
 import svelteBindings from '../../svelte/dist/vite.js';
-import { launchBrowser } from '../../.research/string-css-probe/browser.mjs';
+import { launchBrowser } from '../../test/tools/browser.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const results = resolve(root, 'test-results');

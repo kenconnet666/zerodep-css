@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { build } from 'esbuild';
 import { fileURLToPath } from 'node:url';
 import { createServerCssHost, serializeCssRules } from '../../core/dist/server.js';
-import { launchBrowser } from '../../.research/string-css-probe/browser.mjs';
+import { launchBrowser } from '../../test/tools/browser.mjs';
 
 import { Css } from '../../core/dist/index.js';
 const s = new Css();

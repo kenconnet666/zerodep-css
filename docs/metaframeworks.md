@@ -96,8 +96,8 @@ node ../../node_modules/vite/bin/vite.js build
 回到仓库根运行：
 
 ```powershell
-pnpm --dir .research/string-css-probe test:transport
-pnpm --dir .research/string-css-probe test:metaframeworks
+pnpm --dir test/tools test:transport
+pnpm --dir test/tools test:metaframeworks
 ```
 
 准备脚本只在夹具的 node_modules 中链接当前工作区包，路径按仓库位置计算，无需本机绝对路径配置。夹具通过真实 exports 消费 dist，不用源码 alias 绕过包入口。

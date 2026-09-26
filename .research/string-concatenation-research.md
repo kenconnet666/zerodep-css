@@ -32,7 +32,7 @@ V8 来源是研究当天的主分支，解释可能的实现机制，不证明 C
 
 ## 当前注册器探针
 
-运行：`pnpm --dir .research/string-css-probe probe:string-concat`。
+运行：`pnpm --dir test/tools probe:string-concat`。
 
 探针读取实际 `core/src/registry.ts`，在内存中仅替换 `const body = parts.join('')`，通过 esbuild 生成相同目标的代码。对比六种方法：原始 `join`、索引循环 `+=`、`concat(...parts)`、`reduce`，以及 1—2 / 1—4 参数使用直接加法、其余使用 `join` 的版本。
 
@@ -40,7 +40,7 @@ V8 来源是研究当天的主分支，解释可能的实现机制，不证明 C
 
 覆盖 1、2、4、8、32 片段；ASCII 组使用自定义属性与宽度，Unicode 组在前面的片段加入中文和 emoji。单片段时两组都是宽度，只是两次不同运行时机的对照。验证空参数、空片段、输出类名、正文顺序、规则数量，浏览器与临时样式表均由 `finally` 清理。
 
-原始记录保留于 [首轮](string-css-probe/results/string-concat.json) 和 [复测](string-css-probe/results/string-concat-repeat.json)。这不是独立库之间的实测；库的判断来自源码。两次本机 Chrome 测量也不构成跨浏览器结论或 CI 性能门槛。
+原始记录保留于 [首轮](../test/tools/results/string-concat.json) 和 [复测](../test/tools/results/string-concat-repeat.json)。这不是独立库之间的实测；库的判断来自源码。两次本机 Chrome 测量也不构成跨浏览器结论或 CI 性能门槛。
 
 两次各自的 7 轮中位数范围，单位毫秒，越低越好：
 

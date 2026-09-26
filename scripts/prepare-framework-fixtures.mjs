@@ -6,8 +6,8 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 for (const [directory, name] of [
   ['nuxt/test/app', 'nuxt'],
   ['sveltekit/test/app', 'sveltekit'],
-  ['.research/string-css-probe', 'vue'],
-  ['.research/string-css-probe', 'svelte'],
+  ['test/tools', 'vue'],
+  ['test/tools', 'svelte'],
 ]) {
   const scope = join(root, directory, 'node_modules/@zerodep-css');
   await mkdir(scope, { recursive: true });

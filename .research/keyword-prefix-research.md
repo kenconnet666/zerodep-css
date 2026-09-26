@@ -99,4 +99,4 @@ getter / Proxy 会改变对象枚举：研究中关键字不再是 own 字段。
 
 完整泛型化还可以继续削减每属性类的样板，但会牵动构造器导出、继承、单位能力和 IDE 展示。本轮先隔离关键字存储表示的收益，不未经审阅替换正式架构。
 
-原始数据：[keyword-representation-b199f94.json](string-css-probe/results/keyword-representation-b199f94.json)。复跑入口为 `pnpm --dir .research/string-css-probe probe:keywords`，按照项目约定由 CI 执行耗时测量。
+原始数据：[keyword-representation-b199f94.json](../test/tools/results/keyword-representation-b199f94.json)。复跑入口为 `pnpm --dir test/tools probe:keywords`，按照项目约定由 CI 执行耗时测量。

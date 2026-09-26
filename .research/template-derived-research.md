@@ -38,11 +38,11 @@ derived 模式不启动隐式绑定；现有插件本来也会让派生内部的
 
 ## 测法与验收范围
 
-`pnpm --dir .research/string-css-probe probe:template-derived`：每个框架、每条路径使用全新页面，200 个独立组件，20 次无关更新、20 次宽度更新，五轮轮换顺序，记录挂载和更新耗时、规则统计、类名变化及卸载后的绑定数。时间包含框架刷新与布局读取，无性能硬阈值。两个框架挂载组织不同，只做各框架内部的方案对照。
+`pnpm --dir test/tools probe:template-derived`：每个框架、每条路径使用全新页面，200 个独立组件，20 次无关更新、20 次宽度更新，五轮轮换顺序，记录挂载和更新耗时、规则统计、类名变化及卸载后的绑定数。时间包含框架刷新与布局读取，无性能硬阈值。两个框架挂载组织不同，只做各框架内部的方案对照。
 
 组件初始宽度为 20 + 序号，每轮加 1，因此各组件间存在规则共享，运行时最终宽度类理论上为 220 种；不拿这个数字模拟每次完全唯一值的最坏情况。绑定路径应始终保持类名和规则数量稳定，卸载后绑定规则为零。
 
-本地只执行 `node .research/string-css-probe/template-derived.mjs --compile-only`，验证八份变体通过生产编译与实际绑定转换。CI 上传 `runtime-diagnostics/template-derived/results.json`。浏览器正确性与性能状态以对应提交的 CI 为准。
+本地只执行 `node test/tools/template-derived.mjs --compile-only`，验证八份变体通过生产编译与实际绑定转换。CI 上传 `runtime-diagnostics/template-derived/results.json`。浏览器正确性与性能状态以对应提交的 CI 为准。
 
 ## 正式实现前需要保留的边界
 
@@ -123,7 +123,7 @@ Vite 的 `enforce: 'post'` 表示插件顺序，不表示一定处于所有 TS �
 
 ### 首轮连续值结果（已完成）
 
-提交 `9b9fd46` 的 [CI](https://github.com/kenconnet666/zerodep-css/actions/runs/36237795863) 三个任务全部成功，[原始样本](string-css-probe/results/template-derived-9b9fd46.json)已存档。以下为 Chrome 153 / Node 24 的五轮中位数，单位 ms；每栏包含 200 个组件的 20 次批量更新及布局读取，不是单次 css 调用时间。
+提交 `9b9fd46` 的 [CI](https://github.com/kenconnet666/zerodep-css/actions/runs/36237795863) 三个任务全部成功，[原始样本](../test/tools/results/template-derived-9b9fd46.json)已存档。以下为 Chrome 153 / Node 24 的五轮中位数，单位 ms；每栏包含 200 个组件的 20 次批量更新及布局读取，不是单次 css 调用时间。
 
 | 框架 / 路径           | 无关更新 | 宽度更新 |
 | --------------------- | -------: | -------: |

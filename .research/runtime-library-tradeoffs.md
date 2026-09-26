@@ -67,7 +67,7 @@ Emotion 的 [sheet](https://github.com/emotion-js/emotion/blob/b882bcba851325549
 
 ## 已复现的问题与边界
 
-执行 `pnpm --dir .research/string-css-probe probe:library-review`，结果见[原始记录](string-css-probe/results/runtime-library-review.json)。探针只在内存中的注册器副本统计哈希调用，产品文件不变。这是本次缺口快照，不把“继续复现缺陷”设为 CI 通过条件；修复时应迁移成正式回归用例。
+执行 `pnpm --dir test/tools probe:library-review`，结果见[原始记录](../test/tools/results/runtime-library-review.json)。探针只在内存中的注册器副本统计哈希调用，产品文件不变。这是本次缺口快照，不把“继续复现缺陷”设为 CI 通过条件；修复时应迁移成正式回归用例。
 
 ### 新规则重复哈希
 

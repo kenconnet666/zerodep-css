@@ -32,11 +32,11 @@ Vue 的[计算属性约束](https://vuejs.org/guide/essentials/computed)与 Svel
 
 ## 运行与已验证边界
 
-仓库根运行 `pnpm install --frozen-lockfile`、`pnpm build`，然后进入 `.research/string-css-probe` 安装其固定依赖。运行：
+仓库根运行 `pnpm install --frozen-lockfile`、`pnpm build`，然后进入 `test/tools` 安装其固定依赖。运行：
 
 ```powershell
-pnpm --dir .research/string-css-probe test:examples:browser
-pnpm --dir .research/string-css-probe test:examples:hydration
+pnpm --dir test/tools test:examples:browser
+pnpm --dir test/tools test:examples:hydration
 ```
 
 默认使用本机 Chrome；CI 使用 `CSS_PROBE_BROWSER_CHANNEL=chromium`。测试直接加载上述组件，覆盖静态值、有限状态切换、运行时新值、无关状态更新、连续变量、子树主题隔离、hover 与 media。两个包的类型检查也包含示例。
@@ -49,6 +49,6 @@ pnpm --dir .research/string-css-probe test:examples:hydration
 - 首次更新与重复分支切换结果正确；有限状态预热后不继续增加规则，连续变量与主题切换不增加规则，开放动态新值按需增加规则。
 - 卸载后重新挂载复用同一文档规则；新组件回到自己的初始状态，不继承上一个组件的临时状态。
 
-测试使用[Vue 服务端驱动](../.research/string-css-probe/fixtures/vue-examples-server.ts)和[Svelte 服务端驱动](../.research/string-css-probe/fixtures/svelte-examples-server.ts)。完整组件渲染必须包在 `withCssHost()` 的请求生命周期内；浏览器必须先收到服务端样式，再在首次挂载前调用一次 `hydrateCss(rules)`。同一文档的普通后续挂载不重复调用 `hydrateCss()`。
+测试使用[Vue 服务端驱动](../test/tools/fixtures/vue-examples-server.ts)和[Svelte 服务端驱动](../test/tools/fixtures/svelte-examples-server.ts)。完整组件渲染必须包在 `withCssHost()` 的请求生命周期内；浏览器必须先收到服务端样式，再在首次挂载前调用一次 `hydrateCss(rules)`。同一文档的普通后续挂载不重复调用 `hydrateCss()`。
 
 后续已完成[Nuxt/SvelteKit 的 Node 接入、HTML 清单与 CSP/nonce](metaframeworks.md)，以及[真实 HMR 与生命周期检查](lifecycle-and-diagnostics.md)。流式 SSR、Teleport / portal 的主题边界仍单独处理；本页只说明本组组件用例。

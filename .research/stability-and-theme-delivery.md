@@ -1,6 +1,6 @@
 # 稳定性、诊断与主题交付记录
 
-本轮按[五阶段规划](next-stage-stability-and-themes.md)实施。保留运行时 CSS、类继承、下划线选择器、单一 css 组合入口；五包仍为 private。
+本轮按[五阶段规划](../docs/production-progress.md)实施。保留运行时 CSS、类继承、下划线选择器、单一 css 组合入口；五包仍为 private。
 
 ## 已完成的工作
 
@@ -14,7 +14,7 @@
 
 提交 `a5ab599` 的[完整 CI](https://github.com/kenconnet666/zerodep-css/actions/runs/36230336979)通过 Windows / Ubuntu 基础检查和浏览器 / SSR / 元框架集成。性能、HMR、压力与元框架构建均由 CI 执行；本地仅运行相关类型、单元及必要语义复现。
 
-原始资料来自该运行的 runtime-diagnostics artifact，已归档到 [stability-a5ab599](string-css-probe/results/stability-a5ab599)。后续文档提交以自身 CI 状态为准。
+原始资料来自该运行的 runtime-diagnostics artifact，已归档到 [stability-a5ab599](../test/tools/results/stability-a5ab599)。后续文档提交以自身 CI 状态为准。
 
 ## 生命周期边界
 

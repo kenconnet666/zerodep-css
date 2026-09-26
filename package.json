@@ -21,7 +21,8 @@
     "format:check": "prettier --check README.md AGENTS.md package.json pnpm-workspace.yaml tsconfig*.json .codex scripts docs core vue svelte nuxt sveltekit test .research .github",
     "lsp:setup": "pwsh -NoProfile -File scripts/language-services/setup.ps1",
     "lsp:verify": "node scripts/language-services/verify.mjs .",
-    "lsp:inspect": "node scripts/language-services/inspect.mjs ."
+    "lsp:inspect": "node scripts/language-services/inspect.mjs .",
+    "test:coverage": "node scripts/test-runtime.mjs"
   },
   "devDependencies": {
     "vite": "catalog:",

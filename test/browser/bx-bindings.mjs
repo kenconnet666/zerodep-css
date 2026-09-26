@@ -3,8 +3,8 @@ import { mkdir, writeFile, unlink } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import vuePlugin from '../../vue/dist/vite.js';
 import sveltePlugin from '../../svelte/dist/vite.js';
-import { bundle } from '../../.research/string-css-probe/mup-bundle.mjs';
-import { launchBrowser } from '../../.research/string-css-probe/browser.mjs';
+import { bundle } from '../../test/tools/mup-bundle.mjs';
+import { launchBrowser } from '../../test/tools/browser.mjs';
 
 const browser = await launchBrowser();
 const output = new URL('../../test-results/bx-bindings/', import.meta.url);

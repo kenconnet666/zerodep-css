@@ -33,16 +33,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: pnpm --filter @zerodep-css/core test
+      - run: pnpm test:coverage
       - run: pnpm test:author
       - run: pnpm test:theme
       - run: pnpm test:bindings
       - run: pnpm test:compiler
-      - run: pnpm --dir .research/string-css-probe test:compiler-instances
-      - run: pnpm --dir .research/string-css-probe test:keyword-variants
-      - run: pnpm --dir .research/string-css-probe test:vfor-style
-      - run: pnpm --dir .research/string-css-probe test:mup:server
-      - run: pnpm --dir .research/string-css-probe test:mup:exports
+      - run: pnpm --dir test/tools test:compiler-instances
+      - run: pnpm --dir test/tools test:keyword-variants
+      - run: pnpm --dir test/tools test:vfor-style
+      - run: pnpm --dir test/tools test:mup:server
+      - run: pnpm --dir test/tools test:mup:exports
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: runtime-coverage
+          path: test-results/runtime-coverage.lcov
 
   browser:
     strategy:
@@ -57,14 +62,14 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           browser: ${{ matrix.browser }}
-      - run: pnpm --dir .research/string-css-probe test:selectors
-      - run: pnpm --dir .research/string-css-probe test:mup:browser
-      - run: pnpm --dir .research/string-css-probe test:mup:hydration
-      - run: pnpm --dir .research/string-css-probe test:examples:browser
-      - run: pnpm --dir .research/string-css-probe test:examples:hydration
-      - run: pnpm --dir .research/string-css-probe test:transport
-      - run: pnpm --dir .research/string-css-probe test:author-api
-      - run: pnpm --dir .research/string-css-probe test:bindings
+      - run: pnpm --dir test/tools test:selectors
+      - run: pnpm --dir test/tools test:mup:browser
+      - run: pnpm --dir test/tools test:mup:hydration
+      - run: pnpm --dir test/tools test:examples:browser
+      - run: pnpm --dir test/tools test:examples:hydration
+      - run: pnpm --dir test/tools test:transport
+      - run: pnpm --dir test/tools test:author-api
+      - run: pnpm --dir test/tools test:bindings
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -111,7 +116,7 @@ jobs:
       - if: matrix.framework == 'sveltekit'
         run: node ../../node_modules/vite/bin/vite.js build
         working-directory: sveltekit/test/app
-      - run: pnpm --dir .research/string-css-probe test:metaframeworks
+      - run: pnpm --dir test/tools test:metaframeworks
 
   performance:
     strategy:
@@ -125,19 +130,19 @@ jobs:
         with:
           browser: chromium
       - if: startsWith(matrix.suite, 'bindings-')
-        run: pnpm --dir .research/string-css-probe probe:bindings
+        run: pnpm --dir test/tools probe:bindings
         env:
           BINDING_ROUNDS: '3'
           BINDING_ROWS: ${{ matrix.suite == 'bindings-1000' && '1000' || '200' }}
       - if: matrix.suite == 'author'
         run: |
-          pnpm --dir .research/string-css-probe probe:static-fields
-          pnpm --dir .research/string-css-probe probe:keywords
+          pnpm --dir test/tools probe:static-fields
+          pnpm --dir test/tools probe:keywords
       - if: matrix.suite == 'templates'
         run: |
-          pnpm --dir .research/string-css-probe probe:template-derived
-          pnpm --dir .research/string-css-probe probe:template-conditional
-          pnpm --dir .research/string-css-probe probe:vfor-style
+          pnpm --dir test/tools probe:template-derived
+          pnpm --dir test/tools probe:template-conditional
+          pnpm --dir test/tools probe:vfor-style
       - uses: actions/upload-artifact@v4
         if: always()
         with:

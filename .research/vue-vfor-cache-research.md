@@ -99,15 +99,15 @@ renderList(
 本地焦点检查：
 
 ```powershell
-pnpm --dir .research/string-css-probe test:vfor-style
-node .research/string-css-probe/vfor-style-performance.mjs --compile-only
+pnpm --dir test/tools test:vfor-style
+node test/tools/vfor-style-performance.mjs --compile-only
 ```
 
 五项测试使用真实官方编译产物、真实 Vue 响应式调度与无 DOM 的小型 renderer。已验证无关更新不重复计算 class、文本继续更新、同对象字段变化、同 key 替换、重排与索引变化、外部响应式值变化、删除与重挂、嵌套同 key，以及 v-memo 冻结文本反例。主用例七轮操作没有产生额外渲染。
 
 浏览器探针由 CI 执行：200 行、21 次无关更新、21 次样式更新、五轮计时；另设独立调用计数轮，不把计数开销混进计时。浏览器断言检查实际 padding/width、文本、重排、对象替换与清空。输出 `runtime-diagnostics/vfor-style/`。时间无硬阈值；需要结合挂载与真实样式更新成本判断是否默认启用。
 
-实现文件：[编译原型](string-css-probe/vfor-style-compiler.mjs)、[小型缓存](string-css-probe/vfor-style-cache.mjs)、[焦点测试](string-css-probe/vfor-style-cache.test.mjs)、[CI 性能探针](string-css-probe/vfor-style-performance.mjs)。
+实现文件：[编译原型](../test/tools/vfor-style-compiler.mjs)、[小型缓存](../test/tools/vfor-style-cache.mjs)、[焦点测试](../test/tools/vfor-style-cache.test.mjs)、[CI 性能探针](../test/tools/vfor-style-performance.mjs)。
 
 ## 已取得的 CI 结果
 

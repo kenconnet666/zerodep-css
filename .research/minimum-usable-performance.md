@@ -1,6 +1,6 @@
 # 最小可用阶段性能记录
 
-这轮测量使用已构建的 `core`、Vue、Svelte 包入口，不沿用最初单宿主探针的速度结论。Windows、Node 24.18.0、Chrome 153.0.8010.54；Vue 3.5.43、Svelte 5.57.0、Emotion CSS 11.13.5。Vue 与 Svelte 分开测，每种场景有 200 个元素、三轮交错顺序；整套测试独立执行两次。表中是每次运行三轮中位数构成的范围，单位毫秒，越低越好。每个用例使用新浏览器页面，并验证全部元素的计算样式与规则数量。原始数据见 [dist 第一轮](string-css-probe/results/results-mup-dist-a.json)、[dist 第二轮](string-css-probe/results/results-mup-dist-b.json) 和[冷加载数据](string-css-probe/results/results-mup-dist-cold.json)。
+这轮测量使用已构建的 `core`、Vue、Svelte 包入口，不沿用最初单宿主探针的速度结论。Windows、Node 24.18.0、Chrome 153.0.8010.54；Vue 3.5.43、Svelte 5.57.0、Emotion CSS 11.13.5。Vue 与 Svelte 分开测，每种场景有 200 个元素、三轮交错顺序；整套测试独立执行两次。表中是每次运行三轮中位数构成的范围，单位毫秒，越低越好。每个用例使用新浏览器页面，并验证全部元素的计算样式与规则数量。原始数据见 [dist 第一轮](../test/tools/results/results-mup-dist-a.json)、[dist 第二轮](../test/tools/results/results-mup-dist-b.json) 和[冷加载数据](../test/tools/results/results-mup-dist-cold.json)。
 
 | 场景与写法                           | Vue 更新耗时 | Svelte 更新耗时 | 更新结束后新增规则 |
 | ------------------------------------ | -----------: | --------------: | -----------------: |
@@ -30,4 +30,4 @@
 
 目前可下的结论是：有限值缓存类的端到端更新时间已接近本测试的预声明原生类；持续新值的运行时类仍比原生变量路径慢并带来规则增长。相同字符串输入下本实现通常快于 Emotion，但跨轮波动存在，不能推断所有组件或浏览器都如此。性能热点主要是完整作者模型首次加载和新规则插入；规则注册器本身很薄。下一步的优化应由实际应用负载决定，暂不为了追逐微基准加入 CSS 解析器或强制编译器。
 
-复测命令：先在仓库根运行 `pnpm build`，再在 `.research/string-css-probe` 运行 `pnpm install --frozen-lockfile`；以 `MUP_DIST=1` 分别执行 `pnpm probe:mup` 和 `pnpm probe:mup:cold`。在 Windows PowerShell 中可先执行 `$env:MUP_DIST='1'`。真实性能计时应串行运行；CI 只验证功能正确性，不把共享机器的计时作为性能回归门槛。
+复测命令：先在仓库根运行 `pnpm build`，再在 `test/tools` 运行 `pnpm install --frozen-lockfile`；以 `MUP_DIST=1` 分别执行 `pnpm probe:mup` 和 `pnpm probe:mup:cold`。在 Windows PowerShell 中可先执行 `$env:MUP_DIST='1'`。真实性能计时应串行运行；CI 只验证功能正确性，不把共享机器的计时作为性能回归门槛。

@@ -1,6 +1,6 @@
 # 作者 API 与隐式绑定实施记录
 
-日期：2026-09-26。范围来自[本阶段计划](next-phase-authoring-and-bindings.md)。运行时 CSS 保留，编译器只为可识别的响应式值生成绑定，不要求全项目预生成类名。
+日期：2026-09-26。范围来自[本阶段计划](../docs/production-progress.md)。运行时 CSS 保留，编译器只为可识别的响应式值生成绑定，不要求全项目预生成类名。
 
 后续 API 简化：原 `cx` 已取消，样式组合并入 `css`；当前用法以 [作者 API](../docs/author-api.md) 为准。下文是 `5f56f88` 阶段的实现与性能记录，保留当时的名称和原始样本，不作为旧 API 兼容承诺。
 
@@ -39,7 +39,7 @@ Windows、Node 24.18.0、Chrome 153.0.8010.54；Vue 3.5.43、Svelte 5.57.0、Emo
 
 本轮依据测量避免了更新值时重复写 `selectorText`，保留已解析的选择器；内部帧用按调用点 / 列表 key 的缓存保存身份，变量组名字只在创建时哈希。不增加 Worker、SIMD、自定义 CSS 解析器或一层通用值对象。后续优化优先测实例和列表创建成本，不应为追逐单个比例破坏可维护性。
 
-原始样本：[implicit-bindings.json](string-css-probe/results/implicit-bindings.json)。复跑：`pnpm --dir .research/string-css-probe probe:bindings`。CI 只验证规则数和计算样式，时间没有硬阈值。
+原始样本：[implicit-bindings.json](../test/tools/results/implicit-bindings.json)。复跑：`pnpm --dir test/tools probe:bindings`。CI 只验证规则数和计算样式，时间没有硬阈值。
 
 ## 验证与交付边界
 
