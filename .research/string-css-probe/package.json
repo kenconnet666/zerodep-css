@@ -4,6 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@10.34.5",
   "scripts": {
+    "probe:template-conditional": "node template-conditional.mjs",
     "probe:template-derived": "node template-derived.mjs",
     "probe:keywords": "node keyword-representation.mjs",
     "test:keyword-variants": "node --test keyword-variant.test.mjs",

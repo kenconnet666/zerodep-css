@@ -1,0 +1,1585 @@
+{
+  "node": "v24.21.0",
+  "browser": "153.0.8010.12",
+  "count": 200,
+  "updates": 20,
+  "rounds": 5,
+  "samples": {
+    "vue-runtime": [
+      {
+        "mountMs": 28.39999999999418,
+        "noiseMs": 16.29999999998836,
+        "updateMs": 30.60000000000582,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 23.099999999976717,
+        "noiseMs": 14.5,
+        "updateMs": 28.29999999998836,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 21,
+        "noiseMs": 14.200000000011642,
+        "updateMs": 28,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 24.29999999998836,
+        "noiseMs": 14.39999999999418,
+        "updateMs": 28.29999999998836,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 21.39999999999418,
+        "noiseMs": 14.39999999999418,
+        "updateMs": 28.39999999999418,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      }
+    ],
+    "vue-derived": [
+      {
+        "mountMs": 23.29999999998836,
+        "noiseMs": 12.599999999976717,
+        "updateMs": 33,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 25.10000000000582,
+        "noiseMs": 12.60000000000582,
+        "updateMs": 33.20000000001164,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 23.89999999999418,
+        "noiseMs": 11.599999999976717,
+        "updateMs": 30.70000000001164,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 23.10000000000582,
+        "noiseMs": 10.89999999999418,
+        "updateMs": 30.10000000000582,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 26.10000000000582,
+        "noiseMs": 12.89999999999418,
+        "updateMs": 33.10000000000582,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      }
+    ],
+    "vue-implicit": [
+      {
+        "mountMs": 32.60000000000582,
+        "noiseMs": 22.5,
+        "updateMs": 42.89999999999418,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 31.29999999998836,
+        "noiseMs": 21.699999999982538,
+        "updateMs": 40.10000000000582,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 30.5,
+        "noiseMs": 20.39999999999418,
+        "updateMs": 41.20000000001164,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 28.5,
+        "noiseMs": 22.599999999976717,
+        "updateMs": 42.90000000002328,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 29.300000000017462,
+        "noiseMs": 21.60000000000582,
+        "updateMs": 40.70000000001164,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      }
+    ],
+    "vue-hoisted": [
+      {
+        "mountMs": 34.19999999998254,
+        "noiseMs": 11,
+        "updateMs": 36,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 30.199999999982538,
+        "noiseMs": 12.799999999988358,
+        "updateMs": 35.70000000001164,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 33.69999999998254,
+        "noiseMs": 11.700000000011642,
+        "updateMs": 38.10000000000582,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 34.20000000001164,
+        "noiseMs": 11.10000000000582,
+        "updateMs": 37.30000000001746,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 36.39999999999418,
+        "noiseMs": 11.699999999982538,
+        "updateMs": 38,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      }
+    ],
+    "svelte-runtime": [
+      {
+        "mountMs": 17.599999999976717,
+        "noiseMs": 8.300000000017462,
+        "updateMs": 32.89999999999418,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 18.70000000001164,
+        "noiseMs": 6.600000000005821,
+        "updateMs": 26.39999999999418,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 18.89999999999418,
+        "noiseMs": 6.7000000000116415,
+        "updateMs": 26.60000000000582,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 17.699999999982538,
+        "noiseMs": 6.7000000000116415,
+        "updateMs": 26.39999999999418,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 18.699999999982538,
+        "noiseMs": 6.699999999982538,
+        "updateMs": 27.300000000017462,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      }
+    ],
+    "svelte-derived": [
+      {
+        "mountMs": 17.20000000001164,
+        "noiseMs": 8.200000000011642,
+        "updateMs": 34,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 16.39999999999418,
+        "noiseMs": 8.199999999982538,
+        "updateMs": 30,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 17.70000000001164,
+        "noiseMs": 6.7000000000116415,
+        "updateMs": 26.39999999999418,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 15.5,
+        "noiseMs": 9.700000000011642,
+        "updateMs": 26.89999999999418,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      },
+      {
+        "mountMs": 15.599999999976717,
+        "noiseMs": 7.100000000005821,
+        "updateMs": 26.699999999982538,
+        "initial": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "final": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 220,
+          "classes": 220,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 200,
+        "layout": 8200
+      }
+    ],
+    "svelte-implicit": [
+      {
+        "mountMs": 24.60000000000582,
+        "noiseMs": 8.900000000023283,
+        "updateMs": 37.5,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 27.199999999982538,
+        "noiseMs": 8.60000000000582,
+        "updateMs": 36.89999999999418,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 26,
+        "noiseMs": 8.700000000011642,
+        "updateMs": 36,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 23.70000000001164,
+        "noiseMs": 9,
+        "updateMs": 37.20000000001164,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 24.79999999998836,
+        "noiseMs": 9,
+        "updateMs": 37.39999999999418,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      }
+    ],
+    "svelte-hoisted": [
+      {
+        "mountMs": 32.5,
+        "noiseMs": 10.099999999976717,
+        "updateMs": 38,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 28.39999999999418,
+        "noiseMs": 9.10000000000582,
+        "updateMs": 32.69999999998254,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 25.300000000017462,
+        "noiseMs": 9.300000000017462,
+        "updateMs": 32.19999999998254,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 28.10000000000582,
+        "noiseMs": 9.199999999982538,
+        "updateMs": 32.80000000001746,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      },
+      {
+        "mountMs": 27.900000000023283,
+        "noiseMs": 8.800000000017462,
+        "updateMs": 32.19999999998254,
+        "initial": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterNoise": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "final": {
+          "rules": 400,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 200,
+          "connected": true
+        },
+        "afterDispose": {
+          "rules": 200,
+          "classes": 200,
+          "animations": 0,
+          "globals": 0,
+          "bindings": 0,
+          "connected": true
+        },
+        "classChanges": 0,
+        "layout": 8200
+      }
+    ]
+  }
+}
