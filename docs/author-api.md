@@ -52,6 +52,8 @@ const button = css(
 
 浏览器 `configureCss({ nonce, insertionPoint })` 在首次登记或恢复前调用；位置节点必须位于当前 document.head，库把自身样式放在它之后。SSR 已有样式的 nonce 会沿用到之后创建的标签。`cssStats()` 提供规则数、全局块数与主标签连接状态；`disposeCss()` 只用于整个宿主退出，不能在任意子组件卸载时调用。
 
+`cssStats()` 的 `classes`、`animations`、`globals`、`bindings` 分别表示普通类、动画、命名全局块与私有值规则；`rules` 为总数。统计只在调用时读取现有 Map 大小，不额外扫描 DOM。组件卸载清理私有值规则，普通类可能被外部字符串引用，仍由宿主保留。
+
 若主样式标签意外被移除，下一次调用会根据宿主缓存重建。全局块标签的移除在下次操作该块时重建，不注册全页面 MutationObserver。已有挂载元素需要在宿主销毁前退出；显式 dispose 后不会猜测哪些类还在被外部 DOM 使用。
 
 ## 单位与值方法

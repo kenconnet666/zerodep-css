@@ -27,7 +27,12 @@ interface FrameNode {
 let system: Css | undefined;
 
 /** 编译器内部协议；公开作者方法仍返回字符串，不要求用户传 getter。 */
-export function createBindings(prefix: string, write: Writer, schedule: Schedule) {
+export function createBindings(
+  prefix: string,
+  write: Writer,
+  schedule: Schedule,
+  locations?: Readonly<Record<string, string>>,
+) {
   const groups = new Map<string, Group>();
   const definitionCounts = new Map<string, number>();
   const frames = new Map<string, FrameNode>();
@@ -136,7 +141,7 @@ export function createBindings(prefix: string, write: Writer, schedule: Schedule
       ) {
         warned.add(site);
         console.warn(
-          `[zerodep-css] ${method} is overridden; selector arguments retain their original runtime evaluation.`,
+          `[zerodep-css] ${locations?.[site] ?? method}: ${method} is overridden; selector arguments retain their original runtime evaluation.`,
         );
       }
       // 用户覆写可能加工声明文本；此时让内部属性方法也保留原始值。
@@ -163,7 +168,7 @@ export function createBindings(prefix: string, write: Writer, schedule: Schedule
         ) {
           warned.add(site);
           console.warn(
-            `[zerodep-css] ${propertyName}.${method} is overridden; implicit binding retains the original runtime evaluation.`,
+            `[zerodep-css] ${locations?.[site] ?? `${propertyName}.${method}`}: ${propertyName}.${method} is overridden; implicit binding retains the original runtime evaluation.`,
           );
         }
         return invoke.apply(property, args.map(read));

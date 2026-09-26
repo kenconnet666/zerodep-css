@@ -5,6 +5,7 @@ import {
   bindingNames,
   createBindingTransform,
   replacePropsId,
+  scriptEdits,
   type Edit,
 } from '@zerodep-css/core/compiler';
 
@@ -15,11 +16,13 @@ function located<T>(node: T): T & { start: number; end: number } {
 
 export default function cssBindings() {
   let root = process.cwd();
+  let dev = false;
   return {
     name: 'zerodep-css:svelte-bindings',
     enforce: 'pre' as const,
-    configResolved(config: { root: string }) {
+    configResolved(config: { root: string; isProduction?: boolean }) {
       root = config.root;
+      dev = !config.isProduction;
     },
     transform(this: { warn(message: string): void }, code: string, id: string) {
       if (!id.endsWith('.svelte') || id.includes('?')) return;
@@ -31,6 +34,7 @@ export default function cssBindings() {
         relative(root, id),
         'svelte',
         code,
+        { dev, scriptOffset: script.start },
       );
       if (!model.enabled) return;
       const edits: Edit[] = [];
@@ -70,7 +74,8 @@ export default function cssBindings() {
           const names = snippet.parameters.flatMap((param) =>
             bindingNames(code.slice(located(param).start, located(param).end)),
           );
-          model.warnings.add(
+          model.warnAt(
+            node.start,
             'CSS computed from snippet parameters uses the ordinary runtime CSS path.',
           );
           visit(snippet.body, keys, [...locals, ...names], true);
@@ -85,7 +90,11 @@ export default function cssBindings() {
                 ? located(values[0].expression)
                 : undefined;
             if (expression?.start != null && expression.end != null) {
-              const text = model.expression(code.slice(expression.start, expression.end), locals);
+              const text = model.expression(
+                code.slice(expression.start, expression.end),
+                locals,
+                expression.start,
+              );
               const wrapped = fallback
                 ? `${model.scope}.runtime(() => (${text}))`
                 : `${model.scope}.frame(${JSON.stringify(`element${serial++}`)}, [${keys.join(',')}], () => (${text}))`;
@@ -99,12 +108,16 @@ export default function cssBindings() {
             visit(child, keys, locals, fallback);
       }
       visit(ast.fragment, [], []);
-      for (const warning of model.warnings) this.warn(`${id}: ${warning}`);
+      for (const warning of model.warnings) this.warn(warning);
       if (!model.used) return;
       const idName = `${model.scope}_id`;
       const scriptText = replacePropsId(model.script, idName);
-      const prefix = `import { useBindings as ${model.scope}_use } from '@zerodep-css/svelte/bindings';\nconst ${idName} = $props.id();\nconst ${model.scope} = ${model.scope}_use(${JSON.stringify(model.fileId)}, ${idName}, run => { run(); return $effect.root(() => { $effect(run); }); });\n`;
-      edits.push({ start: script.start, end: script.end, text: prefix + scriptText });
+      const prefix = `import { useBindings as ${model.scope}_use } from '@zerodep-css/svelte/bindings';\nconst ${idName} = $props.id();\nconst ${model.scope} = ${model.scope}_use(${JSON.stringify(model.fileId)}, ${idName}, run => { run(); return $effect.root(() => { $effect(run); }); }${dev ? `, ${JSON.stringify(model.locations)}` : ''});\n`;
+      edits.push(...scriptEdits(code.slice(script.start, script.end), scriptText, script.start), {
+        start: script.start,
+        end: script.start,
+        text: prefix,
+      });
       return applyEdits(code, edits, id);
     },
   };

@@ -41,6 +41,7 @@ export function createBindingTransform(
   file: string,
   framework: 'vue' | 'svelte',
   reserved = script,
+  options: { dev?: boolean; scriptOffset?: number } = {},
 ) {
   const source = ts.createSourceFile(
     file + '.ts',
@@ -59,6 +60,20 @@ export function createBindingTransform(
   let used = false;
   let valueCount = 0;
   let serial = 0;
+  const locations: Record<string, string> = {};
+  const offsets = new Map<ts.SourceFile, number>([[source, options.scriptOffset ?? 0]]);
+  function location(offset: number): string {
+    const prefix = reserved.slice(0, offset);
+    return `${file.replace(/\\/g, '/')}:${prefix.split('\n').length}:${offset - prefix.lastIndexOf('\n')}`;
+  }
+  function site(node: ts.Node, sf: ts.SourceFile): string {
+    const id = String(serial++);
+    if (options.dev) locations[id] = location((offsets.get(sf) ?? 0) + node.getStart(sf));
+    return JSON.stringify(id);
+  }
+  function warn(node: ts.Node, sf: ts.SourceFile, message: string) {
+    warnings.add(`${location((offsets.get(sf) ?? 0) + node.getStart(sf))}: ${message}`);
+  }
 
   function bindings(node: ts.BindingName, into: Set<string>) {
     if (ts.isIdentifier(node)) into.add(node.text);
@@ -220,7 +235,9 @@ export function createBindingTransform(
           (ts.isCallExpression(item) && Boolean(api(item.expression, local, sf))) ||
           Boolean(ts.forEachChild(item, (child) => containsCss(child) || undefined));
         if (containsCss(node))
-          warnings.add(
+          warn(
+            node,
+            sf,
             'CSS calls inside computed/$derived retain their ordinary runtime evaluation; define a bound css() in setup for implicit value binding.',
           );
         return node.getText(sf);
@@ -229,12 +246,14 @@ export function createBindingTransform(
         const before = valueCount;
         const args = node.arguments.map((arg) => render(arg, sf, params, local, false, true));
         if (valueCount === before) return node.getText(sf);
-        return `${scope}.capture(${JSON.stringify(String(serial++))}, ${text}, () => [${args.join(', ')}])`;
+        return `${scope}.capture(${site(node, sf)}, ${text}, () => [${args.join(', ')}])`;
       }
       if (name === 'globalCss') {
         // 全局块按 key 整块更新，不能把值误绑定到局部组件根。
         if (node.arguments.some((arg) => ts.isSpreadElement(arg) || !safe(arg))) {
-          warnings.add(
+          warn(
+            node,
+            sf,
             'Global CSS with spread or side-effecting arguments retains runtime evaluation.',
           );
           return node.getText(sf);
@@ -261,7 +280,9 @@ export function createBindingTransform(
         const method = node.expression.name.text;
         if (methods.has(method) && node.arguments.some((arg) => isDynamic(arg, params))) {
           if (node.arguments.some((arg) => ts.isSpreadElement(arg) || !safe(arg))) {
-            warnings.add(
+            warn(
+              node,
+              sf,
               `Implicit binding skipped for ${property.name.text}.${method}: spread or side-effecting arguments retain runtime evaluation.`,
             );
             return node.getText(sf);
@@ -271,7 +292,7 @@ export function createBindingTransform(
           const args = node.arguments.map((arg) =>
             isDynamic(arg, params) ? `() => (${arg.getText(sf)})` : arg.getText(sf),
           );
-          return `${scope}.value(${JSON.stringify(String(serial++))}, ${JSON.stringify(property.name.text)}, ${property.getText(sf)}, ${JSON.stringify(method)}, [${args.join(', ')}])`;
+          return `${scope}.value(${site(node, sf)}, ${JSON.stringify(property.name.text)}, ${property.getText(sf)}, ${JSON.stringify(method)}, [${args.join(', ')}])`;
         }
       }
       if (
@@ -286,11 +307,13 @@ export function createBindingTransform(
           render(arg, sf, params, local, false, method !== '_selector' || index !== 0),
         );
         if (before === valueCount) return node.getText(sf);
-        return `${scope}.selector(${JSON.stringify(String(serial++))}, ${node.expression.expression.getText(sf)}, ${JSON.stringify(method)}, () => [${args.join(', ')}])`;
+        return `${scope}.selector(${site(node, sf)}, ${node.expression.expression.getText(sf)}, ${JSON.stringify(method)}, () => [${args.join(', ')}])`;
       }
       if (bindingContext && !name) {
         if (isDynamic(node, params))
-          warnings.add(
+          warn(
+            node,
+            sf,
             `Composition call ${text} retains runtime evaluation; its string manipulation is not rewritten.`,
           );
         return node.getText(sf);
@@ -337,9 +360,13 @@ export function createBindingTransform(
       return used;
     },
     warnings,
+    locations,
+    warnAt(offset: number, message: string) {
+      warnings.add(`${location(offset)}: ${message}`);
+    },
     enabled,
     script: transformed + script.slice(source.statements.at(-1)?.end ?? 0),
-    expression(text: string, locals: string[] = []): string {
+    expression(text: string, locals: string[] = [], offset = 0): string {
       const sf = ts.createSourceFile(
         'expression.ts',
         `(${text})`,
@@ -348,6 +375,7 @@ export function createBindingTransform(
         ts.ScriptKind.TS,
       );
       const statement = sf.statements[0];
+      offsets.set(sf, offset - 1);
       if (!statement || !ts.isExpressionStatement(statement)) return text;
       return render(statement.expression, sf, new Set(locals), new Set(locals)).slice(1, -1);
     },
@@ -386,6 +414,38 @@ export function applyEdits(source: string, edits: Edit[], file = 'component') {
     code: output.toString(),
     map: output.generateMap({ source: file, includeContent: true, hires: true }),
   };
+}
+
+/** 逐语句保留未变片段，避免整段 script 覆盖令后续行的 source map 全部指向开头。 */
+export function scriptEdits(before: string, after: string, offset: number): Edit[] {
+  const parse = (code: string) =>
+    ts.createSourceFile('script.ts', code, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const original = parse(before),
+    next = parse(after);
+  if (original.statements.length !== next.statements.length)
+    throw new Error('CSS transform changed script statement boundaries.');
+  const edits: Edit[] = [];
+  original.statements.forEach((node, index) => {
+    const oldText = node.getText(original),
+      newText = next.statements[index]!.getText(next);
+    if (oldText === newText) return;
+    let start = 0,
+      tail = 0;
+    while (start < oldText.length && start < newText.length && oldText[start] === newText[start])
+      start++;
+    while (
+      tail < oldText.length - start &&
+      tail < newText.length - start &&
+      oldText[oldText.length - tail - 1] === newText[newText.length - tail - 1]
+    )
+      tail++;
+    edits.push({
+      start: offset + node.getStart(original) + start,
+      end: offset + node.end - tail,
+      text: newText.slice(start, newText.length - tail),
+    });
+  });
+  return edits;
 }
 
 /** 复用已有的原生组件 ID；只替换调用节点，绝不改字符串或注释。 */

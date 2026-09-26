@@ -4,24 +4,30 @@ import {
   applyEdits,
   bindingNames,
   createBindingTransform,
+  scriptEdits,
   type Edit,
 } from '@zerodep-css/core/compiler';
 
 /** 放在 Vue 插件之前，仅处理 script setup；普通运行时写法仍可单独使用。 */
 export default function cssBindings() {
   let root = process.cwd();
+  let dev = false;
   return {
     name: 'zerodep-css:vue-bindings',
     enforce: 'pre' as const,
-    configResolved(config: { root: string }) {
+    configResolved(config: { root: string; isProduction?: boolean }) {
       root = config.root;
+      dev = !config.isProduction;
     },
     transform(this: { warn(message: string): void }, code: string, id: string) {
       if (!id.endsWith('.vue') || id.includes('?')) return;
       const { descriptor } = parse(code, { filename: id });
       const script = descriptor.scriptSetup;
       if (!script || !descriptor.template?.ast) return;
-      const model = createBindingTransform(script.content, relative(root, id), 'vue', code);
+      const model = createBindingTransform(script.content, relative(root, id), 'vue', code, {
+        dev,
+        scriptOffset: script.loc.start.offset,
+      });
       if (!model.enabled) return;
       const edits: Edit[] = [];
       let serial = 0;
@@ -80,7 +86,11 @@ export default function cssBindings() {
             prop.exp?.type !== 4
           )
             continue;
-          const expression = model.expression(prop.exp.content, nextLocals);
+          const expression = model.expression(
+            prop.exp.content,
+            nextLocals,
+            prop.exp.loc.start.offset,
+          );
           const wrapped = fallback
             ? `${model.scope}.runtime(() => (${expression}))`
             : `${model.scope}.frame(${JSON.stringify(`element${serial++}`)}, [${nextKeys.join(',')}], () => (${expression}))`;
@@ -91,19 +101,20 @@ export default function cssBindings() {
           });
         }
         if (fallback)
-          model.warnings.add(
+          model.warnAt(
+            node.loc.start.offset,
             'Slot props or shadowed loop bindings use the ordinary runtime CSS path.',
           );
         for (const child of node.children) visit(child, nextKeys, nextLocals, fallback);
       }
       for (const node of descriptor.template.ast.children) visit(node, [], []);
-      for (const warning of model.warnings) this.warn(`${id}: ${warning}`);
+      for (const warning of model.warnings) this.warn(warning);
       if (!model.used) return;
-      const prefix = `import { useBindings as ${model.scope}_use } from '@zerodep-css/vue/bindings';\nconst ${model.scope} = ${model.scope}_use(${JSON.stringify(model.fileId)});\n`;
-      edits.push({
+      const prefix = `import { useBindings as ${model.scope}_use } from '@zerodep-css/vue/bindings';\nconst ${model.scope} = ${model.scope}_use(${JSON.stringify(model.fileId)}${dev ? `, ${JSON.stringify(model.locations)}` : ''});\n`;
+      edits.push(...scriptEdits(script.content, model.script, script.loc.start.offset), {
         start: script.loc.start.offset,
-        end: script.loc.end.offset,
-        text: prefix + model.script,
+        end: script.loc.start.offset,
+        text: prefix,
       });
       return applyEdits(code, edits, id);
     },

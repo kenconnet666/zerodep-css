@@ -7,12 +7,16 @@ export function createVueBindings(
     bindingId(owner: object): number;
     setBindings(key: string, body: string | null): void;
   },
+  locations?: Readonly<Record<string, string>>,
 ) {
   const instance = getCurrentInstance();
   if (!instance) throw new Error('CSS bindings require component setup.');
   const owner = instance.appContext.config.idPrefix || host.bindingId(instance.appContext.app);
-  const scope = createBindings(`${file}:${owner}:${useId()}`, host.setBindings, (run) =>
-    watchEffect(run),
+  const scope = createBindings(
+    `${file}:${owner}:${useId()}`,
+    host.setBindings,
+    (run) => watchEffect(run),
+    locations,
   );
   onMounted(scope.finishSetup);
   onUnmounted(scope.dispose);

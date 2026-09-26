@@ -10,11 +10,13 @@ export function createSvelteBindings(
     bindingId(owner: object): number;
     setBindings(key: string, body: string | null): void;
   },
+  locations?: Readonly<Record<string, string>>,
 ) {
   const scope = createBindings(
     `${file}:${host.bindingId(getBindingOwner())}:${id}`,
     host.setBindings,
     schedule,
+    locations,
   );
   onMount(() => {
     scope.finishSetup();
