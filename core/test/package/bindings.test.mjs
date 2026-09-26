@@ -170,3 +170,23 @@ test('手写 computed 与 Svelte derived 复用绑定帧', () => {
   assert.throws(() => scope.runtime(() => scope.bind('x', () => 1)), /not supported/);
   scope.dispose();
 });
+
+test('同名全局块被覆盖后，重新执行带 bx 的调用会恢复原块', () => {
+  const { host, scope } = fixture();
+  const result = transform("function apply(){globalCss('theme','body{color:'+bx('red')+';}')}");
+  const script = result.script.replace(/import[^;]+;/g, '');
+  const apply = new Function('__zc', 'globalCss', script + '; return apply;')(
+    scope,
+    host.globalCss,
+  );
+  const draw = () => scope.frame('global', [], apply);
+  draw();
+  const first = host.rules().find((r) => r.key === 'theme').body;
+  host.globalCss('theme', 'body{color:blue;}');
+  draw();
+  assert.equal(host.rules().find((r) => r.key === 'theme').body, first);
+  host.globalCss('theme');
+  draw();
+  assert.equal(host.rules().find((r) => r.key === 'theme').body, first);
+  scope.dispose();
+});

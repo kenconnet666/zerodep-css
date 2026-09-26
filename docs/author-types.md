@@ -24,7 +24,7 @@ class AnimationPlayStateCss extends CssProperty {
 
 数学参数直接写 `Property.Width | CssString` 等，不再嵌入 Extract 条件类型。CSS 属性值是字符串或数值，开放字符串已经覆盖关键字，因此保留原数值约束：width 的裸数字只接受 0，opacity 可接受普通数字，时间值仍需单位。clamp 使用普通数组 join 拼接，避免大型关键字联合触发 TypeScript 模板字面量组合膨胀。
 
-`declaration` 是 protected 格式化实现。用户通常继续调用 raw、单位方法或添加自己的 readonly 字段；继承方式没有变化：
+`declaration` 是 protected 格式化实现，raw、单位、颜色和数学等动态方法最终均经过它；静态关键字是已生成的普通字符串，不会随方法覆写变化。用户通常继续调用 raw、单位方法或添加自己的 readonly 字段；继承方式没有变化：
 
 ```ts
 class ThemeWidth extends WidthCss {

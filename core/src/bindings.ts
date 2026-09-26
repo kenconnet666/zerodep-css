@@ -93,6 +93,7 @@ export function createBindings(
       site: string,
       register: (...parts: Part[]) => Result,
       produce: () => Part[],
+      reuseResult = true,
     ): Result {
       const counts = frame?.counts ?? definitionCounts;
       const count = counts.get(site) ?? 0;
@@ -123,7 +124,8 @@ export function createBindings(
         else update(group);
       }
       // 值变化时模板字符串通常不变。只缓存平铺字符串，避免可变数组的别名误命中。
-      const cached = group.cached;
+      // 命名全局块可被其他调用覆盖，必须再次交给宿主处理覆盖顺序。
+      const cached = reuseResult ? group.cached : undefined;
       if (
         cached?.register === register &&
         parts.length === cached.parts.length &&
@@ -131,9 +133,10 @@ export function createBindings(
       )
         return cached.result as Result;
       const result = register(...parts);
-      group.cached = parts.every((part) => typeof part === 'string')
-        ? { register, parts: parts.slice(), result }
-        : undefined;
+      group.cached =
+        reuseResult && parts.every((part) => typeof part === 'string')
+          ? { register, parts: parts.slice(), result }
+          : undefined;
       return result;
     },
     bind(site: string, read: () => BxValue): string {

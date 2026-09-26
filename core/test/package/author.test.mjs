@@ -107,3 +107,32 @@ test('下划线选择器方法共享原型，支持只读数组且不登记或�
   }
   assert.equal(new AppCss()._highlight(s.color.red), '&[data-highlight]{color:red;}');
 });
+
+test('动态属性方法统一经过声明格式化，固定字段仍为普通常量', () => {
+  class ProjectWidth extends WidthCss {
+    declaration(value) {
+      return super.declaration('calc(' + value + ' * 2)');
+    }
+  }
+  const width = new ProjectWidth();
+  assert.equal(width.raw('12px'), 'width:calc(12px * 2);');
+  assert.equal(width.px(12), 'width:calc(12px * 2);');
+  assert.equal(width.percent(50), 'width:calc(50% * 2);');
+  assert.equal(width.clamp('1px', '12px', '20px'), 'width:calc(clamp(1px, 12px, 20px) * 2);');
+  assert.equal(width.auto, 'width:auto;');
+});
+
+test('颜色通道允许变量字符串，现代颜色方法保持原生值，补全 placeholder 选择器', () => {
+  const s = new Css();
+  assert.equal(
+    s.color.rgb('var(--red)', 20, 30, 'var(--alpha)'),
+    'color:rgb(var(--red) 20 30 / var(--alpha));',
+  );
+  assert.equal(
+    s.color.hsl('1turn', 'var(--sat)', 50, '50%'),
+    'color:hsl(1turn var(--sat) 50% / 50%);',
+  );
+  assert.equal(s.color.oklch(0.7, 0.15, 240, 0.5), 'color:oklch(0.7 0.15 240 / 0.5);');
+  assert.equal(s.fill.oklab('70%', 0.1, 'var(--b)'), 'fill:oklab(70% 0.1 var(--b));');
+  assert.equal(s._placeholder(s.color.gray), '&::placeholder{color:gray;}');
+});

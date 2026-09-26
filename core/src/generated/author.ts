@@ -66,6 +66,10 @@ export class Css {
   _after(...parts: CssInput[]): string {
     return this._selector('&::after', ...parts);
   }
+  /** 生成 &::placeholder 嵌套规则；返回声明片段，不登记样式。 */
+  _placeholder(...parts: CssInput[]): string {
+    return this._selector('&::placeholder', ...parts);
+  }
   /** CSS 属性 accent-color；初始值 auto。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color
    */

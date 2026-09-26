@@ -78,3 +78,27 @@ test('动画去重、全局块原位更新移除、恢复清单整体回滚', ()
   assert.deepEqual(next.rules(), registry.rules());
   assert.equal(writes.length, 6);
 });
+
+test('动画与全局块接受嵌套条件片段，空块更新与删除语义分开', () => {
+  const registry = createRuleRegistry(() => {});
+  const frames = Object.freeze([
+    'from{opacity:0;}',
+    Object.freeze([false, null, 'to{opacity:1;}']),
+  ]);
+  assert.equal(registry.keyframes(frames), registry.keyframes('from{opacity:0;}to{opacity:1;}'));
+  registry.globalCss('base', ['body{margin:0;}', [false, 'html{color:red;}']]);
+  assert.equal(
+    registry.rules().find((r) => r.key === 'base').body,
+    'body{margin:0;}html{color:red;}',
+  );
+  registry.globalCss('base', false, []);
+  assert.equal(registry.rules().find((r) => r.key === 'base').body, '');
+  registry.globalCss('base');
+  assert.equal(
+    registry.rules().some((r) => r.key === 'base'),
+    false,
+  );
+  const name = registry.css('color:red;');
+  registry.globalCss('literal', name);
+  assert.equal(registry.rules().find((r) => r.key === 'literal').body, name);
+});

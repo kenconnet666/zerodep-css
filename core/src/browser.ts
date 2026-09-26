@@ -150,9 +150,9 @@ export function css(...parts: CssInput[]): string {
   return getHost(document).registry.css(...parts);
 }
 
-export const keyframes = (...parts: string[]): string =>
+export const keyframes = (...parts: CssInput[]): string =>
   getHost(document).registry.keyframes(...parts);
-export function globalCss(key: string, ...parts: string[]): void {
+export function globalCss(key: string, ...parts: CssInput[]): void {
   const host = getHost(document);
   if (host.globals.has(key) && !host.globals.get(key)!.isConnected) host.rebuild();
   host.registry.globalCss(key, ...parts);

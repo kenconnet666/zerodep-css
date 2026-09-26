@@ -1,4 +1,4 @@
-// 方法与运行时绑定共用这份单位表；只生成原生单位，不进行数值范围判断。
+// 生成器与模板缓存纯度检查共用这份单位表；只生成原生单位，不进行数值范围判断。
 export const units = Object.fromEntries(
   [
     ...'px cm mm q in pt pc em rem ex rex ch rch cap rcap ic ric lh rlh'.split(' '),
@@ -24,7 +24,7 @@ export function unitMethod(name, suffix, min = 1, max = 1, override = false) {
   if (max === 1)
     return [
       doc,
-      `${name}(value: number): string { return \`\${this.name}:\${value}${suffix};\`; }`,
+      `${name}(value: number): string { return this.declaration(\`\${value}${suffix}\`); }`,
     ];
   const declarations = [];
   for (let count = min; count <= max; count++)
@@ -34,7 +34,7 @@ export function unitMethod(name, suffix, min = 1, max = 1, override = false) {
   return [
     doc,
     ...declarations,
-    `${override ? 'override ' : ''}${name}(...values: number[]): string { return \`\${this.name}:\${values.map(value => \`\${value}${suffix}\`).join(' ')};\`; }`,
+    `${override ? 'override ' : ''}${name}(...values: number[]): string { return this.declaration(values.map(value => \`\${value}${suffix}\`).join(' ')); }`,
   ];
 }
 
@@ -42,10 +42,17 @@ export function valueMethods(type, color, math) {
   const lines = [];
   if (color)
     lines.push(
-      '/** RGB 通道与可选 alpha；不隐式截断数值。 */',
-      "rgb(red: number, green: number, blue: number, alpha?: number): string { return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`); }",
-      '/** 色相用度数，饱和度和明度用百分数。 */',
-      "hsl(hue: number, saturation: number, lightness: number, alpha?: number): string { return this.raw(`hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`); }",
+      '/** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */',
+      "rgb(red: number | CssString, green: number | CssString, blue: number | CssString, alpha?: number | CssString): string { return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`); }",
+      '/** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */',
+      "hsl(hue: number | CssString, saturation: number | CssString, lightness: number | CssString, alpha?: number | CssString): string { return this.raw(`hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`); }",
+    );
+  if (color)
+    lines.push(
+      '/** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */',
+      "oklch(lightness: number | CssString, chroma: number | CssString, hue: number | CssString, alpha?: number | CssString): string { return this.raw(`oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`); }",
+      '/** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */',
+      "oklab(lightness: number | CssString, a: number | CssString, b: number | CssString, alpha?: number | CssString): string { return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`); }",
     );
   if (math) {
     // CSS 属性值只含字符串与数值；开放字符串已覆盖关键字，无需再用 Extract。

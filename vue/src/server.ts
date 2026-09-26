@@ -10,6 +10,6 @@ export {
 export { createCssContext } from './context.js';
 export { provideCssHost } from './server-host.js';
 export const css = (...parts: CssInput[]): string => resolveCssHost().css(...parts);
-export const keyframes = (...parts: string[]): string => resolveCssHost().keyframes(...parts);
-export const globalCss = (key: string, ...parts: string[]): void =>
+export const keyframes = (...parts: CssInput[]): string => resolveCssHost().keyframes(...parts);
+export const globalCss = (key: string, ...parts: CssInput[]): void =>
   resolveCssHost().globalCss(key, ...parts);

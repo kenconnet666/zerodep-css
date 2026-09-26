@@ -1,7 +1,6 @@
 import { hash } from './names.js';
-
-/** 声明或当前宿主的样式类；条件空项省略，数组按原顺序展开。 */
-export type CssInput = string | false | null | undefined | readonly CssInput[];
+import { joinFragments, type CssInput } from './fragments.js';
+export type { CssInput } from './fragments.js';
 
 export interface CssRule {
   className: string;
@@ -119,8 +118,8 @@ export function createRuleRegistry(
       return owners.get(owner)!;
     },
     css,
-    keyframes: (...parts: string[]) => register(parts.join(''), 'keyframes'),
-    globalCss(key: string, ...parts: string[]): void {
+    keyframes: (...parts: CssInput[]) => register(joinFragments(parts), 'keyframes'),
+    globalCss(key: string, ...parts: CssInput[]): void {
       if (!parts.length) {
         if (globals.has(key)) {
           updateGlobal(key);
@@ -128,7 +127,7 @@ export function createRuleRegistry(
         }
         return;
       }
-      const body = parts.join('');
+      const body = joinFragments(parts);
       if (globals.get(key)?.body === body) return;
       const rule: CssRule = { kind: 'global', key, className: ruleName('global', body, key), body };
       updateGlobal(key, rule);

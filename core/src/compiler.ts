@@ -10,6 +10,8 @@ const methods = new Set([
   'raw',
   'rgb',
   'hsl',
+  'oklch',
+  'oklab',
   'calc',
   'min',
   'max',
@@ -268,7 +270,7 @@ export function createBindingTransform(
             node.expression.getText(sf) +
             ', () => [' +
             args.join(', ') +
-            '])'
+            (name === 'globalCss' ? '], false)' : '])')
           );
         return node.expression.getText(sf) + '(' + args.join(', ') + ')';
       }

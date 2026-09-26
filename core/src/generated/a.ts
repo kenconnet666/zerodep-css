@@ -213,15 +213,45 @@ export class AccentColorCss extends CssProperty {
   raw(value: Property.AccentColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -462,11 +492,11 @@ export class AnimationCss extends CssProperty {
   }
   /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
   ms(value: number): string {
-    return `${this.name}:${value}ms;`;
+    return this.declaration(`${value}ms`);
   }
   /** 使用 s 单位生成声明；数值合法性由浏览器处理。 */
   s(value: number): string {
-    return `${this.name}:${value}s;`;
+    return this.declaration(`${value}s`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -532,11 +562,11 @@ export class AnimationDelayCss extends CssProperty {
   }
   /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
   ms(value: number): string {
-    return `${this.name}:${value}ms;`;
+    return this.declaration(`${value}ms`);
   }
   /** 使用 s 单位生成声明；数值合法性由浏览器处理。 */
   s(value: number): string {
-    return `${this.name}:${value}s;`;
+    return this.declaration(`${value}s`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -604,11 +634,11 @@ export class AnimationDurationCss extends CssProperty {
   }
   /** 使用 ms 单位生成声明；数值合法性由浏览器处理。 */
   ms(value: number): string {
-    return `${this.name}:${value}ms;`;
+    return this.declaration(`${value}ms`);
   }
   /** 使用 s 单位生成声明；数值合法性由浏览器处理。 */
   s(value: number): string {
-    return `${this.name}:${value}s;`;
+    return this.declaration(`${value}s`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -811,7 +841,7 @@ export class AnimationRangeEndCss extends LengthCssProperty {
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
-    return `${this.name}:${value}%;`;
+    return this.declaration(`${value}%`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -863,7 +893,7 @@ export class AnimationRangeStartCss extends LengthCssProperty {
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
-    return `${this.name}:${value}%;`;
+    return this.declaration(`${value}%`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {

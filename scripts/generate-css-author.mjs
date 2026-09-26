@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import prettier from 'prettier';
 import ts from 'typescript';
 import { units, extraUnits, unitMethod, valueMethods } from './css-author-methods.mjs';
-import { selectorShortcuts } from '../core/src/selectors.ts';
+import { selectorShortcuts } from '../core/src/selector-shortcuts.ts';
 import { themePalette, themeVariable } from '../core/src/theme-palette.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -196,7 +196,7 @@ for (const name of names) {
     ...(hasPercent ? ['percent'] : []),
     ...(hasTime ? ['ms', 's'] : []),
     ...(hasAngle ? ['deg', 'grad', 'rad', 'turn'] : []),
-    ...(hasColor ? ['rgb', 'hsl'] : []),
+    ...(hasColor ? ['rgb', 'hsl', 'oklch', 'oklab'] : []),
     ...(hasLength || hasPercent || hasTime || hasAngle || hasNumber
       ? ['calc', 'min', 'max', 'clamp']
       : []),

@@ -29,7 +29,7 @@ globalCss('theme');
 
 `s._selector` 使用浏览器原生 CSS 嵌套，不引入 Stylis。需要选择独立子元素时使用上例的 `className` 标记；Emotion 的 `&-child` 字符串后缀展开不属于原生嵌套，不能直接套用。
 
-选择器方法接受声明字符串、嵌套只读数组和 `false/null/undefined` 空项，不查询宿主，不展开已生成的类名。`keyframes`、`globalCss` 的片段参数继续为字符串，登记职责不变。
+选择器方法接受声明字符串、嵌套只读数组和 `false/null/undefined` 空项，不查询宿主，不展开已生成的类名。`keyframes`、`globalCss` 同样接受这些片段，数组只展开声明，不解析样式类。`globalCss(name)` 删除块；`globalCss(name, false)` 将块更新为空但保留插入顺序。
 
 ## 选择器方法
 
@@ -44,7 +44,7 @@ const button = css(
 );
 ```
 
-快捷方法为 `_hover`、`_active`、`_focus`、`_focusVisible`、`_focusWithin`、`_disabled`、`_checked`、`_before`、`_after`，分别对应原生伪类 / 伪元素。全部共享原型方法，不提供无前缀别名。`_selector(selector, ...parts)` 用 `CssSelector` 提供常见选择器、@ 规则、from/to 的补全，并允许任意字符串；没有对浏览器语法另做限制。
+快捷方法为 `_hover`、`_active`、`_focus`、`_focusVisible`、`_focusWithin`、`_disabled`、`_checked`、`_before`、`_after`、`_placeholder`，分别对应原生伪类 / 伪元素。全部共享原型方法，不提供无前缀别名。`_selector(selector, ...parts)` 用 `CssSelector` 提供常见选择器、@ 规则、from/to 的补全，并允许任意字符串；没有对浏览器语法另做限制。
 
 快捷方法调用 `this._selector`，用户可以通过继承扩展自己的方法。仅显式 bx 表达式生成 CSS 变量；覆写快捷方法或 `_selector` 仍按用户实现执行，并接收原有声明字符串（其中可包含 var 引用）。
 
@@ -71,11 +71,15 @@ s.animationDuration.ms(180);
 s.rotate.turn(0.5);
 s.color.rgb(255, 0, 0, 0.5);
 s.color.hsl(200, 60, 50);
+s.color.rgb(bx(red), 20, 30, bx(alpha));
+s.color.hsl('1turn', bx(saturation + '%'), '50%');
+s.color.oklch(0.7, 0.15, 240);
+s.color.oklab('70%', 0.1, bx(channelB));
 s.width.clamp('16rem', '50vw', '40rem');
 s.opacity.clamp(0, 0.5, 1);
 ```
 
-长度属性提供绝对、字体、视口（含 s/l/d 家族）、容器单位。百分比、时间、角度按属性的类型和语法生成；数学方法为 calc/min/max/clamp，颜色方法为 rgb/hsl。所有方法仍返回完整声明字符串，没有公开 var 方法，没有 pct/percentage 或 rgba 同义入口。
+长度属性提供绝对、字体、视口（含 s/l/d 家族）、容器单位。百分比、时间、角度按属性的类型和语法生成；数学方法为 calc/min/max/clamp，颜色方法为 rgb/hsl/oklch/oklab。颜色通道接受数字和 CSS 字符串（包括 bx 返回值），字符串不补单位；hsl 的数值饱和度与明度仍补百分号。所有方法仍返回完整声明字符串，没有公开 var 方法，没有 pct/percentage 或 rgba 同义入口。
 
 普通单位方法收一个数字；padding/margin、gap、逻辑边距、背景尺寸等根据元数据提供合适的参数数量。混合单位、斜线分组和特殊值继续使用 raw。类型提示只约束作者入口，不做浏览器值域校验。单位名不会挤掉无关属性的系统关键字，例如 textBox.cap、textBoxEdge.ex 仍是字符串字段。
 

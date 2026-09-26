@@ -16,199 +16,199 @@ export class CssProperty {
 export class LengthCssProperty extends CssProperty {
   /** 使用 px 单位生成声明；数值合法性由浏览器处理。 */
   px(value: number): string {
-    return `${this.name}:${value}px;`;
+    return this.declaration(`${value}px`);
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value: number): string {
-    return `${this.name}:${value}cm;`;
+    return this.declaration(`${value}cm`);
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value: number): string {
-    return `${this.name}:${value}mm;`;
+    return this.declaration(`${value}mm`);
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value: number): string {
-    return `${this.name}:${value}q;`;
+    return this.declaration(`${value}q`);
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value: number): string {
-    return `${this.name}:${value}in;`;
+    return this.declaration(`${value}in`);
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value: number): string {
-    return `${this.name}:${value}pt;`;
+    return this.declaration(`${value}pt`);
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value: number): string {
-    return `${this.name}:${value}pc;`;
+    return this.declaration(`${value}pc`);
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value: number): string {
-    return `${this.name}:${value}em;`;
+    return this.declaration(`${value}em`);
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value: number): string {
-    return `${this.name}:${value}rem;`;
+    return this.declaration(`${value}rem`);
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value: number): string {
-    return `${this.name}:${value}ex;`;
+    return this.declaration(`${value}ex`);
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value: number): string {
-    return `${this.name}:${value}rex;`;
+    return this.declaration(`${value}rex`);
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value: number): string {
-    return `${this.name}:${value}ch;`;
+    return this.declaration(`${value}ch`);
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value: number): string {
-    return `${this.name}:${value}rch;`;
+    return this.declaration(`${value}rch`);
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value: number): string {
-    return `${this.name}:${value}cap;`;
+    return this.declaration(`${value}cap`);
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value: number): string {
-    return `${this.name}:${value}rcap;`;
+    return this.declaration(`${value}rcap`);
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value: number): string {
-    return `${this.name}:${value}ic;`;
+    return this.declaration(`${value}ic`);
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value: number): string {
-    return `${this.name}:${value}ric;`;
+    return this.declaration(`${value}ric`);
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value: number): string {
-    return `${this.name}:${value}lh;`;
+    return this.declaration(`${value}lh`);
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value: number): string {
-    return `${this.name}:${value}rlh;`;
+    return this.declaration(`${value}rlh`);
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value: number): string {
-    return `${this.name}:${value}vw;`;
+    return this.declaration(`${value}vw`);
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value: number): string {
-    return `${this.name}:${value}vh;`;
+    return this.declaration(`${value}vh`);
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value: number): string {
-    return `${this.name}:${value}vi;`;
+    return this.declaration(`${value}vi`);
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value: number): string {
-    return `${this.name}:${value}vb;`;
+    return this.declaration(`${value}vb`);
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value: number): string {
-    return `${this.name}:${value}vmin;`;
+    return this.declaration(`${value}vmin`);
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value: number): string {
-    return `${this.name}:${value}vmax;`;
+    return this.declaration(`${value}vmax`);
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value: number): string {
-    return `${this.name}:${value}svw;`;
+    return this.declaration(`${value}svw`);
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value: number): string {
-    return `${this.name}:${value}svh;`;
+    return this.declaration(`${value}svh`);
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value: number): string {
-    return `${this.name}:${value}svi;`;
+    return this.declaration(`${value}svi`);
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value: number): string {
-    return `${this.name}:${value}svb;`;
+    return this.declaration(`${value}svb`);
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value: number): string {
-    return `${this.name}:${value}svmin;`;
+    return this.declaration(`${value}svmin`);
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value: number): string {
-    return `${this.name}:${value}svmax;`;
+    return this.declaration(`${value}svmax`);
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value: number): string {
-    return `${this.name}:${value}lvw;`;
+    return this.declaration(`${value}lvw`);
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value: number): string {
-    return `${this.name}:${value}lvh;`;
+    return this.declaration(`${value}lvh`);
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value: number): string {
-    return `${this.name}:${value}lvi;`;
+    return this.declaration(`${value}lvi`);
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value: number): string {
-    return `${this.name}:${value}lvb;`;
+    return this.declaration(`${value}lvb`);
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value: number): string {
-    return `${this.name}:${value}lvmin;`;
+    return this.declaration(`${value}lvmin`);
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value: number): string {
-    return `${this.name}:${value}lvmax;`;
+    return this.declaration(`${value}lvmax`);
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value: number): string {
-    return `${this.name}:${value}dvw;`;
+    return this.declaration(`${value}dvw`);
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value: number): string {
-    return `${this.name}:${value}dvh;`;
+    return this.declaration(`${value}dvh`);
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value: number): string {
-    return `${this.name}:${value}dvi;`;
+    return this.declaration(`${value}dvi`);
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value: number): string {
-    return `${this.name}:${value}dvb;`;
+    return this.declaration(`${value}dvb`);
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value: number): string {
-    return `${this.name}:${value}dvmin;`;
+    return this.declaration(`${value}dvmin`);
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value: number): string {
-    return `${this.name}:${value}dvmax;`;
+    return this.declaration(`${value}dvmax`);
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value: number): string {
-    return `${this.name}:${value}cqw;`;
+    return this.declaration(`${value}cqw`);
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value: number): string {
-    return `${this.name}:${value}cqh;`;
+    return this.declaration(`${value}cqh`);
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value: number): string {
-    return `${this.name}:${value}cqi;`;
+    return this.declaration(`${value}cqi`);
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value: number): string {
-    return `${this.name}:${value}cqb;`;
+    return this.declaration(`${value}cqb`);
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value: number): string {
-    return `${this.name}:${value}cqmin;`;
+    return this.declaration(`${value}cqmin`);
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value: number): string {
-    return `${this.name}:${value}cqmax;`;
+    return this.declaration(`${value}cqmax`);
   }
 }
 export const unitSuffix: Readonly<Record<string, string>> = {

@@ -27,3 +27,11 @@ s.width.rem(1, 2);
 s.padding.rem(1, 2, 3, 4, 5);
 // @ts-expect-error width 数学表达式的非零裸数字缺少单位
 s.width.clamp(10, 20, 30);
+
+s.color.rgb('var(--red)', 0, 0, 'var(--alpha)');
+s.color.hsl('1turn', 'var(--saturation)', '50%');
+s.color.oklch(0.7, 0.1, 240);
+s.fill.oklab('70%', 0.1, 'var(--b)');
+s._placeholder(s.color.gray);
+// @ts-expect-error 颜色方法不出现在长度属性
+s.width.oklch(0.7, 0.1, 240);

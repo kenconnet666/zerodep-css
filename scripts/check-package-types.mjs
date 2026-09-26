@@ -10,8 +10,8 @@ const fixture = await mkdtemp(join(results, 'package-types-'));
 
 function sourceFor(name, server) {
   const imports = server
-    ? `import { Css, WidthCss, createCssContext, css, bx, createServerCssHost, withCssHost } from '@zerodep-css/${name}';`
-    : `import { Css, WidthCss, createCssContext, css, bx, hydrateCss } from '@zerodep-css/${name}';`;
+    ? `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, createServerCssHost, withCssHost } from '@zerodep-css/${name}';`
+    : `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, hydrateCss } from '@zerodep-css/${name}';`;
   return `${imports}
 import type { CssRule } from '@zerodep-css/core';
 import type { CssInput } from '@zerodep-css/core';
@@ -43,6 +43,10 @@ bx(12) satisfies string;
 bx('20px') satisfies string;
 bx(null); bx(undefined);
 s.width.raw(bx('20px'));
+s.color.rgb(bx(120), 20, 30, bx(0.5));
+s.color.oklch(bx(0.7), 0.1, 240);
+keyframes([false, s._selector('from', s.opacity.raw(0)), [s._selector('to', s.opacity.raw(1))]]);
+globalCss('base', [s._selector('body', s.margin.px(0)), false]);
 // @ts-expect-error bx 返回 CSS 值字符串，px 只接受数字
 s.width.px(bx(12));
 // @ts-expect-error 显式绑定恰好一个值

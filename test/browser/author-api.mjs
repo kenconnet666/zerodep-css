@@ -4,7 +4,16 @@ import { fileURLToPath } from 'node:url';
 import { createServerCssHost, serializeCssRules } from '../../core/dist/server.js';
 import { launchBrowser } from '../../.research/string-css-probe/browser.mjs';
 
+import { Css } from '../../core/dist/index.js';
+const s = new Css();
 const host = createServerCssHost();
+const colorSamples = [
+  [s.color.rgb('var(--red)', 20, 30, 'var(--alpha)'), 'rgb(120 20 30 / 0.5)'],
+  [s.color.hsl('1turn', 'var(--saturation)', 50), 'hsl(1turn 60% 50%)'],
+  [s.color.oklch(0.7, 0.15, 240), 'oklch(0.7 0.15 240)'],
+  [s.color.oklab('70%', 0.1, 0.15), 'oklab(70% 0.1 0.15)'],
+].map(([body, native]) => ({ className: host.css(body), native }));
+host.globalCss('variables', [false, ':root{--red:120;--alpha:0.5;--saturation:60%;}']);
 host.globalCss('theme', 'body{color:red;}');
 host.globalCss('reset', 'body{margin:0;}');
 const animation = host.keyframes('from{opacity:0;}to{opacity:1;}');
@@ -28,9 +37,33 @@ try {
     `<style data-zerodep-css nonce="test-nonce">${cssText}</style><script type="application/json" data-zerodep-css>${manifest}</script><div id="box" class="${combined}"></div><div id="animated" class="${animated}"></div>`,
   );
   await page.addScriptTag({ content: outputFiles[0].text });
+  const modern = await page.evaluate(
+    (samples) =>
+      samples.map((sample) => {
+        const actual = document.createElement('span'),
+          expected = document.createElement('span');
+        actual.className = sample.className;
+        expected.style.color = sample.native;
+        document.body.append(actual, expected);
+        const result = {
+          supported: CSS.supports('color', sample.native),
+          actual: getComputedStyle(actual).color,
+          expected: getComputedStyle(expected).color,
+        };
+        actual.remove();
+        expected.remove();
+        return result;
+      }),
+    colorSamples,
+  );
+  for (const sample of modern) {
+    assert.equal(sample.supported, true);
+    assert.equal(sample.actual, sample.expected);
+  }
   const result = await page.evaluate(
     ({ a, b, combined, animation }) => {
       api.hydrateCss();
+      api.globalCss('variables');
       if ('cx' in api) throw new Error('Removed cx export is still present.');
       const box = document.querySelector('#box');
       const before = {

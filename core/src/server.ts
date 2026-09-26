@@ -5,8 +5,8 @@ export { serializeCssRules } from './serialization.js';
 
 export interface ServerCssHost {
   css(...parts: CssInput[]): string;
-  keyframes(...parts: string[]): string;
-  globalCss(key: string, ...parts: string[]): void;
+  keyframes(...parts: CssInput[]): string;
+  globalCss(key: string, ...parts: CssInput[]): void;
   setBindings(key: string, body: string | null): void;
   bindingId(owner: object): number;
   readonly nonce?: string;
@@ -46,6 +46,6 @@ export function requireHost(): ServerCssHost {
   if (!host) throw new Error('CSS server host is unavailable.');
   return host;
 }
-export const keyframes = (...parts: string[]): string => requireHost().keyframes(...parts);
-export const globalCss = (key: string, ...parts: string[]): void =>
+export const keyframes = (...parts: CssInput[]): string => requireHost().keyframes(...parts);
+export const globalCss = (key: string, ...parts: CssInput[]): void =>
   requireHost().globalCss(key, ...parts);

@@ -269,15 +269,45 @@ export class BackgroundCss extends LengthCssProperty {
   raw(value: Property.Background | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -590,15 +620,45 @@ export class BackgroundColorCss extends CssProperty {
   raw(value: Property.BackgroundColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -667,301 +727,301 @@ export class BackgroundPositionCss extends LengthCssProperty {
   px(value1: number): string;
   px(value1: number, value2: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
   cm(value1: number, value2: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
   mm(value1: number, value2: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
   q(value1: number, value2: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
   in(value1: number, value2: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
   pt(value1: number, value2: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
   pc(value1: number, value2: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
   em(value1: number, value2: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
   rem(value1: number, value2: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
   ex(value1: number, value2: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
   rex(value1: number, value2: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
   ch(value1: number, value2: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
   rch(value1: number, value2: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
   cap(value1: number, value2: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
   rcap(value1: number, value2: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
   ic(value1: number, value2: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
   ric(value1: number, value2: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
   lh(value1: number, value2: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
   rlh(value1: number, value2: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
   vw(value1: number, value2: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
   vh(value1: number, value2: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
   vi(value1: number, value2: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
   vb(value1: number, value2: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
   vmin(value1: number, value2: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
   vmax(value1: number, value2: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
   svw(value1: number, value2: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
   svh(value1: number, value2: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
   svi(value1: number, value2: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
   svb(value1: number, value2: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
   svmin(value1: number, value2: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
   svmax(value1: number, value2: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
   lvw(value1: number, value2: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
   lvh(value1: number, value2: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
   lvi(value1: number, value2: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
   lvb(value1: number, value2: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
   lvmin(value1: number, value2: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
   lvmax(value1: number, value2: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
   dvw(value1: number, value2: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
   dvh(value1: number, value2: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
   dvi(value1: number, value2: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
   dvb(value1: number, value2: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
   dvmin(value1: number, value2: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
   dvmax(value1: number, value2: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
   cqw(value1: number, value2: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
   cqh(value1: number, value2: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
   cqi(value1: number, value2: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
   cqb(value1: number, value2: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
   cqmin(value1: number, value2: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
   cqmax(value1: number, value2: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
   percent(value1: number, value2: number): string;
   percent(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}%`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}%`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -1011,7 +1071,7 @@ export class BackgroundPositionXCss extends LengthCssProperty {
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
-    return `${this.name}:${value}%;`;
+    return this.declaration(`${value}%`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -1061,7 +1121,7 @@ export class BackgroundPositionYCss extends LengthCssProperty {
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
-    return `${this.name}:${value}%;`;
+    return this.declaration(`${value}%`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -1135,301 +1195,301 @@ export class BackgroundSizeCss extends LengthCssProperty {
   px(value1: number): string;
   px(value1: number, value2: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
   cm(value1: number, value2: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
   mm(value1: number, value2: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
   q(value1: number, value2: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
   in(value1: number, value2: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
   pt(value1: number, value2: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
   pc(value1: number, value2: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
   em(value1: number, value2: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
   rem(value1: number, value2: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
   ex(value1: number, value2: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
   rex(value1: number, value2: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
   ch(value1: number, value2: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
   rch(value1: number, value2: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
   cap(value1: number, value2: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
   rcap(value1: number, value2: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
   ic(value1: number, value2: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
   ric(value1: number, value2: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
   lh(value1: number, value2: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
   rlh(value1: number, value2: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
   vw(value1: number, value2: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
   vh(value1: number, value2: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
   vi(value1: number, value2: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
   vb(value1: number, value2: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
   vmin(value1: number, value2: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
   vmax(value1: number, value2: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
   svw(value1: number, value2: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
   svh(value1: number, value2: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
   svi(value1: number, value2: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
   svb(value1: number, value2: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
   svmin(value1: number, value2: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
   svmax(value1: number, value2: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
   lvw(value1: number, value2: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
   lvh(value1: number, value2: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
   lvi(value1: number, value2: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
   lvb(value1: number, value2: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
   lvmin(value1: number, value2: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
   lvmax(value1: number, value2: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
   dvw(value1: number, value2: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
   dvh(value1: number, value2: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
   dvi(value1: number, value2: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
   dvb(value1: number, value2: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
   dvmin(value1: number, value2: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
   dvmax(value1: number, value2: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
   cqw(value1: number, value2: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
   cqh(value1: number, value2: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
   cqi(value1: number, value2: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
   cqb(value1: number, value2: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
   cqmin(value1: number, value2: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
   cqmax(value1: number, value2: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
   percent(value1: number, value2: number): string;
   percent(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}%`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}%`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -1477,7 +1537,7 @@ export class BaselineShiftCss extends LengthCssProperty {
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
-    return `${this.name}:${value}%;`;
+    return this.declaration(`${value}%`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -1770,15 +1830,45 @@ export class BorderCss extends LengthCssProperty {
   raw(value: Property.Border | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -2020,15 +2110,45 @@ export class BorderBlockCss extends LengthCssProperty {
   raw(value: Property.BorderBlock | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -2263,15 +2383,45 @@ export class BorderBlockColorCss extends CssProperty {
   raw(value: Property.BorderBlockColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -2496,15 +2646,45 @@ export class BorderBlockEndCss extends LengthCssProperty {
   raw(value: Property.BorderBlockEnd | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -2739,15 +2919,45 @@ export class BorderBlockEndColorCss extends CssProperty {
   raw(value: Property.BorderBlockEndColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -3044,15 +3254,45 @@ export class BorderBlockStartCss extends LengthCssProperty {
   raw(value: Property.BorderBlockStart | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -3287,15 +3527,45 @@ export class BorderBlockStartColorCss extends CssProperty {
   raw(value: Property.BorderBlockStartColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -3422,295 +3692,295 @@ export class BorderBlockWidthCss extends LengthCssProperty {
   px(value1: number): string;
   px(value1: number, value2: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
   cm(value1: number, value2: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
   mm(value1: number, value2: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
   q(value1: number, value2: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
   in(value1: number, value2: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
   pt(value1: number, value2: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
   pc(value1: number, value2: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
   em(value1: number, value2: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
   rem(value1: number, value2: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
   ex(value1: number, value2: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
   rex(value1: number, value2: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
   ch(value1: number, value2: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
   rch(value1: number, value2: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
   cap(value1: number, value2: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
   rcap(value1: number, value2: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
   ic(value1: number, value2: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
   ric(value1: number, value2: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
   lh(value1: number, value2: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
   rlh(value1: number, value2: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
   vw(value1: number, value2: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
   vh(value1: number, value2: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
   vi(value1: number, value2: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
   vb(value1: number, value2: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
   vmin(value1: number, value2: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
   vmax(value1: number, value2: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
   svw(value1: number, value2: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
   svh(value1: number, value2: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
   svi(value1: number, value2: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
   svb(value1: number, value2: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
   svmin(value1: number, value2: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
   svmax(value1: number, value2: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
   lvw(value1: number, value2: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
   lvh(value1: number, value2: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
   lvi(value1: number, value2: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
   lvb(value1: number, value2: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
   lvmin(value1: number, value2: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
   lvmax(value1: number, value2: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
   dvw(value1: number, value2: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
   dvh(value1: number, value2: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
   dvi(value1: number, value2: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
   dvb(value1: number, value2: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
   dvmin(value1: number, value2: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
   dvmax(value1: number, value2: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
   cqw(value1: number, value2: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
   cqh(value1: number, value2: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
   cqi(value1: number, value2: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
   cqb(value1: number, value2: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
   cqmin(value1: number, value2: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
   cqmax(value1: number, value2: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -3958,15 +4228,45 @@ export class BorderBottomCss extends LengthCssProperty {
   raw(value: Property.BorderBottom | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -4201,15 +4501,45 @@ export class BorderBottomColorCss extends CssProperty {
   raw(value: Property.BorderBottomColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -4233,301 +4563,301 @@ export class BorderBottomLeftRadiusCss extends LengthCssProperty {
   px(value1: number): string;
   px(value1: number, value2: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
   cm(value1: number, value2: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
   mm(value1: number, value2: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
   q(value1: number, value2: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
   in(value1: number, value2: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
   pt(value1: number, value2: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
   pc(value1: number, value2: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
   em(value1: number, value2: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
   rem(value1: number, value2: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
   ex(value1: number, value2: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
   rex(value1: number, value2: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
   ch(value1: number, value2: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
   rch(value1: number, value2: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
   cap(value1: number, value2: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
   rcap(value1: number, value2: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
   ic(value1: number, value2: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
   ric(value1: number, value2: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
   lh(value1: number, value2: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
   rlh(value1: number, value2: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
   vw(value1: number, value2: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
   vh(value1: number, value2: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
   vi(value1: number, value2: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
   vb(value1: number, value2: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
   vmin(value1: number, value2: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
   vmax(value1: number, value2: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
   svw(value1: number, value2: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
   svh(value1: number, value2: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
   svi(value1: number, value2: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
   svb(value1: number, value2: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
   svmin(value1: number, value2: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
   svmax(value1: number, value2: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
   lvw(value1: number, value2: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
   lvh(value1: number, value2: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
   lvi(value1: number, value2: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
   lvb(value1: number, value2: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
   lvmin(value1: number, value2: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
   lvmax(value1: number, value2: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
   dvw(value1: number, value2: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
   dvh(value1: number, value2: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
   dvi(value1: number, value2: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
   dvb(value1: number, value2: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
   dvmin(value1: number, value2: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
   dvmax(value1: number, value2: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
   cqw(value1: number, value2: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
   cqh(value1: number, value2: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
   cqi(value1: number, value2: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
   cqb(value1: number, value2: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
   cqmin(value1: number, value2: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
   cqmax(value1: number, value2: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
   percent(value1: number, value2: number): string;
   percent(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}%`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}%`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -4574,301 +4904,301 @@ export class BorderBottomRightRadiusCss extends LengthCssProperty {
   px(value1: number): string;
   px(value1: number, value2: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
   cm(value1: number, value2: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
   mm(value1: number, value2: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
   q(value1: number, value2: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
   in(value1: number, value2: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
   pt(value1: number, value2: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
   pc(value1: number, value2: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
   em(value1: number, value2: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
   rem(value1: number, value2: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
   ex(value1: number, value2: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
   rex(value1: number, value2: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
   ch(value1: number, value2: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
   rch(value1: number, value2: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
   cap(value1: number, value2: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
   rcap(value1: number, value2: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
   ic(value1: number, value2: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
   ric(value1: number, value2: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
   lh(value1: number, value2: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
   rlh(value1: number, value2: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
   vw(value1: number, value2: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
   vh(value1: number, value2: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
   vi(value1: number, value2: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
   vb(value1: number, value2: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
   vmin(value1: number, value2: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
   vmax(value1: number, value2: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
   svw(value1: number, value2: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
   svh(value1: number, value2: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
   svi(value1: number, value2: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
   svb(value1: number, value2: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
   svmin(value1: number, value2: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
   svmax(value1: number, value2: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
   lvw(value1: number, value2: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
   lvh(value1: number, value2: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
   lvi(value1: number, value2: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
   lvb(value1: number, value2: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
   lvmin(value1: number, value2: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
   lvmax(value1: number, value2: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
   dvw(value1: number, value2: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
   dvh(value1: number, value2: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
   dvi(value1: number, value2: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
   dvb(value1: number, value2: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
   dvmin(value1: number, value2: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
   dvmax(value1: number, value2: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
   cqw(value1: number, value2: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
   cqh(value1: number, value2: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
   cqi(value1: number, value2: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
   cqb(value1: number, value2: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
   cqmin(value1: number, value2: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
   cqmax(value1: number, value2: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
   percent(value1: number, value2: number): string;
   percent(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}%`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}%`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -5195,15 +5525,45 @@ export class BorderColorCss extends CssProperty {
   raw(value: Property.BorderColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -5357,7 +5717,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   px(value1: number, value2: number, value3: number): string;
   px(value1: number, value2: number, value3: number, value4: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
@@ -5365,7 +5725,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   cm(value1: number, value2: number, value3: number): string;
   cm(value1: number, value2: number, value3: number, value4: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
@@ -5373,7 +5733,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   mm(value1: number, value2: number, value3: number): string;
   mm(value1: number, value2: number, value3: number, value4: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
@@ -5381,7 +5741,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   q(value1: number, value2: number, value3: number): string;
   q(value1: number, value2: number, value3: number, value4: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
@@ -5389,7 +5749,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   in(value1: number, value2: number, value3: number): string;
   in(value1: number, value2: number, value3: number, value4: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
@@ -5397,7 +5757,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   pt(value1: number, value2: number, value3: number): string;
   pt(value1: number, value2: number, value3: number, value4: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
@@ -5405,7 +5765,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   pc(value1: number, value2: number, value3: number): string;
   pc(value1: number, value2: number, value3: number, value4: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
@@ -5413,7 +5773,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   em(value1: number, value2: number, value3: number): string;
   em(value1: number, value2: number, value3: number, value4: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
@@ -5421,7 +5781,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   rem(value1: number, value2: number, value3: number): string;
   rem(value1: number, value2: number, value3: number, value4: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
@@ -5429,7 +5789,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   ex(value1: number, value2: number, value3: number): string;
   ex(value1: number, value2: number, value3: number, value4: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
@@ -5437,7 +5797,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   rex(value1: number, value2: number, value3: number): string;
   rex(value1: number, value2: number, value3: number, value4: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
@@ -5445,7 +5805,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   ch(value1: number, value2: number, value3: number): string;
   ch(value1: number, value2: number, value3: number, value4: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
@@ -5453,7 +5813,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   rch(value1: number, value2: number, value3: number): string;
   rch(value1: number, value2: number, value3: number, value4: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
@@ -5461,7 +5821,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   cap(value1: number, value2: number, value3: number): string;
   cap(value1: number, value2: number, value3: number, value4: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
@@ -5469,7 +5829,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   rcap(value1: number, value2: number, value3: number): string;
   rcap(value1: number, value2: number, value3: number, value4: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
@@ -5477,7 +5837,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   ic(value1: number, value2: number, value3: number): string;
   ic(value1: number, value2: number, value3: number, value4: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
@@ -5485,7 +5845,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   ric(value1: number, value2: number, value3: number): string;
   ric(value1: number, value2: number, value3: number, value4: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
@@ -5493,7 +5853,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   lh(value1: number, value2: number, value3: number): string;
   lh(value1: number, value2: number, value3: number, value4: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
@@ -5501,7 +5861,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   rlh(value1: number, value2: number, value3: number): string;
   rlh(value1: number, value2: number, value3: number, value4: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
@@ -5509,7 +5869,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   vw(value1: number, value2: number, value3: number): string;
   vw(value1: number, value2: number, value3: number, value4: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
@@ -5517,7 +5877,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   vh(value1: number, value2: number, value3: number): string;
   vh(value1: number, value2: number, value3: number, value4: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
@@ -5525,7 +5885,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   vi(value1: number, value2: number, value3: number): string;
   vi(value1: number, value2: number, value3: number, value4: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
@@ -5533,7 +5893,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   vb(value1: number, value2: number, value3: number): string;
   vb(value1: number, value2: number, value3: number, value4: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
@@ -5541,7 +5901,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   vmin(value1: number, value2: number, value3: number): string;
   vmin(value1: number, value2: number, value3: number, value4: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
@@ -5549,7 +5909,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   vmax(value1: number, value2: number, value3: number): string;
   vmax(value1: number, value2: number, value3: number, value4: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
@@ -5557,7 +5917,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   svw(value1: number, value2: number, value3: number): string;
   svw(value1: number, value2: number, value3: number, value4: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
@@ -5565,7 +5925,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   svh(value1: number, value2: number, value3: number): string;
   svh(value1: number, value2: number, value3: number, value4: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
@@ -5573,7 +5933,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   svi(value1: number, value2: number, value3: number): string;
   svi(value1: number, value2: number, value3: number, value4: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
@@ -5581,7 +5941,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   svb(value1: number, value2: number, value3: number): string;
   svb(value1: number, value2: number, value3: number, value4: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
@@ -5589,7 +5949,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   svmin(value1: number, value2: number, value3: number): string;
   svmin(value1: number, value2: number, value3: number, value4: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
@@ -5597,7 +5957,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   svmax(value1: number, value2: number, value3: number): string;
   svmax(value1: number, value2: number, value3: number, value4: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
@@ -5605,7 +5965,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   lvw(value1: number, value2: number, value3: number): string;
   lvw(value1: number, value2: number, value3: number, value4: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
@@ -5613,7 +5973,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   lvh(value1: number, value2: number, value3: number): string;
   lvh(value1: number, value2: number, value3: number, value4: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
@@ -5621,7 +5981,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   lvi(value1: number, value2: number, value3: number): string;
   lvi(value1: number, value2: number, value3: number, value4: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
@@ -5629,7 +5989,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   lvb(value1: number, value2: number, value3: number): string;
   lvb(value1: number, value2: number, value3: number, value4: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
@@ -5637,7 +5997,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   lvmin(value1: number, value2: number, value3: number): string;
   lvmin(value1: number, value2: number, value3: number, value4: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
@@ -5645,7 +6005,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   lvmax(value1: number, value2: number, value3: number): string;
   lvmax(value1: number, value2: number, value3: number, value4: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
@@ -5653,7 +6013,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   dvw(value1: number, value2: number, value3: number): string;
   dvw(value1: number, value2: number, value3: number, value4: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
@@ -5661,7 +6021,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   dvh(value1: number, value2: number, value3: number): string;
   dvh(value1: number, value2: number, value3: number, value4: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
@@ -5669,7 +6029,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   dvi(value1: number, value2: number, value3: number): string;
   dvi(value1: number, value2: number, value3: number, value4: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
@@ -5677,7 +6037,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   dvb(value1: number, value2: number, value3: number): string;
   dvb(value1: number, value2: number, value3: number, value4: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
@@ -5685,7 +6045,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   dvmin(value1: number, value2: number, value3: number): string;
   dvmin(value1: number, value2: number, value3: number, value4: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
@@ -5693,7 +6053,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   dvmax(value1: number, value2: number, value3: number): string;
   dvmax(value1: number, value2: number, value3: number, value4: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
@@ -5701,7 +6061,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   cqw(value1: number, value2: number, value3: number): string;
   cqw(value1: number, value2: number, value3: number, value4: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
@@ -5709,7 +6069,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   cqh(value1: number, value2: number, value3: number): string;
   cqh(value1: number, value2: number, value3: number, value4: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
@@ -5717,7 +6077,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   cqi(value1: number, value2: number, value3: number): string;
   cqi(value1: number, value2: number, value3: number, value4: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
@@ -5725,7 +6085,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   cqb(value1: number, value2: number, value3: number): string;
   cqb(value1: number, value2: number, value3: number, value4: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
@@ -5733,7 +6093,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   cqmin(value1: number, value2: number, value3: number): string;
   cqmin(value1: number, value2: number, value3: number, value4: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
@@ -5741,7 +6101,7 @@ export class BorderImageOutsetCss extends LengthCssProperty {
   cqmax(value1: number, value2: number, value3: number): string;
   cqmax(value1: number, value2: number, value3: number, value4: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -5812,7 +6172,7 @@ export class BorderImageSliceCss extends CssProperty {
   percent(value1: number, value2: number, value3: number): string;
   percent(value1: number, value2: number, value3: number, value4: number): string;
   percent(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}%`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}%`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -5881,7 +6241,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   px(value1: number, value2: number, value3: number): string;
   px(value1: number, value2: number, value3: number, value4: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
@@ -5889,7 +6249,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   cm(value1: number, value2: number, value3: number): string;
   cm(value1: number, value2: number, value3: number, value4: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
@@ -5897,7 +6257,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   mm(value1: number, value2: number, value3: number): string;
   mm(value1: number, value2: number, value3: number, value4: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
@@ -5905,7 +6265,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   q(value1: number, value2: number, value3: number): string;
   q(value1: number, value2: number, value3: number, value4: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
@@ -5913,7 +6273,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   in(value1: number, value2: number, value3: number): string;
   in(value1: number, value2: number, value3: number, value4: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
@@ -5921,7 +6281,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   pt(value1: number, value2: number, value3: number): string;
   pt(value1: number, value2: number, value3: number, value4: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
@@ -5929,7 +6289,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   pc(value1: number, value2: number, value3: number): string;
   pc(value1: number, value2: number, value3: number, value4: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
@@ -5937,7 +6297,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   em(value1: number, value2: number, value3: number): string;
   em(value1: number, value2: number, value3: number, value4: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
@@ -5945,7 +6305,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   rem(value1: number, value2: number, value3: number): string;
   rem(value1: number, value2: number, value3: number, value4: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
@@ -5953,7 +6313,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   ex(value1: number, value2: number, value3: number): string;
   ex(value1: number, value2: number, value3: number, value4: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
@@ -5961,7 +6321,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   rex(value1: number, value2: number, value3: number): string;
   rex(value1: number, value2: number, value3: number, value4: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
@@ -5969,7 +6329,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   ch(value1: number, value2: number, value3: number): string;
   ch(value1: number, value2: number, value3: number, value4: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
@@ -5977,7 +6337,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   rch(value1: number, value2: number, value3: number): string;
   rch(value1: number, value2: number, value3: number, value4: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
@@ -5985,7 +6345,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   cap(value1: number, value2: number, value3: number): string;
   cap(value1: number, value2: number, value3: number, value4: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
@@ -5993,7 +6353,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   rcap(value1: number, value2: number, value3: number): string;
   rcap(value1: number, value2: number, value3: number, value4: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
@@ -6001,7 +6361,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   ic(value1: number, value2: number, value3: number): string;
   ic(value1: number, value2: number, value3: number, value4: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
@@ -6009,7 +6369,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   ric(value1: number, value2: number, value3: number): string;
   ric(value1: number, value2: number, value3: number, value4: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
@@ -6017,7 +6377,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   lh(value1: number, value2: number, value3: number): string;
   lh(value1: number, value2: number, value3: number, value4: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
@@ -6025,7 +6385,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   rlh(value1: number, value2: number, value3: number): string;
   rlh(value1: number, value2: number, value3: number, value4: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
@@ -6033,7 +6393,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   vw(value1: number, value2: number, value3: number): string;
   vw(value1: number, value2: number, value3: number, value4: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
@@ -6041,7 +6401,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   vh(value1: number, value2: number, value3: number): string;
   vh(value1: number, value2: number, value3: number, value4: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
@@ -6049,7 +6409,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   vi(value1: number, value2: number, value3: number): string;
   vi(value1: number, value2: number, value3: number, value4: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
@@ -6057,7 +6417,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   vb(value1: number, value2: number, value3: number): string;
   vb(value1: number, value2: number, value3: number, value4: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
@@ -6065,7 +6425,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   vmin(value1: number, value2: number, value3: number): string;
   vmin(value1: number, value2: number, value3: number, value4: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
@@ -6073,7 +6433,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   vmax(value1: number, value2: number, value3: number): string;
   vmax(value1: number, value2: number, value3: number, value4: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
@@ -6081,7 +6441,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   svw(value1: number, value2: number, value3: number): string;
   svw(value1: number, value2: number, value3: number, value4: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
@@ -6089,7 +6449,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   svh(value1: number, value2: number, value3: number): string;
   svh(value1: number, value2: number, value3: number, value4: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
@@ -6097,7 +6457,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   svi(value1: number, value2: number, value3: number): string;
   svi(value1: number, value2: number, value3: number, value4: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
@@ -6105,7 +6465,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   svb(value1: number, value2: number, value3: number): string;
   svb(value1: number, value2: number, value3: number, value4: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
@@ -6113,7 +6473,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   svmin(value1: number, value2: number, value3: number): string;
   svmin(value1: number, value2: number, value3: number, value4: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
@@ -6121,7 +6481,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   svmax(value1: number, value2: number, value3: number): string;
   svmax(value1: number, value2: number, value3: number, value4: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
@@ -6129,7 +6489,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   lvw(value1: number, value2: number, value3: number): string;
   lvw(value1: number, value2: number, value3: number, value4: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
@@ -6137,7 +6497,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   lvh(value1: number, value2: number, value3: number): string;
   lvh(value1: number, value2: number, value3: number, value4: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
@@ -6145,7 +6505,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   lvi(value1: number, value2: number, value3: number): string;
   lvi(value1: number, value2: number, value3: number, value4: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
@@ -6153,7 +6513,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   lvb(value1: number, value2: number, value3: number): string;
   lvb(value1: number, value2: number, value3: number, value4: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
@@ -6161,7 +6521,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   lvmin(value1: number, value2: number, value3: number): string;
   lvmin(value1: number, value2: number, value3: number, value4: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
@@ -6169,7 +6529,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   lvmax(value1: number, value2: number, value3: number): string;
   lvmax(value1: number, value2: number, value3: number, value4: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
@@ -6177,7 +6537,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   dvw(value1: number, value2: number, value3: number): string;
   dvw(value1: number, value2: number, value3: number, value4: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
@@ -6185,7 +6545,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   dvh(value1: number, value2: number, value3: number): string;
   dvh(value1: number, value2: number, value3: number, value4: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
@@ -6193,7 +6553,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   dvi(value1: number, value2: number, value3: number): string;
   dvi(value1: number, value2: number, value3: number, value4: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
@@ -6201,7 +6561,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   dvb(value1: number, value2: number, value3: number): string;
   dvb(value1: number, value2: number, value3: number, value4: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
@@ -6209,7 +6569,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   dvmin(value1: number, value2: number, value3: number): string;
   dvmin(value1: number, value2: number, value3: number, value4: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
@@ -6217,7 +6577,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   dvmax(value1: number, value2: number, value3: number): string;
   dvmax(value1: number, value2: number, value3: number, value4: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
@@ -6225,7 +6585,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   cqw(value1: number, value2: number, value3: number): string;
   cqw(value1: number, value2: number, value3: number, value4: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
@@ -6233,7 +6593,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   cqh(value1: number, value2: number, value3: number): string;
   cqh(value1: number, value2: number, value3: number, value4: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
@@ -6241,7 +6601,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   cqi(value1: number, value2: number, value3: number): string;
   cqi(value1: number, value2: number, value3: number, value4: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
@@ -6249,7 +6609,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   cqb(value1: number, value2: number, value3: number): string;
   cqb(value1: number, value2: number, value3: number, value4: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
@@ -6257,7 +6617,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   cqmin(value1: number, value2: number, value3: number): string;
   cqmin(value1: number, value2: number, value3: number, value4: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
@@ -6265,7 +6625,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   cqmax(value1: number, value2: number, value3: number): string;
   cqmax(value1: number, value2: number, value3: number, value4: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
@@ -6273,7 +6633,7 @@ export class BorderImageWidthCss extends LengthCssProperty {
   percent(value1: number, value2: number, value3: number): string;
   percent(value1: number, value2: number, value3: number, value4: number): string;
   percent(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}%`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}%`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -6521,15 +6881,45 @@ export class BorderInlineCss extends LengthCssProperty {
   raw(value: Property.BorderInline | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -6764,15 +7154,45 @@ export class BorderInlineColorCss extends CssProperty {
   raw(value: Property.BorderInlineColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -6997,15 +7417,45 @@ export class BorderInlineEndCss extends LengthCssProperty {
   raw(value: Property.BorderInlineEnd | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -7240,15 +7690,45 @@ export class BorderInlineEndColorCss extends CssProperty {
   raw(value: Property.BorderInlineEndColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -7545,15 +8025,45 @@ export class BorderInlineStartCss extends LengthCssProperty {
   raw(value: Property.BorderInlineStart | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -7788,15 +8298,45 @@ export class BorderInlineStartColorCss extends CssProperty {
   raw(value: Property.BorderInlineStartColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -7923,295 +8463,295 @@ export class BorderInlineWidthCss extends LengthCssProperty {
   px(value1: number): string;
   px(value1: number, value2: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
   cm(value1: number, value2: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
   mm(value1: number, value2: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
   q(value1: number, value2: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
   in(value1: number, value2: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
   pt(value1: number, value2: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
   pc(value1: number, value2: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
   em(value1: number, value2: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
   rem(value1: number, value2: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
   ex(value1: number, value2: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
   rex(value1: number, value2: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
   ch(value1: number, value2: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
   rch(value1: number, value2: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
   cap(value1: number, value2: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
   rcap(value1: number, value2: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
   ic(value1: number, value2: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
   ric(value1: number, value2: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
   lh(value1: number, value2: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
   rlh(value1: number, value2: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
   vw(value1: number, value2: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
   vh(value1: number, value2: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
   vi(value1: number, value2: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
   vb(value1: number, value2: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
   vmin(value1: number, value2: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
   vmax(value1: number, value2: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
   svw(value1: number, value2: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
   svh(value1: number, value2: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
   svi(value1: number, value2: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
   svb(value1: number, value2: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
   svmin(value1: number, value2: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
   svmax(value1: number, value2: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
   lvw(value1: number, value2: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
   lvh(value1: number, value2: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
   lvi(value1: number, value2: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
   lvb(value1: number, value2: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
   lvmin(value1: number, value2: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
   lvmax(value1: number, value2: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
   dvw(value1: number, value2: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
   dvh(value1: number, value2: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
   dvi(value1: number, value2: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
   dvb(value1: number, value2: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
   dvmin(value1: number, value2: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
   dvmax(value1: number, value2: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
   cqw(value1: number, value2: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
   cqh(value1: number, value2: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
   cqi(value1: number, value2: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
   cqb(value1: number, value2: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
   cqmin(value1: number, value2: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
   cqmax(value1: number, value2: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -8459,15 +8999,45 @@ export class BorderLeftCss extends LengthCssProperty {
   raw(value: Property.BorderLeft | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -8702,15 +9272,45 @@ export class BorderLeftColorCss extends CssProperty {
   raw(value: Property.BorderLeftColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -8808,7 +9408,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   px(value1: number, value2: number, value3: number): string;
   px(value1: number, value2: number, value3: number, value4: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
@@ -8816,7 +9416,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   cm(value1: number, value2: number, value3: number): string;
   cm(value1: number, value2: number, value3: number, value4: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
@@ -8824,7 +9424,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   mm(value1: number, value2: number, value3: number): string;
   mm(value1: number, value2: number, value3: number, value4: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
@@ -8832,7 +9432,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   q(value1: number, value2: number, value3: number): string;
   q(value1: number, value2: number, value3: number, value4: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
@@ -8840,7 +9440,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   in(value1: number, value2: number, value3: number): string;
   in(value1: number, value2: number, value3: number, value4: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
@@ -8848,7 +9448,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   pt(value1: number, value2: number, value3: number): string;
   pt(value1: number, value2: number, value3: number, value4: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
@@ -8856,7 +9456,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   pc(value1: number, value2: number, value3: number): string;
   pc(value1: number, value2: number, value3: number, value4: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
@@ -8864,7 +9464,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   em(value1: number, value2: number, value3: number): string;
   em(value1: number, value2: number, value3: number, value4: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
@@ -8872,7 +9472,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   rem(value1: number, value2: number, value3: number): string;
   rem(value1: number, value2: number, value3: number, value4: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
@@ -8880,7 +9480,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   ex(value1: number, value2: number, value3: number): string;
   ex(value1: number, value2: number, value3: number, value4: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
@@ -8888,7 +9488,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   rex(value1: number, value2: number, value3: number): string;
   rex(value1: number, value2: number, value3: number, value4: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
@@ -8896,7 +9496,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   ch(value1: number, value2: number, value3: number): string;
   ch(value1: number, value2: number, value3: number, value4: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
@@ -8904,7 +9504,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   rch(value1: number, value2: number, value3: number): string;
   rch(value1: number, value2: number, value3: number, value4: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
@@ -8912,7 +9512,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   cap(value1: number, value2: number, value3: number): string;
   cap(value1: number, value2: number, value3: number, value4: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
@@ -8920,7 +9520,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   rcap(value1: number, value2: number, value3: number): string;
   rcap(value1: number, value2: number, value3: number, value4: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
@@ -8928,7 +9528,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   ic(value1: number, value2: number, value3: number): string;
   ic(value1: number, value2: number, value3: number, value4: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
@@ -8936,7 +9536,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   ric(value1: number, value2: number, value3: number): string;
   ric(value1: number, value2: number, value3: number, value4: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
@@ -8944,7 +9544,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   lh(value1: number, value2: number, value3: number): string;
   lh(value1: number, value2: number, value3: number, value4: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
@@ -8952,7 +9552,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   rlh(value1: number, value2: number, value3: number): string;
   rlh(value1: number, value2: number, value3: number, value4: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
@@ -8960,7 +9560,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   vw(value1: number, value2: number, value3: number): string;
   vw(value1: number, value2: number, value3: number, value4: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
@@ -8968,7 +9568,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   vh(value1: number, value2: number, value3: number): string;
   vh(value1: number, value2: number, value3: number, value4: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
@@ -8976,7 +9576,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   vi(value1: number, value2: number, value3: number): string;
   vi(value1: number, value2: number, value3: number, value4: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
@@ -8984,7 +9584,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   vb(value1: number, value2: number, value3: number): string;
   vb(value1: number, value2: number, value3: number, value4: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
@@ -8992,7 +9592,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   vmin(value1: number, value2: number, value3: number): string;
   vmin(value1: number, value2: number, value3: number, value4: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
@@ -9000,7 +9600,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   vmax(value1: number, value2: number, value3: number): string;
   vmax(value1: number, value2: number, value3: number, value4: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
@@ -9008,7 +9608,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   svw(value1: number, value2: number, value3: number): string;
   svw(value1: number, value2: number, value3: number, value4: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
@@ -9016,7 +9616,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   svh(value1: number, value2: number, value3: number): string;
   svh(value1: number, value2: number, value3: number, value4: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
@@ -9024,7 +9624,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   svi(value1: number, value2: number, value3: number): string;
   svi(value1: number, value2: number, value3: number, value4: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
@@ -9032,7 +9632,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   svb(value1: number, value2: number, value3: number): string;
   svb(value1: number, value2: number, value3: number, value4: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
@@ -9040,7 +9640,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   svmin(value1: number, value2: number, value3: number): string;
   svmin(value1: number, value2: number, value3: number, value4: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
@@ -9048,7 +9648,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   svmax(value1: number, value2: number, value3: number): string;
   svmax(value1: number, value2: number, value3: number, value4: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
@@ -9056,7 +9656,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   lvw(value1: number, value2: number, value3: number): string;
   lvw(value1: number, value2: number, value3: number, value4: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
@@ -9064,7 +9664,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   lvh(value1: number, value2: number, value3: number): string;
   lvh(value1: number, value2: number, value3: number, value4: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
@@ -9072,7 +9672,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   lvi(value1: number, value2: number, value3: number): string;
   lvi(value1: number, value2: number, value3: number, value4: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
@@ -9080,7 +9680,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   lvb(value1: number, value2: number, value3: number): string;
   lvb(value1: number, value2: number, value3: number, value4: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
@@ -9088,7 +9688,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   lvmin(value1: number, value2: number, value3: number): string;
   lvmin(value1: number, value2: number, value3: number, value4: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
@@ -9096,7 +9696,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   lvmax(value1: number, value2: number, value3: number): string;
   lvmax(value1: number, value2: number, value3: number, value4: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
@@ -9104,7 +9704,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   dvw(value1: number, value2: number, value3: number): string;
   dvw(value1: number, value2: number, value3: number, value4: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
@@ -9112,7 +9712,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   dvh(value1: number, value2: number, value3: number): string;
   dvh(value1: number, value2: number, value3: number, value4: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
@@ -9120,7 +9720,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   dvi(value1: number, value2: number, value3: number): string;
   dvi(value1: number, value2: number, value3: number, value4: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
@@ -9128,7 +9728,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   dvb(value1: number, value2: number, value3: number): string;
   dvb(value1: number, value2: number, value3: number, value4: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
@@ -9136,7 +9736,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   dvmin(value1: number, value2: number, value3: number): string;
   dvmin(value1: number, value2: number, value3: number, value4: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
@@ -9144,7 +9744,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   dvmax(value1: number, value2: number, value3: number): string;
   dvmax(value1: number, value2: number, value3: number, value4: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
@@ -9152,7 +9752,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   cqw(value1: number, value2: number, value3: number): string;
   cqw(value1: number, value2: number, value3: number, value4: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
@@ -9160,7 +9760,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   cqh(value1: number, value2: number, value3: number): string;
   cqh(value1: number, value2: number, value3: number, value4: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
@@ -9168,7 +9768,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   cqi(value1: number, value2: number, value3: number): string;
   cqi(value1: number, value2: number, value3: number, value4: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
@@ -9176,7 +9776,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   cqb(value1: number, value2: number, value3: number): string;
   cqb(value1: number, value2: number, value3: number, value4: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
@@ -9184,7 +9784,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   cqmin(value1: number, value2: number, value3: number): string;
   cqmin(value1: number, value2: number, value3: number, value4: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
@@ -9192,7 +9792,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   cqmax(value1: number, value2: number, value3: number): string;
   cqmax(value1: number, value2: number, value3: number, value4: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
@@ -9200,7 +9800,7 @@ export class BorderRadiusCss extends LengthCssProperty {
   percent(value1: number, value2: number, value3: number): string;
   percent(value1: number, value2: number, value3: number, value4: number): string;
   percent(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}%`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}%`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -9448,15 +10048,45 @@ export class BorderRightCss extends LengthCssProperty {
   raw(value: Property.BorderRight | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -9691,15 +10321,45 @@ export class BorderRightColorCss extends CssProperty {
   raw(value: Property.BorderRightColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -9795,295 +10455,295 @@ export class BorderSpacingCss extends LengthCssProperty {
   px(value1: number): string;
   px(value1: number, value2: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
   cm(value1: number, value2: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
   mm(value1: number, value2: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
   q(value1: number, value2: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
   in(value1: number, value2: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
   pt(value1: number, value2: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
   pc(value1: number, value2: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
   em(value1: number, value2: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
   rem(value1: number, value2: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
   ex(value1: number, value2: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
   rex(value1: number, value2: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
   ch(value1: number, value2: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
   rch(value1: number, value2: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
   cap(value1: number, value2: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
   rcap(value1: number, value2: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
   ic(value1: number, value2: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
   ric(value1: number, value2: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
   lh(value1: number, value2: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
   rlh(value1: number, value2: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
   vw(value1: number, value2: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
   vh(value1: number, value2: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
   vi(value1: number, value2: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
   vb(value1: number, value2: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
   vmin(value1: number, value2: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
   vmax(value1: number, value2: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
   svw(value1: number, value2: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
   svh(value1: number, value2: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
   svi(value1: number, value2: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
   svb(value1: number, value2: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
   svmin(value1: number, value2: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
   svmax(value1: number, value2: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
   lvw(value1: number, value2: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
   lvh(value1: number, value2: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
   lvi(value1: number, value2: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
   lvb(value1: number, value2: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
   lvmin(value1: number, value2: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
   lvmax(value1: number, value2: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
   dvw(value1: number, value2: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
   dvh(value1: number, value2: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
   dvi(value1: number, value2: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
   dvb(value1: number, value2: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
   dvmin(value1: number, value2: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
   dvmax(value1: number, value2: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
   cqw(value1: number, value2: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
   cqh(value1: number, value2: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
   cqi(value1: number, value2: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
   cqb(value1: number, value2: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
   cqmin(value1: number, value2: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
   cqmax(value1: number, value2: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -10441,15 +11101,45 @@ export class BorderTopCss extends LengthCssProperty {
   raw(value: Property.BorderTop | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -10684,15 +11374,45 @@ export class BorderTopColorCss extends CssProperty {
   raw(value: Property.BorderTopColor | CssString): string {
     return this.declaration(value);
   }
-  /** RGB 通道与可选 alpha；不隐式截断数值。 */
-  rgb(red: number, green: number, blue: number, alpha?: number): string {
+  /** RGB 通道与可选 alpha；字符串（含 bx 返回值）原样输出，不截断数值。 */
+  rgb(
+    red: number | CssString,
+    green: number | CssString,
+    blue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(`rgb(${red} ${green} ${blue}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
-  /** 色相用度数，饱和度和明度用百分数。 */
-  hsl(hue: number, saturation: number, lightness: number, alpha?: number): string {
+  /** 数值色相用度数、饱和度和明度用百分数；字符串保留自己的单位。 */
+  hsl(
+    hue: number | CssString,
+    saturation: number | CssString,
+    lightness: number | CssString,
+    alpha?: number | CssString,
+  ): string {
     return this.raw(
-      `hsl(${hue} ${saturation}% ${lightness}%${alpha === undefined ? '' : ` / ${alpha}`})`,
+      `hsl(${hue} ${typeof saturation === 'number' ? saturation + '%' : saturation} ${typeof lightness === 'number' ? lightness + '%' : lightness}${alpha === undefined ? '' : ` / ${alpha}`})`,
     );
+  }
+  /** 原生 oklch() 通道；数值和 CSS 字符串直接输出。 */
+  oklch(
+    lightness: number | CssString,
+    chroma: number | CssString,
+    hue: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(
+      `oklch(${lightness} ${chroma} ${hue}${alpha === undefined ? '' : ` / ${alpha}`})`,
+    );
+  }
+  /** 原生 oklab() 通道；数值和 CSS 字符串直接输出。 */
+  oklab(
+    lightness: number | CssString,
+    a: number | CssString,
+    b: number | CssString,
+    alpha?: number | CssString,
+  ): string {
+    return this.raw(`oklab(${lightness} ${a} ${b}${alpha === undefined ? '' : ` / ${alpha}`})`);
   }
 }
 
@@ -10716,301 +11436,301 @@ export class BorderTopLeftRadiusCss extends LengthCssProperty {
   px(value1: number): string;
   px(value1: number, value2: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
   cm(value1: number, value2: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
   mm(value1: number, value2: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
   q(value1: number, value2: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
   in(value1: number, value2: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
   pt(value1: number, value2: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
   pc(value1: number, value2: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
   em(value1: number, value2: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
   rem(value1: number, value2: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
   ex(value1: number, value2: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
   rex(value1: number, value2: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
   ch(value1: number, value2: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
   rch(value1: number, value2: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
   cap(value1: number, value2: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
   rcap(value1: number, value2: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
   ic(value1: number, value2: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
   ric(value1: number, value2: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
   lh(value1: number, value2: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
   rlh(value1: number, value2: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
   vw(value1: number, value2: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
   vh(value1: number, value2: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
   vi(value1: number, value2: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
   vb(value1: number, value2: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
   vmin(value1: number, value2: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
   vmax(value1: number, value2: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
   svw(value1: number, value2: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
   svh(value1: number, value2: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
   svi(value1: number, value2: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
   svb(value1: number, value2: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
   svmin(value1: number, value2: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
   svmax(value1: number, value2: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
   lvw(value1: number, value2: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
   lvh(value1: number, value2: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
   lvi(value1: number, value2: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
   lvb(value1: number, value2: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
   lvmin(value1: number, value2: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
   lvmax(value1: number, value2: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
   dvw(value1: number, value2: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
   dvh(value1: number, value2: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
   dvi(value1: number, value2: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
   dvb(value1: number, value2: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
   dvmin(value1: number, value2: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
   dvmax(value1: number, value2: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
   cqw(value1: number, value2: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
   cqh(value1: number, value2: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
   cqi(value1: number, value2: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
   cqb(value1: number, value2: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
   cqmin(value1: number, value2: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
   cqmax(value1: number, value2: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
   percent(value1: number, value2: number): string;
   percent(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}%`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}%`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -11057,301 +11777,301 @@ export class BorderTopRightRadiusCss extends LengthCssProperty {
   px(value1: number): string;
   px(value1: number, value2: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
   cm(value1: number, value2: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
   mm(value1: number, value2: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
   q(value1: number, value2: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
   in(value1: number, value2: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
   pt(value1: number, value2: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
   pc(value1: number, value2: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
   em(value1: number, value2: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
   rem(value1: number, value2: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
   ex(value1: number, value2: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
   rex(value1: number, value2: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
   ch(value1: number, value2: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
   rch(value1: number, value2: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
   cap(value1: number, value2: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
   rcap(value1: number, value2: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
   ic(value1: number, value2: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
   ric(value1: number, value2: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
   lh(value1: number, value2: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
   rlh(value1: number, value2: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
   vw(value1: number, value2: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
   vh(value1: number, value2: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
   vi(value1: number, value2: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
   vb(value1: number, value2: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
   vmin(value1: number, value2: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
   vmax(value1: number, value2: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
   svw(value1: number, value2: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
   svh(value1: number, value2: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
   svi(value1: number, value2: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
   svb(value1: number, value2: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
   svmin(value1: number, value2: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
   svmax(value1: number, value2: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
   lvw(value1: number, value2: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
   lvh(value1: number, value2: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
   lvi(value1: number, value2: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
   lvb(value1: number, value2: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
   lvmin(value1: number, value2: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
   lvmax(value1: number, value2: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
   dvw(value1: number, value2: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
   dvh(value1: number, value2: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
   dvi(value1: number, value2: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
   dvb(value1: number, value2: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
   dvmin(value1: number, value2: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
   dvmax(value1: number, value2: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
   cqw(value1: number, value2: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
   cqh(value1: number, value2: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
   cqi(value1: number, value2: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
   cqb(value1: number, value2: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
   cqmin(value1: number, value2: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
   cqmax(value1: number, value2: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value1: number): string;
   percent(value1: number, value2: number): string;
   percent(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}%`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}%`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -11475,7 +12195,7 @@ export class BorderWidthCss extends LengthCssProperty {
   px(value1: number, value2: number, value3: number): string;
   px(value1: number, value2: number, value3: number, value4: number): string;
   override px(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}px`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}px`).join(' '));
   }
   /** 使用 cm 单位生成声明；数值合法性由浏览器处理。 */
   cm(value1: number): string;
@@ -11483,7 +12203,7 @@ export class BorderWidthCss extends LengthCssProperty {
   cm(value1: number, value2: number, value3: number): string;
   cm(value1: number, value2: number, value3: number, value4: number): string;
   override cm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cm`).join(' '));
   }
   /** 使用 mm 单位生成声明；数值合法性由浏览器处理。 */
   mm(value1: number): string;
@@ -11491,7 +12211,7 @@ export class BorderWidthCss extends LengthCssProperty {
   mm(value1: number, value2: number, value3: number): string;
   mm(value1: number, value2: number, value3: number, value4: number): string;
   override mm(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}mm`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}mm`).join(' '));
   }
   /** 使用 q 单位生成声明；数值合法性由浏览器处理。 */
   q(value1: number): string;
@@ -11499,7 +12219,7 @@ export class BorderWidthCss extends LengthCssProperty {
   q(value1: number, value2: number, value3: number): string;
   q(value1: number, value2: number, value3: number, value4: number): string;
   override q(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}q`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}q`).join(' '));
   }
   /** 使用 in 单位生成声明；数值合法性由浏览器处理。 */
   in(value1: number): string;
@@ -11507,7 +12227,7 @@ export class BorderWidthCss extends LengthCssProperty {
   in(value1: number, value2: number, value3: number): string;
   in(value1: number, value2: number, value3: number, value4: number): string;
   override in(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}in`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}in`).join(' '));
   }
   /** 使用 pt 单位生成声明；数值合法性由浏览器处理。 */
   pt(value1: number): string;
@@ -11515,7 +12235,7 @@ export class BorderWidthCss extends LengthCssProperty {
   pt(value1: number, value2: number, value3: number): string;
   pt(value1: number, value2: number, value3: number, value4: number): string;
   override pt(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pt`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pt`).join(' '));
   }
   /** 使用 pc 单位生成声明；数值合法性由浏览器处理。 */
   pc(value1: number): string;
@@ -11523,7 +12243,7 @@ export class BorderWidthCss extends LengthCssProperty {
   pc(value1: number, value2: number, value3: number): string;
   pc(value1: number, value2: number, value3: number, value4: number): string;
   override pc(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}pc`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}pc`).join(' '));
   }
   /** 使用 em 单位生成声明；数值合法性由浏览器处理。 */
   em(value1: number): string;
@@ -11531,7 +12251,7 @@ export class BorderWidthCss extends LengthCssProperty {
   em(value1: number, value2: number, value3: number): string;
   em(value1: number, value2: number, value3: number, value4: number): string;
   override em(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}em`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}em`).join(' '));
   }
   /** 使用 rem 单位生成声明；数值合法性由浏览器处理。 */
   rem(value1: number): string;
@@ -11539,7 +12259,7 @@ export class BorderWidthCss extends LengthCssProperty {
   rem(value1: number, value2: number, value3: number): string;
   rem(value1: number, value2: number, value3: number, value4: number): string;
   override rem(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rem`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rem`).join(' '));
   }
   /** 使用 ex 单位生成声明；数值合法性由浏览器处理。 */
   ex(value1: number): string;
@@ -11547,7 +12267,7 @@ export class BorderWidthCss extends LengthCssProperty {
   ex(value1: number, value2: number, value3: number): string;
   ex(value1: number, value2: number, value3: number, value4: number): string;
   override ex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ex`).join(' '));
   }
   /** 使用 rex 单位生成声明；数值合法性由浏览器处理。 */
   rex(value1: number): string;
@@ -11555,7 +12275,7 @@ export class BorderWidthCss extends LengthCssProperty {
   rex(value1: number, value2: number, value3: number): string;
   rex(value1: number, value2: number, value3: number, value4: number): string;
   override rex(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rex`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rex`).join(' '));
   }
   /** 使用 ch 单位生成声明；数值合法性由浏览器处理。 */
   ch(value1: number): string;
@@ -11563,7 +12283,7 @@ export class BorderWidthCss extends LengthCssProperty {
   ch(value1: number, value2: number, value3: number): string;
   ch(value1: number, value2: number, value3: number, value4: number): string;
   override ch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ch`).join(' '));
   }
   /** 使用 rch 单位生成声明；数值合法性由浏览器处理。 */
   rch(value1: number): string;
@@ -11571,7 +12291,7 @@ export class BorderWidthCss extends LengthCssProperty {
   rch(value1: number, value2: number, value3: number): string;
   rch(value1: number, value2: number, value3: number, value4: number): string;
   override rch(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rch`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rch`).join(' '));
   }
   /** 使用 cap 单位生成声明；数值合法性由浏览器处理。 */
   cap(value1: number): string;
@@ -11579,7 +12299,7 @@ export class BorderWidthCss extends LengthCssProperty {
   cap(value1: number, value2: number, value3: number): string;
   cap(value1: number, value2: number, value3: number, value4: number): string;
   override cap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cap`).join(' '));
   }
   /** 使用 rcap 单位生成声明；数值合法性由浏览器处理。 */
   rcap(value1: number): string;
@@ -11587,7 +12307,7 @@ export class BorderWidthCss extends LengthCssProperty {
   rcap(value1: number, value2: number, value3: number): string;
   rcap(value1: number, value2: number, value3: number, value4: number): string;
   override rcap(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rcap`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rcap`).join(' '));
   }
   /** 使用 ic 单位生成声明；数值合法性由浏览器处理。 */
   ic(value1: number): string;
@@ -11595,7 +12315,7 @@ export class BorderWidthCss extends LengthCssProperty {
   ic(value1: number, value2: number, value3: number): string;
   ic(value1: number, value2: number, value3: number, value4: number): string;
   override ic(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ic`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ic`).join(' '));
   }
   /** 使用 ric 单位生成声明；数值合法性由浏览器处理。 */
   ric(value1: number): string;
@@ -11603,7 +12323,7 @@ export class BorderWidthCss extends LengthCssProperty {
   ric(value1: number, value2: number, value3: number): string;
   ric(value1: number, value2: number, value3: number, value4: number): string;
   override ric(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}ric`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}ric`).join(' '));
   }
   /** 使用 lh 单位生成声明；数值合法性由浏览器处理。 */
   lh(value1: number): string;
@@ -11611,7 +12331,7 @@ export class BorderWidthCss extends LengthCssProperty {
   lh(value1: number, value2: number, value3: number): string;
   lh(value1: number, value2: number, value3: number, value4: number): string;
   override lh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lh`).join(' '));
   }
   /** 使用 rlh 单位生成声明；数值合法性由浏览器处理。 */
   rlh(value1: number): string;
@@ -11619,7 +12339,7 @@ export class BorderWidthCss extends LengthCssProperty {
   rlh(value1: number, value2: number, value3: number): string;
   rlh(value1: number, value2: number, value3: number, value4: number): string;
   override rlh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}rlh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}rlh`).join(' '));
   }
   /** 使用 vw 单位生成声明；数值合法性由浏览器处理。 */
   vw(value1: number): string;
@@ -11627,7 +12347,7 @@ export class BorderWidthCss extends LengthCssProperty {
   vw(value1: number, value2: number, value3: number): string;
   vw(value1: number, value2: number, value3: number, value4: number): string;
   override vw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vw`).join(' '));
   }
   /** 使用 vh 单位生成声明；数值合法性由浏览器处理。 */
   vh(value1: number): string;
@@ -11635,7 +12355,7 @@ export class BorderWidthCss extends LengthCssProperty {
   vh(value1: number, value2: number, value3: number): string;
   vh(value1: number, value2: number, value3: number, value4: number): string;
   override vh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vh`).join(' '));
   }
   /** 使用 vi 单位生成声明；数值合法性由浏览器处理。 */
   vi(value1: number): string;
@@ -11643,7 +12363,7 @@ export class BorderWidthCss extends LengthCssProperty {
   vi(value1: number, value2: number, value3: number): string;
   vi(value1: number, value2: number, value3: number, value4: number): string;
   override vi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vi`).join(' '));
   }
   /** 使用 vb 单位生成声明；数值合法性由浏览器处理。 */
   vb(value1: number): string;
@@ -11651,7 +12371,7 @@ export class BorderWidthCss extends LengthCssProperty {
   vb(value1: number, value2: number, value3: number): string;
   vb(value1: number, value2: number, value3: number, value4: number): string;
   override vb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vb`).join(' '));
   }
   /** 使用 vmin 单位生成声明；数值合法性由浏览器处理。 */
   vmin(value1: number): string;
@@ -11659,7 +12379,7 @@ export class BorderWidthCss extends LengthCssProperty {
   vmin(value1: number, value2: number, value3: number): string;
   vmin(value1: number, value2: number, value3: number, value4: number): string;
   override vmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmin`).join(' '));
   }
   /** 使用 vmax 单位生成声明；数值合法性由浏览器处理。 */
   vmax(value1: number): string;
@@ -11667,7 +12387,7 @@ export class BorderWidthCss extends LengthCssProperty {
   vmax(value1: number, value2: number, value3: number): string;
   vmax(value1: number, value2: number, value3: number, value4: number): string;
   override vmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}vmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}vmax`).join(' '));
   }
   /** 使用 svw 单位生成声明；数值合法性由浏览器处理。 */
   svw(value1: number): string;
@@ -11675,7 +12395,7 @@ export class BorderWidthCss extends LengthCssProperty {
   svw(value1: number, value2: number, value3: number): string;
   svw(value1: number, value2: number, value3: number, value4: number): string;
   override svw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svw`).join(' '));
   }
   /** 使用 svh 单位生成声明；数值合法性由浏览器处理。 */
   svh(value1: number): string;
@@ -11683,7 +12403,7 @@ export class BorderWidthCss extends LengthCssProperty {
   svh(value1: number, value2: number, value3: number): string;
   svh(value1: number, value2: number, value3: number, value4: number): string;
   override svh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svh`).join(' '));
   }
   /** 使用 svi 单位生成声明；数值合法性由浏览器处理。 */
   svi(value1: number): string;
@@ -11691,7 +12411,7 @@ export class BorderWidthCss extends LengthCssProperty {
   svi(value1: number, value2: number, value3: number): string;
   svi(value1: number, value2: number, value3: number, value4: number): string;
   override svi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svi`).join(' '));
   }
   /** 使用 svb 单位生成声明；数值合法性由浏览器处理。 */
   svb(value1: number): string;
@@ -11699,7 +12419,7 @@ export class BorderWidthCss extends LengthCssProperty {
   svb(value1: number, value2: number, value3: number): string;
   svb(value1: number, value2: number, value3: number, value4: number): string;
   override svb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svb`).join(' '));
   }
   /** 使用 svmin 单位生成声明；数值合法性由浏览器处理。 */
   svmin(value1: number): string;
@@ -11707,7 +12427,7 @@ export class BorderWidthCss extends LengthCssProperty {
   svmin(value1: number, value2: number, value3: number): string;
   svmin(value1: number, value2: number, value3: number, value4: number): string;
   override svmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmin`).join(' '));
   }
   /** 使用 svmax 单位生成声明；数值合法性由浏览器处理。 */
   svmax(value1: number): string;
@@ -11715,7 +12435,7 @@ export class BorderWidthCss extends LengthCssProperty {
   svmax(value1: number, value2: number, value3: number): string;
   svmax(value1: number, value2: number, value3: number, value4: number): string;
   override svmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}svmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}svmax`).join(' '));
   }
   /** 使用 lvw 单位生成声明；数值合法性由浏览器处理。 */
   lvw(value1: number): string;
@@ -11723,7 +12443,7 @@ export class BorderWidthCss extends LengthCssProperty {
   lvw(value1: number, value2: number, value3: number): string;
   lvw(value1: number, value2: number, value3: number, value4: number): string;
   override lvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvw`).join(' '));
   }
   /** 使用 lvh 单位生成声明；数值合法性由浏览器处理。 */
   lvh(value1: number): string;
@@ -11731,7 +12451,7 @@ export class BorderWidthCss extends LengthCssProperty {
   lvh(value1: number, value2: number, value3: number): string;
   lvh(value1: number, value2: number, value3: number, value4: number): string;
   override lvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvh`).join(' '));
   }
   /** 使用 lvi 单位生成声明；数值合法性由浏览器处理。 */
   lvi(value1: number): string;
@@ -11739,7 +12459,7 @@ export class BorderWidthCss extends LengthCssProperty {
   lvi(value1: number, value2: number, value3: number): string;
   lvi(value1: number, value2: number, value3: number, value4: number): string;
   override lvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvi`).join(' '));
   }
   /** 使用 lvb 单位生成声明；数值合法性由浏览器处理。 */
   lvb(value1: number): string;
@@ -11747,7 +12467,7 @@ export class BorderWidthCss extends LengthCssProperty {
   lvb(value1: number, value2: number, value3: number): string;
   lvb(value1: number, value2: number, value3: number, value4: number): string;
   override lvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvb`).join(' '));
   }
   /** 使用 lvmin 单位生成声明；数值合法性由浏览器处理。 */
   lvmin(value1: number): string;
@@ -11755,7 +12475,7 @@ export class BorderWidthCss extends LengthCssProperty {
   lvmin(value1: number, value2: number, value3: number): string;
   lvmin(value1: number, value2: number, value3: number, value4: number): string;
   override lvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmin`).join(' '));
   }
   /** 使用 lvmax 单位生成声明；数值合法性由浏览器处理。 */
   lvmax(value1: number): string;
@@ -11763,7 +12483,7 @@ export class BorderWidthCss extends LengthCssProperty {
   lvmax(value1: number, value2: number, value3: number): string;
   lvmax(value1: number, value2: number, value3: number, value4: number): string;
   override lvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}lvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}lvmax`).join(' '));
   }
   /** 使用 dvw 单位生成声明；数值合法性由浏览器处理。 */
   dvw(value1: number): string;
@@ -11771,7 +12491,7 @@ export class BorderWidthCss extends LengthCssProperty {
   dvw(value1: number, value2: number, value3: number): string;
   dvw(value1: number, value2: number, value3: number, value4: number): string;
   override dvw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvw`).join(' '));
   }
   /** 使用 dvh 单位生成声明；数值合法性由浏览器处理。 */
   dvh(value1: number): string;
@@ -11779,7 +12499,7 @@ export class BorderWidthCss extends LengthCssProperty {
   dvh(value1: number, value2: number, value3: number): string;
   dvh(value1: number, value2: number, value3: number, value4: number): string;
   override dvh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvh`).join(' '));
   }
   /** 使用 dvi 单位生成声明；数值合法性由浏览器处理。 */
   dvi(value1: number): string;
@@ -11787,7 +12507,7 @@ export class BorderWidthCss extends LengthCssProperty {
   dvi(value1: number, value2: number, value3: number): string;
   dvi(value1: number, value2: number, value3: number, value4: number): string;
   override dvi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvi`).join(' '));
   }
   /** 使用 dvb 单位生成声明；数值合法性由浏览器处理。 */
   dvb(value1: number): string;
@@ -11795,7 +12515,7 @@ export class BorderWidthCss extends LengthCssProperty {
   dvb(value1: number, value2: number, value3: number): string;
   dvb(value1: number, value2: number, value3: number, value4: number): string;
   override dvb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvb`).join(' '));
   }
   /** 使用 dvmin 单位生成声明；数值合法性由浏览器处理。 */
   dvmin(value1: number): string;
@@ -11803,7 +12523,7 @@ export class BorderWidthCss extends LengthCssProperty {
   dvmin(value1: number, value2: number, value3: number): string;
   dvmin(value1: number, value2: number, value3: number, value4: number): string;
   override dvmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmin`).join(' '));
   }
   /** 使用 dvmax 单位生成声明；数值合法性由浏览器处理。 */
   dvmax(value1: number): string;
@@ -11811,7 +12531,7 @@ export class BorderWidthCss extends LengthCssProperty {
   dvmax(value1: number, value2: number, value3: number): string;
   dvmax(value1: number, value2: number, value3: number, value4: number): string;
   override dvmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}dvmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}dvmax`).join(' '));
   }
   /** 使用 cqw 单位生成声明；数值合法性由浏览器处理。 */
   cqw(value1: number): string;
@@ -11819,7 +12539,7 @@ export class BorderWidthCss extends LengthCssProperty {
   cqw(value1: number, value2: number, value3: number): string;
   cqw(value1: number, value2: number, value3: number, value4: number): string;
   override cqw(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqw`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqw`).join(' '));
   }
   /** 使用 cqh 单位生成声明；数值合法性由浏览器处理。 */
   cqh(value1: number): string;
@@ -11827,7 +12547,7 @@ export class BorderWidthCss extends LengthCssProperty {
   cqh(value1: number, value2: number, value3: number): string;
   cqh(value1: number, value2: number, value3: number, value4: number): string;
   override cqh(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqh`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqh`).join(' '));
   }
   /** 使用 cqi 单位生成声明；数值合法性由浏览器处理。 */
   cqi(value1: number): string;
@@ -11835,7 +12555,7 @@ export class BorderWidthCss extends LengthCssProperty {
   cqi(value1: number, value2: number, value3: number): string;
   cqi(value1: number, value2: number, value3: number, value4: number): string;
   override cqi(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqi`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqi`).join(' '));
   }
   /** 使用 cqb 单位生成声明；数值合法性由浏览器处理。 */
   cqb(value1: number): string;
@@ -11843,7 +12563,7 @@ export class BorderWidthCss extends LengthCssProperty {
   cqb(value1: number, value2: number, value3: number): string;
   cqb(value1: number, value2: number, value3: number, value4: number): string;
   override cqb(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqb`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqb`).join(' '));
   }
   /** 使用 cqmin 单位生成声明；数值合法性由浏览器处理。 */
   cqmin(value1: number): string;
@@ -11851,7 +12571,7 @@ export class BorderWidthCss extends LengthCssProperty {
   cqmin(value1: number, value2: number, value3: number): string;
   cqmin(value1: number, value2: number, value3: number, value4: number): string;
   override cqmin(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmin`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmin`).join(' '));
   }
   /** 使用 cqmax 单位生成声明；数值合法性由浏览器处理。 */
   cqmax(value1: number): string;
@@ -11859,7 +12579,7 @@ export class BorderWidthCss extends LengthCssProperty {
   cqmax(value1: number, value2: number, value3: number): string;
   cqmax(value1: number, value2: number, value3: number, value4: number): string;
   override cqmax(...values: number[]): string {
-    return `${this.name}:${values.map((value) => `${value}cqmax`).join(' ')};`;
+    return this.declaration(values.map((value) => `${value}cqmax`).join(' '));
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
@@ -11905,7 +12625,7 @@ export class BottomCss extends LengthCssProperty {
   }
   /** 使用 % 单位生成声明；数值合法性由浏览器处理。 */
   percent(value: number): string {
-    return `${this.name}:${value}%;`;
+    return this.declaration(`${value}%`);
   }
   /** 数学表达式原样交给浏览器。 */
   calc(expression: string): string {
