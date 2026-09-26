@@ -12,6 +12,7 @@ interface Group {
   name: string;
   readers: Array<() => string>;
   stop?: () => void;
+  cached?: { register: unknown; parts: string[]; result: string };
 }
 interface Frame {
   id: number;
@@ -126,7 +127,19 @@ export function createBindings(
         if (fresh && !frame) group.stop = schedule(() => update(group!));
         else update(group);
       }
-      return register(...parts);
+      // 值变化时模板字符串通常不变。只缓存平铺字符串，避免可变数组的别名误命中。
+      const cached = group.cached;
+      if (
+        cached?.register === register &&
+        parts.length === cached.parts.length &&
+        parts.every((part, index) => part === cached.parts[index])
+      )
+        return cached.result;
+      const result = register(...parts);
+      group.cached = parts.every((part) => typeof part === 'string')
+        ? { register, parts: parts.slice() as string[], result }
+        : undefined;
+      return result;
     },
     selector(site: string, author: unknown, method: string, produce: () => unknown[]): string {
       const target = author as Property;

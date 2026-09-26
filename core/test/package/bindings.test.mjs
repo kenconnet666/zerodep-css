@@ -207,3 +207,36 @@ test('系统选择器支持嵌套动态声明，覆写选择器时整个片段�
   assert.equal(host.rules().filter((rule) => rule.kind === 'bindings').length, 1);
   scope.dispose();
 });
+
+test('模板未变时更新变量但不重复登记，可变声明数组仍重新求值', () => {
+  const host = createServerCssHost();
+  const scope = createBindings('cache', host.setBindings, (run) => {
+    run();
+    return () => {};
+  });
+  const s = new Css();
+  let calls = 0,
+    width = 12;
+  const register = (...parts) => {
+    calls++;
+    return host.css(...parts);
+  };
+  const draw = () =>
+    scope.frame('box', [], () =>
+      scope.capture('style', register, () => [
+        scope.value('w', 'width', s.width, 'px', [() => width]),
+      ]),
+    );
+  const first = draw();
+  width = 24;
+  assert.equal(draw(), first);
+  assert.equal(calls, 1);
+  assert.match(host.rules().find((rule) => rule.kind === 'bindings').body, /:24px;/);
+  const parts = [s.color.red];
+  const array = () =>
+    scope.frame('array', [], () => scope.capture('style', register, () => [parts]));
+  const red = array();
+  parts[0] = s.color.blue;
+  assert.notEqual(array(), red);
+  scope.dispose();
+});
