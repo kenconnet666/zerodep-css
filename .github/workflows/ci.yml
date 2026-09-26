@@ -62,6 +62,8 @@ jobs:
       - run: pnpm --dir .research/string-css-probe test:transport
       - run: pnpm --dir .research/string-css-probe test:author-api
       - run: pnpm --dir .research/string-css-probe test:bindings
+      - run: pnpm --dir .research/string-css-probe test:keyword-variants
+      - run: pnpm --dir .research/string-css-probe probe:keywords
       - run: node test/browser/lifecycle-hmr.mjs
       - run: pnpm --dir .research/string-css-probe probe:bindings
         env:
@@ -84,3 +86,4 @@ jobs:
             test-results/lifecycle-hmr.json
             test-results/lifecycle-failure-*.json
             test-results/binding-performance/*.json
+            test-results/keyword-representation/*.json
