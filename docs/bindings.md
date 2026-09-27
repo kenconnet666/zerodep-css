@@ -36,6 +36,8 @@ export default { plugins: [cssBindings(), vue()] };
 
 Svelte 5.20+ 使用 `zerodep-css-svelte/vite`，放在官方 svelte 插件之前。SvelteKit 使用相同顺序，保留[宿主接入](metaframeworks.md)。Nuxt 模块默认安装转换；关闭 bindings 选项后不能使用 bx。
 
+Svelte 适配器会预先声明编译器注入的绑定运行时，避免依赖预优化在首次挂载中途重载 Svelte。0.1.1 同时处理依赖 SSR / HMR 的 `.svelte?v=...`、`.svelte?t=...` 缓存查询，变量身份仍由原始文件路径确定；样式、raw、url 等资源子请求不参与组件转换。
+
 bx 是组件编译入口，必须经过插件；未经转换直接调用会报错，不会悄悄退回普通字符串。Vue 处理 script setup 和模板，Svelte 处理实例脚本及组件模板；普通 .ts、Vue Options API 和 Svelte 模块导出的 snippet 不在本阶段支持范围。别名导入和命名空间导入可识别，局部同名 bx 不转换。调用只接受一个参数，不支持嵌套 bx、await/yield 参数。
 
 ## 模板直接调用与自动缓存

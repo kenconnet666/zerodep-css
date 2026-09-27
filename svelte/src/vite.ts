@@ -53,18 +53,26 @@ export default function cssBindings(options: { inlineBindings?: boolean } = {}) 
   return {
     name: 'zerodep-css:svelte-bindings',
     enforce: 'pre' as const,
+    config() {
+      // 绑定运行时由转换注入，依赖扫描看不到它；提前优化以免中途重载 Svelte。
+      return { optimizeDeps: { include: ['zerodep-css-svelte/bindings'] } };
+    },
     configResolved(config: { root: string; isProduction?: boolean }) {
       root = config.root;
       dev = !config.isProduction;
     },
     transform(this: { warn(message: string): void }, code: string, id: string) {
-      if (!id.endsWith('.svelte') || id.includes('?')) return;
+      const [filename = '', query] = id.split('?', 2);
+      if (!filename.endsWith('.svelte')) return;
+      // Vite 的依赖 SSR / HMR 会附加缓存键。样式、raw 等子请求仍不作为组件转换。
+      if (query && [...new URLSearchParams(query).keys()].some((key) => key !== 'v' && key !== 't'))
+        return;
       const ast = parse(code, { modern: true });
       if (!ast.instance) return;
       const script = located(ast.instance.content);
       const model = createBindingTransform(
         code.slice(script.start, script.end),
-        relative(root, id),
+        relative(root, filename),
         'svelte',
         code,
         { dev, scriptOffset: script.start },

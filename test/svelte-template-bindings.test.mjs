@@ -9,12 +9,12 @@ import * as bindings from '../svelte/dist/bindings-server.js';
 import plugin from '../svelte/dist/vite.js';
 
 const require = createRequire(import.meta.url);
-function component(source, options) {
+function component(source, options, id = '/test/Template.svelte') {
   const warnings = [];
   const result = plugin(options).transform.call(
     { warn: (message) => warnings.push(message) },
     source,
-    '/test/Template.svelte',
+    id,
   );
   const transformed = result?.code ?? source;
   // 两套正式编译目标都必须接受转换，客户端仍由 Svelte 生成派生。
@@ -36,12 +36,32 @@ function component(source, options) {
   return { component: module.exports.default, transformed, warnings };
 }
 const script = `<script>import {Css,css,bx} from 'zerodep-css-svelte'; const s=new Css(); let width=$state(12);</script>`;
-function inspect(source, options) {
-  const result = component(source, options),
+function inspect(source, options, id) {
+  const result = component(source, options, id),
     host = adapter.createServerCssHost();
   const html = adapter.withCssHost(host, () => render(result.component).body);
   return { ...result, html, rules: host.rules() };
 }
+
+test('依赖 SSR 和 HMR 的缓存查询保留绑定转换及稳定变量身份', () => {
+  const source = `${script}<svg class={css(s.width.raw(bx(width+'px')))}></svg>`;
+  const baseline = inspect(source);
+  for (const query of ['v=first', 'v=second', 't=123', 'v=hash&t=456']) {
+    const result = inspect(source, undefined, '/test/Template.svelte?' + query);
+    assert.equal(result.transformed, baseline.transformed);
+    assert.match(result.html, /--zi-[^:]+: 12px/);
+    assert.deepEqual(result.warnings, []);
+  }
+});
+
+test('样式和资源子请求不会被误当作 Svelte 源组件解析', () => {
+  for (const suffix of ['?svelte&type=style&lang.css', '?raw', '?url', '?v=hash&raw', '.js']) {
+    assert.equal(
+      plugin().transform.call({ warn() {} }, 'not Svelte source', '/test/Template.svelte' + suffix),
+      undefined,
+    );
+  }
+});
 
 test('Svelte 元素变量兼容已有 style 和 style 指令，多变量、常量及未执行分支', () => {
   const result =
