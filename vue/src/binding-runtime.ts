@@ -1,5 +1,5 @@
 import { getCurrentInstance, onUnmounted, useId, watchEffect } from 'vue';
-import { createBindings } from '@zerodep-css/core/bindings';
+import { createBindings } from 'zerodep-css/bindings';
 import { createTemplateCache } from './template-cache.js';
 
 export function createVueBindings(

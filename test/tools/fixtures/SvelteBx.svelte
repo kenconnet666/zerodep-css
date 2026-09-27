@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { bx, css, globalCss, keyframes } from '@zerodep-css/svelte';
+  import { bx, css, globalCss, keyframes } from 'zerodep-css-svelte';
   import { useCss } from '../../../svelte/examples/context.js';
   import Plain from './SveltePlainClass.svelte';
   import { ProjectCss } from '../../../core/examples/project-css.js';

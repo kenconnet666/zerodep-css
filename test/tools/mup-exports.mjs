@@ -6,7 +6,7 @@ for (const framework of ['vue', 'svelte']) {
   for (const platform of ['browser', 'node']) {
     const result = await build({
       stdin: {
-        contents: `import { css } from '@zerodep-css/${framework}'; console.log(css);`,
+        contents: `import { css } from 'zerodep-css-${framework}'; console.log(css);`,
         resolveDir: resolve(`../../${framework}`),
         sourcefile: 'self.ts',
       },

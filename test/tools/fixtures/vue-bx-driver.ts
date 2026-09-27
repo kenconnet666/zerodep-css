@@ -1,5 +1,5 @@
 import { createApp, createSSRApp, defineComponent, h, nextTick } from 'vue';
-import { hydrateCss, cssStats, configureCss } from '@zerodep-css/vue';
+import { hydrateCss, cssStats, configureCss } from 'zerodep-css-vue';
 import { AppCss } from '../../../core/examples/theme.js';
 import { provideCss } from '../../../vue/examples/context.js';
 import Component from './VueBx.vue';

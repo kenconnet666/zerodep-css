@@ -1,4 +1,4 @@
-import { bindingId, setBindings, releaseBindings } from '@zerodep-css/core/browser';
+import { bindingId, setBindings, releaseBindings } from 'zerodep-css/browser';
 import { createSvelteBindings } from './binding-runtime.js';
 export const useBindings = (
   file: string,

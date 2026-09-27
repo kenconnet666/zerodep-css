@@ -26,7 +26,7 @@ export function templateVariant(framework, mode) {
     if (mode === 'bx' || mode === 'hoisted') {
       code = code
         .replace(
-          /import \{([^}]+)\} from '(@zerodep-css\/(?:vue|svelte))';/,
+          /import \{([^}]+)\} from '(zerodep-css-(?:vue|svelte))';/,
           (_, names, from) => 'import { bx,' + names + "} from '" + from + "';",
         )
         .replaceAll('s.width.px(width.value)', "s.width.raw(bx(width.value + 'px'))")

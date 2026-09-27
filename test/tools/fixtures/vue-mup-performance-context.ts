@@ -1,4 +1,4 @@
-import { Css, createCssContext, css as registeredCss } from '@zerodep-css/vue';
+import { Css, createCssContext, css as registeredCss } from 'zerodep-css-vue';
 
 export { Css };
 export const { provideCss, useCss } = createCssContext<Css>();

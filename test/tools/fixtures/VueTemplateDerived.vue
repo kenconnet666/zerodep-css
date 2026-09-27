@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { Css, css } from '@zerodep-css/vue';
+import { Css, css } from 'zerodep-css-vue';
 const props = defineProps<{
   index: number;
   expose: (step: () => void, noise: () => void) => void;

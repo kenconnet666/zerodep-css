@@ -1,5 +1,5 @@
 import { render } from 'svelte/server';
-import { createServerCssHost, css, withCssHost } from '@zerodep-css/svelte';
+import { createServerCssHost, css, withCssHost } from 'zerodep-css-svelte';
 import Component from './SvelteMup.svelte';
 
 export async function renderPage(width: number, delay = 0) {

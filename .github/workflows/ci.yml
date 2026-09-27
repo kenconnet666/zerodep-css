@@ -43,6 +43,8 @@ jobs:
       - run: pnpm --dir test/tools test:vfor-style
       - run: pnpm --dir test/tools test:mup:server
       - run: pnpm --dir test/tools test:mup:exports
+      - run: pnpm release:pack
+      - run: pnpm release:check
       - uses: actions/upload-artifact@v4
         if: always()
         with:

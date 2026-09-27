@@ -8,7 +8,7 @@ import {
   createBindingTransform,
   scriptEdits,
   type Edit,
-} from '@zerodep-css/core/compiler';
+} from 'zerodep-css/compiler';
 
 /** 放在 Vue 插件之前，仅处理 script setup；普通运行时写法仍可单独使用。 */
 export default function cssBindings(
@@ -186,7 +186,7 @@ export default function cssBindings(
       for (const node of descriptor.template.ast.children) visit(node, [], []);
       for (const warning of model.warnings) this.warn(warning);
       if (!model.used) return;
-      const prefix = `import { useBindings as ${model.scope}_use } from '@zerodep-css/vue/bindings';\nconst ${model.scope} = ${model.scope}_use(${JSON.stringify(model.fileId)}${dev ? `, ${JSON.stringify(model.locations)}` : ''});\n`;
+      const prefix = `import { useBindings as ${model.scope}_use } from 'zerodep-css-vue/bindings';\nconst ${model.scope} = ${model.scope}_use(${JSON.stringify(model.fileId)}${dev ? `, ${JSON.stringify(model.locations)}` : ''});\n`;
       edits.push(...scriptEdits(script.content, model.script, script.loc.start.offset), {
         start: script.loc.start.offset,
         end: script.loc.start.offset,

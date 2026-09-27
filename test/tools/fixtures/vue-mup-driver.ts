@@ -1,5 +1,5 @@
 import { createApp, createSSRApp, defineComponent, h, nextTick, ref } from 'vue';
-import { Css, WidthCss, createCssContext, css, hydrateCss, type CssRule } from '@zerodep-css/vue';
+import { Css, WidthCss, createCssContext, css, hydrateCss, type CssRule } from 'zerodep-css-vue';
 
 class ThemeWidthCss extends WidthCss {
   readonly _md = this.px(48);

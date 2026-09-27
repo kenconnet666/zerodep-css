@@ -8,7 +8,7 @@ Vue 的组件 setup 中：
 
 ```ts
 import { ref } from 'vue';
-import { css, bx } from '@zerodep-css/vue';
+import { css, bx } from 'zerodep-css-vue';
 const width = ref(24);
 const x = ref(4);
 const box = css(
@@ -29,12 +29,12 @@ bx 的结果是 `var(...)` 字符串。模板元素绑定使用固定的 `--zi-.
 
 ```ts
 // Vue 3.5：在 Vue 插件前安装。
-import cssBindings from '@zerodep-css/vue/vite';
+import cssBindings from 'zerodep-css-vue/vite';
 import vue from '@vitejs/plugin-vue';
 export default { plugins: [cssBindings(), vue()] };
 ```
 
-Svelte 5.20+ 使用 `@zerodep-css/svelte/vite`，放在官方 svelte 插件之前。SvelteKit 使用相同顺序，保留[宿主接入](metaframeworks.md)。Nuxt 模块默认安装转换；关闭 bindings 选项后不能使用 bx。
+Svelte 5.20+ 使用 `zerodep-css-svelte/vite`，放在官方 svelte 插件之前。SvelteKit 使用相同顺序，保留[宿主接入](metaframeworks.md)。Nuxt 模块默认安装转换；关闭 bindings 选项后不能使用 bx。
 
 bx 是组件编译入口，必须经过插件；未经转换直接调用会报错，不会悄悄退回普通字符串。Vue 处理 script setup 和模板，Svelte 处理实例脚本及组件模板；普通 .ts、Vue Options API 和 Svelte 模块导出的 snippet 不在本阶段支持范围。别名导入和命名空间导入可识别，局部同名 bx 不转换。调用只接受一个参数，不支持嵌套 bx、await/yield 参数。
 
@@ -80,7 +80,7 @@ Vue scoped slot 支持 bx，各次调用按参数身份隔离；优先传递有�
 
 模板原生元素的默认快路径参考 Vue CSS v-bind：共享声明，值写到元素内联 style；不直接依赖 Vue 内部 useCssVars API。script/setup、需要传递的 class、动画/全局规则和跨元素选择器继续使用私有 CSSOM 值规则，必要时使用私有 :root 变量。普通 css 仍可在运行时构建，没有要求静态提取全部样式。
 
-SSR 内联变量受页面 `style-src-attr` 策略约束。项目禁止内联 style 时，在 Vue/Svelte 插件上设置 `cssBindings({ inlineBindings: false })`，统一使用样式表传输；Nuxt 模块对应选项同名：`modules: [['@zerodep-css/nuxt', { inlineBindings: false }]]`。此选项不关闭 bx。不要依赖客户端 CSSOM 写入是否被 CSP 放行来推断服务端内联 HTML 也被许可。
+SSR 内联变量受页面 `style-src-attr` 策略约束。项目禁止内联 style 时，在 Vue/Svelte 插件上设置 `cssBindings({ inlineBindings: false })`，统一使用样式表传输；Nuxt 模块对应选项同名：`modules: [['zerodep-css-nuxt', { inlineBindings: false }]]`。此选项不关闭 bx。不要依赖客户端 CSSOM 写入是否被 CSP 放行来推断服务端内联 HTML 也被许可。
 
 null/undefined 在私有样式表路径清空声明；元素路径写入 initial，避免继承外层同名变量。0 保留。无效值交给浏览器，包括 CSS 变量在计算值阶段失效的原生行为。重新赋值后恢复。
 

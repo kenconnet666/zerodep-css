@@ -21,11 +21,11 @@ const base = fileURLToPath(new URL('../../core', import.meta.url));
 for (const variant of variants) {
   report.bundles[variant] = {};
   for (const [name, contents] of Object.entries({
-    full: "export {Css} from '@zerodep-css/core';",
-    color: "export {ColorCss} from '@zerodep-css/core';",
-    animation: "export {AnimationPlayStateCss} from '@zerodep-css/core';",
+    full: "export {Css} from 'zerodep-css';",
+    color: "export {ColorCss} from 'zerodep-css';",
+    animation: "export {AnimationPlayStateCss} from 'zerodep-css';",
     runtime:
-      "export {Css,ColorCss,WidthCss,AnimationPlayStateCss} from '@zerodep-css/core'; export {createRuleRegistry} from './src/registry.ts';",
+      "export {Css,ColorCss,WidthCss,AnimationPlayStateCss} from 'zerodep-css'; export {createRuleRegistry} from './src/registry.ts';",
   })) {
     const result = await build({
       stdin: { contents, resolveDir: base, loader: 'ts' },

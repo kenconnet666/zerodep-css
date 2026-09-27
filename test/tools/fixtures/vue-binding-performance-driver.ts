@@ -1,5 +1,5 @@
 import { createApp, nextTick } from 'vue';
-import { cssStats } from '@zerodep-css/vue';
+import { cssStats } from 'zerodep-css-vue';
 import createEmotion from '@emotion/css/create-instance';
 import Component from './VueBindingPerformance.vue';
 export async function start(target: HTMLElement, mode: string, count: number) {

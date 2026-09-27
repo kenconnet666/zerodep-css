@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
-import { bx, css, globalCss, keyframes } from '@zerodep-css/vue';
+import { bx, css, globalCss, keyframes } from 'zerodep-css-vue';
 import { useCss } from '../../../vue/examples/context.js';
 import Plain from './VuePlainClass.vue';
 import { ProjectCss } from '../../../core/examples/project-css.js';

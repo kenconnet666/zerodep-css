@@ -1,7 +1,6 @@
 {
-  "name": "@zerodep-css/vue",
-  "version": "0.0.0",
-  "private": true,
+  "name": "zerodep-css-vue",
+  "version": "0.1.0",
   "type": "module",
   "exports": {
     "./vite": {
@@ -35,7 +34,9 @@
   },
   "dependencies": {
     "@vue/compiler-dom": "catalog:",
-    "@zerodep-css/core": "workspace:*"
+    "zerodep-css": "workspace:*",
+    "typescript": "catalog:",
+    "magic-string": "catalog:"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
@@ -44,5 +45,30 @@
     "@types/node": "catalog:",
     "vue": "catalog:",
     "vue-tsc": "catalog:languageServices"
-  }
+  },
+  "description": "Runtime CSS and explicit CSS variable bindings for Vue 3.5.",
+  "author": "kenconnet666",
+  "engines": {
+    "node": ">=24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
+    "directory": "vue"
+  },
+  "homepage": "https://github.com/kenconnet666/zerodep-css#readme",
+  "bugs": {
+    "url": "https://github.com/kenconnet666/zerodep-css/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT"
 }

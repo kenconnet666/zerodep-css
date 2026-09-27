@@ -1,5 +1,5 @@
 import { createApp, createSSRApp, nextTick } from 'vue';
-import { hydrateCss } from '@zerodep-css/vue';
+import { hydrateCss } from 'zerodep-css-vue';
 import App from '../../../vue/examples/App.vue';
 import type { ExampleProps } from '../../../core/examples/theme.js';
 

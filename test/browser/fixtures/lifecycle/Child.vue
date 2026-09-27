@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { bx, Css, css } from '@zerodep-css/vue';
+import { bx, Css, css } from 'zerodep-css-vue';
 import { width } from './state.js';
 const s = new Css();
 let generation = 0;

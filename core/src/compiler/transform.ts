@@ -73,7 +73,7 @@ export function createBindingTransform(
   for (const node of source.statements) {
     if (!ts.isImportDeclaration(node) || !ts.isStringLiteral(node.moduleSpecifier)) continue;
     if (node.importClause?.isTypeOnly) continue;
-    const cssModule = /^@zerodep-css\/(vue|svelte|core)(\/server|\/browser)?$/.test(
+    const cssModule = /^zerodep-css(?:-(?:vue|svelte))?(?:\/(?:server|browser))?$/.test(
       node.moduleSpecifier.text,
     );
     const imports = node.importClause?.namedBindings;

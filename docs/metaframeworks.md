@@ -1,6 +1,6 @@
 # Nuxt 4 与 SvelteKit 2 接入
 
-五个包仍为 private 工作区包。先构建包产物，普通组件继续从 `@zerodep-css/vue` / `@zerodep-css/svelte` 使用原有 API；元框架包负责宿主生命周期，不重新导出一套作者 API。
+Nuxt 安装 `zerodep-css-nuxt` 与 `zerodep-css-vue`，SvelteKit 安装 `zerodep-css-sveltekit` 与 `zerodep-css-svelte`。普通组件继续从框架适配包使用作者 API；元框架包负责宿主生命周期，不重新导出另一套作者 API。
 
 本阶段验收 Nuxt 4.5.2、SvelteKit 2.70.3、Vue 3.5.43、Svelte 5.57.0，运行环境为 Node 24 和 Chromium。覆盖标准 Node SSR、客户端导航、静态预渲染页面及其恢复，包含[bx 多变量绑定](bindings.md)。
 
@@ -10,13 +10,13 @@
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['@zerodep-css/nuxt'],
+  modules: ['zerodep-css-nuxt'],
 });
 ```
 
 应用自行定义 `createCssContext<AppCss>()` 并在根组件 `provideCss(new AppCss())`，使用方式见[入门示例](getting-started.md)。模块不猜测用户的作者类或主题。
 
-模块默认安装绑定转换；`modules: [['@zerodep-css/nuxt', { bindings: false }]]` 可以关闭。动态 nonce 从 `event.context.zerodepCssNonce` 读取，应用在前置服务器 middleware 中生成并设置匹配的 CSP 响应头。
+模块默认安装绑定转换；`modules: [['zerodep-css-nuxt', { bindings: false }]]` 可以关闭。动态 nonce 从 `event.context.zerodepCssNonce` 读取，应用在前置服务器 middleware 中生成并设置匹配的 CSP 响应头。
 
 模块注册两个插件：服务端为每个 Nuxt Vue 应用创建独立宿主，组件渲染结束后向 head 输出样式和 JSON 清单；客户端在组件创建前恢复清单。组件内同步调用和异步 setup 恢复上下文后的 `css()` 都使用当前应用宿主。脱离组件上下文的任意服务器任务不会自动获得这个宿主，手工 SSR 仍可使用 `withCssHost()`。
 
@@ -29,21 +29,21 @@ Vue `/server` 新增 `provideCssHost(app, host)`，用于由元框架掌握渲�
 先在 Vite 中启用转换，再配置宿主：
 
 ```ts
-import cssBindings from '@zerodep-css/svelte/vite';
+import cssBindings from 'zerodep-css-svelte/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 export default { plugins: [cssBindings(), sveltekit()] };
 ```
 
 ```ts
 // src/hooks.server.ts
-export { handle } from '@zerodep-css/sveltekit/server';
+export { handle } from 'zerodep-css-sveltekit/server';
 ```
 
 已有服务器 hook 时用 Kit 的 `sequence` 组合；[夹具](../sveltekit/test/app/src/hooks.server.ts)验证了组合后的自定义响应头仍然保留。需要 nonce 时，由前置 hook 设置 `event.locals.zerodepCssNonce` 和匹配的 CSP 响应头，再进入 CSS handle。
 
 ```ts
 // src/hooks.client.ts
-export { init } from '@zerodep-css/sveltekit';
+export { init } from 'zerodep-css-sveltekit';
 ```
 
 已有客户端 `init` 时，在自己的初始化函数中先调用导入的 `init`，再执行其他初始化，不覆盖原有逻辑。

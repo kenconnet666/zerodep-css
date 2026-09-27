@@ -1,5 +1,5 @@
 import { createApp, nextTick } from 'vue';
-import { cssStats } from '@zerodep-css/vue';
+import { cssStats } from 'zerodep-css-vue';
 import Component from './VueTemplateDerived.vue';
 
 export async function start(target: HTMLElement, count: number) {

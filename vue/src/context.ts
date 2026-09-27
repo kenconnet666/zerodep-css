@@ -1,4 +1,4 @@
-import type { Css } from '@zerodep-css/core';
+import type { Css } from 'zerodep-css';
 import { inject, provide, type InjectionKey } from 'vue';
 
 /** 类型只需在项目入口声明一次；后代注入同一个作者实例。 */

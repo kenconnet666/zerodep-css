@@ -75,7 +75,7 @@ function fixture(file, valid) {
     ? './__lsp_shared__.js'
     : '../../core/src/__lsp_shared__.js';
   const body = `import { tokens, pixels } from '${shared}';
-${isTs ? '' : "import '@zerodep-css/core';"}
+${isTs ? '' : "import 'zerodep-css';"}
 const count: number = ${valid ? '1' : "'wrong'"};
 const tone = tokens.${valid ? 'primary' : 'missing'};
 const width = pixels(${valid ? '12' : "'bad'"});

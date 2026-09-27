@@ -10,7 +10,7 @@ test('研究变体保持样例值、大小写、单位与继承，不修改正�
     const output = await build({
       stdin: {
         contents:
-          "export {AnimationPlayStateCss,ColorInterpolationCss,WidthCss,ImageRenderingCss,ShapeRenderingCss} from '@zerodep-css/core';",
+          "export {AnimationPlayStateCss,ColorInterpolationCss,WidthCss,ImageRenderingCss,ShapeRenderingCss} from 'zerodep-css';",
         resolveDir: fileURLToPath(new URL('../../core', import.meta.url)),
       },
       bundle: true,

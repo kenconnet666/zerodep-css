@@ -1,4 +1,4 @@
-export * from '@zerodep-css/core';
+export * from 'zerodep-css';
 export {
   css,
   keyframes,
@@ -7,5 +7,5 @@ export {
   configureCss,
   disposeCss,
   cssStats,
-} from '@zerodep-css/core/browser';
+} from 'zerodep-css/browser';
 export { createCssContext } from './context.js';

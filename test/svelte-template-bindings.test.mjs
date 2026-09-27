@@ -25,9 +25,9 @@ function component(source, options) {
   const module = { exports: {} };
   new Function('require', 'module', 'exports', js)(
     (name) =>
-      name === '@zerodep-css/svelte'
+      name === 'zerodep-css-svelte'
         ? adapter
-        : name === '@zerodep-css/svelte/bindings'
+        : name === 'zerodep-css-svelte/bindings'
           ? bindings
           : require(name),
     module,
@@ -35,7 +35,7 @@ function component(source, options) {
   );
   return { component: module.exports.default, transformed, warnings };
 }
-const script = `<script>import {Css,css,bx} from '@zerodep-css/svelte'; const s=new Css(); let width=$state(12);</script>`;
+const script = `<script>import {Css,css,bx} from 'zerodep-css-svelte'; const s=new Css(); let width=$state(12);</script>`;
 function inspect(source, options) {
   const result = component(source, options),
     host = adapter.createServerCssHost();
@@ -45,7 +45,7 @@ function inspect(source, options) {
 
 test('Svelte 元素变量兼容已有 style 和 style 指令，多变量、常量及未执行分支', () => {
   const result =
-    inspect(`<script>import {Css,css,bx} from '@zerodep-css/svelte';const s=new Css();let width=$state(20);
+    inspect(`<script>import {Css,css,bx} from 'zerodep-css-svelte';const s=new Css();let width=$state(20);
     function format(n){return n+'px'} function fail(){throw Error('inactive')}</script>
     <div style="color:red" style:height={width+'px'} class={css(s.padding.raw(bx(format(width))+' '+bx('2px')),
       true?s.width.raw(bx(format(width))):s.width.raw(bx(fail())),s._hover(s.opacity.raw(bx(0.5))))}></div>`);
@@ -67,7 +67,7 @@ test('Svelte 关闭内联绑定时保留严格 CSP 传输，空值在元素模�
 });
 
 test('Svelte 的覆写方法和任意选择器不改变变量的原有作用域', () => {
-  const result = inspect(`<script>import {Css,WidthCss,css,bx} from '@zerodep-css/svelte';
+  const result = inspect(`<script>import {Css,WidthCss,css,bx} from 'zerodep-css-svelte';
     class Width extends WidthCss {raw(value){return super.raw(value)}} class App extends Css {width=new Width()}
     const s=new App();let width=$state(20);</script>
     <div class={css(s.width.raw(bx(width+'px')))}></div>
@@ -77,7 +77,7 @@ test('Svelte 的覆写方法和任意选择器不改变变量的原有作用域'
 });
 
 test('Svelte Grid 方法使用元素变量，项目选择器和主题方法保留用户实现', () => {
-  const result = inspect(`<script>import {Css,css,bx} from '@zerodep-css/svelte';
+  const result = inspect(`<script>import {Css,css,bx} from 'zerodep-css-svelte';
     import {ProjectCss} from '../core/examples/project-css.ts';const s=new Css(),project=new ProjectCss();let width=$state(20);</script>
     <div class={css(s.gridTemplateColumns.repeat(2,bx(width+'px'),'1fr'),s.gridAutoRows.minmax(0,bx(width+'px')),s.gridTemplateRows.fitContent(bx('50%')))}></div>
     <div class={css(project._media('(width >= 0px)',s.width.raw(bx(width+'px'))))}></div>
@@ -120,7 +120,7 @@ test('each 中的 const tag 不漏绑定，同名 css 局部声明不被误当�
 
 test('const tag 中直接构建 CSS 或调用样式辅助函数，都拥有模板绑定帧', () => {
   const result =
-    inspect(`<script>import {Css,css,bx} from '@zerodep-css/svelte';const s=new Css();let width=$state(12);
+    inspect(`<script>import {Css,css,bx} from 'zerodep-css-svelte';const s=new Css();let width=$state(12);
 function style(value){return css(s.width.raw(bx(value+'px')));}</script>
 {#if true}{@const first=css(s.height.raw(bx(width+'px')))}{@const second=style(width)}
 <div class={first}></div><div class={second}></div>{/if}`);
@@ -142,8 +142,8 @@ test('await then/catch 变量进入各自作用域，普通值的 then 分支可
 
 test('模块导出的 snippet 保持可导出，不捕获组件实例宿主', () => {
   const result =
-    inspect(`<script module>import {Css,css} from '@zerodep-css/svelte';const s=new Css();export {card};</script>
-<script>import {css as makeCss,bx} from '@zerodep-css/svelte';let width=$state(12);const box=makeCss(s.width.raw(bx(width+'px')));</script>
+    inspect(`<script module>import {Css,css} from 'zerodep-css-svelte';const s=new Css();export {card};</script>
+<script>import {css as makeCss,bx} from 'zerodep-css-svelte';let width=$state(12);const box=makeCss(s.width.raw(bx(width+'px')));</script>
 {#snippet card(value)}<div class={css(s.width.px(value))}></div>{/snippet}
 <div class={box}></div>{@render card(20)}`);
   assert.equal(result.rules.filter((rule) => rule.kind === 'bindings').length, 1);
@@ -151,7 +151,7 @@ test('模块导出的 snippet 保持可导出，不捕获组件实例宿主', ()
 });
 
 test('常量与普通变量 bx 也生成变量，derived.by 工厂隔离各次创建', () => {
-  const result = inspect(`<script>import {Css,css,bx} from '@zerodep-css/svelte'; const s=new Css();
+  const result = inspect(`<script>import {Css,css,bx} from 'zerodep-css-svelte'; const s=new Css();
 const plain='12px';const opacity=bx(0.5);
 function make(value){const name=$derived(css(s.opacity.raw(opacity),s.width.raw(bx(value))));return ()=>name;}
 const a=make(plain),b=make('24px');</script><div class={a()}></div><div class={b()}></div>`);
@@ -164,7 +164,7 @@ const a=make(plain),b=make('24px');</script><div class={a()}></div><div class={b
 
 test('derived.by 引用命名 getter 时仍使用派生实例作用域', () => {
   const result = inspect(
-    `<script>import {Css,css,bx} from '@zerodep-css/svelte';const s=new Css();let width=$state(12);function read(){return css(s.width.raw(bx(width+'px')))} const box=$derived.by(read);</script><div class={box}></div>`,
+    `<script>import {Css,css,bx} from 'zerodep-css-svelte';const s=new Css();let width=$state(12);function read(){return css(s.width.raw(bx(width+'px')))} const box=$derived.by(read);</script><div class={box}></div>`,
   );
   assert.match(result.transformed, /\$derived.by\(__zc.frameCallback/);
   assert.match(result.rules.find((r) => r.kind === 'bindings').body, /:12px;/);
@@ -185,7 +185,7 @@ test('SSR 由服务端入口决定，不受测试环境中 document 全局影响
 
 test('Svelte effect 回调可编译且不会提前在服务端运行', () => {
   const result = inspect(
-    `<script>import {Css,css,bx} from '@zerodep-css/svelte';const s=new Css();let width=$state(12);let box=$state(css(s.height.px(12)));$effect(()=>{const next=width;box=css(s.height.raw(bx(next+'px')))});</script><div class={box}></div>`,
+    `<script>import {Css,css,bx} from 'zerodep-css-svelte';const s=new Css();let width=$state(12);let box=$state(css(s.height.px(12)));$effect(()=>{const next=width;box=css(s.height.raw(bx(next+'px')))});</script><div class={box}></div>`,
   );
   assert.match(result.transformed, /\$effect\(__zc.frameCallback/);
   assert.equal(result.rules.filter((r) => r.kind === 'bindings').length, 0);

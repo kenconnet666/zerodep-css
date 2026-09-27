@@ -6,7 +6,7 @@ import {
   replacePropsId,
   scriptEdits,
   type Edit,
-} from '@zerodep-css/core/compiler';
+} from 'zerodep-css/compiler';
 
 // Svelte 的 ESTree 节点包含偏移，但通用 ESTree 类型未声明这两个字段。
 function located<T>(node: T): T & { start: number; end: number } {
@@ -232,7 +232,7 @@ export default function cssBindings(options: { inlineBindings?: boolean } = {}) 
       if (!model.used) return;
       const idName = `${model.scope}_id`;
       const scriptText = replacePropsId(model.script, idName);
-      const prefix = `import { useBindings as ${model.scope}_use } from '@zerodep-css/svelte/bindings';\nconst ${idName} = $props.id();\nconst ${model.scope} = ${model.scope}_use(${JSON.stringify(model.fileId)}, ${idName}, run => { run(); return $effect.root(() => { $effect(run); }); }${dev ? `, ${JSON.stringify(model.locations)}` : ''});\n`;
+      const prefix = `import { useBindings as ${model.scope}_use } from 'zerodep-css-svelte/bindings';\nconst ${idName} = $props.id();\nconst ${model.scope} = ${model.scope}_use(${JSON.stringify(model.fileId)}, ${idName}, run => { run(); return $effect.root(() => { $effect(run); }); }${dev ? `, ${JSON.stringify(model.locations)}` : ''});\n`;
       edits.push(...scriptEdits(code.slice(script.start, script.end), scriptText, script.start), {
         start: script.start,
         end: script.start,

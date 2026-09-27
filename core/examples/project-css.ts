@@ -1,5 +1,5 @@
-import type { CssInput } from '@zerodep-css/core';
-import { ThemeCss } from '@zerodep-css/core/theme';
+import type { CssInput } from 'zerodep-css';
+import { ThemeCss } from 'zerodep-css/theme';
 
 /** 示例项目自己选择允许覆盖的主题键，不属于框架公共配置。 */
 export interface ProjectTheme {

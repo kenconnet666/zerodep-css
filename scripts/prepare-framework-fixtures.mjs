@@ -9,9 +9,9 @@ for (const [directory, name] of [
   ['test/tools', 'vue'],
   ['test/tools', 'svelte'],
 ]) {
-  const scope = join(root, directory, 'node_modules/@zerodep-css');
+  const scope = join(root, directory, 'node_modules');
   await mkdir(scope, { recursive: true });
-  const link = join(scope, name);
+  const link = join(scope, `zerodep-css-${name}`);
   const target = join(root, name);
   const existing = await lstat(link).catch((error) => {
     if (error.code === 'ENOENT') return null;

@@ -62,7 +62,7 @@ try {
         join(directory, 'main.js'),
         `${framework === 'vue' ? "import {createApp} from 'vue';" : "import {mount} from 'svelte';"}
 import Root from './Root.${ext}';
-import {cssStats} from '@zerodep-css/${framework}';
+import {cssStats} from 'zerodep-css-${framework}';
 import {width} from './${state}';
 window.control={stats:cssStats,bump(){width.value++}};
 ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:document.querySelector('#app')});"}`,
@@ -79,16 +79,16 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
           dedupe: ['vue', 'svelte'],
           alias: [
             {
-              find: new RegExp(`^@zerodep-css/${framework}$`),
+              find: new RegExp(`^zerodep-css-${framework}$`),
               replacement: resolve(root, framework, 'dist/index.js'),
             },
             {
-              find: new RegExp(`^@zerodep-css/${framework}/bindings$`),
+              find: new RegExp(`^zerodep-css-${framework}/bindings$`),
               replacement: resolve(root, framework, 'dist/bindings.js'),
             },
           ],
         },
-        optimizeDeps: { exclude: [`@zerodep-css/${framework}`, '@zerodep-css/core'] },
+        optimizeDeps: { exclude: [`zerodep-css-${framework}`, 'zerodep-css'] },
         server: { host: '127.0.0.1', port: 0, fs: { allow: [root] } },
         logLevel: 'warn',
       });

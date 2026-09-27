@@ -6,7 +6,7 @@ import { createBindingTransform } from '../core/dist/compiler.js';
 
 for (const framework of ['vue', 'svelte']) {
   test(`${framework} 转换后的 TS 保留片段参数和框架回调的上下文类型`, () => {
-    const source = `import {Css,css,bx,globalCss,keyframes} from '@zerodep-css/${framework}';
+    const source = `import {Css,css,bx,globalCss,keyframes} from 'zerodep-css-${framework}';
 const s=new Css(), size=12;
 const frames=keyframes([false,s._selector('to',s.width.raw(bx(size+'px')))]);
 css([false,s.width.raw(bx(size+'px'))],s.animationName.raw(frames));
@@ -25,7 +25,7 @@ watchEffect(onCleanup=>{onCleanup(()=>{});css(s.width.raw(bx(width.value+'px')))
     const model = createBindingTransform(source, 'typed.' + framework, framework);
     const file = resolve(framework, 'compiled-types-probe.ts');
     const code =
-      `import {useBindings} from '@zerodep-css/${framework}/bindings';
+      `import {useBindings} from 'zerodep-css-${framework}/bindings';
 const ${model.scope}=useBindings(${framework === 'vue' ? "'probe'" : "'probe','id',run=>{run();return()=>{}}"});\n` +
       model.script;
     const options = {

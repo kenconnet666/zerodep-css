@@ -26,11 +26,11 @@ export async function bundle(framework, platform, entry, options = {}) {
     ...(browser ? { globalName: 'mupBundle' } : {}),
     platform,
     alias: {
-      [`@zerodep-css/${framework}/bindings`]: resolve(
+      [`zerodep-css-${framework}/bindings`]: resolve(
         directory,
         `../../${framework}/${dist ? 'dist' : 'src'}/${browser ? 'bindings' : 'bindings-server'}.${dist ? 'js' : 'ts'}`,
       ),
-      [framework === 'vue' ? '@zerodep-css/vue' : '@zerodep-css/svelte']: resolve(
+      [framework === 'vue' ? 'zerodep-css-vue' : 'zerodep-css-svelte']: resolve(
         directory,
         `../../${framework}/${dist ? 'dist' : 'src'}/${browser ? 'index' : 'server'}.${dist ? 'js' : 'ts'}`,
       ),

@@ -1,5 +1,5 @@
 import { createApp, nextTick, reactive, toRefs } from 'vue';
-import { Css, css, cssStats } from '@zerodep-css/vue';
+import { Css, css, cssStats } from 'zerodep-css-vue';
 // 仅由探针内存插件提供，不进入正式包。
 // @ts-expect-error 研究脚本生成的虚拟模块
 import { render } from 'vfor-probe:render';

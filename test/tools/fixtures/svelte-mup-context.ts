@@ -1,4 +1,4 @@
-import { Css, WidthCss, createCssContext } from '@zerodep-css/svelte';
+import { Css, WidthCss, createCssContext } from 'zerodep-css-svelte';
 
 class ThemeWidthCss extends WidthCss {
   readonly _md = this.px(48);

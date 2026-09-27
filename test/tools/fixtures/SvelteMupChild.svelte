@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { css } from '@zerodep-css/svelte';
+  import { css } from 'zerodep-css-svelte';
   import { useCss, type AppCss } from './svelte-mup-context.ts';
 
   const props = $props<{

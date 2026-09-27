@@ -32,7 +32,7 @@ test('主题是可选的第二层继承，关键词仍为声明字符串', () =>
 test('系统入口不会引入可选主题变量或调色板', async () => {
   const result = await build({
     stdin: {
-      contents: "import {Css} from '@zerodep-css/core'; console.log(new Css().color.red);",
+      contents: "import {Css} from 'zerodep-css'; console.log(new Css().color.red);",
       resolveDir: resolve('core'),
     },
     bundle: true,

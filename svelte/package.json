@@ -1,7 +1,6 @@
 {
-  "name": "@zerodep-css/svelte",
-  "version": "0.0.0",
-  "private": true,
+  "name": "zerodep-css-svelte",
+  "version": "0.1.0",
   "type": "module",
   "exports": {
     "./vite": {
@@ -34,7 +33,9 @@
     "check": "svelte-check --tsconfig tsconfig.json"
   },
   "dependencies": {
-    "@zerodep-css/core": "workspace:*"
+    "zerodep-css": "workspace:*",
+    "typescript": "catalog:",
+    "magic-string": "catalog:"
   },
   "peerDependencies": {
     "svelte": "^5.20.0"
@@ -43,5 +44,30 @@
     "@types/node": "catalog:",
     "svelte": "catalog:",
     "svelte-check": "catalog:"
-  }
+  },
+  "description": "Runtime CSS and explicit CSS variable bindings for Svelte 5.",
+  "author": "kenconnet666",
+  "engines": {
+    "node": ">=24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
+    "directory": "svelte"
+  },
+  "homepage": "https://github.com/kenconnet666/zerodep-css#readme",
+  "bugs": {
+    "url": "https://github.com/kenconnet666/zerodep-css/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT"
 }

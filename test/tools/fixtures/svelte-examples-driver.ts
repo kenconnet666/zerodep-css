@@ -1,5 +1,5 @@
 import { hydrate, mount, tick, unmount } from 'svelte';
-import { hydrateCss } from '@zerodep-css/svelte';
+import { hydrateCss } from 'zerodep-css-svelte';
 import App from '../../../svelte/examples/App.svelte';
 import type { ExampleProps } from '../../../core/examples/theme.js';
 

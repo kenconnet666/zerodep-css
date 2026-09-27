@@ -9,9 +9,9 @@ export function concatVariant(variant) {
   return {
     name: `concat-${variant}`,
     setup(bundler) {
-      bundler.onResolve({ filter: /^@zerodep-css\/core(?:\/(browser|server))?$/ }, ({ path }) => ({
+      bundler.onResolve({ filter: /^zerodep-css(?:\/(browser|server))?$/ }, ({ path }) => ({
         path: fileURLToPath(
-          new URL(`../../core/src/${path.split('/')[2] ?? 'index'}.ts`, import.meta.url),
+          new URL(`../../core/src/${path.split('/')[1] ?? 'index'}.ts`, import.meta.url),
         ),
       }));
       bundler.onLoad({ filter: /[\\/]core[\\/]src[\\/]registry\.ts$/ }, async ({ path }) => {

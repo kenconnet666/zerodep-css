@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Css, css } from '@zerodep-css/svelte';
+  import { Css, css } from 'zerodep-css-svelte';
   let { index, expose } = $props<{
     index: number;
     expose: (step: () => void, noise: () => void) => void;

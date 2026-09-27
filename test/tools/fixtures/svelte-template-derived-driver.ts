@@ -1,5 +1,5 @@
 import { mount, unmount, tick } from 'svelte';
-import { cssStats } from '@zerodep-css/svelte';
+import { cssStats } from 'zerodep-css-svelte';
 import Component from './SvelteTemplateDerived.svelte';
 
 export async function start(target: HTMLElement, count: number) {

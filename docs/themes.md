@@ -1,10 +1,10 @@
 # 可选亮暗主题
 
-纯系统 `Css` 不携带主题。需要预设时从 `@zerodep-css/core/theme` 导入 `ThemeCss`、对应的 `ThemeColorCss` 等属性类和 `themes`。此入口独立于 core 主入口，不新增包。
+纯系统 `Css` 不携带主题。需要预设时从 `zerodep-css/theme` 导入 `ThemeCss`、对应的 `ThemeColorCss` 等属性类和 `themes`。此入口独立于 core 主入口，不新增包。
 
 ```ts
-import { ThemeCss, ThemeColorCss, themes } from '@zerodep-css/core/theme';
-import { css, createCssContext } from '@zerodep-css/vue'; // Svelte 使用对应适配包
+import { ThemeCss, ThemeColorCss, themes } from 'zerodep-css/theme';
+import { css, createCssContext } from 'zerodep-css-vue'; // Svelte 使用对应适配包
 
 class ProjectColor extends ThemeColorCss {
   readonly _brand = this.raw('#c026d3');

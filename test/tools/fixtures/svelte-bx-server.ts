@@ -1,5 +1,5 @@
 import { render } from 'svelte/server';
-import { createServerCssHost, withCssHost, serializeCssRules } from '@zerodep-css/svelte';
+import { createServerCssHost, withCssHost, serializeCssRules } from 'zerodep-css-svelte';
 import Root from './SvelteBxRoot.svelte';
 export async function renderPage() {
   const host = createServerCssHost();

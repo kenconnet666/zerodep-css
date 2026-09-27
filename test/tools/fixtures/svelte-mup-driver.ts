@@ -1,5 +1,5 @@
 import { hydrate, mount, tick, unmount } from 'svelte';
-import { hydrateCss, type CssRule } from '@zerodep-css/svelte';
+import { hydrateCss, type CssRule } from 'zerodep-css-svelte';
 import Component from './SvelteMup.svelte';
 import type { AppCss } from './svelte-mup-context.ts';
 

@@ -1,5 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
-import { createServerCssHost, serializeCssRules, withCssHost } from '@zerodep-css/svelte/server';
+import { createServerCssHost, serializeCssRules, withCssHost } from 'zerodep-css-svelte/server';
 
 /** 首版缓冲 HTML 到渲染结束，确保首屏包含所有同步 SSR 规则。 */
 export const handle: Handle = ({ event, resolve }) => {

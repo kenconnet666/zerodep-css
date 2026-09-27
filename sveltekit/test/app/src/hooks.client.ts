@@ -1,1 +1,1 @@
-export { init } from '@zerodep-css/sveltekit';
+export { init } from 'zerodep-css-sveltekit';

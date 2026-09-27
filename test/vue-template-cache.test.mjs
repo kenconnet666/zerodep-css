@@ -16,7 +16,7 @@ function compile(template, extra = '', options = {}) {
   const instance = plugin(options);
   const source = `<script setup lang="ts">
 import {reactive} from 'vue';
-import {Css,css as makeCss,WidthCss,bx} from '@zerodep-css/vue';
+import {Css,css as makeCss,WidthCss,bx} from 'zerodep-css-vue';
 const state = reactive({noise:0,width:20,compact:false,show:true,items:[{id:'a',compact:false,width:10,label:'A'},{id:'b',compact:true,width:30,label:'B'}]});
 const s = new Css();
 ${extra}
@@ -40,9 +40,9 @@ defineExpose({state});
       (name) =>
         name === 'vue'
           ? Vue
-          : name === '@zerodep-css/vue'
+          : name === 'zerodep-css-vue'
             ? adapter
-            : name === '@zerodep-css/vue/bindings'
+            : name === 'zerodep-css-vue/bindings'
               ? bindings
               : require(name),
       module,

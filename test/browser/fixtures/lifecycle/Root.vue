@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Css, css } from '@zerodep-css/vue';
+import { Css, css } from 'zerodep-css-vue';
 import Child from './Child.vue';
 const visible = ref(true);
 const s = new Css();

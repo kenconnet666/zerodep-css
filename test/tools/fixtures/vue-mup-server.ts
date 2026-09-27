@@ -7,7 +7,7 @@ import {
   createServerCssHost,
   css,
   withCssHost,
-} from '@zerodep-css/vue';
+} from 'zerodep-css-vue';
 
 class ThemeWidthCss extends WidthCss {
   readonly _md = this.px(48);

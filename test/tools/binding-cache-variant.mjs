@@ -8,14 +8,11 @@ export function bindingCacheVariant(enabled) {
   return {
     name: `binding-cache-${enabled}`,
     setup(build) {
-      build.onResolve(
-        { filter: /^@zerodep-css\/core(?:\/(browser|bindings|server))?$/ },
-        ({ path }) => ({
-          path: fileURLToPath(
-            new URL(`../../core/src/${path.split('/')[2] ?? 'index'}.ts`, import.meta.url),
-          ),
-        }),
-      );
+      build.onResolve({ filter: /^zerodep-css(?:\/(browser|bindings|server))?$/ }, ({ path }) => ({
+        path: fileURLToPath(
+          new URL(`../../core/src/${path.split('/')[1] ?? 'index'}.ts`, import.meta.url),
+        ),
+      }));
       build.onLoad({ filter: /[\\/]core[\\/]src[\\/]bindings\.ts$/ }, async ({ path }) => {
         let contents = (await readFile(path, 'utf8')).replace(/\r\n/g, '\n');
         loaded++;

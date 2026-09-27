@@ -44,9 +44,9 @@ test('直接属性链独立可用，系统字段只在首次构造 Css 时注册
 
 test('消费端只导入少数能力时移除完整作者模型', async () => {
   const sources = {
-    marker: "import { className } from '@zerodep-css/core'; console.log(className('Card.title'))",
-    color: "import { ColorCss } from '@zerodep-css/core'; console.log(new ColorCss().red)",
-    full: "import { Css } from '@zerodep-css/core'; console.log(new Css().color.red)",
+    marker: "import { className } from 'zerodep-css'; console.log(className('Card.title'))",
+    color: "import { ColorCss } from 'zerodep-css'; console.log(new ColorCss().red)",
+    full: "import { Css } from 'zerodep-css'; console.log(new Css().color.red)",
   };
   const bytes = {};
   for (const [name, contents] of Object.entries(sources)) {

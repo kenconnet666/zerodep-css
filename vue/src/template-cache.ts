@@ -1,5 +1,5 @@
 import { computed, isReactive, isRef, normalizeClass, type ComputedRef, type VNode } from 'vue';
-import { authorInputs } from '@zerodep-css/core/bindings';
+import { authorInputs } from 'zerodep-css/bindings';
 
 type Guard =
   | readonly [value: unknown]

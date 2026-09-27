@@ -1,7 +1,6 @@
 {
-  "name": "@zerodep-css/core",
-  "version": "0.0.0",
-  "private": true,
+  "name": "zerodep-css",
+  "version": "0.1.0",
   "type": "module",
   "exports": {
     "./theme": {
@@ -53,5 +52,30 @@
     "magic-string": {
       "optional": true
     }
-  }
+  },
+  "description": "Typed CSS declaration strings and framework-independent runtime CSS.",
+  "author": "kenconnet666",
+  "engines": {
+    "node": ">=24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
+    "directory": "core"
+  },
+  "homepage": "https://github.com/kenconnet666/zerodep-css#readme",
+  "bugs": {
+    "url": "https://github.com/kenconnet666/zerodep-css/issues"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT"
 }

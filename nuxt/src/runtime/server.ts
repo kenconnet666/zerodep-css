@@ -1,5 +1,5 @@
 import { defineNuxtPlugin } from 'nuxt/app';
-import { createServerCssHost, provideCssHost, serializeCssRules } from '@zerodep-css/vue/server';
+import { createServerCssHost, provideCssHost, serializeCssRules } from 'zerodep-css-vue/server';
 
 export default defineNuxtPlugin({
   name: 'zerodep-css:host',

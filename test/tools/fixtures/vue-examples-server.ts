@@ -1,6 +1,6 @@
 import { createSSRApp } from 'vue';
 import { renderToString } from 'vue/server-renderer';
-import { createServerCssHost, withCssHost } from '@zerodep-css/vue';
+import { createServerCssHost, withCssHost } from 'zerodep-css-vue';
 import App from '../../../vue/examples/App.vue';
 import type { ExampleProps } from '../../../core/examples/theme.js';
 

@@ -1,5 +1,5 @@
 import { hasInjectionContext, inject, type App, type InjectionKey } from 'vue';
-import { requireHost, type ServerCssHost } from '@zerodep-css/core/server';
+import { requireHost, type ServerCssHost } from 'zerodep-css/server';
 
 const hostKey: InjectionKey<ServerCssHost> = Symbol('zerodep-css-host');
 /** 应用级宿主与绑定运行时共享同一 Symbol，不修改全局异步上下文。 */

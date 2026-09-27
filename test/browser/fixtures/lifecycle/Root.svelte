@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Css, css } from '@zerodep-css/svelte';
+  import { Css, css } from 'zerodep-css-svelte';
   import Child from './Child.svelte';
   const s = new Css();
   let visible = $state(true);

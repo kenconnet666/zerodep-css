@@ -16,7 +16,7 @@ import {
   type CompilerOptions,
   type ExpressionNode,
 } from '@vue/compiler-dom';
-import { bindingNames } from '@zerodep-css/core/compiler';
+import { bindingNames } from 'zerodep-css/compiler';
 
 type Node = RootNode | ElementNode | ForNode | IfNode | IfBranchNode;
 function container(value: unknown): value is Node {

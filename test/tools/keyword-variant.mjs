@@ -96,14 +96,11 @@ export function keywordVariant(variant) {
   return {
     name: `keywords-${variant}`,
     setup(build) {
-      build.onResolve(
-        { filter: /^@zerodep-css\/core(?:\/(browser|bindings|server))?$/ },
-        ({ path }) => ({
-          path: fileURLToPath(
-            new URL(`../../core/src/${path.split('/')[2] ?? 'index'}.ts`, import.meta.url),
-          ),
-        }),
-      );
+      build.onResolve({ filter: /^zerodep-css(?:\/(browser|bindings|server))?$/ }, ({ path }) => ({
+        path: fileURLToPath(
+          new URL(`../../core/src/${path.split('/')[1] ?? 'index'}.ts`, import.meta.url),
+        ),
+      }));
       build.onLoad(
         { filter: /[\\/]core[\\/]src[\\/]generated[\\/][^\\/]+\.ts$/ },
         async ({ path }) => {

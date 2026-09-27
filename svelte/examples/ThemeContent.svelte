@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { css } from '@zerodep-css/svelte';
+  import { css } from 'zerodep-css-svelte';
   import { useCss } from './preset-context.js';
   let { label }: { label: string } = $props();
   const s = useCss();

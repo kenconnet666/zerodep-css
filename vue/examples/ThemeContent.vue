@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { css } from '@zerodep-css/vue';
+import { css } from 'zerodep-css-vue';
 import { useCss } from './preset-context.js';
 defineProps<{ label: string }>();
 const s = useCss();

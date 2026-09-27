@@ -1,4 +1,4 @@
-import { ThemeCss, ThemeColorCss } from '@zerodep-css/core/theme';
+import { ThemeCss, ThemeColorCss } from 'zerodep-css/theme';
 
 class ProjectColor extends ThemeColorCss {
   readonly _brand = this.raw('#c026d3');

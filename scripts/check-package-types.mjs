@@ -10,19 +10,19 @@ const fixture = await mkdtemp(join(results, 'package-types-'));
 
 function sourceFor(name, server) {
   const imports = server
-    ? `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, createServerCssHost, withCssHost } from '@zerodep-css/${name}';`
-    : `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, hydrateCss, configureCss } from '@zerodep-css/${name}';`;
+    ? `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, createServerCssHost, withCssHost } from 'zerodep-css-${name}';`
+    : `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, hydrateCss, configureCss } from 'zerodep-css-${name}';`;
   return `${imports}
-import type { CssRule } from '@zerodep-css/core';
-import type { CssInput } from '@zerodep-css/core';
-import type { CssString } from '@zerodep-css/core';
-import type { CssSelector } from '@zerodep-css/core';
+import type { CssRule } from 'zerodep-css';
+import type { CssInput } from 'zerodep-css';
+import type { CssString } from 'zerodep-css';
+import type { CssSelector } from 'zerodep-css';
 // @ts-expect-error 独立 ic 已移除，选择器入口在作者对象
-import { ic } from '@zerodep-css/${name}';
+import { ic } from 'zerodep-css-${name}';
 // @ts-expect-error cx 已移除，组合统一使用 css
-import { cx } from '@zerodep-css/${name}';
+import { cx } from 'zerodep-css-${name}';
 // @ts-expect-error 规则注册器不是公开作者 API
-import { createCss } from '@zerodep-css/core';
+import { createCss } from 'zerodep-css';
 class ThemeWidth extends WidthCss { readonly _md = this.raw('48rem'); }
 class ThemeCss extends Css { override readonly width = new ThemeWidth(); }
 class AppCss extends ThemeCss { readonly brand = 'brand'; }
@@ -159,10 +159,14 @@ function check(file, node) {
 }
 
 try {
-  const modules = join(fixture, 'node_modules', '@zerodep-css');
+  const modules = join(fixture, 'node_modules');
   await mkdir(modules, { recursive: true });
   for (const name of ['core', 'vue', 'svelte'])
-    await symlink(join(root, name), join(modules, name), 'junction');
+    await symlink(
+      join(root, name),
+      join(modules, name === 'core' ? 'zerodep-css' : `zerodep-css-${name}`),
+      'junction',
+    );
   await writeFile(join(fixture, 'package.json'), '{"type":"module"}\n');
 
   for (const name of ['vue', 'svelte']) {

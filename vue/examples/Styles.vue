@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { css } from '@zerodep-css/vue';
+import { css } from 'zerodep-css-vue';
 import { useCss } from './context.js';
 
 const s = useCss();

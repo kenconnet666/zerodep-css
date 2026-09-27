@@ -1,12 +1,12 @@
-export * from '@zerodep-css/core';
+export * from 'zerodep-css';
 import { resolveCssHost } from './server-host.js';
-import type { CssInput } from '@zerodep-css/core';
+import type { CssInput } from 'zerodep-css';
 export {
   createServerCssHost,
   withCssHost,
   serializeCssRules,
   type ServerCssHost,
-} from '@zerodep-css/core/server';
+} from 'zerodep-css/server';
 export { createCssContext } from './context.js';
 export { provideCssHost } from './server-host.js';
 export const css = (...parts: CssInput[]): string => resolveCssHost().css(...parts);

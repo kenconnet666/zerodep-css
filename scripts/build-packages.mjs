@@ -27,19 +27,19 @@ for (const [name, entries, external] of [
   [
     'vue',
     ['index', 'server', 'bindings', 'bindings-server', 'vite'],
-    ['node:*', '@zerodep-css/core', '@zerodep-css/core/*', 'vue', '@vue/compiler-dom'],
+    ['node:*', 'zerodep-css', 'zerodep-css/*', 'vue', '@vue/compiler-dom'],
   ],
   [
     'svelte',
     ['index', 'server', 'bindings', 'bindings-server', 'vite'],
-    ['node:*', '@zerodep-css/core', '@zerodep-css/core/*', 'svelte'],
+    ['node:*', 'zerodep-css', 'zerodep-css/*', 'svelte'],
   ],
   [
     'nuxt',
     ['index', 'runtime/server', 'runtime/client'],
-    ['@zerodep-css/vue', '@zerodep-css/vue/*', '@nuxt/kit', 'nuxt/app'],
+    ['zerodep-css-vue', 'zerodep-css-vue/*', '@nuxt/kit', 'nuxt/app'],
   ],
-  ['sveltekit', ['index', 'server'], ['@zerodep-css/svelte', '@zerodep-css/svelte/*']],
+  ['sveltekit', ['index', 'server'], ['zerodep-css-svelte', 'zerodep-css-svelte/*']],
 ]) {
   if (['core', 'vue', 'svelte'].includes(name)) {
     // 多入口共用作者原型与宿主状态，避免 bindings 入口复制另一份类定义。

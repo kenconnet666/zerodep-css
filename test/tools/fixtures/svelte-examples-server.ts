@@ -1,5 +1,5 @@
 import { render } from 'svelte/server';
-import { createServerCssHost, withCssHost } from '@zerodep-css/svelte';
+import { createServerCssHost, withCssHost } from 'zerodep-css-svelte';
 import App from '../../../svelte/examples/App.svelte';
 import type { ExampleProps } from '../../../core/examples/theme.js';
 

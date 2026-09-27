@@ -6,7 +6,7 @@ import { Css, WidthCss, bx } from '../../dist/index.js';
 import { createServerCssHost } from '../../dist/server.js';
 const transform = (text) =>
   createBindingTransform(
-    "import { css, bx, globalCss, keyframes } from '@zerodep-css/vue'; import { computed } from 'vue'; " +
+    "import { css, bx, globalCss, keyframes } from 'zerodep-css-vue'; import { computed } from 'vue'; " +
       text,
     'test.vue',
     'vue',
@@ -42,7 +42,7 @@ test('bx 显式绑定常量、普通值与响应式表达式；未标记调用�
 
 test('别名、命名空间及多变量字符串被转换，局部同名 bx 不转换', () => {
   const result = createBindingTransform(
-    "import {bx as bind} from '@zerodep-css/vue'; import * as z from '@zerodep-css/core'; const a=bind(12); const b=z.bx('red');",
+    "import {bx as bind} from 'zerodep-css-vue'; import * as z from 'zerodep-css'; const a=bind(12); const b=z.bx('red');",
     'a.vue',
     'vue',
   );
@@ -56,8 +56,7 @@ test('别名、命名空间及多变量字符串被转换，局部同名 bx 不�
   ])
     assert.equal(transform(text).used, false, text);
   assert.equal(
-    createBindingTransform("import type {bx} from '@zerodep-css/core'; bx(12)", 'a.vue', 'vue')
-      .used,
+    createBindingTransform("import type {bx} from 'zerodep-css'; bx(12)", 'a.vue', 'vue').used,
     false,
   );
   assert.equal(
@@ -165,7 +164,7 @@ test('手写 computed 与 Svelte derived 复用绑定帧', () => {
   assert.match(vue.script, /computed\(__zc.frameCallback/);
   assert.match(vue.script, /\.capture\(/);
   const svelte = createBindingTransform(
-    "import {css,bx} from '@zerodep-css/svelte'; const box=$derived(css(s.width.raw(bx(width+'px'))));",
+    "import {css,bx} from 'zerodep-css-svelte'; const box=$derived(css(s.width.raw(bx(width+'px'))));",
     'a.svelte',
     'svelte',
   );

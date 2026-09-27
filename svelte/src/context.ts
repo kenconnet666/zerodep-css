@@ -1,4 +1,4 @@
-import type { Css } from '@zerodep-css/core';
+import type { Css } from 'zerodep-css';
 import { getContext, setContext } from 'svelte';
 const bindingOwner = Symbol('zerodep-css-binding-owner');
 export function getBindingOwner(): object {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { css } from '@zerodep-css/svelte';
+  import { css } from 'zerodep-css-svelte';
   import { useCss } from './context.js';
 
   const s = useCss();

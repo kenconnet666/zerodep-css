@@ -1,4 +1,4 @@
-export * from '@zerodep-css/core';
+export * from 'zerodep-css';
 export {
   css,
   keyframes,
@@ -7,5 +7,5 @@ export {
   withCssHost,
   serializeCssRules,
   type ServerCssHost,
-} from '@zerodep-css/core/server';
+} from 'zerodep-css/server';
 export { createCssContext } from './context.js';

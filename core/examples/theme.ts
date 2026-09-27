@@ -1,4 +1,4 @@
-import { ColorCss, Css, WidthCss } from '@zerodep-css/core';
+import { ColorCss, Css, WidthCss } from 'zerodep-css';
 
 export type ThemeName = 'light' | 'dark';
 export interface ExampleProps {

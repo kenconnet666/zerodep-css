@@ -1,7 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
-  import { css } from '@zerodep-css/svelte';
-  import { themes } from '@zerodep-css/core/theme';
+  import { css } from 'zerodep-css-svelte';
+  import { themes } from 'zerodep-css/theme';
   import { ProjectCss } from '../../core/examples/preset-theme.js';
   import { provideCss } from './preset-context.js';
   import Content from './ThemeContent.svelte';

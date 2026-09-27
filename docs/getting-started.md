@@ -1,13 +1,13 @@
 # Vue 与 Svelte 开始使用
 
-五个包仍是工作区 private 包。先运行 `pnpm install --frozen-lockfile` 与 `pnpm build`；浏览器构建使用主入口的默认 DOM 实现，Node SSR 按 `node` 条件使用请求宿主。Nuxt/SvelteKit 已有[专用接入](metaframeworks.md)，[bx 绑定](bindings.md)、[全局规则与动画](author-api.md)、CSP/nonce 均已提供，支持边界见对应文档。
+Vue 项目安装 `zerodep-css-vue`，Svelte 项目安装 `zerodep-css-svelte`；Node 构建/SSR 要求 24+，产物为 ESM。浏览器构建使用主入口的默认 DOM 实现，Node SSR 按 `node` 条件使用请求宿主。Nuxt/SvelteKit 已有[专用接入](metaframeworks.md)，[bx 绑定](bindings.md)、[全局规则与动画](author-api.md)、CSP/nonce 均已提供，支持边界见对应文档。
 
 ## 作者类型与组件
 
-Vue 项目从 `@zerodep-css/vue`、Svelte 项目从 `@zerodep-css/svelte` 导入相同名字的 `Css`、`WidthCss`、`createCssContext` 和 `css`。选择器直接使用 `s._hover` / `s._selector`。项目模块只创建类型化上下文，实际作者实例由根组件提供：
+Vue 项目从 `zerodep-css-vue`、Svelte 项目从 `zerodep-css-svelte` 导入相同名字的 `Css`、`WidthCss`、`createCssContext` 和 `css`。选择器直接使用 `s._hover` / `s._selector`。项目模块只创建类型化上下文，实际作者实例由根组件提供：
 
 ```ts
-import { Css, WidthCss, createCssContext } from '@zerodep-css/vue';
+import { Css, WidthCss, createCssContext } from 'zerodep-css-vue';
 
 class ThemeWidthCss extends WidthCss {
   readonly _md = this.raw('48rem');
@@ -29,13 +29,13 @@ const className = css(s.display.flex, s.width._md, s._hover(s.color.red));
 
 ## 包入口与示例
 
-| 入口                                       | 用途                                                              |
-| ------------------------------------------ | ----------------------------------------------------------------- |
-| `@zerodep-css/vue` / `@zerodep-css/svelte` | 组件统一入口，按 Node 条件选择服务器实现，其余构建使用 DOM 实现   |
-| 对应适配包的 `/server`                     | 手工 Node SSR；暴露请求宿主、序列化等服务器能力                   |
-| 对应适配包的 `/vite`                       | bx 与模板优化的构建插件                                           |
-| `@zerodep-css/core`                        | 框架无关的作者类与类型；适配器从 `/browser` 或 `/server` 选择宿主 |
-| `@zerodep-css/core/theme`                  | 可选 ThemeCss、主题属性类与 themes.light/dark                     |
+| 入口                                     | 用途                                                              |
+| ---------------------------------------- | ----------------------------------------------------------------- |
+| `zerodep-css-vue` / `zerodep-css-svelte` | 组件统一入口，按 Node 条件选择服务器实现，其余构建使用 DOM 实现   |
+| 对应适配包的 `/server`                   | 手工 Node SSR；暴露请求宿主、序列化等服务器能力                   |
+| 对应适配包的 `/vite`                     | bx 与模板优化的构建插件                                           |
+| `zerodep-css`                            | 框架无关的作者类与类型；适配器从 `/browser` 或 `/server` 选择宿主 |
+| `zerodep-css/theme`                      | 可选 ThemeCss、主题属性类与 themes.light/dark                     |
 
 `core/compiler` 和适配包的 `/bindings` 是编译器内部协议，业务组件不直接调用。运行时不引入 TypeScript 编译器。Nuxt/Kit 包只提供元框架接入，不重复导出作者 API；配置见[元框架文档](metaframeworks.md)。
 
@@ -53,7 +53,7 @@ const className = css(s.display.flex, s.width._md, s._hover(s.color.red));
 
 ```ts
 import { renderToString } from 'vue/server-renderer';
-import { createServerCssHost, withCssHost } from '@zerodep-css/vue/server';
+import { createServerCssHost, withCssHost } from 'zerodep-css-vue/server';
 
 const host = createServerCssHost();
 const html = await withCssHost(host, () => renderToString(app));
@@ -65,7 +65,7 @@ Svelte 的相同步骤使用 `render` 并取得 `body`：
 
 ```ts
 import { render } from 'svelte/server';
-import { createServerCssHost, withCssHost } from '@zerodep-css/svelte/server';
+import { createServerCssHost, withCssHost } from 'zerodep-css-svelte/server';
 
 const host = createServerCssHost();
 const body = withCssHost(host, () => render(Root).body);

@@ -2,7 +2,7 @@
 
 ## 工作区与接续
 
-主线为 `codex/runtime-css-research`，远程为 `kenconnet666/zerodep-css`。五包保持 private；尚未公开发布。运行时 CSS 是基础能力，bx 与模板缓存是优化，不要求把全部样式静态提取。
+主线为 `main`，远程为 `kenconnet666/zerodep-css`。五个 npm 包统一版本、采用 MIT；根工作区仍为 private。运行时 CSS 是基础能力，bx 与模板缓存是优化，不要求把全部样式静态提取。
 
 使用 Node 24、pnpm 10.34.5，依赖由 catalog 和锁文件固定。新机器执行：
 
@@ -66,3 +66,11 @@ protected `declaration` 是动态方法的公共格式化点；关键字字段�
 分阶段中文提交并逐次推送。本地运行本次改动相关测试；类型入口/基础配置变更运行 `pnpm check`。完整浏览器、真实 HMR、元框架和性能交 CI。推送后不等待或轮询，下一次提交前检查上次结果。未取得当前提交的完整结果，不称为完整验收通过。
 
 最近证据见[性能与验收记录](performance.md)。旧方案和阶段讨论从 Git 历史查询；`test/tools/results` 保留历史原始样本，不作为当前性能结论。
+
+## npm 发布
+
+五包名称为 zerodep-css、zerodep-css-vue、zerodep-css-svelte、zerodep-css-nuxt、zerodep-css-sveltekit。发布顺序先 core、再两个框架适配器、最后两个元框架包。包间 workspace/catalog 协议由 pnpm pack 转换，不能直接把源码 package.json 交给 npm publish。
+
+在已提交并推送的 main 上运行 `pnpm build` 和 `pnpm release:pack`，再运行 `pnpm release:publish`。产物和 SHA-512 清单位于被忽略的 test-results/release；发布脚本只接受当前提交的产物，并核对 registry 摘要后才继续下一个包。中途失败保留产物，可用同一清单重试，不覆盖已发布版本。
+
+令牌只使用 NPM_TOKEN。Windows 用户变量尚未进入当前终端时，发布脚本会读取当前用户变量；临时 npmrc 只含环境变量占位符并在结束时清理。不将令牌写入仓库或复制到命令行参数。源码分支的完整测试和 `release:check` 的 tarball 消费检查都由 CI 执行，本地发布阶段不重复运行完整测试。

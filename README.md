@@ -1,6 +1,13 @@
 # zerodep-css：运行时 CSS
 
-普通类字段和方法返回声明字符串，`css(...parts)` 组合并缓存样式类；`bx(value)` 可通过框架插件绑定 CSS 变量。保留运行时 CSS 和原生 if/switch，不要求静态提取全部样式。系统包含 502 条属性链和 12,586 个关键字，Vue/Svelte 负责响应式与生命周期，Nuxt/SvelteKit 提供 Node SSR 和预渲染接入。**五包仍为 private，尚未公开发布；流式 SSR、边缘部署尚未验收。**
+普通类字段和方法返回声明字符串，`css(...parts)` 组合并缓存样式类；`bx(value)` 可通过框架插件绑定 CSS 变量。保留运行时 CSS 和原生 if/switch，不要求静态提取全部样式。系统包含 502 条属性链和 12,586 个关键字，Vue/Svelte 负责响应式与生命周期，Nuxt/SvelteKit 提供 Node SSR 和预渲染接入。采用 MIT 许可；流式 SSR、边缘部署尚未验收。
+
+```sh
+pnpm add zerodep-css-vue     # Vue 项目
+pnpm add zerodep-css-svelte  # Svelte 项目
+```
+
+底层包为 `zerodep-css`；元框架集成使用 `zerodep-css-nuxt` 或 `zerodep-css-sveltekit`。构建与 Node SSR 要求 Node 24+，包产物为 ESM。
 
 | 子项目      | 职责                 |
 | ----------- | -------------------- |

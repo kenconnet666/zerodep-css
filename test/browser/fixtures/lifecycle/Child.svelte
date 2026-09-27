@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { bx, Css, css } from '@zerodep-css/svelte';
+  import { bx, Css, css } from 'zerodep-css-svelte';
   import { width } from './state.svelte.js';
   const s = new Css();
   let generation = 0;

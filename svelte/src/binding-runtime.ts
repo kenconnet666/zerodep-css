@@ -1,5 +1,5 @@
 import { onDestroy } from 'svelte';
-import { createBindings } from '@zerodep-css/core/bindings';
+import { createBindings } from 'zerodep-css/bindings';
 import { getBindingOwner } from './context.js';
 
 export function createSvelteBindings(

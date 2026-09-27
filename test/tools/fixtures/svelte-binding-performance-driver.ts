@@ -1,5 +1,5 @@
 import { mount, unmount, tick } from 'svelte';
-import { cssStats } from '@zerodep-css/svelte';
+import { cssStats } from 'zerodep-css-svelte';
 import createEmotion from '@emotion/css/create-instance';
 import Component from './SvelteBindingPerformance.svelte';
 export async function start(target: HTMLElement, mode: string, count: number) {

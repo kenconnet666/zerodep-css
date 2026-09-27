@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Css, css } from '@zerodep-css/svelte';
+  import { Css, css } from 'zerodep-css-svelte';
   let { mode, count, emit, expose } = $props<{
     mode: string;
     count: number;

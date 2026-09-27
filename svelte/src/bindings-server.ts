@@ -1,4 +1,4 @@
-import { requireHost } from '@zerodep-css/core/server';
+import { requireHost } from 'zerodep-css/server';
 import { createSvelteBindings } from './binding-runtime.js';
 export const useBindings = (
   file: string,

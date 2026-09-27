@@ -1,7 +1,7 @@
 # zerodep-css 研究工作区
 
 - 当前已有五包配置、502 属性生成器、作者 API、Vue/Svelte bx 绑定插件和 Nuxt 4 / SvelteKit 2 的 Node SSR / 预渲染接入。转换范围见 `docs/bindings.md`；流式 SSR、边缘部署未验收，不要把研究探针当作正式 API。
-- `core` 保持框架无关；`vue`、`svelte`、`nuxt`、`sveltekit` 各自负责适配。五包保持 private，包间使用 `workspace:*`。
+- `core` 保持框架无关；其 npm 名为 `zerodep-css`，四个适配包依次为 `zerodep-css-vue`、`zerodep-css-svelte`、`zerodep-css-nuxt`、`zerodep-css-sveltekit`。根工作区保持 private，五包按 MIT 公开发布；本地包间使用 `workspace:*`，打包时转换为明确版本。
 - 选择器统一使用作者对象的 `_hover` / `_selector` 等下划线方法；独立 `ic`、`cx` 已移除。`keyframes` 仍是宿主登记函数。快捷方法元数据在 `core/src/selector-shortcuts.ts`，由生成器和绑定编译器共用。
 - 作者类型优先直观可读：属性基类不传泛型，各属性类明确声明 `raw` 等方法参数，静态关键字保留普通 readonly 字段。不为体积或极限性能引入复杂映射类型、声明合并或 Proxy 作者模型。
 - 条件规则快捷方法和主题局部覆盖由用户在项目类中定义，系统提供 `_selector`、声明字符串和继承能力；不内置 `_media` 或 `themes.override`。属性值方法只补充适用的原生 CSS 函数，不另建值对象 DSL；不引入调试命名或标签模板调用。
@@ -13,6 +13,7 @@
 - 旧实现只作为本地 Git 历史和 `zerodep-css-归档` 中的参考。保持归档目录只读，不把旧 API、测试或性能结论当作新分支功能。
 - 分阶段用中文提交，每次提交后推送远程。本地只做改动相关的焦点测试，完整的跨平台、浏览器、SSR 和类型验收由远程 CI 执行；未取得 CI 结果前不要宣称远程验收通过。
 - 推送后不等待或轮询 CI，继续下一阶段；下一次提交前检查上次运行并修复失败。最终交付必须区分本地验证与远程验收状态。
+- 发布从 main 执行；令牌只读取 NPM_TOKEN 环境变量，不写入仓库或日志。发布前打包核对产物，完整消费端测试交 CI；不要为发布重复在本地运行完整测试。
 - 性能测量、长期挂卸 / 列表压力、真实 HMR 与元框架等耗时场景交给 CI；本地仅保留相关类型检查、小范围单元测试和必要复现。
 
 ## 核心工程要求

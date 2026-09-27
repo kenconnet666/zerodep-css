@@ -1,4 +1,4 @@
-import { Css, createCssContext, css as registeredCss } from '@zerodep-css/svelte';
+import { Css, createCssContext, css as registeredCss } from 'zerodep-css-svelte';
 
 export { Css };
 export const { provideCss, useCss } = createCssContext<Css>();
