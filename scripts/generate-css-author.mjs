@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import prettier from 'prettier';
 import ts from 'typescript';
-import { units, extraUnits, unitMethod, valueMethods } from './css-author-methods.mjs';
+import { units, extraUnits, unitMethod, valueMethods, gridMethods } from './css-author-methods.mjs';
 import { selectorShortcuts } from '../core/src/selector-shortcuts.ts';
 import { themePalette, themeVariable } from '../core/src/theme-palette.ts';
 
@@ -191,7 +191,9 @@ for (const name of names) {
     Boolean(type.flags & ts.TypeFlags.NumberLike) ||
     Boolean(type.isUnionOrIntersection() && type.types.some(isNumber));
   const hasNumber = isNumber(resolved);
+  const grid = gridMethods(name);
   const methodNames = [
+    ...Object.keys(grid),
     ...(hasLength ? Object.keys(units) : []),
     ...(hasPercent ? ['percent'] : []),
     ...(hasTime ? ['ms', 's'] : []),
@@ -231,6 +233,7 @@ for (const name of names) {
     for (const name of ['deg', 'grad', 'rad', 'turn']) lines.push(...unitMethod(name, name));
   lines.push(
     ...valueMethods(type, hasColor, hasLength || hasPercent || hasTime || hasAngle || hasNumber),
+    ...Object.values(grid).flat(),
   );
   lines.push('}');
   systemFields.push(documentation, `  declare readonly ${setting.name}: ${alias}.${className};`);

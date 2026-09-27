@@ -62,6 +62,8 @@ Vue 通过官方 AST 扩展缓存可分析的 class 表达式，不冻结其他�
 
 未知样式辅助函数、覆写作者方法、任意 `_selector`、动态 raw 原文等继续使用样式表绑定；这保持跨元素选择器和自定义作者行为。系统 `_hover` / `_before` 等快捷选择器支持元素变量。作者方法身份检查只选择传输/缓存路径，bx 在两条路径中都生成变量，不退回真实值，也不判断 CSS 值是否有效。
 
+项目可自行定义 `_media`、主题覆盖等字符串方法，直接传入 `bx(value)`；不需要额外注册或注解。编译器保留用户方法执行，使用通用绑定路径。内置 Grid repeat/minmax/fitContent 方法与其他系统属性方法一样支持模板缓存和元素变量。
+
 Svelte 利用原生模板派生，支持 each、const tag、await then/catch 和组件内 snippet 的局部参数。每次 snippet 调用有独立绑定身份。手写 Vue computed（含命名 getter 和可写形式）、Svelte $derived / $derived.by（含命名 getter）同样使用绑定帧，不在派生求值期间创建额外订阅。异步 getter 不支持此保证。
 
 Vue scoped slot 支持 bx，各次调用按参数身份隔离；优先传递有稳定身份的 item 对象，连续变化的原始值参数会建立新的绑定帧。被遮蔽的嵌套循环作用域仍需使用普通运行时 CSS 或将 bx 提到独立行组件。模块引用/导出的 Svelte snippet 不转换 bx，不能引用组件实例宿主。普通无 bx 写法仍可在这些位置使用。

@@ -29,7 +29,6 @@ pnpm check
 - [元框架](docs/metaframeworks.md)：Nuxt 4 / SvelteKit 2 的 Node SSR、静态部署和 CSP。
 - [维护与支持范围](docs/maintenance.md)：换机、LSP、生成器、目录归属、生命周期和交付流程。
 - [性能与验收](docs/performance.md)：精确提交的测量数据、CI 状态与尚存差距。
-- [待选 API](docs/api-options.md)：有示例和取舍的候选方案，尚未实现。
 
 ## 工程目录
 

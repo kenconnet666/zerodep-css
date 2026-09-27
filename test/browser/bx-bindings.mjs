@@ -100,6 +100,12 @@ try {
                 snapshot: getComputedStyle(root.querySelector('[data-bound="snapshot"]')).height,
                 snapshotClass: root.querySelector('[data-bound="snapshot"]').className,
                 effect: getComputedStyle(root.querySelector('[data-bound="effect"]')).height,
+                custom: {
+                  width: getComputedStyle(root.querySelector('[data-bound="custom"]')).width,
+                  color: getComputedStyle(root.querySelector('[data-bound="custom"]')).color,
+                },
+                grid: getComputedStyle(root.querySelector('[data-bound="grid"]'))
+                  .gridTemplateColumns,
                 snippets: [...root.querySelectorAll('[data-snippet]')].map((node) => ({
                   className: node.className,
                   width: getComputedStyle(node).width,
@@ -135,6 +141,8 @@ try {
         }
         assert.equal(initial.nodes[0].width, '24px');
         assert.equal(initial.nodes[1].width, '40px');
+        assert.deepEqual(initial.nodes[0].custom, { width: '24px', color: 'rgb(10, 0, 0)' });
+        assert.equal(initial.nodes[0].grid, '3px 3px');
         for (let i = 0; i < 4; i++) await page.evaluate(() => window.control.step(0));
         const changed = await inspect();
         assert.equal(changed.nodes[0].width, '28px');
@@ -144,6 +152,8 @@ try {
         assert.notEqual(changed.nodes[0].transform, initial.nodes[0].transform);
         assert.equal(changed.nodes[0].snapshot, '24px');
         assert.equal(changed.nodes[0].effect, '28px');
+        assert.deepEqual(changed.nodes[0].custom, { width: '28px', color: 'rgb(14, 0, 0)' });
+        assert.equal(changed.nodes[0].grid, '7px 7px');
         assert.deepEqual(changed.nodes[0].dual, ['7px', '112px']);
         assert.equal(changed.nodes[0].sibling, '28px');
         assert.equal(changed.nodes[0].forwarded, '28px');

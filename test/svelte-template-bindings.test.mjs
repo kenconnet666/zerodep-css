@@ -76,6 +76,20 @@ test('Svelte 的覆写方法和任意选择器不改变变量的原有作用域'
   assert.doesNotMatch(result.html, /style=/);
 });
 
+test('Svelte Grid 方法使用元素变量，项目选择器和主题方法保留用户实现', () => {
+  const result = inspect(`<script>import {Css,css,bx} from '@zerodep-css/svelte';
+    import {ProjectCss} from '../core/examples/project-css.ts';const s=new Css(),project=new ProjectCss();let width=$state(20);</script>
+    <div class={css(s.gridTemplateColumns.repeat(2,bx(width+'px'),'1fr'),s.gridAutoRows.minmax(0,bx(width+'px')),s.gridTemplateRows.fitContent(bx('50%')))}></div>
+    <div class={css(project._media('(width >= 0px)',s.width.raw(bx(width+'px'))))}></div>
+    <div class={css(project.theme({text:bx('red')}),project.color._text)}></div>`);
+  assert.match(result.html, /--zi-[^:]+: 20px/);
+  assert.match(result.html, /--zi-[^:]+: 50%/);
+  assert.ok(result.rules.some((r) => r.body.includes('repeat(2, var(--zi-')));
+  assert.ok(result.rules.some((r) => r.body.includes('@media (width >= 0px)')));
+  assert.ok(result.rules.some((r) => r.body.includes('--z-theme-text:var(--zv-')));
+  assert.equal(result.rules.filter((r) => r.kind === 'bindings').length, 2);
+});
+
 test('snippet 多次调用具有独立变量值，const tag 解构别名参与绑定', () => {
   const result = inspect(`${script}
 {#snippet card(value)}

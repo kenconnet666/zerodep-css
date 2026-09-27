@@ -48,6 +48,20 @@ const button = css(
 
 快捷方法调用 `this._selector`，用户可以通过继承扩展自己的方法。仅显式 bx 表达式生成 CSS 变量；覆写快捷方法或 `_selector` 仍按用户实现执行，并接收原有声明字符串（其中可包含 var 引用）。
 
+条件规则快捷方法由项目自行定义，不加入系统作者：
+
+```ts
+class AppCss extends Css {
+  _media(query: string, ...parts: CssInput[]): string {
+    return this._selector(`@media ${query}`, parts);
+  }
+}
+const s = new AppCss();
+css(s._media('(width >= 48rem)', s.display.grid, s.gap.rem(2)));
+```
+
+`CssInput` 从框架包或 core 的主入口导入，支持条件空项与嵌套只读数组。项目可以按相同方式定义 supports、container、命名断点；无需注册到编译器。用户方法保持普通运行时行为，传入的 bx 仍使用变量绑定。可执行的条件规则与主题扩展示例见 [ProjectCss](../core/examples/project-css.ts)。
+
 全局块放在普通类样式之前，块之间按创建顺序排列。同名更新保留位置，移除再创建放在全局块末尾。更新全局块不会重写普通类的 CSSOM。动画与普通类按内容命名和复用，采用完整 UTF-16 的更宽哈希，仍保留冲突诊断。
 
 浏览器 `configureCss({ nonce, insertionPoint })` 在首次登记或恢复前调用；位置节点必须位于当前 document.head，库把自身样式放在它之后。SSR 已有样式的 nonce 会沿用到之后创建的标签。`cssStats()` 提供规则数、全局块数与主标签连接状态；`disposeCss()` 只用于整个宿主退出，不能在任意子组件卸载时调用。
@@ -82,3 +96,18 @@ s.opacity.clamp(0, 0.5, 1);
 普通单位方法收一个数字；padding/margin、gap、逻辑边距、背景尺寸等根据元数据提供合适的参数数量。混合单位、斜线分组和特殊值继续使用 raw。类型提示只约束作者入口，不做浏览器值域校验。单位名不会挤掉无关属性的系统关键字，例如 textBox.cap、textBoxEdge.ex 仍是字符串字段。
 
 Vue / Svelte 已提供可选的[bx 绑定转换](bindings.md)，常量和动态表达式统一转为变量，支持一条声明中的多个 bx、复杂 raw 表达式、声明 / 类组合与动画，保留原有运行时求值路径。SSR 和宿主 nonce 接入见[元框架说明](metaframeworks.md)。
+
+## Grid 轨道函数
+
+```ts
+s.gridTemplateColumns.repeat(3, 'minmax(0, 1fr)');
+s.gridTemplateColumns.repeat('auto-fit', 'minmax(12rem, 1fr)');
+s.gridTemplateRows.repeat(2, '[line]', '20px', '1fr');
+s.gridAutoColumns.minmax('12rem', '1fr');
+s.gridAutoRows.fitContent('50%');
+s.gridTemplateColumns.repeat(bx(count), bx(size + 'px'), '1fr');
+```
+
+`repeat(count, track, ...tracks)` 只提供给 gridTemplateColumns/gridTemplateRows；轨道片段以空格连接。`minmax(minimum, maximum)` 和 `fitContent(limit)` 同时适用于模板行列与自动行列，范围依据 [CSS Grid 轨道语法](https://drafts.csswg.org/css-grid-2/#track-sizing)。`width.fitContent` 等已有关键字仍为字符串。
+
+方法仍返回完整声明，经 raw 和 protected declaration 格式化。尺寸接受关键字、任意字符串（含 bx）与 0，其他数值由调用方写出单位；重复次数可传数字、auto-fill/auto-fit 或变量字符串，具体合法性由浏览器判断。函数嵌套用原生值字符串，例如上例的 `'minmax(0, 1fr)'`，不要把另一个属性方法返回的完整声明当作值。新方法参与现有模板缓存和元素变量转换，没有增加值对象或解析器。

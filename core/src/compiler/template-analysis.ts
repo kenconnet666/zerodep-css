@@ -14,6 +14,9 @@ const methods = new Set([
   'min',
   'max',
   'clamp',
+  'repeat',
+  'minmax',
+  'fitContent',
   ...Object.keys(unitSuffix),
 ]);
 export const reactive = new Set([

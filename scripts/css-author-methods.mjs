@@ -19,6 +19,31 @@ export const extraUnits = {
   turn: 'turn',
 };
 
+/** Grid 函数仅生成到接受轨道尺寸的属性，不放进所有长度属性的基类。 */
+export function gridMethods(property) {
+  const explicit = property === 'gridTemplateColumns' || property === 'gridTemplateRows';
+  if (!explicit && property !== 'gridAutoColumns' && property !== 'gridAutoRows') return {};
+  const track = "'auto' | 'min-content' | 'max-content' | CssString | 0";
+  return {
+    ...(explicit
+      ? {
+          repeat: [
+            '/** 重复一组轨道；字符串支持 auto-fill / auto-fit 与 bx，数值合法性由浏览器判断。 */',
+            `repeat(count: number | 'auto-fill' | 'auto-fit' | CssString, track: ${track}, ...tracks: (${track})[]): string { return this.raw(\`repeat(\${count}, \${[track, ...tracks].join(' ')})\`); }`,
+          ],
+        }
+      : {}),
+    minmax: [
+      '/** 单条轨道的最小/最大尺寸；0 保留，其他长度由调用方提供单位。 */',
+      `minmax(minimum: ${track}, maximum: ${track}): string { return this.raw(\`minmax(\${minimum}, \${maximum})\`); }`,
+    ],
+    fitContent: [
+      '/** 用给定长度或百分比限制轨道尺寸；返回完整属性声明。 */',
+      'fitContent(limit: CssString | 0): string { return this.raw(`fit-content(${limit})`); }',
+    ],
+  };
+}
+
 export function unitMethod(name, suffix, min = 1, max = 1, override = false) {
   const doc = `/** 使用 ${suffix} 单位生成声明；数值合法性由浏览器处理。 */`;
   if (max === 1)

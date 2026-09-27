@@ -5,6 +5,7 @@ import { createServerCssHost, serializeCssRules } from '../../core/dist/server.j
 import { launchBrowser } from '../../test/tools/browser.mjs';
 
 import { Css } from '../../core/dist/index.js';
+import { ProjectCss } from '../../core/examples/project-css.ts';
 const s = new Css();
 const host = createServerCssHost();
 const colorSamples = [
@@ -13,6 +14,39 @@ const colorSamples = [
   [s.color.oklch(0.7, 0.15, 240), 'oklch(0.7 0.15 240)'],
   [s.color.oklab('70%', 0.1, 0.15), 'oklab(70% 0.1 0.15)'],
 ].map(([body, native]) => ({ className: host.css(body), native }));
+const gridSamples = [
+  ['grid-template-columns', s.gridTemplateColumns.repeat(2, '20px', '1fr'), 'repeat(2, 20px 1fr)'],
+  ['grid-template-rows', s.gridTemplateRows.repeat('auto-fill', '20px'), 'repeat(auto-fill, 20px)'],
+  [
+    'grid-template-columns',
+    s.gridTemplateColumns.repeat('auto-fit', 'minmax(20px, 1fr)'),
+    'repeat(auto-fit, minmax(20px, 1fr))',
+  ],
+  ...[
+    ['grid-template-columns', s.gridTemplateColumns],
+    ['grid-template-rows', s.gridTemplateRows],
+    ['grid-auto-columns', s.gridAutoColumns],
+    ['grid-auto-rows', s.gridAutoRows],
+  ].flatMap(([property, author]) => [
+    [property, author.minmax(0, '1fr'), 'minmax(0, 1fr)'],
+    [property, author.fitContent('50%'), 'fit-content(50%)'],
+  ]),
+].map(([property, body, native]) => ({
+  property,
+  native,
+  className: host.css(s.display.grid, s.width.px(240), s.height.px(120), body),
+}));
+const project = new ProjectCss();
+const projectClasses = {
+  parent: host.css(project.theme({ text: '#7c3aed', surface: '#faf5ff' })),
+  text: host.css(project.color._text, project.backgroundColor._surface),
+  nested: host.css(project.theme({ text: '#166534' })),
+  conditions: host.css(
+    project._media('(min-width: 1px)', s.width.px(25)),
+    project._supports('(display: grid)', s.height.px(19)),
+    project._container('(min-width: 200px)', s.opacity.raw(0.5)),
+  ),
+};
 host.globalCss('variables', [false, ':root{--red:120;--alpha:0.5;--saturation:60%;}']);
 host.globalCss('theme', 'body{color:red;}');
 host.globalCss('reset', 'body{margin:0;}');
@@ -60,6 +94,63 @@ try {
     assert.equal(sample.supported, true);
     assert.equal(sample.actual, sample.expected);
   }
+  const grids = await page.evaluate(
+    (samples) =>
+      samples.map((sample) => {
+        const actual = document.createElement('div'),
+          expected = document.createElement('div');
+        actual.className = sample.className;
+        expected.style.cssText = 'display:grid;width:240px;height:120px;';
+        expected.style.setProperty(sample.property, sample.native);
+        actual.innerHTML = expected.innerHTML = '<span>track</span>'.repeat(6);
+        document.body.append(actual, expected);
+        const result = {
+          supported: CSS.supports(sample.property, sample.native),
+          actual: getComputedStyle(actual).getPropertyValue(sample.property),
+          expected: getComputedStyle(expected).getPropertyValue(sample.property),
+        };
+        actual.remove();
+        expected.remove();
+        return result;
+      }),
+    gridSamples,
+  );
+  for (const sample of grids) {
+    assert.equal(sample.supported, true);
+    assert.equal(sample.actual, sample.expected);
+  }
+  const extension = await page.evaluate((names) => {
+    const parent = document.createElement('section'),
+      child = document.createElement('div'),
+      sibling = document.createElement('div');
+    parent.className = names.parent;
+    parent.style.cssText = 'container-type:inline-size;width:240px;';
+    child.className = names.text + ' ' + names.nested + ' ' + names.conditions;
+    sibling.className = names.text;
+    parent.append(child, sibling);
+    document.body.append(parent);
+    const before = {
+      color: getComputedStyle(child).color,
+      surface: getComputedStyle(child).backgroundColor,
+      sibling: getComputedStyle(sibling).color,
+      width: getComputedStyle(child).width,
+      height: getComputedStyle(child).height,
+      opacity: getComputedStyle(child).opacity,
+    };
+    child.classList.remove(names.nested);
+    const restored = getComputedStyle(child).color;
+    parent.remove();
+    return { before, restored };
+  }, projectClasses);
+  assert.deepEqual(extension.before, {
+    color: 'rgb(22, 101, 52)',
+    surface: 'rgb(250, 245, 255)',
+    sibling: 'rgb(124, 58, 237)',
+    width: '25px',
+    height: '19px',
+    opacity: '0.5',
+  });
+  assert.equal(extension.restored, 'rgb(124, 58, 237)');
   const result = await page.evaluate(
     ({ a, b, combined, animation }) => {
       api.hydrateCss();

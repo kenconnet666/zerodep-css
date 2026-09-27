@@ -4,6 +4,7 @@ import { build } from 'esbuild';
 import { resolve } from 'node:path';
 import * as system from '../../dist/index.js';
 import { ThemeCss, ThemeColorCss, themes } from '../../dist/theme.js';
+import { ProjectCss } from '../../examples/project-css.ts';
 
 test('主题是可选的第二层继承，关键词仍为声明字符串', () => {
   assert.equal('ThemeCss' in system, false);
@@ -72,4 +73,28 @@ test('亮暗预设的文字与强调色默认配对保持可读对比度', () =>
       );
     }
   }
+});
+
+test('条件规则和主题覆盖由项目类定义，不进入系统作者或内置主题入口', () => {
+  const s = new ProjectCss();
+  assert.equal('_media' in new system.Css(), false);
+  assert.equal('override' in themes, false);
+  assert.equal(
+    s._media('(width >= 48rem)', [s.display.grid, false, [s.gap.rem(1)]]),
+    '@media (width >= 48rem){display:grid;gap:1rem;}',
+  );
+  assert.equal(
+    s._supports('(display: grid)', s.display.grid),
+    '@supports (display: grid){display:grid;}',
+  );
+  assert.equal(
+    s._container('card (width >= 24rem)', s.padding.rem(2)),
+    '@container card (width >= 24rem){padding:2rem;}',
+  );
+  assert.equal(
+    s.theme({ text: '#7c3aed', surface: 'var(--surface)' }),
+    '--z-theme-text:#7c3aed;--z-theme-surface:var(--surface);',
+  );
+  assert.equal(s.theme({ text: undefined }), '');
+  assert.equal(s.color._text, 'color:var(--z-theme-text);');
 });

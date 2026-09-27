@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { resolve } from 'node:path';
 import { build } from 'esbuild';
-import { ColorCss, Css, WidthCss } from '../../dist/index.js';
+import { ColorCss, Css, WidthCss, GridTemplateColumnsCss } from '../../dist/index.js';
 import * as author from '../../dist/index.js';
 
 test('直接属性链独立可用，系统字段只在首次构造 Css 时注册', () => {
@@ -135,4 +135,47 @@ test('颜色通道允许变量字符串，现代颜色方法保持原生值，�
   assert.equal(s.color.oklch(0.7, 0.15, 240, 0.5), 'color:oklch(0.7 0.15 240 / 0.5);');
   assert.equal(s.fill.oklab('70%', 0.1, 'var(--b)'), 'fill:oklab(70% 0.1 var(--b));');
   assert.equal(s._placeholder(s.color.gray), '&::placeholder{color:gray;}');
+});
+
+test('Grid 函数只出现在适用属性，支持多轨道、变量及原生零值', () => {
+  const s = new Css();
+  assert.equal(
+    s.gridTemplateColumns.repeat(3, 'minmax(0, 1fr)'),
+    'grid-template-columns:repeat(3, minmax(0, 1fr));',
+  );
+  assert.equal(
+    s.gridTemplateRows.repeat('auto-fit', '20px'),
+    'grid-template-rows:repeat(auto-fit, 20px);',
+  );
+  assert.equal(
+    s.gridTemplateColumns.repeat('var(--count)', '[line]', '20px', '1fr'),
+    'grid-template-columns:repeat(var(--count), [line] 20px 1fr);',
+  );
+  for (const [name, property] of [
+    ['grid-template-columns', s.gridTemplateColumns],
+    ['grid-template-rows', s.gridTemplateRows],
+    ['grid-auto-columns', s.gridAutoColumns],
+    ['grid-auto-rows', s.gridAutoRows],
+  ]) {
+    assert.equal(property.minmax(0, '1fr'), `${name}:minmax(0, 1fr);`);
+    assert.equal(
+      property.minmax('var(--min)', 'max-content'),
+      `${name}:minmax(var(--min), max-content);`,
+    );
+    assert.equal(property.fitContent('50%'), `${name}:fit-content(50%);`);
+    assert.equal(property.fitContent(0), `${name}:fit-content(0);`);
+  }
+  assert.equal('repeat' in s.gridAutoRows, false);
+  assert.equal('repeat' in s.gridAutoColumns, false);
+  assert.equal('minmax' in s.width, false);
+  assert.equal(s.width.fitContent, 'width:fit-content;');
+  class ProjectColumns extends GridTemplateColumnsCss {
+    raw(value) {
+      return super.raw(value) + 'color:red;';
+    }
+  }
+  const columns = new ProjectColumns();
+  assert.equal(columns.repeat(2, '1fr'), 'grid-template-columns:repeat(2, 1fr);color:red;');
+  assert.equal(columns.minmax('12px', '1fr'), 'grid-template-columns:minmax(12px, 1fr);color:red;');
+  assert.equal(columns.fitContent('10rem'), 'grid-template-columns:fit-content(10rem);color:red;');
 });

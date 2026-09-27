@@ -556,3 +556,51 @@ test('元素变量空值重置不继承外层值，Vue 开发编译与关闭缓�
       options,
     );
 });
+
+test('Grid 值方法参与模板缓存及元素 bx，只有数值变化时不重新登记', async () => {
+  await run(
+    `<div data-box :class="makeCss(s.gridTemplateColumns.repeat(2,bx(state.width+'px'),'1fr'),s.gridAutoRows.minmax(0,bx(state.width+'px')),s.gridTemplateRows.fitContent(bx('50%')))"></div>`,
+    async (p) => {
+      const box = () => find(p.root, 'data-box')[0];
+      const initial = box().props.class,
+        calls = p.calls();
+      assert.equal(p.host.rules().filter((r) => r.kind === 'bindings').length, 0);
+      assert.ok(p.host.rules().some((r) => r.body.includes('repeat(2, var(--zi-')));
+      await p.update((s) => {
+        s.width = 35;
+      });
+      assert.equal(box().props.class, initial);
+      assert.equal(p.calls(), calls);
+      assert.ok(Object.values(box().props.style).includes('35px'));
+    },
+  );
+});
+
+test('项目条件规则和主题覆盖方法中的 bx 保持响应式，不要求注册用户方法', async () => {
+  await run(
+    `<div data-media :class="makeCss(project._media('(width >= 0px)',s.width.raw(bx(state.width+'px'))))"></div>
+    <div data-theme :class="makeCss(project.theme({text:bx('rgb('+state.width+' 0 0)')}),project.color._text)"></div>`,
+    async (p) => {
+      const names = find(p.root, 'data-media')
+        .concat(find(p.root, 'data-theme'))
+        .map((n) => n.props.class);
+      const initial = p.host.rules().length;
+      await p.update((s) => {
+        s.width = 45;
+      });
+      assert.equal(p.host.rules().length, initial);
+      assert.deepEqual(
+        find(p.root, 'data-media')
+          .concat(find(p.root, 'data-theme'))
+          .map((n) => n.props.class),
+        names,
+      );
+      const values = p.host.rules().filter((r) => r.kind === 'bindings');
+      assert.equal(values.length, 2);
+      assert.ok(values.some((r) => r.body.includes('45px')));
+      assert.ok(values.some((r) => r.body.includes('rgb(45 0 0)')));
+      assert.ok(p.host.rules().some((r) => r.body.includes('@media (width >= 0px)')));
+    },
+    `import {ProjectCss} from '../core/examples/project-css.ts'; const project=new ProjectCss();`,
+  );
+});

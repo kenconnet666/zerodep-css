@@ -11,6 +11,14 @@ class ProjectColor extends ThemeColorCss {
 }
 class AppCss extends ThemeCss {
   override readonly color = new ProjectColor();
+
+  // 项目自己决定哪些变量可被局部覆盖，返回普通声明字符串。
+  theme(values: { text?: string; surface?: string }): string {
+    return Object.entries(values)
+      .filter(([, value]) => value !== undefined)
+      .map(([name, value]) => `--z-theme-${name}:${value};`)
+      .join('');
+  }
 }
 export const { provideCss, useCss } = createCssContext<AppCss>();
 ```
@@ -40,10 +48,12 @@ Vue 使用 `<section :class="isDark ? dark : light">`，Svelte 使用 `<section 
 子树可以只覆盖一项：
 
 ```ts
-const nested = css('--z-theme-text:#c026d3;');
+const nested = css(s.theme({ text: '#c026d3' }));
 ```
 
 将 `nested` 放到子树边界；兄弟继续继承父级主题。移除它后恢复父级继承，其他未覆盖变量仍随父主题变化。DOM 被移到边界外时，继承也会随物理位置改变，不自动复制主题。
+
+这里的 `theme()` 是上方 AppCss 的用户方法，不是系统 API；内置 `themes` 只提供 light/dark 声明，不提供 override。用户可自行选择键名、变量名、参数类型，也可直接写 `css('--z-theme-text:#c026d3;')`。完整项目扩展示例见 [ProjectCss](../core/examples/project-css.ts)，其中的条件方法和主题方法都只是普通类方法。
 
 可执行样板：[Vue](../vue/examples/Theme.vue)、[Svelte](../svelte/examples/Theme.svelte)。它们通过真正的 context 注入同一个作者实例，并展示项目关键字、父主题切换、子树覆盖和撤销。元框架 CI 同时验证首屏无 JS、hydration、静态部署及 nonce CSP；主题不使用内联 style。
 

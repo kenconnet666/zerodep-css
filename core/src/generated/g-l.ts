@@ -479,6 +479,17 @@ export class GridAutoColumnsCss extends LengthCssProperty {
   ): string {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
+  /** 单条轨道的最小/最大尺寸；0 保留，其他长度由调用方提供单位。 */
+  minmax(
+    minimum: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+    maximum: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+  ): string {
+    return this.raw(`minmax(${minimum}, ${maximum})`);
+  }
+  /** 用给定长度或百分比限制轨道尺寸；返回完整属性声明。 */
+  fitContent(limit: CssString | 0): string {
+    return this.raw(`fit-content(${limit})`);
+  }
 }
 
 /** CSS 属性 grid-auto-flow；初始值 row。
@@ -543,6 +554,17 @@ export class GridAutoRowsCss extends LengthCssProperty {
     maximum: Property.GridAutoRows | CssString,
   ): string {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
+  }
+  /** 单条轨道的最小/最大尺寸；0 保留，其他长度由调用方提供单位。 */
+  minmax(
+    minimum: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+    maximum: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+  ): string {
+    return this.raw(`minmax(${minimum}, ${maximum})`);
+  }
+  /** 用给定长度或百分比限制轨道尺寸；返回完整属性声明。 */
+  fitContent(limit: CssString | 0): string {
+    return this.raw(`fit-content(${limit})`);
   }
 }
 
@@ -874,6 +896,25 @@ export class GridTemplateColumnsCss extends LengthCssProperty {
   ): string {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
+  /** 重复一组轨道；字符串支持 auto-fill / auto-fit 与 bx，数值合法性由浏览器判断。 */
+  repeat(
+    count: number | 'auto-fill' | 'auto-fit' | CssString,
+    track: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+    ...tracks: ('auto' | 'min-content' | 'max-content' | CssString | 0)[]
+  ): string {
+    return this.raw(`repeat(${count}, ${[track, ...tracks].join(' ')})`);
+  }
+  /** 单条轨道的最小/最大尺寸；0 保留，其他长度由调用方提供单位。 */
+  minmax(
+    minimum: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+    maximum: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+  ): string {
+    return this.raw(`minmax(${minimum}, ${maximum})`);
+  }
+  /** 用给定长度或百分比限制轨道尺寸；返回完整属性声明。 */
+  fitContent(limit: CssString | 0): string {
+    return this.raw(`fit-content(${limit})`);
+  }
 }
 
 /** CSS 属性 grid-template-rows；初始值 none。
@@ -919,6 +960,25 @@ export class GridTemplateRowsCss extends LengthCssProperty {
     maximum: Property.GridTemplateRows | CssString,
   ): string {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
+  }
+  /** 重复一组轨道；字符串支持 auto-fill / auto-fit 与 bx，数值合法性由浏览器判断。 */
+  repeat(
+    count: number | 'auto-fill' | 'auto-fit' | CssString,
+    track: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+    ...tracks: ('auto' | 'min-content' | 'max-content' | CssString | 0)[]
+  ): string {
+    return this.raw(`repeat(${count}, ${[track, ...tracks].join(' ')})`);
+  }
+  /** 单条轨道的最小/最大尺寸；0 保留，其他长度由调用方提供单位。 */
+  minmax(
+    minimum: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+    maximum: 'auto' | 'min-content' | 'max-content' | CssString | 0,
+  ): string {
+    return this.raw(`minmax(${minimum}, ${maximum})`);
+  }
+  /** 用给定长度或百分比限制轨道尺寸；返回完整属性声明。 */
+  fitContent(limit: CssString | 0): string {
+    return this.raw(`fit-content(${limit})`);
   }
 }
 

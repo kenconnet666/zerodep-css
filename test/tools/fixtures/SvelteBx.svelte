@@ -2,6 +2,7 @@
   import { bx, css, globalCss, keyframes } from '@zerodep-css/svelte';
   import { useCss } from '../../../svelte/examples/context.js';
   import Plain from './SveltePlainClass.svelte';
+  import { ProjectCss } from '../../../core/examples/project-css.js';
   let {
     initial,
     expose,
@@ -11,6 +12,12 @@
   let side = $state(3);
   let red = $state(10);
   let alpha = $state(0.5);
+  const project = new ProjectCss();
+  const custom = css(
+    project._media('(min-width: 1px)', s.width.raw(bx(width + 'px'))),
+    project.theme({ text: bx('rgb(' + red + ' 0 0)') }),
+    project.color._text,
+  );
   const snapshot = width;
   let rows = $state([
     { id: 'a', width: 11 },
@@ -93,6 +100,11 @@
   <div data-bound="animated" class={animated}></div>
   <div data-bound="snapshot" class={fixed}></div>
   <div data-bound="effect" class={effectClass}></div>
+  <div data-bound="custom" class={custom}></div>
+  <div
+    data-bound="grid"
+    class={css(s.display.grid, s.gridTemplateColumns.repeat(2, bx(side + 'px')))}
+  ></div>
   <div data-bound="dual" class={dual}></div>
   <div class={sibling}></div>
   <div data-bound="sibling"></div>

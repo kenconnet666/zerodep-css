@@ -4,6 +4,7 @@
 - `core` 保持框架无关；`vue`、`svelte`、`nuxt`、`sveltekit` 各自负责适配。五包保持 private，包间使用 `workspace:*`。
 - 选择器统一使用作者对象的 `_hover` / `_selector` 等下划线方法；独立 `ic`、`cx` 已移除。`keyframes` 仍是宿主登记函数。快捷方法元数据在 `core/src/selector-shortcuts.ts`，由生成器和绑定编译器共用。
 - 作者类型优先直观可读：属性基类不传泛型，各属性类明确声明 `raw` 等方法参数，静态关键字保留普通 readonly 字段。不为体积或极限性能引入复杂映射类型、声明合并或 Proxy 作者模型。
+- 条件规则快捷方法和主题局部覆盖由用户在项目类中定义，系统提供 `_selector`、声明字符串和继承能力；不内置 `_media` 或 `themes.override`。属性值方法只补充适用的原生 CSS 函数，不另建值对象 DSL；不引入调试命名或标签模板调用。
 - Vue 模板缓存接入 `vue/src/template-compiler.ts` 的编译 AST 扩展；bx 变量绑定仍由共享源码转换负责。普通元素与 v-for 的缓存不能冻结其他属性；未知/覆写调用保留运行时路径。手写 computed / $derived 内的 bx 使用绑定帧，非 bx 表达式不自动转换。
 - 使用 Node 24、pnpm 10.34.5 和工作区固定依赖；不要升级全局工具。本地优先运行改动相关的检查，基础配置或包类型入口变更运行 `pnpm check`，LSP 桥变更运行 `pnpm lsp:verify`。
 - `core/src/generated/` 只由 `pnpm css:generate` 更新；`pnpm check` 必须通过生成结果一致性与各包类型检查。
