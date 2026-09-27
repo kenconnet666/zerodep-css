@@ -7,8 +7,6 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 /**
  * 设置表格标题相对于表格的放置侧。（caption-side）
  *
- * CSS 语法：`top | bottom`。
- *
  * CSS 初始值：`top`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caption-side
  */
@@ -71,8 +69,6 @@ export class CaptionSideCss extends CssProperty {
 
 /**
  * 集中设置文本插入光标的颜色和形状。（caret）
- *
- * CSS 语法：`<'caret-color'> || <'caret-shape'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret
  */
 export class CaretCss extends CssProperty {
@@ -609,8 +605,6 @@ export class CaretCss extends CssProperty {
 /**
  * 设置可编辑内容中的文本插入光标颜色。（caret-color）
  *
- * CSS 语法：`auto | <color>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-color
  */
@@ -1142,8 +1136,6 @@ export class CaretColorCss extends CssProperty {
 /**
  * 设置文本插入光标的形状。（caret-shape）
  *
- * CSS 语法：`auto | bar | block | underscore`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-shape
  */
@@ -1210,8 +1202,6 @@ export class CaretShapeCss extends CssProperty {
 
 /**
  * 要求元素避让指定侧的前置浮动元素。（clear）
- *
- * CSS 语法：`none | left | right | both | inline-start | inline-end`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clear
@@ -1343,8 +1333,6 @@ export class ClipCss extends CssProperty {
 /**
  * 通过基本形状、路径或引用裁剪元素的可见区域。（clip-path）
  *
- * CSS 语法：`<clip-source> | [ <basic-shape> || <geometry-box> ] | none`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-path
  */
@@ -1420,8 +1408,6 @@ export class ClipPathCss extends CssProperty {
 /**
  * 设置 SVG 裁剪路径判断内部区域所用的填充规则。（clip-rule）
  *
- * CSS 语法：`nonzero | evenodd`。
- *
  * CSS 初始值：`nonzero`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-rule
  */
@@ -1486,8 +1472,6 @@ export class ClipRuleCss extends CssProperty {
  * 设置文字前景色，同时作为 currentColor 的来源。（color）
  *
  * 改变文字和 currentColor 的来源，不会自动改变背景。颜色函数方法返回完整 color 声明。
- *
- * CSS 语法：`<color>`。
  *
  * CSS 初始值：`canvastext`（不同于浏览器默认样式表）。
  * @example
@@ -2022,8 +2006,6 @@ export class ColorCss extends CssProperty {
 /**
  * 控制输出设备对颜色的自动调整；这是 print-color-adjust 的旧名称。（color-adjust）
  *
- * CSS 语法：`economy | exact`。
- *
  * CSS 初始值：`economy`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
  */
@@ -2149,8 +2131,6 @@ export class ColorInterpolationCss extends CssProperty {
 
 /**
  * 设置 SVG 滤镜效果进行颜色计算时所用的色彩空间。（color-interpolation-filters）
- *
- * CSS 语法：`auto | sRGB | linearRGB`。
  *
  * CSS 初始值：`linearRGB`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-interpolation-filters
@@ -2282,8 +2262,6 @@ export class ColorRenderingCss extends CssProperty {
  *
  * 声明支持的方案不等于为应用生成主题颜色；文字、背景和业务 token 仍需自行定义。
  *
- * CSS 语法：`normal | [ light | dark | <custom-ident> ]+ && only?`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-scheme
  */
@@ -2348,8 +2326,6 @@ export class ColorSchemeCss extends CssProperty {
 
 /**
  * 设置多栏布局的目标栏数。（column-count）
- *
- * CSS 语法：`<integer> | auto`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-count
@@ -2468,8 +2444,6 @@ export class ColumnCountCss extends CssProperty {
 /**
  * 设置多栏内容顺序填充还是尽量均衡栏高。（column-fill）
  *
- * CSS 语法：`auto | balance`。
- *
  * CSS 初始值：`balance`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-fill
  */
@@ -2532,8 +2506,6 @@ export class ColumnFillCss extends CssProperty {
 
 /**
  * 设置布局中相邻列之间的间距。（column-gap）
- *
- * CSS 语法：`normal | <length-percentage>`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
@@ -2663,8 +2635,6 @@ export class ColumnGapCss extends LengthCssProperty {
 
 /**
  * 设置多栏之间分隔线的宽度、线型和颜色。（column-rule）
- *
- * CSS 语法：`<'column-rule-width'> || <'column-rule-style'> || <'column-rule-color'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule
  */
 export class ColumnRuleCss extends LengthCssProperty {
@@ -3275,8 +3245,6 @@ export class ColumnRuleCss extends LengthCssProperty {
 /**
  * 设置多栏分隔线的颜色。（column-rule-color）
  *
- * CSS 语法：`<color>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-color
  */
@@ -3806,8 +3774,6 @@ export class ColumnRuleColorCss extends CssProperty {
 /**
  * 设置多栏分隔线的线型。（column-rule-style）
  *
- * CSS 语法：`<'border-style'>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-style
  */
@@ -3886,8 +3852,6 @@ export class ColumnRuleStyleCss extends CssProperty {
 
 /**
  * 设置多栏分隔线的宽度。（column-rule-width）
- *
- * CSS 语法：`<'border-width'>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-width
@@ -4010,8 +3974,6 @@ export class ColumnRuleWidthCss extends LengthCssProperty {
 /**
  * 设置多栏布局中的元素是否跨越所有栏。（column-span）
  *
- * CSS 语法：`none | all`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-span
  */
@@ -4074,8 +4036,6 @@ export class ColumnSpanCss extends CssProperty {
 
 /**
  * 设置多栏布局的首选栏宽，实际栏宽由容器空间决定。（column-width）
- *
- * CSS 语法：`<length> | auto`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-width
@@ -4193,8 +4153,6 @@ export class ColumnWidthCss extends LengthCssProperty {
 
 /**
  * 同时设置多栏布局的首选栏宽和目标栏数。（columns）
- *
- * CSS 语法：`<'column-width'> || <'column-count'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/columns
  */
 export class ColumnsCss extends LengthCssProperty {
@@ -4305,9 +4263,20 @@ export class ColumnsCss extends LengthCssProperty {
 /**
  * 声明尺寸、布局、绘制或样式隔离，限制子树对外部的影响。（contain）
  *
- * CSS 语法：`none | strict | content | [ [ size || inline-size ] || layout || style || paint ]`。
+ * 不同隔离类型会改变布局和绘制语义，不能仅当作无副作用的性能开关。
+ *
+ * 常用值：
+ * - `content`：组合 layout、style 和 paint 隔离，不包含 size 隔离。
+ * - `strict`：组合 size、layout、style 和 paint 隔离；尺寸隔离可能影响自动尺寸。
+ * - `size`：计算盒子尺寸时不依赖后代内容，通常需要显式或替代内部尺寸。
+ * - `paint`：将后代绘制限制在隔离边界内。
+ * - `style`：隔离计数器等特定样式副作用，不会阻止普通 CSS 继承或选择器匹配。
+ *
+ * 适用场景：边界明确且尺寸、溢出行为经过验证的独立区域。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @example
+ * s.contain.content
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain
  */
 export class ContainCss extends CssProperty {
@@ -4401,8 +4370,6 @@ export class ContainCss extends CssProperty {
 
 /**
  * 设置块轴尺寸隔离或跳过内容渲染时使用的替代内部尺寸。（contain-intrinsic-block-size）
- *
- * CSS 语法：`auto? [ none | <length> ]`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-block-size
@@ -4521,8 +4488,6 @@ export class ContainIntrinsicBlockSizeCss extends LengthCssProperty {
 /**
  * 设置高度隔离或跳过内容渲染时使用的替代内部高度。（contain-intrinsic-height）
  *
- * CSS 语法：`auto? [ none | <length> ]`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-height
  */
@@ -4640,8 +4605,6 @@ export class ContainIntrinsicHeightCss extends LengthCssProperty {
 /**
  * 设置行内轴尺寸隔离或跳过内容渲染时使用的替代内部尺寸。（contain-intrinsic-inline-size）
  *
- * CSS 语法：`auto? [ none | <length> ]`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-inline-size
  */
@@ -4758,8 +4721,6 @@ export class ContainIntrinsicInlineSizeCss extends LengthCssProperty {
 
 /**
  * 集中设置尺寸隔离时使用的替代内部宽高。（contain-intrinsic-size）
- *
- * CSS 语法：`[ auto? [ none | <length> ] ]{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-size
  */
 export class ContainIntrinsicSizeCss extends LengthCssProperty {
@@ -6052,8 +6013,6 @@ export class ContainIntrinsicSizeCss extends LengthCssProperty {
 /**
  * 设置宽度隔离或跳过内容渲染时使用的替代内部宽度。（contain-intrinsic-width）
  *
- * CSS 语法：`auto? [ none | <length> ]`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-width
  */
@@ -6170,8 +6129,6 @@ export class ContainIntrinsicWidthCss extends LengthCssProperty {
 
 /**
  * 同时声明查询容器的名称和类型。（container）
- *
- * CSS 语法：`<'container-name'> [ / <'container-type'> ]?`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container
  */
 export class ContainerCss extends CssProperty {
@@ -6231,8 +6188,6 @@ export class ContainerCss extends CssProperty {
 
 /**
  * 为查询容器命名，供 @container 条件规则选择。（container-name）
- *
- * CSS 语法：`none | <custom-ident>+`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-name
@@ -6295,9 +6250,18 @@ export class ContainerNameCss extends CssProperty {
 /**
  * 建立指定类型的查询容器，并施加所需的隔离行为。（container-type）
  *
- * CSS 语法：`normal | [ [ size | inline-size ] || scroll-state ]`。
+ * 建立尺寸查询容器会同时引入必要的隔离语义；容器本身的样式通常由祖先查询容器决定。
+ *
+ * 常用值：
+ * - `normal`：不建立尺寸查询容器；仍可用于支持的样式查询。
+ * - `inline-size`：建立行内轴尺寸查询容器，不同时隔离块轴尺寸。
+ * - `size`：建立两个轴的尺寸查询容器，内容不再直接决定其隔离尺寸。
+ *
+ * 适用场景：让组件按所在容器尺寸响应，而不是只按视口响应。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @example
+ * s.containerType.inlineSize
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-type
  */
 export class ContainerTypeCss extends CssProperty {
@@ -6376,8 +6340,6 @@ export class ContainerTypeCss extends CssProperty {
 /**
  * 设置生成内容、替换内容或伪元素的内容。（content）
  *
- * CSS 语法：`normal | none | [ <content-replacement> | <content-list> ] [ / [ <string> | <counter> | <attr()> ]+ ]?`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content
  */
@@ -6449,9 +6411,18 @@ export class ContentCss extends CssProperty {
 /**
  * 控制是否渲染元素内容，并允许浏览器跳过暂时不可见的子树。（content-visibility）
  *
- * CSS 语法：`visible | auto | hidden`。
+ * 允许跳过子树渲染；跳过时的占位尺寸可由 contain-intrinsic-size 提供。
+ *
+ * 常用值：
+ * - `visible`：正常渲染内容，不由此属性跳过子树。
+ * - `auto`：允许浏览器跳过与用户暂不相关的内容渲染，仍需维护布局和可访问性语义。
+ * - `hidden`：跳过内容渲染，行为不同于只隐藏绘制的 visibility:hidden。
+ *
+ * 适用场景：页面中较长、暂时位于视口外的独立内容区域。
  *
  * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+ * @example
+ * s.contentVisibility.auto
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content-visibility
  */
 export class ContentVisibilityCss extends CssProperty {
@@ -6528,8 +6499,6 @@ export class ContentVisibilityCss extends CssProperty {
 /**
  * 增加或减少指定 CSS 计数器的值。（counter-increment）
  *
- * CSS 语法：`[ <counter-name> <integer>? ]+ | none`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-increment
  */
@@ -6590,8 +6559,6 @@ export class CounterIncrementCss extends CssProperty {
 
 /**
  * 创建或重置 CSS 计数器。（counter-reset）
- *
- * CSS 语法：`[ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-reset
@@ -6654,8 +6621,6 @@ export class CounterResetCss extends CssProperty {
 /**
  * 设置已有 CSS 计数器的值，必要时创建计数器。（counter-set）
  *
- * CSS 语法：`[ <counter-name> <integer>? ]+ | none`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-set
  */
@@ -6716,8 +6681,6 @@ export class CounterSetCss extends CssProperty {
 
 /**
  * 设置指针位于元素上方时显示的光标。（cursor）
- *
- * CSS 语法：`[ [ <url> [ <x> <y> ]? , ]* <cursor-predefined> ]`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cursor
@@ -6850,8 +6813,6 @@ export class CursorCss extends CssProperty {
 /**
  * 设置 SVG 圆或椭圆中心的横坐标。（cx）
  *
- * CSS 语法：`<length> | <percentage>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cx
  */
@@ -6972,8 +6933,6 @@ export class CxCss extends LengthCssProperty {
 
 /**
  * 设置 SVG 圆或椭圆中心的纵坐标。（cy）
- *
- * CSS 语法：`<length> | <percentage>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cy
@@ -7096,8 +7055,6 @@ export class CyCss extends LengthCssProperty {
 /**
  * 设置 SVG path 元素的路径数据。（d）
  *
- * CSS 语法：`none | path(<string>)`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/d
  */
@@ -7158,8 +7115,6 @@ export class DCss extends CssProperty {
 
 /**
  * 设置文本基本方向，参与双向文本及部分布局计算。（direction）
- *
- * CSS 语法：`ltr | rtl`。
  *
  * CSS 初始值：`ltr`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/direction
@@ -7222,16 +7177,24 @@ export class DirectionCss extends CssProperty {
 }
 
 /**
- * 设置元素的外部显示类型，以及子元素使用的内部布局方式。（display）
+ * 决定元素是否生成布局盒子，以及元素自身和内部内容如何排版。（display）
  *
- * 外部显示类型决定元素如何参与父级布局，内部显示类型决定如何排列子元素。
+ * 外部显示类型决定元素自身以块级还是行内级方式参与周围布局；内部布局方式决定内容使用普通流、Flex 或 Grid 等布局。此属性不继承；例如 div 通常由浏览器默认样式设置为 block。
  *
- * CSS 语法：`[ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy>`。
+ * 常用值：
+ * - `block`：生成块级盒子，内部默认采用普通流布局。
+ * - `inline`：生成行内盒子，参与行内排版；普通非替换行内盒子的宽高不按块盒规则应用。
+ * - `flex`：生成块级弹性容器，直接子元素参与 Flex 布局。
+ * - `inline-flex`：创建行内级的 Flex 容器。
+ * - `grid`：生成块级网格容器，直接子元素参与 Grid 布局。
+ * - `none`：不生成元素及其后代的布局盒子，通常也从可访问性树中移除。
+ *
+ * 适用场景：选择容器的布局方式；具体对齐、间距和换行由对应布局属性控制。
  *
  * CSS 初始值：`inline`（不同于浏览器默认样式表）。
  * @example
  * css(s.display.flex, s.alignItems.center, s.gap.rem(0.5))
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
+ * @see https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/display
  */
 export class DisplayCss extends CssProperty {
   /**
@@ -7243,13 +7206,33 @@ export class DisplayCss extends CssProperty {
   /**
    * 通常不生成元素自身的主盒子，让子盒子参与外层布局；背景、边框等失去承载盒，应核对可访问性行为。
    *
+   * 普通元素自身不再提供主盒子，子盒子可参与外层 Flex/Grid 等布局。
+   *
+   * 适用场景：保留 DOM 包装节点，同时让内部项目进入外层布局。
+   *
+   * 注意：替换元素等存在特殊规则；应检查语义和可访问性，不要把它当作无条件删除包装盒的替代。
+   *
    * CSS 声明：`display:contents;`。
+   * @example
+   * s.display.contents
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
    */
   readonly contents = 'display:contents;';
   /**
    * 生成块级弹性容器，直接子元素参与 Flex 布局。
    *
+   * 容器自身以块级方式参与普通流，直接子元素成为弹性项目；可分配剩余空间、对齐和换行。
+   *
+   * 区别：inline-flex 使用相同的内部布局，但容器对外按行内级盒子排列。
+   *
+   * 适用场景：工具栏、横向导航、纵向堆叠和一维内容排列。
+   *
+   * 注意：默认主轴为 row，默认不换行；主轴方向还受书写方向影响。
+   *
    * CSS 声明：`display:flex;`。
+   * @example
+   * css(s.display.flex, s.alignItems.center, s.justifyContent.spaceBetween)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
    */
   readonly flex = 'display:flex;';
   /** CSS 声明：`display:flow;`。 */
@@ -7257,13 +7240,29 @@ export class DisplayCss extends CssProperty {
   /**
    * 建立独立块格式化上下文，可包住内部浮动并隔离部分外边距折叠。
    *
+   * 区别：与普通 block 相比，显式建立独立块格式化上下文；无需借助 overflow:hidden，也不会因此裁剪溢出。
+   *
+   * 适用场景：让容器包住内部浮动，或隔离内外的部分外边距折叠。
+   *
    * CSS 声明：`display:flow-root;`。
+   * @example
+   * css(s.display.flowRoot, s.padding.rem(1))
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
    */
   readonly flowRoot = 'display:flow-root;';
   /**
    * 生成块级网格容器，直接子元素参与 Grid 布局。
    *
+   * 直接子元素进入网格，行列轨道和命名区域共同决定项目位置与尺寸。
+   *
+   * 区别：Flex 更侧重单个主轴；Grid 可以同时控制行和列。inline-grid 则改变容器对外的显示类型。
+   *
+   * 适用场景：卡片网格、表单对齐和二维页面区域布局。
+   *
    * CSS 声明：`display:grid;`。
+   * @example
+   * css(s.display.grid, s.gridTemplateColumns.repeat(3, 'minmax(0, 1fr)'), s.gap.rem(1))
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
    */
   readonly grid = 'display:grid;';
   /**
@@ -7287,19 +7286,47 @@ export class DisplayCss extends CssProperty {
   /**
    * 外部参与行内排版，内部建立独立格式化上下文，可设置宽高。
    *
+   * 区别：与 inline 相比可设置宽高，内部建立独立格式化上下文；与 inline-flex 相比，内部使用普通流而非 Flex。
+   *
+   * 适用场景：需要宽高、内边距且随文本同行排列的小盒子。
+   *
+   * 注意：相邻行内级盒子之间的文本空白仍可能形成间距，vertical-align 会影响它在行内的位置。
+   *
    * CSS 声明：`display:inline-block;`。
+   * @example
+   * css(s.display.inlineBlock, s.width.rem(2), s.height.rem(2), s.verticalAlign.middle)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
    */
   readonly inlineBlock = 'display:inline-block;';
   /**
-   * 生成行内级弹性容器，内部仍使用 Flex 布局。
+   * 创建行内级的 Flex 容器。
+   *
+   * 对外：在普通文档流中作为一个整体参与行内排版，可以与文字或其他行内内容位于同一行。
+   * 对内：直接子元素使用 Flex 布局，可通过 alignItems、justifyContent、gap 等控制对齐和间距。
+   *
+   * 区别：与 flex 的区别是容器自身的外部排版方式，内部弹性布局机制相同；inline-flex 对应双关键字写法 inline flex。
+   *
+   * 适用场景：图标与文字组合、标签等需要内部弹性对齐，同时以行内方式排列的内容。
+   *
+   * 注意：子项换行由 flex-wrap 控制。当容器自身是 Flex/Grid 项目时，其外部排版还受父布局控制。
    *
    * CSS 声明：`display:inline-flex;`。
+   * @example
+   * css(s.display.inlineFlex, s.alignItems.center, s.gap.rem(0.375))
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
    */
   readonly inlineFlex = 'display:inline-flex;';
   /**
    * 生成行内级网格容器，内部仍使用 Grid 布局。
    *
+   * 区别：与 grid 的内部网格布局相同，但容器在普通流中按行内级盒子排列。
+   *
+   * 适用场景：需要行列对齐并与周围文字同行的小型内容组。
+   *
    * CSS 声明：`display:inline-grid;`。
+   * @example
+   * css(s.display.inlineGrid, s.gridTemplateColumns.repeat(2, 'auto'), s.gap.rem(0.25))
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
    */
   readonly inlineGrid = 'display:inline-grid;';
   /** CSS 声明：`display:inline-list-item;`。 */
@@ -7315,7 +7342,16 @@ export class DisplayCss extends CssProperty {
   /**
    * 不生成元素及其后代的布局盒子，通常也从可访问性树中移除。
    *
+   * 区别：visibility:hidden 通常保留布局空间；opacity:0 只改变透明度，通常仍能交互。
+   *
+   * 适用场景：从当前布局中隐藏一段内容。
+   *
+   * 注意：不能靠它保留可聚焦交互；重新显示时需按组件需求管理焦点。
+   *
    * CSS 声明：`display:none;`。
+   * @example
+   * s.display.none
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
    */
   readonly none = 'display:none;';
   /**
@@ -7390,8 +7426,6 @@ export class DisplayCss extends CssProperty {
 
 /**
  * 选择 SVG 文本布局的主导基线及基线表。（dominant-baseline）
- *
- * CSS 语法：`auto | text-bottom | alphabetic | ideographic | middle | central | mathematical | hanging | text-top`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/dominant-baseline
@@ -7470,8 +7504,6 @@ export class DominantBaselineCss extends CssProperty {
 /**
  * 控制分离边框表格中空单元格的边框和背景是否绘制。（empty-cells）
  *
- * CSS 语法：`show | hide`。
- *
  * CSS 初始值：`show`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/empty-cells
  */
@@ -7535,8 +7567,6 @@ export class EmptyCellsCss extends CssProperty {
 /**
  * 控制表单控件采用固定默认尺寸还是根据内容调整尺寸。（field-sizing）
  *
- * CSS 语法：`content | fixed`。
- *
  * CSS 初始值：`fixed`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/field-sizing
  */
@@ -7599,8 +7629,6 @@ export class FieldSizingCss extends CssProperty {
 
 /**
  * 设置 SVG 图形内部的填充绘制方式。（fill）
- *
- * CSS 语法：`<paint>`。
  *
  * CSS 初始值：`black`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill
@@ -8137,8 +8165,6 @@ export class FillCss extends CssProperty {
 /**
  * 设置 SVG 填充的不透明度，不影响描边。（fill-opacity）
  *
- * CSS 语法：`<'opacity'>`。
- *
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-opacity
  */
@@ -8254,8 +8280,6 @@ export class FillOpacityCss extends CssProperty {
 /**
  * 设置复杂 SVG 路径的内部区域判定规则。（fill-rule）
  *
- * CSS 语法：`nonzero | evenodd`。
- *
  * CSS 初始值：`nonzero`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-rule
  */
@@ -8327,8 +8351,6 @@ export class FillRuleCss extends CssProperty {
 /**
  * 对元素的最终图像应用模糊、亮度等滤镜。（filter）
  *
- * CSS 语法：`none | <filter-value-list>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/filter
  */
@@ -8390,14 +8412,33 @@ export class FilterCss extends CssProperty {
 /**
  * 集中设置弹性项目的增长系数、收缩系数和基础尺寸。（flex）
  *
- * CSS 语法：`none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]`。
+ * 依次对应 flex-grow、flex-shrink、flex-basis。作用于弹性项目，应先由父容器建立 Flex 布局。
+ *
+ * 常用值：
+ * - `auto`：等价于 1 1 auto：可增长、可收缩，基础尺寸由主尺寸属性或内容决定。
+ * - `none`：等价于 0 0 auto：不增长也不收缩，保留自动基础尺寸。
+ *
+ * 适用场景：分配弹性布局中的剩余空间，或让项目保持自身尺寸。
+ * @example
+ * s.flex.raw('1 1 0%')
+ * @example
+ * s.flex.none
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex
  */
 export class FlexCss extends LengthCssProperty {
   /**
    * 等价于 1 1 auto：可增长、可收缩，基础尺寸由主尺寸属性或内容决定。
    *
+   * 区别：1 1 0% 以零百分比为基础分配，auto 的基础尺寸通常受内容或主尺寸属性影响。
+   *
+   * 适用场景：让项目以自身尺寸为基础参与剩余空间分配。
+   *
+   * 注意：最终比例还受最小/最大尺寸约束，不保证所有项目等宽。
+   *
    * CSS 声明：`flex:auto;`。
+   * @example
+   * s.flex.auto
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex
    */
   readonly auto = 'flex:auto;';
   /** CSS 声明：`flex:content;`。 */
@@ -8423,7 +8464,14 @@ export class FlexCss extends LengthCssProperty {
   /**
    * 等价于 0 0 auto：不增长也不收缩，保留自动基础尺寸。
    *
+   * 区别：auto 会增长和收缩；none 两者都不参与。
+   *
+   * 适用场景：防止工具栏中的图标或固定控件被压缩。
+   *
    * CSS 声明：`flex:none;`。
+   * @example
+   * s.flex.none
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex
    */
   readonly none = 'flex:none;';
   /**
@@ -8519,9 +8567,17 @@ export class FlexCss extends LengthCssProperty {
 /**
  * 设置弹性项目分配剩余空间之前的主轴基础尺寸。（flex-basis）
  *
- * CSS 语法：`content | <'width'>`。
+ * 在剩余空间分配前确定项目的主轴基础尺寸；设置为 auto 时先参考对应的 width/height。
+ *
+ * 常用值：
+ * - `auto`：先参考主轴对应的 width 或 height；该值也为 auto 时由内容决定。
+ * - `content`：按内容确定基础尺寸，而不直接使用 width 或 height 作为基础尺寸。
+ *
+ * 适用场景：为侧栏、内容区或重复项目指定弹性分配的起始尺寸。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.flexBasis.rem(16)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-basis
  */
 export class FlexBasisCss extends LengthCssProperty {
@@ -8654,9 +8710,17 @@ export class FlexBasisCss extends LengthCssProperty {
 /**
  * 设置弹性容器的主轴方向及项目排列方向。（flex-direction）
  *
- * CSS 语法：`row | row-reverse | column | column-reverse`。
+ * row 沿行内轴，column 沿块轴；不能始终按“水平/垂直”理解。反转只改变视觉排列，不改变 DOM 顺序。
+ *
+ * 常用值：
+ * - `row`：主轴沿行内方向排列；不一定是从左到右，取决于书写方向。
+ * - `column`：主轴沿块方向排列；水平书写时通常从上到下。
+ * - `row-reverse`：反转行内方向的视觉排列，不改变 DOM 顺序。
+ * - `column-reverse`：反转块方向的视觉排列，不改变 DOM 顺序。
  *
  * CSS 初始值：`row`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.display.flex, s.flexDirection.column, s.gap.rem(1))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-direction
  */
 export class FlexDirectionCss extends CssProperty {
@@ -8738,8 +8802,6 @@ export class FlexDirectionCss extends CssProperty {
 
 /**
  * 同时设置弹性布局的主轴方向和换行方式。（flex-flow）
- *
- * CSS 语法：`<'flex-direction'> || <'flex-wrap'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-flow
  */
 export class FlexFlowCss extends CssProperty {
@@ -8812,9 +8874,13 @@ export class FlexFlowCss extends CssProperty {
 /**
  * 设置弹性项目分配正剩余空间时的增长系数。（flex-grow）
  *
- * CSS 语法：`<number>`。
+ * 数值是分配正剩余空间的相对权重，不是最终宽度百分比。只有容器存在剩余空间时才发挥作用。
+ *
+ * 适用场景：让主内容区填充工具栏或行布局的剩余空间。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @example
+ * s.flexGrow.raw(1)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-grow
  */
 export class FlexGrowCss extends CssProperty {
@@ -8925,9 +8991,11 @@ export class FlexGrowCss extends CssProperty {
  *
  * 实际收缩还与 flex-basis 成比例；自动最小尺寸可能阻止项目继续缩小。
  *
- * CSS 语法：`<number>`。
+ * 适用场景：控制空间不足时是否允许缩小；设置为 0 可避免图标或固定控件收缩。
  *
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
+ * @example
+ * s.flexShrink.raw(0)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-shrink
  */
 export class FlexShrinkCss extends CssProperty {
@@ -9042,9 +9110,16 @@ export class FlexShrinkCss extends CssProperty {
 /**
  * 设置弹性项目是否换行，以及多行的排列方向。（flex-wrap）
  *
- * CSS 语法：`nowrap | wrap | wrap-reverse`。
+ * 常用值：
+ * - `nowrap`：保持单行；项目仍可能收缩或溢出。
+ * - `wrap`：空间不足时形成多行，沿交叉轴正常方向排列。
+ * - `wrap-reverse`：允许换行并反转交叉轴上各行的排列方向。
+ *
+ * 适用场景：标签、按钮等项目不足一行时允许分行。
  *
  * CSS 初始值：`nowrap`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.display.flex, s.flexWrap.wrap, s.gap.rem(0.5))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-wrap
  */
 export class FlexWrapCss extends CssProperty {
@@ -9087,7 +9162,14 @@ export class FlexWrapCss extends CssProperty {
   /**
    * 空间不足时形成多行，沿交叉轴正常方向排列。
    *
+   * 区别：nowrap 保持单行；wrap-reverse 反转交叉轴上各行的排列方向。
+   *
+   * 注意：换行不会自动均分每行项目宽度，尺寸仍由各项目的 flex 配置决定。
+   *
    * CSS 声明：`flex-wrap:wrap;`。
+   * @example
+   * css(s.display.flex, s.flexWrap.wrap)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-wrap
    */
   readonly wrap = 'flex-wrap:wrap;';
   /**
@@ -9120,8 +9202,6 @@ export class FlexWrapCss extends CssProperty {
 
 /**
  * 将元素浮动到指定侧，使相邻行内内容围绕它排列。（float）
- *
- * CSS 语法：`left | right | none | inline-start | inline-end`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/float
@@ -9191,8 +9271,6 @@ export class FloatCss extends CssProperty {
 
 /**
  * 设置 SVG feFlood 或相关滤镜的洪泛颜色。（flood-color）
- *
- * CSS 语法：`<color>`。
  *
  * CSS 初始值：`black`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-color
@@ -9723,8 +9801,6 @@ export class FloodColorCss extends CssProperty {
 /**
  * 设置 SVG 洪泛滤镜颜色的不透明度。（flood-opacity）
  *
- * CSS 语法：`<'opacity'>`。
- *
  * CSS 初始值：`black`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-opacity
  */
@@ -9839,8 +9915,6 @@ export class FloodOpacityCss extends CssProperty {
 
 /**
  * 集中设置字体样式、粗细、大小、行高和字体族等信息。（font）
- *
- * CSS 语法：`[ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font
  */
 export class FontCss extends CssProperty {
@@ -9910,8 +9984,6 @@ export class FontCss extends CssProperty {
 
 /**
  * 设置按优先级排列的字体族及通用字体回退。（font-family）
- *
- * CSS 语法：`[ <family-name> | <generic-family> ]#`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-family
  */
 export class FontFamilyCss extends CssProperty {
@@ -9998,8 +10070,6 @@ export class FontFamilyCss extends CssProperty {
 /**
  * 通过 OpenType 特性标签控制字体的底层排版功能。（font-feature-settings）
  *
- * CSS 语法：`normal | <feature-tag-value>#`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-feature-settings
  */
@@ -10060,8 +10130,6 @@ export class FontFeatureSettingsCss extends CssProperty {
 
 /**
  * 设置是否应用字体提供的字偶间距调整。（font-kerning）
- *
- * CSS 语法：`auto | normal | none`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-kerning
@@ -10128,8 +10196,6 @@ export class FontKerningCss extends CssProperty {
 /**
  * 覆盖字体排版使用的语言系统标签，不改变文本实际语言。（font-language-override）
  *
- * CSS 语法：`normal | <string>`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-language-override
  */
@@ -10190,8 +10256,6 @@ export class FontLanguageOverrideCss extends CssProperty {
 
 /**
  * 控制支持光学尺寸轴的字体是否按字号优化字形。（font-optical-sizing）
- *
- * CSS 语法：`auto | none`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-optical-sizing
@@ -10255,8 +10319,6 @@ export class FontOpticalSizingCss extends CssProperty {
 
 /**
  * 选择或覆盖彩色字体使用的调色板。（font-palette）
- *
- * CSS 语法：`normal | light | dark | <palette-identifier> | <palette-mix()>`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-palette
@@ -10323,9 +10385,13 @@ export class FontPaletteCss extends CssProperty {
 /**
  * 设置字体大小，也影响 em 等相对单位的计算。（font-size）
  *
- * CSS 语法：`<absolute-size> | <relative-size> | <length-percentage [0,∞]> | math`。
+ * 改变字形大小，并影响 em 等相对长度；行盒高度还由 line-height 决定。
+ *
+ * 适用场景：建立文字层级，根字号相对尺寸可用 rem 表达。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.fontSize.rem(1), s.lineHeight.raw(1.5))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size
  */
 export class FontSizeCss extends LengthCssProperty {
@@ -10468,8 +10534,6 @@ export class FontSizeCss extends LengthCssProperty {
 /**
  * 按字体特征尺寸调整字号，减少字体回退造成的视觉变化。（font-size-adjust）
  *
- * CSS 语法：`none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number> ]`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size-adjust
  */
@@ -10588,8 +10652,6 @@ export class FontSizeAdjustCss extends CssProperty {
 
 /**
  * 控制字体平滑的非标准属性；使用前核对目标浏览器。（font-smooth）
- *
- * CSS 语法：`auto | never | always | <absolute-size> | <length>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-smooth
@@ -10803,8 +10865,6 @@ export class FontStretchCss extends CssProperty {
 /**
  * 选择正常、斜体或倾斜字体样式。（font-style）
  *
- * CSS 语法：`normal | italic | oblique <angle>?`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-style
  */
@@ -10974,8 +11034,6 @@ export class FontStyleCss extends CssProperty {
 /**
  * 控制缺少真实字体字形时浏览器可否合成粗体、斜体等样式。（font-synthesis）
  *
- * CSS 语法：`none | [ weight || style || small-caps || position]`。
- *
  * CSS 初始值：`weight style small-caps position `（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis
  */
@@ -11045,8 +11103,6 @@ export class FontSynthesisCss extends CssProperty {
 /**
  * 控制浏览器是否可以合成上标和下标字形。（font-synthesis-position）
  *
- * CSS 语法：`auto | none`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-position
  */
@@ -11109,8 +11165,6 @@ export class FontSynthesisPositionCss extends CssProperty {
 
 /**
  * 控制浏览器是否可以合成小型大写字形。（font-synthesis-small-caps）
- *
- * CSS 语法：`auto | none`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-small-caps
@@ -11175,8 +11229,6 @@ export class FontSynthesisSmallCapsCss extends CssProperty {
 /**
  * 控制浏览器是否可以合成倾斜字体。（font-synthesis-style）
  *
- * CSS 语法：`auto | none`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-style
  */
@@ -11240,8 +11292,6 @@ export class FontSynthesisStyleCss extends CssProperty {
 /**
  * 控制浏览器是否可以合成加粗字体。（font-synthesis-weight）
  *
- * CSS 语法：`auto | none`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-weight
  */
@@ -11304,8 +11354,6 @@ export class FontSynthesisWeightCss extends CssProperty {
 
 /**
  * 集中设置字体的连字、大小写、数字及其他变体。（font-variant）
- *
- * CSS 语法：`normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic( <feature-value-name> ) || historical-forms || styleset( <feature-value-name># ) || character-variant( <feature-value-name># ) || swash( <feature-value-name> ) || ornaments( <feature-value-name> ) || annotation( <feature-value-name> ) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant
@@ -11434,8 +11482,6 @@ export class FontVariantCss extends CssProperty {
 /**
  * 选择字体提供的替代字形。（font-variant-alternates）
  *
- * CSS 语法：`normal | [ stylistic( <feature-value-name> ) || historical-forms || styleset( <feature-value-name># ) || character-variant( <feature-value-name># ) || swash( <feature-value-name> ) || ornaments( <feature-value-name> ) || annotation( <feature-value-name> ) ]`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-alternates
  */
@@ -11498,8 +11544,6 @@ export class FontVariantAlternatesCss extends CssProperty {
 
 /**
  * 设置小型大写等大小写字形变体。（font-variant-caps）
- *
- * CSS 语法：`normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-caps
@@ -11573,8 +11617,6 @@ export class FontVariantCapsCss extends CssProperty {
 
 /**
  * 设置东亚文字字形及宽度变体。（font-variant-east-asian）
- *
- * CSS 语法：`normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-east-asian
@@ -11655,8 +11697,6 @@ export class FontVariantEastAsianCss extends CssProperty {
 /**
  * 设置字符优先采用文本字形还是 emoji 字形。（font-variant-emoji）
  *
- * CSS 语法：`normal | text | emoji | unicode`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-emoji
  */
@@ -11723,8 +11763,6 @@ export class FontVariantEmojiCss extends CssProperty {
 
 /**
  * 设置字体连字的启用方式。（font-variant-ligatures）
- *
- * CSS 语法：`normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-ligatures
@@ -11805,8 +11843,6 @@ export class FontVariantLigaturesCss extends CssProperty {
 /**
  * 设置数字的等宽、比例、分数及其他排版变体。（font-variant-numeric）
  *
- * CSS 语法：`normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-numeric
  */
@@ -11884,8 +11920,6 @@ export class FontVariantNumericCss extends CssProperty {
 /**
  * 选择字体提供的上标或下标字形。（font-variant-position）
  *
- * CSS 语法：`normal | sub | super`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-position
  */
@@ -11951,8 +11985,6 @@ export class FontVariantPositionCss extends CssProperty {
 /**
  * 直接设置可变字体各个轴的数值。（font-variation-settings）
  *
- * CSS 语法：`normal | [ <string> <number> ]#`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variation-settings
  */
@@ -12014,9 +12046,19 @@ export class FontVariationSettingsCss extends CssProperty {
 /**
  * 设置字体粗细，实际可用字重取决于字体。（font-weight）
  *
- * CSS 语法：`<font-weight-absolute> | bolder | lighter`。
+ * 最终字形取决于已加载字体和可用字重；变量字体可支持连续的字重范围。
+ *
+ * 常用值：
+ * - `normal`：正常字重，等价于数值 400。
+ * - `bold`：粗体字重，等价于数值 700。
+ * - `bolder`：相对于继承字重选择更粗的字重，不是简单加一个固定数值。
+ * - `lighter`：相对于继承字重选择更细的字重，不是简单减一个固定数值。
+ *
+ * 适用场景：正文、强调文字和标题的视觉层级。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @example
+ * s.fontWeight.raw(600)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-weight
  */
 export class FontWeightCss extends CssProperty {
@@ -12154,8 +12196,6 @@ export class FontWeightCss extends CssProperty {
 
 /**
  * 选择字体的宽窄字面，不是通过变换拉伸元素。（font-width）
- *
- * CSS 语法：`normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-width
@@ -12301,8 +12341,6 @@ export class FontWidthCss extends CssProperty {
 
 /**
  * 控制元素是否参与系统强制颜色模式的自动替换。（forced-color-adjust）
- *
- * CSS 语法：`auto | none | preserve-parent-color`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/forced-color-adjust

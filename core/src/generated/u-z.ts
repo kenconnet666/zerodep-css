@@ -7,8 +7,6 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 /**
  * 设置元素如何参与 Unicode 双向文本算法，通常与 direction 配合。（unicode-bidi）
  *
- * CSS 语法：`normal | embed | isolate | bidi-override | isolate-override | plaintext`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/unicode-bidi
  */
@@ -80,9 +78,17 @@ export class UnicodeBidiCss extends CssProperty {
 /**
  * 设置用户是否可以选取元素中的文本。（user-select）
  *
- * CSS 语法：`auto | text | none | all`。
+ * 常用值：
+ * - `auto`：由父级与元素上下文决定使用的选取行为。
+ * - `text`：允许文本选取。
+ * - `none`：阻止常规文本选取，不是内容保护或访问控制。
+ * - `all`：将元素内容作为整体选取单元。
+ *
+ * 适用场景：调整拖拽控件中的文本选取，或让代码片段整段选中。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.userSelect.all
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/user-select
  */
 export class UserSelectCss extends CssProperty {
@@ -165,8 +171,6 @@ export class UserSelectCss extends CssProperty {
 /**
  * 设置 SVG 图形变换时对描边等矢量效果的处理。（vector-effect）
  *
- * CSS 语法：`none | non-scaling-stroke | non-scaling-size | non-rotation | fixed-position`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/vector-effect
  */
@@ -235,8 +239,6 @@ export class VectorEffectCss extends CssProperty {
 
 /**
  * 设置行内级盒子或表格单元格的垂直对齐，不用于普通块盒居中。（vertical-align）
- *
- * CSS 语法：`baseline | sub | super | text-top | text-bottom | middle | top | bottom | <percentage> | <length>`。
  *
  * CSS 初始值：`baseline`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/vertical-align
@@ -380,8 +382,6 @@ export class VerticalAlignCss extends LengthCssProperty {
 
 /**
  * 同时声明基于元素可见进度的时间线名称与轴。（view-timeline）
- *
- * CSS 语法：`[ <'view-timeline-name'> [ <'view-timeline-axis'> || <'view-timeline-inset'> ]? ]#`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline
  */
 export class ViewTimelineCss extends CssProperty {
@@ -441,8 +441,6 @@ export class ViewTimelineCss extends CssProperty {
 
 /**
  * 设置可见进度时间线所观察的滚动轴。（view-timeline-axis）
- *
- * CSS 语法：`[ block | inline | x | y ]#`。
  *
  * CSS 初始值：`block`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-axis
@@ -510,8 +508,6 @@ export class ViewTimelineAxisCss extends CssProperty {
 
 /**
  * 设置可见进度时间线使用的滚动视口内缩范围。（view-timeline-inset）
- *
- * CSS 语法：`[ [ auto | <length-percentage> ]{1,2} ]#`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-inset
@@ -1830,8 +1826,6 @@ export class ViewTimelineInsetCss extends LengthCssProperty {
 /**
  * 声明基于元素进入和离开滚动视口的时间线名称。（view-timeline-name）
  *
- * CSS 语法：`[ none | <dashed-ident> ]#`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-name
  */
@@ -1893,8 +1887,6 @@ export class ViewTimelineNameCss extends CssProperty {
 /**
  * 为视图过渡的快照伪元素分组，以便共用样式。（view-transition-class）
  *
- * CSS 语法：`none | <custom-ident>+`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-class
  */
@@ -1955,8 +1947,6 @@ export class ViewTransitionClassCss extends CssProperty {
 
 /**
  * 为视图过渡中的元素命名，以匹配前后状态的快照。（view-transition-name）
- *
- * CSS 语法：`none | <custom-ident> | match-element`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-name
@@ -2021,9 +2011,16 @@ export class ViewTransitionNameCss extends CssProperty {
 /**
  * 设置元素是否可见；隐藏通常保留布局空间。（visibility）
  *
- * CSS 语法：`visible | hidden | collapse`。
+ * 常用值：
+ * - `visible`：正常显示元素。
+ * - `hidden`：隐藏绘制但通常保留布局空间；后代可显式恢复 visible。
+ * - `collapse`：对表格行列等特定布局有折叠语义，其他场景通常类似 hidden；应核对具体布局行为。
+ *
+ * 适用场景：需要隐藏内容但通常保留其布局占位的场景。
  *
  * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+ * @example
+ * s.visibility.hidden
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/visibility
  */
 export class VisibilityCss extends CssProperty {
@@ -2036,7 +2033,14 @@ export class VisibilityCss extends CssProperty {
   /**
    * 隐藏绘制但通常保留布局空间；后代可显式恢复 visible。
    *
+   * 区别：display:none 不保留布局盒；opacity:0 不会以相同方式移除交互和可访问性。
+   *
+   * 适用场景：暂时隐藏占位内容。
+   *
    * CSS 声明：`visibility:hidden;`。
+   * @example
+   * s.visibility.hidden
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/visibility
    */
   readonly hidden = 'visibility:hidden;';
   /**
@@ -2100,9 +2104,21 @@ export class VisibilityCss extends CssProperty {
 /**
  * 设置空白折叠和换行处理方式。（white-space）
  *
- * CSS 语法：`normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'>`。
+ * 同时影响空白折叠和软换行。它不负责给溢出内容添加省略号。
+ *
+ * 常用值：
+ * - `normal`：折叠连续空白和源换行，允许软换行。
+ * - `nowrap`：折叠空白并禁止软换行；不会自行生成省略号。
+ * - `pre`：保留空白和源换行，不进行普通软换行。
+ * - `pre-wrap`：保留空白和源换行，同时允许软换行。
+ * - `pre-line`：折叠空格等空白但保留源换行，同时允许软换行。
+ * - `break-spaces`：保留空白并允许在保留的空格后换行；行末空格占据空间。
+ *
+ * 适用场景：单行标签、保留换行的用户文本和代码片段。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @example
+ * s.whiteSpace.preWrap
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
  */
 export class WhiteSpaceCss extends CssProperty {
@@ -2135,7 +2151,14 @@ export class WhiteSpaceCss extends CssProperty {
   /**
    * 折叠空白并禁止软换行；不会自行生成省略号。
    *
+   * 区别：pre 也不进行普通软换行，但会保留连续空白。
+   *
+   * 适用场景：单行标签；结合宽度约束、overflow 和 text-overflow 实现省略。
+   *
    * CSS 声明：`white-space:nowrap;`。
+   * @example
+   * css(s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
    */
   readonly nowrap = 'white-space:nowrap;';
   /**
@@ -2153,7 +2176,14 @@ export class WhiteSpaceCss extends CssProperty {
   /**
    * 保留空白和源换行，同时允许软换行。
    *
+   * 区别：pre 不进行普通软换行；pre-line 会折叠连续空格。
+   *
+   * 适用场景：需要保留用户换行和空格，同时允许适应容器宽度的文本。
+   *
    * CSS 声明：`white-space:pre-wrap;`。
+   * @example
+   * s.whiteSpace.preWrap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
    */
   readonly preWrap = 'white-space:pre-wrap;';
   /** CSS 声明：`white-space:preserve;`。 */
@@ -2206,8 +2236,6 @@ export class WhiteSpaceCss extends CssProperty {
 
 /**
  * 设置空格、制表符和换行符如何折叠或保留。（white-space-collapse）
- *
- * CSS 语法：`collapse | preserve | preserve-breaks | preserve-spaces | break-spaces`。
  *
  * CSS 初始值：`collapse`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space-collapse
@@ -2277,8 +2305,6 @@ export class WhiteSpaceCollapseCss extends CssProperty {
 
 /**
  * 设置分页或分栏断点后需保留的最少行数。（widows）
- *
- * CSS 语法：`<integer>`。
  *
  * CSS 初始值：`2`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/widows
@@ -2391,7 +2417,13 @@ export class WidowsCss extends CssProperty {
  *
  * 百分比依据包含块解析；auto、内部尺寸和最小/最大约束共同决定最终使用尺寸。
  *
- * CSS 语法：`auto | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
+ * 常用值：
+ * - `auto`：让布局算法决定尺寸，不保证等于父元素尺寸。
+ * - `min-content`：采用内容的最小内部尺寸，文字会考虑可用的软换行机会。
+ * - `max-content`：采用内容的最大内部尺寸，通常不进行软换行。
+ * - `fit-content`：在最小和最大内部尺寸之间按可用空间夹取尺寸。
+ *
+ * 适用场景：控制物理宽度；支持书写模式的布局可优先考虑 inline-size。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @example
@@ -2548,8 +2580,6 @@ export class WidthCss extends LengthCssProperty {
  *
  * 仅对即将发生的变化短期使用；长期或大量声明可能占用额外资源，并提前改变层叠上下文。
  *
- * CSS 语法：`auto | <animateable-feature>#`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/will-change
  */
@@ -2615,9 +2645,16 @@ export class WillChangeCss extends CssProperty {
 /**
  * 设置单词内部或文字之间的断行规则。（word-break）
  *
- * CSS 语法：`normal | break-all | keep-all | break-word | auto-phrase`。
+ * 按字符和语言控制断行。仅需避免超长单词溢出时，通常先考虑 overflow-wrap。
+ *
+ * 常用值：
+ * - `normal`：按语言的默认断行规则处理。
+ * - `break-all`：允许在更多字符间断行以防溢出，可能拆开普通单词。
+ * - `keep-all`：限制中日韩文字内部断行，其他文字仍按正常规则处理。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @example
+ * s.wordBreak.normal
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-break
  */
 export class WordBreakCss extends CssProperty {
@@ -2697,8 +2734,6 @@ export class WordBreakCss extends CssProperty {
 
 /**
  * 设置单词或词间分隔符的额外间距。（word-spacing）
- *
- * CSS 语法：`normal | <length>`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-spacing
@@ -2817,8 +2852,6 @@ export class WordSpacingCss extends LengthCssProperty {
 /**
  * 设置长文本的额外换行行为；是 overflow-wrap 的兼容名称。（word-wrap）
  *
- * CSS 语法：`normal | break-word`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-wrap
  */
@@ -2890,8 +2923,6 @@ export class WordWrapCss extends CssProperty {
 /**
  * 设置水平或竖直书写模式，以及行和块的推进方向。（writing-mode）
  *
- * CSS 语法：`horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr`。
- *
  * CSS 初始值：`horizontal-tb`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/writing-mode
  */
@@ -2960,8 +2991,6 @@ export class WritingModeCss extends CssProperty {
 
 /**
  * 设置适用 SVG 元素的水平几何坐标。（x）
- *
- * CSS 语法：`<length> | <percentage>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/x
@@ -3083,8 +3112,6 @@ export class XCss extends LengthCssProperty {
 
 /**
  * 设置适用 SVG 元素的垂直几何坐标。（y）
- *
- * CSS 语法：`<length> | <percentage>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/y
@@ -3209,9 +3236,11 @@ export class YCss extends LengthCssProperty {
  *
  * 数值只在所属层叠上下文内比较；更大的数值不保证盖过其他层叠上下文。Flex/Grid 项目也可以使用 z-index。
  *
- * CSS 语法：`auto | <integer>`。
+ * 适用场景：控制同一层叠上下文中的浮层顺序，排查遮挡时先确认祖先层叠上下文。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.position.relative, s.zIndex.raw(1))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/z-index
  */
 export class ZIndexCss extends CssProperty {
@@ -3321,8 +3350,6 @@ export class ZIndexCss extends CssProperty {
 
 /**
  * 设置元素及其布局的缩放比例，与 transform:scale 的布局行为不同。（zoom）
- *
- * CSS 语法：`normal | reset | <number [0,∞]> || <percentage [0,∞]>`。
  *
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/zoom

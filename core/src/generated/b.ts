@@ -7,8 +7,6 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 /**
  * 对元素背后的图像区域应用模糊等滤镜，通常需要透明或半透明背景。（backdrop-filter）
  *
- * CSS 语法：`none | <filter-value-list>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backdrop-filter
  */
@@ -69,8 +67,6 @@ export class BackdropFilterCss extends CssProperty {
 
 /**
  * 控制经过三维变换后背向观察者的元素背面是否可见。（backface-visibility）
- *
- * CSS 语法：`visible | hidden`。
  *
  * CSS 初始值：`visible`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backface-visibility
@@ -134,8 +130,6 @@ export class BackfaceVisibilityCss extends CssProperty {
 
 /**
  * 集中设置背景颜色、图像、位置、尺寸、重复及绘制区域。（background）
- *
- * CSS 语法：`<bg-layer>#? , <final-bg-layer>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background
  */
 export class BackgroundCss extends LengthCssProperty {
@@ -756,8 +750,6 @@ export class BackgroundCss extends LengthCssProperty {
 /**
  * 设置背景图像相对于视口、元素或局部滚动内容的固定方式。（background-attachment）
  *
- * CSS 语法：`<attachment>#`。
- *
  * CSS 初始值：`scroll`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
  */
@@ -822,8 +814,6 @@ export class BackgroundAttachmentCss extends CssProperty {
 
 /**
  * 设置背景图层彼此之间以及与背景色之间的混合模式。（background-blend-mode）
- *
- * CSS 语法：`<blend-mode>#`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-blend-mode
@@ -916,8 +906,6 @@ export class BackgroundBlendModeCss extends CssProperty {
 /**
  * 设置背景允许绘制到的边界区域。（background-clip）
  *
- * CSS 语法：`<bg-clip>#`。
- *
  * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-clip
  */
@@ -990,8 +978,6 @@ export class BackgroundClipCss extends CssProperty {
 
 /**
  * 设置元素背景颜色，位于背景图像下方。（background-color）
- *
- * CSS 语法：`<color>`。
  *
  * CSS 初始值：`transparent`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-color
@@ -1522,8 +1508,6 @@ export class BackgroundColorCss extends CssProperty {
 /**
  * 设置一个或多个背景图像或渐变图层。（background-image）
  *
- * CSS 语法：`<bg-image>#`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
  */
@@ -1584,8 +1568,6 @@ export class BackgroundImageCss extends CssProperty {
 
 /**
  * 设置背景图像定位所依据的盒子区域。（background-origin）
- *
- * CSS 语法：`<visual-box>#`。
  *
  * CSS 初始值：`padding-box`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-origin
@@ -1651,8 +1633,6 @@ export class BackgroundOriginCss extends CssProperty {
 
 /**
  * 设置背景图像在定位区域内的位置。（background-position）
- *
- * CSS 语法：`<bg-position>#`。
  *
  * CSS 初始值：`0% 0%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position
@@ -2979,8 +2959,6 @@ export class BackgroundPositionCss extends LengthCssProperty {
 /**
  * 设置背景图像的水平位置。（background-position-x）
  *
- * CSS 语法：`[ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]#`。
- *
  * CSS 初始值：`0%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-x
  */
@@ -3117,8 +3095,6 @@ export class BackgroundPositionXCss extends LengthCssProperty {
 
 /**
  * 设置背景图像的垂直位置。（background-position-y）
- *
- * CSS 语法：`[ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]#`。
  *
  * CSS 初始值：`0%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-y
@@ -3257,8 +3233,6 @@ export class BackgroundPositionYCss extends LengthCssProperty {
 /**
  * 设置背景图像在水平和垂直方向上的重复方式。（background-repeat）
  *
- * CSS 语法：`<repeat-style>#`。
- *
  * CSS 初始值：`repeat`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat
  */
@@ -3330,9 +3304,18 @@ export class BackgroundRepeatCss extends CssProperty {
 /**
  * 设置背景图像尺寸，以及覆盖或完整容纳图像的缩放方式。（background-size）
  *
- * CSS 语法：`<bg-size>#`。
+ * 改变背景图像的尺寸，不改变元素尺寸；位置由 background-position 决定。
+ *
+ * 常用值：
+ * - `auto`：依据图像内部尺寸、比例及另一维的设置确定尺寸。
+ * - `contain`：保持图像比例并使整张图像容纳于定位区域，可能留下空白。
+ * - `cover`：保持图像比例并覆盖整个定位区域，超出部分可能被裁剪。
+ *
+ * 适用场景：背景封面或需要完整显示的背景装饰。
  *
  * CSS 初始值：`auto auto`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.backgroundSize.cover, s.backgroundPosition.raw('center'))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-size
  */
 export class BackgroundSizeCss extends LengthCssProperty {
@@ -4665,8 +4648,6 @@ export class BackgroundSizeCss extends LengthCssProperty {
 /**
  * 使 SVG 文本基线相对于其基准位置偏移。（baseline-shift）
  *
- * CSS 语法：`<length-percentage> | sub | super | baseline`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
  */
@@ -4800,9 +4781,13 @@ export class BaselineShiftCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴尺寸；水平书写时通常对应高度。（block-size）
  *
- * CSS 语法：`<'width'>`。
+ * 水平书写时通常对应 height，竖直书写时通常对应 width。
+ *
+ * 适用场景：使用逻辑轴表达内容块尺寸。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.blockSize.rem(10)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/block-size
  */
 export class BlockSizeCss extends LengthCssProperty {
@@ -4940,8 +4925,6 @@ export class BlockSizeCss extends LengthCssProperty {
 
 /**
  * 同时设置四边边框的宽度、线型和颜色。（border）
- *
- * CSS 语法：`<line-width> || <line-style> || <color>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border
  */
 export class BorderCss extends LengthCssProperty {
@@ -5545,8 +5528,6 @@ export class BorderCss extends LengthCssProperty {
 
 /**
  * 设置逻辑块轴起始侧和结束侧的边框。（border-block）
- *
- * CSS 语法：`<'border-block-start'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block
  */
 export class BorderBlockCss extends LengthCssProperty {
@@ -6157,8 +6138,6 @@ export class BorderBlockCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴两侧边框颜色。（border-block-color）
  *
- * CSS 语法：`<'border-top-color'>{1,2}`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-color
  */
@@ -6687,8 +6666,6 @@ export class BorderBlockColorCss extends CssProperty {
 
 /**
  * 设置逻辑块轴结束侧边框的宽度、线型和颜色。（border-block-end）
- *
- * CSS 语法：`<'border-top-width'> || <'border-top-style'> || <color>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end
  */
 export class BorderBlockEndCss extends LengthCssProperty {
@@ -7299,8 +7276,6 @@ export class BorderBlockEndCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴结束侧的边框颜色。（border-block-end-color）
  *
- * CSS 语法：`<'border-top-color'>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-color
  */
@@ -7830,8 +7805,6 @@ export class BorderBlockEndColorCss extends CssProperty {
 /**
  * 设置逻辑块轴结束侧的边框线型。（border-block-end-style）
  *
- * CSS 语法：`<'border-top-style'>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-style
  */
@@ -7910,8 +7883,6 @@ export class BorderBlockEndStyleCss extends CssProperty {
 
 /**
  * 设置逻辑块轴结束侧的边框宽度。（border-block-end-width）
- *
- * CSS 语法：`<'border-top-width'>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-width
@@ -8033,8 +8004,6 @@ export class BorderBlockEndWidthCss extends LengthCssProperty {
 
 /**
  * 设置逻辑块轴起始侧边框的宽度、线型和颜色。（border-block-start）
- *
- * CSS 语法：`<'border-top-width'> || <'border-top-style'> || <color>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start
  */
 export class BorderBlockStartCss extends LengthCssProperty {
@@ -8645,8 +8614,6 @@ export class BorderBlockStartCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴起始侧的边框颜色。（border-block-start-color）
  *
- * CSS 语法：`<'border-top-color'>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-color
  */
@@ -9176,8 +9143,6 @@ export class BorderBlockStartColorCss extends CssProperty {
 /**
  * 设置逻辑块轴起始侧的边框线型。（border-block-start-style）
  *
- * CSS 语法：`<'border-top-style'>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-style
  */
@@ -9256,8 +9221,6 @@ export class BorderBlockStartStyleCss extends CssProperty {
 
 /**
  * 设置逻辑块轴起始侧的边框宽度。（border-block-start-width）
- *
- * CSS 语法：`<'border-top-width'>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-width
@@ -9380,8 +9343,6 @@ export class BorderBlockStartWidthCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴两侧的边框线型。（border-block-style）
  *
- * CSS 语法：`<'border-top-style'>{1,2}`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-style
  */
@@ -9460,8 +9421,6 @@ export class BorderBlockStyleCss extends CssProperty {
 
 /**
  * 设置逻辑块轴两侧的边框宽度。（border-block-width）
- *
- * CSS 语法：`<'border-top-width'>{1,2}`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-width
@@ -10759,8 +10718,6 @@ export class BorderBlockWidthCss extends LengthCssProperty {
 
 /**
  * 设置下边框的宽度、线型和颜色。（border-bottom）
- *
- * CSS 语法：`<line-width> || <line-style> || <color>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom
  */
 export class BorderBottomCss extends LengthCssProperty {
@@ -11371,8 +11328,6 @@ export class BorderBottomCss extends LengthCssProperty {
 /**
  * 设置下边框颜色。（border-bottom-color）
  *
- * CSS 语法：`<'border-top-color'>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-color
  */
@@ -11901,8 +11856,6 @@ export class BorderBottomColorCss extends CssProperty {
 
 /**
  * 设置左下角边框的圆角半径。（border-bottom-left-radius）
- *
- * CSS 语法：`<length-percentage [0,∞]>{1,2}`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
@@ -13219,8 +13172,6 @@ export class BorderBottomLeftRadiusCss extends LengthCssProperty {
 /**
  * 设置右下角边框的圆角半径。（border-bottom-right-radius）
  *
- * CSS 语法：`<length-percentage [0,∞]>{1,2}`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
  */
@@ -14536,8 +14487,6 @@ export class BorderBottomRightRadiusCss extends LengthCssProperty {
 /**
  * 设置下边框线型。（border-bottom-style）
  *
- * CSS 语法：`<line-style>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-style
  */
@@ -14616,8 +14565,6 @@ export class BorderBottomStyleCss extends CssProperty {
 
 /**
  * 设置下边框宽度。（border-bottom-width）
- *
- * CSS 语法：`<line-width>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-width
@@ -14740,8 +14687,6 @@ export class BorderBottomWidthCss extends LengthCssProperty {
 /**
  * 设置表格相邻单元格边框合并还是分离。（border-collapse）
  *
- * CSS 语法：`separate | collapse`。
- *
  * CSS 初始值：`separate`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-collapse
  */
@@ -14804,8 +14749,6 @@ export class BorderCollapseCss extends CssProperty {
 
 /**
  * 设置四边边框颜色，支持按上、右、下、左顺序简写。（border-color）
- *
- * CSS 语法：`<color>{1,4}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-color
  */
 export class BorderColorCss extends CssProperty {
@@ -15334,8 +15277,6 @@ export class BorderColorCss extends CssProperty {
 /**
  * 设置逻辑块轴结束侧与行内轴结束侧相交角的圆角。（border-end-end-radius）
  *
- * CSS 语法：`<'border-top-left-radius'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
  */
@@ -15451,8 +15392,6 @@ export class BorderEndEndRadiusCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴结束侧与行内轴起始侧相交角的圆角。（border-end-start-radius）
  *
- * CSS 语法：`<'border-top-left-radius'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
  */
@@ -15567,8 +15506,6 @@ export class BorderEndStartRadiusCss extends LengthCssProperty {
 
 /**
  * 设置用作边框的图像及其切片、宽度、外扩和重复方式。（border-image）
- *
- * CSS 语法：`<'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image
  */
 export class BorderImageCss extends CssProperty {
@@ -15692,8 +15629,6 @@ export class BorderImageCss extends CssProperty {
 
 /**
  * 设置边框图像超出边框盒的距离。（border-image-outset）
- *
- * CSS 语法：`[ <length [0,∞]> | <number [0,∞]> ]{1,4}  `。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-outset
@@ -18211,8 +18146,6 @@ export class BorderImageOutsetCss extends LengthCssProperty {
 /**
  * 设置边框图像切片沿边框的重复或拉伸方式。（border-image-repeat）
  *
- * CSS 语法：`[ stretch | repeat | round | space ]{1,2}`。
- *
  * CSS 初始值：`stretch`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-repeat
  */
@@ -18279,8 +18212,6 @@ export class BorderImageRepeatCss extends CssProperty {
 
 /**
  * 设置边框图像的切片位置及是否填充中间区域。（border-image-slice）
- *
- * CSS 语法：`[ <number [0,∞]> | <percentage [0,∞]> ]{1,4}  && fill?`。
  *
  * CSS 初始值：`100%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-slice
@@ -18446,8 +18377,6 @@ export class BorderImageSliceCss extends CssProperty {
 /**
  * 指定边框使用的图像或渐变。（border-image-source）
  *
- * CSS 语法：`none | <image>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-source
  */
@@ -18508,8 +18437,6 @@ export class BorderImageSourceCss extends CssProperty {
 
 /**
  * 设置边框图像各边的绘制宽度。（border-image-width）
- *
- * CSS 语法：`[ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4}`。
  *
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-width
@@ -21077,8 +21004,6 @@ export class BorderImageWidthCss extends LengthCssProperty {
 
 /**
  * 设置逻辑行内轴起始侧和结束侧的边框。（border-inline）
- *
- * CSS 语法：`<'border-block-start'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline
  */
 export class BorderInlineCss extends LengthCssProperty {
@@ -21689,8 +21614,6 @@ export class BorderInlineCss extends LengthCssProperty {
 /**
  * 设置逻辑行内轴两侧边框颜色。（border-inline-color）
  *
- * CSS 语法：`<'border-top-color'>{1,2}`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-color
  */
@@ -22219,8 +22142,6 @@ export class BorderInlineColorCss extends CssProperty {
 
 /**
  * 设置逻辑行内轴结束侧边框的宽度、线型和颜色。（border-inline-end）
- *
- * CSS 语法：`<'border-top-width'> || <'border-top-style'> || <color>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end
  */
 export class BorderInlineEndCss extends LengthCssProperty {
@@ -22831,8 +22752,6 @@ export class BorderInlineEndCss extends LengthCssProperty {
 /**
  * 设置逻辑行内轴结束侧边框颜色。（border-inline-end-color）
  *
- * CSS 语法：`<'border-top-color'>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-color
  */
@@ -23362,8 +23281,6 @@ export class BorderInlineEndColorCss extends CssProperty {
 /**
  * 设置逻辑行内轴结束侧边框线型。（border-inline-end-style）
  *
- * CSS 语法：`<'border-top-style'>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-style
  */
@@ -23442,8 +23359,6 @@ export class BorderInlineEndStyleCss extends CssProperty {
 
 /**
  * 设置逻辑行内轴结束侧边框宽度。（border-inline-end-width）
- *
- * CSS 语法：`<'border-top-width'>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
@@ -23565,8 +23480,6 @@ export class BorderInlineEndWidthCss extends LengthCssProperty {
 
 /**
  * 设置逻辑行内轴起始侧边框的宽度、线型和颜色。（border-inline-start）
- *
- * CSS 语法：`<'border-top-width'> || <'border-top-style'> || <color>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start
  */
 export class BorderInlineStartCss extends LengthCssProperty {
@@ -24177,8 +24090,6 @@ export class BorderInlineStartCss extends LengthCssProperty {
 /**
  * 设置逻辑行内轴起始侧边框颜色。（border-inline-start-color）
  *
- * CSS 语法：`<'border-top-color'>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-color
  */
@@ -24708,8 +24619,6 @@ export class BorderInlineStartColorCss extends CssProperty {
 /**
  * 设置逻辑行内轴起始侧边框线型。（border-inline-start-style）
  *
- * CSS 语法：`<'border-top-style'>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-style
  */
@@ -24788,8 +24697,6 @@ export class BorderInlineStartStyleCss extends CssProperty {
 
 /**
  * 设置逻辑行内轴起始侧边框宽度。（border-inline-start-width）
- *
- * CSS 语法：`<'border-top-width'>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
@@ -24912,8 +24819,6 @@ export class BorderInlineStartWidthCss extends LengthCssProperty {
 /**
  * 设置逻辑行内轴两侧边框线型。（border-inline-style）
  *
- * CSS 语法：`<'border-top-style'>{1,2}`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-style
  */
@@ -24992,8 +24897,6 @@ export class BorderInlineStyleCss extends CssProperty {
 
 /**
  * 设置逻辑行内轴两侧边框宽度。（border-inline-width）
- *
- * CSS 语法：`<'border-top-width'>{1,2}`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-width
@@ -26291,8 +26194,6 @@ export class BorderInlineWidthCss extends LengthCssProperty {
 
 /**
  * 设置左边框的宽度、线型和颜色。（border-left）
- *
- * CSS 语法：`<line-width> || <line-style> || <color>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left
  */
 export class BorderLeftCss extends LengthCssProperty {
@@ -26903,8 +26804,6 @@ export class BorderLeftCss extends LengthCssProperty {
 /**
  * 设置左边框颜色。（border-left-color）
  *
- * CSS 语法：`<color>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-color
  */
@@ -27434,8 +27333,6 @@ export class BorderLeftColorCss extends CssProperty {
 /**
  * 设置左边框线型。（border-left-style）
  *
- * CSS 语法：`<line-style>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-style
  */
@@ -27514,8 +27411,6 @@ export class BorderLeftStyleCss extends CssProperty {
 
 /**
  * 设置左边框宽度。（border-left-width）
- *
- * CSS 语法：`<line-width>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-width
@@ -27638,7 +27533,11 @@ export class BorderLeftWidthCss extends LengthCssProperty {
 /**
  * 设置四个角的圆角半径；斜杠语法可分别指定水平和垂直半径。（border-radius）
  *
- * CSS 语法：`<length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?`。
+ * 1/2/3/4 个半径依次控制四角、两组对角、三组角和逐角。它裁剪自身背景，但不会单独保证裁剪所有后代内容。
+ *
+ * 适用场景：卡片、按钮、头像的圆角外观。
+ * @example
+ * s.borderRadius.px(8)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-radius
  */
 export class BorderRadiusCss extends LengthCssProperty {
@@ -30202,8 +30101,6 @@ export class BorderRadiusCss extends LengthCssProperty {
 
 /**
  * 设置右边框的宽度、线型和颜色。（border-right）
- *
- * CSS 语法：`<line-width> || <line-style> || <color>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
  */
 export class BorderRightCss extends LengthCssProperty {
@@ -30814,8 +30711,6 @@ export class BorderRightCss extends LengthCssProperty {
 /**
  * 设置右边框颜色。（border-right-color）
  *
- * CSS 语法：`<color>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-color
  */
@@ -31345,8 +31240,6 @@ export class BorderRightColorCss extends CssProperty {
 /**
  * 设置右边框线型。（border-right-style）
  *
- * CSS 语法：`<line-style>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-style
  */
@@ -31425,8 +31318,6 @@ export class BorderRightStyleCss extends CssProperty {
 
 /**
  * 设置右边框宽度。（border-right-width）
- *
- * CSS 语法：`<line-width>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-width
@@ -31548,8 +31439,6 @@ export class BorderRightWidthCss extends LengthCssProperty {
 
 /**
  * 设置分离边框模型下表格单元格之间的水平和垂直间距。（border-spacing）
- *
- * CSS 语法：`<length>{1,2}`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-spacing
@@ -32842,8 +32731,6 @@ export class BorderSpacingCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴起始侧与行内轴结束侧相交角的圆角。（border-start-end-radius）
  *
- * CSS 语法：`<'border-top-left-radius'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
  */
@@ -32959,8 +32846,6 @@ export class BorderStartEndRadiusCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴起始侧与行内轴起始侧相交角的圆角。（border-start-start-radius）
  *
- * CSS 语法：`<'border-top-left-radius'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
  */
@@ -33075,8 +32960,6 @@ export class BorderStartStartRadiusCss extends LengthCssProperty {
 
 /**
  * 设置四边边框线型。（border-style）
- *
- * CSS 语法：`<line-style>{1,4}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-style
  */
 export class BorderStyleCss extends CssProperty {
@@ -33166,8 +33049,6 @@ export class BorderStyleCss extends CssProperty {
 
 /**
  * 设置上边框的宽度、线型和颜色。（border-top）
- *
- * CSS 语法：`<line-width> || <line-style> || <color>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
  */
 export class BorderTopCss extends LengthCssProperty {
@@ -33778,8 +33659,6 @@ export class BorderTopCss extends LengthCssProperty {
 /**
  * 设置上边框颜色。（border-top-color）
  *
- * CSS 语法：`<color>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-color
  */
@@ -34308,8 +34187,6 @@ export class BorderTopColorCss extends CssProperty {
 
 /**
  * 设置左上角边框的圆角半径。（border-top-left-radius）
- *
- * CSS 语法：`<length-percentage [0,∞]>{1,2}`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
@@ -35626,8 +35503,6 @@ export class BorderTopLeftRadiusCss extends LengthCssProperty {
 /**
  * 设置右上角边框的圆角半径。（border-top-right-radius）
  *
- * CSS 语法：`<length-percentage [0,∞]>{1,2}`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
  */
@@ -36943,8 +36818,6 @@ export class BorderTopRightRadiusCss extends LengthCssProperty {
 /**
  * 设置上边框线型。（border-top-style）
  *
- * CSS 语法：`<line-style>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-style
  */
@@ -37023,8 +36896,6 @@ export class BorderTopStyleCss extends CssProperty {
 
 /**
  * 设置上边框宽度。（border-top-width）
- *
- * CSS 语法：`<line-width>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-width
@@ -37146,8 +37017,6 @@ export class BorderTopWidthCss extends LengthCssProperty {
 
 /**
  * 设置四边边框宽度；可见边框通常还需要非 none 的线型。（border-width）
- *
- * CSS 语法：`<line-width>{1,4}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-width
  */
 export class BorderWidthCss extends LengthCssProperty {
@@ -39669,8 +39538,6 @@ export class BorderWidthCss extends LengthCssProperty {
 /**
  * 设置定位元素相对于其定位参照的下侧偏移。（bottom）
  *
- * CSS 语法：`auto | <length-percentage> | <anchor()> | <anchor-size()>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/bottom
  */
@@ -39794,8 +39661,6 @@ export class BottomCss extends LengthCssProperty {
 /**
  * 设置盒子被分成多行、多栏或多页时装饰如何绘制。（box-decoration-break）
  *
- * CSS 语法：`slice | clone`。
- *
  * CSS 初始值：`slice`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-decoration-break
  */
@@ -39859,9 +39724,13 @@ export class BoxDecorationBreakCss extends CssProperty {
 /**
  * 设置盒子的外部或内部阴影，可叠加多层。（box-shadow）
  *
- * CSS 语法：`none | <shadow>#`。
+ * 阴影不占布局空间，可用逗号叠加；与 border/outline 的用途和绘制位置不同。
+ *
+ * 适用场景：浮层层次、卡片边缘或内凹效果。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @example
+ * s.boxShadow.raw('0 2px 8px rgb(0 0 0 / 0.15)')
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-shadow
  */
 export class BoxShadowCss extends CssProperty {
@@ -39922,22 +39791,42 @@ export class BoxShadowCss extends CssProperty {
 /**
  * 决定 width、height 等尺寸是否包含内边距和边框。（box-sizing）
  *
- * CSS 语法：`content-box | border-box`。
+ * 常用值：
+ * - `content-box`：指定尺寸仅计算内容盒，内边距和边框额外增加外部尺寸。
+ * - `border-box`：指定尺寸包含内容、内边距和边框，但不包含外边距。
+ *
+ * 适用场景：确定组件声明宽高时是否把 padding 和 border 算在尺寸内。
  *
  * CSS 初始值：`content-box`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.boxSizing.borderBox, s.width.rem(20), s.padding.rem(1))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-sizing
  */
 export class BoxSizingCss extends CssProperty {
   /**
    * 指定尺寸包含内容、内边距和边框，但不包含外边距。
    *
+   * 区别：content-box 在声明宽高之外再加内边距和边框。
+   *
+   * 适用场景：希望组件的指定宽高包含内边距和边框时。
+   *
+   * 注意：仍不包含 margin；最小/最大尺寸和布局约束仍参与计算。
+   *
    * CSS 声明：`box-sizing:border-box;`。
+   * @example
+   * css(s.boxSizing.borderBox, s.width.rem(20), s.padding.rem(1))
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-sizing
    */
   readonly borderBox = 'box-sizing:border-box;';
   /**
    * 指定尺寸仅计算内容盒，内边距和边框额外增加外部尺寸。
    *
+   * 适用场景：希望明确指定纯内容区尺寸时。
+   *
    * CSS 声明：`box-sizing:content-box;`。
+   * @example
+   * css(s.boxSizing.contentBox, s.width.px(100), s.padding.px(10))
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-sizing
    */
   readonly contentBox = 'box-sizing:content-box;';
   /**
@@ -39994,8 +39883,6 @@ export class BoxSizingCss extends CssProperty {
 
 /**
  * 设置元素之后的分页、分栏或区域分片行为。（break-after）
- *
- * CSS 语法：`auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-after
@@ -40084,8 +39971,6 @@ export class BreakAfterCss extends CssProperty {
 /**
  * 设置元素之前的分页、分栏或区域分片行为。（break-before）
  *
- * CSS 语法：`auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-before
  */
@@ -40172,8 +40057,6 @@ export class BreakBeforeCss extends CssProperty {
 
 /**
  * 设置元素内部是否允许分页、分栏或区域分片。（break-inside）
- *
- * CSS 语法：`auto | avoid | avoid-page | avoid-column | avoid-region`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-inside

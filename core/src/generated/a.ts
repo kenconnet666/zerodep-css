@@ -7,8 +7,6 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 /**
  * 设置复选框、单选框等原生控件的强调色；具体使用部位由浏览器决定。（accent-color）
  *
- * CSS 语法：`auto | <color>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color
  */
@@ -540,8 +538,6 @@ export class AccentColorCss extends CssProperty {
 /**
  * 分配布局容器交叉轴或块轴上的剩余空间，控制内容整体的对齐。（align-content）
  *
- * CSS 语法：`normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position>`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-content
  */
@@ -623,9 +619,20 @@ export class AlignContentCss extends CssProperty {
 /**
  * 设置容器内项目在交叉轴或块轴上的默认对齐方式。（align-items）
  *
- * CSS 语法：`normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] | anchor-center`。
+ * Flex 中沿交叉轴对齐；Grid 中通常沿块轴对齐。单个项目可以用 align-self 覆盖。
+ *
+ * 常用值：
+ * - `stretch`：在自动尺寸及最小/最大约束允许时拉伸项目，不强制覆盖显式尺寸。
+ * - `center`：将各项目在交叉轴或块轴的对齐区域中居中。
+ * - `baseline`：按项目的对齐基线对齐，不等同于底边对齐。
+ * - `start`：按对齐轴的逻辑起始侧对齐。
+ * - `end`：按对齐轴的逻辑结束侧对齐。
+ *
+ * 适用场景：图标与文字居中、表单控件基线对齐或项目拉伸。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.display.flex, s.alignItems.center)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-items
  */
 export class AlignItemsCss extends CssProperty {
@@ -640,7 +647,14 @@ export class AlignItemsCss extends CssProperty {
   /**
    * 将各项目在交叉轴或块轴的对齐区域中居中。
    *
+   * 区别：justify-content 控制 Flex 主轴上的内容分布；align-items 控制交叉轴。
+   *
+   * 适用场景：横向图标和文字的垂直对齐。
+   *
    * CSS 声明：`align-items:center;`。
+   * @example
+   * css(s.display.inlineFlex, s.alignItems.center)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-items
    */
   readonly center = 'align-items:center;';
   /**
@@ -704,7 +718,14 @@ export class AlignItemsCss extends CssProperty {
   /**
    * 在自动尺寸及最小/最大约束允许时拉伸项目，不强制覆盖显式尺寸。
    *
+   * 区别：center 保持项目尺寸并居中；stretch 尝试扩大自动尺寸。
+   *
+   * 注意：项目在对齐轴有显式尺寸或受最小/最大尺寸约束时，不一定填满可用区域。
+   *
    * CSS 声明：`align-items:stretch;`。
+   * @example
+   * css(s.display.flex, s.alignItems.stretch)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-items
    */
   readonly stretch = 'align-items:stretch;';
   /**
@@ -738,9 +759,16 @@ export class AlignItemsCss extends CssProperty {
 /**
  * 单独覆盖一个项目的交叉轴或块轴对齐方式。（align-self）
  *
- * CSS 语法：`auto | normal | stretch | <baseline-position> | <overflow-position>? <self-position> | anchor-center`。
+ * 常用值：
+ * - `auto`：使用父容器的 align-items 对齐方式。
+ * - `stretch`：在自动尺寸和最小/最大约束允许时拉伸当前项目。
+ * - `baseline`：让当前项目参与基线对齐，不等同于底边对齐。
+ *
+ * 适用场景：只改变某一个项目的交叉轴或块轴对齐，不改变同组其他项目。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.alignSelf.center
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-self
  */
 export class AlignSelfCss extends CssProperty {
@@ -835,8 +863,6 @@ export class AlignSelfCss extends CssProperty {
 /**
  * 旧版瀑布流布局提案中沿块轴对齐轨道的属性；使用前核对实现与规范版本。（align-tracks）
  *
- * CSS 语法：`[ normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ]#`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-tracks
  */
@@ -918,8 +944,6 @@ export class AlignTracksCss extends CssProperty {
 /**
  * 选择行内或 SVG 文本参与对齐时使用的基线。（alignment-baseline）
  *
- * CSS 语法：`baseline | alphabetic | ideographic | middle | central | mathematical | text-before-edge | text-after-edge`。
- *
  * CSS 初始值：`baseline`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/alignment-baseline
  */
@@ -994,8 +1018,6 @@ export class AlignmentBaselineCss extends CssProperty {
 
 /**
  * 批量重置 CSS 属性；不重置 direction、unicode-bidi 和自定义属性。（all）
- *
- * CSS 语法：`initial | inherit | unset | revert | revert-layer`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/all
  */
 export class AllCss extends CssProperty {
@@ -1053,8 +1075,6 @@ export class AllCss extends CssProperty {
 
 /**
  * 为元素声明锚点名称，供锚点定位的元素引用。（anchor-name）
- *
- * CSS 语法：`none | <dashed-ident>#`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-name
@@ -1116,8 +1136,6 @@ export class AnchorNameCss extends CssProperty {
 
 /**
  * 限制锚点名称的可见范围，避免同名锚点跨组件互相影响。（anchor-scope）
- *
- * CSS 语法：`none | all | <dashed-ident>#`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-scope
@@ -1181,8 +1199,6 @@ export class AnchorScopeCss extends CssProperty {
 
 /**
  * 集中设置关键帧动画的名称、时长、缓动、延迟、次数及播放行为。（animation）
- *
- * CSS 语法：`<single-animation>#`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation
  */
 export class AnimationCss extends CssProperty {
@@ -1359,8 +1375,6 @@ export class AnimationCss extends CssProperty {
 /**
  * 设置动画效果与底层属性值的替换、叠加或累积方式。（animation-composition）
  *
- * CSS 语法：`<single-animation-composition>#`。
- *
  * CSS 初始值：`replace`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-composition
  */
@@ -1425,8 +1439,6 @@ export class AnimationCompositionCss extends CssProperty {
 
 /**
  * 设置动画开始前的延迟；负值表示从动画中途开始播放。（animation-delay）
- *
- * CSS 语法：`<time>#`。
  *
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-delay
@@ -1567,8 +1579,6 @@ export class AnimationDelayCss extends CssProperty {
 /**
  * 设置动画按正向、反向或交替方向播放。（animation-direction）
  *
- * CSS 语法：`<single-animation-direction>#`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-direction
  */
@@ -1635,8 +1645,6 @@ export class AnimationDirectionCss extends CssProperty {
 
 /**
  * 设置动画完成一次循环的时长。（animation-duration）
- *
- * CSS 语法：`[ auto | <time [0s,∞]> ]#`。
  *
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-duration
@@ -1779,9 +1787,19 @@ export class AnimationDurationCss extends CssProperty {
 /**
  * 设置动画在有效播放区间之外是否应用关键帧样式。（animation-fill-mode）
  *
- * CSS 语法：`<single-animation-fill-mode>#`。
+ * 控制动画有效播放区间之外的样式，不会把最终值写回普通 CSS 声明。
+ *
+ * 常用值：
+ * - `none`：动画有效区间之外不应用动画关键帧值。
+ * - `forwards`：播放结束后保留最后生效关键帧的效果；最后帧取决于方向和循环次数。
+ * - `backwards`：延迟阶段应用最先生效关键帧的效果，具体帧取决于播放方向。
+ * - `both`：同时应用 backwards 和 forwards 的区间外效果。
+ *
+ * 适用场景：控制延迟阶段和播放结束后的动画呈现。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @example
+ * s.animationFillMode.forwards
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-fill-mode
  */
 export class AnimationFillModeCss extends CssProperty {
@@ -1863,8 +1881,6 @@ export class AnimationFillModeCss extends CssProperty {
 
 /**
  * 设置动画循环次数，或无限循环。（animation-iteration-count）
- *
- * CSS 语法：`<single-animation-iteration-count>#`。
  *
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-iteration-count
@@ -1983,8 +1999,6 @@ export class AnimationIterationCountCss extends CssProperty {
 /**
  * 选择要播放的 @keyframes 动画名称。（animation-name）
  *
- * CSS 语法：`[ none | <keyframes-name> ]#`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-name
  */
@@ -2045,8 +2059,6 @@ export class AnimationNameCss extends CssProperty {
 
 /**
  * 控制动画运行或暂停，暂停后可从原位置继续。（animation-play-state）
- *
- * CSS 语法：`<single-animation-play-state>#`。
  *
  * CSS 初始值：`running`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-play-state
@@ -2110,8 +2122,6 @@ export class AnimationPlayStateCss extends CssProperty {
 
 /**
  * 设置动画附着到时间线的起止范围。（animation-range）
- *
- * CSS 语法：`[ <'animation-range-start'> <'animation-range-end'>? ]#`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range
  */
 export class AnimationRangeCss extends LengthCssProperty {
@@ -2239,8 +2249,6 @@ export class AnimationRangeCss extends LengthCssProperty {
 
 /**
  * 设置动画在时间线上的附着范围终点。（animation-range-end）
- *
- * CSS 语法：`[ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-end
@@ -2383,8 +2391,6 @@ export class AnimationRangeEndCss extends LengthCssProperty {
 /**
  * 设置动画在时间线上的附着范围起点。（animation-range-start）
  *
- * CSS 语法：`[ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-start
  */
@@ -2526,8 +2532,6 @@ export class AnimationRangeStartCss extends LengthCssProperty {
 /**
  * 选择驱动动画的时间线，例如文档时间或滚动进度。（animation-timeline）
  *
- * CSS 语法：`<single-animation-timeline>#`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timeline
  */
@@ -2590,8 +2594,6 @@ export class AnimationTimelineCss extends CssProperty {
 
 /**
  * 设置动画每个关键帧区间内进度变化的缓动函数。（animation-timing-function）
- *
- * CSS 语法：`<easing-function>#`。
  *
  * CSS 初始值：`ease`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timing-function
@@ -2665,8 +2667,6 @@ export class AnimationTimingFunctionCss extends CssProperty {
 
 /**
  * 控制元素是否采用平台原生控件外观。（appearance）
- *
- * CSS 语法：`none | auto | <compat-auto> | <compat-special>`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/appearance
@@ -2753,9 +2753,13 @@ export class AppearanceCss extends CssProperty {
 /**
  * 设置盒子的首选宽高比，参与自动尺寸计算。（aspect-ratio）
  *
- * CSS 语法：`auto || <ratio>`。
+ * 通常需要至少一个轴为自动尺寸才参与尺寸计算；两个轴都被明确尺寸约束时，不会强行保持比例。
+ *
+ * 适用场景：图片占位、视频和卡片封面区域。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.aspectRatio.raw('16 / 9'), s.width.percent(100))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/aspect-ratio
  */
 export class AspectRatioCss extends CssProperty {

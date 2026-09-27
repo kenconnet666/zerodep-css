@@ -15,7 +15,7 @@ const button = css(s.display.flex, s.padding.rem(0.5, 1), s._hover(s.color.blue)
 ```
 
 - 主入口：502 个属性类、关键字、类型和独立 className 标记。
-- 类型声明内置中文属性说明、常用关键字解释，以及单位、颜色、数学与 Grid 方法的参数和调用示例；可通过编辑器悬停、补全详情和参数提示查看。
+- 类型声明内置中文属性说明、常用值、使用场景，以及单位、颜色、数学与 Grid 方法的参数和调用示例；inlineFlex 等重点关键字还解释实际效果和相近值区别，可通过编辑器悬停、补全详情和参数提示查看。
 - `/browser`：DOM 样式登记、hydrateCss、configureCss 和 cssStats。
 - `/server`：Node 请求宿主、withCssHost 与安全的 HTML 序列化。
 - `/theme`：可选 ThemeCss、亮暗预设及主题关键字。

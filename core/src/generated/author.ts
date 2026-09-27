@@ -151,16 +151,12 @@ export class Css {
   /**
    * 设置复选框、单选框等原生控件的强调色；具体使用部位由浏览器决定。（accent-color）
    *
-   * CSS 语法：`auto | <color>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color
    */
   declare readonly accentColor: group0.AccentColorCss;
   /**
    * 分配布局容器交叉轴或块轴上的剩余空间，控制内容整体的对齐。（align-content）
-   *
-   * CSS 语法：`normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position>`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-content
@@ -169,25 +165,41 @@ export class Css {
   /**
    * 设置容器内项目在交叉轴或块轴上的默认对齐方式。（align-items）
    *
-   * CSS 语法：`normal | stretch | <baseline-position> | [ <overflow-position>? <self-position> ] | anchor-center`。
+   * Flex 中沿交叉轴对齐；Grid 中通常沿块轴对齐。单个项目可以用 align-self 覆盖。
+   *
+   * 常用值：
+   * - `stretch`：在自动尺寸及最小/最大约束允许时拉伸项目，不强制覆盖显式尺寸。
+   * - `center`：将各项目在交叉轴或块轴的对齐区域中居中。
+   * - `baseline`：按项目的对齐基线对齐，不等同于底边对齐。
+   * - `start`：按对齐轴的逻辑起始侧对齐。
+   * - `end`：按对齐轴的逻辑结束侧对齐。
+   *
+   * 适用场景：图标与文字居中、表单控件基线对齐或项目拉伸。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.display.flex, s.alignItems.center)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-items
    */
   declare readonly alignItems: group0.AlignItemsCss;
   /**
    * 单独覆盖一个项目的交叉轴或块轴对齐方式。（align-self）
    *
-   * CSS 语法：`auto | normal | stretch | <baseline-position> | <overflow-position>? <self-position> | anchor-center`。
+   * 常用值：
+   * - `auto`：使用父容器的 align-items 对齐方式。
+   * - `stretch`：在自动尺寸和最小/最大约束允许时拉伸当前项目。
+   * - `baseline`：让当前项目参与基线对齐，不等同于底边对齐。
+   *
+   * 适用场景：只改变某一个项目的交叉轴或块轴对齐，不改变同组其他项目。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.alignSelf.center
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-self
    */
   declare readonly alignSelf: group0.AlignSelfCss;
   /**
    * 旧版瀑布流布局提案中沿块轴对齐轨道的属性；使用前核对实现与规范版本。（align-tracks）
-   *
-   * CSS 语法：`[ normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ]#`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-tracks
@@ -196,23 +208,17 @@ export class Css {
   /**
    * 选择行内或 SVG 文本参与对齐时使用的基线。（alignment-baseline）
    *
-   * CSS 语法：`baseline | alphabetic | ideographic | middle | central | mathematical | text-before-edge | text-after-edge`。
-   *
    * CSS 初始值：`baseline`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/alignment-baseline
    */
   declare readonly alignmentBaseline: group0.AlignmentBaselineCss;
   /**
    * 批量重置 CSS 属性；不重置 direction、unicode-bidi 和自定义属性。（all）
-   *
-   * CSS 语法：`initial | inherit | unset | revert | revert-layer`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/all
    */
   declare readonly all: group0.AllCss;
   /**
    * 为元素声明锚点名称，供锚点定位的元素引用。（anchor-name）
-   *
-   * CSS 语法：`none | <dashed-ident>#`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-name
@@ -221,23 +227,17 @@ export class Css {
   /**
    * 限制锚点名称的可见范围，避免同名锚点跨组件互相影响。（anchor-scope）
    *
-   * CSS 语法：`none | all | <dashed-ident>#`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-scope
    */
   declare readonly anchorScope: group0.AnchorScopeCss;
   /**
    * 集中设置关键帧动画的名称、时长、缓动、延迟、次数及播放行为。（animation）
-   *
-   * CSS 语法：`<single-animation>#`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation
    */
   declare readonly animation: group0.AnimationCss;
   /**
    * 设置动画效果与底层属性值的替换、叠加或累积方式。（animation-composition）
-   *
-   * CSS 语法：`<single-animation-composition>#`。
    *
    * CSS 初始值：`replace`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-composition
@@ -246,16 +246,12 @@ export class Css {
   /**
    * 设置动画开始前的延迟；负值表示从动画中途开始播放。（animation-delay）
    *
-   * CSS 语法：`<time>#`。
-   *
    * CSS 初始值：`0s`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-delay
    */
   declare readonly animationDelay: group0.AnimationDelayCss;
   /**
    * 设置动画按正向、反向或交替方向播放。（animation-direction）
-   *
-   * CSS 语法：`<single-animation-direction>#`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-direction
@@ -264,8 +260,6 @@ export class Css {
   /**
    * 设置动画完成一次循环的时长。（animation-duration）
    *
-   * CSS 语法：`[ auto | <time [0s,∞]> ]#`。
-   *
    * CSS 初始值：`0s`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-duration
    */
@@ -273,16 +267,24 @@ export class Css {
   /**
    * 设置动画在有效播放区间之外是否应用关键帧样式。（animation-fill-mode）
    *
-   * CSS 语法：`<single-animation-fill-mode>#`。
+   * 控制动画有效播放区间之外的样式，不会把最终值写回普通 CSS 声明。
+   *
+   * 常用值：
+   * - `none`：动画有效区间之外不应用动画关键帧值。
+   * - `forwards`：播放结束后保留最后生效关键帧的效果；最后帧取决于方向和循环次数。
+   * - `backwards`：延迟阶段应用最先生效关键帧的效果，具体帧取决于播放方向。
+   * - `both`：同时应用 backwards 和 forwards 的区间外效果。
+   *
+   * 适用场景：控制延迟阶段和播放结束后的动画呈现。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
+   * @example
+   * s.animationFillMode.forwards
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-fill-mode
    */
   declare readonly animationFillMode: group0.AnimationFillModeCss;
   /**
    * 设置动画循环次数，或无限循环。（animation-iteration-count）
-   *
-   * CSS 语法：`<single-animation-iteration-count>#`。
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-iteration-count
@@ -291,8 +293,6 @@ export class Css {
   /**
    * 选择要播放的 @keyframes 动画名称。（animation-name）
    *
-   * CSS 语法：`[ none | <keyframes-name> ]#`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-name
    */
@@ -300,23 +300,17 @@ export class Css {
   /**
    * 控制动画运行或暂停，暂停后可从原位置继续。（animation-play-state）
    *
-   * CSS 语法：`<single-animation-play-state>#`。
-   *
    * CSS 初始值：`running`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-play-state
    */
   declare readonly animationPlayState: group0.AnimationPlayStateCss;
   /**
    * 设置动画附着到时间线的起止范围。（animation-range）
-   *
-   * CSS 语法：`[ <'animation-range-start'> <'animation-range-end'>? ]#`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range
    */
   declare readonly animationRange: group0.AnimationRangeCss;
   /**
    * 设置动画在时间线上的附着范围终点。（animation-range-end）
-   *
-   * CSS 语法：`[ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-end
@@ -325,16 +319,12 @@ export class Css {
   /**
    * 设置动画在时间线上的附着范围起点。（animation-range-start）
    *
-   * CSS 语法：`[ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-start
    */
   declare readonly animationRangeStart: group0.AnimationRangeStartCss;
   /**
    * 选择驱动动画的时间线，例如文档时间或滚动进度。（animation-timeline）
-   *
-   * CSS 语法：`<single-animation-timeline>#`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timeline
@@ -343,16 +333,12 @@ export class Css {
   /**
    * 设置动画每个关键帧区间内进度变化的缓动函数。（animation-timing-function）
    *
-   * CSS 语法：`<easing-function>#`。
-   *
    * CSS 初始值：`ease`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timing-function
    */
   declare readonly animationTimingFunction: group0.AnimationTimingFunctionCss;
   /**
    * 控制元素是否采用平台原生控件外观。（appearance）
-   *
-   * CSS 语法：`none | auto | <compat-auto> | <compat-special>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/appearance
@@ -361,16 +347,18 @@ export class Css {
   /**
    * 设置盒子的首选宽高比，参与自动尺寸计算。（aspect-ratio）
    *
-   * CSS 语法：`auto || <ratio>`。
+   * 通常需要至少一个轴为自动尺寸才参与尺寸计算；两个轴都被明确尺寸约束时，不会强行保持比例。
+   *
+   * 适用场景：图片占位、视频和卡片封面区域。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.aspectRatio.raw('16 / 9'), s.width.percent(100))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/aspect-ratio
    */
   declare readonly aspectRatio: group0.AspectRatioCss;
   /**
    * 对元素背后的图像区域应用模糊等滤镜，通常需要透明或半透明背景。（backdrop-filter）
-   *
-   * CSS 语法：`none | <filter-value-list>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backdrop-filter
@@ -379,23 +367,17 @@ export class Css {
   /**
    * 控制经过三维变换后背向观察者的元素背面是否可见。（backface-visibility）
    *
-   * CSS 语法：`visible | hidden`。
-   *
    * CSS 初始值：`visible`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backface-visibility
    */
   declare readonly backfaceVisibility: group1.BackfaceVisibilityCss;
   /**
    * 集中设置背景颜色、图像、位置、尺寸、重复及绘制区域。（background）
-   *
-   * CSS 语法：`<bg-layer>#? , <final-bg-layer>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background
    */
   declare readonly background: group1.BackgroundCss;
   /**
    * 设置背景图像相对于视口、元素或局部滚动内容的固定方式。（background-attachment）
-   *
-   * CSS 语法：`<attachment>#`。
    *
    * CSS 初始值：`scroll`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
@@ -404,16 +386,12 @@ export class Css {
   /**
    * 设置背景图层彼此之间以及与背景色之间的混合模式。（background-blend-mode）
    *
-   * CSS 语法：`<blend-mode>#`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-blend-mode
    */
   declare readonly backgroundBlendMode: group1.BackgroundBlendModeCss;
   /**
    * 设置背景允许绘制到的边界区域。（background-clip）
-   *
-   * CSS 语法：`<bg-clip>#`。
    *
    * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-clip
@@ -422,16 +400,12 @@ export class Css {
   /**
    * 设置元素背景颜色，位于背景图像下方。（background-color）
    *
-   * CSS 语法：`<color>`。
-   *
    * CSS 初始值：`transparent`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-color
    */
   declare readonly backgroundColor: group1.BackgroundColorCss;
   /**
    * 设置一个或多个背景图像或渐变图层。（background-image）
-   *
-   * CSS 语法：`<bg-image>#`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
@@ -440,16 +414,12 @@ export class Css {
   /**
    * 设置背景图像定位所依据的盒子区域。（background-origin）
    *
-   * CSS 语法：`<visual-box>#`。
-   *
    * CSS 初始值：`padding-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-origin
    */
   declare readonly backgroundOrigin: group1.BackgroundOriginCss;
   /**
    * 设置背景图像在定位区域内的位置。（background-position）
-   *
-   * CSS 语法：`<bg-position>#`。
    *
    * CSS 初始值：`0% 0%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position
@@ -458,16 +428,12 @@ export class Css {
   /**
    * 设置背景图像的水平位置。（background-position-x）
    *
-   * CSS 语法：`[ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]#`。
-   *
    * CSS 初始值：`0%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-x
    */
   declare readonly backgroundPositionX: group1.BackgroundPositionXCss;
   /**
    * 设置背景图像的垂直位置。（background-position-y）
-   *
-   * CSS 语法：`[ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]#`。
    *
    * CSS 初始值：`0%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-y
@@ -476,8 +442,6 @@ export class Css {
   /**
    * 设置背景图像在水平和垂直方向上的重复方式。（background-repeat）
    *
-   * CSS 语法：`<repeat-style>#`。
-   *
    * CSS 初始值：`repeat`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat
    */
@@ -485,16 +449,23 @@ export class Css {
   /**
    * 设置背景图像尺寸，以及覆盖或完整容纳图像的缩放方式。（background-size）
    *
-   * CSS 语法：`<bg-size>#`。
+   * 改变背景图像的尺寸，不改变元素尺寸；位置由 background-position 决定。
+   *
+   * 常用值：
+   * - `auto`：依据图像内部尺寸、比例及另一维的设置确定尺寸。
+   * - `contain`：保持图像比例并使整张图像容纳于定位区域，可能留下空白。
+   * - `cover`：保持图像比例并覆盖整个定位区域，超出部分可能被裁剪。
+   *
+   * 适用场景：背景封面或需要完整显示的背景装饰。
    *
    * CSS 初始值：`auto auto`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.backgroundSize.cover, s.backgroundPosition.raw('center'))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-size
    */
   declare readonly backgroundSize: group1.BackgroundSizeCss;
   /**
    * 使 SVG 文本基线相对于其基准位置偏移。（baseline-shift）
-   *
-   * CSS 语法：`<length-percentage> | sub | super | baseline`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
@@ -503,30 +474,28 @@ export class Css {
   /**
    * 设置逻辑块轴尺寸；水平书写时通常对应高度。（block-size）
    *
-   * CSS 语法：`<'width'>`。
+   * 水平书写时通常对应 height，竖直书写时通常对应 width。
+   *
+   * 适用场景：使用逻辑轴表达内容块尺寸。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.blockSize.rem(10)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/block-size
    */
   declare readonly blockSize: group1.BlockSizeCss;
   /**
    * 同时设置四边边框的宽度、线型和颜色。（border）
-   *
-   * CSS 语法：`<line-width> || <line-style> || <color>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border
    */
   declare readonly border: group1.BorderCss;
   /**
    * 设置逻辑块轴起始侧和结束侧的边框。（border-block）
-   *
-   * CSS 语法：`<'border-block-start'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block
    */
   declare readonly borderBlock: group1.BorderBlockCss;
   /**
    * 设置逻辑块轴两侧边框颜色。（border-block-color）
-   *
-   * CSS 语法：`<'border-top-color'>{1,2}`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-color
@@ -534,15 +503,11 @@ export class Css {
   declare readonly borderBlockColor: group1.BorderBlockColorCss;
   /**
    * 设置逻辑块轴结束侧边框的宽度、线型和颜色。（border-block-end）
-   *
-   * CSS 语法：`<'border-top-width'> || <'border-top-style'> || <color>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end
    */
   declare readonly borderBlockEnd: group1.BorderBlockEndCss;
   /**
    * 设置逻辑块轴结束侧的边框颜色。（border-block-end-color）
-   *
-   * CSS 语法：`<'border-top-color'>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-color
@@ -551,8 +516,6 @@ export class Css {
   /**
    * 设置逻辑块轴结束侧的边框线型。（border-block-end-style）
    *
-   * CSS 语法：`<'border-top-style'>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-style
    */
@@ -560,23 +523,17 @@ export class Css {
   /**
    * 设置逻辑块轴结束侧的边框宽度。（border-block-end-width）
    *
-   * CSS 语法：`<'border-top-width'>`。
-   *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-width
    */
   declare readonly borderBlockEndWidth: group1.BorderBlockEndWidthCss;
   /**
    * 设置逻辑块轴起始侧边框的宽度、线型和颜色。（border-block-start）
-   *
-   * CSS 语法：`<'border-top-width'> || <'border-top-style'> || <color>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start
    */
   declare readonly borderBlockStart: group1.BorderBlockStartCss;
   /**
    * 设置逻辑块轴起始侧的边框颜色。（border-block-start-color）
-   *
-   * CSS 语法：`<'border-top-color'>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-color
@@ -585,16 +542,12 @@ export class Css {
   /**
    * 设置逻辑块轴起始侧的边框线型。（border-block-start-style）
    *
-   * CSS 语法：`<'border-top-style'>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-style
    */
   declare readonly borderBlockStartStyle: group1.BorderBlockStartStyleCss;
   /**
    * 设置逻辑块轴起始侧的边框宽度。（border-block-start-width）
-   *
-   * CSS 语法：`<'border-top-width'>`。
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-width
@@ -603,8 +556,6 @@ export class Css {
   /**
    * 设置逻辑块轴两侧的边框线型。（border-block-style）
    *
-   * CSS 语法：`<'border-top-style'>{1,2}`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-style
    */
@@ -612,23 +563,17 @@ export class Css {
   /**
    * 设置逻辑块轴两侧的边框宽度。（border-block-width）
    *
-   * CSS 语法：`<'border-top-width'>{1,2}`。
-   *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-width
    */
   declare readonly borderBlockWidth: group1.BorderBlockWidthCss;
   /**
    * 设置下边框的宽度、线型和颜色。（border-bottom）
-   *
-   * CSS 语法：`<line-width> || <line-style> || <color>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom
    */
   declare readonly borderBottom: group1.BorderBottomCss;
   /**
    * 设置下边框颜色。（border-bottom-color）
-   *
-   * CSS 语法：`<'border-top-color'>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-color
@@ -637,16 +582,12 @@ export class Css {
   /**
    * 设置左下角边框的圆角半径。（border-bottom-left-radius）
    *
-   * CSS 语法：`<length-percentage [0,∞]>{1,2}`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
    */
   declare readonly borderBottomLeftRadius: group1.BorderBottomLeftRadiusCss;
   /**
    * 设置右下角边框的圆角半径。（border-bottom-right-radius）
-   *
-   * CSS 语法：`<length-percentage [0,∞]>{1,2}`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
@@ -655,16 +596,12 @@ export class Css {
   /**
    * 设置下边框线型。（border-bottom-style）
    *
-   * CSS 语法：`<line-style>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-style
    */
   declare readonly borderBottomStyle: group1.BorderBottomStyleCss;
   /**
    * 设置下边框宽度。（border-bottom-width）
-   *
-   * CSS 语法：`<line-width>`。
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-width
@@ -673,23 +610,17 @@ export class Css {
   /**
    * 设置表格相邻单元格边框合并还是分离。（border-collapse）
    *
-   * CSS 语法：`separate | collapse`。
-   *
    * CSS 初始值：`separate`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-collapse
    */
   declare readonly borderCollapse: group1.BorderCollapseCss;
   /**
    * 设置四边边框颜色，支持按上、右、下、左顺序简写。（border-color）
-   *
-   * CSS 语法：`<color>{1,4}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-color
    */
   declare readonly borderColor: group1.BorderColorCss;
   /**
    * 设置逻辑块轴结束侧与行内轴结束侧相交角的圆角。（border-end-end-radius）
-   *
-   * CSS 语法：`<'border-top-left-radius'>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
@@ -698,23 +629,17 @@ export class Css {
   /**
    * 设置逻辑块轴结束侧与行内轴起始侧相交角的圆角。（border-end-start-radius）
    *
-   * CSS 语法：`<'border-top-left-radius'>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
   declare readonly borderEndStartRadius: group1.BorderEndStartRadiusCss;
   /**
    * 设置用作边框的图像及其切片、宽度、外扩和重复方式。（border-image）
-   *
-   * CSS 语法：`<'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image
    */
   declare readonly borderImage: group1.BorderImageCss;
   /**
    * 设置边框图像超出边框盒的距离。（border-image-outset）
-   *
-   * CSS 语法：`[ <length [0,∞]> | <number [0,∞]> ]{1,4}  `。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-outset
@@ -723,16 +648,12 @@ export class Css {
   /**
    * 设置边框图像切片沿边框的重复或拉伸方式。（border-image-repeat）
    *
-   * CSS 语法：`[ stretch | repeat | round | space ]{1,2}`。
-   *
    * CSS 初始值：`stretch`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-repeat
    */
   declare readonly borderImageRepeat: group1.BorderImageRepeatCss;
   /**
    * 设置边框图像的切片位置及是否填充中间区域。（border-image-slice）
-   *
-   * CSS 语法：`[ <number [0,∞]> | <percentage [0,∞]> ]{1,4}  && fill?`。
    *
    * CSS 初始值：`100%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-slice
@@ -741,8 +662,6 @@ export class Css {
   /**
    * 指定边框使用的图像或渐变。（border-image-source）
    *
-   * CSS 语法：`none | <image>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-source
    */
@@ -750,23 +669,17 @@ export class Css {
   /**
    * 设置边框图像各边的绘制宽度。（border-image-width）
    *
-   * CSS 语法：`[ <length-percentage [0,∞]> | <number [0,∞]> | auto ]{1,4}`。
-   *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-width
    */
   declare readonly borderImageWidth: group1.BorderImageWidthCss;
   /**
    * 设置逻辑行内轴起始侧和结束侧的边框。（border-inline）
-   *
-   * CSS 语法：`<'border-block-start'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline
    */
   declare readonly borderInline: group1.BorderInlineCss;
   /**
    * 设置逻辑行内轴两侧边框颜色。（border-inline-color）
-   *
-   * CSS 语法：`<'border-top-color'>{1,2}`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-color
@@ -774,15 +687,11 @@ export class Css {
   declare readonly borderInlineColor: group1.BorderInlineColorCss;
   /**
    * 设置逻辑行内轴结束侧边框的宽度、线型和颜色。（border-inline-end）
-   *
-   * CSS 语法：`<'border-top-width'> || <'border-top-style'> || <color>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end
    */
   declare readonly borderInlineEnd: group1.BorderInlineEndCss;
   /**
    * 设置逻辑行内轴结束侧边框颜色。（border-inline-end-color）
-   *
-   * CSS 语法：`<'border-top-color'>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-color
@@ -791,8 +700,6 @@ export class Css {
   /**
    * 设置逻辑行内轴结束侧边框线型。（border-inline-end-style）
    *
-   * CSS 语法：`<'border-top-style'>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-style
    */
@@ -800,23 +707,17 @@ export class Css {
   /**
    * 设置逻辑行内轴结束侧边框宽度。（border-inline-end-width）
    *
-   * CSS 语法：`<'border-top-width'>`。
-   *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
    */
   declare readonly borderInlineEndWidth: group1.BorderInlineEndWidthCss;
   /**
    * 设置逻辑行内轴起始侧边框的宽度、线型和颜色。（border-inline-start）
-   *
-   * CSS 语法：`<'border-top-width'> || <'border-top-style'> || <color>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start
    */
   declare readonly borderInlineStart: group1.BorderInlineStartCss;
   /**
    * 设置逻辑行内轴起始侧边框颜色。（border-inline-start-color）
-   *
-   * CSS 语法：`<'border-top-color'>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-color
@@ -825,16 +726,12 @@ export class Css {
   /**
    * 设置逻辑行内轴起始侧边框线型。（border-inline-start-style）
    *
-   * CSS 语法：`<'border-top-style'>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-style
    */
   declare readonly borderInlineStartStyle: group1.BorderInlineStartStyleCss;
   /**
    * 设置逻辑行内轴起始侧边框宽度。（border-inline-start-width）
-   *
-   * CSS 语法：`<'border-top-width'>`。
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
@@ -843,8 +740,6 @@ export class Css {
   /**
    * 设置逻辑行内轴两侧边框线型。（border-inline-style）
    *
-   * CSS 语法：`<'border-top-style'>{1,2}`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-style
    */
@@ -852,23 +747,17 @@ export class Css {
   /**
    * 设置逻辑行内轴两侧边框宽度。（border-inline-width）
    *
-   * CSS 语法：`<'border-top-width'>{1,2}`。
-   *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-width
    */
   declare readonly borderInlineWidth: group1.BorderInlineWidthCss;
   /**
    * 设置左边框的宽度、线型和颜色。（border-left）
-   *
-   * CSS 语法：`<line-width> || <line-style> || <color>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left
    */
   declare readonly borderLeft: group1.BorderLeftCss;
   /**
    * 设置左边框颜色。（border-left-color）
-   *
-   * CSS 语法：`<color>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-color
@@ -877,16 +766,12 @@ export class Css {
   /**
    * 设置左边框线型。（border-left-style）
    *
-   * CSS 语法：`<line-style>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-style
    */
   declare readonly borderLeftStyle: group1.BorderLeftStyleCss;
   /**
    * 设置左边框宽度。（border-left-width）
-   *
-   * CSS 语法：`<line-width>`。
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-width
@@ -895,21 +780,21 @@ export class Css {
   /**
    * 设置四个角的圆角半径；斜杠语法可分别指定水平和垂直半径。（border-radius）
    *
-   * CSS 语法：`<length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?`。
+   * 1/2/3/4 个半径依次控制四角、两组对角、三组角和逐角。它裁剪自身背景，但不会单独保证裁剪所有后代内容。
+   *
+   * 适用场景：卡片、按钮、头像的圆角外观。
+   * @example
+   * s.borderRadius.px(8)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-radius
    */
   declare readonly borderRadius: group1.BorderRadiusCss;
   /**
    * 设置右边框的宽度、线型和颜色。（border-right）
-   *
-   * CSS 语法：`<line-width> || <line-style> || <color>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
    */
   declare readonly borderRight: group1.BorderRightCss;
   /**
    * 设置右边框颜色。（border-right-color）
-   *
-   * CSS 语法：`<color>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-color
@@ -918,16 +803,12 @@ export class Css {
   /**
    * 设置右边框线型。（border-right-style）
    *
-   * CSS 语法：`<line-style>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-style
    */
   declare readonly borderRightStyle: group1.BorderRightStyleCss;
   /**
    * 设置右边框宽度。（border-right-width）
-   *
-   * CSS 语法：`<line-width>`。
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-width
@@ -936,16 +817,12 @@ export class Css {
   /**
    * 设置分离边框模型下表格单元格之间的水平和垂直间距。（border-spacing）
    *
-   * CSS 语法：`<length>{1,2}`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-spacing
    */
   declare readonly borderSpacing: group1.BorderSpacingCss;
   /**
    * 设置逻辑块轴起始侧与行内轴结束侧相交角的圆角。（border-start-end-radius）
-   *
-   * CSS 语法：`<'border-top-left-radius'>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
@@ -954,30 +831,22 @@ export class Css {
   /**
    * 设置逻辑块轴起始侧与行内轴起始侧相交角的圆角。（border-start-start-radius）
    *
-   * CSS 语法：`<'border-top-left-radius'>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   declare readonly borderStartStartRadius: group1.BorderStartStartRadiusCss;
   /**
    * 设置四边边框线型。（border-style）
-   *
-   * CSS 语法：`<line-style>{1,4}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-style
    */
   declare readonly borderStyle: group1.BorderStyleCss;
   /**
    * 设置上边框的宽度、线型和颜色。（border-top）
-   *
-   * CSS 语法：`<line-width> || <line-style> || <color>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
    */
   declare readonly borderTop: group1.BorderTopCss;
   /**
    * 设置上边框颜色。（border-top-color）
-   *
-   * CSS 语法：`<color>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-color
@@ -986,16 +855,12 @@ export class Css {
   /**
    * 设置左上角边框的圆角半径。（border-top-left-radius）
    *
-   * CSS 语法：`<length-percentage [0,∞]>{1,2}`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    */
   declare readonly borderTopLeftRadius: group1.BorderTopLeftRadiusCss;
   /**
    * 设置右上角边框的圆角半径。（border-top-right-radius）
-   *
-   * CSS 语法：`<length-percentage [0,∞]>{1,2}`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
@@ -1004,8 +869,6 @@ export class Css {
   /**
    * 设置上边框线型。（border-top-style）
    *
-   * CSS 语法：`<line-style>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-style
    */
@@ -1013,23 +876,17 @@ export class Css {
   /**
    * 设置上边框宽度。（border-top-width）
    *
-   * CSS 语法：`<line-width>`。
-   *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-width
    */
   declare readonly borderTopWidth: group1.BorderTopWidthCss;
   /**
    * 设置四边边框宽度；可见边框通常还需要非 none 的线型。（border-width）
-   *
-   * CSS 语法：`<line-width>{1,4}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-width
    */
   declare readonly borderWidth: group1.BorderWidthCss;
   /**
    * 设置定位元素相对于其定位参照的下侧偏移。（bottom）
-   *
-   * CSS 语法：`auto | <length-percentage> | <anchor()> | <anchor-size()>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/bottom
@@ -1038,8 +895,6 @@ export class Css {
   /**
    * 设置盒子被分成多行、多栏或多页时装饰如何绘制。（box-decoration-break）
    *
-   * CSS 语法：`slice | clone`。
-   *
    * CSS 初始值：`slice`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-decoration-break
    */
@@ -1047,25 +902,33 @@ export class Css {
   /**
    * 设置盒子的外部或内部阴影，可叠加多层。（box-shadow）
    *
-   * CSS 语法：`none | <shadow>#`。
+   * 阴影不占布局空间，可用逗号叠加；与 border/outline 的用途和绘制位置不同。
+   *
+   * 适用场景：浮层层次、卡片边缘或内凹效果。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
+   * @example
+   * s.boxShadow.raw('0 2px 8px rgb(0 0 0 / 0.15)')
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-shadow
    */
   declare readonly boxShadow: group1.BoxShadowCss;
   /**
    * 决定 width、height 等尺寸是否包含内边距和边框。（box-sizing）
    *
-   * CSS 语法：`content-box | border-box`。
+   * 常用值：
+   * - `content-box`：指定尺寸仅计算内容盒，内边距和边框额外增加外部尺寸。
+   * - `border-box`：指定尺寸包含内容、内边距和边框，但不包含外边距。
+   *
+   * 适用场景：确定组件声明宽高时是否把 padding 和 border 算在尺寸内。
    *
    * CSS 初始值：`content-box`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.boxSizing.borderBox, s.width.rem(20), s.padding.rem(1))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-sizing
    */
   declare readonly boxSizing: group1.BoxSizingCss;
   /**
    * 设置元素之后的分页、分栏或区域分片行为。（break-after）
-   *
-   * CSS 语法：`auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-after
@@ -1074,16 +937,12 @@ export class Css {
   /**
    * 设置元素之前的分页、分栏或区域分片行为。（break-before）
    *
-   * CSS 语法：`auto | avoid | always | all | avoid-page | page | left | right | recto | verso | avoid-column | column | avoid-region | region`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-before
    */
   declare readonly breakBefore: group1.BreakBeforeCss;
   /**
    * 设置元素内部是否允许分页、分栏或区域分片。（break-inside）
-   *
-   * CSS 语法：`auto | avoid | avoid-page | avoid-column | avoid-region`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-inside
@@ -1092,23 +951,17 @@ export class Css {
   /**
    * 设置表格标题相对于表格的放置侧。（caption-side）
    *
-   * CSS 语法：`top | bottom`。
-   *
    * CSS 初始值：`top`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caption-side
    */
   declare readonly captionSide: group2.CaptionSideCss;
   /**
    * 集中设置文本插入光标的颜色和形状。（caret）
-   *
-   * CSS 语法：`<'caret-color'> || <'caret-shape'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret
    */
   declare readonly caret: group2.CaretCss;
   /**
    * 设置可编辑内容中的文本插入光标颜色。（caret-color）
-   *
-   * CSS 语法：`auto | <color>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-color
@@ -1117,16 +970,12 @@ export class Css {
   /**
    * 设置文本插入光标的形状。（caret-shape）
    *
-   * CSS 语法：`auto | bar | block | underscore`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-shape
    */
   declare readonly caretShape: group2.CaretShapeCss;
   /**
    * 要求元素避让指定侧的前置浮动元素。（clear）
-   *
-   * CSS 语法：`none | left | right | both | inline-start | inline-end`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clear
@@ -1140,16 +989,12 @@ export class Css {
   /**
    * 通过基本形状、路径或引用裁剪元素的可见区域。（clip-path）
    *
-   * CSS 语法：`<clip-source> | [ <basic-shape> || <geometry-box> ] | none`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-path
    */
   declare readonly clipPath: group2.ClipPathCss;
   /**
    * 设置 SVG 裁剪路径判断内部区域所用的填充规则。（clip-rule）
-   *
-   * CSS 语法：`nonzero | evenodd`。
    *
    * CSS 初始值：`nonzero`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-rule
@@ -1159,8 +1004,6 @@ export class Css {
    * 设置文字前景色，同时作为 currentColor 的来源。（color）
    *
    * 改变文字和 currentColor 的来源，不会自动改变背景。颜色函数方法返回完整 color 声明。
-   *
-   * CSS 语法：`<color>`。
    *
    * CSS 初始值：`canvastext`（不同于浏览器默认样式表）。
    * @example
@@ -1173,8 +1016,6 @@ export class Css {
   /**
    * 控制输出设备对颜色的自动调整；这是 print-color-adjust 的旧名称。（color-adjust）
    *
-   * CSS 语法：`economy | exact`。
-   *
    * CSS 初始值：`economy`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
    */
@@ -1186,8 +1027,6 @@ export class Css {
   declare readonly colorInterpolation: group2.ColorInterpolationCss;
   /**
    * 设置 SVG 滤镜效果进行颜色计算时所用的色彩空间。（color-interpolation-filters）
-   *
-   * CSS 语法：`auto | sRGB | linearRGB`。
    *
    * CSS 初始值：`linearRGB`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-interpolation-filters
@@ -1203,16 +1042,12 @@ export class Css {
    *
    * 声明支持的方案不等于为应用生成主题颜色；文字、背景和业务 token 仍需自行定义。
    *
-   * CSS 语法：`normal | [ light | dark | <custom-ident> ]+ && only?`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-scheme
    */
   declare readonly colorScheme: group2.ColorSchemeCss;
   /**
    * 设置多栏布局的目标栏数。（column-count）
-   *
-   * CSS 语法：`<integer> | auto`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-count
@@ -1221,8 +1056,6 @@ export class Css {
   /**
    * 设置多栏内容顺序填充还是尽量均衡栏高。（column-fill）
    *
-   * CSS 语法：`auto | balance`。
-   *
    * CSS 初始值：`balance`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-fill
    */
@@ -1230,23 +1063,17 @@ export class Css {
   /**
    * 设置布局中相邻列之间的间距。（column-gap）
    *
-   * CSS 语法：`normal | <length-percentage>`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
    */
   declare readonly columnGap: group2.ColumnGapCss;
   /**
    * 设置多栏之间分隔线的宽度、线型和颜色。（column-rule）
-   *
-   * CSS 语法：`<'column-rule-width'> || <'column-rule-style'> || <'column-rule-color'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule
    */
   declare readonly columnRule: group2.ColumnRuleCss;
   /**
    * 设置多栏分隔线的颜色。（column-rule-color）
-   *
-   * CSS 语法：`<color>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-color
@@ -1255,16 +1082,12 @@ export class Css {
   /**
    * 设置多栏分隔线的线型。（column-rule-style）
    *
-   * CSS 语法：`<'border-style'>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-style
    */
   declare readonly columnRuleStyle: group2.ColumnRuleStyleCss;
   /**
    * 设置多栏分隔线的宽度。（column-rule-width）
-   *
-   * CSS 语法：`<'border-width'>`。
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-width
@@ -1273,8 +1096,6 @@ export class Css {
   /**
    * 设置多栏布局中的元素是否跨越所有栏。（column-span）
    *
-   * CSS 语法：`none | all`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-span
    */
@@ -1282,32 +1103,37 @@ export class Css {
   /**
    * 设置多栏布局的首选栏宽，实际栏宽由容器空间决定。（column-width）
    *
-   * CSS 语法：`<length> | auto`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-width
    */
   declare readonly columnWidth: group2.ColumnWidthCss;
   /**
    * 同时设置多栏布局的首选栏宽和目标栏数。（columns）
-   *
-   * CSS 语法：`<'column-width'> || <'column-count'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/columns
    */
   declare readonly columns: group2.ColumnsCss;
   /**
    * 声明尺寸、布局、绘制或样式隔离，限制子树对外部的影响。（contain）
    *
-   * CSS 语法：`none | strict | content | [ [ size || inline-size ] || layout || style || paint ]`。
+   * 不同隔离类型会改变布局和绘制语义，不能仅当作无副作用的性能开关。
+   *
+   * 常用值：
+   * - `content`：组合 layout、style 和 paint 隔离，不包含 size 隔离。
+   * - `strict`：组合 size、layout、style 和 paint 隔离；尺寸隔离可能影响自动尺寸。
+   * - `size`：计算盒子尺寸时不依赖后代内容，通常需要显式或替代内部尺寸。
+   * - `paint`：将后代绘制限制在隔离边界内。
+   * - `style`：隔离计数器等特定样式副作用，不会阻止普通 CSS 继承或选择器匹配。
+   *
+   * 适用场景：边界明确且尺寸、溢出行为经过验证的独立区域。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
+   * @example
+   * s.contain.content
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain
    */
   declare readonly contain: group2.ContainCss;
   /**
    * 设置块轴尺寸隔离或跳过内容渲染时使用的替代内部尺寸。（contain-intrinsic-block-size）
-   *
-   * CSS 语法：`auto? [ none | <length> ]`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-block-size
@@ -1316,8 +1142,6 @@ export class Css {
   /**
    * 设置高度隔离或跳过内容渲染时使用的替代内部高度。（contain-intrinsic-height）
    *
-   * CSS 语法：`auto? [ none | <length> ]`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-height
    */
@@ -1325,23 +1149,17 @@ export class Css {
   /**
    * 设置行内轴尺寸隔离或跳过内容渲染时使用的替代内部尺寸。（contain-intrinsic-inline-size）
    *
-   * CSS 语法：`auto? [ none | <length> ]`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-inline-size
    */
   declare readonly containIntrinsicInlineSize: group2.ContainIntrinsicInlineSizeCss;
   /**
    * 集中设置尺寸隔离时使用的替代内部宽高。（contain-intrinsic-size）
-   *
-   * CSS 语法：`[ auto? [ none | <length> ] ]{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-size
    */
   declare readonly containIntrinsicSize: group2.ContainIntrinsicSizeCss;
   /**
    * 设置宽度隔离或跳过内容渲染时使用的替代内部宽度。（contain-intrinsic-width）
-   *
-   * CSS 语法：`auto? [ none | <length> ]`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-width
@@ -1349,15 +1167,11 @@ export class Css {
   declare readonly containIntrinsicWidth: group2.ContainIntrinsicWidthCss;
   /**
    * 同时声明查询容器的名称和类型。（container）
-   *
-   * CSS 语法：`<'container-name'> [ / <'container-type'> ]?`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container
    */
   declare readonly container: group2.ContainerCss;
   /**
    * 为查询容器命名，供 @container 条件规则选择。（container-name）
-   *
-   * CSS 语法：`none | <custom-ident>+`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-name
@@ -1366,16 +1180,23 @@ export class Css {
   /**
    * 建立指定类型的查询容器，并施加所需的隔离行为。（container-type）
    *
-   * CSS 语法：`normal | [ [ size | inline-size ] || scroll-state ]`。
+   * 建立尺寸查询容器会同时引入必要的隔离语义；容器本身的样式通常由祖先查询容器决定。
+   *
+   * 常用值：
+   * - `normal`：不建立尺寸查询容器；仍可用于支持的样式查询。
+   * - `inline-size`：建立行内轴尺寸查询容器，不同时隔离块轴尺寸。
+   * - `size`：建立两个轴的尺寸查询容器，内容不再直接决定其隔离尺寸。
+   *
+   * 适用场景：让组件按所在容器尺寸响应，而不是只按视口响应。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+   * @example
+   * s.containerType.inlineSize
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-type
    */
   declare readonly containerType: group2.ContainerTypeCss;
   /**
    * 设置生成内容、替换内容或伪元素的内容。（content）
-   *
-   * CSS 语法：`normal | none | [ <content-replacement> | <content-list> ] [ / [ <string> | <counter> | <attr()> ]+ ]?`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content
@@ -1384,16 +1205,23 @@ export class Css {
   /**
    * 控制是否渲染元素内容，并允许浏览器跳过暂时不可见的子树。（content-visibility）
    *
-   * CSS 语法：`visible | auto | hidden`。
+   * 允许跳过子树渲染；跳过时的占位尺寸可由 contain-intrinsic-size 提供。
+   *
+   * 常用值：
+   * - `visible`：正常渲染内容，不由此属性跳过子树。
+   * - `auto`：允许浏览器跳过与用户暂不相关的内容渲染，仍需维护布局和可访问性语义。
+   * - `hidden`：跳过内容渲染，行为不同于只隐藏绘制的 visibility:hidden。
+   *
+   * 适用场景：页面中较长、暂时位于视口外的独立内容区域。
    *
    * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+   * @example
+   * s.contentVisibility.auto
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content-visibility
    */
   declare readonly contentVisibility: group2.ContentVisibilityCss;
   /**
    * 增加或减少指定 CSS 计数器的值。（counter-increment）
-   *
-   * CSS 语法：`[ <counter-name> <integer>? ]+ | none`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-increment
@@ -1402,16 +1230,12 @@ export class Css {
   /**
    * 创建或重置 CSS 计数器。（counter-reset）
    *
-   * CSS 语法：`[ <counter-name> <integer>? | <reversed-counter-name> <integer>? ]+ | none`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-reset
    */
   declare readonly counterReset: group2.CounterResetCss;
   /**
    * 设置已有 CSS 计数器的值，必要时创建计数器。（counter-set）
-   *
-   * CSS 语法：`[ <counter-name> <integer>? ]+ | none`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-set
@@ -1420,16 +1244,12 @@ export class Css {
   /**
    * 设置指针位于元素上方时显示的光标。（cursor）
    *
-   * CSS 语法：`[ [ <url> [ <x> <y> ]? , ]* <cursor-predefined> ]`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cursor
    */
   declare readonly cursor: group2.CursorCss;
   /**
    * 设置 SVG 圆或椭圆中心的横坐标。（cx）
-   *
-   * CSS 语法：`<length> | <percentage>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cx
@@ -1438,16 +1258,12 @@ export class Css {
   /**
    * 设置 SVG 圆或椭圆中心的纵坐标。（cy）
    *
-   * CSS 语法：`<length> | <percentage>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cy
    */
   declare readonly cy: group2.CyCss;
   /**
    * 设置 SVG path 元素的路径数据。（d）
-   *
-   * CSS 语法：`none | path(<string>)`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/d
@@ -1456,29 +1272,33 @@ export class Css {
   /**
    * 设置文本基本方向，参与双向文本及部分布局计算。（direction）
    *
-   * CSS 语法：`ltr | rtl`。
-   *
    * CSS 初始值：`ltr`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/direction
    */
   declare readonly direction: group2.DirectionCss;
   /**
-   * 设置元素的外部显示类型，以及子元素使用的内部布局方式。（display）
+   * 决定元素是否生成布局盒子，以及元素自身和内部内容如何排版。（display）
    *
-   * 外部显示类型决定元素如何参与父级布局，内部显示类型决定如何排列子元素。
+   * 外部显示类型决定元素自身以块级还是行内级方式参与周围布局；内部布局方式决定内容使用普通流、Flex 或 Grid 等布局。此属性不继承；例如 div 通常由浏览器默认样式设置为 block。
    *
-   * CSS 语法：`[ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy>`。
+   * 常用值：
+   * - `block`：生成块级盒子，内部默认采用普通流布局。
+   * - `inline`：生成行内盒子，参与行内排版；普通非替换行内盒子的宽高不按块盒规则应用。
+   * - `flex`：生成块级弹性容器，直接子元素参与 Flex 布局。
+   * - `inline-flex`：创建行内级的 Flex 容器。
+   * - `grid`：生成块级网格容器，直接子元素参与 Grid 布局。
+   * - `none`：不生成元素及其后代的布局盒子，通常也从可访问性树中移除。
+   *
+   * 适用场景：选择容器的布局方式；具体对齐、间距和换行由对应布局属性控制。
    *
    * CSS 初始值：`inline`（不同于浏览器默认样式表）。
    * @example
    * css(s.display.flex, s.alignItems.center, s.gap.rem(0.5))
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/display
+   * @see https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/display
    */
   declare readonly display: group2.DisplayCss;
   /**
    * 选择 SVG 文本布局的主导基线及基线表。（dominant-baseline）
-   *
-   * CSS 语法：`auto | text-bottom | alphabetic | ideographic | middle | central | mathematical | hanging | text-top`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/dominant-baseline
@@ -1487,16 +1307,12 @@ export class Css {
   /**
    * 控制分离边框表格中空单元格的边框和背景是否绘制。（empty-cells）
    *
-   * CSS 语法：`show | hide`。
-   *
    * CSS 初始值：`show`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/empty-cells
    */
   declare readonly emptyCells: group2.EmptyCellsCss;
   /**
    * 控制表单控件采用固定默认尺寸还是根据内容调整尺寸。（field-sizing）
-   *
-   * CSS 语法：`content | fixed`。
    *
    * CSS 初始值：`fixed`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/field-sizing
@@ -1505,16 +1321,12 @@ export class Css {
   /**
    * 设置 SVG 图形内部的填充绘制方式。（fill）
    *
-   * CSS 语法：`<paint>`。
-   *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill
    */
   declare readonly fill: group2.FillCss;
   /**
    * 设置 SVG 填充的不透明度，不影响描边。（fill-opacity）
-   *
-   * CSS 语法：`<'opacity'>`。
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-opacity
@@ -1523,16 +1335,12 @@ export class Css {
   /**
    * 设置复杂 SVG 路径的内部区域判定规则。（fill-rule）
    *
-   * CSS 语法：`nonzero | evenodd`。
-   *
    * CSS 初始值：`nonzero`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-rule
    */
   declare readonly fillRule: group2.FillRuleCss;
   /**
    * 对元素的最终图像应用模糊、亮度等滤镜。（filter）
-   *
-   * CSS 语法：`none | <filter-value-list>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/filter
@@ -1541,41 +1349,69 @@ export class Css {
   /**
    * 集中设置弹性项目的增长系数、收缩系数和基础尺寸。（flex）
    *
-   * CSS 语法：`none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]`。
+   * 依次对应 flex-grow、flex-shrink、flex-basis。作用于弹性项目，应先由父容器建立 Flex 布局。
+   *
+   * 常用值：
+   * - `auto`：等价于 1 1 auto：可增长、可收缩，基础尺寸由主尺寸属性或内容决定。
+   * - `none`：等价于 0 0 auto：不增长也不收缩，保留自动基础尺寸。
+   *
+   * 适用场景：分配弹性布局中的剩余空间，或让项目保持自身尺寸。
+   * @example
+   * s.flex.raw('1 1 0%')
+   * @example
+   * s.flex.none
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex
    */
   declare readonly flex: group2.FlexCss;
   /**
    * 设置弹性项目分配剩余空间之前的主轴基础尺寸。（flex-basis）
    *
-   * CSS 语法：`content | <'width'>`。
+   * 在剩余空间分配前确定项目的主轴基础尺寸；设置为 auto 时先参考对应的 width/height。
+   *
+   * 常用值：
+   * - `auto`：先参考主轴对应的 width 或 height；该值也为 auto 时由内容决定。
+   * - `content`：按内容确定基础尺寸，而不直接使用 width 或 height 作为基础尺寸。
+   *
+   * 适用场景：为侧栏、内容区或重复项目指定弹性分配的起始尺寸。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.flexBasis.rem(16)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-basis
    */
   declare readonly flexBasis: group2.FlexBasisCss;
   /**
    * 设置弹性容器的主轴方向及项目排列方向。（flex-direction）
    *
-   * CSS 语法：`row | row-reverse | column | column-reverse`。
+   * row 沿行内轴，column 沿块轴；不能始终按“水平/垂直”理解。反转只改变视觉排列，不改变 DOM 顺序。
+   *
+   * 常用值：
+   * - `row`：主轴沿行内方向排列；不一定是从左到右，取决于书写方向。
+   * - `column`：主轴沿块方向排列；水平书写时通常从上到下。
+   * - `row-reverse`：反转行内方向的视觉排列，不改变 DOM 顺序。
+   * - `column-reverse`：反转块方向的视觉排列，不改变 DOM 顺序。
    *
    * CSS 初始值：`row`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.display.flex, s.flexDirection.column, s.gap.rem(1))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-direction
    */
   declare readonly flexDirection: group2.FlexDirectionCss;
   /**
    * 同时设置弹性布局的主轴方向和换行方式。（flex-flow）
-   *
-   * CSS 语法：`<'flex-direction'> || <'flex-wrap'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-flow
    */
   declare readonly flexFlow: group2.FlexFlowCss;
   /**
    * 设置弹性项目分配正剩余空间时的增长系数。（flex-grow）
    *
-   * CSS 语法：`<number>`。
+   * 数值是分配正剩余空间的相对权重，不是最终宽度百分比。只有容器存在剩余空间时才发挥作用。
+   *
+   * 适用场景：让主内容区填充工具栏或行布局的剩余空间。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
+   * @example
+   * s.flexGrow.raw(1)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-grow
    */
   declare readonly flexGrow: group2.FlexGrowCss;
@@ -1584,25 +1420,32 @@ export class Css {
    *
    * 实际收缩还与 flex-basis 成比例；自动最小尺寸可能阻止项目继续缩小。
    *
-   * CSS 语法：`<number>`。
+   * 适用场景：控制空间不足时是否允许缩小；设置为 0 可避免图标或固定控件收缩。
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
+   * @example
+   * s.flexShrink.raw(0)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-shrink
    */
   declare readonly flexShrink: group2.FlexShrinkCss;
   /**
    * 设置弹性项目是否换行，以及多行的排列方向。（flex-wrap）
    *
-   * CSS 语法：`nowrap | wrap | wrap-reverse`。
+   * 常用值：
+   * - `nowrap`：保持单行；项目仍可能收缩或溢出。
+   * - `wrap`：空间不足时形成多行，沿交叉轴正常方向排列。
+   * - `wrap-reverse`：允许换行并反转交叉轴上各行的排列方向。
+   *
+   * 适用场景：标签、按钮等项目不足一行时允许分行。
    *
    * CSS 初始值：`nowrap`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.display.flex, s.flexWrap.wrap, s.gap.rem(0.5))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-wrap
    */
   declare readonly flexWrap: group2.FlexWrapCss;
   /**
    * 将元素浮动到指定侧，使相邻行内内容围绕它排列。（float）
-   *
-   * CSS 语法：`left | right | none | inline-start | inline-end`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/float
@@ -1611,8 +1454,6 @@ export class Css {
   /**
    * 设置 SVG feFlood 或相关滤镜的洪泛颜色。（flood-color）
    *
-   * CSS 语法：`<color>`。
-   *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-color
    */
@@ -1620,30 +1461,22 @@ export class Css {
   /**
    * 设置 SVG 洪泛滤镜颜色的不透明度。（flood-opacity）
    *
-   * CSS 语法：`<'opacity'>`。
-   *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-opacity
    */
   declare readonly floodOpacity: group2.FloodOpacityCss;
   /**
    * 集中设置字体样式、粗细、大小、行高和字体族等信息。（font）
-   *
-   * CSS 语法：`[ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-family-name>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font
    */
   declare readonly font: group2.FontCss;
   /**
    * 设置按优先级排列的字体族及通用字体回退。（font-family）
-   *
-   * CSS 语法：`[ <family-name> | <generic-family> ]#`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-family
    */
   declare readonly fontFamily: group2.FontFamilyCss;
   /**
    * 通过 OpenType 特性标签控制字体的底层排版功能。（font-feature-settings）
-   *
-   * CSS 语法：`normal | <feature-tag-value>#`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-feature-settings
@@ -1652,16 +1485,12 @@ export class Css {
   /**
    * 设置是否应用字体提供的字偶间距调整。（font-kerning）
    *
-   * CSS 语法：`auto | normal | none`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-kerning
    */
   declare readonly fontKerning: group2.FontKerningCss;
   /**
    * 覆盖字体排版使用的语言系统标签，不改变文本实际语言。（font-language-override）
-   *
-   * CSS 语法：`normal | <string>`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-language-override
@@ -1670,16 +1499,12 @@ export class Css {
   /**
    * 控制支持光学尺寸轴的字体是否按字号优化字形。（font-optical-sizing）
    *
-   * CSS 语法：`auto | none`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-optical-sizing
    */
   declare readonly fontOpticalSizing: group2.FontOpticalSizingCss;
   /**
    * 选择或覆盖彩色字体使用的调色板。（font-palette）
-   *
-   * CSS 语法：`normal | light | dark | <palette-identifier> | <palette-mix()>`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-palette
@@ -1688,16 +1513,18 @@ export class Css {
   /**
    * 设置字体大小，也影响 em 等相对单位的计算。（font-size）
    *
-   * CSS 语法：`<absolute-size> | <relative-size> | <length-percentage [0,∞]> | math`。
+   * 改变字形大小，并影响 em 等相对长度；行盒高度还由 line-height 决定。
+   *
+   * 适用场景：建立文字层级，根字号相对尺寸可用 rem 表达。
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.fontSize.rem(1), s.lineHeight.raw(1.5))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size
    */
   declare readonly fontSize: group2.FontSizeCss;
   /**
    * 按字体特征尺寸调整字号，减少字体回退造成的视觉变化。（font-size-adjust）
-   *
-   * CSS 语法：`none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number> ]`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size-adjust
@@ -1705,8 +1532,6 @@ export class Css {
   declare readonly fontSizeAdjust: group2.FontSizeAdjustCss;
   /**
    * 控制字体平滑的非标准属性；使用前核对目标浏览器。（font-smooth）
-   *
-   * CSS 语法：`auto | never | always | <absolute-size> | <length>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-smooth
@@ -1720,16 +1545,12 @@ export class Css {
   /**
    * 选择正常、斜体或倾斜字体样式。（font-style）
    *
-   * CSS 语法：`normal | italic | oblique <angle>?`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-style
    */
   declare readonly fontStyle: group2.FontStyleCss;
   /**
    * 控制缺少真实字体字形时浏览器可否合成粗体、斜体等样式。（font-synthesis）
-   *
-   * CSS 语法：`none | [ weight || style || small-caps || position]`。
    *
    * CSS 初始值：`weight style small-caps position `（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis
@@ -1738,16 +1559,12 @@ export class Css {
   /**
    * 控制浏览器是否可以合成上标和下标字形。（font-synthesis-position）
    *
-   * CSS 语法：`auto | none`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-position
    */
   declare readonly fontSynthesisPosition: group2.FontSynthesisPositionCss;
   /**
    * 控制浏览器是否可以合成小型大写字形。（font-synthesis-small-caps）
-   *
-   * CSS 语法：`auto | none`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-small-caps
@@ -1756,16 +1573,12 @@ export class Css {
   /**
    * 控制浏览器是否可以合成倾斜字体。（font-synthesis-style）
    *
-   * CSS 语法：`auto | none`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-style
    */
   declare readonly fontSynthesisStyle: group2.FontSynthesisStyleCss;
   /**
    * 控制浏览器是否可以合成加粗字体。（font-synthesis-weight）
-   *
-   * CSS 语法：`auto | none`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-weight
@@ -1774,16 +1587,12 @@ export class Css {
   /**
    * 集中设置字体的连字、大小写、数字及其他变体。（font-variant）
    *
-   * CSS 语法：`normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> || stylistic( <feature-value-name> ) || historical-forms || styleset( <feature-value-name># ) || character-variant( <feature-value-name># ) || swash( <feature-value-name> ) || ornaments( <feature-value-name> ) || annotation( <feature-value-name> ) || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero || <east-asian-variant-values> || <east-asian-width-values> || ruby ]`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant
    */
   declare readonly fontVariant: group2.FontVariantCss;
   /**
    * 选择字体提供的替代字形。（font-variant-alternates）
-   *
-   * CSS 语法：`normal | [ stylistic( <feature-value-name> ) || historical-forms || styleset( <feature-value-name># ) || character-variant( <feature-value-name># ) || swash( <feature-value-name> ) || ornaments( <feature-value-name> ) || annotation( <feature-value-name> ) ]`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-alternates
@@ -1792,16 +1601,12 @@ export class Css {
   /**
    * 设置小型大写等大小写字形变体。（font-variant-caps）
    *
-   * CSS 语法：`normal | small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-caps
    */
   declare readonly fontVariantCaps: group2.FontVariantCapsCss;
   /**
    * 设置东亚文字字形及宽度变体。（font-variant-east-asian）
-   *
-   * CSS 语法：`normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-east-asian
@@ -1810,16 +1615,12 @@ export class Css {
   /**
    * 设置字符优先采用文本字形还是 emoji 字形。（font-variant-emoji）
    *
-   * CSS 语法：`normal | text | emoji | unicode`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-emoji
    */
   declare readonly fontVariantEmoji: group2.FontVariantEmojiCss;
   /**
    * 设置字体连字的启用方式。（font-variant-ligatures）
-   *
-   * CSS 语法：`normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-ligatures
@@ -1828,16 +1629,12 @@ export class Css {
   /**
    * 设置数字的等宽、比例、分数及其他排版变体。（font-variant-numeric）
    *
-   * CSS 语法：`normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-numeric
    */
   declare readonly fontVariantNumeric: group2.FontVariantNumericCss;
   /**
    * 选择字体提供的上标或下标字形。（font-variant-position）
-   *
-   * CSS 语法：`normal | sub | super`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-position
@@ -1846,8 +1643,6 @@ export class Css {
   /**
    * 直接设置可变字体各个轴的数值。（font-variation-settings）
    *
-   * CSS 语法：`normal | [ <string> <number> ]#`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variation-settings
    */
@@ -1855,16 +1650,24 @@ export class Css {
   /**
    * 设置字体粗细，实际可用字重取决于字体。（font-weight）
    *
-   * CSS 语法：`<font-weight-absolute> | bolder | lighter`。
+   * 最终字形取决于已加载字体和可用字重；变量字体可支持连续的字重范围。
+   *
+   * 常用值：
+   * - `normal`：正常字重，等价于数值 400。
+   * - `bold`：粗体字重，等价于数值 700。
+   * - `bolder`：相对于继承字重选择更粗的字重，不是简单加一个固定数值。
+   * - `lighter`：相对于继承字重选择更细的字重，不是简单减一个固定数值。
+   *
+   * 适用场景：正文、强调文字和标题的视觉层级。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+   * @example
+   * s.fontWeight.raw(600)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-weight
    */
   declare readonly fontWeight: group2.FontWeightCss;
   /**
    * 选择字体的宽窄字面，不是通过变换拉伸元素。（font-width）
-   *
-   * CSS 语法：`normal | <percentage [0,∞]> | ultra-condensed | extra-condensed | condensed | semi-condensed | semi-expanded | expanded | extra-expanded | ultra-expanded`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-width
@@ -1872,8 +1675,6 @@ export class Css {
   declare readonly fontWidth: group2.FontWidthCss;
   /**
    * 控制元素是否参与系统强制颜色模式的自动替换。（forced-color-adjust）
-   *
-   * CSS 语法：`auto | none | preserve-parent-color`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/forced-color-adjust
@@ -1884,7 +1685,7 @@ export class Css {
    *
    * 两个值依次为 row-gap 和 column-gap；在 Flex 中对应项目还是行间距取决于 flex-direction。它不增加容器外缘的间距。
    *
-   * CSS 语法：`<'row-gap'> <'column-gap'>?`。
+   * 适用场景：给 Flex/Grid 项目设置统一间隔，避免逐个项目添加 margin。
    * @example
    * s.gap.px(8, 16) // gap:8px 16px;
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/gap
@@ -1897,22 +1698,16 @@ export class Css {
   declare readonly glyphOrientationVertical: group3.GlyphOrientationVerticalCss;
   /**
    * 集中设置显式和隐式网格的轨道、区域及自动放置方式。（grid）
-   *
-   * CSS 语法：`<'grid-template'> | <'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? | [ auto-flow && dense? ] <'grid-auto-rows'>? / <'grid-template-columns'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid
    */
   declare readonly grid: group3.GridCss;
   /**
    * 设置网格项目的区域名，或行起点、列起点、行终点、列终点。（grid-area）
-   *
-   * CSS 语法：`<grid-line> [ / <grid-line> ]{0,3}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-area
    */
   declare readonly gridArea: group3.GridAreaCss;
   /**
    * 设置隐式生成的网格列尺寸。（grid-auto-columns）
-   *
-   * CSS 语法：`<track-size>+`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-columns
@@ -1923,16 +1718,21 @@ export class Css {
    *
    * dense 可能改变视觉顺序，但不改变 DOM 和键盘导航顺序。
    *
-   * CSS 语法：`[ row | column ] || dense`。
+   * 常用值：
+   * - `row`：优先沿行放置项目，必要时创建新的隐式行。
+   * - `column`：优先沿列放置项目，必要时创建新的隐式列。
+   * - `dense`：尝试回填前面留下的空洞，可能让视觉顺序与 DOM 顺序不同。
+   *
+   * 适用场景：控制未明确指定位置的网格项目如何自动填入轨道。
    *
    * CSS 初始值：`row`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.display.grid, s.gridAutoFlow.row)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-flow
    */
   declare readonly gridAutoFlow: group3.GridAutoFlowCss;
   /**
    * 设置隐式生成的网格行尺寸。（grid-auto-rows）
-   *
-   * CSS 语法：`<track-size>+`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-rows
@@ -1940,15 +1740,11 @@ export class Css {
   declare readonly gridAutoRows: group3.GridAutoRowsCss;
   /**
    * 设置网格项目的列起点和列终点。（grid-column）
-   *
-   * CSS 语法：`<grid-line> [ / <grid-line> ]?`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column
    */
   declare readonly gridColumn: group3.GridColumnCss;
   /**
    * 设置网格项目的列终止线或跨越范围。（grid-column-end）
-   *
-   * CSS 语法：`<grid-line>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-end
@@ -1957,23 +1753,17 @@ export class Css {
   /**
    * 设置网格项目的列起始线或跨越范围。（grid-column-start）
    *
-   * CSS 语法：`<grid-line>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-start
    */
   declare readonly gridColumnStart: group3.GridColumnStartCss;
   /**
    * 设置网格项目的行起点和行终点。（grid-row）
-   *
-   * CSS 语法：`<grid-line> [ / <grid-line> ]?`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row
    */
   declare readonly gridRow: group3.GridRowCss;
   /**
    * 设置网格项目的行终止线或跨越范围。（grid-row-end）
-   *
-   * CSS 语法：`<grid-line>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-end
@@ -1982,23 +1772,17 @@ export class Css {
   /**
    * 设置网格项目的行起始线或跨越范围。（grid-row-start）
    *
-   * CSS 语法：`<grid-line>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-start
    */
   declare readonly gridRowStart: group3.GridRowStartCss;
   /**
    * 集中设置显式网格的行、列和命名区域。（grid-template）
-   *
-   * CSS 语法：`none | [ <'grid-template-rows'> / <'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]?`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template
    */
   declare readonly gridTemplate: group3.GridTemplateCss;
   /**
    * 用区域名称矩阵定义网格布局区域。（grid-template-areas）
-   *
-   * CSS 语法：`none | <string>+`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-areas
@@ -2007,7 +1791,9 @@ export class Css {
   /**
    * 定义显式网格的列轨道尺寸及网格线名称。（grid-template-columns）
    *
-   * CSS 语法：`none | <track-list> | <auto-track-list> | subgrid <line-name-list>?`。
+   * 每个轨道值定义一列；fr 分配剩余空间。需要允许长内容所在列缩小时，可使用 minmax(0, 1fr)。
+   *
+   * 适用场景：响应式卡片、表单标签与输入框的列布局。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @example
@@ -2018,16 +1804,18 @@ export class Css {
   /**
    * 定义显式网格的行轨道尺寸及网格线名称。（grid-template-rows）
    *
-   * CSS 语法：`none | <track-list> | <auto-track-list> | subgrid <line-name-list>?`。
+   * 每个轨道值定义一行，未显式定义的行使用 grid-auto-rows。
+   *
+   * 适用场景：区分固定工具栏和可伸缩内容区域。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
+   * @example
+   * s.gridTemplateRows.raw('auto minmax(0, 1fr)')
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-rows
    */
   declare readonly gridTemplateRows: group3.GridTemplateRowsCss;
   /**
    * 控制标点是否可以悬挂在行盒边缘之外。（hanging-punctuation）
-   *
-   * CSS 语法：`none | [ first || [ force-end | allow-end ] || last ]`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hanging-punctuation
@@ -2038,16 +1826,16 @@ export class Css {
    *
    * 百分比高度能否解析取决于包含块的尺寸确定方式；设置 100% 不自动等于视口高度。
    *
-   * CSS 语法：`auto | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
+   * 适用场景：控制物理高度；滚动面板通常结合 max-height 和 overflow。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.maxHeight.rem(20), s.overflowY.auto)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/height
    */
   declare readonly height: group3.HeightCss;
   /**
    * 设置自动断词时插入的断字符号。（hyphenate-character）
-   *
-   * CSS 语法：`auto | <string>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-character
@@ -2056,16 +1844,12 @@ export class Css {
   /**
    * 限制可断词的最小单词长度以及断点两侧的最少字符数。（hyphenate-limit-chars）
    *
-   * CSS 语法：`[ auto | <integer> ]{1,3}`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-limit-chars
    */
   declare readonly hyphenateLimitChars: group3.HyphenateLimitCharsCss;
   /**
    * 设置文字断词和连字符插入的方式；自动断词依赖语言和词典。（hyphens）
-   *
-   * CSS 语法：`none | manual | auto`。
    *
    * CSS 初始值：`manual`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphens
@@ -2074,16 +1858,12 @@ export class Css {
   /**
    * 设置图像是否按元数据等信息调整方向。（image-orientation）
    *
-   * CSS 语法：`from-image | <angle> | [ <angle>? flip ]`。
-   *
    * CSS 初始值：`from-image`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-orientation
    */
   declare readonly imageOrientation: group3.ImageOrientationCss;
   /**
    * 向浏览器指定图像缩放时的插值与清晰度偏好。（image-rendering）
-   *
-   * CSS 语法：`auto | crisp-edges | pixelated | smooth`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-rendering
@@ -2092,16 +1872,12 @@ export class Css {
   /**
    * 设置图像的分辨率解释方式；使用前核对目标浏览器支持。（image-resolution）
    *
-   * CSS 语法：`[ from-image || <resolution> ] && snap?`。
-   *
    * CSS 初始值：`1dppx`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-resolution
    */
   declare readonly imageResolution: group3.ImageResolutionCss;
   /**
    * 设置段落首字下沉或抬升时占用的行数与对齐位置。（initial-letter）
-   *
-   * CSS 语法：`normal | [ <number> <integer>? ]`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/initial-letter
@@ -2110,8 +1886,6 @@ export class Css {
   /**
    * 设置首字下沉时字形与正文使用的对齐基线。（initial-letter-align）
    *
-   * CSS 语法：`[ auto | alphabetic | hanging | ideographic ]`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/initial-letter-align
    */
@@ -2119,30 +1893,28 @@ export class Css {
   /**
    * 设置逻辑行内轴尺寸；水平书写时通常对应宽度。（inline-size）
    *
-   * CSS 语法：`<'width'>`。
+   * 水平书写时通常对应 width，竖直书写时通常对应 height。实际尺寸还受 min-inline-size/max-inline-size 和 box-sizing 约束。
+   *
+   * 适用场景：希望布局尺寸跟随书写模式变化的组件。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.inlineSize.rem(20)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inline-size
    */
   declare readonly inlineSize: group3.InlineSizeCss;
   /**
    * 同时设置定位元素的上、右、下、左偏移。（inset）
-   *
-   * CSS 语法：`<'top'>{1,4}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset
    */
   declare readonly inset: group3.InsetCss;
   /**
    * 设置定位元素沿逻辑块轴的起始和结束偏移。（inset-block）
-   *
-   * CSS 语法：`<'top'>{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block
    */
   declare readonly insetBlock: group3.InsetBlockCss;
   /**
    * 设置定位元素在逻辑块轴结束侧的偏移。（inset-block-end）
-   *
-   * CSS 语法：`<'top'>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-end
@@ -2151,23 +1923,17 @@ export class Css {
   /**
    * 设置定位元素在逻辑块轴起始侧的偏移。（inset-block-start）
    *
-   * CSS 语法：`<'top'>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-start
    */
   declare readonly insetBlockStart: group3.InsetBlockStartCss;
   /**
    * 设置定位元素沿逻辑行内轴的起始和结束偏移。（inset-inline）
-   *
-   * CSS 语法：`<'top'>{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline
    */
   declare readonly insetInline: group3.InsetInlineCss;
   /**
    * 设置定位元素在逻辑行内轴结束侧的偏移。（inset-inline-end）
-   *
-   * CSS 语法：`<'top'>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-end
@@ -2176,16 +1942,12 @@ export class Css {
   /**
    * 设置定位元素在逻辑行内轴起始侧的偏移。（inset-inline-start）
    *
-   * CSS 语法：`<'top'>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-start
    */
   declare readonly insetInlineStart: group3.InsetInlineStartCss;
   /**
    * 控制动画是否允许在数值尺寸与内部尺寸关键字之间插值。（interpolate-size）
-   *
-   * CSS 语法：`numeric-only | allow-keywords`。
    *
    * CSS 初始值：`numeric-only`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interpolate-size
@@ -2194,25 +1956,37 @@ export class Css {
   /**
    * 控制元素是否建立独立的层叠上下文，隔离混合效果。（isolation）
    *
-   * CSS 语法：`auto | isolate`。
+   * 常用值：
+   * - `auto`：由其他属性是否需要层叠上下文决定，不强制隔离。
+   * - `isolate`：建立独立层叠上下文，使混合效果在该分组内处理。
+   *
+   * 适用场景：建立局部层叠边界，或限制混合模式影响范围。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.isolation.isolate
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/isolation
    */
   declare readonly isolation: group3.IsolationCss;
   /**
    * 分配布局主轴或行内轴的剩余空间，控制内容整体对齐。（justify-content）
    *
-   * CSS 语法：`normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ]`。
+   * Flex 中沿主轴分配空间，Grid 中沿行内轴对齐网格整体。没有剩余空间时，空间分配效果可能不明显。
+   *
+   * 常用值：
+   * - `center`：将整体内容放在主轴或行内轴的中间，不改变项目内部文字对齐。
+   * - `space-between`：首尾项目贴两端，剩余空间等分到相邻项目之间。
+   * - `space-around`：每个项目两侧分配相等空间，容器边缘的空间是相邻项目间的一半。
+   * - `space-evenly`：容器两端和相邻项目之间分配相等空间。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.display.flex, s.justifyContent.spaceBetween)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-content
    */
   declare readonly justifyContent: group3.JustifyContentCss;
   /**
    * 设置容器内项目在行内轴上的默认对齐方式；不控制 Flex 项目的主轴对齐。（justify-items）
-   *
-   * CSS 语法：`normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ] | anchor-center`。
    *
    * CSS 初始值：`legacy`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-items
@@ -2221,16 +1995,12 @@ export class Css {
   /**
    * 单独设置项目在其布局区域内的行内轴对齐方式。（justify-self）
    *
-   * CSS 语法：`auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | anchor-center`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-self
    */
   declare readonly justifySelf: group3.JustifySelfCss;
   /**
    * 旧版瀑布流布局提案中沿行内轴对齐轨道的属性；使用前核对实现与规范版本。（justify-tracks）
-   *
-   * CSS 语法：`[ normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ]#`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-tracks
@@ -2239,16 +2009,12 @@ export class Css {
   /**
    * 设置定位元素相对于其定位参照的左侧偏移。（left）
    *
-   * CSS 语法：`auto | <length-percentage> | <anchor()> | <anchor-size()>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/left
    */
   declare readonly left: group3.LeftCss;
   /**
    * 设置字符之间额外增加或减少的间距。（letter-spacing）
-   *
-   * CSS 语法：`normal | <length>`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/letter-spacing
@@ -2257,8 +2023,6 @@ export class Css {
   /**
    * 设置 SVG 光照滤镜使用的光源颜色。（lighting-color）
    *
-   * CSS 语法：`<color>`。
-   *
    * CSS 初始值：`white`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/lighting-color
    */
@@ -2266,16 +2030,12 @@ export class Css {
   /**
    * 设置东亚文字标点等字符的换行严格程度。（line-break）
    *
-   * CSS 语法：`auto | loose | normal | strict | anywhere`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-break
    */
   declare readonly lineBreak: group3.LineBreakCss;
   /**
    * 限制块容器显示的行数及截断行为；使用前核对所需语法的支持情况。（line-clamp）
-   *
-   * CSS 语法：`none | <integer>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-clamp
@@ -2286,7 +2046,7 @@ export class Css {
    *
    * 无单位数字作为倍数继承；长度值按长度继承。单独设置行高不会自动实现多行文本垂直居中。
    *
-   * CSS 语法：`normal | <number> | <length> | <percentage>`。
+   * 适用场景：控制正文行间节奏；可继承的字号倍数通常比固定长度更适合嵌套文字。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @example
@@ -2297,23 +2057,17 @@ export class Css {
   /**
    * 设置行盒高度向上取整使用的步长。（line-height-step）
    *
-   * CSS 语法：`<length>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-height-step
    */
   declare readonly lineHeightStep: group3.LineHeightStepCss;
   /**
    * 集中设置列表标记的类型、图像和位置。（list-style）
-   *
-   * CSS 语法：`<'list-style-type'> || <'list-style-position'> || <'list-style-image'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style
    */
   declare readonly listStyle: group3.ListStyleCss;
   /**
    * 设置用作列表标记的图像。（list-style-image）
-   *
-   * CSS 语法：`<image> | none`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-image
@@ -2322,16 +2076,12 @@ export class Css {
   /**
    * 设置列表标记位于主块盒内部还是外部。（list-style-position）
    *
-   * CSS 语法：`inside | outside`。
-   *
    * CSS 初始值：`outside`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-position
    */
   declare readonly listStylePosition: group3.ListStylePositionCss;
   /**
    * 设置列表标记或计数器的样式。（list-style-type）
-   *
-   * CSS 语法：`<counter-style> | <string> | none`。
    *
    * CSS 初始值：`disc`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-type
@@ -2342,7 +2092,7 @@ export class Css {
    *
    * 1/2/3/4 个值依次表示：四边；上下/左右；上/左右/下；上/右/下/左。块布局中的垂直外边距可能折叠。
    *
-   * CSS 语法：`<'margin-top'>{1,4}`。
+   * 适用场景：控制盒子外侧与相邻内容的距离；布局项统一间隔可考虑容器 gap。
    * @example
    * s.margin.px(8, 16) // margin:8px 16px;
    * @example
@@ -2352,15 +2102,11 @@ export class Css {
   declare readonly margin: group4.MarginCss;
   /**
    * 设置逻辑块轴起始侧和结束侧的外边距。（margin-block）
-   *
-   * CSS 语法：`<'margin-top'>{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block
    */
   declare readonly marginBlock: group4.MarginBlockCss;
   /**
    * 设置逻辑块轴结束侧的外边距。（margin-block-end）
-   *
-   * CSS 语法：`<'margin-top'>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block-end
@@ -2369,8 +2115,6 @@ export class Css {
   /**
    * 设置逻辑块轴起始侧的外边距。（margin-block-start）
    *
-   * CSS 语法：`<'margin-top'>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block-start
    */
@@ -2378,23 +2122,17 @@ export class Css {
   /**
    * 设置下外边距。（margin-bottom）
    *
-   * CSS 语法：`<length-percentage> | auto | <anchor-size()>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-bottom
    */
   declare readonly marginBottom: group4.MarginBottomCss;
   /**
    * 设置逻辑行内轴起始侧和结束侧的外边距。（margin-inline）
-   *
-   * CSS 语法：`<'margin-top'>{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline
    */
   declare readonly marginInline: group4.MarginInlineCss;
   /**
    * 设置逻辑行内轴结束侧的外边距。（margin-inline-end）
-   *
-   * CSS 语法：`<'margin-top'>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-end
@@ -2403,16 +2141,12 @@ export class Css {
   /**
    * 设置逻辑行内轴起始侧的外边距。（margin-inline-start）
    *
-   * CSS 语法：`<'margin-top'>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-start
    */
   declare readonly marginInlineStart: group4.MarginInlineStartCss;
   /**
    * 设置左外边距。（margin-left）
-   *
-   * CSS 语法：`<length-percentage> | auto | <anchor-size()>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-left
@@ -2421,16 +2155,12 @@ export class Css {
   /**
    * 设置右外边距。（margin-right）
    *
-   * CSS 语法：`<length-percentage> | auto | <anchor-size()>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-right
    */
   declare readonly marginRight: group4.MarginRightCss;
   /**
    * 设置上外边距。（margin-top）
-   *
-   * CSS 语法：`<length-percentage> | auto | <anchor-size()>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
@@ -2439,23 +2169,17 @@ export class Css {
   /**
    * 控制容器边缘处子元素外边距的裁减。（margin-trim）
    *
-   * CSS 语法：`none | in-flow | all`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-trim
    */
   declare readonly marginTrim: group4.MarginTrimCss;
   /**
    * 同时设置 SVG 路径起点、中间顶点和终点的标记图形。（marker）
-   *
-   * CSS 语法：`none | <url>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker
    */
   declare readonly marker: group4.MarkerCss;
   /**
    * 设置 SVG 路径终点的标记图形。（marker-end）
-   *
-   * CSS 语法：`none | <url>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-end
@@ -2464,8 +2188,6 @@ export class Css {
   /**
    * 设置 SVG 路径中间顶点的标记图形。（marker-mid）
    *
-   * CSS 语法：`none | <url>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-mid
    */
@@ -2473,30 +2195,22 @@ export class Css {
   /**
    * 设置 SVG 路径起点的标记图形。（marker-start）
    *
-   * CSS 语法：`none | <url>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-start
    */
   declare readonly markerStart: group4.MarkerStartCss;
   /**
    * 集中设置遮罩图层的图像、位置、尺寸、重复及合成方式。（mask）
-   *
-   * CSS 语法：`<mask-layer>#`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask
    */
   declare readonly mask: group4.MaskCss;
   /**
    * 设置基于九宫格图像切片的边框遮罩。（mask-border）
-   *
-   * CSS 语法：`<'mask-border-source'> || <'mask-border-slice'> [ / <'mask-border-width'>? [ / <'mask-border-outset'> ]? ]? || <'mask-border-repeat'> || <'mask-border-mode'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border
    */
   declare readonly maskBorder: group4.MaskBorderCss;
   /**
    * 设置边框遮罩使用 alpha 还是亮度信息。（mask-border-mode）
-   *
-   * CSS 语法：`luminance | alpha`。
    *
    * CSS 初始值：`alpha`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-mode
@@ -2505,16 +2219,12 @@ export class Css {
   /**
    * 设置边框遮罩超出边框盒的距离。（mask-border-outset）
    *
-   * CSS 语法：`[ <length> | <number> ]{1,4}`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-outset
    */
   declare readonly maskBorderOutset: group4.MaskBorderOutsetCss;
   /**
    * 设置边框遮罩切片的重复或拉伸方式。（mask-border-repeat）
-   *
-   * CSS 语法：`[ stretch | repeat | round | space ]{1,2}`。
    *
    * CSS 初始值：`stretch`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-repeat
@@ -2523,16 +2233,12 @@ export class Css {
   /**
    * 设置边框遮罩图像的切片位置。（mask-border-slice）
    *
-   * CSS 语法：`<number-percentage>{1,4} fill?`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-slice
    */
   declare readonly maskBorderSlice: group4.MaskBorderSliceCss;
   /**
    * 设置边框遮罩的源图像。（mask-border-source）
-   *
-   * CSS 语法：`none | <image>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-source
@@ -2541,16 +2247,12 @@ export class Css {
   /**
    * 设置边框遮罩各边的宽度。（mask-border-width）
    *
-   * CSS 语法：`[ <length-percentage> | <number> | auto ]{1,4}`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-width
    */
   declare readonly maskBorderWidth: group4.MaskBorderWidthCss;
   /**
    * 设置遮罩效果允许作用的裁剪区域。（mask-clip）
-   *
-   * CSS 语法：`[ <coord-box> | no-clip ]#`。
    *
    * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-clip
@@ -2559,16 +2261,12 @@ export class Css {
   /**
    * 设置多个遮罩图层之间的合成运算。（mask-composite）
    *
-   * CSS 语法：`<compositing-operator>#`。
-   *
    * CSS 初始值：`add`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-composite
    */
   declare readonly maskComposite: group4.MaskCompositeCss;
   /**
    * 设置遮罩使用的图像、渐变或 SVG 遮罩引用。（mask-image）
-   *
-   * CSS 语法：`<mask-reference>#`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-image
@@ -2577,16 +2275,12 @@ export class Css {
   /**
    * 设置遮罩按 alpha、亮度或源类型解释。（mask-mode）
    *
-   * CSS 语法：`<masking-mode>#`。
-   *
    * CSS 初始值：`match-source`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-mode
    */
   declare readonly maskMode: group4.MaskModeCss;
   /**
    * 设置遮罩图像定位所依据的盒子。（mask-origin）
-   *
-   * CSS 语法：`<coord-box>#`。
    *
    * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-origin
@@ -2595,16 +2289,12 @@ export class Css {
   /**
    * 设置遮罩图像在定位区域中的位置。（mask-position）
    *
-   * CSS 语法：`<position>#`。
-   *
    * CSS 初始值：`0% 0%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-position
    */
   declare readonly maskPosition: group4.MaskPositionCss;
   /**
    * 设置遮罩图像的重复方式。（mask-repeat）
-   *
-   * CSS 语法：`<repeat-style>#`。
    *
    * CSS 初始值：`repeat`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-repeat
@@ -2613,16 +2303,12 @@ export class Css {
   /**
    * 设置遮罩图像的尺寸。（mask-size）
    *
-   * CSS 语法：`<bg-size>#`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-size
    */
   declare readonly maskSize: group4.MaskSizeCss;
   /**
    * 设置 SVG mask 元素使用亮度还是 alpha 作为遮罩。（mask-type）
-   *
-   * CSS 语法：`luminance | alpha`。
    *
    * CSS 初始值：`luminance`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-type
@@ -2631,16 +2317,12 @@ export class Css {
   /**
    * 旧版瀑布流布局提案中的自动放置策略；使用前核对实现与规范版本。（masonry-auto-flow）
    *
-   * CSS 语法：`[ pack | next ] || [ definite-first | ordered ]`。
-   *
    * CSS 初始值：`pack`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/masonry-auto-flow
    */
   declare readonly masonryAutoFlow: group4.MasonryAutoFlowCss;
   /**
    * 设置数学公式的嵌套深度，用于数学字号等排版计算。（math-depth）
-   *
-   * CSS 语法：`auto-add | add(<integer>) | <integer>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-depth
@@ -2649,16 +2331,12 @@ export class Css {
   /**
    * 控制数学上标采用正常还是压缩的垂直偏移。（math-shift）
    *
-   * CSS 语法：`normal | compact`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-shift
    */
   declare readonly mathShift: group4.MathShiftCss;
   /**
    * 设置数学公式采用正常还是紧凑排版。（math-style）
-   *
-   * CSS 语法：`normal | compact`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-style
@@ -2667,16 +2345,12 @@ export class Css {
   /**
    * 限制元素逻辑块轴的最大尺寸。（max-block-size）
    *
-   * CSS 语法：`<'max-width'>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-block-size
    */
   declare readonly maxBlockSize: group4.MaxBlockSizeCss;
   /**
    * 限制元素的最大物理高度。（max-height）
-   *
-   * CSS 语法：`none | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-height
@@ -2685,16 +2359,12 @@ export class Css {
   /**
    * 限制元素逻辑行内轴的最大尺寸。（max-inline-size）
    *
-   * CSS 语法：`<'max-width'>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-inline-size
    */
   declare readonly maxInlineSize: group4.MaxInlineSizeCss;
   /**
    * 限制分片上下文中的最大行数；属于需核对支持情况的截行能力。（max-lines）
-   *
-   * CSS 语法：`none | <integer>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-lines
@@ -2703,16 +2373,18 @@ export class Css {
   /**
    * 限制元素的最大物理宽度。（max-width）
    *
-   * CSS 语法：`none | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
+   * 限制最终宽度，不会单独要求元素达到该宽度。最小尺寸约束可能优先于较小的最大尺寸。
+   *
+   * 适用场景：限制正文行长、弹窗宽度或响应式内容区。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.width.percent(100), s.maxWidth.rem(48))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-width
    */
   declare readonly maxWidth: group4.MaxWidthCss;
   /**
    * 设置元素逻辑块轴的最小尺寸。（min-block-size）
-   *
-   * CSS 语法：`<'min-width'>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-block-size
@@ -2721,16 +2393,12 @@ export class Css {
   /**
    * 设置元素的最小物理高度。（min-height）
    *
-   * CSS 语法：`auto | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-height
    */
   declare readonly minHeight: group4.MinHeightCss;
   /**
    * 设置元素逻辑行内轴的最小尺寸。（min-inline-size）
-   *
-   * CSS 语法：`<'min-width'>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-inline-size
@@ -2741,16 +2409,16 @@ export class Css {
    *
    * Flex/Grid 项目的 auto 最小尺寸可能由内容决定。需要允许其收缩时，可以按布局目的设置 min-width:0。
    *
-   * CSS 语法：`auto | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
+   * 适用场景：给控件设置最小可用宽度，或用 0 允许 Flex/Grid 子项突破自动内容最小宽度。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.minWidth.px(0)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-width
    */
   declare readonly minWidth: group4.MinWidthCss;
   /**
    * 设置元素整体与其背后内容的颜色混合方式。（mix-blend-mode）
-   *
-   * CSS 语法：`<blend-mode> | plus-darker | plus-lighter`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mix-blend-mode
@@ -2758,15 +2426,11 @@ export class Css {
   declare readonly mixBlendMode: group4.MixBlendModeCss;
   /**
    * 设置运动路径的旧式简写；对应现代 offset 属性族。（motion）
-   *
-   * CSS 语法：`[ <'offset-position'>? [ <'offset-path'> [ <'offset-distance'> || <'offset-rotate'> ]? ]? ]! [ / <'offset-anchor'> ]?`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset
    */
   declare readonly motion: group4.MotionCss;
   /**
    * 设置沿运动路径行进距离的旧属性；对应 offset-distance。（motion-distance）
-   *
-   * CSS 语法：`<length-percentage>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-distance
@@ -2775,16 +2439,12 @@ export class Css {
   /**
    * 设置运动路径的旧属性；对应 offset-path。（motion-path）
    *
-   * CSS 语法：`none | <offset-path> || <coord-box>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-path
    */
   declare readonly motionPath: group4.MotionPathCss;
   /**
    * 设置运动路径旋转方式的旧属性；对应 offset-rotate。（motion-rotation）
-   *
-   * CSS 语法：`[ auto | reverse ] || <angle>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
@@ -2793,16 +2453,25 @@ export class Css {
   /**
    * 设置替换元素的内容如何适应其内容盒，例如图像的裁切和缩放。（object-fit）
    *
-   * CSS 语法：`fill | contain | cover | none | scale-down`。
+   * 控制 img、video 等替换内容在盒子内部的缩放与裁剪；不改变盒子本身的 width/height。
+   *
+   * 常用值：
+   * - `fill`：把内容拉伸到内容盒，可能改变原有宽高比。
+   * - `contain`：保留宽高比并完整放入内容盒，可能留下空白。
+   * - `cover`：保留宽高比并填满内容盒，可能裁掉部分图像。
+   * - `none`：不按内容盒缩放替换内容。
+   * - `scale-down`：在 none 和 contain 中选择得到较小内容尺寸的方案。
+   *
+   * 适用场景：封面裁剪、头像和完整图像预览。
    *
    * CSS 初始值：`fill`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.width.px(80), s.height.px(80), s.objectFit.cover)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-fit
    */
   declare readonly objectFit: group4.ObjectFitCss;
   /**
    * 设置替换元素内容在内容盒内的对齐位置。（object-position）
-   *
-   * CSS 语法：`<position>`。
    *
    * CSS 初始值：`50% 50%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-position
@@ -2811,23 +2480,17 @@ export class Css {
   /**
    * 设置替换元素内容的可视区域，控制用于呈现的图像范围。（object-view-box）
    *
-   * CSS 语法：`none | <basic-shape-rect>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-view-box
    */
   declare readonly objectViewBox: group4.ObjectViewBoxCss;
   /**
    * 集中设置运动路径、起始位置、距离、方向和锚点。（offset）
-   *
-   * CSS 语法：`[ <'offset-position'>? [ <'offset-path'> [ <'offset-distance'> || <'offset-rotate'> ]? ]? ]! [ / <'offset-anchor'> ]?`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset
    */
   declare readonly offset: group4.OffsetCss;
   /**
    * 设置元素沿运动路径移动时与路径相接的内部锚点。（offset-anchor）
-   *
-   * CSS 语法：`auto | <position>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-anchor
@@ -2836,16 +2499,12 @@ export class Css {
   /**
    * 设置元素沿运动路径行进的距离。（offset-distance）
    *
-   * CSS 语法：`<length-percentage>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-distance
    */
   declare readonly offsetDistance: group4.OffsetDistanceCss;
   /**
    * 设置元素运动所沿用的路径。（offset-path）
-   *
-   * CSS 语法：`none | <offset-path> || <coord-box>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-path
@@ -2854,8 +2513,6 @@ export class Css {
   /**
    * 设置运动路径的初始位置。（offset-position）
    *
-   * CSS 语法：`normal | auto | <position>`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-position
    */
@@ -2863,16 +2520,12 @@ export class Css {
   /**
    * 设置元素沿运动路径移动时的方向和附加旋转。（offset-rotate）
    *
-   * CSS 语法：`[ auto | reverse ] || <angle>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
    */
   declare readonly offsetRotate: group4.OffsetRotateCss;
   /**
    * 设置路径旋转的旧名称；新代码使用 offset-rotate。（offset-rotation）
-   *
-   * CSS 语法：`[ auto | reverse ] || <angle>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
@@ -2883,7 +2536,7 @@ export class Css {
    *
    * 0 完全透明，1 完全不透明；作用于整个子树的合成结果。透明元素仍可能接受点击和键盘焦点。
    *
-   * CSS 语法：`<opacity-value>`。
+   * 适用场景：统一调整整个元素子树的透明度；只需背景半透明时应使用带 alpha 的背景色。
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @example
@@ -2896,16 +2549,12 @@ export class Css {
    *
    * 不改变源代码、朗读及通常的 Tab 顺序，避免用视觉重排破坏阅读顺序。
    *
-   * CSS 语法：`<integer>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/order
    */
   declare readonly order: group4.OrderCss;
   /**
    * 设置分页或分栏断点前需保留的最少行数。（orphans）
-   *
-   * CSS 语法：`<integer>`。
    *
    * CSS 初始值：`2`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/orphans
@@ -2914,14 +2563,16 @@ export class Css {
   /**
    * 设置盒子外围轮廓线的宽度、线型和颜色，不占布局空间。（outline）
    *
-   * CSS 语法：`<'outline-width'> || <'outline-style'> || <'outline-color'>`。
+   * 不占布局空间，可用 outline-offset 调整距离；键盘焦点指示不应被无替代地移除。
+   *
+   * 适用场景：控件焦点指示和不影响布局的轮廓。
+   * @example
+   * s._focusVisible(s.outline.raw('2px solid currentColor'), s.outlineOffset.px(2))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline
    */
   declare readonly outline: group4.OutlineCss;
   /**
    * 设置轮廓线颜色。（outline-color）
-   *
-   * CSS 语法：`auto | <color>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-color
@@ -2930,16 +2581,12 @@ export class Css {
   /**
    * 设置轮廓线与边框边缘之间的距离。（outline-offset）
    *
-   * CSS 语法：`<length>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-offset
    */
   declare readonly outlineOffset: group4.OutlineOffsetCss;
   /**
    * 设置轮廓线线型。（outline-style）
-   *
-   * CSS 语法：`auto | <outline-line-style>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-style
@@ -2948,8 +2595,6 @@ export class Css {
   /**
    * 设置轮廓线宽度。（outline-width）
    *
-   * CSS 语法：`<line-width>`。
-   *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-width
    */
@@ -2957,16 +2602,25 @@ export class Css {
   /**
    * 设置内容超出盒子时的裁剪和滚动行为。（overflow）
    *
-   * CSS 语法：`[ visible | hidden | clip | scroll | auto ]{1,2}`。
+   * 一个值同时设置两轴；两个值依次设置 overflow-x、overflow-y。通常需要尺寸约束才会出现可滚动的溢出。
+   *
+   * 常用值：
+   * - `visible`：允许内容绘制到盒子外；与另一轴的设置组合时计算值可能变化。
+   * - `hidden`：裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
+   * - `clip`：在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
+   * - `auto`：按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
+   * - `scroll`：建立滚动容器，通常即使未溢出也显示滚动条；具体外观由平台决定。
+   *
+   * 适用场景：滚动面板、内容裁剪和受限尺寸区域。
    *
    * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.maxHeight.rem(20), s.overflow.auto)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow
    */
   declare readonly overflow: group4.OverflowCss;
   /**
    * 控制元素是否参与滚动锚定，以减少内容变化造成的视口跳动。（overflow-anchor）
-   *
-   * CSS 语法：`auto | none`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-anchor
@@ -2975,16 +2629,12 @@ export class Css {
   /**
    * 设置逻辑块轴上的溢出行为。（overflow-block）
    *
-   * CSS 语法：`visible | hidden | clip | scroll | auto`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-block
    */
   declare readonly overflowBlock: group4.OverflowBlockCss;
   /**
    * 设置溢出裁剪参照盒的非标准属性；使用前核对目标浏览器。（overflow-clip-box）
-   *
-   * CSS 语法：`padding-box | content-box`。
    *
    * CSS 初始值：`padding-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-clip-box
@@ -2993,16 +2643,12 @@ export class Css {
   /**
    * 设置 overflow:clip 的裁剪边界允许向外扩展的距离。（overflow-clip-margin）
    *
-   * CSS 语法：`<visual-box> || <length [0,∞]>`。
-   *
    * CSS 初始值：`0px`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-clip-margin
    */
   declare readonly overflowClipMargin: group4.OverflowClipMarginCss;
   /**
    * 设置逻辑行内轴上的溢出行为。（overflow-inline）
-   *
-   * CSS 语法：`visible | hidden | clip | scroll | auto`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-inline
@@ -3011,34 +2657,57 @@ export class Css {
   /**
    * 设置不可正常断开的长文本是否允许额外换行。（overflow-wrap）
    *
-   * CSS 语法：`normal | break-word | anywhere`。
+   * 常用值：
+   * - `normal`：只使用正常换行机会，不为长单词额外断行。
+   * - `anywhere`：必要时允许在长文本任意位置断行，这些机会参与 min-content 尺寸计算。
+   * - `break-word`：必要时允许长文本断行，但新增断点不按 anywhere 的方式参与 min-content 计算。
+   *
+   * 适用场景：防止 URL、标识符等长文本撑破容器。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+   * @example
+   * s.overflowWrap.anywhere
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-wrap
    */
   declare readonly overflowWrap: group4.OverflowWrapCss;
   /**
    * 设置水平方向的溢出行为。（overflow-x）
    *
-   * CSS 语法：`visible | hidden | clip | scroll | auto`。
+   * 和 overflow-y 的组合可能改变计算值；例如另一轴是 auto 时，visible 可能按 auto 计算。
+   *
+   * 常用值：
+   * - `auto`：按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
+   * - `hidden`：裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
+   * - `clip`：在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
+   *
+   * 适用场景：横向滚动标签、宽表格或水平内容裁剪。
    *
    * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+   * @example
+   * s.overflowX.auto
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-x
    */
   declare readonly overflowX: group4.OverflowXCss;
   /**
    * 设置垂直方向的溢出行为。（overflow-y）
    *
-   * CSS 语法：`visible | hidden | clip | scroll | auto`。
+   * 通常配合 height/max-height 或可收缩的布局区域使用。
+   *
+   * 常用值：
+   * - `auto`：按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
+   * - `hidden`：裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
+   * - `clip`：在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
+   *
+   * 适用场景：纵向列表和弹窗内容区。
    *
    * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.maxHeight.rem(20), s.overflowY.auto)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-y
    */
   declare readonly overflowY: group4.OverflowYCss;
   /**
    * 反映元素是否位于顶层，主要用于顶层退出过渡；通常由浏览器管理。（overlay）
-   *
-   * CSS 语法：`none | auto`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overlay
@@ -3047,16 +2716,21 @@ export class Css {
   /**
    * 控制滚动到边界后的滚动链和越界反馈行为。（overscroll-behavior）
    *
-   * CSS 语法：`[ contain | none | auto ]{1,2}`。
+   * 常用值：
+   * - `auto`：采用默认滚动链和边界反馈。
+   * - `contain`：阻止滚动链传播到祖先，同时可保留当前容器的边界反馈。
+   * - `none`：阻止滚动链，并抑制当前容器的默认越界反馈。
+   *
+   * 适用场景：阻止弹窗或内部滚动面板到达边界后继续滚动外层页面。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.overflowY.auto, s.overscrollBehavior.contain)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior
    */
   declare readonly overscrollBehavior: group4.OverscrollBehaviorCss;
   /**
    * 控制逻辑块轴上到达滚动边界后的行为。（overscroll-behavior-block）
-   *
-   * CSS 语法：`contain | none | auto`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-block
@@ -3065,8 +2739,6 @@ export class Css {
   /**
    * 控制逻辑行内轴上到达滚动边界后的行为。（overscroll-behavior-inline）
    *
-   * CSS 语法：`contain | none | auto`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-inline
    */
@@ -3074,16 +2746,12 @@ export class Css {
   /**
    * 控制水平方向到达滚动边界后的行为。（overscroll-behavior-x）
    *
-   * CSS 语法：`contain | none | auto`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-x
    */
   declare readonly overscrollBehaviorX: group4.OverscrollBehaviorXCss;
   /**
    * 控制垂直方向到达滚动边界后的行为。（overscroll-behavior-y）
-   *
-   * CSS 语法：`contain | none | auto`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-y
@@ -3094,7 +2762,7 @@ export class Css {
    *
    * 1/2/3/4 个值依次表示：四边；上下/左右；上/左右/下；上/右/下/左。不能使用负值或 auto。
    *
-   * CSS 语法：`<'padding-top'>{1,4}`。
+   * 适用场景：控制文字或子元素与组件边框之间的留白。
    * @example
    * s.padding.rem(0.5, 1) // padding:0.5rem 1rem;
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding
@@ -3102,15 +2770,11 @@ export class Css {
   declare readonly padding: group5.PaddingCss;
   /**
    * 设置逻辑块轴起始侧和结束侧的内边距。（padding-block）
-   *
-   * CSS 语法：`<'padding-top'>{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block
    */
   declare readonly paddingBlock: group5.PaddingBlockCss;
   /**
    * 设置逻辑块轴结束侧的内边距。（padding-block-end）
-   *
-   * CSS 语法：`<'padding-top'>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-end
@@ -3119,8 +2783,6 @@ export class Css {
   /**
    * 设置逻辑块轴起始侧的内边距。（padding-block-start）
    *
-   * CSS 语法：`<'padding-top'>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-start
    */
@@ -3128,23 +2790,17 @@ export class Css {
   /**
    * 设置下内边距。（padding-bottom）
    *
-   * CSS 语法：`<length-percentage [0,∞]>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
    */
   declare readonly paddingBottom: group5.PaddingBottomCss;
   /**
    * 设置逻辑行内轴起始侧和结束侧的内边距。（padding-inline）
-   *
-   * CSS 语法：`<'padding-top'>{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline
    */
   declare readonly paddingInline: group5.PaddingInlineCss;
   /**
    * 设置逻辑行内轴结束侧的内边距。（padding-inline-end）
-   *
-   * CSS 语法：`<'padding-top'>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
@@ -3153,16 +2809,12 @@ export class Css {
   /**
    * 设置逻辑行内轴起始侧的内边距。（padding-inline-start）
    *
-   * CSS 语法：`<'padding-top'>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
   declare readonly paddingInlineStart: group5.PaddingInlineStartCss;
   /**
    * 设置左内边距。（padding-left）
-   *
-   * CSS 语法：`<length-percentage [0,∞]>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-left
@@ -3171,16 +2823,12 @@ export class Css {
   /**
    * 设置右内边距。（padding-right）
    *
-   * CSS 语法：`<length-percentage [0,∞]>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-right
    */
   declare readonly paddingRight: group5.PaddingRightCss;
   /**
    * 设置上内边距。（padding-top）
-   *
-   * CSS 语法：`<length-percentage [0,∞]>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
@@ -3189,16 +2837,12 @@ export class Css {
   /**
    * 选择分页媒体中使用的命名页面类型。（page）
    *
-   * CSS 语法：`auto | <custom-ident>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page
    */
   declare readonly page: group5.PageCss;
   /**
    * 设置 SVG 填充、描边和标记的绘制先后顺序。（paint-order）
-   *
-   * CSS 语法：`normal | [ fill || stroke || markers ]`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
@@ -3207,8 +2851,6 @@ export class Css {
   /**
    * 设置观察子元素三维变换时的透视距离。（perspective）
    *
-   * CSS 语法：`none | <length>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective
    */
@@ -3216,39 +2858,39 @@ export class Css {
   /**
    * 设置三维透视的观察原点。（perspective-origin）
    *
-   * CSS 语法：`<position>`。
-   *
    * CSS 初始值：`50% 50%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective-origin
    */
   declare readonly perspectiveOrigin: group5.PerspectiveOriginCss;
   /**
    * 同时设置 align-content 与 justify-content。（place-content）
-   *
-   * CSS 语法：`<'align-content'> <'justify-content'>?`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-content
    */
   declare readonly placeContent: group5.PlaceContentCss;
   /**
    * 同时设置 align-items 与 justify-items。（place-items）
-   *
-   * CSS 语法：`<'align-items'> <'justify-items'>?`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-items
    */
   declare readonly placeItems: group5.PlaceItemsCss;
   /**
    * 同时设置 align-self 与 justify-self。（place-self）
-   *
-   * CSS 语法：`<'align-self'> <'justify-self'>?`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-self
    */
   declare readonly placeSelf: group5.PlaceSelfCss;
   /**
    * 设置元素何时可以成为指针命中目标；SVG 还支持按填充和描边命中。（pointer-events）
    *
-   * CSS 语法：`auto | none | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | inherit`。
+   * 控制指针命中，不等同于原生 disabled，也不会单独阻止键盘交互。
+   *
+   * 常用值：
+   * - `auto`：采用当前元素类型的默认命中规则。
+   * - `none`：元素本身不成为指针命中目标；不等于禁用，仍可能通过 Tab 获焦，后代也可恢复命中。
+   *
+   * 适用场景：允许指针穿过装饰层；可交互控件的禁用应同时处理行为和语义。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.pointerEvents.none
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/pointer-events
    */
   declare readonly pointerEvents: group5.PointerEventsCss;
@@ -3257,7 +2899,14 @@ export class Css {
    *
    * 偏移通常通过 top/right/bottom/left 或逻辑 inset 属性设置。fixed 和 absolute 的包含块也可能由 transform 等属性建立。
    *
-   * CSS 语法：`static | relative | absolute | sticky | fixed`。
+   * 常用值：
+   * - `static`：参与普通文档流，top/right/bottom/left 等定位偏移不生效。
+   * - `relative`：保留普通流中的原位置，再按偏移移动绘制位置；不会为偏移后的区域重新排版。
+   * - `absolute`：脱离普通文档流，按包含块定位；包含块通常由定位祖先或 transform 等属性建立。
+   * - `fixed`：脱离普通流，通常相对视口固定；某些祖先属性会建立不同的包含块。
+   * - `sticky`：保留流内位置，在滚动范围内按 inset 约束吸附。对应轴至少一个 inset 须非 auto，并受滚动祖先和包含块限制。
+   *
+   * 适用场景：建立定位参照、覆盖层、固定区域或滚动吸附内容。
    *
    * CSS 初始值：`static`（不同于浏览器默认样式表）。
    * @example
@@ -3268,8 +2917,6 @@ export class Css {
   /**
    * 选择绝对定位元素使用的默认锚点。（position-anchor）
    *
-   * CSS 语法：`auto | <anchor-name>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-anchor
    */
@@ -3277,23 +2924,17 @@ export class Css {
   /**
    * 选择相对于锚点的定位区域。（position-area）
    *
-   * CSS 语法：`none | <position-area>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-area
    */
   declare readonly positionArea: group5.PositionAreaCss;
   /**
    * 同时设置锚点定位的候选回退方式及尝试顺序。（position-try）
-   *
-   * CSS 语法：`<'position-try-order'>? <'position-try-fallbacks'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try
    */
   declare readonly positionTry: group5.PositionTryCss;
   /**
    * 设置锚点定位溢出时尝试的替代位置。（position-try-fallbacks）
-   *
-   * CSS 语法：`none | [ [<dashed-ident> || <try-tactic>] | <'position-area'> ]#`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-fallbacks
@@ -3302,16 +2943,12 @@ export class Css {
   /**
    * 设置锚点定位候选方案的尝试顺序。（position-try-order）
    *
-   * CSS 语法：`normal | <try-size>`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-order
    */
   declare readonly positionTryOrder: group5.PositionTryOrderCss;
   /**
    * 设置锚点定位元素根据锚点可见性和溢出情况是否显示。（position-visibility）
-   *
-   * CSS 语法：`always | [ anchors-valid || anchors-visible || no-overflow ]`。
    *
    * CSS 初始值：`anchors-visible`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-visibility
@@ -3320,23 +2957,17 @@ export class Css {
   /**
    * 设置打印时浏览器是否可以为节墨或可读性调整颜色。（print-color-adjust）
    *
-   * CSS 语法：`economy | exact`。
-   *
    * CSS 初始值：`economy`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
    */
   declare readonly printColorAdjust: group5.PrintColorAdjustCss;
   /**
    * 设置生成引号所用的开闭字符对。（quotes）
-   *
-   * CSS 语法：`none | auto | [ <string> <string> ]+`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/quotes
    */
   declare readonly quotes: group5.QuotesCss;
   /**
    * 设置 SVG 圆的半径。（r）
-   *
-   * CSS 语法：`<length> | <percentage>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/r
@@ -3345,16 +2976,12 @@ export class Css {
   /**
    * 设置用户是否能调整元素尺寸以及可调整的方向。（resize）
    *
-   * CSS 语法：`none | both | horizontal | vertical | block | inline`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/resize
    */
   declare readonly resize: group5.ResizeCss;
   /**
    * 设置定位元素相对于其定位参照的右侧偏移。（right）
-   *
-   * CSS 语法：`auto | <length-percentage> | <anchor()> | <anchor-size()>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
@@ -3363,16 +2990,12 @@ export class Css {
   /**
    * 独立设置元素旋转，不必重写 transform 中的其他变换。（rotate）
    *
-   * CSS 语法：`none | <angle> | [ x | y | z | <number>{3} ] && <angle>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rotate
    */
   declare readonly rotate: group5.RotateCss;
   /**
    * 设置布局中相邻行之间的间距。（row-gap）
-   *
-   * CSS 语法：`normal | <length-percentage>`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/row-gap
@@ -3381,16 +3004,12 @@ export class Css {
   /**
    * 设置注音文字与基底文字之间剩余空间的分配方式。（ruby-align）
    *
-   * CSS 语法：`start | center | space-between | space-around`。
-   *
    * CSS 初始值：`space-around`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-align
    */
   declare readonly rubyAlign: group5.RubyAlignCss;
   /**
    * 设置相邻注音容器的合并方式；使用前核对目标浏览器。（ruby-merge）
-   *
-   * CSS 语法：`separate | collapse | auto`。
    *
    * CSS 初始值：`separate`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-merge
@@ -3399,16 +3018,12 @@ export class Css {
   /**
    * 控制注音文字是否可以悬伸到相邻文本上方。（ruby-overhang）
    *
-   * CSS 语法：`auto | none`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-overhang
    */
   declare readonly rubyOverhang: group5.RubyOverhangCss;
   /**
    * 设置注音文字相对于基底文字的位置。（ruby-position）
-   *
-   * CSS 语法：`[ alternate || [ over | under ] ] | inter-character`。
    *
    * CSS 初始值：`alternate`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-position
@@ -3417,16 +3032,12 @@ export class Css {
   /**
    * 设置 SVG 椭圆的水平半径，或矩形的水平圆角半径。（rx）
    *
-   * CSS 语法：`<length> | <percentage>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rx
    */
   declare readonly rx: group5.RxCss;
   /**
    * 设置 SVG 椭圆的垂直半径，或矩形的垂直圆角半径。（ry）
-   *
-   * CSS 语法：`<length> | <percentage>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ry
@@ -3435,8 +3046,6 @@ export class Css {
   /**
    * 独立设置元素的缩放比例。（scale）
    *
-   * CSS 语法：`none | [ <number> | <percentage> ]{1,3}`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scale
    */
@@ -3444,16 +3053,18 @@ export class Css {
   /**
    * 设置由导航或滚动 API 触发的滚动采用即时还是平滑方式。（scroll-behavior）
    *
-   * CSS 语法：`auto | smooth`。
+   * 主要影响导航和滚动 API 触发的滚动，不会把所有用户滚动强制变成动画。
+   *
+   * 适用场景：锚点跳转或程序化滚动；应同时考虑减少动态效果的用户偏好。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.scrollBehavior.smooth
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-behavior
    */
   declare readonly scrollBehavior: group6.ScrollBehaviorCss;
   /**
    * 将元素声明为祖先滚动容器首次呈现时的候选滚动吸附目标。（scroll-initial-target）
-   *
-   * CSS 语法：`none | nearest`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-initial-target
@@ -3461,22 +3072,16 @@ export class Css {
   declare readonly scrollInitialTarget: group6.ScrollInitialTargetCss;
   /**
    * 设置元素滚动目标区域的四边外扩距离，不改变普通布局外边距。（scroll-margin）
-   *
-   * CSS 语法：`<length>{1,4}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
    */
   declare readonly scrollMargin: group6.ScrollMarginCss;
   /**
    * 设置滚动目标区域在逻辑块轴两侧的外扩距离。（scroll-margin-block）
-   *
-   * CSS 语法：`<length>{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block
    */
   declare readonly scrollMarginBlock: group6.ScrollMarginBlockCss;
   /**
    * 设置滚动目标区域在逻辑块轴结束侧的外扩距离。（scroll-margin-block-end）
-   *
-   * CSS 语法：`<length>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-end
@@ -3485,8 +3090,6 @@ export class Css {
   /**
    * 设置滚动目标区域在逻辑块轴起始侧的外扩距离。（scroll-margin-block-start）
    *
-   * CSS 语法：`<length>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-start
    */
@@ -3494,23 +3097,17 @@ export class Css {
   /**
    * 设置滚动目标区域下侧的外扩距离。（scroll-margin-bottom）
    *
-   * CSS 语法：`<length>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
    */
   declare readonly scrollMarginBottom: group6.ScrollMarginBottomCss;
   /**
    * 设置滚动目标区域在逻辑行内轴两侧的外扩距离。（scroll-margin-inline）
-   *
-   * CSS 语法：`<length>{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline
    */
   declare readonly scrollMarginInline: group6.ScrollMarginInlineCss;
   /**
    * 设置滚动目标区域在逻辑行内轴结束侧的外扩距离。（scroll-margin-inline-end）
-   *
-   * CSS 语法：`<length>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-end
@@ -3519,16 +3116,12 @@ export class Css {
   /**
    * 设置滚动目标区域在逻辑行内轴起始侧的外扩距离。（scroll-margin-inline-start）
    *
-   * CSS 语法：`<length>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-start
    */
   declare readonly scrollMarginInlineStart: group6.ScrollMarginInlineStartCss;
   /**
    * 设置滚动目标区域左侧的外扩距离。（scroll-margin-left）
-   *
-   * CSS 语法：`<length>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
@@ -3537,8 +3130,6 @@ export class Css {
   /**
    * 设置滚动目标区域右侧的外扩距离。（scroll-margin-right）
    *
-   * CSS 语法：`<length>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
    */
@@ -3546,30 +3137,22 @@ export class Css {
   /**
    * 设置滚动目标区域上侧的外扩距离。（scroll-margin-top）
    *
-   * CSS 语法：`<length>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
   declare readonly scrollMarginTop: group6.ScrollMarginTopCss;
   /**
    * 设置滚动容器最佳可视区域的四边内缩距离。（scroll-padding）
-   *
-   * CSS 语法：`[ auto | <length-percentage> ]{1,4}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding
    */
   declare readonly scrollPadding: group6.ScrollPaddingCss;
   /**
    * 设置滚动容器最佳可视区域在逻辑块轴两侧的内缩距离。（scroll-padding-block）
-   *
-   * CSS 语法：`[ auto | <length-percentage> ]{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block
    */
   declare readonly scrollPaddingBlock: group6.ScrollPaddingBlockCss;
   /**
    * 设置滚动容器最佳可视区域在逻辑块轴结束侧的内缩距离。（scroll-padding-block-end）
-   *
-   * CSS 语法：`auto | <length-percentage>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-end
@@ -3578,8 +3161,6 @@ export class Css {
   /**
    * 设置滚动容器最佳可视区域在逻辑块轴起始侧的内缩距离。（scroll-padding-block-start）
    *
-   * CSS 语法：`auto | <length-percentage>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-start
    */
@@ -3587,23 +3168,17 @@ export class Css {
   /**
    * 设置滚动容器最佳可视区域下侧的内缩距离。（scroll-padding-bottom）
    *
-   * CSS 语法：`auto | <length-percentage>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-bottom
    */
   declare readonly scrollPaddingBottom: group6.ScrollPaddingBottomCss;
   /**
    * 设置滚动容器最佳可视区域在逻辑行内轴两侧的内缩距离。（scroll-padding-inline）
-   *
-   * CSS 语法：`[ auto | <length-percentage> ]{1,2}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline
    */
   declare readonly scrollPaddingInline: group6.ScrollPaddingInlineCss;
   /**
    * 设置滚动容器最佳可视区域在逻辑行内轴结束侧的内缩距离。（scroll-padding-inline-end）
-   *
-   * CSS 语法：`auto | <length-percentage>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-end
@@ -3612,16 +3187,12 @@ export class Css {
   /**
    * 设置滚动容器最佳可视区域在逻辑行内轴起始侧的内缩距离。（scroll-padding-inline-start）
    *
-   * CSS 语法：`auto | <length-percentage>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-start
    */
   declare readonly scrollPaddingInlineStart: group6.ScrollPaddingInlineStartCss;
   /**
    * 设置滚动容器最佳可视区域左侧的内缩距离。（scroll-padding-left）
-   *
-   * CSS 语法：`auto | <length-percentage>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-left
@@ -3630,16 +3201,12 @@ export class Css {
   /**
    * 设置滚动容器最佳可视区域右侧的内缩距离。（scroll-padding-right）
    *
-   * CSS 语法：`auto | <length-percentage>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-right
    */
   declare readonly scrollPaddingRight: group6.ScrollPaddingRightCss;
   /**
    * 设置滚动容器最佳可视区域上侧的内缩距离。（scroll-padding-top）
-   *
-   * CSS 语法：`auto | <length-percentage>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
@@ -3648,23 +3215,17 @@ export class Css {
   /**
    * 设置元素作为滚动吸附目标时在块轴和行内轴上的对齐位置。（scroll-snap-align）
    *
-   * CSS 语法：`[ none | start | end | center ]{1,2}`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-align
    */
   declare readonly scrollSnapAlign: group6.ScrollSnapAlignCss;
   /**
    * 设置滚动吸附区域外扩的旧名称；新代码使用 scroll-margin。（scroll-snap-margin）
-   *
-   * CSS 语法：`<length>{1,4}`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
    */
   declare readonly scrollSnapMargin: group6.ScrollSnapMarginCss;
   /**
    * 设置滚动吸附区域下侧外扩的旧名称；新代码使用 scroll-margin-bottom。（scroll-snap-margin-bottom）
-   *
-   * CSS 语法：`<length>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
@@ -3673,16 +3234,12 @@ export class Css {
   /**
    * 设置滚动吸附区域左侧外扩的旧名称；新代码使用 scroll-margin-left。（scroll-snap-margin-left）
    *
-   * CSS 语法：`<length>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
    */
   declare readonly scrollSnapMarginLeft: group6.ScrollSnapMarginLeftCss;
   /**
    * 设置滚动吸附区域右侧外扩的旧名称；新代码使用 scroll-margin-right。（scroll-snap-margin-right）
-   *
-   * CSS 语法：`<length>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
@@ -3691,16 +3248,12 @@ export class Css {
   /**
    * 设置滚动吸附区域上侧外扩的旧名称；新代码使用 scroll-margin-top。（scroll-snap-margin-top）
    *
-   * CSS 语法：`<length>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
   declare readonly scrollSnapMarginTop: group6.ScrollSnapMarginTopCss;
   /**
    * 设置滚动时是否允许越过该元素的吸附位置。（scroll-snap-stop）
-   *
-   * CSS 语法：`normal | always`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-stop
@@ -3711,8 +3264,6 @@ export class Css {
    *
    * 轴和吸附强度的组合通过 raw 写入，例如 x mandatory；单独声明轴时省略的强度按 CSS 规则处理。
    *
-   * CSS 语法：`none | [ x | y | block | inline | both ] [ mandatory | proximity ]?`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @example
    * s.scrollSnapType.raw('x mandatory') // scroll-snap-type:x mandatory;
@@ -3721,15 +3272,11 @@ export class Css {
   declare readonly scrollSnapType: group6.ScrollSnapTypeCss;
   /**
    * 同时声明滚动进度时间线的名称和轴。（scroll-timeline）
-   *
-   * CSS 语法：`[ <'scroll-timeline-name'> <'scroll-timeline-axis'>? ]#`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline
    */
   declare readonly scrollTimeline: group6.ScrollTimelineCss;
   /**
    * 设置滚动进度时间线所观察的滚动轴。（scroll-timeline-axis）
-   *
-   * CSS 语法：`[ block | inline | x | y ]#`。
    *
    * CSS 初始值：`block`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-axis
@@ -3738,16 +3285,12 @@ export class Css {
   /**
    * 声明基于当前容器滚动进度的时间线名称。（scroll-timeline-name）
    *
-   * CSS 语法：`[ none | <dashed-ident> ]#`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-name
    */
   declare readonly scrollTimelineName: group6.ScrollTimelineNameCss;
   /**
    * 设置滚动条滑块和轨道的颜色。（scrollbar-color）
-   *
-   * CSS 语法：`auto | <color>{2}`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-color
@@ -3756,16 +3299,12 @@ export class Css {
   /**
    * 设置是否预留滚动条槽位，以减少滚动条出现时的布局变化。（scrollbar-gutter）
    *
-   * CSS 语法：`auto | stable && both-edges?`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-gutter
    */
   declare readonly scrollbarGutter: group6.ScrollbarGutterCss;
   /**
    * 设置滚动条采用正常、较细或隐藏的外观。（scrollbar-width）
-   *
-   * CSS 语法：`auto | thin | none`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-width
@@ -3774,16 +3313,12 @@ export class Css {
   /**
    * 设置从图像 alpha 信息提取环绕形状时的阈值。（shape-image-threshold）
    *
-   * CSS 语法：`<opacity-value>`。
-   *
    * CSS 初始值：`0.0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-image-threshold
    */
   declare readonly shapeImageThreshold: group6.ShapeImageThresholdCss;
   /**
    * 设置文字环绕形状之外的额外间距。（shape-margin）
-   *
-   * CSS 语法：`<length-percentage>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-margin
@@ -3792,16 +3327,12 @@ export class Css {
   /**
    * 设置浮动元素周围行内内容所环绕的形状。（shape-outside）
    *
-   * CSS 语法：`none | [ <shape-box> || <basic-shape> ] | <image>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-outside
    */
   declare readonly shapeOutside: group6.ShapeOutsideCss;
   /**
    * 向 SVG 渲染器提供图形绘制精度与速度的偏好。（shape-rendering）
-   *
-   * CSS 语法：`auto | optimizeSpeed | crispEdges | geometricPrecision`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-rendering
@@ -3810,16 +3341,12 @@ export class Css {
   /**
    * 设置语音呈现时文字、数字和标点的朗读方式；使用前核对语音媒体支持。（speak-as）
    *
-   * CSS 语法：`normal | spell-out || digits || [ literal-punctuation | no-punctuation ]`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/speak-as
    */
   declare readonly speakAs: group6.SpeakAsCss;
   /**
    * 设置 SVG 渐变 stop 节点的颜色。（stop-color）
-   *
-   * CSS 语法：`<'color'>`。
    *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-color
@@ -3828,23 +3355,17 @@ export class Css {
   /**
    * 设置 SVG 渐变 stop 节点的不透明度。（stop-opacity）
    *
-   * CSS 语法：`<'opacity'>`。
-   *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-opacity
    */
   declare readonly stopOpacity: group6.StopOpacityCss;
   /**
    * 设置 SVG 图形轮廓的描边绘制方式。（stroke）
-   *
-   * CSS 语法：`<paint>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke
    */
   declare readonly stroke: group6.StrokeCss;
   /**
    * 设置描边颜色的扩展属性；常规 SVG 优先使用 stroke 并核对支持情况。（stroke-color）
-   *
-   * CSS 语法：`<color>`。
    *
    * CSS 初始值：`transparent`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-color
@@ -3853,16 +3374,12 @@ export class Css {
   /**
    * 设置 SVG 描边虚线中线段与空隙的长度序列。（stroke-dasharray）
    *
-   * CSS 语法：`none | <dasharray>`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dasharray
    */
   declare readonly strokeDasharray: group6.StrokeDasharrayCss;
   /**
    * 设置 SVG 虚线描边相对于路径起点的偏移。（stroke-dashoffset）
-   *
-   * CSS 语法：`<length-percentage> | <number>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dashoffset
@@ -3871,16 +3388,12 @@ export class Css {
   /**
    * 设置开放 SVG 子路径端点的描边形状。（stroke-linecap）
    *
-   * CSS 语法：`butt | round | square`。
-   *
    * CSS 初始值：`butt`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linecap
    */
   declare readonly strokeLinecap: group6.StrokeLinecapCss;
   /**
    * 设置 SVG 路径转角处描边的连接形状。（stroke-linejoin）
-   *
-   * CSS 语法：`miter | miter-clip | round | bevel | arcs`。
    *
    * CSS 初始值：`miter`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linejoin
@@ -3889,16 +3402,12 @@ export class Css {
   /**
    * 限制尖角连接的延伸比例，超过阈值时改变连接形状。（stroke-miterlimit）
    *
-   * CSS 语法：`<number>`。
-   *
    * CSS 初始值：`4`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-miterlimit
    */
   declare readonly strokeMiterlimit: group6.StrokeMiterlimitCss;
   /**
    * 设置 SVG 描边的不透明度，不影响填充。（stroke-opacity）
-   *
-   * CSS 语法：`<'opacity'>`。
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-opacity
@@ -3907,16 +3416,12 @@ export class Css {
   /**
    * 设置 SVG 描边宽度。（stroke-width）
    *
-   * CSS 语法：`<length-percentage> | <number>`。
-   *
    * CSS 初始值：`1px`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-width
    */
   declare readonly strokeWidth: group6.StrokeWidthCss;
   /**
    * 设置保留制表符时每个制表位的宽度。（tab-size）
-   *
-   * CSS 语法：`<integer> | <length>`。
    *
    * CSS 初始值：`8`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/tab-size
@@ -3925,8 +3430,6 @@ export class Css {
   /**
    * 设置表格列宽采用自动还是固定布局算法。（table-layout）
    *
-   * CSS 语法：`auto | fixed`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/table-layout
    */
@@ -3934,16 +3437,24 @@ export class Css {
   /**
    * 设置块容器中行内内容的水平或逻辑方向对齐。（text-align）
    *
-   * CSS 语法：`start | end | left | right | center | justify | match-parent`。
+   * 控制块容器中的行内内容，不是块盒自身的位置，也不是 Flex/Grid 项目的对齐。
+   *
+   * 常用值：
+   * - `start`：按当前书写方向的行内起始侧对齐。
+   * - `end`：按当前书写方向的行内结束侧对齐。
+   * - `center`：将行内内容在行盒中居中，不会让块盒自身居中。
+   * - `justify`：调整行内间距使文字两端对齐；最后一行通常由 text-align-last 控制。
+   *
+   * 适用场景：正文、标题和表格单元格中的文本对齐。
    *
    * CSS 初始值：`start`（不同于浏览器默认样式表）。
+   * @example
+   * s.textAlign.start
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align
    */
   declare readonly textAlign: group6.TextAlignCss;
   /**
    * 设置段落最后一行或强制换行前一行的对齐方式。（text-align-last）
-   *
-   * CSS 语法：`auto | start | end | left | right | center | justify`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align-last
@@ -3952,16 +3463,12 @@ export class Css {
   /**
    * 设置 SVG 文本片段相对于定位点的锚定方式。（text-anchor）
    *
-   * CSS 语法：`start | middle | end`。
-   *
    * CSS 初始值：`start`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-anchor
    */
   declare readonly textAnchor: group6.TextAnchorCss;
   /**
    * 设置中西文、数字等不同文字系统之间的自动间距。（text-autospace）
-   *
-   * CSS 语法：`normal | <autospace> | auto`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-autospace
@@ -3970,16 +3477,12 @@ export class Css {
   /**
    * 同时设置文本盒边缘参照及首尾空白裁减。（text-box）
    *
-   * CSS 语法：`normal | <'text-box-trim'> || <'text-box-edge'>`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box
    */
   declare readonly textBox: group6.TextBoxCss;
   /**
    * 选择文本盒裁减或对齐使用的字体边缘度量。（text-box-edge）
-   *
-   * CSS 语法：`auto | <text-edge>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-edge
@@ -3988,8 +3491,6 @@ export class Css {
   /**
    * 裁减文本块开头或结尾的额外行高空白。（text-box-trim）
    *
-   * CSS 语法：`none | trim-start | trim-end | trim-both`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-trim
    */
@@ -3997,23 +3498,17 @@ export class Css {
   /**
    * 设置竖排文字中多个字符是否合成为一个横排字形单元。（text-combine-upright）
    *
-   * CSS 语法：`none | all | [ digits <integer>? ]`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-combine-upright
    */
   declare readonly textCombineUpright: group6.TextCombineUprightCss;
   /**
    * 集中设置文本装饰线的位置、线型、颜色及粗细。（text-decoration）
-   *
-   * CSS 语法：`<'text-decoration-line'> || <'text-decoration-style'> || <'text-decoration-color'> || <'text-decoration-thickness'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration
    */
   declare readonly textDecoration: group6.TextDecorationCss;
   /**
    * 设置文本装饰线颜色。（text-decoration-color）
-   *
-   * CSS 语法：`<color>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-color
@@ -4022,16 +3517,12 @@ export class Css {
   /**
    * 设置下划线、上划线或删除线等装饰线位置。（text-decoration-line）
    *
-   * CSS 语法：`none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-line
    */
   declare readonly textDecorationLine: group6.TextDecorationLineCss;
   /**
    * 设置文本装饰线跳过哪些内容；具体语法需核对支持情况。（text-decoration-skip）
-   *
-   * CSS 语法：`none | [ objects || [ spaces | [ leading-spaces || trailing-spaces ] ] || edges || box-decoration ]`。
    *
    * CSS 初始值：`objects`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip
@@ -4040,16 +3531,12 @@ export class Css {
   /**
    * 设置装饰线是否避让字形的笔画。（text-decoration-skip-ink）
    *
-   * CSS 语法：`auto | all | none`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip-ink
    */
   declare readonly textDecorationSkipInk: group6.TextDecorationSkipInkCss;
   /**
    * 设置文本装饰线的实线、波浪线等线型。（text-decoration-style）
-   *
-   * CSS 语法：`solid | double | dotted | dashed | wavy`。
    *
    * CSS 初始值：`solid`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-style
@@ -4058,23 +3545,17 @@ export class Css {
   /**
    * 设置文本装饰线粗细。（text-decoration-thickness）
    *
-   * CSS 语法：`auto | from-font | <length> | <percentage> `。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-thickness
    */
   declare readonly textDecorationThickness: group6.TextDecorationThicknessCss;
   /**
    * 同时设置文字着重号的样式和颜色。（text-emphasis）
-   *
-   * CSS 语法：`<'text-emphasis-style'> || <'text-emphasis-color'>`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis
    */
   declare readonly textEmphasis: group6.TextEmphasisCss;
   /**
    * 设置文字着重号颜色。（text-emphasis-color）
-   *
-   * CSS 语法：`<color>`。
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-color
@@ -4083,16 +3564,12 @@ export class Css {
   /**
    * 设置文字着重号位于文字的哪一侧。（text-emphasis-position）
    *
-   * CSS 语法：`auto | [ over | under ] && [ right | left ]?`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-position
    */
   declare readonly textEmphasisPosition: group6.TextEmphasisPositionCss;
   /**
    * 设置文字着重号的形状和填充方式。（text-emphasis-style）
-   *
-   * CSS 语法：`none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string>`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-style
@@ -4101,8 +3578,6 @@ export class Css {
   /**
    * 设置文本行的缩进距离。（text-indent）
    *
-   * CSS 语法：`<length-percentage> && hanging? && each-line?`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-indent
    */
@@ -4110,16 +3585,12 @@ export class Css {
   /**
    * 设置两端对齐时增加间距的算法。（text-justify）
    *
-   * CSS 语法：`auto | inter-character | inter-word | none`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-justify
    */
   declare readonly textJustify: group6.TextJustifyCss;
   /**
    * 设置竖排模式下字符的方向。（text-orientation）
-   *
-   * CSS 语法：`mixed | upright | sideways`。
    *
    * CSS 初始值：`mixed`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-orientation
@@ -4130,16 +3601,20 @@ export class Css {
    *
    * 本属性不自行制造溢出。单行省略通常还需要受限宽度、overflow:hidden 和 white-space:nowrap。
    *
-   * CSS 语法：`[ clip | ellipsis | <string> ]{1,2}`。
+   * 常用值：
+   * - `ellipsis`：用省略号提示被裁剪的行内溢出；还需要限制尺寸并配置溢出规则。
+   * - `clip`：直接裁剪溢出文本，不添加省略标记。
+   *
+   * 适用场景：受限宽度中的单行标题或标签。多行截断需要单独的布局和截行方案。
    *
    * CSS 初始值：`clip`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.maxWidth.rem(12), s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-overflow
    */
   declare readonly textOverflow: group6.TextOverflowCss;
   /**
    * 向渲染器提供文本速度、可读性或几何精度的偏好。（text-rendering）
-   *
-   * CSS 语法：`auto | optimizeSpeed | optimizeLegibility | geometricPrecision`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-rendering
@@ -4148,16 +3623,12 @@ export class Css {
   /**
    * 设置文字及其装饰的阴影，可叠加多层。（text-shadow）
    *
-   * CSS 语法：`none | <shadow-t>#`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-shadow
    */
   declare readonly textShadow: group6.TextShadowCss;
   /**
    * 控制移动浏览器为提升可读性而进行的文字自动放大。（text-size-adjust）
-   *
-   * CSS 语法：`none | auto | <percentage>`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-size-adjust
@@ -4166,16 +3637,12 @@ export class Css {
   /**
    * 设置东亚文字标点等字符周围空白的裁减。（text-spacing-trim）
    *
-   * CSS 语法：`space-all | normal | space-first | trim-start`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-spacing-trim
    */
   declare readonly textSpacingTrim: group6.TextSpacingTrimCss;
   /**
    * 设置文字显示时的大小写、全角或其他字形转换。（text-transform）
-   *
-   * CSS 语法：`none | [ capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-transform
@@ -4184,16 +3651,12 @@ export class Css {
   /**
    * 设置下划线相对于默认位置的偏移。（text-underline-offset）
    *
-   * CSS 语法：`auto | <length> | <percentage> `。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-offset
    */
   declare readonly textUnderlineOffset: group6.TextUnderlineOffsetCss;
   /**
    * 设置下划线相对于文字基线或竖排文字的放置方式。（text-underline-position）
-   *
-   * CSS 语法：`auto | from-font | [ under || [ left | right ] ]`。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-position
@@ -4202,16 +3665,12 @@ export class Css {
   /**
    * 同时设置文本是否换行及换行策略。（text-wrap）
    *
-   * CSS 语法：`<'text-wrap-mode'> || <'text-wrap-style'>`。
-   *
    * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap
    */
   declare readonly textWrap: group6.TextWrapCss;
   /**
    * 设置文本是否允许软换行。（text-wrap-mode）
-   *
-   * CSS 语法：`wrap | nowrap`。
    *
    * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-mode
@@ -4220,16 +3679,12 @@ export class Css {
   /**
    * 设置文本换行的排版策略，例如平衡各行长度。（text-wrap-style）
    *
-   * CSS 语法：`auto | balance | stable | pretty`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-style
    */
   declare readonly textWrapStyle: group6.TextWrapStyleCss;
   /**
    * 扩大命名动画时间线的可引用作用域。（timeline-scope）
-   *
-   * CSS 语法：`none | <dashed-ident>#`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/timeline-scope
@@ -4238,8 +3693,6 @@ export class Css {
   /**
    * 设置定位元素相对于其定位参照的上侧偏移。（top）
    *
-   * CSS 语法：`auto | <length-percentage> | <anchor()> | <anchor-size()>`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
    */
@@ -4247,9 +3700,19 @@ export class Css {
   /**
    * 声明浏览器可以处理的触摸平移与缩放手势。（touch-action）
    *
-   * CSS 语法：`auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] || pinch-zoom ] | manipulation`。
+   * 描述浏览器可接管的触摸手势，手势开始后再修改通常不会改变当前手势的处理。
+   *
+   * 常用值：
+   * - `manipulation`：允许平移和连续缩放，通常禁用双击缩放等额外手势。
+   * - `pan-x`：允许浏览器处理水平单指平移。
+   * - `pan-y`：允许浏览器处理垂直单指平移。
+   * - `none`：禁用浏览器在该区域处理的平移和缩放手势，可能影响用户缩放可访问性。
+   *
+   * 适用场景：拖拽控件与页面滚动之间分配触摸方向；保留用户所需的缩放能力。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.touchAction.panY
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/touch-action
    */
   declare readonly touchAction: group6.TouchActionCss;
@@ -4258,16 +3721,16 @@ export class Css {
    *
    * 多个变换的顺序会影响结果。变换通常不改变元素在普通文档流中预留的尺寸。
    *
-   * CSS 语法：`none | <transform-list>`。
+   * 适用场景：平移、旋转和缩放的视觉效果；需要改变普通流占位时应调整布局属性。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
+   * @example
+   * s.transform.raw('translateX(8px) scale(1.05)')
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform
    */
   declare readonly transform: group6.TransformCss;
   /**
    * 设置变换及其原点所依据的参照盒。（transform-box）
-   *
-   * CSS 语法：`content-box | border-box | fill-box | stroke-box | view-box`。
    *
    * CSS 初始值：`view-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-box
@@ -4276,16 +3739,12 @@ export class Css {
   /**
    * 设置元素变换的原点。（transform-origin）
    *
-   * CSS 语法：`[ <length-percentage> | left | center | right | top | bottom ] | [ [ <length-percentage> | left | center | right ] && [ <length-percentage> | top | center | bottom ] ] <length>?`。
-   *
    * CSS 初始值：`50% 50% 0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-origin
    */
   declare readonly transformOrigin: group6.TransformOriginCss;
   /**
    * 控制子元素的三维位置保留在三维空间还是展平。（transform-style）
-   *
-   * CSS 语法：`flat | preserve-3d`。
    *
    * CSS 初始值：`flat`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-style
@@ -4294,14 +3753,16 @@ export class Css {
   /**
    * 集中设置属性变化过渡的目标、时长、缓动、延迟和行为。（transition）
    *
-   * CSS 语法：`<single-transition>#`。
+   * 只对属性变化创建过渡；不会自动触发变化。建议明确列出目标属性，避免 all 意外过渡布局变化。
+   *
+   * 适用场景：悬停、选中和展开状态之间的平滑变化。
+   * @example
+   * s.transition.raw('opacity 160ms ease')
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition
    */
   declare readonly transition: group6.TransitionCss;
   /**
    * 控制离散属性是否可以启动 CSS 过渡。（transition-behavior）
-   *
-   * CSS 语法：`<transition-behavior-value>#`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-behavior
@@ -4310,8 +3771,6 @@ export class Css {
   /**
    * 设置属性变化后开始过渡的延迟。（transition-delay）
    *
-   * CSS 语法：`<time>#`。
-   *
    * CSS 初始值：`0s`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-delay
    */
@@ -4319,23 +3778,17 @@ export class Css {
   /**
    * 设置过渡从开始到完成的时长。（transition-duration）
    *
-   * CSS 语法：`<time>#`。
-   *
    * CSS 初始值：`0s`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-duration
    */
   declare readonly transitionDuration: group6.TransitionDurationCss;
   /**
    * 指定发生变化时需要过渡的 CSS 属性。（transition-property）
-   *
-   * CSS 语法：`none | <single-transition-property>#`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-property
    */
   declare readonly transitionProperty: group6.TransitionPropertyCss;
   /**
    * 设置过渡进度变化的缓动函数。（transition-timing-function）
-   *
-   * CSS 语法：`<easing-function>#`。
    *
    * CSS 初始值：`ease`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-timing-function
@@ -4344,16 +3797,12 @@ export class Css {
   /**
    * 独立设置元素在二维或三维空间中的平移。（translate）
    *
-   * CSS 语法：`none | <length-percentage> [ <length-percentage> <length>? ]?`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/translate
    */
   declare readonly translate: group6.TranslateCss;
   /**
    * 设置元素如何参与 Unicode 双向文本算法，通常与 direction 配合。（unicode-bidi）
-   *
-   * CSS 语法：`normal | embed | isolate | bidi-override | isolate-override | plaintext`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/unicode-bidi
@@ -4362,16 +3811,22 @@ export class Css {
   /**
    * 设置用户是否可以选取元素中的文本。（user-select）
    *
-   * CSS 语法：`auto | text | none | all`。
+   * 常用值：
+   * - `auto`：由父级与元素上下文决定使用的选取行为。
+   * - `text`：允许文本选取。
+   * - `none`：阻止常规文本选取，不是内容保护或访问控制。
+   * - `all`：将元素内容作为整体选取单元。
+   *
+   * 适用场景：调整拖拽控件中的文本选取，或让代码片段整段选中。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * s.userSelect.all
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/user-select
    */
   declare readonly userSelect: group7.UserSelectCss;
   /**
    * 设置 SVG 图形变换时对描边等矢量效果的处理。（vector-effect）
-   *
-   * CSS 语法：`none | non-scaling-stroke | non-scaling-size | non-rotation | fixed-position`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/vector-effect
@@ -4380,23 +3835,17 @@ export class Css {
   /**
    * 设置行内级盒子或表格单元格的垂直对齐，不用于普通块盒居中。（vertical-align）
    *
-   * CSS 语法：`baseline | sub | super | text-top | text-bottom | middle | top | bottom | <percentage> | <length>`。
-   *
    * CSS 初始值：`baseline`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/vertical-align
    */
   declare readonly verticalAlign: group7.VerticalAlignCss;
   /**
    * 同时声明基于元素可见进度的时间线名称与轴。（view-timeline）
-   *
-   * CSS 语法：`[ <'view-timeline-name'> [ <'view-timeline-axis'> || <'view-timeline-inset'> ]? ]#`。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline
    */
   declare readonly viewTimeline: group7.ViewTimelineCss;
   /**
    * 设置可见进度时间线所观察的滚动轴。（view-timeline-axis）
-   *
-   * CSS 语法：`[ block | inline | x | y ]#`。
    *
    * CSS 初始值：`block`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-axis
@@ -4405,16 +3854,12 @@ export class Css {
   /**
    * 设置可见进度时间线使用的滚动视口内缩范围。（view-timeline-inset）
    *
-   * CSS 语法：`[ [ auto | <length-percentage> ]{1,2} ]#`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-inset
    */
   declare readonly viewTimelineInset: group7.ViewTimelineInsetCss;
   /**
    * 声明基于元素进入和离开滚动视口的时间线名称。（view-timeline-name）
-   *
-   * CSS 语法：`[ none | <dashed-ident> ]#`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-name
@@ -4423,16 +3868,12 @@ export class Css {
   /**
    * 为视图过渡的快照伪元素分组，以便共用样式。（view-transition-class）
    *
-   * CSS 语法：`none | <custom-ident>+`。
-   *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-class
    */
   declare readonly viewTransitionClass: group7.ViewTransitionClassCss;
   /**
    * 为视图过渡中的元素命名，以匹配前后状态的快照。（view-transition-name）
-   *
-   * CSS 语法：`none | <custom-ident> | match-element`。
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-name
@@ -4441,25 +3882,42 @@ export class Css {
   /**
    * 设置元素是否可见；隐藏通常保留布局空间。（visibility）
    *
-   * CSS 语法：`visible | hidden | collapse`。
+   * 常用值：
+   * - `visible`：正常显示元素。
+   * - `hidden`：隐藏绘制但通常保留布局空间；后代可显式恢复 visible。
+   * - `collapse`：对表格行列等特定布局有折叠语义，其他场景通常类似 hidden；应核对具体布局行为。
+   *
+   * 适用场景：需要隐藏内容但通常保留其布局占位的场景。
    *
    * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+   * @example
+   * s.visibility.hidden
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/visibility
    */
   declare readonly visibility: group7.VisibilityCss;
   /**
    * 设置空白折叠和换行处理方式。（white-space）
    *
-   * CSS 语法：`normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'>`。
+   * 同时影响空白折叠和软换行。它不负责给溢出内容添加省略号。
+   *
+   * 常用值：
+   * - `normal`：折叠连续空白和源换行，允许软换行。
+   * - `nowrap`：折叠空白并禁止软换行；不会自行生成省略号。
+   * - `pre`：保留空白和源换行，不进行普通软换行。
+   * - `pre-wrap`：保留空白和源换行，同时允许软换行。
+   * - `pre-line`：折叠空格等空白但保留源换行，同时允许软换行。
+   * - `break-spaces`：保留空白并允许在保留的空格后换行；行末空格占据空间。
+   *
+   * 适用场景：单行标签、保留换行的用户文本和代码片段。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+   * @example
+   * s.whiteSpace.preWrap
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
    */
   declare readonly whiteSpace: group7.WhiteSpaceCss;
   /**
    * 设置空格、制表符和换行符如何折叠或保留。（white-space-collapse）
-   *
-   * CSS 语法：`collapse | preserve | preserve-breaks | preserve-spaces | break-spaces`。
    *
    * CSS 初始值：`collapse`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space-collapse
@@ -4467,8 +3925,6 @@ export class Css {
   declare readonly whiteSpaceCollapse: group7.WhiteSpaceCollapseCss;
   /**
    * 设置分页或分栏断点后需保留的最少行数。（widows）
-   *
-   * CSS 语法：`<integer>`。
    *
    * CSS 初始值：`2`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/widows
@@ -4479,7 +3935,13 @@ export class Css {
    *
    * 百分比依据包含块解析；auto、内部尺寸和最小/最大约束共同决定最终使用尺寸。
    *
-   * CSS 语法：`auto | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
+   * 常用值：
+   * - `auto`：让布局算法决定尺寸，不保证等于父元素尺寸。
+   * - `min-content`：采用内容的最小内部尺寸，文字会考虑可用的软换行机会。
+   * - `max-content`：采用内容的最大内部尺寸，通常不进行软换行。
+   * - `fit-content`：在最小和最大内部尺寸之间按可用空间夹取尺寸。
+   *
+   * 适用场景：控制物理宽度；支持书写模式的布局可优先考虑 inline-size。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @example
@@ -4494,8 +3956,6 @@ export class Css {
    *
    * 仅对即将发生的变化短期使用；长期或大量声明可能占用额外资源，并提前改变层叠上下文。
    *
-   * CSS 语法：`auto | <animateable-feature>#`。
-   *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/will-change
    */
@@ -4503,16 +3963,21 @@ export class Css {
   /**
    * 设置单词内部或文字之间的断行规则。（word-break）
    *
-   * CSS 语法：`normal | break-all | keep-all | break-word | auto-phrase`。
+   * 按字符和语言控制断行。仅需避免超长单词溢出时，通常先考虑 overflow-wrap。
+   *
+   * 常用值：
+   * - `normal`：按语言的默认断行规则处理。
+   * - `break-all`：允许在更多字符间断行以防溢出，可能拆开普通单词。
+   * - `keep-all`：限制中日韩文字内部断行，其他文字仍按正常规则处理。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+   * @example
+   * s.wordBreak.normal
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-break
    */
   declare readonly wordBreak: group7.WordBreakCss;
   /**
    * 设置单词或词间分隔符的额外间距。（word-spacing）
-   *
-   * CSS 语法：`normal | <length>`。
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-spacing
@@ -4521,16 +3986,12 @@ export class Css {
   /**
    * 设置长文本的额外换行行为；是 overflow-wrap 的兼容名称。（word-wrap）
    *
-   * CSS 语法：`normal | break-word`。
-   *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-wrap
    */
   declare readonly wordWrap: group7.WordWrapCss;
   /**
    * 设置水平或竖直书写模式，以及行和块的推进方向。（writing-mode）
-   *
-   * CSS 语法：`horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr`。
    *
    * CSS 初始值：`horizontal-tb`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/writing-mode
@@ -4539,16 +4000,12 @@ export class Css {
   /**
    * 设置适用 SVG 元素的水平几何坐标。（x）
    *
-   * CSS 语法：`<length> | <percentage>`。
-   *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/x
    */
   declare readonly x: group7.XCss;
   /**
    * 设置适用 SVG 元素的垂直几何坐标。（y）
-   *
-   * CSS 语法：`<length> | <percentage>`。
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/y
@@ -4559,16 +4016,16 @@ export class Css {
    *
    * 数值只在所属层叠上下文内比较；更大的数值不保证盖过其他层叠上下文。Flex/Grid 项目也可以使用 z-index。
    *
-   * CSS 语法：`auto | <integer>`。
+   * 适用场景：控制同一层叠上下文中的浮层顺序，排查遮挡时先确认祖先层叠上下文。
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+   * @example
+   * css(s.position.relative, s.zIndex.raw(1))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/z-index
    */
   declare readonly zIndex: group7.ZIndexCss;
   /**
    * 设置元素及其布局的缩放比例，与 transform:scale 的布局行为不同。（zoom）
-   *
-   * CSS 语法：`normal | reset | <number [0,∞]> || <percentage [0,∞]>`。
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/zoom

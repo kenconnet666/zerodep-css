@@ -7,8 +7,6 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 /**
  * 独立设置元素的缩放比例。（scale）
  *
- * CSS 语法：`none | [ <number> | <percentage> ]{1,3}`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scale
  */
@@ -156,9 +154,13 @@ export class ScaleCss extends CssProperty {
 /**
  * 设置由导航或滚动 API 触发的滚动采用即时还是平滑方式。（scroll-behavior）
  *
- * CSS 语法：`auto | smooth`。
+ * 主要影响导航和滚动 API 触发的滚动，不会把所有用户滚动强制变成动画。
+ *
+ * 适用场景：锚点跳转或程序化滚动；应同时考虑减少动态效果的用户偏好。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.scrollBehavior.smooth
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-behavior
  */
 export class ScrollBehaviorCss extends CssProperty {
@@ -220,8 +222,6 @@ export class ScrollBehaviorCss extends CssProperty {
 
 /**
  * 将元素声明为祖先滚动容器首次呈现时的候选滚动吸附目标。（scroll-initial-target）
- *
- * CSS 语法：`none | nearest`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-initial-target
@@ -285,8 +285,6 @@ export class ScrollInitialTargetCss extends CssProperty {
 
 /**
  * 设置元素滚动目标区域的四边外扩距离，不改变普通布局外边距。（scroll-margin）
- *
- * CSS 语法：`<length>{1,4}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
  */
 export class ScrollMarginCss extends LengthCssProperty {
@@ -2801,8 +2799,6 @@ export class ScrollMarginCss extends LengthCssProperty {
 
 /**
  * 设置滚动目标区域在逻辑块轴两侧的外扩距离。（scroll-margin-block）
- *
- * CSS 语法：`<length>{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block
  */
 export class ScrollMarginBlockCss extends LengthCssProperty {
@@ -4093,8 +4089,6 @@ export class ScrollMarginBlockCss extends LengthCssProperty {
 /**
  * 设置滚动目标区域在逻辑块轴结束侧的外扩距离。（scroll-margin-block-end）
  *
- * CSS 语法：`<length>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-end
  */
@@ -4209,8 +4203,6 @@ export class ScrollMarginBlockEndCss extends LengthCssProperty {
 
 /**
  * 设置滚动目标区域在逻辑块轴起始侧的外扩距离。（scroll-margin-block-start）
- *
- * CSS 语法：`<length>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-start
@@ -4327,8 +4319,6 @@ export class ScrollMarginBlockStartCss extends LengthCssProperty {
 /**
  * 设置滚动目标区域下侧的外扩距离。（scroll-margin-bottom）
  *
- * CSS 语法：`<length>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
  */
@@ -4443,8 +4433,6 @@ export class ScrollMarginBottomCss extends LengthCssProperty {
 
 /**
  * 设置滚动目标区域在逻辑行内轴两侧的外扩距离。（scroll-margin-inline）
- *
- * CSS 语法：`<length>{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline
  */
 export class ScrollMarginInlineCss extends LengthCssProperty {
@@ -5735,8 +5723,6 @@ export class ScrollMarginInlineCss extends LengthCssProperty {
 /**
  * 设置滚动目标区域在逻辑行内轴结束侧的外扩距离。（scroll-margin-inline-end）
  *
- * CSS 语法：`<length>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-end
  */
@@ -5851,8 +5837,6 @@ export class ScrollMarginInlineEndCss extends LengthCssProperty {
 
 /**
  * 设置滚动目标区域在逻辑行内轴起始侧的外扩距离。（scroll-margin-inline-start）
- *
- * CSS 语法：`<length>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-start
@@ -5969,8 +5953,6 @@ export class ScrollMarginInlineStartCss extends LengthCssProperty {
 /**
  * 设置滚动目标区域左侧的外扩距离。（scroll-margin-left）
  *
- * CSS 语法：`<length>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
  */
@@ -6085,8 +6067,6 @@ export class ScrollMarginLeftCss extends LengthCssProperty {
 
 /**
  * 设置滚动目标区域右侧的外扩距离。（scroll-margin-right）
- *
- * CSS 语法：`<length>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
@@ -6203,8 +6183,6 @@ export class ScrollMarginRightCss extends LengthCssProperty {
 /**
  * 设置滚动目标区域上侧的外扩距离。（scroll-margin-top）
  *
- * CSS 语法：`<length>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
  */
@@ -6319,8 +6297,6 @@ export class ScrollMarginTopCss extends LengthCssProperty {
 
 /**
  * 设置滚动容器最佳可视区域的四边内缩距离。（scroll-padding）
- *
- * CSS 语法：`[ auto | <length-percentage> ]{1,4}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding
  */
 export class ScrollPaddingCss extends LengthCssProperty {
@@ -8886,8 +8862,6 @@ export class ScrollPaddingCss extends LengthCssProperty {
 
 /**
  * 设置滚动容器最佳可视区域在逻辑块轴两侧的内缩距离。（scroll-padding-block）
- *
- * CSS 语法：`[ auto | <length-percentage> ]{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block
  */
 export class ScrollPaddingBlockCss extends LengthCssProperty {
@@ -10204,8 +10178,6 @@ export class ScrollPaddingBlockCss extends LengthCssProperty {
 /**
  * 设置滚动容器最佳可视区域在逻辑块轴结束侧的内缩距离。（scroll-padding-block-end）
  *
- * CSS 语法：`auto | <length-percentage>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-end
  */
@@ -10334,8 +10306,6 @@ export class ScrollPaddingBlockEndCss extends LengthCssProperty {
 
 /**
  * 设置滚动容器最佳可视区域在逻辑块轴起始侧的内缩距离。（scroll-padding-block-start）
- *
- * CSS 语法：`auto | <length-percentage>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-start
@@ -10466,8 +10436,6 @@ export class ScrollPaddingBlockStartCss extends LengthCssProperty {
 /**
  * 设置滚动容器最佳可视区域下侧的内缩距离。（scroll-padding-bottom）
  *
- * CSS 语法：`auto | <length-percentage>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-bottom
  */
@@ -10596,8 +10564,6 @@ export class ScrollPaddingBottomCss extends LengthCssProperty {
 
 /**
  * 设置滚动容器最佳可视区域在逻辑行内轴两侧的内缩距离。（scroll-padding-inline）
- *
- * CSS 语法：`[ auto | <length-percentage> ]{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline
  */
 export class ScrollPaddingInlineCss extends LengthCssProperty {
@@ -11914,8 +11880,6 @@ export class ScrollPaddingInlineCss extends LengthCssProperty {
 /**
  * 设置滚动容器最佳可视区域在逻辑行内轴结束侧的内缩距离。（scroll-padding-inline-end）
  *
- * CSS 语法：`auto | <length-percentage>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-end
  */
@@ -12044,8 +12008,6 @@ export class ScrollPaddingInlineEndCss extends LengthCssProperty {
 
 /**
  * 设置滚动容器最佳可视区域在逻辑行内轴起始侧的内缩距离。（scroll-padding-inline-start）
- *
- * CSS 语法：`auto | <length-percentage>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-start
@@ -12176,8 +12138,6 @@ export class ScrollPaddingInlineStartCss extends LengthCssProperty {
 /**
  * 设置滚动容器最佳可视区域左侧的内缩距离。（scroll-padding-left）
  *
- * CSS 语法：`auto | <length-percentage>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-left
  */
@@ -12306,8 +12266,6 @@ export class ScrollPaddingLeftCss extends LengthCssProperty {
 
 /**
  * 设置滚动容器最佳可视区域右侧的内缩距离。（scroll-padding-right）
- *
- * CSS 语法：`auto | <length-percentage>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-right
@@ -12438,8 +12396,6 @@ export class ScrollPaddingRightCss extends LengthCssProperty {
 /**
  * 设置滚动容器最佳可视区域上侧的内缩距离。（scroll-padding-top）
  *
- * CSS 语法：`auto | <length-percentage>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
  */
@@ -12569,8 +12525,6 @@ export class ScrollPaddingTopCss extends LengthCssProperty {
 /**
  * 设置元素作为滚动吸附目标时在块轴和行内轴上的对齐位置。（scroll-snap-align）
  *
- * CSS 语法：`[ none | start | end | center ]{1,2}`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-align
  */
@@ -12637,8 +12591,6 @@ export class ScrollSnapAlignCss extends CssProperty {
 
 /**
  * 设置滚动吸附区域外扩的旧名称；新代码使用 scroll-margin。（scroll-snap-margin）
- *
- * CSS 语法：`<length>{1,4}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
  */
 export class ScrollSnapMarginCss extends LengthCssProperty {
@@ -15154,8 +15106,6 @@ export class ScrollSnapMarginCss extends LengthCssProperty {
 /**
  * 设置滚动吸附区域下侧外扩的旧名称；新代码使用 scroll-margin-bottom。（scroll-snap-margin-bottom）
  *
- * CSS 语法：`<length>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
  */
@@ -15270,8 +15220,6 @@ export class ScrollSnapMarginBottomCss extends LengthCssProperty {
 
 /**
  * 设置滚动吸附区域左侧外扩的旧名称；新代码使用 scroll-margin-left。（scroll-snap-margin-left）
- *
- * CSS 语法：`<length>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
@@ -15388,8 +15336,6 @@ export class ScrollSnapMarginLeftCss extends LengthCssProperty {
 /**
  * 设置滚动吸附区域右侧外扩的旧名称；新代码使用 scroll-margin-right。（scroll-snap-margin-right）
  *
- * CSS 语法：`<length>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
  */
@@ -15504,8 +15450,6 @@ export class ScrollSnapMarginRightCss extends LengthCssProperty {
 
 /**
  * 设置滚动吸附区域上侧外扩的旧名称；新代码使用 scroll-margin-top。（scroll-snap-margin-top）
- *
- * CSS 语法：`<length>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
@@ -15622,8 +15566,6 @@ export class ScrollSnapMarginTopCss extends LengthCssProperty {
 /**
  * 设置滚动时是否允许越过该元素的吸附位置。（scroll-snap-stop）
  *
- * CSS 语法：`normal | always`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-stop
  */
@@ -15688,8 +15630,6 @@ export class ScrollSnapStopCss extends CssProperty {
  * 设置滚动容器的吸附轴和吸附强度。（scroll-snap-type）
  *
  * 轴和吸附强度的组合通过 raw 写入，例如 x mandatory；单独声明轴时省略的强度按 CSS 规则处理。
- *
- * CSS 语法：`none | [ x | y | block | inline | both ] [ mandatory | proximity ]?`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @example
@@ -15763,8 +15703,6 @@ export class ScrollSnapTypeCss extends CssProperty {
 
 /**
  * 同时声明滚动进度时间线的名称和轴。（scroll-timeline）
- *
- * CSS 语法：`[ <'scroll-timeline-name'> <'scroll-timeline-axis'>? ]#`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline
  */
 export class ScrollTimelineCss extends CssProperty {
@@ -15824,8 +15762,6 @@ export class ScrollTimelineCss extends CssProperty {
 
 /**
  * 设置滚动进度时间线所观察的滚动轴。（scroll-timeline-axis）
- *
- * CSS 语法：`[ block | inline | x | y ]#`。
  *
  * CSS 初始值：`block`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-axis
@@ -15894,8 +15830,6 @@ export class ScrollTimelineAxisCss extends CssProperty {
 /**
  * 声明基于当前容器滚动进度的时间线名称。（scroll-timeline-name）
  *
- * CSS 语法：`[ none | <dashed-ident> ]#`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-name
  */
@@ -15957,8 +15891,6 @@ export class ScrollTimelineNameCss extends CssProperty {
 /**
  * 设置滚动条滑块和轨道的颜色。（scrollbar-color）
  *
- * CSS 语法：`auto | <color>{2}`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-color
  */
@@ -16019,8 +15951,6 @@ export class ScrollbarColorCss extends CssProperty {
 
 /**
  * 设置是否预留滚动条槽位，以减少滚动条出现时的布局变化。（scrollbar-gutter）
- *
- * CSS 语法：`auto | stable && both-edges?`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-gutter
@@ -16084,8 +16014,6 @@ export class ScrollbarGutterCss extends CssProperty {
 
 /**
  * 设置滚动条采用正常、较细或隐藏的外观。（scrollbar-width）
- *
- * CSS 语法：`auto | thin | none`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-width
@@ -16151,8 +16079,6 @@ export class ScrollbarWidthCss extends CssProperty {
 
 /**
  * 设置从图像 alpha 信息提取环绕形状时的阈值。（shape-image-threshold）
- *
- * CSS 语法：`<opacity-value>`。
  *
  * CSS 初始值：`0.0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-image-threshold
@@ -16281,8 +16207,6 @@ export class ShapeImageThresholdCss extends CssProperty {
 /**
  * 设置文字环绕形状之外的额外间距。（shape-margin）
  *
- * CSS 语法：`<length-percentage>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-margin
  */
@@ -16410,8 +16334,6 @@ export class ShapeMarginCss extends LengthCssProperty {
 /**
  * 设置浮动元素周围行内内容所环绕的形状。（shape-outside）
  *
- * CSS 语法：`none | [ <shape-box> || <basic-shape> ] | <image>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-outside
  */
@@ -16481,8 +16403,6 @@ export class ShapeOutsideCss extends CssProperty {
 /**
  * 向 SVG 渲染器提供图形绘制精度与速度的偏好。（shape-rendering）
  *
- * CSS 语法：`auto | optimizeSpeed | crispEdges | geometricPrecision`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-rendering
  */
@@ -16549,8 +16469,6 @@ export class ShapeRenderingCss extends CssProperty {
 
 /**
  * 设置语音呈现时文字、数字和标点的朗读方式；使用前核对语音媒体支持。（speak-as）
- *
- * CSS 语法：`normal | spell-out || digits || [ literal-punctuation | no-punctuation ]`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/speak-as
@@ -16620,8 +16538,6 @@ export class SpeakAsCss extends CssProperty {
 
 /**
  * 设置 SVG 渐变 stop 节点的颜色。（stop-color）
- *
- * CSS 语法：`<'color'>`。
  *
  * CSS 初始值：`black`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-color
@@ -17152,8 +17068,6 @@ export class StopColorCss extends CssProperty {
 /**
  * 设置 SVG 渐变 stop 节点的不透明度。（stop-opacity）
  *
- * CSS 语法：`<'opacity'>`。
- *
  * CSS 初始值：`black`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-opacity
  */
@@ -17268,8 +17182,6 @@ export class StopOpacityCss extends CssProperty {
 
 /**
  * 设置 SVG 图形轮廓的描边绘制方式。（stroke）
- *
- * CSS 语法：`<paint>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke
  */
 export class StrokeCss extends CssProperty {
@@ -17804,8 +17716,6 @@ export class StrokeCss extends CssProperty {
 /**
  * 设置描边颜色的扩展属性；常规 SVG 优先使用 stroke 并核对支持情况。（stroke-color）
  *
- * CSS 语法：`<color>`。
- *
  * CSS 初始值：`transparent`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-color
  */
@@ -18335,8 +18245,6 @@ export class StrokeColorCss extends CssProperty {
 /**
  * 设置 SVG 描边虚线中线段与空隙的长度序列。（stroke-dasharray）
  *
- * CSS 语法：`none | <dasharray>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dasharray
  */
@@ -18453,8 +18361,6 @@ export class StrokeDasharrayCss extends LengthCssProperty {
 
 /**
  * 设置 SVG 虚线描边相对于路径起点的偏移。（stroke-dashoffset）
- *
- * CSS 语法：`<length-percentage> | <number>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dashoffset
@@ -18583,8 +18489,6 @@ export class StrokeDashoffsetCss extends LengthCssProperty {
 /**
  * 设置开放 SVG 子路径端点的描边形状。（stroke-linecap）
  *
- * CSS 语法：`butt | round | square`。
- *
  * CSS 初始值：`butt`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linecap
  */
@@ -18662,8 +18566,6 @@ export class StrokeLinecapCss extends CssProperty {
 /**
  * 设置 SVG 路径转角处描边的连接形状。（stroke-linejoin）
  *
- * CSS 语法：`miter | miter-clip | round | bevel | arcs`。
- *
  * CSS 初始值：`miter`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linejoin
  */
@@ -18732,8 +18634,6 @@ export class StrokeLinejoinCss extends CssProperty {
 
 /**
  * 限制尖角连接的延伸比例，超过阈值时改变连接形状。（stroke-miterlimit）
- *
- * CSS 语法：`<number>`。
  *
  * CSS 初始值：`4`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-miterlimit
@@ -18850,8 +18750,6 @@ export class StrokeMiterlimitCss extends CssProperty {
 /**
  * 设置 SVG 描边的不透明度，不影响填充。（stroke-opacity）
  *
- * CSS 语法：`<'opacity'>`。
- *
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-opacity
  */
@@ -18966,8 +18864,6 @@ export class StrokeOpacityCss extends CssProperty {
 
 /**
  * 设置 SVG 描边宽度。（stroke-width）
- *
- * CSS 语法：`<length-percentage> | <number>`。
  *
  * CSS 初始值：`1px`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-width
@@ -19096,8 +18992,6 @@ export class StrokeWidthCss extends LengthCssProperty {
 /**
  * 设置保留制表符时每个制表位的宽度。（tab-size）
  *
- * CSS 语法：`<integer> | <length>`。
- *
  * CSS 初始值：`8`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/tab-size
  */
@@ -19207,8 +19101,6 @@ export class TabSizeCss extends LengthCssProperty {
 /**
  * 设置表格列宽采用自动还是固定布局算法。（table-layout）
  *
- * CSS 语法：`auto | fixed`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/table-layout
  */
@@ -19272,9 +19164,19 @@ export class TableLayoutCss extends CssProperty {
 /**
  * 设置块容器中行内内容的水平或逻辑方向对齐。（text-align）
  *
- * CSS 语法：`start | end | left | right | center | justify | match-parent`。
+ * 控制块容器中的行内内容，不是块盒自身的位置，也不是 Flex/Grid 项目的对齐。
+ *
+ * 常用值：
+ * - `start`：按当前书写方向的行内起始侧对齐。
+ * - `end`：按当前书写方向的行内结束侧对齐。
+ * - `center`：将行内内容在行盒中居中，不会让块盒自身居中。
+ * - `justify`：调整行内间距使文字两端对齐；最后一行通常由 text-align-last 控制。
+ *
+ * 适用场景：正文、标题和表格单元格中的文本对齐。
  *
  * CSS 初始值：`start`（不同于浏览器默认样式表）。
+ * @example
+ * s.textAlign.start
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align
  */
 export class TextAlignCss extends CssProperty {
@@ -19369,8 +19271,6 @@ export class TextAlignCss extends CssProperty {
 /**
  * 设置段落最后一行或强制换行前一行的对齐方式。（text-align-last）
  *
- * CSS 语法：`auto | start | end | left | right | center | justify`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align-last
  */
@@ -19444,8 +19344,6 @@ export class TextAlignLastCss extends CssProperty {
 /**
  * 设置 SVG 文本片段相对于定位点的锚定方式。（text-anchor）
  *
- * CSS 语法：`start | middle | end`。
- *
  * CSS 初始值：`start`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-anchor
  */
@@ -19510,8 +19408,6 @@ export class TextAnchorCss extends CssProperty {
 
 /**
  * 设置中西文、数字等不同文字系统之间的自动间距。（text-autospace）
- *
- * CSS 语法：`normal | <autospace> | auto`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-autospace
@@ -19587,8 +19483,6 @@ export class TextAutospaceCss extends CssProperty {
 
 /**
  * 同时设置文本盒边缘参照及首尾空白裁减。（text-box）
- *
- * CSS 语法：`normal | <'text-box-trim'> || <'text-box-edge'>`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box
@@ -19671,8 +19565,6 @@ export class TextBoxCss extends CssProperty {
 /**
  * 选择文本盒裁减或对齐使用的字体边缘度量。（text-box-edge）
  *
- * CSS 语法：`auto | <text-edge>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-edge
  */
@@ -19744,8 +19636,6 @@ export class TextBoxEdgeCss extends CssProperty {
 /**
  * 裁减文本块开头或结尾的额外行高空白。（text-box-trim）
  *
- * CSS 语法：`none | trim-start | trim-end | trim-both`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-trim
  */
@@ -19813,8 +19703,6 @@ export class TextBoxTrimCss extends CssProperty {
 /**
  * 设置竖排文字中多个字符是否合成为一个横排字形单元。（text-combine-upright）
  *
- * CSS 语法：`none | all | [ digits <integer>? ]`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-combine-upright
  */
@@ -19879,8 +19767,6 @@ export class TextCombineUprightCss extends CssProperty {
 
 /**
  * 集中设置文本装饰线的位置、线型、颜色及粗细。（text-decoration）
- *
- * CSS 语法：`<'text-decoration-line'> || <'text-decoration-style'> || <'text-decoration-color'> || <'text-decoration-thickness'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration
  */
 export class TextDecorationCss extends LengthCssProperty {
@@ -20493,8 +20379,6 @@ export class TextDecorationCss extends LengthCssProperty {
 /**
  * 设置文本装饰线颜色。（text-decoration-color）
  *
- * CSS 语法：`<color>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-color
  */
@@ -21024,8 +20908,6 @@ export class TextDecorationColorCss extends CssProperty {
 /**
  * 设置下划线、上划线或删除线等装饰线位置。（text-decoration-line）
  *
- * CSS 语法：`none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-line
  */
@@ -21098,8 +20980,6 @@ export class TextDecorationLineCss extends CssProperty {
 
 /**
  * 设置文本装饰线跳过哪些内容；具体语法需核对支持情况。（text-decoration-skip）
- *
- * CSS 语法：`none | [ objects || [ spaces | [ leading-spaces || trailing-spaces ] ] || edges || box-decoration ]`。
  *
  * CSS 初始值：`objects`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip
@@ -21174,8 +21054,6 @@ export class TextDecorationSkipCss extends CssProperty {
 /**
  * 设置装饰线是否避让字形的笔画。（text-decoration-skip-ink）
  *
- * CSS 语法：`auto | all | none`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip-ink
  */
@@ -21240,8 +21118,6 @@ export class TextDecorationSkipInkCss extends CssProperty {
 
 /**
  * 设置文本装饰线的实线、波浪线等线型。（text-decoration-style）
- *
- * CSS 语法：`solid | double | dotted | dashed | wavy`。
  *
  * CSS 初始值：`solid`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-style
@@ -21311,8 +21187,6 @@ export class TextDecorationStyleCss extends CssProperty {
 
 /**
  * 设置文本装饰线粗细。（text-decoration-thickness）
- *
- * CSS 语法：`auto | from-font | <length> | <percentage> `。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-thickness
@@ -21444,8 +21318,6 @@ export class TextDecorationThicknessCss extends LengthCssProperty {
 
 /**
  * 同时设置文字着重号的样式和颜色。（text-emphasis）
- *
- * CSS 语法：`<'text-emphasis-style'> || <'text-emphasis-color'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis
  */
 export class TextEmphasisCss extends CssProperty {
@@ -21990,8 +21862,6 @@ export class TextEmphasisCss extends CssProperty {
 /**
  * 设置文字着重号颜色。（text-emphasis-color）
  *
- * CSS 语法：`<color>`。
- *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-color
  */
@@ -22521,8 +22391,6 @@ export class TextEmphasisColorCss extends CssProperty {
 /**
  * 设置文字着重号位于文字的哪一侧。（text-emphasis-position）
  *
- * CSS 语法：`auto | [ over | under ] && [ right | left ]?`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-position
  */
@@ -22587,8 +22455,6 @@ export class TextEmphasisPositionCss extends CssProperty {
 
 /**
  * 设置文字着重号的形状和填充方式。（text-emphasis-style）
- *
- * CSS 语法：`none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string>`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-style
@@ -22664,8 +22530,6 @@ export class TextEmphasisStyleCss extends CssProperty {
 
 /**
  * 设置文本行的缩进距离。（text-indent）
- *
- * CSS 语法：`<length-percentage> && hanging? && each-line?`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-indent
@@ -22794,8 +22658,6 @@ export class TextIndentCss extends LengthCssProperty {
 /**
  * 设置两端对齐时增加间距的算法。（text-justify）
  *
- * CSS 语法：`auto | inter-character | inter-word | none`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-justify
  */
@@ -22864,8 +22726,6 @@ export class TextJustifyCss extends CssProperty {
 
 /**
  * 设置竖排模式下字符的方向。（text-orientation）
- *
- * CSS 语法：`mixed | upright | sideways`。
  *
  * CSS 初始值：`mixed`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-orientation
@@ -22936,9 +22796,15 @@ export class TextOrientationCss extends CssProperty {
  *
  * 本属性不自行制造溢出。单行省略通常还需要受限宽度、overflow:hidden 和 white-space:nowrap。
  *
- * CSS 语法：`[ clip | ellipsis | <string> ]{1,2}`。
+ * 常用值：
+ * - `ellipsis`：用省略号提示被裁剪的行内溢出；还需要限制尺寸并配置溢出规则。
+ * - `clip`：直接裁剪溢出文本，不添加省略标记。
+ *
+ * 适用场景：受限宽度中的单行标题或标签。多行截断需要单独的布局和截行方案。
  *
  * CSS 初始值：`clip`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.maxWidth.rem(12), s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-overflow
  */
 export class TextOverflowCss extends CssProperty {
@@ -22951,7 +22817,14 @@ export class TextOverflowCss extends CssProperty {
   /**
    * 用省略号提示被裁剪的行内溢出；还需要限制尺寸并配置溢出规则。
    *
+   * 适用场景：给确实发生行内溢出的单行内容添加省略提示。
+   *
+   * 注意：不会自动限制宽度、禁用换行或实现多行省略。Flex/Grid 子项还可能需要 min-width:0。
+   *
    * CSS 声明：`text-overflow:ellipsis;`。
+   * @example
+   * css(s.minWidth.px(0), s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-overflow
    */
   readonly ellipsis = 'text-overflow:ellipsis;';
   /**
@@ -23008,8 +22881,6 @@ export class TextOverflowCss extends CssProperty {
 
 /**
  * 向渲染器提供文本速度、可读性或几何精度的偏好。（text-rendering）
- *
- * CSS 语法：`auto | optimizeSpeed | optimizeLegibility | geometricPrecision`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-rendering
@@ -23078,8 +22949,6 @@ export class TextRenderingCss extends CssProperty {
 /**
  * 设置文字及其装饰的阴影，可叠加多层。（text-shadow）
  *
- * CSS 语法：`none | <shadow-t>#`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-shadow
  */
@@ -23140,8 +23009,6 @@ export class TextShadowCss extends CssProperty {
 
 /**
  * 控制移动浏览器为提升可读性而进行的文字自动放大。（text-size-adjust）
- *
- * CSS 语法：`none | auto | <percentage>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-size-adjust
@@ -23274,8 +23141,6 @@ export class TextSizeAdjustCss extends CssProperty {
 /**
  * 设置东亚文字标点等字符周围空白的裁减。（text-spacing-trim）
  *
- * CSS 语法：`space-all | normal | space-first | trim-start`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-spacing-trim
  */
@@ -23342,8 +23207,6 @@ export class TextSpacingTrimCss extends CssProperty {
 
 /**
  * 设置文字显示时的大小写、全角或其他字形转换。（text-transform）
- *
- * CSS 语法：`none | [ capitalize | uppercase | lowercase ] || full-width || full-size-kana | math-auto`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-transform
@@ -23417,8 +23280,6 @@ export class TextTransformCss extends CssProperty {
 
 /**
  * 设置下划线相对于默认位置的偏移。（text-underline-offset）
- *
- * CSS 语法：`auto | <length> | <percentage> `。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-offset
@@ -23549,8 +23410,6 @@ export class TextUnderlineOffsetCss extends LengthCssProperty {
 /**
  * 设置下划线相对于文字基线或竖排文字的放置方式。（text-underline-position）
  *
- * CSS 语法：`auto | from-font | [ under || [ left | right ] ]`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-position
  */
@@ -23619,8 +23478,6 @@ export class TextUnderlinePositionCss extends CssProperty {
 
 /**
  * 同时设置文本是否换行及换行策略。（text-wrap）
- *
- * CSS 语法：`<'text-wrap-mode'> || <'text-wrap-style'>`。
  *
  * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap
@@ -23713,8 +23570,6 @@ export class TextWrapCss extends CssProperty {
 /**
  * 设置文本是否允许软换行。（text-wrap-mode）
  *
- * CSS 语法：`wrap | nowrap`。
- *
  * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-mode
  */
@@ -23785,8 +23640,6 @@ export class TextWrapModeCss extends CssProperty {
 
 /**
  * 设置文本换行的排版策略，例如平衡各行长度。（text-wrap-style）
- *
- * CSS 语法：`auto | balance | stable | pretty`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-style
@@ -23867,8 +23720,6 @@ export class TextWrapStyleCss extends CssProperty {
 /**
  * 扩大命名动画时间线的可引用作用域。（timeline-scope）
  *
- * CSS 语法：`none | <dashed-ident>#`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/timeline-scope
  */
@@ -23929,8 +23780,6 @@ export class TimelineScopeCss extends CssProperty {
 
 /**
  * 设置定位元素相对于其定位参照的上侧偏移。（top）
- *
- * CSS 语法：`auto | <length-percentage> | <anchor()> | <anchor-size()>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
@@ -24055,9 +23904,19 @@ export class TopCss extends LengthCssProperty {
 /**
  * 声明浏览器可以处理的触摸平移与缩放手势。（touch-action）
  *
- * CSS 语法：`auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] || pinch-zoom ] | manipulation`。
+ * 描述浏览器可接管的触摸手势，手势开始后再修改通常不会改变当前手势的处理。
+ *
+ * 常用值：
+ * - `manipulation`：允许平移和连续缩放，通常禁用双击缩放等额外手势。
+ * - `pan-x`：允许浏览器处理水平单指平移。
+ * - `pan-y`：允许浏览器处理垂直单指平移。
+ * - `none`：禁用浏览器在该区域处理的平移和缩放手势，可能影响用户缩放可访问性。
+ *
+ * 适用场景：拖拽控件与页面滚动之间分配触摸方向；保留用户所需的缩放能力。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.touchAction.panY
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/touch-action
  */
 export class TouchActionCss extends CssProperty {
@@ -24154,9 +24013,11 @@ export class TouchActionCss extends CssProperty {
  *
  * 多个变换的顺序会影响结果。变换通常不改变元素在普通文档流中预留的尺寸。
  *
- * CSS 语法：`none | <transform-list>`。
+ * 适用场景：平移、旋转和缩放的视觉效果；需要改变普通流占位时应调整布局属性。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @example
+ * s.transform.raw('translateX(8px) scale(1.05)')
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform
  */
 export class TransformCss extends CssProperty {
@@ -24216,8 +24077,6 @@ export class TransformCss extends CssProperty {
 
 /**
  * 设置变换及其原点所依据的参照盒。（transform-box）
- *
- * CSS 语法：`content-box | border-box | fill-box | stroke-box | view-box`。
  *
  * CSS 初始值：`view-box`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-box
@@ -24287,8 +24146,6 @@ export class TransformBoxCss extends CssProperty {
 
 /**
  * 设置元素变换的原点。（transform-origin）
- *
- * CSS 语法：`[ <length-percentage> | left | center | right | top | bottom ] | [ [ <length-percentage> | left | center | right ] && [ <length-percentage> | top | center | bottom ] ] <length>?`。
  *
  * CSS 初始值：`50% 50% 0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-origin
@@ -24427,8 +24284,6 @@ export class TransformOriginCss extends LengthCssProperty {
 /**
  * 控制子元素的三维位置保留在三维空间还是展平。（transform-style）
  *
- * CSS 语法：`flat | preserve-3d`。
- *
  * CSS 初始值：`flat`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-style
  */
@@ -24490,7 +24345,11 @@ export class TransformStyleCss extends CssProperty {
 /**
  * 集中设置属性变化过渡的目标、时长、缓动、延迟和行为。（transition）
  *
- * CSS 语法：`<single-transition>#`。
+ * 只对属性变化创建过渡；不会自动触发变化。建议明确列出目标属性，避免 all 意外过渡布局变化。
+ *
+ * 适用场景：悬停、选中和展开状态之间的平滑变化。
+ * @example
+ * s.transition.raw('opacity 160ms ease')
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition
  */
 export class TransitionCss extends CssProperty {
@@ -24651,8 +24510,6 @@ export class TransitionCss extends CssProperty {
 /**
  * 控制离散属性是否可以启动 CSS 过渡。（transition-behavior）
  *
- * CSS 语法：`<transition-behavior-value>#`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-behavior
  */
@@ -24723,8 +24580,6 @@ export class TransitionBehaviorCss extends CssProperty {
 
 /**
  * 设置属性变化后开始过渡的延迟。（transition-delay）
- *
- * CSS 语法：`<time>#`。
  *
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-delay
@@ -24865,8 +24720,6 @@ export class TransitionDelayCss extends CssProperty {
 /**
  * 设置过渡从开始到完成的时长。（transition-duration）
  *
- * CSS 语法：`<time>#`。
- *
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-duration
  */
@@ -25005,8 +24858,6 @@ export class TransitionDurationCss extends CssProperty {
 
 /**
  * 指定发生变化时需要过渡的 CSS 属性。（transition-property）
- *
- * CSS 语法：`none | <single-transition-property>#`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-property
  */
 export class TransitionPropertyCss extends CssProperty {
@@ -25068,8 +24919,6 @@ export class TransitionPropertyCss extends CssProperty {
 
 /**
  * 设置过渡进度变化的缓动函数。（transition-timing-function）
- *
- * CSS 语法：`<easing-function>#`。
  *
  * CSS 初始值：`ease`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-timing-function
@@ -25143,8 +24992,6 @@ export class TransitionTimingFunctionCss extends CssProperty {
 
 /**
  * 独立设置元素在二维或三维空间中的平移。（translate）
- *
- * CSS 语法：`none | <length-percentage> [ <length-percentage> <length>? ]?`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/translate

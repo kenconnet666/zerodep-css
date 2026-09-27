@@ -9,7 +9,7 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
  *
  * 两个值依次为 row-gap 和 column-gap；在 Flex 中对应项目还是行间距取决于 flex-direction。它不增加容器外缘的间距。
  *
- * CSS 语法：`<'row-gap'> <'column-gap'>?`。
+ * 适用场景：给 Flex/Grid 项目设置统一间隔，避免逐个项目添加 margin。
  * @example
  * s.gap.px(8, 16) // gap:8px 16px;
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/gap
@@ -1436,8 +1436,6 @@ export class GlyphOrientationVerticalCss extends CssProperty {
 
 /**
  * 集中设置显式和隐式网格的轨道、区域及自动放置方式。（grid）
- *
- * CSS 语法：`<'grid-template'> | <'grid-template-rows'> / [ auto-flow && dense? ] <'grid-auto-columns'>? | [ auto-flow && dense? ] <'grid-auto-rows'>? / <'grid-template-columns'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid
  */
 export class GridCss extends CssProperty {
@@ -1497,8 +1495,6 @@ export class GridCss extends CssProperty {
 
 /**
  * 设置网格项目的区域名，或行起点、列起点、行终点、列终点。（grid-area）
- *
- * CSS 语法：`<grid-line> [ / <grid-line> ]{0,3}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-area
  */
 export class GridAreaCss extends CssProperty {
@@ -1608,8 +1604,6 @@ export class GridAreaCss extends CssProperty {
 
 /**
  * 设置隐式生成的网格列尺寸。（grid-auto-columns）
- *
- * CSS 语法：`<track-size>+`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-columns
@@ -1760,9 +1754,16 @@ export class GridAutoColumnsCss extends LengthCssProperty {
  *
  * dense 可能改变视觉顺序，但不改变 DOM 和键盘导航顺序。
  *
- * CSS 语法：`[ row | column ] || dense`。
+ * 常用值：
+ * - `row`：优先沿行放置项目，必要时创建新的隐式行。
+ * - `column`：优先沿列放置项目，必要时创建新的隐式列。
+ * - `dense`：尝试回填前面留下的空洞，可能让视觉顺序与 DOM 顺序不同。
+ *
+ * 适用场景：控制未明确指定位置的网格项目如何自动填入轨道。
  *
  * CSS 初始值：`row`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.display.grid, s.gridAutoFlow.row)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-flow
  */
 export class GridAutoFlowCss extends CssProperty {
@@ -1838,8 +1839,6 @@ export class GridAutoFlowCss extends CssProperty {
 
 /**
  * 设置隐式生成的网格行尺寸。（grid-auto-rows）
- *
- * CSS 语法：`<track-size>+`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-rows
@@ -1987,8 +1986,6 @@ export class GridAutoRowsCss extends LengthCssProperty {
 
 /**
  * 设置网格项目的列起点和列终点。（grid-column）
- *
- * CSS 语法：`<grid-line> [ / <grid-line> ]?`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column
  */
 export class GridColumnCss extends CssProperty {
@@ -2104,8 +2101,6 @@ export class GridColumnCss extends CssProperty {
 
 /**
  * 设置网格项目的列终止线或跨越范围。（grid-column-end）
- *
- * CSS 语法：`<grid-line>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-end
@@ -2224,8 +2219,6 @@ export class GridColumnEndCss extends CssProperty {
 /**
  * 设置网格项目的列起始线或跨越范围。（grid-column-start）
  *
- * CSS 语法：`<grid-line>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-start
  */
@@ -2342,8 +2335,6 @@ export class GridColumnStartCss extends CssProperty {
 
 /**
  * 设置网格项目的行起点和行终点。（grid-row）
- *
- * CSS 语法：`<grid-line> [ / <grid-line> ]?`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row
  */
 export class GridRowCss extends CssProperty {
@@ -2453,8 +2444,6 @@ export class GridRowCss extends CssProperty {
 
 /**
  * 设置网格项目的行终止线或跨越范围。（grid-row-end）
- *
- * CSS 语法：`<grid-line>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-end
@@ -2573,8 +2562,6 @@ export class GridRowEndCss extends CssProperty {
 /**
  * 设置网格项目的行起始线或跨越范围。（grid-row-start）
  *
- * CSS 语法：`<grid-line>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-start
  */
@@ -2691,8 +2678,6 @@ export class GridRowStartCss extends CssProperty {
 
 /**
  * 集中设置显式网格的行、列和命名区域。（grid-template）
- *
- * CSS 语法：`none | [ <'grid-template-rows'> / <'grid-template-columns'> ] | [ <line-names>? <string> <track-size>? <line-names>? ]+ [ / <explicit-track-list> ]?`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template
  */
 export class GridTemplateCss extends CssProperty {
@@ -2752,8 +2737,6 @@ export class GridTemplateCss extends CssProperty {
 
 /**
  * 用区域名称矩阵定义网格布局区域。（grid-template-areas）
- *
- * CSS 语法：`none | <string>+`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-areas
@@ -2816,7 +2799,9 @@ export class GridTemplateAreasCss extends CssProperty {
 /**
  * 定义显式网格的列轨道尺寸及网格线名称。（grid-template-columns）
  *
- * CSS 语法：`none | <track-list> | <auto-track-list> | subgrid <line-name-list>?`。
+ * 每个轨道值定义一列；fr 分配剩余空间。需要允许长内容所在列缩小时，可使用 minmax(0, 1fr)。
+ *
+ * 适用场景：响应式卡片、表单标签与输入框的列布局。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @example
@@ -2989,9 +2974,13 @@ export class GridTemplateColumnsCss extends LengthCssProperty {
 /**
  * 定义显式网格的行轨道尺寸及网格线名称。（grid-template-rows）
  *
- * CSS 语法：`none | <track-list> | <auto-track-list> | subgrid <line-name-list>?`。
+ * 每个轨道值定义一行，未显式定义的行使用 grid-auto-rows。
+ *
+ * 适用场景：区分固定工具栏和可伸缩内容区域。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @example
+ * s.gridTemplateRows.raw('auto minmax(0, 1fr)')
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-rows
  */
 export class GridTemplateRowsCss extends LengthCssProperty {
@@ -3160,8 +3149,6 @@ export class GridTemplateRowsCss extends LengthCssProperty {
 /**
  * 控制标点是否可以悬挂在行盒边缘之外。（hanging-punctuation）
  *
- * CSS 语法：`none | [ first || [ force-end | allow-end ] || last ]`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hanging-punctuation
  */
@@ -3233,9 +3220,11 @@ export class HangingPunctuationCss extends CssProperty {
  *
  * 百分比高度能否解析取决于包含块的尺寸确定方式；设置 100% 不自动等于视口高度。
  *
- * CSS 语法：`auto | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
+ * 适用场景：控制物理高度；滚动面板通常结合 max-height 和 overflow。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.maxHeight.rem(20), s.overflowY.auto)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/height
  */
 export class HeightCss extends LengthCssProperty {
@@ -3380,8 +3369,6 @@ export class HeightCss extends LengthCssProperty {
 /**
  * 设置自动断词时插入的断字符号。（hyphenate-character）
  *
- * CSS 语法：`auto | <string>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-character
  */
@@ -3442,8 +3429,6 @@ export class HyphenateCharacterCss extends CssProperty {
 
 /**
  * 限制可断词的最小单词长度以及断点两侧的最少字符数。（hyphenate-limit-chars）
- *
- * CSS 语法：`[ auto | <integer> ]{1,3}`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-limit-chars
@@ -3562,8 +3547,6 @@ export class HyphenateLimitCharsCss extends CssProperty {
 /**
  * 设置文字断词和连字符插入的方式；自动断词依赖语言和词典。（hyphens）
  *
- * CSS 语法：`none | manual | auto`。
- *
  * CSS 初始值：`manual`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphens
  */
@@ -3628,8 +3611,6 @@ export class HyphensCss extends CssProperty {
 
 /**
  * 设置图像是否按元数据等信息调整方向。（image-orientation）
- *
- * CSS 语法：`from-image | <angle> | [ <angle>? flip ]`。
  *
  * CSS 初始值：`from-image`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-orientation
@@ -3798,8 +3779,6 @@ export class ImageOrientationCss extends CssProperty {
 /**
  * 向浏览器指定图像缩放时的插值与清晰度偏好。（image-rendering）
  *
- * CSS 语法：`auto | crisp-edges | pixelated | smooth`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-rendering
  */
@@ -3867,8 +3846,6 @@ export class ImageRenderingCss extends CssProperty {
 /**
  * 设置图像的分辨率解释方式；使用前核对目标浏览器支持。（image-resolution）
  *
- * CSS 语法：`[ from-image || <resolution> ] && snap?`。
- *
  * CSS 初始值：`1dppx`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-resolution
  */
@@ -3929,8 +3906,6 @@ export class ImageResolutionCss extends CssProperty {
 
 /**
  * 设置段落首字下沉或抬升时占用的行数与对齐位置。（initial-letter）
- *
- * CSS 语法：`normal | [ <number> <integer>? ]`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/initial-letter
@@ -4049,8 +4024,6 @@ export class InitialLetterCss extends CssProperty {
 /**
  * 设置首字下沉时字形与正文使用的对齐基线。（initial-letter-align）
  *
- * CSS 语法：`[ auto | alphabetic | hanging | ideographic ]`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/initial-letter-align
  */
@@ -4118,9 +4091,13 @@ export class InitialLetterAlignCss extends CssProperty {
 /**
  * 设置逻辑行内轴尺寸；水平书写时通常对应宽度。（inline-size）
  *
- * CSS 语法：`<'width'>`。
+ * 水平书写时通常对应 width，竖直书写时通常对应 height。实际尺寸还受 min-inline-size/max-inline-size 和 box-sizing 约束。
+ *
+ * 适用场景：希望布局尺寸跟随书写模式变化的组件。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.inlineSize.rem(20)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inline-size
  */
 export class InlineSizeCss extends LengthCssProperty {
@@ -4258,8 +4235,6 @@ export class InlineSizeCss extends LengthCssProperty {
 
 /**
  * 同时设置定位元素的上、右、下、左偏移。（inset）
- *
- * CSS 语法：`<'top'>{1,4}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset
  */
 export class InsetCss extends LengthCssProperty {
@@ -6770,8 +6745,6 @@ export class InsetCss extends LengthCssProperty {
 
 /**
  * 设置定位元素沿逻辑块轴的起始和结束偏移。（inset-block）
- *
- * CSS 语法：`<'top'>{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block
  */
 export class InsetBlockCss extends LengthCssProperty {
@@ -8064,8 +8037,6 @@ export class InsetBlockCss extends LengthCssProperty {
 /**
  * 设置定位元素在逻辑块轴结束侧的偏移。（inset-block-end）
  *
- * CSS 语法：`<'top'>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-end
  */
@@ -8183,8 +8154,6 @@ export class InsetBlockEndCss extends LengthCssProperty {
 /**
  * 设置定位元素在逻辑块轴起始侧的偏移。（inset-block-start）
  *
- * CSS 语法：`<'top'>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-start
  */
@@ -8301,8 +8270,6 @@ export class InsetBlockStartCss extends LengthCssProperty {
 
 /**
  * 设置定位元素沿逻辑行内轴的起始和结束偏移。（inset-inline）
- *
- * CSS 语法：`<'top'>{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline
  */
 export class InsetInlineCss extends LengthCssProperty {
@@ -9595,8 +9562,6 @@ export class InsetInlineCss extends LengthCssProperty {
 /**
  * 设置定位元素在逻辑行内轴结束侧的偏移。（inset-inline-end）
  *
- * CSS 语法：`<'top'>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-end
  */
@@ -9713,8 +9678,6 @@ export class InsetInlineEndCss extends LengthCssProperty {
 
 /**
  * 设置定位元素在逻辑行内轴起始侧的偏移。（inset-inline-start）
- *
- * CSS 语法：`<'top'>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-start
@@ -9833,8 +9796,6 @@ export class InsetInlineStartCss extends LengthCssProperty {
 /**
  * 控制动画是否允许在数值尺寸与内部尺寸关键字之间插值。（interpolate-size）
  *
- * CSS 语法：`numeric-only | allow-keywords`。
- *
  * CSS 初始值：`numeric-only`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interpolate-size
  */
@@ -9906,9 +9867,15 @@ export class InterpolateSizeCss extends CssProperty {
 /**
  * 控制元素是否建立独立的层叠上下文，隔离混合效果。（isolation）
  *
- * CSS 语法：`auto | isolate`。
+ * 常用值：
+ * - `auto`：由其他属性是否需要层叠上下文决定，不强制隔离。
+ * - `isolate`：建立独立层叠上下文，使混合效果在该分组内处理。
+ *
+ * 适用场景：建立局部层叠边界，或限制混合模式影响范围。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.isolation.isolate
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/isolation
  */
 export class IsolationCss extends CssProperty {
@@ -9979,9 +9946,17 @@ export class IsolationCss extends CssProperty {
 /**
  * 分配布局主轴或行内轴的剩余空间，控制内容整体对齐。（justify-content）
  *
- * CSS 语法：`normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ]`。
+ * Flex 中沿主轴分配空间，Grid 中沿行内轴对齐网格整体。没有剩余空间时，空间分配效果可能不明显。
+ *
+ * 常用值：
+ * - `center`：将整体内容放在主轴或行内轴的中间，不改变项目内部文字对齐。
+ * - `space-between`：首尾项目贴两端，剩余空间等分到相邻项目之间。
+ * - `space-around`：每个项目两侧分配相等空间，容器边缘的空间是相邻项目间的一半。
+ * - `space-evenly`：容器两端和相邻项目之间分配相等空间。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.display.flex, s.justifyContent.spaceBetween)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-content
  */
 export class JustifyContentCss extends CssProperty {
@@ -10044,13 +10019,27 @@ export class JustifyContentCss extends CssProperty {
   /**
    * 首尾项目贴两端，剩余空间等分到相邻项目之间。
    *
+   * 区别：space-evenly 在两端也保留等量空间；space-around 的边缘空间只有项目之间的一半。
+   *
+   * 适用场景：工具栏左侧标题和右侧操作分居两端。
+   *
+   * 注意：只有一个项目时靠起始侧，不会自动居中。
+   *
    * CSS 声明：`justify-content:space-between;`。
+   * @example
+   * css(s.display.flex, s.justifyContent.spaceBetween, s.alignItems.center)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-content
    */
   readonly spaceBetween = 'justify-content:space-between;';
   /**
    * 容器两端和相邻项目之间分配相等空间。
    *
+   * 适用场景：希望容器两端和项目之间空隙一致的导航或操作组。
+   *
    * CSS 声明：`justify-content:space-evenly;`。
+   * @example
+   * css(s.display.flex, s.justifyContent.spaceEvenly)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-content
    */
   readonly spaceEvenly = 'justify-content:space-evenly;';
   /** CSS 声明：`justify-content:start;`。 */
@@ -10091,8 +10080,6 @@ export class JustifyContentCss extends CssProperty {
 
 /**
  * 设置容器内项目在行内轴上的默认对齐方式；不控制 Flex 项目的主轴对齐。（justify-items）
- *
- * CSS 语法：`normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | legacy | legacy && [ left | right | center ] | anchor-center`。
  *
  * CSS 初始值：`legacy`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-items
@@ -10180,8 +10167,6 @@ export class JustifyItemsCss extends CssProperty {
 
 /**
  * 单独设置项目在其布局区域内的行内轴对齐方式。（justify-self）
- *
- * CSS 语法：`auto | normal | stretch | <baseline-position> | <overflow-position>? [ <self-position> | left | right ] | anchor-center`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-self
@@ -10278,8 +10263,6 @@ export class JustifySelfCss extends CssProperty {
 /**
  * 旧版瀑布流布局提案中沿行内轴对齐轨道的属性；使用前核对实现与规范版本。（justify-tracks）
  *
- * CSS 语法：`[ normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ]#`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-tracks
  */
@@ -10362,8 +10345,6 @@ export class JustifyTracksCss extends CssProperty {
 
 /**
  * 设置定位元素相对于其定位参照的左侧偏移。（left）
- *
- * CSS 语法：`auto | <length-percentage> | <anchor()> | <anchor-size()>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/left
@@ -10488,8 +10469,6 @@ export class LeftCss extends LengthCssProperty {
 /**
  * 设置字符之间额外增加或减少的间距。（letter-spacing）
  *
- * CSS 语法：`normal | <length>`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/letter-spacing
  */
@@ -10606,8 +10585,6 @@ export class LetterSpacingCss extends LengthCssProperty {
 
 /**
  * 设置 SVG 光照滤镜使用的光源颜色。（lighting-color）
- *
- * CSS 语法：`<color>`。
  *
  * CSS 初始值：`white`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/lighting-color
@@ -11138,8 +11115,6 @@ export class LightingColorCss extends CssProperty {
 /**
  * 设置东亚文字标点等字符的换行严格程度。（line-break）
  *
- * CSS 语法：`auto | loose | normal | strict | anywhere`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-break
  */
@@ -11208,8 +11183,6 @@ export class LineBreakCss extends CssProperty {
 
 /**
  * 限制块容器显示的行数及截断行为；使用前核对所需语法的支持情况。（line-clamp）
- *
- * CSS 语法：`none | <integer>`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-clamp
@@ -11330,7 +11303,7 @@ export class LineClampCss extends CssProperty {
  *
  * 无单位数字作为倍数继承；长度值按长度继承。单独设置行高不会自动实现多行文本垂直居中。
  *
- * CSS 语法：`normal | <number> | <length> | <percentage>`。
+ * 适用场景：控制正文行间节奏；可继承的字号倍数通常比固定长度更适合嵌套文字。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @example
@@ -11467,8 +11440,6 @@ export class LineHeightCss extends LengthCssProperty {
 /**
  * 设置行盒高度向上取整使用的步长。（line-height-step）
  *
- * CSS 语法：`<length>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-height-step
  */
@@ -11583,8 +11554,6 @@ export class LineHeightStepCss extends LengthCssProperty {
 
 /**
  * 集中设置列表标记的类型、图像和位置。（list-style）
- *
- * CSS 语法：`<'list-style-type'> || <'list-style-position'> || <'list-style-image'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style
  */
 export class ListStyleCss extends CssProperty {
@@ -11649,8 +11618,6 @@ export class ListStyleCss extends CssProperty {
 /**
  * 设置用作列表标记的图像。（list-style-image）
  *
- * CSS 语法：`<image> | none`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-image
  */
@@ -11711,8 +11678,6 @@ export class ListStyleImageCss extends CssProperty {
 
 /**
  * 设置列表标记位于主块盒内部还是外部。（list-style-position）
- *
- * CSS 语法：`inside | outside`。
  *
  * CSS 初始值：`outside`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-position
@@ -11776,8 +11741,6 @@ export class ListStylePositionCss extends CssProperty {
 
 /**
  * 设置列表标记或计数器的样式。（list-style-type）
- *
- * CSS 语法：`<counter-style> | <string> | none`。
  *
  * CSS 初始值：`disc`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-type

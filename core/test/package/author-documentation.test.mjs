@@ -115,7 +115,7 @@ test('消费端 hover、补全详情和各重载参数提示包含实际使用�
   const code = `import {Css} from 'zerodep-css';
 import {ThemeCss} from 'zerodep-css/theme';
 const s=new Css();const themed=new ThemeCss();
-s.display; s.display.flex; s.position.sticky; s.overflow.clip;
+s.display; s.display.flex; s.display.inlineFlex; s.objectFit.cover; s.position.sticky; s.overflow.clip;
 s.width.rem(1); s.width.clamp('12rem','50vw','40rem');
 s.margin.px(8); s.margin.px(8,16); s.margin.px(8,16,4); s.margin.px(8,16,4,2);
 s.gap.px(8,16); s.borderSpacing.px(8,16); s.color.hsl(210,50,40);
@@ -131,6 +131,8 @@ themed.color._accent;
     for (const [expression, expected] of [
       ['s.display;', /内部布局/],
       ['s.display.flex', /直接子元素.*Flex/],
+      ['s.display.inlineFlex', /普通文档流.*行内排版/s],
+      ['s.objectFit.cover', /contain.*完整内容|contain.*完整图像/s],
       ['s.position.sticky', /inset.*auto/],
       ['s.overflow.clip', /不建立滚动容器/],
       ['s.width.rem', /根元素字号/],
@@ -138,6 +140,19 @@ themed.color._accent;
       ['themed.color._accent', /主题变量/],
     ])
       assert.match(ts.displayPartsToString(hover(expression)?.documentation), expected, expression);
+    const propertyDocs = ts.displayPartsToString(hover('s.display;')?.documentation);
+    assert.match(propertyDocs, /常用值：[\s\S]*inline-flex/);
+    assert.doesNotMatch(propertyDocs, /<display-outside>/, '形式语法不应挤占悬停说明');
+    const inlineDocs = hover('s.display.inlineFlex');
+    assert.match(ts.displayPartsToString(inlineDocs?.documentation), /区别：[\s\S]*适用场景：/);
+    assert(
+      inlineDocs?.tags?.some(
+        (tag) =>
+          tag.name === 'example' &&
+          ts.displayPartsToString(tag.text).includes('s.display.inlineFlex'),
+      ),
+      '关键字应提供可调用示例',
+    );
     const definition = service.getDefinitionAtPosition(
       file,
       position('s.display.flex') + 's.display.'.length + 1,
@@ -155,6 +170,15 @@ themed.color._accent;
       {},
     );
     assert.match(ts.displayPartsToString(details?.documentation), /弹性容器/);
+    const inlineDetails = service.getCompletionEntryDetails(
+      file,
+      position('s.display.inlineFlex') + 's.display.'.length,
+      'inlineFlex',
+      {},
+      undefined,
+      {},
+    );
+    assert.match(ts.displayPartsToString(inlineDetails?.documentation), /图标与文字组合/);
     const signature = (call, count) => {
       const help = service.getSignatureHelpItems(
         file,

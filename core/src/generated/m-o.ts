@@ -9,7 +9,7 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
  *
  * 1/2/3/4 个值依次表示：四边；上下/左右；上/左右/下；上/右/下/左。块布局中的垂直外边距可能折叠。
  *
- * CSS 语法：`<'margin-top'>{1,4}`。
+ * 适用场景：控制盒子外侧与相邻内容的距离；布局项统一间隔可考虑容器 gap。
  * @example
  * s.margin.px(8, 16) // margin:8px 16px;
  * @example
@@ -2577,8 +2577,6 @@ export class MarginCss extends LengthCssProperty {
 
 /**
  * 设置逻辑块轴起始侧和结束侧的外边距。（margin-block）
- *
- * CSS 语法：`<'margin-top'>{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block
  */
 export class MarginBlockCss extends LengthCssProperty {
@@ -3899,8 +3897,6 @@ export class MarginBlockCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴结束侧的外边距。（margin-block-end）
  *
- * CSS 语法：`<'margin-top'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block-end
  */
@@ -4022,8 +4018,6 @@ export class MarginBlockEndCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴起始侧的外边距。（margin-block-start）
  *
- * CSS 语法：`<'margin-top'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block-start
  */
@@ -4144,8 +4138,6 @@ export class MarginBlockStartCss extends LengthCssProperty {
 
 /**
  * 设置下外边距。（margin-bottom）
- *
- * CSS 语法：`<length-percentage> | auto | <anchor-size()>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-bottom
@@ -4279,8 +4271,6 @@ export class MarginBottomCss extends LengthCssProperty {
 
 /**
  * 设置逻辑行内轴起始侧和结束侧的外边距。（margin-inline）
- *
- * CSS 语法：`<'margin-top'>{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline
  */
 export class MarginInlineCss extends LengthCssProperty {
@@ -5601,8 +5591,6 @@ export class MarginInlineCss extends LengthCssProperty {
 /**
  * 设置逻辑行内轴结束侧的外边距。（margin-inline-end）
  *
- * CSS 语法：`<'margin-top'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-end
  */
@@ -5724,8 +5712,6 @@ export class MarginInlineEndCss extends LengthCssProperty {
 /**
  * 设置逻辑行内轴起始侧的外边距。（margin-inline-start）
  *
- * CSS 语法：`<'margin-top'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-start
  */
@@ -5846,8 +5832,6 @@ export class MarginInlineStartCss extends LengthCssProperty {
 
 /**
  * 设置左外边距。（margin-left）
- *
- * CSS 语法：`<length-percentage> | auto | <anchor-size()>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-left
@@ -5982,8 +5966,6 @@ export class MarginLeftCss extends LengthCssProperty {
 /**
  * 设置右外边距。（margin-right）
  *
- * CSS 语法：`<length-percentage> | auto | <anchor-size()>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-right
  */
@@ -6116,8 +6098,6 @@ export class MarginRightCss extends LengthCssProperty {
 
 /**
  * 设置上外边距。（margin-top）
- *
- * CSS 语法：`<length-percentage> | auto | <anchor-size()>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
@@ -6252,8 +6232,6 @@ export class MarginTopCss extends LengthCssProperty {
 /**
  * 控制容器边缘处子元素外边距的裁减。（margin-trim）
  *
- * CSS 语法：`none | in-flow | all`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-trim
  */
@@ -6318,8 +6296,6 @@ export class MarginTrimCss extends CssProperty {
 
 /**
  * 同时设置 SVG 路径起点、中间顶点和终点的标记图形。（marker）
- *
- * CSS 语法：`none | <url>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker
  */
 export class MarkerCss extends CssProperty {
@@ -6379,8 +6355,6 @@ export class MarkerCss extends CssProperty {
 
 /**
  * 设置 SVG 路径终点的标记图形。（marker-end）
- *
- * CSS 语法：`none | <url>`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-end
@@ -6443,8 +6417,6 @@ export class MarkerEndCss extends CssProperty {
 /**
  * 设置 SVG 路径中间顶点的标记图形。（marker-mid）
  *
- * CSS 语法：`none | <url>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-mid
  */
@@ -6506,8 +6478,6 @@ export class MarkerMidCss extends CssProperty {
 /**
  * 设置 SVG 路径起点的标记图形。（marker-start）
  *
- * CSS 语法：`none | <url>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-start
  */
@@ -6568,8 +6538,6 @@ export class MarkerStartCss extends CssProperty {
 
 /**
  * 集中设置遮罩图层的图像、位置、尺寸、重复及合成方式。（mask）
- *
- * CSS 语法：`<mask-layer>#`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask
  */
 export class MaskCss extends LengthCssProperty {
@@ -6731,8 +6699,6 @@ export class MaskCss extends LengthCssProperty {
 
 /**
  * 设置基于九宫格图像切片的边框遮罩。（mask-border）
- *
- * CSS 语法：`<'mask-border-source'> || <'mask-border-slice'> [ / <'mask-border-width'>? [ / <'mask-border-outset'> ]? ]? || <'mask-border-repeat'> || <'mask-border-mode'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border
  */
 export class MaskBorderCss extends CssProperty {
@@ -6861,8 +6827,6 @@ export class MaskBorderCss extends CssProperty {
 /**
  * 设置边框遮罩使用 alpha 还是亮度信息。（mask-border-mode）
  *
- * CSS 语法：`luminance | alpha`。
- *
  * CSS 初始值：`alpha`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-mode
  */
@@ -6925,8 +6889,6 @@ export class MaskBorderModeCss extends CssProperty {
 
 /**
  * 设置边框遮罩超出边框盒的距离。（mask-border-outset）
- *
- * CSS 语法：`[ <length> | <number> ]{1,4}`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-outset
@@ -9444,8 +9406,6 @@ export class MaskBorderOutsetCss extends LengthCssProperty {
 /**
  * 设置边框遮罩切片的重复或拉伸方式。（mask-border-repeat）
  *
- * CSS 语法：`[ stretch | repeat | round | space ]{1,2}`。
- *
  * CSS 初始值：`stretch`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-repeat
  */
@@ -9512,8 +9472,6 @@ export class MaskBorderRepeatCss extends CssProperty {
 
 /**
  * 设置边框遮罩图像的切片位置。（mask-border-slice）
- *
- * CSS 语法：`<number-percentage>{1,4} fill?`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-slice
@@ -9630,8 +9588,6 @@ export class MaskBorderSliceCss extends CssProperty {
 /**
  * 设置边框遮罩的源图像。（mask-border-source）
  *
- * CSS 语法：`none | <image>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-source
  */
@@ -9692,8 +9648,6 @@ export class MaskBorderSourceCss extends CssProperty {
 
 /**
  * 设置边框遮罩各边的宽度。（mask-border-width）
- *
- * CSS 语法：`[ <length-percentage> | <number> | auto ]{1,4}`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-width
@@ -12262,8 +12216,6 @@ export class MaskBorderWidthCss extends LengthCssProperty {
 /**
  * 设置遮罩效果允许作用的裁剪区域。（mask-clip）
  *
- * CSS 语法：`[ <coord-box> | no-clip ]#`。
- *
  * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-clip
  */
@@ -12337,8 +12289,6 @@ export class MaskClipCss extends CssProperty {
 /**
  * 设置多个遮罩图层之间的合成运算。（mask-composite）
  *
- * CSS 语法：`<compositing-operator>#`。
- *
  * CSS 初始值：`add`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-composite
  */
@@ -12406,8 +12356,6 @@ export class MaskCompositeCss extends CssProperty {
 /**
  * 设置遮罩使用的图像、渐变或 SVG 遮罩引用。（mask-image）
  *
- * CSS 语法：`<mask-reference>#`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-image
  */
@@ -12468,8 +12416,6 @@ export class MaskImageCss extends CssProperty {
 
 /**
  * 设置遮罩按 alpha、亮度或源类型解释。（mask-mode）
- *
- * CSS 语法：`<masking-mode>#`。
  *
  * CSS 初始值：`match-source`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-mode
@@ -12535,8 +12481,6 @@ export class MaskModeCss extends CssProperty {
 
 /**
  * 设置遮罩图像定位所依据的盒子。（mask-origin）
- *
- * CSS 语法：`<coord-box>#`。
  *
  * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-origin
@@ -12608,8 +12552,6 @@ export class MaskOriginCss extends CssProperty {
 
 /**
  * 设置遮罩图像在定位区域中的位置。（mask-position）
- *
- * CSS 语法：`<position>#`。
  *
  * CSS 初始值：`0% 0%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-position
@@ -12736,8 +12678,6 @@ export class MaskPositionCss extends LengthCssProperty {
 /**
  * 设置遮罩图像的重复方式。（mask-repeat）
  *
- * CSS 语法：`<repeat-style>#`。
- *
  * CSS 初始值：`repeat`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-repeat
  */
@@ -12808,8 +12748,6 @@ export class MaskRepeatCss extends CssProperty {
 
 /**
  * 设置遮罩图像的尺寸。（mask-size）
- *
- * CSS 语法：`<bg-size>#`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-size
@@ -12938,8 +12876,6 @@ export class MaskSizeCss extends LengthCssProperty {
 /**
  * 设置 SVG mask 元素使用亮度还是 alpha 作为遮罩。（mask-type）
  *
- * CSS 语法：`luminance | alpha`。
- *
  * CSS 初始值：`luminance`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-type
  */
@@ -13002,8 +12938,6 @@ export class MaskTypeCss extends CssProperty {
 
 /**
  * 旧版瀑布流布局提案中的自动放置策略；使用前核对实现与规范版本。（masonry-auto-flow）
- *
- * CSS 语法：`[ pack | next ] || [ definite-first | ordered ]`。
  *
  * CSS 初始值：`pack`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/masonry-auto-flow
@@ -13071,8 +13005,6 @@ export class MasonryAutoFlowCss extends CssProperty {
 
 /**
  * 设置数学公式的嵌套深度，用于数学字号等排版计算。（math-depth）
- *
- * CSS 语法：`auto-add | add(<integer>) | <integer>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-depth
@@ -13191,8 +13123,6 @@ export class MathDepthCss extends CssProperty {
 /**
  * 控制数学上标采用正常还是压缩的垂直偏移。（math-shift）
  *
- * CSS 语法：`normal | compact`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-shift
  */
@@ -13256,8 +13186,6 @@ export class MathShiftCss extends CssProperty {
 /**
  * 设置数学公式采用正常还是紧凑排版。（math-style）
  *
- * CSS 语法：`normal | compact`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-style
  */
@@ -13320,8 +13248,6 @@ export class MathStyleCss extends CssProperty {
 
 /**
  * 限制元素逻辑块轴的最大尺寸。（max-block-size）
- *
- * CSS 语法：`<'max-width'>`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-block-size
@@ -13445,8 +13371,6 @@ export class MaxBlockSizeCss extends LengthCssProperty {
 
 /**
  * 限制元素的最大物理高度。（max-height）
- *
- * CSS 语法：`none | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-height
@@ -13585,8 +13509,6 @@ export class MaxHeightCss extends LengthCssProperty {
 /**
  * 限制元素逻辑行内轴的最大尺寸。（max-inline-size）
  *
- * CSS 语法：`<'max-width'>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-inline-size
  */
@@ -13710,8 +13632,6 @@ export class MaxInlineSizeCss extends LengthCssProperty {
 /**
  * 限制分片上下文中的最大行数；属于需核对支持情况的截行能力。（max-lines）
  *
- * CSS 语法：`none | <integer>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-lines
  */
@@ -13823,9 +13743,13 @@ export class MaxLinesCss extends CssProperty {
 /**
  * 限制元素的最大物理宽度。（max-width）
  *
- * CSS 语法：`none | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
+ * 限制最终宽度，不会单独要求元素达到该宽度。最小尺寸约束可能优先于较小的最大尺寸。
+ *
+ * 适用场景：限制正文行长、弹窗宽度或响应式内容区。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.width.percent(100), s.maxWidth.rem(48))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-width
  */
 export class MaxWidthCss extends LengthCssProperty {
@@ -13956,8 +13880,6 @@ export class MaxWidthCss extends LengthCssProperty {
 /**
  * 设置元素逻辑块轴的最小尺寸。（min-block-size）
  *
- * CSS 语法：`<'min-width'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-block-size
  */
@@ -14080,8 +14002,6 @@ export class MinBlockSizeCss extends LengthCssProperty {
 
 /**
  * 设置元素的最小物理高度。（min-height）
- *
- * CSS 语法：`auto | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-height
@@ -14220,8 +14140,6 @@ export class MinHeightCss extends LengthCssProperty {
 /**
  * 设置元素逻辑行内轴的最小尺寸。（min-inline-size）
  *
- * CSS 语法：`<'min-width'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-inline-size
  */
@@ -14347,9 +14265,11 @@ export class MinInlineSizeCss extends LengthCssProperty {
  *
  * Flex/Grid 项目的 auto 最小尺寸可能由内容决定。需要允许其收缩时，可以按布局目的设置 min-width:0。
  *
- * CSS 语法：`auto | <length-percentage [0,∞]> | min-content | max-content | fit-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | <anchor-size()>`。
+ * 适用场景：给控件设置最小可用宽度，或用 0 允许 Flex/Grid 子项突破自动内容最小宽度。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.minWidth.px(0)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-width
  */
 export class MinWidthCss extends LengthCssProperty {
@@ -14486,8 +14406,6 @@ export class MinWidthCss extends LengthCssProperty {
 /**
  * 设置元素整体与其背后内容的颜色混合方式。（mix-blend-mode）
  *
- * CSS 语法：`<blend-mode> | plus-darker | plus-lighter`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mix-blend-mode
  */
@@ -14582,8 +14500,6 @@ export class MixBlendModeCss extends CssProperty {
 
 /**
  * 设置运动路径的旧式简写；对应现代 offset 属性族。（motion）
- *
- * CSS 语法：`[ <'offset-position'>? [ <'offset-path'> [ <'offset-distance'> || <'offset-rotate'> ]? ]? ]! [ / <'offset-anchor'> ]?`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset
  */
 export class MotionCss extends LengthCssProperty {
@@ -14720,8 +14636,6 @@ export class MotionCss extends LengthCssProperty {
 /**
  * 设置沿运动路径行进距离的旧属性；对应 offset-distance。（motion-distance）
  *
- * CSS 语法：`<length-percentage>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-distance
  */
@@ -14849,8 +14763,6 @@ export class MotionDistanceCss extends LengthCssProperty {
 /**
  * 设置运动路径的旧属性；对应 offset-path。（motion-path）
  *
- * CSS 语法：`none | <offset-path> || <coord-box>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-path
  */
@@ -14923,8 +14835,6 @@ export class MotionPathCss extends CssProperty {
 
 /**
  * 设置运动路径旋转方式的旧属性；对应 offset-rotate。（motion-rotation）
- *
- * CSS 语法：`[ auto | reverse ] || <angle>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
@@ -15093,22 +15003,49 @@ export class MotionRotationCss extends CssProperty {
 /**
  * 设置替换元素的内容如何适应其内容盒，例如图像的裁切和缩放。（object-fit）
  *
- * CSS 语法：`fill | contain | cover | none | scale-down`。
+ * 控制 img、video 等替换内容在盒子内部的缩放与裁剪；不改变盒子本身的 width/height。
+ *
+ * 常用值：
+ * - `fill`：把内容拉伸到内容盒，可能改变原有宽高比。
+ * - `contain`：保留宽高比并完整放入内容盒，可能留下空白。
+ * - `cover`：保留宽高比并填满内容盒，可能裁掉部分图像。
+ * - `none`：不按内容盒缩放替换内容。
+ * - `scale-down`：在 none 和 contain 中选择得到较小内容尺寸的方案。
+ *
+ * 适用场景：封面裁剪、头像和完整图像预览。
  *
  * CSS 初始值：`fill`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.width.px(80), s.height.px(80), s.objectFit.cover)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-fit
  */
 export class ObjectFitCss extends CssProperty {
   /**
    * 保留宽高比并完整放入内容盒，可能留下空白。
    *
+   * 区别：cover 优先填满盒子并可能裁剪；contain 优先保留完整内容。
+   *
+   * 适用场景：希望完整显示的商品图或图像预览。
+   *
    * CSS 声明：`object-fit:contain;`。
+   * @example
+   * css(s.width.rem(20), s.height.rem(12), s.objectFit.contain)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-fit
    */
   readonly contain = 'object-fit:contain;';
   /**
    * 保留宽高比并填满内容盒，可能裁掉部分图像。
    *
+   * 区别：contain 保证完整图像可见但可能留白；fill 可能改变图像比例。
+   *
+   * 适用场景：固定尺寸头像、卡片封面。
+   *
+   * 注意：裁剪位置由 object-position 控制，盒子尺寸仍需另外设置。
+   *
    * CSS 声明：`object-fit:cover;`。
+   * @example
+   * css(s.width.px(80), s.height.px(80), s.objectFit.cover)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-fit
    */
   readonly cover = 'object-fit:cover;';
   /**
@@ -15183,8 +15120,6 @@ export class ObjectFitCss extends CssProperty {
 
 /**
  * 设置替换元素内容在内容盒内的对齐位置。（object-position）
- *
- * CSS 语法：`<position>`。
  *
  * CSS 初始值：`50% 50%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-position
@@ -15311,8 +15246,6 @@ export class ObjectPositionCss extends LengthCssProperty {
 /**
  * 设置替换元素内容的可视区域，控制用于呈现的图像范围。（object-view-box）
  *
- * CSS 语法：`none | <basic-shape-rect>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-view-box
  */
@@ -15373,8 +15306,6 @@ export class ObjectViewBoxCss extends CssProperty {
 
 /**
  * 集中设置运动路径、起始位置、距离、方向和锚点。（offset）
- *
- * CSS 语法：`[ <'offset-position'>? [ <'offset-path'> [ <'offset-distance'> || <'offset-rotate'> ]? ]? ]! [ / <'offset-anchor'> ]?`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset
  */
 export class OffsetCss extends LengthCssProperty {
@@ -15511,8 +15442,6 @@ export class OffsetCss extends LengthCssProperty {
 /**
  * 设置元素沿运动路径移动时与路径相接的内部锚点。（offset-anchor）
  *
- * CSS 语法：`auto | <position>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-anchor
  */
@@ -15639,8 +15568,6 @@ export class OffsetAnchorCss extends LengthCssProperty {
 
 /**
  * 设置元素沿运动路径行进的距离。（offset-distance）
- *
- * CSS 语法：`<length-percentage>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-distance
@@ -15769,8 +15696,6 @@ export class OffsetDistanceCss extends LengthCssProperty {
 /**
  * 设置元素运动所沿用的路径。（offset-path）
  *
- * CSS 语法：`none | <offset-path> || <coord-box>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-path
  */
@@ -15843,8 +15768,6 @@ export class OffsetPathCss extends CssProperty {
 
 /**
  * 设置运动路径的初始位置。（offset-position）
- *
- * CSS 语法：`normal | auto | <position>`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-position
@@ -15974,8 +15897,6 @@ export class OffsetPositionCss extends LengthCssProperty {
 
 /**
  * 设置元素沿运动路径移动时的方向和附加旋转。（offset-rotate）
- *
- * CSS 语法：`[ auto | reverse ] || <angle>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
@@ -16143,8 +16064,6 @@ export class OffsetRotateCss extends CssProperty {
 
 /**
  * 设置路径旋转的旧名称；新代码使用 offset-rotate。（offset-rotation）
- *
- * CSS 语法：`[ auto | reverse ] || <angle>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
@@ -16315,7 +16234,7 @@ export class OffsetRotationCss extends CssProperty {
  *
  * 0 完全透明，1 完全不透明；作用于整个子树的合成结果。透明元素仍可能接受点击和键盘焦点。
  *
- * CSS 语法：`<opacity-value>`。
+ * 适用场景：统一调整整个元素子树的透明度；只需背景半透明时应使用带 alpha 的背景色。
  *
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
  * @example
@@ -16442,8 +16361,6 @@ export class OpacityCss extends CssProperty {
  *
  * 不改变源代码、朗读及通常的 Tab 顺序，避免用视觉重排破坏阅读顺序。
  *
- * CSS 语法：`<integer>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/order
  */
@@ -16552,8 +16469,6 @@ export class OrderCss extends CssProperty {
 
 /**
  * 设置分页或分栏断点前需保留的最少行数。（orphans）
- *
- * CSS 语法：`<integer>`。
  *
  * CSS 初始值：`2`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/orphans
@@ -16664,7 +16579,11 @@ export class OrphansCss extends CssProperty {
 /**
  * 设置盒子外围轮廓线的宽度、线型和颜色，不占布局空间。（outline）
  *
- * CSS 语法：`<'outline-width'> || <'outline-style'> || <'outline-color'>`。
+ * 不占布局空间，可用 outline-offset 调整距离；键盘焦点指示不应被无替代地移除。
+ *
+ * 适用场景：控件焦点指示和不影响布局的轮廓。
+ * @example
+ * s._focusVisible(s.outline.raw('2px solid currentColor'), s.outlineOffset.px(2))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline
  */
 export class OutlineCss extends LengthCssProperty {
@@ -17269,8 +17188,6 @@ export class OutlineCss extends LengthCssProperty {
 /**
  * 设置轮廓线颜色。（outline-color）
  *
- * CSS 语法：`auto | <color>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-color
  */
@@ -17802,8 +17719,6 @@ export class OutlineColorCss extends CssProperty {
 /**
  * 设置轮廓线与边框边缘之间的距离。（outline-offset）
  *
- * CSS 语法：`<length>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-offset
  */
@@ -17919,8 +17834,6 @@ export class OutlineOffsetCss extends LengthCssProperty {
 /**
  * 设置轮廓线线型。（outline-style）
  *
- * CSS 语法：`auto | <outline-line-style>`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-style
  */
@@ -17999,8 +17912,6 @@ export class OutlineStyleCss extends CssProperty {
 
 /**
  * 设置轮廓线宽度。（outline-width）
- *
- * CSS 语法：`<line-width>`。
  *
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-width
@@ -18123,28 +18034,64 @@ export class OutlineWidthCss extends LengthCssProperty {
 /**
  * 设置内容超出盒子时的裁剪和滚动行为。（overflow）
  *
- * CSS 语法：`[ visible | hidden | clip | scroll | auto ]{1,2}`。
+ * 一个值同时设置两轴；两个值依次设置 overflow-x、overflow-y。通常需要尺寸约束才会出现可滚动的溢出。
+ *
+ * 常用值：
+ * - `visible`：允许内容绘制到盒子外；与另一轴的设置组合时计算值可能变化。
+ * - `hidden`：裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
+ * - `clip`：在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
+ * - `auto`：按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
+ * - `scroll`：建立滚动容器，通常即使未溢出也显示滚动条；具体外观由平台决定。
+ *
+ * 适用场景：滚动面板、内容裁剪和受限尺寸区域。
  *
  * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.maxHeight.rem(20), s.overflow.auto)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow
  */
 export class OverflowCss extends CssProperty {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
+   * 区别：scroll 通常始终预留或显示滚动机制；auto 根据溢出情况显示滚动条，外观由平台决定。
+   *
+   * 适用场景：内容超过受限尺寸时可以滚动的面板。
+   *
    * CSS 声明：`overflow:auto;`。
+   * @example
+   * s.overflow.auto
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow
    */
   readonly auto = 'overflow:auto;';
   /**
    * 在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
    *
+   * 区别：与 hidden 不同，不支持程序化滚动，也不单独建立块格式化上下文。
+   *
+   * 适用场景：只裁剪绘制，不希望该轴成为滚动容器的区域。
+   *
+   * 注意：两轴设置会影响计算结果；与另一轴 auto/scroll 等组合时，要检查最终溢出行为。
+   *
    * CSS 声明：`overflow:clip;`。
+   * @example
+   * s.overflow.clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow
    */
   readonly clip = 'overflow:clip;';
   /**
    * 裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
    *
+   * 区别：clip 不建立滚动容器；hidden 仍可通过脚本或焦点移动滚动。
+   *
+   * 适用场景：需要裁剪且仍保留程序化滚动的容器。
+   *
+   * 注意：可能成为 sticky 后代的滚动参照，不能把它仅理解成视觉裁剪。
+   *
    * CSS 声明：`overflow:hidden;`。
+   * @example
+   * s.overflow.hidden
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow
    */
   readonly hidden = 'overflow:hidden;';
   /**
@@ -18220,8 +18167,6 @@ export class OverflowCss extends CssProperty {
 /**
  * 控制元素是否参与滚动锚定，以减少内容变化造成的视口跳动。（overflow-anchor）
  *
- * CSS 语法：`auto | none`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-anchor
  */
@@ -18285,8 +18230,6 @@ export class OverflowAnchorCss extends CssProperty {
 /**
  * 设置逻辑块轴上的溢出行为。（overflow-block）
  *
- * CSS 语法：`visible | hidden | clip | scroll | auto`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-block
  */
@@ -18294,19 +18237,44 @@ export class OverflowBlockCss extends CssProperty {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
+   * 区别：scroll 通常始终预留或显示滚动机制；auto 根据溢出情况显示滚动条，外观由平台决定。
+   *
+   * 适用场景：内容超过受限尺寸时可以滚动的面板。
+   *
    * CSS 声明：`overflow-block:auto;`。
+   * @example
+   * s.overflowBlock.auto
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-block
    */
   readonly auto = 'overflow-block:auto;';
   /**
    * 在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
    *
+   * 区别：与 hidden 不同，不支持程序化滚动，也不单独建立块格式化上下文。
+   *
+   * 适用场景：只裁剪绘制，不希望该轴成为滚动容器的区域。
+   *
+   * 注意：两轴设置会影响计算结果；与另一轴 auto/scroll 等组合时，要检查最终溢出行为。
+   *
    * CSS 声明：`overflow-block:clip;`。
+   * @example
+   * s.overflowBlock.clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-block
    */
   readonly clip = 'overflow-block:clip;';
   /**
    * 裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
    *
+   * 区别：clip 不建立滚动容器；hidden 仍可通过脚本或焦点移动滚动。
+   *
+   * 适用场景：需要裁剪且仍保留程序化滚动的容器。
+   *
+   * 注意：可能成为 sticky 后代的滚动参照，不能把它仅理解成视觉裁剪。
+   *
    * CSS 声明：`overflow-block:hidden;`。
+   * @example
+   * s.overflowBlock.hidden
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-block
    */
   readonly hidden = 'overflow-block:hidden;';
   /**
@@ -18376,8 +18344,6 @@ export class OverflowBlockCss extends CssProperty {
 /**
  * 设置溢出裁剪参照盒的非标准属性；使用前核对目标浏览器。（overflow-clip-box）
  *
- * CSS 语法：`padding-box | content-box`。
- *
  * CSS 初始值：`padding-box`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-clip-box
  */
@@ -18440,8 +18406,6 @@ export class OverflowClipBoxCss extends CssProperty {
 
 /**
  * 设置 overflow:clip 的裁剪边界允许向外扩展的距离。（overflow-clip-margin）
- *
- * CSS 语法：`<visual-box> || <length [0,∞]>`。
  *
  * CSS 初始值：`0px`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-clip-margin
@@ -18564,8 +18528,6 @@ export class OverflowClipMarginCss extends LengthCssProperty {
 /**
  * 设置逻辑行内轴上的溢出行为。（overflow-inline）
  *
- * CSS 语法：`visible | hidden | clip | scroll | auto`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-inline
  */
@@ -18573,19 +18535,44 @@ export class OverflowInlineCss extends CssProperty {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
+   * 区别：scroll 通常始终预留或显示滚动机制；auto 根据溢出情况显示滚动条，外观由平台决定。
+   *
+   * 适用场景：内容超过受限尺寸时可以滚动的面板。
+   *
    * CSS 声明：`overflow-inline:auto;`。
+   * @example
+   * s.overflowInline.auto
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-inline
    */
   readonly auto = 'overflow-inline:auto;';
   /**
    * 在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
    *
+   * 区别：与 hidden 不同，不支持程序化滚动，也不单独建立块格式化上下文。
+   *
+   * 适用场景：只裁剪绘制，不希望该轴成为滚动容器的区域。
+   *
+   * 注意：两轴设置会影响计算结果；与另一轴 auto/scroll 等组合时，要检查最终溢出行为。
+   *
    * CSS 声明：`overflow-inline:clip;`。
+   * @example
+   * s.overflowInline.clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-inline
    */
   readonly clip = 'overflow-inline:clip;';
   /**
    * 裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
    *
+   * 区别：clip 不建立滚动容器；hidden 仍可通过脚本或焦点移动滚动。
+   *
+   * 适用场景：需要裁剪且仍保留程序化滚动的容器。
+   *
+   * 注意：可能成为 sticky 后代的滚动参照，不能把它仅理解成视觉裁剪。
+   *
    * CSS 声明：`overflow-inline:hidden;`。
+   * @example
+   * s.overflowInline.hidden
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-inline
    */
   readonly hidden = 'overflow-inline:hidden;';
   /**
@@ -18655,16 +18642,30 @@ export class OverflowInlineCss extends CssProperty {
 /**
  * 设置不可正常断开的长文本是否允许额外换行。（overflow-wrap）
  *
- * CSS 语法：`normal | break-word | anywhere`。
+ * 常用值：
+ * - `normal`：只使用正常换行机会，不为长单词额外断行。
+ * - `anywhere`：必要时允许在长文本任意位置断行，这些机会参与 min-content 尺寸计算。
+ * - `break-word`：必要时允许长文本断行，但新增断点不按 anywhere 的方式参与 min-content 计算。
+ *
+ * 适用场景：防止 URL、标识符等长文本撑破容器。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @example
+ * s.overflowWrap.anywhere
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-wrap
  */
 export class OverflowWrapCss extends CssProperty {
   /**
    * 必要时允许在长文本任意位置断行，这些机会参与 min-content 尺寸计算。
    *
+   * 区别：break-word 的额外断点不按 anywhere 的方式参与最小内容宽度计算；word-break:break-all 更积极地拆分普通单词。
+   *
+   * 适用场景：展示不可控的长 URL 或无空格文本。
+   *
    * CSS 声明：`overflow-wrap:anywhere;`。
+   * @example
+   * s.overflowWrap.anywhere
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-wrap
    */
   readonly anywhere = 'overflow-wrap:anywhere;';
   /**
@@ -18734,28 +18735,62 @@ export class OverflowWrapCss extends CssProperty {
 /**
  * 设置水平方向的溢出行为。（overflow-x）
  *
- * CSS 语法：`visible | hidden | clip | scroll | auto`。
+ * 和 overflow-y 的组合可能改变计算值；例如另一轴是 auto 时，visible 可能按 auto 计算。
+ *
+ * 常用值：
+ * - `auto`：按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
+ * - `hidden`：裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
+ * - `clip`：在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
+ *
+ * 适用场景：横向滚动标签、宽表格或水平内容裁剪。
  *
  * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+ * @example
+ * s.overflowX.auto
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-x
  */
 export class OverflowXCss extends CssProperty {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
+   * 区别：scroll 通常始终预留或显示滚动机制；auto 根据溢出情况显示滚动条，外观由平台决定。
+   *
+   * 适用场景：内容超过受限尺寸时可以滚动的面板。
+   *
    * CSS 声明：`overflow-x:auto;`。
+   * @example
+   * s.overflowX.auto
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-x
    */
   readonly auto = 'overflow-x:auto;';
   /**
    * 在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
    *
+   * 区别：与 hidden 不同，不支持程序化滚动，也不单独建立块格式化上下文。
+   *
+   * 适用场景：只裁剪绘制，不希望该轴成为滚动容器的区域。
+   *
+   * 注意：两轴设置会影响计算结果；与另一轴 auto/scroll 等组合时，要检查最终溢出行为。
+   *
    * CSS 声明：`overflow-x:clip;`。
+   * @example
+   * s.overflowX.clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-x
    */
   readonly clip = 'overflow-x:clip;';
   /**
    * 裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
    *
+   * 区别：clip 不建立滚动容器；hidden 仍可通过脚本或焦点移动滚动。
+   *
+   * 适用场景：需要裁剪且仍保留程序化滚动的容器。
+   *
+   * 注意：可能成为 sticky 后代的滚动参照，不能把它仅理解成视觉裁剪。
+   *
    * CSS 声明：`overflow-x:hidden;`。
+   * @example
+   * s.overflowX.hidden
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-x
    */
   readonly hidden = 'overflow-x:hidden;';
   /**
@@ -18831,28 +18866,62 @@ export class OverflowXCss extends CssProperty {
 /**
  * 设置垂直方向的溢出行为。（overflow-y）
  *
- * CSS 语法：`visible | hidden | clip | scroll | auto`。
+ * 通常配合 height/max-height 或可收缩的布局区域使用。
+ *
+ * 常用值：
+ * - `auto`：按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
+ * - `hidden`：裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
+ * - `clip`：在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
+ *
+ * 适用场景：纵向列表和弹窗内容区。
  *
  * CSS 初始值：`visible`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.maxHeight.rem(20), s.overflowY.auto)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-y
  */
 export class OverflowYCss extends CssProperty {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
+   * 区别：scroll 通常始终预留或显示滚动机制；auto 根据溢出情况显示滚动条，外观由平台决定。
+   *
+   * 适用场景：内容超过受限尺寸时可以滚动的面板。
+   *
    * CSS 声明：`overflow-y:auto;`。
+   * @example
+   * s.overflowY.auto
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-y
    */
   readonly auto = 'overflow-y:auto;';
   /**
    * 在裁剪边界截断内容，不建立滚动容器，也不支持程序化滚动。
    *
+   * 区别：与 hidden 不同，不支持程序化滚动，也不单独建立块格式化上下文。
+   *
+   * 适用场景：只裁剪绘制，不希望该轴成为滚动容器的区域。
+   *
+   * 注意：两轴设置会影响计算结果；与另一轴 auto/scroll 等组合时，要检查最终溢出行为。
+   *
    * CSS 声明：`overflow-y:clip;`。
+   * @example
+   * s.overflowY.clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-y
    */
   readonly clip = 'overflow-y:clip;';
   /**
    * 裁剪溢出且不显示滚动条，但仍是可通过脚本等方式滚动的滚动容器。
    *
+   * 区别：clip 不建立滚动容器；hidden 仍可通过脚本或焦点移动滚动。
+   *
+   * 适用场景：需要裁剪且仍保留程序化滚动的容器。
+   *
+   * 注意：可能成为 sticky 后代的滚动参照，不能把它仅理解成视觉裁剪。
+   *
    * CSS 声明：`overflow-y:hidden;`。
+   * @example
+   * s.overflowY.hidden
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-y
    */
   readonly hidden = 'overflow-y:hidden;';
   /**
@@ -18928,8 +18997,6 @@ export class OverflowYCss extends CssProperty {
 /**
  * 反映元素是否位于顶层，主要用于顶层退出过渡；通常由浏览器管理。（overlay）
  *
- * CSS 语法：`none | auto`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overlay
  */
@@ -18993,9 +19060,16 @@ export class OverlayCss extends CssProperty {
 /**
  * 控制滚动到边界后的滚动链和越界反馈行为。（overscroll-behavior）
  *
- * CSS 语法：`[ contain | none | auto ]{1,2}`。
+ * 常用值：
+ * - `auto`：采用默认滚动链和边界反馈。
+ * - `contain`：阻止滚动链传播到祖先，同时可保留当前容器的边界反馈。
+ * - `none`：阻止滚动链，并抑制当前容器的默认越界反馈。
+ *
+ * 适用场景：阻止弹窗或内部滚动面板到达边界后继续滚动外层页面。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * css(s.overflowY.auto, s.overscrollBehavior.contain)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior
  */
 export class OverscrollBehaviorCss extends CssProperty {
@@ -19071,8 +19145,6 @@ export class OverscrollBehaviorCss extends CssProperty {
 
 /**
  * 控制逻辑块轴上到达滚动边界后的行为。（overscroll-behavior-block）
- *
- * CSS 语法：`contain | none | auto`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-block
@@ -19151,8 +19223,6 @@ export class OverscrollBehaviorBlockCss extends CssProperty {
 /**
  * 控制逻辑行内轴上到达滚动边界后的行为。（overscroll-behavior-inline）
  *
- * CSS 语法：`contain | none | auto`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-inline
  */
@@ -19230,8 +19300,6 @@ export class OverscrollBehaviorInlineCss extends CssProperty {
 /**
  * 控制水平方向到达滚动边界后的行为。（overscroll-behavior-x）
  *
- * CSS 语法：`contain | none | auto`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-x
  */
@@ -19308,8 +19376,6 @@ export class OverscrollBehaviorXCss extends CssProperty {
 
 /**
  * 控制垂直方向到达滚动边界后的行为。（overscroll-behavior-y）
- *
- * CSS 语法：`contain | none | auto`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-y

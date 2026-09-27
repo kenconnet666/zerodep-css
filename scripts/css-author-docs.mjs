@@ -39,39 +39,107 @@ export function validatePropertyDocs(names) {
     for (const name of Object.keys(section)) assert(known.has(name), `未知属性文档 ${name}`);
   for (const target of Object.values(docs.keywordAliases))
     assert(Object.hasOwn(docs.keywords, target), `未知关键字文档引用 ${target}`);
+  for (const [name, detail] of Object.entries(docs.details)) {
+    validateDetail(detail, ['remarks', 'usage', 'examples', 'commonValues', 'see'], name);
+    if (detail.commonValues) {
+      assert(Array.isArray(detail.commonValues), `${name}.commonValues 必须是数组`);
+      assert.equal(
+        new Set(detail.commonValues).size,
+        detail.commonValues.length,
+        `${name} 常用值重复`,
+      );
+    }
+  }
+  for (const [name, entries] of Object.entries(docs.keywords))
+    for (const [value, detail] of Object.entries(entries))
+      if (typeof detail !== 'string') {
+        assert(
+          typeof detail.summary === 'string' && detail.summary.trim(),
+          `${name}.${value} 缺少摘要`,
+        );
+        validateDetail(
+          detail,
+          ['summary', 'effect', 'comparison', 'usage', 'notes', 'examples'],
+          `${name}.${value}`,
+        );
+      }
+}
+
+function validateDetail(detail, allowed, name) {
+  for (const [key, value] of Object.entries(detail)) {
+    assert(allowed.includes(key), `${name} 未知文档字段 ${key}`);
+    if (key === 'commonValues' || key === 'examples')
+      assert(
+        Array.isArray(value) && value.every((item) => typeof item === 'string' && item.trim()),
+        `${name}.${key} 必须是非空字符串数组`,
+      );
+    else assert(typeof value === 'string' && value.trim(), `${name}.${key} 必须是非空文本`);
+  }
+}
+
+function keywordDetail(name, value) {
+  const entry =
+    docs.keywords[name]?.[value] ??
+    docs.keywords[docs.keywordAliases[name]]?.[value] ??
+    docs.globalKeywords[value] ??
+    docs.valueKeywords[value];
+  return typeof entry === 'string' ? { summary: entry } : entry;
 }
 
 export function validateKeywordDocs(name, keywords) {
   const values = new Set(keywords.map(([, value]) => value));
   for (const value of Object.keys(docs.keywords[name] ?? {}))
     assert(values.has(value), `${name}.${value} 不存在于生成关键字集合`);
+  for (const value of docs.details[name]?.commonValues ?? []) {
+    assert(values.has(value), `${name} 的常用值 ${value} 不存在`);
+    assert(keywordDetail(name, value), `${name}.${value} 缺少常用值解释`);
+  }
 }
 
 export function propertyDocumentation(name, cssName, upstream) {
   const initial = upstream.match(/\*\*Initial value\*\*: `([^`]+)`/)?.[1];
-  const syntax = upstream.match(/\*\*Syntax\*\*: `([^`]+)`/)?.[1];
   const url = upstream.match(/@see (https:\/\/[^\s*]+)/)?.[1];
   const detail = docs.details[name] ?? {};
   const facts = [
     detail.remarks,
-    syntax && `CSS 语法：\`${syntax}\`。`,
+    detail.commonValues?.length &&
+      '常用值：\n' +
+        detail.commonValues
+          .map((value) => `- \`${value}\`：${keywordDetail(name, value).summary}`)
+          .join('\n'),
+    detail.usage && `适用场景：${detail.usage}`,
     initial && `CSS 初始值：\`${initial}\`（不同于浏览器默认样式表）。`,
   ].filter(Boolean);
   return jsdoc(`${docs.properties[name]}（${cssName}）`, {
     remarks: facts.join('\n\n'),
     examples: detail.examples ?? [],
-    see: url ?? `https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/${cssName}`,
+    // 完整形式语法留在参考文档；悬停优先解释效果和用法。
+    see:
+      detail.see ??
+      url ??
+      `https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/${cssName}`,
   });
 }
 
 export function keywordDocumentation(name, cssName, value) {
-  const explanation =
-    docs.keywords[name]?.[value] ??
-    docs.keywords[docs.keywordAliases[name]]?.[value] ??
-    docs.globalKeywords[value] ??
-    docs.valueKeywords[value];
-  if (!explanation) return `/** CSS 声明：\`${cssName}:${value};\`。 */`;
-  return jsdoc(explanation, { remarks: `CSS 声明：\`${cssName}:${value};\`。` });
+  const detail = keywordDetail(name, value);
+  if (!detail) return `/** CSS 声明：\`${cssName}:${value};\`。 */`;
+  const facts = [
+    detail.effect,
+    detail.comparison && `区别：${detail.comparison}`,
+    detail.usage && `适用场景：${detail.usage}`,
+    detail.notes && `注意：${detail.notes}`,
+    `CSS 声明：\`${cssName}:${value};\`。`,
+  ].filter(Boolean);
+  // 共享解释可用 $property 代表当前作者属性，避免在 height 提示中展示 width 示例。
+  const examples = detail.examples?.map((example) => example.replaceAll('$property', name));
+  return jsdoc(detail.summary, {
+    remarks: facts.join('\n\n'),
+    examples,
+    ...(detail.examples
+      ? { see: `https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/${cssName}` }
+      : {}),
+  });
 }
 
 const unitDescriptions = {

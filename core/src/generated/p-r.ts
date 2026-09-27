@@ -9,7 +9,7 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
  *
  * 1/2/3/4 个值依次表示：四边；上下/左右；上/左右/下；上/右/下/左。不能使用负值或 auto。
  *
- * CSS 语法：`<'padding-top'>{1,4}`。
+ * 适用场景：控制文字或子元素与组件边框之间的留白。
  * @example
  * s.padding.rem(0.5, 1) // padding:0.5rem 1rem;
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding
@@ -2569,8 +2569,6 @@ export class PaddingCss extends LengthCssProperty {
 
 /**
  * 设置逻辑块轴起始侧和结束侧的内边距。（padding-block）
- *
- * CSS 语法：`<'padding-top'>{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block
  */
 export class PaddingBlockCss extends LengthCssProperty {
@@ -3885,8 +3883,6 @@ export class PaddingBlockCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴结束侧的内边距。（padding-block-end）
  *
- * CSS 语法：`<'padding-top'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-end
  */
@@ -4002,8 +3998,6 @@ export class PaddingBlockEndCss extends LengthCssProperty {
 /**
  * 设置逻辑块轴起始侧的内边距。（padding-block-start）
  *
- * CSS 语法：`<'padding-top'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-start
  */
@@ -4118,8 +4112,6 @@ export class PaddingBlockStartCss extends LengthCssProperty {
 
 /**
  * 设置下内边距。（padding-bottom）
- *
- * CSS 语法：`<length-percentage [0,∞]>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
@@ -4247,8 +4239,6 @@ export class PaddingBottomCss extends LengthCssProperty {
 
 /**
  * 设置逻辑行内轴起始侧和结束侧的内边距。（padding-inline）
- *
- * CSS 语法：`<'padding-top'>{1,2}`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline
  */
 export class PaddingInlineCss extends LengthCssProperty {
@@ -5563,8 +5553,6 @@ export class PaddingInlineCss extends LengthCssProperty {
 /**
  * 设置逻辑行内轴结束侧的内边距。（padding-inline-end）
  *
- * CSS 语法：`<'padding-top'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
  */
@@ -5680,8 +5668,6 @@ export class PaddingInlineEndCss extends LengthCssProperty {
 /**
  * 设置逻辑行内轴起始侧的内边距。（padding-inline-start）
  *
- * CSS 语法：`<'padding-top'>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
  */
@@ -5796,8 +5782,6 @@ export class PaddingInlineStartCss extends LengthCssProperty {
 
 /**
  * 设置左内边距。（padding-left）
- *
- * CSS 语法：`<length-percentage [0,∞]>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-left
@@ -5926,8 +5910,6 @@ export class PaddingLeftCss extends LengthCssProperty {
 /**
  * 设置右内边距。（padding-right）
  *
- * CSS 语法：`<length-percentage [0,∞]>`。
- *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-right
  */
@@ -6054,8 +6036,6 @@ export class PaddingRightCss extends LengthCssProperty {
 
 /**
  * 设置上内边距。（padding-top）
- *
- * CSS 语法：`<length-percentage [0,∞]>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
@@ -6184,8 +6164,6 @@ export class PaddingTopCss extends LengthCssProperty {
 /**
  * 选择分页媒体中使用的命名页面类型。（page）
  *
- * CSS 语法：`auto | <custom-ident>`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page
  */
@@ -6246,8 +6224,6 @@ export class PageCss extends CssProperty {
 
 /**
  * 设置 SVG 填充、描边和标记的绘制先后顺序。（paint-order）
- *
- * CSS 语法：`normal | [ fill || stroke || markers ]`。
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
@@ -6315,8 +6291,6 @@ export class PaintOrderCss extends CssProperty {
 
 /**
  * 设置观察子元素三维变换时的透视距离。（perspective）
- *
- * CSS 语法：`none | <length>`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective
@@ -6434,8 +6408,6 @@ export class PerspectiveCss extends LengthCssProperty {
 
 /**
  * 设置三维透视的观察原点。（perspective-origin）
- *
- * CSS 语法：`<position>`。
  *
  * CSS 初始值：`50% 50%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective-origin
@@ -6561,8 +6533,6 @@ export class PerspectiveOriginCss extends LengthCssProperty {
 
 /**
  * 同时设置 align-content 与 justify-content。（place-content）
- *
- * CSS 语法：`<'align-content'> <'justify-content'>?`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-content
  */
 export class PlaceContentCss extends CssProperty {
@@ -6642,8 +6612,6 @@ export class PlaceContentCss extends CssProperty {
 
 /**
  * 同时设置 align-items 与 justify-items。（place-items）
- *
- * CSS 语法：`<'align-items'> <'justify-items'>?`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-items
  */
 export class PlaceItemsCss extends CssProperty {
@@ -6723,8 +6691,6 @@ export class PlaceItemsCss extends CssProperty {
 
 /**
  * 同时设置 align-self 与 justify-self。（place-self）
- *
- * CSS 语法：`<'align-self'> <'justify-self'>?`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-self
  */
 export class PlaceSelfCss extends CssProperty {
@@ -6807,9 +6773,17 @@ export class PlaceSelfCss extends CssProperty {
 /**
  * 设置元素何时可以成为指针命中目标；SVG 还支持按填充和描边命中。（pointer-events）
  *
- * CSS 语法：`auto | none | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | inherit`。
+ * 控制指针命中，不等同于原生 disabled，也不会单独阻止键盘交互。
+ *
+ * 常用值：
+ * - `auto`：采用当前元素类型的默认命中规则。
+ * - `none`：元素本身不成为指针命中目标；不等于禁用，仍可能通过 Tab 获焦，后代也可恢复命中。
+ *
+ * 适用场景：允许指针穿过装饰层；可交互控件的禁用应同时处理行为和语义。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @example
+ * s.pointerEvents.none
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/pointer-events
  */
 export class PointerEventsCss extends CssProperty {
@@ -6838,7 +6812,14 @@ export class PointerEventsCss extends CssProperty {
   /**
    * 元素本身不成为指针命中目标；不等于禁用，仍可能通过 Tab 获焦，后代也可恢复命中。
    *
+   * 适用场景：覆盖在内容上方但不应拦截点击的装饰层。
+   *
+   * 注意：后代可以恢复命中；来自后代的事件仍可能经过祖先监听器。
+   *
    * CSS 声明：`pointer-events:none;`。
+   * @example
+   * s.pointerEvents.none
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/pointer-events
    */
   readonly none = 'pointer-events:none;';
   /** CSS 声明：`pointer-events:painted;`。 */
@@ -6898,7 +6879,14 @@ export class PointerEventsCss extends CssProperty {
  *
  * 偏移通常通过 top/right/bottom/left 或逻辑 inset 属性设置。fixed 和 absolute 的包含块也可能由 transform 等属性建立。
  *
- * CSS 语法：`static | relative | absolute | sticky | fixed`。
+ * 常用值：
+ * - `static`：参与普通文档流，top/right/bottom/left 等定位偏移不生效。
+ * - `relative`：保留普通流中的原位置，再按偏移移动绘制位置；不会为偏移后的区域重新排版。
+ * - `absolute`：脱离普通文档流，按包含块定位；包含块通常由定位祖先或 transform 等属性建立。
+ * - `fixed`：脱离普通流，通常相对视口固定；某些祖先属性会建立不同的包含块。
+ * - `sticky`：保留流内位置，在滚动范围内按 inset 约束吸附。对应轴至少一个 inset 须非 auto，并受滚动祖先和包含块限制。
+ *
+ * 适用场景：建立定位参照、覆盖层、固定区域或滚动吸附内容。
  *
  * CSS 初始值：`static`（不同于浏览器默认样式表）。
  * @example
@@ -6909,13 +6897,29 @@ export class PositionCss extends CssProperty {
   /**
    * 脱离普通文档流，按包含块定位；包含块通常由定位祖先或 transform 等属性建立。
    *
+   * 适用场景：容器内部的角标、图标覆盖和定位装饰。
+   *
+   * 注意：通常在预期的容器上设置 position:relative；元素不为自己保留普通流占位。
+   *
    * CSS 声明：`position:absolute;`。
+   * @example
+   * css(s.position.absolute, s.top.px(0), s.right.px(0))
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
    */
   readonly absolute = 'position:absolute;';
   /**
    * 脱离普通流，通常相对视口固定；某些祖先属性会建立不同的包含块。
    *
+   * 区别：absolute 通常跟随其包含块滚动；fixed 在以视口为包含块时保持视口位置。
+   *
+   * 适用场景：固定工具栏或覆盖层。
+   *
+   * 注意：祖先的 transform 等属性可能改变固定定位的包含块；z-index 仍受层叠上下文约束。
+   *
    * CSS 声明：`position:fixed;`。
+   * @example
+   * css(s.position.fixed, s.inset.px(0))
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
    */
   readonly fixed = 'position:fixed;';
   /**
@@ -6933,7 +6937,14 @@ export class PositionCss extends CssProperty {
   /**
    * 保留普通流中的原位置，再按偏移移动绘制位置；不会为偏移后的区域重新排版。
    *
+   * 区别：absolute 会脱离普通流；relative 仍保留原占位。
+   *
+   * 适用场景：为绝对定位后代提供定位参照，或做不改变其他元素排布的视觉偏移。
+   *
    * CSS 声明：`position:relative;`。
+   * @example
+   * s.position.relative
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
    */
   readonly relative = 'position:relative;';
   /**
@@ -6957,7 +6968,16 @@ export class PositionCss extends CssProperty {
   /**
    * 保留流内位置，在滚动范围内按 inset 约束吸附。对应轴至少一个 inset 须非 auto，并受滚动祖先和包含块限制。
    *
+   * 区别：与 fixed 不同，它保留流内占位，并受自身所在包含块的范围约束。
+   *
+   * 适用场景：滚动列表的分组标题、吸顶工具栏。
+   *
+   * 注意：对应轴至少一个 inset 必须非 auto；祖先 overflow 可能改变滚动参照。
+   *
    * CSS 声明：`position:sticky;`。
+   * @example
+   * css(s.position.sticky, s.top.px(0))
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
    */
   readonly sticky = 'position:sticky;';
   /**
@@ -6990,8 +7010,6 @@ export class PositionCss extends CssProperty {
 
 /**
  * 选择绝对定位元素使用的默认锚点。（position-anchor）
- *
- * CSS 语法：`auto | <anchor-name>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-anchor
@@ -7053,8 +7071,6 @@ export class PositionAnchorCss extends CssProperty {
 
 /**
  * 选择相对于锚点的定位区域。（position-area）
- *
- * CSS 语法：`none | <position-area>`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-area
@@ -7216,8 +7232,6 @@ export class PositionAreaCss extends CssProperty {
 
 /**
  * 同时设置锚点定位的候选回退方式及尝试顺序。（position-try）
- *
- * CSS 语法：`<'position-try-order'>? <'position-try-fallbacks'>`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try
  */
 export class PositionTryCss extends CssProperty {
@@ -7383,8 +7397,6 @@ export class PositionTryCss extends CssProperty {
 
 /**
  * 设置锚点定位溢出时尝试的替代位置。（position-try-fallbacks）
- *
- * CSS 语法：`none | [ [<dashed-ident> || <try-tactic>] | <'position-area'> ]#`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-fallbacks
@@ -7553,8 +7565,6 @@ export class PositionTryFallbacksCss extends CssProperty {
 /**
  * 设置锚点定位候选方案的尝试顺序。（position-try-order）
  *
- * CSS 语法：`normal | <try-size>`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-order
  */
@@ -7624,8 +7634,6 @@ export class PositionTryOrderCss extends CssProperty {
 /**
  * 设置锚点定位元素根据锚点可见性和溢出情况是否显示。（position-visibility）
  *
- * CSS 语法：`always | [ anchors-valid || anchors-visible || no-overflow ]`。
- *
  * CSS 初始值：`anchors-visible`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-visibility
  */
@@ -7693,8 +7701,6 @@ export class PositionVisibilityCss extends CssProperty {
 /**
  * 设置打印时浏览器是否可以为节墨或可读性调整颜色。（print-color-adjust）
  *
- * CSS 语法：`economy | exact`。
- *
  * CSS 初始值：`economy`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
  */
@@ -7757,8 +7763,6 @@ export class PrintColorAdjustCss extends CssProperty {
 
 /**
  * 设置生成引号所用的开闭字符对。（quotes）
- *
- * CSS 语法：`none | auto | [ <string> <string> ]+`。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/quotes
  */
 export class QuotesCss extends CssProperty {
@@ -7820,8 +7824,6 @@ export class QuotesCss extends CssProperty {
 
 /**
  * 设置 SVG 圆的半径。（r）
- *
- * CSS 语法：`<length> | <percentage>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/r
@@ -7944,8 +7946,6 @@ export class RCss extends LengthCssProperty {
 /**
  * 设置用户是否能调整元素尺寸以及可调整的方向。（resize）
  *
- * CSS 语法：`none | both | horizontal | vertical | block | inline`。
- *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/resize
  */
@@ -8016,8 +8016,6 @@ export class ResizeCss extends CssProperty {
 
 /**
  * 设置定位元素相对于其定位参照的右侧偏移。（right）
- *
- * CSS 语法：`auto | <length-percentage> | <anchor()> | <anchor-size()>`。
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
@@ -8141,8 +8139,6 @@ export class RightCss extends LengthCssProperty {
 
 /**
  * 独立设置元素旋转，不必重写 transform 中的其他变换。（rotate）
- *
- * CSS 语法：`none | <angle> | [ x | y | z | <number>{3} ] && <angle>`。
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rotate
@@ -8303,8 +8299,6 @@ export class RotateCss extends CssProperty {
 /**
  * 设置布局中相邻行之间的间距。（row-gap）
  *
- * CSS 语法：`normal | <length-percentage>`。
- *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/row-gap
  */
@@ -8428,8 +8422,6 @@ export class RowGapCss extends LengthCssProperty {
 /**
  * 设置注音文字与基底文字之间剩余空间的分配方式。（ruby-align）
  *
- * CSS 语法：`start | center | space-between | space-around`。
- *
  * CSS 初始值：`space-around`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-align
  */
@@ -8497,8 +8489,6 @@ export class RubyAlignCss extends CssProperty {
 /**
  * 设置相邻注音容器的合并方式；使用前核对目标浏览器。（ruby-merge）
  *
- * CSS 语法：`separate | collapse | auto`。
- *
  * CSS 初始值：`separate`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-merge
  */
@@ -8564,8 +8554,6 @@ export class RubyMergeCss extends CssProperty {
 /**
  * 控制注音文字是否可以悬伸到相邻文本上方。（ruby-overhang）
  *
- * CSS 语法：`auto | none`。
- *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-overhang
  */
@@ -8628,8 +8616,6 @@ export class RubyOverhangCss extends CssProperty {
 
 /**
  * 设置注音文字相对于基底文字的位置。（ruby-position）
- *
- * CSS 语法：`[ alternate || [ over | under ] ] | inter-character`。
  *
  * CSS 初始值：`alternate`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-position
@@ -8697,8 +8683,6 @@ export class RubyPositionCss extends CssProperty {
 
 /**
  * 设置 SVG 椭圆的水平半径，或矩形的水平圆角半径。（rx）
- *
- * CSS 语法：`<length> | <percentage>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rx
@@ -8820,8 +8804,6 @@ export class RxCss extends LengthCssProperty {
 
 /**
  * 设置 SVG 椭圆的垂直半径，或矩形的垂直圆角半径。（ry）
- *
- * CSS 语法：`<length> | <percentage>`。
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ry
