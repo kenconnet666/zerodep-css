@@ -31,6 +31,7 @@ pnpm check
 
 - [开始使用](docs/getting-started.md)：包入口、组件上下文、可执行示例与手工 SSR。
 - [作者 API](docs/author-api.md)：声明组合、选择器、动画、全局规则和单位/颜色方法。
+- [作者 API 注释维护](docs/author-documentation.md)：中文说明、关键字语义、方法示例和发布类型提示的生成与验收。
 - [bx 绑定](docs/bindings.md)：显式变量、模板缓存、列表、派生值与支持边界。
 - [主题](docs/themes.md)：系统/预设/用户继承，亮暗切换和子树覆盖。
 - [元框架](docs/metaframeworks.md)：Nuxt 4 / SvelteKit 2 的 Node SSR、静态部署和 CSP。

@@ -22,7 +22,8 @@ pnpm lsp:verify
 | 位置                                                                           | 职责                                                                |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
 | core/src/generated                                                             | 502 个属性、关键字、单位与类型签名；只通过 `pnpm css:generate` 更新 |
-| scripts/generate-css-author.mjs、css-author-methods.mjs、css-author-notes.json | 生成规则、方法元数据、少量中文说明                                  |
+| scripts/generate-css-author.mjs、css-author-methods.mjs、css-author-notes.json | 生成规则、方法代码和参数配置                                        |
+| scripts/css-author-docs.json、css-author-docs.mjs                              | 中文语义、调用示例、单位和重载说明及覆盖校验                        |
 | core/src/compiler                                                              | bx 与模板表达式分析、源码编辑和定位                                 |
 | core/src/selector-shortcuts.ts、author-guards.ts                               | 选择器元数据、系统作者身份检查                                      |
 | core/src/registry.ts、bindings.ts、browser.ts、server.ts                       | 注册缓存、变量生命周期、浏览器与 Node 宿主                          |
@@ -44,7 +45,7 @@ class AnimationPlayStateCss extends CssProperty {
 }
 ```
 
-`CssString` 是 `string & {}`，用于保留关键字补全并接受任意字符串。参数保留原生数值约束，例如 width 裸数字只接受 0，opacity 接受普通数字。长度方法只出现在适合的属性上，简写属性按元数据生成参数数量。JSDoc 同时生成到作者属性位置，便于 IDE 直接显示。
+`CssString` 是 `string & {}`，用于保留关键字补全并接受任意字符串。参数保留原生数值约束，例如 width 裸数字只接受 0，opacity 接受普通数字。长度方法只出现在适合的属性上，简写属性按元数据生成参数数量。全部属性与公开方法的 JSDoc 随类型声明发布；覆盖入口字段、关键字、继承单位方法及每个重载的参数提示。维护规则和验收见[作者 API 注释维护](author-documentation.md)。
 
 protected `declaration` 是动态方法的公共格式化点；关键字字段保持已生成的字符串。用户通过属性子类和 `AppCss extends Css / ThemeCss` 扩展；不为少量体积或极限微基准收益增加类型层次。
 

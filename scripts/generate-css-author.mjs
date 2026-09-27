@@ -4,6 +4,14 @@ import { fileURLToPath } from 'node:url';
 import prettier from 'prettier';
 import ts from 'typescript';
 import { units, extraUnits, unitMethod, valueMethods, gridMethods } from './css-author-methods.mjs';
+import {
+  jsdoc,
+  propertyDocumentation,
+  keywordDocumentation,
+  validatePropertyDocs,
+  validateKeywordDocs,
+  selectorDescriptions,
+} from './css-author-docs.mjs';
 import { selectorShortcuts } from '../core/src/selector-shortcuts.ts';
 import { themePalette, themeVariable } from '../core/src/theme-palette.ts';
 
@@ -102,11 +110,12 @@ function keywordsOf(member) {
   return [...keywords].sort(([left], [right]) => (left < right ? -1 : left > right ? 1 : 0));
 }
 
-function commentOf(member, description, cssName) {
-  const docs = member.jsDoc?.map((item) => item.getFullText(source)).join('\n') ?? '';
-  const initial = docs.match(/\*\*Initial value\*\*: `([^`]+)`/)?.[1];
-  const url = docs.match(/@see (https:\/\/[^\s*]+)/)?.[1];
-  return `/** ${description ? `${description}（CSS ${cssName}）` : `CSS 属性 ${cssName}`}${initial ? `；初始值 ${initial}` : ''}。\n * @see ${url ?? `https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/${cssName}`}\n */`;
+function commentOf(member, name, cssName) {
+  return propertyDocumentation(
+    name,
+    cssName,
+    member.jsDoc?.map((item) => item.getFullText(source)).join('\n') ?? '',
+  );
 }
 
 const header = [
@@ -119,14 +128,26 @@ const base = [
   '/** 保留关键字补全，同时允许任意 CSS 字符串。 */',
   'export type CssString = string & {};',
   '',
+  '/** CSS 声明构造基类；供属性子类复用，不验证输入或登记样式。 */',
   'export class CssProperty {',
+  '/** 写入声明的 CSS 属性原名。 */',
   '  protected readonly name: string;',
+  jsdoc('构造指定 CSS 属性的声明作者。', {
+    params: { name: 'CSS 原名，如 background-color；不是 camelCase 字段名。' },
+    examples: ["class CustomCss extends CssProperty { constructor() { super('--custom'); } }"],
+  }),
   '  constructor(name: string) { this.name = name; }',
+  jsdoc('原样拼接当前属性的声明。', {
+    params: { value: '属性值；不自动添加单位、不转义或校验。' },
+    returns: '形如 name:value; 的完整声明字符串。',
+  }),
   '  protected declaration(value: string | number): string { return `${this.name}:${value};`; }',
   '}',
+  '/** 共享长度单位方法；值的参照和限制仍由具体 CSS 属性决定。 */',
   'export class LengthCssProperty extends CssProperty {',
   ...Object.entries(units).flatMap(([name, suffix]) => unitMethod(name, suffix)),
   '}',
+  '/** 作者单位方法到原生 CSS 后缀的映射，例如 percent 对应 %。 */',
   `export const unitSuffix: Readonly<Record<string, string>> = ${JSON.stringify({ ...units, ...extraUnits })};`,
 ];
 const groups = ['a', 'b', 'c-f', 'g-l', 'm-o', 'p-r', 's-t', 'u-z'];
@@ -161,6 +182,7 @@ for (const name of notes.keys())
 const names = [...properties.keys()].sort((left, right) =>
   left < right ? -1 : left > right ? 1 : 0,
 );
+validatePropertyDocs(names);
 for (const name of names) {
   const setting = notes.get(name) ?? { name };
   const found = properties.get(name);
@@ -168,7 +190,8 @@ for (const name of names) {
   const type = propertyType(member);
   const className = `${setting.name[0].toUpperCase()}${setting.name.slice(1)}Css`;
   const keywords = keywordsOf(member);
-  const documentation = commentOf(member, setting.description, cssName);
+  validateKeywordDocs(name, keywords);
+  const documentation = commentOf(member, name, cssName);
   keywordCount += keywords.length;
   const hasLength = member.type.getText(source).includes('TLength');
   const syntax =
@@ -218,21 +241,41 @@ for (const name of names) {
     `export class ${className} extends ${hasLength ? 'LengthCssProperty' : 'CssProperty'} {`,
   );
   for (const [keyword, value] of keywords)
-    lines.push(`  readonly ${keyword} = ${JSON.stringify(`${cssName}:${value};`)};`);
-  lines.push(`  constructor() { super(${JSON.stringify(cssName)}); }`);
+    lines.push(
+      keywordDocumentation(name, cssName, value),
+      `  readonly ${keyword} = ${JSON.stringify(`${cssName}:${value};`)};`,
+    );
   lines.push(
-    '/** 原样生成声明；提供关键字补全，也允许自定义 CSS 字符串。 */',
+    jsdoc(`创建 ${cssName} 属性作者；普通使用通过 s.${name} 取得共享实例。`, {
+      examples: [`class Custom${className} extends ${className} {}`],
+    }),
+    `  constructor() { super(${JSON.stringify(cssName)}); }`,
+  );
+  lines.push(
+    jsdoc(`原样生成 ${cssName} 声明，保留关键字补全并接受自定义 CSS 值。`, {
+      params: { value: '裸 CSS 属性值；不包含属性名或末尾分号。数字不自动添加单位。' },
+      remarks: '不做 CSS 语法校验或转义。多个值、函数或变量可写在同一个字符串中。',
+      returns: `完整声明字符串，形如 ${cssName}:value;。`,
+      examples: [`s.${name}.raw('inherit') // ${cssName}:inherit;`],
+    }),
     `raw(value: Property.${type} | CssString): string { return this.declaration(value); }`,
   );
   if (hasLength && maxArgs > 1)
-    for (const [name, suffix] of Object.entries(units))
-      lines.push(...unitMethod(name, suffix, 1, maxArgs, true));
-  if (hasPercent) lines.push(...unitMethod('percent', '%', 1, maxArgs));
-  if (hasTime) for (const name of ['ms', 's']) lines.push(...unitMethod(name, name));
+    for (const [unit, suffix] of Object.entries(units))
+      lines.push(...unitMethod(unit, suffix, 1, maxArgs, true, name));
+  if (hasPercent) lines.push(...unitMethod('percent', '%', 1, maxArgs, false, name));
+  if (hasTime)
+    for (const unit of ['ms', 's']) lines.push(...unitMethod(unit, unit, 1, 1, false, name));
   if (hasAngle)
-    for (const name of ['deg', 'grad', 'rad', 'turn']) lines.push(...unitMethod(name, name));
+    for (const unit of ['deg', 'grad', 'rad', 'turn'])
+      lines.push(...unitMethod(unit, unit, 1, 1, false, name));
   lines.push(
-    ...valueMethods(type, hasColor, hasLength || hasPercent || hasTime || hasAngle || hasNumber),
+    ...valueMethods(
+      type,
+      hasColor,
+      hasLength || hasPercent || hasTime || hasAngle || hasNumber,
+      name,
+    ),
     ...Object.values(grid).flat(),
   );
   lines.push('}');
@@ -252,11 +295,29 @@ author.push(
   'let systemPropertiesReady = false;',
   '/** 系统属性链；项目可通过类继承扩展关键字。 */',
   'export class Css {',
+  jsdoc('创建作者入口；系统属性链按首次访问惰性创建并共享。', {
+    remarks: '系统属性实例只读。扩展语义成员时继承属性类，并在作者子类中覆盖对应字段。',
+    examples: ['const s = new Css();', 's.display.flex // display:flex;'],
+  }),
   '  constructor() { initializeSystemProperties(); }',
-  '/** 原生选择器 / @ 规则 / 动画帧；展开声明数组并省略条件空项。 */',
+  jsdoc('构造原生选择器、@ 规则或动画帧的嵌套声明片段。', {
+    params: {
+      selector: '选择器、逗号分隔的选择器列表或 @ 规则字符串；& 代表当前规则。',
+      parts: '属性声明、嵌套片段、数组或条件空项；展开数组并省略条件空项。',
+    },
+    returns: '嵌套声明片段；交给 css(...) 后才登记样式。',
+    examples: [
+      "s._selector('& > span', s.color.red)",
+      "s._selector('@media (min-width: 48rem)', s.display.grid)",
+    ],
+  }),
   '_selector(selector: CssSelector, ...parts: CssInput[]): string { return selectorRule(selector, parts); }',
   ...Object.entries(selectorShortcuts).flatMap(([name, selector]) => [
-    `/** 生成 ${selector} 嵌套规则；返回声明片段，不登记样式。 */`,
+    jsdoc(selectorDescriptions[name], {
+      params: { parts: '属性声明或嵌套片段；允许数组及条件空项。' },
+      returns: `${selector} 嵌套规则片段，不立即登记样式。`,
+      examples: [`s.${name}(s.color.red)`],
+    }),
     `${name}(...parts: CssInput[]): string { return this._selector(${JSON.stringify(selector)}, ...parts); }`,
   ]),
 );
@@ -296,10 +357,16 @@ const themeLines = [
 for (const [property, type] of Object.entries(themeProperties)) {
   const entry = properties.get(property);
   if (!entry) throw new Error(`Unknown themed property: ${property}`);
-  themeLines.push(`export class Theme${type} extends ${type} {`);
+  themeLines.push(
+    jsdoc(`${entry.cssName} 的可选语义主题扩展；通过 CSS 变量继承所在 DOM 作用域的主题。`),
+    `export class Theme${type} extends ${type} {`,
+  );
   for (const [name, [label]] of Object.entries(themePalette))
     themeLines.push(
-      `/** ${label}；继承所在 DOM 作用域的主题变量。 */`,
+      jsdoc(`${label}；引用所在 DOM 作用域的主题变量 ${themeVariable(name)}。`, {
+        remarks: `CSS 声明：\`${entry.cssName}:var(${themeVariable(name)});\`。变量需由主题规则提供，本字段不创建主题容器。`,
+        examples: [`s.${property}._${name}`],
+      }),
       `readonly _${name}: string = ${JSON.stringify(`${entry.cssName}:var(${themeVariable(name)});`)};`,
     );
   themeLines.push('}');
@@ -309,7 +376,10 @@ themeLines.push(
   'export class ThemeCss extends Css {',
 );
 for (const [property, type] of Object.entries(themeProperties))
-  themeLines.push(`override readonly ${property} = new Theme${type}();`);
+  themeLines.push(
+    jsdoc(`${property} 的主题属性作者，保留原生关键字并添加语义主题字段。`),
+    `override readonly ${property} = new Theme${type}();`,
+  );
 themeLines.push('}');
 files.set('theme', themeLines);
 for (const [name, lines] of files) {

@@ -111,11 +111,11 @@ function check(file, node) {
 
   const expectedDocs = new Map([
     ['s._selector', '原生选择器'],
-    ['s._hover', '生成 &:hover'],
+    ['s._hover', '指针悬停'],
     ['s.display', '显示类型'],
-    ['s.fill', 'CSS 属性 fill'],
+    ['s.fill', 'SVG 图形内部'],
     ['base.width', '宽度'],
-    ['s.width.raw', '原样生成声明'],
+    ['s.width.raw', '原样生成 width 声明'],
   ]);
   const checker = program.getTypeChecker();
   const keywordHints = new Map([

@@ -1,6 +1,6 @@
 # Third-party notices
 
-The generated CSS property names and keyword data are derived from [CSSType](https://github.com/frenic/csstype), licensed under the MIT License:
+The generated CSS property names, keyword data, syntax and initial-value metadata are derived from [CSSType](https://github.com/frenic/csstype), licensed under the MIT License. Chinese explanations and author-API examples are maintained by this project:
 
 Copyright (c) 2017-2018 Fredrik Nicol
 
