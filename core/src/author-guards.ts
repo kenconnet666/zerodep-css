@@ -1,0 +1,59 @@
+import { Css } from './generated/author.js';
+
+let system: Css | undefined;
+
+function descriptor(value: object, name: string): PropertyDescriptor | undefined {
+  for (let current: object | null = value; current; current = Object.getPrototypeOf(current)) {
+    const found = Object.getOwnPropertyDescriptor(current, name);
+    if (found) return found;
+  }
+}
+
+/** 不执行自定义 getter；覆写方法不能使用系统作者方法的优化假设。 */
+export function authorInputs(
+  author: unknown,
+  property: string,
+  member: string,
+): unknown[] | undefined {
+  if (!(author instanceof Css)) return;
+  if (!property) {
+    if (
+      descriptor(author, member)?.value !== descriptor(Css.prototype, member)?.value ||
+      descriptor(author, '_selector')?.value !== descriptor(Css.prototype, '_selector')?.value
+    )
+      return;
+    return [author];
+  }
+  const entry = descriptor(author, property);
+  if (!entry || (entry.get && entry.get !== descriptor(Css.prototype, property)?.get)) return;
+  const target = Reflect.get(author, property) as object;
+  if (!target || typeof target !== 'object') return;
+  const reference = Reflect.get((system ??= new Css()), property);
+  if (target === reference && Object.isFrozen(target)) {
+    const value = Reflect.get(target, member);
+    if (typeof value !== 'string' && typeof value !== 'function') return;
+    return typeof value === 'function'
+      ? [author, target, value, reference.raw, reference.declaration]
+      : [author, target, value];
+  }
+  const own = descriptor(target, member);
+  if (!own || !('value' in own)) return;
+  if (typeof own.value === 'string') return [author, target, own.value];
+  if (
+    typeof own.value !== 'function' ||
+    own.value !== reference?.[member] ||
+    descriptor(target, 'raw')?.value !== reference.raw ||
+    descriptor(target, 'declaration')?.value !== reference.declaration
+  )
+    return;
+  return [author, target, own.value];
+}
+
+/** 元素变量只接管系统声明；自定义选择器或覆写方法继续走样式表绑定。 */
+export function canBindInline(guards: readonly (readonly unknown[])[]): boolean {
+  return guards.every((guard) => {
+    if (guard.length !== 3) return true;
+    const inputs = authorInputs(guard[0], guard[1] as string, guard[2] as string);
+    return !!inputs && !inputs.some((value) => typeof value === 'string' && /[{}]/.test(value));
+  });
+}

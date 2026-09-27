@@ -9,9 +9,9 @@ import * as bindings from '../svelte/dist/bindings-server.js';
 import plugin from '../svelte/dist/vite.js';
 
 const require = createRequire(import.meta.url);
-function component(source) {
+function component(source, options) {
   const warnings = [];
-  const result = plugin().transform.call(
+  const result = plugin(options).transform.call(
     { warn: (message) => warnings.push(message) },
     source,
     '/test/Template.svelte',
@@ -36,12 +36,45 @@ function component(source) {
   return { component: module.exports.default, transformed, warnings };
 }
 const script = `<script>import {Css,css,bx} from '@zerodep-css/svelte'; const s=new Css(); let width=$state(12);</script>`;
-function inspect(source) {
-  const result = component(source),
+function inspect(source, options) {
+  const result = component(source, options),
     host = adapter.createServerCssHost();
   const html = adapter.withCssHost(host, () => render(result.component).body);
   return { ...result, html, rules: host.rules() };
 }
+
+test('Svelte 元素变量兼容已有 style 和 style 指令，多变量、常量及未执行分支', () => {
+  const result =
+    inspect(`<script>import {Css,css,bx} from '@zerodep-css/svelte';const s=new Css();let width=$state(20);
+    function format(n){return n+'px'} function fail(){throw Error('inactive')}</script>
+    <div style="color:red" style:height={width+'px'} class={css(s.padding.raw(bx(format(width))+' '+bx('2px')),
+      true?s.width.raw(bx(format(width))):s.width.raw(bx(fail())),s._hover(s.opacity.raw(bx(0.5))))}></div>`);
+  assert.equal(result.rules.filter((r) => r.kind === 'bindings').length, 0);
+  assert.match(result.html, /color:red/);
+  assert.match(result.html, /height: 20px/);
+  assert.match(result.html, /--zi-[^:]+: 2px/);
+  assert.match(result.html, /--zi-[^:]+: initial/);
+  assert.ok(result.rules.some((r) => r.body.includes('&:hover')));
+});
+
+test('Svelte 关闭内联绑定时保留严格 CSP 传输，空值在元素模式下重置', () => {
+  const source = `${script}<div class={css(s.width.raw(bx(width+'px')))}></div>`;
+  const result = inspect(source, { inlineBindings: false });
+  assert.equal(result.rules.filter((r) => r.kind === 'bindings').length, 1);
+  assert.doesNotMatch(result.html, /style=/);
+  const empty = inspect(`${script}<div class={css(s.width.raw(bx(null)))}></div>`);
+  assert.match(empty.html, /--zi-[^:]+: initial/);
+});
+
+test('Svelte 的覆写方法和任意选择器不改变变量的原有作用域', () => {
+  const result = inspect(`<script>import {Css,WidthCss,css,bx} from '@zerodep-css/svelte';
+    class Width extends WidthCss {raw(value){return super.raw(value)}} class App extends Css {width=new Width()}
+    const s=new App();let width=$state(20);</script>
+    <div class={css(s.width.raw(bx(width+'px')))}></div>
+    <div class={css(s._selector('& + div',s.width.raw(bx(width+'px'))))}></div>`);
+  assert.equal(result.rules.filter((r) => r.kind === 'bindings').length, 2);
+  assert.doesNotMatch(result.html, /style=/);
+});
 
 test('snippet 多次调用具有独立变量值，const tag 解构别名参与绑定', () => {
   const result = inspect(`${script}
@@ -52,12 +85,10 @@ test('snippet 多次调用具有独立变量值，const tag 解构别名参与�
 {@render card({size:10})}{@render card({size:30})}`);
   assert.deepEqual(result.warnings, []);
   const values = result.rules.filter((rule) => rule.kind === 'bindings');
-  assert.equal(values.length, 2);
-  assert.notEqual(values[0].key, values[1].key);
-  assert.match(values[0].body, /10px/);
-  assert.match(values[1].body, /30px/);
-  assert.match(values[0].body, /12px/);
-  assert.match(values[1].body, /12px/);
+  assert.equal(values.length, 0);
+  assert.equal(result.rules.filter((rule) => (rule.kind ?? 'class') === 'class').length, 1);
+  assert.match(result.html, /style="[^"]*10px[^"]*12px/);
+  assert.match(result.html, /style="[^"]*30px[^"]*12px/);
 });
 
 test('each 中的 const tag 不漏绑定，同名 css 局部声明不被误当成库入口', () => {
@@ -67,7 +98,9 @@ test('each 中的 const tag 不漏绑定，同名 css 局部声明不被误当�
  <div class={css(s.width.raw(bx(size+'px')))}></div>
 {/each}
 {#if true}{@const css=()=> 'external'}<div class={css(s.width.px(width))}></div>{/if}`);
-  assert.equal(result.rules.filter((rule) => rule.kind === 'bindings').length, 2);
+  assert.equal(result.rules.filter((rule) => rule.kind === 'bindings').length, 0);
+  assert.match(result.html, /--zi-[^:]+: 20px/);
+  assert.match(result.html, /--zi-[^:]+: 40px/);
   assert.match(result.html, /class="external"/);
 });
 
@@ -88,7 +121,7 @@ function style(value){return css(s.width.raw(bx(value+'px')));}</script>
 test('await then/catch 变量进入各自作用域，普通值的 then 分支可绑定', () => {
   const result = inspect(`${script}
 {#await {size:32} then item}<div class={css(s.width.raw(bx(item.size+'px')))}></div>{:catch css}<div class={css(s.width.px(width))}></div>{/await}`);
-  assert.match(result.rules.find((rule) => rule.kind === 'bindings').body, /32px/);
+  assert.match(result.html, /--zi-[^:]+: 32px/);
   assert.match(result.transformed, /\.runtime|\.frame/);
   assert.match(result.transformed, /css\(s.width.px\(width\)\)/);
 });
@@ -128,8 +161,8 @@ test('SSR 由服务端入口决定，不受测试环境中 document 全局影响
   Object.defineProperty(globalThis, 'document', { value: {}, configurable: true });
   try {
     const result = inspect(`${script}<div class={css(s.width.raw(bx(width+'px')))}></div>`);
-    assert.equal(result.rules.filter((r) => r.kind === 'bindings').length, 1);
-    assert.match(result.rules.find((r) => r.kind === 'bindings').body, /:12px;/);
+    assert.equal(result.rules.filter((r) => r.kind === 'bindings').length, 0);
+    assert.match(result.html, /--zi-[^:]+: 12px/);
   } finally {
     if (previous) Object.defineProperty(globalThis, 'document', previous);
     else delete globalThis.document;

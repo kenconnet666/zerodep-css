@@ -47,7 +47,7 @@ function containsCall(value: unknown): boolean {
   );
 }
 
-export default function cssBindings() {
+export default function cssBindings(options: { inlineBindings?: boolean } = {}) {
   let root = process.cwd();
   let dev = false;
   return {
@@ -85,7 +85,13 @@ export default function cssBindings() {
           if (!['loc', 'metadata', 'comments', 'parent'].includes(key)) moduleIdentifiers(child);
       }
       moduleIdentifiers(ast.module?.content);
-      function visit(value: unknown, keys: string[], locals: string[], fallback = false): void {
+      function visit(
+        value: unknown,
+        keys: string[],
+        locals: string[],
+        fallback = false,
+        element = false,
+      ): void {
         if (!value || typeof value !== 'object') return;
         if (Array.isArray(value)) {
           // ConstTag 属于整个模板片段作用域，既要追踪动态值，也要识别对 css 导入的遮蔽。
@@ -96,7 +102,7 @@ export default function cssBindings() {
                 )
               : [],
           );
-          value.forEach((item) => visit(item, keys, [...locals, ...declared], fallback));
+          value.forEach((item) => visit(item, keys, [...locals, ...declared], fallback, element));
           return;
         }
         const node = value as AST.BaseNode;
@@ -181,17 +187,45 @@ export default function cssBindings() {
                 locals,
                 expression.start,
               );
+              const inline =
+                element && !fallback && options.inlineBindings !== false
+                  ? model.elementExpression(
+                      code.slice(expression.start, expression.end),
+                      locals,
+                      expression.start,
+                    )
+                  : undefined;
               const wrapped = fallback
                 ? `${model.scope}.runtime(() => (${text}))`
                 : `${model.scope}.frame(${JSON.stringify(`element${serial++}`)}, [${keys.join(',')}], () => (${text}))`;
-              edits.push({ start: expression.start, end: expression.end, text: wrapped });
+              const selected = inline
+                ? `${model.scope}.inline(${inline.guards}) ? (${inline.expression}) : (${wrapped})`
+                : wrapped;
+              edits.push({ start: expression.start, end: expression.end, text: selected });
+              if (inline)
+                edits.push({
+                  start: attribute.end,
+                  end: attribute.end,
+                  text: inline.values
+                    .map(
+                      ({ name, expression }) =>
+                        ` style:${name}={${model.scope}.inline(${inline.guards}) ? ${model.scope}.value(${expression}) : null}`,
+                    )
+                    .join(''),
+                });
             }
           }
           return;
         }
         for (const [key, child] of Object.entries(value))
           if (!['loc', 'metadata', 'comments', 'parent'].includes(key))
-            visit(child, keys, locals, fallback);
+            visit(
+              child,
+              keys,
+              locals,
+              fallback,
+              node.type === 'RegularElement' && key === 'attributes',
+            );
       }
       visit(ast.fragment, [], []);
       for (const warning of model.warnings) this.warn(warning);

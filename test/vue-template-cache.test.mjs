@@ -204,25 +204,18 @@ test('模板 computed 与单行多变量 bx 绑定配合，类稳定且变量持
         initial,
       );
       assert.equal(p.calls(), count);
-      assert.equal(p.renders(), renders, '只有变量值变化时不应重新渲染组件');
-      const values = p.host
-        .rules()
-        .filter((r) => r.kind === 'bindings')
-        .map((r) => r.body)
-        .join('');
+      assert.ok(p.renders() > renders, '元素变量由 Vue 的模板 style 更新');
+      assert.equal(p.host.rules().filter((r) => r.kind === 'bindings').length, 0);
+      assert.equal(initial[0], initial[1], '各行共享静态类');
+      const values = JSON.stringify(
+        [...find(p.root, 'data-box'), ...find(p.root, 'data-row')].map((n) => n.props.style),
+      );
       assert.match(values, /45px/);
       assert.match(values, /11px/);
       await p.update(
         (s) => (s.items[0] = { id: 'a', compact: false, width: 55, label: 'replacement' }),
       );
-      assert.match(
-        p.host
-          .rules()
-          .filter((r) => r.kind === 'bindings')
-          .map((r) => r.body)
-          .join(''),
-        /55px/,
-      );
+      assert.match(JSON.stringify(find(p.root, 'data-row').map((n) => n.props.style)), /55px/);
     },
   );
 });
@@ -270,7 +263,10 @@ test('SSR 使用相同声明与变量绑定协议，不创建客户端列表缓�
     renderToString(Vue.createSSRApp(result.component)),
   );
   assert.match(html, /class="z-/);
-  assert.equal(host.rules().filter((r) => r.kind === 'bindings').length, 2);
+  assert.equal(host.rules().filter((r) => r.kind === 'bindings').length, 0);
+  assert.equal(host.rules().filter((r) => (r.kind ?? 'class') === 'class').length, 1);
+  assert.match(html, /style="--zi-[^"]+:10px/);
+  assert.match(html, /style="--zi-[^"]+:30px/);
   assert.doesNotMatch(result.code, /\.row\(/);
 });
 
@@ -410,7 +406,7 @@ test('scoped slot 多次调用隔离参数，保留文本更新和绑定值', as
     async (p) => {
       const nodes = () => find(p.root, 'data-slot');
       assert.equal(nodes().length, 2);
-      assert.notEqual(nodes()[0].props.class, nodes()[1].props.class);
+      assert.equal(nodes()[0].props.class, nodes()[1].props.class);
       const first = nodes()[0].props.class;
       await p.update((s) => {
         s.items[0].width = 77;
@@ -418,7 +414,8 @@ test('scoped slot 多次调用隔离参数，保留文本更新和绑定值', as
       });
       assert.equal(nodes()[0].text, 'slot updated');
       assert.equal(nodes()[0].props.class, first);
-      assert.ok(p.host.rules().some((r) => r.kind === 'bindings' && r.body.includes('77px')));
+      assert.match(JSON.stringify(nodes()[0].props.style), /77px/);
+      assert.match(JSON.stringify(nodes()[1].props.style), /30px/);
     },
     "import {defineComponent,h} from 'vue'; const SlotRows=defineComponent({props:['items'],setup(props,{slots}){return ()=>h('section',props.items.map(item=>slots.default({item})))}});",
   );
@@ -457,7 +454,7 @@ test('KeepAlive 保留绑定并在最终卸载清理，重新激活不增加规�
       await Vue.nextTick();
       assert.equal(find(root, 'data-kept')[0].props.class, initial);
       assert.equal(host.rules().length, count);
-      assert.ok(host.rules().some((r) => r.kind === 'bindings' && r.body.includes('42px')));
+      assert.match(JSON.stringify(find(root, 'data-kept')[0].props.style), /42px/);
     } finally {
       app.unmount();
     }
@@ -482,4 +479,80 @@ test('watch 与 effect 重跑复用绑定帧，结构和值分开更新', async 
     },
     "import {ref,watch,watchEffect} from 'vue';const watched=ref(''),effect=ref('');watch(()=>state.width,next=>{watched.value=makeCss(s.height.raw(bx(next+'px')))},{immediate:true});watchEffect(()=>{const width=state.width;effect.value=makeCss(state.compact?s.color.red:s.color.blue,s.width.raw(bx(width+'px')))})",
   );
+});
+
+test('元素变量合并已有 style，保留常量、多变量、复杂值表达式及分支惰性', async () => {
+  await run(
+    `<div data-box style="color:red" :style="{height:state.width+'px'}"
+      :class="makeCss(s.padding.raw(bx(format(state.width))+' '+bx('2px')),
+        state.compact ? s.width.raw(bx('8px')) : s.width.raw(bx(format(state.width))),
+        false && s.height.raw(bx(fail())), s._hover(s.opacity.raw(bx(0.5))))"></div>`,
+    async (p) => {
+      const node = () => find(p.root, 'data-box')[0];
+      assert.equal(node().props.style.color, 'red');
+      assert.equal(node().props.style.height, '20px');
+      assert.equal(p.host.rules().filter((r) => r.kind === 'bindings').length, 0);
+      assert.ok(p.host.rules().some((r) => r.body.includes('&:hover')));
+      const before = p.calls();
+      await p.update((s) => {
+        s.width = 40;
+      });
+      assert.equal(p.calls(), before);
+      assert.equal(node().props.style.height, '40px');
+      assert.ok(Object.values(node().props.style).includes('40px'));
+      await p.update((s) => {
+        s.compact = true;
+      });
+      assert.ok(Object.values(node().props.style).includes('8px'));
+      assert.ok(Object.values(node().props.style).includes('initial'));
+    },
+    `function format(n:number){return n+'px'} function fail(){throw Error('inactive branch')}`,
+  );
+});
+
+test('覆写 raw 和跨元素选择器保留样式表路径，显式关闭元素绑定适用于严格 CSP', async () => {
+  for (const [expression, extra, options] of [
+    [
+      `makeCss(custom.width.raw(bx(state.width+'px')))`,
+      `class Width extends WidthCss { raw(v:string){return super.raw(v)} } class App extends Css {override readonly width=new Width()} const custom=new App()`,
+      {},
+    ],
+    [`makeCss(s._selector('& + div',s.width.raw(bx(state.width+'px'))))`, '', {}],
+    [`makeCss(s.width.raw(bx(state.width+'px')))`, '', { inlineBindings: false }],
+  ]) {
+    await run(
+      `<div data-box :class="${expression}"></div>`,
+      async (p) => {
+        assert.equal(p.host.rules().filter((r) => r.kind === 'bindings').length, 1);
+        assert.equal(find(p.root, 'data-box')[0].props.style, undefined);
+        await p.update((s) => {
+          s.width = 31;
+        });
+        assert.ok(p.host.rules().some((r) => r.kind === 'bindings' && r.body.includes('31px')));
+      },
+      extra,
+      options,
+    );
+  }
+});
+
+test('元素变量空值重置不继承外层值，Vue 开发编译与关闭缓存仍可用', async () => {
+  for (const options of [{ development: true }, { templateCache: false }])
+    await run(
+      `<div data-box :class="makeCss(s.width.raw(bx(state.show?state.width+'px':null)))"></div>`,
+      async (p) => {
+        assert.ok(Object.values(find(p.root, 'data-box')[0].props.style).includes('20px'));
+        await p.update((s) => {
+          s.show = false;
+        });
+        assert.deepEqual(Object.values(find(p.root, 'data-box')[0].props.style), ['initial']);
+        await p.update((s) => {
+          s.show = true;
+          s.width = 32;
+        });
+        assert.deepEqual(Object.values(find(p.root, 'data-box')[0].props.style), ['32px']);
+      },
+      '',
+      options,
+    );
 });

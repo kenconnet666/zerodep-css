@@ -2,6 +2,7 @@ import ts from 'typescript';
 import { hash } from '../names.js';
 import { collectBindings } from './source.js';
 import { analyzeTemplate, reactive } from './template-analysis.js';
+import { elementBindings } from './element-bindings.js';
 
 /** 只变换已导入的库调用；框架适配器提供模板 AST 与循环作用域。 */
 export function createBindingTransform(
@@ -375,6 +376,25 @@ export function createBindingTransform(
       return guards;
     },
     script: transformed + script.slice(source.statements.at(-1)?.end ?? 0),
+    elementExpression(text: string, locals: string[] = [], offset = 0) {
+      const guards = analyzeTemplate({
+        expression: expressionSource(text),
+        locals,
+        mutable,
+        stableReactive,
+        dynamic,
+        api,
+      });
+      if (guards === undefined) return;
+      const local = new Set(locals);
+      const result = elementBindings(
+        expressionSource(text),
+        `${hash(file.replace(/\\/g, '/'))}-${offset}`,
+        (node) => api(node, local),
+      );
+      if (result) used = true;
+      return result && { ...result, guards };
+    },
     expression(text: string, locals: string[] = [], offset = 0): string {
       const sf = expressionSource(text);
       const statement = sf.statements[0];

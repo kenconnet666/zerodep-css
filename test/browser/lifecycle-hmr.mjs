@@ -100,7 +100,7 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
       const width = () =>
         page.locator('[data-probe]').evaluate((node) => getComputedStyle(node).width);
       const initial = await stats();
-      assert.equal(initial.bindings, 21);
+      assert.equal(initial.bindings, 1);
       assert.equal(await width(), '24px');
       await page.evaluate(() => {
         window.hmrIdentity = 'preserved';
@@ -110,7 +110,7 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
         () => document.querySelector('[data-probe]')?.textContent === 'template-only',
       );
       assert.equal(await width(), '24px');
-      assert.equal((await stats()).bindings, 21);
+      assert.equal((await stats()).bindings, 1);
       const changed = original
         .replace('>initial<', '>edited<')
         .replace("s.width.raw(bx(width.value + 'px'))", "s.width.raw(bx(width.value + 1 + 'px'))")
@@ -127,7 +127,7 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
         await page.locator('[data-probe]').evaluate((node) => getComputedStyle(node).color),
         'rgb(255, 0, 0)',
       );
-      assert.equal((await stats()).bindings, 21);
+      assert.equal((await stats()).bindings, 1);
       assert.equal(
         await page.locator('[data-sibling]').evaluate((node) => getComputedStyle(node).height),
         '32px',
@@ -142,17 +142,19 @@ ${framework === 'vue' ? "createApp(Root).mount('#app');" : "mount(Root,{target:d
           document.querySelector('[data-probe]')?.textContent === 'removed' &&
           getComputedStyle(document.querySelector('[data-probe]')).width === '30px',
       );
-      assert.equal((await stats()).bindings, 20);
+      assert.equal((await stats()).bindings, 0);
       await updateChild(original);
       await page.waitForFunction(
         () =>
           document.querySelector('[data-probe]')?.textContent === 'initial' &&
           getComputedStyle(document.querySelector('[data-probe]')).width === '24px',
       );
-      // 新 key 的记录按文档保留到组件卸载，测量它而不误删仍可复用的类。
+      // 元素变量随 DOM 更新，新 key 不再增加样式表绑定组。
+      const beforeReplace = await stats();
       for (let i = 0; i < 10; i++) await page.locator('[data-replace]').click();
       const replaced = await stats();
-      assert.equal(replaced.bindings, 221);
+      assert.equal(replaced.bindings, 1);
+      assert.equal(replaced.classes, beforeReplace.classes, '新列表 key 应复用元素样式类');
       await page.locator('[data-toggle]').click();
       await page.waitForFunction(() => !document.querySelector('[data-probe]'));
       assert.equal((await stats()).bindings, 0);

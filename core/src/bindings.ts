@@ -1,4 +1,6 @@
 import { hash } from './names.js';
+import { canBindInline } from './author-guards.js';
+export { authorInputs } from './author-guards.js';
 
 import type { BxValue } from './bx.js';
 type Writer = (key: string, body: string | null) => void;
@@ -54,6 +56,11 @@ export function createBindings(
   }
 
   const api = {
+    inline(guards: readonly (readonly unknown[])[]): boolean {
+      return canBindInline(guards);
+    },
+    // 固定变量名在 DOM 内继承；空值用 initial 隔离外层同名变量，避免串到嵌套实例。
+    value: (value: BxValue): string => (value == null ? 'initial' : String(value)),
     frameCallback<T>(site: string, source: T): T {
       // 每次注册框架回调拥有独立身份；同一个 getter 多次注册也不能串用 previous 值。
       const owner = {};

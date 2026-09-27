@@ -1,5 +1,7 @@
 # 性能与资源验收
 
+下表是提交 30e1ed8 的样式表绑定基线，不代表后续新增的元素变量路径。新 CI 对同一模板分别测试 `bx-template`（元素变量）、`bx-template-stylesheet`（私有样式表），Vue 另比较 class 缓存开关；两框架均保留 manual、runtime、Emotion 和辅助函数 bx 对照。新数据取得前不宣称提速比例。
+
 日期：2026-09-27（UTC+8）。功能提交 30e1ed8a9fe7f6fe194ddcdce2e2d1a2dd8dda48，完整 [CI 运行](https://github.com/kenconnet666/zerodep-css/actions/runs/36257653775) 的 15 个并行任务全部通过。原始样本固定保存在 [验收证据](evidence/2026-09-27/verification.json)，不使用旧方案的计时替代当前结果。
 
 ## 场景和解释

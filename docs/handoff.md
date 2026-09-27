@@ -2,6 +2,8 @@
 
 主线为 codex/runtime-css-research，远程 origin 是 kenconnet666/zerodep-css。当前功能、验收结果和边界分别见 [生产使用](production.md)、[执行记录](production-progress.md)、[性能记录](performance.md)。五包保持 private，本轮不执行 npm 发布。
 
+最新改动参考 Vue v-bind，将模板原生元素的 bx 拆成共享声明和框架 style 更新，Vue/Svelte 同步接入。复杂值表达式、多变量及条件/短路分支保留；作者覆写、跨元素选择器、setup 中传递的 class 保留样式表路径。严格 CSP 用插件/模块 `inlineBindings: false`。共享作者方法检查归 core/src/author-guards.ts，拆分逻辑在 core/src/compiler/element-bindings.ts。性能和三浏览器完整验收交 CI，旧性能表仅作基线。
+
 ## 新机器准备
 
 ```powershell

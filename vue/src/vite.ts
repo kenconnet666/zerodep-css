@@ -11,7 +11,9 @@ import {
 } from '@zerodep-css/core/compiler';
 
 /** 放在 Vue 插件之前，仅处理 script setup；普通运行时写法仍可单独使用。 */
-export default function cssBindings(options: { templateCache?: boolean } = {}) {
+export default function cssBindings(
+  options: { templateCache?: boolean; inlineBindings?: boolean } = {},
+) {
   let root = process.cwd();
   let dev = false;
   return {
@@ -118,6 +120,10 @@ export default function cssBindings(options: { templateCache?: boolean } = {}) {
             nextLocals,
             prop.exp.loc.start.offset,
           );
+          const inline =
+            !fallback && node.tagType === 0 && options.inlineBindings !== false
+              ? model.elementExpression(prop.exp.content, nextLocals, prop.exp.loc.start.offset)
+              : undefined;
           const guards =
             !fallback && !inSlot && options.templateCache !== false
               ? model.templateGuards(prop.exp.content, nextLocals)
@@ -126,14 +132,49 @@ export default function cssBindings(options: { templateCache?: boolean } = {}) {
           const wrapped = fallback
             ? `${model.scope}.runtime(() => (${expression}))`
             : `${model.scope}.frame(${site}, [${nextKeys.join(',')}], () => (${expression}))`;
+          const selected = inline
+            ? `${model.scope}.inline(${inline.guards}) ? (${inline.expression}) : (${wrapped})`
+            : expression.includes(`${model.scope}.`)
+              ? wrapped
+              : expression;
           const cached = guards
-            ? `${model.scope}.template(${site}, ${guards}, () => (${expression.includes(`${model.scope}.`) ? wrapped : expression}))`
-            : wrapped;
+            ? `${model.scope}.template(${site}, ${guards}, () => (${selected}))`
+            : inline
+              ? selected
+              : wrapped;
           edits.push({
             start: prop.loc.start.offset,
             end: prop.loc.end.offset,
             text: `:class="${html(cached)}"`,
           });
+          if (inline) {
+            const values = `{${inline.values
+              .map(
+                ({ name, expression }) =>
+                  `${JSON.stringify(name)}: ${model.scope}.value(${expression})`,
+              )
+              .join(',')}}`;
+            const style = `${model.scope}.inline(${inline.guards}) ? ${values} : undefined`;
+            const existing = node.props.find(
+              (p) =>
+                p.type === 7 &&
+                p.name === 'bind' &&
+                p.arg?.type === 4 &&
+                p.arg.content === 'style' &&
+                p.exp?.type === 4,
+            );
+            if (existing?.type === 7 && existing.exp?.type === 4)
+              edits.push({
+                start: existing.exp.loc.start.offset,
+                end: existing.exp.loc.end.offset,
+                text: html(`[(${existing.exp.content}), (${style})]`),
+              });
+            else {
+              // 避开 class 整段 overwrite 的边界，否则 MagicString 会吞掉新插入的属性。
+              const at = node.loc.start.offset + node.tag.length + 1;
+              edits.push({ start: at, end: at, text: ` :style="${html(style)}"` });
+            }
+          }
         }
         if (fallback)
           model.warnAt(

@@ -45,23 +45,33 @@ try {
       { ...options, plugins: [bindingCacheVariant(false)] },
     );
     const templates = {};
-    if (framework === 'vue')
-      for (const templateCache of [true, false]) {
-        const templatePlugin = vuePlugin({ templateCache });
-        templates[templateCache ? 'bx-template' : 'bx-template-uncached'] = await bundle(
+    // 同一模板同时比较元素变量和样式表变量，避免把不同作者写法混成传输差异。
+    for (const inlineBindings of [true, false]) {
+      for (const templateCache of framework === 'vue' ? [true, false] : [true]) {
+        const templatePlugin =
+          framework === 'vue'
+            ? vuePlugin({ templateCache, inlineBindings })
+            : sveltePlugin({ inlineBindings });
+        const mode =
+          'bx-template' +
+          (inlineBindings ? '' : '-stylesheet') +
+          (templateCache ? '' : '-uncached');
+        templates[mode] = await bundle(
           framework,
           'browser',
           `${framework}-binding-performance-driver.ts`,
           {
             dist: true,
             minify: true,
-            vueCompilerOptions: templatePlugin.api.compilerOptions,
+            vueCompilerOptions: templatePlugin.api?.compilerOptions,
             transformSfc(code, id) {
               const direct = code
                 .replace('Css, css', 'Css, css, bx')
                 .replace(
-                  ':class="classFor(row)"',
-                  ':class="css(s.color.red, s.width.raw(bx((20 + iteration * props.count + row) + `px`)))"',
+                  framework === 'vue' ? ':class="classFor(row)"' : 'class={classFor(row)}',
+                  framework === 'vue'
+                    ? ':class="css(s.color.red, s.width.raw(bx((20 + iteration * props.count + row) + \x27px\x27)))"'
+                    : "class={css(s.color.red, s.width.raw(bx((20 + iteration * count + row) + 'px')))}",
                 );
               assert.notEqual(direct, code, 'Template benchmark fixture changed');
               return templatePlugin.transform.call({ warn() {} }, direct, id)?.code ?? direct;
@@ -69,6 +79,7 @@ try {
           },
         );
       }
+    }
     for (let round = 0; round < rounds; round++) {
       const modes = [
         'bx',
@@ -154,6 +165,8 @@ try {
           );
           if (mode.startsWith('bx') || mode === 'manual')
             assert.equal(sample.finalRules, sample.initialRules);
+          if (mode.startsWith('bx-template') && !mode.includes('stylesheet'))
+            assert.equal(sample.initialRules, 1, '元素变量的所有行应共用一条静态规则');
           if (mode.startsWith('bx')) assert.equal(sample.noiseWrites, 0);
           delete sample.widths;
           (result.samples[`${framework}-${mode}`] ??= []).push(sample);

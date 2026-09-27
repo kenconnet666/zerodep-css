@@ -10,7 +10,7 @@
 - test:selectors / test:author-api / test:bindings：三浏览器原生 CSS、作者 API、bx 和 CSP。
 - test:mup:* / test:examples:* / test:transport：包产物、SSR、hydration 和主题。
 - test:metaframeworks：真实 Nuxt/Kit 应用；CSS_TEST_FRAMEWORK 可以单独选择其中一个。
-- probe:bindings：200/1,000 行，bx、普通运行时、内联变量与 Emotion 同场对照。
+- probe:bindings：200/1,000 行，两框架 bx、普通运行时、手工内联变量与 Emotion 同场对照；同模板另比较默认元素变量和 inlineBindings:false 的样式表变量，Vue 加测 class 缓存开关。
 - probe:keywords / probe:template-derived / probe:template-conditional / probe:vfor-style：作者表示方式与模板派生的成本。
 
 CSS_PROBE_BROWSER_CHANNEL 可选 chromium、firefox、webkit，未设置时保留本机 Chrome 使用方式。CI 时间只做诊断，正确性和资源计数分别断言。结果写入 test-results 并作为任务独立 artifact 上传。

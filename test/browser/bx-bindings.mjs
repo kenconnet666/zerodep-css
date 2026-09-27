@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import { mkdir, writeFile, unlink } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import vuePlugin from '../../vue/dist/vite.js';
 import sveltePlugin from '../../svelte/dist/vite.js';
 import { bundle } from '../../test/tools/mup-bundle.mjs';
@@ -11,8 +10,12 @@ const report = [];
 const output = new URL('../../test-results/bx-bindings/', import.meta.url);
 await mkdir(output, { recursive: true });
 try {
-  for (const framework of ['vue', 'svelte']) {
-    const plugin = framework === 'vue' ? vuePlugin() : sveltePlugin();
+  const cases = ['vue', 'svelte'].flatMap((framework) =>
+    [true, false].map((inlineBindings) => ({ framework, inlineBindings })),
+  );
+  for (const { framework, inlineBindings } of cases) {
+    const plugin =
+      framework === 'vue' ? vuePlugin({ inlineBindings }) : sveltePlugin({ inlineBindings });
     const options = {
       dist: true,
       vueCompilerOptions: framework === 'vue' ? plugin.api.compilerOptions : undefined,
@@ -21,7 +24,10 @@ try {
     };
     const source = await bundle(framework, 'browser', `${framework}-bx-driver.ts`, options);
     const serverCode = await bundle(framework, 'node', `${framework}-bx-server.ts`, options);
-    const serverFile = new URL(`${framework}-server.mjs`, output);
+    const serverFile = new URL(
+      `${framework}-${inlineBindings ? 'element' : 'stylesheet'}-server.mjs`,
+      output,
+    );
     await writeFile(serverFile, serverCode);
     const server = await import(serverFile.href);
     await unlink(serverFile);
@@ -43,7 +49,7 @@ try {
             status: 200,
             contentType: 'text/html',
             headers: {
-              'Content-Security-Policy': "style-src 'nonce-binding-test'; style-src-attr 'none'",
+              'Content-Security-Policy': `style-src 'nonce-binding-test'; style-src-attr ${inlineBindings ? "'unsafe-inline'" : "'none'"}`,
             },
             body: html,
           }),
@@ -192,10 +198,20 @@ try {
         assert.equal(released.animations, 0);
         assert.equal(
           released.classes,
-          new Set(initial.nodes.map((node) => node.snapshotClass)).size,
-          'Only the unbound snapshot classes should survive disposal',
+          new Set(initial.nodes.map((node) => node.snapshotClass)).size +
+            rendered.rules.filter(
+              (rule) => (rule.kind ?? 'class') === 'class' && rule.body.includes('--zi-'),
+            ).length,
+          'Only the unbound snapshots and shared element classes should survive disposal',
         );
-        report.push({ framework, hydrate, status: 'passed', initial: initial.stats, released });
+        report.push({
+          framework,
+          inlineBindings,
+          hydrate,
+          status: 'passed',
+          initial: initial.stats,
+          released,
+        });
         console.log(
           JSON.stringify({
             framework,
@@ -205,7 +221,14 @@ try {
           }),
         );
       } catch (error) {
-        report.push({ framework, hydrate, status: 'failed', error: String(error), errors });
+        report.push({
+          framework,
+          inlineBindings,
+          hydrate,
+          status: 'failed',
+          error: String(error),
+          errors,
+        });
         throw error;
       } finally {
         await page.close();
