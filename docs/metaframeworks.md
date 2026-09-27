@@ -14,7 +14,7 @@ export default defineNuxtConfig({
 });
 ```
 
-应用仍自行定义 `createCssContext<AppCss>()` 并在根组件 `provideCss(new AppCss())`，使用方式见[组件示例](framework-examples.md)。模块不猜测用户的作者类或主题。
+应用自行定义 `createCssContext<AppCss>()` 并在根组件 `provideCss(new AppCss())`，使用方式见[入门示例](getting-started.md)。模块不猜测用户的作者类或主题。
 
 模块默认安装绑定转换；`modules: [['@zerodep-css/nuxt', { bindings: false }]]` 可以关闭。动态 nonce 从 `event.context.zerodepCssNonce` 读取，应用在前置服务器 middleware 中生成并设置匹配的 CSP 响应头。
 

@@ -126,7 +126,7 @@ export default function cssBindings(
               : undefined;
           const guards =
             !fallback && !inSlot && options.templateCache !== false
-              ? model.templateGuards(prop.exp.content, nextLocals)
+              ? (inline?.guards ?? model.templateGuards(prop.exp.content, nextLocals))
               : undefined;
           const site = JSON.stringify(`element${serial++}`);
           const wrapped = fallback

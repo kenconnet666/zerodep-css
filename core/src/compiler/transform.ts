@@ -12,6 +12,7 @@ export function createBindingTransform(
   reserved = script,
   options: { dev?: boolean; scriptOffset?: number } = {},
 ) {
+  const fileId = hash(file.replace(/\\/g, '/'));
   const source = ts.createSourceFile(
     file + '.ts',
     script,
@@ -350,9 +351,18 @@ export function createBindingTransform(
   const transformed = source.statements
     .map((node) => script.slice(node.pos, node.getStart(source)) + render(node, source, new Set()))
     .join('');
+  const templateGuards = (text: string, locals: string[]) =>
+    analyzeTemplate({
+      expression: expressionSource(text),
+      locals,
+      mutable,
+      stableReactive,
+      dynamic,
+      api,
+    });
   return {
     scope,
-    fileId: hash(file.replace(/\\/g, '/')),
+    fileId,
     get used() {
       return used;
     },
@@ -364,33 +374,17 @@ export function createBindingTransform(
     enabled,
     /** 仅标记直接可分析的模板 CSS；未知函数和普通可变变量继续逐次执行。 */
     templateGuards(text: string, locals: string[] = []): string | undefined {
-      const guards = analyzeTemplate({
-        expression: expressionSource(text),
-        locals,
-        mutable,
-        stableReactive,
-        dynamic,
-        api,
-      });
+      const guards = templateGuards(text, locals);
       if (guards !== undefined) used = true;
       return guards;
     },
     script: transformed + script.slice(source.statements.at(-1)?.end ?? 0),
     elementExpression(text: string, locals: string[] = [], offset = 0) {
-      const guards = analyzeTemplate({
-        expression: expressionSource(text),
-        locals,
-        mutable,
-        stableReactive,
-        dynamic,
-        api,
-      });
+      const guards = templateGuards(text, locals);
       if (guards === undefined) return;
       const local = new Set(locals);
-      const result = elementBindings(
-        expressionSource(text),
-        `${hash(file.replace(/\\/g, '/'))}-${offset}`,
-        (node) => api(node, local),
+      const result = elementBindings(expressionSource(text), `${fileId}-${offset}`, (node) =>
+        api(node, local),
       );
       if (result) used = true;
       return result && { ...result, guards };

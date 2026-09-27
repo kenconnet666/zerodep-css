@@ -1,8 +1,8 @@
 # 声明、类名与顶层规则
 
-Vue/Svelte 的主入口提供 `css`、`keyframes`、`globalCss`、`className` 和作者类。样式组合统一由 `css` 处理，选择器使用作者对象的下划线方法；原 `cx`、独立 `ic` 及其旧类型已移除。浏览器与 Node 使用相同写法；服务端调用仍需活动宿主。
+Vue/Svelte 的主入口提供 `css`、`keyframes`、`globalCss`、`className` 和作者类。样式组合统一由 `css` 处理，选择器使用作者对象的下划线方法。浏览器与 Node 使用相同写法；服务端调用需活动宿主。
 
-属性类的 raw / 数学方法直接声明参数类型；`CssString` 集中承接任意字符串与关键字补全。基类只复用方法，不传递值类型泛型，详见[类型结构](author-types.md)。
+属性类的 raw / 数学方法直接声明参数类型；`CssString` 保留关键字补全并接受任意字符串。生成规则见[维护文档](maintenance.md#代码归属和生成器)。
 
 ```ts
 const title = className('Card.title');
@@ -47,8 +47,6 @@ const button = css(
 快捷方法为 `_hover`、`_active`、`_focus`、`_focusVisible`、`_focusWithin`、`_disabled`、`_checked`、`_before`、`_after`、`_placeholder`，分别对应原生伪类 / 伪元素。全部共享原型方法，不提供无前缀别名。`_selector(selector, ...parts)` 用 `CssSelector` 提供常见选择器、@ 规则、from/to 的补全，并允许任意字符串；没有对浏览器语法另做限制。
 
 快捷方法调用 `this._selector`，用户可以通过继承扩展自己的方法。仅显式 bx 表达式生成 CSS 变量；覆写快捷方法或 `_selector` 仍按用户实现执行，并接收原有声明字符串（其中可包含 var 引用）。
-
-`s.width.ic(1)` 仍是原生 CSS 的 ic 长度单位；本次移除的是原来的独立 `ic()` 选择器函数，不改变单位 API。
 
 全局块放在普通类样式之前，块之间按创建顺序排列。同名更新保留位置，移除再创建放在全局块末尾。更新全局块不会重写普通类的 CSSOM。动画与普通类按内容命名和复用，采用完整 UTF-16 的更宽哈希，仍保留冲突诊断。
 

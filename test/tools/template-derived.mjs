@@ -99,7 +99,10 @@ if (process.argv.includes('--compile-only')) {
           assert.equal(sample.classChanges, bound ? 0 : count);
           if (bound) {
             assert.equal(sample.final.rules, sample.initial.rules);
-            assert.equal(sample.final.bindings, count);
+            // bx 在模板元素上写变量；hoisted 在 setup 创建可传递的私有绑定。
+            const elementBindings = name.endsWith('-bx');
+            assert.equal(sample.final.bindings, elementBindings ? 0 : count);
+            assert.equal(sample.final.classes, elementBindings ? 1 : count);
             assert.equal(sample.afterDispose.bindings, 0);
           }
           delete sample.widths;

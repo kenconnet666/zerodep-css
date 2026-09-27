@@ -27,9 +27,25 @@ const className = css(s.display.flex, s.width._md, s._hover(s.color.red));
 
 `css(s.width.px(width))` 可直接放在 Vue/Svelte 模板表达式中。不开启转换时按值生成并缓存类；启用[bx 绑定插件](bindings.md)后，只有显式 bx(value) 使用 CSS 变量，常量也会转换。有限取值仍可预注册类表，通过 Vue `computed` 或 Svelte `$derived` 选择类名。`css(baseClass, active && s.color.red, [s.padding.px(8)])` 统一处理声明和已登记类的组合，始终返回一个样式类名；外部 class 和独立标记交给模板组合。`raw()` 原样拼接字符串，浏览器按原生 CSS 处理值和层叠。
 
-Vue/Svelte 组件初始化、有限状态选择与连续值绑定的对照写法及 SSR 边界见[框架结合研究](../.research/vue-svelte-runtime-integration.md)。
+## 包入口与示例
 
-可直接阅读和测试的组件位于[框架用法示例](framework-examples.md)，测试与文档引用同一份 Vue/Svelte 组件。
+| 入口                                       | 用途                                                              |
+| ------------------------------------------ | ----------------------------------------------------------------- |
+| `@zerodep-css/vue` / `@zerodep-css/svelte` | 组件统一入口，按 Node 条件选择服务器实现，其余构建使用 DOM 实现   |
+| 对应适配包的 `/server`                     | 手工 Node SSR；暴露请求宿主、序列化等服务器能力                   |
+| 对应适配包的 `/vite`                       | bx 与模板优化的构建插件                                           |
+| `@zerodep-css/core`                        | 框架无关的作者类与类型；适配器从 `/browser` 或 `/server` 选择宿主 |
+| `@zerodep-css/core/theme`                  | 可选 ThemeCss、主题属性类与 themes.light/dark                     |
+
+`core/compiler` 和适配包的 `/bindings` 是编译器内部协议，业务组件不直接调用。运行时不引入 TypeScript 编译器。Nuxt/Kit 包只提供元框架接入，不重复导出作者 API；配置见[元框架文档](metaframeworks.md)。
+
+| 示例               | Vue                                                                          | Svelte                                                                                   |
+| ------------------ | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| 上下文、作者实例   | [App.vue](../vue/examples/App.vue)、[context.ts](../vue/examples/context.ts) | [App.svelte](../svelte/examples/App.svelte)、[context.ts](../svelte/examples/context.ts) |
+| 声明、选择器与条件 | [Styles.vue](../vue/examples/Styles.vue)                                     | [Styles.svelte](../svelte/examples/Styles.svelte)                                        |
+| 预设主题与局部覆盖 | [Theme.vue](../vue/examples/Theme.vue)                                       | [Theme.svelte](../svelte/examples/Theme.svelte)                                          |
+
+这些组件就是 CI 使用的输入，不在文档复制另一份实现。静态样式在 setup 创建；动态结构用模板、computed/$derived 或普通函数；连续值优先 bx。适配器支持在派生求值中登记 CSS，但全局块更新和其他业务副作用不应放入派生 getter。模块顶层保留作者类型、上下文和纯声明字符串，SSR 的完整类名在活动请求宿主内创建。
 
 ## 手工 Node SSR 接入边界
 
@@ -59,4 +75,4 @@ const rules = host.rules();
 
 每个 Node 请求创建自己的宿主和根部 `AppCss`，不能把它们放在模块级共享。浏览器 hydration 之前，把服务端的规则放在 `style[data-zerodep-css]` 元素中，再调用 `hydrateCss(rules)`，随后挂载或 hydrate 组件。嵌入 HTML 时使用 `/server` 的 `serializeCssRules(rules)` 输出样式和 JSON 清单；自动读取清单的方式见[元框架接入](metaframeworks.md)。原始 `raw()` 不过滤任意 CSS。
 
-研究夹具的 Vue/Svelte 浏览器、并发 Node SSR、hydration 测试与[性能记录](../.research/minimum-usable-performance.md)提供了可运行的具体示例。缺少作者提供者或服务端活动宿主时会明确抛错。
+缺少作者提供者或服务端活动宿主时会明确抛错。浏览器、并发 Node SSR 和 hydration 用例由 [test/tools](../test/tools/README.md) 组织，完整运行交 CI；当前数据见[性能与验收](performance.md)。

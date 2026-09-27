@@ -1,6 +1,6 @@
 import ts from 'typescript';
 import { unitSuffix } from '../generated/base.js';
-import { selectorShortcuts } from '../selectors.js';
+import { selectorShortcuts } from '../selector-shortcuts.js';
 const selectors = new Set(['_selector', ...Object.keys(selectorShortcuts)]);
 
 // 以下方法表仅用于模板缓存的纯度检查，不再决定变量绑定。

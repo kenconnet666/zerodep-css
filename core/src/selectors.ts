@@ -1,7 +1,6 @@
 import { joinFragments, type CssInput } from './fragments.js';
 
 import { selectorShortcuts } from './selector-shortcuts.js';
-export { selectorShortcuts } from './selector-shortcuts.js';
 
 /** 常见项提供补全，任意原生选择器、@ 规则和动画帧均可直接输入。 */
 export type CssSelector =

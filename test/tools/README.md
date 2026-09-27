@@ -15,4 +15,4 @@
 
 CSS_PROBE_BROWSER_CHANNEL 可选 chromium、firefox、webkit，未设置时保留本机 Chrome 使用方式。CI 时间只做诊断，正确性和资源计数分别断言。结果写入 test-results 并作为任务独立 artifact 上传。
 
-历史性能样本在 results，历史决策在 ../../.research。已失效的单宿主 legacy 实现和命令已从当前工作树删除，可从 Git 历史恢复。
+历史性能样本在 results；旧研究稿、阶段决策和已移除实现从 Git 历史恢复。当前使用与维护说明统一在根目录 docs。
