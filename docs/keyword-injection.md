@@ -1,5 +1,7 @@
 # 注入关键字值的作者
 
+从五包统一的 0.2.0 版本开始提供。UI 消费端已用候选 tarball 验证 Provider、Icon 和表单控件的作用域主题与原始值读取。
+
 本次实现保留类继承和属性链：SystemKeywords 提供系统原始 CSS 值，用户主题继承它，Css(theme) 将当前主题值转换为声明。组件继续通过 createCssContext/useCss 获得作用域作者。
 
 - new Css() 保留原生行为；new Css(theme) 接受主题对象。new Css(() => currentTheme) 用于框架适配层跟踪主题整体替换，组件不需要重复传递主题。
