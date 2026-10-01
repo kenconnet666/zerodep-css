@@ -5,6 +5,76 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
 
 /**
+ * unicode-bidi 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class UnicodeBidiKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`unicode-bidi:bidi-override;`。 */
+  readonly bidiOverride: Property.UnicodeBidi | CssString = 'bidi-override';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`unicode-bidi:embed;`。 */
+  readonly embed: Property.UnicodeBidi | CssString = 'embed';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`unicode-bidi:inherit;`。
+   */
+  readonly inherit: Property.UnicodeBidi | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`unicode-bidi:initial;`。
+   */
+  readonly initial: Property.UnicodeBidi | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`unicode-bidi:isolate;`。 */
+  readonly isolate: Property.UnicodeBidi | CssString = 'isolate';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`unicode-bidi:isolate-override;`。 */
+  readonly isolateOverride: Property.UnicodeBidi | CssString = 'isolate-override';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`unicode-bidi:normal;`。 */
+  readonly normal: Property.UnicodeBidi | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`unicode-bidi:plaintext;`。 */
+  readonly plaintext: Property.UnicodeBidi | CssString = 'plaintext';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`unicode-bidi:revert;`。
+   */
+  readonly revert: Property.UnicodeBidi | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`unicode-bidi:revert-layer;`。
+   */
+  readonly revertLayer: Property.UnicodeBidi | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`unicode-bidi:unset;`。
+   */
+  readonly unset: Property.UnicodeBidi | CssString = 'unset';
+}
+
+/**
  * 设置元素如何参与 Unicode 双向文本算法，通常与 direction 配合。（unicode-bidi）
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
@@ -12,47 +82,47 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
  */
 export class UnicodeBidiCss extends CssProperty {
   /** CSS 声明：`unicode-bidi:bidi-override;`。 */
-  readonly bidiOverride = 'unicode-bidi:bidi-override;';
+  readonly bidiOverride: string = 'unicode-bidi:bidi-override;';
   /** CSS 声明：`unicode-bidi:embed;`。 */
-  readonly embed = 'unicode-bidi:embed;';
+  readonly embed: string = 'unicode-bidi:embed;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`unicode-bidi:inherit;`。
    */
-  readonly inherit = 'unicode-bidi:inherit;';
+  readonly inherit: string = 'unicode-bidi:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`unicode-bidi:initial;`。
    */
-  readonly initial = 'unicode-bidi:initial;';
+  readonly initial: string = 'unicode-bidi:initial;';
   /** CSS 声明：`unicode-bidi:isolate;`。 */
-  readonly isolate = 'unicode-bidi:isolate;';
+  readonly isolate: string = 'unicode-bidi:isolate;';
   /** CSS 声明：`unicode-bidi:isolate-override;`。 */
-  readonly isolateOverride = 'unicode-bidi:isolate-override;';
+  readonly isolateOverride: string = 'unicode-bidi:isolate-override;';
   /** CSS 声明：`unicode-bidi:normal;`。 */
-  readonly normal = 'unicode-bidi:normal;';
+  readonly normal: string = 'unicode-bidi:normal;';
   /** CSS 声明：`unicode-bidi:plaintext;`。 */
-  readonly plaintext = 'unicode-bidi:plaintext;';
+  readonly plaintext: string = 'unicode-bidi:plaintext;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`unicode-bidi:revert;`。
    */
-  readonly revert = 'unicode-bidi:revert;';
+  readonly revert: string = 'unicode-bidi:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`unicode-bidi:revert-layer;`。
    */
-  readonly revertLayer = 'unicode-bidi:revert-layer;';
+  readonly revertLayer: string = 'unicode-bidi:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`unicode-bidi:unset;`。
    */
-  readonly unset = 'unicode-bidi:unset;';
+  readonly unset: string = 'unicode-bidi:unset;';
   /**
    * 创建 unicode-bidi 属性作者；普通使用通过 s.unicodeBidi 取得共享实例。
    * @example
@@ -73,6 +143,84 @@ export class UnicodeBidiCss extends CssProperty {
   raw(value: Property.UnicodeBidi | CssString): string {
     return this.declaration(value);
   }
+}
+
+/**
+ * user-select 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class UserSelectKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 将元素内容作为整体选取单元。
+   *
+   * CSS 声明：`user-select:all;`。
+   */
+  readonly all: Property.UserSelect | CssString = 'all';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 由父级与元素上下文决定使用的选取行为。
+   *
+   * CSS 声明：`user-select:auto;`。
+   */
+  readonly auto: Property.UserSelect | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`user-select:inherit;`。
+   */
+  readonly inherit: Property.UserSelect | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`user-select:initial;`。
+   */
+  readonly initial: Property.UserSelect | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 阻止常规文本选取，不是内容保护或访问控制。
+   *
+   * CSS 声明：`user-select:none;`。
+   */
+  readonly none: Property.UserSelect | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`user-select:revert;`。
+   */
+  readonly revert: Property.UserSelect | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`user-select:revert-layer;`。
+   */
+  readonly revertLayer: Property.UserSelect | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 允许文本选取。
+   *
+   * CSS 声明：`user-select:text;`。
+   */
+  readonly text: Property.UserSelect | CssString = 'text';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`user-select:unset;`。
+   */
+  readonly unset: Property.UserSelect | CssString = 'unset';
 }
 
 /**
@@ -97,55 +245,55 @@ export class UserSelectCss extends CssProperty {
    *
    * CSS 声明：`user-select:all;`。
    */
-  readonly all = 'user-select:all;';
+  readonly all: string = 'user-select:all;';
   /**
    * 由父级与元素上下文决定使用的选取行为。
    *
    * CSS 声明：`user-select:auto;`。
    */
-  readonly auto = 'user-select:auto;';
+  readonly auto: string = 'user-select:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`user-select:inherit;`。
    */
-  readonly inherit = 'user-select:inherit;';
+  readonly inherit: string = 'user-select:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`user-select:initial;`。
    */
-  readonly initial = 'user-select:initial;';
+  readonly initial: string = 'user-select:initial;';
   /**
    * 阻止常规文本选取，不是内容保护或访问控制。
    *
    * CSS 声明：`user-select:none;`。
    */
-  readonly none = 'user-select:none;';
+  readonly none: string = 'user-select:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`user-select:revert;`。
    */
-  readonly revert = 'user-select:revert;';
+  readonly revert: string = 'user-select:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`user-select:revert-layer;`。
    */
-  readonly revertLayer = 'user-select:revert-layer;';
+  readonly revertLayer: string = 'user-select:revert-layer;';
   /**
    * 允许文本选取。
    *
    * CSS 声明：`user-select:text;`。
    */
-  readonly text = 'user-select:text;';
+  readonly text: string = 'user-select:text;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`user-select:unset;`。
    */
-  readonly unset = 'user-select:unset;';
+  readonly unset: string = 'user-select:unset;';
   /**
    * 创建 user-select 属性作者；普通使用通过 s.userSelect 取得共享实例。
    * @example
@@ -169,6 +317,72 @@ export class UserSelectCss extends CssProperty {
 }
 
 /**
+ * vector-effect 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class VectorEffectKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vector-effect:fixed-position;`。 */
+  readonly fixedPosition: Property.VectorEffect | CssString = 'fixed-position';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`vector-effect:inherit;`。
+   */
+  readonly inherit: Property.VectorEffect | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`vector-effect:initial;`。
+   */
+  readonly initial: Property.VectorEffect | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vector-effect:non-rotation;`。 */
+  readonly nonRotation: Property.VectorEffect | CssString = 'non-rotation';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vector-effect:non-scaling-size;`。 */
+  readonly nonScalingSize: Property.VectorEffect | CssString = 'non-scaling-size';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vector-effect:non-scaling-stroke;`。 */
+  readonly nonScalingStroke: Property.VectorEffect | CssString = 'non-scaling-stroke';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vector-effect:none;`。 */
+  readonly none: Property.VectorEffect | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`vector-effect:revert;`。
+   */
+  readonly revert: Property.VectorEffect | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`vector-effect:revert-layer;`。
+   */
+  readonly revertLayer: Property.VectorEffect | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`vector-effect:unset;`。
+   */
+  readonly unset: Property.VectorEffect | CssString = 'unset';
+}
+
+/**
  * 设置 SVG 图形变换时对描边等矢量效果的处理。（vector-effect）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -176,45 +390,45 @@ export class UserSelectCss extends CssProperty {
  */
 export class VectorEffectCss extends CssProperty {
   /** CSS 声明：`vector-effect:fixed-position;`。 */
-  readonly fixedPosition = 'vector-effect:fixed-position;';
+  readonly fixedPosition: string = 'vector-effect:fixed-position;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`vector-effect:inherit;`。
    */
-  readonly inherit = 'vector-effect:inherit;';
+  readonly inherit: string = 'vector-effect:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`vector-effect:initial;`。
    */
-  readonly initial = 'vector-effect:initial;';
+  readonly initial: string = 'vector-effect:initial;';
   /** CSS 声明：`vector-effect:non-rotation;`。 */
-  readonly nonRotation = 'vector-effect:non-rotation;';
+  readonly nonRotation: string = 'vector-effect:non-rotation;';
   /** CSS 声明：`vector-effect:non-scaling-size;`。 */
-  readonly nonScalingSize = 'vector-effect:non-scaling-size;';
+  readonly nonScalingSize: string = 'vector-effect:non-scaling-size;';
   /** CSS 声明：`vector-effect:non-scaling-stroke;`。 */
-  readonly nonScalingStroke = 'vector-effect:non-scaling-stroke;';
+  readonly nonScalingStroke: string = 'vector-effect:non-scaling-stroke;';
   /** CSS 声明：`vector-effect:none;`。 */
-  readonly none = 'vector-effect:none;';
+  readonly none: string = 'vector-effect:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`vector-effect:revert;`。
    */
-  readonly revert = 'vector-effect:revert;';
+  readonly revert: string = 'vector-effect:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`vector-effect:revert-layer;`。
    */
-  readonly revertLayer = 'vector-effect:revert-layer;';
+  readonly revertLayer: string = 'vector-effect:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`vector-effect:unset;`。
    */
-  readonly unset = 'vector-effect:unset;';
+  readonly unset: string = 'vector-effect:unset;';
   /**
    * 创建 vector-effect 属性作者；普通使用通过 s.vectorEffect 取得共享实例。
    * @example
@@ -238,6 +452,84 @@ export class VectorEffectCss extends CssProperty {
 }
 
 /**
+ * vertical-align 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class VerticalAlignKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vertical-align:baseline;`。 */
+  readonly baseline: Property.VerticalAlign | CssString = 'baseline';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vertical-align:bottom;`。 */
+  readonly bottom: Property.VerticalAlign | CssString = 'bottom';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`vertical-align:inherit;`。
+   */
+  readonly inherit: Property.VerticalAlign | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`vertical-align:initial;`。
+   */
+  readonly initial: Property.VerticalAlign | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vertical-align:middle;`。 */
+  readonly middle: Property.VerticalAlign | CssString = 'middle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`vertical-align:revert;`。
+   */
+  readonly revert: Property.VerticalAlign | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`vertical-align:revert-layer;`。
+   */
+  readonly revertLayer: Property.VerticalAlign | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vertical-align:sub;`。 */
+  readonly sub: Property.VerticalAlign | CssString = 'sub';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vertical-align:super;`。 */
+  readonly super: Property.VerticalAlign | CssString = 'super';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vertical-align:text-bottom;`。 */
+  readonly textBottom: Property.VerticalAlign | CssString = 'text-bottom';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vertical-align:text-top;`。 */
+  readonly textTop: Property.VerticalAlign | CssString = 'text-top';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`vertical-align:top;`。 */
+  readonly top: Property.VerticalAlign | CssString = 'top';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`vertical-align:unset;`。
+   */
+  readonly unset: Property.VerticalAlign | CssString = 'unset';
+}
+
+/**
  * 设置行内级盒子或表格单元格的垂直对齐，不用于普通块盒居中。（vertical-align）
  *
  * CSS 初始值：`baseline`（不同于浏览器默认样式表）。
@@ -245,51 +537,51 @@ export class VectorEffectCss extends CssProperty {
  */
 export class VerticalAlignCss extends LengthCssProperty {
   /** CSS 声明：`vertical-align:baseline;`。 */
-  readonly baseline = 'vertical-align:baseline;';
+  readonly baseline: string = 'vertical-align:baseline;';
   /** CSS 声明：`vertical-align:bottom;`。 */
-  readonly bottom = 'vertical-align:bottom;';
+  readonly bottom: string = 'vertical-align:bottom;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`vertical-align:inherit;`。
    */
-  readonly inherit = 'vertical-align:inherit;';
+  readonly inherit: string = 'vertical-align:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`vertical-align:initial;`。
    */
-  readonly initial = 'vertical-align:initial;';
+  readonly initial: string = 'vertical-align:initial;';
   /** CSS 声明：`vertical-align:middle;`。 */
-  readonly middle = 'vertical-align:middle;';
+  readonly middle: string = 'vertical-align:middle;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`vertical-align:revert;`。
    */
-  readonly revert = 'vertical-align:revert;';
+  readonly revert: string = 'vertical-align:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`vertical-align:revert-layer;`。
    */
-  readonly revertLayer = 'vertical-align:revert-layer;';
+  readonly revertLayer: string = 'vertical-align:revert-layer;';
   /** CSS 声明：`vertical-align:sub;`。 */
-  readonly sub = 'vertical-align:sub;';
+  readonly sub: string = 'vertical-align:sub;';
   /** CSS 声明：`vertical-align:super;`。 */
-  readonly super = 'vertical-align:super;';
+  readonly super: string = 'vertical-align:super;';
   /** CSS 声明：`vertical-align:text-bottom;`。 */
-  readonly textBottom = 'vertical-align:text-bottom;';
+  readonly textBottom: string = 'vertical-align:text-bottom;';
   /** CSS 声明：`vertical-align:text-top;`。 */
-  readonly textTop = 'vertical-align:text-top;';
+  readonly textTop: string = 'vertical-align:text-top;';
   /** CSS 声明：`vertical-align:top;`。 */
-  readonly top = 'vertical-align:top;';
+  readonly top: string = 'vertical-align:top;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`vertical-align:unset;`。
    */
-  readonly unset = 'vertical-align:unset;';
+  readonly unset: string = 'vertical-align:unset;';
   /**
    * 创建 vertical-align 属性作者；普通使用通过 s.verticalAlign 取得共享实例。
    * @example
@@ -381,6 +673,56 @@ export class VerticalAlignCss extends LengthCssProperty {
 }
 
 /**
+ * view-timeline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ViewTimelineKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`view-timeline:inherit;`。
+   */
+  readonly inherit: Property.ViewTimeline | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`view-timeline:initial;`。
+   */
+  readonly initial: Property.ViewTimeline | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-timeline:none;`。 */
+  readonly none: Property.ViewTimeline | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`view-timeline:revert;`。
+   */
+  readonly revert: Property.ViewTimeline | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`view-timeline:revert-layer;`。
+   */
+  readonly revertLayer: Property.ViewTimeline | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`view-timeline:unset;`。
+   */
+  readonly unset: Property.ViewTimeline | CssString = 'unset';
+}
+
+/**
  * 同时声明基于元素可见进度的时间线名称与轴。（view-timeline）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline
  */
@@ -390,33 +732,33 @@ export class ViewTimelineCss extends CssProperty {
    *
    * CSS 声明：`view-timeline:inherit;`。
    */
-  readonly inherit = 'view-timeline:inherit;';
+  readonly inherit: string = 'view-timeline:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`view-timeline:initial;`。
    */
-  readonly initial = 'view-timeline:initial;';
+  readonly initial: string = 'view-timeline:initial;';
   /** CSS 声明：`view-timeline:none;`。 */
-  readonly none = 'view-timeline:none;';
+  readonly none: string = 'view-timeline:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`view-timeline:revert;`。
    */
-  readonly revert = 'view-timeline:revert;';
+  readonly revert: string = 'view-timeline:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`view-timeline:revert-layer;`。
    */
-  readonly revertLayer = 'view-timeline:revert-layer;';
+  readonly revertLayer: string = 'view-timeline:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`view-timeline:unset;`。
    */
-  readonly unset = 'view-timeline:unset;';
+  readonly unset: string = 'view-timeline:unset;';
   /**
    * 创建 view-timeline 属性作者；普通使用通过 s.viewTimeline 取得共享实例。
    * @example
@@ -440,6 +782,68 @@ export class ViewTimelineCss extends CssProperty {
 }
 
 /**
+ * view-timeline-axis 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ViewTimelineAxisKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-timeline-axis:block;`。 */
+  readonly block: Property.ViewTimelineAxis | CssString = 'block';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`view-timeline-axis:inherit;`。
+   */
+  readonly inherit: Property.ViewTimelineAxis | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`view-timeline-axis:initial;`。
+   */
+  readonly initial: Property.ViewTimelineAxis | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-timeline-axis:inline;`。 */
+  readonly inline: Property.ViewTimelineAxis | CssString = 'inline';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`view-timeline-axis:revert;`。
+   */
+  readonly revert: Property.ViewTimelineAxis | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`view-timeline-axis:revert-layer;`。
+   */
+  readonly revertLayer: Property.ViewTimelineAxis | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`view-timeline-axis:unset;`。
+   */
+  readonly unset: Property.ViewTimelineAxis | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-timeline-axis:x;`。 */
+  readonly x: Property.ViewTimelineAxis | CssString = 'x';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-timeline-axis:y;`。 */
+  readonly y: Property.ViewTimelineAxis | CssString = 'y';
+}
+
+/**
  * 设置可见进度时间线所观察的滚动轴。（view-timeline-axis）
  *
  * CSS 初始值：`block`（不同于浏览器默认样式表）。
@@ -447,43 +851,43 @@ export class ViewTimelineCss extends CssProperty {
  */
 export class ViewTimelineAxisCss extends CssProperty {
   /** CSS 声明：`view-timeline-axis:block;`。 */
-  readonly block = 'view-timeline-axis:block;';
+  readonly block: string = 'view-timeline-axis:block;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`view-timeline-axis:inherit;`。
    */
-  readonly inherit = 'view-timeline-axis:inherit;';
+  readonly inherit: string = 'view-timeline-axis:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`view-timeline-axis:initial;`。
    */
-  readonly initial = 'view-timeline-axis:initial;';
+  readonly initial: string = 'view-timeline-axis:initial;';
   /** CSS 声明：`view-timeline-axis:inline;`。 */
-  readonly inline = 'view-timeline-axis:inline;';
+  readonly inline: string = 'view-timeline-axis:inline;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`view-timeline-axis:revert;`。
    */
-  readonly revert = 'view-timeline-axis:revert;';
+  readonly revert: string = 'view-timeline-axis:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`view-timeline-axis:revert-layer;`。
    */
-  readonly revertLayer = 'view-timeline-axis:revert-layer;';
+  readonly revertLayer: string = 'view-timeline-axis:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`view-timeline-axis:unset;`。
    */
-  readonly unset = 'view-timeline-axis:unset;';
+  readonly unset: string = 'view-timeline-axis:unset;';
   /** CSS 声明：`view-timeline-axis:x;`。 */
-  readonly x = 'view-timeline-axis:x;';
+  readonly x: string = 'view-timeline-axis:x;';
   /** CSS 声明：`view-timeline-axis:y;`。 */
-  readonly y = 'view-timeline-axis:y;';
+  readonly y: string = 'view-timeline-axis:y;';
   /**
    * 创建 view-timeline-axis 属性作者；普通使用通过 s.viewTimelineAxis 取得共享实例。
    * @example
@@ -507,6 +911,56 @@ export class ViewTimelineAxisCss extends CssProperty {
 }
 
 /**
+ * view-timeline-inset 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ViewTimelineInsetKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-timeline-inset:auto;`。 */
+  readonly auto: Property.ViewTimelineInset | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`view-timeline-inset:inherit;`。
+   */
+  readonly inherit: Property.ViewTimelineInset | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`view-timeline-inset:initial;`。
+   */
+  readonly initial: Property.ViewTimelineInset | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`view-timeline-inset:revert;`。
+   */
+  readonly revert: Property.ViewTimelineInset | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`view-timeline-inset:revert-layer;`。
+   */
+  readonly revertLayer: Property.ViewTimelineInset | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`view-timeline-inset:unset;`。
+   */
+  readonly unset: Property.ViewTimelineInset | CssString = 'unset';
+}
+
+/**
  * 设置可见进度时间线使用的滚动视口内缩范围。（view-timeline-inset）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -514,37 +968,37 @@ export class ViewTimelineAxisCss extends CssProperty {
  */
 export class ViewTimelineInsetCss extends LengthCssProperty {
   /** CSS 声明：`view-timeline-inset:auto;`。 */
-  readonly auto = 'view-timeline-inset:auto;';
+  readonly auto: string = 'view-timeline-inset:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`view-timeline-inset:inherit;`。
    */
-  readonly inherit = 'view-timeline-inset:inherit;';
+  readonly inherit: string = 'view-timeline-inset:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`view-timeline-inset:initial;`。
    */
-  readonly initial = 'view-timeline-inset:initial;';
+  readonly initial: string = 'view-timeline-inset:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`view-timeline-inset:revert;`。
    */
-  readonly revert = 'view-timeline-inset:revert;';
+  readonly revert: string = 'view-timeline-inset:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`view-timeline-inset:revert-layer;`。
    */
-  readonly revertLayer = 'view-timeline-inset:revert-layer;';
+  readonly revertLayer: string = 'view-timeline-inset:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`view-timeline-inset:unset;`。
    */
-  readonly unset = 'view-timeline-inset:unset;';
+  readonly unset: string = 'view-timeline-inset:unset;';
   /**
    * 创建 view-timeline-inset 属性作者；普通使用通过 s.viewTimelineInset 取得共享实例。
    * @example
@@ -1824,6 +2278,56 @@ export class ViewTimelineInsetCss extends LengthCssProperty {
 }
 
 /**
+ * view-timeline-name 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ViewTimelineNameKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`view-timeline-name:inherit;`。
+   */
+  readonly inherit: Property.ViewTimelineName | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`view-timeline-name:initial;`。
+   */
+  readonly initial: Property.ViewTimelineName | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-timeline-name:none;`。 */
+  readonly none: Property.ViewTimelineName | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`view-timeline-name:revert;`。
+   */
+  readonly revert: Property.ViewTimelineName | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`view-timeline-name:revert-layer;`。
+   */
+  readonly revertLayer: Property.ViewTimelineName | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`view-timeline-name:unset;`。
+   */
+  readonly unset: Property.ViewTimelineName | CssString = 'unset';
+}
+
+/**
  * 声明基于元素进入和离开滚动视口的时间线名称。（view-timeline-name）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -1835,33 +2339,33 @@ export class ViewTimelineNameCss extends CssProperty {
    *
    * CSS 声明：`view-timeline-name:inherit;`。
    */
-  readonly inherit = 'view-timeline-name:inherit;';
+  readonly inherit: string = 'view-timeline-name:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`view-timeline-name:initial;`。
    */
-  readonly initial = 'view-timeline-name:initial;';
+  readonly initial: string = 'view-timeline-name:initial;';
   /** CSS 声明：`view-timeline-name:none;`。 */
-  readonly none = 'view-timeline-name:none;';
+  readonly none: string = 'view-timeline-name:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`view-timeline-name:revert;`。
    */
-  readonly revert = 'view-timeline-name:revert;';
+  readonly revert: string = 'view-timeline-name:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`view-timeline-name:revert-layer;`。
    */
-  readonly revertLayer = 'view-timeline-name:revert-layer;';
+  readonly revertLayer: string = 'view-timeline-name:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`view-timeline-name:unset;`。
    */
-  readonly unset = 'view-timeline-name:unset;';
+  readonly unset: string = 'view-timeline-name:unset;';
   /**
    * 创建 view-timeline-name 属性作者；普通使用通过 s.viewTimelineName 取得共享实例。
    * @example
@@ -1885,6 +2389,56 @@ export class ViewTimelineNameCss extends CssProperty {
 }
 
 /**
+ * view-transition-class 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ViewTransitionClassKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`view-transition-class:inherit;`。
+   */
+  readonly inherit: Property.ViewTransitionClass | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`view-transition-class:initial;`。
+   */
+  readonly initial: Property.ViewTransitionClass | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-transition-class:none;`。 */
+  readonly none: Property.ViewTransitionClass | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`view-transition-class:revert;`。
+   */
+  readonly revert: Property.ViewTransitionClass | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`view-transition-class:revert-layer;`。
+   */
+  readonly revertLayer: Property.ViewTransitionClass | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`view-transition-class:unset;`。
+   */
+  readonly unset: Property.ViewTransitionClass | CssString = 'unset';
+}
+
+/**
  * 为视图过渡的快照伪元素分组，以便共用样式。（view-transition-class）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -1896,33 +2450,33 @@ export class ViewTransitionClassCss extends CssProperty {
    *
    * CSS 声明：`view-transition-class:inherit;`。
    */
-  readonly inherit = 'view-transition-class:inherit;';
+  readonly inherit: string = 'view-transition-class:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`view-transition-class:initial;`。
    */
-  readonly initial = 'view-transition-class:initial;';
+  readonly initial: string = 'view-transition-class:initial;';
   /** CSS 声明：`view-transition-class:none;`。 */
-  readonly none = 'view-transition-class:none;';
+  readonly none: string = 'view-transition-class:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`view-transition-class:revert;`。
    */
-  readonly revert = 'view-transition-class:revert;';
+  readonly revert: string = 'view-transition-class:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`view-transition-class:revert-layer;`。
    */
-  readonly revertLayer = 'view-transition-class:revert-layer;';
+  readonly revertLayer: string = 'view-transition-class:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`view-transition-class:unset;`。
    */
-  readonly unset = 'view-transition-class:unset;';
+  readonly unset: string = 'view-transition-class:unset;';
   /**
    * 创建 view-transition-class 属性作者；普通使用通过 s.viewTransitionClass 取得共享实例。
    * @example
@@ -1946,6 +2500,60 @@ export class ViewTransitionClassCss extends CssProperty {
 }
 
 /**
+ * view-transition-name 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ViewTransitionNameKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`view-transition-name:inherit;`。
+   */
+  readonly inherit: Property.ViewTransitionName | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`view-transition-name:initial;`。
+   */
+  readonly initial: Property.ViewTransitionName | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-transition-name:match-element;`。 */
+  readonly matchElement: Property.ViewTransitionName | CssString = 'match-element';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`view-transition-name:none;`。 */
+  readonly none: Property.ViewTransitionName | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`view-transition-name:revert;`。
+   */
+  readonly revert: Property.ViewTransitionName | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`view-transition-name:revert-layer;`。
+   */
+  readonly revertLayer: Property.ViewTransitionName | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`view-transition-name:unset;`。
+   */
+  readonly unset: Property.ViewTransitionName | CssString = 'unset';
+}
+
+/**
  * 为视图过渡中的元素命名，以匹配前后状态的快照。（view-transition-name）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -1957,35 +2565,35 @@ export class ViewTransitionNameCss extends CssProperty {
    *
    * CSS 声明：`view-transition-name:inherit;`。
    */
-  readonly inherit = 'view-transition-name:inherit;';
+  readonly inherit: string = 'view-transition-name:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`view-transition-name:initial;`。
    */
-  readonly initial = 'view-transition-name:initial;';
+  readonly initial: string = 'view-transition-name:initial;';
   /** CSS 声明：`view-transition-name:match-element;`。 */
-  readonly matchElement = 'view-transition-name:match-element;';
+  readonly matchElement: string = 'view-transition-name:match-element;';
   /** CSS 声明：`view-transition-name:none;`。 */
-  readonly none = 'view-transition-name:none;';
+  readonly none: string = 'view-transition-name:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`view-transition-name:revert;`。
    */
-  readonly revert = 'view-transition-name:revert;';
+  readonly revert: string = 'view-transition-name:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`view-transition-name:revert-layer;`。
    */
-  readonly revertLayer = 'view-transition-name:revert-layer;';
+  readonly revertLayer: string = 'view-transition-name:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`view-transition-name:unset;`。
    */
-  readonly unset = 'view-transition-name:unset;';
+  readonly unset: string = 'view-transition-name:unset;';
   /**
    * 创建 view-transition-name 属性作者；普通使用通过 s.viewTransitionName 取得共享实例。
    * @example
@@ -2009,6 +2617,83 @@ export class ViewTransitionNameCss extends CssProperty {
 }
 
 /**
+ * visibility 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class VisibilityKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 对表格行列等特定布局有折叠语义，其他场景通常类似 hidden；应核对具体布局行为。
+   *
+   * CSS 声明：`visibility:collapse;`。
+   */
+  readonly collapse: Property.Visibility | CssString = 'collapse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 隐藏绘制但通常保留布局空间；后代可显式恢复 visible。
+   *
+   * 区别：display:none 不保留布局盒；opacity:0 不会以相同方式移除交互和可访问性。
+   *
+   * 适用场景：暂时隐藏占位内容。
+   *
+   * CSS 声明：`visibility:hidden;`。
+   * @example
+   * s.visibility.hidden
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/visibility
+   */
+  readonly hidden: Property.Visibility | CssString = 'hidden';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`visibility:inherit;`。
+   */
+  readonly inherit: Property.Visibility | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`visibility:initial;`。
+   */
+  readonly initial: Property.Visibility | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`visibility:revert;`。
+   */
+  readonly revert: Property.Visibility | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`visibility:revert-layer;`。
+   */
+  readonly revertLayer: Property.Visibility | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`visibility:unset;`。
+   */
+  readonly unset: Property.Visibility | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 正常显示元素。
+   *
+   * CSS 声明：`visibility:visible;`。
+   */
+  readonly visible: Property.Visibility | CssString = 'visible';
+}
+
+/**
  * 设置元素是否可见；隐藏通常保留布局空间。（visibility）
  *
  * 常用值：
@@ -2029,7 +2714,7 @@ export class VisibilityCss extends CssProperty {
    *
    * CSS 声明：`visibility:collapse;`。
    */
-  readonly collapse = 'visibility:collapse;';
+  readonly collapse: string = 'visibility:collapse;';
   /**
    * 隐藏绘制但通常保留布局空间；后代可显式恢复 visible。
    *
@@ -2042,43 +2727,43 @@ export class VisibilityCss extends CssProperty {
    * s.visibility.hidden
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/visibility
    */
-  readonly hidden = 'visibility:hidden;';
+  readonly hidden: string = 'visibility:hidden;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`visibility:inherit;`。
    */
-  readonly inherit = 'visibility:inherit;';
+  readonly inherit: string = 'visibility:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`visibility:initial;`。
    */
-  readonly initial = 'visibility:initial;';
+  readonly initial: string = 'visibility:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`visibility:revert;`。
    */
-  readonly revert = 'visibility:revert;';
+  readonly revert: string = 'visibility:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`visibility:revert-layer;`。
    */
-  readonly revertLayer = 'visibility:revert-layer;';
+  readonly revertLayer: string = 'visibility:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`visibility:unset;`。
    */
-  readonly unset = 'visibility:unset;';
+  readonly unset: string = 'visibility:unset;';
   /**
    * 正常显示元素。
    *
    * CSS 声明：`visibility:visible;`。
    */
-  readonly visible = 'visibility:visible;';
+  readonly visible: string = 'visibility:visible;';
   /**
    * 创建 visibility 属性作者；普通使用通过 s.visibility 取得共享实例。
    * @example
@@ -2099,6 +2784,134 @@ export class VisibilityCss extends CssProperty {
   raw(value: Property.Visibility | CssString): string {
     return this.declaration(value);
   }
+}
+
+/**
+ * white-space 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class WhiteSpaceKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 保留空白并允许在保留的空格后换行；行末空格占据空间。
+   *
+   * CSS 声明：`white-space:break-spaces;`。
+   */
+  readonly breakSpaces: Property.WhiteSpace | CssString = 'break-spaces';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space:collapse;`。 */
+  readonly collapse: Property.WhiteSpace | CssString = 'collapse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`white-space:inherit;`。
+   */
+  readonly inherit: Property.WhiteSpace | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`white-space:initial;`。
+   */
+  readonly initial: Property.WhiteSpace | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 折叠连续空白和源换行，允许软换行。
+   *
+   * CSS 声明：`white-space:normal;`。
+   */
+  readonly normal: Property.WhiteSpace | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 折叠空白并禁止软换行；不会自行生成省略号。
+   *
+   * 区别：pre 也不进行普通软换行，但会保留连续空白。
+   *
+   * 适用场景：单行标签；结合宽度约束、overflow 和 text-overflow 实现省略。
+   *
+   * CSS 声明：`white-space:nowrap;`。
+   * @example
+   * css(s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
+   */
+  readonly nowrap: Property.WhiteSpace | CssString = 'nowrap';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 保留空白和源换行，不进行普通软换行。
+   *
+   * CSS 声明：`white-space:pre;`。
+   */
+  readonly pre: Property.WhiteSpace | CssString = 'pre';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 折叠空格等空白但保留源换行，同时允许软换行。
+   *
+   * CSS 声明：`white-space:pre-line;`。
+   */
+  readonly preLine: Property.WhiteSpace | CssString = 'pre-line';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 保留空白和源换行，同时允许软换行。
+   *
+   * 区别：pre 不进行普通软换行；pre-line 会折叠连续空格。
+   *
+   * 适用场景：需要保留用户换行和空格，同时允许适应容器宽度的文本。
+   *
+   * CSS 声明：`white-space:pre-wrap;`。
+   * @example
+   * s.whiteSpace.preWrap
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
+   */
+  readonly preWrap: Property.WhiteSpace | CssString = 'pre-wrap';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space:preserve;`。 */
+  readonly preserve: Property.WhiteSpace | CssString = 'preserve';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space:preserve-breaks;`。 */
+  readonly preserveBreaks: Property.WhiteSpace | CssString = 'preserve-breaks';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space:preserve-spaces;`。 */
+  readonly preserveSpaces: Property.WhiteSpace | CssString = 'preserve-spaces';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`white-space:revert;`。
+   */
+  readonly revert: Property.WhiteSpace | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`white-space:revert-layer;`。
+   */
+  readonly revertLayer: Property.WhiteSpace | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`white-space:unset;`。
+   */
+  readonly unset: Property.WhiteSpace | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space:wrap;`。 */
+  readonly wrap: Property.WhiteSpace | CssString = 'wrap';
 }
 
 /**
@@ -2127,27 +2940,27 @@ export class WhiteSpaceCss extends CssProperty {
    *
    * CSS 声明：`white-space:break-spaces;`。
    */
-  readonly breakSpaces = 'white-space:break-spaces;';
+  readonly breakSpaces: string = 'white-space:break-spaces;';
   /** CSS 声明：`white-space:collapse;`。 */
-  readonly collapse = 'white-space:collapse;';
+  readonly collapse: string = 'white-space:collapse;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`white-space:inherit;`。
    */
-  readonly inherit = 'white-space:inherit;';
+  readonly inherit: string = 'white-space:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`white-space:initial;`。
    */
-  readonly initial = 'white-space:initial;';
+  readonly initial: string = 'white-space:initial;';
   /**
    * 折叠连续空白和源换行，允许软换行。
    *
    * CSS 声明：`white-space:normal;`。
    */
-  readonly normal = 'white-space:normal;';
+  readonly normal: string = 'white-space:normal;';
   /**
    * 折叠空白并禁止软换行；不会自行生成省略号。
    *
@@ -2160,19 +2973,19 @@ export class WhiteSpaceCss extends CssProperty {
    * css(s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
    */
-  readonly nowrap = 'white-space:nowrap;';
+  readonly nowrap: string = 'white-space:nowrap;';
   /**
    * 保留空白和源换行，不进行普通软换行。
    *
    * CSS 声明：`white-space:pre;`。
    */
-  readonly pre = 'white-space:pre;';
+  readonly pre: string = 'white-space:pre;';
   /**
    * 折叠空格等空白但保留源换行，同时允许软换行。
    *
    * CSS 声明：`white-space:pre-line;`。
    */
-  readonly preLine = 'white-space:pre-line;';
+  readonly preLine: string = 'white-space:pre-line;';
   /**
    * 保留空白和源换行，同时允许软换行。
    *
@@ -2185,33 +2998,33 @@ export class WhiteSpaceCss extends CssProperty {
    * s.whiteSpace.preWrap
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
    */
-  readonly preWrap = 'white-space:pre-wrap;';
+  readonly preWrap: string = 'white-space:pre-wrap;';
   /** CSS 声明：`white-space:preserve;`。 */
-  readonly preserve = 'white-space:preserve;';
+  readonly preserve: string = 'white-space:preserve;';
   /** CSS 声明：`white-space:preserve-breaks;`。 */
-  readonly preserveBreaks = 'white-space:preserve-breaks;';
+  readonly preserveBreaks: string = 'white-space:preserve-breaks;';
   /** CSS 声明：`white-space:preserve-spaces;`。 */
-  readonly preserveSpaces = 'white-space:preserve-spaces;';
+  readonly preserveSpaces: string = 'white-space:preserve-spaces;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`white-space:revert;`。
    */
-  readonly revert = 'white-space:revert;';
+  readonly revert: string = 'white-space:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`white-space:revert-layer;`。
    */
-  readonly revertLayer = 'white-space:revert-layer;';
+  readonly revertLayer: string = 'white-space:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`white-space:unset;`。
    */
-  readonly unset = 'white-space:unset;';
+  readonly unset: string = 'white-space:unset;';
   /** CSS 声明：`white-space:wrap;`。 */
-  readonly wrap = 'white-space:wrap;';
+  readonly wrap: string = 'white-space:wrap;';
   /**
    * 创建 white-space 属性作者；普通使用通过 s.whiteSpace 取得共享实例。
    * @example
@@ -2235,6 +3048,72 @@ export class WhiteSpaceCss extends CssProperty {
 }
 
 /**
+ * white-space-collapse 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class WhiteSpaceCollapseKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space-collapse:break-spaces;`。 */
+  readonly breakSpaces: Property.WhiteSpaceCollapse | CssString = 'break-spaces';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space-collapse:collapse;`。 */
+  readonly collapse: Property.WhiteSpaceCollapse | CssString = 'collapse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`white-space-collapse:inherit;`。
+   */
+  readonly inherit: Property.WhiteSpaceCollapse | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`white-space-collapse:initial;`。
+   */
+  readonly initial: Property.WhiteSpaceCollapse | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space-collapse:preserve;`。 */
+  readonly preserve: Property.WhiteSpaceCollapse | CssString = 'preserve';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space-collapse:preserve-breaks;`。 */
+  readonly preserveBreaks: Property.WhiteSpaceCollapse | CssString = 'preserve-breaks';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`white-space-collapse:preserve-spaces;`。 */
+  readonly preserveSpaces: Property.WhiteSpaceCollapse | CssString = 'preserve-spaces';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`white-space-collapse:revert;`。
+   */
+  readonly revert: Property.WhiteSpaceCollapse | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`white-space-collapse:revert-layer;`。
+   */
+  readonly revertLayer: Property.WhiteSpaceCollapse | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`white-space-collapse:unset;`。
+   */
+  readonly unset: Property.WhiteSpaceCollapse | CssString = 'unset';
+}
+
+/**
  * 设置空格、制表符和换行符如何折叠或保留。（white-space-collapse）
  *
  * CSS 初始值：`collapse`（不同于浏览器默认样式表）。
@@ -2242,45 +3121,45 @@ export class WhiteSpaceCss extends CssProperty {
  */
 export class WhiteSpaceCollapseCss extends CssProperty {
   /** CSS 声明：`white-space-collapse:break-spaces;`。 */
-  readonly breakSpaces = 'white-space-collapse:break-spaces;';
+  readonly breakSpaces: string = 'white-space-collapse:break-spaces;';
   /** CSS 声明：`white-space-collapse:collapse;`。 */
-  readonly collapse = 'white-space-collapse:collapse;';
+  readonly collapse: string = 'white-space-collapse:collapse;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`white-space-collapse:inherit;`。
    */
-  readonly inherit = 'white-space-collapse:inherit;';
+  readonly inherit: string = 'white-space-collapse:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`white-space-collapse:initial;`。
    */
-  readonly initial = 'white-space-collapse:initial;';
+  readonly initial: string = 'white-space-collapse:initial;';
   /** CSS 声明：`white-space-collapse:preserve;`。 */
-  readonly preserve = 'white-space-collapse:preserve;';
+  readonly preserve: string = 'white-space-collapse:preserve;';
   /** CSS 声明：`white-space-collapse:preserve-breaks;`。 */
-  readonly preserveBreaks = 'white-space-collapse:preserve-breaks;';
+  readonly preserveBreaks: string = 'white-space-collapse:preserve-breaks;';
   /** CSS 声明：`white-space-collapse:preserve-spaces;`。 */
-  readonly preserveSpaces = 'white-space-collapse:preserve-spaces;';
+  readonly preserveSpaces: string = 'white-space-collapse:preserve-spaces;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`white-space-collapse:revert;`。
    */
-  readonly revert = 'white-space-collapse:revert;';
+  readonly revert: string = 'white-space-collapse:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`white-space-collapse:revert-layer;`。
    */
-  readonly revertLayer = 'white-space-collapse:revert-layer;';
+  readonly revertLayer: string = 'white-space-collapse:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`white-space-collapse:unset;`。
    */
-  readonly unset = 'white-space-collapse:unset;';
+  readonly unset: string = 'white-space-collapse:unset;';
   /**
    * 创建 white-space-collapse 属性作者；普通使用通过 s.whiteSpaceCollapse 取得共享实例。
    * @example
@@ -2304,6 +3183,52 @@ export class WhiteSpaceCollapseCss extends CssProperty {
 }
 
 /**
+ * widows 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class WidowsKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`widows:inherit;`。
+   */
+  readonly inherit: Property.Widows | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`widows:initial;`。
+   */
+  readonly initial: Property.Widows | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`widows:revert;`。
+   */
+  readonly revert: Property.Widows | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`widows:revert-layer;`。
+   */
+  readonly revertLayer: Property.Widows | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`widows:unset;`。
+   */
+  readonly unset: Property.Widows | CssString = 'unset';
+}
+
+/**
  * 设置分页或分栏断点后需保留的最少行数。（widows）
  *
  * CSS 初始值：`2`（不同于浏览器默认样式表）。
@@ -2315,31 +3240,31 @@ export class WidowsCss extends CssProperty {
    *
    * CSS 声明：`widows:inherit;`。
    */
-  readonly inherit = 'widows:inherit;';
+  readonly inherit: string = 'widows:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`widows:initial;`。
    */
-  readonly initial = 'widows:initial;';
+  readonly initial: string = 'widows:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`widows:revert;`。
    */
-  readonly revert = 'widows:revert;';
+  readonly revert: string = 'widows:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`widows:revert-layer;`。
    */
-  readonly revertLayer = 'widows:revert-layer;';
+  readonly revertLayer: string = 'widows:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`widows:unset;`。
    */
-  readonly unset = 'widows:unset;';
+  readonly unset: string = 'widows:unset;';
   /**
    * 创建 widows 属性作者；普通使用通过 s.widows 取得共享实例。
    * @example
@@ -2413,6 +3338,92 @@ export class WidowsCss extends CssProperty {
 }
 
 /**
+ * width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class WidthKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 让布局算法决定尺寸，不保证等于父元素尺寸。
+   *
+   * CSS 声明：`width:auto;`。
+   */
+  readonly auto: Property.Width | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 在最小和最大内部尺寸之间按可用空间夹取尺寸。
+   *
+   * CSS 声明：`width:fit-content;`。
+   */
+  readonly fitContent: Property.Width | CssString = 'fit-content';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`width:inherit;`。
+   */
+  readonly inherit: Property.Width | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`width:initial;`。
+   */
+  readonly initial: Property.Width | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`width:intrinsic;`。 */
+  readonly intrinsic: Property.Width | CssString = 'intrinsic';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 采用内容的最大内部尺寸，通常不进行软换行。
+   *
+   * CSS 声明：`width:max-content;`。
+   */
+  readonly maxContent: Property.Width | CssString = 'max-content';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 采用内容的最小内部尺寸，文字会考虑可用的软换行机会。
+   *
+   * CSS 声明：`width:min-content;`。
+   */
+  readonly minContent: Property.Width | CssString = 'min-content';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`width:min-intrinsic;`。 */
+  readonly minIntrinsic: Property.Width | CssString = 'min-intrinsic';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`width:revert;`。
+   */
+  readonly revert: Property.Width | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`width:revert-layer;`。
+   */
+  readonly revertLayer: Property.Width | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`width:unset;`。
+   */
+  readonly unset: Property.Width | CssString = 'unset';
+}
+
+/**
  * 设置元素的物理宽度，盒子范围受 box-sizing 影响。（width）
  *
  * 百分比依据包含块解析；auto、内部尺寸和最小/最大约束共同决定最终使用尺寸。
@@ -2438,59 +3449,59 @@ export class WidthCss extends LengthCssProperty {
    *
    * CSS 声明：`width:auto;`。
    */
-  readonly auto = 'width:auto;';
+  readonly auto: string = 'width:auto;';
   /**
    * 在最小和最大内部尺寸之间按可用空间夹取尺寸。
    *
    * CSS 声明：`width:fit-content;`。
    */
-  readonly fitContent = 'width:fit-content;';
+  readonly fitContent: string = 'width:fit-content;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`width:inherit;`。
    */
-  readonly inherit = 'width:inherit;';
+  readonly inherit: string = 'width:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`width:initial;`。
    */
-  readonly initial = 'width:initial;';
+  readonly initial: string = 'width:initial;';
   /** CSS 声明：`width:intrinsic;`。 */
-  readonly intrinsic = 'width:intrinsic;';
+  readonly intrinsic: string = 'width:intrinsic;';
   /**
    * 采用内容的最大内部尺寸，通常不进行软换行。
    *
    * CSS 声明：`width:max-content;`。
    */
-  readonly maxContent = 'width:max-content;';
+  readonly maxContent: string = 'width:max-content;';
   /**
    * 采用内容的最小内部尺寸，文字会考虑可用的软换行机会。
    *
    * CSS 声明：`width:min-content;`。
    */
-  readonly minContent = 'width:min-content;';
+  readonly minContent: string = 'width:min-content;';
   /** CSS 声明：`width:min-intrinsic;`。 */
-  readonly minIntrinsic = 'width:min-intrinsic;';
+  readonly minIntrinsic: string = 'width:min-intrinsic;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`width:revert;`。
    */
-  readonly revert = 'width:revert;';
+  readonly revert: string = 'width:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`width:revert-layer;`。
    */
-  readonly revertLayer = 'width:revert-layer;';
+  readonly revertLayer: string = 'width:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`width:unset;`。
    */
-  readonly unset = 'width:unset;';
+  readonly unset: string = 'width:unset;';
   /**
    * 创建 width 属性作者；普通使用通过 s.width 取得共享实例。
    * @example
@@ -2576,6 +3587,64 @@ export class WidthCss extends LengthCssProperty {
 }
 
 /**
+ * will-change 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class WillChangeKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`will-change:auto;`。 */
+  readonly auto: Property.WillChange | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`will-change:contents;`。 */
+  readonly contents: Property.WillChange | CssString = 'contents';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`will-change:inherit;`。
+   */
+  readonly inherit: Property.WillChange | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`will-change:initial;`。
+   */
+  readonly initial: Property.WillChange | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`will-change:revert;`。
+   */
+  readonly revert: Property.WillChange | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`will-change:revert-layer;`。
+   */
+  readonly revertLayer: Property.WillChange | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`will-change:scroll-position;`。 */
+  readonly scrollPosition: Property.WillChange | CssString = 'scroll-position';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`will-change:unset;`。
+   */
+  readonly unset: Property.WillChange | CssString = 'unset';
+}
+
+/**
  * 提前告知浏览器可能发生变化的属性，便于准备优化资源。（will-change）
  *
  * 仅对即将发生的变化短期使用；长期或大量声明可能占用额外资源，并提前改变层叠上下文。
@@ -2585,41 +3654,41 @@ export class WidthCss extends LengthCssProperty {
  */
 export class WillChangeCss extends CssProperty {
   /** CSS 声明：`will-change:auto;`。 */
-  readonly auto = 'will-change:auto;';
+  readonly auto: string = 'will-change:auto;';
   /** CSS 声明：`will-change:contents;`。 */
-  readonly contents = 'will-change:contents;';
+  readonly contents: string = 'will-change:contents;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`will-change:inherit;`。
    */
-  readonly inherit = 'will-change:inherit;';
+  readonly inherit: string = 'will-change:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`will-change:initial;`。
    */
-  readonly initial = 'will-change:initial;';
+  readonly initial: string = 'will-change:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`will-change:revert;`。
    */
-  readonly revert = 'will-change:revert;';
+  readonly revert: string = 'will-change:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`will-change:revert-layer;`。
    */
-  readonly revertLayer = 'will-change:revert-layer;';
+  readonly revertLayer: string = 'will-change:revert-layer;';
   /** CSS 声明：`will-change:scroll-position;`。 */
-  readonly scrollPosition = 'will-change:scroll-position;';
+  readonly scrollPosition: string = 'will-change:scroll-position;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`will-change:unset;`。
    */
-  readonly unset = 'will-change:unset;';
+  readonly unset: string = 'will-change:unset;';
   /**
    * 创建 will-change 属性作者；普通使用通过 s.willChange 取得共享实例。
    * @example
@@ -2643,6 +3712,84 @@ export class WillChangeCss extends CssProperty {
 }
 
 /**
+ * word-break 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class WordBreakKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`word-break:auto-phrase;`。 */
+  readonly autoPhrase: Property.WordBreak | CssString = 'auto-phrase';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 允许在更多字符间断行以防溢出，可能拆开普通单词。
+   *
+   * CSS 声明：`word-break:break-all;`。
+   */
+  readonly breakAll: Property.WordBreak | CssString = 'break-all';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`word-break:break-word;`。 */
+  readonly breakWord: Property.WordBreak | CssString = 'break-word';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`word-break:inherit;`。
+   */
+  readonly inherit: Property.WordBreak | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`word-break:initial;`。
+   */
+  readonly initial: Property.WordBreak | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 限制中日韩文字内部断行，其他文字仍按正常规则处理。
+   *
+   * CSS 声明：`word-break:keep-all;`。
+   */
+  readonly keepAll: Property.WordBreak | CssString = 'keep-all';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按语言的默认断行规则处理。
+   *
+   * CSS 声明：`word-break:normal;`。
+   */
+  readonly normal: Property.WordBreak | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`word-break:revert;`。
+   */
+  readonly revert: Property.WordBreak | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`word-break:revert-layer;`。
+   */
+  readonly revertLayer: Property.WordBreak | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`word-break:unset;`。
+   */
+  readonly unset: Property.WordBreak | CssString = 'unset';
+}
+
+/**
  * 设置单词内部或文字之间的断行规则。（word-break）
  *
  * 按字符和语言控制断行。仅需避免超长单词溢出时，通常先考虑 overflow-wrap。
@@ -2659,57 +3806,57 @@ export class WillChangeCss extends CssProperty {
  */
 export class WordBreakCss extends CssProperty {
   /** CSS 声明：`word-break:auto-phrase;`。 */
-  readonly autoPhrase = 'word-break:auto-phrase;';
+  readonly autoPhrase: string = 'word-break:auto-phrase;';
   /**
    * 允许在更多字符间断行以防溢出，可能拆开普通单词。
    *
    * CSS 声明：`word-break:break-all;`。
    */
-  readonly breakAll = 'word-break:break-all;';
+  readonly breakAll: string = 'word-break:break-all;';
   /** CSS 声明：`word-break:break-word;`。 */
-  readonly breakWord = 'word-break:break-word;';
+  readonly breakWord: string = 'word-break:break-word;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`word-break:inherit;`。
    */
-  readonly inherit = 'word-break:inherit;';
+  readonly inherit: string = 'word-break:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`word-break:initial;`。
    */
-  readonly initial = 'word-break:initial;';
+  readonly initial: string = 'word-break:initial;';
   /**
    * 限制中日韩文字内部断行，其他文字仍按正常规则处理。
    *
    * CSS 声明：`word-break:keep-all;`。
    */
-  readonly keepAll = 'word-break:keep-all;';
+  readonly keepAll: string = 'word-break:keep-all;';
   /**
    * 按语言的默认断行规则处理。
    *
    * CSS 声明：`word-break:normal;`。
    */
-  readonly normal = 'word-break:normal;';
+  readonly normal: string = 'word-break:normal;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`word-break:revert;`。
    */
-  readonly revert = 'word-break:revert;';
+  readonly revert: string = 'word-break:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`word-break:revert-layer;`。
    */
-  readonly revertLayer = 'word-break:revert-layer;';
+  readonly revertLayer: string = 'word-break:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`word-break:unset;`。
    */
-  readonly unset = 'word-break:unset;';
+  readonly unset: string = 'word-break:unset;';
   /**
    * 创建 word-break 属性作者；普通使用通过 s.wordBreak 取得共享实例。
    * @example
@@ -2733,6 +3880,56 @@ export class WordBreakCss extends CssProperty {
 }
 
 /**
+ * word-spacing 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class WordSpacingKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`word-spacing:inherit;`。
+   */
+  readonly inherit: Property.WordSpacing | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`word-spacing:initial;`。
+   */
+  readonly initial: Property.WordSpacing | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`word-spacing:normal;`。 */
+  readonly normal: Property.WordSpacing | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`word-spacing:revert;`。
+   */
+  readonly revert: Property.WordSpacing | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`word-spacing:revert-layer;`。
+   */
+  readonly revertLayer: Property.WordSpacing | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`word-spacing:unset;`。
+   */
+  readonly unset: Property.WordSpacing | CssString = 'unset';
+}
+
+/**
  * 设置单词或词间分隔符的额外间距。（word-spacing）
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
@@ -2744,33 +3941,33 @@ export class WordSpacingCss extends LengthCssProperty {
    *
    * CSS 声明：`word-spacing:inherit;`。
    */
-  readonly inherit = 'word-spacing:inherit;';
+  readonly inherit: string = 'word-spacing:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`word-spacing:initial;`。
    */
-  readonly initial = 'word-spacing:initial;';
+  readonly initial: string = 'word-spacing:initial;';
   /** CSS 声明：`word-spacing:normal;`。 */
-  readonly normal = 'word-spacing:normal;';
+  readonly normal: string = 'word-spacing:normal;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`word-spacing:revert;`。
    */
-  readonly revert = 'word-spacing:revert;';
+  readonly revert: string = 'word-spacing:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`word-spacing:revert-layer;`。
    */
-  readonly revertLayer = 'word-spacing:revert-layer;';
+  readonly revertLayer: string = 'word-spacing:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`word-spacing:unset;`。
    */
-  readonly unset = 'word-spacing:unset;';
+  readonly unset: string = 'word-spacing:unset;';
   /**
    * 创建 word-spacing 属性作者；普通使用通过 s.wordSpacing 取得共享实例。
    * @example
@@ -2850,6 +4047,68 @@ export class WordSpacingCss extends LengthCssProperty {
 }
 
 /**
+ * word-wrap 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class WordWrapKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 必要时允许长文本断行，但新增断点不按 anywhere 的方式参与 min-content 计算。
+   *
+   * CSS 声明：`word-wrap:break-word;`。
+   */
+  readonly breakWord: Property.WordWrap | CssString = 'break-word';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`word-wrap:inherit;`。
+   */
+  readonly inherit: Property.WordWrap | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`word-wrap:initial;`。
+   */
+  readonly initial: Property.WordWrap | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 只使用正常换行机会，不为长单词额外断行。
+   *
+   * CSS 声明：`word-wrap:normal;`。
+   */
+  readonly normal: Property.WordWrap | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`word-wrap:revert;`。
+   */
+  readonly revert: Property.WordWrap | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`word-wrap:revert-layer;`。
+   */
+  readonly revertLayer: Property.WordWrap | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`word-wrap:unset;`。
+   */
+  readonly unset: Property.WordWrap | CssString = 'unset';
+}
+
+/**
  * 设置长文本的额外换行行为；是 overflow-wrap 的兼容名称。（word-wrap）
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
@@ -2861,43 +4120,43 @@ export class WordWrapCss extends CssProperty {
    *
    * CSS 声明：`word-wrap:break-word;`。
    */
-  readonly breakWord = 'word-wrap:break-word;';
+  readonly breakWord: string = 'word-wrap:break-word;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`word-wrap:inherit;`。
    */
-  readonly inherit = 'word-wrap:inherit;';
+  readonly inherit: string = 'word-wrap:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`word-wrap:initial;`。
    */
-  readonly initial = 'word-wrap:initial;';
+  readonly initial: string = 'word-wrap:initial;';
   /**
    * 只使用正常换行机会，不为长单词额外断行。
    *
    * CSS 声明：`word-wrap:normal;`。
    */
-  readonly normal = 'word-wrap:normal;';
+  readonly normal: string = 'word-wrap:normal;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`word-wrap:revert;`。
    */
-  readonly revert = 'word-wrap:revert;';
+  readonly revert: string = 'word-wrap:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`word-wrap:revert-layer;`。
    */
-  readonly revertLayer = 'word-wrap:revert-layer;';
+  readonly revertLayer: string = 'word-wrap:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`word-wrap:unset;`。
    */
-  readonly unset = 'word-wrap:unset;';
+  readonly unset: string = 'word-wrap:unset;';
   /**
    * 创建 word-wrap 属性作者；普通使用通过 s.wordWrap 取得共享实例。
    * @example
@@ -2921,6 +4180,72 @@ export class WordWrapCss extends CssProperty {
 }
 
 /**
+ * writing-mode 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class WritingModeKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`writing-mode:horizontal-tb;`。 */
+  readonly horizontalTb: Property.WritingMode | CssString = 'horizontal-tb';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`writing-mode:inherit;`。
+   */
+  readonly inherit: Property.WritingMode | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`writing-mode:initial;`。
+   */
+  readonly initial: Property.WritingMode | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`writing-mode:revert;`。
+   */
+  readonly revert: Property.WritingMode | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`writing-mode:revert-layer;`。
+   */
+  readonly revertLayer: Property.WritingMode | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`writing-mode:sideways-lr;`。 */
+  readonly sidewaysLr: Property.WritingMode | CssString = 'sideways-lr';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`writing-mode:sideways-rl;`。 */
+  readonly sidewaysRl: Property.WritingMode | CssString = 'sideways-rl';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`writing-mode:unset;`。
+   */
+  readonly unset: Property.WritingMode | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`writing-mode:vertical-lr;`。 */
+  readonly verticalLr: Property.WritingMode | CssString = 'vertical-lr';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`writing-mode:vertical-rl;`。 */
+  readonly verticalRl: Property.WritingMode | CssString = 'vertical-rl';
+}
+
+/**
  * 设置水平或竖直书写模式，以及行和块的推进方向。（writing-mode）
  *
  * CSS 初始值：`horizontal-tb`（不同于浏览器默认样式表）。
@@ -2928,45 +4253,45 @@ export class WordWrapCss extends CssProperty {
  */
 export class WritingModeCss extends CssProperty {
   /** CSS 声明：`writing-mode:horizontal-tb;`。 */
-  readonly horizontalTb = 'writing-mode:horizontal-tb;';
+  readonly horizontalTb: string = 'writing-mode:horizontal-tb;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`writing-mode:inherit;`。
    */
-  readonly inherit = 'writing-mode:inherit;';
+  readonly inherit: string = 'writing-mode:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`writing-mode:initial;`。
    */
-  readonly initial = 'writing-mode:initial;';
+  readonly initial: string = 'writing-mode:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`writing-mode:revert;`。
    */
-  readonly revert = 'writing-mode:revert;';
+  readonly revert: string = 'writing-mode:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`writing-mode:revert-layer;`。
    */
-  readonly revertLayer = 'writing-mode:revert-layer;';
+  readonly revertLayer: string = 'writing-mode:revert-layer;';
   /** CSS 声明：`writing-mode:sideways-lr;`。 */
-  readonly sidewaysLr = 'writing-mode:sideways-lr;';
+  readonly sidewaysLr: string = 'writing-mode:sideways-lr;';
   /** CSS 声明：`writing-mode:sideways-rl;`。 */
-  readonly sidewaysRl = 'writing-mode:sideways-rl;';
+  readonly sidewaysRl: string = 'writing-mode:sideways-rl;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`writing-mode:unset;`。
    */
-  readonly unset = 'writing-mode:unset;';
+  readonly unset: string = 'writing-mode:unset;';
   /** CSS 声明：`writing-mode:vertical-lr;`。 */
-  readonly verticalLr = 'writing-mode:vertical-lr;';
+  readonly verticalLr: string = 'writing-mode:vertical-lr;';
   /** CSS 声明：`writing-mode:vertical-rl;`。 */
-  readonly verticalRl = 'writing-mode:vertical-rl;';
+  readonly verticalRl: string = 'writing-mode:vertical-rl;';
   /**
    * 创建 writing-mode 属性作者；普通使用通过 s.writingMode 取得共享实例。
    * @example
@@ -2990,6 +4315,52 @@ export class WritingModeCss extends CssProperty {
 }
 
 /**
+ * x 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class XKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`x:inherit;`。
+   */
+  readonly inherit: Property.X | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`x:initial;`。
+   */
+  readonly initial: Property.X | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`x:revert;`。
+   */
+  readonly revert: Property.X | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`x:revert-layer;`。
+   */
+  readonly revertLayer: Property.X | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`x:unset;`。
+   */
+  readonly unset: Property.X | CssString = 'unset';
+}
+
+/**
  * 设置适用 SVG 元素的水平几何坐标。（x）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -3001,31 +4372,31 @@ export class XCss extends LengthCssProperty {
    *
    * CSS 声明：`x:inherit;`。
    */
-  readonly inherit = 'x:inherit;';
+  readonly inherit: string = 'x:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`x:initial;`。
    */
-  readonly initial = 'x:initial;';
+  readonly initial: string = 'x:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`x:revert;`。
    */
-  readonly revert = 'x:revert;';
+  readonly revert: string = 'x:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`x:revert-layer;`。
    */
-  readonly revertLayer = 'x:revert-layer;';
+  readonly revertLayer: string = 'x:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`x:unset;`。
    */
-  readonly unset = 'x:unset;';
+  readonly unset: string = 'x:unset;';
   /**
    * 创建 x 属性作者；普通使用通过 s.x 取得共享实例。
    * @example
@@ -3111,6 +4482,52 @@ export class XCss extends LengthCssProperty {
 }
 
 /**
+ * y 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class YKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`y:inherit;`。
+   */
+  readonly inherit: Property.Y | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`y:initial;`。
+   */
+  readonly initial: Property.Y | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`y:revert;`。
+   */
+  readonly revert: Property.Y | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`y:revert-layer;`。
+   */
+  readonly revertLayer: Property.Y | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`y:unset;`。
+   */
+  readonly unset: Property.Y | CssString = 'unset';
+}
+
+/**
  * 设置适用 SVG 元素的垂直几何坐标。（y）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -3122,31 +4539,31 @@ export class YCss extends LengthCssProperty {
    *
    * CSS 声明：`y:inherit;`。
    */
-  readonly inherit = 'y:inherit;';
+  readonly inherit: string = 'y:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`y:initial;`。
    */
-  readonly initial = 'y:initial;';
+  readonly initial: string = 'y:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`y:revert;`。
    */
-  readonly revert = 'y:revert;';
+  readonly revert: string = 'y:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`y:revert-layer;`。
    */
-  readonly revertLayer = 'y:revert-layer;';
+  readonly revertLayer: string = 'y:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`y:unset;`。
    */
-  readonly unset = 'y:unset;';
+  readonly unset: string = 'y:unset;';
   /**
    * 创建 y 属性作者；普通使用通过 s.y 取得共享实例。
    * @example
@@ -3232,6 +4649,56 @@ export class YCss extends LengthCssProperty {
 }
 
 /**
+ * z-index 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ZIndexKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`z-index:auto;`。 */
+  readonly auto: Property.ZIndex | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`z-index:inherit;`。
+   */
+  readonly inherit: Property.ZIndex | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`z-index:initial;`。
+   */
+  readonly initial: Property.ZIndex | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`z-index:revert;`。
+   */
+  readonly revert: Property.ZIndex | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`z-index:revert-layer;`。
+   */
+  readonly revertLayer: Property.ZIndex | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`z-index:unset;`。
+   */
+  readonly unset: Property.ZIndex | CssString = 'unset';
+}
+
+/**
  * 设置元素在所属层叠上下文中的层叠级别。（z-index）
  *
  * 数值只在所属层叠上下文内比较；更大的数值不保证盖过其他层叠上下文。Flex/Grid 项目也可以使用 z-index。
@@ -3245,37 +4712,37 @@ export class YCss extends LengthCssProperty {
  */
 export class ZIndexCss extends CssProperty {
   /** CSS 声明：`z-index:auto;`。 */
-  readonly auto = 'z-index:auto;';
+  readonly auto: string = 'z-index:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`z-index:inherit;`。
    */
-  readonly inherit = 'z-index:inherit;';
+  readonly inherit: string = 'z-index:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`z-index:initial;`。
    */
-  readonly initial = 'z-index:initial;';
+  readonly initial: string = 'z-index:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`z-index:revert;`。
    */
-  readonly revert = 'z-index:revert;';
+  readonly revert: string = 'z-index:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`z-index:revert-layer;`。
    */
-  readonly revertLayer = 'z-index:revert-layer;';
+  readonly revertLayer: string = 'z-index:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`z-index:unset;`。
    */
-  readonly unset = 'z-index:unset;';
+  readonly unset: string = 'z-index:unset;';
   /**
    * 创建 z-index 属性作者；普通使用通过 s.zIndex 取得共享实例。
    * @example
@@ -3349,6 +4816,60 @@ export class ZIndexCss extends CssProperty {
 }
 
 /**
+ * zoom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ZoomKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`zoom:inherit;`。
+   */
+  readonly inherit: Property.Zoom | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`zoom:initial;`。
+   */
+  readonly initial: Property.Zoom | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`zoom:normal;`。 */
+  readonly normal: Property.Zoom | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`zoom:reset;`。 */
+  readonly reset: Property.Zoom | CssString = 'reset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`zoom:revert;`。
+   */
+  readonly revert: Property.Zoom | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`zoom:revert-layer;`。
+   */
+  readonly revertLayer: Property.Zoom | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`zoom:unset;`。
+   */
+  readonly unset: Property.Zoom | CssString = 'unset';
+}
+
+/**
  * 设置元素及其布局的缩放比例，与 transform:scale 的布局行为不同。（zoom）
  *
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
@@ -3360,35 +4881,35 @@ export class ZoomCss extends CssProperty {
    *
    * CSS 声明：`zoom:inherit;`。
    */
-  readonly inherit = 'zoom:inherit;';
+  readonly inherit: string = 'zoom:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`zoom:initial;`。
    */
-  readonly initial = 'zoom:initial;';
+  readonly initial: string = 'zoom:initial;';
   /** CSS 声明：`zoom:normal;`。 */
-  readonly normal = 'zoom:normal;';
+  readonly normal: string = 'zoom:normal;';
   /** CSS 声明：`zoom:reset;`。 */
-  readonly reset = 'zoom:reset;';
+  readonly reset: string = 'zoom:reset;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`zoom:revert;`。
    */
-  readonly revert = 'zoom:revert;';
+  readonly revert: string = 'zoom:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`zoom:revert-layer;`。
    */
-  readonly revertLayer = 'zoom:revert-layer;';
+  readonly revertLayer: string = 'zoom:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`zoom:unset;`。
    */
-  readonly unset = 'zoom:unset;';
+  readonly unset: string = 'zoom:unset;';
   /**
    * 创建 zoom 属性作者；普通使用通过 s.zoom 取得共享实例。
    * @example

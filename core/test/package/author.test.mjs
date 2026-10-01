@@ -28,7 +28,7 @@ test('直接属性链独立可用，系统字段只在首次构造 Css 时注册
   assert.equal(typeof getter, 'function');
   assert.equal(
     Object.getOwnPropertyNames(Css.prototype).filter(
-      (name) => name !== 'constructor' && !name.startsWith('_'),
+      (name) => name !== 'constructor' && name !== 'keywords' && !name.startsWith('_'),
     ).length,
     502,
   );

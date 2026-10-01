@@ -4,7 +4,7 @@ import type { Property } from 'csstype';
 const s = new Css();
 s.animationPlayState.raw('running');
 s.animationPlayState.raw('arbitrary-css-value');
-s.animationPlayState.running satisfies 'animation-play-state:running;';
+s.animationPlayState.running satisfies string;
 s.width.raw(0);
 s.width.min(0, '10px');
 s.opacity.max(0.25, 1);

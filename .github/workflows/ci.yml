@@ -70,6 +70,7 @@ jobs:
       - run: pnpm --dir test/tools test:examples:browser
       - run: pnpm --dir test/tools test:examples:hydration
       - run: pnpm --dir test/tools test:transport
+      - run: pnpm --dir test/tools test:keyword-context
       - run: pnpm --dir test/tools test:author-api
       - run: pnpm --dir test/tools test:bindings
       - uses: actions/upload-artifact@v4

@@ -2,6 +2,8 @@
 
 Vue/Svelte 的主入口提供 `css`、`keyframes`、`globalCss`、`className` 和作者类。样式组合统一由 `css` 处理，选择器使用作者对象的下划线方法。浏览器与 Node 使用相同写法；服务端调用需活动宿主。
 
+原生关键字对外返回 string，不把系统默认声明锁成唯一字符串字面量。`SystemKeywords` 提供带 CSS 属性值类型和中文文档的原始值；`new Css(theme)` 自动提供自定义关键字及其声明。参见 [注入关键字](keyword-injection.md)。
+
 属性类的 raw / 数学方法直接声明参数类型；`CssString` 保留关键字补全并接受任意字符串。生成规则见[维护文档](maintenance.md#代码归属和生成器)。
 
 ```ts

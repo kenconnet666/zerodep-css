@@ -14,6 +14,7 @@ function sourceFor(name, server) {
     : `import { Css, WidthCss, createCssContext, css, bx, keyframes, globalCss, hydrateCss, configureCss } from 'zerodep-css-${name}';`;
   return `${imports}
 import type { CssRule } from 'zerodep-css';
+import {SystemKeywords,systemKeywords} from 'zerodep-css';
 import type { CssInput } from 'zerodep-css';
 import type { CssString } from 'zerodep-css';
 import type { CssSelector } from 'zerodep-css';
@@ -39,6 +40,23 @@ s._selector(42, s.color.red);
 // @ts-expect-error 条件对象不属于声明片段
 s._hover({ active: true });
 const base = new Css();
+class LightKeywords extends SystemKeywords { override readonly color={...systemKeywords.color,_primary:'purple'}; }
+const themed = new Css(new LightKeywords());
+themed.color._primary satisfies string;
+themed.color.raw('_primary');
+createCssContext<typeof themed>().provideCss(themed);
+// @ts-expect-error 不存在的主题关键字不能访问
+themed.color._missing;
+// @ts-expect-error 自定义主题类型不能省略实际主题值
+new Css<LightKeywords>();
+class InvalidKeywords extends SystemKeywords { override readonly color={...systemKeywords.color,_primary:123}; }
+// @ts-expect-error 颜色关键字不能使用数字值
+new Css(new InvalidKeywords());
+class ConflictingKeywords extends SystemKeywords { override readonly color={...systemKeywords.color,raw:'red'}; }
+// @ts-expect-error 主题成员不能覆盖原生方法
+new Css(new ConflictingKeywords());
+// @ts-expect-error 系统关键字也不能被具体返回字面量锁死
+const exact:'color:red;'=base.color.red;
 bx(12) satisfies string;
 bx('20px') satisfies string;
 bx(null); bx(undefined);

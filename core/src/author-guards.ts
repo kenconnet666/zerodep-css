@@ -1,4 +1,5 @@
 import { Css } from './generated/author.js';
+import { hasKeywordSource } from './keyword-source.js';
 
 let system: Css | undefined;
 
@@ -16,6 +17,8 @@ export function authorInputs(
   member: string,
 ): unknown[] | undefined {
   if (!(author instanceof Css)) return;
+  // 注入值可随框架响应式状态改变，不能仅凭方法身份跳过本次读取。
+  if (hasKeywordSource(author)) return;
   if (!property) {
     if (
       descriptor(author, member)?.value !== descriptor(Css.prototype, member)?.value ||

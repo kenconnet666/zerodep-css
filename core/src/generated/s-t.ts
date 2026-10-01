@@ -5,6 +5,56 @@ import { CssProperty, LengthCssProperty, type CssString } from './base.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
 
 /**
+ * scale 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScaleKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scale:inherit;`。
+   */
+  readonly inherit: Property.Scale | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scale:initial;`。
+   */
+  readonly initial: Property.Scale | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scale:none;`。 */
+  readonly none: Property.Scale | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scale:revert;`。
+   */
+  readonly revert: Property.Scale | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scale:revert-layer;`。
+   */
+  readonly revertLayer: Property.Scale | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scale:unset;`。
+   */
+  readonly unset: Property.Scale | CssString = 'unset';
+}
+
+/**
  * 独立设置元素的缩放比例。（scale）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -16,33 +66,33 @@ export class ScaleCss extends CssProperty {
    *
    * CSS 声明：`scale:inherit;`。
    */
-  readonly inherit = 'scale:inherit;';
+  readonly inherit: string = 'scale:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scale:initial;`。
    */
-  readonly initial = 'scale:initial;';
+  readonly initial: string = 'scale:initial;';
   /** CSS 声明：`scale:none;`。 */
-  readonly none = 'scale:none;';
+  readonly none: string = 'scale:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scale:revert;`。
    */
-  readonly revert = 'scale:revert;';
+  readonly revert: string = 'scale:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scale:revert-layer;`。
    */
-  readonly revertLayer = 'scale:revert-layer;';
+  readonly revertLayer: string = 'scale:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scale:unset;`。
    */
-  readonly unset = 'scale:unset;';
+  readonly unset: string = 'scale:unset;';
   /**
    * 创建 scale 属性作者；普通使用通过 s.scale 取得共享实例。
    * @example
@@ -152,6 +202,60 @@ export class ScaleCss extends CssProperty {
 }
 
 /**
+ * scroll-behavior 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollBehaviorKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-behavior:auto;`。 */
+  readonly auto: Property.ScrollBehavior | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-behavior:inherit;`。
+   */
+  readonly inherit: Property.ScrollBehavior | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-behavior:initial;`。
+   */
+  readonly initial: Property.ScrollBehavior | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-behavior:revert;`。
+   */
+  readonly revert: Property.ScrollBehavior | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-behavior:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollBehavior | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-behavior:smooth;`。 */
+  readonly smooth: Property.ScrollBehavior | CssString = 'smooth';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-behavior:unset;`。
+   */
+  readonly unset: Property.ScrollBehavior | CssString = 'unset';
+}
+
+/**
  * 设置由导航或滚动 API 触发的滚动采用即时还是平滑方式。（scroll-behavior）
  *
  * 主要影响导航和滚动 API 触发的滚动，不会把所有用户滚动强制变成动画。
@@ -165,39 +269,39 @@ export class ScaleCss extends CssProperty {
  */
 export class ScrollBehaviorCss extends CssProperty {
   /** CSS 声明：`scroll-behavior:auto;`。 */
-  readonly auto = 'scroll-behavior:auto;';
+  readonly auto: string = 'scroll-behavior:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-behavior:inherit;`。
    */
-  readonly inherit = 'scroll-behavior:inherit;';
+  readonly inherit: string = 'scroll-behavior:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-behavior:initial;`。
    */
-  readonly initial = 'scroll-behavior:initial;';
+  readonly initial: string = 'scroll-behavior:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-behavior:revert;`。
    */
-  readonly revert = 'scroll-behavior:revert;';
+  readonly revert: string = 'scroll-behavior:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-behavior:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-behavior:revert-layer;';
+  readonly revertLayer: string = 'scroll-behavior:revert-layer;';
   /** CSS 声明：`scroll-behavior:smooth;`。 */
-  readonly smooth = 'scroll-behavior:smooth;';
+  readonly smooth: string = 'scroll-behavior:smooth;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-behavior:unset;`。
    */
-  readonly unset = 'scroll-behavior:unset;';
+  readonly unset: string = 'scroll-behavior:unset;';
   /**
    * 创建 scroll-behavior 属性作者；普通使用通过 s.scrollBehavior 取得共享实例。
    * @example
@@ -221,6 +325,60 @@ export class ScrollBehaviorCss extends CssProperty {
 }
 
 /**
+ * scroll-initial-target 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollInitialTargetKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-initial-target:inherit;`。
+   */
+  readonly inherit: Property.ScrollInitialTarget | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-initial-target:initial;`。
+   */
+  readonly initial: Property.ScrollInitialTarget | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-initial-target:nearest;`。 */
+  readonly nearest: Property.ScrollInitialTarget | CssString = 'nearest';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-initial-target:none;`。 */
+  readonly none: Property.ScrollInitialTarget | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-initial-target:revert;`。
+   */
+  readonly revert: Property.ScrollInitialTarget | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-initial-target:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollInitialTarget | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-initial-target:unset;`。
+   */
+  readonly unset: Property.ScrollInitialTarget | CssString = 'unset';
+}
+
+/**
  * 将元素声明为祖先滚动容器首次呈现时的候选滚动吸附目标。（scroll-initial-target）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -232,35 +390,35 @@ export class ScrollInitialTargetCss extends CssProperty {
    *
    * CSS 声明：`scroll-initial-target:inherit;`。
    */
-  readonly inherit = 'scroll-initial-target:inherit;';
+  readonly inherit: string = 'scroll-initial-target:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-initial-target:initial;`。
    */
-  readonly initial = 'scroll-initial-target:initial;';
+  readonly initial: string = 'scroll-initial-target:initial;';
   /** CSS 声明：`scroll-initial-target:nearest;`。 */
-  readonly nearest = 'scroll-initial-target:nearest;';
+  readonly nearest: string = 'scroll-initial-target:nearest;';
   /** CSS 声明：`scroll-initial-target:none;`。 */
-  readonly none = 'scroll-initial-target:none;';
+  readonly none: string = 'scroll-initial-target:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-initial-target:revert;`。
    */
-  readonly revert = 'scroll-initial-target:revert;';
+  readonly revert: string = 'scroll-initial-target:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-initial-target:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-initial-target:revert-layer;';
+  readonly revertLayer: string = 'scroll-initial-target:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-initial-target:unset;`。
    */
-  readonly unset = 'scroll-initial-target:unset;';
+  readonly unset: string = 'scroll-initial-target:unset;';
   /**
    * 创建 scroll-initial-target 属性作者；普通使用通过 s.scrollInitialTarget 取得共享实例。
    * @example
@@ -284,6 +442,52 @@ export class ScrollInitialTargetCss extends CssProperty {
 }
 
 /**
+ * scroll-margin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin:inherit;`。
+   */
+  readonly inherit: Property.ScrollMargin | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin:initial;`。
+   */
+  readonly initial: Property.ScrollMargin | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin:revert;`。
+   */
+  readonly revert: Property.ScrollMargin | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMargin | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin:unset;`。
+   */
+  readonly unset: Property.ScrollMargin | CssString = 'unset';
+}
+
+/**
  * 设置元素滚动目标区域的四边外扩距离，不改变普通布局外边距。（scroll-margin）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
  */
@@ -293,31 +497,31 @@ export class ScrollMarginCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin:inherit;`。
    */
-  readonly inherit = 'scroll-margin:inherit;';
+  readonly inherit: string = 'scroll-margin:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin:initial;`。
    */
-  readonly initial = 'scroll-margin:initial;';
+  readonly initial: string = 'scroll-margin:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin:revert;`。
    */
-  readonly revert = 'scroll-margin:revert;';
+  readonly revert: string = 'scroll-margin:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin:unset;`。
    */
-  readonly unset = 'scroll-margin:unset;';
+  readonly unset: string = 'scroll-margin:unset;';
   /**
    * 创建 scroll-margin 属性作者；普通使用通过 s.scrollMargin 取得共享实例。
    * @example
@@ -2798,6 +3002,52 @@ export class ScrollMarginCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-block 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginBlockKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-block:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginBlock | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-block:initial;`。
+   */
+  readonly initial: Property.ScrollMarginBlock | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-block:revert;`。
+   */
+  readonly revert: Property.ScrollMarginBlock | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-block:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginBlock | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-block:unset;`。
+   */
+  readonly unset: Property.ScrollMarginBlock | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域在逻辑块轴两侧的外扩距离。（scroll-margin-block）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block
  */
@@ -2807,31 +3057,31 @@ export class ScrollMarginBlockCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-block:inherit;`。
    */
-  readonly inherit = 'scroll-margin-block:inherit;';
+  readonly inherit: string = 'scroll-margin-block:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-block:initial;`。
    */
-  readonly initial = 'scroll-margin-block:initial;';
+  readonly initial: string = 'scroll-margin-block:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-block:revert;`。
    */
-  readonly revert = 'scroll-margin-block:revert;';
+  readonly revert: string = 'scroll-margin-block:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-block:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-block:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-block:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-block:unset;`。
    */
-  readonly unset = 'scroll-margin-block:unset;';
+  readonly unset: string = 'scroll-margin-block:unset;';
   /**
    * 创建 scroll-margin-block 属性作者；普通使用通过 s.scrollMarginBlock 取得共享实例。
    * @example
@@ -4087,6 +4337,52 @@ export class ScrollMarginBlockCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-block-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginBlockEndKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-block-end:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginBlockEnd | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-block-end:initial;`。
+   */
+  readonly initial: Property.ScrollMarginBlockEnd | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-block-end:revert;`。
+   */
+  readonly revert: Property.ScrollMarginBlockEnd | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-block-end:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginBlockEnd | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-block-end:unset;`。
+   */
+  readonly unset: Property.ScrollMarginBlockEnd | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域在逻辑块轴结束侧的外扩距离。（scroll-margin-block-end）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -4098,31 +4394,31 @@ export class ScrollMarginBlockEndCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-block-end:inherit;`。
    */
-  readonly inherit = 'scroll-margin-block-end:inherit;';
+  readonly inherit: string = 'scroll-margin-block-end:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-block-end:initial;`。
    */
-  readonly initial = 'scroll-margin-block-end:initial;';
+  readonly initial: string = 'scroll-margin-block-end:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-block-end:revert;`。
    */
-  readonly revert = 'scroll-margin-block-end:revert;';
+  readonly revert: string = 'scroll-margin-block-end:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-block-end:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-block-end:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-block-end:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-block-end:unset;`。
    */
-  readonly unset = 'scroll-margin-block-end:unset;';
+  readonly unset: string = 'scroll-margin-block-end:unset;';
   /**
    * 创建 scroll-margin-block-end 属性作者；普通使用通过 s.scrollMarginBlockEnd 取得共享实例。
    * @example
@@ -4202,6 +4498,52 @@ export class ScrollMarginBlockEndCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-block-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginBlockStartKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-block-start:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginBlockStart | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-block-start:initial;`。
+   */
+  readonly initial: Property.ScrollMarginBlockStart | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-block-start:revert;`。
+   */
+  readonly revert: Property.ScrollMarginBlockStart | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-block-start:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginBlockStart | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-block-start:unset;`。
+   */
+  readonly unset: Property.ScrollMarginBlockStart | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域在逻辑块轴起始侧的外扩距离。（scroll-margin-block-start）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -4213,31 +4555,31 @@ export class ScrollMarginBlockStartCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-block-start:inherit;`。
    */
-  readonly inherit = 'scroll-margin-block-start:inherit;';
+  readonly inherit: string = 'scroll-margin-block-start:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-block-start:initial;`。
    */
-  readonly initial = 'scroll-margin-block-start:initial;';
+  readonly initial: string = 'scroll-margin-block-start:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-block-start:revert;`。
    */
-  readonly revert = 'scroll-margin-block-start:revert;';
+  readonly revert: string = 'scroll-margin-block-start:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-block-start:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-block-start:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-block-start:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-block-start:unset;`。
    */
-  readonly unset = 'scroll-margin-block-start:unset;';
+  readonly unset: string = 'scroll-margin-block-start:unset;';
   /**
    * 创建 scroll-margin-block-start 属性作者；普通使用通过 s.scrollMarginBlockStart 取得共享实例。
    * @example
@@ -4317,6 +4659,52 @@ export class ScrollMarginBlockStartCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-bottom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginBottomKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-bottom:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginBottom | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-bottom:initial;`。
+   */
+  readonly initial: Property.ScrollMarginBottom | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-bottom:revert;`。
+   */
+  readonly revert: Property.ScrollMarginBottom | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-bottom:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginBottom | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-bottom:unset;`。
+   */
+  readonly unset: Property.ScrollMarginBottom | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域下侧的外扩距离。（scroll-margin-bottom）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -4328,31 +4716,31 @@ export class ScrollMarginBottomCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-bottom:inherit;`。
    */
-  readonly inherit = 'scroll-margin-bottom:inherit;';
+  readonly inherit: string = 'scroll-margin-bottom:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-bottom:initial;`。
    */
-  readonly initial = 'scroll-margin-bottom:initial;';
+  readonly initial: string = 'scroll-margin-bottom:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-bottom:revert;`。
    */
-  readonly revert = 'scroll-margin-bottom:revert;';
+  readonly revert: string = 'scroll-margin-bottom:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-bottom:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-bottom:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-bottom:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-bottom:unset;`。
    */
-  readonly unset = 'scroll-margin-bottom:unset;';
+  readonly unset: string = 'scroll-margin-bottom:unset;';
   /**
    * 创建 scroll-margin-bottom 属性作者；普通使用通过 s.scrollMarginBottom 取得共享实例。
    * @example
@@ -4432,6 +4820,52 @@ export class ScrollMarginBottomCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-inline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginInlineKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-inline:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginInline | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-inline:initial;`。
+   */
+  readonly initial: Property.ScrollMarginInline | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-inline:revert;`。
+   */
+  readonly revert: Property.ScrollMarginInline | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-inline:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginInline | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-inline:unset;`。
+   */
+  readonly unset: Property.ScrollMarginInline | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域在逻辑行内轴两侧的外扩距离。（scroll-margin-inline）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline
  */
@@ -4441,31 +4875,31 @@ export class ScrollMarginInlineCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-inline:inherit;`。
    */
-  readonly inherit = 'scroll-margin-inline:inherit;';
+  readonly inherit: string = 'scroll-margin-inline:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-inline:initial;`。
    */
-  readonly initial = 'scroll-margin-inline:initial;';
+  readonly initial: string = 'scroll-margin-inline:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-inline:revert;`。
    */
-  readonly revert = 'scroll-margin-inline:revert;';
+  readonly revert: string = 'scroll-margin-inline:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-inline:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-inline:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-inline:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-inline:unset;`。
    */
-  readonly unset = 'scroll-margin-inline:unset;';
+  readonly unset: string = 'scroll-margin-inline:unset;';
   /**
    * 创建 scroll-margin-inline 属性作者；普通使用通过 s.scrollMarginInline 取得共享实例。
    * @example
@@ -5721,6 +6155,52 @@ export class ScrollMarginInlineCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-inline-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginInlineEndKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-inline-end:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginInlineEnd | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-inline-end:initial;`。
+   */
+  readonly initial: Property.ScrollMarginInlineEnd | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-inline-end:revert;`。
+   */
+  readonly revert: Property.ScrollMarginInlineEnd | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-inline-end:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginInlineEnd | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-inline-end:unset;`。
+   */
+  readonly unset: Property.ScrollMarginInlineEnd | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域在逻辑行内轴结束侧的外扩距离。（scroll-margin-inline-end）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -5732,31 +6212,31 @@ export class ScrollMarginInlineEndCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-inline-end:inherit;`。
    */
-  readonly inherit = 'scroll-margin-inline-end:inherit;';
+  readonly inherit: string = 'scroll-margin-inline-end:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-inline-end:initial;`。
    */
-  readonly initial = 'scroll-margin-inline-end:initial;';
+  readonly initial: string = 'scroll-margin-inline-end:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-inline-end:revert;`。
    */
-  readonly revert = 'scroll-margin-inline-end:revert;';
+  readonly revert: string = 'scroll-margin-inline-end:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-inline-end:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-inline-end:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-inline-end:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-inline-end:unset;`。
    */
-  readonly unset = 'scroll-margin-inline-end:unset;';
+  readonly unset: string = 'scroll-margin-inline-end:unset;';
   /**
    * 创建 scroll-margin-inline-end 属性作者；普通使用通过 s.scrollMarginInlineEnd 取得共享实例。
    * @example
@@ -5836,6 +6316,52 @@ export class ScrollMarginInlineEndCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-inline-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginInlineStartKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-inline-start:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginInlineStart | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-inline-start:initial;`。
+   */
+  readonly initial: Property.ScrollMarginInlineStart | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-inline-start:revert;`。
+   */
+  readonly revert: Property.ScrollMarginInlineStart | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-inline-start:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginInlineStart | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-inline-start:unset;`。
+   */
+  readonly unset: Property.ScrollMarginInlineStart | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域在逻辑行内轴起始侧的外扩距离。（scroll-margin-inline-start）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -5847,31 +6373,31 @@ export class ScrollMarginInlineStartCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-inline-start:inherit;`。
    */
-  readonly inherit = 'scroll-margin-inline-start:inherit;';
+  readonly inherit: string = 'scroll-margin-inline-start:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-inline-start:initial;`。
    */
-  readonly initial = 'scroll-margin-inline-start:initial;';
+  readonly initial: string = 'scroll-margin-inline-start:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-inline-start:revert;`。
    */
-  readonly revert = 'scroll-margin-inline-start:revert;';
+  readonly revert: string = 'scroll-margin-inline-start:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-inline-start:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-inline-start:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-inline-start:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-inline-start:unset;`。
    */
-  readonly unset = 'scroll-margin-inline-start:unset;';
+  readonly unset: string = 'scroll-margin-inline-start:unset;';
   /**
    * 创建 scroll-margin-inline-start 属性作者；普通使用通过 s.scrollMarginInlineStart 取得共享实例。
    * @example
@@ -5951,6 +6477,52 @@ export class ScrollMarginInlineStartCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-left 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginLeftKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-left:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginLeft | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-left:initial;`。
+   */
+  readonly initial: Property.ScrollMarginLeft | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-left:revert;`。
+   */
+  readonly revert: Property.ScrollMarginLeft | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-left:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginLeft | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-left:unset;`。
+   */
+  readonly unset: Property.ScrollMarginLeft | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域左侧的外扩距离。（scroll-margin-left）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -5962,31 +6534,31 @@ export class ScrollMarginLeftCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-left:inherit;`。
    */
-  readonly inherit = 'scroll-margin-left:inherit;';
+  readonly inherit: string = 'scroll-margin-left:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-left:initial;`。
    */
-  readonly initial = 'scroll-margin-left:initial;';
+  readonly initial: string = 'scroll-margin-left:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-left:revert;`。
    */
-  readonly revert = 'scroll-margin-left:revert;';
+  readonly revert: string = 'scroll-margin-left:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-left:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-left:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-left:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-left:unset;`。
    */
-  readonly unset = 'scroll-margin-left:unset;';
+  readonly unset: string = 'scroll-margin-left:unset;';
   /**
    * 创建 scroll-margin-left 属性作者；普通使用通过 s.scrollMarginLeft 取得共享实例。
    * @example
@@ -6066,6 +6638,52 @@ export class ScrollMarginLeftCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-right 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginRightKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-right:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginRight | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-right:initial;`。
+   */
+  readonly initial: Property.ScrollMarginRight | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-right:revert;`。
+   */
+  readonly revert: Property.ScrollMarginRight | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-right:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginRight | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-right:unset;`。
+   */
+  readonly unset: Property.ScrollMarginRight | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域右侧的外扩距离。（scroll-margin-right）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -6077,31 +6695,31 @@ export class ScrollMarginRightCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-right:inherit;`。
    */
-  readonly inherit = 'scroll-margin-right:inherit;';
+  readonly inherit: string = 'scroll-margin-right:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-right:initial;`。
    */
-  readonly initial = 'scroll-margin-right:initial;';
+  readonly initial: string = 'scroll-margin-right:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-right:revert;`。
    */
-  readonly revert = 'scroll-margin-right:revert;';
+  readonly revert: string = 'scroll-margin-right:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-right:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-right:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-right:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-right:unset;`。
    */
-  readonly unset = 'scroll-margin-right:unset;';
+  readonly unset: string = 'scroll-margin-right:unset;';
   /**
    * 创建 scroll-margin-right 属性作者；普通使用通过 s.scrollMarginRight 取得共享实例。
    * @example
@@ -6181,6 +6799,52 @@ export class ScrollMarginRightCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-margin-top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollMarginTopKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-margin-top:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginTop | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-margin-top:initial;`。
+   */
+  readonly initial: Property.ScrollMarginTop | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-margin-top:revert;`。
+   */
+  readonly revert: Property.ScrollMarginTop | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-margin-top:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginTop | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-margin-top:unset;`。
+   */
+  readonly unset: Property.ScrollMarginTop | CssString = 'unset';
+}
+
+/**
  * 设置滚动目标区域上侧的外扩距离。（scroll-margin-top）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -6192,31 +6856,31 @@ export class ScrollMarginTopCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-margin-top:inherit;`。
    */
-  readonly inherit = 'scroll-margin-top:inherit;';
+  readonly inherit: string = 'scroll-margin-top:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-margin-top:initial;`。
    */
-  readonly initial = 'scroll-margin-top:initial;';
+  readonly initial: string = 'scroll-margin-top:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-margin-top:revert;`。
    */
-  readonly revert = 'scroll-margin-top:revert;';
+  readonly revert: string = 'scroll-margin-top:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-margin-top:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-margin-top:revert-layer;';
+  readonly revertLayer: string = 'scroll-margin-top:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-margin-top:unset;`。
    */
-  readonly unset = 'scroll-margin-top:unset;';
+  readonly unset: string = 'scroll-margin-top:unset;';
   /**
    * 创建 scroll-margin-top 属性作者；普通使用通过 s.scrollMarginTop 取得共享实例。
    * @example
@@ -6296,42 +6960,92 @@ export class ScrollMarginTopCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding:auto;`。 */
+  readonly auto: Property.ScrollPadding | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding:inherit;`。
+   */
+  readonly inherit: Property.ScrollPadding | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding:initial;`。
+   */
+  readonly initial: Property.ScrollPadding | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding:revert;`。
+   */
+  readonly revert: Property.ScrollPadding | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPadding | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding:unset;`。
+   */
+  readonly unset: Property.ScrollPadding | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域的四边内缩距离。（scroll-padding）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding
  */
 export class ScrollPaddingCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding:auto;`。 */
-  readonly auto = 'scroll-padding:auto;';
+  readonly auto: string = 'scroll-padding:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding:inherit;`。
    */
-  readonly inherit = 'scroll-padding:inherit;';
+  readonly inherit: string = 'scroll-padding:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding:initial;`。
    */
-  readonly initial = 'scroll-padding:initial;';
+  readonly initial: string = 'scroll-padding:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding:revert;`。
    */
-  readonly revert = 'scroll-padding:revert;';
+  readonly revert: string = 'scroll-padding:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding:unset;`。
    */
-  readonly unset = 'scroll-padding:unset;';
+  readonly unset: string = 'scroll-padding:unset;';
   /**
    * 创建 scroll-padding 属性作者；普通使用通过 s.scrollPadding 取得共享实例。
    * @example
@@ -8861,42 +9575,92 @@ export class ScrollPaddingCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-block 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingBlockKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-block:auto;`。 */
+  readonly auto: Property.ScrollPaddingBlock | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-block:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingBlock | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-block:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingBlock | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-block:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingBlock | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-block:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingBlock | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-block:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingBlock | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域在逻辑块轴两侧的内缩距离。（scroll-padding-block）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block
  */
 export class ScrollPaddingBlockCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-block:auto;`。 */
-  readonly auto = 'scroll-padding-block:auto;';
+  readonly auto: string = 'scroll-padding-block:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-block:inherit;`。
    */
-  readonly inherit = 'scroll-padding-block:inherit;';
+  readonly inherit: string = 'scroll-padding-block:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-block:initial;`。
    */
-  readonly initial = 'scroll-padding-block:initial;';
+  readonly initial: string = 'scroll-padding-block:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-block:revert;`。
    */
-  readonly revert = 'scroll-padding-block:revert;';
+  readonly revert: string = 'scroll-padding-block:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-block:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-block:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-block:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-block:unset;`。
    */
-  readonly unset = 'scroll-padding-block:unset;';
+  readonly unset: string = 'scroll-padding-block:unset;';
   /**
    * 创建 scroll-padding-block 属性作者；普通使用通过 s.scrollPaddingBlock 取得共享实例。
    * @example
@@ -10176,6 +10940,56 @@ export class ScrollPaddingBlockCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-block-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingBlockEndKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-block-end:auto;`。 */
+  readonly auto: Property.ScrollPaddingBlockEnd | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-block-end:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingBlockEnd | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-block-end:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingBlockEnd | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-block-end:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingBlockEnd | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-block-end:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingBlockEnd | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-block-end:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingBlockEnd | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域在逻辑块轴结束侧的内缩距离。（scroll-padding-block-end）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -10183,37 +10997,37 @@ export class ScrollPaddingBlockCss extends LengthCssProperty {
  */
 export class ScrollPaddingBlockEndCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-block-end:auto;`。 */
-  readonly auto = 'scroll-padding-block-end:auto;';
+  readonly auto: string = 'scroll-padding-block-end:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-block-end:inherit;`。
    */
-  readonly inherit = 'scroll-padding-block-end:inherit;';
+  readonly inherit: string = 'scroll-padding-block-end:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-block-end:initial;`。
    */
-  readonly initial = 'scroll-padding-block-end:initial;';
+  readonly initial: string = 'scroll-padding-block-end:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-block-end:revert;`。
    */
-  readonly revert = 'scroll-padding-block-end:revert;';
+  readonly revert: string = 'scroll-padding-block-end:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-block-end:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-block-end:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-block-end:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-block-end:unset;`。
    */
-  readonly unset = 'scroll-padding-block-end:unset;';
+  readonly unset: string = 'scroll-padding-block-end:unset;';
   /**
    * 创建 scroll-padding-block-end 属性作者；普通使用通过 s.scrollPaddingBlockEnd 取得共享实例。
    * @example
@@ -10305,6 +11119,56 @@ export class ScrollPaddingBlockEndCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-block-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingBlockStartKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-block-start:auto;`。 */
+  readonly auto: Property.ScrollPaddingBlockStart | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-block-start:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingBlockStart | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-block-start:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingBlockStart | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-block-start:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingBlockStart | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-block-start:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingBlockStart | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-block-start:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingBlockStart | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域在逻辑块轴起始侧的内缩距离。（scroll-padding-block-start）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -10312,37 +11176,37 @@ export class ScrollPaddingBlockEndCss extends LengthCssProperty {
  */
 export class ScrollPaddingBlockStartCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-block-start:auto;`。 */
-  readonly auto = 'scroll-padding-block-start:auto;';
+  readonly auto: string = 'scroll-padding-block-start:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-block-start:inherit;`。
    */
-  readonly inherit = 'scroll-padding-block-start:inherit;';
+  readonly inherit: string = 'scroll-padding-block-start:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-block-start:initial;`。
    */
-  readonly initial = 'scroll-padding-block-start:initial;';
+  readonly initial: string = 'scroll-padding-block-start:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-block-start:revert;`。
    */
-  readonly revert = 'scroll-padding-block-start:revert;';
+  readonly revert: string = 'scroll-padding-block-start:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-block-start:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-block-start:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-block-start:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-block-start:unset;`。
    */
-  readonly unset = 'scroll-padding-block-start:unset;';
+  readonly unset: string = 'scroll-padding-block-start:unset;';
   /**
    * 创建 scroll-padding-block-start 属性作者；普通使用通过 s.scrollPaddingBlockStart 取得共享实例。
    * @example
@@ -10434,6 +11298,56 @@ export class ScrollPaddingBlockStartCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-bottom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingBottomKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-bottom:auto;`。 */
+  readonly auto: Property.ScrollPaddingBottom | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-bottom:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingBottom | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-bottom:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingBottom | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-bottom:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingBottom | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-bottom:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingBottom | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-bottom:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingBottom | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域下侧的内缩距离。（scroll-padding-bottom）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -10441,37 +11355,37 @@ export class ScrollPaddingBlockStartCss extends LengthCssProperty {
  */
 export class ScrollPaddingBottomCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-bottom:auto;`。 */
-  readonly auto = 'scroll-padding-bottom:auto;';
+  readonly auto: string = 'scroll-padding-bottom:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-bottom:inherit;`。
    */
-  readonly inherit = 'scroll-padding-bottom:inherit;';
+  readonly inherit: string = 'scroll-padding-bottom:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-bottom:initial;`。
    */
-  readonly initial = 'scroll-padding-bottom:initial;';
+  readonly initial: string = 'scroll-padding-bottom:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-bottom:revert;`。
    */
-  readonly revert = 'scroll-padding-bottom:revert;';
+  readonly revert: string = 'scroll-padding-bottom:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-bottom:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-bottom:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-bottom:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-bottom:unset;`。
    */
-  readonly unset = 'scroll-padding-bottom:unset;';
+  readonly unset: string = 'scroll-padding-bottom:unset;';
   /**
    * 创建 scroll-padding-bottom 属性作者；普通使用通过 s.scrollPaddingBottom 取得共享实例。
    * @example
@@ -10563,42 +11477,92 @@ export class ScrollPaddingBottomCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-inline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingInlineKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-inline:auto;`。 */
+  readonly auto: Property.ScrollPaddingInline | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-inline:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingInline | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-inline:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingInline | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-inline:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingInline | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-inline:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingInline | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-inline:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingInline | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域在逻辑行内轴两侧的内缩距离。（scroll-padding-inline）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline
  */
 export class ScrollPaddingInlineCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-inline:auto;`。 */
-  readonly auto = 'scroll-padding-inline:auto;';
+  readonly auto: string = 'scroll-padding-inline:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-inline:inherit;`。
    */
-  readonly inherit = 'scroll-padding-inline:inherit;';
+  readonly inherit: string = 'scroll-padding-inline:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-inline:initial;`。
    */
-  readonly initial = 'scroll-padding-inline:initial;';
+  readonly initial: string = 'scroll-padding-inline:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-inline:revert;`。
    */
-  readonly revert = 'scroll-padding-inline:revert;';
+  readonly revert: string = 'scroll-padding-inline:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-inline:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-inline:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-inline:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-inline:unset;`。
    */
-  readonly unset = 'scroll-padding-inline:unset;';
+  readonly unset: string = 'scroll-padding-inline:unset;';
   /**
    * 创建 scroll-padding-inline 属性作者；普通使用通过 s.scrollPaddingInline 取得共享实例。
    * @example
@@ -11878,6 +12842,56 @@ export class ScrollPaddingInlineCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-inline-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingInlineEndKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-inline-end:auto;`。 */
+  readonly auto: Property.ScrollPaddingInlineEnd | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-inline-end:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingInlineEnd | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-inline-end:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingInlineEnd | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-inline-end:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingInlineEnd | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-inline-end:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingInlineEnd | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-inline-end:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingInlineEnd | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域在逻辑行内轴结束侧的内缩距离。（scroll-padding-inline-end）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -11885,37 +12899,37 @@ export class ScrollPaddingInlineCss extends LengthCssProperty {
  */
 export class ScrollPaddingInlineEndCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-inline-end:auto;`。 */
-  readonly auto = 'scroll-padding-inline-end:auto;';
+  readonly auto: string = 'scroll-padding-inline-end:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-inline-end:inherit;`。
    */
-  readonly inherit = 'scroll-padding-inline-end:inherit;';
+  readonly inherit: string = 'scroll-padding-inline-end:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-inline-end:initial;`。
    */
-  readonly initial = 'scroll-padding-inline-end:initial;';
+  readonly initial: string = 'scroll-padding-inline-end:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-inline-end:revert;`。
    */
-  readonly revert = 'scroll-padding-inline-end:revert;';
+  readonly revert: string = 'scroll-padding-inline-end:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-inline-end:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-inline-end:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-inline-end:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-inline-end:unset;`。
    */
-  readonly unset = 'scroll-padding-inline-end:unset;';
+  readonly unset: string = 'scroll-padding-inline-end:unset;';
   /**
    * 创建 scroll-padding-inline-end 属性作者；普通使用通过 s.scrollPaddingInlineEnd 取得共享实例。
    * @example
@@ -12007,6 +13021,56 @@ export class ScrollPaddingInlineEndCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-inline-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingInlineStartKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-inline-start:auto;`。 */
+  readonly auto: Property.ScrollPaddingInlineStart | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-inline-start:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingInlineStart | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-inline-start:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingInlineStart | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-inline-start:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingInlineStart | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-inline-start:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingInlineStart | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-inline-start:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingInlineStart | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域在逻辑行内轴起始侧的内缩距离。（scroll-padding-inline-start）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -12014,37 +13078,37 @@ export class ScrollPaddingInlineEndCss extends LengthCssProperty {
  */
 export class ScrollPaddingInlineStartCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-inline-start:auto;`。 */
-  readonly auto = 'scroll-padding-inline-start:auto;';
+  readonly auto: string = 'scroll-padding-inline-start:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-inline-start:inherit;`。
    */
-  readonly inherit = 'scroll-padding-inline-start:inherit;';
+  readonly inherit: string = 'scroll-padding-inline-start:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-inline-start:initial;`。
    */
-  readonly initial = 'scroll-padding-inline-start:initial;';
+  readonly initial: string = 'scroll-padding-inline-start:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-inline-start:revert;`。
    */
-  readonly revert = 'scroll-padding-inline-start:revert;';
+  readonly revert: string = 'scroll-padding-inline-start:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-inline-start:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-inline-start:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-inline-start:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-inline-start:unset;`。
    */
-  readonly unset = 'scroll-padding-inline-start:unset;';
+  readonly unset: string = 'scroll-padding-inline-start:unset;';
   /**
    * 创建 scroll-padding-inline-start 属性作者；普通使用通过 s.scrollPaddingInlineStart 取得共享实例。
    * @example
@@ -12136,6 +13200,56 @@ export class ScrollPaddingInlineStartCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-left 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingLeftKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-left:auto;`。 */
+  readonly auto: Property.ScrollPaddingLeft | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-left:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingLeft | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-left:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingLeft | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-left:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingLeft | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-left:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingLeft | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-left:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingLeft | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域左侧的内缩距离。（scroll-padding-left）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -12143,37 +13257,37 @@ export class ScrollPaddingInlineStartCss extends LengthCssProperty {
  */
 export class ScrollPaddingLeftCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-left:auto;`。 */
-  readonly auto = 'scroll-padding-left:auto;';
+  readonly auto: string = 'scroll-padding-left:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-left:inherit;`。
    */
-  readonly inherit = 'scroll-padding-left:inherit;';
+  readonly inherit: string = 'scroll-padding-left:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-left:initial;`。
    */
-  readonly initial = 'scroll-padding-left:initial;';
+  readonly initial: string = 'scroll-padding-left:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-left:revert;`。
    */
-  readonly revert = 'scroll-padding-left:revert;';
+  readonly revert: string = 'scroll-padding-left:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-left:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-left:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-left:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-left:unset;`。
    */
-  readonly unset = 'scroll-padding-left:unset;';
+  readonly unset: string = 'scroll-padding-left:unset;';
   /**
    * 创建 scroll-padding-left 属性作者；普通使用通过 s.scrollPaddingLeft 取得共享实例。
    * @example
@@ -12265,6 +13379,56 @@ export class ScrollPaddingLeftCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-right 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingRightKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-right:auto;`。 */
+  readonly auto: Property.ScrollPaddingRight | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-right:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingRight | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-right:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingRight | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-right:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingRight | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-right:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingRight | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-right:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingRight | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域右侧的内缩距离。（scroll-padding-right）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -12272,37 +13436,37 @@ export class ScrollPaddingLeftCss extends LengthCssProperty {
  */
 export class ScrollPaddingRightCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-right:auto;`。 */
-  readonly auto = 'scroll-padding-right:auto;';
+  readonly auto: string = 'scroll-padding-right:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-right:inherit;`。
    */
-  readonly inherit = 'scroll-padding-right:inherit;';
+  readonly inherit: string = 'scroll-padding-right:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-right:initial;`。
    */
-  readonly initial = 'scroll-padding-right:initial;';
+  readonly initial: string = 'scroll-padding-right:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-right:revert;`。
    */
-  readonly revert = 'scroll-padding-right:revert;';
+  readonly revert: string = 'scroll-padding-right:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-right:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-right:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-right:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-right:unset;`。
    */
-  readonly unset = 'scroll-padding-right:unset;';
+  readonly unset: string = 'scroll-padding-right:unset;';
   /**
    * 创建 scroll-padding-right 属性作者；普通使用通过 s.scrollPaddingRight 取得共享实例。
    * @example
@@ -12394,6 +13558,56 @@ export class ScrollPaddingRightCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-padding-top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollPaddingTopKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-padding-top:auto;`。 */
+  readonly auto: Property.ScrollPaddingTop | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-padding-top:inherit;`。
+   */
+  readonly inherit: Property.ScrollPaddingTop | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-padding-top:initial;`。
+   */
+  readonly initial: Property.ScrollPaddingTop | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-padding-top:revert;`。
+   */
+  readonly revert: Property.ScrollPaddingTop | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-padding-top:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollPaddingTop | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-padding-top:unset;`。
+   */
+  readonly unset: Property.ScrollPaddingTop | CssString = 'unset';
+}
+
+/**
  * 设置滚动容器最佳可视区域上侧的内缩距离。（scroll-padding-top）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -12401,37 +13615,37 @@ export class ScrollPaddingRightCss extends LengthCssProperty {
  */
 export class ScrollPaddingTopCss extends LengthCssProperty {
   /** CSS 声明：`scroll-padding-top:auto;`。 */
-  readonly auto = 'scroll-padding-top:auto;';
+  readonly auto: string = 'scroll-padding-top:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-padding-top:inherit;`。
    */
-  readonly inherit = 'scroll-padding-top:inherit;';
+  readonly inherit: string = 'scroll-padding-top:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-padding-top:initial;`。
    */
-  readonly initial = 'scroll-padding-top:initial;';
+  readonly initial: string = 'scroll-padding-top:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-padding-top:revert;`。
    */
-  readonly revert = 'scroll-padding-top:revert;';
+  readonly revert: string = 'scroll-padding-top:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-padding-top:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-padding-top:revert-layer;';
+  readonly revertLayer: string = 'scroll-padding-top:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-padding-top:unset;`。
    */
-  readonly unset = 'scroll-padding-top:unset;';
+  readonly unset: string = 'scroll-padding-top:unset;';
   /**
    * 创建 scroll-padding-top 属性作者；普通使用通过 s.scrollPaddingTop 取得共享实例。
    * @example
@@ -12523,6 +13737,68 @@ export class ScrollPaddingTopCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-snap-align 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollSnapAlignKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-align:center;`。 */
+  readonly center: Property.ScrollSnapAlign | CssString = 'center';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-align:end;`。 */
+  readonly end: Property.ScrollSnapAlign | CssString = 'end';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-snap-align:inherit;`。
+   */
+  readonly inherit: Property.ScrollSnapAlign | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-snap-align:initial;`。
+   */
+  readonly initial: Property.ScrollSnapAlign | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-align:none;`。 */
+  readonly none: Property.ScrollSnapAlign | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-snap-align:revert;`。
+   */
+  readonly revert: Property.ScrollSnapAlign | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-snap-align:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollSnapAlign | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-align:start;`。 */
+  readonly start: Property.ScrollSnapAlign | CssString = 'start';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-snap-align:unset;`。
+   */
+  readonly unset: Property.ScrollSnapAlign | CssString = 'unset';
+}
+
+/**
  * 设置元素作为滚动吸附目标时在块轴和行内轴上的对齐位置。（scroll-snap-align）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -12530,43 +13806,43 @@ export class ScrollPaddingTopCss extends LengthCssProperty {
  */
 export class ScrollSnapAlignCss extends CssProperty {
   /** CSS 声明：`scroll-snap-align:center;`。 */
-  readonly center = 'scroll-snap-align:center;';
+  readonly center: string = 'scroll-snap-align:center;';
   /** CSS 声明：`scroll-snap-align:end;`。 */
-  readonly end = 'scroll-snap-align:end;';
+  readonly end: string = 'scroll-snap-align:end;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-snap-align:inherit;`。
    */
-  readonly inherit = 'scroll-snap-align:inherit;';
+  readonly inherit: string = 'scroll-snap-align:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-snap-align:initial;`。
    */
-  readonly initial = 'scroll-snap-align:initial;';
+  readonly initial: string = 'scroll-snap-align:initial;';
   /** CSS 声明：`scroll-snap-align:none;`。 */
-  readonly none = 'scroll-snap-align:none;';
+  readonly none: string = 'scroll-snap-align:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-snap-align:revert;`。
    */
-  readonly revert = 'scroll-snap-align:revert;';
+  readonly revert: string = 'scroll-snap-align:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-snap-align:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-snap-align:revert-layer;';
+  readonly revertLayer: string = 'scroll-snap-align:revert-layer;';
   /** CSS 声明：`scroll-snap-align:start;`。 */
-  readonly start = 'scroll-snap-align:start;';
+  readonly start: string = 'scroll-snap-align:start;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-snap-align:unset;`。
    */
-  readonly unset = 'scroll-snap-align:unset;';
+  readonly unset: string = 'scroll-snap-align:unset;';
   /**
    * 创建 scroll-snap-align 属性作者；普通使用通过 s.scrollSnapAlign 取得共享实例。
    * @example
@@ -12590,6 +13866,52 @@ export class ScrollSnapAlignCss extends CssProperty {
 }
 
 /**
+ * scroll-snap-margin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollSnapMarginKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-snap-margin:inherit;`。
+   */
+  readonly inherit: Property.ScrollMargin | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-snap-margin:initial;`。
+   */
+  readonly initial: Property.ScrollMargin | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-snap-margin:revert;`。
+   */
+  readonly revert: Property.ScrollMargin | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-snap-margin:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMargin | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-snap-margin:unset;`。
+   */
+  readonly unset: Property.ScrollMargin | CssString = 'unset';
+}
+
+/**
  * 设置滚动吸附区域外扩的旧名称；新代码使用 scroll-margin。（scroll-snap-margin）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
  */
@@ -12599,31 +13921,31 @@ export class ScrollSnapMarginCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-snap-margin:inherit;`。
    */
-  readonly inherit = 'scroll-snap-margin:inherit;';
+  readonly inherit: string = 'scroll-snap-margin:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-snap-margin:initial;`。
    */
-  readonly initial = 'scroll-snap-margin:initial;';
+  readonly initial: string = 'scroll-snap-margin:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-snap-margin:revert;`。
    */
-  readonly revert = 'scroll-snap-margin:revert;';
+  readonly revert: string = 'scroll-snap-margin:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-snap-margin:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-snap-margin:revert-layer;';
+  readonly revertLayer: string = 'scroll-snap-margin:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-snap-margin:unset;`。
    */
-  readonly unset = 'scroll-snap-margin:unset;';
+  readonly unset: string = 'scroll-snap-margin:unset;';
   /**
    * 创建 scroll-snap-margin 属性作者；普通使用通过 s.scrollSnapMargin 取得共享实例。
    * @example
@@ -15104,6 +16426,52 @@ export class ScrollSnapMarginCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-snap-margin-bottom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollSnapMarginBottomKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-snap-margin-bottom:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginBottom | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-snap-margin-bottom:initial;`。
+   */
+  readonly initial: Property.ScrollMarginBottom | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-snap-margin-bottom:revert;`。
+   */
+  readonly revert: Property.ScrollMarginBottom | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-snap-margin-bottom:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginBottom | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-snap-margin-bottom:unset;`。
+   */
+  readonly unset: Property.ScrollMarginBottom | CssString = 'unset';
+}
+
+/**
  * 设置滚动吸附区域下侧外扩的旧名称；新代码使用 scroll-margin-bottom。（scroll-snap-margin-bottom）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -15115,31 +16483,31 @@ export class ScrollSnapMarginBottomCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-snap-margin-bottom:inherit;`。
    */
-  readonly inherit = 'scroll-snap-margin-bottom:inherit;';
+  readonly inherit: string = 'scroll-snap-margin-bottom:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-snap-margin-bottom:initial;`。
    */
-  readonly initial = 'scroll-snap-margin-bottom:initial;';
+  readonly initial: string = 'scroll-snap-margin-bottom:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-snap-margin-bottom:revert;`。
    */
-  readonly revert = 'scroll-snap-margin-bottom:revert;';
+  readonly revert: string = 'scroll-snap-margin-bottom:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-snap-margin-bottom:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-snap-margin-bottom:revert-layer;';
+  readonly revertLayer: string = 'scroll-snap-margin-bottom:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-snap-margin-bottom:unset;`。
    */
-  readonly unset = 'scroll-snap-margin-bottom:unset;';
+  readonly unset: string = 'scroll-snap-margin-bottom:unset;';
   /**
    * 创建 scroll-snap-margin-bottom 属性作者；普通使用通过 s.scrollSnapMarginBottom 取得共享实例。
    * @example
@@ -15219,6 +16587,52 @@ export class ScrollSnapMarginBottomCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-snap-margin-left 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollSnapMarginLeftKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-snap-margin-left:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginLeft | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-snap-margin-left:initial;`。
+   */
+  readonly initial: Property.ScrollMarginLeft | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-snap-margin-left:revert;`。
+   */
+  readonly revert: Property.ScrollMarginLeft | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-snap-margin-left:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginLeft | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-snap-margin-left:unset;`。
+   */
+  readonly unset: Property.ScrollMarginLeft | CssString = 'unset';
+}
+
+/**
  * 设置滚动吸附区域左侧外扩的旧名称；新代码使用 scroll-margin-left。（scroll-snap-margin-left）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -15230,31 +16644,31 @@ export class ScrollSnapMarginLeftCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-snap-margin-left:inherit;`。
    */
-  readonly inherit = 'scroll-snap-margin-left:inherit;';
+  readonly inherit: string = 'scroll-snap-margin-left:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-snap-margin-left:initial;`。
    */
-  readonly initial = 'scroll-snap-margin-left:initial;';
+  readonly initial: string = 'scroll-snap-margin-left:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-snap-margin-left:revert;`。
    */
-  readonly revert = 'scroll-snap-margin-left:revert;';
+  readonly revert: string = 'scroll-snap-margin-left:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-snap-margin-left:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-snap-margin-left:revert-layer;';
+  readonly revertLayer: string = 'scroll-snap-margin-left:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-snap-margin-left:unset;`。
    */
-  readonly unset = 'scroll-snap-margin-left:unset;';
+  readonly unset: string = 'scroll-snap-margin-left:unset;';
   /**
    * 创建 scroll-snap-margin-left 属性作者；普通使用通过 s.scrollSnapMarginLeft 取得共享实例。
    * @example
@@ -15334,6 +16748,52 @@ export class ScrollSnapMarginLeftCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-snap-margin-right 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollSnapMarginRightKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-snap-margin-right:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginRight | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-snap-margin-right:initial;`。
+   */
+  readonly initial: Property.ScrollMarginRight | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-snap-margin-right:revert;`。
+   */
+  readonly revert: Property.ScrollMarginRight | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-snap-margin-right:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginRight | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-snap-margin-right:unset;`。
+   */
+  readonly unset: Property.ScrollMarginRight | CssString = 'unset';
+}
+
+/**
  * 设置滚动吸附区域右侧外扩的旧名称；新代码使用 scroll-margin-right。（scroll-snap-margin-right）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -15345,31 +16805,31 @@ export class ScrollSnapMarginRightCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-snap-margin-right:inherit;`。
    */
-  readonly inherit = 'scroll-snap-margin-right:inherit;';
+  readonly inherit: string = 'scroll-snap-margin-right:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-snap-margin-right:initial;`。
    */
-  readonly initial = 'scroll-snap-margin-right:initial;';
+  readonly initial: string = 'scroll-snap-margin-right:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-snap-margin-right:revert;`。
    */
-  readonly revert = 'scroll-snap-margin-right:revert;';
+  readonly revert: string = 'scroll-snap-margin-right:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-snap-margin-right:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-snap-margin-right:revert-layer;';
+  readonly revertLayer: string = 'scroll-snap-margin-right:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-snap-margin-right:unset;`。
    */
-  readonly unset = 'scroll-snap-margin-right:unset;';
+  readonly unset: string = 'scroll-snap-margin-right:unset;';
   /**
    * 创建 scroll-snap-margin-right 属性作者；普通使用通过 s.scrollSnapMarginRight 取得共享实例。
    * @example
@@ -15449,6 +16909,52 @@ export class ScrollSnapMarginRightCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-snap-margin-top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollSnapMarginTopKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-snap-margin-top:inherit;`。
+   */
+  readonly inherit: Property.ScrollMarginTop | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-snap-margin-top:initial;`。
+   */
+  readonly initial: Property.ScrollMarginTop | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-snap-margin-top:revert;`。
+   */
+  readonly revert: Property.ScrollMarginTop | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-snap-margin-top:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollMarginTop | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-snap-margin-top:unset;`。
+   */
+  readonly unset: Property.ScrollMarginTop | CssString = 'unset';
+}
+
+/**
  * 设置滚动吸附区域上侧外扩的旧名称；新代码使用 scroll-margin-top。（scroll-snap-margin-top）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -15460,31 +16966,31 @@ export class ScrollSnapMarginTopCss extends LengthCssProperty {
    *
    * CSS 声明：`scroll-snap-margin-top:inherit;`。
    */
-  readonly inherit = 'scroll-snap-margin-top:inherit;';
+  readonly inherit: string = 'scroll-snap-margin-top:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-snap-margin-top:initial;`。
    */
-  readonly initial = 'scroll-snap-margin-top:initial;';
+  readonly initial: string = 'scroll-snap-margin-top:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-snap-margin-top:revert;`。
    */
-  readonly revert = 'scroll-snap-margin-top:revert;';
+  readonly revert: string = 'scroll-snap-margin-top:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-snap-margin-top:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-snap-margin-top:revert-layer;';
+  readonly revertLayer: string = 'scroll-snap-margin-top:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-snap-margin-top:unset;`。
    */
-  readonly unset = 'scroll-snap-margin-top:unset;';
+  readonly unset: string = 'scroll-snap-margin-top:unset;';
   /**
    * 创建 scroll-snap-margin-top 属性作者；普通使用通过 s.scrollSnapMarginTop 取得共享实例。
    * @example
@@ -15564,6 +17070,60 @@ export class ScrollSnapMarginTopCss extends LengthCssProperty {
 }
 
 /**
+ * scroll-snap-stop 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollSnapStopKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-stop:always;`。 */
+  readonly always: Property.ScrollSnapStop | CssString = 'always';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-snap-stop:inherit;`。
+   */
+  readonly inherit: Property.ScrollSnapStop | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-snap-stop:initial;`。
+   */
+  readonly initial: Property.ScrollSnapStop | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-stop:normal;`。 */
+  readonly normal: Property.ScrollSnapStop | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-snap-stop:revert;`。
+   */
+  readonly revert: Property.ScrollSnapStop | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-snap-stop:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollSnapStop | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-snap-stop:unset;`。
+   */
+  readonly unset: Property.ScrollSnapStop | CssString = 'unset';
+}
+
+/**
  * 设置滚动时是否允许越过该元素的吸附位置。（scroll-snap-stop）
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
@@ -15571,39 +17131,39 @@ export class ScrollSnapMarginTopCss extends LengthCssProperty {
  */
 export class ScrollSnapStopCss extends CssProperty {
   /** CSS 声明：`scroll-snap-stop:always;`。 */
-  readonly always = 'scroll-snap-stop:always;';
+  readonly always: string = 'scroll-snap-stop:always;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-snap-stop:inherit;`。
    */
-  readonly inherit = 'scroll-snap-stop:inherit;';
+  readonly inherit: string = 'scroll-snap-stop:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-snap-stop:initial;`。
    */
-  readonly initial = 'scroll-snap-stop:initial;';
+  readonly initial: string = 'scroll-snap-stop:initial;';
   /** CSS 声明：`scroll-snap-stop:normal;`。 */
-  readonly normal = 'scroll-snap-stop:normal;';
+  readonly normal: string = 'scroll-snap-stop:normal;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-snap-stop:revert;`。
    */
-  readonly revert = 'scroll-snap-stop:revert;';
+  readonly revert: string = 'scroll-snap-stop:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-snap-stop:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-snap-stop:revert-layer;';
+  readonly revertLayer: string = 'scroll-snap-stop:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-snap-stop:unset;`。
    */
-  readonly unset = 'scroll-snap-stop:unset;';
+  readonly unset: string = 'scroll-snap-stop:unset;';
   /**
    * 创建 scroll-snap-stop 属性作者；普通使用通过 s.scrollSnapStop 取得共享实例。
    * @example
@@ -15627,6 +17187,76 @@ export class ScrollSnapStopCss extends CssProperty {
 }
 
 /**
+ * scroll-snap-type 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollSnapTypeKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-type:block;`。 */
+  readonly block: Property.ScrollSnapType | CssString = 'block';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-type:both;`。 */
+  readonly both: Property.ScrollSnapType | CssString = 'both';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-snap-type:inherit;`。
+   */
+  readonly inherit: Property.ScrollSnapType | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-snap-type:initial;`。
+   */
+  readonly initial: Property.ScrollSnapType | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-type:inline;`。 */
+  readonly inline: Property.ScrollSnapType | CssString = 'inline';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-type:none;`。 */
+  readonly none: Property.ScrollSnapType | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-snap-type:revert;`。
+   */
+  readonly revert: Property.ScrollSnapType | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-snap-type:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollSnapType | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-snap-type:unset;`。
+   */
+  readonly unset: Property.ScrollSnapType | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-type:x;`。 */
+  readonly x: Property.ScrollSnapType | CssString = 'x';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-snap-type:y;`。 */
+  readonly y: Property.ScrollSnapType | CssString = 'y';
+}
+
+/**
  * 设置滚动容器的吸附轴和吸附强度。（scroll-snap-type）
  *
  * 轴和吸附强度的组合通过 raw 写入，例如 x mandatory；单独声明轴时省略的强度按 CSS 规则处理。
@@ -15638,47 +17268,47 @@ export class ScrollSnapStopCss extends CssProperty {
  */
 export class ScrollSnapTypeCss extends CssProperty {
   /** CSS 声明：`scroll-snap-type:block;`。 */
-  readonly block = 'scroll-snap-type:block;';
+  readonly block: string = 'scroll-snap-type:block;';
   /** CSS 声明：`scroll-snap-type:both;`。 */
-  readonly both = 'scroll-snap-type:both;';
+  readonly both: string = 'scroll-snap-type:both;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-snap-type:inherit;`。
    */
-  readonly inherit = 'scroll-snap-type:inherit;';
+  readonly inherit: string = 'scroll-snap-type:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-snap-type:initial;`。
    */
-  readonly initial = 'scroll-snap-type:initial;';
+  readonly initial: string = 'scroll-snap-type:initial;';
   /** CSS 声明：`scroll-snap-type:inline;`。 */
-  readonly inline = 'scroll-snap-type:inline;';
+  readonly inline: string = 'scroll-snap-type:inline;';
   /** CSS 声明：`scroll-snap-type:none;`。 */
-  readonly none = 'scroll-snap-type:none;';
+  readonly none: string = 'scroll-snap-type:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-snap-type:revert;`。
    */
-  readonly revert = 'scroll-snap-type:revert;';
+  readonly revert: string = 'scroll-snap-type:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-snap-type:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-snap-type:revert-layer;';
+  readonly revertLayer: string = 'scroll-snap-type:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-snap-type:unset;`。
    */
-  readonly unset = 'scroll-snap-type:unset;';
+  readonly unset: string = 'scroll-snap-type:unset;';
   /** CSS 声明：`scroll-snap-type:x;`。 */
-  readonly x = 'scroll-snap-type:x;';
+  readonly x: string = 'scroll-snap-type:x;';
   /** CSS 声明：`scroll-snap-type:y;`。 */
-  readonly y = 'scroll-snap-type:y;';
+  readonly y: string = 'scroll-snap-type:y;';
   /**
    * 创建 scroll-snap-type 属性作者；普通使用通过 s.scrollSnapType 取得共享实例。
    * @example
@@ -15702,6 +17332,56 @@ export class ScrollSnapTypeCss extends CssProperty {
 }
 
 /**
+ * scroll-timeline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollTimelineKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-timeline:inherit;`。
+   */
+  readonly inherit: Property.ScrollTimeline | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-timeline:initial;`。
+   */
+  readonly initial: Property.ScrollTimeline | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-timeline:none;`。 */
+  readonly none: Property.ScrollTimeline | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-timeline:revert;`。
+   */
+  readonly revert: Property.ScrollTimeline | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-timeline:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollTimeline | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-timeline:unset;`。
+   */
+  readonly unset: Property.ScrollTimeline | CssString = 'unset';
+}
+
+/**
  * 同时声明滚动进度时间线的名称和轴。（scroll-timeline）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline
  */
@@ -15711,33 +17391,33 @@ export class ScrollTimelineCss extends CssProperty {
    *
    * CSS 声明：`scroll-timeline:inherit;`。
    */
-  readonly inherit = 'scroll-timeline:inherit;';
+  readonly inherit: string = 'scroll-timeline:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-timeline:initial;`。
    */
-  readonly initial = 'scroll-timeline:initial;';
+  readonly initial: string = 'scroll-timeline:initial;';
   /** CSS 声明：`scroll-timeline:none;`。 */
-  readonly none = 'scroll-timeline:none;';
+  readonly none: string = 'scroll-timeline:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-timeline:revert;`。
    */
-  readonly revert = 'scroll-timeline:revert;';
+  readonly revert: string = 'scroll-timeline:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-timeline:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-timeline:revert-layer;';
+  readonly revertLayer: string = 'scroll-timeline:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-timeline:unset;`。
    */
-  readonly unset = 'scroll-timeline:unset;';
+  readonly unset: string = 'scroll-timeline:unset;';
   /**
    * 创建 scroll-timeline 属性作者；普通使用通过 s.scrollTimeline 取得共享实例。
    * @example
@@ -15761,6 +17441,68 @@ export class ScrollTimelineCss extends CssProperty {
 }
 
 /**
+ * scroll-timeline-axis 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollTimelineAxisKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-timeline-axis:block;`。 */
+  readonly block: Property.ScrollTimelineAxis | CssString = 'block';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-timeline-axis:inherit;`。
+   */
+  readonly inherit: Property.ScrollTimelineAxis | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-timeline-axis:initial;`。
+   */
+  readonly initial: Property.ScrollTimelineAxis | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-timeline-axis:inline;`。 */
+  readonly inline: Property.ScrollTimelineAxis | CssString = 'inline';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-timeline-axis:revert;`。
+   */
+  readonly revert: Property.ScrollTimelineAxis | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-timeline-axis:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollTimelineAxis | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-timeline-axis:unset;`。
+   */
+  readonly unset: Property.ScrollTimelineAxis | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-timeline-axis:x;`。 */
+  readonly x: Property.ScrollTimelineAxis | CssString = 'x';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-timeline-axis:y;`。 */
+  readonly y: Property.ScrollTimelineAxis | CssString = 'y';
+}
+
+/**
  * 设置滚动进度时间线所观察的滚动轴。（scroll-timeline-axis）
  *
  * CSS 初始值：`block`（不同于浏览器默认样式表）。
@@ -15768,43 +17510,43 @@ export class ScrollTimelineCss extends CssProperty {
  */
 export class ScrollTimelineAxisCss extends CssProperty {
   /** CSS 声明：`scroll-timeline-axis:block;`。 */
-  readonly block = 'scroll-timeline-axis:block;';
+  readonly block: string = 'scroll-timeline-axis:block;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scroll-timeline-axis:inherit;`。
    */
-  readonly inherit = 'scroll-timeline-axis:inherit;';
+  readonly inherit: string = 'scroll-timeline-axis:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-timeline-axis:initial;`。
    */
-  readonly initial = 'scroll-timeline-axis:initial;';
+  readonly initial: string = 'scroll-timeline-axis:initial;';
   /** CSS 声明：`scroll-timeline-axis:inline;`。 */
-  readonly inline = 'scroll-timeline-axis:inline;';
+  readonly inline: string = 'scroll-timeline-axis:inline;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-timeline-axis:revert;`。
    */
-  readonly revert = 'scroll-timeline-axis:revert;';
+  readonly revert: string = 'scroll-timeline-axis:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-timeline-axis:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-timeline-axis:revert-layer;';
+  readonly revertLayer: string = 'scroll-timeline-axis:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-timeline-axis:unset;`。
    */
-  readonly unset = 'scroll-timeline-axis:unset;';
+  readonly unset: string = 'scroll-timeline-axis:unset;';
   /** CSS 声明：`scroll-timeline-axis:x;`。 */
-  readonly x = 'scroll-timeline-axis:x;';
+  readonly x: string = 'scroll-timeline-axis:x;';
   /** CSS 声明：`scroll-timeline-axis:y;`。 */
-  readonly y = 'scroll-timeline-axis:y;';
+  readonly y: string = 'scroll-timeline-axis:y;';
   /**
    * 创建 scroll-timeline-axis 属性作者；普通使用通过 s.scrollTimelineAxis 取得共享实例。
    * @example
@@ -15828,6 +17570,56 @@ export class ScrollTimelineAxisCss extends CssProperty {
 }
 
 /**
+ * scroll-timeline-name 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollTimelineNameKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scroll-timeline-name:inherit;`。
+   */
+  readonly inherit: Property.ScrollTimelineName | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scroll-timeline-name:initial;`。
+   */
+  readonly initial: Property.ScrollTimelineName | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scroll-timeline-name:none;`。 */
+  readonly none: Property.ScrollTimelineName | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scroll-timeline-name:revert;`。
+   */
+  readonly revert: Property.ScrollTimelineName | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scroll-timeline-name:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollTimelineName | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scroll-timeline-name:unset;`。
+   */
+  readonly unset: Property.ScrollTimelineName | CssString = 'unset';
+}
+
+/**
  * 声明基于当前容器滚动进度的时间线名称。（scroll-timeline-name）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -15839,33 +17631,33 @@ export class ScrollTimelineNameCss extends CssProperty {
    *
    * CSS 声明：`scroll-timeline-name:inherit;`。
    */
-  readonly inherit = 'scroll-timeline-name:inherit;';
+  readonly inherit: string = 'scroll-timeline-name:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scroll-timeline-name:initial;`。
    */
-  readonly initial = 'scroll-timeline-name:initial;';
+  readonly initial: string = 'scroll-timeline-name:initial;';
   /** CSS 声明：`scroll-timeline-name:none;`。 */
-  readonly none = 'scroll-timeline-name:none;';
+  readonly none: string = 'scroll-timeline-name:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scroll-timeline-name:revert;`。
    */
-  readonly revert = 'scroll-timeline-name:revert;';
+  readonly revert: string = 'scroll-timeline-name:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scroll-timeline-name:revert-layer;`。
    */
-  readonly revertLayer = 'scroll-timeline-name:revert-layer;';
+  readonly revertLayer: string = 'scroll-timeline-name:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scroll-timeline-name:unset;`。
    */
-  readonly unset = 'scroll-timeline-name:unset;';
+  readonly unset: string = 'scroll-timeline-name:unset;';
   /**
    * 创建 scroll-timeline-name 属性作者；普通使用通过 s.scrollTimelineName 取得共享实例。
    * @example
@@ -15889,6 +17681,56 @@ export class ScrollTimelineNameCss extends CssProperty {
 }
 
 /**
+ * scrollbar-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollbarColorKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scrollbar-color:auto;`。 */
+  readonly auto: Property.ScrollbarColor | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scrollbar-color:inherit;`。
+   */
+  readonly inherit: Property.ScrollbarColor | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scrollbar-color:initial;`。
+   */
+  readonly initial: Property.ScrollbarColor | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scrollbar-color:revert;`。
+   */
+  readonly revert: Property.ScrollbarColor | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scrollbar-color:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollbarColor | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scrollbar-color:unset;`。
+   */
+  readonly unset: Property.ScrollbarColor | CssString = 'unset';
+}
+
+/**
  * 设置滚动条滑块和轨道的颜色。（scrollbar-color）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -15896,37 +17738,37 @@ export class ScrollTimelineNameCss extends CssProperty {
  */
 export class ScrollbarColorCss extends CssProperty {
   /** CSS 声明：`scrollbar-color:auto;`。 */
-  readonly auto = 'scrollbar-color:auto;';
+  readonly auto: string = 'scrollbar-color:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scrollbar-color:inherit;`。
    */
-  readonly inherit = 'scrollbar-color:inherit;';
+  readonly inherit: string = 'scrollbar-color:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scrollbar-color:initial;`。
    */
-  readonly initial = 'scrollbar-color:initial;';
+  readonly initial: string = 'scrollbar-color:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scrollbar-color:revert;`。
    */
-  readonly revert = 'scrollbar-color:revert;';
+  readonly revert: string = 'scrollbar-color:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scrollbar-color:revert-layer;`。
    */
-  readonly revertLayer = 'scrollbar-color:revert-layer;';
+  readonly revertLayer: string = 'scrollbar-color:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scrollbar-color:unset;`。
    */
-  readonly unset = 'scrollbar-color:unset;';
+  readonly unset: string = 'scrollbar-color:unset;';
   /**
    * 创建 scrollbar-color 属性作者；普通使用通过 s.scrollbarColor 取得共享实例。
    * @example
@@ -15950,6 +17792,60 @@ export class ScrollbarColorCss extends CssProperty {
 }
 
 /**
+ * scrollbar-gutter 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollbarGutterKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scrollbar-gutter:auto;`。 */
+  readonly auto: Property.ScrollbarGutter | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scrollbar-gutter:inherit;`。
+   */
+  readonly inherit: Property.ScrollbarGutter | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scrollbar-gutter:initial;`。
+   */
+  readonly initial: Property.ScrollbarGutter | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scrollbar-gutter:revert;`。
+   */
+  readonly revert: Property.ScrollbarGutter | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scrollbar-gutter:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollbarGutter | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scrollbar-gutter:stable;`。 */
+  readonly stable: Property.ScrollbarGutter | CssString = 'stable';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scrollbar-gutter:unset;`。
+   */
+  readonly unset: Property.ScrollbarGutter | CssString = 'unset';
+}
+
+/**
  * 设置是否预留滚动条槽位，以减少滚动条出现时的布局变化。（scrollbar-gutter）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -15957,39 +17853,39 @@ export class ScrollbarColorCss extends CssProperty {
  */
 export class ScrollbarGutterCss extends CssProperty {
   /** CSS 声明：`scrollbar-gutter:auto;`。 */
-  readonly auto = 'scrollbar-gutter:auto;';
+  readonly auto: string = 'scrollbar-gutter:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scrollbar-gutter:inherit;`。
    */
-  readonly inherit = 'scrollbar-gutter:inherit;';
+  readonly inherit: string = 'scrollbar-gutter:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scrollbar-gutter:initial;`。
    */
-  readonly initial = 'scrollbar-gutter:initial;';
+  readonly initial: string = 'scrollbar-gutter:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scrollbar-gutter:revert;`。
    */
-  readonly revert = 'scrollbar-gutter:revert;';
+  readonly revert: string = 'scrollbar-gutter:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scrollbar-gutter:revert-layer;`。
    */
-  readonly revertLayer = 'scrollbar-gutter:revert-layer;';
+  readonly revertLayer: string = 'scrollbar-gutter:revert-layer;';
   /** CSS 声明：`scrollbar-gutter:stable;`。 */
-  readonly stable = 'scrollbar-gutter:stable;';
+  readonly stable: string = 'scrollbar-gutter:stable;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scrollbar-gutter:unset;`。
    */
-  readonly unset = 'scrollbar-gutter:unset;';
+  readonly unset: string = 'scrollbar-gutter:unset;';
   /**
    * 创建 scrollbar-gutter 属性作者；普通使用通过 s.scrollbarGutter 取得共享实例。
    * @example
@@ -16013,6 +17909,64 @@ export class ScrollbarGutterCss extends CssProperty {
 }
 
 /**
+ * scrollbar-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ScrollbarWidthKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scrollbar-width:auto;`。 */
+  readonly auto: Property.ScrollbarWidth | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`scrollbar-width:inherit;`。
+   */
+  readonly inherit: Property.ScrollbarWidth | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`scrollbar-width:initial;`。
+   */
+  readonly initial: Property.ScrollbarWidth | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scrollbar-width:none;`。 */
+  readonly none: Property.ScrollbarWidth | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`scrollbar-width:revert;`。
+   */
+  readonly revert: Property.ScrollbarWidth | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`scrollbar-width:revert-layer;`。
+   */
+  readonly revertLayer: Property.ScrollbarWidth | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`scrollbar-width:thin;`。 */
+  readonly thin: Property.ScrollbarWidth | CssString = 'thin';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`scrollbar-width:unset;`。
+   */
+  readonly unset: Property.ScrollbarWidth | CssString = 'unset';
+}
+
+/**
  * 设置滚动条采用正常、较细或隐藏的外观。（scrollbar-width）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -16020,41 +17974,41 @@ export class ScrollbarGutterCss extends CssProperty {
  */
 export class ScrollbarWidthCss extends CssProperty {
   /** CSS 声明：`scrollbar-width:auto;`。 */
-  readonly auto = 'scrollbar-width:auto;';
+  readonly auto: string = 'scrollbar-width:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`scrollbar-width:inherit;`。
    */
-  readonly inherit = 'scrollbar-width:inherit;';
+  readonly inherit: string = 'scrollbar-width:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`scrollbar-width:initial;`。
    */
-  readonly initial = 'scrollbar-width:initial;';
+  readonly initial: string = 'scrollbar-width:initial;';
   /** CSS 声明：`scrollbar-width:none;`。 */
-  readonly none = 'scrollbar-width:none;';
+  readonly none: string = 'scrollbar-width:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`scrollbar-width:revert;`。
    */
-  readonly revert = 'scrollbar-width:revert;';
+  readonly revert: string = 'scrollbar-width:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`scrollbar-width:revert-layer;`。
    */
-  readonly revertLayer = 'scrollbar-width:revert-layer;';
+  readonly revertLayer: string = 'scrollbar-width:revert-layer;';
   /** CSS 声明：`scrollbar-width:thin;`。 */
-  readonly thin = 'scrollbar-width:thin;';
+  readonly thin: string = 'scrollbar-width:thin;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`scrollbar-width:unset;`。
    */
-  readonly unset = 'scrollbar-width:unset;';
+  readonly unset: string = 'scrollbar-width:unset;';
   /**
    * 创建 scrollbar-width 属性作者；普通使用通过 s.scrollbarWidth 取得共享实例。
    * @example
@@ -16078,6 +18032,52 @@ export class ScrollbarWidthCss extends CssProperty {
 }
 
 /**
+ * shape-image-threshold 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ShapeImageThresholdKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`shape-image-threshold:inherit;`。
+   */
+  readonly inherit: Property.ShapeImageThreshold | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`shape-image-threshold:initial;`。
+   */
+  readonly initial: Property.ShapeImageThreshold | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`shape-image-threshold:revert;`。
+   */
+  readonly revert: Property.ShapeImageThreshold | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`shape-image-threshold:revert-layer;`。
+   */
+  readonly revertLayer: Property.ShapeImageThreshold | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`shape-image-threshold:unset;`。
+   */
+  readonly unset: Property.ShapeImageThreshold | CssString = 'unset';
+}
+
+/**
  * 设置从图像 alpha 信息提取环绕形状时的阈值。（shape-image-threshold）
  *
  * CSS 初始值：`0.0`（不同于浏览器默认样式表）。
@@ -16089,31 +18089,31 @@ export class ShapeImageThresholdCss extends CssProperty {
    *
    * CSS 声明：`shape-image-threshold:inherit;`。
    */
-  readonly inherit = 'shape-image-threshold:inherit;';
+  readonly inherit: string = 'shape-image-threshold:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`shape-image-threshold:initial;`。
    */
-  readonly initial = 'shape-image-threshold:initial;';
+  readonly initial: string = 'shape-image-threshold:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`shape-image-threshold:revert;`。
    */
-  readonly revert = 'shape-image-threshold:revert;';
+  readonly revert: string = 'shape-image-threshold:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`shape-image-threshold:revert-layer;`。
    */
-  readonly revertLayer = 'shape-image-threshold:revert-layer;';
+  readonly revertLayer: string = 'shape-image-threshold:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`shape-image-threshold:unset;`。
    */
-  readonly unset = 'shape-image-threshold:unset;';
+  readonly unset: string = 'shape-image-threshold:unset;';
   /**
    * 创建 shape-image-threshold 属性作者；普通使用通过 s.shapeImageThreshold 取得共享实例。
    * @example
@@ -16205,6 +18205,52 @@ export class ShapeImageThresholdCss extends CssProperty {
 }
 
 /**
+ * shape-margin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ShapeMarginKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`shape-margin:inherit;`。
+   */
+  readonly inherit: Property.ShapeMargin | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`shape-margin:initial;`。
+   */
+  readonly initial: Property.ShapeMargin | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`shape-margin:revert;`。
+   */
+  readonly revert: Property.ShapeMargin | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`shape-margin:revert-layer;`。
+   */
+  readonly revertLayer: Property.ShapeMargin | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`shape-margin:unset;`。
+   */
+  readonly unset: Property.ShapeMargin | CssString = 'unset';
+}
+
+/**
  * 设置文字环绕形状之外的额外间距。（shape-margin）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -16216,31 +18262,31 @@ export class ShapeMarginCss extends LengthCssProperty {
    *
    * CSS 声明：`shape-margin:inherit;`。
    */
-  readonly inherit = 'shape-margin:inherit;';
+  readonly inherit: string = 'shape-margin:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`shape-margin:initial;`。
    */
-  readonly initial = 'shape-margin:initial;';
+  readonly initial: string = 'shape-margin:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`shape-margin:revert;`。
    */
-  readonly revert = 'shape-margin:revert;';
+  readonly revert: string = 'shape-margin:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`shape-margin:revert-layer;`。
    */
-  readonly revertLayer = 'shape-margin:revert-layer;';
+  readonly revertLayer: string = 'shape-margin:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`shape-margin:unset;`。
    */
-  readonly unset = 'shape-margin:unset;';
+  readonly unset: string = 'shape-margin:unset;';
   /**
    * 创建 shape-margin 属性作者；普通使用通过 s.shapeMargin 取得共享实例。
    * @example
@@ -16332,6 +18378,72 @@ export class ShapeMarginCss extends LengthCssProperty {
 }
 
 /**
+ * shape-outside 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ShapeOutsideKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`shape-outside:border-box;`。 */
+  readonly borderBox: Property.ShapeOutside | CssString = 'border-box';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`shape-outside:content-box;`。 */
+  readonly contentBox: Property.ShapeOutside | CssString = 'content-box';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`shape-outside:inherit;`。
+   */
+  readonly inherit: Property.ShapeOutside | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`shape-outside:initial;`。
+   */
+  readonly initial: Property.ShapeOutside | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`shape-outside:margin-box;`。 */
+  readonly marginBox: Property.ShapeOutside | CssString = 'margin-box';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`shape-outside:none;`。 */
+  readonly none: Property.ShapeOutside | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`shape-outside:padding-box;`。 */
+  readonly paddingBox: Property.ShapeOutside | CssString = 'padding-box';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`shape-outside:revert;`。
+   */
+  readonly revert: Property.ShapeOutside | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`shape-outside:revert-layer;`。
+   */
+  readonly revertLayer: Property.ShapeOutside | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`shape-outside:unset;`。
+   */
+  readonly unset: Property.ShapeOutside | CssString = 'unset';
+}
+
+/**
  * 设置浮动元素周围行内内容所环绕的形状。（shape-outside）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -16339,45 +18451,45 @@ export class ShapeMarginCss extends LengthCssProperty {
  */
 export class ShapeOutsideCss extends CssProperty {
   /** CSS 声明：`shape-outside:border-box;`。 */
-  readonly borderBox = 'shape-outside:border-box;';
+  readonly borderBox: string = 'shape-outside:border-box;';
   /** CSS 声明：`shape-outside:content-box;`。 */
-  readonly contentBox = 'shape-outside:content-box;';
+  readonly contentBox: string = 'shape-outside:content-box;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`shape-outside:inherit;`。
    */
-  readonly inherit = 'shape-outside:inherit;';
+  readonly inherit: string = 'shape-outside:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`shape-outside:initial;`。
    */
-  readonly initial = 'shape-outside:initial;';
+  readonly initial: string = 'shape-outside:initial;';
   /** CSS 声明：`shape-outside:margin-box;`。 */
-  readonly marginBox = 'shape-outside:margin-box;';
+  readonly marginBox: string = 'shape-outside:margin-box;';
   /** CSS 声明：`shape-outside:none;`。 */
-  readonly none = 'shape-outside:none;';
+  readonly none: string = 'shape-outside:none;';
   /** CSS 声明：`shape-outside:padding-box;`。 */
-  readonly paddingBox = 'shape-outside:padding-box;';
+  readonly paddingBox: string = 'shape-outside:padding-box;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`shape-outside:revert;`。
    */
-  readonly revert = 'shape-outside:revert;';
+  readonly revert: string = 'shape-outside:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`shape-outside:revert-layer;`。
    */
-  readonly revertLayer = 'shape-outside:revert-layer;';
+  readonly revertLayer: string = 'shape-outside:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`shape-outside:unset;`。
    */
-  readonly unset = 'shape-outside:unset;';
+  readonly unset: string = 'shape-outside:unset;';
   /**
    * 创建 shape-outside 属性作者；普通使用通过 s.shapeOutside 取得共享实例。
    * @example
@@ -16401,6 +18513,68 @@ export class ShapeOutsideCss extends CssProperty {
 }
 
 /**
+ * shape-rendering 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class ShapeRenderingKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`shape-rendering:auto;`。 */
+  readonly auto: Property.ShapeRendering | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`shape-rendering:crispEdges;`。 */
+  readonly crispEdges: Property.ShapeRendering | CssString = 'crispEdges';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`shape-rendering:geometricPrecision;`。 */
+  readonly geometricPrecision: Property.ShapeRendering | CssString = 'geometricPrecision';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`shape-rendering:inherit;`。
+   */
+  readonly inherit: Property.ShapeRendering | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`shape-rendering:initial;`。
+   */
+  readonly initial: Property.ShapeRendering | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`shape-rendering:optimizeSpeed;`。 */
+  readonly optimizeSpeed: Property.ShapeRendering | CssString = 'optimizeSpeed';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`shape-rendering:revert;`。
+   */
+  readonly revert: Property.ShapeRendering | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`shape-rendering:revert-layer;`。
+   */
+  readonly revertLayer: Property.ShapeRendering | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`shape-rendering:unset;`。
+   */
+  readonly unset: Property.ShapeRendering | CssString = 'unset';
+}
+
+/**
  * 向 SVG 渲染器提供图形绘制精度与速度的偏好。（shape-rendering）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -16408,43 +18582,43 @@ export class ShapeOutsideCss extends CssProperty {
  */
 export class ShapeRenderingCss extends CssProperty {
   /** CSS 声明：`shape-rendering:auto;`。 */
-  readonly auto = 'shape-rendering:auto;';
+  readonly auto: string = 'shape-rendering:auto;';
   /** CSS 声明：`shape-rendering:crispEdges;`。 */
-  readonly crispEdges = 'shape-rendering:crispEdges;';
+  readonly crispEdges: string = 'shape-rendering:crispEdges;';
   /** CSS 声明：`shape-rendering:geometricPrecision;`。 */
-  readonly geometricPrecision = 'shape-rendering:geometricPrecision;';
+  readonly geometricPrecision: string = 'shape-rendering:geometricPrecision;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`shape-rendering:inherit;`。
    */
-  readonly inherit = 'shape-rendering:inherit;';
+  readonly inherit: string = 'shape-rendering:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`shape-rendering:initial;`。
    */
-  readonly initial = 'shape-rendering:initial;';
+  readonly initial: string = 'shape-rendering:initial;';
   /** CSS 声明：`shape-rendering:optimizeSpeed;`。 */
-  readonly optimizeSpeed = 'shape-rendering:optimizeSpeed;';
+  readonly optimizeSpeed: string = 'shape-rendering:optimizeSpeed;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`shape-rendering:revert;`。
    */
-  readonly revert = 'shape-rendering:revert;';
+  readonly revert: string = 'shape-rendering:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`shape-rendering:revert-layer;`。
    */
-  readonly revertLayer = 'shape-rendering:revert-layer;';
+  readonly revertLayer: string = 'shape-rendering:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`shape-rendering:unset;`。
    */
-  readonly unset = 'shape-rendering:unset;';
+  readonly unset: string = 'shape-rendering:unset;';
   /**
    * 创建 shape-rendering 属性作者；普通使用通过 s.shapeRendering 取得共享实例。
    * @example
@@ -16468,6 +18642,72 @@ export class ShapeRenderingCss extends CssProperty {
 }
 
 /**
+ * speak-as 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class SpeakAsKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`speak-as:digits;`。 */
+  readonly digits: Property.SpeakAs | CssString = 'digits';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`speak-as:inherit;`。
+   */
+  readonly inherit: Property.SpeakAs | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`speak-as:initial;`。
+   */
+  readonly initial: Property.SpeakAs | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`speak-as:literal-punctuation;`。 */
+  readonly literalPunctuation: Property.SpeakAs | CssString = 'literal-punctuation';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`speak-as:no-punctuation;`。 */
+  readonly noPunctuation: Property.SpeakAs | CssString = 'no-punctuation';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`speak-as:normal;`。 */
+  readonly normal: Property.SpeakAs | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`speak-as:revert;`。
+   */
+  readonly revert: Property.SpeakAs | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`speak-as:revert-layer;`。
+   */
+  readonly revertLayer: Property.SpeakAs | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`speak-as:spell-out;`。 */
+  readonly spellOut: Property.SpeakAs | CssString = 'spell-out';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`speak-as:unset;`。
+   */
+  readonly unset: Property.SpeakAs | CssString = 'unset';
+}
+
+/**
  * 设置语音呈现时文字、数字和标点的朗读方式；使用前核对语音媒体支持。（speak-as）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -16475,45 +18715,45 @@ export class ShapeRenderingCss extends CssProperty {
  */
 export class SpeakAsCss extends CssProperty {
   /** CSS 声明：`speak-as:digits;`。 */
-  readonly digits = 'speak-as:digits;';
+  readonly digits: string = 'speak-as:digits;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`speak-as:inherit;`。
    */
-  readonly inherit = 'speak-as:inherit;';
+  readonly inherit: string = 'speak-as:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`speak-as:initial;`。
    */
-  readonly initial = 'speak-as:initial;';
+  readonly initial: string = 'speak-as:initial;';
   /** CSS 声明：`speak-as:literal-punctuation;`。 */
-  readonly literalPunctuation = 'speak-as:literal-punctuation;';
+  readonly literalPunctuation: string = 'speak-as:literal-punctuation;';
   /** CSS 声明：`speak-as:no-punctuation;`。 */
-  readonly noPunctuation = 'speak-as:no-punctuation;';
+  readonly noPunctuation: string = 'speak-as:no-punctuation;';
   /** CSS 声明：`speak-as:normal;`。 */
-  readonly normal = 'speak-as:normal;';
+  readonly normal: string = 'speak-as:normal;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`speak-as:revert;`。
    */
-  readonly revert = 'speak-as:revert;';
+  readonly revert: string = 'speak-as:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`speak-as:revert-layer;`。
    */
-  readonly revertLayer = 'speak-as:revert-layer;';
+  readonly revertLayer: string = 'speak-as:revert-layer;';
   /** CSS 声明：`speak-as:spell-out;`。 */
-  readonly spellOut = 'speak-as:spell-out;';
+  readonly spellOut: string = 'speak-as:spell-out;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`speak-as:unset;`。
    */
-  readonly unset = 'speak-as:unset;';
+  readonly unset: string = 'speak-as:unset;';
   /**
    * 创建 speak-as 属性作者；普通使用通过 s.speakAs 取得共享实例。
    * @example
@@ -16537,6 +18777,828 @@ export class SpeakAsCss extends CssProperty {
 }
 
 /**
+ * stop-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StopColorKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:AccentColor;`。 */
+  readonly AccentColor: Property.StopColor | CssString = 'AccentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:AccentColorText;`。 */
+  readonly AccentColorText: Property.StopColor | CssString = 'AccentColorText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ActiveBorder;`。 */
+  readonly ActiveBorder: Property.StopColor | CssString = 'ActiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ActiveCaption;`。 */
+  readonly ActiveCaption: Property.StopColor | CssString = 'ActiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ActiveText;`。 */
+  readonly ActiveText: Property.StopColor | CssString = 'ActiveText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:AppWorkspace;`。 */
+  readonly AppWorkspace: Property.StopColor | CssString = 'AppWorkspace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:Background;`。 */
+  readonly Background: Property.StopColor | CssString = 'Background';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ButtonBorder;`。 */
+  readonly ButtonBorder: Property.StopColor | CssString = 'ButtonBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ButtonFace;`。 */
+  readonly ButtonFace: Property.StopColor | CssString = 'ButtonFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ButtonHighlight;`。 */
+  readonly ButtonHighlight: Property.StopColor | CssString = 'ButtonHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ButtonShadow;`。 */
+  readonly ButtonShadow: Property.StopColor | CssString = 'ButtonShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ButtonText;`。 */
+  readonly ButtonText: Property.StopColor | CssString = 'ButtonText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:Canvas;`。 */
+  readonly Canvas: Property.StopColor | CssString = 'Canvas';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:CanvasText;`。 */
+  readonly CanvasText: Property.StopColor | CssString = 'CanvasText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:CaptionText;`。 */
+  readonly CaptionText: Property.StopColor | CssString = 'CaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:Field;`。 */
+  readonly Field: Property.StopColor | CssString = 'Field';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:FieldText;`。 */
+  readonly FieldText: Property.StopColor | CssString = 'FieldText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:GrayText;`。 */
+  readonly GrayText: Property.StopColor | CssString = 'GrayText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:Highlight;`。 */
+  readonly Highlight: Property.StopColor | CssString = 'Highlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:HighlightText;`。 */
+  readonly HighlightText: Property.StopColor | CssString = 'HighlightText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:InactiveBorder;`。 */
+  readonly InactiveBorder: Property.StopColor | CssString = 'InactiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:InactiveCaption;`。 */
+  readonly InactiveCaption: Property.StopColor | CssString = 'InactiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:InactiveCaptionText;`。 */
+  readonly InactiveCaptionText: Property.StopColor | CssString = 'InactiveCaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:InfoBackground;`。 */
+  readonly InfoBackground: Property.StopColor | CssString = 'InfoBackground';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:InfoText;`。 */
+  readonly InfoText: Property.StopColor | CssString = 'InfoText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:LinkText;`。 */
+  readonly LinkText: Property.StopColor | CssString = 'LinkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:Mark;`。 */
+  readonly Mark: Property.StopColor | CssString = 'Mark';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:MarkText;`。 */
+  readonly MarkText: Property.StopColor | CssString = 'MarkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:Menu;`。 */
+  readonly Menu: Property.StopColor | CssString = 'Menu';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:MenuText;`。 */
+  readonly MenuText: Property.StopColor | CssString = 'MenuText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:Scrollbar;`。 */
+  readonly Scrollbar: Property.StopColor | CssString = 'Scrollbar';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:SelectedItem;`。 */
+  readonly SelectedItem: Property.StopColor | CssString = 'SelectedItem';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:SelectedItemText;`。 */
+  readonly SelectedItemText: Property.StopColor | CssString = 'SelectedItemText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ThreeDDarkShadow;`。 */
+  readonly ThreeDDarkShadow: Property.StopColor | CssString = 'ThreeDDarkShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ThreeDFace;`。 */
+  readonly ThreeDFace: Property.StopColor | CssString = 'ThreeDFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ThreeDHighlight;`。 */
+  readonly ThreeDHighlight: Property.StopColor | CssString = 'ThreeDHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ThreeDLightShadow;`。 */
+  readonly ThreeDLightShadow: Property.StopColor | CssString = 'ThreeDLightShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ThreeDShadow;`。 */
+  readonly ThreeDShadow: Property.StopColor | CssString = 'ThreeDShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:VisitedText;`。 */
+  readonly VisitedText: Property.StopColor | CssString = 'VisitedText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:Window;`。 */
+  readonly Window: Property.StopColor | CssString = 'Window';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:WindowFrame;`。 */
+  readonly WindowFrame: Property.StopColor | CssString = 'WindowFrame';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:WindowText;`。 */
+  readonly WindowText: Property.StopColor | CssString = 'WindowText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:aliceblue;`。 */
+  readonly aliceblue: Property.StopColor | CssString = 'aliceblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:antiquewhite;`。 */
+  readonly antiquewhite: Property.StopColor | CssString = 'antiquewhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:aqua;`。 */
+  readonly aqua: Property.StopColor | CssString = 'aqua';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:aquamarine;`。 */
+  readonly aquamarine: Property.StopColor | CssString = 'aquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:azure;`。 */
+  readonly azure: Property.StopColor | CssString = 'azure';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:beige;`。 */
+  readonly beige: Property.StopColor | CssString = 'beige';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:bisque;`。 */
+  readonly bisque: Property.StopColor | CssString = 'bisque';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:black;`。 */
+  readonly black: Property.StopColor | CssString = 'black';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:blanchedalmond;`。 */
+  readonly blanchedalmond: Property.StopColor | CssString = 'blanchedalmond';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:blue;`。 */
+  readonly blue: Property.StopColor | CssString = 'blue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:blueviolet;`。 */
+  readonly blueviolet: Property.StopColor | CssString = 'blueviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:brown;`。 */
+  readonly brown: Property.StopColor | CssString = 'brown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:burlywood;`。 */
+  readonly burlywood: Property.StopColor | CssString = 'burlywood';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:cadetblue;`。 */
+  readonly cadetblue: Property.StopColor | CssString = 'cadetblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:chartreuse;`。 */
+  readonly chartreuse: Property.StopColor | CssString = 'chartreuse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:chocolate;`。 */
+  readonly chocolate: Property.StopColor | CssString = 'chocolate';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:coral;`。 */
+  readonly coral: Property.StopColor | CssString = 'coral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:cornflowerblue;`。 */
+  readonly cornflowerblue: Property.StopColor | CssString = 'cornflowerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:cornsilk;`。 */
+  readonly cornsilk: Property.StopColor | CssString = 'cornsilk';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:crimson;`。 */
+  readonly crimson: Property.StopColor | CssString = 'crimson';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
+   *
+   * CSS 声明：`stop-color:currentColor;`。
+   */
+  readonly currentColor: Property.StopColor | CssString = 'currentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:cyan;`。 */
+  readonly cyan: Property.StopColor | CssString = 'cyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkblue;`。 */
+  readonly darkblue: Property.StopColor | CssString = 'darkblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkcyan;`。 */
+  readonly darkcyan: Property.StopColor | CssString = 'darkcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkgoldenrod;`。 */
+  readonly darkgoldenrod: Property.StopColor | CssString = 'darkgoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkgray;`。 */
+  readonly darkgray: Property.StopColor | CssString = 'darkgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkgreen;`。 */
+  readonly darkgreen: Property.StopColor | CssString = 'darkgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkgrey;`。 */
+  readonly darkgrey: Property.StopColor | CssString = 'darkgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkkhaki;`。 */
+  readonly darkkhaki: Property.StopColor | CssString = 'darkkhaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkmagenta;`。 */
+  readonly darkmagenta: Property.StopColor | CssString = 'darkmagenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkolivegreen;`。 */
+  readonly darkolivegreen: Property.StopColor | CssString = 'darkolivegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkorange;`。 */
+  readonly darkorange: Property.StopColor | CssString = 'darkorange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkorchid;`。 */
+  readonly darkorchid: Property.StopColor | CssString = 'darkorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkred;`。 */
+  readonly darkred: Property.StopColor | CssString = 'darkred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darksalmon;`。 */
+  readonly darksalmon: Property.StopColor | CssString = 'darksalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkseagreen;`。 */
+  readonly darkseagreen: Property.StopColor | CssString = 'darkseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkslateblue;`。 */
+  readonly darkslateblue: Property.StopColor | CssString = 'darkslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkslategray;`。 */
+  readonly darkslategray: Property.StopColor | CssString = 'darkslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkslategrey;`。 */
+  readonly darkslategrey: Property.StopColor | CssString = 'darkslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkturquoise;`。 */
+  readonly darkturquoise: Property.StopColor | CssString = 'darkturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:darkviolet;`。 */
+  readonly darkviolet: Property.StopColor | CssString = 'darkviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:deeppink;`。 */
+  readonly deeppink: Property.StopColor | CssString = 'deeppink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:deepskyblue;`。 */
+  readonly deepskyblue: Property.StopColor | CssString = 'deepskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:dimgray;`。 */
+  readonly dimgray: Property.StopColor | CssString = 'dimgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:dimgrey;`。 */
+  readonly dimgrey: Property.StopColor | CssString = 'dimgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:dodgerblue;`。 */
+  readonly dodgerblue: Property.StopColor | CssString = 'dodgerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:firebrick;`。 */
+  readonly firebrick: Property.StopColor | CssString = 'firebrick';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:floralwhite;`。 */
+  readonly floralwhite: Property.StopColor | CssString = 'floralwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:forestgreen;`。 */
+  readonly forestgreen: Property.StopColor | CssString = 'forestgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:fuchsia;`。 */
+  readonly fuchsia: Property.StopColor | CssString = 'fuchsia';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:gainsboro;`。 */
+  readonly gainsboro: Property.StopColor | CssString = 'gainsboro';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ghostwhite;`。 */
+  readonly ghostwhite: Property.StopColor | CssString = 'ghostwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:gold;`。 */
+  readonly gold: Property.StopColor | CssString = 'gold';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:goldenrod;`。 */
+  readonly goldenrod: Property.StopColor | CssString = 'goldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:gray;`。 */
+  readonly gray: Property.StopColor | CssString = 'gray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:green;`。 */
+  readonly green: Property.StopColor | CssString = 'green';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:greenyellow;`。 */
+  readonly greenyellow: Property.StopColor | CssString = 'greenyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:grey;`。 */
+  readonly grey: Property.StopColor | CssString = 'grey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:honeydew;`。 */
+  readonly honeydew: Property.StopColor | CssString = 'honeydew';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:hotpink;`。 */
+  readonly hotpink: Property.StopColor | CssString = 'hotpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:indianred;`。 */
+  readonly indianred: Property.StopColor | CssString = 'indianred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:indigo;`。 */
+  readonly indigo: Property.StopColor | CssString = 'indigo';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stop-color:inherit;`。
+   */
+  readonly inherit: Property.StopColor | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stop-color:initial;`。
+   */
+  readonly initial: Property.StopColor | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:ivory;`。 */
+  readonly ivory: Property.StopColor | CssString = 'ivory';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:khaki;`。 */
+  readonly khaki: Property.StopColor | CssString = 'khaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lavender;`。 */
+  readonly lavender: Property.StopColor | CssString = 'lavender';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lavenderblush;`。 */
+  readonly lavenderblush: Property.StopColor | CssString = 'lavenderblush';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lawngreen;`。 */
+  readonly lawngreen: Property.StopColor | CssString = 'lawngreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lemonchiffon;`。 */
+  readonly lemonchiffon: Property.StopColor | CssString = 'lemonchiffon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightblue;`。 */
+  readonly lightblue: Property.StopColor | CssString = 'lightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightcoral;`。 */
+  readonly lightcoral: Property.StopColor | CssString = 'lightcoral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightcyan;`。 */
+  readonly lightcyan: Property.StopColor | CssString = 'lightcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightgoldenrodyellow;`。 */
+  readonly lightgoldenrodyellow: Property.StopColor | CssString = 'lightgoldenrodyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightgray;`。 */
+  readonly lightgray: Property.StopColor | CssString = 'lightgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightgreen;`。 */
+  readonly lightgreen: Property.StopColor | CssString = 'lightgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightgrey;`。 */
+  readonly lightgrey: Property.StopColor | CssString = 'lightgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightpink;`。 */
+  readonly lightpink: Property.StopColor | CssString = 'lightpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightsalmon;`。 */
+  readonly lightsalmon: Property.StopColor | CssString = 'lightsalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightseagreen;`。 */
+  readonly lightseagreen: Property.StopColor | CssString = 'lightseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightskyblue;`。 */
+  readonly lightskyblue: Property.StopColor | CssString = 'lightskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightslategray;`。 */
+  readonly lightslategray: Property.StopColor | CssString = 'lightslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightslategrey;`。 */
+  readonly lightslategrey: Property.StopColor | CssString = 'lightslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightsteelblue;`。 */
+  readonly lightsteelblue: Property.StopColor | CssString = 'lightsteelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lightyellow;`。 */
+  readonly lightyellow: Property.StopColor | CssString = 'lightyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:lime;`。 */
+  readonly lime: Property.StopColor | CssString = 'lime';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:limegreen;`。 */
+  readonly limegreen: Property.StopColor | CssString = 'limegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:linen;`。 */
+  readonly linen: Property.StopColor | CssString = 'linen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:magenta;`。 */
+  readonly magenta: Property.StopColor | CssString = 'magenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:maroon;`。 */
+  readonly maroon: Property.StopColor | CssString = 'maroon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mediumaquamarine;`。 */
+  readonly mediumaquamarine: Property.StopColor | CssString = 'mediumaquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mediumblue;`。 */
+  readonly mediumblue: Property.StopColor | CssString = 'mediumblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mediumorchid;`。 */
+  readonly mediumorchid: Property.StopColor | CssString = 'mediumorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mediumpurple;`。 */
+  readonly mediumpurple: Property.StopColor | CssString = 'mediumpurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mediumseagreen;`。 */
+  readonly mediumseagreen: Property.StopColor | CssString = 'mediumseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mediumslateblue;`。 */
+  readonly mediumslateblue: Property.StopColor | CssString = 'mediumslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mediumspringgreen;`。 */
+  readonly mediumspringgreen: Property.StopColor | CssString = 'mediumspringgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mediumturquoise;`。 */
+  readonly mediumturquoise: Property.StopColor | CssString = 'mediumturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mediumvioletred;`。 */
+  readonly mediumvioletred: Property.StopColor | CssString = 'mediumvioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:midnightblue;`。 */
+  readonly midnightblue: Property.StopColor | CssString = 'midnightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mintcream;`。 */
+  readonly mintcream: Property.StopColor | CssString = 'mintcream';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:mistyrose;`。 */
+  readonly mistyrose: Property.StopColor | CssString = 'mistyrose';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:moccasin;`。 */
+  readonly moccasin: Property.StopColor | CssString = 'moccasin';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:navajowhite;`。 */
+  readonly navajowhite: Property.StopColor | CssString = 'navajowhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:navy;`。 */
+  readonly navy: Property.StopColor | CssString = 'navy';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:oldlace;`。 */
+  readonly oldlace: Property.StopColor | CssString = 'oldlace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:olive;`。 */
+  readonly olive: Property.StopColor | CssString = 'olive';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:olivedrab;`。 */
+  readonly olivedrab: Property.StopColor | CssString = 'olivedrab';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:orange;`。 */
+  readonly orange: Property.StopColor | CssString = 'orange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:orangered;`。 */
+  readonly orangered: Property.StopColor | CssString = 'orangered';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:orchid;`。 */
+  readonly orchid: Property.StopColor | CssString = 'orchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:palegoldenrod;`。 */
+  readonly palegoldenrod: Property.StopColor | CssString = 'palegoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:palegreen;`。 */
+  readonly palegreen: Property.StopColor | CssString = 'palegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:paleturquoise;`。 */
+  readonly paleturquoise: Property.StopColor | CssString = 'paleturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:palevioletred;`。 */
+  readonly palevioletred: Property.StopColor | CssString = 'palevioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:papayawhip;`。 */
+  readonly papayawhip: Property.StopColor | CssString = 'papayawhip';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:peachpuff;`。 */
+  readonly peachpuff: Property.StopColor | CssString = 'peachpuff';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:peru;`。 */
+  readonly peru: Property.StopColor | CssString = 'peru';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:pink;`。 */
+  readonly pink: Property.StopColor | CssString = 'pink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:plum;`。 */
+  readonly plum: Property.StopColor | CssString = 'plum';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:powderblue;`。 */
+  readonly powderblue: Property.StopColor | CssString = 'powderblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:purple;`。 */
+  readonly purple: Property.StopColor | CssString = 'purple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:rebeccapurple;`。 */
+  readonly rebeccapurple: Property.StopColor | CssString = 'rebeccapurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:red;`。 */
+  readonly red: Property.StopColor | CssString = 'red';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stop-color:revert;`。
+   */
+  readonly revert: Property.StopColor | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stop-color:revert-layer;`。
+   */
+  readonly revertLayer: Property.StopColor | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:rosybrown;`。 */
+  readonly rosybrown: Property.StopColor | CssString = 'rosybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:royalblue;`。 */
+  readonly royalblue: Property.StopColor | CssString = 'royalblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:saddlebrown;`。 */
+  readonly saddlebrown: Property.StopColor | CssString = 'saddlebrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:salmon;`。 */
+  readonly salmon: Property.StopColor | CssString = 'salmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:sandybrown;`。 */
+  readonly sandybrown: Property.StopColor | CssString = 'sandybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:seagreen;`。 */
+  readonly seagreen: Property.StopColor | CssString = 'seagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:seashell;`。 */
+  readonly seashell: Property.StopColor | CssString = 'seashell';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:sienna;`。 */
+  readonly sienna: Property.StopColor | CssString = 'sienna';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:silver;`。 */
+  readonly silver: Property.StopColor | CssString = 'silver';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:skyblue;`。 */
+  readonly skyblue: Property.StopColor | CssString = 'skyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:slateblue;`。 */
+  readonly slateblue: Property.StopColor | CssString = 'slateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:slategray;`。 */
+  readonly slategray: Property.StopColor | CssString = 'slategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:slategrey;`。 */
+  readonly slategrey: Property.StopColor | CssString = 'slategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:snow;`。 */
+  readonly snow: Property.StopColor | CssString = 'snow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:springgreen;`。 */
+  readonly springgreen: Property.StopColor | CssString = 'springgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:steelblue;`。 */
+  readonly steelblue: Property.StopColor | CssString = 'steelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:tan;`。 */
+  readonly tan: Property.StopColor | CssString = 'tan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:teal;`。 */
+  readonly teal: Property.StopColor | CssString = 'teal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:thistle;`。 */
+  readonly thistle: Property.StopColor | CssString = 'thistle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:tomato;`。 */
+  readonly tomato: Property.StopColor | CssString = 'tomato';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
+   *
+   * CSS 声明：`stop-color:transparent;`。
+   */
+  readonly transparent: Property.StopColor | CssString = 'transparent';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:turquoise;`。 */
+  readonly turquoise: Property.StopColor | CssString = 'turquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stop-color:unset;`。
+   */
+  readonly unset: Property.StopColor | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:violet;`。 */
+  readonly violet: Property.StopColor | CssString = 'violet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:wheat;`。 */
+  readonly wheat: Property.StopColor | CssString = 'wheat';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:white;`。 */
+  readonly white: Property.StopColor | CssString = 'white';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:whitesmoke;`。 */
+  readonly whitesmoke: Property.StopColor | CssString = 'whitesmoke';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:yellow;`。 */
+  readonly yellow: Property.StopColor | CssString = 'yellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stop-color:yellowgreen;`。 */
+  readonly yellowgreen: Property.StopColor | CssString = 'yellowgreen';
+}
+
+/**
  * 设置 SVG 渐变 stop 节点的颜色。（stop-color）
  *
  * CSS 初始值：`black`（不同于浏览器默认样式表）。
@@ -16544,427 +19606,427 @@ export class SpeakAsCss extends CssProperty {
  */
 export class StopColorCss extends CssProperty {
   /** CSS 声明：`stop-color:AccentColor;`。 */
-  readonly AccentColor = 'stop-color:AccentColor;';
+  readonly AccentColor: string = 'stop-color:AccentColor;';
   /** CSS 声明：`stop-color:AccentColorText;`。 */
-  readonly AccentColorText = 'stop-color:AccentColorText;';
+  readonly AccentColorText: string = 'stop-color:AccentColorText;';
   /** CSS 声明：`stop-color:ActiveBorder;`。 */
-  readonly ActiveBorder = 'stop-color:ActiveBorder;';
+  readonly ActiveBorder: string = 'stop-color:ActiveBorder;';
   /** CSS 声明：`stop-color:ActiveCaption;`。 */
-  readonly ActiveCaption = 'stop-color:ActiveCaption;';
+  readonly ActiveCaption: string = 'stop-color:ActiveCaption;';
   /** CSS 声明：`stop-color:ActiveText;`。 */
-  readonly ActiveText = 'stop-color:ActiveText;';
+  readonly ActiveText: string = 'stop-color:ActiveText;';
   /** CSS 声明：`stop-color:AppWorkspace;`。 */
-  readonly AppWorkspace = 'stop-color:AppWorkspace;';
+  readonly AppWorkspace: string = 'stop-color:AppWorkspace;';
   /** CSS 声明：`stop-color:Background;`。 */
-  readonly Background = 'stop-color:Background;';
+  readonly Background: string = 'stop-color:Background;';
   /** CSS 声明：`stop-color:ButtonBorder;`。 */
-  readonly ButtonBorder = 'stop-color:ButtonBorder;';
+  readonly ButtonBorder: string = 'stop-color:ButtonBorder;';
   /** CSS 声明：`stop-color:ButtonFace;`。 */
-  readonly ButtonFace = 'stop-color:ButtonFace;';
+  readonly ButtonFace: string = 'stop-color:ButtonFace;';
   /** CSS 声明：`stop-color:ButtonHighlight;`。 */
-  readonly ButtonHighlight = 'stop-color:ButtonHighlight;';
+  readonly ButtonHighlight: string = 'stop-color:ButtonHighlight;';
   /** CSS 声明：`stop-color:ButtonShadow;`。 */
-  readonly ButtonShadow = 'stop-color:ButtonShadow;';
+  readonly ButtonShadow: string = 'stop-color:ButtonShadow;';
   /** CSS 声明：`stop-color:ButtonText;`。 */
-  readonly ButtonText = 'stop-color:ButtonText;';
+  readonly ButtonText: string = 'stop-color:ButtonText;';
   /** CSS 声明：`stop-color:Canvas;`。 */
-  readonly Canvas = 'stop-color:Canvas;';
+  readonly Canvas: string = 'stop-color:Canvas;';
   /** CSS 声明：`stop-color:CanvasText;`。 */
-  readonly CanvasText = 'stop-color:CanvasText;';
+  readonly CanvasText: string = 'stop-color:CanvasText;';
   /** CSS 声明：`stop-color:CaptionText;`。 */
-  readonly CaptionText = 'stop-color:CaptionText;';
+  readonly CaptionText: string = 'stop-color:CaptionText;';
   /** CSS 声明：`stop-color:Field;`。 */
-  readonly Field = 'stop-color:Field;';
+  readonly Field: string = 'stop-color:Field;';
   /** CSS 声明：`stop-color:FieldText;`。 */
-  readonly FieldText = 'stop-color:FieldText;';
+  readonly FieldText: string = 'stop-color:FieldText;';
   /** CSS 声明：`stop-color:GrayText;`。 */
-  readonly GrayText = 'stop-color:GrayText;';
+  readonly GrayText: string = 'stop-color:GrayText;';
   /** CSS 声明：`stop-color:Highlight;`。 */
-  readonly Highlight = 'stop-color:Highlight;';
+  readonly Highlight: string = 'stop-color:Highlight;';
   /** CSS 声明：`stop-color:HighlightText;`。 */
-  readonly HighlightText = 'stop-color:HighlightText;';
+  readonly HighlightText: string = 'stop-color:HighlightText;';
   /** CSS 声明：`stop-color:InactiveBorder;`。 */
-  readonly InactiveBorder = 'stop-color:InactiveBorder;';
+  readonly InactiveBorder: string = 'stop-color:InactiveBorder;';
   /** CSS 声明：`stop-color:InactiveCaption;`。 */
-  readonly InactiveCaption = 'stop-color:InactiveCaption;';
+  readonly InactiveCaption: string = 'stop-color:InactiveCaption;';
   /** CSS 声明：`stop-color:InactiveCaptionText;`。 */
-  readonly InactiveCaptionText = 'stop-color:InactiveCaptionText;';
+  readonly InactiveCaptionText: string = 'stop-color:InactiveCaptionText;';
   /** CSS 声明：`stop-color:InfoBackground;`。 */
-  readonly InfoBackground = 'stop-color:InfoBackground;';
+  readonly InfoBackground: string = 'stop-color:InfoBackground;';
   /** CSS 声明：`stop-color:InfoText;`。 */
-  readonly InfoText = 'stop-color:InfoText;';
+  readonly InfoText: string = 'stop-color:InfoText;';
   /** CSS 声明：`stop-color:LinkText;`。 */
-  readonly LinkText = 'stop-color:LinkText;';
+  readonly LinkText: string = 'stop-color:LinkText;';
   /** CSS 声明：`stop-color:Mark;`。 */
-  readonly Mark = 'stop-color:Mark;';
+  readonly Mark: string = 'stop-color:Mark;';
   /** CSS 声明：`stop-color:MarkText;`。 */
-  readonly MarkText = 'stop-color:MarkText;';
+  readonly MarkText: string = 'stop-color:MarkText;';
   /** CSS 声明：`stop-color:Menu;`。 */
-  readonly Menu = 'stop-color:Menu;';
+  readonly Menu: string = 'stop-color:Menu;';
   /** CSS 声明：`stop-color:MenuText;`。 */
-  readonly MenuText = 'stop-color:MenuText;';
+  readonly MenuText: string = 'stop-color:MenuText;';
   /** CSS 声明：`stop-color:Scrollbar;`。 */
-  readonly Scrollbar = 'stop-color:Scrollbar;';
+  readonly Scrollbar: string = 'stop-color:Scrollbar;';
   /** CSS 声明：`stop-color:SelectedItem;`。 */
-  readonly SelectedItem = 'stop-color:SelectedItem;';
+  readonly SelectedItem: string = 'stop-color:SelectedItem;';
   /** CSS 声明：`stop-color:SelectedItemText;`。 */
-  readonly SelectedItemText = 'stop-color:SelectedItemText;';
+  readonly SelectedItemText: string = 'stop-color:SelectedItemText;';
   /** CSS 声明：`stop-color:ThreeDDarkShadow;`。 */
-  readonly ThreeDDarkShadow = 'stop-color:ThreeDDarkShadow;';
+  readonly ThreeDDarkShadow: string = 'stop-color:ThreeDDarkShadow;';
   /** CSS 声明：`stop-color:ThreeDFace;`。 */
-  readonly ThreeDFace = 'stop-color:ThreeDFace;';
+  readonly ThreeDFace: string = 'stop-color:ThreeDFace;';
   /** CSS 声明：`stop-color:ThreeDHighlight;`。 */
-  readonly ThreeDHighlight = 'stop-color:ThreeDHighlight;';
+  readonly ThreeDHighlight: string = 'stop-color:ThreeDHighlight;';
   /** CSS 声明：`stop-color:ThreeDLightShadow;`。 */
-  readonly ThreeDLightShadow = 'stop-color:ThreeDLightShadow;';
+  readonly ThreeDLightShadow: string = 'stop-color:ThreeDLightShadow;';
   /** CSS 声明：`stop-color:ThreeDShadow;`。 */
-  readonly ThreeDShadow = 'stop-color:ThreeDShadow;';
+  readonly ThreeDShadow: string = 'stop-color:ThreeDShadow;';
   /** CSS 声明：`stop-color:VisitedText;`。 */
-  readonly VisitedText = 'stop-color:VisitedText;';
+  readonly VisitedText: string = 'stop-color:VisitedText;';
   /** CSS 声明：`stop-color:Window;`。 */
-  readonly Window = 'stop-color:Window;';
+  readonly Window: string = 'stop-color:Window;';
   /** CSS 声明：`stop-color:WindowFrame;`。 */
-  readonly WindowFrame = 'stop-color:WindowFrame;';
+  readonly WindowFrame: string = 'stop-color:WindowFrame;';
   /** CSS 声明：`stop-color:WindowText;`。 */
-  readonly WindowText = 'stop-color:WindowText;';
+  readonly WindowText: string = 'stop-color:WindowText;';
   /** CSS 声明：`stop-color:aliceblue;`。 */
-  readonly aliceblue = 'stop-color:aliceblue;';
+  readonly aliceblue: string = 'stop-color:aliceblue;';
   /** CSS 声明：`stop-color:antiquewhite;`。 */
-  readonly antiquewhite = 'stop-color:antiquewhite;';
+  readonly antiquewhite: string = 'stop-color:antiquewhite;';
   /** CSS 声明：`stop-color:aqua;`。 */
-  readonly aqua = 'stop-color:aqua;';
+  readonly aqua: string = 'stop-color:aqua;';
   /** CSS 声明：`stop-color:aquamarine;`。 */
-  readonly aquamarine = 'stop-color:aquamarine;';
+  readonly aquamarine: string = 'stop-color:aquamarine;';
   /** CSS 声明：`stop-color:azure;`。 */
-  readonly azure = 'stop-color:azure;';
+  readonly azure: string = 'stop-color:azure;';
   /** CSS 声明：`stop-color:beige;`。 */
-  readonly beige = 'stop-color:beige;';
+  readonly beige: string = 'stop-color:beige;';
   /** CSS 声明：`stop-color:bisque;`。 */
-  readonly bisque = 'stop-color:bisque;';
+  readonly bisque: string = 'stop-color:bisque;';
   /** CSS 声明：`stop-color:black;`。 */
-  readonly black = 'stop-color:black;';
+  readonly black: string = 'stop-color:black;';
   /** CSS 声明：`stop-color:blanchedalmond;`。 */
-  readonly blanchedalmond = 'stop-color:blanchedalmond;';
+  readonly blanchedalmond: string = 'stop-color:blanchedalmond;';
   /** CSS 声明：`stop-color:blue;`。 */
-  readonly blue = 'stop-color:blue;';
+  readonly blue: string = 'stop-color:blue;';
   /** CSS 声明：`stop-color:blueviolet;`。 */
-  readonly blueviolet = 'stop-color:blueviolet;';
+  readonly blueviolet: string = 'stop-color:blueviolet;';
   /** CSS 声明：`stop-color:brown;`。 */
-  readonly brown = 'stop-color:brown;';
+  readonly brown: string = 'stop-color:brown;';
   /** CSS 声明：`stop-color:burlywood;`。 */
-  readonly burlywood = 'stop-color:burlywood;';
+  readonly burlywood: string = 'stop-color:burlywood;';
   /** CSS 声明：`stop-color:cadetblue;`。 */
-  readonly cadetblue = 'stop-color:cadetblue;';
+  readonly cadetblue: string = 'stop-color:cadetblue;';
   /** CSS 声明：`stop-color:chartreuse;`。 */
-  readonly chartreuse = 'stop-color:chartreuse;';
+  readonly chartreuse: string = 'stop-color:chartreuse;';
   /** CSS 声明：`stop-color:chocolate;`。 */
-  readonly chocolate = 'stop-color:chocolate;';
+  readonly chocolate: string = 'stop-color:chocolate;';
   /** CSS 声明：`stop-color:coral;`。 */
-  readonly coral = 'stop-color:coral;';
+  readonly coral: string = 'stop-color:coral;';
   /** CSS 声明：`stop-color:cornflowerblue;`。 */
-  readonly cornflowerblue = 'stop-color:cornflowerblue;';
+  readonly cornflowerblue: string = 'stop-color:cornflowerblue;';
   /** CSS 声明：`stop-color:cornsilk;`。 */
-  readonly cornsilk = 'stop-color:cornsilk;';
+  readonly cornsilk: string = 'stop-color:cornsilk;';
   /** CSS 声明：`stop-color:crimson;`。 */
-  readonly crimson = 'stop-color:crimson;';
+  readonly crimson: string = 'stop-color:crimson;';
   /**
    * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
    *
    * CSS 声明：`stop-color:currentColor;`。
    */
-  readonly currentColor = 'stop-color:currentColor;';
+  readonly currentColor: string = 'stop-color:currentColor;';
   /** CSS 声明：`stop-color:cyan;`。 */
-  readonly cyan = 'stop-color:cyan;';
+  readonly cyan: string = 'stop-color:cyan;';
   /** CSS 声明：`stop-color:darkblue;`。 */
-  readonly darkblue = 'stop-color:darkblue;';
+  readonly darkblue: string = 'stop-color:darkblue;';
   /** CSS 声明：`stop-color:darkcyan;`。 */
-  readonly darkcyan = 'stop-color:darkcyan;';
+  readonly darkcyan: string = 'stop-color:darkcyan;';
   /** CSS 声明：`stop-color:darkgoldenrod;`。 */
-  readonly darkgoldenrod = 'stop-color:darkgoldenrod;';
+  readonly darkgoldenrod: string = 'stop-color:darkgoldenrod;';
   /** CSS 声明：`stop-color:darkgray;`。 */
-  readonly darkgray = 'stop-color:darkgray;';
+  readonly darkgray: string = 'stop-color:darkgray;';
   /** CSS 声明：`stop-color:darkgreen;`。 */
-  readonly darkgreen = 'stop-color:darkgreen;';
+  readonly darkgreen: string = 'stop-color:darkgreen;';
   /** CSS 声明：`stop-color:darkgrey;`。 */
-  readonly darkgrey = 'stop-color:darkgrey;';
+  readonly darkgrey: string = 'stop-color:darkgrey;';
   /** CSS 声明：`stop-color:darkkhaki;`。 */
-  readonly darkkhaki = 'stop-color:darkkhaki;';
+  readonly darkkhaki: string = 'stop-color:darkkhaki;';
   /** CSS 声明：`stop-color:darkmagenta;`。 */
-  readonly darkmagenta = 'stop-color:darkmagenta;';
+  readonly darkmagenta: string = 'stop-color:darkmagenta;';
   /** CSS 声明：`stop-color:darkolivegreen;`。 */
-  readonly darkolivegreen = 'stop-color:darkolivegreen;';
+  readonly darkolivegreen: string = 'stop-color:darkolivegreen;';
   /** CSS 声明：`stop-color:darkorange;`。 */
-  readonly darkorange = 'stop-color:darkorange;';
+  readonly darkorange: string = 'stop-color:darkorange;';
   /** CSS 声明：`stop-color:darkorchid;`。 */
-  readonly darkorchid = 'stop-color:darkorchid;';
+  readonly darkorchid: string = 'stop-color:darkorchid;';
   /** CSS 声明：`stop-color:darkred;`。 */
-  readonly darkred = 'stop-color:darkred;';
+  readonly darkred: string = 'stop-color:darkred;';
   /** CSS 声明：`stop-color:darksalmon;`。 */
-  readonly darksalmon = 'stop-color:darksalmon;';
+  readonly darksalmon: string = 'stop-color:darksalmon;';
   /** CSS 声明：`stop-color:darkseagreen;`。 */
-  readonly darkseagreen = 'stop-color:darkseagreen;';
+  readonly darkseagreen: string = 'stop-color:darkseagreen;';
   /** CSS 声明：`stop-color:darkslateblue;`。 */
-  readonly darkslateblue = 'stop-color:darkslateblue;';
+  readonly darkslateblue: string = 'stop-color:darkslateblue;';
   /** CSS 声明：`stop-color:darkslategray;`。 */
-  readonly darkslategray = 'stop-color:darkslategray;';
+  readonly darkslategray: string = 'stop-color:darkslategray;';
   /** CSS 声明：`stop-color:darkslategrey;`。 */
-  readonly darkslategrey = 'stop-color:darkslategrey;';
+  readonly darkslategrey: string = 'stop-color:darkslategrey;';
   /** CSS 声明：`stop-color:darkturquoise;`。 */
-  readonly darkturquoise = 'stop-color:darkturquoise;';
+  readonly darkturquoise: string = 'stop-color:darkturquoise;';
   /** CSS 声明：`stop-color:darkviolet;`。 */
-  readonly darkviolet = 'stop-color:darkviolet;';
+  readonly darkviolet: string = 'stop-color:darkviolet;';
   /** CSS 声明：`stop-color:deeppink;`。 */
-  readonly deeppink = 'stop-color:deeppink;';
+  readonly deeppink: string = 'stop-color:deeppink;';
   /** CSS 声明：`stop-color:deepskyblue;`。 */
-  readonly deepskyblue = 'stop-color:deepskyblue;';
+  readonly deepskyblue: string = 'stop-color:deepskyblue;';
   /** CSS 声明：`stop-color:dimgray;`。 */
-  readonly dimgray = 'stop-color:dimgray;';
+  readonly dimgray: string = 'stop-color:dimgray;';
   /** CSS 声明：`stop-color:dimgrey;`。 */
-  readonly dimgrey = 'stop-color:dimgrey;';
+  readonly dimgrey: string = 'stop-color:dimgrey;';
   /** CSS 声明：`stop-color:dodgerblue;`。 */
-  readonly dodgerblue = 'stop-color:dodgerblue;';
+  readonly dodgerblue: string = 'stop-color:dodgerblue;';
   /** CSS 声明：`stop-color:firebrick;`。 */
-  readonly firebrick = 'stop-color:firebrick;';
+  readonly firebrick: string = 'stop-color:firebrick;';
   /** CSS 声明：`stop-color:floralwhite;`。 */
-  readonly floralwhite = 'stop-color:floralwhite;';
+  readonly floralwhite: string = 'stop-color:floralwhite;';
   /** CSS 声明：`stop-color:forestgreen;`。 */
-  readonly forestgreen = 'stop-color:forestgreen;';
+  readonly forestgreen: string = 'stop-color:forestgreen;';
   /** CSS 声明：`stop-color:fuchsia;`。 */
-  readonly fuchsia = 'stop-color:fuchsia;';
+  readonly fuchsia: string = 'stop-color:fuchsia;';
   /** CSS 声明：`stop-color:gainsboro;`。 */
-  readonly gainsboro = 'stop-color:gainsboro;';
+  readonly gainsboro: string = 'stop-color:gainsboro;';
   /** CSS 声明：`stop-color:ghostwhite;`。 */
-  readonly ghostwhite = 'stop-color:ghostwhite;';
+  readonly ghostwhite: string = 'stop-color:ghostwhite;';
   /** CSS 声明：`stop-color:gold;`。 */
-  readonly gold = 'stop-color:gold;';
+  readonly gold: string = 'stop-color:gold;';
   /** CSS 声明：`stop-color:goldenrod;`。 */
-  readonly goldenrod = 'stop-color:goldenrod;';
+  readonly goldenrod: string = 'stop-color:goldenrod;';
   /** CSS 声明：`stop-color:gray;`。 */
-  readonly gray = 'stop-color:gray;';
+  readonly gray: string = 'stop-color:gray;';
   /** CSS 声明：`stop-color:green;`。 */
-  readonly green = 'stop-color:green;';
+  readonly green: string = 'stop-color:green;';
   /** CSS 声明：`stop-color:greenyellow;`。 */
-  readonly greenyellow = 'stop-color:greenyellow;';
+  readonly greenyellow: string = 'stop-color:greenyellow;';
   /** CSS 声明：`stop-color:grey;`。 */
-  readonly grey = 'stop-color:grey;';
+  readonly grey: string = 'stop-color:grey;';
   /** CSS 声明：`stop-color:honeydew;`。 */
-  readonly honeydew = 'stop-color:honeydew;';
+  readonly honeydew: string = 'stop-color:honeydew;';
   /** CSS 声明：`stop-color:hotpink;`。 */
-  readonly hotpink = 'stop-color:hotpink;';
+  readonly hotpink: string = 'stop-color:hotpink;';
   /** CSS 声明：`stop-color:indianred;`。 */
-  readonly indianred = 'stop-color:indianred;';
+  readonly indianred: string = 'stop-color:indianred;';
   /** CSS 声明：`stop-color:indigo;`。 */
-  readonly indigo = 'stop-color:indigo;';
+  readonly indigo: string = 'stop-color:indigo;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`stop-color:inherit;`。
    */
-  readonly inherit = 'stop-color:inherit;';
+  readonly inherit: string = 'stop-color:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stop-color:initial;`。
    */
-  readonly initial = 'stop-color:initial;';
+  readonly initial: string = 'stop-color:initial;';
   /** CSS 声明：`stop-color:ivory;`。 */
-  readonly ivory = 'stop-color:ivory;';
+  readonly ivory: string = 'stop-color:ivory;';
   /** CSS 声明：`stop-color:khaki;`。 */
-  readonly khaki = 'stop-color:khaki;';
+  readonly khaki: string = 'stop-color:khaki;';
   /** CSS 声明：`stop-color:lavender;`。 */
-  readonly lavender = 'stop-color:lavender;';
+  readonly lavender: string = 'stop-color:lavender;';
   /** CSS 声明：`stop-color:lavenderblush;`。 */
-  readonly lavenderblush = 'stop-color:lavenderblush;';
+  readonly lavenderblush: string = 'stop-color:lavenderblush;';
   /** CSS 声明：`stop-color:lawngreen;`。 */
-  readonly lawngreen = 'stop-color:lawngreen;';
+  readonly lawngreen: string = 'stop-color:lawngreen;';
   /** CSS 声明：`stop-color:lemonchiffon;`。 */
-  readonly lemonchiffon = 'stop-color:lemonchiffon;';
+  readonly lemonchiffon: string = 'stop-color:lemonchiffon;';
   /** CSS 声明：`stop-color:lightblue;`。 */
-  readonly lightblue = 'stop-color:lightblue;';
+  readonly lightblue: string = 'stop-color:lightblue;';
   /** CSS 声明：`stop-color:lightcoral;`。 */
-  readonly lightcoral = 'stop-color:lightcoral;';
+  readonly lightcoral: string = 'stop-color:lightcoral;';
   /** CSS 声明：`stop-color:lightcyan;`。 */
-  readonly lightcyan = 'stop-color:lightcyan;';
+  readonly lightcyan: string = 'stop-color:lightcyan;';
   /** CSS 声明：`stop-color:lightgoldenrodyellow;`。 */
-  readonly lightgoldenrodyellow = 'stop-color:lightgoldenrodyellow;';
+  readonly lightgoldenrodyellow: string = 'stop-color:lightgoldenrodyellow;';
   /** CSS 声明：`stop-color:lightgray;`。 */
-  readonly lightgray = 'stop-color:lightgray;';
+  readonly lightgray: string = 'stop-color:lightgray;';
   /** CSS 声明：`stop-color:lightgreen;`。 */
-  readonly lightgreen = 'stop-color:lightgreen;';
+  readonly lightgreen: string = 'stop-color:lightgreen;';
   /** CSS 声明：`stop-color:lightgrey;`。 */
-  readonly lightgrey = 'stop-color:lightgrey;';
+  readonly lightgrey: string = 'stop-color:lightgrey;';
   /** CSS 声明：`stop-color:lightpink;`。 */
-  readonly lightpink = 'stop-color:lightpink;';
+  readonly lightpink: string = 'stop-color:lightpink;';
   /** CSS 声明：`stop-color:lightsalmon;`。 */
-  readonly lightsalmon = 'stop-color:lightsalmon;';
+  readonly lightsalmon: string = 'stop-color:lightsalmon;';
   /** CSS 声明：`stop-color:lightseagreen;`。 */
-  readonly lightseagreen = 'stop-color:lightseagreen;';
+  readonly lightseagreen: string = 'stop-color:lightseagreen;';
   /** CSS 声明：`stop-color:lightskyblue;`。 */
-  readonly lightskyblue = 'stop-color:lightskyblue;';
+  readonly lightskyblue: string = 'stop-color:lightskyblue;';
   /** CSS 声明：`stop-color:lightslategray;`。 */
-  readonly lightslategray = 'stop-color:lightslategray;';
+  readonly lightslategray: string = 'stop-color:lightslategray;';
   /** CSS 声明：`stop-color:lightslategrey;`。 */
-  readonly lightslategrey = 'stop-color:lightslategrey;';
+  readonly lightslategrey: string = 'stop-color:lightslategrey;';
   /** CSS 声明：`stop-color:lightsteelblue;`。 */
-  readonly lightsteelblue = 'stop-color:lightsteelblue;';
+  readonly lightsteelblue: string = 'stop-color:lightsteelblue;';
   /** CSS 声明：`stop-color:lightyellow;`。 */
-  readonly lightyellow = 'stop-color:lightyellow;';
+  readonly lightyellow: string = 'stop-color:lightyellow;';
   /** CSS 声明：`stop-color:lime;`。 */
-  readonly lime = 'stop-color:lime;';
+  readonly lime: string = 'stop-color:lime;';
   /** CSS 声明：`stop-color:limegreen;`。 */
-  readonly limegreen = 'stop-color:limegreen;';
+  readonly limegreen: string = 'stop-color:limegreen;';
   /** CSS 声明：`stop-color:linen;`。 */
-  readonly linen = 'stop-color:linen;';
+  readonly linen: string = 'stop-color:linen;';
   /** CSS 声明：`stop-color:magenta;`。 */
-  readonly magenta = 'stop-color:magenta;';
+  readonly magenta: string = 'stop-color:magenta;';
   /** CSS 声明：`stop-color:maroon;`。 */
-  readonly maroon = 'stop-color:maroon;';
+  readonly maroon: string = 'stop-color:maroon;';
   /** CSS 声明：`stop-color:mediumaquamarine;`。 */
-  readonly mediumaquamarine = 'stop-color:mediumaquamarine;';
+  readonly mediumaquamarine: string = 'stop-color:mediumaquamarine;';
   /** CSS 声明：`stop-color:mediumblue;`。 */
-  readonly mediumblue = 'stop-color:mediumblue;';
+  readonly mediumblue: string = 'stop-color:mediumblue;';
   /** CSS 声明：`stop-color:mediumorchid;`。 */
-  readonly mediumorchid = 'stop-color:mediumorchid;';
+  readonly mediumorchid: string = 'stop-color:mediumorchid;';
   /** CSS 声明：`stop-color:mediumpurple;`。 */
-  readonly mediumpurple = 'stop-color:mediumpurple;';
+  readonly mediumpurple: string = 'stop-color:mediumpurple;';
   /** CSS 声明：`stop-color:mediumseagreen;`。 */
-  readonly mediumseagreen = 'stop-color:mediumseagreen;';
+  readonly mediumseagreen: string = 'stop-color:mediumseagreen;';
   /** CSS 声明：`stop-color:mediumslateblue;`。 */
-  readonly mediumslateblue = 'stop-color:mediumslateblue;';
+  readonly mediumslateblue: string = 'stop-color:mediumslateblue;';
   /** CSS 声明：`stop-color:mediumspringgreen;`。 */
-  readonly mediumspringgreen = 'stop-color:mediumspringgreen;';
+  readonly mediumspringgreen: string = 'stop-color:mediumspringgreen;';
   /** CSS 声明：`stop-color:mediumturquoise;`。 */
-  readonly mediumturquoise = 'stop-color:mediumturquoise;';
+  readonly mediumturquoise: string = 'stop-color:mediumturquoise;';
   /** CSS 声明：`stop-color:mediumvioletred;`。 */
-  readonly mediumvioletred = 'stop-color:mediumvioletred;';
+  readonly mediumvioletred: string = 'stop-color:mediumvioletred;';
   /** CSS 声明：`stop-color:midnightblue;`。 */
-  readonly midnightblue = 'stop-color:midnightblue;';
+  readonly midnightblue: string = 'stop-color:midnightblue;';
   /** CSS 声明：`stop-color:mintcream;`。 */
-  readonly mintcream = 'stop-color:mintcream;';
+  readonly mintcream: string = 'stop-color:mintcream;';
   /** CSS 声明：`stop-color:mistyrose;`。 */
-  readonly mistyrose = 'stop-color:mistyrose;';
+  readonly mistyrose: string = 'stop-color:mistyrose;';
   /** CSS 声明：`stop-color:moccasin;`。 */
-  readonly moccasin = 'stop-color:moccasin;';
+  readonly moccasin: string = 'stop-color:moccasin;';
   /** CSS 声明：`stop-color:navajowhite;`。 */
-  readonly navajowhite = 'stop-color:navajowhite;';
+  readonly navajowhite: string = 'stop-color:navajowhite;';
   /** CSS 声明：`stop-color:navy;`。 */
-  readonly navy = 'stop-color:navy;';
+  readonly navy: string = 'stop-color:navy;';
   /** CSS 声明：`stop-color:oldlace;`。 */
-  readonly oldlace = 'stop-color:oldlace;';
+  readonly oldlace: string = 'stop-color:oldlace;';
   /** CSS 声明：`stop-color:olive;`。 */
-  readonly olive = 'stop-color:olive;';
+  readonly olive: string = 'stop-color:olive;';
   /** CSS 声明：`stop-color:olivedrab;`。 */
-  readonly olivedrab = 'stop-color:olivedrab;';
+  readonly olivedrab: string = 'stop-color:olivedrab;';
   /** CSS 声明：`stop-color:orange;`。 */
-  readonly orange = 'stop-color:orange;';
+  readonly orange: string = 'stop-color:orange;';
   /** CSS 声明：`stop-color:orangered;`。 */
-  readonly orangered = 'stop-color:orangered;';
+  readonly orangered: string = 'stop-color:orangered;';
   /** CSS 声明：`stop-color:orchid;`。 */
-  readonly orchid = 'stop-color:orchid;';
+  readonly orchid: string = 'stop-color:orchid;';
   /** CSS 声明：`stop-color:palegoldenrod;`。 */
-  readonly palegoldenrod = 'stop-color:palegoldenrod;';
+  readonly palegoldenrod: string = 'stop-color:palegoldenrod;';
   /** CSS 声明：`stop-color:palegreen;`。 */
-  readonly palegreen = 'stop-color:palegreen;';
+  readonly palegreen: string = 'stop-color:palegreen;';
   /** CSS 声明：`stop-color:paleturquoise;`。 */
-  readonly paleturquoise = 'stop-color:paleturquoise;';
+  readonly paleturquoise: string = 'stop-color:paleturquoise;';
   /** CSS 声明：`stop-color:palevioletred;`。 */
-  readonly palevioletred = 'stop-color:palevioletred;';
+  readonly palevioletred: string = 'stop-color:palevioletred;';
   /** CSS 声明：`stop-color:papayawhip;`。 */
-  readonly papayawhip = 'stop-color:papayawhip;';
+  readonly papayawhip: string = 'stop-color:papayawhip;';
   /** CSS 声明：`stop-color:peachpuff;`。 */
-  readonly peachpuff = 'stop-color:peachpuff;';
+  readonly peachpuff: string = 'stop-color:peachpuff;';
   /** CSS 声明：`stop-color:peru;`。 */
-  readonly peru = 'stop-color:peru;';
+  readonly peru: string = 'stop-color:peru;';
   /** CSS 声明：`stop-color:pink;`。 */
-  readonly pink = 'stop-color:pink;';
+  readonly pink: string = 'stop-color:pink;';
   /** CSS 声明：`stop-color:plum;`。 */
-  readonly plum = 'stop-color:plum;';
+  readonly plum: string = 'stop-color:plum;';
   /** CSS 声明：`stop-color:powderblue;`。 */
-  readonly powderblue = 'stop-color:powderblue;';
+  readonly powderblue: string = 'stop-color:powderblue;';
   /** CSS 声明：`stop-color:purple;`。 */
-  readonly purple = 'stop-color:purple;';
+  readonly purple: string = 'stop-color:purple;';
   /** CSS 声明：`stop-color:rebeccapurple;`。 */
-  readonly rebeccapurple = 'stop-color:rebeccapurple;';
+  readonly rebeccapurple: string = 'stop-color:rebeccapurple;';
   /** CSS 声明：`stop-color:red;`。 */
-  readonly red = 'stop-color:red;';
+  readonly red: string = 'stop-color:red;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stop-color:revert;`。
    */
-  readonly revert = 'stop-color:revert;';
+  readonly revert: string = 'stop-color:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stop-color:revert-layer;`。
    */
-  readonly revertLayer = 'stop-color:revert-layer;';
+  readonly revertLayer: string = 'stop-color:revert-layer;';
   /** CSS 声明：`stop-color:rosybrown;`。 */
-  readonly rosybrown = 'stop-color:rosybrown;';
+  readonly rosybrown: string = 'stop-color:rosybrown;';
   /** CSS 声明：`stop-color:royalblue;`。 */
-  readonly royalblue = 'stop-color:royalblue;';
+  readonly royalblue: string = 'stop-color:royalblue;';
   /** CSS 声明：`stop-color:saddlebrown;`。 */
-  readonly saddlebrown = 'stop-color:saddlebrown;';
+  readonly saddlebrown: string = 'stop-color:saddlebrown;';
   /** CSS 声明：`stop-color:salmon;`。 */
-  readonly salmon = 'stop-color:salmon;';
+  readonly salmon: string = 'stop-color:salmon;';
   /** CSS 声明：`stop-color:sandybrown;`。 */
-  readonly sandybrown = 'stop-color:sandybrown;';
+  readonly sandybrown: string = 'stop-color:sandybrown;';
   /** CSS 声明：`stop-color:seagreen;`。 */
-  readonly seagreen = 'stop-color:seagreen;';
+  readonly seagreen: string = 'stop-color:seagreen;';
   /** CSS 声明：`stop-color:seashell;`。 */
-  readonly seashell = 'stop-color:seashell;';
+  readonly seashell: string = 'stop-color:seashell;';
   /** CSS 声明：`stop-color:sienna;`。 */
-  readonly sienna = 'stop-color:sienna;';
+  readonly sienna: string = 'stop-color:sienna;';
   /** CSS 声明：`stop-color:silver;`。 */
-  readonly silver = 'stop-color:silver;';
+  readonly silver: string = 'stop-color:silver;';
   /** CSS 声明：`stop-color:skyblue;`。 */
-  readonly skyblue = 'stop-color:skyblue;';
+  readonly skyblue: string = 'stop-color:skyblue;';
   /** CSS 声明：`stop-color:slateblue;`。 */
-  readonly slateblue = 'stop-color:slateblue;';
+  readonly slateblue: string = 'stop-color:slateblue;';
   /** CSS 声明：`stop-color:slategray;`。 */
-  readonly slategray = 'stop-color:slategray;';
+  readonly slategray: string = 'stop-color:slategray;';
   /** CSS 声明：`stop-color:slategrey;`。 */
-  readonly slategrey = 'stop-color:slategrey;';
+  readonly slategrey: string = 'stop-color:slategrey;';
   /** CSS 声明：`stop-color:snow;`。 */
-  readonly snow = 'stop-color:snow;';
+  readonly snow: string = 'stop-color:snow;';
   /** CSS 声明：`stop-color:springgreen;`。 */
-  readonly springgreen = 'stop-color:springgreen;';
+  readonly springgreen: string = 'stop-color:springgreen;';
   /** CSS 声明：`stop-color:steelblue;`。 */
-  readonly steelblue = 'stop-color:steelblue;';
+  readonly steelblue: string = 'stop-color:steelblue;';
   /** CSS 声明：`stop-color:tan;`。 */
-  readonly tan = 'stop-color:tan;';
+  readonly tan: string = 'stop-color:tan;';
   /** CSS 声明：`stop-color:teal;`。 */
-  readonly teal = 'stop-color:teal;';
+  readonly teal: string = 'stop-color:teal;';
   /** CSS 声明：`stop-color:thistle;`。 */
-  readonly thistle = 'stop-color:thistle;';
+  readonly thistle: string = 'stop-color:thistle;';
   /** CSS 声明：`stop-color:tomato;`。 */
-  readonly tomato = 'stop-color:tomato;';
+  readonly tomato: string = 'stop-color:tomato;';
   /**
    * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
    *
    * CSS 声明：`stop-color:transparent;`。
    */
-  readonly transparent = 'stop-color:transparent;';
+  readonly transparent: string = 'stop-color:transparent;';
   /** CSS 声明：`stop-color:turquoise;`。 */
-  readonly turquoise = 'stop-color:turquoise;';
+  readonly turquoise: string = 'stop-color:turquoise;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stop-color:unset;`。
    */
-  readonly unset = 'stop-color:unset;';
+  readonly unset: string = 'stop-color:unset;';
   /** CSS 声明：`stop-color:violet;`。 */
-  readonly violet = 'stop-color:violet;';
+  readonly violet: string = 'stop-color:violet;';
   /** CSS 声明：`stop-color:wheat;`。 */
-  readonly wheat = 'stop-color:wheat;';
+  readonly wheat: string = 'stop-color:wheat;';
   /** CSS 声明：`stop-color:white;`。 */
-  readonly white = 'stop-color:white;';
+  readonly white: string = 'stop-color:white;';
   /** CSS 声明：`stop-color:whitesmoke;`。 */
-  readonly whitesmoke = 'stop-color:whitesmoke;';
+  readonly whitesmoke: string = 'stop-color:whitesmoke;';
   /** CSS 声明：`stop-color:yellow;`。 */
-  readonly yellow = 'stop-color:yellow;';
+  readonly yellow: string = 'stop-color:yellow;';
   /** CSS 声明：`stop-color:yellowgreen;`。 */
-  readonly yellowgreen = 'stop-color:yellowgreen;';
+  readonly yellowgreen: string = 'stop-color:yellowgreen;';
   /**
    * 创建 stop-color 属性作者；普通使用通过 s.stopColor 取得共享实例。
    * @example
@@ -17066,6 +20128,52 @@ export class StopColorCss extends CssProperty {
 }
 
 /**
+ * stop-opacity 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StopOpacityKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stop-opacity:inherit;`。
+   */
+  readonly inherit: Property.StopOpacity | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stop-opacity:initial;`。
+   */
+  readonly initial: Property.StopOpacity | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stop-opacity:revert;`。
+   */
+  readonly revert: Property.StopOpacity | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stop-opacity:revert-layer;`。
+   */
+  readonly revertLayer: Property.StopOpacity | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stop-opacity:unset;`。
+   */
+  readonly unset: Property.StopOpacity | CssString = 'unset';
+}
+
+/**
  * 设置 SVG 渐变 stop 节点的不透明度。（stop-opacity）
  *
  * CSS 初始值：`black`（不同于浏览器默认样式表）。
@@ -17077,31 +20185,31 @@ export class StopOpacityCss extends CssProperty {
    *
    * CSS 声明：`stop-opacity:inherit;`。
    */
-  readonly inherit = 'stop-opacity:inherit;';
+  readonly inherit: string = 'stop-opacity:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stop-opacity:initial;`。
    */
-  readonly initial = 'stop-opacity:initial;';
+  readonly initial: string = 'stop-opacity:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stop-opacity:revert;`。
    */
-  readonly revert = 'stop-opacity:revert;';
+  readonly revert: string = 'stop-opacity:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stop-opacity:revert-layer;`。
    */
-  readonly revertLayer = 'stop-opacity:revert-layer;';
+  readonly revertLayer: string = 'stop-opacity:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stop-opacity:unset;`。
    */
-  readonly unset = 'stop-opacity:unset;';
+  readonly unset: string = 'stop-opacity:unset;';
   /**
    * 创建 stop-opacity 属性作者；普通使用通过 s.stopOpacity 取得共享实例。
    * @example
@@ -17181,438 +20289,1272 @@ export class StopOpacityCss extends CssProperty {
 }
 
 /**
+ * stroke 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StrokeKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:AccentColor;`。 */
+  readonly AccentColor: Property.Stroke | CssString = 'AccentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:AccentColorText;`。 */
+  readonly AccentColorText: Property.Stroke | CssString = 'AccentColorText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ActiveBorder;`。 */
+  readonly ActiveBorder: Property.Stroke | CssString = 'ActiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ActiveCaption;`。 */
+  readonly ActiveCaption: Property.Stroke | CssString = 'ActiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ActiveText;`。 */
+  readonly ActiveText: Property.Stroke | CssString = 'ActiveText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:AppWorkspace;`。 */
+  readonly AppWorkspace: Property.Stroke | CssString = 'AppWorkspace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:Background;`。 */
+  readonly Background: Property.Stroke | CssString = 'Background';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ButtonBorder;`。 */
+  readonly ButtonBorder: Property.Stroke | CssString = 'ButtonBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ButtonFace;`。 */
+  readonly ButtonFace: Property.Stroke | CssString = 'ButtonFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ButtonHighlight;`。 */
+  readonly ButtonHighlight: Property.Stroke | CssString = 'ButtonHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ButtonShadow;`。 */
+  readonly ButtonShadow: Property.Stroke | CssString = 'ButtonShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ButtonText;`。 */
+  readonly ButtonText: Property.Stroke | CssString = 'ButtonText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:Canvas;`。 */
+  readonly Canvas: Property.Stroke | CssString = 'Canvas';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:CanvasText;`。 */
+  readonly CanvasText: Property.Stroke | CssString = 'CanvasText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:CaptionText;`。 */
+  readonly CaptionText: Property.Stroke | CssString = 'CaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:Field;`。 */
+  readonly Field: Property.Stroke | CssString = 'Field';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:FieldText;`。 */
+  readonly FieldText: Property.Stroke | CssString = 'FieldText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:GrayText;`。 */
+  readonly GrayText: Property.Stroke | CssString = 'GrayText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:Highlight;`。 */
+  readonly Highlight: Property.Stroke | CssString = 'Highlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:HighlightText;`。 */
+  readonly HighlightText: Property.Stroke | CssString = 'HighlightText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:InactiveBorder;`。 */
+  readonly InactiveBorder: Property.Stroke | CssString = 'InactiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:InactiveCaption;`。 */
+  readonly InactiveCaption: Property.Stroke | CssString = 'InactiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:InactiveCaptionText;`。 */
+  readonly InactiveCaptionText: Property.Stroke | CssString = 'InactiveCaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:InfoBackground;`。 */
+  readonly InfoBackground: Property.Stroke | CssString = 'InfoBackground';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:InfoText;`。 */
+  readonly InfoText: Property.Stroke | CssString = 'InfoText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:LinkText;`。 */
+  readonly LinkText: Property.Stroke | CssString = 'LinkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:Mark;`。 */
+  readonly Mark: Property.Stroke | CssString = 'Mark';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:MarkText;`。 */
+  readonly MarkText: Property.Stroke | CssString = 'MarkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:Menu;`。 */
+  readonly Menu: Property.Stroke | CssString = 'Menu';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:MenuText;`。 */
+  readonly MenuText: Property.Stroke | CssString = 'MenuText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:Scrollbar;`。 */
+  readonly Scrollbar: Property.Stroke | CssString = 'Scrollbar';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:SelectedItem;`。 */
+  readonly SelectedItem: Property.Stroke | CssString = 'SelectedItem';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:SelectedItemText;`。 */
+  readonly SelectedItemText: Property.Stroke | CssString = 'SelectedItemText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ThreeDDarkShadow;`。 */
+  readonly ThreeDDarkShadow: Property.Stroke | CssString = 'ThreeDDarkShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ThreeDFace;`。 */
+  readonly ThreeDFace: Property.Stroke | CssString = 'ThreeDFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ThreeDHighlight;`。 */
+  readonly ThreeDHighlight: Property.Stroke | CssString = 'ThreeDHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ThreeDLightShadow;`。 */
+  readonly ThreeDLightShadow: Property.Stroke | CssString = 'ThreeDLightShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ThreeDShadow;`。 */
+  readonly ThreeDShadow: Property.Stroke | CssString = 'ThreeDShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:VisitedText;`。 */
+  readonly VisitedText: Property.Stroke | CssString = 'VisitedText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:Window;`。 */
+  readonly Window: Property.Stroke | CssString = 'Window';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:WindowFrame;`。 */
+  readonly WindowFrame: Property.Stroke | CssString = 'WindowFrame';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:WindowText;`。 */
+  readonly WindowText: Property.Stroke | CssString = 'WindowText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:aliceblue;`。 */
+  readonly aliceblue: Property.Stroke | CssString = 'aliceblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:antiquewhite;`。 */
+  readonly antiquewhite: Property.Stroke | CssString = 'antiquewhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:aqua;`。 */
+  readonly aqua: Property.Stroke | CssString = 'aqua';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:aquamarine;`。 */
+  readonly aquamarine: Property.Stroke | CssString = 'aquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:azure;`。 */
+  readonly azure: Property.Stroke | CssString = 'azure';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:beige;`。 */
+  readonly beige: Property.Stroke | CssString = 'beige';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:bisque;`。 */
+  readonly bisque: Property.Stroke | CssString = 'bisque';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:black;`。 */
+  readonly black: Property.Stroke | CssString = 'black';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:blanchedalmond;`。 */
+  readonly blanchedalmond: Property.Stroke | CssString = 'blanchedalmond';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:blue;`。 */
+  readonly blue: Property.Stroke | CssString = 'blue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:blueviolet;`。 */
+  readonly blueviolet: Property.Stroke | CssString = 'blueviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:brown;`。 */
+  readonly brown: Property.Stroke | CssString = 'brown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:burlywood;`。 */
+  readonly burlywood: Property.Stroke | CssString = 'burlywood';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:cadetblue;`。 */
+  readonly cadetblue: Property.Stroke | CssString = 'cadetblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:chartreuse;`。 */
+  readonly chartreuse: Property.Stroke | CssString = 'chartreuse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:chocolate;`。 */
+  readonly chocolate: Property.Stroke | CssString = 'chocolate';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:context-fill;`。 */
+  readonly contextFill: Property.Stroke | CssString = 'context-fill';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:context-stroke;`。 */
+  readonly contextStroke: Property.Stroke | CssString = 'context-stroke';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:coral;`。 */
+  readonly coral: Property.Stroke | CssString = 'coral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:cornflowerblue;`。 */
+  readonly cornflowerblue: Property.Stroke | CssString = 'cornflowerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:cornsilk;`。 */
+  readonly cornsilk: Property.Stroke | CssString = 'cornsilk';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:crimson;`。 */
+  readonly crimson: Property.Stroke | CssString = 'crimson';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
+   *
+   * CSS 声明：`stroke:currentColor;`。
+   */
+  readonly currentColor: Property.Stroke | CssString = 'currentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:cyan;`。 */
+  readonly cyan: Property.Stroke | CssString = 'cyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkblue;`。 */
+  readonly darkblue: Property.Stroke | CssString = 'darkblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkcyan;`。 */
+  readonly darkcyan: Property.Stroke | CssString = 'darkcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkgoldenrod;`。 */
+  readonly darkgoldenrod: Property.Stroke | CssString = 'darkgoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkgray;`。 */
+  readonly darkgray: Property.Stroke | CssString = 'darkgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkgreen;`。 */
+  readonly darkgreen: Property.Stroke | CssString = 'darkgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkgrey;`。 */
+  readonly darkgrey: Property.Stroke | CssString = 'darkgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkkhaki;`。 */
+  readonly darkkhaki: Property.Stroke | CssString = 'darkkhaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkmagenta;`。 */
+  readonly darkmagenta: Property.Stroke | CssString = 'darkmagenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkolivegreen;`。 */
+  readonly darkolivegreen: Property.Stroke | CssString = 'darkolivegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkorange;`。 */
+  readonly darkorange: Property.Stroke | CssString = 'darkorange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkorchid;`。 */
+  readonly darkorchid: Property.Stroke | CssString = 'darkorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkred;`。 */
+  readonly darkred: Property.Stroke | CssString = 'darkred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darksalmon;`。 */
+  readonly darksalmon: Property.Stroke | CssString = 'darksalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkseagreen;`。 */
+  readonly darkseagreen: Property.Stroke | CssString = 'darkseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkslateblue;`。 */
+  readonly darkslateblue: Property.Stroke | CssString = 'darkslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkslategray;`。 */
+  readonly darkslategray: Property.Stroke | CssString = 'darkslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkslategrey;`。 */
+  readonly darkslategrey: Property.Stroke | CssString = 'darkslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkturquoise;`。 */
+  readonly darkturquoise: Property.Stroke | CssString = 'darkturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:darkviolet;`。 */
+  readonly darkviolet: Property.Stroke | CssString = 'darkviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:deeppink;`。 */
+  readonly deeppink: Property.Stroke | CssString = 'deeppink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:deepskyblue;`。 */
+  readonly deepskyblue: Property.Stroke | CssString = 'deepskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:dimgray;`。 */
+  readonly dimgray: Property.Stroke | CssString = 'dimgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:dimgrey;`。 */
+  readonly dimgrey: Property.Stroke | CssString = 'dimgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:dodgerblue;`。 */
+  readonly dodgerblue: Property.Stroke | CssString = 'dodgerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:firebrick;`。 */
+  readonly firebrick: Property.Stroke | CssString = 'firebrick';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:floralwhite;`。 */
+  readonly floralwhite: Property.Stroke | CssString = 'floralwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:forestgreen;`。 */
+  readonly forestgreen: Property.Stroke | CssString = 'forestgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:fuchsia;`。 */
+  readonly fuchsia: Property.Stroke | CssString = 'fuchsia';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:gainsboro;`。 */
+  readonly gainsboro: Property.Stroke | CssString = 'gainsboro';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ghostwhite;`。 */
+  readonly ghostwhite: Property.Stroke | CssString = 'ghostwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:gold;`。 */
+  readonly gold: Property.Stroke | CssString = 'gold';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:goldenrod;`。 */
+  readonly goldenrod: Property.Stroke | CssString = 'goldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:gray;`。 */
+  readonly gray: Property.Stroke | CssString = 'gray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:green;`。 */
+  readonly green: Property.Stroke | CssString = 'green';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:greenyellow;`。 */
+  readonly greenyellow: Property.Stroke | CssString = 'greenyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:grey;`。 */
+  readonly grey: Property.Stroke | CssString = 'grey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:honeydew;`。 */
+  readonly honeydew: Property.Stroke | CssString = 'honeydew';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:hotpink;`。 */
+  readonly hotpink: Property.Stroke | CssString = 'hotpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:indianred;`。 */
+  readonly indianred: Property.Stroke | CssString = 'indianred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:indigo;`。 */
+  readonly indigo: Property.Stroke | CssString = 'indigo';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stroke:inherit;`。
+   */
+  readonly inherit: Property.Stroke | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stroke:initial;`。
+   */
+  readonly initial: Property.Stroke | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:ivory;`。 */
+  readonly ivory: Property.Stroke | CssString = 'ivory';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:khaki;`。 */
+  readonly khaki: Property.Stroke | CssString = 'khaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lavender;`。 */
+  readonly lavender: Property.Stroke | CssString = 'lavender';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lavenderblush;`。 */
+  readonly lavenderblush: Property.Stroke | CssString = 'lavenderblush';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lawngreen;`。 */
+  readonly lawngreen: Property.Stroke | CssString = 'lawngreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lemonchiffon;`。 */
+  readonly lemonchiffon: Property.Stroke | CssString = 'lemonchiffon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightblue;`。 */
+  readonly lightblue: Property.Stroke | CssString = 'lightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightcoral;`。 */
+  readonly lightcoral: Property.Stroke | CssString = 'lightcoral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightcyan;`。 */
+  readonly lightcyan: Property.Stroke | CssString = 'lightcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightgoldenrodyellow;`。 */
+  readonly lightgoldenrodyellow: Property.Stroke | CssString = 'lightgoldenrodyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightgray;`。 */
+  readonly lightgray: Property.Stroke | CssString = 'lightgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightgreen;`。 */
+  readonly lightgreen: Property.Stroke | CssString = 'lightgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightgrey;`。 */
+  readonly lightgrey: Property.Stroke | CssString = 'lightgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightpink;`。 */
+  readonly lightpink: Property.Stroke | CssString = 'lightpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightsalmon;`。 */
+  readonly lightsalmon: Property.Stroke | CssString = 'lightsalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightseagreen;`。 */
+  readonly lightseagreen: Property.Stroke | CssString = 'lightseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightskyblue;`。 */
+  readonly lightskyblue: Property.Stroke | CssString = 'lightskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightslategray;`。 */
+  readonly lightslategray: Property.Stroke | CssString = 'lightslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightslategrey;`。 */
+  readonly lightslategrey: Property.Stroke | CssString = 'lightslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightsteelblue;`。 */
+  readonly lightsteelblue: Property.Stroke | CssString = 'lightsteelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lightyellow;`。 */
+  readonly lightyellow: Property.Stroke | CssString = 'lightyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:lime;`。 */
+  readonly lime: Property.Stroke | CssString = 'lime';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:limegreen;`。 */
+  readonly limegreen: Property.Stroke | CssString = 'limegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:linen;`。 */
+  readonly linen: Property.Stroke | CssString = 'linen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:magenta;`。 */
+  readonly magenta: Property.Stroke | CssString = 'magenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:maroon;`。 */
+  readonly maroon: Property.Stroke | CssString = 'maroon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mediumaquamarine;`。 */
+  readonly mediumaquamarine: Property.Stroke | CssString = 'mediumaquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mediumblue;`。 */
+  readonly mediumblue: Property.Stroke | CssString = 'mediumblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mediumorchid;`。 */
+  readonly mediumorchid: Property.Stroke | CssString = 'mediumorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mediumpurple;`。 */
+  readonly mediumpurple: Property.Stroke | CssString = 'mediumpurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mediumseagreen;`。 */
+  readonly mediumseagreen: Property.Stroke | CssString = 'mediumseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mediumslateblue;`。 */
+  readonly mediumslateblue: Property.Stroke | CssString = 'mediumslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mediumspringgreen;`。 */
+  readonly mediumspringgreen: Property.Stroke | CssString = 'mediumspringgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mediumturquoise;`。 */
+  readonly mediumturquoise: Property.Stroke | CssString = 'mediumturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mediumvioletred;`。 */
+  readonly mediumvioletred: Property.Stroke | CssString = 'mediumvioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:midnightblue;`。 */
+  readonly midnightblue: Property.Stroke | CssString = 'midnightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mintcream;`。 */
+  readonly mintcream: Property.Stroke | CssString = 'mintcream';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:mistyrose;`。 */
+  readonly mistyrose: Property.Stroke | CssString = 'mistyrose';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:moccasin;`。 */
+  readonly moccasin: Property.Stroke | CssString = 'moccasin';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:navajowhite;`。 */
+  readonly navajowhite: Property.Stroke | CssString = 'navajowhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:navy;`。 */
+  readonly navy: Property.Stroke | CssString = 'navy';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:none;`。 */
+  readonly none: Property.Stroke | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:oldlace;`。 */
+  readonly oldlace: Property.Stroke | CssString = 'oldlace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:olive;`。 */
+  readonly olive: Property.Stroke | CssString = 'olive';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:olivedrab;`。 */
+  readonly olivedrab: Property.Stroke | CssString = 'olivedrab';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:orange;`。 */
+  readonly orange: Property.Stroke | CssString = 'orange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:orangered;`。 */
+  readonly orangered: Property.Stroke | CssString = 'orangered';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:orchid;`。 */
+  readonly orchid: Property.Stroke | CssString = 'orchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:palegoldenrod;`。 */
+  readonly palegoldenrod: Property.Stroke | CssString = 'palegoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:palegreen;`。 */
+  readonly palegreen: Property.Stroke | CssString = 'palegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:paleturquoise;`。 */
+  readonly paleturquoise: Property.Stroke | CssString = 'paleturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:palevioletred;`。 */
+  readonly palevioletred: Property.Stroke | CssString = 'palevioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:papayawhip;`。 */
+  readonly papayawhip: Property.Stroke | CssString = 'papayawhip';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:peachpuff;`。 */
+  readonly peachpuff: Property.Stroke | CssString = 'peachpuff';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:peru;`。 */
+  readonly peru: Property.Stroke | CssString = 'peru';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:pink;`。 */
+  readonly pink: Property.Stroke | CssString = 'pink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:plum;`。 */
+  readonly plum: Property.Stroke | CssString = 'plum';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:powderblue;`。 */
+  readonly powderblue: Property.Stroke | CssString = 'powderblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:purple;`。 */
+  readonly purple: Property.Stroke | CssString = 'purple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:rebeccapurple;`。 */
+  readonly rebeccapurple: Property.Stroke | CssString = 'rebeccapurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:red;`。 */
+  readonly red: Property.Stroke | CssString = 'red';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stroke:revert;`。
+   */
+  readonly revert: Property.Stroke | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stroke:revert-layer;`。
+   */
+  readonly revertLayer: Property.Stroke | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:rosybrown;`。 */
+  readonly rosybrown: Property.Stroke | CssString = 'rosybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:royalblue;`。 */
+  readonly royalblue: Property.Stroke | CssString = 'royalblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:saddlebrown;`。 */
+  readonly saddlebrown: Property.Stroke | CssString = 'saddlebrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:salmon;`。 */
+  readonly salmon: Property.Stroke | CssString = 'salmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:sandybrown;`。 */
+  readonly sandybrown: Property.Stroke | CssString = 'sandybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:seagreen;`。 */
+  readonly seagreen: Property.Stroke | CssString = 'seagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:seashell;`。 */
+  readonly seashell: Property.Stroke | CssString = 'seashell';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:sienna;`。 */
+  readonly sienna: Property.Stroke | CssString = 'sienna';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:silver;`。 */
+  readonly silver: Property.Stroke | CssString = 'silver';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:skyblue;`。 */
+  readonly skyblue: Property.Stroke | CssString = 'skyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:slateblue;`。 */
+  readonly slateblue: Property.Stroke | CssString = 'slateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:slategray;`。 */
+  readonly slategray: Property.Stroke | CssString = 'slategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:slategrey;`。 */
+  readonly slategrey: Property.Stroke | CssString = 'slategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:snow;`。 */
+  readonly snow: Property.Stroke | CssString = 'snow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:springgreen;`。 */
+  readonly springgreen: Property.Stroke | CssString = 'springgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:steelblue;`。 */
+  readonly steelblue: Property.Stroke | CssString = 'steelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:tan;`。 */
+  readonly tan: Property.Stroke | CssString = 'tan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:teal;`。 */
+  readonly teal: Property.Stroke | CssString = 'teal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:thistle;`。 */
+  readonly thistle: Property.Stroke | CssString = 'thistle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:tomato;`。 */
+  readonly tomato: Property.Stroke | CssString = 'tomato';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
+   *
+   * CSS 声明：`stroke:transparent;`。
+   */
+  readonly transparent: Property.Stroke | CssString = 'transparent';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:turquoise;`。 */
+  readonly turquoise: Property.Stroke | CssString = 'turquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stroke:unset;`。
+   */
+  readonly unset: Property.Stroke | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:violet;`。 */
+  readonly violet: Property.Stroke | CssString = 'violet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:wheat;`。 */
+  readonly wheat: Property.Stroke | CssString = 'wheat';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:white;`。 */
+  readonly white: Property.Stroke | CssString = 'white';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:whitesmoke;`。 */
+  readonly whitesmoke: Property.Stroke | CssString = 'whitesmoke';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:yellow;`。 */
+  readonly yellow: Property.Stroke | CssString = 'yellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke:yellowgreen;`。 */
+  readonly yellowgreen: Property.Stroke | CssString = 'yellowgreen';
+}
+
+/**
  * 设置 SVG 图形轮廓的描边绘制方式。（stroke）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke
  */
 export class StrokeCss extends CssProperty {
   /** CSS 声明：`stroke:AccentColor;`。 */
-  readonly AccentColor = 'stroke:AccentColor;';
+  readonly AccentColor: string = 'stroke:AccentColor;';
   /** CSS 声明：`stroke:AccentColorText;`。 */
-  readonly AccentColorText = 'stroke:AccentColorText;';
+  readonly AccentColorText: string = 'stroke:AccentColorText;';
   /** CSS 声明：`stroke:ActiveBorder;`。 */
-  readonly ActiveBorder = 'stroke:ActiveBorder;';
+  readonly ActiveBorder: string = 'stroke:ActiveBorder;';
   /** CSS 声明：`stroke:ActiveCaption;`。 */
-  readonly ActiveCaption = 'stroke:ActiveCaption;';
+  readonly ActiveCaption: string = 'stroke:ActiveCaption;';
   /** CSS 声明：`stroke:ActiveText;`。 */
-  readonly ActiveText = 'stroke:ActiveText;';
+  readonly ActiveText: string = 'stroke:ActiveText;';
   /** CSS 声明：`stroke:AppWorkspace;`。 */
-  readonly AppWorkspace = 'stroke:AppWorkspace;';
+  readonly AppWorkspace: string = 'stroke:AppWorkspace;';
   /** CSS 声明：`stroke:Background;`。 */
-  readonly Background = 'stroke:Background;';
+  readonly Background: string = 'stroke:Background;';
   /** CSS 声明：`stroke:ButtonBorder;`。 */
-  readonly ButtonBorder = 'stroke:ButtonBorder;';
+  readonly ButtonBorder: string = 'stroke:ButtonBorder;';
   /** CSS 声明：`stroke:ButtonFace;`。 */
-  readonly ButtonFace = 'stroke:ButtonFace;';
+  readonly ButtonFace: string = 'stroke:ButtonFace;';
   /** CSS 声明：`stroke:ButtonHighlight;`。 */
-  readonly ButtonHighlight = 'stroke:ButtonHighlight;';
+  readonly ButtonHighlight: string = 'stroke:ButtonHighlight;';
   /** CSS 声明：`stroke:ButtonShadow;`。 */
-  readonly ButtonShadow = 'stroke:ButtonShadow;';
+  readonly ButtonShadow: string = 'stroke:ButtonShadow;';
   /** CSS 声明：`stroke:ButtonText;`。 */
-  readonly ButtonText = 'stroke:ButtonText;';
+  readonly ButtonText: string = 'stroke:ButtonText;';
   /** CSS 声明：`stroke:Canvas;`。 */
-  readonly Canvas = 'stroke:Canvas;';
+  readonly Canvas: string = 'stroke:Canvas;';
   /** CSS 声明：`stroke:CanvasText;`。 */
-  readonly CanvasText = 'stroke:CanvasText;';
+  readonly CanvasText: string = 'stroke:CanvasText;';
   /** CSS 声明：`stroke:CaptionText;`。 */
-  readonly CaptionText = 'stroke:CaptionText;';
+  readonly CaptionText: string = 'stroke:CaptionText;';
   /** CSS 声明：`stroke:Field;`。 */
-  readonly Field = 'stroke:Field;';
+  readonly Field: string = 'stroke:Field;';
   /** CSS 声明：`stroke:FieldText;`。 */
-  readonly FieldText = 'stroke:FieldText;';
+  readonly FieldText: string = 'stroke:FieldText;';
   /** CSS 声明：`stroke:GrayText;`。 */
-  readonly GrayText = 'stroke:GrayText;';
+  readonly GrayText: string = 'stroke:GrayText;';
   /** CSS 声明：`stroke:Highlight;`。 */
-  readonly Highlight = 'stroke:Highlight;';
+  readonly Highlight: string = 'stroke:Highlight;';
   /** CSS 声明：`stroke:HighlightText;`。 */
-  readonly HighlightText = 'stroke:HighlightText;';
+  readonly HighlightText: string = 'stroke:HighlightText;';
   /** CSS 声明：`stroke:InactiveBorder;`。 */
-  readonly InactiveBorder = 'stroke:InactiveBorder;';
+  readonly InactiveBorder: string = 'stroke:InactiveBorder;';
   /** CSS 声明：`stroke:InactiveCaption;`。 */
-  readonly InactiveCaption = 'stroke:InactiveCaption;';
+  readonly InactiveCaption: string = 'stroke:InactiveCaption;';
   /** CSS 声明：`stroke:InactiveCaptionText;`。 */
-  readonly InactiveCaptionText = 'stroke:InactiveCaptionText;';
+  readonly InactiveCaptionText: string = 'stroke:InactiveCaptionText;';
   /** CSS 声明：`stroke:InfoBackground;`。 */
-  readonly InfoBackground = 'stroke:InfoBackground;';
+  readonly InfoBackground: string = 'stroke:InfoBackground;';
   /** CSS 声明：`stroke:InfoText;`。 */
-  readonly InfoText = 'stroke:InfoText;';
+  readonly InfoText: string = 'stroke:InfoText;';
   /** CSS 声明：`stroke:LinkText;`。 */
-  readonly LinkText = 'stroke:LinkText;';
+  readonly LinkText: string = 'stroke:LinkText;';
   /** CSS 声明：`stroke:Mark;`。 */
-  readonly Mark = 'stroke:Mark;';
+  readonly Mark: string = 'stroke:Mark;';
   /** CSS 声明：`stroke:MarkText;`。 */
-  readonly MarkText = 'stroke:MarkText;';
+  readonly MarkText: string = 'stroke:MarkText;';
   /** CSS 声明：`stroke:Menu;`。 */
-  readonly Menu = 'stroke:Menu;';
+  readonly Menu: string = 'stroke:Menu;';
   /** CSS 声明：`stroke:MenuText;`。 */
-  readonly MenuText = 'stroke:MenuText;';
+  readonly MenuText: string = 'stroke:MenuText;';
   /** CSS 声明：`stroke:Scrollbar;`。 */
-  readonly Scrollbar = 'stroke:Scrollbar;';
+  readonly Scrollbar: string = 'stroke:Scrollbar;';
   /** CSS 声明：`stroke:SelectedItem;`。 */
-  readonly SelectedItem = 'stroke:SelectedItem;';
+  readonly SelectedItem: string = 'stroke:SelectedItem;';
   /** CSS 声明：`stroke:SelectedItemText;`。 */
-  readonly SelectedItemText = 'stroke:SelectedItemText;';
+  readonly SelectedItemText: string = 'stroke:SelectedItemText;';
   /** CSS 声明：`stroke:ThreeDDarkShadow;`。 */
-  readonly ThreeDDarkShadow = 'stroke:ThreeDDarkShadow;';
+  readonly ThreeDDarkShadow: string = 'stroke:ThreeDDarkShadow;';
   /** CSS 声明：`stroke:ThreeDFace;`。 */
-  readonly ThreeDFace = 'stroke:ThreeDFace;';
+  readonly ThreeDFace: string = 'stroke:ThreeDFace;';
   /** CSS 声明：`stroke:ThreeDHighlight;`。 */
-  readonly ThreeDHighlight = 'stroke:ThreeDHighlight;';
+  readonly ThreeDHighlight: string = 'stroke:ThreeDHighlight;';
   /** CSS 声明：`stroke:ThreeDLightShadow;`。 */
-  readonly ThreeDLightShadow = 'stroke:ThreeDLightShadow;';
+  readonly ThreeDLightShadow: string = 'stroke:ThreeDLightShadow;';
   /** CSS 声明：`stroke:ThreeDShadow;`。 */
-  readonly ThreeDShadow = 'stroke:ThreeDShadow;';
+  readonly ThreeDShadow: string = 'stroke:ThreeDShadow;';
   /** CSS 声明：`stroke:VisitedText;`。 */
-  readonly VisitedText = 'stroke:VisitedText;';
+  readonly VisitedText: string = 'stroke:VisitedText;';
   /** CSS 声明：`stroke:Window;`。 */
-  readonly Window = 'stroke:Window;';
+  readonly Window: string = 'stroke:Window;';
   /** CSS 声明：`stroke:WindowFrame;`。 */
-  readonly WindowFrame = 'stroke:WindowFrame;';
+  readonly WindowFrame: string = 'stroke:WindowFrame;';
   /** CSS 声明：`stroke:WindowText;`。 */
-  readonly WindowText = 'stroke:WindowText;';
+  readonly WindowText: string = 'stroke:WindowText;';
   /** CSS 声明：`stroke:aliceblue;`。 */
-  readonly aliceblue = 'stroke:aliceblue;';
+  readonly aliceblue: string = 'stroke:aliceblue;';
   /** CSS 声明：`stroke:antiquewhite;`。 */
-  readonly antiquewhite = 'stroke:antiquewhite;';
+  readonly antiquewhite: string = 'stroke:antiquewhite;';
   /** CSS 声明：`stroke:aqua;`。 */
-  readonly aqua = 'stroke:aqua;';
+  readonly aqua: string = 'stroke:aqua;';
   /** CSS 声明：`stroke:aquamarine;`。 */
-  readonly aquamarine = 'stroke:aquamarine;';
+  readonly aquamarine: string = 'stroke:aquamarine;';
   /** CSS 声明：`stroke:azure;`。 */
-  readonly azure = 'stroke:azure;';
+  readonly azure: string = 'stroke:azure;';
   /** CSS 声明：`stroke:beige;`。 */
-  readonly beige = 'stroke:beige;';
+  readonly beige: string = 'stroke:beige;';
   /** CSS 声明：`stroke:bisque;`。 */
-  readonly bisque = 'stroke:bisque;';
+  readonly bisque: string = 'stroke:bisque;';
   /** CSS 声明：`stroke:black;`。 */
-  readonly black = 'stroke:black;';
+  readonly black: string = 'stroke:black;';
   /** CSS 声明：`stroke:blanchedalmond;`。 */
-  readonly blanchedalmond = 'stroke:blanchedalmond;';
+  readonly blanchedalmond: string = 'stroke:blanchedalmond;';
   /** CSS 声明：`stroke:blue;`。 */
-  readonly blue = 'stroke:blue;';
+  readonly blue: string = 'stroke:blue;';
   /** CSS 声明：`stroke:blueviolet;`。 */
-  readonly blueviolet = 'stroke:blueviolet;';
+  readonly blueviolet: string = 'stroke:blueviolet;';
   /** CSS 声明：`stroke:brown;`。 */
-  readonly brown = 'stroke:brown;';
+  readonly brown: string = 'stroke:brown;';
   /** CSS 声明：`stroke:burlywood;`。 */
-  readonly burlywood = 'stroke:burlywood;';
+  readonly burlywood: string = 'stroke:burlywood;';
   /** CSS 声明：`stroke:cadetblue;`。 */
-  readonly cadetblue = 'stroke:cadetblue;';
+  readonly cadetblue: string = 'stroke:cadetblue;';
   /** CSS 声明：`stroke:chartreuse;`。 */
-  readonly chartreuse = 'stroke:chartreuse;';
+  readonly chartreuse: string = 'stroke:chartreuse;';
   /** CSS 声明：`stroke:chocolate;`。 */
-  readonly chocolate = 'stroke:chocolate;';
+  readonly chocolate: string = 'stroke:chocolate;';
   /** CSS 声明：`stroke:context-fill;`。 */
-  readonly contextFill = 'stroke:context-fill;';
+  readonly contextFill: string = 'stroke:context-fill;';
   /** CSS 声明：`stroke:context-stroke;`。 */
-  readonly contextStroke = 'stroke:context-stroke;';
+  readonly contextStroke: string = 'stroke:context-stroke;';
   /** CSS 声明：`stroke:coral;`。 */
-  readonly coral = 'stroke:coral;';
+  readonly coral: string = 'stroke:coral;';
   /** CSS 声明：`stroke:cornflowerblue;`。 */
-  readonly cornflowerblue = 'stroke:cornflowerblue;';
+  readonly cornflowerblue: string = 'stroke:cornflowerblue;';
   /** CSS 声明：`stroke:cornsilk;`。 */
-  readonly cornsilk = 'stroke:cornsilk;';
+  readonly cornsilk: string = 'stroke:cornsilk;';
   /** CSS 声明：`stroke:crimson;`。 */
-  readonly crimson = 'stroke:crimson;';
+  readonly crimson: string = 'stroke:crimson;';
   /**
    * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
    *
    * CSS 声明：`stroke:currentColor;`。
    */
-  readonly currentColor = 'stroke:currentColor;';
+  readonly currentColor: string = 'stroke:currentColor;';
   /** CSS 声明：`stroke:cyan;`。 */
-  readonly cyan = 'stroke:cyan;';
+  readonly cyan: string = 'stroke:cyan;';
   /** CSS 声明：`stroke:darkblue;`。 */
-  readonly darkblue = 'stroke:darkblue;';
+  readonly darkblue: string = 'stroke:darkblue;';
   /** CSS 声明：`stroke:darkcyan;`。 */
-  readonly darkcyan = 'stroke:darkcyan;';
+  readonly darkcyan: string = 'stroke:darkcyan;';
   /** CSS 声明：`stroke:darkgoldenrod;`。 */
-  readonly darkgoldenrod = 'stroke:darkgoldenrod;';
+  readonly darkgoldenrod: string = 'stroke:darkgoldenrod;';
   /** CSS 声明：`stroke:darkgray;`。 */
-  readonly darkgray = 'stroke:darkgray;';
+  readonly darkgray: string = 'stroke:darkgray;';
   /** CSS 声明：`stroke:darkgreen;`。 */
-  readonly darkgreen = 'stroke:darkgreen;';
+  readonly darkgreen: string = 'stroke:darkgreen;';
   /** CSS 声明：`stroke:darkgrey;`。 */
-  readonly darkgrey = 'stroke:darkgrey;';
+  readonly darkgrey: string = 'stroke:darkgrey;';
   /** CSS 声明：`stroke:darkkhaki;`。 */
-  readonly darkkhaki = 'stroke:darkkhaki;';
+  readonly darkkhaki: string = 'stroke:darkkhaki;';
   /** CSS 声明：`stroke:darkmagenta;`。 */
-  readonly darkmagenta = 'stroke:darkmagenta;';
+  readonly darkmagenta: string = 'stroke:darkmagenta;';
   /** CSS 声明：`stroke:darkolivegreen;`。 */
-  readonly darkolivegreen = 'stroke:darkolivegreen;';
+  readonly darkolivegreen: string = 'stroke:darkolivegreen;';
   /** CSS 声明：`stroke:darkorange;`。 */
-  readonly darkorange = 'stroke:darkorange;';
+  readonly darkorange: string = 'stroke:darkorange;';
   /** CSS 声明：`stroke:darkorchid;`。 */
-  readonly darkorchid = 'stroke:darkorchid;';
+  readonly darkorchid: string = 'stroke:darkorchid;';
   /** CSS 声明：`stroke:darkred;`。 */
-  readonly darkred = 'stroke:darkred;';
+  readonly darkred: string = 'stroke:darkred;';
   /** CSS 声明：`stroke:darksalmon;`。 */
-  readonly darksalmon = 'stroke:darksalmon;';
+  readonly darksalmon: string = 'stroke:darksalmon;';
   /** CSS 声明：`stroke:darkseagreen;`。 */
-  readonly darkseagreen = 'stroke:darkseagreen;';
+  readonly darkseagreen: string = 'stroke:darkseagreen;';
   /** CSS 声明：`stroke:darkslateblue;`。 */
-  readonly darkslateblue = 'stroke:darkslateblue;';
+  readonly darkslateblue: string = 'stroke:darkslateblue;';
   /** CSS 声明：`stroke:darkslategray;`。 */
-  readonly darkslategray = 'stroke:darkslategray;';
+  readonly darkslategray: string = 'stroke:darkslategray;';
   /** CSS 声明：`stroke:darkslategrey;`。 */
-  readonly darkslategrey = 'stroke:darkslategrey;';
+  readonly darkslategrey: string = 'stroke:darkslategrey;';
   /** CSS 声明：`stroke:darkturquoise;`。 */
-  readonly darkturquoise = 'stroke:darkturquoise;';
+  readonly darkturquoise: string = 'stroke:darkturquoise;';
   /** CSS 声明：`stroke:darkviolet;`。 */
-  readonly darkviolet = 'stroke:darkviolet;';
+  readonly darkviolet: string = 'stroke:darkviolet;';
   /** CSS 声明：`stroke:deeppink;`。 */
-  readonly deeppink = 'stroke:deeppink;';
+  readonly deeppink: string = 'stroke:deeppink;';
   /** CSS 声明：`stroke:deepskyblue;`。 */
-  readonly deepskyblue = 'stroke:deepskyblue;';
+  readonly deepskyblue: string = 'stroke:deepskyblue;';
   /** CSS 声明：`stroke:dimgray;`。 */
-  readonly dimgray = 'stroke:dimgray;';
+  readonly dimgray: string = 'stroke:dimgray;';
   /** CSS 声明：`stroke:dimgrey;`。 */
-  readonly dimgrey = 'stroke:dimgrey;';
+  readonly dimgrey: string = 'stroke:dimgrey;';
   /** CSS 声明：`stroke:dodgerblue;`。 */
-  readonly dodgerblue = 'stroke:dodgerblue;';
+  readonly dodgerblue: string = 'stroke:dodgerblue;';
   /** CSS 声明：`stroke:firebrick;`。 */
-  readonly firebrick = 'stroke:firebrick;';
+  readonly firebrick: string = 'stroke:firebrick;';
   /** CSS 声明：`stroke:floralwhite;`。 */
-  readonly floralwhite = 'stroke:floralwhite;';
+  readonly floralwhite: string = 'stroke:floralwhite;';
   /** CSS 声明：`stroke:forestgreen;`。 */
-  readonly forestgreen = 'stroke:forestgreen;';
+  readonly forestgreen: string = 'stroke:forestgreen;';
   /** CSS 声明：`stroke:fuchsia;`。 */
-  readonly fuchsia = 'stroke:fuchsia;';
+  readonly fuchsia: string = 'stroke:fuchsia;';
   /** CSS 声明：`stroke:gainsboro;`。 */
-  readonly gainsboro = 'stroke:gainsboro;';
+  readonly gainsboro: string = 'stroke:gainsboro;';
   /** CSS 声明：`stroke:ghostwhite;`。 */
-  readonly ghostwhite = 'stroke:ghostwhite;';
+  readonly ghostwhite: string = 'stroke:ghostwhite;';
   /** CSS 声明：`stroke:gold;`。 */
-  readonly gold = 'stroke:gold;';
+  readonly gold: string = 'stroke:gold;';
   /** CSS 声明：`stroke:goldenrod;`。 */
-  readonly goldenrod = 'stroke:goldenrod;';
+  readonly goldenrod: string = 'stroke:goldenrod;';
   /** CSS 声明：`stroke:gray;`。 */
-  readonly gray = 'stroke:gray;';
+  readonly gray: string = 'stroke:gray;';
   /** CSS 声明：`stroke:green;`。 */
-  readonly green = 'stroke:green;';
+  readonly green: string = 'stroke:green;';
   /** CSS 声明：`stroke:greenyellow;`。 */
-  readonly greenyellow = 'stroke:greenyellow;';
+  readonly greenyellow: string = 'stroke:greenyellow;';
   /** CSS 声明：`stroke:grey;`。 */
-  readonly grey = 'stroke:grey;';
+  readonly grey: string = 'stroke:grey;';
   /** CSS 声明：`stroke:honeydew;`。 */
-  readonly honeydew = 'stroke:honeydew;';
+  readonly honeydew: string = 'stroke:honeydew;';
   /** CSS 声明：`stroke:hotpink;`。 */
-  readonly hotpink = 'stroke:hotpink;';
+  readonly hotpink: string = 'stroke:hotpink;';
   /** CSS 声明：`stroke:indianred;`。 */
-  readonly indianred = 'stroke:indianred;';
+  readonly indianred: string = 'stroke:indianred;';
   /** CSS 声明：`stroke:indigo;`。 */
-  readonly indigo = 'stroke:indigo;';
+  readonly indigo: string = 'stroke:indigo;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`stroke:inherit;`。
    */
-  readonly inherit = 'stroke:inherit;';
+  readonly inherit: string = 'stroke:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stroke:initial;`。
    */
-  readonly initial = 'stroke:initial;';
+  readonly initial: string = 'stroke:initial;';
   /** CSS 声明：`stroke:ivory;`。 */
-  readonly ivory = 'stroke:ivory;';
+  readonly ivory: string = 'stroke:ivory;';
   /** CSS 声明：`stroke:khaki;`。 */
-  readonly khaki = 'stroke:khaki;';
+  readonly khaki: string = 'stroke:khaki;';
   /** CSS 声明：`stroke:lavender;`。 */
-  readonly lavender = 'stroke:lavender;';
+  readonly lavender: string = 'stroke:lavender;';
   /** CSS 声明：`stroke:lavenderblush;`。 */
-  readonly lavenderblush = 'stroke:lavenderblush;';
+  readonly lavenderblush: string = 'stroke:lavenderblush;';
   /** CSS 声明：`stroke:lawngreen;`。 */
-  readonly lawngreen = 'stroke:lawngreen;';
+  readonly lawngreen: string = 'stroke:lawngreen;';
   /** CSS 声明：`stroke:lemonchiffon;`。 */
-  readonly lemonchiffon = 'stroke:lemonchiffon;';
+  readonly lemonchiffon: string = 'stroke:lemonchiffon;';
   /** CSS 声明：`stroke:lightblue;`。 */
-  readonly lightblue = 'stroke:lightblue;';
+  readonly lightblue: string = 'stroke:lightblue;';
   /** CSS 声明：`stroke:lightcoral;`。 */
-  readonly lightcoral = 'stroke:lightcoral;';
+  readonly lightcoral: string = 'stroke:lightcoral;';
   /** CSS 声明：`stroke:lightcyan;`。 */
-  readonly lightcyan = 'stroke:lightcyan;';
+  readonly lightcyan: string = 'stroke:lightcyan;';
   /** CSS 声明：`stroke:lightgoldenrodyellow;`。 */
-  readonly lightgoldenrodyellow = 'stroke:lightgoldenrodyellow;';
+  readonly lightgoldenrodyellow: string = 'stroke:lightgoldenrodyellow;';
   /** CSS 声明：`stroke:lightgray;`。 */
-  readonly lightgray = 'stroke:lightgray;';
+  readonly lightgray: string = 'stroke:lightgray;';
   /** CSS 声明：`stroke:lightgreen;`。 */
-  readonly lightgreen = 'stroke:lightgreen;';
+  readonly lightgreen: string = 'stroke:lightgreen;';
   /** CSS 声明：`stroke:lightgrey;`。 */
-  readonly lightgrey = 'stroke:lightgrey;';
+  readonly lightgrey: string = 'stroke:lightgrey;';
   /** CSS 声明：`stroke:lightpink;`。 */
-  readonly lightpink = 'stroke:lightpink;';
+  readonly lightpink: string = 'stroke:lightpink;';
   /** CSS 声明：`stroke:lightsalmon;`。 */
-  readonly lightsalmon = 'stroke:lightsalmon;';
+  readonly lightsalmon: string = 'stroke:lightsalmon;';
   /** CSS 声明：`stroke:lightseagreen;`。 */
-  readonly lightseagreen = 'stroke:lightseagreen;';
+  readonly lightseagreen: string = 'stroke:lightseagreen;';
   /** CSS 声明：`stroke:lightskyblue;`。 */
-  readonly lightskyblue = 'stroke:lightskyblue;';
+  readonly lightskyblue: string = 'stroke:lightskyblue;';
   /** CSS 声明：`stroke:lightslategray;`。 */
-  readonly lightslategray = 'stroke:lightslategray;';
+  readonly lightslategray: string = 'stroke:lightslategray;';
   /** CSS 声明：`stroke:lightslategrey;`。 */
-  readonly lightslategrey = 'stroke:lightslategrey;';
+  readonly lightslategrey: string = 'stroke:lightslategrey;';
   /** CSS 声明：`stroke:lightsteelblue;`。 */
-  readonly lightsteelblue = 'stroke:lightsteelblue;';
+  readonly lightsteelblue: string = 'stroke:lightsteelblue;';
   /** CSS 声明：`stroke:lightyellow;`。 */
-  readonly lightyellow = 'stroke:lightyellow;';
+  readonly lightyellow: string = 'stroke:lightyellow;';
   /** CSS 声明：`stroke:lime;`。 */
-  readonly lime = 'stroke:lime;';
+  readonly lime: string = 'stroke:lime;';
   /** CSS 声明：`stroke:limegreen;`。 */
-  readonly limegreen = 'stroke:limegreen;';
+  readonly limegreen: string = 'stroke:limegreen;';
   /** CSS 声明：`stroke:linen;`。 */
-  readonly linen = 'stroke:linen;';
+  readonly linen: string = 'stroke:linen;';
   /** CSS 声明：`stroke:magenta;`。 */
-  readonly magenta = 'stroke:magenta;';
+  readonly magenta: string = 'stroke:magenta;';
   /** CSS 声明：`stroke:maroon;`。 */
-  readonly maroon = 'stroke:maroon;';
+  readonly maroon: string = 'stroke:maroon;';
   /** CSS 声明：`stroke:mediumaquamarine;`。 */
-  readonly mediumaquamarine = 'stroke:mediumaquamarine;';
+  readonly mediumaquamarine: string = 'stroke:mediumaquamarine;';
   /** CSS 声明：`stroke:mediumblue;`。 */
-  readonly mediumblue = 'stroke:mediumblue;';
+  readonly mediumblue: string = 'stroke:mediumblue;';
   /** CSS 声明：`stroke:mediumorchid;`。 */
-  readonly mediumorchid = 'stroke:mediumorchid;';
+  readonly mediumorchid: string = 'stroke:mediumorchid;';
   /** CSS 声明：`stroke:mediumpurple;`。 */
-  readonly mediumpurple = 'stroke:mediumpurple;';
+  readonly mediumpurple: string = 'stroke:mediumpurple;';
   /** CSS 声明：`stroke:mediumseagreen;`。 */
-  readonly mediumseagreen = 'stroke:mediumseagreen;';
+  readonly mediumseagreen: string = 'stroke:mediumseagreen;';
   /** CSS 声明：`stroke:mediumslateblue;`。 */
-  readonly mediumslateblue = 'stroke:mediumslateblue;';
+  readonly mediumslateblue: string = 'stroke:mediumslateblue;';
   /** CSS 声明：`stroke:mediumspringgreen;`。 */
-  readonly mediumspringgreen = 'stroke:mediumspringgreen;';
+  readonly mediumspringgreen: string = 'stroke:mediumspringgreen;';
   /** CSS 声明：`stroke:mediumturquoise;`。 */
-  readonly mediumturquoise = 'stroke:mediumturquoise;';
+  readonly mediumturquoise: string = 'stroke:mediumturquoise;';
   /** CSS 声明：`stroke:mediumvioletred;`。 */
-  readonly mediumvioletred = 'stroke:mediumvioletred;';
+  readonly mediumvioletred: string = 'stroke:mediumvioletred;';
   /** CSS 声明：`stroke:midnightblue;`。 */
-  readonly midnightblue = 'stroke:midnightblue;';
+  readonly midnightblue: string = 'stroke:midnightblue;';
   /** CSS 声明：`stroke:mintcream;`。 */
-  readonly mintcream = 'stroke:mintcream;';
+  readonly mintcream: string = 'stroke:mintcream;';
   /** CSS 声明：`stroke:mistyrose;`。 */
-  readonly mistyrose = 'stroke:mistyrose;';
+  readonly mistyrose: string = 'stroke:mistyrose;';
   /** CSS 声明：`stroke:moccasin;`。 */
-  readonly moccasin = 'stroke:moccasin;';
+  readonly moccasin: string = 'stroke:moccasin;';
   /** CSS 声明：`stroke:navajowhite;`。 */
-  readonly navajowhite = 'stroke:navajowhite;';
+  readonly navajowhite: string = 'stroke:navajowhite;';
   /** CSS 声明：`stroke:navy;`。 */
-  readonly navy = 'stroke:navy;';
+  readonly navy: string = 'stroke:navy;';
   /** CSS 声明：`stroke:none;`。 */
-  readonly none = 'stroke:none;';
+  readonly none: string = 'stroke:none;';
   /** CSS 声明：`stroke:oldlace;`。 */
-  readonly oldlace = 'stroke:oldlace;';
+  readonly oldlace: string = 'stroke:oldlace;';
   /** CSS 声明：`stroke:olive;`。 */
-  readonly olive = 'stroke:olive;';
+  readonly olive: string = 'stroke:olive;';
   /** CSS 声明：`stroke:olivedrab;`。 */
-  readonly olivedrab = 'stroke:olivedrab;';
+  readonly olivedrab: string = 'stroke:olivedrab;';
   /** CSS 声明：`stroke:orange;`。 */
-  readonly orange = 'stroke:orange;';
+  readonly orange: string = 'stroke:orange;';
   /** CSS 声明：`stroke:orangered;`。 */
-  readonly orangered = 'stroke:orangered;';
+  readonly orangered: string = 'stroke:orangered;';
   /** CSS 声明：`stroke:orchid;`。 */
-  readonly orchid = 'stroke:orchid;';
+  readonly orchid: string = 'stroke:orchid;';
   /** CSS 声明：`stroke:palegoldenrod;`。 */
-  readonly palegoldenrod = 'stroke:palegoldenrod;';
+  readonly palegoldenrod: string = 'stroke:palegoldenrod;';
   /** CSS 声明：`stroke:palegreen;`。 */
-  readonly palegreen = 'stroke:palegreen;';
+  readonly palegreen: string = 'stroke:palegreen;';
   /** CSS 声明：`stroke:paleturquoise;`。 */
-  readonly paleturquoise = 'stroke:paleturquoise;';
+  readonly paleturquoise: string = 'stroke:paleturquoise;';
   /** CSS 声明：`stroke:palevioletred;`。 */
-  readonly palevioletred = 'stroke:palevioletred;';
+  readonly palevioletred: string = 'stroke:palevioletred;';
   /** CSS 声明：`stroke:papayawhip;`。 */
-  readonly papayawhip = 'stroke:papayawhip;';
+  readonly papayawhip: string = 'stroke:papayawhip;';
   /** CSS 声明：`stroke:peachpuff;`。 */
-  readonly peachpuff = 'stroke:peachpuff;';
+  readonly peachpuff: string = 'stroke:peachpuff;';
   /** CSS 声明：`stroke:peru;`。 */
-  readonly peru = 'stroke:peru;';
+  readonly peru: string = 'stroke:peru;';
   /** CSS 声明：`stroke:pink;`。 */
-  readonly pink = 'stroke:pink;';
+  readonly pink: string = 'stroke:pink;';
   /** CSS 声明：`stroke:plum;`。 */
-  readonly plum = 'stroke:plum;';
+  readonly plum: string = 'stroke:plum;';
   /** CSS 声明：`stroke:powderblue;`。 */
-  readonly powderblue = 'stroke:powderblue;';
+  readonly powderblue: string = 'stroke:powderblue;';
   /** CSS 声明：`stroke:purple;`。 */
-  readonly purple = 'stroke:purple;';
+  readonly purple: string = 'stroke:purple;';
   /** CSS 声明：`stroke:rebeccapurple;`。 */
-  readonly rebeccapurple = 'stroke:rebeccapurple;';
+  readonly rebeccapurple: string = 'stroke:rebeccapurple;';
   /** CSS 声明：`stroke:red;`。 */
-  readonly red = 'stroke:red;';
+  readonly red: string = 'stroke:red;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stroke:revert;`。
    */
-  readonly revert = 'stroke:revert;';
+  readonly revert: string = 'stroke:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stroke:revert-layer;`。
    */
-  readonly revertLayer = 'stroke:revert-layer;';
+  readonly revertLayer: string = 'stroke:revert-layer;';
   /** CSS 声明：`stroke:rosybrown;`。 */
-  readonly rosybrown = 'stroke:rosybrown;';
+  readonly rosybrown: string = 'stroke:rosybrown;';
   /** CSS 声明：`stroke:royalblue;`。 */
-  readonly royalblue = 'stroke:royalblue;';
+  readonly royalblue: string = 'stroke:royalblue;';
   /** CSS 声明：`stroke:saddlebrown;`。 */
-  readonly saddlebrown = 'stroke:saddlebrown;';
+  readonly saddlebrown: string = 'stroke:saddlebrown;';
   /** CSS 声明：`stroke:salmon;`。 */
-  readonly salmon = 'stroke:salmon;';
+  readonly salmon: string = 'stroke:salmon;';
   /** CSS 声明：`stroke:sandybrown;`。 */
-  readonly sandybrown = 'stroke:sandybrown;';
+  readonly sandybrown: string = 'stroke:sandybrown;';
   /** CSS 声明：`stroke:seagreen;`。 */
-  readonly seagreen = 'stroke:seagreen;';
+  readonly seagreen: string = 'stroke:seagreen;';
   /** CSS 声明：`stroke:seashell;`。 */
-  readonly seashell = 'stroke:seashell;';
+  readonly seashell: string = 'stroke:seashell;';
   /** CSS 声明：`stroke:sienna;`。 */
-  readonly sienna = 'stroke:sienna;';
+  readonly sienna: string = 'stroke:sienna;';
   /** CSS 声明：`stroke:silver;`。 */
-  readonly silver = 'stroke:silver;';
+  readonly silver: string = 'stroke:silver;';
   /** CSS 声明：`stroke:skyblue;`。 */
-  readonly skyblue = 'stroke:skyblue;';
+  readonly skyblue: string = 'stroke:skyblue;';
   /** CSS 声明：`stroke:slateblue;`。 */
-  readonly slateblue = 'stroke:slateblue;';
+  readonly slateblue: string = 'stroke:slateblue;';
   /** CSS 声明：`stroke:slategray;`。 */
-  readonly slategray = 'stroke:slategray;';
+  readonly slategray: string = 'stroke:slategray;';
   /** CSS 声明：`stroke:slategrey;`。 */
-  readonly slategrey = 'stroke:slategrey;';
+  readonly slategrey: string = 'stroke:slategrey;';
   /** CSS 声明：`stroke:snow;`。 */
-  readonly snow = 'stroke:snow;';
+  readonly snow: string = 'stroke:snow;';
   /** CSS 声明：`stroke:springgreen;`。 */
-  readonly springgreen = 'stroke:springgreen;';
+  readonly springgreen: string = 'stroke:springgreen;';
   /** CSS 声明：`stroke:steelblue;`。 */
-  readonly steelblue = 'stroke:steelblue;';
+  readonly steelblue: string = 'stroke:steelblue;';
   /** CSS 声明：`stroke:tan;`。 */
-  readonly tan = 'stroke:tan;';
+  readonly tan: string = 'stroke:tan;';
   /** CSS 声明：`stroke:teal;`。 */
-  readonly teal = 'stroke:teal;';
+  readonly teal: string = 'stroke:teal;';
   /** CSS 声明：`stroke:thistle;`。 */
-  readonly thistle = 'stroke:thistle;';
+  readonly thistle: string = 'stroke:thistle;';
   /** CSS 声明：`stroke:tomato;`。 */
-  readonly tomato = 'stroke:tomato;';
+  readonly tomato: string = 'stroke:tomato;';
   /**
    * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
    *
    * CSS 声明：`stroke:transparent;`。
    */
-  readonly transparent = 'stroke:transparent;';
+  readonly transparent: string = 'stroke:transparent;';
   /** CSS 声明：`stroke:turquoise;`。 */
-  readonly turquoise = 'stroke:turquoise;';
+  readonly turquoise: string = 'stroke:turquoise;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stroke:unset;`。
    */
-  readonly unset = 'stroke:unset;';
+  readonly unset: string = 'stroke:unset;';
   /** CSS 声明：`stroke:violet;`。 */
-  readonly violet = 'stroke:violet;';
+  readonly violet: string = 'stroke:violet;';
   /** CSS 声明：`stroke:wheat;`。 */
-  readonly wheat = 'stroke:wheat;';
+  readonly wheat: string = 'stroke:wheat;';
   /** CSS 声明：`stroke:white;`。 */
-  readonly white = 'stroke:white;';
+  readonly white: string = 'stroke:white;';
   /** CSS 声明：`stroke:whitesmoke;`。 */
-  readonly whitesmoke = 'stroke:whitesmoke;';
+  readonly whitesmoke: string = 'stroke:whitesmoke;';
   /** CSS 声明：`stroke:yellow;`。 */
-  readonly yellow = 'stroke:yellow;';
+  readonly yellow: string = 'stroke:yellow;';
   /** CSS 声明：`stroke:yellowgreen;`。 */
-  readonly yellowgreen = 'stroke:yellowgreen;';
+  readonly yellowgreen: string = 'stroke:yellowgreen;';
   /**
    * 创建 stroke 属性作者；普通使用通过 s.stroke 取得共享实例。
    * @example
@@ -17714,6 +21656,828 @@ export class StrokeCss extends CssProperty {
 }
 
 /**
+ * stroke-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StrokeColorKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:AccentColor;`。 */
+  readonly AccentColor: Property.StrokeColor | CssString = 'AccentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:AccentColorText;`。 */
+  readonly AccentColorText: Property.StrokeColor | CssString = 'AccentColorText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ActiveBorder;`。 */
+  readonly ActiveBorder: Property.StrokeColor | CssString = 'ActiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ActiveCaption;`。 */
+  readonly ActiveCaption: Property.StrokeColor | CssString = 'ActiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ActiveText;`。 */
+  readonly ActiveText: Property.StrokeColor | CssString = 'ActiveText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:AppWorkspace;`。 */
+  readonly AppWorkspace: Property.StrokeColor | CssString = 'AppWorkspace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:Background;`。 */
+  readonly Background: Property.StrokeColor | CssString = 'Background';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ButtonBorder;`。 */
+  readonly ButtonBorder: Property.StrokeColor | CssString = 'ButtonBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ButtonFace;`。 */
+  readonly ButtonFace: Property.StrokeColor | CssString = 'ButtonFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ButtonHighlight;`。 */
+  readonly ButtonHighlight: Property.StrokeColor | CssString = 'ButtonHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ButtonShadow;`。 */
+  readonly ButtonShadow: Property.StrokeColor | CssString = 'ButtonShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ButtonText;`。 */
+  readonly ButtonText: Property.StrokeColor | CssString = 'ButtonText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:Canvas;`。 */
+  readonly Canvas: Property.StrokeColor | CssString = 'Canvas';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:CanvasText;`。 */
+  readonly CanvasText: Property.StrokeColor | CssString = 'CanvasText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:CaptionText;`。 */
+  readonly CaptionText: Property.StrokeColor | CssString = 'CaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:Field;`。 */
+  readonly Field: Property.StrokeColor | CssString = 'Field';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:FieldText;`。 */
+  readonly FieldText: Property.StrokeColor | CssString = 'FieldText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:GrayText;`。 */
+  readonly GrayText: Property.StrokeColor | CssString = 'GrayText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:Highlight;`。 */
+  readonly Highlight: Property.StrokeColor | CssString = 'Highlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:HighlightText;`。 */
+  readonly HighlightText: Property.StrokeColor | CssString = 'HighlightText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:InactiveBorder;`。 */
+  readonly InactiveBorder: Property.StrokeColor | CssString = 'InactiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:InactiveCaption;`。 */
+  readonly InactiveCaption: Property.StrokeColor | CssString = 'InactiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:InactiveCaptionText;`。 */
+  readonly InactiveCaptionText: Property.StrokeColor | CssString = 'InactiveCaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:InfoBackground;`。 */
+  readonly InfoBackground: Property.StrokeColor | CssString = 'InfoBackground';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:InfoText;`。 */
+  readonly InfoText: Property.StrokeColor | CssString = 'InfoText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:LinkText;`。 */
+  readonly LinkText: Property.StrokeColor | CssString = 'LinkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:Mark;`。 */
+  readonly Mark: Property.StrokeColor | CssString = 'Mark';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:MarkText;`。 */
+  readonly MarkText: Property.StrokeColor | CssString = 'MarkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:Menu;`。 */
+  readonly Menu: Property.StrokeColor | CssString = 'Menu';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:MenuText;`。 */
+  readonly MenuText: Property.StrokeColor | CssString = 'MenuText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:Scrollbar;`。 */
+  readonly Scrollbar: Property.StrokeColor | CssString = 'Scrollbar';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:SelectedItem;`。 */
+  readonly SelectedItem: Property.StrokeColor | CssString = 'SelectedItem';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:SelectedItemText;`。 */
+  readonly SelectedItemText: Property.StrokeColor | CssString = 'SelectedItemText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ThreeDDarkShadow;`。 */
+  readonly ThreeDDarkShadow: Property.StrokeColor | CssString = 'ThreeDDarkShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ThreeDFace;`。 */
+  readonly ThreeDFace: Property.StrokeColor | CssString = 'ThreeDFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ThreeDHighlight;`。 */
+  readonly ThreeDHighlight: Property.StrokeColor | CssString = 'ThreeDHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ThreeDLightShadow;`。 */
+  readonly ThreeDLightShadow: Property.StrokeColor | CssString = 'ThreeDLightShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ThreeDShadow;`。 */
+  readonly ThreeDShadow: Property.StrokeColor | CssString = 'ThreeDShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:VisitedText;`。 */
+  readonly VisitedText: Property.StrokeColor | CssString = 'VisitedText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:Window;`。 */
+  readonly Window: Property.StrokeColor | CssString = 'Window';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:WindowFrame;`。 */
+  readonly WindowFrame: Property.StrokeColor | CssString = 'WindowFrame';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:WindowText;`。 */
+  readonly WindowText: Property.StrokeColor | CssString = 'WindowText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:aliceblue;`。 */
+  readonly aliceblue: Property.StrokeColor | CssString = 'aliceblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:antiquewhite;`。 */
+  readonly antiquewhite: Property.StrokeColor | CssString = 'antiquewhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:aqua;`。 */
+  readonly aqua: Property.StrokeColor | CssString = 'aqua';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:aquamarine;`。 */
+  readonly aquamarine: Property.StrokeColor | CssString = 'aquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:azure;`。 */
+  readonly azure: Property.StrokeColor | CssString = 'azure';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:beige;`。 */
+  readonly beige: Property.StrokeColor | CssString = 'beige';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:bisque;`。 */
+  readonly bisque: Property.StrokeColor | CssString = 'bisque';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:black;`。 */
+  readonly black: Property.StrokeColor | CssString = 'black';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:blanchedalmond;`。 */
+  readonly blanchedalmond: Property.StrokeColor | CssString = 'blanchedalmond';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:blue;`。 */
+  readonly blue: Property.StrokeColor | CssString = 'blue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:blueviolet;`。 */
+  readonly blueviolet: Property.StrokeColor | CssString = 'blueviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:brown;`。 */
+  readonly brown: Property.StrokeColor | CssString = 'brown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:burlywood;`。 */
+  readonly burlywood: Property.StrokeColor | CssString = 'burlywood';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:cadetblue;`。 */
+  readonly cadetblue: Property.StrokeColor | CssString = 'cadetblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:chartreuse;`。 */
+  readonly chartreuse: Property.StrokeColor | CssString = 'chartreuse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:chocolate;`。 */
+  readonly chocolate: Property.StrokeColor | CssString = 'chocolate';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:coral;`。 */
+  readonly coral: Property.StrokeColor | CssString = 'coral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:cornflowerblue;`。 */
+  readonly cornflowerblue: Property.StrokeColor | CssString = 'cornflowerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:cornsilk;`。 */
+  readonly cornsilk: Property.StrokeColor | CssString = 'cornsilk';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:crimson;`。 */
+  readonly crimson: Property.StrokeColor | CssString = 'crimson';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
+   *
+   * CSS 声明：`stroke-color:currentColor;`。
+   */
+  readonly currentColor: Property.StrokeColor | CssString = 'currentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:cyan;`。 */
+  readonly cyan: Property.StrokeColor | CssString = 'cyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkblue;`。 */
+  readonly darkblue: Property.StrokeColor | CssString = 'darkblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkcyan;`。 */
+  readonly darkcyan: Property.StrokeColor | CssString = 'darkcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkgoldenrod;`。 */
+  readonly darkgoldenrod: Property.StrokeColor | CssString = 'darkgoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkgray;`。 */
+  readonly darkgray: Property.StrokeColor | CssString = 'darkgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkgreen;`。 */
+  readonly darkgreen: Property.StrokeColor | CssString = 'darkgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkgrey;`。 */
+  readonly darkgrey: Property.StrokeColor | CssString = 'darkgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkkhaki;`。 */
+  readonly darkkhaki: Property.StrokeColor | CssString = 'darkkhaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkmagenta;`。 */
+  readonly darkmagenta: Property.StrokeColor | CssString = 'darkmagenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkolivegreen;`。 */
+  readonly darkolivegreen: Property.StrokeColor | CssString = 'darkolivegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkorange;`。 */
+  readonly darkorange: Property.StrokeColor | CssString = 'darkorange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkorchid;`。 */
+  readonly darkorchid: Property.StrokeColor | CssString = 'darkorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkred;`。 */
+  readonly darkred: Property.StrokeColor | CssString = 'darkred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darksalmon;`。 */
+  readonly darksalmon: Property.StrokeColor | CssString = 'darksalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkseagreen;`。 */
+  readonly darkseagreen: Property.StrokeColor | CssString = 'darkseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkslateblue;`。 */
+  readonly darkslateblue: Property.StrokeColor | CssString = 'darkslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkslategray;`。 */
+  readonly darkslategray: Property.StrokeColor | CssString = 'darkslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkslategrey;`。 */
+  readonly darkslategrey: Property.StrokeColor | CssString = 'darkslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkturquoise;`。 */
+  readonly darkturquoise: Property.StrokeColor | CssString = 'darkturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:darkviolet;`。 */
+  readonly darkviolet: Property.StrokeColor | CssString = 'darkviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:deeppink;`。 */
+  readonly deeppink: Property.StrokeColor | CssString = 'deeppink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:deepskyblue;`。 */
+  readonly deepskyblue: Property.StrokeColor | CssString = 'deepskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:dimgray;`。 */
+  readonly dimgray: Property.StrokeColor | CssString = 'dimgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:dimgrey;`。 */
+  readonly dimgrey: Property.StrokeColor | CssString = 'dimgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:dodgerblue;`。 */
+  readonly dodgerblue: Property.StrokeColor | CssString = 'dodgerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:firebrick;`。 */
+  readonly firebrick: Property.StrokeColor | CssString = 'firebrick';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:floralwhite;`。 */
+  readonly floralwhite: Property.StrokeColor | CssString = 'floralwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:forestgreen;`。 */
+  readonly forestgreen: Property.StrokeColor | CssString = 'forestgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:fuchsia;`。 */
+  readonly fuchsia: Property.StrokeColor | CssString = 'fuchsia';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:gainsboro;`。 */
+  readonly gainsboro: Property.StrokeColor | CssString = 'gainsboro';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ghostwhite;`。 */
+  readonly ghostwhite: Property.StrokeColor | CssString = 'ghostwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:gold;`。 */
+  readonly gold: Property.StrokeColor | CssString = 'gold';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:goldenrod;`。 */
+  readonly goldenrod: Property.StrokeColor | CssString = 'goldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:gray;`。 */
+  readonly gray: Property.StrokeColor | CssString = 'gray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:green;`。 */
+  readonly green: Property.StrokeColor | CssString = 'green';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:greenyellow;`。 */
+  readonly greenyellow: Property.StrokeColor | CssString = 'greenyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:grey;`。 */
+  readonly grey: Property.StrokeColor | CssString = 'grey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:honeydew;`。 */
+  readonly honeydew: Property.StrokeColor | CssString = 'honeydew';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:hotpink;`。 */
+  readonly hotpink: Property.StrokeColor | CssString = 'hotpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:indianred;`。 */
+  readonly indianred: Property.StrokeColor | CssString = 'indianred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:indigo;`。 */
+  readonly indigo: Property.StrokeColor | CssString = 'indigo';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stroke-color:inherit;`。
+   */
+  readonly inherit: Property.StrokeColor | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stroke-color:initial;`。
+   */
+  readonly initial: Property.StrokeColor | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:ivory;`。 */
+  readonly ivory: Property.StrokeColor | CssString = 'ivory';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:khaki;`。 */
+  readonly khaki: Property.StrokeColor | CssString = 'khaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lavender;`。 */
+  readonly lavender: Property.StrokeColor | CssString = 'lavender';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lavenderblush;`。 */
+  readonly lavenderblush: Property.StrokeColor | CssString = 'lavenderblush';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lawngreen;`。 */
+  readonly lawngreen: Property.StrokeColor | CssString = 'lawngreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lemonchiffon;`。 */
+  readonly lemonchiffon: Property.StrokeColor | CssString = 'lemonchiffon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightblue;`。 */
+  readonly lightblue: Property.StrokeColor | CssString = 'lightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightcoral;`。 */
+  readonly lightcoral: Property.StrokeColor | CssString = 'lightcoral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightcyan;`。 */
+  readonly lightcyan: Property.StrokeColor | CssString = 'lightcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightgoldenrodyellow;`。 */
+  readonly lightgoldenrodyellow: Property.StrokeColor | CssString = 'lightgoldenrodyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightgray;`。 */
+  readonly lightgray: Property.StrokeColor | CssString = 'lightgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightgreen;`。 */
+  readonly lightgreen: Property.StrokeColor | CssString = 'lightgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightgrey;`。 */
+  readonly lightgrey: Property.StrokeColor | CssString = 'lightgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightpink;`。 */
+  readonly lightpink: Property.StrokeColor | CssString = 'lightpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightsalmon;`。 */
+  readonly lightsalmon: Property.StrokeColor | CssString = 'lightsalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightseagreen;`。 */
+  readonly lightseagreen: Property.StrokeColor | CssString = 'lightseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightskyblue;`。 */
+  readonly lightskyblue: Property.StrokeColor | CssString = 'lightskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightslategray;`。 */
+  readonly lightslategray: Property.StrokeColor | CssString = 'lightslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightslategrey;`。 */
+  readonly lightslategrey: Property.StrokeColor | CssString = 'lightslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightsteelblue;`。 */
+  readonly lightsteelblue: Property.StrokeColor | CssString = 'lightsteelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lightyellow;`。 */
+  readonly lightyellow: Property.StrokeColor | CssString = 'lightyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:lime;`。 */
+  readonly lime: Property.StrokeColor | CssString = 'lime';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:limegreen;`。 */
+  readonly limegreen: Property.StrokeColor | CssString = 'limegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:linen;`。 */
+  readonly linen: Property.StrokeColor | CssString = 'linen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:magenta;`。 */
+  readonly magenta: Property.StrokeColor | CssString = 'magenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:maroon;`。 */
+  readonly maroon: Property.StrokeColor | CssString = 'maroon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mediumaquamarine;`。 */
+  readonly mediumaquamarine: Property.StrokeColor | CssString = 'mediumaquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mediumblue;`。 */
+  readonly mediumblue: Property.StrokeColor | CssString = 'mediumblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mediumorchid;`。 */
+  readonly mediumorchid: Property.StrokeColor | CssString = 'mediumorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mediumpurple;`。 */
+  readonly mediumpurple: Property.StrokeColor | CssString = 'mediumpurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mediumseagreen;`。 */
+  readonly mediumseagreen: Property.StrokeColor | CssString = 'mediumseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mediumslateblue;`。 */
+  readonly mediumslateblue: Property.StrokeColor | CssString = 'mediumslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mediumspringgreen;`。 */
+  readonly mediumspringgreen: Property.StrokeColor | CssString = 'mediumspringgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mediumturquoise;`。 */
+  readonly mediumturquoise: Property.StrokeColor | CssString = 'mediumturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mediumvioletred;`。 */
+  readonly mediumvioletred: Property.StrokeColor | CssString = 'mediumvioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:midnightblue;`。 */
+  readonly midnightblue: Property.StrokeColor | CssString = 'midnightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mintcream;`。 */
+  readonly mintcream: Property.StrokeColor | CssString = 'mintcream';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:mistyrose;`。 */
+  readonly mistyrose: Property.StrokeColor | CssString = 'mistyrose';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:moccasin;`。 */
+  readonly moccasin: Property.StrokeColor | CssString = 'moccasin';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:navajowhite;`。 */
+  readonly navajowhite: Property.StrokeColor | CssString = 'navajowhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:navy;`。 */
+  readonly navy: Property.StrokeColor | CssString = 'navy';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:oldlace;`。 */
+  readonly oldlace: Property.StrokeColor | CssString = 'oldlace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:olive;`。 */
+  readonly olive: Property.StrokeColor | CssString = 'olive';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:olivedrab;`。 */
+  readonly olivedrab: Property.StrokeColor | CssString = 'olivedrab';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:orange;`。 */
+  readonly orange: Property.StrokeColor | CssString = 'orange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:orangered;`。 */
+  readonly orangered: Property.StrokeColor | CssString = 'orangered';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:orchid;`。 */
+  readonly orchid: Property.StrokeColor | CssString = 'orchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:palegoldenrod;`。 */
+  readonly palegoldenrod: Property.StrokeColor | CssString = 'palegoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:palegreen;`。 */
+  readonly palegreen: Property.StrokeColor | CssString = 'palegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:paleturquoise;`。 */
+  readonly paleturquoise: Property.StrokeColor | CssString = 'paleturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:palevioletred;`。 */
+  readonly palevioletred: Property.StrokeColor | CssString = 'palevioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:papayawhip;`。 */
+  readonly papayawhip: Property.StrokeColor | CssString = 'papayawhip';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:peachpuff;`。 */
+  readonly peachpuff: Property.StrokeColor | CssString = 'peachpuff';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:peru;`。 */
+  readonly peru: Property.StrokeColor | CssString = 'peru';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:pink;`。 */
+  readonly pink: Property.StrokeColor | CssString = 'pink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:plum;`。 */
+  readonly plum: Property.StrokeColor | CssString = 'plum';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:powderblue;`。 */
+  readonly powderblue: Property.StrokeColor | CssString = 'powderblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:purple;`。 */
+  readonly purple: Property.StrokeColor | CssString = 'purple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:rebeccapurple;`。 */
+  readonly rebeccapurple: Property.StrokeColor | CssString = 'rebeccapurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:red;`。 */
+  readonly red: Property.StrokeColor | CssString = 'red';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stroke-color:revert;`。
+   */
+  readonly revert: Property.StrokeColor | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stroke-color:revert-layer;`。
+   */
+  readonly revertLayer: Property.StrokeColor | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:rosybrown;`。 */
+  readonly rosybrown: Property.StrokeColor | CssString = 'rosybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:royalblue;`。 */
+  readonly royalblue: Property.StrokeColor | CssString = 'royalblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:saddlebrown;`。 */
+  readonly saddlebrown: Property.StrokeColor | CssString = 'saddlebrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:salmon;`。 */
+  readonly salmon: Property.StrokeColor | CssString = 'salmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:sandybrown;`。 */
+  readonly sandybrown: Property.StrokeColor | CssString = 'sandybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:seagreen;`。 */
+  readonly seagreen: Property.StrokeColor | CssString = 'seagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:seashell;`。 */
+  readonly seashell: Property.StrokeColor | CssString = 'seashell';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:sienna;`。 */
+  readonly sienna: Property.StrokeColor | CssString = 'sienna';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:silver;`。 */
+  readonly silver: Property.StrokeColor | CssString = 'silver';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:skyblue;`。 */
+  readonly skyblue: Property.StrokeColor | CssString = 'skyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:slateblue;`。 */
+  readonly slateblue: Property.StrokeColor | CssString = 'slateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:slategray;`。 */
+  readonly slategray: Property.StrokeColor | CssString = 'slategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:slategrey;`。 */
+  readonly slategrey: Property.StrokeColor | CssString = 'slategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:snow;`。 */
+  readonly snow: Property.StrokeColor | CssString = 'snow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:springgreen;`。 */
+  readonly springgreen: Property.StrokeColor | CssString = 'springgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:steelblue;`。 */
+  readonly steelblue: Property.StrokeColor | CssString = 'steelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:tan;`。 */
+  readonly tan: Property.StrokeColor | CssString = 'tan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:teal;`。 */
+  readonly teal: Property.StrokeColor | CssString = 'teal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:thistle;`。 */
+  readonly thistle: Property.StrokeColor | CssString = 'thistle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:tomato;`。 */
+  readonly tomato: Property.StrokeColor | CssString = 'tomato';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
+   *
+   * CSS 声明：`stroke-color:transparent;`。
+   */
+  readonly transparent: Property.StrokeColor | CssString = 'transparent';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:turquoise;`。 */
+  readonly turquoise: Property.StrokeColor | CssString = 'turquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stroke-color:unset;`。
+   */
+  readonly unset: Property.StrokeColor | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:violet;`。 */
+  readonly violet: Property.StrokeColor | CssString = 'violet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:wheat;`。 */
+  readonly wheat: Property.StrokeColor | CssString = 'wheat';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:white;`。 */
+  readonly white: Property.StrokeColor | CssString = 'white';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:whitesmoke;`。 */
+  readonly whitesmoke: Property.StrokeColor | CssString = 'whitesmoke';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:yellow;`。 */
+  readonly yellow: Property.StrokeColor | CssString = 'yellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-color:yellowgreen;`。 */
+  readonly yellowgreen: Property.StrokeColor | CssString = 'yellowgreen';
+}
+
+/**
  * 设置描边颜色的扩展属性；常规 SVG 优先使用 stroke 并核对支持情况。（stroke-color）
  *
  * CSS 初始值：`transparent`（不同于浏览器默认样式表）。
@@ -17721,427 +22485,427 @@ export class StrokeCss extends CssProperty {
  */
 export class StrokeColorCss extends CssProperty {
   /** CSS 声明：`stroke-color:AccentColor;`。 */
-  readonly AccentColor = 'stroke-color:AccentColor;';
+  readonly AccentColor: string = 'stroke-color:AccentColor;';
   /** CSS 声明：`stroke-color:AccentColorText;`。 */
-  readonly AccentColorText = 'stroke-color:AccentColorText;';
+  readonly AccentColorText: string = 'stroke-color:AccentColorText;';
   /** CSS 声明：`stroke-color:ActiveBorder;`。 */
-  readonly ActiveBorder = 'stroke-color:ActiveBorder;';
+  readonly ActiveBorder: string = 'stroke-color:ActiveBorder;';
   /** CSS 声明：`stroke-color:ActiveCaption;`。 */
-  readonly ActiveCaption = 'stroke-color:ActiveCaption;';
+  readonly ActiveCaption: string = 'stroke-color:ActiveCaption;';
   /** CSS 声明：`stroke-color:ActiveText;`。 */
-  readonly ActiveText = 'stroke-color:ActiveText;';
+  readonly ActiveText: string = 'stroke-color:ActiveText;';
   /** CSS 声明：`stroke-color:AppWorkspace;`。 */
-  readonly AppWorkspace = 'stroke-color:AppWorkspace;';
+  readonly AppWorkspace: string = 'stroke-color:AppWorkspace;';
   /** CSS 声明：`stroke-color:Background;`。 */
-  readonly Background = 'stroke-color:Background;';
+  readonly Background: string = 'stroke-color:Background;';
   /** CSS 声明：`stroke-color:ButtonBorder;`。 */
-  readonly ButtonBorder = 'stroke-color:ButtonBorder;';
+  readonly ButtonBorder: string = 'stroke-color:ButtonBorder;';
   /** CSS 声明：`stroke-color:ButtonFace;`。 */
-  readonly ButtonFace = 'stroke-color:ButtonFace;';
+  readonly ButtonFace: string = 'stroke-color:ButtonFace;';
   /** CSS 声明：`stroke-color:ButtonHighlight;`。 */
-  readonly ButtonHighlight = 'stroke-color:ButtonHighlight;';
+  readonly ButtonHighlight: string = 'stroke-color:ButtonHighlight;';
   /** CSS 声明：`stroke-color:ButtonShadow;`。 */
-  readonly ButtonShadow = 'stroke-color:ButtonShadow;';
+  readonly ButtonShadow: string = 'stroke-color:ButtonShadow;';
   /** CSS 声明：`stroke-color:ButtonText;`。 */
-  readonly ButtonText = 'stroke-color:ButtonText;';
+  readonly ButtonText: string = 'stroke-color:ButtonText;';
   /** CSS 声明：`stroke-color:Canvas;`。 */
-  readonly Canvas = 'stroke-color:Canvas;';
+  readonly Canvas: string = 'stroke-color:Canvas;';
   /** CSS 声明：`stroke-color:CanvasText;`。 */
-  readonly CanvasText = 'stroke-color:CanvasText;';
+  readonly CanvasText: string = 'stroke-color:CanvasText;';
   /** CSS 声明：`stroke-color:CaptionText;`。 */
-  readonly CaptionText = 'stroke-color:CaptionText;';
+  readonly CaptionText: string = 'stroke-color:CaptionText;';
   /** CSS 声明：`stroke-color:Field;`。 */
-  readonly Field = 'stroke-color:Field;';
+  readonly Field: string = 'stroke-color:Field;';
   /** CSS 声明：`stroke-color:FieldText;`。 */
-  readonly FieldText = 'stroke-color:FieldText;';
+  readonly FieldText: string = 'stroke-color:FieldText;';
   /** CSS 声明：`stroke-color:GrayText;`。 */
-  readonly GrayText = 'stroke-color:GrayText;';
+  readonly GrayText: string = 'stroke-color:GrayText;';
   /** CSS 声明：`stroke-color:Highlight;`。 */
-  readonly Highlight = 'stroke-color:Highlight;';
+  readonly Highlight: string = 'stroke-color:Highlight;';
   /** CSS 声明：`stroke-color:HighlightText;`。 */
-  readonly HighlightText = 'stroke-color:HighlightText;';
+  readonly HighlightText: string = 'stroke-color:HighlightText;';
   /** CSS 声明：`stroke-color:InactiveBorder;`。 */
-  readonly InactiveBorder = 'stroke-color:InactiveBorder;';
+  readonly InactiveBorder: string = 'stroke-color:InactiveBorder;';
   /** CSS 声明：`stroke-color:InactiveCaption;`。 */
-  readonly InactiveCaption = 'stroke-color:InactiveCaption;';
+  readonly InactiveCaption: string = 'stroke-color:InactiveCaption;';
   /** CSS 声明：`stroke-color:InactiveCaptionText;`。 */
-  readonly InactiveCaptionText = 'stroke-color:InactiveCaptionText;';
+  readonly InactiveCaptionText: string = 'stroke-color:InactiveCaptionText;';
   /** CSS 声明：`stroke-color:InfoBackground;`。 */
-  readonly InfoBackground = 'stroke-color:InfoBackground;';
+  readonly InfoBackground: string = 'stroke-color:InfoBackground;';
   /** CSS 声明：`stroke-color:InfoText;`。 */
-  readonly InfoText = 'stroke-color:InfoText;';
+  readonly InfoText: string = 'stroke-color:InfoText;';
   /** CSS 声明：`stroke-color:LinkText;`。 */
-  readonly LinkText = 'stroke-color:LinkText;';
+  readonly LinkText: string = 'stroke-color:LinkText;';
   /** CSS 声明：`stroke-color:Mark;`。 */
-  readonly Mark = 'stroke-color:Mark;';
+  readonly Mark: string = 'stroke-color:Mark;';
   /** CSS 声明：`stroke-color:MarkText;`。 */
-  readonly MarkText = 'stroke-color:MarkText;';
+  readonly MarkText: string = 'stroke-color:MarkText;';
   /** CSS 声明：`stroke-color:Menu;`。 */
-  readonly Menu = 'stroke-color:Menu;';
+  readonly Menu: string = 'stroke-color:Menu;';
   /** CSS 声明：`stroke-color:MenuText;`。 */
-  readonly MenuText = 'stroke-color:MenuText;';
+  readonly MenuText: string = 'stroke-color:MenuText;';
   /** CSS 声明：`stroke-color:Scrollbar;`。 */
-  readonly Scrollbar = 'stroke-color:Scrollbar;';
+  readonly Scrollbar: string = 'stroke-color:Scrollbar;';
   /** CSS 声明：`stroke-color:SelectedItem;`。 */
-  readonly SelectedItem = 'stroke-color:SelectedItem;';
+  readonly SelectedItem: string = 'stroke-color:SelectedItem;';
   /** CSS 声明：`stroke-color:SelectedItemText;`。 */
-  readonly SelectedItemText = 'stroke-color:SelectedItemText;';
+  readonly SelectedItemText: string = 'stroke-color:SelectedItemText;';
   /** CSS 声明：`stroke-color:ThreeDDarkShadow;`。 */
-  readonly ThreeDDarkShadow = 'stroke-color:ThreeDDarkShadow;';
+  readonly ThreeDDarkShadow: string = 'stroke-color:ThreeDDarkShadow;';
   /** CSS 声明：`stroke-color:ThreeDFace;`。 */
-  readonly ThreeDFace = 'stroke-color:ThreeDFace;';
+  readonly ThreeDFace: string = 'stroke-color:ThreeDFace;';
   /** CSS 声明：`stroke-color:ThreeDHighlight;`。 */
-  readonly ThreeDHighlight = 'stroke-color:ThreeDHighlight;';
+  readonly ThreeDHighlight: string = 'stroke-color:ThreeDHighlight;';
   /** CSS 声明：`stroke-color:ThreeDLightShadow;`。 */
-  readonly ThreeDLightShadow = 'stroke-color:ThreeDLightShadow;';
+  readonly ThreeDLightShadow: string = 'stroke-color:ThreeDLightShadow;';
   /** CSS 声明：`stroke-color:ThreeDShadow;`。 */
-  readonly ThreeDShadow = 'stroke-color:ThreeDShadow;';
+  readonly ThreeDShadow: string = 'stroke-color:ThreeDShadow;';
   /** CSS 声明：`stroke-color:VisitedText;`。 */
-  readonly VisitedText = 'stroke-color:VisitedText;';
+  readonly VisitedText: string = 'stroke-color:VisitedText;';
   /** CSS 声明：`stroke-color:Window;`。 */
-  readonly Window = 'stroke-color:Window;';
+  readonly Window: string = 'stroke-color:Window;';
   /** CSS 声明：`stroke-color:WindowFrame;`。 */
-  readonly WindowFrame = 'stroke-color:WindowFrame;';
+  readonly WindowFrame: string = 'stroke-color:WindowFrame;';
   /** CSS 声明：`stroke-color:WindowText;`。 */
-  readonly WindowText = 'stroke-color:WindowText;';
+  readonly WindowText: string = 'stroke-color:WindowText;';
   /** CSS 声明：`stroke-color:aliceblue;`。 */
-  readonly aliceblue = 'stroke-color:aliceblue;';
+  readonly aliceblue: string = 'stroke-color:aliceblue;';
   /** CSS 声明：`stroke-color:antiquewhite;`。 */
-  readonly antiquewhite = 'stroke-color:antiquewhite;';
+  readonly antiquewhite: string = 'stroke-color:antiquewhite;';
   /** CSS 声明：`stroke-color:aqua;`。 */
-  readonly aqua = 'stroke-color:aqua;';
+  readonly aqua: string = 'stroke-color:aqua;';
   /** CSS 声明：`stroke-color:aquamarine;`。 */
-  readonly aquamarine = 'stroke-color:aquamarine;';
+  readonly aquamarine: string = 'stroke-color:aquamarine;';
   /** CSS 声明：`stroke-color:azure;`。 */
-  readonly azure = 'stroke-color:azure;';
+  readonly azure: string = 'stroke-color:azure;';
   /** CSS 声明：`stroke-color:beige;`。 */
-  readonly beige = 'stroke-color:beige;';
+  readonly beige: string = 'stroke-color:beige;';
   /** CSS 声明：`stroke-color:bisque;`。 */
-  readonly bisque = 'stroke-color:bisque;';
+  readonly bisque: string = 'stroke-color:bisque;';
   /** CSS 声明：`stroke-color:black;`。 */
-  readonly black = 'stroke-color:black;';
+  readonly black: string = 'stroke-color:black;';
   /** CSS 声明：`stroke-color:blanchedalmond;`。 */
-  readonly blanchedalmond = 'stroke-color:blanchedalmond;';
+  readonly blanchedalmond: string = 'stroke-color:blanchedalmond;';
   /** CSS 声明：`stroke-color:blue;`。 */
-  readonly blue = 'stroke-color:blue;';
+  readonly blue: string = 'stroke-color:blue;';
   /** CSS 声明：`stroke-color:blueviolet;`。 */
-  readonly blueviolet = 'stroke-color:blueviolet;';
+  readonly blueviolet: string = 'stroke-color:blueviolet;';
   /** CSS 声明：`stroke-color:brown;`。 */
-  readonly brown = 'stroke-color:brown;';
+  readonly brown: string = 'stroke-color:brown;';
   /** CSS 声明：`stroke-color:burlywood;`。 */
-  readonly burlywood = 'stroke-color:burlywood;';
+  readonly burlywood: string = 'stroke-color:burlywood;';
   /** CSS 声明：`stroke-color:cadetblue;`。 */
-  readonly cadetblue = 'stroke-color:cadetblue;';
+  readonly cadetblue: string = 'stroke-color:cadetblue;';
   /** CSS 声明：`stroke-color:chartreuse;`。 */
-  readonly chartreuse = 'stroke-color:chartreuse;';
+  readonly chartreuse: string = 'stroke-color:chartreuse;';
   /** CSS 声明：`stroke-color:chocolate;`。 */
-  readonly chocolate = 'stroke-color:chocolate;';
+  readonly chocolate: string = 'stroke-color:chocolate;';
   /** CSS 声明：`stroke-color:coral;`。 */
-  readonly coral = 'stroke-color:coral;';
+  readonly coral: string = 'stroke-color:coral;';
   /** CSS 声明：`stroke-color:cornflowerblue;`。 */
-  readonly cornflowerblue = 'stroke-color:cornflowerblue;';
+  readonly cornflowerblue: string = 'stroke-color:cornflowerblue;';
   /** CSS 声明：`stroke-color:cornsilk;`。 */
-  readonly cornsilk = 'stroke-color:cornsilk;';
+  readonly cornsilk: string = 'stroke-color:cornsilk;';
   /** CSS 声明：`stroke-color:crimson;`。 */
-  readonly crimson = 'stroke-color:crimson;';
+  readonly crimson: string = 'stroke-color:crimson;';
   /**
    * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
    *
    * CSS 声明：`stroke-color:currentColor;`。
    */
-  readonly currentColor = 'stroke-color:currentColor;';
+  readonly currentColor: string = 'stroke-color:currentColor;';
   /** CSS 声明：`stroke-color:cyan;`。 */
-  readonly cyan = 'stroke-color:cyan;';
+  readonly cyan: string = 'stroke-color:cyan;';
   /** CSS 声明：`stroke-color:darkblue;`。 */
-  readonly darkblue = 'stroke-color:darkblue;';
+  readonly darkblue: string = 'stroke-color:darkblue;';
   /** CSS 声明：`stroke-color:darkcyan;`。 */
-  readonly darkcyan = 'stroke-color:darkcyan;';
+  readonly darkcyan: string = 'stroke-color:darkcyan;';
   /** CSS 声明：`stroke-color:darkgoldenrod;`。 */
-  readonly darkgoldenrod = 'stroke-color:darkgoldenrod;';
+  readonly darkgoldenrod: string = 'stroke-color:darkgoldenrod;';
   /** CSS 声明：`stroke-color:darkgray;`。 */
-  readonly darkgray = 'stroke-color:darkgray;';
+  readonly darkgray: string = 'stroke-color:darkgray;';
   /** CSS 声明：`stroke-color:darkgreen;`。 */
-  readonly darkgreen = 'stroke-color:darkgreen;';
+  readonly darkgreen: string = 'stroke-color:darkgreen;';
   /** CSS 声明：`stroke-color:darkgrey;`。 */
-  readonly darkgrey = 'stroke-color:darkgrey;';
+  readonly darkgrey: string = 'stroke-color:darkgrey;';
   /** CSS 声明：`stroke-color:darkkhaki;`。 */
-  readonly darkkhaki = 'stroke-color:darkkhaki;';
+  readonly darkkhaki: string = 'stroke-color:darkkhaki;';
   /** CSS 声明：`stroke-color:darkmagenta;`。 */
-  readonly darkmagenta = 'stroke-color:darkmagenta;';
+  readonly darkmagenta: string = 'stroke-color:darkmagenta;';
   /** CSS 声明：`stroke-color:darkolivegreen;`。 */
-  readonly darkolivegreen = 'stroke-color:darkolivegreen;';
+  readonly darkolivegreen: string = 'stroke-color:darkolivegreen;';
   /** CSS 声明：`stroke-color:darkorange;`。 */
-  readonly darkorange = 'stroke-color:darkorange;';
+  readonly darkorange: string = 'stroke-color:darkorange;';
   /** CSS 声明：`stroke-color:darkorchid;`。 */
-  readonly darkorchid = 'stroke-color:darkorchid;';
+  readonly darkorchid: string = 'stroke-color:darkorchid;';
   /** CSS 声明：`stroke-color:darkred;`。 */
-  readonly darkred = 'stroke-color:darkred;';
+  readonly darkred: string = 'stroke-color:darkred;';
   /** CSS 声明：`stroke-color:darksalmon;`。 */
-  readonly darksalmon = 'stroke-color:darksalmon;';
+  readonly darksalmon: string = 'stroke-color:darksalmon;';
   /** CSS 声明：`stroke-color:darkseagreen;`。 */
-  readonly darkseagreen = 'stroke-color:darkseagreen;';
+  readonly darkseagreen: string = 'stroke-color:darkseagreen;';
   /** CSS 声明：`stroke-color:darkslateblue;`。 */
-  readonly darkslateblue = 'stroke-color:darkslateblue;';
+  readonly darkslateblue: string = 'stroke-color:darkslateblue;';
   /** CSS 声明：`stroke-color:darkslategray;`。 */
-  readonly darkslategray = 'stroke-color:darkslategray;';
+  readonly darkslategray: string = 'stroke-color:darkslategray;';
   /** CSS 声明：`stroke-color:darkslategrey;`。 */
-  readonly darkslategrey = 'stroke-color:darkslategrey;';
+  readonly darkslategrey: string = 'stroke-color:darkslategrey;';
   /** CSS 声明：`stroke-color:darkturquoise;`。 */
-  readonly darkturquoise = 'stroke-color:darkturquoise;';
+  readonly darkturquoise: string = 'stroke-color:darkturquoise;';
   /** CSS 声明：`stroke-color:darkviolet;`。 */
-  readonly darkviolet = 'stroke-color:darkviolet;';
+  readonly darkviolet: string = 'stroke-color:darkviolet;';
   /** CSS 声明：`stroke-color:deeppink;`。 */
-  readonly deeppink = 'stroke-color:deeppink;';
+  readonly deeppink: string = 'stroke-color:deeppink;';
   /** CSS 声明：`stroke-color:deepskyblue;`。 */
-  readonly deepskyblue = 'stroke-color:deepskyblue;';
+  readonly deepskyblue: string = 'stroke-color:deepskyblue;';
   /** CSS 声明：`stroke-color:dimgray;`。 */
-  readonly dimgray = 'stroke-color:dimgray;';
+  readonly dimgray: string = 'stroke-color:dimgray;';
   /** CSS 声明：`stroke-color:dimgrey;`。 */
-  readonly dimgrey = 'stroke-color:dimgrey;';
+  readonly dimgrey: string = 'stroke-color:dimgrey;';
   /** CSS 声明：`stroke-color:dodgerblue;`。 */
-  readonly dodgerblue = 'stroke-color:dodgerblue;';
+  readonly dodgerblue: string = 'stroke-color:dodgerblue;';
   /** CSS 声明：`stroke-color:firebrick;`。 */
-  readonly firebrick = 'stroke-color:firebrick;';
+  readonly firebrick: string = 'stroke-color:firebrick;';
   /** CSS 声明：`stroke-color:floralwhite;`。 */
-  readonly floralwhite = 'stroke-color:floralwhite;';
+  readonly floralwhite: string = 'stroke-color:floralwhite;';
   /** CSS 声明：`stroke-color:forestgreen;`。 */
-  readonly forestgreen = 'stroke-color:forestgreen;';
+  readonly forestgreen: string = 'stroke-color:forestgreen;';
   /** CSS 声明：`stroke-color:fuchsia;`。 */
-  readonly fuchsia = 'stroke-color:fuchsia;';
+  readonly fuchsia: string = 'stroke-color:fuchsia;';
   /** CSS 声明：`stroke-color:gainsboro;`。 */
-  readonly gainsboro = 'stroke-color:gainsboro;';
+  readonly gainsboro: string = 'stroke-color:gainsboro;';
   /** CSS 声明：`stroke-color:ghostwhite;`。 */
-  readonly ghostwhite = 'stroke-color:ghostwhite;';
+  readonly ghostwhite: string = 'stroke-color:ghostwhite;';
   /** CSS 声明：`stroke-color:gold;`。 */
-  readonly gold = 'stroke-color:gold;';
+  readonly gold: string = 'stroke-color:gold;';
   /** CSS 声明：`stroke-color:goldenrod;`。 */
-  readonly goldenrod = 'stroke-color:goldenrod;';
+  readonly goldenrod: string = 'stroke-color:goldenrod;';
   /** CSS 声明：`stroke-color:gray;`。 */
-  readonly gray = 'stroke-color:gray;';
+  readonly gray: string = 'stroke-color:gray;';
   /** CSS 声明：`stroke-color:green;`。 */
-  readonly green = 'stroke-color:green;';
+  readonly green: string = 'stroke-color:green;';
   /** CSS 声明：`stroke-color:greenyellow;`。 */
-  readonly greenyellow = 'stroke-color:greenyellow;';
+  readonly greenyellow: string = 'stroke-color:greenyellow;';
   /** CSS 声明：`stroke-color:grey;`。 */
-  readonly grey = 'stroke-color:grey;';
+  readonly grey: string = 'stroke-color:grey;';
   /** CSS 声明：`stroke-color:honeydew;`。 */
-  readonly honeydew = 'stroke-color:honeydew;';
+  readonly honeydew: string = 'stroke-color:honeydew;';
   /** CSS 声明：`stroke-color:hotpink;`。 */
-  readonly hotpink = 'stroke-color:hotpink;';
+  readonly hotpink: string = 'stroke-color:hotpink;';
   /** CSS 声明：`stroke-color:indianred;`。 */
-  readonly indianred = 'stroke-color:indianred;';
+  readonly indianred: string = 'stroke-color:indianred;';
   /** CSS 声明：`stroke-color:indigo;`。 */
-  readonly indigo = 'stroke-color:indigo;';
+  readonly indigo: string = 'stroke-color:indigo;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`stroke-color:inherit;`。
    */
-  readonly inherit = 'stroke-color:inherit;';
+  readonly inherit: string = 'stroke-color:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stroke-color:initial;`。
    */
-  readonly initial = 'stroke-color:initial;';
+  readonly initial: string = 'stroke-color:initial;';
   /** CSS 声明：`stroke-color:ivory;`。 */
-  readonly ivory = 'stroke-color:ivory;';
+  readonly ivory: string = 'stroke-color:ivory;';
   /** CSS 声明：`stroke-color:khaki;`。 */
-  readonly khaki = 'stroke-color:khaki;';
+  readonly khaki: string = 'stroke-color:khaki;';
   /** CSS 声明：`stroke-color:lavender;`。 */
-  readonly lavender = 'stroke-color:lavender;';
+  readonly lavender: string = 'stroke-color:lavender;';
   /** CSS 声明：`stroke-color:lavenderblush;`。 */
-  readonly lavenderblush = 'stroke-color:lavenderblush;';
+  readonly lavenderblush: string = 'stroke-color:lavenderblush;';
   /** CSS 声明：`stroke-color:lawngreen;`。 */
-  readonly lawngreen = 'stroke-color:lawngreen;';
+  readonly lawngreen: string = 'stroke-color:lawngreen;';
   /** CSS 声明：`stroke-color:lemonchiffon;`。 */
-  readonly lemonchiffon = 'stroke-color:lemonchiffon;';
+  readonly lemonchiffon: string = 'stroke-color:lemonchiffon;';
   /** CSS 声明：`stroke-color:lightblue;`。 */
-  readonly lightblue = 'stroke-color:lightblue;';
+  readonly lightblue: string = 'stroke-color:lightblue;';
   /** CSS 声明：`stroke-color:lightcoral;`。 */
-  readonly lightcoral = 'stroke-color:lightcoral;';
+  readonly lightcoral: string = 'stroke-color:lightcoral;';
   /** CSS 声明：`stroke-color:lightcyan;`。 */
-  readonly lightcyan = 'stroke-color:lightcyan;';
+  readonly lightcyan: string = 'stroke-color:lightcyan;';
   /** CSS 声明：`stroke-color:lightgoldenrodyellow;`。 */
-  readonly lightgoldenrodyellow = 'stroke-color:lightgoldenrodyellow;';
+  readonly lightgoldenrodyellow: string = 'stroke-color:lightgoldenrodyellow;';
   /** CSS 声明：`stroke-color:lightgray;`。 */
-  readonly lightgray = 'stroke-color:lightgray;';
+  readonly lightgray: string = 'stroke-color:lightgray;';
   /** CSS 声明：`stroke-color:lightgreen;`。 */
-  readonly lightgreen = 'stroke-color:lightgreen;';
+  readonly lightgreen: string = 'stroke-color:lightgreen;';
   /** CSS 声明：`stroke-color:lightgrey;`。 */
-  readonly lightgrey = 'stroke-color:lightgrey;';
+  readonly lightgrey: string = 'stroke-color:lightgrey;';
   /** CSS 声明：`stroke-color:lightpink;`。 */
-  readonly lightpink = 'stroke-color:lightpink;';
+  readonly lightpink: string = 'stroke-color:lightpink;';
   /** CSS 声明：`stroke-color:lightsalmon;`。 */
-  readonly lightsalmon = 'stroke-color:lightsalmon;';
+  readonly lightsalmon: string = 'stroke-color:lightsalmon;';
   /** CSS 声明：`stroke-color:lightseagreen;`。 */
-  readonly lightseagreen = 'stroke-color:lightseagreen;';
+  readonly lightseagreen: string = 'stroke-color:lightseagreen;';
   /** CSS 声明：`stroke-color:lightskyblue;`。 */
-  readonly lightskyblue = 'stroke-color:lightskyblue;';
+  readonly lightskyblue: string = 'stroke-color:lightskyblue;';
   /** CSS 声明：`stroke-color:lightslategray;`。 */
-  readonly lightslategray = 'stroke-color:lightslategray;';
+  readonly lightslategray: string = 'stroke-color:lightslategray;';
   /** CSS 声明：`stroke-color:lightslategrey;`。 */
-  readonly lightslategrey = 'stroke-color:lightslategrey;';
+  readonly lightslategrey: string = 'stroke-color:lightslategrey;';
   /** CSS 声明：`stroke-color:lightsteelblue;`。 */
-  readonly lightsteelblue = 'stroke-color:lightsteelblue;';
+  readonly lightsteelblue: string = 'stroke-color:lightsteelblue;';
   /** CSS 声明：`stroke-color:lightyellow;`。 */
-  readonly lightyellow = 'stroke-color:lightyellow;';
+  readonly lightyellow: string = 'stroke-color:lightyellow;';
   /** CSS 声明：`stroke-color:lime;`。 */
-  readonly lime = 'stroke-color:lime;';
+  readonly lime: string = 'stroke-color:lime;';
   /** CSS 声明：`stroke-color:limegreen;`。 */
-  readonly limegreen = 'stroke-color:limegreen;';
+  readonly limegreen: string = 'stroke-color:limegreen;';
   /** CSS 声明：`stroke-color:linen;`。 */
-  readonly linen = 'stroke-color:linen;';
+  readonly linen: string = 'stroke-color:linen;';
   /** CSS 声明：`stroke-color:magenta;`。 */
-  readonly magenta = 'stroke-color:magenta;';
+  readonly magenta: string = 'stroke-color:magenta;';
   /** CSS 声明：`stroke-color:maroon;`。 */
-  readonly maroon = 'stroke-color:maroon;';
+  readonly maroon: string = 'stroke-color:maroon;';
   /** CSS 声明：`stroke-color:mediumaquamarine;`。 */
-  readonly mediumaquamarine = 'stroke-color:mediumaquamarine;';
+  readonly mediumaquamarine: string = 'stroke-color:mediumaquamarine;';
   /** CSS 声明：`stroke-color:mediumblue;`。 */
-  readonly mediumblue = 'stroke-color:mediumblue;';
+  readonly mediumblue: string = 'stroke-color:mediumblue;';
   /** CSS 声明：`stroke-color:mediumorchid;`。 */
-  readonly mediumorchid = 'stroke-color:mediumorchid;';
+  readonly mediumorchid: string = 'stroke-color:mediumorchid;';
   /** CSS 声明：`stroke-color:mediumpurple;`。 */
-  readonly mediumpurple = 'stroke-color:mediumpurple;';
+  readonly mediumpurple: string = 'stroke-color:mediumpurple;';
   /** CSS 声明：`stroke-color:mediumseagreen;`。 */
-  readonly mediumseagreen = 'stroke-color:mediumseagreen;';
+  readonly mediumseagreen: string = 'stroke-color:mediumseagreen;';
   /** CSS 声明：`stroke-color:mediumslateblue;`。 */
-  readonly mediumslateblue = 'stroke-color:mediumslateblue;';
+  readonly mediumslateblue: string = 'stroke-color:mediumslateblue;';
   /** CSS 声明：`stroke-color:mediumspringgreen;`。 */
-  readonly mediumspringgreen = 'stroke-color:mediumspringgreen;';
+  readonly mediumspringgreen: string = 'stroke-color:mediumspringgreen;';
   /** CSS 声明：`stroke-color:mediumturquoise;`。 */
-  readonly mediumturquoise = 'stroke-color:mediumturquoise;';
+  readonly mediumturquoise: string = 'stroke-color:mediumturquoise;';
   /** CSS 声明：`stroke-color:mediumvioletred;`。 */
-  readonly mediumvioletred = 'stroke-color:mediumvioletred;';
+  readonly mediumvioletred: string = 'stroke-color:mediumvioletred;';
   /** CSS 声明：`stroke-color:midnightblue;`。 */
-  readonly midnightblue = 'stroke-color:midnightblue;';
+  readonly midnightblue: string = 'stroke-color:midnightblue;';
   /** CSS 声明：`stroke-color:mintcream;`。 */
-  readonly mintcream = 'stroke-color:mintcream;';
+  readonly mintcream: string = 'stroke-color:mintcream;';
   /** CSS 声明：`stroke-color:mistyrose;`。 */
-  readonly mistyrose = 'stroke-color:mistyrose;';
+  readonly mistyrose: string = 'stroke-color:mistyrose;';
   /** CSS 声明：`stroke-color:moccasin;`。 */
-  readonly moccasin = 'stroke-color:moccasin;';
+  readonly moccasin: string = 'stroke-color:moccasin;';
   /** CSS 声明：`stroke-color:navajowhite;`。 */
-  readonly navajowhite = 'stroke-color:navajowhite;';
+  readonly navajowhite: string = 'stroke-color:navajowhite;';
   /** CSS 声明：`stroke-color:navy;`。 */
-  readonly navy = 'stroke-color:navy;';
+  readonly navy: string = 'stroke-color:navy;';
   /** CSS 声明：`stroke-color:oldlace;`。 */
-  readonly oldlace = 'stroke-color:oldlace;';
+  readonly oldlace: string = 'stroke-color:oldlace;';
   /** CSS 声明：`stroke-color:olive;`。 */
-  readonly olive = 'stroke-color:olive;';
+  readonly olive: string = 'stroke-color:olive;';
   /** CSS 声明：`stroke-color:olivedrab;`。 */
-  readonly olivedrab = 'stroke-color:olivedrab;';
+  readonly olivedrab: string = 'stroke-color:olivedrab;';
   /** CSS 声明：`stroke-color:orange;`。 */
-  readonly orange = 'stroke-color:orange;';
+  readonly orange: string = 'stroke-color:orange;';
   /** CSS 声明：`stroke-color:orangered;`。 */
-  readonly orangered = 'stroke-color:orangered;';
+  readonly orangered: string = 'stroke-color:orangered;';
   /** CSS 声明：`stroke-color:orchid;`。 */
-  readonly orchid = 'stroke-color:orchid;';
+  readonly orchid: string = 'stroke-color:orchid;';
   /** CSS 声明：`stroke-color:palegoldenrod;`。 */
-  readonly palegoldenrod = 'stroke-color:palegoldenrod;';
+  readonly palegoldenrod: string = 'stroke-color:palegoldenrod;';
   /** CSS 声明：`stroke-color:palegreen;`。 */
-  readonly palegreen = 'stroke-color:palegreen;';
+  readonly palegreen: string = 'stroke-color:palegreen;';
   /** CSS 声明：`stroke-color:paleturquoise;`。 */
-  readonly paleturquoise = 'stroke-color:paleturquoise;';
+  readonly paleturquoise: string = 'stroke-color:paleturquoise;';
   /** CSS 声明：`stroke-color:palevioletred;`。 */
-  readonly palevioletred = 'stroke-color:palevioletred;';
+  readonly palevioletred: string = 'stroke-color:palevioletred;';
   /** CSS 声明：`stroke-color:papayawhip;`。 */
-  readonly papayawhip = 'stroke-color:papayawhip;';
+  readonly papayawhip: string = 'stroke-color:papayawhip;';
   /** CSS 声明：`stroke-color:peachpuff;`。 */
-  readonly peachpuff = 'stroke-color:peachpuff;';
+  readonly peachpuff: string = 'stroke-color:peachpuff;';
   /** CSS 声明：`stroke-color:peru;`。 */
-  readonly peru = 'stroke-color:peru;';
+  readonly peru: string = 'stroke-color:peru;';
   /** CSS 声明：`stroke-color:pink;`。 */
-  readonly pink = 'stroke-color:pink;';
+  readonly pink: string = 'stroke-color:pink;';
   /** CSS 声明：`stroke-color:plum;`。 */
-  readonly plum = 'stroke-color:plum;';
+  readonly plum: string = 'stroke-color:plum;';
   /** CSS 声明：`stroke-color:powderblue;`。 */
-  readonly powderblue = 'stroke-color:powderblue;';
+  readonly powderblue: string = 'stroke-color:powderblue;';
   /** CSS 声明：`stroke-color:purple;`。 */
-  readonly purple = 'stroke-color:purple;';
+  readonly purple: string = 'stroke-color:purple;';
   /** CSS 声明：`stroke-color:rebeccapurple;`。 */
-  readonly rebeccapurple = 'stroke-color:rebeccapurple;';
+  readonly rebeccapurple: string = 'stroke-color:rebeccapurple;';
   /** CSS 声明：`stroke-color:red;`。 */
-  readonly red = 'stroke-color:red;';
+  readonly red: string = 'stroke-color:red;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stroke-color:revert;`。
    */
-  readonly revert = 'stroke-color:revert;';
+  readonly revert: string = 'stroke-color:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stroke-color:revert-layer;`。
    */
-  readonly revertLayer = 'stroke-color:revert-layer;';
+  readonly revertLayer: string = 'stroke-color:revert-layer;';
   /** CSS 声明：`stroke-color:rosybrown;`。 */
-  readonly rosybrown = 'stroke-color:rosybrown;';
+  readonly rosybrown: string = 'stroke-color:rosybrown;';
   /** CSS 声明：`stroke-color:royalblue;`。 */
-  readonly royalblue = 'stroke-color:royalblue;';
+  readonly royalblue: string = 'stroke-color:royalblue;';
   /** CSS 声明：`stroke-color:saddlebrown;`。 */
-  readonly saddlebrown = 'stroke-color:saddlebrown;';
+  readonly saddlebrown: string = 'stroke-color:saddlebrown;';
   /** CSS 声明：`stroke-color:salmon;`。 */
-  readonly salmon = 'stroke-color:salmon;';
+  readonly salmon: string = 'stroke-color:salmon;';
   /** CSS 声明：`stroke-color:sandybrown;`。 */
-  readonly sandybrown = 'stroke-color:sandybrown;';
+  readonly sandybrown: string = 'stroke-color:sandybrown;';
   /** CSS 声明：`stroke-color:seagreen;`。 */
-  readonly seagreen = 'stroke-color:seagreen;';
+  readonly seagreen: string = 'stroke-color:seagreen;';
   /** CSS 声明：`stroke-color:seashell;`。 */
-  readonly seashell = 'stroke-color:seashell;';
+  readonly seashell: string = 'stroke-color:seashell;';
   /** CSS 声明：`stroke-color:sienna;`。 */
-  readonly sienna = 'stroke-color:sienna;';
+  readonly sienna: string = 'stroke-color:sienna;';
   /** CSS 声明：`stroke-color:silver;`。 */
-  readonly silver = 'stroke-color:silver;';
+  readonly silver: string = 'stroke-color:silver;';
   /** CSS 声明：`stroke-color:skyblue;`。 */
-  readonly skyblue = 'stroke-color:skyblue;';
+  readonly skyblue: string = 'stroke-color:skyblue;';
   /** CSS 声明：`stroke-color:slateblue;`。 */
-  readonly slateblue = 'stroke-color:slateblue;';
+  readonly slateblue: string = 'stroke-color:slateblue;';
   /** CSS 声明：`stroke-color:slategray;`。 */
-  readonly slategray = 'stroke-color:slategray;';
+  readonly slategray: string = 'stroke-color:slategray;';
   /** CSS 声明：`stroke-color:slategrey;`。 */
-  readonly slategrey = 'stroke-color:slategrey;';
+  readonly slategrey: string = 'stroke-color:slategrey;';
   /** CSS 声明：`stroke-color:snow;`。 */
-  readonly snow = 'stroke-color:snow;';
+  readonly snow: string = 'stroke-color:snow;';
   /** CSS 声明：`stroke-color:springgreen;`。 */
-  readonly springgreen = 'stroke-color:springgreen;';
+  readonly springgreen: string = 'stroke-color:springgreen;';
   /** CSS 声明：`stroke-color:steelblue;`。 */
-  readonly steelblue = 'stroke-color:steelblue;';
+  readonly steelblue: string = 'stroke-color:steelblue;';
   /** CSS 声明：`stroke-color:tan;`。 */
-  readonly tan = 'stroke-color:tan;';
+  readonly tan: string = 'stroke-color:tan;';
   /** CSS 声明：`stroke-color:teal;`。 */
-  readonly teal = 'stroke-color:teal;';
+  readonly teal: string = 'stroke-color:teal;';
   /** CSS 声明：`stroke-color:thistle;`。 */
-  readonly thistle = 'stroke-color:thistle;';
+  readonly thistle: string = 'stroke-color:thistle;';
   /** CSS 声明：`stroke-color:tomato;`。 */
-  readonly tomato = 'stroke-color:tomato;';
+  readonly tomato: string = 'stroke-color:tomato;';
   /**
    * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
    *
    * CSS 声明：`stroke-color:transparent;`。
    */
-  readonly transparent = 'stroke-color:transparent;';
+  readonly transparent: string = 'stroke-color:transparent;';
   /** CSS 声明：`stroke-color:turquoise;`。 */
-  readonly turquoise = 'stroke-color:turquoise;';
+  readonly turquoise: string = 'stroke-color:turquoise;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stroke-color:unset;`。
    */
-  readonly unset = 'stroke-color:unset;';
+  readonly unset: string = 'stroke-color:unset;';
   /** CSS 声明：`stroke-color:violet;`。 */
-  readonly violet = 'stroke-color:violet;';
+  readonly violet: string = 'stroke-color:violet;';
   /** CSS 声明：`stroke-color:wheat;`。 */
-  readonly wheat = 'stroke-color:wheat;';
+  readonly wheat: string = 'stroke-color:wheat;';
   /** CSS 声明：`stroke-color:white;`。 */
-  readonly white = 'stroke-color:white;';
+  readonly white: string = 'stroke-color:white;';
   /** CSS 声明：`stroke-color:whitesmoke;`。 */
-  readonly whitesmoke = 'stroke-color:whitesmoke;';
+  readonly whitesmoke: string = 'stroke-color:whitesmoke;';
   /** CSS 声明：`stroke-color:yellow;`。 */
-  readonly yellow = 'stroke-color:yellow;';
+  readonly yellow: string = 'stroke-color:yellow;';
   /** CSS 声明：`stroke-color:yellowgreen;`。 */
-  readonly yellowgreen = 'stroke-color:yellowgreen;';
+  readonly yellowgreen: string = 'stroke-color:yellowgreen;';
   /**
    * 创建 stroke-color 属性作者；普通使用通过 s.strokeColor 取得共享实例。
    * @example
@@ -18243,6 +23007,56 @@ export class StrokeColorCss extends CssProperty {
 }
 
 /**
+ * stroke-dasharray 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StrokeDasharrayKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stroke-dasharray:inherit;`。
+   */
+  readonly inherit: Property.StrokeDasharray | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stroke-dasharray:initial;`。
+   */
+  readonly initial: Property.StrokeDasharray | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-dasharray:none;`。 */
+  readonly none: Property.StrokeDasharray | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stroke-dasharray:revert;`。
+   */
+  readonly revert: Property.StrokeDasharray | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stroke-dasharray:revert-layer;`。
+   */
+  readonly revertLayer: Property.StrokeDasharray | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stroke-dasharray:unset;`。
+   */
+  readonly unset: Property.StrokeDasharray | CssString = 'unset';
+}
+
+/**
  * 设置 SVG 描边虚线中线段与空隙的长度序列。（stroke-dasharray）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -18254,33 +23068,33 @@ export class StrokeDasharrayCss extends LengthCssProperty {
    *
    * CSS 声明：`stroke-dasharray:inherit;`。
    */
-  readonly inherit = 'stroke-dasharray:inherit;';
+  readonly inherit: string = 'stroke-dasharray:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stroke-dasharray:initial;`。
    */
-  readonly initial = 'stroke-dasharray:initial;';
+  readonly initial: string = 'stroke-dasharray:initial;';
   /** CSS 声明：`stroke-dasharray:none;`。 */
-  readonly none = 'stroke-dasharray:none;';
+  readonly none: string = 'stroke-dasharray:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stroke-dasharray:revert;`。
    */
-  readonly revert = 'stroke-dasharray:revert;';
+  readonly revert: string = 'stroke-dasharray:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stroke-dasharray:revert-layer;`。
    */
-  readonly revertLayer = 'stroke-dasharray:revert-layer;';
+  readonly revertLayer: string = 'stroke-dasharray:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stroke-dasharray:unset;`。
    */
-  readonly unset = 'stroke-dasharray:unset;';
+  readonly unset: string = 'stroke-dasharray:unset;';
   /**
    * 创建 stroke-dasharray 属性作者；普通使用通过 s.strokeDasharray 取得共享实例。
    * @example
@@ -18360,6 +23174,52 @@ export class StrokeDasharrayCss extends LengthCssProperty {
 }
 
 /**
+ * stroke-dashoffset 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StrokeDashoffsetKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stroke-dashoffset:inherit;`。
+   */
+  readonly inherit: Property.StrokeDashoffset | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stroke-dashoffset:initial;`。
+   */
+  readonly initial: Property.StrokeDashoffset | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stroke-dashoffset:revert;`。
+   */
+  readonly revert: Property.StrokeDashoffset | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stroke-dashoffset:revert-layer;`。
+   */
+  readonly revertLayer: Property.StrokeDashoffset | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stroke-dashoffset:unset;`。
+   */
+  readonly unset: Property.StrokeDashoffset | CssString = 'unset';
+}
+
+/**
  * 设置 SVG 虚线描边相对于路径起点的偏移。（stroke-dashoffset）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -18371,31 +23231,31 @@ export class StrokeDashoffsetCss extends LengthCssProperty {
    *
    * CSS 声明：`stroke-dashoffset:inherit;`。
    */
-  readonly inherit = 'stroke-dashoffset:inherit;';
+  readonly inherit: string = 'stroke-dashoffset:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stroke-dashoffset:initial;`。
    */
-  readonly initial = 'stroke-dashoffset:initial;';
+  readonly initial: string = 'stroke-dashoffset:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stroke-dashoffset:revert;`。
    */
-  readonly revert = 'stroke-dashoffset:revert;';
+  readonly revert: string = 'stroke-dashoffset:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stroke-dashoffset:revert-layer;`。
    */
-  readonly revertLayer = 'stroke-dashoffset:revert-layer;';
+  readonly revertLayer: string = 'stroke-dashoffset:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stroke-dashoffset:unset;`。
    */
-  readonly unset = 'stroke-dashoffset:unset;';
+  readonly unset: string = 'stroke-dashoffset:unset;';
   /**
    * 创建 stroke-dashoffset 属性作者；普通使用通过 s.strokeDashoffset 取得共享实例。
    * @example
@@ -18487,6 +23347,76 @@ export class StrokeDashoffsetCss extends LengthCssProperty {
 }
 
 /**
+ * stroke-linecap 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StrokeLinecapKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 在端点处平直截断描边，不向外延伸。
+   *
+   * CSS 声明：`stroke-linecap:butt;`。
+   */
+  readonly butt: Property.StrokeLinecap | CssString = 'butt';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stroke-linecap:inherit;`。
+   */
+  readonly inherit: Property.StrokeLinecap | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stroke-linecap:initial;`。
+   */
+  readonly initial: Property.StrokeLinecap | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stroke-linecap:revert;`。
+   */
+  readonly revert: Property.StrokeLinecap | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stroke-linecap:revert-layer;`。
+   */
+  readonly revertLayer: Property.StrokeLinecap | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用半圆端帽，向端点外延伸半个描边宽度。
+   *
+   * CSS 声明：`stroke-linecap:round;`。
+   */
+  readonly round: Property.StrokeLinecap | CssString = 'round';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用方形端帽，向端点外延伸半个描边宽度。
+   *
+   * CSS 声明：`stroke-linecap:square;`。
+   */
+  readonly square: Property.StrokeLinecap | CssString = 'square';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stroke-linecap:unset;`。
+   */
+  readonly unset: Property.StrokeLinecap | CssString = 'unset';
+}
+
+/**
  * 设置开放 SVG 子路径端点的描边形状。（stroke-linecap）
  *
  * CSS 初始值：`butt`（不同于浏览器默认样式表）。
@@ -18498,49 +23428,49 @@ export class StrokeLinecapCss extends CssProperty {
    *
    * CSS 声明：`stroke-linecap:butt;`。
    */
-  readonly butt = 'stroke-linecap:butt;';
+  readonly butt: string = 'stroke-linecap:butt;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`stroke-linecap:inherit;`。
    */
-  readonly inherit = 'stroke-linecap:inherit;';
+  readonly inherit: string = 'stroke-linecap:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stroke-linecap:initial;`。
    */
-  readonly initial = 'stroke-linecap:initial;';
+  readonly initial: string = 'stroke-linecap:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stroke-linecap:revert;`。
    */
-  readonly revert = 'stroke-linecap:revert;';
+  readonly revert: string = 'stroke-linecap:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stroke-linecap:revert-layer;`。
    */
-  readonly revertLayer = 'stroke-linecap:revert-layer;';
+  readonly revertLayer: string = 'stroke-linecap:revert-layer;';
   /**
    * 使用半圆端帽，向端点外延伸半个描边宽度。
    *
    * CSS 声明：`stroke-linecap:round;`。
    */
-  readonly round = 'stroke-linecap:round;';
+  readonly round: string = 'stroke-linecap:round;';
   /**
    * 使用方形端帽，向端点外延伸半个描边宽度。
    *
    * CSS 声明：`stroke-linecap:square;`。
    */
-  readonly square = 'stroke-linecap:square;';
+  readonly square: string = 'stroke-linecap:square;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stroke-linecap:unset;`。
    */
-  readonly unset = 'stroke-linecap:unset;';
+  readonly unset: string = 'stroke-linecap:unset;';
   /**
    * 创建 stroke-linecap 属性作者；普通使用通过 s.strokeLinecap 取得共享实例。
    * @example
@@ -18564,6 +23494,72 @@ export class StrokeLinecapCss extends CssProperty {
 }
 
 /**
+ * stroke-linejoin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StrokeLinejoinKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-linejoin:arcs;`。 */
+  readonly arcs: Property.StrokeLinejoin | CssString = 'arcs';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-linejoin:bevel;`。 */
+  readonly bevel: Property.StrokeLinejoin | CssString = 'bevel';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stroke-linejoin:inherit;`。
+   */
+  readonly inherit: Property.StrokeLinejoin | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stroke-linejoin:initial;`。
+   */
+  readonly initial: Property.StrokeLinejoin | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-linejoin:miter;`。 */
+  readonly miter: Property.StrokeLinejoin | CssString = 'miter';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-linejoin:miter-clip;`。 */
+  readonly miterClip: Property.StrokeLinejoin | CssString = 'miter-clip';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stroke-linejoin:revert;`。
+   */
+  readonly revert: Property.StrokeLinejoin | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stroke-linejoin:revert-layer;`。
+   */
+  readonly revertLayer: Property.StrokeLinejoin | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`stroke-linejoin:round;`。 */
+  readonly round: Property.StrokeLinejoin | CssString = 'round';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stroke-linejoin:unset;`。
+   */
+  readonly unset: Property.StrokeLinejoin | CssString = 'unset';
+}
+
+/**
  * 设置 SVG 路径转角处描边的连接形状。（stroke-linejoin）
  *
  * CSS 初始值：`miter`（不同于浏览器默认样式表）。
@@ -18571,45 +23567,45 @@ export class StrokeLinecapCss extends CssProperty {
  */
 export class StrokeLinejoinCss extends CssProperty {
   /** CSS 声明：`stroke-linejoin:arcs;`。 */
-  readonly arcs = 'stroke-linejoin:arcs;';
+  readonly arcs: string = 'stroke-linejoin:arcs;';
   /** CSS 声明：`stroke-linejoin:bevel;`。 */
-  readonly bevel = 'stroke-linejoin:bevel;';
+  readonly bevel: string = 'stroke-linejoin:bevel;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`stroke-linejoin:inherit;`。
    */
-  readonly inherit = 'stroke-linejoin:inherit;';
+  readonly inherit: string = 'stroke-linejoin:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stroke-linejoin:initial;`。
    */
-  readonly initial = 'stroke-linejoin:initial;';
+  readonly initial: string = 'stroke-linejoin:initial;';
   /** CSS 声明：`stroke-linejoin:miter;`。 */
-  readonly miter = 'stroke-linejoin:miter;';
+  readonly miter: string = 'stroke-linejoin:miter;';
   /** CSS 声明：`stroke-linejoin:miter-clip;`。 */
-  readonly miterClip = 'stroke-linejoin:miter-clip;';
+  readonly miterClip: string = 'stroke-linejoin:miter-clip;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stroke-linejoin:revert;`。
    */
-  readonly revert = 'stroke-linejoin:revert;';
+  readonly revert: string = 'stroke-linejoin:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stroke-linejoin:revert-layer;`。
    */
-  readonly revertLayer = 'stroke-linejoin:revert-layer;';
+  readonly revertLayer: string = 'stroke-linejoin:revert-layer;';
   /** CSS 声明：`stroke-linejoin:round;`。 */
-  readonly round = 'stroke-linejoin:round;';
+  readonly round: string = 'stroke-linejoin:round;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stroke-linejoin:unset;`。
    */
-  readonly unset = 'stroke-linejoin:unset;';
+  readonly unset: string = 'stroke-linejoin:unset;';
   /**
    * 创建 stroke-linejoin 属性作者；普通使用通过 s.strokeLinejoin 取得共享实例。
    * @example
@@ -18633,6 +23629,52 @@ export class StrokeLinejoinCss extends CssProperty {
 }
 
 /**
+ * stroke-miterlimit 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StrokeMiterlimitKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stroke-miterlimit:inherit;`。
+   */
+  readonly inherit: Property.StrokeMiterlimit | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stroke-miterlimit:initial;`。
+   */
+  readonly initial: Property.StrokeMiterlimit | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stroke-miterlimit:revert;`。
+   */
+  readonly revert: Property.StrokeMiterlimit | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stroke-miterlimit:revert-layer;`。
+   */
+  readonly revertLayer: Property.StrokeMiterlimit | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stroke-miterlimit:unset;`。
+   */
+  readonly unset: Property.StrokeMiterlimit | CssString = 'unset';
+}
+
+/**
  * 限制尖角连接的延伸比例，超过阈值时改变连接形状。（stroke-miterlimit）
  *
  * CSS 初始值：`4`（不同于浏览器默认样式表）。
@@ -18644,31 +23686,31 @@ export class StrokeMiterlimitCss extends CssProperty {
    *
    * CSS 声明：`stroke-miterlimit:inherit;`。
    */
-  readonly inherit = 'stroke-miterlimit:inherit;';
+  readonly inherit: string = 'stroke-miterlimit:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stroke-miterlimit:initial;`。
    */
-  readonly initial = 'stroke-miterlimit:initial;';
+  readonly initial: string = 'stroke-miterlimit:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stroke-miterlimit:revert;`。
    */
-  readonly revert = 'stroke-miterlimit:revert;';
+  readonly revert: string = 'stroke-miterlimit:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stroke-miterlimit:revert-layer;`。
    */
-  readonly revertLayer = 'stroke-miterlimit:revert-layer;';
+  readonly revertLayer: string = 'stroke-miterlimit:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stroke-miterlimit:unset;`。
    */
-  readonly unset = 'stroke-miterlimit:unset;';
+  readonly unset: string = 'stroke-miterlimit:unset;';
   /**
    * 创建 stroke-miterlimit 属性作者；普通使用通过 s.strokeMiterlimit 取得共享实例。
    * @example
@@ -18748,6 +23790,52 @@ export class StrokeMiterlimitCss extends CssProperty {
 }
 
 /**
+ * stroke-opacity 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StrokeOpacityKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stroke-opacity:inherit;`。
+   */
+  readonly inherit: Property.StrokeOpacity | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stroke-opacity:initial;`。
+   */
+  readonly initial: Property.StrokeOpacity | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stroke-opacity:revert;`。
+   */
+  readonly revert: Property.StrokeOpacity | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stroke-opacity:revert-layer;`。
+   */
+  readonly revertLayer: Property.StrokeOpacity | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stroke-opacity:unset;`。
+   */
+  readonly unset: Property.StrokeOpacity | CssString = 'unset';
+}
+
+/**
  * 设置 SVG 描边的不透明度，不影响填充。（stroke-opacity）
  *
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
@@ -18759,31 +23847,31 @@ export class StrokeOpacityCss extends CssProperty {
    *
    * CSS 声明：`stroke-opacity:inherit;`。
    */
-  readonly inherit = 'stroke-opacity:inherit;';
+  readonly inherit: string = 'stroke-opacity:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stroke-opacity:initial;`。
    */
-  readonly initial = 'stroke-opacity:initial;';
+  readonly initial: string = 'stroke-opacity:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stroke-opacity:revert;`。
    */
-  readonly revert = 'stroke-opacity:revert;';
+  readonly revert: string = 'stroke-opacity:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stroke-opacity:revert-layer;`。
    */
-  readonly revertLayer = 'stroke-opacity:revert-layer;';
+  readonly revertLayer: string = 'stroke-opacity:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stroke-opacity:unset;`。
    */
-  readonly unset = 'stroke-opacity:unset;';
+  readonly unset: string = 'stroke-opacity:unset;';
   /**
    * 创建 stroke-opacity 属性作者；普通使用通过 s.strokeOpacity 取得共享实例。
    * @example
@@ -18863,6 +23951,52 @@ export class StrokeOpacityCss extends CssProperty {
 }
 
 /**
+ * stroke-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class StrokeWidthKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`stroke-width:inherit;`。
+   */
+  readonly inherit: Property.StrokeWidth | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`stroke-width:initial;`。
+   */
+  readonly initial: Property.StrokeWidth | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`stroke-width:revert;`。
+   */
+  readonly revert: Property.StrokeWidth | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`stroke-width:revert-layer;`。
+   */
+  readonly revertLayer: Property.StrokeWidth | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`stroke-width:unset;`。
+   */
+  readonly unset: Property.StrokeWidth | CssString = 'unset';
+}
+
+/**
  * 设置 SVG 描边宽度。（stroke-width）
  *
  * CSS 初始值：`1px`（不同于浏览器默认样式表）。
@@ -18874,31 +24008,31 @@ export class StrokeWidthCss extends LengthCssProperty {
    *
    * CSS 声明：`stroke-width:inherit;`。
    */
-  readonly inherit = 'stroke-width:inherit;';
+  readonly inherit: string = 'stroke-width:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`stroke-width:initial;`。
    */
-  readonly initial = 'stroke-width:initial;';
+  readonly initial: string = 'stroke-width:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`stroke-width:revert;`。
    */
-  readonly revert = 'stroke-width:revert;';
+  readonly revert: string = 'stroke-width:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`stroke-width:revert-layer;`。
    */
-  readonly revertLayer = 'stroke-width:revert-layer;';
+  readonly revertLayer: string = 'stroke-width:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`stroke-width:unset;`。
    */
-  readonly unset = 'stroke-width:unset;';
+  readonly unset: string = 'stroke-width:unset;';
   /**
    * 创建 stroke-width 属性作者；普通使用通过 s.strokeWidth 取得共享实例。
    * @example
@@ -18990,6 +24124,52 @@ export class StrokeWidthCss extends LengthCssProperty {
 }
 
 /**
+ * tab-size 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TabSizeKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`tab-size:inherit;`。
+   */
+  readonly inherit: Property.TabSize | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`tab-size:initial;`。
+   */
+  readonly initial: Property.TabSize | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`tab-size:revert;`。
+   */
+  readonly revert: Property.TabSize | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`tab-size:revert-layer;`。
+   */
+  readonly revertLayer: Property.TabSize | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`tab-size:unset;`。
+   */
+  readonly unset: Property.TabSize | CssString = 'unset';
+}
+
+/**
  * 设置保留制表符时每个制表位的宽度。（tab-size）
  *
  * CSS 初始值：`8`（不同于浏览器默认样式表）。
@@ -19001,31 +24181,31 @@ export class TabSizeCss extends LengthCssProperty {
    *
    * CSS 声明：`tab-size:inherit;`。
    */
-  readonly inherit = 'tab-size:inherit;';
+  readonly inherit: string = 'tab-size:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`tab-size:initial;`。
    */
-  readonly initial = 'tab-size:initial;';
+  readonly initial: string = 'tab-size:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`tab-size:revert;`。
    */
-  readonly revert = 'tab-size:revert;';
+  readonly revert: string = 'tab-size:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`tab-size:revert-layer;`。
    */
-  readonly revertLayer = 'tab-size:revert-layer;';
+  readonly revertLayer: string = 'tab-size:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`tab-size:unset;`。
    */
-  readonly unset = 'tab-size:unset;';
+  readonly unset: string = 'tab-size:unset;';
   /**
    * 创建 tab-size 属性作者；普通使用通过 s.tabSize 取得共享实例。
    * @example
@@ -19099,6 +24279,60 @@ export class TabSizeCss extends LengthCssProperty {
 }
 
 /**
+ * table-layout 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TableLayoutKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`table-layout:auto;`。 */
+  readonly auto: Property.TableLayout | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`table-layout:fixed;`。 */
+  readonly fixed: Property.TableLayout | CssString = 'fixed';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`table-layout:inherit;`。
+   */
+  readonly inherit: Property.TableLayout | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`table-layout:initial;`。
+   */
+  readonly initial: Property.TableLayout | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`table-layout:revert;`。
+   */
+  readonly revert: Property.TableLayout | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`table-layout:revert-layer;`。
+   */
+  readonly revertLayer: Property.TableLayout | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`table-layout:unset;`。
+   */
+  readonly unset: Property.TableLayout | CssString = 'unset';
+}
+
+/**
  * 设置表格列宽采用自动还是固定布局算法。（table-layout）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -19106,39 +24340,39 @@ export class TabSizeCss extends LengthCssProperty {
  */
 export class TableLayoutCss extends CssProperty {
   /** CSS 声明：`table-layout:auto;`。 */
-  readonly auto = 'table-layout:auto;';
+  readonly auto: string = 'table-layout:auto;';
   /** CSS 声明：`table-layout:fixed;`。 */
-  readonly fixed = 'table-layout:fixed;';
+  readonly fixed: string = 'table-layout:fixed;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`table-layout:inherit;`。
    */
-  readonly inherit = 'table-layout:inherit;';
+  readonly inherit: string = 'table-layout:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`table-layout:initial;`。
    */
-  readonly initial = 'table-layout:initial;';
+  readonly initial: string = 'table-layout:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`table-layout:revert;`。
    */
-  readonly revert = 'table-layout:revert;';
+  readonly revert: string = 'table-layout:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`table-layout:revert-layer;`。
    */
-  readonly revertLayer = 'table-layout:revert-layer;';
+  readonly revertLayer: string = 'table-layout:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`table-layout:unset;`。
    */
-  readonly unset = 'table-layout:unset;';
+  readonly unset: string = 'table-layout:unset;';
   /**
    * 创建 table-layout 属性作者；普通使用通过 s.tableLayout 取得共享实例。
    * @example
@@ -19162,6 +24396,108 @@ export class TableLayoutCss extends CssProperty {
 }
 
 /**
+ * text-align 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextAlignKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align:-khtml-center;`。 */
+  readonly KhtmlCenter: Property.TextAlign | CssString = '-khtml-center';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align:-khtml-left;`。 */
+  readonly KhtmlLeft: Property.TextAlign | CssString = '-khtml-left';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align:-khtml-right;`。 */
+  readonly KhtmlRight: Property.TextAlign | CssString = '-khtml-right';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 将行内内容在行盒中居中，不会让块盒自身居中。
+   *
+   * CSS 声明：`text-align:center;`。
+   */
+  readonly center: Property.TextAlign | CssString = 'center';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按当前书写方向的行内结束侧对齐。
+   *
+   * CSS 声明：`text-align:end;`。
+   */
+  readonly end: Property.TextAlign | CssString = 'end';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-align:inherit;`。
+   */
+  readonly inherit: Property.TextAlign | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-align:initial;`。
+   */
+  readonly initial: Property.TextAlign | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 调整行内间距使文字两端对齐；最后一行通常由 text-align-last 控制。
+   *
+   * CSS 声明：`text-align:justify;`。
+   */
+  readonly justify: Property.TextAlign | CssString = 'justify';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align:left;`。 */
+  readonly left: Property.TextAlign | CssString = 'left';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align:match-parent;`。 */
+  readonly matchParent: Property.TextAlign | CssString = 'match-parent';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-align:revert;`。
+   */
+  readonly revert: Property.TextAlign | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-align:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextAlign | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align:right;`。 */
+  readonly right: Property.TextAlign | CssString = 'right';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按当前书写方向的行内起始侧对齐。
+   *
+   * CSS 声明：`text-align:start;`。
+   */
+  readonly start: Property.TextAlign | CssString = 'start';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-align:unset;`。
+   */
+  readonly unset: Property.TextAlign | CssString = 'unset';
+}
+
+/**
  * 设置块容器中行内内容的水平或逻辑方向对齐。（text-align）
  *
  * 控制块容器中的行内内容，不是块盒自身的位置，也不是 Flex/Grid 项目的对齐。
@@ -19181,71 +24517,71 @@ export class TableLayoutCss extends CssProperty {
  */
 export class TextAlignCss extends CssProperty {
   /** CSS 声明：`text-align:-khtml-center;`。 */
-  readonly KhtmlCenter = 'text-align:-khtml-center;';
+  readonly KhtmlCenter: string = 'text-align:-khtml-center;';
   /** CSS 声明：`text-align:-khtml-left;`。 */
-  readonly KhtmlLeft = 'text-align:-khtml-left;';
+  readonly KhtmlLeft: string = 'text-align:-khtml-left;';
   /** CSS 声明：`text-align:-khtml-right;`。 */
-  readonly KhtmlRight = 'text-align:-khtml-right;';
+  readonly KhtmlRight: string = 'text-align:-khtml-right;';
   /**
    * 将行内内容在行盒中居中，不会让块盒自身居中。
    *
    * CSS 声明：`text-align:center;`。
    */
-  readonly center = 'text-align:center;';
+  readonly center: string = 'text-align:center;';
   /**
    * 按当前书写方向的行内结束侧对齐。
    *
    * CSS 声明：`text-align:end;`。
    */
-  readonly end = 'text-align:end;';
+  readonly end: string = 'text-align:end;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-align:inherit;`。
    */
-  readonly inherit = 'text-align:inherit;';
+  readonly inherit: string = 'text-align:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-align:initial;`。
    */
-  readonly initial = 'text-align:initial;';
+  readonly initial: string = 'text-align:initial;';
   /**
    * 调整行内间距使文字两端对齐；最后一行通常由 text-align-last 控制。
    *
    * CSS 声明：`text-align:justify;`。
    */
-  readonly justify = 'text-align:justify;';
+  readonly justify: string = 'text-align:justify;';
   /** CSS 声明：`text-align:left;`。 */
-  readonly left = 'text-align:left;';
+  readonly left: string = 'text-align:left;';
   /** CSS 声明：`text-align:match-parent;`。 */
-  readonly matchParent = 'text-align:match-parent;';
+  readonly matchParent: string = 'text-align:match-parent;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-align:revert;`。
    */
-  readonly revert = 'text-align:revert;';
+  readonly revert: string = 'text-align:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-align:revert-layer;`。
    */
-  readonly revertLayer = 'text-align:revert-layer;';
+  readonly revertLayer: string = 'text-align:revert-layer;';
   /** CSS 声明：`text-align:right;`。 */
-  readonly right = 'text-align:right;';
+  readonly right: string = 'text-align:right;';
   /**
    * 按当前书写方向的行内起始侧对齐。
    *
    * CSS 声明：`text-align:start;`。
    */
-  readonly start = 'text-align:start;';
+  readonly start: string = 'text-align:start;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-align:unset;`。
    */
-  readonly unset = 'text-align:unset;';
+  readonly unset: string = 'text-align:unset;';
   /**
    * 创建 text-align 属性作者；普通使用通过 s.textAlign 取得共享实例。
    * @example
@@ -19269,6 +24605,80 @@ export class TextAlignCss extends CssProperty {
 }
 
 /**
+ * text-align-last 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextAlignLastKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align-last:auto;`。 */
+  readonly auto: Property.TextAlignLast | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align-last:center;`。 */
+  readonly center: Property.TextAlignLast | CssString = 'center';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align-last:end;`。 */
+  readonly end: Property.TextAlignLast | CssString = 'end';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-align-last:inherit;`。
+   */
+  readonly inherit: Property.TextAlignLast | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-align-last:initial;`。
+   */
+  readonly initial: Property.TextAlignLast | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align-last:justify;`。 */
+  readonly justify: Property.TextAlignLast | CssString = 'justify';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align-last:left;`。 */
+  readonly left: Property.TextAlignLast | CssString = 'left';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-align-last:revert;`。
+   */
+  readonly revert: Property.TextAlignLast | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-align-last:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextAlignLast | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align-last:right;`。 */
+  readonly right: Property.TextAlignLast | CssString = 'right';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-align-last:start;`。 */
+  readonly start: Property.TextAlignLast | CssString = 'start';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-align-last:unset;`。
+   */
+  readonly unset: Property.TextAlignLast | CssString = 'unset';
+}
+
+/**
  * 设置段落最后一行或强制换行前一行的对齐方式。（text-align-last）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -19276,49 +24686,49 @@ export class TextAlignCss extends CssProperty {
  */
 export class TextAlignLastCss extends CssProperty {
   /** CSS 声明：`text-align-last:auto;`。 */
-  readonly auto = 'text-align-last:auto;';
+  readonly auto: string = 'text-align-last:auto;';
   /** CSS 声明：`text-align-last:center;`。 */
-  readonly center = 'text-align-last:center;';
+  readonly center: string = 'text-align-last:center;';
   /** CSS 声明：`text-align-last:end;`。 */
-  readonly end = 'text-align-last:end;';
+  readonly end: string = 'text-align-last:end;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-align-last:inherit;`。
    */
-  readonly inherit = 'text-align-last:inherit;';
+  readonly inherit: string = 'text-align-last:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-align-last:initial;`。
    */
-  readonly initial = 'text-align-last:initial;';
+  readonly initial: string = 'text-align-last:initial;';
   /** CSS 声明：`text-align-last:justify;`。 */
-  readonly justify = 'text-align-last:justify;';
+  readonly justify: string = 'text-align-last:justify;';
   /** CSS 声明：`text-align-last:left;`。 */
-  readonly left = 'text-align-last:left;';
+  readonly left: string = 'text-align-last:left;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-align-last:revert;`。
    */
-  readonly revert = 'text-align-last:revert;';
+  readonly revert: string = 'text-align-last:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-align-last:revert-layer;`。
    */
-  readonly revertLayer = 'text-align-last:revert-layer;';
+  readonly revertLayer: string = 'text-align-last:revert-layer;';
   /** CSS 声明：`text-align-last:right;`。 */
-  readonly right = 'text-align-last:right;';
+  readonly right: string = 'text-align-last:right;';
   /** CSS 声明：`text-align-last:start;`。 */
-  readonly start = 'text-align-last:start;';
+  readonly start: string = 'text-align-last:start;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-align-last:unset;`。
    */
-  readonly unset = 'text-align-last:unset;';
+  readonly unset: string = 'text-align-last:unset;';
   /**
    * 创建 text-align-last 属性作者；普通使用通过 s.textAlignLast 取得共享实例。
    * @example
@@ -19342,6 +24752,64 @@ export class TextAlignLastCss extends CssProperty {
 }
 
 /**
+ * text-anchor 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextAnchorKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-anchor:end;`。 */
+  readonly end: Property.TextAnchor | CssString = 'end';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-anchor:inherit;`。
+   */
+  readonly inherit: Property.TextAnchor | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-anchor:initial;`。
+   */
+  readonly initial: Property.TextAnchor | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-anchor:middle;`。 */
+  readonly middle: Property.TextAnchor | CssString = 'middle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-anchor:revert;`。
+   */
+  readonly revert: Property.TextAnchor | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-anchor:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextAnchor | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-anchor:start;`。 */
+  readonly start: Property.TextAnchor | CssString = 'start';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-anchor:unset;`。
+   */
+  readonly unset: Property.TextAnchor | CssString = 'unset';
+}
+
+/**
  * 设置 SVG 文本片段相对于定位点的锚定方式。（text-anchor）
  *
  * CSS 初始值：`start`（不同于浏览器默认样式表）。
@@ -19349,41 +24817,41 @@ export class TextAlignLastCss extends CssProperty {
  */
 export class TextAnchorCss extends CssProperty {
   /** CSS 声明：`text-anchor:end;`。 */
-  readonly end = 'text-anchor:end;';
+  readonly end: string = 'text-anchor:end;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-anchor:inherit;`。
    */
-  readonly inherit = 'text-anchor:inherit;';
+  readonly inherit: string = 'text-anchor:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-anchor:initial;`。
    */
-  readonly initial = 'text-anchor:initial;';
+  readonly initial: string = 'text-anchor:initial;';
   /** CSS 声明：`text-anchor:middle;`。 */
-  readonly middle = 'text-anchor:middle;';
+  readonly middle: string = 'text-anchor:middle;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-anchor:revert;`。
    */
-  readonly revert = 'text-anchor:revert;';
+  readonly revert: string = 'text-anchor:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-anchor:revert-layer;`。
    */
-  readonly revertLayer = 'text-anchor:revert-layer;';
+  readonly revertLayer: string = 'text-anchor:revert-layer;';
   /** CSS 声明：`text-anchor:start;`。 */
-  readonly start = 'text-anchor:start;';
+  readonly start: string = 'text-anchor:start;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-anchor:unset;`。
    */
-  readonly unset = 'text-anchor:unset;';
+  readonly unset: string = 'text-anchor:unset;';
   /**
    * 创建 text-anchor 属性作者；普通使用通过 s.textAnchor 取得共享实例。
    * @example
@@ -19407,6 +24875,84 @@ export class TextAnchorCss extends CssProperty {
 }
 
 /**
+ * text-autospace 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextAutospaceKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-autospace:auto;`。 */
+  readonly auto: Property.TextAutospace | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-autospace:ideograph-alpha;`。 */
+  readonly ideographAlpha: Property.TextAutospace | CssString = 'ideograph-alpha';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-autospace:ideograph-numeric;`。 */
+  readonly ideographNumeric: Property.TextAutospace | CssString = 'ideograph-numeric';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-autospace:inherit;`。
+   */
+  readonly inherit: Property.TextAutospace | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-autospace:initial;`。
+   */
+  readonly initial: Property.TextAutospace | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-autospace:insert;`。 */
+  readonly insert: Property.TextAutospace | CssString = 'insert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-autospace:no-autospace;`。 */
+  readonly noAutospace: Property.TextAutospace | CssString = 'no-autospace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-autospace:normal;`。 */
+  readonly normal: Property.TextAutospace | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-autospace:punctuation;`。 */
+  readonly punctuation: Property.TextAutospace | CssString = 'punctuation';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-autospace:replace;`。 */
+  readonly replace: Property.TextAutospace | CssString = 'replace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-autospace:revert;`。
+   */
+  readonly revert: Property.TextAutospace | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-autospace:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextAutospace | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-autospace:unset;`。
+   */
+  readonly unset: Property.TextAutospace | CssString = 'unset';
+}
+
+/**
  * 设置中西文、数字等不同文字系统之间的自动间距。（text-autospace）
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
@@ -19414,51 +24960,51 @@ export class TextAnchorCss extends CssProperty {
  */
 export class TextAutospaceCss extends CssProperty {
   /** CSS 声明：`text-autospace:auto;`。 */
-  readonly auto = 'text-autospace:auto;';
+  readonly auto: string = 'text-autospace:auto;';
   /** CSS 声明：`text-autospace:ideograph-alpha;`。 */
-  readonly ideographAlpha = 'text-autospace:ideograph-alpha;';
+  readonly ideographAlpha: string = 'text-autospace:ideograph-alpha;';
   /** CSS 声明：`text-autospace:ideograph-numeric;`。 */
-  readonly ideographNumeric = 'text-autospace:ideograph-numeric;';
+  readonly ideographNumeric: string = 'text-autospace:ideograph-numeric;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-autospace:inherit;`。
    */
-  readonly inherit = 'text-autospace:inherit;';
+  readonly inherit: string = 'text-autospace:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-autospace:initial;`。
    */
-  readonly initial = 'text-autospace:initial;';
+  readonly initial: string = 'text-autospace:initial;';
   /** CSS 声明：`text-autospace:insert;`。 */
-  readonly insert = 'text-autospace:insert;';
+  readonly insert: string = 'text-autospace:insert;';
   /** CSS 声明：`text-autospace:no-autospace;`。 */
-  readonly noAutospace = 'text-autospace:no-autospace;';
+  readonly noAutospace: string = 'text-autospace:no-autospace;';
   /** CSS 声明：`text-autospace:normal;`。 */
-  readonly normal = 'text-autospace:normal;';
+  readonly normal: string = 'text-autospace:normal;';
   /** CSS 声明：`text-autospace:punctuation;`。 */
-  readonly punctuation = 'text-autospace:punctuation;';
+  readonly punctuation: string = 'text-autospace:punctuation;';
   /** CSS 声明：`text-autospace:replace;`。 */
-  readonly replace = 'text-autospace:replace;';
+  readonly replace: string = 'text-autospace:replace;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-autospace:revert;`。
    */
-  readonly revert = 'text-autospace:revert;';
+  readonly revert: string = 'text-autospace:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-autospace:revert-layer;`。
    */
-  readonly revertLayer = 'text-autospace:revert-layer;';
+  readonly revertLayer: string = 'text-autospace:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-autospace:unset;`。
    */
-  readonly unset = 'text-autospace:unset;';
+  readonly unset: string = 'text-autospace:unset;';
   /**
    * 创建 text-autospace 属性作者；普通使用通过 s.textAutospace 取得共享实例。
    * @example
@@ -19482,6 +25028,96 @@ export class TextAutospaceCss extends CssProperty {
 }
 
 /**
+ * text-box 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextBoxKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:auto;`。 */
+  readonly auto: Property.TextBox | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:cap;`。 */
+  readonly cap: Property.TextBox | CssString = 'cap';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:ex;`。 */
+  readonly ex: Property.TextBox | CssString = 'ex';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:ideographic;`。 */
+  readonly ideographic: Property.TextBox | CssString = 'ideographic';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:ideographic-ink;`。 */
+  readonly ideographicInk: Property.TextBox | CssString = 'ideographic-ink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-box:inherit;`。
+   */
+  readonly inherit: Property.TextBox | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-box:initial;`。
+   */
+  readonly initial: Property.TextBox | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:none;`。 */
+  readonly none: Property.TextBox | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:normal;`。 */
+  readonly normal: Property.TextBox | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-box:revert;`。
+   */
+  readonly revert: Property.TextBox | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-box:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextBox | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:text;`。 */
+  readonly text: Property.TextBox | CssString = 'text';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:trim-both;`。 */
+  readonly trimBoth: Property.TextBox | CssString = 'trim-both';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:trim-end;`。 */
+  readonly trimEnd: Property.TextBox | CssString = 'trim-end';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box:trim-start;`。 */
+  readonly trimStart: Property.TextBox | CssString = 'trim-start';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-box:unset;`。
+   */
+  readonly unset: Property.TextBox | CssString = 'unset';
+}
+
+/**
  * 同时设置文本盒边缘参照及首尾空白裁减。（text-box）
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
@@ -19489,57 +25125,57 @@ export class TextAutospaceCss extends CssProperty {
  */
 export class TextBoxCss extends CssProperty {
   /** CSS 声明：`text-box:auto;`。 */
-  readonly auto = 'text-box:auto;';
+  readonly auto: string = 'text-box:auto;';
   /** CSS 声明：`text-box:cap;`。 */
-  readonly cap = 'text-box:cap;';
+  readonly cap: string = 'text-box:cap;';
   /** CSS 声明：`text-box:ex;`。 */
-  readonly ex = 'text-box:ex;';
+  readonly ex: string = 'text-box:ex;';
   /** CSS 声明：`text-box:ideographic;`。 */
-  readonly ideographic = 'text-box:ideographic;';
+  readonly ideographic: string = 'text-box:ideographic;';
   /** CSS 声明：`text-box:ideographic-ink;`。 */
-  readonly ideographicInk = 'text-box:ideographic-ink;';
+  readonly ideographicInk: string = 'text-box:ideographic-ink;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-box:inherit;`。
    */
-  readonly inherit = 'text-box:inherit;';
+  readonly inherit: string = 'text-box:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-box:initial;`。
    */
-  readonly initial = 'text-box:initial;';
+  readonly initial: string = 'text-box:initial;';
   /** CSS 声明：`text-box:none;`。 */
-  readonly none = 'text-box:none;';
+  readonly none: string = 'text-box:none;';
   /** CSS 声明：`text-box:normal;`。 */
-  readonly normal = 'text-box:normal;';
+  readonly normal: string = 'text-box:normal;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-box:revert;`。
    */
-  readonly revert = 'text-box:revert;';
+  readonly revert: string = 'text-box:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-box:revert-layer;`。
    */
-  readonly revertLayer = 'text-box:revert-layer;';
+  readonly revertLayer: string = 'text-box:revert-layer;';
   /** CSS 声明：`text-box:text;`。 */
-  readonly text = 'text-box:text;';
+  readonly text: string = 'text-box:text;';
   /** CSS 声明：`text-box:trim-both;`。 */
-  readonly trimBoth = 'text-box:trim-both;';
+  readonly trimBoth: string = 'text-box:trim-both;';
   /** CSS 声明：`text-box:trim-end;`。 */
-  readonly trimEnd = 'text-box:trim-end;';
+  readonly trimEnd: string = 'text-box:trim-end;';
   /** CSS 声明：`text-box:trim-start;`。 */
-  readonly trimStart = 'text-box:trim-start;';
+  readonly trimStart: string = 'text-box:trim-start;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-box:unset;`。
    */
-  readonly unset = 'text-box:unset;';
+  readonly unset: string = 'text-box:unset;';
   /**
    * 创建 text-box 属性作者；普通使用通过 s.textBox 取得共享实例。
    * @example
@@ -19563,6 +25199,76 @@ export class TextBoxCss extends CssProperty {
 }
 
 /**
+ * text-box-edge 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextBoxEdgeKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-edge:auto;`。 */
+  readonly auto: Property.TextBoxEdge | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-edge:cap;`。 */
+  readonly cap: Property.TextBoxEdge | CssString = 'cap';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-edge:ex;`。 */
+  readonly ex: Property.TextBoxEdge | CssString = 'ex';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-edge:ideographic;`。 */
+  readonly ideographic: Property.TextBoxEdge | CssString = 'ideographic';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-edge:ideographic-ink;`。 */
+  readonly ideographicInk: Property.TextBoxEdge | CssString = 'ideographic-ink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-box-edge:inherit;`。
+   */
+  readonly inherit: Property.TextBoxEdge | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-box-edge:initial;`。
+   */
+  readonly initial: Property.TextBoxEdge | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-box-edge:revert;`。
+   */
+  readonly revert: Property.TextBoxEdge | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-box-edge:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextBoxEdge | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-edge:text;`。 */
+  readonly text: Property.TextBoxEdge | CssString = 'text';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-box-edge:unset;`。
+   */
+  readonly unset: Property.TextBoxEdge | CssString = 'unset';
+}
+
+/**
  * 选择文本盒裁减或对齐使用的字体边缘度量。（text-box-edge）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -19570,47 +25276,47 @@ export class TextBoxCss extends CssProperty {
  */
 export class TextBoxEdgeCss extends CssProperty {
   /** CSS 声明：`text-box-edge:auto;`。 */
-  readonly auto = 'text-box-edge:auto;';
+  readonly auto: string = 'text-box-edge:auto;';
   /** CSS 声明：`text-box-edge:cap;`。 */
-  readonly cap = 'text-box-edge:cap;';
+  readonly cap: string = 'text-box-edge:cap;';
   /** CSS 声明：`text-box-edge:ex;`。 */
-  readonly ex = 'text-box-edge:ex;';
+  readonly ex: string = 'text-box-edge:ex;';
   /** CSS 声明：`text-box-edge:ideographic;`。 */
-  readonly ideographic = 'text-box-edge:ideographic;';
+  readonly ideographic: string = 'text-box-edge:ideographic;';
   /** CSS 声明：`text-box-edge:ideographic-ink;`。 */
-  readonly ideographicInk = 'text-box-edge:ideographic-ink;';
+  readonly ideographicInk: string = 'text-box-edge:ideographic-ink;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-box-edge:inherit;`。
    */
-  readonly inherit = 'text-box-edge:inherit;';
+  readonly inherit: string = 'text-box-edge:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-box-edge:initial;`。
    */
-  readonly initial = 'text-box-edge:initial;';
+  readonly initial: string = 'text-box-edge:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-box-edge:revert;`。
    */
-  readonly revert = 'text-box-edge:revert;';
+  readonly revert: string = 'text-box-edge:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-box-edge:revert-layer;`。
    */
-  readonly revertLayer = 'text-box-edge:revert-layer;';
+  readonly revertLayer: string = 'text-box-edge:revert-layer;';
   /** CSS 声明：`text-box-edge:text;`。 */
-  readonly text = 'text-box-edge:text;';
+  readonly text: string = 'text-box-edge:text;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-box-edge:unset;`。
    */
-  readonly unset = 'text-box-edge:unset;';
+  readonly unset: string = 'text-box-edge:unset;';
   /**
    * 创建 text-box-edge 属性作者；普通使用通过 s.textBoxEdge 取得共享实例。
    * @example
@@ -19634,6 +25340,68 @@ export class TextBoxEdgeCss extends CssProperty {
 }
 
 /**
+ * text-box-trim 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextBoxTrimKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-box-trim:inherit;`。
+   */
+  readonly inherit: Property.TextBoxTrim | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-box-trim:initial;`。
+   */
+  readonly initial: Property.TextBoxTrim | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-trim:none;`。 */
+  readonly none: Property.TextBoxTrim | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-box-trim:revert;`。
+   */
+  readonly revert: Property.TextBoxTrim | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-box-trim:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextBoxTrim | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-trim:trim-both;`。 */
+  readonly trimBoth: Property.TextBoxTrim | CssString = 'trim-both';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-trim:trim-end;`。 */
+  readonly trimEnd: Property.TextBoxTrim | CssString = 'trim-end';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-box-trim:trim-start;`。 */
+  readonly trimStart: Property.TextBoxTrim | CssString = 'trim-start';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-box-trim:unset;`。
+   */
+  readonly unset: Property.TextBoxTrim | CssString = 'unset';
+}
+
+/**
  * 裁减文本块开头或结尾的额外行高空白。（text-box-trim）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -19645,39 +25413,39 @@ export class TextBoxTrimCss extends CssProperty {
    *
    * CSS 声明：`text-box-trim:inherit;`。
    */
-  readonly inherit = 'text-box-trim:inherit;';
+  readonly inherit: string = 'text-box-trim:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-box-trim:initial;`。
    */
-  readonly initial = 'text-box-trim:initial;';
+  readonly initial: string = 'text-box-trim:initial;';
   /** CSS 声明：`text-box-trim:none;`。 */
-  readonly none = 'text-box-trim:none;';
+  readonly none: string = 'text-box-trim:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-box-trim:revert;`。
    */
-  readonly revert = 'text-box-trim:revert;';
+  readonly revert: string = 'text-box-trim:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-box-trim:revert-layer;`。
    */
-  readonly revertLayer = 'text-box-trim:revert-layer;';
+  readonly revertLayer: string = 'text-box-trim:revert-layer;';
   /** CSS 声明：`text-box-trim:trim-both;`。 */
-  readonly trimBoth = 'text-box-trim:trim-both;';
+  readonly trimBoth: string = 'text-box-trim:trim-both;';
   /** CSS 声明：`text-box-trim:trim-end;`。 */
-  readonly trimEnd = 'text-box-trim:trim-end;';
+  readonly trimEnd: string = 'text-box-trim:trim-end;';
   /** CSS 声明：`text-box-trim:trim-start;`。 */
-  readonly trimStart = 'text-box-trim:trim-start;';
+  readonly trimStart: string = 'text-box-trim:trim-start;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-box-trim:unset;`。
    */
-  readonly unset = 'text-box-trim:unset;';
+  readonly unset: string = 'text-box-trim:unset;';
   /**
    * 创建 text-box-trim 属性作者；普通使用通过 s.textBoxTrim 取得共享实例。
    * @example
@@ -19701,6 +25469,64 @@ export class TextBoxTrimCss extends CssProperty {
 }
 
 /**
+ * text-combine-upright 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextCombineUprightKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-combine-upright:all;`。 */
+  readonly all: Property.TextCombineUpright | CssString = 'all';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-combine-upright:digits;`。 */
+  readonly digits: Property.TextCombineUpright | CssString = 'digits';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-combine-upright:inherit;`。
+   */
+  readonly inherit: Property.TextCombineUpright | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-combine-upright:initial;`。
+   */
+  readonly initial: Property.TextCombineUpright | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-combine-upright:none;`。 */
+  readonly none: Property.TextCombineUpright | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-combine-upright:revert;`。
+   */
+  readonly revert: Property.TextCombineUpright | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-combine-upright:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextCombineUpright | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-combine-upright:unset;`。
+   */
+  readonly unset: Property.TextCombineUpright | CssString = 'unset';
+}
+
+/**
  * 设置竖排文字中多个字符是否合成为一个横排字形单元。（text-combine-upright）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -19708,41 +25534,41 @@ export class TextBoxTrimCss extends CssProperty {
  */
 export class TextCombineUprightCss extends CssProperty {
   /** CSS 声明：`text-combine-upright:all;`。 */
-  readonly all = 'text-combine-upright:all;';
+  readonly all: string = 'text-combine-upright:all;';
   /** CSS 声明：`text-combine-upright:digits;`。 */
-  readonly digits = 'text-combine-upright:digits;';
+  readonly digits: string = 'text-combine-upright:digits;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-combine-upright:inherit;`。
    */
-  readonly inherit = 'text-combine-upright:inherit;';
+  readonly inherit: string = 'text-combine-upright:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-combine-upright:initial;`。
    */
-  readonly initial = 'text-combine-upright:initial;';
+  readonly initial: string = 'text-combine-upright:initial;';
   /** CSS 声明：`text-combine-upright:none;`。 */
-  readonly none = 'text-combine-upright:none;';
+  readonly none: string = 'text-combine-upright:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-combine-upright:revert;`。
    */
-  readonly revert = 'text-combine-upright:revert;';
+  readonly revert: string = 'text-combine-upright:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-combine-upright:revert-layer;`。
    */
-  readonly revertLayer = 'text-combine-upright:revert-layer;';
+  readonly revertLayer: string = 'text-combine-upright:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-combine-upright:unset;`。
    */
-  readonly unset = 'text-combine-upright:unset;';
+  readonly unset: string = 'text-combine-upright:unset;';
   /**
    * 创建 text-combine-upright 属性作者；普通使用通过 s.textCombineUpright 取得共享实例。
    * @example
@@ -19766,460 +25592,1338 @@ export class TextCombineUprightCss extends CssProperty {
 }
 
 /**
+ * text-decoration 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextDecorationKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:AccentColor;`。 */
+  readonly AccentColor: Property.TextDecoration | CssString = 'AccentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:AccentColorText;`。 */
+  readonly AccentColorText: Property.TextDecoration | CssString = 'AccentColorText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ActiveBorder;`。 */
+  readonly ActiveBorder: Property.TextDecoration | CssString = 'ActiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ActiveCaption;`。 */
+  readonly ActiveCaption: Property.TextDecoration | CssString = 'ActiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ActiveText;`。 */
+  readonly ActiveText: Property.TextDecoration | CssString = 'ActiveText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:AppWorkspace;`。 */
+  readonly AppWorkspace: Property.TextDecoration | CssString = 'AppWorkspace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:Background;`。 */
+  readonly Background: Property.TextDecoration | CssString = 'Background';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ButtonBorder;`。 */
+  readonly ButtonBorder: Property.TextDecoration | CssString = 'ButtonBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ButtonFace;`。 */
+  readonly ButtonFace: Property.TextDecoration | CssString = 'ButtonFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ButtonHighlight;`。 */
+  readonly ButtonHighlight: Property.TextDecoration | CssString = 'ButtonHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ButtonShadow;`。 */
+  readonly ButtonShadow: Property.TextDecoration | CssString = 'ButtonShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ButtonText;`。 */
+  readonly ButtonText: Property.TextDecoration | CssString = 'ButtonText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:Canvas;`。 */
+  readonly Canvas: Property.TextDecoration | CssString = 'Canvas';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:CanvasText;`。 */
+  readonly CanvasText: Property.TextDecoration | CssString = 'CanvasText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:CaptionText;`。 */
+  readonly CaptionText: Property.TextDecoration | CssString = 'CaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:Field;`。 */
+  readonly Field: Property.TextDecoration | CssString = 'Field';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:FieldText;`。 */
+  readonly FieldText: Property.TextDecoration | CssString = 'FieldText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:GrayText;`。 */
+  readonly GrayText: Property.TextDecoration | CssString = 'GrayText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:Highlight;`。 */
+  readonly Highlight: Property.TextDecoration | CssString = 'Highlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:HighlightText;`。 */
+  readonly HighlightText: Property.TextDecoration | CssString = 'HighlightText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:InactiveBorder;`。 */
+  readonly InactiveBorder: Property.TextDecoration | CssString = 'InactiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:InactiveCaption;`。 */
+  readonly InactiveCaption: Property.TextDecoration | CssString = 'InactiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:InactiveCaptionText;`。 */
+  readonly InactiveCaptionText: Property.TextDecoration | CssString = 'InactiveCaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:InfoBackground;`。 */
+  readonly InfoBackground: Property.TextDecoration | CssString = 'InfoBackground';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:InfoText;`。 */
+  readonly InfoText: Property.TextDecoration | CssString = 'InfoText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:LinkText;`。 */
+  readonly LinkText: Property.TextDecoration | CssString = 'LinkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:Mark;`。 */
+  readonly Mark: Property.TextDecoration | CssString = 'Mark';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:MarkText;`。 */
+  readonly MarkText: Property.TextDecoration | CssString = 'MarkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:Menu;`。 */
+  readonly Menu: Property.TextDecoration | CssString = 'Menu';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:MenuText;`。 */
+  readonly MenuText: Property.TextDecoration | CssString = 'MenuText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:Scrollbar;`。 */
+  readonly Scrollbar: Property.TextDecoration | CssString = 'Scrollbar';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:SelectedItem;`。 */
+  readonly SelectedItem: Property.TextDecoration | CssString = 'SelectedItem';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:SelectedItemText;`。 */
+  readonly SelectedItemText: Property.TextDecoration | CssString = 'SelectedItemText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ThreeDDarkShadow;`。 */
+  readonly ThreeDDarkShadow: Property.TextDecoration | CssString = 'ThreeDDarkShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ThreeDFace;`。 */
+  readonly ThreeDFace: Property.TextDecoration | CssString = 'ThreeDFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ThreeDHighlight;`。 */
+  readonly ThreeDHighlight: Property.TextDecoration | CssString = 'ThreeDHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ThreeDLightShadow;`。 */
+  readonly ThreeDLightShadow: Property.TextDecoration | CssString = 'ThreeDLightShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ThreeDShadow;`。 */
+  readonly ThreeDShadow: Property.TextDecoration | CssString = 'ThreeDShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:VisitedText;`。 */
+  readonly VisitedText: Property.TextDecoration | CssString = 'VisitedText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:Window;`。 */
+  readonly Window: Property.TextDecoration | CssString = 'Window';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:WindowFrame;`。 */
+  readonly WindowFrame: Property.TextDecoration | CssString = 'WindowFrame';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:WindowText;`。 */
+  readonly WindowText: Property.TextDecoration | CssString = 'WindowText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:aliceblue;`。 */
+  readonly aliceblue: Property.TextDecoration | CssString = 'aliceblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:antiquewhite;`。 */
+  readonly antiquewhite: Property.TextDecoration | CssString = 'antiquewhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:aqua;`。 */
+  readonly aqua: Property.TextDecoration | CssString = 'aqua';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:aquamarine;`。 */
+  readonly aquamarine: Property.TextDecoration | CssString = 'aquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:auto;`。 */
+  readonly auto: Property.TextDecoration | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:azure;`。 */
+  readonly azure: Property.TextDecoration | CssString = 'azure';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:beige;`。 */
+  readonly beige: Property.TextDecoration | CssString = 'beige';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:bisque;`。 */
+  readonly bisque: Property.TextDecoration | CssString = 'bisque';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:black;`。 */
+  readonly black: Property.TextDecoration | CssString = 'black';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:blanchedalmond;`。 */
+  readonly blanchedalmond: Property.TextDecoration | CssString = 'blanchedalmond';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:blink;`。 */
+  readonly blink: Property.TextDecoration | CssString = 'blink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:blue;`。 */
+  readonly blue: Property.TextDecoration | CssString = 'blue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:blueviolet;`。 */
+  readonly blueviolet: Property.TextDecoration | CssString = 'blueviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:brown;`。 */
+  readonly brown: Property.TextDecoration | CssString = 'brown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:burlywood;`。 */
+  readonly burlywood: Property.TextDecoration | CssString = 'burlywood';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:cadetblue;`。 */
+  readonly cadetblue: Property.TextDecoration | CssString = 'cadetblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:chartreuse;`。 */
+  readonly chartreuse: Property.TextDecoration | CssString = 'chartreuse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:chocolate;`。 */
+  readonly chocolate: Property.TextDecoration | CssString = 'chocolate';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:coral;`。 */
+  readonly coral: Property.TextDecoration | CssString = 'coral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:cornflowerblue;`。 */
+  readonly cornflowerblue: Property.TextDecoration | CssString = 'cornflowerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:cornsilk;`。 */
+  readonly cornsilk: Property.TextDecoration | CssString = 'cornsilk';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:crimson;`。 */
+  readonly crimson: Property.TextDecoration | CssString = 'crimson';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
+   *
+   * CSS 声明：`text-decoration:currentColor;`。
+   */
+  readonly currentColor: Property.TextDecoration | CssString = 'currentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:cyan;`。 */
+  readonly cyan: Property.TextDecoration | CssString = 'cyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkblue;`。 */
+  readonly darkblue: Property.TextDecoration | CssString = 'darkblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkcyan;`。 */
+  readonly darkcyan: Property.TextDecoration | CssString = 'darkcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkgoldenrod;`。 */
+  readonly darkgoldenrod: Property.TextDecoration | CssString = 'darkgoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkgray;`。 */
+  readonly darkgray: Property.TextDecoration | CssString = 'darkgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkgreen;`。 */
+  readonly darkgreen: Property.TextDecoration | CssString = 'darkgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkgrey;`。 */
+  readonly darkgrey: Property.TextDecoration | CssString = 'darkgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkkhaki;`。 */
+  readonly darkkhaki: Property.TextDecoration | CssString = 'darkkhaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkmagenta;`。 */
+  readonly darkmagenta: Property.TextDecoration | CssString = 'darkmagenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkolivegreen;`。 */
+  readonly darkolivegreen: Property.TextDecoration | CssString = 'darkolivegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkorange;`。 */
+  readonly darkorange: Property.TextDecoration | CssString = 'darkorange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkorchid;`。 */
+  readonly darkorchid: Property.TextDecoration | CssString = 'darkorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkred;`。 */
+  readonly darkred: Property.TextDecoration | CssString = 'darkred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darksalmon;`。 */
+  readonly darksalmon: Property.TextDecoration | CssString = 'darksalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkseagreen;`。 */
+  readonly darkseagreen: Property.TextDecoration | CssString = 'darkseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkslateblue;`。 */
+  readonly darkslateblue: Property.TextDecoration | CssString = 'darkslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkslategray;`。 */
+  readonly darkslategray: Property.TextDecoration | CssString = 'darkslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkslategrey;`。 */
+  readonly darkslategrey: Property.TextDecoration | CssString = 'darkslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkturquoise;`。 */
+  readonly darkturquoise: Property.TextDecoration | CssString = 'darkturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:darkviolet;`。 */
+  readonly darkviolet: Property.TextDecoration | CssString = 'darkviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:dashed;`。 */
+  readonly dashed: Property.TextDecoration | CssString = 'dashed';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:deeppink;`。 */
+  readonly deeppink: Property.TextDecoration | CssString = 'deeppink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:deepskyblue;`。 */
+  readonly deepskyblue: Property.TextDecoration | CssString = 'deepskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:dimgray;`。 */
+  readonly dimgray: Property.TextDecoration | CssString = 'dimgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:dimgrey;`。 */
+  readonly dimgrey: Property.TextDecoration | CssString = 'dimgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:dodgerblue;`。 */
+  readonly dodgerblue: Property.TextDecoration | CssString = 'dodgerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:dotted;`。 */
+  readonly dotted: Property.TextDecoration | CssString = 'dotted';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:double;`。 */
+  readonly double: Property.TextDecoration | CssString = 'double';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:firebrick;`。 */
+  readonly firebrick: Property.TextDecoration | CssString = 'firebrick';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:floralwhite;`。 */
+  readonly floralwhite: Property.TextDecoration | CssString = 'floralwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:forestgreen;`。 */
+  readonly forestgreen: Property.TextDecoration | CssString = 'forestgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:from-font;`。 */
+  readonly fromFont: Property.TextDecoration | CssString = 'from-font';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:fuchsia;`。 */
+  readonly fuchsia: Property.TextDecoration | CssString = 'fuchsia';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:gainsboro;`。 */
+  readonly gainsboro: Property.TextDecoration | CssString = 'gainsboro';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ghostwhite;`。 */
+  readonly ghostwhite: Property.TextDecoration | CssString = 'ghostwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:gold;`。 */
+  readonly gold: Property.TextDecoration | CssString = 'gold';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:goldenrod;`。 */
+  readonly goldenrod: Property.TextDecoration | CssString = 'goldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:grammar-error;`。 */
+  readonly grammarError: Property.TextDecoration | CssString = 'grammar-error';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:gray;`。 */
+  readonly gray: Property.TextDecoration | CssString = 'gray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:green;`。 */
+  readonly green: Property.TextDecoration | CssString = 'green';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:greenyellow;`。 */
+  readonly greenyellow: Property.TextDecoration | CssString = 'greenyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:grey;`。 */
+  readonly grey: Property.TextDecoration | CssString = 'grey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:honeydew;`。 */
+  readonly honeydew: Property.TextDecoration | CssString = 'honeydew';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:hotpink;`。 */
+  readonly hotpink: Property.TextDecoration | CssString = 'hotpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:indianred;`。 */
+  readonly indianred: Property.TextDecoration | CssString = 'indianred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:indigo;`。 */
+  readonly indigo: Property.TextDecoration | CssString = 'indigo';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-decoration:inherit;`。
+   */
+  readonly inherit: Property.TextDecoration | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-decoration:initial;`。
+   */
+  readonly initial: Property.TextDecoration | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:ivory;`。 */
+  readonly ivory: Property.TextDecoration | CssString = 'ivory';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:khaki;`。 */
+  readonly khaki: Property.TextDecoration | CssString = 'khaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lavender;`。 */
+  readonly lavender: Property.TextDecoration | CssString = 'lavender';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lavenderblush;`。 */
+  readonly lavenderblush: Property.TextDecoration | CssString = 'lavenderblush';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lawngreen;`。 */
+  readonly lawngreen: Property.TextDecoration | CssString = 'lawngreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lemonchiffon;`。 */
+  readonly lemonchiffon: Property.TextDecoration | CssString = 'lemonchiffon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightblue;`。 */
+  readonly lightblue: Property.TextDecoration | CssString = 'lightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightcoral;`。 */
+  readonly lightcoral: Property.TextDecoration | CssString = 'lightcoral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightcyan;`。 */
+  readonly lightcyan: Property.TextDecoration | CssString = 'lightcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightgoldenrodyellow;`。 */
+  readonly lightgoldenrodyellow: Property.TextDecoration | CssString = 'lightgoldenrodyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightgray;`。 */
+  readonly lightgray: Property.TextDecoration | CssString = 'lightgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightgreen;`。 */
+  readonly lightgreen: Property.TextDecoration | CssString = 'lightgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightgrey;`。 */
+  readonly lightgrey: Property.TextDecoration | CssString = 'lightgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightpink;`。 */
+  readonly lightpink: Property.TextDecoration | CssString = 'lightpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightsalmon;`。 */
+  readonly lightsalmon: Property.TextDecoration | CssString = 'lightsalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightseagreen;`。 */
+  readonly lightseagreen: Property.TextDecoration | CssString = 'lightseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightskyblue;`。 */
+  readonly lightskyblue: Property.TextDecoration | CssString = 'lightskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightslategray;`。 */
+  readonly lightslategray: Property.TextDecoration | CssString = 'lightslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightslategrey;`。 */
+  readonly lightslategrey: Property.TextDecoration | CssString = 'lightslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightsteelblue;`。 */
+  readonly lightsteelblue: Property.TextDecoration | CssString = 'lightsteelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lightyellow;`。 */
+  readonly lightyellow: Property.TextDecoration | CssString = 'lightyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:lime;`。 */
+  readonly lime: Property.TextDecoration | CssString = 'lime';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:limegreen;`。 */
+  readonly limegreen: Property.TextDecoration | CssString = 'limegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:line-through;`。 */
+  readonly lineThrough: Property.TextDecoration | CssString = 'line-through';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:linen;`。 */
+  readonly linen: Property.TextDecoration | CssString = 'linen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:magenta;`。 */
+  readonly magenta: Property.TextDecoration | CssString = 'magenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:maroon;`。 */
+  readonly maroon: Property.TextDecoration | CssString = 'maroon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mediumaquamarine;`。 */
+  readonly mediumaquamarine: Property.TextDecoration | CssString = 'mediumaquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mediumblue;`。 */
+  readonly mediumblue: Property.TextDecoration | CssString = 'mediumblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mediumorchid;`。 */
+  readonly mediumorchid: Property.TextDecoration | CssString = 'mediumorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mediumpurple;`。 */
+  readonly mediumpurple: Property.TextDecoration | CssString = 'mediumpurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mediumseagreen;`。 */
+  readonly mediumseagreen: Property.TextDecoration | CssString = 'mediumseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mediumslateblue;`。 */
+  readonly mediumslateblue: Property.TextDecoration | CssString = 'mediumslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mediumspringgreen;`。 */
+  readonly mediumspringgreen: Property.TextDecoration | CssString = 'mediumspringgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mediumturquoise;`。 */
+  readonly mediumturquoise: Property.TextDecoration | CssString = 'mediumturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mediumvioletred;`。 */
+  readonly mediumvioletred: Property.TextDecoration | CssString = 'mediumvioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:midnightblue;`。 */
+  readonly midnightblue: Property.TextDecoration | CssString = 'midnightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mintcream;`。 */
+  readonly mintcream: Property.TextDecoration | CssString = 'mintcream';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:mistyrose;`。 */
+  readonly mistyrose: Property.TextDecoration | CssString = 'mistyrose';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:moccasin;`。 */
+  readonly moccasin: Property.TextDecoration | CssString = 'moccasin';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:navajowhite;`。 */
+  readonly navajowhite: Property.TextDecoration | CssString = 'navajowhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:navy;`。 */
+  readonly navy: Property.TextDecoration | CssString = 'navy';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:none;`。 */
+  readonly none: Property.TextDecoration | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:oldlace;`。 */
+  readonly oldlace: Property.TextDecoration | CssString = 'oldlace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:olive;`。 */
+  readonly olive: Property.TextDecoration | CssString = 'olive';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:olivedrab;`。 */
+  readonly olivedrab: Property.TextDecoration | CssString = 'olivedrab';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:orange;`。 */
+  readonly orange: Property.TextDecoration | CssString = 'orange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:orangered;`。 */
+  readonly orangered: Property.TextDecoration | CssString = 'orangered';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:orchid;`。 */
+  readonly orchid: Property.TextDecoration | CssString = 'orchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:overline;`。 */
+  readonly overline: Property.TextDecoration | CssString = 'overline';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:palegoldenrod;`。 */
+  readonly palegoldenrod: Property.TextDecoration | CssString = 'palegoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:palegreen;`。 */
+  readonly palegreen: Property.TextDecoration | CssString = 'palegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:paleturquoise;`。 */
+  readonly paleturquoise: Property.TextDecoration | CssString = 'paleturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:palevioletred;`。 */
+  readonly palevioletred: Property.TextDecoration | CssString = 'palevioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:papayawhip;`。 */
+  readonly papayawhip: Property.TextDecoration | CssString = 'papayawhip';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:peachpuff;`。 */
+  readonly peachpuff: Property.TextDecoration | CssString = 'peachpuff';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:peru;`。 */
+  readonly peru: Property.TextDecoration | CssString = 'peru';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:pink;`。 */
+  readonly pink: Property.TextDecoration | CssString = 'pink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:plum;`。 */
+  readonly plum: Property.TextDecoration | CssString = 'plum';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:powderblue;`。 */
+  readonly powderblue: Property.TextDecoration | CssString = 'powderblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:purple;`。 */
+  readonly purple: Property.TextDecoration | CssString = 'purple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:rebeccapurple;`。 */
+  readonly rebeccapurple: Property.TextDecoration | CssString = 'rebeccapurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:red;`。 */
+  readonly red: Property.TextDecoration | CssString = 'red';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-decoration:revert;`。
+   */
+  readonly revert: Property.TextDecoration | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-decoration:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextDecoration | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:rosybrown;`。 */
+  readonly rosybrown: Property.TextDecoration | CssString = 'rosybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:royalblue;`。 */
+  readonly royalblue: Property.TextDecoration | CssString = 'royalblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:saddlebrown;`。 */
+  readonly saddlebrown: Property.TextDecoration | CssString = 'saddlebrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:salmon;`。 */
+  readonly salmon: Property.TextDecoration | CssString = 'salmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:sandybrown;`。 */
+  readonly sandybrown: Property.TextDecoration | CssString = 'sandybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:seagreen;`。 */
+  readonly seagreen: Property.TextDecoration | CssString = 'seagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:seashell;`。 */
+  readonly seashell: Property.TextDecoration | CssString = 'seashell';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:sienna;`。 */
+  readonly sienna: Property.TextDecoration | CssString = 'sienna';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:silver;`。 */
+  readonly silver: Property.TextDecoration | CssString = 'silver';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:skyblue;`。 */
+  readonly skyblue: Property.TextDecoration | CssString = 'skyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:slateblue;`。 */
+  readonly slateblue: Property.TextDecoration | CssString = 'slateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:slategray;`。 */
+  readonly slategray: Property.TextDecoration | CssString = 'slategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:slategrey;`。 */
+  readonly slategrey: Property.TextDecoration | CssString = 'slategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:snow;`。 */
+  readonly snow: Property.TextDecoration | CssString = 'snow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:solid;`。 */
+  readonly solid: Property.TextDecoration | CssString = 'solid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:spelling-error;`。 */
+  readonly spellingError: Property.TextDecoration | CssString = 'spelling-error';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:springgreen;`。 */
+  readonly springgreen: Property.TextDecoration | CssString = 'springgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:steelblue;`。 */
+  readonly steelblue: Property.TextDecoration | CssString = 'steelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:tan;`。 */
+  readonly tan: Property.TextDecoration | CssString = 'tan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:teal;`。 */
+  readonly teal: Property.TextDecoration | CssString = 'teal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:thistle;`。 */
+  readonly thistle: Property.TextDecoration | CssString = 'thistle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:tomato;`。 */
+  readonly tomato: Property.TextDecoration | CssString = 'tomato';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
+   *
+   * CSS 声明：`text-decoration:transparent;`。
+   */
+  readonly transparent: Property.TextDecoration | CssString = 'transparent';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:turquoise;`。 */
+  readonly turquoise: Property.TextDecoration | CssString = 'turquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:underline;`。 */
+  readonly underline: Property.TextDecoration | CssString = 'underline';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-decoration:unset;`。
+   */
+  readonly unset: Property.TextDecoration | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:violet;`。 */
+  readonly violet: Property.TextDecoration | CssString = 'violet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:wavy;`。 */
+  readonly wavy: Property.TextDecoration | CssString = 'wavy';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:wheat;`。 */
+  readonly wheat: Property.TextDecoration | CssString = 'wheat';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:white;`。 */
+  readonly white: Property.TextDecoration | CssString = 'white';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:whitesmoke;`。 */
+  readonly whitesmoke: Property.TextDecoration | CssString = 'whitesmoke';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:yellow;`。 */
+  readonly yellow: Property.TextDecoration | CssString = 'yellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration:yellowgreen;`。 */
+  readonly yellowgreen: Property.TextDecoration | CssString = 'yellowgreen';
+}
+
+/**
  * 集中设置文本装饰线的位置、线型、颜色及粗细。（text-decoration）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration
  */
 export class TextDecorationCss extends LengthCssProperty {
   /** CSS 声明：`text-decoration:AccentColor;`。 */
-  readonly AccentColor = 'text-decoration:AccentColor;';
+  readonly AccentColor: string = 'text-decoration:AccentColor;';
   /** CSS 声明：`text-decoration:AccentColorText;`。 */
-  readonly AccentColorText = 'text-decoration:AccentColorText;';
+  readonly AccentColorText: string = 'text-decoration:AccentColorText;';
   /** CSS 声明：`text-decoration:ActiveBorder;`。 */
-  readonly ActiveBorder = 'text-decoration:ActiveBorder;';
+  readonly ActiveBorder: string = 'text-decoration:ActiveBorder;';
   /** CSS 声明：`text-decoration:ActiveCaption;`。 */
-  readonly ActiveCaption = 'text-decoration:ActiveCaption;';
+  readonly ActiveCaption: string = 'text-decoration:ActiveCaption;';
   /** CSS 声明：`text-decoration:ActiveText;`。 */
-  readonly ActiveText = 'text-decoration:ActiveText;';
+  readonly ActiveText: string = 'text-decoration:ActiveText;';
   /** CSS 声明：`text-decoration:AppWorkspace;`。 */
-  readonly AppWorkspace = 'text-decoration:AppWorkspace;';
+  readonly AppWorkspace: string = 'text-decoration:AppWorkspace;';
   /** CSS 声明：`text-decoration:Background;`。 */
-  readonly Background = 'text-decoration:Background;';
+  readonly Background: string = 'text-decoration:Background;';
   /** CSS 声明：`text-decoration:ButtonBorder;`。 */
-  readonly ButtonBorder = 'text-decoration:ButtonBorder;';
+  readonly ButtonBorder: string = 'text-decoration:ButtonBorder;';
   /** CSS 声明：`text-decoration:ButtonFace;`。 */
-  readonly ButtonFace = 'text-decoration:ButtonFace;';
+  readonly ButtonFace: string = 'text-decoration:ButtonFace;';
   /** CSS 声明：`text-decoration:ButtonHighlight;`。 */
-  readonly ButtonHighlight = 'text-decoration:ButtonHighlight;';
+  readonly ButtonHighlight: string = 'text-decoration:ButtonHighlight;';
   /** CSS 声明：`text-decoration:ButtonShadow;`。 */
-  readonly ButtonShadow = 'text-decoration:ButtonShadow;';
+  readonly ButtonShadow: string = 'text-decoration:ButtonShadow;';
   /** CSS 声明：`text-decoration:ButtonText;`。 */
-  readonly ButtonText = 'text-decoration:ButtonText;';
+  readonly ButtonText: string = 'text-decoration:ButtonText;';
   /** CSS 声明：`text-decoration:Canvas;`。 */
-  readonly Canvas = 'text-decoration:Canvas;';
+  readonly Canvas: string = 'text-decoration:Canvas;';
   /** CSS 声明：`text-decoration:CanvasText;`。 */
-  readonly CanvasText = 'text-decoration:CanvasText;';
+  readonly CanvasText: string = 'text-decoration:CanvasText;';
   /** CSS 声明：`text-decoration:CaptionText;`。 */
-  readonly CaptionText = 'text-decoration:CaptionText;';
+  readonly CaptionText: string = 'text-decoration:CaptionText;';
   /** CSS 声明：`text-decoration:Field;`。 */
-  readonly Field = 'text-decoration:Field;';
+  readonly Field: string = 'text-decoration:Field;';
   /** CSS 声明：`text-decoration:FieldText;`。 */
-  readonly FieldText = 'text-decoration:FieldText;';
+  readonly FieldText: string = 'text-decoration:FieldText;';
   /** CSS 声明：`text-decoration:GrayText;`。 */
-  readonly GrayText = 'text-decoration:GrayText;';
+  readonly GrayText: string = 'text-decoration:GrayText;';
   /** CSS 声明：`text-decoration:Highlight;`。 */
-  readonly Highlight = 'text-decoration:Highlight;';
+  readonly Highlight: string = 'text-decoration:Highlight;';
   /** CSS 声明：`text-decoration:HighlightText;`。 */
-  readonly HighlightText = 'text-decoration:HighlightText;';
+  readonly HighlightText: string = 'text-decoration:HighlightText;';
   /** CSS 声明：`text-decoration:InactiveBorder;`。 */
-  readonly InactiveBorder = 'text-decoration:InactiveBorder;';
+  readonly InactiveBorder: string = 'text-decoration:InactiveBorder;';
   /** CSS 声明：`text-decoration:InactiveCaption;`。 */
-  readonly InactiveCaption = 'text-decoration:InactiveCaption;';
+  readonly InactiveCaption: string = 'text-decoration:InactiveCaption;';
   /** CSS 声明：`text-decoration:InactiveCaptionText;`。 */
-  readonly InactiveCaptionText = 'text-decoration:InactiveCaptionText;';
+  readonly InactiveCaptionText: string = 'text-decoration:InactiveCaptionText;';
   /** CSS 声明：`text-decoration:InfoBackground;`。 */
-  readonly InfoBackground = 'text-decoration:InfoBackground;';
+  readonly InfoBackground: string = 'text-decoration:InfoBackground;';
   /** CSS 声明：`text-decoration:InfoText;`。 */
-  readonly InfoText = 'text-decoration:InfoText;';
+  readonly InfoText: string = 'text-decoration:InfoText;';
   /** CSS 声明：`text-decoration:LinkText;`。 */
-  readonly LinkText = 'text-decoration:LinkText;';
+  readonly LinkText: string = 'text-decoration:LinkText;';
   /** CSS 声明：`text-decoration:Mark;`。 */
-  readonly Mark = 'text-decoration:Mark;';
+  readonly Mark: string = 'text-decoration:Mark;';
   /** CSS 声明：`text-decoration:MarkText;`。 */
-  readonly MarkText = 'text-decoration:MarkText;';
+  readonly MarkText: string = 'text-decoration:MarkText;';
   /** CSS 声明：`text-decoration:Menu;`。 */
-  readonly Menu = 'text-decoration:Menu;';
+  readonly Menu: string = 'text-decoration:Menu;';
   /** CSS 声明：`text-decoration:MenuText;`。 */
-  readonly MenuText = 'text-decoration:MenuText;';
+  readonly MenuText: string = 'text-decoration:MenuText;';
   /** CSS 声明：`text-decoration:Scrollbar;`。 */
-  readonly Scrollbar = 'text-decoration:Scrollbar;';
+  readonly Scrollbar: string = 'text-decoration:Scrollbar;';
   /** CSS 声明：`text-decoration:SelectedItem;`。 */
-  readonly SelectedItem = 'text-decoration:SelectedItem;';
+  readonly SelectedItem: string = 'text-decoration:SelectedItem;';
   /** CSS 声明：`text-decoration:SelectedItemText;`。 */
-  readonly SelectedItemText = 'text-decoration:SelectedItemText;';
+  readonly SelectedItemText: string = 'text-decoration:SelectedItemText;';
   /** CSS 声明：`text-decoration:ThreeDDarkShadow;`。 */
-  readonly ThreeDDarkShadow = 'text-decoration:ThreeDDarkShadow;';
+  readonly ThreeDDarkShadow: string = 'text-decoration:ThreeDDarkShadow;';
   /** CSS 声明：`text-decoration:ThreeDFace;`。 */
-  readonly ThreeDFace = 'text-decoration:ThreeDFace;';
+  readonly ThreeDFace: string = 'text-decoration:ThreeDFace;';
   /** CSS 声明：`text-decoration:ThreeDHighlight;`。 */
-  readonly ThreeDHighlight = 'text-decoration:ThreeDHighlight;';
+  readonly ThreeDHighlight: string = 'text-decoration:ThreeDHighlight;';
   /** CSS 声明：`text-decoration:ThreeDLightShadow;`。 */
-  readonly ThreeDLightShadow = 'text-decoration:ThreeDLightShadow;';
+  readonly ThreeDLightShadow: string = 'text-decoration:ThreeDLightShadow;';
   /** CSS 声明：`text-decoration:ThreeDShadow;`。 */
-  readonly ThreeDShadow = 'text-decoration:ThreeDShadow;';
+  readonly ThreeDShadow: string = 'text-decoration:ThreeDShadow;';
   /** CSS 声明：`text-decoration:VisitedText;`。 */
-  readonly VisitedText = 'text-decoration:VisitedText;';
+  readonly VisitedText: string = 'text-decoration:VisitedText;';
   /** CSS 声明：`text-decoration:Window;`。 */
-  readonly Window = 'text-decoration:Window;';
+  readonly Window: string = 'text-decoration:Window;';
   /** CSS 声明：`text-decoration:WindowFrame;`。 */
-  readonly WindowFrame = 'text-decoration:WindowFrame;';
+  readonly WindowFrame: string = 'text-decoration:WindowFrame;';
   /** CSS 声明：`text-decoration:WindowText;`。 */
-  readonly WindowText = 'text-decoration:WindowText;';
+  readonly WindowText: string = 'text-decoration:WindowText;';
   /** CSS 声明：`text-decoration:aliceblue;`。 */
-  readonly aliceblue = 'text-decoration:aliceblue;';
+  readonly aliceblue: string = 'text-decoration:aliceblue;';
   /** CSS 声明：`text-decoration:antiquewhite;`。 */
-  readonly antiquewhite = 'text-decoration:antiquewhite;';
+  readonly antiquewhite: string = 'text-decoration:antiquewhite;';
   /** CSS 声明：`text-decoration:aqua;`。 */
-  readonly aqua = 'text-decoration:aqua;';
+  readonly aqua: string = 'text-decoration:aqua;';
   /** CSS 声明：`text-decoration:aquamarine;`。 */
-  readonly aquamarine = 'text-decoration:aquamarine;';
+  readonly aquamarine: string = 'text-decoration:aquamarine;';
   /** CSS 声明：`text-decoration:auto;`。 */
-  readonly auto = 'text-decoration:auto;';
+  readonly auto: string = 'text-decoration:auto;';
   /** CSS 声明：`text-decoration:azure;`。 */
-  readonly azure = 'text-decoration:azure;';
+  readonly azure: string = 'text-decoration:azure;';
   /** CSS 声明：`text-decoration:beige;`。 */
-  readonly beige = 'text-decoration:beige;';
+  readonly beige: string = 'text-decoration:beige;';
   /** CSS 声明：`text-decoration:bisque;`。 */
-  readonly bisque = 'text-decoration:bisque;';
+  readonly bisque: string = 'text-decoration:bisque;';
   /** CSS 声明：`text-decoration:black;`。 */
-  readonly black = 'text-decoration:black;';
+  readonly black: string = 'text-decoration:black;';
   /** CSS 声明：`text-decoration:blanchedalmond;`。 */
-  readonly blanchedalmond = 'text-decoration:blanchedalmond;';
+  readonly blanchedalmond: string = 'text-decoration:blanchedalmond;';
   /** CSS 声明：`text-decoration:blink;`。 */
-  readonly blink = 'text-decoration:blink;';
+  readonly blink: string = 'text-decoration:blink;';
   /** CSS 声明：`text-decoration:blue;`。 */
-  readonly blue = 'text-decoration:blue;';
+  readonly blue: string = 'text-decoration:blue;';
   /** CSS 声明：`text-decoration:blueviolet;`。 */
-  readonly blueviolet = 'text-decoration:blueviolet;';
+  readonly blueviolet: string = 'text-decoration:blueviolet;';
   /** CSS 声明：`text-decoration:brown;`。 */
-  readonly brown = 'text-decoration:brown;';
+  readonly brown: string = 'text-decoration:brown;';
   /** CSS 声明：`text-decoration:burlywood;`。 */
-  readonly burlywood = 'text-decoration:burlywood;';
+  readonly burlywood: string = 'text-decoration:burlywood;';
   /** CSS 声明：`text-decoration:cadetblue;`。 */
-  readonly cadetblue = 'text-decoration:cadetblue;';
+  readonly cadetblue: string = 'text-decoration:cadetblue;';
   /** CSS 声明：`text-decoration:chartreuse;`。 */
-  readonly chartreuse = 'text-decoration:chartreuse;';
+  readonly chartreuse: string = 'text-decoration:chartreuse;';
   /** CSS 声明：`text-decoration:chocolate;`。 */
-  readonly chocolate = 'text-decoration:chocolate;';
+  readonly chocolate: string = 'text-decoration:chocolate;';
   /** CSS 声明：`text-decoration:coral;`。 */
-  readonly coral = 'text-decoration:coral;';
+  readonly coral: string = 'text-decoration:coral;';
   /** CSS 声明：`text-decoration:cornflowerblue;`。 */
-  readonly cornflowerblue = 'text-decoration:cornflowerblue;';
+  readonly cornflowerblue: string = 'text-decoration:cornflowerblue;';
   /** CSS 声明：`text-decoration:cornsilk;`。 */
-  readonly cornsilk = 'text-decoration:cornsilk;';
+  readonly cornsilk: string = 'text-decoration:cornsilk;';
   /** CSS 声明：`text-decoration:crimson;`。 */
-  readonly crimson = 'text-decoration:crimson;';
+  readonly crimson: string = 'text-decoration:crimson;';
   /**
    * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
    *
    * CSS 声明：`text-decoration:currentColor;`。
    */
-  readonly currentColor = 'text-decoration:currentColor;';
+  readonly currentColor: string = 'text-decoration:currentColor;';
   /** CSS 声明：`text-decoration:cyan;`。 */
-  readonly cyan = 'text-decoration:cyan;';
+  readonly cyan: string = 'text-decoration:cyan;';
   /** CSS 声明：`text-decoration:darkblue;`。 */
-  readonly darkblue = 'text-decoration:darkblue;';
+  readonly darkblue: string = 'text-decoration:darkblue;';
   /** CSS 声明：`text-decoration:darkcyan;`。 */
-  readonly darkcyan = 'text-decoration:darkcyan;';
+  readonly darkcyan: string = 'text-decoration:darkcyan;';
   /** CSS 声明：`text-decoration:darkgoldenrod;`。 */
-  readonly darkgoldenrod = 'text-decoration:darkgoldenrod;';
+  readonly darkgoldenrod: string = 'text-decoration:darkgoldenrod;';
   /** CSS 声明：`text-decoration:darkgray;`。 */
-  readonly darkgray = 'text-decoration:darkgray;';
+  readonly darkgray: string = 'text-decoration:darkgray;';
   /** CSS 声明：`text-decoration:darkgreen;`。 */
-  readonly darkgreen = 'text-decoration:darkgreen;';
+  readonly darkgreen: string = 'text-decoration:darkgreen;';
   /** CSS 声明：`text-decoration:darkgrey;`。 */
-  readonly darkgrey = 'text-decoration:darkgrey;';
+  readonly darkgrey: string = 'text-decoration:darkgrey;';
   /** CSS 声明：`text-decoration:darkkhaki;`。 */
-  readonly darkkhaki = 'text-decoration:darkkhaki;';
+  readonly darkkhaki: string = 'text-decoration:darkkhaki;';
   /** CSS 声明：`text-decoration:darkmagenta;`。 */
-  readonly darkmagenta = 'text-decoration:darkmagenta;';
+  readonly darkmagenta: string = 'text-decoration:darkmagenta;';
   /** CSS 声明：`text-decoration:darkolivegreen;`。 */
-  readonly darkolivegreen = 'text-decoration:darkolivegreen;';
+  readonly darkolivegreen: string = 'text-decoration:darkolivegreen;';
   /** CSS 声明：`text-decoration:darkorange;`。 */
-  readonly darkorange = 'text-decoration:darkorange;';
+  readonly darkorange: string = 'text-decoration:darkorange;';
   /** CSS 声明：`text-decoration:darkorchid;`。 */
-  readonly darkorchid = 'text-decoration:darkorchid;';
+  readonly darkorchid: string = 'text-decoration:darkorchid;';
   /** CSS 声明：`text-decoration:darkred;`。 */
-  readonly darkred = 'text-decoration:darkred;';
+  readonly darkred: string = 'text-decoration:darkred;';
   /** CSS 声明：`text-decoration:darksalmon;`。 */
-  readonly darksalmon = 'text-decoration:darksalmon;';
+  readonly darksalmon: string = 'text-decoration:darksalmon;';
   /** CSS 声明：`text-decoration:darkseagreen;`。 */
-  readonly darkseagreen = 'text-decoration:darkseagreen;';
+  readonly darkseagreen: string = 'text-decoration:darkseagreen;';
   /** CSS 声明：`text-decoration:darkslateblue;`。 */
-  readonly darkslateblue = 'text-decoration:darkslateblue;';
+  readonly darkslateblue: string = 'text-decoration:darkslateblue;';
   /** CSS 声明：`text-decoration:darkslategray;`。 */
-  readonly darkslategray = 'text-decoration:darkslategray;';
+  readonly darkslategray: string = 'text-decoration:darkslategray;';
   /** CSS 声明：`text-decoration:darkslategrey;`。 */
-  readonly darkslategrey = 'text-decoration:darkslategrey;';
+  readonly darkslategrey: string = 'text-decoration:darkslategrey;';
   /** CSS 声明：`text-decoration:darkturquoise;`。 */
-  readonly darkturquoise = 'text-decoration:darkturquoise;';
+  readonly darkturquoise: string = 'text-decoration:darkturquoise;';
   /** CSS 声明：`text-decoration:darkviolet;`。 */
-  readonly darkviolet = 'text-decoration:darkviolet;';
+  readonly darkviolet: string = 'text-decoration:darkviolet;';
   /** CSS 声明：`text-decoration:dashed;`。 */
-  readonly dashed = 'text-decoration:dashed;';
+  readonly dashed: string = 'text-decoration:dashed;';
   /** CSS 声明：`text-decoration:deeppink;`。 */
-  readonly deeppink = 'text-decoration:deeppink;';
+  readonly deeppink: string = 'text-decoration:deeppink;';
   /** CSS 声明：`text-decoration:deepskyblue;`。 */
-  readonly deepskyblue = 'text-decoration:deepskyblue;';
+  readonly deepskyblue: string = 'text-decoration:deepskyblue;';
   /** CSS 声明：`text-decoration:dimgray;`。 */
-  readonly dimgray = 'text-decoration:dimgray;';
+  readonly dimgray: string = 'text-decoration:dimgray;';
   /** CSS 声明：`text-decoration:dimgrey;`。 */
-  readonly dimgrey = 'text-decoration:dimgrey;';
+  readonly dimgrey: string = 'text-decoration:dimgrey;';
   /** CSS 声明：`text-decoration:dodgerblue;`。 */
-  readonly dodgerblue = 'text-decoration:dodgerblue;';
+  readonly dodgerblue: string = 'text-decoration:dodgerblue;';
   /** CSS 声明：`text-decoration:dotted;`。 */
-  readonly dotted = 'text-decoration:dotted;';
+  readonly dotted: string = 'text-decoration:dotted;';
   /** CSS 声明：`text-decoration:double;`。 */
-  readonly double = 'text-decoration:double;';
+  readonly double: string = 'text-decoration:double;';
   /** CSS 声明：`text-decoration:firebrick;`。 */
-  readonly firebrick = 'text-decoration:firebrick;';
+  readonly firebrick: string = 'text-decoration:firebrick;';
   /** CSS 声明：`text-decoration:floralwhite;`。 */
-  readonly floralwhite = 'text-decoration:floralwhite;';
+  readonly floralwhite: string = 'text-decoration:floralwhite;';
   /** CSS 声明：`text-decoration:forestgreen;`。 */
-  readonly forestgreen = 'text-decoration:forestgreen;';
+  readonly forestgreen: string = 'text-decoration:forestgreen;';
   /** CSS 声明：`text-decoration:from-font;`。 */
-  readonly fromFont = 'text-decoration:from-font;';
+  readonly fromFont: string = 'text-decoration:from-font;';
   /** CSS 声明：`text-decoration:fuchsia;`。 */
-  readonly fuchsia = 'text-decoration:fuchsia;';
+  readonly fuchsia: string = 'text-decoration:fuchsia;';
   /** CSS 声明：`text-decoration:gainsboro;`。 */
-  readonly gainsboro = 'text-decoration:gainsboro;';
+  readonly gainsboro: string = 'text-decoration:gainsboro;';
   /** CSS 声明：`text-decoration:ghostwhite;`。 */
-  readonly ghostwhite = 'text-decoration:ghostwhite;';
+  readonly ghostwhite: string = 'text-decoration:ghostwhite;';
   /** CSS 声明：`text-decoration:gold;`。 */
-  readonly gold = 'text-decoration:gold;';
+  readonly gold: string = 'text-decoration:gold;';
   /** CSS 声明：`text-decoration:goldenrod;`。 */
-  readonly goldenrod = 'text-decoration:goldenrod;';
+  readonly goldenrod: string = 'text-decoration:goldenrod;';
   /** CSS 声明：`text-decoration:grammar-error;`。 */
-  readonly grammarError = 'text-decoration:grammar-error;';
+  readonly grammarError: string = 'text-decoration:grammar-error;';
   /** CSS 声明：`text-decoration:gray;`。 */
-  readonly gray = 'text-decoration:gray;';
+  readonly gray: string = 'text-decoration:gray;';
   /** CSS 声明：`text-decoration:green;`。 */
-  readonly green = 'text-decoration:green;';
+  readonly green: string = 'text-decoration:green;';
   /** CSS 声明：`text-decoration:greenyellow;`。 */
-  readonly greenyellow = 'text-decoration:greenyellow;';
+  readonly greenyellow: string = 'text-decoration:greenyellow;';
   /** CSS 声明：`text-decoration:grey;`。 */
-  readonly grey = 'text-decoration:grey;';
+  readonly grey: string = 'text-decoration:grey;';
   /** CSS 声明：`text-decoration:honeydew;`。 */
-  readonly honeydew = 'text-decoration:honeydew;';
+  readonly honeydew: string = 'text-decoration:honeydew;';
   /** CSS 声明：`text-decoration:hotpink;`。 */
-  readonly hotpink = 'text-decoration:hotpink;';
+  readonly hotpink: string = 'text-decoration:hotpink;';
   /** CSS 声明：`text-decoration:indianred;`。 */
-  readonly indianred = 'text-decoration:indianred;';
+  readonly indianred: string = 'text-decoration:indianred;';
   /** CSS 声明：`text-decoration:indigo;`。 */
-  readonly indigo = 'text-decoration:indigo;';
+  readonly indigo: string = 'text-decoration:indigo;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-decoration:inherit;`。
    */
-  readonly inherit = 'text-decoration:inherit;';
+  readonly inherit: string = 'text-decoration:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-decoration:initial;`。
    */
-  readonly initial = 'text-decoration:initial;';
+  readonly initial: string = 'text-decoration:initial;';
   /** CSS 声明：`text-decoration:ivory;`。 */
-  readonly ivory = 'text-decoration:ivory;';
+  readonly ivory: string = 'text-decoration:ivory;';
   /** CSS 声明：`text-decoration:khaki;`。 */
-  readonly khaki = 'text-decoration:khaki;';
+  readonly khaki: string = 'text-decoration:khaki;';
   /** CSS 声明：`text-decoration:lavender;`。 */
-  readonly lavender = 'text-decoration:lavender;';
+  readonly lavender: string = 'text-decoration:lavender;';
   /** CSS 声明：`text-decoration:lavenderblush;`。 */
-  readonly lavenderblush = 'text-decoration:lavenderblush;';
+  readonly lavenderblush: string = 'text-decoration:lavenderblush;';
   /** CSS 声明：`text-decoration:lawngreen;`。 */
-  readonly lawngreen = 'text-decoration:lawngreen;';
+  readonly lawngreen: string = 'text-decoration:lawngreen;';
   /** CSS 声明：`text-decoration:lemonchiffon;`。 */
-  readonly lemonchiffon = 'text-decoration:lemonchiffon;';
+  readonly lemonchiffon: string = 'text-decoration:lemonchiffon;';
   /** CSS 声明：`text-decoration:lightblue;`。 */
-  readonly lightblue = 'text-decoration:lightblue;';
+  readonly lightblue: string = 'text-decoration:lightblue;';
   /** CSS 声明：`text-decoration:lightcoral;`。 */
-  readonly lightcoral = 'text-decoration:lightcoral;';
+  readonly lightcoral: string = 'text-decoration:lightcoral;';
   /** CSS 声明：`text-decoration:lightcyan;`。 */
-  readonly lightcyan = 'text-decoration:lightcyan;';
+  readonly lightcyan: string = 'text-decoration:lightcyan;';
   /** CSS 声明：`text-decoration:lightgoldenrodyellow;`。 */
-  readonly lightgoldenrodyellow = 'text-decoration:lightgoldenrodyellow;';
+  readonly lightgoldenrodyellow: string = 'text-decoration:lightgoldenrodyellow;';
   /** CSS 声明：`text-decoration:lightgray;`。 */
-  readonly lightgray = 'text-decoration:lightgray;';
+  readonly lightgray: string = 'text-decoration:lightgray;';
   /** CSS 声明：`text-decoration:lightgreen;`。 */
-  readonly lightgreen = 'text-decoration:lightgreen;';
+  readonly lightgreen: string = 'text-decoration:lightgreen;';
   /** CSS 声明：`text-decoration:lightgrey;`。 */
-  readonly lightgrey = 'text-decoration:lightgrey;';
+  readonly lightgrey: string = 'text-decoration:lightgrey;';
   /** CSS 声明：`text-decoration:lightpink;`。 */
-  readonly lightpink = 'text-decoration:lightpink;';
+  readonly lightpink: string = 'text-decoration:lightpink;';
   /** CSS 声明：`text-decoration:lightsalmon;`。 */
-  readonly lightsalmon = 'text-decoration:lightsalmon;';
+  readonly lightsalmon: string = 'text-decoration:lightsalmon;';
   /** CSS 声明：`text-decoration:lightseagreen;`。 */
-  readonly lightseagreen = 'text-decoration:lightseagreen;';
+  readonly lightseagreen: string = 'text-decoration:lightseagreen;';
   /** CSS 声明：`text-decoration:lightskyblue;`。 */
-  readonly lightskyblue = 'text-decoration:lightskyblue;';
+  readonly lightskyblue: string = 'text-decoration:lightskyblue;';
   /** CSS 声明：`text-decoration:lightslategray;`。 */
-  readonly lightslategray = 'text-decoration:lightslategray;';
+  readonly lightslategray: string = 'text-decoration:lightslategray;';
   /** CSS 声明：`text-decoration:lightslategrey;`。 */
-  readonly lightslategrey = 'text-decoration:lightslategrey;';
+  readonly lightslategrey: string = 'text-decoration:lightslategrey;';
   /** CSS 声明：`text-decoration:lightsteelblue;`。 */
-  readonly lightsteelblue = 'text-decoration:lightsteelblue;';
+  readonly lightsteelblue: string = 'text-decoration:lightsteelblue;';
   /** CSS 声明：`text-decoration:lightyellow;`。 */
-  readonly lightyellow = 'text-decoration:lightyellow;';
+  readonly lightyellow: string = 'text-decoration:lightyellow;';
   /** CSS 声明：`text-decoration:lime;`。 */
-  readonly lime = 'text-decoration:lime;';
+  readonly lime: string = 'text-decoration:lime;';
   /** CSS 声明：`text-decoration:limegreen;`。 */
-  readonly limegreen = 'text-decoration:limegreen;';
+  readonly limegreen: string = 'text-decoration:limegreen;';
   /** CSS 声明：`text-decoration:line-through;`。 */
-  readonly lineThrough = 'text-decoration:line-through;';
+  readonly lineThrough: string = 'text-decoration:line-through;';
   /** CSS 声明：`text-decoration:linen;`。 */
-  readonly linen = 'text-decoration:linen;';
+  readonly linen: string = 'text-decoration:linen;';
   /** CSS 声明：`text-decoration:magenta;`。 */
-  readonly magenta = 'text-decoration:magenta;';
+  readonly magenta: string = 'text-decoration:magenta;';
   /** CSS 声明：`text-decoration:maroon;`。 */
-  readonly maroon = 'text-decoration:maroon;';
+  readonly maroon: string = 'text-decoration:maroon;';
   /** CSS 声明：`text-decoration:mediumaquamarine;`。 */
-  readonly mediumaquamarine = 'text-decoration:mediumaquamarine;';
+  readonly mediumaquamarine: string = 'text-decoration:mediumaquamarine;';
   /** CSS 声明：`text-decoration:mediumblue;`。 */
-  readonly mediumblue = 'text-decoration:mediumblue;';
+  readonly mediumblue: string = 'text-decoration:mediumblue;';
   /** CSS 声明：`text-decoration:mediumorchid;`。 */
-  readonly mediumorchid = 'text-decoration:mediumorchid;';
+  readonly mediumorchid: string = 'text-decoration:mediumorchid;';
   /** CSS 声明：`text-decoration:mediumpurple;`。 */
-  readonly mediumpurple = 'text-decoration:mediumpurple;';
+  readonly mediumpurple: string = 'text-decoration:mediumpurple;';
   /** CSS 声明：`text-decoration:mediumseagreen;`。 */
-  readonly mediumseagreen = 'text-decoration:mediumseagreen;';
+  readonly mediumseagreen: string = 'text-decoration:mediumseagreen;';
   /** CSS 声明：`text-decoration:mediumslateblue;`。 */
-  readonly mediumslateblue = 'text-decoration:mediumslateblue;';
+  readonly mediumslateblue: string = 'text-decoration:mediumslateblue;';
   /** CSS 声明：`text-decoration:mediumspringgreen;`。 */
-  readonly mediumspringgreen = 'text-decoration:mediumspringgreen;';
+  readonly mediumspringgreen: string = 'text-decoration:mediumspringgreen;';
   /** CSS 声明：`text-decoration:mediumturquoise;`。 */
-  readonly mediumturquoise = 'text-decoration:mediumturquoise;';
+  readonly mediumturquoise: string = 'text-decoration:mediumturquoise;';
   /** CSS 声明：`text-decoration:mediumvioletred;`。 */
-  readonly mediumvioletred = 'text-decoration:mediumvioletred;';
+  readonly mediumvioletred: string = 'text-decoration:mediumvioletred;';
   /** CSS 声明：`text-decoration:midnightblue;`。 */
-  readonly midnightblue = 'text-decoration:midnightblue;';
+  readonly midnightblue: string = 'text-decoration:midnightblue;';
   /** CSS 声明：`text-decoration:mintcream;`。 */
-  readonly mintcream = 'text-decoration:mintcream;';
+  readonly mintcream: string = 'text-decoration:mintcream;';
   /** CSS 声明：`text-decoration:mistyrose;`。 */
-  readonly mistyrose = 'text-decoration:mistyrose;';
+  readonly mistyrose: string = 'text-decoration:mistyrose;';
   /** CSS 声明：`text-decoration:moccasin;`。 */
-  readonly moccasin = 'text-decoration:moccasin;';
+  readonly moccasin: string = 'text-decoration:moccasin;';
   /** CSS 声明：`text-decoration:navajowhite;`。 */
-  readonly navajowhite = 'text-decoration:navajowhite;';
+  readonly navajowhite: string = 'text-decoration:navajowhite;';
   /** CSS 声明：`text-decoration:navy;`。 */
-  readonly navy = 'text-decoration:navy;';
+  readonly navy: string = 'text-decoration:navy;';
   /** CSS 声明：`text-decoration:none;`。 */
-  readonly none = 'text-decoration:none;';
+  readonly none: string = 'text-decoration:none;';
   /** CSS 声明：`text-decoration:oldlace;`。 */
-  readonly oldlace = 'text-decoration:oldlace;';
+  readonly oldlace: string = 'text-decoration:oldlace;';
   /** CSS 声明：`text-decoration:olive;`。 */
-  readonly olive = 'text-decoration:olive;';
+  readonly olive: string = 'text-decoration:olive;';
   /** CSS 声明：`text-decoration:olivedrab;`。 */
-  readonly olivedrab = 'text-decoration:olivedrab;';
+  readonly olivedrab: string = 'text-decoration:olivedrab;';
   /** CSS 声明：`text-decoration:orange;`。 */
-  readonly orange = 'text-decoration:orange;';
+  readonly orange: string = 'text-decoration:orange;';
   /** CSS 声明：`text-decoration:orangered;`。 */
-  readonly orangered = 'text-decoration:orangered;';
+  readonly orangered: string = 'text-decoration:orangered;';
   /** CSS 声明：`text-decoration:orchid;`。 */
-  readonly orchid = 'text-decoration:orchid;';
+  readonly orchid: string = 'text-decoration:orchid;';
   /** CSS 声明：`text-decoration:overline;`。 */
-  readonly overline = 'text-decoration:overline;';
+  readonly overline: string = 'text-decoration:overline;';
   /** CSS 声明：`text-decoration:palegoldenrod;`。 */
-  readonly palegoldenrod = 'text-decoration:palegoldenrod;';
+  readonly palegoldenrod: string = 'text-decoration:palegoldenrod;';
   /** CSS 声明：`text-decoration:palegreen;`。 */
-  readonly palegreen = 'text-decoration:palegreen;';
+  readonly palegreen: string = 'text-decoration:palegreen;';
   /** CSS 声明：`text-decoration:paleturquoise;`。 */
-  readonly paleturquoise = 'text-decoration:paleturquoise;';
+  readonly paleturquoise: string = 'text-decoration:paleturquoise;';
   /** CSS 声明：`text-decoration:palevioletred;`。 */
-  readonly palevioletred = 'text-decoration:palevioletred;';
+  readonly palevioletred: string = 'text-decoration:palevioletred;';
   /** CSS 声明：`text-decoration:papayawhip;`。 */
-  readonly papayawhip = 'text-decoration:papayawhip;';
+  readonly papayawhip: string = 'text-decoration:papayawhip;';
   /** CSS 声明：`text-decoration:peachpuff;`。 */
-  readonly peachpuff = 'text-decoration:peachpuff;';
+  readonly peachpuff: string = 'text-decoration:peachpuff;';
   /** CSS 声明：`text-decoration:peru;`。 */
-  readonly peru = 'text-decoration:peru;';
+  readonly peru: string = 'text-decoration:peru;';
   /** CSS 声明：`text-decoration:pink;`。 */
-  readonly pink = 'text-decoration:pink;';
+  readonly pink: string = 'text-decoration:pink;';
   /** CSS 声明：`text-decoration:plum;`。 */
-  readonly plum = 'text-decoration:plum;';
+  readonly plum: string = 'text-decoration:plum;';
   /** CSS 声明：`text-decoration:powderblue;`。 */
-  readonly powderblue = 'text-decoration:powderblue;';
+  readonly powderblue: string = 'text-decoration:powderblue;';
   /** CSS 声明：`text-decoration:purple;`。 */
-  readonly purple = 'text-decoration:purple;';
+  readonly purple: string = 'text-decoration:purple;';
   /** CSS 声明：`text-decoration:rebeccapurple;`。 */
-  readonly rebeccapurple = 'text-decoration:rebeccapurple;';
+  readonly rebeccapurple: string = 'text-decoration:rebeccapurple;';
   /** CSS 声明：`text-decoration:red;`。 */
-  readonly red = 'text-decoration:red;';
+  readonly red: string = 'text-decoration:red;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-decoration:revert;`。
    */
-  readonly revert = 'text-decoration:revert;';
+  readonly revert: string = 'text-decoration:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-decoration:revert-layer;`。
    */
-  readonly revertLayer = 'text-decoration:revert-layer;';
+  readonly revertLayer: string = 'text-decoration:revert-layer;';
   /** CSS 声明：`text-decoration:rosybrown;`。 */
-  readonly rosybrown = 'text-decoration:rosybrown;';
+  readonly rosybrown: string = 'text-decoration:rosybrown;';
   /** CSS 声明：`text-decoration:royalblue;`。 */
-  readonly royalblue = 'text-decoration:royalblue;';
+  readonly royalblue: string = 'text-decoration:royalblue;';
   /** CSS 声明：`text-decoration:saddlebrown;`。 */
-  readonly saddlebrown = 'text-decoration:saddlebrown;';
+  readonly saddlebrown: string = 'text-decoration:saddlebrown;';
   /** CSS 声明：`text-decoration:salmon;`。 */
-  readonly salmon = 'text-decoration:salmon;';
+  readonly salmon: string = 'text-decoration:salmon;';
   /** CSS 声明：`text-decoration:sandybrown;`。 */
-  readonly sandybrown = 'text-decoration:sandybrown;';
+  readonly sandybrown: string = 'text-decoration:sandybrown;';
   /** CSS 声明：`text-decoration:seagreen;`。 */
-  readonly seagreen = 'text-decoration:seagreen;';
+  readonly seagreen: string = 'text-decoration:seagreen;';
   /** CSS 声明：`text-decoration:seashell;`。 */
-  readonly seashell = 'text-decoration:seashell;';
+  readonly seashell: string = 'text-decoration:seashell;';
   /** CSS 声明：`text-decoration:sienna;`。 */
-  readonly sienna = 'text-decoration:sienna;';
+  readonly sienna: string = 'text-decoration:sienna;';
   /** CSS 声明：`text-decoration:silver;`。 */
-  readonly silver = 'text-decoration:silver;';
+  readonly silver: string = 'text-decoration:silver;';
   /** CSS 声明：`text-decoration:skyblue;`。 */
-  readonly skyblue = 'text-decoration:skyblue;';
+  readonly skyblue: string = 'text-decoration:skyblue;';
   /** CSS 声明：`text-decoration:slateblue;`。 */
-  readonly slateblue = 'text-decoration:slateblue;';
+  readonly slateblue: string = 'text-decoration:slateblue;';
   /** CSS 声明：`text-decoration:slategray;`。 */
-  readonly slategray = 'text-decoration:slategray;';
+  readonly slategray: string = 'text-decoration:slategray;';
   /** CSS 声明：`text-decoration:slategrey;`。 */
-  readonly slategrey = 'text-decoration:slategrey;';
+  readonly slategrey: string = 'text-decoration:slategrey;';
   /** CSS 声明：`text-decoration:snow;`。 */
-  readonly snow = 'text-decoration:snow;';
+  readonly snow: string = 'text-decoration:snow;';
   /** CSS 声明：`text-decoration:solid;`。 */
-  readonly solid = 'text-decoration:solid;';
+  readonly solid: string = 'text-decoration:solid;';
   /** CSS 声明：`text-decoration:spelling-error;`。 */
-  readonly spellingError = 'text-decoration:spelling-error;';
+  readonly spellingError: string = 'text-decoration:spelling-error;';
   /** CSS 声明：`text-decoration:springgreen;`。 */
-  readonly springgreen = 'text-decoration:springgreen;';
+  readonly springgreen: string = 'text-decoration:springgreen;';
   /** CSS 声明：`text-decoration:steelblue;`。 */
-  readonly steelblue = 'text-decoration:steelblue;';
+  readonly steelblue: string = 'text-decoration:steelblue;';
   /** CSS 声明：`text-decoration:tan;`。 */
-  readonly tan = 'text-decoration:tan;';
+  readonly tan: string = 'text-decoration:tan;';
   /** CSS 声明：`text-decoration:teal;`。 */
-  readonly teal = 'text-decoration:teal;';
+  readonly teal: string = 'text-decoration:teal;';
   /** CSS 声明：`text-decoration:thistle;`。 */
-  readonly thistle = 'text-decoration:thistle;';
+  readonly thistle: string = 'text-decoration:thistle;';
   /** CSS 声明：`text-decoration:tomato;`。 */
-  readonly tomato = 'text-decoration:tomato;';
+  readonly tomato: string = 'text-decoration:tomato;';
   /**
    * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
    *
    * CSS 声明：`text-decoration:transparent;`。
    */
-  readonly transparent = 'text-decoration:transparent;';
+  readonly transparent: string = 'text-decoration:transparent;';
   /** CSS 声明：`text-decoration:turquoise;`。 */
-  readonly turquoise = 'text-decoration:turquoise;';
+  readonly turquoise: string = 'text-decoration:turquoise;';
   /** CSS 声明：`text-decoration:underline;`。 */
-  readonly underline = 'text-decoration:underline;';
+  readonly underline: string = 'text-decoration:underline;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-decoration:unset;`。
    */
-  readonly unset = 'text-decoration:unset;';
+  readonly unset: string = 'text-decoration:unset;';
   /** CSS 声明：`text-decoration:violet;`。 */
-  readonly violet = 'text-decoration:violet;';
+  readonly violet: string = 'text-decoration:violet;';
   /** CSS 声明：`text-decoration:wavy;`。 */
-  readonly wavy = 'text-decoration:wavy;';
+  readonly wavy: string = 'text-decoration:wavy;';
   /** CSS 声明：`text-decoration:wheat;`。 */
-  readonly wheat = 'text-decoration:wheat;';
+  readonly wheat: string = 'text-decoration:wheat;';
   /** CSS 声明：`text-decoration:white;`。 */
-  readonly white = 'text-decoration:white;';
+  readonly white: string = 'text-decoration:white;';
   /** CSS 声明：`text-decoration:whitesmoke;`。 */
-  readonly whitesmoke = 'text-decoration:whitesmoke;';
+  readonly whitesmoke: string = 'text-decoration:whitesmoke;';
   /** CSS 声明：`text-decoration:yellow;`。 */
-  readonly yellow = 'text-decoration:yellow;';
+  readonly yellow: string = 'text-decoration:yellow;';
   /** CSS 声明：`text-decoration:yellowgreen;`。 */
-  readonly yellowgreen = 'text-decoration:yellowgreen;';
+  readonly yellowgreen: string = 'text-decoration:yellowgreen;';
   /**
    * 创建 text-decoration 属性作者；普通使用通过 s.textDecoration 取得共享实例。
    * @example
@@ -20377,6 +27081,828 @@ export class TextDecorationCss extends LengthCssProperty {
 }
 
 /**
+ * text-decoration-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextDecorationColorKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:AccentColor;`。 */
+  readonly AccentColor: Property.TextDecorationColor | CssString = 'AccentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:AccentColorText;`。 */
+  readonly AccentColorText: Property.TextDecorationColor | CssString = 'AccentColorText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ActiveBorder;`。 */
+  readonly ActiveBorder: Property.TextDecorationColor | CssString = 'ActiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ActiveCaption;`。 */
+  readonly ActiveCaption: Property.TextDecorationColor | CssString = 'ActiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ActiveText;`。 */
+  readonly ActiveText: Property.TextDecorationColor | CssString = 'ActiveText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:AppWorkspace;`。 */
+  readonly AppWorkspace: Property.TextDecorationColor | CssString = 'AppWorkspace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:Background;`。 */
+  readonly Background: Property.TextDecorationColor | CssString = 'Background';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ButtonBorder;`。 */
+  readonly ButtonBorder: Property.TextDecorationColor | CssString = 'ButtonBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ButtonFace;`。 */
+  readonly ButtonFace: Property.TextDecorationColor | CssString = 'ButtonFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ButtonHighlight;`。 */
+  readonly ButtonHighlight: Property.TextDecorationColor | CssString = 'ButtonHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ButtonShadow;`。 */
+  readonly ButtonShadow: Property.TextDecorationColor | CssString = 'ButtonShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ButtonText;`。 */
+  readonly ButtonText: Property.TextDecorationColor | CssString = 'ButtonText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:Canvas;`。 */
+  readonly Canvas: Property.TextDecorationColor | CssString = 'Canvas';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:CanvasText;`。 */
+  readonly CanvasText: Property.TextDecorationColor | CssString = 'CanvasText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:CaptionText;`。 */
+  readonly CaptionText: Property.TextDecorationColor | CssString = 'CaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:Field;`。 */
+  readonly Field: Property.TextDecorationColor | CssString = 'Field';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:FieldText;`。 */
+  readonly FieldText: Property.TextDecorationColor | CssString = 'FieldText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:GrayText;`。 */
+  readonly GrayText: Property.TextDecorationColor | CssString = 'GrayText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:Highlight;`。 */
+  readonly Highlight: Property.TextDecorationColor | CssString = 'Highlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:HighlightText;`。 */
+  readonly HighlightText: Property.TextDecorationColor | CssString = 'HighlightText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:InactiveBorder;`。 */
+  readonly InactiveBorder: Property.TextDecorationColor | CssString = 'InactiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:InactiveCaption;`。 */
+  readonly InactiveCaption: Property.TextDecorationColor | CssString = 'InactiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:InactiveCaptionText;`。 */
+  readonly InactiveCaptionText: Property.TextDecorationColor | CssString = 'InactiveCaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:InfoBackground;`。 */
+  readonly InfoBackground: Property.TextDecorationColor | CssString = 'InfoBackground';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:InfoText;`。 */
+  readonly InfoText: Property.TextDecorationColor | CssString = 'InfoText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:LinkText;`。 */
+  readonly LinkText: Property.TextDecorationColor | CssString = 'LinkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:Mark;`。 */
+  readonly Mark: Property.TextDecorationColor | CssString = 'Mark';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:MarkText;`。 */
+  readonly MarkText: Property.TextDecorationColor | CssString = 'MarkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:Menu;`。 */
+  readonly Menu: Property.TextDecorationColor | CssString = 'Menu';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:MenuText;`。 */
+  readonly MenuText: Property.TextDecorationColor | CssString = 'MenuText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:Scrollbar;`。 */
+  readonly Scrollbar: Property.TextDecorationColor | CssString = 'Scrollbar';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:SelectedItem;`。 */
+  readonly SelectedItem: Property.TextDecorationColor | CssString = 'SelectedItem';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:SelectedItemText;`。 */
+  readonly SelectedItemText: Property.TextDecorationColor | CssString = 'SelectedItemText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ThreeDDarkShadow;`。 */
+  readonly ThreeDDarkShadow: Property.TextDecorationColor | CssString = 'ThreeDDarkShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ThreeDFace;`。 */
+  readonly ThreeDFace: Property.TextDecorationColor | CssString = 'ThreeDFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ThreeDHighlight;`。 */
+  readonly ThreeDHighlight: Property.TextDecorationColor | CssString = 'ThreeDHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ThreeDLightShadow;`。 */
+  readonly ThreeDLightShadow: Property.TextDecorationColor | CssString = 'ThreeDLightShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ThreeDShadow;`。 */
+  readonly ThreeDShadow: Property.TextDecorationColor | CssString = 'ThreeDShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:VisitedText;`。 */
+  readonly VisitedText: Property.TextDecorationColor | CssString = 'VisitedText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:Window;`。 */
+  readonly Window: Property.TextDecorationColor | CssString = 'Window';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:WindowFrame;`。 */
+  readonly WindowFrame: Property.TextDecorationColor | CssString = 'WindowFrame';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:WindowText;`。 */
+  readonly WindowText: Property.TextDecorationColor | CssString = 'WindowText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:aliceblue;`。 */
+  readonly aliceblue: Property.TextDecorationColor | CssString = 'aliceblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:antiquewhite;`。 */
+  readonly antiquewhite: Property.TextDecorationColor | CssString = 'antiquewhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:aqua;`。 */
+  readonly aqua: Property.TextDecorationColor | CssString = 'aqua';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:aquamarine;`。 */
+  readonly aquamarine: Property.TextDecorationColor | CssString = 'aquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:azure;`。 */
+  readonly azure: Property.TextDecorationColor | CssString = 'azure';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:beige;`。 */
+  readonly beige: Property.TextDecorationColor | CssString = 'beige';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:bisque;`。 */
+  readonly bisque: Property.TextDecorationColor | CssString = 'bisque';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:black;`。 */
+  readonly black: Property.TextDecorationColor | CssString = 'black';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:blanchedalmond;`。 */
+  readonly blanchedalmond: Property.TextDecorationColor | CssString = 'blanchedalmond';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:blue;`。 */
+  readonly blue: Property.TextDecorationColor | CssString = 'blue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:blueviolet;`。 */
+  readonly blueviolet: Property.TextDecorationColor | CssString = 'blueviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:brown;`。 */
+  readonly brown: Property.TextDecorationColor | CssString = 'brown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:burlywood;`。 */
+  readonly burlywood: Property.TextDecorationColor | CssString = 'burlywood';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:cadetblue;`。 */
+  readonly cadetblue: Property.TextDecorationColor | CssString = 'cadetblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:chartreuse;`。 */
+  readonly chartreuse: Property.TextDecorationColor | CssString = 'chartreuse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:chocolate;`。 */
+  readonly chocolate: Property.TextDecorationColor | CssString = 'chocolate';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:coral;`。 */
+  readonly coral: Property.TextDecorationColor | CssString = 'coral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:cornflowerblue;`。 */
+  readonly cornflowerblue: Property.TextDecorationColor | CssString = 'cornflowerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:cornsilk;`。 */
+  readonly cornsilk: Property.TextDecorationColor | CssString = 'cornsilk';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:crimson;`。 */
+  readonly crimson: Property.TextDecorationColor | CssString = 'crimson';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
+   *
+   * CSS 声明：`text-decoration-color:currentColor;`。
+   */
+  readonly currentColor: Property.TextDecorationColor | CssString = 'currentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:cyan;`。 */
+  readonly cyan: Property.TextDecorationColor | CssString = 'cyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkblue;`。 */
+  readonly darkblue: Property.TextDecorationColor | CssString = 'darkblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkcyan;`。 */
+  readonly darkcyan: Property.TextDecorationColor | CssString = 'darkcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkgoldenrod;`。 */
+  readonly darkgoldenrod: Property.TextDecorationColor | CssString = 'darkgoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkgray;`。 */
+  readonly darkgray: Property.TextDecorationColor | CssString = 'darkgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkgreen;`。 */
+  readonly darkgreen: Property.TextDecorationColor | CssString = 'darkgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkgrey;`。 */
+  readonly darkgrey: Property.TextDecorationColor | CssString = 'darkgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkkhaki;`。 */
+  readonly darkkhaki: Property.TextDecorationColor | CssString = 'darkkhaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkmagenta;`。 */
+  readonly darkmagenta: Property.TextDecorationColor | CssString = 'darkmagenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkolivegreen;`。 */
+  readonly darkolivegreen: Property.TextDecorationColor | CssString = 'darkolivegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkorange;`。 */
+  readonly darkorange: Property.TextDecorationColor | CssString = 'darkorange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkorchid;`。 */
+  readonly darkorchid: Property.TextDecorationColor | CssString = 'darkorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkred;`。 */
+  readonly darkred: Property.TextDecorationColor | CssString = 'darkred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darksalmon;`。 */
+  readonly darksalmon: Property.TextDecorationColor | CssString = 'darksalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkseagreen;`。 */
+  readonly darkseagreen: Property.TextDecorationColor | CssString = 'darkseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkslateblue;`。 */
+  readonly darkslateblue: Property.TextDecorationColor | CssString = 'darkslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkslategray;`。 */
+  readonly darkslategray: Property.TextDecorationColor | CssString = 'darkslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkslategrey;`。 */
+  readonly darkslategrey: Property.TextDecorationColor | CssString = 'darkslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkturquoise;`。 */
+  readonly darkturquoise: Property.TextDecorationColor | CssString = 'darkturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:darkviolet;`。 */
+  readonly darkviolet: Property.TextDecorationColor | CssString = 'darkviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:deeppink;`。 */
+  readonly deeppink: Property.TextDecorationColor | CssString = 'deeppink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:deepskyblue;`。 */
+  readonly deepskyblue: Property.TextDecorationColor | CssString = 'deepskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:dimgray;`。 */
+  readonly dimgray: Property.TextDecorationColor | CssString = 'dimgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:dimgrey;`。 */
+  readonly dimgrey: Property.TextDecorationColor | CssString = 'dimgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:dodgerblue;`。 */
+  readonly dodgerblue: Property.TextDecorationColor | CssString = 'dodgerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:firebrick;`。 */
+  readonly firebrick: Property.TextDecorationColor | CssString = 'firebrick';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:floralwhite;`。 */
+  readonly floralwhite: Property.TextDecorationColor | CssString = 'floralwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:forestgreen;`。 */
+  readonly forestgreen: Property.TextDecorationColor | CssString = 'forestgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:fuchsia;`。 */
+  readonly fuchsia: Property.TextDecorationColor | CssString = 'fuchsia';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:gainsboro;`。 */
+  readonly gainsboro: Property.TextDecorationColor | CssString = 'gainsboro';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ghostwhite;`。 */
+  readonly ghostwhite: Property.TextDecorationColor | CssString = 'ghostwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:gold;`。 */
+  readonly gold: Property.TextDecorationColor | CssString = 'gold';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:goldenrod;`。 */
+  readonly goldenrod: Property.TextDecorationColor | CssString = 'goldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:gray;`。 */
+  readonly gray: Property.TextDecorationColor | CssString = 'gray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:green;`。 */
+  readonly green: Property.TextDecorationColor | CssString = 'green';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:greenyellow;`。 */
+  readonly greenyellow: Property.TextDecorationColor | CssString = 'greenyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:grey;`。 */
+  readonly grey: Property.TextDecorationColor | CssString = 'grey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:honeydew;`。 */
+  readonly honeydew: Property.TextDecorationColor | CssString = 'honeydew';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:hotpink;`。 */
+  readonly hotpink: Property.TextDecorationColor | CssString = 'hotpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:indianred;`。 */
+  readonly indianred: Property.TextDecorationColor | CssString = 'indianred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:indigo;`。 */
+  readonly indigo: Property.TextDecorationColor | CssString = 'indigo';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-decoration-color:inherit;`。
+   */
+  readonly inherit: Property.TextDecorationColor | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-decoration-color:initial;`。
+   */
+  readonly initial: Property.TextDecorationColor | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:ivory;`。 */
+  readonly ivory: Property.TextDecorationColor | CssString = 'ivory';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:khaki;`。 */
+  readonly khaki: Property.TextDecorationColor | CssString = 'khaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lavender;`。 */
+  readonly lavender: Property.TextDecorationColor | CssString = 'lavender';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lavenderblush;`。 */
+  readonly lavenderblush: Property.TextDecorationColor | CssString = 'lavenderblush';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lawngreen;`。 */
+  readonly lawngreen: Property.TextDecorationColor | CssString = 'lawngreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lemonchiffon;`。 */
+  readonly lemonchiffon: Property.TextDecorationColor | CssString = 'lemonchiffon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightblue;`。 */
+  readonly lightblue: Property.TextDecorationColor | CssString = 'lightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightcoral;`。 */
+  readonly lightcoral: Property.TextDecorationColor | CssString = 'lightcoral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightcyan;`。 */
+  readonly lightcyan: Property.TextDecorationColor | CssString = 'lightcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightgoldenrodyellow;`。 */
+  readonly lightgoldenrodyellow: Property.TextDecorationColor | CssString = 'lightgoldenrodyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightgray;`。 */
+  readonly lightgray: Property.TextDecorationColor | CssString = 'lightgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightgreen;`。 */
+  readonly lightgreen: Property.TextDecorationColor | CssString = 'lightgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightgrey;`。 */
+  readonly lightgrey: Property.TextDecorationColor | CssString = 'lightgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightpink;`。 */
+  readonly lightpink: Property.TextDecorationColor | CssString = 'lightpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightsalmon;`。 */
+  readonly lightsalmon: Property.TextDecorationColor | CssString = 'lightsalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightseagreen;`。 */
+  readonly lightseagreen: Property.TextDecorationColor | CssString = 'lightseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightskyblue;`。 */
+  readonly lightskyblue: Property.TextDecorationColor | CssString = 'lightskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightslategray;`。 */
+  readonly lightslategray: Property.TextDecorationColor | CssString = 'lightslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightslategrey;`。 */
+  readonly lightslategrey: Property.TextDecorationColor | CssString = 'lightslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightsteelblue;`。 */
+  readonly lightsteelblue: Property.TextDecorationColor | CssString = 'lightsteelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lightyellow;`。 */
+  readonly lightyellow: Property.TextDecorationColor | CssString = 'lightyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:lime;`。 */
+  readonly lime: Property.TextDecorationColor | CssString = 'lime';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:limegreen;`。 */
+  readonly limegreen: Property.TextDecorationColor | CssString = 'limegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:linen;`。 */
+  readonly linen: Property.TextDecorationColor | CssString = 'linen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:magenta;`。 */
+  readonly magenta: Property.TextDecorationColor | CssString = 'magenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:maroon;`。 */
+  readonly maroon: Property.TextDecorationColor | CssString = 'maroon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mediumaquamarine;`。 */
+  readonly mediumaquamarine: Property.TextDecorationColor | CssString = 'mediumaquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mediumblue;`。 */
+  readonly mediumblue: Property.TextDecorationColor | CssString = 'mediumblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mediumorchid;`。 */
+  readonly mediumorchid: Property.TextDecorationColor | CssString = 'mediumorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mediumpurple;`。 */
+  readonly mediumpurple: Property.TextDecorationColor | CssString = 'mediumpurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mediumseagreen;`。 */
+  readonly mediumseagreen: Property.TextDecorationColor | CssString = 'mediumseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mediumslateblue;`。 */
+  readonly mediumslateblue: Property.TextDecorationColor | CssString = 'mediumslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mediumspringgreen;`。 */
+  readonly mediumspringgreen: Property.TextDecorationColor | CssString = 'mediumspringgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mediumturquoise;`。 */
+  readonly mediumturquoise: Property.TextDecorationColor | CssString = 'mediumturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mediumvioletred;`。 */
+  readonly mediumvioletred: Property.TextDecorationColor | CssString = 'mediumvioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:midnightblue;`。 */
+  readonly midnightblue: Property.TextDecorationColor | CssString = 'midnightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mintcream;`。 */
+  readonly mintcream: Property.TextDecorationColor | CssString = 'mintcream';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:mistyrose;`。 */
+  readonly mistyrose: Property.TextDecorationColor | CssString = 'mistyrose';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:moccasin;`。 */
+  readonly moccasin: Property.TextDecorationColor | CssString = 'moccasin';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:navajowhite;`。 */
+  readonly navajowhite: Property.TextDecorationColor | CssString = 'navajowhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:navy;`。 */
+  readonly navy: Property.TextDecorationColor | CssString = 'navy';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:oldlace;`。 */
+  readonly oldlace: Property.TextDecorationColor | CssString = 'oldlace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:olive;`。 */
+  readonly olive: Property.TextDecorationColor | CssString = 'olive';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:olivedrab;`。 */
+  readonly olivedrab: Property.TextDecorationColor | CssString = 'olivedrab';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:orange;`。 */
+  readonly orange: Property.TextDecorationColor | CssString = 'orange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:orangered;`。 */
+  readonly orangered: Property.TextDecorationColor | CssString = 'orangered';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:orchid;`。 */
+  readonly orchid: Property.TextDecorationColor | CssString = 'orchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:palegoldenrod;`。 */
+  readonly palegoldenrod: Property.TextDecorationColor | CssString = 'palegoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:palegreen;`。 */
+  readonly palegreen: Property.TextDecorationColor | CssString = 'palegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:paleturquoise;`。 */
+  readonly paleturquoise: Property.TextDecorationColor | CssString = 'paleturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:palevioletred;`。 */
+  readonly palevioletred: Property.TextDecorationColor | CssString = 'palevioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:papayawhip;`。 */
+  readonly papayawhip: Property.TextDecorationColor | CssString = 'papayawhip';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:peachpuff;`。 */
+  readonly peachpuff: Property.TextDecorationColor | CssString = 'peachpuff';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:peru;`。 */
+  readonly peru: Property.TextDecorationColor | CssString = 'peru';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:pink;`。 */
+  readonly pink: Property.TextDecorationColor | CssString = 'pink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:plum;`。 */
+  readonly plum: Property.TextDecorationColor | CssString = 'plum';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:powderblue;`。 */
+  readonly powderblue: Property.TextDecorationColor | CssString = 'powderblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:purple;`。 */
+  readonly purple: Property.TextDecorationColor | CssString = 'purple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:rebeccapurple;`。 */
+  readonly rebeccapurple: Property.TextDecorationColor | CssString = 'rebeccapurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:red;`。 */
+  readonly red: Property.TextDecorationColor | CssString = 'red';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-decoration-color:revert;`。
+   */
+  readonly revert: Property.TextDecorationColor | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-decoration-color:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextDecorationColor | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:rosybrown;`。 */
+  readonly rosybrown: Property.TextDecorationColor | CssString = 'rosybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:royalblue;`。 */
+  readonly royalblue: Property.TextDecorationColor | CssString = 'royalblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:saddlebrown;`。 */
+  readonly saddlebrown: Property.TextDecorationColor | CssString = 'saddlebrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:salmon;`。 */
+  readonly salmon: Property.TextDecorationColor | CssString = 'salmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:sandybrown;`。 */
+  readonly sandybrown: Property.TextDecorationColor | CssString = 'sandybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:seagreen;`。 */
+  readonly seagreen: Property.TextDecorationColor | CssString = 'seagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:seashell;`。 */
+  readonly seashell: Property.TextDecorationColor | CssString = 'seashell';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:sienna;`。 */
+  readonly sienna: Property.TextDecorationColor | CssString = 'sienna';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:silver;`。 */
+  readonly silver: Property.TextDecorationColor | CssString = 'silver';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:skyblue;`。 */
+  readonly skyblue: Property.TextDecorationColor | CssString = 'skyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:slateblue;`。 */
+  readonly slateblue: Property.TextDecorationColor | CssString = 'slateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:slategray;`。 */
+  readonly slategray: Property.TextDecorationColor | CssString = 'slategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:slategrey;`。 */
+  readonly slategrey: Property.TextDecorationColor | CssString = 'slategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:snow;`。 */
+  readonly snow: Property.TextDecorationColor | CssString = 'snow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:springgreen;`。 */
+  readonly springgreen: Property.TextDecorationColor | CssString = 'springgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:steelblue;`。 */
+  readonly steelblue: Property.TextDecorationColor | CssString = 'steelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:tan;`。 */
+  readonly tan: Property.TextDecorationColor | CssString = 'tan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:teal;`。 */
+  readonly teal: Property.TextDecorationColor | CssString = 'teal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:thistle;`。 */
+  readonly thistle: Property.TextDecorationColor | CssString = 'thistle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:tomato;`。 */
+  readonly tomato: Property.TextDecorationColor | CssString = 'tomato';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
+   *
+   * CSS 声明：`text-decoration-color:transparent;`。
+   */
+  readonly transparent: Property.TextDecorationColor | CssString = 'transparent';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:turquoise;`。 */
+  readonly turquoise: Property.TextDecorationColor | CssString = 'turquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-decoration-color:unset;`。
+   */
+  readonly unset: Property.TextDecorationColor | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:violet;`。 */
+  readonly violet: Property.TextDecorationColor | CssString = 'violet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:wheat;`。 */
+  readonly wheat: Property.TextDecorationColor | CssString = 'wheat';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:white;`。 */
+  readonly white: Property.TextDecorationColor | CssString = 'white';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:whitesmoke;`。 */
+  readonly whitesmoke: Property.TextDecorationColor | CssString = 'whitesmoke';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:yellow;`。 */
+  readonly yellow: Property.TextDecorationColor | CssString = 'yellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-color:yellowgreen;`。 */
+  readonly yellowgreen: Property.TextDecorationColor | CssString = 'yellowgreen';
+}
+
+/**
  * 设置文本装饰线颜色。（text-decoration-color）
  *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
@@ -20384,427 +27910,427 @@ export class TextDecorationCss extends LengthCssProperty {
  */
 export class TextDecorationColorCss extends CssProperty {
   /** CSS 声明：`text-decoration-color:AccentColor;`。 */
-  readonly AccentColor = 'text-decoration-color:AccentColor;';
+  readonly AccentColor: string = 'text-decoration-color:AccentColor;';
   /** CSS 声明：`text-decoration-color:AccentColorText;`。 */
-  readonly AccentColorText = 'text-decoration-color:AccentColorText;';
+  readonly AccentColorText: string = 'text-decoration-color:AccentColorText;';
   /** CSS 声明：`text-decoration-color:ActiveBorder;`。 */
-  readonly ActiveBorder = 'text-decoration-color:ActiveBorder;';
+  readonly ActiveBorder: string = 'text-decoration-color:ActiveBorder;';
   /** CSS 声明：`text-decoration-color:ActiveCaption;`。 */
-  readonly ActiveCaption = 'text-decoration-color:ActiveCaption;';
+  readonly ActiveCaption: string = 'text-decoration-color:ActiveCaption;';
   /** CSS 声明：`text-decoration-color:ActiveText;`。 */
-  readonly ActiveText = 'text-decoration-color:ActiveText;';
+  readonly ActiveText: string = 'text-decoration-color:ActiveText;';
   /** CSS 声明：`text-decoration-color:AppWorkspace;`。 */
-  readonly AppWorkspace = 'text-decoration-color:AppWorkspace;';
+  readonly AppWorkspace: string = 'text-decoration-color:AppWorkspace;';
   /** CSS 声明：`text-decoration-color:Background;`。 */
-  readonly Background = 'text-decoration-color:Background;';
+  readonly Background: string = 'text-decoration-color:Background;';
   /** CSS 声明：`text-decoration-color:ButtonBorder;`。 */
-  readonly ButtonBorder = 'text-decoration-color:ButtonBorder;';
+  readonly ButtonBorder: string = 'text-decoration-color:ButtonBorder;';
   /** CSS 声明：`text-decoration-color:ButtonFace;`。 */
-  readonly ButtonFace = 'text-decoration-color:ButtonFace;';
+  readonly ButtonFace: string = 'text-decoration-color:ButtonFace;';
   /** CSS 声明：`text-decoration-color:ButtonHighlight;`。 */
-  readonly ButtonHighlight = 'text-decoration-color:ButtonHighlight;';
+  readonly ButtonHighlight: string = 'text-decoration-color:ButtonHighlight;';
   /** CSS 声明：`text-decoration-color:ButtonShadow;`。 */
-  readonly ButtonShadow = 'text-decoration-color:ButtonShadow;';
+  readonly ButtonShadow: string = 'text-decoration-color:ButtonShadow;';
   /** CSS 声明：`text-decoration-color:ButtonText;`。 */
-  readonly ButtonText = 'text-decoration-color:ButtonText;';
+  readonly ButtonText: string = 'text-decoration-color:ButtonText;';
   /** CSS 声明：`text-decoration-color:Canvas;`。 */
-  readonly Canvas = 'text-decoration-color:Canvas;';
+  readonly Canvas: string = 'text-decoration-color:Canvas;';
   /** CSS 声明：`text-decoration-color:CanvasText;`。 */
-  readonly CanvasText = 'text-decoration-color:CanvasText;';
+  readonly CanvasText: string = 'text-decoration-color:CanvasText;';
   /** CSS 声明：`text-decoration-color:CaptionText;`。 */
-  readonly CaptionText = 'text-decoration-color:CaptionText;';
+  readonly CaptionText: string = 'text-decoration-color:CaptionText;';
   /** CSS 声明：`text-decoration-color:Field;`。 */
-  readonly Field = 'text-decoration-color:Field;';
+  readonly Field: string = 'text-decoration-color:Field;';
   /** CSS 声明：`text-decoration-color:FieldText;`。 */
-  readonly FieldText = 'text-decoration-color:FieldText;';
+  readonly FieldText: string = 'text-decoration-color:FieldText;';
   /** CSS 声明：`text-decoration-color:GrayText;`。 */
-  readonly GrayText = 'text-decoration-color:GrayText;';
+  readonly GrayText: string = 'text-decoration-color:GrayText;';
   /** CSS 声明：`text-decoration-color:Highlight;`。 */
-  readonly Highlight = 'text-decoration-color:Highlight;';
+  readonly Highlight: string = 'text-decoration-color:Highlight;';
   /** CSS 声明：`text-decoration-color:HighlightText;`。 */
-  readonly HighlightText = 'text-decoration-color:HighlightText;';
+  readonly HighlightText: string = 'text-decoration-color:HighlightText;';
   /** CSS 声明：`text-decoration-color:InactiveBorder;`。 */
-  readonly InactiveBorder = 'text-decoration-color:InactiveBorder;';
+  readonly InactiveBorder: string = 'text-decoration-color:InactiveBorder;';
   /** CSS 声明：`text-decoration-color:InactiveCaption;`。 */
-  readonly InactiveCaption = 'text-decoration-color:InactiveCaption;';
+  readonly InactiveCaption: string = 'text-decoration-color:InactiveCaption;';
   /** CSS 声明：`text-decoration-color:InactiveCaptionText;`。 */
-  readonly InactiveCaptionText = 'text-decoration-color:InactiveCaptionText;';
+  readonly InactiveCaptionText: string = 'text-decoration-color:InactiveCaptionText;';
   /** CSS 声明：`text-decoration-color:InfoBackground;`。 */
-  readonly InfoBackground = 'text-decoration-color:InfoBackground;';
+  readonly InfoBackground: string = 'text-decoration-color:InfoBackground;';
   /** CSS 声明：`text-decoration-color:InfoText;`。 */
-  readonly InfoText = 'text-decoration-color:InfoText;';
+  readonly InfoText: string = 'text-decoration-color:InfoText;';
   /** CSS 声明：`text-decoration-color:LinkText;`。 */
-  readonly LinkText = 'text-decoration-color:LinkText;';
+  readonly LinkText: string = 'text-decoration-color:LinkText;';
   /** CSS 声明：`text-decoration-color:Mark;`。 */
-  readonly Mark = 'text-decoration-color:Mark;';
+  readonly Mark: string = 'text-decoration-color:Mark;';
   /** CSS 声明：`text-decoration-color:MarkText;`。 */
-  readonly MarkText = 'text-decoration-color:MarkText;';
+  readonly MarkText: string = 'text-decoration-color:MarkText;';
   /** CSS 声明：`text-decoration-color:Menu;`。 */
-  readonly Menu = 'text-decoration-color:Menu;';
+  readonly Menu: string = 'text-decoration-color:Menu;';
   /** CSS 声明：`text-decoration-color:MenuText;`。 */
-  readonly MenuText = 'text-decoration-color:MenuText;';
+  readonly MenuText: string = 'text-decoration-color:MenuText;';
   /** CSS 声明：`text-decoration-color:Scrollbar;`。 */
-  readonly Scrollbar = 'text-decoration-color:Scrollbar;';
+  readonly Scrollbar: string = 'text-decoration-color:Scrollbar;';
   /** CSS 声明：`text-decoration-color:SelectedItem;`。 */
-  readonly SelectedItem = 'text-decoration-color:SelectedItem;';
+  readonly SelectedItem: string = 'text-decoration-color:SelectedItem;';
   /** CSS 声明：`text-decoration-color:SelectedItemText;`。 */
-  readonly SelectedItemText = 'text-decoration-color:SelectedItemText;';
+  readonly SelectedItemText: string = 'text-decoration-color:SelectedItemText;';
   /** CSS 声明：`text-decoration-color:ThreeDDarkShadow;`。 */
-  readonly ThreeDDarkShadow = 'text-decoration-color:ThreeDDarkShadow;';
+  readonly ThreeDDarkShadow: string = 'text-decoration-color:ThreeDDarkShadow;';
   /** CSS 声明：`text-decoration-color:ThreeDFace;`。 */
-  readonly ThreeDFace = 'text-decoration-color:ThreeDFace;';
+  readonly ThreeDFace: string = 'text-decoration-color:ThreeDFace;';
   /** CSS 声明：`text-decoration-color:ThreeDHighlight;`。 */
-  readonly ThreeDHighlight = 'text-decoration-color:ThreeDHighlight;';
+  readonly ThreeDHighlight: string = 'text-decoration-color:ThreeDHighlight;';
   /** CSS 声明：`text-decoration-color:ThreeDLightShadow;`。 */
-  readonly ThreeDLightShadow = 'text-decoration-color:ThreeDLightShadow;';
+  readonly ThreeDLightShadow: string = 'text-decoration-color:ThreeDLightShadow;';
   /** CSS 声明：`text-decoration-color:ThreeDShadow;`。 */
-  readonly ThreeDShadow = 'text-decoration-color:ThreeDShadow;';
+  readonly ThreeDShadow: string = 'text-decoration-color:ThreeDShadow;';
   /** CSS 声明：`text-decoration-color:VisitedText;`。 */
-  readonly VisitedText = 'text-decoration-color:VisitedText;';
+  readonly VisitedText: string = 'text-decoration-color:VisitedText;';
   /** CSS 声明：`text-decoration-color:Window;`。 */
-  readonly Window = 'text-decoration-color:Window;';
+  readonly Window: string = 'text-decoration-color:Window;';
   /** CSS 声明：`text-decoration-color:WindowFrame;`。 */
-  readonly WindowFrame = 'text-decoration-color:WindowFrame;';
+  readonly WindowFrame: string = 'text-decoration-color:WindowFrame;';
   /** CSS 声明：`text-decoration-color:WindowText;`。 */
-  readonly WindowText = 'text-decoration-color:WindowText;';
+  readonly WindowText: string = 'text-decoration-color:WindowText;';
   /** CSS 声明：`text-decoration-color:aliceblue;`。 */
-  readonly aliceblue = 'text-decoration-color:aliceblue;';
+  readonly aliceblue: string = 'text-decoration-color:aliceblue;';
   /** CSS 声明：`text-decoration-color:antiquewhite;`。 */
-  readonly antiquewhite = 'text-decoration-color:antiquewhite;';
+  readonly antiquewhite: string = 'text-decoration-color:antiquewhite;';
   /** CSS 声明：`text-decoration-color:aqua;`。 */
-  readonly aqua = 'text-decoration-color:aqua;';
+  readonly aqua: string = 'text-decoration-color:aqua;';
   /** CSS 声明：`text-decoration-color:aquamarine;`。 */
-  readonly aquamarine = 'text-decoration-color:aquamarine;';
+  readonly aquamarine: string = 'text-decoration-color:aquamarine;';
   /** CSS 声明：`text-decoration-color:azure;`。 */
-  readonly azure = 'text-decoration-color:azure;';
+  readonly azure: string = 'text-decoration-color:azure;';
   /** CSS 声明：`text-decoration-color:beige;`。 */
-  readonly beige = 'text-decoration-color:beige;';
+  readonly beige: string = 'text-decoration-color:beige;';
   /** CSS 声明：`text-decoration-color:bisque;`。 */
-  readonly bisque = 'text-decoration-color:bisque;';
+  readonly bisque: string = 'text-decoration-color:bisque;';
   /** CSS 声明：`text-decoration-color:black;`。 */
-  readonly black = 'text-decoration-color:black;';
+  readonly black: string = 'text-decoration-color:black;';
   /** CSS 声明：`text-decoration-color:blanchedalmond;`。 */
-  readonly blanchedalmond = 'text-decoration-color:blanchedalmond;';
+  readonly blanchedalmond: string = 'text-decoration-color:blanchedalmond;';
   /** CSS 声明：`text-decoration-color:blue;`。 */
-  readonly blue = 'text-decoration-color:blue;';
+  readonly blue: string = 'text-decoration-color:blue;';
   /** CSS 声明：`text-decoration-color:blueviolet;`。 */
-  readonly blueviolet = 'text-decoration-color:blueviolet;';
+  readonly blueviolet: string = 'text-decoration-color:blueviolet;';
   /** CSS 声明：`text-decoration-color:brown;`。 */
-  readonly brown = 'text-decoration-color:brown;';
+  readonly brown: string = 'text-decoration-color:brown;';
   /** CSS 声明：`text-decoration-color:burlywood;`。 */
-  readonly burlywood = 'text-decoration-color:burlywood;';
+  readonly burlywood: string = 'text-decoration-color:burlywood;';
   /** CSS 声明：`text-decoration-color:cadetblue;`。 */
-  readonly cadetblue = 'text-decoration-color:cadetblue;';
+  readonly cadetblue: string = 'text-decoration-color:cadetblue;';
   /** CSS 声明：`text-decoration-color:chartreuse;`。 */
-  readonly chartreuse = 'text-decoration-color:chartreuse;';
+  readonly chartreuse: string = 'text-decoration-color:chartreuse;';
   /** CSS 声明：`text-decoration-color:chocolate;`。 */
-  readonly chocolate = 'text-decoration-color:chocolate;';
+  readonly chocolate: string = 'text-decoration-color:chocolate;';
   /** CSS 声明：`text-decoration-color:coral;`。 */
-  readonly coral = 'text-decoration-color:coral;';
+  readonly coral: string = 'text-decoration-color:coral;';
   /** CSS 声明：`text-decoration-color:cornflowerblue;`。 */
-  readonly cornflowerblue = 'text-decoration-color:cornflowerblue;';
+  readonly cornflowerblue: string = 'text-decoration-color:cornflowerblue;';
   /** CSS 声明：`text-decoration-color:cornsilk;`。 */
-  readonly cornsilk = 'text-decoration-color:cornsilk;';
+  readonly cornsilk: string = 'text-decoration-color:cornsilk;';
   /** CSS 声明：`text-decoration-color:crimson;`。 */
-  readonly crimson = 'text-decoration-color:crimson;';
+  readonly crimson: string = 'text-decoration-color:crimson;';
   /**
    * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
    *
    * CSS 声明：`text-decoration-color:currentColor;`。
    */
-  readonly currentColor = 'text-decoration-color:currentColor;';
+  readonly currentColor: string = 'text-decoration-color:currentColor;';
   /** CSS 声明：`text-decoration-color:cyan;`。 */
-  readonly cyan = 'text-decoration-color:cyan;';
+  readonly cyan: string = 'text-decoration-color:cyan;';
   /** CSS 声明：`text-decoration-color:darkblue;`。 */
-  readonly darkblue = 'text-decoration-color:darkblue;';
+  readonly darkblue: string = 'text-decoration-color:darkblue;';
   /** CSS 声明：`text-decoration-color:darkcyan;`。 */
-  readonly darkcyan = 'text-decoration-color:darkcyan;';
+  readonly darkcyan: string = 'text-decoration-color:darkcyan;';
   /** CSS 声明：`text-decoration-color:darkgoldenrod;`。 */
-  readonly darkgoldenrod = 'text-decoration-color:darkgoldenrod;';
+  readonly darkgoldenrod: string = 'text-decoration-color:darkgoldenrod;';
   /** CSS 声明：`text-decoration-color:darkgray;`。 */
-  readonly darkgray = 'text-decoration-color:darkgray;';
+  readonly darkgray: string = 'text-decoration-color:darkgray;';
   /** CSS 声明：`text-decoration-color:darkgreen;`。 */
-  readonly darkgreen = 'text-decoration-color:darkgreen;';
+  readonly darkgreen: string = 'text-decoration-color:darkgreen;';
   /** CSS 声明：`text-decoration-color:darkgrey;`。 */
-  readonly darkgrey = 'text-decoration-color:darkgrey;';
+  readonly darkgrey: string = 'text-decoration-color:darkgrey;';
   /** CSS 声明：`text-decoration-color:darkkhaki;`。 */
-  readonly darkkhaki = 'text-decoration-color:darkkhaki;';
+  readonly darkkhaki: string = 'text-decoration-color:darkkhaki;';
   /** CSS 声明：`text-decoration-color:darkmagenta;`。 */
-  readonly darkmagenta = 'text-decoration-color:darkmagenta;';
+  readonly darkmagenta: string = 'text-decoration-color:darkmagenta;';
   /** CSS 声明：`text-decoration-color:darkolivegreen;`。 */
-  readonly darkolivegreen = 'text-decoration-color:darkolivegreen;';
+  readonly darkolivegreen: string = 'text-decoration-color:darkolivegreen;';
   /** CSS 声明：`text-decoration-color:darkorange;`。 */
-  readonly darkorange = 'text-decoration-color:darkorange;';
+  readonly darkorange: string = 'text-decoration-color:darkorange;';
   /** CSS 声明：`text-decoration-color:darkorchid;`。 */
-  readonly darkorchid = 'text-decoration-color:darkorchid;';
+  readonly darkorchid: string = 'text-decoration-color:darkorchid;';
   /** CSS 声明：`text-decoration-color:darkred;`。 */
-  readonly darkred = 'text-decoration-color:darkred;';
+  readonly darkred: string = 'text-decoration-color:darkred;';
   /** CSS 声明：`text-decoration-color:darksalmon;`。 */
-  readonly darksalmon = 'text-decoration-color:darksalmon;';
+  readonly darksalmon: string = 'text-decoration-color:darksalmon;';
   /** CSS 声明：`text-decoration-color:darkseagreen;`。 */
-  readonly darkseagreen = 'text-decoration-color:darkseagreen;';
+  readonly darkseagreen: string = 'text-decoration-color:darkseagreen;';
   /** CSS 声明：`text-decoration-color:darkslateblue;`。 */
-  readonly darkslateblue = 'text-decoration-color:darkslateblue;';
+  readonly darkslateblue: string = 'text-decoration-color:darkslateblue;';
   /** CSS 声明：`text-decoration-color:darkslategray;`。 */
-  readonly darkslategray = 'text-decoration-color:darkslategray;';
+  readonly darkslategray: string = 'text-decoration-color:darkslategray;';
   /** CSS 声明：`text-decoration-color:darkslategrey;`。 */
-  readonly darkslategrey = 'text-decoration-color:darkslategrey;';
+  readonly darkslategrey: string = 'text-decoration-color:darkslategrey;';
   /** CSS 声明：`text-decoration-color:darkturquoise;`。 */
-  readonly darkturquoise = 'text-decoration-color:darkturquoise;';
+  readonly darkturquoise: string = 'text-decoration-color:darkturquoise;';
   /** CSS 声明：`text-decoration-color:darkviolet;`。 */
-  readonly darkviolet = 'text-decoration-color:darkviolet;';
+  readonly darkviolet: string = 'text-decoration-color:darkviolet;';
   /** CSS 声明：`text-decoration-color:deeppink;`。 */
-  readonly deeppink = 'text-decoration-color:deeppink;';
+  readonly deeppink: string = 'text-decoration-color:deeppink;';
   /** CSS 声明：`text-decoration-color:deepskyblue;`。 */
-  readonly deepskyblue = 'text-decoration-color:deepskyblue;';
+  readonly deepskyblue: string = 'text-decoration-color:deepskyblue;';
   /** CSS 声明：`text-decoration-color:dimgray;`。 */
-  readonly dimgray = 'text-decoration-color:dimgray;';
+  readonly dimgray: string = 'text-decoration-color:dimgray;';
   /** CSS 声明：`text-decoration-color:dimgrey;`。 */
-  readonly dimgrey = 'text-decoration-color:dimgrey;';
+  readonly dimgrey: string = 'text-decoration-color:dimgrey;';
   /** CSS 声明：`text-decoration-color:dodgerblue;`。 */
-  readonly dodgerblue = 'text-decoration-color:dodgerblue;';
+  readonly dodgerblue: string = 'text-decoration-color:dodgerblue;';
   /** CSS 声明：`text-decoration-color:firebrick;`。 */
-  readonly firebrick = 'text-decoration-color:firebrick;';
+  readonly firebrick: string = 'text-decoration-color:firebrick;';
   /** CSS 声明：`text-decoration-color:floralwhite;`。 */
-  readonly floralwhite = 'text-decoration-color:floralwhite;';
+  readonly floralwhite: string = 'text-decoration-color:floralwhite;';
   /** CSS 声明：`text-decoration-color:forestgreen;`。 */
-  readonly forestgreen = 'text-decoration-color:forestgreen;';
+  readonly forestgreen: string = 'text-decoration-color:forestgreen;';
   /** CSS 声明：`text-decoration-color:fuchsia;`。 */
-  readonly fuchsia = 'text-decoration-color:fuchsia;';
+  readonly fuchsia: string = 'text-decoration-color:fuchsia;';
   /** CSS 声明：`text-decoration-color:gainsboro;`。 */
-  readonly gainsboro = 'text-decoration-color:gainsboro;';
+  readonly gainsboro: string = 'text-decoration-color:gainsboro;';
   /** CSS 声明：`text-decoration-color:ghostwhite;`。 */
-  readonly ghostwhite = 'text-decoration-color:ghostwhite;';
+  readonly ghostwhite: string = 'text-decoration-color:ghostwhite;';
   /** CSS 声明：`text-decoration-color:gold;`。 */
-  readonly gold = 'text-decoration-color:gold;';
+  readonly gold: string = 'text-decoration-color:gold;';
   /** CSS 声明：`text-decoration-color:goldenrod;`。 */
-  readonly goldenrod = 'text-decoration-color:goldenrod;';
+  readonly goldenrod: string = 'text-decoration-color:goldenrod;';
   /** CSS 声明：`text-decoration-color:gray;`。 */
-  readonly gray = 'text-decoration-color:gray;';
+  readonly gray: string = 'text-decoration-color:gray;';
   /** CSS 声明：`text-decoration-color:green;`。 */
-  readonly green = 'text-decoration-color:green;';
+  readonly green: string = 'text-decoration-color:green;';
   /** CSS 声明：`text-decoration-color:greenyellow;`。 */
-  readonly greenyellow = 'text-decoration-color:greenyellow;';
+  readonly greenyellow: string = 'text-decoration-color:greenyellow;';
   /** CSS 声明：`text-decoration-color:grey;`。 */
-  readonly grey = 'text-decoration-color:grey;';
+  readonly grey: string = 'text-decoration-color:grey;';
   /** CSS 声明：`text-decoration-color:honeydew;`。 */
-  readonly honeydew = 'text-decoration-color:honeydew;';
+  readonly honeydew: string = 'text-decoration-color:honeydew;';
   /** CSS 声明：`text-decoration-color:hotpink;`。 */
-  readonly hotpink = 'text-decoration-color:hotpink;';
+  readonly hotpink: string = 'text-decoration-color:hotpink;';
   /** CSS 声明：`text-decoration-color:indianred;`。 */
-  readonly indianred = 'text-decoration-color:indianred;';
+  readonly indianred: string = 'text-decoration-color:indianred;';
   /** CSS 声明：`text-decoration-color:indigo;`。 */
-  readonly indigo = 'text-decoration-color:indigo;';
+  readonly indigo: string = 'text-decoration-color:indigo;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-decoration-color:inherit;`。
    */
-  readonly inherit = 'text-decoration-color:inherit;';
+  readonly inherit: string = 'text-decoration-color:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-decoration-color:initial;`。
    */
-  readonly initial = 'text-decoration-color:initial;';
+  readonly initial: string = 'text-decoration-color:initial;';
   /** CSS 声明：`text-decoration-color:ivory;`。 */
-  readonly ivory = 'text-decoration-color:ivory;';
+  readonly ivory: string = 'text-decoration-color:ivory;';
   /** CSS 声明：`text-decoration-color:khaki;`。 */
-  readonly khaki = 'text-decoration-color:khaki;';
+  readonly khaki: string = 'text-decoration-color:khaki;';
   /** CSS 声明：`text-decoration-color:lavender;`。 */
-  readonly lavender = 'text-decoration-color:lavender;';
+  readonly lavender: string = 'text-decoration-color:lavender;';
   /** CSS 声明：`text-decoration-color:lavenderblush;`。 */
-  readonly lavenderblush = 'text-decoration-color:lavenderblush;';
+  readonly lavenderblush: string = 'text-decoration-color:lavenderblush;';
   /** CSS 声明：`text-decoration-color:lawngreen;`。 */
-  readonly lawngreen = 'text-decoration-color:lawngreen;';
+  readonly lawngreen: string = 'text-decoration-color:lawngreen;';
   /** CSS 声明：`text-decoration-color:lemonchiffon;`。 */
-  readonly lemonchiffon = 'text-decoration-color:lemonchiffon;';
+  readonly lemonchiffon: string = 'text-decoration-color:lemonchiffon;';
   /** CSS 声明：`text-decoration-color:lightblue;`。 */
-  readonly lightblue = 'text-decoration-color:lightblue;';
+  readonly lightblue: string = 'text-decoration-color:lightblue;';
   /** CSS 声明：`text-decoration-color:lightcoral;`。 */
-  readonly lightcoral = 'text-decoration-color:lightcoral;';
+  readonly lightcoral: string = 'text-decoration-color:lightcoral;';
   /** CSS 声明：`text-decoration-color:lightcyan;`。 */
-  readonly lightcyan = 'text-decoration-color:lightcyan;';
+  readonly lightcyan: string = 'text-decoration-color:lightcyan;';
   /** CSS 声明：`text-decoration-color:lightgoldenrodyellow;`。 */
-  readonly lightgoldenrodyellow = 'text-decoration-color:lightgoldenrodyellow;';
+  readonly lightgoldenrodyellow: string = 'text-decoration-color:lightgoldenrodyellow;';
   /** CSS 声明：`text-decoration-color:lightgray;`。 */
-  readonly lightgray = 'text-decoration-color:lightgray;';
+  readonly lightgray: string = 'text-decoration-color:lightgray;';
   /** CSS 声明：`text-decoration-color:lightgreen;`。 */
-  readonly lightgreen = 'text-decoration-color:lightgreen;';
+  readonly lightgreen: string = 'text-decoration-color:lightgreen;';
   /** CSS 声明：`text-decoration-color:lightgrey;`。 */
-  readonly lightgrey = 'text-decoration-color:lightgrey;';
+  readonly lightgrey: string = 'text-decoration-color:lightgrey;';
   /** CSS 声明：`text-decoration-color:lightpink;`。 */
-  readonly lightpink = 'text-decoration-color:lightpink;';
+  readonly lightpink: string = 'text-decoration-color:lightpink;';
   /** CSS 声明：`text-decoration-color:lightsalmon;`。 */
-  readonly lightsalmon = 'text-decoration-color:lightsalmon;';
+  readonly lightsalmon: string = 'text-decoration-color:lightsalmon;';
   /** CSS 声明：`text-decoration-color:lightseagreen;`。 */
-  readonly lightseagreen = 'text-decoration-color:lightseagreen;';
+  readonly lightseagreen: string = 'text-decoration-color:lightseagreen;';
   /** CSS 声明：`text-decoration-color:lightskyblue;`。 */
-  readonly lightskyblue = 'text-decoration-color:lightskyblue;';
+  readonly lightskyblue: string = 'text-decoration-color:lightskyblue;';
   /** CSS 声明：`text-decoration-color:lightslategray;`。 */
-  readonly lightslategray = 'text-decoration-color:lightslategray;';
+  readonly lightslategray: string = 'text-decoration-color:lightslategray;';
   /** CSS 声明：`text-decoration-color:lightslategrey;`。 */
-  readonly lightslategrey = 'text-decoration-color:lightslategrey;';
+  readonly lightslategrey: string = 'text-decoration-color:lightslategrey;';
   /** CSS 声明：`text-decoration-color:lightsteelblue;`。 */
-  readonly lightsteelblue = 'text-decoration-color:lightsteelblue;';
+  readonly lightsteelblue: string = 'text-decoration-color:lightsteelblue;';
   /** CSS 声明：`text-decoration-color:lightyellow;`。 */
-  readonly lightyellow = 'text-decoration-color:lightyellow;';
+  readonly lightyellow: string = 'text-decoration-color:lightyellow;';
   /** CSS 声明：`text-decoration-color:lime;`。 */
-  readonly lime = 'text-decoration-color:lime;';
+  readonly lime: string = 'text-decoration-color:lime;';
   /** CSS 声明：`text-decoration-color:limegreen;`。 */
-  readonly limegreen = 'text-decoration-color:limegreen;';
+  readonly limegreen: string = 'text-decoration-color:limegreen;';
   /** CSS 声明：`text-decoration-color:linen;`。 */
-  readonly linen = 'text-decoration-color:linen;';
+  readonly linen: string = 'text-decoration-color:linen;';
   /** CSS 声明：`text-decoration-color:magenta;`。 */
-  readonly magenta = 'text-decoration-color:magenta;';
+  readonly magenta: string = 'text-decoration-color:magenta;';
   /** CSS 声明：`text-decoration-color:maroon;`。 */
-  readonly maroon = 'text-decoration-color:maroon;';
+  readonly maroon: string = 'text-decoration-color:maroon;';
   /** CSS 声明：`text-decoration-color:mediumaquamarine;`。 */
-  readonly mediumaquamarine = 'text-decoration-color:mediumaquamarine;';
+  readonly mediumaquamarine: string = 'text-decoration-color:mediumaquamarine;';
   /** CSS 声明：`text-decoration-color:mediumblue;`。 */
-  readonly mediumblue = 'text-decoration-color:mediumblue;';
+  readonly mediumblue: string = 'text-decoration-color:mediumblue;';
   /** CSS 声明：`text-decoration-color:mediumorchid;`。 */
-  readonly mediumorchid = 'text-decoration-color:mediumorchid;';
+  readonly mediumorchid: string = 'text-decoration-color:mediumorchid;';
   /** CSS 声明：`text-decoration-color:mediumpurple;`。 */
-  readonly mediumpurple = 'text-decoration-color:mediumpurple;';
+  readonly mediumpurple: string = 'text-decoration-color:mediumpurple;';
   /** CSS 声明：`text-decoration-color:mediumseagreen;`。 */
-  readonly mediumseagreen = 'text-decoration-color:mediumseagreen;';
+  readonly mediumseagreen: string = 'text-decoration-color:mediumseagreen;';
   /** CSS 声明：`text-decoration-color:mediumslateblue;`。 */
-  readonly mediumslateblue = 'text-decoration-color:mediumslateblue;';
+  readonly mediumslateblue: string = 'text-decoration-color:mediumslateblue;';
   /** CSS 声明：`text-decoration-color:mediumspringgreen;`。 */
-  readonly mediumspringgreen = 'text-decoration-color:mediumspringgreen;';
+  readonly mediumspringgreen: string = 'text-decoration-color:mediumspringgreen;';
   /** CSS 声明：`text-decoration-color:mediumturquoise;`。 */
-  readonly mediumturquoise = 'text-decoration-color:mediumturquoise;';
+  readonly mediumturquoise: string = 'text-decoration-color:mediumturquoise;';
   /** CSS 声明：`text-decoration-color:mediumvioletred;`。 */
-  readonly mediumvioletred = 'text-decoration-color:mediumvioletred;';
+  readonly mediumvioletred: string = 'text-decoration-color:mediumvioletred;';
   /** CSS 声明：`text-decoration-color:midnightblue;`。 */
-  readonly midnightblue = 'text-decoration-color:midnightblue;';
+  readonly midnightblue: string = 'text-decoration-color:midnightblue;';
   /** CSS 声明：`text-decoration-color:mintcream;`。 */
-  readonly mintcream = 'text-decoration-color:mintcream;';
+  readonly mintcream: string = 'text-decoration-color:mintcream;';
   /** CSS 声明：`text-decoration-color:mistyrose;`。 */
-  readonly mistyrose = 'text-decoration-color:mistyrose;';
+  readonly mistyrose: string = 'text-decoration-color:mistyrose;';
   /** CSS 声明：`text-decoration-color:moccasin;`。 */
-  readonly moccasin = 'text-decoration-color:moccasin;';
+  readonly moccasin: string = 'text-decoration-color:moccasin;';
   /** CSS 声明：`text-decoration-color:navajowhite;`。 */
-  readonly navajowhite = 'text-decoration-color:navajowhite;';
+  readonly navajowhite: string = 'text-decoration-color:navajowhite;';
   /** CSS 声明：`text-decoration-color:navy;`。 */
-  readonly navy = 'text-decoration-color:navy;';
+  readonly navy: string = 'text-decoration-color:navy;';
   /** CSS 声明：`text-decoration-color:oldlace;`。 */
-  readonly oldlace = 'text-decoration-color:oldlace;';
+  readonly oldlace: string = 'text-decoration-color:oldlace;';
   /** CSS 声明：`text-decoration-color:olive;`。 */
-  readonly olive = 'text-decoration-color:olive;';
+  readonly olive: string = 'text-decoration-color:olive;';
   /** CSS 声明：`text-decoration-color:olivedrab;`。 */
-  readonly olivedrab = 'text-decoration-color:olivedrab;';
+  readonly olivedrab: string = 'text-decoration-color:olivedrab;';
   /** CSS 声明：`text-decoration-color:orange;`。 */
-  readonly orange = 'text-decoration-color:orange;';
+  readonly orange: string = 'text-decoration-color:orange;';
   /** CSS 声明：`text-decoration-color:orangered;`。 */
-  readonly orangered = 'text-decoration-color:orangered;';
+  readonly orangered: string = 'text-decoration-color:orangered;';
   /** CSS 声明：`text-decoration-color:orchid;`。 */
-  readonly orchid = 'text-decoration-color:orchid;';
+  readonly orchid: string = 'text-decoration-color:orchid;';
   /** CSS 声明：`text-decoration-color:palegoldenrod;`。 */
-  readonly palegoldenrod = 'text-decoration-color:palegoldenrod;';
+  readonly palegoldenrod: string = 'text-decoration-color:palegoldenrod;';
   /** CSS 声明：`text-decoration-color:palegreen;`。 */
-  readonly palegreen = 'text-decoration-color:palegreen;';
+  readonly palegreen: string = 'text-decoration-color:palegreen;';
   /** CSS 声明：`text-decoration-color:paleturquoise;`。 */
-  readonly paleturquoise = 'text-decoration-color:paleturquoise;';
+  readonly paleturquoise: string = 'text-decoration-color:paleturquoise;';
   /** CSS 声明：`text-decoration-color:palevioletred;`。 */
-  readonly palevioletred = 'text-decoration-color:palevioletred;';
+  readonly palevioletred: string = 'text-decoration-color:palevioletred;';
   /** CSS 声明：`text-decoration-color:papayawhip;`。 */
-  readonly papayawhip = 'text-decoration-color:papayawhip;';
+  readonly papayawhip: string = 'text-decoration-color:papayawhip;';
   /** CSS 声明：`text-decoration-color:peachpuff;`。 */
-  readonly peachpuff = 'text-decoration-color:peachpuff;';
+  readonly peachpuff: string = 'text-decoration-color:peachpuff;';
   /** CSS 声明：`text-decoration-color:peru;`。 */
-  readonly peru = 'text-decoration-color:peru;';
+  readonly peru: string = 'text-decoration-color:peru;';
   /** CSS 声明：`text-decoration-color:pink;`。 */
-  readonly pink = 'text-decoration-color:pink;';
+  readonly pink: string = 'text-decoration-color:pink;';
   /** CSS 声明：`text-decoration-color:plum;`。 */
-  readonly plum = 'text-decoration-color:plum;';
+  readonly plum: string = 'text-decoration-color:plum;';
   /** CSS 声明：`text-decoration-color:powderblue;`。 */
-  readonly powderblue = 'text-decoration-color:powderblue;';
+  readonly powderblue: string = 'text-decoration-color:powderblue;';
   /** CSS 声明：`text-decoration-color:purple;`。 */
-  readonly purple = 'text-decoration-color:purple;';
+  readonly purple: string = 'text-decoration-color:purple;';
   /** CSS 声明：`text-decoration-color:rebeccapurple;`。 */
-  readonly rebeccapurple = 'text-decoration-color:rebeccapurple;';
+  readonly rebeccapurple: string = 'text-decoration-color:rebeccapurple;';
   /** CSS 声明：`text-decoration-color:red;`。 */
-  readonly red = 'text-decoration-color:red;';
+  readonly red: string = 'text-decoration-color:red;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-decoration-color:revert;`。
    */
-  readonly revert = 'text-decoration-color:revert;';
+  readonly revert: string = 'text-decoration-color:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-decoration-color:revert-layer;`。
    */
-  readonly revertLayer = 'text-decoration-color:revert-layer;';
+  readonly revertLayer: string = 'text-decoration-color:revert-layer;';
   /** CSS 声明：`text-decoration-color:rosybrown;`。 */
-  readonly rosybrown = 'text-decoration-color:rosybrown;';
+  readonly rosybrown: string = 'text-decoration-color:rosybrown;';
   /** CSS 声明：`text-decoration-color:royalblue;`。 */
-  readonly royalblue = 'text-decoration-color:royalblue;';
+  readonly royalblue: string = 'text-decoration-color:royalblue;';
   /** CSS 声明：`text-decoration-color:saddlebrown;`。 */
-  readonly saddlebrown = 'text-decoration-color:saddlebrown;';
+  readonly saddlebrown: string = 'text-decoration-color:saddlebrown;';
   /** CSS 声明：`text-decoration-color:salmon;`。 */
-  readonly salmon = 'text-decoration-color:salmon;';
+  readonly salmon: string = 'text-decoration-color:salmon;';
   /** CSS 声明：`text-decoration-color:sandybrown;`。 */
-  readonly sandybrown = 'text-decoration-color:sandybrown;';
+  readonly sandybrown: string = 'text-decoration-color:sandybrown;';
   /** CSS 声明：`text-decoration-color:seagreen;`。 */
-  readonly seagreen = 'text-decoration-color:seagreen;';
+  readonly seagreen: string = 'text-decoration-color:seagreen;';
   /** CSS 声明：`text-decoration-color:seashell;`。 */
-  readonly seashell = 'text-decoration-color:seashell;';
+  readonly seashell: string = 'text-decoration-color:seashell;';
   /** CSS 声明：`text-decoration-color:sienna;`。 */
-  readonly sienna = 'text-decoration-color:sienna;';
+  readonly sienna: string = 'text-decoration-color:sienna;';
   /** CSS 声明：`text-decoration-color:silver;`。 */
-  readonly silver = 'text-decoration-color:silver;';
+  readonly silver: string = 'text-decoration-color:silver;';
   /** CSS 声明：`text-decoration-color:skyblue;`。 */
-  readonly skyblue = 'text-decoration-color:skyblue;';
+  readonly skyblue: string = 'text-decoration-color:skyblue;';
   /** CSS 声明：`text-decoration-color:slateblue;`。 */
-  readonly slateblue = 'text-decoration-color:slateblue;';
+  readonly slateblue: string = 'text-decoration-color:slateblue;';
   /** CSS 声明：`text-decoration-color:slategray;`。 */
-  readonly slategray = 'text-decoration-color:slategray;';
+  readonly slategray: string = 'text-decoration-color:slategray;';
   /** CSS 声明：`text-decoration-color:slategrey;`。 */
-  readonly slategrey = 'text-decoration-color:slategrey;';
+  readonly slategrey: string = 'text-decoration-color:slategrey;';
   /** CSS 声明：`text-decoration-color:snow;`。 */
-  readonly snow = 'text-decoration-color:snow;';
+  readonly snow: string = 'text-decoration-color:snow;';
   /** CSS 声明：`text-decoration-color:springgreen;`。 */
-  readonly springgreen = 'text-decoration-color:springgreen;';
+  readonly springgreen: string = 'text-decoration-color:springgreen;';
   /** CSS 声明：`text-decoration-color:steelblue;`。 */
-  readonly steelblue = 'text-decoration-color:steelblue;';
+  readonly steelblue: string = 'text-decoration-color:steelblue;';
   /** CSS 声明：`text-decoration-color:tan;`。 */
-  readonly tan = 'text-decoration-color:tan;';
+  readonly tan: string = 'text-decoration-color:tan;';
   /** CSS 声明：`text-decoration-color:teal;`。 */
-  readonly teal = 'text-decoration-color:teal;';
+  readonly teal: string = 'text-decoration-color:teal;';
   /** CSS 声明：`text-decoration-color:thistle;`。 */
-  readonly thistle = 'text-decoration-color:thistle;';
+  readonly thistle: string = 'text-decoration-color:thistle;';
   /** CSS 声明：`text-decoration-color:tomato;`。 */
-  readonly tomato = 'text-decoration-color:tomato;';
+  readonly tomato: string = 'text-decoration-color:tomato;';
   /**
    * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
    *
    * CSS 声明：`text-decoration-color:transparent;`。
    */
-  readonly transparent = 'text-decoration-color:transparent;';
+  readonly transparent: string = 'text-decoration-color:transparent;';
   /** CSS 声明：`text-decoration-color:turquoise;`。 */
-  readonly turquoise = 'text-decoration-color:turquoise;';
+  readonly turquoise: string = 'text-decoration-color:turquoise;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-decoration-color:unset;`。
    */
-  readonly unset = 'text-decoration-color:unset;';
+  readonly unset: string = 'text-decoration-color:unset;';
   /** CSS 声明：`text-decoration-color:violet;`。 */
-  readonly violet = 'text-decoration-color:violet;';
+  readonly violet: string = 'text-decoration-color:violet;';
   /** CSS 声明：`text-decoration-color:wheat;`。 */
-  readonly wheat = 'text-decoration-color:wheat;';
+  readonly wheat: string = 'text-decoration-color:wheat;';
   /** CSS 声明：`text-decoration-color:white;`。 */
-  readonly white = 'text-decoration-color:white;';
+  readonly white: string = 'text-decoration-color:white;';
   /** CSS 声明：`text-decoration-color:whitesmoke;`。 */
-  readonly whitesmoke = 'text-decoration-color:whitesmoke;';
+  readonly whitesmoke: string = 'text-decoration-color:whitesmoke;';
   /** CSS 声明：`text-decoration-color:yellow;`。 */
-  readonly yellow = 'text-decoration-color:yellow;';
+  readonly yellow: string = 'text-decoration-color:yellow;';
   /** CSS 声明：`text-decoration-color:yellowgreen;`。 */
-  readonly yellowgreen = 'text-decoration-color:yellowgreen;';
+  readonly yellowgreen: string = 'text-decoration-color:yellowgreen;';
   /**
    * 创建 text-decoration-color 属性作者；普通使用通过 s.textDecorationColor 取得共享实例。
    * @example
@@ -20906,6 +28432,80 @@ export class TextDecorationColorCss extends CssProperty {
 }
 
 /**
+ * text-decoration-line 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextDecorationLineKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-line:blink;`。 */
+  readonly blink: Property.TextDecorationLine | CssString = 'blink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-line:grammar-error;`。 */
+  readonly grammarError: Property.TextDecorationLine | CssString = 'grammar-error';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-decoration-line:inherit;`。
+   */
+  readonly inherit: Property.TextDecorationLine | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-decoration-line:initial;`。
+   */
+  readonly initial: Property.TextDecorationLine | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-line:line-through;`。 */
+  readonly lineThrough: Property.TextDecorationLine | CssString = 'line-through';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-line:none;`。 */
+  readonly none: Property.TextDecorationLine | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-line:overline;`。 */
+  readonly overline: Property.TextDecorationLine | CssString = 'overline';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-decoration-line:revert;`。
+   */
+  readonly revert: Property.TextDecorationLine | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-decoration-line:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextDecorationLine | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-line:spelling-error;`。 */
+  readonly spellingError: Property.TextDecorationLine | CssString = 'spelling-error';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-line:underline;`。 */
+  readonly underline: Property.TextDecorationLine | CssString = 'underline';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-decoration-line:unset;`。
+   */
+  readonly unset: Property.TextDecorationLine | CssString = 'unset';
+}
+
+/**
  * 设置下划线、上划线或删除线等装饰线位置。（text-decoration-line）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -20913,49 +28513,49 @@ export class TextDecorationColorCss extends CssProperty {
  */
 export class TextDecorationLineCss extends CssProperty {
   /** CSS 声明：`text-decoration-line:blink;`。 */
-  readonly blink = 'text-decoration-line:blink;';
+  readonly blink: string = 'text-decoration-line:blink;';
   /** CSS 声明：`text-decoration-line:grammar-error;`。 */
-  readonly grammarError = 'text-decoration-line:grammar-error;';
+  readonly grammarError: string = 'text-decoration-line:grammar-error;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-decoration-line:inherit;`。
    */
-  readonly inherit = 'text-decoration-line:inherit;';
+  readonly inherit: string = 'text-decoration-line:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-decoration-line:initial;`。
    */
-  readonly initial = 'text-decoration-line:initial;';
+  readonly initial: string = 'text-decoration-line:initial;';
   /** CSS 声明：`text-decoration-line:line-through;`。 */
-  readonly lineThrough = 'text-decoration-line:line-through;';
+  readonly lineThrough: string = 'text-decoration-line:line-through;';
   /** CSS 声明：`text-decoration-line:none;`。 */
-  readonly none = 'text-decoration-line:none;';
+  readonly none: string = 'text-decoration-line:none;';
   /** CSS 声明：`text-decoration-line:overline;`。 */
-  readonly overline = 'text-decoration-line:overline;';
+  readonly overline: string = 'text-decoration-line:overline;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-decoration-line:revert;`。
    */
-  readonly revert = 'text-decoration-line:revert;';
+  readonly revert: string = 'text-decoration-line:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-decoration-line:revert-layer;`。
    */
-  readonly revertLayer = 'text-decoration-line:revert-layer;';
+  readonly revertLayer: string = 'text-decoration-line:revert-layer;';
   /** CSS 声明：`text-decoration-line:spelling-error;`。 */
-  readonly spellingError = 'text-decoration-line:spelling-error;';
+  readonly spellingError: string = 'text-decoration-line:spelling-error;';
   /** CSS 声明：`text-decoration-line:underline;`。 */
-  readonly underline = 'text-decoration-line:underline;';
+  readonly underline: string = 'text-decoration-line:underline;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-decoration-line:unset;`。
    */
-  readonly unset = 'text-decoration-line:unset;';
+  readonly unset: string = 'text-decoration-line:unset;';
   /**
    * 创建 text-decoration-line 属性作者；普通使用通过 s.textDecorationLine 取得共享实例。
    * @example
@@ -20979,6 +28579,80 @@ export class TextDecorationLineCss extends CssProperty {
 }
 
 /**
+ * text-decoration-skip 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextDecorationSkipKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip:box-decoration;`。 */
+  readonly boxDecoration: Property.TextDecorationSkip | CssString = 'box-decoration';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip:edges;`。 */
+  readonly edges: Property.TextDecorationSkip | CssString = 'edges';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-decoration-skip:inherit;`。
+   */
+  readonly inherit: Property.TextDecorationSkip | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-decoration-skip:initial;`。
+   */
+  readonly initial: Property.TextDecorationSkip | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip:leading-spaces;`。 */
+  readonly leadingSpaces: Property.TextDecorationSkip | CssString = 'leading-spaces';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip:none;`。 */
+  readonly none: Property.TextDecorationSkip | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip:objects;`。 */
+  readonly objects: Property.TextDecorationSkip | CssString = 'objects';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-decoration-skip:revert;`。
+   */
+  readonly revert: Property.TextDecorationSkip | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-decoration-skip:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextDecorationSkip | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip:spaces;`。 */
+  readonly spaces: Property.TextDecorationSkip | CssString = 'spaces';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip:trailing-spaces;`。 */
+  readonly trailingSpaces: Property.TextDecorationSkip | CssString = 'trailing-spaces';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-decoration-skip:unset;`。
+   */
+  readonly unset: Property.TextDecorationSkip | CssString = 'unset';
+}
+
+/**
  * 设置文本装饰线跳过哪些内容；具体语法需核对支持情况。（text-decoration-skip）
  *
  * CSS 初始值：`objects`（不同于浏览器默认样式表）。
@@ -20986,49 +28660,49 @@ export class TextDecorationLineCss extends CssProperty {
  */
 export class TextDecorationSkipCss extends CssProperty {
   /** CSS 声明：`text-decoration-skip:box-decoration;`。 */
-  readonly boxDecoration = 'text-decoration-skip:box-decoration;';
+  readonly boxDecoration: string = 'text-decoration-skip:box-decoration;';
   /** CSS 声明：`text-decoration-skip:edges;`。 */
-  readonly edges = 'text-decoration-skip:edges;';
+  readonly edges: string = 'text-decoration-skip:edges;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-decoration-skip:inherit;`。
    */
-  readonly inherit = 'text-decoration-skip:inherit;';
+  readonly inherit: string = 'text-decoration-skip:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-decoration-skip:initial;`。
    */
-  readonly initial = 'text-decoration-skip:initial;';
+  readonly initial: string = 'text-decoration-skip:initial;';
   /** CSS 声明：`text-decoration-skip:leading-spaces;`。 */
-  readonly leadingSpaces = 'text-decoration-skip:leading-spaces;';
+  readonly leadingSpaces: string = 'text-decoration-skip:leading-spaces;';
   /** CSS 声明：`text-decoration-skip:none;`。 */
-  readonly none = 'text-decoration-skip:none;';
+  readonly none: string = 'text-decoration-skip:none;';
   /** CSS 声明：`text-decoration-skip:objects;`。 */
-  readonly objects = 'text-decoration-skip:objects;';
+  readonly objects: string = 'text-decoration-skip:objects;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-decoration-skip:revert;`。
    */
-  readonly revert = 'text-decoration-skip:revert;';
+  readonly revert: string = 'text-decoration-skip:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-decoration-skip:revert-layer;`。
    */
-  readonly revertLayer = 'text-decoration-skip:revert-layer;';
+  readonly revertLayer: string = 'text-decoration-skip:revert-layer;';
   /** CSS 声明：`text-decoration-skip:spaces;`。 */
-  readonly spaces = 'text-decoration-skip:spaces;';
+  readonly spaces: string = 'text-decoration-skip:spaces;';
   /** CSS 声明：`text-decoration-skip:trailing-spaces;`。 */
-  readonly trailingSpaces = 'text-decoration-skip:trailing-spaces;';
+  readonly trailingSpaces: string = 'text-decoration-skip:trailing-spaces;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-decoration-skip:unset;`。
    */
-  readonly unset = 'text-decoration-skip:unset;';
+  readonly unset: string = 'text-decoration-skip:unset;';
   /**
    * 创建 text-decoration-skip 属性作者；普通使用通过 s.textDecorationSkip 取得共享实例。
    * @example
@@ -21052,6 +28726,64 @@ export class TextDecorationSkipCss extends CssProperty {
 }
 
 /**
+ * text-decoration-skip-ink 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextDecorationSkipInkKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip-ink:all;`。 */
+  readonly all: Property.TextDecorationSkipInk | CssString = 'all';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip-ink:auto;`。 */
+  readonly auto: Property.TextDecorationSkipInk | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-decoration-skip-ink:inherit;`。
+   */
+  readonly inherit: Property.TextDecorationSkipInk | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-decoration-skip-ink:initial;`。
+   */
+  readonly initial: Property.TextDecorationSkipInk | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-skip-ink:none;`。 */
+  readonly none: Property.TextDecorationSkipInk | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-decoration-skip-ink:revert;`。
+   */
+  readonly revert: Property.TextDecorationSkipInk | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-decoration-skip-ink:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextDecorationSkipInk | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-decoration-skip-ink:unset;`。
+   */
+  readonly unset: Property.TextDecorationSkipInk | CssString = 'unset';
+}
+
+/**
  * 设置装饰线是否避让字形的笔画。（text-decoration-skip-ink）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -21059,41 +28791,41 @@ export class TextDecorationSkipCss extends CssProperty {
  */
 export class TextDecorationSkipInkCss extends CssProperty {
   /** CSS 声明：`text-decoration-skip-ink:all;`。 */
-  readonly all = 'text-decoration-skip-ink:all;';
+  readonly all: string = 'text-decoration-skip-ink:all;';
   /** CSS 声明：`text-decoration-skip-ink:auto;`。 */
-  readonly auto = 'text-decoration-skip-ink:auto;';
+  readonly auto: string = 'text-decoration-skip-ink:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-decoration-skip-ink:inherit;`。
    */
-  readonly inherit = 'text-decoration-skip-ink:inherit;';
+  readonly inherit: string = 'text-decoration-skip-ink:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-decoration-skip-ink:initial;`。
    */
-  readonly initial = 'text-decoration-skip-ink:initial;';
+  readonly initial: string = 'text-decoration-skip-ink:initial;';
   /** CSS 声明：`text-decoration-skip-ink:none;`。 */
-  readonly none = 'text-decoration-skip-ink:none;';
+  readonly none: string = 'text-decoration-skip-ink:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-decoration-skip-ink:revert;`。
    */
-  readonly revert = 'text-decoration-skip-ink:revert;';
+  readonly revert: string = 'text-decoration-skip-ink:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-decoration-skip-ink:revert-layer;`。
    */
-  readonly revertLayer = 'text-decoration-skip-ink:revert-layer;';
+  readonly revertLayer: string = 'text-decoration-skip-ink:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-decoration-skip-ink:unset;`。
    */
-  readonly unset = 'text-decoration-skip-ink:unset;';
+  readonly unset: string = 'text-decoration-skip-ink:unset;';
   /**
    * 创建 text-decoration-skip-ink 属性作者；普通使用通过 s.textDecorationSkipInk 取得共享实例。
    * @example
@@ -21117,6 +28849,72 @@ export class TextDecorationSkipInkCss extends CssProperty {
 }
 
 /**
+ * text-decoration-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextDecorationStyleKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-style:dashed;`。 */
+  readonly dashed: Property.TextDecorationStyle | CssString = 'dashed';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-style:dotted;`。 */
+  readonly dotted: Property.TextDecorationStyle | CssString = 'dotted';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-style:double;`。 */
+  readonly double: Property.TextDecorationStyle | CssString = 'double';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-decoration-style:inherit;`。
+   */
+  readonly inherit: Property.TextDecorationStyle | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-decoration-style:initial;`。
+   */
+  readonly initial: Property.TextDecorationStyle | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-decoration-style:revert;`。
+   */
+  readonly revert: Property.TextDecorationStyle | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-decoration-style:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextDecorationStyle | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-style:solid;`。 */
+  readonly solid: Property.TextDecorationStyle | CssString = 'solid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-decoration-style:unset;`。
+   */
+  readonly unset: Property.TextDecorationStyle | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-style:wavy;`。 */
+  readonly wavy: Property.TextDecorationStyle | CssString = 'wavy';
+}
+
+/**
  * 设置文本装饰线的实线、波浪线等线型。（text-decoration-style）
  *
  * CSS 初始值：`solid`（不同于浏览器默认样式表）。
@@ -21124,45 +28922,45 @@ export class TextDecorationSkipInkCss extends CssProperty {
  */
 export class TextDecorationStyleCss extends CssProperty {
   /** CSS 声明：`text-decoration-style:dashed;`。 */
-  readonly dashed = 'text-decoration-style:dashed;';
+  readonly dashed: string = 'text-decoration-style:dashed;';
   /** CSS 声明：`text-decoration-style:dotted;`。 */
-  readonly dotted = 'text-decoration-style:dotted;';
+  readonly dotted: string = 'text-decoration-style:dotted;';
   /** CSS 声明：`text-decoration-style:double;`。 */
-  readonly double = 'text-decoration-style:double;';
+  readonly double: string = 'text-decoration-style:double;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-decoration-style:inherit;`。
    */
-  readonly inherit = 'text-decoration-style:inherit;';
+  readonly inherit: string = 'text-decoration-style:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-decoration-style:initial;`。
    */
-  readonly initial = 'text-decoration-style:initial;';
+  readonly initial: string = 'text-decoration-style:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-decoration-style:revert;`。
    */
-  readonly revert = 'text-decoration-style:revert;';
+  readonly revert: string = 'text-decoration-style:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-decoration-style:revert-layer;`。
    */
-  readonly revertLayer = 'text-decoration-style:revert-layer;';
+  readonly revertLayer: string = 'text-decoration-style:revert-layer;';
   /** CSS 声明：`text-decoration-style:solid;`。 */
-  readonly solid = 'text-decoration-style:solid;';
+  readonly solid: string = 'text-decoration-style:solid;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-decoration-style:unset;`。
    */
-  readonly unset = 'text-decoration-style:unset;';
+  readonly unset: string = 'text-decoration-style:unset;';
   /** CSS 声明：`text-decoration-style:wavy;`。 */
-  readonly wavy = 'text-decoration-style:wavy;';
+  readonly wavy: string = 'text-decoration-style:wavy;';
   /**
    * 创建 text-decoration-style 属性作者；普通使用通过 s.textDecorationStyle 取得共享实例。
    * @example
@@ -21186,6 +28984,60 @@ export class TextDecorationStyleCss extends CssProperty {
 }
 
 /**
+ * text-decoration-thickness 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextDecorationThicknessKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-thickness:auto;`。 */
+  readonly auto: Property.TextDecorationThickness | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-decoration-thickness:from-font;`。 */
+  readonly fromFont: Property.TextDecorationThickness | CssString = 'from-font';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-decoration-thickness:inherit;`。
+   */
+  readonly inherit: Property.TextDecorationThickness | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-decoration-thickness:initial;`。
+   */
+  readonly initial: Property.TextDecorationThickness | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-decoration-thickness:revert;`。
+   */
+  readonly revert: Property.TextDecorationThickness | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-decoration-thickness:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextDecorationThickness | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-decoration-thickness:unset;`。
+   */
+  readonly unset: Property.TextDecorationThickness | CssString = 'unset';
+}
+
+/**
  * 设置文本装饰线粗细。（text-decoration-thickness）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -21193,39 +29045,39 @@ export class TextDecorationStyleCss extends CssProperty {
  */
 export class TextDecorationThicknessCss extends LengthCssProperty {
   /** CSS 声明：`text-decoration-thickness:auto;`。 */
-  readonly auto = 'text-decoration-thickness:auto;';
+  readonly auto: string = 'text-decoration-thickness:auto;';
   /** CSS 声明：`text-decoration-thickness:from-font;`。 */
-  readonly fromFont = 'text-decoration-thickness:from-font;';
+  readonly fromFont: string = 'text-decoration-thickness:from-font;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-decoration-thickness:inherit;`。
    */
-  readonly inherit = 'text-decoration-thickness:inherit;';
+  readonly inherit: string = 'text-decoration-thickness:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-decoration-thickness:initial;`。
    */
-  readonly initial = 'text-decoration-thickness:initial;';
+  readonly initial: string = 'text-decoration-thickness:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-decoration-thickness:revert;`。
    */
-  readonly revert = 'text-decoration-thickness:revert;';
+  readonly revert: string = 'text-decoration-thickness:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-decoration-thickness:revert-layer;`。
    */
-  readonly revertLayer = 'text-decoration-thickness:revert-layer;';
+  readonly revertLayer: string = 'text-decoration-thickness:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-decoration-thickness:unset;`。
    */
-  readonly unset = 'text-decoration-thickness:unset;';
+  readonly unset: string = 'text-decoration-thickness:unset;';
   /**
    * 创建 text-decoration-thickness 属性作者；普通使用通过 s.textDecorationThickness 取得共享实例。
    * @example
@@ -21317,448 +29169,1302 @@ export class TextDecorationThicknessCss extends LengthCssProperty {
 }
 
 /**
+ * text-emphasis 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextEmphasisKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:AccentColor;`。 */
+  readonly AccentColor: Property.TextEmphasis | CssString = 'AccentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:AccentColorText;`。 */
+  readonly AccentColorText: Property.TextEmphasis | CssString = 'AccentColorText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ActiveBorder;`。 */
+  readonly ActiveBorder: Property.TextEmphasis | CssString = 'ActiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ActiveCaption;`。 */
+  readonly ActiveCaption: Property.TextEmphasis | CssString = 'ActiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ActiveText;`。 */
+  readonly ActiveText: Property.TextEmphasis | CssString = 'ActiveText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:AppWorkspace;`。 */
+  readonly AppWorkspace: Property.TextEmphasis | CssString = 'AppWorkspace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:Background;`。 */
+  readonly Background: Property.TextEmphasis | CssString = 'Background';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ButtonBorder;`。 */
+  readonly ButtonBorder: Property.TextEmphasis | CssString = 'ButtonBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ButtonFace;`。 */
+  readonly ButtonFace: Property.TextEmphasis | CssString = 'ButtonFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ButtonHighlight;`。 */
+  readonly ButtonHighlight: Property.TextEmphasis | CssString = 'ButtonHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ButtonShadow;`。 */
+  readonly ButtonShadow: Property.TextEmphasis | CssString = 'ButtonShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ButtonText;`。 */
+  readonly ButtonText: Property.TextEmphasis | CssString = 'ButtonText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:Canvas;`。 */
+  readonly Canvas: Property.TextEmphasis | CssString = 'Canvas';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:CanvasText;`。 */
+  readonly CanvasText: Property.TextEmphasis | CssString = 'CanvasText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:CaptionText;`。 */
+  readonly CaptionText: Property.TextEmphasis | CssString = 'CaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:Field;`。 */
+  readonly Field: Property.TextEmphasis | CssString = 'Field';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:FieldText;`。 */
+  readonly FieldText: Property.TextEmphasis | CssString = 'FieldText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:GrayText;`。 */
+  readonly GrayText: Property.TextEmphasis | CssString = 'GrayText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:Highlight;`。 */
+  readonly Highlight: Property.TextEmphasis | CssString = 'Highlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:HighlightText;`。 */
+  readonly HighlightText: Property.TextEmphasis | CssString = 'HighlightText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:InactiveBorder;`。 */
+  readonly InactiveBorder: Property.TextEmphasis | CssString = 'InactiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:InactiveCaption;`。 */
+  readonly InactiveCaption: Property.TextEmphasis | CssString = 'InactiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:InactiveCaptionText;`。 */
+  readonly InactiveCaptionText: Property.TextEmphasis | CssString = 'InactiveCaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:InfoBackground;`。 */
+  readonly InfoBackground: Property.TextEmphasis | CssString = 'InfoBackground';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:InfoText;`。 */
+  readonly InfoText: Property.TextEmphasis | CssString = 'InfoText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:LinkText;`。 */
+  readonly LinkText: Property.TextEmphasis | CssString = 'LinkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:Mark;`。 */
+  readonly Mark: Property.TextEmphasis | CssString = 'Mark';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:MarkText;`。 */
+  readonly MarkText: Property.TextEmphasis | CssString = 'MarkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:Menu;`。 */
+  readonly Menu: Property.TextEmphasis | CssString = 'Menu';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:MenuText;`。 */
+  readonly MenuText: Property.TextEmphasis | CssString = 'MenuText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:Scrollbar;`。 */
+  readonly Scrollbar: Property.TextEmphasis | CssString = 'Scrollbar';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:SelectedItem;`。 */
+  readonly SelectedItem: Property.TextEmphasis | CssString = 'SelectedItem';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:SelectedItemText;`。 */
+  readonly SelectedItemText: Property.TextEmphasis | CssString = 'SelectedItemText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ThreeDDarkShadow;`。 */
+  readonly ThreeDDarkShadow: Property.TextEmphasis | CssString = 'ThreeDDarkShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ThreeDFace;`。 */
+  readonly ThreeDFace: Property.TextEmphasis | CssString = 'ThreeDFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ThreeDHighlight;`。 */
+  readonly ThreeDHighlight: Property.TextEmphasis | CssString = 'ThreeDHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ThreeDLightShadow;`。 */
+  readonly ThreeDLightShadow: Property.TextEmphasis | CssString = 'ThreeDLightShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ThreeDShadow;`。 */
+  readonly ThreeDShadow: Property.TextEmphasis | CssString = 'ThreeDShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:VisitedText;`。 */
+  readonly VisitedText: Property.TextEmphasis | CssString = 'VisitedText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:Window;`。 */
+  readonly Window: Property.TextEmphasis | CssString = 'Window';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:WindowFrame;`。 */
+  readonly WindowFrame: Property.TextEmphasis | CssString = 'WindowFrame';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:WindowText;`。 */
+  readonly WindowText: Property.TextEmphasis | CssString = 'WindowText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:aliceblue;`。 */
+  readonly aliceblue: Property.TextEmphasis | CssString = 'aliceblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:antiquewhite;`。 */
+  readonly antiquewhite: Property.TextEmphasis | CssString = 'antiquewhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:aqua;`。 */
+  readonly aqua: Property.TextEmphasis | CssString = 'aqua';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:aquamarine;`。 */
+  readonly aquamarine: Property.TextEmphasis | CssString = 'aquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:azure;`。 */
+  readonly azure: Property.TextEmphasis | CssString = 'azure';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:beige;`。 */
+  readonly beige: Property.TextEmphasis | CssString = 'beige';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:bisque;`。 */
+  readonly bisque: Property.TextEmphasis | CssString = 'bisque';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:black;`。 */
+  readonly black: Property.TextEmphasis | CssString = 'black';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:blanchedalmond;`。 */
+  readonly blanchedalmond: Property.TextEmphasis | CssString = 'blanchedalmond';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:blue;`。 */
+  readonly blue: Property.TextEmphasis | CssString = 'blue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:blueviolet;`。 */
+  readonly blueviolet: Property.TextEmphasis | CssString = 'blueviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:brown;`。 */
+  readonly brown: Property.TextEmphasis | CssString = 'brown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:burlywood;`。 */
+  readonly burlywood: Property.TextEmphasis | CssString = 'burlywood';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:cadetblue;`。 */
+  readonly cadetblue: Property.TextEmphasis | CssString = 'cadetblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:chartreuse;`。 */
+  readonly chartreuse: Property.TextEmphasis | CssString = 'chartreuse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:chocolate;`。 */
+  readonly chocolate: Property.TextEmphasis | CssString = 'chocolate';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:circle;`。 */
+  readonly circle: Property.TextEmphasis | CssString = 'circle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:coral;`。 */
+  readonly coral: Property.TextEmphasis | CssString = 'coral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:cornflowerblue;`。 */
+  readonly cornflowerblue: Property.TextEmphasis | CssString = 'cornflowerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:cornsilk;`。 */
+  readonly cornsilk: Property.TextEmphasis | CssString = 'cornsilk';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:crimson;`。 */
+  readonly crimson: Property.TextEmphasis | CssString = 'crimson';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
+   *
+   * CSS 声明：`text-emphasis:currentColor;`。
+   */
+  readonly currentColor: Property.TextEmphasis | CssString = 'currentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:cyan;`。 */
+  readonly cyan: Property.TextEmphasis | CssString = 'cyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkblue;`。 */
+  readonly darkblue: Property.TextEmphasis | CssString = 'darkblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkcyan;`。 */
+  readonly darkcyan: Property.TextEmphasis | CssString = 'darkcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkgoldenrod;`。 */
+  readonly darkgoldenrod: Property.TextEmphasis | CssString = 'darkgoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkgray;`。 */
+  readonly darkgray: Property.TextEmphasis | CssString = 'darkgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkgreen;`。 */
+  readonly darkgreen: Property.TextEmphasis | CssString = 'darkgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkgrey;`。 */
+  readonly darkgrey: Property.TextEmphasis | CssString = 'darkgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkkhaki;`。 */
+  readonly darkkhaki: Property.TextEmphasis | CssString = 'darkkhaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkmagenta;`。 */
+  readonly darkmagenta: Property.TextEmphasis | CssString = 'darkmagenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkolivegreen;`。 */
+  readonly darkolivegreen: Property.TextEmphasis | CssString = 'darkolivegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkorange;`。 */
+  readonly darkorange: Property.TextEmphasis | CssString = 'darkorange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkorchid;`。 */
+  readonly darkorchid: Property.TextEmphasis | CssString = 'darkorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkred;`。 */
+  readonly darkred: Property.TextEmphasis | CssString = 'darkred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darksalmon;`。 */
+  readonly darksalmon: Property.TextEmphasis | CssString = 'darksalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkseagreen;`。 */
+  readonly darkseagreen: Property.TextEmphasis | CssString = 'darkseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkslateblue;`。 */
+  readonly darkslateblue: Property.TextEmphasis | CssString = 'darkslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkslategray;`。 */
+  readonly darkslategray: Property.TextEmphasis | CssString = 'darkslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkslategrey;`。 */
+  readonly darkslategrey: Property.TextEmphasis | CssString = 'darkslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkturquoise;`。 */
+  readonly darkturquoise: Property.TextEmphasis | CssString = 'darkturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:darkviolet;`。 */
+  readonly darkviolet: Property.TextEmphasis | CssString = 'darkviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:deeppink;`。 */
+  readonly deeppink: Property.TextEmphasis | CssString = 'deeppink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:deepskyblue;`。 */
+  readonly deepskyblue: Property.TextEmphasis | CssString = 'deepskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:dimgray;`。 */
+  readonly dimgray: Property.TextEmphasis | CssString = 'dimgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:dimgrey;`。 */
+  readonly dimgrey: Property.TextEmphasis | CssString = 'dimgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:dodgerblue;`。 */
+  readonly dodgerblue: Property.TextEmphasis | CssString = 'dodgerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:dot;`。 */
+  readonly dot: Property.TextEmphasis | CssString = 'dot';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:double-circle;`。 */
+  readonly doubleCircle: Property.TextEmphasis | CssString = 'double-circle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:filled;`。 */
+  readonly filled: Property.TextEmphasis | CssString = 'filled';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:firebrick;`。 */
+  readonly firebrick: Property.TextEmphasis | CssString = 'firebrick';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:floralwhite;`。 */
+  readonly floralwhite: Property.TextEmphasis | CssString = 'floralwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:forestgreen;`。 */
+  readonly forestgreen: Property.TextEmphasis | CssString = 'forestgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:fuchsia;`。 */
+  readonly fuchsia: Property.TextEmphasis | CssString = 'fuchsia';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:gainsboro;`。 */
+  readonly gainsboro: Property.TextEmphasis | CssString = 'gainsboro';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ghostwhite;`。 */
+  readonly ghostwhite: Property.TextEmphasis | CssString = 'ghostwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:gold;`。 */
+  readonly gold: Property.TextEmphasis | CssString = 'gold';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:goldenrod;`。 */
+  readonly goldenrod: Property.TextEmphasis | CssString = 'goldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:gray;`。 */
+  readonly gray: Property.TextEmphasis | CssString = 'gray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:green;`。 */
+  readonly green: Property.TextEmphasis | CssString = 'green';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:greenyellow;`。 */
+  readonly greenyellow: Property.TextEmphasis | CssString = 'greenyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:grey;`。 */
+  readonly grey: Property.TextEmphasis | CssString = 'grey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:honeydew;`。 */
+  readonly honeydew: Property.TextEmphasis | CssString = 'honeydew';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:hotpink;`。 */
+  readonly hotpink: Property.TextEmphasis | CssString = 'hotpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:indianred;`。 */
+  readonly indianred: Property.TextEmphasis | CssString = 'indianred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:indigo;`。 */
+  readonly indigo: Property.TextEmphasis | CssString = 'indigo';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-emphasis:inherit;`。
+   */
+  readonly inherit: Property.TextEmphasis | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-emphasis:initial;`。
+   */
+  readonly initial: Property.TextEmphasis | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:ivory;`。 */
+  readonly ivory: Property.TextEmphasis | CssString = 'ivory';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:khaki;`。 */
+  readonly khaki: Property.TextEmphasis | CssString = 'khaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lavender;`。 */
+  readonly lavender: Property.TextEmphasis | CssString = 'lavender';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lavenderblush;`。 */
+  readonly lavenderblush: Property.TextEmphasis | CssString = 'lavenderblush';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lawngreen;`。 */
+  readonly lawngreen: Property.TextEmphasis | CssString = 'lawngreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lemonchiffon;`。 */
+  readonly lemonchiffon: Property.TextEmphasis | CssString = 'lemonchiffon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightblue;`。 */
+  readonly lightblue: Property.TextEmphasis | CssString = 'lightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightcoral;`。 */
+  readonly lightcoral: Property.TextEmphasis | CssString = 'lightcoral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightcyan;`。 */
+  readonly lightcyan: Property.TextEmphasis | CssString = 'lightcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightgoldenrodyellow;`。 */
+  readonly lightgoldenrodyellow: Property.TextEmphasis | CssString = 'lightgoldenrodyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightgray;`。 */
+  readonly lightgray: Property.TextEmphasis | CssString = 'lightgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightgreen;`。 */
+  readonly lightgreen: Property.TextEmphasis | CssString = 'lightgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightgrey;`。 */
+  readonly lightgrey: Property.TextEmphasis | CssString = 'lightgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightpink;`。 */
+  readonly lightpink: Property.TextEmphasis | CssString = 'lightpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightsalmon;`。 */
+  readonly lightsalmon: Property.TextEmphasis | CssString = 'lightsalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightseagreen;`。 */
+  readonly lightseagreen: Property.TextEmphasis | CssString = 'lightseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightskyblue;`。 */
+  readonly lightskyblue: Property.TextEmphasis | CssString = 'lightskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightslategray;`。 */
+  readonly lightslategray: Property.TextEmphasis | CssString = 'lightslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightslategrey;`。 */
+  readonly lightslategrey: Property.TextEmphasis | CssString = 'lightslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightsteelblue;`。 */
+  readonly lightsteelblue: Property.TextEmphasis | CssString = 'lightsteelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lightyellow;`。 */
+  readonly lightyellow: Property.TextEmphasis | CssString = 'lightyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:lime;`。 */
+  readonly lime: Property.TextEmphasis | CssString = 'lime';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:limegreen;`。 */
+  readonly limegreen: Property.TextEmphasis | CssString = 'limegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:linen;`。 */
+  readonly linen: Property.TextEmphasis | CssString = 'linen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:magenta;`。 */
+  readonly magenta: Property.TextEmphasis | CssString = 'magenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:maroon;`。 */
+  readonly maroon: Property.TextEmphasis | CssString = 'maroon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mediumaquamarine;`。 */
+  readonly mediumaquamarine: Property.TextEmphasis | CssString = 'mediumaquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mediumblue;`。 */
+  readonly mediumblue: Property.TextEmphasis | CssString = 'mediumblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mediumorchid;`。 */
+  readonly mediumorchid: Property.TextEmphasis | CssString = 'mediumorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mediumpurple;`。 */
+  readonly mediumpurple: Property.TextEmphasis | CssString = 'mediumpurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mediumseagreen;`。 */
+  readonly mediumseagreen: Property.TextEmphasis | CssString = 'mediumseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mediumslateblue;`。 */
+  readonly mediumslateblue: Property.TextEmphasis | CssString = 'mediumslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mediumspringgreen;`。 */
+  readonly mediumspringgreen: Property.TextEmphasis | CssString = 'mediumspringgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mediumturquoise;`。 */
+  readonly mediumturquoise: Property.TextEmphasis | CssString = 'mediumturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mediumvioletred;`。 */
+  readonly mediumvioletred: Property.TextEmphasis | CssString = 'mediumvioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:midnightblue;`。 */
+  readonly midnightblue: Property.TextEmphasis | CssString = 'midnightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mintcream;`。 */
+  readonly mintcream: Property.TextEmphasis | CssString = 'mintcream';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:mistyrose;`。 */
+  readonly mistyrose: Property.TextEmphasis | CssString = 'mistyrose';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:moccasin;`。 */
+  readonly moccasin: Property.TextEmphasis | CssString = 'moccasin';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:navajowhite;`。 */
+  readonly navajowhite: Property.TextEmphasis | CssString = 'navajowhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:navy;`。 */
+  readonly navy: Property.TextEmphasis | CssString = 'navy';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:none;`。 */
+  readonly none: Property.TextEmphasis | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:oldlace;`。 */
+  readonly oldlace: Property.TextEmphasis | CssString = 'oldlace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:olive;`。 */
+  readonly olive: Property.TextEmphasis | CssString = 'olive';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:olivedrab;`。 */
+  readonly olivedrab: Property.TextEmphasis | CssString = 'olivedrab';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:open;`。 */
+  readonly open: Property.TextEmphasis | CssString = 'open';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:orange;`。 */
+  readonly orange: Property.TextEmphasis | CssString = 'orange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:orangered;`。 */
+  readonly orangered: Property.TextEmphasis | CssString = 'orangered';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:orchid;`。 */
+  readonly orchid: Property.TextEmphasis | CssString = 'orchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:palegoldenrod;`。 */
+  readonly palegoldenrod: Property.TextEmphasis | CssString = 'palegoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:palegreen;`。 */
+  readonly palegreen: Property.TextEmphasis | CssString = 'palegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:paleturquoise;`。 */
+  readonly paleturquoise: Property.TextEmphasis | CssString = 'paleturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:palevioletred;`。 */
+  readonly palevioletred: Property.TextEmphasis | CssString = 'palevioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:papayawhip;`。 */
+  readonly papayawhip: Property.TextEmphasis | CssString = 'papayawhip';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:peachpuff;`。 */
+  readonly peachpuff: Property.TextEmphasis | CssString = 'peachpuff';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:peru;`。 */
+  readonly peru: Property.TextEmphasis | CssString = 'peru';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:pink;`。 */
+  readonly pink: Property.TextEmphasis | CssString = 'pink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:plum;`。 */
+  readonly plum: Property.TextEmphasis | CssString = 'plum';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:powderblue;`。 */
+  readonly powderblue: Property.TextEmphasis | CssString = 'powderblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:purple;`。 */
+  readonly purple: Property.TextEmphasis | CssString = 'purple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:rebeccapurple;`。 */
+  readonly rebeccapurple: Property.TextEmphasis | CssString = 'rebeccapurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:red;`。 */
+  readonly red: Property.TextEmphasis | CssString = 'red';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-emphasis:revert;`。
+   */
+  readonly revert: Property.TextEmphasis | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-emphasis:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextEmphasis | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:rosybrown;`。 */
+  readonly rosybrown: Property.TextEmphasis | CssString = 'rosybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:royalblue;`。 */
+  readonly royalblue: Property.TextEmphasis | CssString = 'royalblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:saddlebrown;`。 */
+  readonly saddlebrown: Property.TextEmphasis | CssString = 'saddlebrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:salmon;`。 */
+  readonly salmon: Property.TextEmphasis | CssString = 'salmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:sandybrown;`。 */
+  readonly sandybrown: Property.TextEmphasis | CssString = 'sandybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:seagreen;`。 */
+  readonly seagreen: Property.TextEmphasis | CssString = 'seagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:seashell;`。 */
+  readonly seashell: Property.TextEmphasis | CssString = 'seashell';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:sesame;`。 */
+  readonly sesame: Property.TextEmphasis | CssString = 'sesame';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:sienna;`。 */
+  readonly sienna: Property.TextEmphasis | CssString = 'sienna';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:silver;`。 */
+  readonly silver: Property.TextEmphasis | CssString = 'silver';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:skyblue;`。 */
+  readonly skyblue: Property.TextEmphasis | CssString = 'skyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:slateblue;`。 */
+  readonly slateblue: Property.TextEmphasis | CssString = 'slateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:slategray;`。 */
+  readonly slategray: Property.TextEmphasis | CssString = 'slategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:slategrey;`。 */
+  readonly slategrey: Property.TextEmphasis | CssString = 'slategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:snow;`。 */
+  readonly snow: Property.TextEmphasis | CssString = 'snow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:springgreen;`。 */
+  readonly springgreen: Property.TextEmphasis | CssString = 'springgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:steelblue;`。 */
+  readonly steelblue: Property.TextEmphasis | CssString = 'steelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:tan;`。 */
+  readonly tan: Property.TextEmphasis | CssString = 'tan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:teal;`。 */
+  readonly teal: Property.TextEmphasis | CssString = 'teal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:thistle;`。 */
+  readonly thistle: Property.TextEmphasis | CssString = 'thistle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:tomato;`。 */
+  readonly tomato: Property.TextEmphasis | CssString = 'tomato';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
+   *
+   * CSS 声明：`text-emphasis:transparent;`。
+   */
+  readonly transparent: Property.TextEmphasis | CssString = 'transparent';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:triangle;`。 */
+  readonly triangle: Property.TextEmphasis | CssString = 'triangle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:turquoise;`。 */
+  readonly turquoise: Property.TextEmphasis | CssString = 'turquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-emphasis:unset;`。
+   */
+  readonly unset: Property.TextEmphasis | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:violet;`。 */
+  readonly violet: Property.TextEmphasis | CssString = 'violet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:wheat;`。 */
+  readonly wheat: Property.TextEmphasis | CssString = 'wheat';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:white;`。 */
+  readonly white: Property.TextEmphasis | CssString = 'white';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:whitesmoke;`。 */
+  readonly whitesmoke: Property.TextEmphasis | CssString = 'whitesmoke';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:yellow;`。 */
+  readonly yellow: Property.TextEmphasis | CssString = 'yellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis:yellowgreen;`。 */
+  readonly yellowgreen: Property.TextEmphasis | CssString = 'yellowgreen';
+}
+
+/**
  * 同时设置文字着重号的样式和颜色。（text-emphasis）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis
  */
 export class TextEmphasisCss extends CssProperty {
   /** CSS 声明：`text-emphasis:AccentColor;`。 */
-  readonly AccentColor = 'text-emphasis:AccentColor;';
+  readonly AccentColor: string = 'text-emphasis:AccentColor;';
   /** CSS 声明：`text-emphasis:AccentColorText;`。 */
-  readonly AccentColorText = 'text-emphasis:AccentColorText;';
+  readonly AccentColorText: string = 'text-emphasis:AccentColorText;';
   /** CSS 声明：`text-emphasis:ActiveBorder;`。 */
-  readonly ActiveBorder = 'text-emphasis:ActiveBorder;';
+  readonly ActiveBorder: string = 'text-emphasis:ActiveBorder;';
   /** CSS 声明：`text-emphasis:ActiveCaption;`。 */
-  readonly ActiveCaption = 'text-emphasis:ActiveCaption;';
+  readonly ActiveCaption: string = 'text-emphasis:ActiveCaption;';
   /** CSS 声明：`text-emphasis:ActiveText;`。 */
-  readonly ActiveText = 'text-emphasis:ActiveText;';
+  readonly ActiveText: string = 'text-emphasis:ActiveText;';
   /** CSS 声明：`text-emphasis:AppWorkspace;`。 */
-  readonly AppWorkspace = 'text-emphasis:AppWorkspace;';
+  readonly AppWorkspace: string = 'text-emphasis:AppWorkspace;';
   /** CSS 声明：`text-emphasis:Background;`。 */
-  readonly Background = 'text-emphasis:Background;';
+  readonly Background: string = 'text-emphasis:Background;';
   /** CSS 声明：`text-emphasis:ButtonBorder;`。 */
-  readonly ButtonBorder = 'text-emphasis:ButtonBorder;';
+  readonly ButtonBorder: string = 'text-emphasis:ButtonBorder;';
   /** CSS 声明：`text-emphasis:ButtonFace;`。 */
-  readonly ButtonFace = 'text-emphasis:ButtonFace;';
+  readonly ButtonFace: string = 'text-emphasis:ButtonFace;';
   /** CSS 声明：`text-emphasis:ButtonHighlight;`。 */
-  readonly ButtonHighlight = 'text-emphasis:ButtonHighlight;';
+  readonly ButtonHighlight: string = 'text-emphasis:ButtonHighlight;';
   /** CSS 声明：`text-emphasis:ButtonShadow;`。 */
-  readonly ButtonShadow = 'text-emphasis:ButtonShadow;';
+  readonly ButtonShadow: string = 'text-emphasis:ButtonShadow;';
   /** CSS 声明：`text-emphasis:ButtonText;`。 */
-  readonly ButtonText = 'text-emphasis:ButtonText;';
+  readonly ButtonText: string = 'text-emphasis:ButtonText;';
   /** CSS 声明：`text-emphasis:Canvas;`。 */
-  readonly Canvas = 'text-emphasis:Canvas;';
+  readonly Canvas: string = 'text-emphasis:Canvas;';
   /** CSS 声明：`text-emphasis:CanvasText;`。 */
-  readonly CanvasText = 'text-emphasis:CanvasText;';
+  readonly CanvasText: string = 'text-emphasis:CanvasText;';
   /** CSS 声明：`text-emphasis:CaptionText;`。 */
-  readonly CaptionText = 'text-emphasis:CaptionText;';
+  readonly CaptionText: string = 'text-emphasis:CaptionText;';
   /** CSS 声明：`text-emphasis:Field;`。 */
-  readonly Field = 'text-emphasis:Field;';
+  readonly Field: string = 'text-emphasis:Field;';
   /** CSS 声明：`text-emphasis:FieldText;`。 */
-  readonly FieldText = 'text-emphasis:FieldText;';
+  readonly FieldText: string = 'text-emphasis:FieldText;';
   /** CSS 声明：`text-emphasis:GrayText;`。 */
-  readonly GrayText = 'text-emphasis:GrayText;';
+  readonly GrayText: string = 'text-emphasis:GrayText;';
   /** CSS 声明：`text-emphasis:Highlight;`。 */
-  readonly Highlight = 'text-emphasis:Highlight;';
+  readonly Highlight: string = 'text-emphasis:Highlight;';
   /** CSS 声明：`text-emphasis:HighlightText;`。 */
-  readonly HighlightText = 'text-emphasis:HighlightText;';
+  readonly HighlightText: string = 'text-emphasis:HighlightText;';
   /** CSS 声明：`text-emphasis:InactiveBorder;`。 */
-  readonly InactiveBorder = 'text-emphasis:InactiveBorder;';
+  readonly InactiveBorder: string = 'text-emphasis:InactiveBorder;';
   /** CSS 声明：`text-emphasis:InactiveCaption;`。 */
-  readonly InactiveCaption = 'text-emphasis:InactiveCaption;';
+  readonly InactiveCaption: string = 'text-emphasis:InactiveCaption;';
   /** CSS 声明：`text-emphasis:InactiveCaptionText;`。 */
-  readonly InactiveCaptionText = 'text-emphasis:InactiveCaptionText;';
+  readonly InactiveCaptionText: string = 'text-emphasis:InactiveCaptionText;';
   /** CSS 声明：`text-emphasis:InfoBackground;`。 */
-  readonly InfoBackground = 'text-emphasis:InfoBackground;';
+  readonly InfoBackground: string = 'text-emphasis:InfoBackground;';
   /** CSS 声明：`text-emphasis:InfoText;`。 */
-  readonly InfoText = 'text-emphasis:InfoText;';
+  readonly InfoText: string = 'text-emphasis:InfoText;';
   /** CSS 声明：`text-emphasis:LinkText;`。 */
-  readonly LinkText = 'text-emphasis:LinkText;';
+  readonly LinkText: string = 'text-emphasis:LinkText;';
   /** CSS 声明：`text-emphasis:Mark;`。 */
-  readonly Mark = 'text-emphasis:Mark;';
+  readonly Mark: string = 'text-emphasis:Mark;';
   /** CSS 声明：`text-emphasis:MarkText;`。 */
-  readonly MarkText = 'text-emphasis:MarkText;';
+  readonly MarkText: string = 'text-emphasis:MarkText;';
   /** CSS 声明：`text-emphasis:Menu;`。 */
-  readonly Menu = 'text-emphasis:Menu;';
+  readonly Menu: string = 'text-emphasis:Menu;';
   /** CSS 声明：`text-emphasis:MenuText;`。 */
-  readonly MenuText = 'text-emphasis:MenuText;';
+  readonly MenuText: string = 'text-emphasis:MenuText;';
   /** CSS 声明：`text-emphasis:Scrollbar;`。 */
-  readonly Scrollbar = 'text-emphasis:Scrollbar;';
+  readonly Scrollbar: string = 'text-emphasis:Scrollbar;';
   /** CSS 声明：`text-emphasis:SelectedItem;`。 */
-  readonly SelectedItem = 'text-emphasis:SelectedItem;';
+  readonly SelectedItem: string = 'text-emphasis:SelectedItem;';
   /** CSS 声明：`text-emphasis:SelectedItemText;`。 */
-  readonly SelectedItemText = 'text-emphasis:SelectedItemText;';
+  readonly SelectedItemText: string = 'text-emphasis:SelectedItemText;';
   /** CSS 声明：`text-emphasis:ThreeDDarkShadow;`。 */
-  readonly ThreeDDarkShadow = 'text-emphasis:ThreeDDarkShadow;';
+  readonly ThreeDDarkShadow: string = 'text-emphasis:ThreeDDarkShadow;';
   /** CSS 声明：`text-emphasis:ThreeDFace;`。 */
-  readonly ThreeDFace = 'text-emphasis:ThreeDFace;';
+  readonly ThreeDFace: string = 'text-emphasis:ThreeDFace;';
   /** CSS 声明：`text-emphasis:ThreeDHighlight;`。 */
-  readonly ThreeDHighlight = 'text-emphasis:ThreeDHighlight;';
+  readonly ThreeDHighlight: string = 'text-emphasis:ThreeDHighlight;';
   /** CSS 声明：`text-emphasis:ThreeDLightShadow;`。 */
-  readonly ThreeDLightShadow = 'text-emphasis:ThreeDLightShadow;';
+  readonly ThreeDLightShadow: string = 'text-emphasis:ThreeDLightShadow;';
   /** CSS 声明：`text-emphasis:ThreeDShadow;`。 */
-  readonly ThreeDShadow = 'text-emphasis:ThreeDShadow;';
+  readonly ThreeDShadow: string = 'text-emphasis:ThreeDShadow;';
   /** CSS 声明：`text-emphasis:VisitedText;`。 */
-  readonly VisitedText = 'text-emphasis:VisitedText;';
+  readonly VisitedText: string = 'text-emphasis:VisitedText;';
   /** CSS 声明：`text-emphasis:Window;`。 */
-  readonly Window = 'text-emphasis:Window;';
+  readonly Window: string = 'text-emphasis:Window;';
   /** CSS 声明：`text-emphasis:WindowFrame;`。 */
-  readonly WindowFrame = 'text-emphasis:WindowFrame;';
+  readonly WindowFrame: string = 'text-emphasis:WindowFrame;';
   /** CSS 声明：`text-emphasis:WindowText;`。 */
-  readonly WindowText = 'text-emphasis:WindowText;';
+  readonly WindowText: string = 'text-emphasis:WindowText;';
   /** CSS 声明：`text-emphasis:aliceblue;`。 */
-  readonly aliceblue = 'text-emphasis:aliceblue;';
+  readonly aliceblue: string = 'text-emphasis:aliceblue;';
   /** CSS 声明：`text-emphasis:antiquewhite;`。 */
-  readonly antiquewhite = 'text-emphasis:antiquewhite;';
+  readonly antiquewhite: string = 'text-emphasis:antiquewhite;';
   /** CSS 声明：`text-emphasis:aqua;`。 */
-  readonly aqua = 'text-emphasis:aqua;';
+  readonly aqua: string = 'text-emphasis:aqua;';
   /** CSS 声明：`text-emphasis:aquamarine;`。 */
-  readonly aquamarine = 'text-emphasis:aquamarine;';
+  readonly aquamarine: string = 'text-emphasis:aquamarine;';
   /** CSS 声明：`text-emphasis:azure;`。 */
-  readonly azure = 'text-emphasis:azure;';
+  readonly azure: string = 'text-emphasis:azure;';
   /** CSS 声明：`text-emphasis:beige;`。 */
-  readonly beige = 'text-emphasis:beige;';
+  readonly beige: string = 'text-emphasis:beige;';
   /** CSS 声明：`text-emphasis:bisque;`。 */
-  readonly bisque = 'text-emphasis:bisque;';
+  readonly bisque: string = 'text-emphasis:bisque;';
   /** CSS 声明：`text-emphasis:black;`。 */
-  readonly black = 'text-emphasis:black;';
+  readonly black: string = 'text-emphasis:black;';
   /** CSS 声明：`text-emphasis:blanchedalmond;`。 */
-  readonly blanchedalmond = 'text-emphasis:blanchedalmond;';
+  readonly blanchedalmond: string = 'text-emphasis:blanchedalmond;';
   /** CSS 声明：`text-emphasis:blue;`。 */
-  readonly blue = 'text-emphasis:blue;';
+  readonly blue: string = 'text-emphasis:blue;';
   /** CSS 声明：`text-emphasis:blueviolet;`。 */
-  readonly blueviolet = 'text-emphasis:blueviolet;';
+  readonly blueviolet: string = 'text-emphasis:blueviolet;';
   /** CSS 声明：`text-emphasis:brown;`。 */
-  readonly brown = 'text-emphasis:brown;';
+  readonly brown: string = 'text-emphasis:brown;';
   /** CSS 声明：`text-emphasis:burlywood;`。 */
-  readonly burlywood = 'text-emphasis:burlywood;';
+  readonly burlywood: string = 'text-emphasis:burlywood;';
   /** CSS 声明：`text-emphasis:cadetblue;`。 */
-  readonly cadetblue = 'text-emphasis:cadetblue;';
+  readonly cadetblue: string = 'text-emphasis:cadetblue;';
   /** CSS 声明：`text-emphasis:chartreuse;`。 */
-  readonly chartreuse = 'text-emphasis:chartreuse;';
+  readonly chartreuse: string = 'text-emphasis:chartreuse;';
   /** CSS 声明：`text-emphasis:chocolate;`。 */
-  readonly chocolate = 'text-emphasis:chocolate;';
+  readonly chocolate: string = 'text-emphasis:chocolate;';
   /** CSS 声明：`text-emphasis:circle;`。 */
-  readonly circle = 'text-emphasis:circle;';
+  readonly circle: string = 'text-emphasis:circle;';
   /** CSS 声明：`text-emphasis:coral;`。 */
-  readonly coral = 'text-emphasis:coral;';
+  readonly coral: string = 'text-emphasis:coral;';
   /** CSS 声明：`text-emphasis:cornflowerblue;`。 */
-  readonly cornflowerblue = 'text-emphasis:cornflowerblue;';
+  readonly cornflowerblue: string = 'text-emphasis:cornflowerblue;';
   /** CSS 声明：`text-emphasis:cornsilk;`。 */
-  readonly cornsilk = 'text-emphasis:cornsilk;';
+  readonly cornsilk: string = 'text-emphasis:cornsilk;';
   /** CSS 声明：`text-emphasis:crimson;`。 */
-  readonly crimson = 'text-emphasis:crimson;';
+  readonly crimson: string = 'text-emphasis:crimson;';
   /**
    * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
    *
    * CSS 声明：`text-emphasis:currentColor;`。
    */
-  readonly currentColor = 'text-emphasis:currentColor;';
+  readonly currentColor: string = 'text-emphasis:currentColor;';
   /** CSS 声明：`text-emphasis:cyan;`。 */
-  readonly cyan = 'text-emphasis:cyan;';
+  readonly cyan: string = 'text-emphasis:cyan;';
   /** CSS 声明：`text-emphasis:darkblue;`。 */
-  readonly darkblue = 'text-emphasis:darkblue;';
+  readonly darkblue: string = 'text-emphasis:darkblue;';
   /** CSS 声明：`text-emphasis:darkcyan;`。 */
-  readonly darkcyan = 'text-emphasis:darkcyan;';
+  readonly darkcyan: string = 'text-emphasis:darkcyan;';
   /** CSS 声明：`text-emphasis:darkgoldenrod;`。 */
-  readonly darkgoldenrod = 'text-emphasis:darkgoldenrod;';
+  readonly darkgoldenrod: string = 'text-emphasis:darkgoldenrod;';
   /** CSS 声明：`text-emphasis:darkgray;`。 */
-  readonly darkgray = 'text-emphasis:darkgray;';
+  readonly darkgray: string = 'text-emphasis:darkgray;';
   /** CSS 声明：`text-emphasis:darkgreen;`。 */
-  readonly darkgreen = 'text-emphasis:darkgreen;';
+  readonly darkgreen: string = 'text-emphasis:darkgreen;';
   /** CSS 声明：`text-emphasis:darkgrey;`。 */
-  readonly darkgrey = 'text-emphasis:darkgrey;';
+  readonly darkgrey: string = 'text-emphasis:darkgrey;';
   /** CSS 声明：`text-emphasis:darkkhaki;`。 */
-  readonly darkkhaki = 'text-emphasis:darkkhaki;';
+  readonly darkkhaki: string = 'text-emphasis:darkkhaki;';
   /** CSS 声明：`text-emphasis:darkmagenta;`。 */
-  readonly darkmagenta = 'text-emphasis:darkmagenta;';
+  readonly darkmagenta: string = 'text-emphasis:darkmagenta;';
   /** CSS 声明：`text-emphasis:darkolivegreen;`。 */
-  readonly darkolivegreen = 'text-emphasis:darkolivegreen;';
+  readonly darkolivegreen: string = 'text-emphasis:darkolivegreen;';
   /** CSS 声明：`text-emphasis:darkorange;`。 */
-  readonly darkorange = 'text-emphasis:darkorange;';
+  readonly darkorange: string = 'text-emphasis:darkorange;';
   /** CSS 声明：`text-emphasis:darkorchid;`。 */
-  readonly darkorchid = 'text-emphasis:darkorchid;';
+  readonly darkorchid: string = 'text-emphasis:darkorchid;';
   /** CSS 声明：`text-emphasis:darkred;`。 */
-  readonly darkred = 'text-emphasis:darkred;';
+  readonly darkred: string = 'text-emphasis:darkred;';
   /** CSS 声明：`text-emphasis:darksalmon;`。 */
-  readonly darksalmon = 'text-emphasis:darksalmon;';
+  readonly darksalmon: string = 'text-emphasis:darksalmon;';
   /** CSS 声明：`text-emphasis:darkseagreen;`。 */
-  readonly darkseagreen = 'text-emphasis:darkseagreen;';
+  readonly darkseagreen: string = 'text-emphasis:darkseagreen;';
   /** CSS 声明：`text-emphasis:darkslateblue;`。 */
-  readonly darkslateblue = 'text-emphasis:darkslateblue;';
+  readonly darkslateblue: string = 'text-emphasis:darkslateblue;';
   /** CSS 声明：`text-emphasis:darkslategray;`。 */
-  readonly darkslategray = 'text-emphasis:darkslategray;';
+  readonly darkslategray: string = 'text-emphasis:darkslategray;';
   /** CSS 声明：`text-emphasis:darkslategrey;`。 */
-  readonly darkslategrey = 'text-emphasis:darkslategrey;';
+  readonly darkslategrey: string = 'text-emphasis:darkslategrey;';
   /** CSS 声明：`text-emphasis:darkturquoise;`。 */
-  readonly darkturquoise = 'text-emphasis:darkturquoise;';
+  readonly darkturquoise: string = 'text-emphasis:darkturquoise;';
   /** CSS 声明：`text-emphasis:darkviolet;`。 */
-  readonly darkviolet = 'text-emphasis:darkviolet;';
+  readonly darkviolet: string = 'text-emphasis:darkviolet;';
   /** CSS 声明：`text-emphasis:deeppink;`。 */
-  readonly deeppink = 'text-emphasis:deeppink;';
+  readonly deeppink: string = 'text-emphasis:deeppink;';
   /** CSS 声明：`text-emphasis:deepskyblue;`。 */
-  readonly deepskyblue = 'text-emphasis:deepskyblue;';
+  readonly deepskyblue: string = 'text-emphasis:deepskyblue;';
   /** CSS 声明：`text-emphasis:dimgray;`。 */
-  readonly dimgray = 'text-emphasis:dimgray;';
+  readonly dimgray: string = 'text-emphasis:dimgray;';
   /** CSS 声明：`text-emphasis:dimgrey;`。 */
-  readonly dimgrey = 'text-emphasis:dimgrey;';
+  readonly dimgrey: string = 'text-emphasis:dimgrey;';
   /** CSS 声明：`text-emphasis:dodgerblue;`。 */
-  readonly dodgerblue = 'text-emphasis:dodgerblue;';
+  readonly dodgerblue: string = 'text-emphasis:dodgerblue;';
   /** CSS 声明：`text-emphasis:dot;`。 */
-  readonly dot = 'text-emphasis:dot;';
+  readonly dot: string = 'text-emphasis:dot;';
   /** CSS 声明：`text-emphasis:double-circle;`。 */
-  readonly doubleCircle = 'text-emphasis:double-circle;';
+  readonly doubleCircle: string = 'text-emphasis:double-circle;';
   /** CSS 声明：`text-emphasis:filled;`。 */
-  readonly filled = 'text-emphasis:filled;';
+  readonly filled: string = 'text-emphasis:filled;';
   /** CSS 声明：`text-emphasis:firebrick;`。 */
-  readonly firebrick = 'text-emphasis:firebrick;';
+  readonly firebrick: string = 'text-emphasis:firebrick;';
   /** CSS 声明：`text-emphasis:floralwhite;`。 */
-  readonly floralwhite = 'text-emphasis:floralwhite;';
+  readonly floralwhite: string = 'text-emphasis:floralwhite;';
   /** CSS 声明：`text-emphasis:forestgreen;`。 */
-  readonly forestgreen = 'text-emphasis:forestgreen;';
+  readonly forestgreen: string = 'text-emphasis:forestgreen;';
   /** CSS 声明：`text-emphasis:fuchsia;`。 */
-  readonly fuchsia = 'text-emphasis:fuchsia;';
+  readonly fuchsia: string = 'text-emphasis:fuchsia;';
   /** CSS 声明：`text-emphasis:gainsboro;`。 */
-  readonly gainsboro = 'text-emphasis:gainsboro;';
+  readonly gainsboro: string = 'text-emphasis:gainsboro;';
   /** CSS 声明：`text-emphasis:ghostwhite;`。 */
-  readonly ghostwhite = 'text-emphasis:ghostwhite;';
+  readonly ghostwhite: string = 'text-emphasis:ghostwhite;';
   /** CSS 声明：`text-emphasis:gold;`。 */
-  readonly gold = 'text-emphasis:gold;';
+  readonly gold: string = 'text-emphasis:gold;';
   /** CSS 声明：`text-emphasis:goldenrod;`。 */
-  readonly goldenrod = 'text-emphasis:goldenrod;';
+  readonly goldenrod: string = 'text-emphasis:goldenrod;';
   /** CSS 声明：`text-emphasis:gray;`。 */
-  readonly gray = 'text-emphasis:gray;';
+  readonly gray: string = 'text-emphasis:gray;';
   /** CSS 声明：`text-emphasis:green;`。 */
-  readonly green = 'text-emphasis:green;';
+  readonly green: string = 'text-emphasis:green;';
   /** CSS 声明：`text-emphasis:greenyellow;`。 */
-  readonly greenyellow = 'text-emphasis:greenyellow;';
+  readonly greenyellow: string = 'text-emphasis:greenyellow;';
   /** CSS 声明：`text-emphasis:grey;`。 */
-  readonly grey = 'text-emphasis:grey;';
+  readonly grey: string = 'text-emphasis:grey;';
   /** CSS 声明：`text-emphasis:honeydew;`。 */
-  readonly honeydew = 'text-emphasis:honeydew;';
+  readonly honeydew: string = 'text-emphasis:honeydew;';
   /** CSS 声明：`text-emphasis:hotpink;`。 */
-  readonly hotpink = 'text-emphasis:hotpink;';
+  readonly hotpink: string = 'text-emphasis:hotpink;';
   /** CSS 声明：`text-emphasis:indianred;`。 */
-  readonly indianred = 'text-emphasis:indianred;';
+  readonly indianred: string = 'text-emphasis:indianred;';
   /** CSS 声明：`text-emphasis:indigo;`。 */
-  readonly indigo = 'text-emphasis:indigo;';
+  readonly indigo: string = 'text-emphasis:indigo;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-emphasis:inherit;`。
    */
-  readonly inherit = 'text-emphasis:inherit;';
+  readonly inherit: string = 'text-emphasis:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-emphasis:initial;`。
    */
-  readonly initial = 'text-emphasis:initial;';
+  readonly initial: string = 'text-emphasis:initial;';
   /** CSS 声明：`text-emphasis:ivory;`。 */
-  readonly ivory = 'text-emphasis:ivory;';
+  readonly ivory: string = 'text-emphasis:ivory;';
   /** CSS 声明：`text-emphasis:khaki;`。 */
-  readonly khaki = 'text-emphasis:khaki;';
+  readonly khaki: string = 'text-emphasis:khaki;';
   /** CSS 声明：`text-emphasis:lavender;`。 */
-  readonly lavender = 'text-emphasis:lavender;';
+  readonly lavender: string = 'text-emphasis:lavender;';
   /** CSS 声明：`text-emphasis:lavenderblush;`。 */
-  readonly lavenderblush = 'text-emphasis:lavenderblush;';
+  readonly lavenderblush: string = 'text-emphasis:lavenderblush;';
   /** CSS 声明：`text-emphasis:lawngreen;`。 */
-  readonly lawngreen = 'text-emphasis:lawngreen;';
+  readonly lawngreen: string = 'text-emphasis:lawngreen;';
   /** CSS 声明：`text-emphasis:lemonchiffon;`。 */
-  readonly lemonchiffon = 'text-emphasis:lemonchiffon;';
+  readonly lemonchiffon: string = 'text-emphasis:lemonchiffon;';
   /** CSS 声明：`text-emphasis:lightblue;`。 */
-  readonly lightblue = 'text-emphasis:lightblue;';
+  readonly lightblue: string = 'text-emphasis:lightblue;';
   /** CSS 声明：`text-emphasis:lightcoral;`。 */
-  readonly lightcoral = 'text-emphasis:lightcoral;';
+  readonly lightcoral: string = 'text-emphasis:lightcoral;';
   /** CSS 声明：`text-emphasis:lightcyan;`。 */
-  readonly lightcyan = 'text-emphasis:lightcyan;';
+  readonly lightcyan: string = 'text-emphasis:lightcyan;';
   /** CSS 声明：`text-emphasis:lightgoldenrodyellow;`。 */
-  readonly lightgoldenrodyellow = 'text-emphasis:lightgoldenrodyellow;';
+  readonly lightgoldenrodyellow: string = 'text-emphasis:lightgoldenrodyellow;';
   /** CSS 声明：`text-emphasis:lightgray;`。 */
-  readonly lightgray = 'text-emphasis:lightgray;';
+  readonly lightgray: string = 'text-emphasis:lightgray;';
   /** CSS 声明：`text-emphasis:lightgreen;`。 */
-  readonly lightgreen = 'text-emphasis:lightgreen;';
+  readonly lightgreen: string = 'text-emphasis:lightgreen;';
   /** CSS 声明：`text-emphasis:lightgrey;`。 */
-  readonly lightgrey = 'text-emphasis:lightgrey;';
+  readonly lightgrey: string = 'text-emphasis:lightgrey;';
   /** CSS 声明：`text-emphasis:lightpink;`。 */
-  readonly lightpink = 'text-emphasis:lightpink;';
+  readonly lightpink: string = 'text-emphasis:lightpink;';
   /** CSS 声明：`text-emphasis:lightsalmon;`。 */
-  readonly lightsalmon = 'text-emphasis:lightsalmon;';
+  readonly lightsalmon: string = 'text-emphasis:lightsalmon;';
   /** CSS 声明：`text-emphasis:lightseagreen;`。 */
-  readonly lightseagreen = 'text-emphasis:lightseagreen;';
+  readonly lightseagreen: string = 'text-emphasis:lightseagreen;';
   /** CSS 声明：`text-emphasis:lightskyblue;`。 */
-  readonly lightskyblue = 'text-emphasis:lightskyblue;';
+  readonly lightskyblue: string = 'text-emphasis:lightskyblue;';
   /** CSS 声明：`text-emphasis:lightslategray;`。 */
-  readonly lightslategray = 'text-emphasis:lightslategray;';
+  readonly lightslategray: string = 'text-emphasis:lightslategray;';
   /** CSS 声明：`text-emphasis:lightslategrey;`。 */
-  readonly lightslategrey = 'text-emphasis:lightslategrey;';
+  readonly lightslategrey: string = 'text-emphasis:lightslategrey;';
   /** CSS 声明：`text-emphasis:lightsteelblue;`。 */
-  readonly lightsteelblue = 'text-emphasis:lightsteelblue;';
+  readonly lightsteelblue: string = 'text-emphasis:lightsteelblue;';
   /** CSS 声明：`text-emphasis:lightyellow;`。 */
-  readonly lightyellow = 'text-emphasis:lightyellow;';
+  readonly lightyellow: string = 'text-emphasis:lightyellow;';
   /** CSS 声明：`text-emphasis:lime;`。 */
-  readonly lime = 'text-emphasis:lime;';
+  readonly lime: string = 'text-emphasis:lime;';
   /** CSS 声明：`text-emphasis:limegreen;`。 */
-  readonly limegreen = 'text-emphasis:limegreen;';
+  readonly limegreen: string = 'text-emphasis:limegreen;';
   /** CSS 声明：`text-emphasis:linen;`。 */
-  readonly linen = 'text-emphasis:linen;';
+  readonly linen: string = 'text-emphasis:linen;';
   /** CSS 声明：`text-emphasis:magenta;`。 */
-  readonly magenta = 'text-emphasis:magenta;';
+  readonly magenta: string = 'text-emphasis:magenta;';
   /** CSS 声明：`text-emphasis:maroon;`。 */
-  readonly maroon = 'text-emphasis:maroon;';
+  readonly maroon: string = 'text-emphasis:maroon;';
   /** CSS 声明：`text-emphasis:mediumaquamarine;`。 */
-  readonly mediumaquamarine = 'text-emphasis:mediumaquamarine;';
+  readonly mediumaquamarine: string = 'text-emphasis:mediumaquamarine;';
   /** CSS 声明：`text-emphasis:mediumblue;`。 */
-  readonly mediumblue = 'text-emphasis:mediumblue;';
+  readonly mediumblue: string = 'text-emphasis:mediumblue;';
   /** CSS 声明：`text-emphasis:mediumorchid;`。 */
-  readonly mediumorchid = 'text-emphasis:mediumorchid;';
+  readonly mediumorchid: string = 'text-emphasis:mediumorchid;';
   /** CSS 声明：`text-emphasis:mediumpurple;`。 */
-  readonly mediumpurple = 'text-emphasis:mediumpurple;';
+  readonly mediumpurple: string = 'text-emphasis:mediumpurple;';
   /** CSS 声明：`text-emphasis:mediumseagreen;`。 */
-  readonly mediumseagreen = 'text-emphasis:mediumseagreen;';
+  readonly mediumseagreen: string = 'text-emphasis:mediumseagreen;';
   /** CSS 声明：`text-emphasis:mediumslateblue;`。 */
-  readonly mediumslateblue = 'text-emphasis:mediumslateblue;';
+  readonly mediumslateblue: string = 'text-emphasis:mediumslateblue;';
   /** CSS 声明：`text-emphasis:mediumspringgreen;`。 */
-  readonly mediumspringgreen = 'text-emphasis:mediumspringgreen;';
+  readonly mediumspringgreen: string = 'text-emphasis:mediumspringgreen;';
   /** CSS 声明：`text-emphasis:mediumturquoise;`。 */
-  readonly mediumturquoise = 'text-emphasis:mediumturquoise;';
+  readonly mediumturquoise: string = 'text-emphasis:mediumturquoise;';
   /** CSS 声明：`text-emphasis:mediumvioletred;`。 */
-  readonly mediumvioletred = 'text-emphasis:mediumvioletred;';
+  readonly mediumvioletred: string = 'text-emphasis:mediumvioletred;';
   /** CSS 声明：`text-emphasis:midnightblue;`。 */
-  readonly midnightblue = 'text-emphasis:midnightblue;';
+  readonly midnightblue: string = 'text-emphasis:midnightblue;';
   /** CSS 声明：`text-emphasis:mintcream;`。 */
-  readonly mintcream = 'text-emphasis:mintcream;';
+  readonly mintcream: string = 'text-emphasis:mintcream;';
   /** CSS 声明：`text-emphasis:mistyrose;`。 */
-  readonly mistyrose = 'text-emphasis:mistyrose;';
+  readonly mistyrose: string = 'text-emphasis:mistyrose;';
   /** CSS 声明：`text-emphasis:moccasin;`。 */
-  readonly moccasin = 'text-emphasis:moccasin;';
+  readonly moccasin: string = 'text-emphasis:moccasin;';
   /** CSS 声明：`text-emphasis:navajowhite;`。 */
-  readonly navajowhite = 'text-emphasis:navajowhite;';
+  readonly navajowhite: string = 'text-emphasis:navajowhite;';
   /** CSS 声明：`text-emphasis:navy;`。 */
-  readonly navy = 'text-emphasis:navy;';
+  readonly navy: string = 'text-emphasis:navy;';
   /** CSS 声明：`text-emphasis:none;`。 */
-  readonly none = 'text-emphasis:none;';
+  readonly none: string = 'text-emphasis:none;';
   /** CSS 声明：`text-emphasis:oldlace;`。 */
-  readonly oldlace = 'text-emphasis:oldlace;';
+  readonly oldlace: string = 'text-emphasis:oldlace;';
   /** CSS 声明：`text-emphasis:olive;`。 */
-  readonly olive = 'text-emphasis:olive;';
+  readonly olive: string = 'text-emphasis:olive;';
   /** CSS 声明：`text-emphasis:olivedrab;`。 */
-  readonly olivedrab = 'text-emphasis:olivedrab;';
+  readonly olivedrab: string = 'text-emphasis:olivedrab;';
   /** CSS 声明：`text-emphasis:open;`。 */
-  readonly open = 'text-emphasis:open;';
+  readonly open: string = 'text-emphasis:open;';
   /** CSS 声明：`text-emphasis:orange;`。 */
-  readonly orange = 'text-emphasis:orange;';
+  readonly orange: string = 'text-emphasis:orange;';
   /** CSS 声明：`text-emphasis:orangered;`。 */
-  readonly orangered = 'text-emphasis:orangered;';
+  readonly orangered: string = 'text-emphasis:orangered;';
   /** CSS 声明：`text-emphasis:orchid;`。 */
-  readonly orchid = 'text-emphasis:orchid;';
+  readonly orchid: string = 'text-emphasis:orchid;';
   /** CSS 声明：`text-emphasis:palegoldenrod;`。 */
-  readonly palegoldenrod = 'text-emphasis:palegoldenrod;';
+  readonly palegoldenrod: string = 'text-emphasis:palegoldenrod;';
   /** CSS 声明：`text-emphasis:palegreen;`。 */
-  readonly palegreen = 'text-emphasis:palegreen;';
+  readonly palegreen: string = 'text-emphasis:palegreen;';
   /** CSS 声明：`text-emphasis:paleturquoise;`。 */
-  readonly paleturquoise = 'text-emphasis:paleturquoise;';
+  readonly paleturquoise: string = 'text-emphasis:paleturquoise;';
   /** CSS 声明：`text-emphasis:palevioletred;`。 */
-  readonly palevioletred = 'text-emphasis:palevioletred;';
+  readonly palevioletred: string = 'text-emphasis:palevioletred;';
   /** CSS 声明：`text-emphasis:papayawhip;`。 */
-  readonly papayawhip = 'text-emphasis:papayawhip;';
+  readonly papayawhip: string = 'text-emphasis:papayawhip;';
   /** CSS 声明：`text-emphasis:peachpuff;`。 */
-  readonly peachpuff = 'text-emphasis:peachpuff;';
+  readonly peachpuff: string = 'text-emphasis:peachpuff;';
   /** CSS 声明：`text-emphasis:peru;`。 */
-  readonly peru = 'text-emphasis:peru;';
+  readonly peru: string = 'text-emphasis:peru;';
   /** CSS 声明：`text-emphasis:pink;`。 */
-  readonly pink = 'text-emphasis:pink;';
+  readonly pink: string = 'text-emphasis:pink;';
   /** CSS 声明：`text-emphasis:plum;`。 */
-  readonly plum = 'text-emphasis:plum;';
+  readonly plum: string = 'text-emphasis:plum;';
   /** CSS 声明：`text-emphasis:powderblue;`。 */
-  readonly powderblue = 'text-emphasis:powderblue;';
+  readonly powderblue: string = 'text-emphasis:powderblue;';
   /** CSS 声明：`text-emphasis:purple;`。 */
-  readonly purple = 'text-emphasis:purple;';
+  readonly purple: string = 'text-emphasis:purple;';
   /** CSS 声明：`text-emphasis:rebeccapurple;`。 */
-  readonly rebeccapurple = 'text-emphasis:rebeccapurple;';
+  readonly rebeccapurple: string = 'text-emphasis:rebeccapurple;';
   /** CSS 声明：`text-emphasis:red;`。 */
-  readonly red = 'text-emphasis:red;';
+  readonly red: string = 'text-emphasis:red;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-emphasis:revert;`。
    */
-  readonly revert = 'text-emphasis:revert;';
+  readonly revert: string = 'text-emphasis:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-emphasis:revert-layer;`。
    */
-  readonly revertLayer = 'text-emphasis:revert-layer;';
+  readonly revertLayer: string = 'text-emphasis:revert-layer;';
   /** CSS 声明：`text-emphasis:rosybrown;`。 */
-  readonly rosybrown = 'text-emphasis:rosybrown;';
+  readonly rosybrown: string = 'text-emphasis:rosybrown;';
   /** CSS 声明：`text-emphasis:royalblue;`。 */
-  readonly royalblue = 'text-emphasis:royalblue;';
+  readonly royalblue: string = 'text-emphasis:royalblue;';
   /** CSS 声明：`text-emphasis:saddlebrown;`。 */
-  readonly saddlebrown = 'text-emphasis:saddlebrown;';
+  readonly saddlebrown: string = 'text-emphasis:saddlebrown;';
   /** CSS 声明：`text-emphasis:salmon;`。 */
-  readonly salmon = 'text-emphasis:salmon;';
+  readonly salmon: string = 'text-emphasis:salmon;';
   /** CSS 声明：`text-emphasis:sandybrown;`。 */
-  readonly sandybrown = 'text-emphasis:sandybrown;';
+  readonly sandybrown: string = 'text-emphasis:sandybrown;';
   /** CSS 声明：`text-emphasis:seagreen;`。 */
-  readonly seagreen = 'text-emphasis:seagreen;';
+  readonly seagreen: string = 'text-emphasis:seagreen;';
   /** CSS 声明：`text-emphasis:seashell;`。 */
-  readonly seashell = 'text-emphasis:seashell;';
+  readonly seashell: string = 'text-emphasis:seashell;';
   /** CSS 声明：`text-emphasis:sesame;`。 */
-  readonly sesame = 'text-emphasis:sesame;';
+  readonly sesame: string = 'text-emphasis:sesame;';
   /** CSS 声明：`text-emphasis:sienna;`。 */
-  readonly sienna = 'text-emphasis:sienna;';
+  readonly sienna: string = 'text-emphasis:sienna;';
   /** CSS 声明：`text-emphasis:silver;`。 */
-  readonly silver = 'text-emphasis:silver;';
+  readonly silver: string = 'text-emphasis:silver;';
   /** CSS 声明：`text-emphasis:skyblue;`。 */
-  readonly skyblue = 'text-emphasis:skyblue;';
+  readonly skyblue: string = 'text-emphasis:skyblue;';
   /** CSS 声明：`text-emphasis:slateblue;`。 */
-  readonly slateblue = 'text-emphasis:slateblue;';
+  readonly slateblue: string = 'text-emphasis:slateblue;';
   /** CSS 声明：`text-emphasis:slategray;`。 */
-  readonly slategray = 'text-emphasis:slategray;';
+  readonly slategray: string = 'text-emphasis:slategray;';
   /** CSS 声明：`text-emphasis:slategrey;`。 */
-  readonly slategrey = 'text-emphasis:slategrey;';
+  readonly slategrey: string = 'text-emphasis:slategrey;';
   /** CSS 声明：`text-emphasis:snow;`。 */
-  readonly snow = 'text-emphasis:snow;';
+  readonly snow: string = 'text-emphasis:snow;';
   /** CSS 声明：`text-emphasis:springgreen;`。 */
-  readonly springgreen = 'text-emphasis:springgreen;';
+  readonly springgreen: string = 'text-emphasis:springgreen;';
   /** CSS 声明：`text-emphasis:steelblue;`。 */
-  readonly steelblue = 'text-emphasis:steelblue;';
+  readonly steelblue: string = 'text-emphasis:steelblue;';
   /** CSS 声明：`text-emphasis:tan;`。 */
-  readonly tan = 'text-emphasis:tan;';
+  readonly tan: string = 'text-emphasis:tan;';
   /** CSS 声明：`text-emphasis:teal;`。 */
-  readonly teal = 'text-emphasis:teal;';
+  readonly teal: string = 'text-emphasis:teal;';
   /** CSS 声明：`text-emphasis:thistle;`。 */
-  readonly thistle = 'text-emphasis:thistle;';
+  readonly thistle: string = 'text-emphasis:thistle;';
   /** CSS 声明：`text-emphasis:tomato;`。 */
-  readonly tomato = 'text-emphasis:tomato;';
+  readonly tomato: string = 'text-emphasis:tomato;';
   /**
    * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
    *
    * CSS 声明：`text-emphasis:transparent;`。
    */
-  readonly transparent = 'text-emphasis:transparent;';
+  readonly transparent: string = 'text-emphasis:transparent;';
   /** CSS 声明：`text-emphasis:triangle;`。 */
-  readonly triangle = 'text-emphasis:triangle;';
+  readonly triangle: string = 'text-emphasis:triangle;';
   /** CSS 声明：`text-emphasis:turquoise;`。 */
-  readonly turquoise = 'text-emphasis:turquoise;';
+  readonly turquoise: string = 'text-emphasis:turquoise;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-emphasis:unset;`。
    */
-  readonly unset = 'text-emphasis:unset;';
+  readonly unset: string = 'text-emphasis:unset;';
   /** CSS 声明：`text-emphasis:violet;`。 */
-  readonly violet = 'text-emphasis:violet;';
+  readonly violet: string = 'text-emphasis:violet;';
   /** CSS 声明：`text-emphasis:wheat;`。 */
-  readonly wheat = 'text-emphasis:wheat;';
+  readonly wheat: string = 'text-emphasis:wheat;';
   /** CSS 声明：`text-emphasis:white;`。 */
-  readonly white = 'text-emphasis:white;';
+  readonly white: string = 'text-emphasis:white;';
   /** CSS 声明：`text-emphasis:whitesmoke;`。 */
-  readonly whitesmoke = 'text-emphasis:whitesmoke;';
+  readonly whitesmoke: string = 'text-emphasis:whitesmoke;';
   /** CSS 声明：`text-emphasis:yellow;`。 */
-  readonly yellow = 'text-emphasis:yellow;';
+  readonly yellow: string = 'text-emphasis:yellow;';
   /** CSS 声明：`text-emphasis:yellowgreen;`。 */
-  readonly yellowgreen = 'text-emphasis:yellowgreen;';
+  readonly yellowgreen: string = 'text-emphasis:yellowgreen;';
   /**
    * 创建 text-emphasis 属性作者；普通使用通过 s.textEmphasis 取得共享实例。
    * @example
@@ -21860,6 +30566,828 @@ export class TextEmphasisCss extends CssProperty {
 }
 
 /**
+ * text-emphasis-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextEmphasisColorKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:AccentColor;`。 */
+  readonly AccentColor: Property.TextEmphasisColor | CssString = 'AccentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:AccentColorText;`。 */
+  readonly AccentColorText: Property.TextEmphasisColor | CssString = 'AccentColorText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ActiveBorder;`。 */
+  readonly ActiveBorder: Property.TextEmphasisColor | CssString = 'ActiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ActiveCaption;`。 */
+  readonly ActiveCaption: Property.TextEmphasisColor | CssString = 'ActiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ActiveText;`。 */
+  readonly ActiveText: Property.TextEmphasisColor | CssString = 'ActiveText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:AppWorkspace;`。 */
+  readonly AppWorkspace: Property.TextEmphasisColor | CssString = 'AppWorkspace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:Background;`。 */
+  readonly Background: Property.TextEmphasisColor | CssString = 'Background';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ButtonBorder;`。 */
+  readonly ButtonBorder: Property.TextEmphasisColor | CssString = 'ButtonBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ButtonFace;`。 */
+  readonly ButtonFace: Property.TextEmphasisColor | CssString = 'ButtonFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ButtonHighlight;`。 */
+  readonly ButtonHighlight: Property.TextEmphasisColor | CssString = 'ButtonHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ButtonShadow;`。 */
+  readonly ButtonShadow: Property.TextEmphasisColor | CssString = 'ButtonShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ButtonText;`。 */
+  readonly ButtonText: Property.TextEmphasisColor | CssString = 'ButtonText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:Canvas;`。 */
+  readonly Canvas: Property.TextEmphasisColor | CssString = 'Canvas';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:CanvasText;`。 */
+  readonly CanvasText: Property.TextEmphasisColor | CssString = 'CanvasText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:CaptionText;`。 */
+  readonly CaptionText: Property.TextEmphasisColor | CssString = 'CaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:Field;`。 */
+  readonly Field: Property.TextEmphasisColor | CssString = 'Field';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:FieldText;`。 */
+  readonly FieldText: Property.TextEmphasisColor | CssString = 'FieldText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:GrayText;`。 */
+  readonly GrayText: Property.TextEmphasisColor | CssString = 'GrayText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:Highlight;`。 */
+  readonly Highlight: Property.TextEmphasisColor | CssString = 'Highlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:HighlightText;`。 */
+  readonly HighlightText: Property.TextEmphasisColor | CssString = 'HighlightText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:InactiveBorder;`。 */
+  readonly InactiveBorder: Property.TextEmphasisColor | CssString = 'InactiveBorder';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:InactiveCaption;`。 */
+  readonly InactiveCaption: Property.TextEmphasisColor | CssString = 'InactiveCaption';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:InactiveCaptionText;`。 */
+  readonly InactiveCaptionText: Property.TextEmphasisColor | CssString = 'InactiveCaptionText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:InfoBackground;`。 */
+  readonly InfoBackground: Property.TextEmphasisColor | CssString = 'InfoBackground';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:InfoText;`。 */
+  readonly InfoText: Property.TextEmphasisColor | CssString = 'InfoText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:LinkText;`。 */
+  readonly LinkText: Property.TextEmphasisColor | CssString = 'LinkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:Mark;`。 */
+  readonly Mark: Property.TextEmphasisColor | CssString = 'Mark';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:MarkText;`。 */
+  readonly MarkText: Property.TextEmphasisColor | CssString = 'MarkText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:Menu;`。 */
+  readonly Menu: Property.TextEmphasisColor | CssString = 'Menu';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:MenuText;`。 */
+  readonly MenuText: Property.TextEmphasisColor | CssString = 'MenuText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:Scrollbar;`。 */
+  readonly Scrollbar: Property.TextEmphasisColor | CssString = 'Scrollbar';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:SelectedItem;`。 */
+  readonly SelectedItem: Property.TextEmphasisColor | CssString = 'SelectedItem';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:SelectedItemText;`。 */
+  readonly SelectedItemText: Property.TextEmphasisColor | CssString = 'SelectedItemText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ThreeDDarkShadow;`。 */
+  readonly ThreeDDarkShadow: Property.TextEmphasisColor | CssString = 'ThreeDDarkShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ThreeDFace;`。 */
+  readonly ThreeDFace: Property.TextEmphasisColor | CssString = 'ThreeDFace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ThreeDHighlight;`。 */
+  readonly ThreeDHighlight: Property.TextEmphasisColor | CssString = 'ThreeDHighlight';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ThreeDLightShadow;`。 */
+  readonly ThreeDLightShadow: Property.TextEmphasisColor | CssString = 'ThreeDLightShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ThreeDShadow;`。 */
+  readonly ThreeDShadow: Property.TextEmphasisColor | CssString = 'ThreeDShadow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:VisitedText;`。 */
+  readonly VisitedText: Property.TextEmphasisColor | CssString = 'VisitedText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:Window;`。 */
+  readonly Window: Property.TextEmphasisColor | CssString = 'Window';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:WindowFrame;`。 */
+  readonly WindowFrame: Property.TextEmphasisColor | CssString = 'WindowFrame';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:WindowText;`。 */
+  readonly WindowText: Property.TextEmphasisColor | CssString = 'WindowText';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:aliceblue;`。 */
+  readonly aliceblue: Property.TextEmphasisColor | CssString = 'aliceblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:antiquewhite;`。 */
+  readonly antiquewhite: Property.TextEmphasisColor | CssString = 'antiquewhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:aqua;`。 */
+  readonly aqua: Property.TextEmphasisColor | CssString = 'aqua';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:aquamarine;`。 */
+  readonly aquamarine: Property.TextEmphasisColor | CssString = 'aquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:azure;`。 */
+  readonly azure: Property.TextEmphasisColor | CssString = 'azure';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:beige;`。 */
+  readonly beige: Property.TextEmphasisColor | CssString = 'beige';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:bisque;`。 */
+  readonly bisque: Property.TextEmphasisColor | CssString = 'bisque';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:black;`。 */
+  readonly black: Property.TextEmphasisColor | CssString = 'black';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:blanchedalmond;`。 */
+  readonly blanchedalmond: Property.TextEmphasisColor | CssString = 'blanchedalmond';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:blue;`。 */
+  readonly blue: Property.TextEmphasisColor | CssString = 'blue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:blueviolet;`。 */
+  readonly blueviolet: Property.TextEmphasisColor | CssString = 'blueviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:brown;`。 */
+  readonly brown: Property.TextEmphasisColor | CssString = 'brown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:burlywood;`。 */
+  readonly burlywood: Property.TextEmphasisColor | CssString = 'burlywood';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:cadetblue;`。 */
+  readonly cadetblue: Property.TextEmphasisColor | CssString = 'cadetblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:chartreuse;`。 */
+  readonly chartreuse: Property.TextEmphasisColor | CssString = 'chartreuse';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:chocolate;`。 */
+  readonly chocolate: Property.TextEmphasisColor | CssString = 'chocolate';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:coral;`。 */
+  readonly coral: Property.TextEmphasisColor | CssString = 'coral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:cornflowerblue;`。 */
+  readonly cornflowerblue: Property.TextEmphasisColor | CssString = 'cornflowerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:cornsilk;`。 */
+  readonly cornsilk: Property.TextEmphasisColor | CssString = 'cornsilk';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:crimson;`。 */
+  readonly crimson: Property.TextEmphasisColor | CssString = 'crimson';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
+   *
+   * CSS 声明：`text-emphasis-color:currentColor;`。
+   */
+  readonly currentColor: Property.TextEmphasisColor | CssString = 'currentColor';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:cyan;`。 */
+  readonly cyan: Property.TextEmphasisColor | CssString = 'cyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkblue;`。 */
+  readonly darkblue: Property.TextEmphasisColor | CssString = 'darkblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkcyan;`。 */
+  readonly darkcyan: Property.TextEmphasisColor | CssString = 'darkcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkgoldenrod;`。 */
+  readonly darkgoldenrod: Property.TextEmphasisColor | CssString = 'darkgoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkgray;`。 */
+  readonly darkgray: Property.TextEmphasisColor | CssString = 'darkgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkgreen;`。 */
+  readonly darkgreen: Property.TextEmphasisColor | CssString = 'darkgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkgrey;`。 */
+  readonly darkgrey: Property.TextEmphasisColor | CssString = 'darkgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkkhaki;`。 */
+  readonly darkkhaki: Property.TextEmphasisColor | CssString = 'darkkhaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkmagenta;`。 */
+  readonly darkmagenta: Property.TextEmphasisColor | CssString = 'darkmagenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkolivegreen;`。 */
+  readonly darkolivegreen: Property.TextEmphasisColor | CssString = 'darkolivegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkorange;`。 */
+  readonly darkorange: Property.TextEmphasisColor | CssString = 'darkorange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkorchid;`。 */
+  readonly darkorchid: Property.TextEmphasisColor | CssString = 'darkorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkred;`。 */
+  readonly darkred: Property.TextEmphasisColor | CssString = 'darkred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darksalmon;`。 */
+  readonly darksalmon: Property.TextEmphasisColor | CssString = 'darksalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkseagreen;`。 */
+  readonly darkseagreen: Property.TextEmphasisColor | CssString = 'darkseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkslateblue;`。 */
+  readonly darkslateblue: Property.TextEmphasisColor | CssString = 'darkslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkslategray;`。 */
+  readonly darkslategray: Property.TextEmphasisColor | CssString = 'darkslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkslategrey;`。 */
+  readonly darkslategrey: Property.TextEmphasisColor | CssString = 'darkslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkturquoise;`。 */
+  readonly darkturquoise: Property.TextEmphasisColor | CssString = 'darkturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:darkviolet;`。 */
+  readonly darkviolet: Property.TextEmphasisColor | CssString = 'darkviolet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:deeppink;`。 */
+  readonly deeppink: Property.TextEmphasisColor | CssString = 'deeppink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:deepskyblue;`。 */
+  readonly deepskyblue: Property.TextEmphasisColor | CssString = 'deepskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:dimgray;`。 */
+  readonly dimgray: Property.TextEmphasisColor | CssString = 'dimgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:dimgrey;`。 */
+  readonly dimgrey: Property.TextEmphasisColor | CssString = 'dimgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:dodgerblue;`。 */
+  readonly dodgerblue: Property.TextEmphasisColor | CssString = 'dodgerblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:firebrick;`。 */
+  readonly firebrick: Property.TextEmphasisColor | CssString = 'firebrick';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:floralwhite;`。 */
+  readonly floralwhite: Property.TextEmphasisColor | CssString = 'floralwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:forestgreen;`。 */
+  readonly forestgreen: Property.TextEmphasisColor | CssString = 'forestgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:fuchsia;`。 */
+  readonly fuchsia: Property.TextEmphasisColor | CssString = 'fuchsia';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:gainsboro;`。 */
+  readonly gainsboro: Property.TextEmphasisColor | CssString = 'gainsboro';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ghostwhite;`。 */
+  readonly ghostwhite: Property.TextEmphasisColor | CssString = 'ghostwhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:gold;`。 */
+  readonly gold: Property.TextEmphasisColor | CssString = 'gold';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:goldenrod;`。 */
+  readonly goldenrod: Property.TextEmphasisColor | CssString = 'goldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:gray;`。 */
+  readonly gray: Property.TextEmphasisColor | CssString = 'gray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:green;`。 */
+  readonly green: Property.TextEmphasisColor | CssString = 'green';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:greenyellow;`。 */
+  readonly greenyellow: Property.TextEmphasisColor | CssString = 'greenyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:grey;`。 */
+  readonly grey: Property.TextEmphasisColor | CssString = 'grey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:honeydew;`。 */
+  readonly honeydew: Property.TextEmphasisColor | CssString = 'honeydew';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:hotpink;`。 */
+  readonly hotpink: Property.TextEmphasisColor | CssString = 'hotpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:indianred;`。 */
+  readonly indianred: Property.TextEmphasisColor | CssString = 'indianred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:indigo;`。 */
+  readonly indigo: Property.TextEmphasisColor | CssString = 'indigo';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-emphasis-color:inherit;`。
+   */
+  readonly inherit: Property.TextEmphasisColor | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-emphasis-color:initial;`。
+   */
+  readonly initial: Property.TextEmphasisColor | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:ivory;`。 */
+  readonly ivory: Property.TextEmphasisColor | CssString = 'ivory';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:khaki;`。 */
+  readonly khaki: Property.TextEmphasisColor | CssString = 'khaki';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lavender;`。 */
+  readonly lavender: Property.TextEmphasisColor | CssString = 'lavender';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lavenderblush;`。 */
+  readonly lavenderblush: Property.TextEmphasisColor | CssString = 'lavenderblush';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lawngreen;`。 */
+  readonly lawngreen: Property.TextEmphasisColor | CssString = 'lawngreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lemonchiffon;`。 */
+  readonly lemonchiffon: Property.TextEmphasisColor | CssString = 'lemonchiffon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightblue;`。 */
+  readonly lightblue: Property.TextEmphasisColor | CssString = 'lightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightcoral;`。 */
+  readonly lightcoral: Property.TextEmphasisColor | CssString = 'lightcoral';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightcyan;`。 */
+  readonly lightcyan: Property.TextEmphasisColor | CssString = 'lightcyan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightgoldenrodyellow;`。 */
+  readonly lightgoldenrodyellow: Property.TextEmphasisColor | CssString = 'lightgoldenrodyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightgray;`。 */
+  readonly lightgray: Property.TextEmphasisColor | CssString = 'lightgray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightgreen;`。 */
+  readonly lightgreen: Property.TextEmphasisColor | CssString = 'lightgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightgrey;`。 */
+  readonly lightgrey: Property.TextEmphasisColor | CssString = 'lightgrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightpink;`。 */
+  readonly lightpink: Property.TextEmphasisColor | CssString = 'lightpink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightsalmon;`。 */
+  readonly lightsalmon: Property.TextEmphasisColor | CssString = 'lightsalmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightseagreen;`。 */
+  readonly lightseagreen: Property.TextEmphasisColor | CssString = 'lightseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightskyblue;`。 */
+  readonly lightskyblue: Property.TextEmphasisColor | CssString = 'lightskyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightslategray;`。 */
+  readonly lightslategray: Property.TextEmphasisColor | CssString = 'lightslategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightslategrey;`。 */
+  readonly lightslategrey: Property.TextEmphasisColor | CssString = 'lightslategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightsteelblue;`。 */
+  readonly lightsteelblue: Property.TextEmphasisColor | CssString = 'lightsteelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lightyellow;`。 */
+  readonly lightyellow: Property.TextEmphasisColor | CssString = 'lightyellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:lime;`。 */
+  readonly lime: Property.TextEmphasisColor | CssString = 'lime';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:limegreen;`。 */
+  readonly limegreen: Property.TextEmphasisColor | CssString = 'limegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:linen;`。 */
+  readonly linen: Property.TextEmphasisColor | CssString = 'linen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:magenta;`。 */
+  readonly magenta: Property.TextEmphasisColor | CssString = 'magenta';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:maroon;`。 */
+  readonly maroon: Property.TextEmphasisColor | CssString = 'maroon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mediumaquamarine;`。 */
+  readonly mediumaquamarine: Property.TextEmphasisColor | CssString = 'mediumaquamarine';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mediumblue;`。 */
+  readonly mediumblue: Property.TextEmphasisColor | CssString = 'mediumblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mediumorchid;`。 */
+  readonly mediumorchid: Property.TextEmphasisColor | CssString = 'mediumorchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mediumpurple;`。 */
+  readonly mediumpurple: Property.TextEmphasisColor | CssString = 'mediumpurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mediumseagreen;`。 */
+  readonly mediumseagreen: Property.TextEmphasisColor | CssString = 'mediumseagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mediumslateblue;`。 */
+  readonly mediumslateblue: Property.TextEmphasisColor | CssString = 'mediumslateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mediumspringgreen;`。 */
+  readonly mediumspringgreen: Property.TextEmphasisColor | CssString = 'mediumspringgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mediumturquoise;`。 */
+  readonly mediumturquoise: Property.TextEmphasisColor | CssString = 'mediumturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mediumvioletred;`。 */
+  readonly mediumvioletred: Property.TextEmphasisColor | CssString = 'mediumvioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:midnightblue;`。 */
+  readonly midnightblue: Property.TextEmphasisColor | CssString = 'midnightblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mintcream;`。 */
+  readonly mintcream: Property.TextEmphasisColor | CssString = 'mintcream';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:mistyrose;`。 */
+  readonly mistyrose: Property.TextEmphasisColor | CssString = 'mistyrose';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:moccasin;`。 */
+  readonly moccasin: Property.TextEmphasisColor | CssString = 'moccasin';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:navajowhite;`。 */
+  readonly navajowhite: Property.TextEmphasisColor | CssString = 'navajowhite';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:navy;`。 */
+  readonly navy: Property.TextEmphasisColor | CssString = 'navy';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:oldlace;`。 */
+  readonly oldlace: Property.TextEmphasisColor | CssString = 'oldlace';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:olive;`。 */
+  readonly olive: Property.TextEmphasisColor | CssString = 'olive';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:olivedrab;`。 */
+  readonly olivedrab: Property.TextEmphasisColor | CssString = 'olivedrab';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:orange;`。 */
+  readonly orange: Property.TextEmphasisColor | CssString = 'orange';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:orangered;`。 */
+  readonly orangered: Property.TextEmphasisColor | CssString = 'orangered';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:orchid;`。 */
+  readonly orchid: Property.TextEmphasisColor | CssString = 'orchid';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:palegoldenrod;`。 */
+  readonly palegoldenrod: Property.TextEmphasisColor | CssString = 'palegoldenrod';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:palegreen;`。 */
+  readonly palegreen: Property.TextEmphasisColor | CssString = 'palegreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:paleturquoise;`。 */
+  readonly paleturquoise: Property.TextEmphasisColor | CssString = 'paleturquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:palevioletred;`。 */
+  readonly palevioletred: Property.TextEmphasisColor | CssString = 'palevioletred';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:papayawhip;`。 */
+  readonly papayawhip: Property.TextEmphasisColor | CssString = 'papayawhip';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:peachpuff;`。 */
+  readonly peachpuff: Property.TextEmphasisColor | CssString = 'peachpuff';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:peru;`。 */
+  readonly peru: Property.TextEmphasisColor | CssString = 'peru';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:pink;`。 */
+  readonly pink: Property.TextEmphasisColor | CssString = 'pink';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:plum;`。 */
+  readonly plum: Property.TextEmphasisColor | CssString = 'plum';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:powderblue;`。 */
+  readonly powderblue: Property.TextEmphasisColor | CssString = 'powderblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:purple;`。 */
+  readonly purple: Property.TextEmphasisColor | CssString = 'purple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:rebeccapurple;`。 */
+  readonly rebeccapurple: Property.TextEmphasisColor | CssString = 'rebeccapurple';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:red;`。 */
+  readonly red: Property.TextEmphasisColor | CssString = 'red';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-emphasis-color:revert;`。
+   */
+  readonly revert: Property.TextEmphasisColor | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-emphasis-color:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextEmphasisColor | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:rosybrown;`。 */
+  readonly rosybrown: Property.TextEmphasisColor | CssString = 'rosybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:royalblue;`。 */
+  readonly royalblue: Property.TextEmphasisColor | CssString = 'royalblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:saddlebrown;`。 */
+  readonly saddlebrown: Property.TextEmphasisColor | CssString = 'saddlebrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:salmon;`。 */
+  readonly salmon: Property.TextEmphasisColor | CssString = 'salmon';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:sandybrown;`。 */
+  readonly sandybrown: Property.TextEmphasisColor | CssString = 'sandybrown';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:seagreen;`。 */
+  readonly seagreen: Property.TextEmphasisColor | CssString = 'seagreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:seashell;`。 */
+  readonly seashell: Property.TextEmphasisColor | CssString = 'seashell';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:sienna;`。 */
+  readonly sienna: Property.TextEmphasisColor | CssString = 'sienna';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:silver;`。 */
+  readonly silver: Property.TextEmphasisColor | CssString = 'silver';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:skyblue;`。 */
+  readonly skyblue: Property.TextEmphasisColor | CssString = 'skyblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:slateblue;`。 */
+  readonly slateblue: Property.TextEmphasisColor | CssString = 'slateblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:slategray;`。 */
+  readonly slategray: Property.TextEmphasisColor | CssString = 'slategray';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:slategrey;`。 */
+  readonly slategrey: Property.TextEmphasisColor | CssString = 'slategrey';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:snow;`。 */
+  readonly snow: Property.TextEmphasisColor | CssString = 'snow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:springgreen;`。 */
+  readonly springgreen: Property.TextEmphasisColor | CssString = 'springgreen';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:steelblue;`。 */
+  readonly steelblue: Property.TextEmphasisColor | CssString = 'steelblue';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:tan;`。 */
+  readonly tan: Property.TextEmphasisColor | CssString = 'tan';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:teal;`。 */
+  readonly teal: Property.TextEmphasisColor | CssString = 'teal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:thistle;`。 */
+  readonly thistle: Property.TextEmphasisColor | CssString = 'thistle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:tomato;`。 */
+  readonly tomato: Property.TextEmphasisColor | CssString = 'tomato';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
+   *
+   * CSS 声明：`text-emphasis-color:transparent;`。
+   */
+  readonly transparent: Property.TextEmphasisColor | CssString = 'transparent';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:turquoise;`。 */
+  readonly turquoise: Property.TextEmphasisColor | CssString = 'turquoise';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-emphasis-color:unset;`。
+   */
+  readonly unset: Property.TextEmphasisColor | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:violet;`。 */
+  readonly violet: Property.TextEmphasisColor | CssString = 'violet';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:wheat;`。 */
+  readonly wheat: Property.TextEmphasisColor | CssString = 'wheat';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:white;`。 */
+  readonly white: Property.TextEmphasisColor | CssString = 'white';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:whitesmoke;`。 */
+  readonly whitesmoke: Property.TextEmphasisColor | CssString = 'whitesmoke';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:yellow;`。 */
+  readonly yellow: Property.TextEmphasisColor | CssString = 'yellow';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-color:yellowgreen;`。 */
+  readonly yellowgreen: Property.TextEmphasisColor | CssString = 'yellowgreen';
+}
+
+/**
  * 设置文字着重号颜色。（text-emphasis-color）
  *
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
@@ -21867,427 +31395,427 @@ export class TextEmphasisCss extends CssProperty {
  */
 export class TextEmphasisColorCss extends CssProperty {
   /** CSS 声明：`text-emphasis-color:AccentColor;`。 */
-  readonly AccentColor = 'text-emphasis-color:AccentColor;';
+  readonly AccentColor: string = 'text-emphasis-color:AccentColor;';
   /** CSS 声明：`text-emphasis-color:AccentColorText;`。 */
-  readonly AccentColorText = 'text-emphasis-color:AccentColorText;';
+  readonly AccentColorText: string = 'text-emphasis-color:AccentColorText;';
   /** CSS 声明：`text-emphasis-color:ActiveBorder;`。 */
-  readonly ActiveBorder = 'text-emphasis-color:ActiveBorder;';
+  readonly ActiveBorder: string = 'text-emphasis-color:ActiveBorder;';
   /** CSS 声明：`text-emphasis-color:ActiveCaption;`。 */
-  readonly ActiveCaption = 'text-emphasis-color:ActiveCaption;';
+  readonly ActiveCaption: string = 'text-emphasis-color:ActiveCaption;';
   /** CSS 声明：`text-emphasis-color:ActiveText;`。 */
-  readonly ActiveText = 'text-emphasis-color:ActiveText;';
+  readonly ActiveText: string = 'text-emphasis-color:ActiveText;';
   /** CSS 声明：`text-emphasis-color:AppWorkspace;`。 */
-  readonly AppWorkspace = 'text-emphasis-color:AppWorkspace;';
+  readonly AppWorkspace: string = 'text-emphasis-color:AppWorkspace;';
   /** CSS 声明：`text-emphasis-color:Background;`。 */
-  readonly Background = 'text-emphasis-color:Background;';
+  readonly Background: string = 'text-emphasis-color:Background;';
   /** CSS 声明：`text-emphasis-color:ButtonBorder;`。 */
-  readonly ButtonBorder = 'text-emphasis-color:ButtonBorder;';
+  readonly ButtonBorder: string = 'text-emphasis-color:ButtonBorder;';
   /** CSS 声明：`text-emphasis-color:ButtonFace;`。 */
-  readonly ButtonFace = 'text-emphasis-color:ButtonFace;';
+  readonly ButtonFace: string = 'text-emphasis-color:ButtonFace;';
   /** CSS 声明：`text-emphasis-color:ButtonHighlight;`。 */
-  readonly ButtonHighlight = 'text-emphasis-color:ButtonHighlight;';
+  readonly ButtonHighlight: string = 'text-emphasis-color:ButtonHighlight;';
   /** CSS 声明：`text-emphasis-color:ButtonShadow;`。 */
-  readonly ButtonShadow = 'text-emphasis-color:ButtonShadow;';
+  readonly ButtonShadow: string = 'text-emphasis-color:ButtonShadow;';
   /** CSS 声明：`text-emphasis-color:ButtonText;`。 */
-  readonly ButtonText = 'text-emphasis-color:ButtonText;';
+  readonly ButtonText: string = 'text-emphasis-color:ButtonText;';
   /** CSS 声明：`text-emphasis-color:Canvas;`。 */
-  readonly Canvas = 'text-emphasis-color:Canvas;';
+  readonly Canvas: string = 'text-emphasis-color:Canvas;';
   /** CSS 声明：`text-emphasis-color:CanvasText;`。 */
-  readonly CanvasText = 'text-emphasis-color:CanvasText;';
+  readonly CanvasText: string = 'text-emphasis-color:CanvasText;';
   /** CSS 声明：`text-emphasis-color:CaptionText;`。 */
-  readonly CaptionText = 'text-emphasis-color:CaptionText;';
+  readonly CaptionText: string = 'text-emphasis-color:CaptionText;';
   /** CSS 声明：`text-emphasis-color:Field;`。 */
-  readonly Field = 'text-emphasis-color:Field;';
+  readonly Field: string = 'text-emphasis-color:Field;';
   /** CSS 声明：`text-emphasis-color:FieldText;`。 */
-  readonly FieldText = 'text-emphasis-color:FieldText;';
+  readonly FieldText: string = 'text-emphasis-color:FieldText;';
   /** CSS 声明：`text-emphasis-color:GrayText;`。 */
-  readonly GrayText = 'text-emphasis-color:GrayText;';
+  readonly GrayText: string = 'text-emphasis-color:GrayText;';
   /** CSS 声明：`text-emphasis-color:Highlight;`。 */
-  readonly Highlight = 'text-emphasis-color:Highlight;';
+  readonly Highlight: string = 'text-emphasis-color:Highlight;';
   /** CSS 声明：`text-emphasis-color:HighlightText;`。 */
-  readonly HighlightText = 'text-emphasis-color:HighlightText;';
+  readonly HighlightText: string = 'text-emphasis-color:HighlightText;';
   /** CSS 声明：`text-emphasis-color:InactiveBorder;`。 */
-  readonly InactiveBorder = 'text-emphasis-color:InactiveBorder;';
+  readonly InactiveBorder: string = 'text-emphasis-color:InactiveBorder;';
   /** CSS 声明：`text-emphasis-color:InactiveCaption;`。 */
-  readonly InactiveCaption = 'text-emphasis-color:InactiveCaption;';
+  readonly InactiveCaption: string = 'text-emphasis-color:InactiveCaption;';
   /** CSS 声明：`text-emphasis-color:InactiveCaptionText;`。 */
-  readonly InactiveCaptionText = 'text-emphasis-color:InactiveCaptionText;';
+  readonly InactiveCaptionText: string = 'text-emphasis-color:InactiveCaptionText;';
   /** CSS 声明：`text-emphasis-color:InfoBackground;`。 */
-  readonly InfoBackground = 'text-emphasis-color:InfoBackground;';
+  readonly InfoBackground: string = 'text-emphasis-color:InfoBackground;';
   /** CSS 声明：`text-emphasis-color:InfoText;`。 */
-  readonly InfoText = 'text-emphasis-color:InfoText;';
+  readonly InfoText: string = 'text-emphasis-color:InfoText;';
   /** CSS 声明：`text-emphasis-color:LinkText;`。 */
-  readonly LinkText = 'text-emphasis-color:LinkText;';
+  readonly LinkText: string = 'text-emphasis-color:LinkText;';
   /** CSS 声明：`text-emphasis-color:Mark;`。 */
-  readonly Mark = 'text-emphasis-color:Mark;';
+  readonly Mark: string = 'text-emphasis-color:Mark;';
   /** CSS 声明：`text-emphasis-color:MarkText;`。 */
-  readonly MarkText = 'text-emphasis-color:MarkText;';
+  readonly MarkText: string = 'text-emphasis-color:MarkText;';
   /** CSS 声明：`text-emphasis-color:Menu;`。 */
-  readonly Menu = 'text-emphasis-color:Menu;';
+  readonly Menu: string = 'text-emphasis-color:Menu;';
   /** CSS 声明：`text-emphasis-color:MenuText;`。 */
-  readonly MenuText = 'text-emphasis-color:MenuText;';
+  readonly MenuText: string = 'text-emphasis-color:MenuText;';
   /** CSS 声明：`text-emphasis-color:Scrollbar;`。 */
-  readonly Scrollbar = 'text-emphasis-color:Scrollbar;';
+  readonly Scrollbar: string = 'text-emphasis-color:Scrollbar;';
   /** CSS 声明：`text-emphasis-color:SelectedItem;`。 */
-  readonly SelectedItem = 'text-emphasis-color:SelectedItem;';
+  readonly SelectedItem: string = 'text-emphasis-color:SelectedItem;';
   /** CSS 声明：`text-emphasis-color:SelectedItemText;`。 */
-  readonly SelectedItemText = 'text-emphasis-color:SelectedItemText;';
+  readonly SelectedItemText: string = 'text-emphasis-color:SelectedItemText;';
   /** CSS 声明：`text-emphasis-color:ThreeDDarkShadow;`。 */
-  readonly ThreeDDarkShadow = 'text-emphasis-color:ThreeDDarkShadow;';
+  readonly ThreeDDarkShadow: string = 'text-emphasis-color:ThreeDDarkShadow;';
   /** CSS 声明：`text-emphasis-color:ThreeDFace;`。 */
-  readonly ThreeDFace = 'text-emphasis-color:ThreeDFace;';
+  readonly ThreeDFace: string = 'text-emphasis-color:ThreeDFace;';
   /** CSS 声明：`text-emphasis-color:ThreeDHighlight;`。 */
-  readonly ThreeDHighlight = 'text-emphasis-color:ThreeDHighlight;';
+  readonly ThreeDHighlight: string = 'text-emphasis-color:ThreeDHighlight;';
   /** CSS 声明：`text-emphasis-color:ThreeDLightShadow;`。 */
-  readonly ThreeDLightShadow = 'text-emphasis-color:ThreeDLightShadow;';
+  readonly ThreeDLightShadow: string = 'text-emphasis-color:ThreeDLightShadow;';
   /** CSS 声明：`text-emphasis-color:ThreeDShadow;`。 */
-  readonly ThreeDShadow = 'text-emphasis-color:ThreeDShadow;';
+  readonly ThreeDShadow: string = 'text-emphasis-color:ThreeDShadow;';
   /** CSS 声明：`text-emphasis-color:VisitedText;`。 */
-  readonly VisitedText = 'text-emphasis-color:VisitedText;';
+  readonly VisitedText: string = 'text-emphasis-color:VisitedText;';
   /** CSS 声明：`text-emphasis-color:Window;`。 */
-  readonly Window = 'text-emphasis-color:Window;';
+  readonly Window: string = 'text-emphasis-color:Window;';
   /** CSS 声明：`text-emphasis-color:WindowFrame;`。 */
-  readonly WindowFrame = 'text-emphasis-color:WindowFrame;';
+  readonly WindowFrame: string = 'text-emphasis-color:WindowFrame;';
   /** CSS 声明：`text-emphasis-color:WindowText;`。 */
-  readonly WindowText = 'text-emphasis-color:WindowText;';
+  readonly WindowText: string = 'text-emphasis-color:WindowText;';
   /** CSS 声明：`text-emphasis-color:aliceblue;`。 */
-  readonly aliceblue = 'text-emphasis-color:aliceblue;';
+  readonly aliceblue: string = 'text-emphasis-color:aliceblue;';
   /** CSS 声明：`text-emphasis-color:antiquewhite;`。 */
-  readonly antiquewhite = 'text-emphasis-color:antiquewhite;';
+  readonly antiquewhite: string = 'text-emphasis-color:antiquewhite;';
   /** CSS 声明：`text-emphasis-color:aqua;`。 */
-  readonly aqua = 'text-emphasis-color:aqua;';
+  readonly aqua: string = 'text-emphasis-color:aqua;';
   /** CSS 声明：`text-emphasis-color:aquamarine;`。 */
-  readonly aquamarine = 'text-emphasis-color:aquamarine;';
+  readonly aquamarine: string = 'text-emphasis-color:aquamarine;';
   /** CSS 声明：`text-emphasis-color:azure;`。 */
-  readonly azure = 'text-emphasis-color:azure;';
+  readonly azure: string = 'text-emphasis-color:azure;';
   /** CSS 声明：`text-emphasis-color:beige;`。 */
-  readonly beige = 'text-emphasis-color:beige;';
+  readonly beige: string = 'text-emphasis-color:beige;';
   /** CSS 声明：`text-emphasis-color:bisque;`。 */
-  readonly bisque = 'text-emphasis-color:bisque;';
+  readonly bisque: string = 'text-emphasis-color:bisque;';
   /** CSS 声明：`text-emphasis-color:black;`。 */
-  readonly black = 'text-emphasis-color:black;';
+  readonly black: string = 'text-emphasis-color:black;';
   /** CSS 声明：`text-emphasis-color:blanchedalmond;`。 */
-  readonly blanchedalmond = 'text-emphasis-color:blanchedalmond;';
+  readonly blanchedalmond: string = 'text-emphasis-color:blanchedalmond;';
   /** CSS 声明：`text-emphasis-color:blue;`。 */
-  readonly blue = 'text-emphasis-color:blue;';
+  readonly blue: string = 'text-emphasis-color:blue;';
   /** CSS 声明：`text-emphasis-color:blueviolet;`。 */
-  readonly blueviolet = 'text-emphasis-color:blueviolet;';
+  readonly blueviolet: string = 'text-emphasis-color:blueviolet;';
   /** CSS 声明：`text-emphasis-color:brown;`。 */
-  readonly brown = 'text-emphasis-color:brown;';
+  readonly brown: string = 'text-emphasis-color:brown;';
   /** CSS 声明：`text-emphasis-color:burlywood;`。 */
-  readonly burlywood = 'text-emphasis-color:burlywood;';
+  readonly burlywood: string = 'text-emphasis-color:burlywood;';
   /** CSS 声明：`text-emphasis-color:cadetblue;`。 */
-  readonly cadetblue = 'text-emphasis-color:cadetblue;';
+  readonly cadetblue: string = 'text-emphasis-color:cadetblue;';
   /** CSS 声明：`text-emphasis-color:chartreuse;`。 */
-  readonly chartreuse = 'text-emphasis-color:chartreuse;';
+  readonly chartreuse: string = 'text-emphasis-color:chartreuse;';
   /** CSS 声明：`text-emphasis-color:chocolate;`。 */
-  readonly chocolate = 'text-emphasis-color:chocolate;';
+  readonly chocolate: string = 'text-emphasis-color:chocolate;';
   /** CSS 声明：`text-emphasis-color:coral;`。 */
-  readonly coral = 'text-emphasis-color:coral;';
+  readonly coral: string = 'text-emphasis-color:coral;';
   /** CSS 声明：`text-emphasis-color:cornflowerblue;`。 */
-  readonly cornflowerblue = 'text-emphasis-color:cornflowerblue;';
+  readonly cornflowerblue: string = 'text-emphasis-color:cornflowerblue;';
   /** CSS 声明：`text-emphasis-color:cornsilk;`。 */
-  readonly cornsilk = 'text-emphasis-color:cornsilk;';
+  readonly cornsilk: string = 'text-emphasis-color:cornsilk;';
   /** CSS 声明：`text-emphasis-color:crimson;`。 */
-  readonly crimson = 'text-emphasis-color:crimson;';
+  readonly crimson: string = 'text-emphasis-color:crimson;';
   /**
    * 引用当前 color 的计算值；用于 color 自身时按继承的颜色解析。
    *
    * CSS 声明：`text-emphasis-color:currentColor;`。
    */
-  readonly currentColor = 'text-emphasis-color:currentColor;';
+  readonly currentColor: string = 'text-emphasis-color:currentColor;';
   /** CSS 声明：`text-emphasis-color:cyan;`。 */
-  readonly cyan = 'text-emphasis-color:cyan;';
+  readonly cyan: string = 'text-emphasis-color:cyan;';
   /** CSS 声明：`text-emphasis-color:darkblue;`。 */
-  readonly darkblue = 'text-emphasis-color:darkblue;';
+  readonly darkblue: string = 'text-emphasis-color:darkblue;';
   /** CSS 声明：`text-emphasis-color:darkcyan;`。 */
-  readonly darkcyan = 'text-emphasis-color:darkcyan;';
+  readonly darkcyan: string = 'text-emphasis-color:darkcyan;';
   /** CSS 声明：`text-emphasis-color:darkgoldenrod;`。 */
-  readonly darkgoldenrod = 'text-emphasis-color:darkgoldenrod;';
+  readonly darkgoldenrod: string = 'text-emphasis-color:darkgoldenrod;';
   /** CSS 声明：`text-emphasis-color:darkgray;`。 */
-  readonly darkgray = 'text-emphasis-color:darkgray;';
+  readonly darkgray: string = 'text-emphasis-color:darkgray;';
   /** CSS 声明：`text-emphasis-color:darkgreen;`。 */
-  readonly darkgreen = 'text-emphasis-color:darkgreen;';
+  readonly darkgreen: string = 'text-emphasis-color:darkgreen;';
   /** CSS 声明：`text-emphasis-color:darkgrey;`。 */
-  readonly darkgrey = 'text-emphasis-color:darkgrey;';
+  readonly darkgrey: string = 'text-emphasis-color:darkgrey;';
   /** CSS 声明：`text-emphasis-color:darkkhaki;`。 */
-  readonly darkkhaki = 'text-emphasis-color:darkkhaki;';
+  readonly darkkhaki: string = 'text-emphasis-color:darkkhaki;';
   /** CSS 声明：`text-emphasis-color:darkmagenta;`。 */
-  readonly darkmagenta = 'text-emphasis-color:darkmagenta;';
+  readonly darkmagenta: string = 'text-emphasis-color:darkmagenta;';
   /** CSS 声明：`text-emphasis-color:darkolivegreen;`。 */
-  readonly darkolivegreen = 'text-emphasis-color:darkolivegreen;';
+  readonly darkolivegreen: string = 'text-emphasis-color:darkolivegreen;';
   /** CSS 声明：`text-emphasis-color:darkorange;`。 */
-  readonly darkorange = 'text-emphasis-color:darkorange;';
+  readonly darkorange: string = 'text-emphasis-color:darkorange;';
   /** CSS 声明：`text-emphasis-color:darkorchid;`。 */
-  readonly darkorchid = 'text-emphasis-color:darkorchid;';
+  readonly darkorchid: string = 'text-emphasis-color:darkorchid;';
   /** CSS 声明：`text-emphasis-color:darkred;`。 */
-  readonly darkred = 'text-emphasis-color:darkred;';
+  readonly darkred: string = 'text-emphasis-color:darkred;';
   /** CSS 声明：`text-emphasis-color:darksalmon;`。 */
-  readonly darksalmon = 'text-emphasis-color:darksalmon;';
+  readonly darksalmon: string = 'text-emphasis-color:darksalmon;';
   /** CSS 声明：`text-emphasis-color:darkseagreen;`。 */
-  readonly darkseagreen = 'text-emphasis-color:darkseagreen;';
+  readonly darkseagreen: string = 'text-emphasis-color:darkseagreen;';
   /** CSS 声明：`text-emphasis-color:darkslateblue;`。 */
-  readonly darkslateblue = 'text-emphasis-color:darkslateblue;';
+  readonly darkslateblue: string = 'text-emphasis-color:darkslateblue;';
   /** CSS 声明：`text-emphasis-color:darkslategray;`。 */
-  readonly darkslategray = 'text-emphasis-color:darkslategray;';
+  readonly darkslategray: string = 'text-emphasis-color:darkslategray;';
   /** CSS 声明：`text-emphasis-color:darkslategrey;`。 */
-  readonly darkslategrey = 'text-emphasis-color:darkslategrey;';
+  readonly darkslategrey: string = 'text-emphasis-color:darkslategrey;';
   /** CSS 声明：`text-emphasis-color:darkturquoise;`。 */
-  readonly darkturquoise = 'text-emphasis-color:darkturquoise;';
+  readonly darkturquoise: string = 'text-emphasis-color:darkturquoise;';
   /** CSS 声明：`text-emphasis-color:darkviolet;`。 */
-  readonly darkviolet = 'text-emphasis-color:darkviolet;';
+  readonly darkviolet: string = 'text-emphasis-color:darkviolet;';
   /** CSS 声明：`text-emphasis-color:deeppink;`。 */
-  readonly deeppink = 'text-emphasis-color:deeppink;';
+  readonly deeppink: string = 'text-emphasis-color:deeppink;';
   /** CSS 声明：`text-emphasis-color:deepskyblue;`。 */
-  readonly deepskyblue = 'text-emphasis-color:deepskyblue;';
+  readonly deepskyblue: string = 'text-emphasis-color:deepskyblue;';
   /** CSS 声明：`text-emphasis-color:dimgray;`。 */
-  readonly dimgray = 'text-emphasis-color:dimgray;';
+  readonly dimgray: string = 'text-emphasis-color:dimgray;';
   /** CSS 声明：`text-emphasis-color:dimgrey;`。 */
-  readonly dimgrey = 'text-emphasis-color:dimgrey;';
+  readonly dimgrey: string = 'text-emphasis-color:dimgrey;';
   /** CSS 声明：`text-emphasis-color:dodgerblue;`。 */
-  readonly dodgerblue = 'text-emphasis-color:dodgerblue;';
+  readonly dodgerblue: string = 'text-emphasis-color:dodgerblue;';
   /** CSS 声明：`text-emphasis-color:firebrick;`。 */
-  readonly firebrick = 'text-emphasis-color:firebrick;';
+  readonly firebrick: string = 'text-emphasis-color:firebrick;';
   /** CSS 声明：`text-emphasis-color:floralwhite;`。 */
-  readonly floralwhite = 'text-emphasis-color:floralwhite;';
+  readonly floralwhite: string = 'text-emphasis-color:floralwhite;';
   /** CSS 声明：`text-emphasis-color:forestgreen;`。 */
-  readonly forestgreen = 'text-emphasis-color:forestgreen;';
+  readonly forestgreen: string = 'text-emphasis-color:forestgreen;';
   /** CSS 声明：`text-emphasis-color:fuchsia;`。 */
-  readonly fuchsia = 'text-emphasis-color:fuchsia;';
+  readonly fuchsia: string = 'text-emphasis-color:fuchsia;';
   /** CSS 声明：`text-emphasis-color:gainsboro;`。 */
-  readonly gainsboro = 'text-emphasis-color:gainsboro;';
+  readonly gainsboro: string = 'text-emphasis-color:gainsboro;';
   /** CSS 声明：`text-emphasis-color:ghostwhite;`。 */
-  readonly ghostwhite = 'text-emphasis-color:ghostwhite;';
+  readonly ghostwhite: string = 'text-emphasis-color:ghostwhite;';
   /** CSS 声明：`text-emphasis-color:gold;`。 */
-  readonly gold = 'text-emphasis-color:gold;';
+  readonly gold: string = 'text-emphasis-color:gold;';
   /** CSS 声明：`text-emphasis-color:goldenrod;`。 */
-  readonly goldenrod = 'text-emphasis-color:goldenrod;';
+  readonly goldenrod: string = 'text-emphasis-color:goldenrod;';
   /** CSS 声明：`text-emphasis-color:gray;`。 */
-  readonly gray = 'text-emphasis-color:gray;';
+  readonly gray: string = 'text-emphasis-color:gray;';
   /** CSS 声明：`text-emphasis-color:green;`。 */
-  readonly green = 'text-emphasis-color:green;';
+  readonly green: string = 'text-emphasis-color:green;';
   /** CSS 声明：`text-emphasis-color:greenyellow;`。 */
-  readonly greenyellow = 'text-emphasis-color:greenyellow;';
+  readonly greenyellow: string = 'text-emphasis-color:greenyellow;';
   /** CSS 声明：`text-emphasis-color:grey;`。 */
-  readonly grey = 'text-emphasis-color:grey;';
+  readonly grey: string = 'text-emphasis-color:grey;';
   /** CSS 声明：`text-emphasis-color:honeydew;`。 */
-  readonly honeydew = 'text-emphasis-color:honeydew;';
+  readonly honeydew: string = 'text-emphasis-color:honeydew;';
   /** CSS 声明：`text-emphasis-color:hotpink;`。 */
-  readonly hotpink = 'text-emphasis-color:hotpink;';
+  readonly hotpink: string = 'text-emphasis-color:hotpink;';
   /** CSS 声明：`text-emphasis-color:indianred;`。 */
-  readonly indianred = 'text-emphasis-color:indianred;';
+  readonly indianred: string = 'text-emphasis-color:indianred;';
   /** CSS 声明：`text-emphasis-color:indigo;`。 */
-  readonly indigo = 'text-emphasis-color:indigo;';
+  readonly indigo: string = 'text-emphasis-color:indigo;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-emphasis-color:inherit;`。
    */
-  readonly inherit = 'text-emphasis-color:inherit;';
+  readonly inherit: string = 'text-emphasis-color:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-emphasis-color:initial;`。
    */
-  readonly initial = 'text-emphasis-color:initial;';
+  readonly initial: string = 'text-emphasis-color:initial;';
   /** CSS 声明：`text-emphasis-color:ivory;`。 */
-  readonly ivory = 'text-emphasis-color:ivory;';
+  readonly ivory: string = 'text-emphasis-color:ivory;';
   /** CSS 声明：`text-emphasis-color:khaki;`。 */
-  readonly khaki = 'text-emphasis-color:khaki;';
+  readonly khaki: string = 'text-emphasis-color:khaki;';
   /** CSS 声明：`text-emphasis-color:lavender;`。 */
-  readonly lavender = 'text-emphasis-color:lavender;';
+  readonly lavender: string = 'text-emphasis-color:lavender;';
   /** CSS 声明：`text-emphasis-color:lavenderblush;`。 */
-  readonly lavenderblush = 'text-emphasis-color:lavenderblush;';
+  readonly lavenderblush: string = 'text-emphasis-color:lavenderblush;';
   /** CSS 声明：`text-emphasis-color:lawngreen;`。 */
-  readonly lawngreen = 'text-emphasis-color:lawngreen;';
+  readonly lawngreen: string = 'text-emphasis-color:lawngreen;';
   /** CSS 声明：`text-emphasis-color:lemonchiffon;`。 */
-  readonly lemonchiffon = 'text-emphasis-color:lemonchiffon;';
+  readonly lemonchiffon: string = 'text-emphasis-color:lemonchiffon;';
   /** CSS 声明：`text-emphasis-color:lightblue;`。 */
-  readonly lightblue = 'text-emphasis-color:lightblue;';
+  readonly lightblue: string = 'text-emphasis-color:lightblue;';
   /** CSS 声明：`text-emphasis-color:lightcoral;`。 */
-  readonly lightcoral = 'text-emphasis-color:lightcoral;';
+  readonly lightcoral: string = 'text-emphasis-color:lightcoral;';
   /** CSS 声明：`text-emphasis-color:lightcyan;`。 */
-  readonly lightcyan = 'text-emphasis-color:lightcyan;';
+  readonly lightcyan: string = 'text-emphasis-color:lightcyan;';
   /** CSS 声明：`text-emphasis-color:lightgoldenrodyellow;`。 */
-  readonly lightgoldenrodyellow = 'text-emphasis-color:lightgoldenrodyellow;';
+  readonly lightgoldenrodyellow: string = 'text-emphasis-color:lightgoldenrodyellow;';
   /** CSS 声明：`text-emphasis-color:lightgray;`。 */
-  readonly lightgray = 'text-emphasis-color:lightgray;';
+  readonly lightgray: string = 'text-emphasis-color:lightgray;';
   /** CSS 声明：`text-emphasis-color:lightgreen;`。 */
-  readonly lightgreen = 'text-emphasis-color:lightgreen;';
+  readonly lightgreen: string = 'text-emphasis-color:lightgreen;';
   /** CSS 声明：`text-emphasis-color:lightgrey;`。 */
-  readonly lightgrey = 'text-emphasis-color:lightgrey;';
+  readonly lightgrey: string = 'text-emphasis-color:lightgrey;';
   /** CSS 声明：`text-emphasis-color:lightpink;`。 */
-  readonly lightpink = 'text-emphasis-color:lightpink;';
+  readonly lightpink: string = 'text-emphasis-color:lightpink;';
   /** CSS 声明：`text-emphasis-color:lightsalmon;`。 */
-  readonly lightsalmon = 'text-emphasis-color:lightsalmon;';
+  readonly lightsalmon: string = 'text-emphasis-color:lightsalmon;';
   /** CSS 声明：`text-emphasis-color:lightseagreen;`。 */
-  readonly lightseagreen = 'text-emphasis-color:lightseagreen;';
+  readonly lightseagreen: string = 'text-emphasis-color:lightseagreen;';
   /** CSS 声明：`text-emphasis-color:lightskyblue;`。 */
-  readonly lightskyblue = 'text-emphasis-color:lightskyblue;';
+  readonly lightskyblue: string = 'text-emphasis-color:lightskyblue;';
   /** CSS 声明：`text-emphasis-color:lightslategray;`。 */
-  readonly lightslategray = 'text-emphasis-color:lightslategray;';
+  readonly lightslategray: string = 'text-emphasis-color:lightslategray;';
   /** CSS 声明：`text-emphasis-color:lightslategrey;`。 */
-  readonly lightslategrey = 'text-emphasis-color:lightslategrey;';
+  readonly lightslategrey: string = 'text-emphasis-color:lightslategrey;';
   /** CSS 声明：`text-emphasis-color:lightsteelblue;`。 */
-  readonly lightsteelblue = 'text-emphasis-color:lightsteelblue;';
+  readonly lightsteelblue: string = 'text-emphasis-color:lightsteelblue;';
   /** CSS 声明：`text-emphasis-color:lightyellow;`。 */
-  readonly lightyellow = 'text-emphasis-color:lightyellow;';
+  readonly lightyellow: string = 'text-emphasis-color:lightyellow;';
   /** CSS 声明：`text-emphasis-color:lime;`。 */
-  readonly lime = 'text-emphasis-color:lime;';
+  readonly lime: string = 'text-emphasis-color:lime;';
   /** CSS 声明：`text-emphasis-color:limegreen;`。 */
-  readonly limegreen = 'text-emphasis-color:limegreen;';
+  readonly limegreen: string = 'text-emphasis-color:limegreen;';
   /** CSS 声明：`text-emphasis-color:linen;`。 */
-  readonly linen = 'text-emphasis-color:linen;';
+  readonly linen: string = 'text-emphasis-color:linen;';
   /** CSS 声明：`text-emphasis-color:magenta;`。 */
-  readonly magenta = 'text-emphasis-color:magenta;';
+  readonly magenta: string = 'text-emphasis-color:magenta;';
   /** CSS 声明：`text-emphasis-color:maroon;`。 */
-  readonly maroon = 'text-emphasis-color:maroon;';
+  readonly maroon: string = 'text-emphasis-color:maroon;';
   /** CSS 声明：`text-emphasis-color:mediumaquamarine;`。 */
-  readonly mediumaquamarine = 'text-emphasis-color:mediumaquamarine;';
+  readonly mediumaquamarine: string = 'text-emphasis-color:mediumaquamarine;';
   /** CSS 声明：`text-emphasis-color:mediumblue;`。 */
-  readonly mediumblue = 'text-emphasis-color:mediumblue;';
+  readonly mediumblue: string = 'text-emphasis-color:mediumblue;';
   /** CSS 声明：`text-emphasis-color:mediumorchid;`。 */
-  readonly mediumorchid = 'text-emphasis-color:mediumorchid;';
+  readonly mediumorchid: string = 'text-emphasis-color:mediumorchid;';
   /** CSS 声明：`text-emphasis-color:mediumpurple;`。 */
-  readonly mediumpurple = 'text-emphasis-color:mediumpurple;';
+  readonly mediumpurple: string = 'text-emphasis-color:mediumpurple;';
   /** CSS 声明：`text-emphasis-color:mediumseagreen;`。 */
-  readonly mediumseagreen = 'text-emphasis-color:mediumseagreen;';
+  readonly mediumseagreen: string = 'text-emphasis-color:mediumseagreen;';
   /** CSS 声明：`text-emphasis-color:mediumslateblue;`。 */
-  readonly mediumslateblue = 'text-emphasis-color:mediumslateblue;';
+  readonly mediumslateblue: string = 'text-emphasis-color:mediumslateblue;';
   /** CSS 声明：`text-emphasis-color:mediumspringgreen;`。 */
-  readonly mediumspringgreen = 'text-emphasis-color:mediumspringgreen;';
+  readonly mediumspringgreen: string = 'text-emphasis-color:mediumspringgreen;';
   /** CSS 声明：`text-emphasis-color:mediumturquoise;`。 */
-  readonly mediumturquoise = 'text-emphasis-color:mediumturquoise;';
+  readonly mediumturquoise: string = 'text-emphasis-color:mediumturquoise;';
   /** CSS 声明：`text-emphasis-color:mediumvioletred;`。 */
-  readonly mediumvioletred = 'text-emphasis-color:mediumvioletred;';
+  readonly mediumvioletred: string = 'text-emphasis-color:mediumvioletred;';
   /** CSS 声明：`text-emphasis-color:midnightblue;`。 */
-  readonly midnightblue = 'text-emphasis-color:midnightblue;';
+  readonly midnightblue: string = 'text-emphasis-color:midnightblue;';
   /** CSS 声明：`text-emphasis-color:mintcream;`。 */
-  readonly mintcream = 'text-emphasis-color:mintcream;';
+  readonly mintcream: string = 'text-emphasis-color:mintcream;';
   /** CSS 声明：`text-emphasis-color:mistyrose;`。 */
-  readonly mistyrose = 'text-emphasis-color:mistyrose;';
+  readonly mistyrose: string = 'text-emphasis-color:mistyrose;';
   /** CSS 声明：`text-emphasis-color:moccasin;`。 */
-  readonly moccasin = 'text-emphasis-color:moccasin;';
+  readonly moccasin: string = 'text-emphasis-color:moccasin;';
   /** CSS 声明：`text-emphasis-color:navajowhite;`。 */
-  readonly navajowhite = 'text-emphasis-color:navajowhite;';
+  readonly navajowhite: string = 'text-emphasis-color:navajowhite;';
   /** CSS 声明：`text-emphasis-color:navy;`。 */
-  readonly navy = 'text-emphasis-color:navy;';
+  readonly navy: string = 'text-emphasis-color:navy;';
   /** CSS 声明：`text-emphasis-color:oldlace;`。 */
-  readonly oldlace = 'text-emphasis-color:oldlace;';
+  readonly oldlace: string = 'text-emphasis-color:oldlace;';
   /** CSS 声明：`text-emphasis-color:olive;`。 */
-  readonly olive = 'text-emphasis-color:olive;';
+  readonly olive: string = 'text-emphasis-color:olive;';
   /** CSS 声明：`text-emphasis-color:olivedrab;`。 */
-  readonly olivedrab = 'text-emphasis-color:olivedrab;';
+  readonly olivedrab: string = 'text-emphasis-color:olivedrab;';
   /** CSS 声明：`text-emphasis-color:orange;`。 */
-  readonly orange = 'text-emphasis-color:orange;';
+  readonly orange: string = 'text-emphasis-color:orange;';
   /** CSS 声明：`text-emphasis-color:orangered;`。 */
-  readonly orangered = 'text-emphasis-color:orangered;';
+  readonly orangered: string = 'text-emphasis-color:orangered;';
   /** CSS 声明：`text-emphasis-color:orchid;`。 */
-  readonly orchid = 'text-emphasis-color:orchid;';
+  readonly orchid: string = 'text-emphasis-color:orchid;';
   /** CSS 声明：`text-emphasis-color:palegoldenrod;`。 */
-  readonly palegoldenrod = 'text-emphasis-color:palegoldenrod;';
+  readonly palegoldenrod: string = 'text-emphasis-color:palegoldenrod;';
   /** CSS 声明：`text-emphasis-color:palegreen;`。 */
-  readonly palegreen = 'text-emphasis-color:palegreen;';
+  readonly palegreen: string = 'text-emphasis-color:palegreen;';
   /** CSS 声明：`text-emphasis-color:paleturquoise;`。 */
-  readonly paleturquoise = 'text-emphasis-color:paleturquoise;';
+  readonly paleturquoise: string = 'text-emphasis-color:paleturquoise;';
   /** CSS 声明：`text-emphasis-color:palevioletred;`。 */
-  readonly palevioletred = 'text-emphasis-color:palevioletred;';
+  readonly palevioletred: string = 'text-emphasis-color:palevioletred;';
   /** CSS 声明：`text-emphasis-color:papayawhip;`。 */
-  readonly papayawhip = 'text-emphasis-color:papayawhip;';
+  readonly papayawhip: string = 'text-emphasis-color:papayawhip;';
   /** CSS 声明：`text-emphasis-color:peachpuff;`。 */
-  readonly peachpuff = 'text-emphasis-color:peachpuff;';
+  readonly peachpuff: string = 'text-emphasis-color:peachpuff;';
   /** CSS 声明：`text-emphasis-color:peru;`。 */
-  readonly peru = 'text-emphasis-color:peru;';
+  readonly peru: string = 'text-emphasis-color:peru;';
   /** CSS 声明：`text-emphasis-color:pink;`。 */
-  readonly pink = 'text-emphasis-color:pink;';
+  readonly pink: string = 'text-emphasis-color:pink;';
   /** CSS 声明：`text-emphasis-color:plum;`。 */
-  readonly plum = 'text-emphasis-color:plum;';
+  readonly plum: string = 'text-emphasis-color:plum;';
   /** CSS 声明：`text-emphasis-color:powderblue;`。 */
-  readonly powderblue = 'text-emphasis-color:powderblue;';
+  readonly powderblue: string = 'text-emphasis-color:powderblue;';
   /** CSS 声明：`text-emphasis-color:purple;`。 */
-  readonly purple = 'text-emphasis-color:purple;';
+  readonly purple: string = 'text-emphasis-color:purple;';
   /** CSS 声明：`text-emphasis-color:rebeccapurple;`。 */
-  readonly rebeccapurple = 'text-emphasis-color:rebeccapurple;';
+  readonly rebeccapurple: string = 'text-emphasis-color:rebeccapurple;';
   /** CSS 声明：`text-emphasis-color:red;`。 */
-  readonly red = 'text-emphasis-color:red;';
+  readonly red: string = 'text-emphasis-color:red;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-emphasis-color:revert;`。
    */
-  readonly revert = 'text-emphasis-color:revert;';
+  readonly revert: string = 'text-emphasis-color:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-emphasis-color:revert-layer;`。
    */
-  readonly revertLayer = 'text-emphasis-color:revert-layer;';
+  readonly revertLayer: string = 'text-emphasis-color:revert-layer;';
   /** CSS 声明：`text-emphasis-color:rosybrown;`。 */
-  readonly rosybrown = 'text-emphasis-color:rosybrown;';
+  readonly rosybrown: string = 'text-emphasis-color:rosybrown;';
   /** CSS 声明：`text-emphasis-color:royalblue;`。 */
-  readonly royalblue = 'text-emphasis-color:royalblue;';
+  readonly royalblue: string = 'text-emphasis-color:royalblue;';
   /** CSS 声明：`text-emphasis-color:saddlebrown;`。 */
-  readonly saddlebrown = 'text-emphasis-color:saddlebrown;';
+  readonly saddlebrown: string = 'text-emphasis-color:saddlebrown;';
   /** CSS 声明：`text-emphasis-color:salmon;`。 */
-  readonly salmon = 'text-emphasis-color:salmon;';
+  readonly salmon: string = 'text-emphasis-color:salmon;';
   /** CSS 声明：`text-emphasis-color:sandybrown;`。 */
-  readonly sandybrown = 'text-emphasis-color:sandybrown;';
+  readonly sandybrown: string = 'text-emphasis-color:sandybrown;';
   /** CSS 声明：`text-emphasis-color:seagreen;`。 */
-  readonly seagreen = 'text-emphasis-color:seagreen;';
+  readonly seagreen: string = 'text-emphasis-color:seagreen;';
   /** CSS 声明：`text-emphasis-color:seashell;`。 */
-  readonly seashell = 'text-emphasis-color:seashell;';
+  readonly seashell: string = 'text-emphasis-color:seashell;';
   /** CSS 声明：`text-emphasis-color:sienna;`。 */
-  readonly sienna = 'text-emphasis-color:sienna;';
+  readonly sienna: string = 'text-emphasis-color:sienna;';
   /** CSS 声明：`text-emphasis-color:silver;`。 */
-  readonly silver = 'text-emphasis-color:silver;';
+  readonly silver: string = 'text-emphasis-color:silver;';
   /** CSS 声明：`text-emphasis-color:skyblue;`。 */
-  readonly skyblue = 'text-emphasis-color:skyblue;';
+  readonly skyblue: string = 'text-emphasis-color:skyblue;';
   /** CSS 声明：`text-emphasis-color:slateblue;`。 */
-  readonly slateblue = 'text-emphasis-color:slateblue;';
+  readonly slateblue: string = 'text-emphasis-color:slateblue;';
   /** CSS 声明：`text-emphasis-color:slategray;`。 */
-  readonly slategray = 'text-emphasis-color:slategray;';
+  readonly slategray: string = 'text-emphasis-color:slategray;';
   /** CSS 声明：`text-emphasis-color:slategrey;`。 */
-  readonly slategrey = 'text-emphasis-color:slategrey;';
+  readonly slategrey: string = 'text-emphasis-color:slategrey;';
   /** CSS 声明：`text-emphasis-color:snow;`。 */
-  readonly snow = 'text-emphasis-color:snow;';
+  readonly snow: string = 'text-emphasis-color:snow;';
   /** CSS 声明：`text-emphasis-color:springgreen;`。 */
-  readonly springgreen = 'text-emphasis-color:springgreen;';
+  readonly springgreen: string = 'text-emphasis-color:springgreen;';
   /** CSS 声明：`text-emphasis-color:steelblue;`。 */
-  readonly steelblue = 'text-emphasis-color:steelblue;';
+  readonly steelblue: string = 'text-emphasis-color:steelblue;';
   /** CSS 声明：`text-emphasis-color:tan;`。 */
-  readonly tan = 'text-emphasis-color:tan;';
+  readonly tan: string = 'text-emphasis-color:tan;';
   /** CSS 声明：`text-emphasis-color:teal;`。 */
-  readonly teal = 'text-emphasis-color:teal;';
+  readonly teal: string = 'text-emphasis-color:teal;';
   /** CSS 声明：`text-emphasis-color:thistle;`。 */
-  readonly thistle = 'text-emphasis-color:thistle;';
+  readonly thistle: string = 'text-emphasis-color:thistle;';
   /** CSS 声明：`text-emphasis-color:tomato;`。 */
-  readonly tomato = 'text-emphasis-color:tomato;';
+  readonly tomato: string = 'text-emphasis-color:tomato;';
   /**
    * 完全透明的颜色值；不会隐藏元素、取消布局或阻止交互。
    *
    * CSS 声明：`text-emphasis-color:transparent;`。
    */
-  readonly transparent = 'text-emphasis-color:transparent;';
+  readonly transparent: string = 'text-emphasis-color:transparent;';
   /** CSS 声明：`text-emphasis-color:turquoise;`。 */
-  readonly turquoise = 'text-emphasis-color:turquoise;';
+  readonly turquoise: string = 'text-emphasis-color:turquoise;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-emphasis-color:unset;`。
    */
-  readonly unset = 'text-emphasis-color:unset;';
+  readonly unset: string = 'text-emphasis-color:unset;';
   /** CSS 声明：`text-emphasis-color:violet;`。 */
-  readonly violet = 'text-emphasis-color:violet;';
+  readonly violet: string = 'text-emphasis-color:violet;';
   /** CSS 声明：`text-emphasis-color:wheat;`。 */
-  readonly wheat = 'text-emphasis-color:wheat;';
+  readonly wheat: string = 'text-emphasis-color:wheat;';
   /** CSS 声明：`text-emphasis-color:white;`。 */
-  readonly white = 'text-emphasis-color:white;';
+  readonly white: string = 'text-emphasis-color:white;';
   /** CSS 声明：`text-emphasis-color:whitesmoke;`。 */
-  readonly whitesmoke = 'text-emphasis-color:whitesmoke;';
+  readonly whitesmoke: string = 'text-emphasis-color:whitesmoke;';
   /** CSS 声明：`text-emphasis-color:yellow;`。 */
-  readonly yellow = 'text-emphasis-color:yellow;';
+  readonly yellow: string = 'text-emphasis-color:yellow;';
   /** CSS 声明：`text-emphasis-color:yellowgreen;`。 */
-  readonly yellowgreen = 'text-emphasis-color:yellowgreen;';
+  readonly yellowgreen: string = 'text-emphasis-color:yellowgreen;';
   /**
    * 创建 text-emphasis-color 属性作者；普通使用通过 s.textEmphasisColor 取得共享实例。
    * @example
@@ -22389,6 +31917,64 @@ export class TextEmphasisColorCss extends CssProperty {
 }
 
 /**
+ * text-emphasis-position 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextEmphasisPositionKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-position:auto;`。 */
+  readonly auto: Property.TextEmphasisPosition | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-emphasis-position:inherit;`。
+   */
+  readonly inherit: Property.TextEmphasisPosition | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-emphasis-position:initial;`。
+   */
+  readonly initial: Property.TextEmphasisPosition | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-position:over;`。 */
+  readonly over: Property.TextEmphasisPosition | CssString = 'over';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-emphasis-position:revert;`。
+   */
+  readonly revert: Property.TextEmphasisPosition | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-emphasis-position:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextEmphasisPosition | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-position:under;`。 */
+  readonly under: Property.TextEmphasisPosition | CssString = 'under';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-emphasis-position:unset;`。
+   */
+  readonly unset: Property.TextEmphasisPosition | CssString = 'unset';
+}
+
+/**
  * 设置文字着重号位于文字的哪一侧。（text-emphasis-position）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -22396,41 +31982,41 @@ export class TextEmphasisColorCss extends CssProperty {
  */
 export class TextEmphasisPositionCss extends CssProperty {
   /** CSS 声明：`text-emphasis-position:auto;`。 */
-  readonly auto = 'text-emphasis-position:auto;';
+  readonly auto: string = 'text-emphasis-position:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-emphasis-position:inherit;`。
    */
-  readonly inherit = 'text-emphasis-position:inherit;';
+  readonly inherit: string = 'text-emphasis-position:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-emphasis-position:initial;`。
    */
-  readonly initial = 'text-emphasis-position:initial;';
+  readonly initial: string = 'text-emphasis-position:initial;';
   /** CSS 声明：`text-emphasis-position:over;`。 */
-  readonly over = 'text-emphasis-position:over;';
+  readonly over: string = 'text-emphasis-position:over;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-emphasis-position:revert;`。
    */
-  readonly revert = 'text-emphasis-position:revert;';
+  readonly revert: string = 'text-emphasis-position:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-emphasis-position:revert-layer;`。
    */
-  readonly revertLayer = 'text-emphasis-position:revert-layer;';
+  readonly revertLayer: string = 'text-emphasis-position:revert-layer;';
   /** CSS 声明：`text-emphasis-position:under;`。 */
-  readonly under = 'text-emphasis-position:under;';
+  readonly under: string = 'text-emphasis-position:under;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-emphasis-position:unset;`。
    */
-  readonly unset = 'text-emphasis-position:unset;';
+  readonly unset: string = 'text-emphasis-position:unset;';
   /**
    * 创建 text-emphasis-position 属性作者；普通使用通过 s.textEmphasisPosition 取得共享实例。
    * @example
@@ -22454,6 +32040,84 @@ export class TextEmphasisPositionCss extends CssProperty {
 }
 
 /**
+ * text-emphasis-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextEmphasisStyleKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-style:circle;`。 */
+  readonly circle: Property.TextEmphasisStyle | CssString = 'circle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-style:dot;`。 */
+  readonly dot: Property.TextEmphasisStyle | CssString = 'dot';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-style:double-circle;`。 */
+  readonly doubleCircle: Property.TextEmphasisStyle | CssString = 'double-circle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-style:filled;`。 */
+  readonly filled: Property.TextEmphasisStyle | CssString = 'filled';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-emphasis-style:inherit;`。
+   */
+  readonly inherit: Property.TextEmphasisStyle | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-emphasis-style:initial;`。
+   */
+  readonly initial: Property.TextEmphasisStyle | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-style:none;`。 */
+  readonly none: Property.TextEmphasisStyle | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-style:open;`。 */
+  readonly open: Property.TextEmphasisStyle | CssString = 'open';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-emphasis-style:revert;`。
+   */
+  readonly revert: Property.TextEmphasisStyle | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-emphasis-style:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextEmphasisStyle | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-style:sesame;`。 */
+  readonly sesame: Property.TextEmphasisStyle | CssString = 'sesame';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-emphasis-style:triangle;`。 */
+  readonly triangle: Property.TextEmphasisStyle | CssString = 'triangle';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-emphasis-style:unset;`。
+   */
+  readonly unset: Property.TextEmphasisStyle | CssString = 'unset';
+}
+
+/**
  * 设置文字着重号的形状和填充方式。（text-emphasis-style）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -22461,51 +32125,51 @@ export class TextEmphasisPositionCss extends CssProperty {
  */
 export class TextEmphasisStyleCss extends CssProperty {
   /** CSS 声明：`text-emphasis-style:circle;`。 */
-  readonly circle = 'text-emphasis-style:circle;';
+  readonly circle: string = 'text-emphasis-style:circle;';
   /** CSS 声明：`text-emphasis-style:dot;`。 */
-  readonly dot = 'text-emphasis-style:dot;';
+  readonly dot: string = 'text-emphasis-style:dot;';
   /** CSS 声明：`text-emphasis-style:double-circle;`。 */
-  readonly doubleCircle = 'text-emphasis-style:double-circle;';
+  readonly doubleCircle: string = 'text-emphasis-style:double-circle;';
   /** CSS 声明：`text-emphasis-style:filled;`。 */
-  readonly filled = 'text-emphasis-style:filled;';
+  readonly filled: string = 'text-emphasis-style:filled;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-emphasis-style:inherit;`。
    */
-  readonly inherit = 'text-emphasis-style:inherit;';
+  readonly inherit: string = 'text-emphasis-style:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-emphasis-style:initial;`。
    */
-  readonly initial = 'text-emphasis-style:initial;';
+  readonly initial: string = 'text-emphasis-style:initial;';
   /** CSS 声明：`text-emphasis-style:none;`。 */
-  readonly none = 'text-emphasis-style:none;';
+  readonly none: string = 'text-emphasis-style:none;';
   /** CSS 声明：`text-emphasis-style:open;`。 */
-  readonly open = 'text-emphasis-style:open;';
+  readonly open: string = 'text-emphasis-style:open;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-emphasis-style:revert;`。
    */
-  readonly revert = 'text-emphasis-style:revert;';
+  readonly revert: string = 'text-emphasis-style:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-emphasis-style:revert-layer;`。
    */
-  readonly revertLayer = 'text-emphasis-style:revert-layer;';
+  readonly revertLayer: string = 'text-emphasis-style:revert-layer;';
   /** CSS 声明：`text-emphasis-style:sesame;`。 */
-  readonly sesame = 'text-emphasis-style:sesame;';
+  readonly sesame: string = 'text-emphasis-style:sesame;';
   /** CSS 声明：`text-emphasis-style:triangle;`。 */
-  readonly triangle = 'text-emphasis-style:triangle;';
+  readonly triangle: string = 'text-emphasis-style:triangle;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-emphasis-style:unset;`。
    */
-  readonly unset = 'text-emphasis-style:unset;';
+  readonly unset: string = 'text-emphasis-style:unset;';
   /**
    * 创建 text-emphasis-style 属性作者；普通使用通过 s.textEmphasisStyle 取得共享实例。
    * @example
@@ -22529,6 +32193,52 @@ export class TextEmphasisStyleCss extends CssProperty {
 }
 
 /**
+ * text-indent 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextIndentKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-indent:inherit;`。
+   */
+  readonly inherit: Property.TextIndent | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-indent:initial;`。
+   */
+  readonly initial: Property.TextIndent | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-indent:revert;`。
+   */
+  readonly revert: Property.TextIndent | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-indent:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextIndent | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-indent:unset;`。
+   */
+  readonly unset: Property.TextIndent | CssString = 'unset';
+}
+
+/**
  * 设置文本行的缩进距离。（text-indent）
  *
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
@@ -22540,31 +32250,31 @@ export class TextIndentCss extends LengthCssProperty {
    *
    * CSS 声明：`text-indent:inherit;`。
    */
-  readonly inherit = 'text-indent:inherit;';
+  readonly inherit: string = 'text-indent:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-indent:initial;`。
    */
-  readonly initial = 'text-indent:initial;';
+  readonly initial: string = 'text-indent:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-indent:revert;`。
    */
-  readonly revert = 'text-indent:revert;';
+  readonly revert: string = 'text-indent:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-indent:revert-layer;`。
    */
-  readonly revertLayer = 'text-indent:revert-layer;';
+  readonly revertLayer: string = 'text-indent:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-indent:unset;`。
    */
-  readonly unset = 'text-indent:unset;';
+  readonly unset: string = 'text-indent:unset;';
   /**
    * 创建 text-indent 属性作者；普通使用通过 s.textIndent 取得共享实例。
    * @example
@@ -22656,6 +32366,72 @@ export class TextIndentCss extends LengthCssProperty {
 }
 
 /**
+ * text-justify 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextJustifyKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-justify:auto;`。 */
+  readonly auto: Property.TextJustify | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-justify:distribute;`。 */
+  readonly distribute: Property.TextJustify | CssString = 'distribute';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-justify:inherit;`。
+   */
+  readonly inherit: Property.TextJustify | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-justify:initial;`。
+   */
+  readonly initial: Property.TextJustify | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-justify:inter-character;`。 */
+  readonly interCharacter: Property.TextJustify | CssString = 'inter-character';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-justify:inter-word;`。 */
+  readonly interWord: Property.TextJustify | CssString = 'inter-word';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-justify:none;`。 */
+  readonly none: Property.TextJustify | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-justify:revert;`。
+   */
+  readonly revert: Property.TextJustify | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-justify:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextJustify | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-justify:unset;`。
+   */
+  readonly unset: Property.TextJustify | CssString = 'unset';
+}
+
+/**
  * 设置两端对齐时增加间距的算法。（text-justify）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -22663,45 +32439,45 @@ export class TextIndentCss extends LengthCssProperty {
  */
 export class TextJustifyCss extends CssProperty {
   /** CSS 声明：`text-justify:auto;`。 */
-  readonly auto = 'text-justify:auto;';
+  readonly auto: string = 'text-justify:auto;';
   /** CSS 声明：`text-justify:distribute;`。 */
-  readonly distribute = 'text-justify:distribute;';
+  readonly distribute: string = 'text-justify:distribute;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-justify:inherit;`。
    */
-  readonly inherit = 'text-justify:inherit;';
+  readonly inherit: string = 'text-justify:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-justify:initial;`。
    */
-  readonly initial = 'text-justify:initial;';
+  readonly initial: string = 'text-justify:initial;';
   /** CSS 声明：`text-justify:inter-character;`。 */
-  readonly interCharacter = 'text-justify:inter-character;';
+  readonly interCharacter: string = 'text-justify:inter-character;';
   /** CSS 声明：`text-justify:inter-word;`。 */
-  readonly interWord = 'text-justify:inter-word;';
+  readonly interWord: string = 'text-justify:inter-word;';
   /** CSS 声明：`text-justify:none;`。 */
-  readonly none = 'text-justify:none;';
+  readonly none: string = 'text-justify:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-justify:revert;`。
    */
-  readonly revert = 'text-justify:revert;';
+  readonly revert: string = 'text-justify:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-justify:revert-layer;`。
    */
-  readonly revertLayer = 'text-justify:revert-layer;';
+  readonly revertLayer: string = 'text-justify:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-justify:unset;`。
    */
-  readonly unset = 'text-justify:unset;';
+  readonly unset: string = 'text-justify:unset;';
   /**
    * 创建 text-justify 属性作者；普通使用通过 s.textJustify 取得共享实例。
    * @example
@@ -22725,6 +32501,68 @@ export class TextJustifyCss extends CssProperty {
 }
 
 /**
+ * text-orientation 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextOrientationKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-orientation:inherit;`。
+   */
+  readonly inherit: Property.TextOrientation | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-orientation:initial;`。
+   */
+  readonly initial: Property.TextOrientation | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-orientation:mixed;`。 */
+  readonly mixed: Property.TextOrientation | CssString = 'mixed';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-orientation:revert;`。
+   */
+  readonly revert: Property.TextOrientation | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-orientation:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextOrientation | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-orientation:sideways;`。 */
+  readonly sideways: Property.TextOrientation | CssString = 'sideways';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-orientation:sideways-right;`。 */
+  readonly sidewaysRight: Property.TextOrientation | CssString = 'sideways-right';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-orientation:unset;`。
+   */
+  readonly unset: Property.TextOrientation | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-orientation:upright;`。 */
+  readonly upright: Property.TextOrientation | CssString = 'upright';
+}
+
+/**
  * 设置竖排模式下字符的方向。（text-orientation）
  *
  * CSS 初始值：`mixed`（不同于浏览器默认样式表）。
@@ -22736,39 +32574,39 @@ export class TextOrientationCss extends CssProperty {
    *
    * CSS 声明：`text-orientation:inherit;`。
    */
-  readonly inherit = 'text-orientation:inherit;';
+  readonly inherit: string = 'text-orientation:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-orientation:initial;`。
    */
-  readonly initial = 'text-orientation:initial;';
+  readonly initial: string = 'text-orientation:initial;';
   /** CSS 声明：`text-orientation:mixed;`。 */
-  readonly mixed = 'text-orientation:mixed;';
+  readonly mixed: string = 'text-orientation:mixed;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-orientation:revert;`。
    */
-  readonly revert = 'text-orientation:revert;';
+  readonly revert: string = 'text-orientation:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-orientation:revert-layer;`。
    */
-  readonly revertLayer = 'text-orientation:revert-layer;';
+  readonly revertLayer: string = 'text-orientation:revert-layer;';
   /** CSS 声明：`text-orientation:sideways;`。 */
-  readonly sideways = 'text-orientation:sideways;';
+  readonly sideways: string = 'text-orientation:sideways;';
   /** CSS 声明：`text-orientation:sideways-right;`。 */
-  readonly sidewaysRight = 'text-orientation:sideways-right;';
+  readonly sidewaysRight: string = 'text-orientation:sideways-right;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-orientation:unset;`。
    */
-  readonly unset = 'text-orientation:unset;';
+  readonly unset: string = 'text-orientation:unset;';
   /** CSS 声明：`text-orientation:upright;`。 */
-  readonly upright = 'text-orientation:upright;';
+  readonly upright: string = 'text-orientation:upright;';
   /**
    * 创建 text-orientation 属性作者；普通使用通过 s.textOrientation 取得共享实例。
    * @example
@@ -22789,6 +32627,75 @@ export class TextOrientationCss extends CssProperty {
   raw(value: Property.TextOrientation | CssString): string {
     return this.declaration(value);
   }
+}
+
+/**
+ * text-overflow 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextOverflowKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 直接裁剪溢出文本，不添加省略标记。
+   *
+   * CSS 声明：`text-overflow:clip;`。
+   */
+  readonly clip: Property.TextOverflow | CssString = 'clip';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 用省略号提示被裁剪的行内溢出；还需要限制尺寸并配置溢出规则。
+   *
+   * 适用场景：给确实发生行内溢出的单行内容添加省略提示。
+   *
+   * 注意：不会自动限制宽度、禁用换行或实现多行省略。Flex/Grid 子项还可能需要 min-width:0。
+   *
+   * CSS 声明：`text-overflow:ellipsis;`。
+   * @example
+   * css(s.minWidth.px(0), s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
+   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-overflow
+   */
+  readonly ellipsis: Property.TextOverflow | CssString = 'ellipsis';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-overflow:inherit;`。
+   */
+  readonly inherit: Property.TextOverflow | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-overflow:initial;`。
+   */
+  readonly initial: Property.TextOverflow | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-overflow:revert;`。
+   */
+  readonly revert: Property.TextOverflow | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-overflow:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextOverflow | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-overflow:unset;`。
+   */
+  readonly unset: Property.TextOverflow | CssString = 'unset';
 }
 
 /**
@@ -22813,7 +32720,7 @@ export class TextOverflowCss extends CssProperty {
    *
    * CSS 声明：`text-overflow:clip;`。
    */
-  readonly clip = 'text-overflow:clip;';
+  readonly clip: string = 'text-overflow:clip;';
   /**
    * 用省略号提示被裁剪的行内溢出；还需要限制尺寸并配置溢出规则。
    *
@@ -22826,37 +32733,37 @@ export class TextOverflowCss extends CssProperty {
    * css(s.minWidth.px(0), s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-overflow
    */
-  readonly ellipsis = 'text-overflow:ellipsis;';
+  readonly ellipsis: string = 'text-overflow:ellipsis;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-overflow:inherit;`。
    */
-  readonly inherit = 'text-overflow:inherit;';
+  readonly inherit: string = 'text-overflow:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-overflow:initial;`。
    */
-  readonly initial = 'text-overflow:initial;';
+  readonly initial: string = 'text-overflow:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-overflow:revert;`。
    */
-  readonly revert = 'text-overflow:revert;';
+  readonly revert: string = 'text-overflow:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-overflow:revert-layer;`。
    */
-  readonly revertLayer = 'text-overflow:revert-layer;';
+  readonly revertLayer: string = 'text-overflow:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-overflow:unset;`。
    */
-  readonly unset = 'text-overflow:unset;';
+  readonly unset: string = 'text-overflow:unset;';
   /**
    * 创建 text-overflow 属性作者；普通使用通过 s.textOverflow 取得共享实例。
    * @example
@@ -22880,6 +32787,68 @@ export class TextOverflowCss extends CssProperty {
 }
 
 /**
+ * text-rendering 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextRenderingKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-rendering:auto;`。 */
+  readonly auto: Property.TextRendering | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-rendering:geometricPrecision;`。 */
+  readonly geometricPrecision: Property.TextRendering | CssString = 'geometricPrecision';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-rendering:inherit;`。
+   */
+  readonly inherit: Property.TextRendering | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-rendering:initial;`。
+   */
+  readonly initial: Property.TextRendering | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-rendering:optimizeLegibility;`。 */
+  readonly optimizeLegibility: Property.TextRendering | CssString = 'optimizeLegibility';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-rendering:optimizeSpeed;`。 */
+  readonly optimizeSpeed: Property.TextRendering | CssString = 'optimizeSpeed';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-rendering:revert;`。
+   */
+  readonly revert: Property.TextRendering | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-rendering:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextRendering | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-rendering:unset;`。
+   */
+  readonly unset: Property.TextRendering | CssString = 'unset';
+}
+
+/**
  * 向渲染器提供文本速度、可读性或几何精度的偏好。（text-rendering）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -22887,43 +32856,43 @@ export class TextOverflowCss extends CssProperty {
  */
 export class TextRenderingCss extends CssProperty {
   /** CSS 声明：`text-rendering:auto;`。 */
-  readonly auto = 'text-rendering:auto;';
+  readonly auto: string = 'text-rendering:auto;';
   /** CSS 声明：`text-rendering:geometricPrecision;`。 */
-  readonly geometricPrecision = 'text-rendering:geometricPrecision;';
+  readonly geometricPrecision: string = 'text-rendering:geometricPrecision;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-rendering:inherit;`。
    */
-  readonly inherit = 'text-rendering:inherit;';
+  readonly inherit: string = 'text-rendering:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-rendering:initial;`。
    */
-  readonly initial = 'text-rendering:initial;';
+  readonly initial: string = 'text-rendering:initial;';
   /** CSS 声明：`text-rendering:optimizeLegibility;`。 */
-  readonly optimizeLegibility = 'text-rendering:optimizeLegibility;';
+  readonly optimizeLegibility: string = 'text-rendering:optimizeLegibility;';
   /** CSS 声明：`text-rendering:optimizeSpeed;`。 */
-  readonly optimizeSpeed = 'text-rendering:optimizeSpeed;';
+  readonly optimizeSpeed: string = 'text-rendering:optimizeSpeed;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-rendering:revert;`。
    */
-  readonly revert = 'text-rendering:revert;';
+  readonly revert: string = 'text-rendering:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-rendering:revert-layer;`。
    */
-  readonly revertLayer = 'text-rendering:revert-layer;';
+  readonly revertLayer: string = 'text-rendering:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-rendering:unset;`。
    */
-  readonly unset = 'text-rendering:unset;';
+  readonly unset: string = 'text-rendering:unset;';
   /**
    * 创建 text-rendering 属性作者；普通使用通过 s.textRendering 取得共享实例。
    * @example
@@ -22947,6 +32916,56 @@ export class TextRenderingCss extends CssProperty {
 }
 
 /**
+ * text-shadow 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextShadowKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-shadow:inherit;`。
+   */
+  readonly inherit: Property.TextShadow | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-shadow:initial;`。
+   */
+  readonly initial: Property.TextShadow | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-shadow:none;`。 */
+  readonly none: Property.TextShadow | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-shadow:revert;`。
+   */
+  readonly revert: Property.TextShadow | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-shadow:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextShadow | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-shadow:unset;`。
+   */
+  readonly unset: Property.TextShadow | CssString = 'unset';
+}
+
+/**
  * 设置文字及其装饰的阴影，可叠加多层。（text-shadow）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -22958,33 +32977,33 @@ export class TextShadowCss extends CssProperty {
    *
    * CSS 声明：`text-shadow:inherit;`。
    */
-  readonly inherit = 'text-shadow:inherit;';
+  readonly inherit: string = 'text-shadow:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-shadow:initial;`。
    */
-  readonly initial = 'text-shadow:initial;';
+  readonly initial: string = 'text-shadow:initial;';
   /** CSS 声明：`text-shadow:none;`。 */
-  readonly none = 'text-shadow:none;';
+  readonly none: string = 'text-shadow:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-shadow:revert;`。
    */
-  readonly revert = 'text-shadow:revert;';
+  readonly revert: string = 'text-shadow:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-shadow:revert-layer;`。
    */
-  readonly revertLayer = 'text-shadow:revert-layer;';
+  readonly revertLayer: string = 'text-shadow:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-shadow:unset;`。
    */
-  readonly unset = 'text-shadow:unset;';
+  readonly unset: string = 'text-shadow:unset;';
   /**
    * 创建 text-shadow 属性作者；普通使用通过 s.textShadow 取得共享实例。
    * @example
@@ -23008,6 +33027,60 @@ export class TextShadowCss extends CssProperty {
 }
 
 /**
+ * text-size-adjust 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextSizeAdjustKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-size-adjust:auto;`。 */
+  readonly auto: Property.TextSizeAdjust | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-size-adjust:inherit;`。
+   */
+  readonly inherit: Property.TextSizeAdjust | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-size-adjust:initial;`。
+   */
+  readonly initial: Property.TextSizeAdjust | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-size-adjust:none;`。 */
+  readonly none: Property.TextSizeAdjust | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-size-adjust:revert;`。
+   */
+  readonly revert: Property.TextSizeAdjust | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-size-adjust:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextSizeAdjust | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-size-adjust:unset;`。
+   */
+  readonly unset: Property.TextSizeAdjust | CssString = 'unset';
+}
+
+/**
  * 控制移动浏览器为提升可读性而进行的文字自动放大。（text-size-adjust）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -23015,39 +33088,39 @@ export class TextShadowCss extends CssProperty {
  */
 export class TextSizeAdjustCss extends CssProperty {
   /** CSS 声明：`text-size-adjust:auto;`。 */
-  readonly auto = 'text-size-adjust:auto;';
+  readonly auto: string = 'text-size-adjust:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-size-adjust:inherit;`。
    */
-  readonly inherit = 'text-size-adjust:inherit;';
+  readonly inherit: string = 'text-size-adjust:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-size-adjust:initial;`。
    */
-  readonly initial = 'text-size-adjust:initial;';
+  readonly initial: string = 'text-size-adjust:initial;';
   /** CSS 声明：`text-size-adjust:none;`。 */
-  readonly none = 'text-size-adjust:none;';
+  readonly none: string = 'text-size-adjust:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-size-adjust:revert;`。
    */
-  readonly revert = 'text-size-adjust:revert;';
+  readonly revert: string = 'text-size-adjust:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-size-adjust:revert-layer;`。
    */
-  readonly revertLayer = 'text-size-adjust:revert-layer;';
+  readonly revertLayer: string = 'text-size-adjust:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-size-adjust:unset;`。
    */
-  readonly unset = 'text-size-adjust:unset;';
+  readonly unset: string = 'text-size-adjust:unset;';
   /**
    * 创建 text-size-adjust 属性作者；普通使用通过 s.textSizeAdjust 取得共享实例。
    * @example
@@ -23139,6 +33212,68 @@ export class TextSizeAdjustCss extends CssProperty {
 }
 
 /**
+ * text-spacing-trim 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextSpacingTrimKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-spacing-trim:inherit;`。
+   */
+  readonly inherit: Property.TextSpacingTrim | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-spacing-trim:initial;`。
+   */
+  readonly initial: Property.TextSpacingTrim | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-spacing-trim:normal;`。 */
+  readonly normal: Property.TextSpacingTrim | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-spacing-trim:revert;`。
+   */
+  readonly revert: Property.TextSpacingTrim | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-spacing-trim:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextSpacingTrim | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-spacing-trim:space-all;`。 */
+  readonly spaceAll: Property.TextSpacingTrim | CssString = 'space-all';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-spacing-trim:space-first;`。 */
+  readonly spaceFirst: Property.TextSpacingTrim | CssString = 'space-first';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-spacing-trim:trim-start;`。 */
+  readonly trimStart: Property.TextSpacingTrim | CssString = 'trim-start';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-spacing-trim:unset;`。
+   */
+  readonly unset: Property.TextSpacingTrim | CssString = 'unset';
+}
+
+/**
  * 设置东亚文字标点等字符周围空白的裁减。（text-spacing-trim）
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
@@ -23150,39 +33285,39 @@ export class TextSpacingTrimCss extends CssProperty {
    *
    * CSS 声明：`text-spacing-trim:inherit;`。
    */
-  readonly inherit = 'text-spacing-trim:inherit;';
+  readonly inherit: string = 'text-spacing-trim:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-spacing-trim:initial;`。
    */
-  readonly initial = 'text-spacing-trim:initial;';
+  readonly initial: string = 'text-spacing-trim:initial;';
   /** CSS 声明：`text-spacing-trim:normal;`。 */
-  readonly normal = 'text-spacing-trim:normal;';
+  readonly normal: string = 'text-spacing-trim:normal;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-spacing-trim:revert;`。
    */
-  readonly revert = 'text-spacing-trim:revert;';
+  readonly revert: string = 'text-spacing-trim:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-spacing-trim:revert-layer;`。
    */
-  readonly revertLayer = 'text-spacing-trim:revert-layer;';
+  readonly revertLayer: string = 'text-spacing-trim:revert-layer;';
   /** CSS 声明：`text-spacing-trim:space-all;`。 */
-  readonly spaceAll = 'text-spacing-trim:space-all;';
+  readonly spaceAll: string = 'text-spacing-trim:space-all;';
   /** CSS 声明：`text-spacing-trim:space-first;`。 */
-  readonly spaceFirst = 'text-spacing-trim:space-first;';
+  readonly spaceFirst: string = 'text-spacing-trim:space-first;';
   /** CSS 声明：`text-spacing-trim:trim-start;`。 */
-  readonly trimStart = 'text-spacing-trim:trim-start;';
+  readonly trimStart: string = 'text-spacing-trim:trim-start;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-spacing-trim:unset;`。
    */
-  readonly unset = 'text-spacing-trim:unset;';
+  readonly unset: string = 'text-spacing-trim:unset;';
   /**
    * 创建 text-spacing-trim 属性作者；普通使用通过 s.textSpacingTrim 取得共享实例。
    * @example
@@ -23206,6 +33341,80 @@ export class TextSpacingTrimCss extends CssProperty {
 }
 
 /**
+ * text-transform 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextTransformKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-transform:capitalize;`。 */
+  readonly capitalize: Property.TextTransform | CssString = 'capitalize';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-transform:full-size-kana;`。 */
+  readonly fullSizeKana: Property.TextTransform | CssString = 'full-size-kana';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-transform:full-width;`。 */
+  readonly fullWidth: Property.TextTransform | CssString = 'full-width';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-transform:inherit;`。
+   */
+  readonly inherit: Property.TextTransform | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-transform:initial;`。
+   */
+  readonly initial: Property.TextTransform | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-transform:lowercase;`。 */
+  readonly lowercase: Property.TextTransform | CssString = 'lowercase';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-transform:math-auto;`。 */
+  readonly mathAuto: Property.TextTransform | CssString = 'math-auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-transform:none;`。 */
+  readonly none: Property.TextTransform | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-transform:revert;`。
+   */
+  readonly revert: Property.TextTransform | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-transform:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextTransform | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-transform:unset;`。
+   */
+  readonly unset: Property.TextTransform | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-transform:uppercase;`。 */
+  readonly uppercase: Property.TextTransform | CssString = 'uppercase';
+}
+
+/**
  * 设置文字显示时的大小写、全角或其他字形转换。（text-transform）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -23213,49 +33422,49 @@ export class TextSpacingTrimCss extends CssProperty {
  */
 export class TextTransformCss extends CssProperty {
   /** CSS 声明：`text-transform:capitalize;`。 */
-  readonly capitalize = 'text-transform:capitalize;';
+  readonly capitalize: string = 'text-transform:capitalize;';
   /** CSS 声明：`text-transform:full-size-kana;`。 */
-  readonly fullSizeKana = 'text-transform:full-size-kana;';
+  readonly fullSizeKana: string = 'text-transform:full-size-kana;';
   /** CSS 声明：`text-transform:full-width;`。 */
-  readonly fullWidth = 'text-transform:full-width;';
+  readonly fullWidth: string = 'text-transform:full-width;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-transform:inherit;`。
    */
-  readonly inherit = 'text-transform:inherit;';
+  readonly inherit: string = 'text-transform:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-transform:initial;`。
    */
-  readonly initial = 'text-transform:initial;';
+  readonly initial: string = 'text-transform:initial;';
   /** CSS 声明：`text-transform:lowercase;`。 */
-  readonly lowercase = 'text-transform:lowercase;';
+  readonly lowercase: string = 'text-transform:lowercase;';
   /** CSS 声明：`text-transform:math-auto;`。 */
-  readonly mathAuto = 'text-transform:math-auto;';
+  readonly mathAuto: string = 'text-transform:math-auto;';
   /** CSS 声明：`text-transform:none;`。 */
-  readonly none = 'text-transform:none;';
+  readonly none: string = 'text-transform:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-transform:revert;`。
    */
-  readonly revert = 'text-transform:revert;';
+  readonly revert: string = 'text-transform:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-transform:revert-layer;`。
    */
-  readonly revertLayer = 'text-transform:revert-layer;';
+  readonly revertLayer: string = 'text-transform:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-transform:unset;`。
    */
-  readonly unset = 'text-transform:unset;';
+  readonly unset: string = 'text-transform:unset;';
   /** CSS 声明：`text-transform:uppercase;`。 */
-  readonly uppercase = 'text-transform:uppercase;';
+  readonly uppercase: string = 'text-transform:uppercase;';
   /**
    * 创建 text-transform 属性作者；普通使用通过 s.textTransform 取得共享实例。
    * @example
@@ -23279,6 +33488,56 @@ export class TextTransformCss extends CssProperty {
 }
 
 /**
+ * text-underline-offset 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextUnderlineOffsetKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-underline-offset:auto;`。 */
+  readonly auto: Property.TextUnderlineOffset | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-underline-offset:inherit;`。
+   */
+  readonly inherit: Property.TextUnderlineOffset | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-underline-offset:initial;`。
+   */
+  readonly initial: Property.TextUnderlineOffset | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-underline-offset:revert;`。
+   */
+  readonly revert: Property.TextUnderlineOffset | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-underline-offset:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextUnderlineOffset | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-underline-offset:unset;`。
+   */
+  readonly unset: Property.TextUnderlineOffset | CssString = 'unset';
+}
+
+/**
  * 设置下划线相对于默认位置的偏移。（text-underline-offset）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -23286,37 +33545,37 @@ export class TextTransformCss extends CssProperty {
  */
 export class TextUnderlineOffsetCss extends LengthCssProperty {
   /** CSS 声明：`text-underline-offset:auto;`。 */
-  readonly auto = 'text-underline-offset:auto;';
+  readonly auto: string = 'text-underline-offset:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-underline-offset:inherit;`。
    */
-  readonly inherit = 'text-underline-offset:inherit;';
+  readonly inherit: string = 'text-underline-offset:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-underline-offset:initial;`。
    */
-  readonly initial = 'text-underline-offset:initial;';
+  readonly initial: string = 'text-underline-offset:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-underline-offset:revert;`。
    */
-  readonly revert = 'text-underline-offset:revert;';
+  readonly revert: string = 'text-underline-offset:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-underline-offset:revert-layer;`。
    */
-  readonly revertLayer = 'text-underline-offset:revert-layer;';
+  readonly revertLayer: string = 'text-underline-offset:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-underline-offset:unset;`。
    */
-  readonly unset = 'text-underline-offset:unset;';
+  readonly unset: string = 'text-underline-offset:unset;';
   /**
    * 创建 text-underline-offset 属性作者；普通使用通过 s.textUnderlineOffset 取得共享实例。
    * @example
@@ -23408,6 +33667,72 @@ export class TextUnderlineOffsetCss extends LengthCssProperty {
 }
 
 /**
+ * text-underline-position 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextUnderlinePositionKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-underline-position:auto;`。 */
+  readonly auto: Property.TextUnderlinePosition | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-underline-position:from-font;`。 */
+  readonly fromFont: Property.TextUnderlinePosition | CssString = 'from-font';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-underline-position:inherit;`。
+   */
+  readonly inherit: Property.TextUnderlinePosition | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-underline-position:initial;`。
+   */
+  readonly initial: Property.TextUnderlinePosition | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-underline-position:left;`。 */
+  readonly left: Property.TextUnderlinePosition | CssString = 'left';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-underline-position:revert;`。
+   */
+  readonly revert: Property.TextUnderlinePosition | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-underline-position:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextUnderlinePosition | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-underline-position:right;`。 */
+  readonly right: Property.TextUnderlinePosition | CssString = 'right';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-underline-position:under;`。 */
+  readonly under: Property.TextUnderlinePosition | CssString = 'under';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-underline-position:unset;`。
+   */
+  readonly unset: Property.TextUnderlinePosition | CssString = 'unset';
+}
+
+/**
  * 设置下划线相对于文字基线或竖排文字的放置方式。（text-underline-position）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -23415,45 +33740,45 @@ export class TextUnderlineOffsetCss extends LengthCssProperty {
  */
 export class TextUnderlinePositionCss extends CssProperty {
   /** CSS 声明：`text-underline-position:auto;`。 */
-  readonly auto = 'text-underline-position:auto;';
+  readonly auto: string = 'text-underline-position:auto;';
   /** CSS 声明：`text-underline-position:from-font;`。 */
-  readonly fromFont = 'text-underline-position:from-font;';
+  readonly fromFont: string = 'text-underline-position:from-font;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-underline-position:inherit;`。
    */
-  readonly inherit = 'text-underline-position:inherit;';
+  readonly inherit: string = 'text-underline-position:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-underline-position:initial;`。
    */
-  readonly initial = 'text-underline-position:initial;';
+  readonly initial: string = 'text-underline-position:initial;';
   /** CSS 声明：`text-underline-position:left;`。 */
-  readonly left = 'text-underline-position:left;';
+  readonly left: string = 'text-underline-position:left;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-underline-position:revert;`。
    */
-  readonly revert = 'text-underline-position:revert;';
+  readonly revert: string = 'text-underline-position:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-underline-position:revert-layer;`。
    */
-  readonly revertLayer = 'text-underline-position:revert-layer;';
+  readonly revertLayer: string = 'text-underline-position:revert-layer;';
   /** CSS 声明：`text-underline-position:right;`。 */
-  readonly right = 'text-underline-position:right;';
+  readonly right: string = 'text-underline-position:right;';
   /** CSS 声明：`text-underline-position:under;`。 */
-  readonly under = 'text-underline-position:under;';
+  readonly under: string = 'text-underline-position:under;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-underline-position:unset;`。
    */
-  readonly unset = 'text-underline-position:unset;';
+  readonly unset: string = 'text-underline-position:unset;';
   /**
    * 创建 text-underline-position 属性作者；普通使用通过 s.textUnderlinePosition 取得共享实例。
    * @example
@@ -23477,6 +33802,96 @@ export class TextUnderlinePositionCss extends CssProperty {
 }
 
 /**
+ * text-wrap 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextWrapKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-wrap:auto;`。 */
+  readonly auto: Property.TextWrap | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 尝试让各行长度更均衡，常用于标题；可处理行数由浏览器决定。
+   *
+   * CSS 声明：`text-wrap:balance;`。
+   */
+  readonly balance: Property.TextWrap | CssString = 'balance';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-wrap:inherit;`。
+   */
+  readonly inherit: Property.TextWrap | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-wrap:initial;`。
+   */
+  readonly initial: Property.TextWrap | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 禁止软换行，但不取消显式强制换行。
+   *
+   * CSS 声明：`text-wrap:nowrap;`。
+   */
+  readonly nowrap: Property.TextWrap | CssString = 'nowrap';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用偏向排版质量的换行策略，例如减少末行孤立短词。
+   *
+   * CSS 声明：`text-wrap:pretty;`。
+   */
+  readonly pretty: Property.TextWrap | CssString = 'pretty';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-wrap:revert;`。
+   */
+  readonly revert: Property.TextWrap | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-wrap:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextWrap | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 编辑时尽量不改变较早行的换行位置。
+   *
+   * CSS 声明：`text-wrap:stable;`。
+   */
+  readonly stable: Property.TextWrap | CssString = 'stable';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-wrap:unset;`。
+   */
+  readonly unset: Property.TextWrap | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 允许软换行。
+   *
+   * CSS 声明：`text-wrap:wrap;`。
+   */
+  readonly wrap: Property.TextWrap | CssString = 'wrap';
+}
+
+/**
  * 同时设置文本是否换行及换行策略。（text-wrap）
  *
  * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
@@ -23484,67 +33899,67 @@ export class TextUnderlinePositionCss extends CssProperty {
  */
 export class TextWrapCss extends CssProperty {
   /** CSS 声明：`text-wrap:auto;`。 */
-  readonly auto = 'text-wrap:auto;';
+  readonly auto: string = 'text-wrap:auto;';
   /**
    * 尝试让各行长度更均衡，常用于标题；可处理行数由浏览器决定。
    *
    * CSS 声明：`text-wrap:balance;`。
    */
-  readonly balance = 'text-wrap:balance;';
+  readonly balance: string = 'text-wrap:balance;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-wrap:inherit;`。
    */
-  readonly inherit = 'text-wrap:inherit;';
+  readonly inherit: string = 'text-wrap:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-wrap:initial;`。
    */
-  readonly initial = 'text-wrap:initial;';
+  readonly initial: string = 'text-wrap:initial;';
   /**
    * 禁止软换行，但不取消显式强制换行。
    *
    * CSS 声明：`text-wrap:nowrap;`。
    */
-  readonly nowrap = 'text-wrap:nowrap;';
+  readonly nowrap: string = 'text-wrap:nowrap;';
   /**
    * 使用偏向排版质量的换行策略，例如减少末行孤立短词。
    *
    * CSS 声明：`text-wrap:pretty;`。
    */
-  readonly pretty = 'text-wrap:pretty;';
+  readonly pretty: string = 'text-wrap:pretty;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-wrap:revert;`。
    */
-  readonly revert = 'text-wrap:revert;';
+  readonly revert: string = 'text-wrap:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-wrap:revert-layer;`。
    */
-  readonly revertLayer = 'text-wrap:revert-layer;';
+  readonly revertLayer: string = 'text-wrap:revert-layer;';
   /**
    * 编辑时尽量不改变较早行的换行位置。
    *
    * CSS 声明：`text-wrap:stable;`。
    */
-  readonly stable = 'text-wrap:stable;';
+  readonly stable: string = 'text-wrap:stable;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-wrap:unset;`。
    */
-  readonly unset = 'text-wrap:unset;';
+  readonly unset: string = 'text-wrap:unset;';
   /**
    * 允许软换行。
    *
    * CSS 声明：`text-wrap:wrap;`。
    */
-  readonly wrap = 'text-wrap:wrap;';
+  readonly wrap: string = 'text-wrap:wrap;';
   /**
    * 创建 text-wrap 属性作者；普通使用通过 s.textWrap 取得共享实例。
    * @example
@@ -23568,6 +33983,68 @@ export class TextWrapCss extends CssProperty {
 }
 
 /**
+ * text-wrap-mode 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextWrapModeKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-wrap-mode:inherit;`。
+   */
+  readonly inherit: Property.TextWrapMode | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-wrap-mode:initial;`。
+   */
+  readonly initial: Property.TextWrapMode | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 禁止软换行，但不取消显式强制换行。
+   *
+   * CSS 声明：`text-wrap-mode:nowrap;`。
+   */
+  readonly nowrap: Property.TextWrapMode | CssString = 'nowrap';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-wrap-mode:revert;`。
+   */
+  readonly revert: Property.TextWrapMode | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-wrap-mode:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextWrapMode | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-wrap-mode:unset;`。
+   */
+  readonly unset: Property.TextWrapMode | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 允许软换行。
+   *
+   * CSS 声明：`text-wrap-mode:wrap;`。
+   */
+  readonly wrap: Property.TextWrapMode | CssString = 'wrap';
+}
+
+/**
  * 设置文本是否允许软换行。（text-wrap-mode）
  *
  * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
@@ -23579,43 +34056,43 @@ export class TextWrapModeCss extends CssProperty {
    *
    * CSS 声明：`text-wrap-mode:inherit;`。
    */
-  readonly inherit = 'text-wrap-mode:inherit;';
+  readonly inherit: string = 'text-wrap-mode:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-wrap-mode:initial;`。
    */
-  readonly initial = 'text-wrap-mode:initial;';
+  readonly initial: string = 'text-wrap-mode:initial;';
   /**
    * 禁止软换行，但不取消显式强制换行。
    *
    * CSS 声明：`text-wrap-mode:nowrap;`。
    */
-  readonly nowrap = 'text-wrap-mode:nowrap;';
+  readonly nowrap: string = 'text-wrap-mode:nowrap;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-wrap-mode:revert;`。
    */
-  readonly revert = 'text-wrap-mode:revert;';
+  readonly revert: string = 'text-wrap-mode:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-wrap-mode:revert-layer;`。
    */
-  readonly revertLayer = 'text-wrap-mode:revert-layer;';
+  readonly revertLayer: string = 'text-wrap-mode:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-wrap-mode:unset;`。
    */
-  readonly unset = 'text-wrap-mode:unset;';
+  readonly unset: string = 'text-wrap-mode:unset;';
   /**
    * 允许软换行。
    *
    * CSS 声明：`text-wrap-mode:wrap;`。
    */
-  readonly wrap = 'text-wrap-mode:wrap;';
+  readonly wrap: string = 'text-wrap-mode:wrap;';
   /**
    * 创建 text-wrap-mode 属性作者；普通使用通过 s.textWrapMode 取得共享实例。
    * @example
@@ -23639,6 +34116,80 @@ export class TextWrapModeCss extends CssProperty {
 }
 
 /**
+ * text-wrap-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TextWrapStyleKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`text-wrap-style:auto;`。 */
+  readonly auto: Property.TextWrapStyle | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 尝试让各行长度更均衡，常用于标题；可处理行数由浏览器决定。
+   *
+   * CSS 声明：`text-wrap-style:balance;`。
+   */
+  readonly balance: Property.TextWrapStyle | CssString = 'balance';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`text-wrap-style:inherit;`。
+   */
+  readonly inherit: Property.TextWrapStyle | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`text-wrap-style:initial;`。
+   */
+  readonly initial: Property.TextWrapStyle | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用偏向排版质量的换行策略，例如减少末行孤立短词。
+   *
+   * CSS 声明：`text-wrap-style:pretty;`。
+   */
+  readonly pretty: Property.TextWrapStyle | CssString = 'pretty';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`text-wrap-style:revert;`。
+   */
+  readonly revert: Property.TextWrapStyle | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`text-wrap-style:revert-layer;`。
+   */
+  readonly revertLayer: Property.TextWrapStyle | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 编辑时尽量不改变较早行的换行位置。
+   *
+   * CSS 声明：`text-wrap-style:stable;`。
+   */
+  readonly stable: Property.TextWrapStyle | CssString = 'stable';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`text-wrap-style:unset;`。
+   */
+  readonly unset: Property.TextWrapStyle | CssString = 'unset';
+}
+
+/**
  * 设置文本换行的排版策略，例如平衡各行长度。（text-wrap-style）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -23646,55 +34197,55 @@ export class TextWrapModeCss extends CssProperty {
  */
 export class TextWrapStyleCss extends CssProperty {
   /** CSS 声明：`text-wrap-style:auto;`。 */
-  readonly auto = 'text-wrap-style:auto;';
+  readonly auto: string = 'text-wrap-style:auto;';
   /**
    * 尝试让各行长度更均衡，常用于标题；可处理行数由浏览器决定。
    *
    * CSS 声明：`text-wrap-style:balance;`。
    */
-  readonly balance = 'text-wrap-style:balance;';
+  readonly balance: string = 'text-wrap-style:balance;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`text-wrap-style:inherit;`。
    */
-  readonly inherit = 'text-wrap-style:inherit;';
+  readonly inherit: string = 'text-wrap-style:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`text-wrap-style:initial;`。
    */
-  readonly initial = 'text-wrap-style:initial;';
+  readonly initial: string = 'text-wrap-style:initial;';
   /**
    * 使用偏向排版质量的换行策略，例如减少末行孤立短词。
    *
    * CSS 声明：`text-wrap-style:pretty;`。
    */
-  readonly pretty = 'text-wrap-style:pretty;';
+  readonly pretty: string = 'text-wrap-style:pretty;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`text-wrap-style:revert;`。
    */
-  readonly revert = 'text-wrap-style:revert;';
+  readonly revert: string = 'text-wrap-style:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`text-wrap-style:revert-layer;`。
    */
-  readonly revertLayer = 'text-wrap-style:revert-layer;';
+  readonly revertLayer: string = 'text-wrap-style:revert-layer;';
   /**
    * 编辑时尽量不改变较早行的换行位置。
    *
    * CSS 声明：`text-wrap-style:stable;`。
    */
-  readonly stable = 'text-wrap-style:stable;';
+  readonly stable: string = 'text-wrap-style:stable;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`text-wrap-style:unset;`。
    */
-  readonly unset = 'text-wrap-style:unset;';
+  readonly unset: string = 'text-wrap-style:unset;';
   /**
    * 创建 text-wrap-style 属性作者；普通使用通过 s.textWrapStyle 取得共享实例。
    * @example
@@ -23718,6 +34269,56 @@ export class TextWrapStyleCss extends CssProperty {
 }
 
 /**
+ * timeline-scope 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TimelineScopeKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`timeline-scope:inherit;`。
+   */
+  readonly inherit: Property.TimelineScope | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`timeline-scope:initial;`。
+   */
+  readonly initial: Property.TimelineScope | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`timeline-scope:none;`。 */
+  readonly none: Property.TimelineScope | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`timeline-scope:revert;`。
+   */
+  readonly revert: Property.TimelineScope | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`timeline-scope:revert-layer;`。
+   */
+  readonly revertLayer: Property.TimelineScope | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`timeline-scope:unset;`。
+   */
+  readonly unset: Property.TimelineScope | CssString = 'unset';
+}
+
+/**
  * 扩大命名动画时间线的可引用作用域。（timeline-scope）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -23729,33 +34330,33 @@ export class TimelineScopeCss extends CssProperty {
    *
    * CSS 声明：`timeline-scope:inherit;`。
    */
-  readonly inherit = 'timeline-scope:inherit;';
+  readonly inherit: string = 'timeline-scope:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`timeline-scope:initial;`。
    */
-  readonly initial = 'timeline-scope:initial;';
+  readonly initial: string = 'timeline-scope:initial;';
   /** CSS 声明：`timeline-scope:none;`。 */
-  readonly none = 'timeline-scope:none;';
+  readonly none: string = 'timeline-scope:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`timeline-scope:revert;`。
    */
-  readonly revert = 'timeline-scope:revert;';
+  readonly revert: string = 'timeline-scope:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`timeline-scope:revert-layer;`。
    */
-  readonly revertLayer = 'timeline-scope:revert-layer;';
+  readonly revertLayer: string = 'timeline-scope:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`timeline-scope:unset;`。
    */
-  readonly unset = 'timeline-scope:unset;';
+  readonly unset: string = 'timeline-scope:unset;';
   /**
    * 创建 timeline-scope 属性作者；普通使用通过 s.timelineScope 取得共享实例。
    * @example
@@ -23779,6 +34380,56 @@ export class TimelineScopeCss extends CssProperty {
 }
 
 /**
+ * top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TopKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`top:auto;`。 */
+  readonly auto: Property.Top | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`top:inherit;`。
+   */
+  readonly inherit: Property.Top | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`top:initial;`。
+   */
+  readonly initial: Property.Top | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`top:revert;`。
+   */
+  readonly revert: Property.Top | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`top:revert-layer;`。
+   */
+  readonly revertLayer: Property.Top | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`top:unset;`。
+   */
+  readonly unset: Property.Top | CssString = 'unset';
+}
+
+/**
  * 设置定位元素相对于其定位参照的上侧偏移。（top）
  *
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
@@ -23786,37 +34437,37 @@ export class TimelineScopeCss extends CssProperty {
  */
 export class TopCss extends LengthCssProperty {
   /** CSS 声明：`top:auto;`。 */
-  readonly auto = 'top:auto;';
+  readonly auto: string = 'top:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`top:inherit;`。
    */
-  readonly inherit = 'top:inherit;';
+  readonly inherit: string = 'top:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`top:initial;`。
    */
-  readonly initial = 'top:initial;';
+  readonly initial: string = 'top:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`top:revert;`。
    */
-  readonly revert = 'top:revert;';
+  readonly revert: string = 'top:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`top:revert-layer;`。
    */
-  readonly revertLayer = 'top:revert-layer;';
+  readonly revertLayer: string = 'top:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`top:unset;`。
    */
-  readonly unset = 'top:unset;';
+  readonly unset: string = 'top:unset;';
   /**
    * 创建 top 属性作者；普通使用通过 s.top 取得共享实例。
    * @example
@@ -23902,6 +34553,108 @@ export class TopCss extends LengthCssProperty {
 }
 
 /**
+ * touch-action 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TouchActionKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`touch-action:auto;`。 */
+  readonly auto: Property.TouchAction | CssString = 'auto';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`touch-action:inherit;`。
+   */
+  readonly inherit: Property.TouchAction | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`touch-action:initial;`。
+   */
+  readonly initial: Property.TouchAction | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 允许平移和连续缩放，通常禁用双击缩放等额外手势。
+   *
+   * CSS 声明：`touch-action:manipulation;`。
+   */
+  readonly manipulation: Property.TouchAction | CssString = 'manipulation';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 禁用浏览器在该区域处理的平移和缩放手势，可能影响用户缩放可访问性。
+   *
+   * CSS 声明：`touch-action:none;`。
+   */
+  readonly none: Property.TouchAction | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`touch-action:pan-down;`。 */
+  readonly panDown: Property.TouchAction | CssString = 'pan-down';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`touch-action:pan-left;`。 */
+  readonly panLeft: Property.TouchAction | CssString = 'pan-left';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`touch-action:pan-right;`。 */
+  readonly panRight: Property.TouchAction | CssString = 'pan-right';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`touch-action:pan-up;`。 */
+  readonly panUp: Property.TouchAction | CssString = 'pan-up';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 允许浏览器处理水平单指平移。
+   *
+   * CSS 声明：`touch-action:pan-x;`。
+   */
+  readonly panX: Property.TouchAction | CssString = 'pan-x';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 允许浏览器处理垂直单指平移。
+   *
+   * CSS 声明：`touch-action:pan-y;`。
+   */
+  readonly panY: Property.TouchAction | CssString = 'pan-y';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`touch-action:pinch-zoom;`。 */
+  readonly pinchZoom: Property.TouchAction | CssString = 'pinch-zoom';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`touch-action:revert;`。
+   */
+  readonly revert: Property.TouchAction | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`touch-action:revert-layer;`。
+   */
+  readonly revertLayer: Property.TouchAction | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`touch-action:unset;`。
+   */
+  readonly unset: Property.TouchAction | CssString = 'unset';
+}
+
+/**
  * 声明浏览器可以处理的触摸平移与缩放手势。（touch-action）
  *
  * 描述浏览器可接管的触摸手势，手势开始后再修改通常不会改变当前手势的处理。
@@ -23921,71 +34674,71 @@ export class TopCss extends LengthCssProperty {
  */
 export class TouchActionCss extends CssProperty {
   /** CSS 声明：`touch-action:auto;`。 */
-  readonly auto = 'touch-action:auto;';
+  readonly auto: string = 'touch-action:auto;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`touch-action:inherit;`。
    */
-  readonly inherit = 'touch-action:inherit;';
+  readonly inherit: string = 'touch-action:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`touch-action:initial;`。
    */
-  readonly initial = 'touch-action:initial;';
+  readonly initial: string = 'touch-action:initial;';
   /**
    * 允许平移和连续缩放，通常禁用双击缩放等额外手势。
    *
    * CSS 声明：`touch-action:manipulation;`。
    */
-  readonly manipulation = 'touch-action:manipulation;';
+  readonly manipulation: string = 'touch-action:manipulation;';
   /**
    * 禁用浏览器在该区域处理的平移和缩放手势，可能影响用户缩放可访问性。
    *
    * CSS 声明：`touch-action:none;`。
    */
-  readonly none = 'touch-action:none;';
+  readonly none: string = 'touch-action:none;';
   /** CSS 声明：`touch-action:pan-down;`。 */
-  readonly panDown = 'touch-action:pan-down;';
+  readonly panDown: string = 'touch-action:pan-down;';
   /** CSS 声明：`touch-action:pan-left;`。 */
-  readonly panLeft = 'touch-action:pan-left;';
+  readonly panLeft: string = 'touch-action:pan-left;';
   /** CSS 声明：`touch-action:pan-right;`。 */
-  readonly panRight = 'touch-action:pan-right;';
+  readonly panRight: string = 'touch-action:pan-right;';
   /** CSS 声明：`touch-action:pan-up;`。 */
-  readonly panUp = 'touch-action:pan-up;';
+  readonly panUp: string = 'touch-action:pan-up;';
   /**
    * 允许浏览器处理水平单指平移。
    *
    * CSS 声明：`touch-action:pan-x;`。
    */
-  readonly panX = 'touch-action:pan-x;';
+  readonly panX: string = 'touch-action:pan-x;';
   /**
    * 允许浏览器处理垂直单指平移。
    *
    * CSS 声明：`touch-action:pan-y;`。
    */
-  readonly panY = 'touch-action:pan-y;';
+  readonly panY: string = 'touch-action:pan-y;';
   /** CSS 声明：`touch-action:pinch-zoom;`。 */
-  readonly pinchZoom = 'touch-action:pinch-zoom;';
+  readonly pinchZoom: string = 'touch-action:pinch-zoom;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`touch-action:revert;`。
    */
-  readonly revert = 'touch-action:revert;';
+  readonly revert: string = 'touch-action:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`touch-action:revert-layer;`。
    */
-  readonly revertLayer = 'touch-action:revert-layer;';
+  readonly revertLayer: string = 'touch-action:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`touch-action:unset;`。
    */
-  readonly unset = 'touch-action:unset;';
+  readonly unset: string = 'touch-action:unset;';
   /**
    * 创建 touch-action 属性作者；普通使用通过 s.touchAction 取得共享实例。
    * @example
@@ -24009,6 +34762,56 @@ export class TouchActionCss extends CssProperty {
 }
 
 /**
+ * transform 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransformKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transform:inherit;`。
+   */
+  readonly inherit: Property.Transform | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transform:initial;`。
+   */
+  readonly initial: Property.Transform | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform:none;`。 */
+  readonly none: Property.Transform | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transform:revert;`。
+   */
+  readonly revert: Property.Transform | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transform:revert-layer;`。
+   */
+  readonly revertLayer: Property.Transform | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transform:unset;`。
+   */
+  readonly unset: Property.Transform | CssString = 'unset';
+}
+
+/**
  * 按顺序组合平移、旋转、缩放等二维或三维变换。（transform）
  *
  * 多个变换的顺序会影响结果。变换通常不改变元素在普通文档流中预留的尺寸。
@@ -24026,33 +34829,33 @@ export class TransformCss extends CssProperty {
    *
    * CSS 声明：`transform:inherit;`。
    */
-  readonly inherit = 'transform:inherit;';
+  readonly inherit: string = 'transform:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transform:initial;`。
    */
-  readonly initial = 'transform:initial;';
+  readonly initial: string = 'transform:initial;';
   /** CSS 声明：`transform:none;`。 */
-  readonly none = 'transform:none;';
+  readonly none: string = 'transform:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transform:revert;`。
    */
-  readonly revert = 'transform:revert;';
+  readonly revert: string = 'transform:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transform:revert-layer;`。
    */
-  readonly revertLayer = 'transform:revert-layer;';
+  readonly revertLayer: string = 'transform:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transform:unset;`。
    */
-  readonly unset = 'transform:unset;';
+  readonly unset: string = 'transform:unset;';
   /**
    * 创建 transform 属性作者；普通使用通过 s.transform 取得共享实例。
    * @example
@@ -24076,6 +34879,72 @@ export class TransformCss extends CssProperty {
 }
 
 /**
+ * transform-box 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransformBoxKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-box:border-box;`。 */
+  readonly borderBox: Property.TransformBox | CssString = 'border-box';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-box:content-box;`。 */
+  readonly contentBox: Property.TransformBox | CssString = 'content-box';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-box:fill-box;`。 */
+  readonly fillBox: Property.TransformBox | CssString = 'fill-box';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transform-box:inherit;`。
+   */
+  readonly inherit: Property.TransformBox | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transform-box:initial;`。
+   */
+  readonly initial: Property.TransformBox | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transform-box:revert;`。
+   */
+  readonly revert: Property.TransformBox | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transform-box:revert-layer;`。
+   */
+  readonly revertLayer: Property.TransformBox | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-box:stroke-box;`。 */
+  readonly strokeBox: Property.TransformBox | CssString = 'stroke-box';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transform-box:unset;`。
+   */
+  readonly unset: Property.TransformBox | CssString = 'unset';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-box:view-box;`。 */
+  readonly viewBox: Property.TransformBox | CssString = 'view-box';
+}
+
+/**
  * 设置变换及其原点所依据的参照盒。（transform-box）
  *
  * CSS 初始值：`view-box`（不同于浏览器默认样式表）。
@@ -24083,45 +34952,45 @@ export class TransformCss extends CssProperty {
  */
 export class TransformBoxCss extends CssProperty {
   /** CSS 声明：`transform-box:border-box;`。 */
-  readonly borderBox = 'transform-box:border-box;';
+  readonly borderBox: string = 'transform-box:border-box;';
   /** CSS 声明：`transform-box:content-box;`。 */
-  readonly contentBox = 'transform-box:content-box;';
+  readonly contentBox: string = 'transform-box:content-box;';
   /** CSS 声明：`transform-box:fill-box;`。 */
-  readonly fillBox = 'transform-box:fill-box;';
+  readonly fillBox: string = 'transform-box:fill-box;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`transform-box:inherit;`。
    */
-  readonly inherit = 'transform-box:inherit;';
+  readonly inherit: string = 'transform-box:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transform-box:initial;`。
    */
-  readonly initial = 'transform-box:initial;';
+  readonly initial: string = 'transform-box:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transform-box:revert;`。
    */
-  readonly revert = 'transform-box:revert;';
+  readonly revert: string = 'transform-box:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transform-box:revert-layer;`。
    */
-  readonly revertLayer = 'transform-box:revert-layer;';
+  readonly revertLayer: string = 'transform-box:revert-layer;';
   /** CSS 声明：`transform-box:stroke-box;`。 */
-  readonly strokeBox = 'transform-box:stroke-box;';
+  readonly strokeBox: string = 'transform-box:stroke-box;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transform-box:unset;`。
    */
-  readonly unset = 'transform-box:unset;';
+  readonly unset: string = 'transform-box:unset;';
   /** CSS 声明：`transform-box:view-box;`。 */
-  readonly viewBox = 'transform-box:view-box;';
+  readonly viewBox: string = 'transform-box:view-box;';
   /**
    * 创建 transform-box 属性作者；普通使用通过 s.transformBox 取得共享实例。
    * @example
@@ -24145,6 +35014,72 @@ export class TransformBoxCss extends CssProperty {
 }
 
 /**
+ * transform-origin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransformOriginKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-origin:bottom;`。 */
+  readonly bottom: Property.TransformOrigin | CssString = 'bottom';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-origin:center;`。 */
+  readonly center: Property.TransformOrigin | CssString = 'center';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transform-origin:inherit;`。
+   */
+  readonly inherit: Property.TransformOrigin | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transform-origin:initial;`。
+   */
+  readonly initial: Property.TransformOrigin | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-origin:left;`。 */
+  readonly left: Property.TransformOrigin | CssString = 'left';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transform-origin:revert;`。
+   */
+  readonly revert: Property.TransformOrigin | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transform-origin:revert-layer;`。
+   */
+  readonly revertLayer: Property.TransformOrigin | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-origin:right;`。 */
+  readonly right: Property.TransformOrigin | CssString = 'right';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-origin:top;`。 */
+  readonly top: Property.TransformOrigin | CssString = 'top';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transform-origin:unset;`。
+   */
+  readonly unset: Property.TransformOrigin | CssString = 'unset';
+}
+
+/**
  * 设置元素变换的原点。（transform-origin）
  *
  * CSS 初始值：`50% 50% 0`（不同于浏览器默认样式表）。
@@ -24152,45 +35087,45 @@ export class TransformBoxCss extends CssProperty {
  */
 export class TransformOriginCss extends LengthCssProperty {
   /** CSS 声明：`transform-origin:bottom;`。 */
-  readonly bottom = 'transform-origin:bottom;';
+  readonly bottom: string = 'transform-origin:bottom;';
   /** CSS 声明：`transform-origin:center;`。 */
-  readonly center = 'transform-origin:center;';
+  readonly center: string = 'transform-origin:center;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`transform-origin:inherit;`。
    */
-  readonly inherit = 'transform-origin:inherit;';
+  readonly inherit: string = 'transform-origin:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transform-origin:initial;`。
    */
-  readonly initial = 'transform-origin:initial;';
+  readonly initial: string = 'transform-origin:initial;';
   /** CSS 声明：`transform-origin:left;`。 */
-  readonly left = 'transform-origin:left;';
+  readonly left: string = 'transform-origin:left;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transform-origin:revert;`。
    */
-  readonly revert = 'transform-origin:revert;';
+  readonly revert: string = 'transform-origin:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transform-origin:revert-layer;`。
    */
-  readonly revertLayer = 'transform-origin:revert-layer;';
+  readonly revertLayer: string = 'transform-origin:revert-layer;';
   /** CSS 声明：`transform-origin:right;`。 */
-  readonly right = 'transform-origin:right;';
+  readonly right: string = 'transform-origin:right;';
   /** CSS 声明：`transform-origin:top;`。 */
-  readonly top = 'transform-origin:top;';
+  readonly top: string = 'transform-origin:top;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transform-origin:unset;`。
    */
-  readonly unset = 'transform-origin:unset;';
+  readonly unset: string = 'transform-origin:unset;';
   /**
    * 创建 transform-origin 属性作者；普通使用通过 s.transformOrigin 取得共享实例。
    * @example
@@ -24282,6 +35217,56 @@ export class TransformOriginCss extends LengthCssProperty {
 }
 
 /**
+ * transform-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransformStyleKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transform-style:flat;`。 */
+  readonly flat: Property.TransformStyle | CssString = 'flat';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transform-style:inherit;`。
+   */
+  readonly inherit: Property.TransformStyle | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transform-style:initial;`。
+   */
+  readonly initial: Property.TransformStyle | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transform-style:revert;`。
+   */
+  readonly revert: Property.TransformStyle | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transform-style:revert-layer;`。
+   */
+  readonly revertLayer: Property.TransformStyle | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transform-style:unset;`。
+   */
+  readonly unset: Property.TransformStyle | CssString = 'unset';
+}
+
+/**
  * 控制子元素的三维位置保留在三维空间还是展平。（transform-style）
  *
  * CSS 初始值：`flat`（不同于浏览器默认样式表）。
@@ -24289,37 +35274,37 @@ export class TransformOriginCss extends LengthCssProperty {
  */
 export class TransformStyleCss extends CssProperty {
   /** CSS 声明：`transform-style:flat;`。 */
-  readonly flat = 'transform-style:flat;';
+  readonly flat: string = 'transform-style:flat;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`transform-style:inherit;`。
    */
-  readonly inherit = 'transform-style:inherit;';
+  readonly inherit: string = 'transform-style:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transform-style:initial;`。
    */
-  readonly initial = 'transform-style:initial;';
+  readonly initial: string = 'transform-style:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transform-style:revert;`。
    */
-  readonly revert = 'transform-style:revert;';
+  readonly revert: string = 'transform-style:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transform-style:revert-layer;`。
    */
-  readonly revertLayer = 'transform-style:revert-layer;';
+  readonly revertLayer: string = 'transform-style:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transform-style:unset;`。
    */
-  readonly unset = 'transform-style:unset;';
+  readonly unset: string = 'transform-style:unset;';
   /**
    * 创建 transform-style 属性作者；普通使用通过 s.transformStyle 取得共享实例。
    * @example
@@ -24343,6 +35328,96 @@ export class TransformStyleCss extends CssProperty {
 }
 
 /**
+ * transition 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransitionKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:all;`。 */
+  readonly all: Property.Transition | CssString = 'all';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:allow-discrete;`。 */
+  readonly allowDiscrete: Property.Transition | CssString = 'allow-discrete';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:ease;`。 */
+  readonly ease: Property.Transition | CssString = 'ease';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:ease-in;`。 */
+  readonly easeIn: Property.Transition | CssString = 'ease-in';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:ease-in-out;`。 */
+  readonly easeInOut: Property.Transition | CssString = 'ease-in-out';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:ease-out;`。 */
+  readonly easeOut: Property.Transition | CssString = 'ease-out';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transition:inherit;`。
+   */
+  readonly inherit: Property.Transition | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transition:initial;`。
+   */
+  readonly initial: Property.Transition | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:linear;`。 */
+  readonly linear: Property.Transition | CssString = 'linear';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:none;`。 */
+  readonly none: Property.Transition | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:normal;`。 */
+  readonly normal: Property.Transition | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transition:revert;`。
+   */
+  readonly revert: Property.Transition | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transition:revert-layer;`。
+   */
+  readonly revertLayer: Property.Transition | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:step-end;`。 */
+  readonly stepEnd: Property.Transition | CssString = 'step-end';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition:step-start;`。 */
+  readonly stepStart: Property.Transition | CssString = 'step-start';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transition:unset;`。
+   */
+  readonly unset: Property.Transition | CssString = 'unset';
+}
+
+/**
  * 集中设置属性变化过渡的目标、时长、缓动、延迟和行为。（transition）
  *
  * 只对属性变化创建过渡；不会自动触发变化。建议明确列出目标属性，避免 all 意外过渡布局变化。
@@ -24354,57 +35429,57 @@ export class TransformStyleCss extends CssProperty {
  */
 export class TransitionCss extends CssProperty {
   /** CSS 声明：`transition:all;`。 */
-  readonly all = 'transition:all;';
+  readonly all: string = 'transition:all;';
   /** CSS 声明：`transition:allow-discrete;`。 */
-  readonly allowDiscrete = 'transition:allow-discrete;';
+  readonly allowDiscrete: string = 'transition:allow-discrete;';
   /** CSS 声明：`transition:ease;`。 */
-  readonly ease = 'transition:ease;';
+  readonly ease: string = 'transition:ease;';
   /** CSS 声明：`transition:ease-in;`。 */
-  readonly easeIn = 'transition:ease-in;';
+  readonly easeIn: string = 'transition:ease-in;';
   /** CSS 声明：`transition:ease-in-out;`。 */
-  readonly easeInOut = 'transition:ease-in-out;';
+  readonly easeInOut: string = 'transition:ease-in-out;';
   /** CSS 声明：`transition:ease-out;`。 */
-  readonly easeOut = 'transition:ease-out;';
+  readonly easeOut: string = 'transition:ease-out;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`transition:inherit;`。
    */
-  readonly inherit = 'transition:inherit;';
+  readonly inherit: string = 'transition:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transition:initial;`。
    */
-  readonly initial = 'transition:initial;';
+  readonly initial: string = 'transition:initial;';
   /** CSS 声明：`transition:linear;`。 */
-  readonly linear = 'transition:linear;';
+  readonly linear: string = 'transition:linear;';
   /** CSS 声明：`transition:none;`。 */
-  readonly none = 'transition:none;';
+  readonly none: string = 'transition:none;';
   /** CSS 声明：`transition:normal;`。 */
-  readonly normal = 'transition:normal;';
+  readonly normal: string = 'transition:normal;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transition:revert;`。
    */
-  readonly revert = 'transition:revert;';
+  readonly revert: string = 'transition:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transition:revert-layer;`。
    */
-  readonly revertLayer = 'transition:revert-layer;';
+  readonly revertLayer: string = 'transition:revert-layer;';
   /** CSS 声明：`transition:step-end;`。 */
-  readonly stepEnd = 'transition:step-end;';
+  readonly stepEnd: string = 'transition:step-end;';
   /** CSS 声明：`transition:step-start;`。 */
-  readonly stepStart = 'transition:step-start;';
+  readonly stepStart: string = 'transition:step-start;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transition:unset;`。
    */
-  readonly unset = 'transition:unset;';
+  readonly unset: string = 'transition:unset;';
   /**
    * 创建 transition 属性作者；普通使用通过 s.transition 取得共享实例。
    * @example
@@ -24508,6 +35583,68 @@ export class TransitionCss extends CssProperty {
 }
 
 /**
+ * transition-behavior 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransitionBehaviorKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 允许离散属性启动过渡；切换时机仍由各属性的动画规则决定。
+   *
+   * CSS 声明：`transition-behavior:allow-discrete;`。
+   */
+  readonly allowDiscrete: Property.TransitionBehavior | CssString = 'allow-discrete';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transition-behavior:inherit;`。
+   */
+  readonly inherit: Property.TransitionBehavior | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transition-behavior:initial;`。
+   */
+  readonly initial: Property.TransitionBehavior | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 不为离散属性启动普通 CSS 过渡。
+   *
+   * CSS 声明：`transition-behavior:normal;`。
+   */
+  readonly normal: Property.TransitionBehavior | CssString = 'normal';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transition-behavior:revert;`。
+   */
+  readonly revert: Property.TransitionBehavior | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transition-behavior:revert-layer;`。
+   */
+  readonly revertLayer: Property.TransitionBehavior | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transition-behavior:unset;`。
+   */
+  readonly unset: Property.TransitionBehavior | CssString = 'unset';
+}
+
+/**
  * 控制离散属性是否可以启动 CSS 过渡。（transition-behavior）
  *
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
@@ -24519,43 +35656,43 @@ export class TransitionBehaviorCss extends CssProperty {
    *
    * CSS 声明：`transition-behavior:allow-discrete;`。
    */
-  readonly allowDiscrete = 'transition-behavior:allow-discrete;';
+  readonly allowDiscrete: string = 'transition-behavior:allow-discrete;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`transition-behavior:inherit;`。
    */
-  readonly inherit = 'transition-behavior:inherit;';
+  readonly inherit: string = 'transition-behavior:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transition-behavior:initial;`。
    */
-  readonly initial = 'transition-behavior:initial;';
+  readonly initial: string = 'transition-behavior:initial;';
   /**
    * 不为离散属性启动普通 CSS 过渡。
    *
    * CSS 声明：`transition-behavior:normal;`。
    */
-  readonly normal = 'transition-behavior:normal;';
+  readonly normal: string = 'transition-behavior:normal;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transition-behavior:revert;`。
    */
-  readonly revert = 'transition-behavior:revert;';
+  readonly revert: string = 'transition-behavior:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transition-behavior:revert-layer;`。
    */
-  readonly revertLayer = 'transition-behavior:revert-layer;';
+  readonly revertLayer: string = 'transition-behavior:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transition-behavior:unset;`。
    */
-  readonly unset = 'transition-behavior:unset;';
+  readonly unset: string = 'transition-behavior:unset;';
   /**
    * 创建 transition-behavior 属性作者；普通使用通过 s.transitionBehavior 取得共享实例。
    * @example
@@ -24579,6 +35716,52 @@ export class TransitionBehaviorCss extends CssProperty {
 }
 
 /**
+ * transition-delay 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransitionDelayKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transition-delay:inherit;`。
+   */
+  readonly inherit: Property.TransitionDelay | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transition-delay:initial;`。
+   */
+  readonly initial: Property.TransitionDelay | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transition-delay:revert;`。
+   */
+  readonly revert: Property.TransitionDelay | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transition-delay:revert-layer;`。
+   */
+  readonly revertLayer: Property.TransitionDelay | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transition-delay:unset;`。
+   */
+  readonly unset: Property.TransitionDelay | CssString = 'unset';
+}
+
+/**
  * 设置属性变化后开始过渡的延迟。（transition-delay）
  *
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
@@ -24590,31 +35773,31 @@ export class TransitionDelayCss extends CssProperty {
    *
    * CSS 声明：`transition-delay:inherit;`。
    */
-  readonly inherit = 'transition-delay:inherit;';
+  readonly inherit: string = 'transition-delay:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transition-delay:initial;`。
    */
-  readonly initial = 'transition-delay:initial;';
+  readonly initial: string = 'transition-delay:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transition-delay:revert;`。
    */
-  readonly revert = 'transition-delay:revert;';
+  readonly revert: string = 'transition-delay:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transition-delay:revert-layer;`。
    */
-  readonly revertLayer = 'transition-delay:revert-layer;';
+  readonly revertLayer: string = 'transition-delay:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transition-delay:unset;`。
    */
-  readonly unset = 'transition-delay:unset;';
+  readonly unset: string = 'transition-delay:unset;';
   /**
    * 创建 transition-delay 属性作者；普通使用通过 s.transitionDelay 取得共享实例。
    * @example
@@ -24718,6 +35901,52 @@ export class TransitionDelayCss extends CssProperty {
 }
 
 /**
+ * transition-duration 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransitionDurationKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transition-duration:inherit;`。
+   */
+  readonly inherit: Property.TransitionDuration | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transition-duration:initial;`。
+   */
+  readonly initial: Property.TransitionDuration | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transition-duration:revert;`。
+   */
+  readonly revert: Property.TransitionDuration | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transition-duration:revert-layer;`。
+   */
+  readonly revertLayer: Property.TransitionDuration | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transition-duration:unset;`。
+   */
+  readonly unset: Property.TransitionDuration | CssString = 'unset';
+}
+
+/**
  * 设置过渡从开始到完成的时长。（transition-duration）
  *
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
@@ -24729,31 +35958,31 @@ export class TransitionDurationCss extends CssProperty {
    *
    * CSS 声明：`transition-duration:inherit;`。
    */
-  readonly inherit = 'transition-duration:inherit;';
+  readonly inherit: string = 'transition-duration:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transition-duration:initial;`。
    */
-  readonly initial = 'transition-duration:initial;';
+  readonly initial: string = 'transition-duration:initial;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transition-duration:revert;`。
    */
-  readonly revert = 'transition-duration:revert;';
+  readonly revert: string = 'transition-duration:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transition-duration:revert-layer;`。
    */
-  readonly revertLayer = 'transition-duration:revert-layer;';
+  readonly revertLayer: string = 'transition-duration:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transition-duration:unset;`。
    */
-  readonly unset = 'transition-duration:unset;';
+  readonly unset: string = 'transition-duration:unset;';
   /**
    * 创建 transition-duration 属性作者；普通使用通过 s.transitionDuration 取得共享实例。
    * @example
@@ -24857,44 +36086,98 @@ export class TransitionDurationCss extends CssProperty {
 }
 
 /**
+ * transition-property 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransitionPropertyKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition-property:all;`。 */
+  readonly all: Property.TransitionProperty | CssString = 'all';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transition-property:inherit;`。
+   */
+  readonly inherit: Property.TransitionProperty | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transition-property:initial;`。
+   */
+  readonly initial: Property.TransitionProperty | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition-property:none;`。 */
+  readonly none: Property.TransitionProperty | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transition-property:revert;`。
+   */
+  readonly revert: Property.TransitionProperty | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transition-property:revert-layer;`。
+   */
+  readonly revertLayer: Property.TransitionProperty | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transition-property:unset;`。
+   */
+  readonly unset: Property.TransitionProperty | CssString = 'unset';
+}
+
+/**
  * 指定发生变化时需要过渡的 CSS 属性。（transition-property）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-property
  */
 export class TransitionPropertyCss extends CssProperty {
   /** CSS 声明：`transition-property:all;`。 */
-  readonly all = 'transition-property:all;';
+  readonly all: string = 'transition-property:all;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`transition-property:inherit;`。
    */
-  readonly inherit = 'transition-property:inherit;';
+  readonly inherit: string = 'transition-property:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transition-property:initial;`。
    */
-  readonly initial = 'transition-property:initial;';
+  readonly initial: string = 'transition-property:initial;';
   /** CSS 声明：`transition-property:none;`。 */
-  readonly none = 'transition-property:none;';
+  readonly none: string = 'transition-property:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transition-property:revert;`。
    */
-  readonly revert = 'transition-property:revert;';
+  readonly revert: string = 'transition-property:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transition-property:revert-layer;`。
    */
-  readonly revertLayer = 'transition-property:revert-layer;';
+  readonly revertLayer: string = 'transition-property:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transition-property:unset;`。
    */
-  readonly unset = 'transition-property:unset;';
+  readonly unset: string = 'transition-property:unset;';
   /**
    * 创建 transition-property 属性作者；普通使用通过 s.transitionProperty 取得共享实例。
    * @example
@@ -24918,6 +36201,80 @@ export class TransitionPropertyCss extends CssProperty {
 }
 
 /**
+ * transition-timing-function 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TransitionTimingFunctionKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition-timing-function:ease;`。 */
+  readonly ease: Property.TransitionTimingFunction | CssString = 'ease';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition-timing-function:ease-in;`。 */
+  readonly easeIn: Property.TransitionTimingFunction | CssString = 'ease-in';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition-timing-function:ease-in-out;`。 */
+  readonly easeInOut: Property.TransitionTimingFunction | CssString = 'ease-in-out';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition-timing-function:ease-out;`。 */
+  readonly easeOut: Property.TransitionTimingFunction | CssString = 'ease-out';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`transition-timing-function:inherit;`。
+   */
+  readonly inherit: Property.TransitionTimingFunction | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`transition-timing-function:initial;`。
+   */
+  readonly initial: Property.TransitionTimingFunction | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition-timing-function:linear;`。 */
+  readonly linear: Property.TransitionTimingFunction | CssString = 'linear';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`transition-timing-function:revert;`。
+   */
+  readonly revert: Property.TransitionTimingFunction | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`transition-timing-function:revert-layer;`。
+   */
+  readonly revertLayer: Property.TransitionTimingFunction | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition-timing-function:step-end;`。 */
+  readonly stepEnd: Property.TransitionTimingFunction | CssString = 'step-end';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`transition-timing-function:step-start;`。 */
+  readonly stepStart: Property.TransitionTimingFunction | CssString = 'step-start';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`transition-timing-function:unset;`。
+   */
+  readonly unset: Property.TransitionTimingFunction | CssString = 'unset';
+}
+
+/**
  * 设置过渡进度变化的缓动函数。（transition-timing-function）
  *
  * CSS 初始值：`ease`（不同于浏览器默认样式表）。
@@ -24925,49 +36282,49 @@ export class TransitionPropertyCss extends CssProperty {
  */
 export class TransitionTimingFunctionCss extends CssProperty {
   /** CSS 声明：`transition-timing-function:ease;`。 */
-  readonly ease = 'transition-timing-function:ease;';
+  readonly ease: string = 'transition-timing-function:ease;';
   /** CSS 声明：`transition-timing-function:ease-in;`。 */
-  readonly easeIn = 'transition-timing-function:ease-in;';
+  readonly easeIn: string = 'transition-timing-function:ease-in;';
   /** CSS 声明：`transition-timing-function:ease-in-out;`。 */
-  readonly easeInOut = 'transition-timing-function:ease-in-out;';
+  readonly easeInOut: string = 'transition-timing-function:ease-in-out;';
   /** CSS 声明：`transition-timing-function:ease-out;`。 */
-  readonly easeOut = 'transition-timing-function:ease-out;';
+  readonly easeOut: string = 'transition-timing-function:ease-out;';
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
    * CSS 声明：`transition-timing-function:inherit;`。
    */
-  readonly inherit = 'transition-timing-function:inherit;';
+  readonly inherit: string = 'transition-timing-function:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`transition-timing-function:initial;`。
    */
-  readonly initial = 'transition-timing-function:initial;';
+  readonly initial: string = 'transition-timing-function:initial;';
   /** CSS 声明：`transition-timing-function:linear;`。 */
-  readonly linear = 'transition-timing-function:linear;';
+  readonly linear: string = 'transition-timing-function:linear;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`transition-timing-function:revert;`。
    */
-  readonly revert = 'transition-timing-function:revert;';
+  readonly revert: string = 'transition-timing-function:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`transition-timing-function:revert-layer;`。
    */
-  readonly revertLayer = 'transition-timing-function:revert-layer;';
+  readonly revertLayer: string = 'transition-timing-function:revert-layer;';
   /** CSS 声明：`transition-timing-function:step-end;`。 */
-  readonly stepEnd = 'transition-timing-function:step-end;';
+  readonly stepEnd: string = 'transition-timing-function:step-end;';
   /** CSS 声明：`transition-timing-function:step-start;`。 */
-  readonly stepStart = 'transition-timing-function:step-start;';
+  readonly stepStart: string = 'transition-timing-function:step-start;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`transition-timing-function:unset;`。
    */
-  readonly unset = 'transition-timing-function:unset;';
+  readonly unset: string = 'transition-timing-function:unset;';
   /**
    * 创建 transition-timing-function 属性作者；普通使用通过 s.transitionTimingFunction 取得共享实例。
    * @example
@@ -24991,6 +36348,56 @@ export class TransitionTimingFunctionCss extends CssProperty {
 }
 
 /**
+ * translate 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
+ */
+export class TranslateKeywords {
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用父元素该属性的计算值，即使这个属性默认不继承。
+   *
+   * CSS 声明：`translate:inherit;`。
+   */
+  readonly inherit: Property.Translate | CssString = 'inherit';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
+   *
+   * CSS 声明：`translate:initial;`。
+   */
+  readonly initial: Property.Translate | CssString = 'initial';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   * CSS 声明：`translate:none;`。 */
+  readonly none: Property.Translate | CssString = 'none';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
+   *
+   * CSS 声明：`translate:revert;`。
+   */
+  readonly revert: Property.Translate | CssString = 'revert';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
+   *
+   * CSS 声明：`translate:revert-layer;`。
+   */
+  readonly revertLayer: Property.Translate | CssString = 'revert-layer';
+  /**
+   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
+   *
+   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
+   *
+   * CSS 声明：`translate:unset;`。
+   */
+  readonly unset: Property.Translate | CssString = 'unset';
+}
+
+/**
  * 独立设置元素在二维或三维空间中的平移。（translate）
  *
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
@@ -25002,33 +36409,33 @@ export class TranslateCss extends LengthCssProperty {
    *
    * CSS 声明：`translate:inherit;`。
    */
-  readonly inherit = 'translate:inherit;';
+  readonly inherit: string = 'translate:inherit;';
   /**
    * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
    *
    * CSS 声明：`translate:initial;`。
    */
-  readonly initial = 'translate:initial;';
+  readonly initial: string = 'translate:initial;';
   /** CSS 声明：`translate:none;`。 */
-  readonly none = 'translate:none;';
+  readonly none: string = 'translate:none;';
   /**
    * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
    *
    * CSS 声明：`translate:revert;`。
    */
-  readonly revert = 'translate:revert;';
+  readonly revert: string = 'translate:revert;';
   /**
    * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
    *
    * CSS 声明：`translate:revert-layer;`。
    */
-  readonly revertLayer = 'translate:revert-layer;';
+  readonly revertLayer: string = 'translate:revert-layer;';
   /**
    * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
    *
    * CSS 声明：`translate:unset;`。
    */
-  readonly unset = 'translate:unset;';
+  readonly unset: string = 'translate:unset;';
   /**
    * 创建 translate 属性作者；普通使用通过 s.translate 取得共享实例。
    * @example

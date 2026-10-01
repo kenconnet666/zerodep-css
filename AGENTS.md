@@ -3,7 +3,7 @@
 - 当前已有五包配置、502 属性生成器、作者 API、Vue/Svelte bx 绑定插件和 Nuxt 4 / SvelteKit 2 的 Node SSR / 预渲染接入。转换范围见 `docs/bindings.md`；流式 SSR、边缘部署未验收，不要把研究探针当作正式 API。
 - `core` 保持框架无关；其 npm 名为 `zerodep-css`，四个适配包依次为 `zerodep-css-vue`、`zerodep-css-svelte`、`zerodep-css-nuxt`、`zerodep-css-sveltekit`。根工作区保持 private，五包按 MIT 公开发布；本地包间使用 `workspace:*`，打包时转换为明确版本。
 - 选择器统一使用作者对象的 `_hover` / `_selector` 等下划线方法；独立 `ic`、`cx` 已移除。`keyframes` 仍是宿主登记函数。快捷方法元数据在 `core/src/selector-shortcuts.ts`，由生成器和绑定编译器共用。
-- 作者类型优先直观可读：属性基类不传泛型，各属性类明确声明 `raw` 等方法参数，静态关键字保留普通 readonly 字段。不为体积或极限性能引入复杂映射类型、声明合并或 Proxy 作者模型。
+- 作者类型优先直观可读：属性基类不传泛型，各属性类明确声明 `raw` 等方法参数，系统默认声明保留 readonly string 字段；SystemKeywords 保存原始 CSS 值，Css<T> 注入值或读取函数，主题属性视图按使用时取值。自定义键仅用浅层类型映射保留补全和文档，不生成字面量声明约束。不引入递归条件类型、声明合并或 Proxy 作者模型。主题缓存不能仅依据作者方法身份，必须保留框架的值读取。
 - 条件规则快捷方法和主题局部覆盖由用户在项目类中定义，系统提供 `_selector`、声明字符串和继承能力；不内置 `_media` 或 `themes.override`。属性值方法只补充适用的原生 CSS 函数，不另建值对象 DSL；不引入调试命名或标签模板调用。
 - Vue 模板缓存接入 `vue/src/template-compiler.ts` 的编译 AST 扩展；bx 变量绑定仍由共享源码转换负责。普通元素与 v-for 的缓存不能冻结其他属性；未知/覆写调用保留运行时路径。手写 computed / $derived 内的 bx 使用绑定帧，非 bx 表达式不自动转换。
 - 使用 Node 24、pnpm 10.34.5 和工作区固定依赖；不要升级全局工具。本地优先运行改动相关的检查，基础配置或包类型入口变更运行 `pnpm check`，LSP 桥变更运行 `pnpm lsp:verify`。

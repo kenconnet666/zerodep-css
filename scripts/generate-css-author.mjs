@@ -174,6 +174,9 @@ function groupFor(name) {
 }
 
 const systemFields = [];
+const keywordFields = [];
+const keywordCreators = [];
+const keywordValues = [];
 const systemCreators = [];
 let keywordCount = 0;
 const notes = new Map(config.properties.map((setting) => [setting.name, setting]));
@@ -235,6 +238,26 @@ for (const name of names) {
   if (!group) throw new Error(`No generated group for ${name}.`);
   const lines = groupLines.get(group);
   const alias = `group${groups.indexOf(group)}`;
+  const keywordClass = className.replace(/Css$/, 'Keywords');
+  lines.push(
+    '',
+    jsdoc(`${cssName} 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。`),
+    `export class ${keywordClass} {`,
+  );
+  for (const [keyword, value] of keywords)
+    lines.push(
+      keywordDocumentation(name, cssName, value).replace(
+        '/**',
+        '/**\n * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。\n *',
+      ),
+      `readonly ${keyword}: Property.${type} | CssString = ${JSON.stringify(value)};`,
+    );
+  lines.push('}');
+  keywordFields.push(documentation, `declare readonly ${name}: ${alias}.${keywordClass};`);
+  keywordCreators.push(
+    `defineKeywordProperty(${JSON.stringify(name)}, () => new ${alias}.${keywordClass}());`,
+  );
+  keywordValues.push(documentation, `readonly ${name}: Property.${type} | CssString;`);
   lines.push(
     '',
     documentation,
@@ -243,7 +266,7 @@ for (const name of names) {
   for (const [keyword, value] of keywords)
     lines.push(
       keywordDocumentation(name, cssName, value),
-      `  readonly ${keyword} = ${JSON.stringify(`${cssName}:${value};`)};`,
+      `  readonly ${keyword}: string = ${JSON.stringify(`${cssName}:${value};`)};`,
     );
   lines.push(
     jsdoc(`创建 ${cssName} 属性作者；普通使用通过 s.${name} 取得共享实例。`, {
@@ -279,7 +302,10 @@ for (const name of names) {
     ...Object.values(grid).flat(),
   );
   lines.push('}');
-  systemFields.push(documentation, `  declare readonly ${setting.name}: ${alias}.${className};`);
+  systemFields.push(
+    documentation,
+    `  declare readonly ${setting.name}: KeywordAuthor<${alias}.${className}, T[${JSON.stringify(name)}]>;`,
+  );
   systemCreators.push(
     `defineSystemProperty(${JSON.stringify(setting.name)}, () => new ${alias}.${className}());`,
   );
@@ -290,16 +316,31 @@ for (const name of ['_selector', ...Object.keys(selectorShortcuts)]) {
 author.push(
   "import { selectorRule, type CssSelector } from '../selectors.js';",
   "import type { CssInput } from '../registry.js';",
+  "import { SystemKeywords, systemKeywords } from './keywords.js';",
+  "export * from './keywords.js';",
+  "import { getKeywordSource, setKeywordSource, bindKeywords, type KeywordSource, type KeywordAuthor, type CheckedKeywords } from '../keyword-source.js';",
   '',
   '// 仅在首次构造作者实例时注册，避免未使用的属性链阻止按需打包。',
   'let systemPropertiesReady = false;',
   '/** 系统属性链；项目可通过类继承扩展关键字。 */',
-  'export class Css {',
-  jsdoc('创建作者入口；系统属性链按首次访问惰性创建并共享。', {
-    remarks: '系统属性实例只读。扩展语义成员时继承属性类，并在作者子类中覆盖对应字段。',
+  'export class Css<T extends SystemKeywords = SystemKeywords> {',
+  jsdoc('创建作者入口；可注入主题值或由框架跟踪的当前主题读取函数。', {
+    params: { theme: '原始关键字值或读取函数；省略时使用系统默认值。' },
+    remarks:
+      '系统默认属性实例只读共享；注入主题时创建作用域属性视图。主题值变化在下一次读取声明时生效。',
     examples: ['const s = new Css();', 's.display.flex // display:flex;'],
   }),
-  '  constructor() { initializeSystemProperties(); }',
+  '  constructor(theme: KeywordSource<T> & KeywordSource<CheckedKeywords<T>>);',
+  jsdoc('创建无主题的系统作者；显式扩展主题类型时必须提供对应值。', {
+    params: { args: '系统作者可省略参数；自定义主题作者必须提供主题值或读取函数。' },
+    examples: ['const s = new Css();'],
+  }),
+  '  constructor(...args: SystemKeywords extends T ? [] : [theme: KeywordSource<T> & KeywordSource<CheckedKeywords<T>>]);',
+  '  constructor(...args: [theme?: KeywordSource<T> & KeywordSource<CheckedKeywords<T>>]) { initializeSystemProperties(); if (args[0]) setKeywordSource(this, args[0]); }',
+  jsdoc('取得当前作用域的原始关键字值；主题读取函数由框架跟踪。', {
+    examples: ['const values = new Css().keywords;'],
+  }),
+  '  get keywords(): T { return (getKeywordSource(this)?.() ?? systemKeywords) as T; }',
   jsdoc('构造原生选择器、@ 规则或动画帧的嵌套声明片段。', {
     params: {
       selector: '选择器、逗号分隔的选择器列表或 @ 规则字符串；& 代表当前规则。',
@@ -324,11 +365,18 @@ author.push(
 author.push(...systemFields, '}');
 author.push(
   'function defineSystemProperty(name: string, create: () => object): void {',
+  '  let shared: object | undefined;',
+  '  const scoped = new WeakMap<object, object>();',
   '  Object.defineProperty(Css.prototype, name, {',
   '    configurable: true,',
   '    get() {',
-  '      const value = Object.freeze(create());',
-  '      Object.defineProperty(Css.prototype, name, { value, enumerable: true });',
+  '      const source = getKeywordSource(this);',
+  '      if (!source) return shared ??= Object.freeze(create());',
+  '      let value = scoped.get(this);',
+  '      if (!value) {',
+  '        value = bindKeywords(create() as { raw(value: never): string }, name, () => Reflect.get(source(), name));',
+  '        scoped.set(this, value);',
+  '      }',
   '      return value;',
   '    },',
   '  });',
@@ -340,7 +388,43 @@ author.push(
   '}',
 );
 
-const files = new Map([['base', base], ...groupLines, ['author', author]]);
+const keywordRoot = [
+  ...header,
+  "import type { Property } from 'csstype';",
+  "import type { CssString } from './base.js';",
+  ...groups.map((group, index) => `import * as group${index} from './${group}.js';`),
+  '/** 各 CSS 属性允许的原始关键字值类型。 */',
+  'export interface KeywordValues {',
+  ...keywordValues,
+  '}',
+  '/** 系统关键字的值契约；用户主题通过继承覆盖或扩展属性组。 */',
+  'export class SystemKeywords {',
+  jsdoc('创建系统默认关键字；属性组按需创建并只读共享。', {
+    examples: ['const keywords = new SystemKeywords();'],
+  }),
+  'constructor() { initializeKeywords(); }',
+  ...keywordFields,
+  '}',
+  '/** 不携带请求或组件状态的系统默认值，适合对象展开复用。 */',
+  'let defaults: SystemKeywords | undefined;',
+  'export const systemKeywords: SystemKeywords = {',
+  ...names.map((name) => `get ${name}() { return (defaults ??= new SystemKeywords()).${name}; },`),
+  '};',
+  'function defineKeywordProperty(name: string, create: () => object): void {',
+  'let shared: object | undefined;',
+  'Object.defineProperty(SystemKeywords.prototype, name, { enumerable: true, get() { return shared ??= Object.freeze(create()); } });',
+  '}',
+  'function initializeKeywords(): void {',
+  "if (Object.hasOwn(SystemKeywords.prototype, 'color')) return;",
+  ...keywordCreators,
+  '}',
+];
+const files = new Map([
+  ['base', base],
+  ...groupLines,
+  ['author', author],
+  ['keywords', keywordRoot],
+]);
 // 可选预设单独导出，不能从纯系统作者入口反向导入主题。
 const themeProperties = {
   color: 'ColorCss',

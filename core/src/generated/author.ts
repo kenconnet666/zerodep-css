@@ -18,22 +18,54 @@ export * from './s-t.js';
 export * from './u-z.js';
 import { selectorRule, type CssSelector } from '../selectors.js';
 import type { CssInput } from '../registry.js';
+import { SystemKeywords, systemKeywords } from './keywords.js';
+export * from './keywords.js';
+import {
+  getKeywordSource,
+  setKeywordSource,
+  bindKeywords,
+  type KeywordSource,
+  type KeywordAuthor,
+  type CheckedKeywords,
+} from '../keyword-source.js';
 
 // 仅在首次构造作者实例时注册，避免未使用的属性链阻止按需打包。
 let systemPropertiesReady = false;
 /** 系统属性链；项目可通过类继承扩展关键字。 */
-export class Css {
+export class Css<T extends SystemKeywords = SystemKeywords> {
   /**
-   * 创建作者入口；系统属性链按首次访问惰性创建并共享。
+   * 创建作者入口；可注入主题值或由框架跟踪的当前主题读取函数。
    *
-   * 系统属性实例只读。扩展语义成员时继承属性类，并在作者子类中覆盖对应字段。
+   * 系统默认属性实例只读共享；注入主题时创建作用域属性视图。主题值变化在下一次读取声明时生效。
+   * @param theme 原始关键字值或读取函数；省略时使用系统默认值。
    * @example
    * const s = new Css();
    * @example
    * s.display.flex // display:flex;
    */
-  constructor() {
+  constructor(theme: KeywordSource<T> & KeywordSource<CheckedKeywords<T>>);
+  /**
+   * 创建无主题的系统作者；显式扩展主题类型时必须提供对应值。
+   * @param args 系统作者可省略参数；自定义主题作者必须提供主题值或读取函数。
+   * @example
+   * const s = new Css();
+   */
+  constructor(
+    ...args: SystemKeywords extends T
+      ? []
+      : [theme: KeywordSource<T> & KeywordSource<CheckedKeywords<T>>]
+  );
+  constructor(...args: [theme?: KeywordSource<T> & KeywordSource<CheckedKeywords<T>>]) {
     initializeSystemProperties();
+    if (args[0]) setKeywordSource(this, args[0]);
+  }
+  /**
+   * 取得当前作用域的原始关键字值；主题读取函数由框架跟踪。
+   * @example
+   * const values = new Css().keywords;
+   */
+  get keywords(): T {
+    return (getKeywordSource(this)?.() ?? systemKeywords) as T;
   }
   /**
    * 构造原生选择器、@ 规则或动画帧的嵌套声明片段。
@@ -154,14 +186,14 @@ export class Css {
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color
    */
-  declare readonly accentColor: group0.AccentColorCss;
+  declare readonly accentColor: KeywordAuthor<group0.AccentColorCss, T['accentColor']>;
   /**
    * 分配布局容器交叉轴或块轴上的剩余空间，控制内容整体的对齐。（align-content）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-content
    */
-  declare readonly alignContent: group0.AlignContentCss;
+  declare readonly alignContent: KeywordAuthor<group0.AlignContentCss, T['alignContent']>;
   /**
    * 设置容器内项目在交叉轴或块轴上的默认对齐方式。（align-items）
    *
@@ -181,7 +213,7 @@ export class Css {
    * css(s.display.flex, s.alignItems.center)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-items
    */
-  declare readonly alignItems: group0.AlignItemsCss;
+  declare readonly alignItems: KeywordAuthor<group0.AlignItemsCss, T['alignItems']>;
   /**
    * 单独覆盖一个项目的交叉轴或块轴对齐方式。（align-self）
    *
@@ -197,73 +229,85 @@ export class Css {
    * s.alignSelf.center
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-self
    */
-  declare readonly alignSelf: group0.AlignSelfCss;
+  declare readonly alignSelf: KeywordAuthor<group0.AlignSelfCss, T['alignSelf']>;
   /**
    * 旧版瀑布流布局提案中沿块轴对齐轨道的属性；使用前核对实现与规范版本。（align-tracks）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-tracks
    */
-  declare readonly alignTracks: group0.AlignTracksCss;
+  declare readonly alignTracks: KeywordAuthor<group0.AlignTracksCss, T['alignTracks']>;
   /**
    * 选择行内或 SVG 文本参与对齐时使用的基线。（alignment-baseline）
    *
    * CSS 初始值：`baseline`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/alignment-baseline
    */
-  declare readonly alignmentBaseline: group0.AlignmentBaselineCss;
+  declare readonly alignmentBaseline: KeywordAuthor<
+    group0.AlignmentBaselineCss,
+    T['alignmentBaseline']
+  >;
   /**
    * 批量重置 CSS 属性；不重置 direction、unicode-bidi 和自定义属性。（all）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/all
    */
-  declare readonly all: group0.AllCss;
+  declare readonly all: KeywordAuthor<group0.AllCss, T['all']>;
   /**
    * 为元素声明锚点名称，供锚点定位的元素引用。（anchor-name）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-name
    */
-  declare readonly anchorName: group0.AnchorNameCss;
+  declare readonly anchorName: KeywordAuthor<group0.AnchorNameCss, T['anchorName']>;
   /**
    * 限制锚点名称的可见范围，避免同名锚点跨组件互相影响。（anchor-scope）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-scope
    */
-  declare readonly anchorScope: group0.AnchorScopeCss;
+  declare readonly anchorScope: KeywordAuthor<group0.AnchorScopeCss, T['anchorScope']>;
   /**
    * 集中设置关键帧动画的名称、时长、缓动、延迟、次数及播放行为。（animation）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation
    */
-  declare readonly animation: group0.AnimationCss;
+  declare readonly animation: KeywordAuthor<group0.AnimationCss, T['animation']>;
   /**
    * 设置动画效果与底层属性值的替换、叠加或累积方式。（animation-composition）
    *
    * CSS 初始值：`replace`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-composition
    */
-  declare readonly animationComposition: group0.AnimationCompositionCss;
+  declare readonly animationComposition: KeywordAuthor<
+    group0.AnimationCompositionCss,
+    T['animationComposition']
+  >;
   /**
    * 设置动画开始前的延迟；负值表示从动画中途开始播放。（animation-delay）
    *
    * CSS 初始值：`0s`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-delay
    */
-  declare readonly animationDelay: group0.AnimationDelayCss;
+  declare readonly animationDelay: KeywordAuthor<group0.AnimationDelayCss, T['animationDelay']>;
   /**
    * 设置动画按正向、反向或交替方向播放。（animation-direction）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-direction
    */
-  declare readonly animationDirection: group0.AnimationDirectionCss;
+  declare readonly animationDirection: KeywordAuthor<
+    group0.AnimationDirectionCss,
+    T['animationDirection']
+  >;
   /**
    * 设置动画完成一次循环的时长。（animation-duration）
    *
    * CSS 初始值：`0s`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-duration
    */
-  declare readonly animationDuration: group0.AnimationDurationCss;
+  declare readonly animationDuration: KeywordAuthor<
+    group0.AnimationDurationCss,
+    T['animationDuration']
+  >;
   /**
    * 设置动画在有效播放区间之外是否应用关键帧样式。（animation-fill-mode）
    *
@@ -282,68 +326,89 @@ export class Css {
    * s.animationFillMode.forwards
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-fill-mode
    */
-  declare readonly animationFillMode: group0.AnimationFillModeCss;
+  declare readonly animationFillMode: KeywordAuthor<
+    group0.AnimationFillModeCss,
+    T['animationFillMode']
+  >;
   /**
    * 设置动画循环次数，或无限循环。（animation-iteration-count）
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-iteration-count
    */
-  declare readonly animationIterationCount: group0.AnimationIterationCountCss;
+  declare readonly animationIterationCount: KeywordAuthor<
+    group0.AnimationIterationCountCss,
+    T['animationIterationCount']
+  >;
   /**
    * 选择要播放的 @keyframes 动画名称。（animation-name）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-name
    */
-  declare readonly animationName: group0.AnimationNameCss;
+  declare readonly animationName: KeywordAuthor<group0.AnimationNameCss, T['animationName']>;
   /**
    * 控制动画运行或暂停，暂停后可从原位置继续。（animation-play-state）
    *
    * CSS 初始值：`running`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-play-state
    */
-  declare readonly animationPlayState: group0.AnimationPlayStateCss;
+  declare readonly animationPlayState: KeywordAuthor<
+    group0.AnimationPlayStateCss,
+    T['animationPlayState']
+  >;
   /**
    * 设置动画附着到时间线的起止范围。（animation-range）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range
    */
-  declare readonly animationRange: group0.AnimationRangeCss;
+  declare readonly animationRange: KeywordAuthor<group0.AnimationRangeCss, T['animationRange']>;
   /**
    * 设置动画在时间线上的附着范围终点。（animation-range-end）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-end
    */
-  declare readonly animationRangeEnd: group0.AnimationRangeEndCss;
+  declare readonly animationRangeEnd: KeywordAuthor<
+    group0.AnimationRangeEndCss,
+    T['animationRangeEnd']
+  >;
   /**
    * 设置动画在时间线上的附着范围起点。（animation-range-start）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-start
    */
-  declare readonly animationRangeStart: group0.AnimationRangeStartCss;
+  declare readonly animationRangeStart: KeywordAuthor<
+    group0.AnimationRangeStartCss,
+    T['animationRangeStart']
+  >;
   /**
    * 选择驱动动画的时间线，例如文档时间或滚动进度。（animation-timeline）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timeline
    */
-  declare readonly animationTimeline: group0.AnimationTimelineCss;
+  declare readonly animationTimeline: KeywordAuthor<
+    group0.AnimationTimelineCss,
+    T['animationTimeline']
+  >;
   /**
    * 设置动画每个关键帧区间内进度变化的缓动函数。（animation-timing-function）
    *
    * CSS 初始值：`ease`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timing-function
    */
-  declare readonly animationTimingFunction: group0.AnimationTimingFunctionCss;
+  declare readonly animationTimingFunction: KeywordAuthor<
+    group0.AnimationTimingFunctionCss,
+    T['animationTimingFunction']
+  >;
   /**
    * 控制元素是否采用平台原生控件外观。（appearance）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/appearance
    */
-  declare readonly appearance: group0.AppearanceCss;
+  declare readonly appearance: KeywordAuthor<group0.AppearanceCss, T['appearance']>;
   /**
    * 设置盒子的首选宽高比，参与自动尺寸计算。（aspect-ratio）
    *
@@ -356,96 +421,120 @@ export class Css {
    * css(s.aspectRatio.raw('16 / 9'), s.width.percent(100))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/aspect-ratio
    */
-  declare readonly aspectRatio: group0.AspectRatioCss;
+  declare readonly aspectRatio: KeywordAuthor<group0.AspectRatioCss, T['aspectRatio']>;
   /**
    * 对元素背后的图像区域应用模糊等滤镜，通常需要透明或半透明背景。（backdrop-filter）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backdrop-filter
    */
-  declare readonly backdropFilter: group1.BackdropFilterCss;
+  declare readonly backdropFilter: KeywordAuthor<group1.BackdropFilterCss, T['backdropFilter']>;
   /**
    * 控制经过三维变换后背向观察者的元素背面是否可见。（backface-visibility）
    *
    * CSS 初始值：`visible`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backface-visibility
    */
-  declare readonly backfaceVisibility: group1.BackfaceVisibilityCss;
+  declare readonly backfaceVisibility: KeywordAuthor<
+    group1.BackfaceVisibilityCss,
+    T['backfaceVisibility']
+  >;
   /**
    * 集中设置背景颜色、图像、位置、尺寸、重复及绘制区域。（background）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background
    */
-  declare readonly background: group1.BackgroundCss;
+  declare readonly background: KeywordAuthor<group1.BackgroundCss, T['background']>;
   /**
    * 设置背景图像相对于视口、元素或局部滚动内容的固定方式。（background-attachment）
    *
    * CSS 初始值：`scroll`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
    */
-  declare readonly backgroundAttachment: group1.BackgroundAttachmentCss;
+  declare readonly backgroundAttachment: KeywordAuthor<
+    group1.BackgroundAttachmentCss,
+    T['backgroundAttachment']
+  >;
   /**
    * 设置背景图层彼此之间以及与背景色之间的混合模式。（background-blend-mode）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-blend-mode
    */
-  declare readonly backgroundBlendMode: group1.BackgroundBlendModeCss;
+  declare readonly backgroundBlendMode: KeywordAuthor<
+    group1.BackgroundBlendModeCss,
+    T['backgroundBlendMode']
+  >;
   /**
    * 设置背景允许绘制到的边界区域。（background-clip）
    *
    * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-clip
    */
-  declare readonly backgroundClip: group1.BackgroundClipCss;
+  declare readonly backgroundClip: KeywordAuthor<group1.BackgroundClipCss, T['backgroundClip']>;
   /**
    * 设置元素背景颜色，位于背景图像下方。（background-color）
    *
    * CSS 初始值：`transparent`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-color
    */
-  declare readonly backgroundColor: group1.BackgroundColorCss;
+  declare readonly backgroundColor: KeywordAuthor<group1.BackgroundColorCss, T['backgroundColor']>;
   /**
    * 设置一个或多个背景图像或渐变图层。（background-image）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
    */
-  declare readonly backgroundImage: group1.BackgroundImageCss;
+  declare readonly backgroundImage: KeywordAuthor<group1.BackgroundImageCss, T['backgroundImage']>;
   /**
    * 设置背景图像定位所依据的盒子区域。（background-origin）
    *
    * CSS 初始值：`padding-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-origin
    */
-  declare readonly backgroundOrigin: group1.BackgroundOriginCss;
+  declare readonly backgroundOrigin: KeywordAuthor<
+    group1.BackgroundOriginCss,
+    T['backgroundOrigin']
+  >;
   /**
    * 设置背景图像在定位区域内的位置。（background-position）
    *
    * CSS 初始值：`0% 0%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position
    */
-  declare readonly backgroundPosition: group1.BackgroundPositionCss;
+  declare readonly backgroundPosition: KeywordAuthor<
+    group1.BackgroundPositionCss,
+    T['backgroundPosition']
+  >;
   /**
    * 设置背景图像的水平位置。（background-position-x）
    *
    * CSS 初始值：`0%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-x
    */
-  declare readonly backgroundPositionX: group1.BackgroundPositionXCss;
+  declare readonly backgroundPositionX: KeywordAuthor<
+    group1.BackgroundPositionXCss,
+    T['backgroundPositionX']
+  >;
   /**
    * 设置背景图像的垂直位置。（background-position-y）
    *
    * CSS 初始值：`0%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-y
    */
-  declare readonly backgroundPositionY: group1.BackgroundPositionYCss;
+  declare readonly backgroundPositionY: KeywordAuthor<
+    group1.BackgroundPositionYCss,
+    T['backgroundPositionY']
+  >;
   /**
    * 设置背景图像在水平和垂直方向上的重复方式。（background-repeat）
    *
    * CSS 初始值：`repeat`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat
    */
-  declare readonly backgroundRepeat: group1.BackgroundRepeatCss;
+  declare readonly backgroundRepeat: KeywordAuthor<
+    group1.BackgroundRepeatCss,
+    T['backgroundRepeat']
+  >;
   /**
    * 设置背景图像尺寸，以及覆盖或完整容纳图像的缩放方式。（background-size）
    *
@@ -463,14 +552,14 @@ export class Css {
    * css(s.backgroundSize.cover, s.backgroundPosition.raw('center'))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-size
    */
-  declare readonly backgroundSize: group1.BackgroundSizeCss;
+  declare readonly backgroundSize: KeywordAuthor<group1.BackgroundSizeCss, T['backgroundSize']>;
   /**
    * 使 SVG 文本基线相对于其基准位置偏移。（baseline-shift）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
    */
-  declare readonly baselineShift: group1.BaselineShiftCss;
+  declare readonly baselineShift: KeywordAuthor<group1.BaselineShiftCss, T['baselineShift']>;
   /**
    * 设置逻辑块轴尺寸；水平书写时通常对应高度。（block-size）
    *
@@ -483,300 +572,396 @@ export class Css {
    * s.blockSize.rem(10)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/block-size
    */
-  declare readonly blockSize: group1.BlockSizeCss;
+  declare readonly blockSize: KeywordAuthor<group1.BlockSizeCss, T['blockSize']>;
   /**
    * 同时设置四边边框的宽度、线型和颜色。（border）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border
    */
-  declare readonly border: group1.BorderCss;
+  declare readonly border: KeywordAuthor<group1.BorderCss, T['border']>;
   /**
    * 设置逻辑块轴起始侧和结束侧的边框。（border-block）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block
    */
-  declare readonly borderBlock: group1.BorderBlockCss;
+  declare readonly borderBlock: KeywordAuthor<group1.BorderBlockCss, T['borderBlock']>;
   /**
    * 设置逻辑块轴两侧边框颜色。（border-block-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-color
    */
-  declare readonly borderBlockColor: group1.BorderBlockColorCss;
+  declare readonly borderBlockColor: KeywordAuthor<
+    group1.BorderBlockColorCss,
+    T['borderBlockColor']
+  >;
   /**
    * 设置逻辑块轴结束侧边框的宽度、线型和颜色。（border-block-end）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end
    */
-  declare readonly borderBlockEnd: group1.BorderBlockEndCss;
+  declare readonly borderBlockEnd: KeywordAuthor<group1.BorderBlockEndCss, T['borderBlockEnd']>;
   /**
    * 设置逻辑块轴结束侧的边框颜色。（border-block-end-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-color
    */
-  declare readonly borderBlockEndColor: group1.BorderBlockEndColorCss;
+  declare readonly borderBlockEndColor: KeywordAuthor<
+    group1.BorderBlockEndColorCss,
+    T['borderBlockEndColor']
+  >;
   /**
    * 设置逻辑块轴结束侧的边框线型。（border-block-end-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-style
    */
-  declare readonly borderBlockEndStyle: group1.BorderBlockEndStyleCss;
+  declare readonly borderBlockEndStyle: KeywordAuthor<
+    group1.BorderBlockEndStyleCss,
+    T['borderBlockEndStyle']
+  >;
   /**
    * 设置逻辑块轴结束侧的边框宽度。（border-block-end-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-width
    */
-  declare readonly borderBlockEndWidth: group1.BorderBlockEndWidthCss;
+  declare readonly borderBlockEndWidth: KeywordAuthor<
+    group1.BorderBlockEndWidthCss,
+    T['borderBlockEndWidth']
+  >;
   /**
    * 设置逻辑块轴起始侧边框的宽度、线型和颜色。（border-block-start）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start
    */
-  declare readonly borderBlockStart: group1.BorderBlockStartCss;
+  declare readonly borderBlockStart: KeywordAuthor<
+    group1.BorderBlockStartCss,
+    T['borderBlockStart']
+  >;
   /**
    * 设置逻辑块轴起始侧的边框颜色。（border-block-start-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-color
    */
-  declare readonly borderBlockStartColor: group1.BorderBlockStartColorCss;
+  declare readonly borderBlockStartColor: KeywordAuthor<
+    group1.BorderBlockStartColorCss,
+    T['borderBlockStartColor']
+  >;
   /**
    * 设置逻辑块轴起始侧的边框线型。（border-block-start-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-style
    */
-  declare readonly borderBlockStartStyle: group1.BorderBlockStartStyleCss;
+  declare readonly borderBlockStartStyle: KeywordAuthor<
+    group1.BorderBlockStartStyleCss,
+    T['borderBlockStartStyle']
+  >;
   /**
    * 设置逻辑块轴起始侧的边框宽度。（border-block-start-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-width
    */
-  declare readonly borderBlockStartWidth: group1.BorderBlockStartWidthCss;
+  declare readonly borderBlockStartWidth: KeywordAuthor<
+    group1.BorderBlockStartWidthCss,
+    T['borderBlockStartWidth']
+  >;
   /**
    * 设置逻辑块轴两侧的边框线型。（border-block-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-style
    */
-  declare readonly borderBlockStyle: group1.BorderBlockStyleCss;
+  declare readonly borderBlockStyle: KeywordAuthor<
+    group1.BorderBlockStyleCss,
+    T['borderBlockStyle']
+  >;
   /**
    * 设置逻辑块轴两侧的边框宽度。（border-block-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-width
    */
-  declare readonly borderBlockWidth: group1.BorderBlockWidthCss;
+  declare readonly borderBlockWidth: KeywordAuthor<
+    group1.BorderBlockWidthCss,
+    T['borderBlockWidth']
+  >;
   /**
    * 设置下边框的宽度、线型和颜色。（border-bottom）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom
    */
-  declare readonly borderBottom: group1.BorderBottomCss;
+  declare readonly borderBottom: KeywordAuthor<group1.BorderBottomCss, T['borderBottom']>;
   /**
    * 设置下边框颜色。（border-bottom-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-color
    */
-  declare readonly borderBottomColor: group1.BorderBottomColorCss;
+  declare readonly borderBottomColor: KeywordAuthor<
+    group1.BorderBottomColorCss,
+    T['borderBottomColor']
+  >;
   /**
    * 设置左下角边框的圆角半径。（border-bottom-left-radius）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
    */
-  declare readonly borderBottomLeftRadius: group1.BorderBottomLeftRadiusCss;
+  declare readonly borderBottomLeftRadius: KeywordAuthor<
+    group1.BorderBottomLeftRadiusCss,
+    T['borderBottomLeftRadius']
+  >;
   /**
    * 设置右下角边框的圆角半径。（border-bottom-right-radius）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
    */
-  declare readonly borderBottomRightRadius: group1.BorderBottomRightRadiusCss;
+  declare readonly borderBottomRightRadius: KeywordAuthor<
+    group1.BorderBottomRightRadiusCss,
+    T['borderBottomRightRadius']
+  >;
   /**
    * 设置下边框线型。（border-bottom-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-style
    */
-  declare readonly borderBottomStyle: group1.BorderBottomStyleCss;
+  declare readonly borderBottomStyle: KeywordAuthor<
+    group1.BorderBottomStyleCss,
+    T['borderBottomStyle']
+  >;
   /**
    * 设置下边框宽度。（border-bottom-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-width
    */
-  declare readonly borderBottomWidth: group1.BorderBottomWidthCss;
+  declare readonly borderBottomWidth: KeywordAuthor<
+    group1.BorderBottomWidthCss,
+    T['borderBottomWidth']
+  >;
   /**
    * 设置表格相邻单元格边框合并还是分离。（border-collapse）
    *
    * CSS 初始值：`separate`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-collapse
    */
-  declare readonly borderCollapse: group1.BorderCollapseCss;
+  declare readonly borderCollapse: KeywordAuthor<group1.BorderCollapseCss, T['borderCollapse']>;
   /**
    * 设置四边边框颜色，支持按上、右、下、左顺序简写。（border-color）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-color
    */
-  declare readonly borderColor: group1.BorderColorCss;
+  declare readonly borderColor: KeywordAuthor<group1.BorderColorCss, T['borderColor']>;
   /**
    * 设置逻辑块轴结束侧与行内轴结束侧相交角的圆角。（border-end-end-radius）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
    */
-  declare readonly borderEndEndRadius: group1.BorderEndEndRadiusCss;
+  declare readonly borderEndEndRadius: KeywordAuthor<
+    group1.BorderEndEndRadiusCss,
+    T['borderEndEndRadius']
+  >;
   /**
    * 设置逻辑块轴结束侧与行内轴起始侧相交角的圆角。（border-end-start-radius）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
-  declare readonly borderEndStartRadius: group1.BorderEndStartRadiusCss;
+  declare readonly borderEndStartRadius: KeywordAuthor<
+    group1.BorderEndStartRadiusCss,
+    T['borderEndStartRadius']
+  >;
   /**
    * 设置用作边框的图像及其切片、宽度、外扩和重复方式。（border-image）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image
    */
-  declare readonly borderImage: group1.BorderImageCss;
+  declare readonly borderImage: KeywordAuthor<group1.BorderImageCss, T['borderImage']>;
   /**
    * 设置边框图像超出边框盒的距离。（border-image-outset）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-outset
    */
-  declare readonly borderImageOutset: group1.BorderImageOutsetCss;
+  declare readonly borderImageOutset: KeywordAuthor<
+    group1.BorderImageOutsetCss,
+    T['borderImageOutset']
+  >;
   /**
    * 设置边框图像切片沿边框的重复或拉伸方式。（border-image-repeat）
    *
    * CSS 初始值：`stretch`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-repeat
    */
-  declare readonly borderImageRepeat: group1.BorderImageRepeatCss;
+  declare readonly borderImageRepeat: KeywordAuthor<
+    group1.BorderImageRepeatCss,
+    T['borderImageRepeat']
+  >;
   /**
    * 设置边框图像的切片位置及是否填充中间区域。（border-image-slice）
    *
    * CSS 初始值：`100%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-slice
    */
-  declare readonly borderImageSlice: group1.BorderImageSliceCss;
+  declare readonly borderImageSlice: KeywordAuthor<
+    group1.BorderImageSliceCss,
+    T['borderImageSlice']
+  >;
   /**
    * 指定边框使用的图像或渐变。（border-image-source）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-source
    */
-  declare readonly borderImageSource: group1.BorderImageSourceCss;
+  declare readonly borderImageSource: KeywordAuthor<
+    group1.BorderImageSourceCss,
+    T['borderImageSource']
+  >;
   /**
    * 设置边框图像各边的绘制宽度。（border-image-width）
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-width
    */
-  declare readonly borderImageWidth: group1.BorderImageWidthCss;
+  declare readonly borderImageWidth: KeywordAuthor<
+    group1.BorderImageWidthCss,
+    T['borderImageWidth']
+  >;
   /**
    * 设置逻辑行内轴起始侧和结束侧的边框。（border-inline）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline
    */
-  declare readonly borderInline: group1.BorderInlineCss;
+  declare readonly borderInline: KeywordAuthor<group1.BorderInlineCss, T['borderInline']>;
   /**
    * 设置逻辑行内轴两侧边框颜色。（border-inline-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-color
    */
-  declare readonly borderInlineColor: group1.BorderInlineColorCss;
+  declare readonly borderInlineColor: KeywordAuthor<
+    group1.BorderInlineColorCss,
+    T['borderInlineColor']
+  >;
   /**
    * 设置逻辑行内轴结束侧边框的宽度、线型和颜色。（border-inline-end）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end
    */
-  declare readonly borderInlineEnd: group1.BorderInlineEndCss;
+  declare readonly borderInlineEnd: KeywordAuthor<group1.BorderInlineEndCss, T['borderInlineEnd']>;
   /**
    * 设置逻辑行内轴结束侧边框颜色。（border-inline-end-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-color
    */
-  declare readonly borderInlineEndColor: group1.BorderInlineEndColorCss;
+  declare readonly borderInlineEndColor: KeywordAuthor<
+    group1.BorderInlineEndColorCss,
+    T['borderInlineEndColor']
+  >;
   /**
    * 设置逻辑行内轴结束侧边框线型。（border-inline-end-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-style
    */
-  declare readonly borderInlineEndStyle: group1.BorderInlineEndStyleCss;
+  declare readonly borderInlineEndStyle: KeywordAuthor<
+    group1.BorderInlineEndStyleCss,
+    T['borderInlineEndStyle']
+  >;
   /**
    * 设置逻辑行内轴结束侧边框宽度。（border-inline-end-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
    */
-  declare readonly borderInlineEndWidth: group1.BorderInlineEndWidthCss;
+  declare readonly borderInlineEndWidth: KeywordAuthor<
+    group1.BorderInlineEndWidthCss,
+    T['borderInlineEndWidth']
+  >;
   /**
    * 设置逻辑行内轴起始侧边框的宽度、线型和颜色。（border-inline-start）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start
    */
-  declare readonly borderInlineStart: group1.BorderInlineStartCss;
+  declare readonly borderInlineStart: KeywordAuthor<
+    group1.BorderInlineStartCss,
+    T['borderInlineStart']
+  >;
   /**
    * 设置逻辑行内轴起始侧边框颜色。（border-inline-start-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-color
    */
-  declare readonly borderInlineStartColor: group1.BorderInlineStartColorCss;
+  declare readonly borderInlineStartColor: KeywordAuthor<
+    group1.BorderInlineStartColorCss,
+    T['borderInlineStartColor']
+  >;
   /**
    * 设置逻辑行内轴起始侧边框线型。（border-inline-start-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-style
    */
-  declare readonly borderInlineStartStyle: group1.BorderInlineStartStyleCss;
+  declare readonly borderInlineStartStyle: KeywordAuthor<
+    group1.BorderInlineStartStyleCss,
+    T['borderInlineStartStyle']
+  >;
   /**
    * 设置逻辑行内轴起始侧边框宽度。（border-inline-start-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
    */
-  declare readonly borderInlineStartWidth: group1.BorderInlineStartWidthCss;
+  declare readonly borderInlineStartWidth: KeywordAuthor<
+    group1.BorderInlineStartWidthCss,
+    T['borderInlineStartWidth']
+  >;
   /**
    * 设置逻辑行内轴两侧边框线型。（border-inline-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-style
    */
-  declare readonly borderInlineStyle: group1.BorderInlineStyleCss;
+  declare readonly borderInlineStyle: KeywordAuthor<
+    group1.BorderInlineStyleCss,
+    T['borderInlineStyle']
+  >;
   /**
    * 设置逻辑行内轴两侧边框宽度。（border-inline-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-width
    */
-  declare readonly borderInlineWidth: group1.BorderInlineWidthCss;
+  declare readonly borderInlineWidth: KeywordAuthor<
+    group1.BorderInlineWidthCss,
+    T['borderInlineWidth']
+  >;
   /**
    * 设置左边框的宽度、线型和颜色。（border-left）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left
    */
-  declare readonly borderLeft: group1.BorderLeftCss;
+  declare readonly borderLeft: KeywordAuthor<group1.BorderLeftCss, T['borderLeft']>;
   /**
    * 设置左边框颜色。（border-left-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-color
    */
-  declare readonly borderLeftColor: group1.BorderLeftColorCss;
+  declare readonly borderLeftColor: KeywordAuthor<group1.BorderLeftColorCss, T['borderLeftColor']>;
   /**
    * 设置左边框线型。（border-left-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-style
    */
-  declare readonly borderLeftStyle: group1.BorderLeftStyleCss;
+  declare readonly borderLeftStyle: KeywordAuthor<group1.BorderLeftStyleCss, T['borderLeftStyle']>;
   /**
    * 设置左边框宽度。（border-left-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-width
    */
-  declare readonly borderLeftWidth: group1.BorderLeftWidthCss;
+  declare readonly borderLeftWidth: KeywordAuthor<group1.BorderLeftWidthCss, T['borderLeftWidth']>;
   /**
    * 设置四个角的圆角半径；斜杠语法可分别指定水平和垂直半径。（border-radius）
    *
@@ -787,118 +972,142 @@ export class Css {
    * s.borderRadius.px(8)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-radius
    */
-  declare readonly borderRadius: group1.BorderRadiusCss;
+  declare readonly borderRadius: KeywordAuthor<group1.BorderRadiusCss, T['borderRadius']>;
   /**
    * 设置右边框的宽度、线型和颜色。（border-right）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
    */
-  declare readonly borderRight: group1.BorderRightCss;
+  declare readonly borderRight: KeywordAuthor<group1.BorderRightCss, T['borderRight']>;
   /**
    * 设置右边框颜色。（border-right-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-color
    */
-  declare readonly borderRightColor: group1.BorderRightColorCss;
+  declare readonly borderRightColor: KeywordAuthor<
+    group1.BorderRightColorCss,
+    T['borderRightColor']
+  >;
   /**
    * 设置右边框线型。（border-right-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-style
    */
-  declare readonly borderRightStyle: group1.BorderRightStyleCss;
+  declare readonly borderRightStyle: KeywordAuthor<
+    group1.BorderRightStyleCss,
+    T['borderRightStyle']
+  >;
   /**
    * 设置右边框宽度。（border-right-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-width
    */
-  declare readonly borderRightWidth: group1.BorderRightWidthCss;
+  declare readonly borderRightWidth: KeywordAuthor<
+    group1.BorderRightWidthCss,
+    T['borderRightWidth']
+  >;
   /**
    * 设置分离边框模型下表格单元格之间的水平和垂直间距。（border-spacing）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-spacing
    */
-  declare readonly borderSpacing: group1.BorderSpacingCss;
+  declare readonly borderSpacing: KeywordAuthor<group1.BorderSpacingCss, T['borderSpacing']>;
   /**
    * 设置逻辑块轴起始侧与行内轴结束侧相交角的圆角。（border-start-end-radius）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
    */
-  declare readonly borderStartEndRadius: group1.BorderStartEndRadiusCss;
+  declare readonly borderStartEndRadius: KeywordAuthor<
+    group1.BorderStartEndRadiusCss,
+    T['borderStartEndRadius']
+  >;
   /**
    * 设置逻辑块轴起始侧与行内轴起始侧相交角的圆角。（border-start-start-radius）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
-  declare readonly borderStartStartRadius: group1.BorderStartStartRadiusCss;
+  declare readonly borderStartStartRadius: KeywordAuthor<
+    group1.BorderStartStartRadiusCss,
+    T['borderStartStartRadius']
+  >;
   /**
    * 设置四边边框线型。（border-style）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-style
    */
-  declare readonly borderStyle: group1.BorderStyleCss;
+  declare readonly borderStyle: KeywordAuthor<group1.BorderStyleCss, T['borderStyle']>;
   /**
    * 设置上边框的宽度、线型和颜色。（border-top）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
    */
-  declare readonly borderTop: group1.BorderTopCss;
+  declare readonly borderTop: KeywordAuthor<group1.BorderTopCss, T['borderTop']>;
   /**
    * 设置上边框颜色。（border-top-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-color
    */
-  declare readonly borderTopColor: group1.BorderTopColorCss;
+  declare readonly borderTopColor: KeywordAuthor<group1.BorderTopColorCss, T['borderTopColor']>;
   /**
    * 设置左上角边框的圆角半径。（border-top-left-radius）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    */
-  declare readonly borderTopLeftRadius: group1.BorderTopLeftRadiusCss;
+  declare readonly borderTopLeftRadius: KeywordAuthor<
+    group1.BorderTopLeftRadiusCss,
+    T['borderTopLeftRadius']
+  >;
   /**
    * 设置右上角边框的圆角半径。（border-top-right-radius）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
-  declare readonly borderTopRightRadius: group1.BorderTopRightRadiusCss;
+  declare readonly borderTopRightRadius: KeywordAuthor<
+    group1.BorderTopRightRadiusCss,
+    T['borderTopRightRadius']
+  >;
   /**
    * 设置上边框线型。（border-top-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-style
    */
-  declare readonly borderTopStyle: group1.BorderTopStyleCss;
+  declare readonly borderTopStyle: KeywordAuthor<group1.BorderTopStyleCss, T['borderTopStyle']>;
   /**
    * 设置上边框宽度。（border-top-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-width
    */
-  declare readonly borderTopWidth: group1.BorderTopWidthCss;
+  declare readonly borderTopWidth: KeywordAuthor<group1.BorderTopWidthCss, T['borderTopWidth']>;
   /**
    * 设置四边边框宽度；可见边框通常还需要非 none 的线型。（border-width）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-width
    */
-  declare readonly borderWidth: group1.BorderWidthCss;
+  declare readonly borderWidth: KeywordAuthor<group1.BorderWidthCss, T['borderWidth']>;
   /**
    * 设置定位元素相对于其定位参照的下侧偏移。（bottom）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/bottom
    */
-  declare readonly bottom: group1.BottomCss;
+  declare readonly bottom: KeywordAuthor<group1.BottomCss, T['bottom']>;
   /**
    * 设置盒子被分成多行、多栏或多页时装饰如何绘制。（box-decoration-break）
    *
    * CSS 初始值：`slice`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-decoration-break
    */
-  declare readonly boxDecorationBreak: group1.BoxDecorationBreakCss;
+  declare readonly boxDecorationBreak: KeywordAuthor<
+    group1.BoxDecorationBreakCss,
+    T['boxDecorationBreak']
+  >;
   /**
    * 设置盒子的外部或内部阴影，可叠加多层。（box-shadow）
    *
@@ -911,7 +1120,7 @@ export class Css {
    * s.boxShadow.raw('0 2px 8px rgb(0 0 0 / 0.15)')
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-shadow
    */
-  declare readonly boxShadow: group1.BoxShadowCss;
+  declare readonly boxShadow: KeywordAuthor<group1.BoxShadowCss, T['boxShadow']>;
   /**
    * 决定 width、height 等尺寸是否包含内边距和边框。（box-sizing）
    *
@@ -926,80 +1135,80 @@ export class Css {
    * css(s.boxSizing.borderBox, s.width.rem(20), s.padding.rem(1))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-sizing
    */
-  declare readonly boxSizing: group1.BoxSizingCss;
+  declare readonly boxSizing: KeywordAuthor<group1.BoxSizingCss, T['boxSizing']>;
   /**
    * 设置元素之后的分页、分栏或区域分片行为。（break-after）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-after
    */
-  declare readonly breakAfter: group1.BreakAfterCss;
+  declare readonly breakAfter: KeywordAuthor<group1.BreakAfterCss, T['breakAfter']>;
   /**
    * 设置元素之前的分页、分栏或区域分片行为。（break-before）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-before
    */
-  declare readonly breakBefore: group1.BreakBeforeCss;
+  declare readonly breakBefore: KeywordAuthor<group1.BreakBeforeCss, T['breakBefore']>;
   /**
    * 设置元素内部是否允许分页、分栏或区域分片。（break-inside）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-inside
    */
-  declare readonly breakInside: group1.BreakInsideCss;
+  declare readonly breakInside: KeywordAuthor<group1.BreakInsideCss, T['breakInside']>;
   /**
    * 设置表格标题相对于表格的放置侧。（caption-side）
    *
    * CSS 初始值：`top`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caption-side
    */
-  declare readonly captionSide: group2.CaptionSideCss;
+  declare readonly captionSide: KeywordAuthor<group2.CaptionSideCss, T['captionSide']>;
   /**
    * 集中设置文本插入光标的颜色和形状。（caret）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret
    */
-  declare readonly caret: group2.CaretCss;
+  declare readonly caret: KeywordAuthor<group2.CaretCss, T['caret']>;
   /**
    * 设置可编辑内容中的文本插入光标颜色。（caret-color）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-color
    */
-  declare readonly caretColor: group2.CaretColorCss;
+  declare readonly caretColor: KeywordAuthor<group2.CaretColorCss, T['caretColor']>;
   /**
    * 设置文本插入光标的形状。（caret-shape）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/caret-shape
    */
-  declare readonly caretShape: group2.CaretShapeCss;
+  declare readonly caretShape: KeywordAuthor<group2.CaretShapeCss, T['caretShape']>;
   /**
    * 要求元素避让指定侧的前置浮动元素。（clear）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clear
    */
-  declare readonly clear: group2.ClearCss;
+  declare readonly clear: KeywordAuthor<group2.ClearCss, T['clear']>;
   /**
    * 使用旧式矩形裁剪绝对定位元素；新代码优先考虑 clip-path。（clip）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip
    */
-  declare readonly clip: group2.ClipCss;
+  declare readonly clip: KeywordAuthor<group2.ClipCss, T['clip']>;
   /**
    * 通过基本形状、路径或引用裁剪元素的可见区域。（clip-path）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-path
    */
-  declare readonly clipPath: group2.ClipPathCss;
+  declare readonly clipPath: KeywordAuthor<group2.ClipPathCss, T['clipPath']>;
   /**
    * 设置 SVG 裁剪路径判断内部区域所用的填充规则。（clip-rule）
    *
    * CSS 初始值：`nonzero`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/clip-rule
    */
-  declare readonly clipRule: group2.ClipRuleCss;
+  declare readonly clipRule: KeywordAuthor<group2.ClipRuleCss, T['clipRule']>;
   /**
    * 设置文字前景色，同时作为 currentColor 的来源。（color）
    *
@@ -1012,31 +1221,37 @@ export class Css {
    * s.color.oklch(0.7, 0.15, 250) // color:oklch(0.7 0.15 250);
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color
    */
-  declare readonly color: group2.ColorCss;
+  declare readonly color: KeywordAuthor<group2.ColorCss, T['color']>;
   /**
    * 控制输出设备对颜色的自动调整；这是 print-color-adjust 的旧名称。（color-adjust）
    *
    * CSS 初始值：`economy`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
    */
-  declare readonly colorAdjust: group2.ColorAdjustCss;
+  declare readonly colorAdjust: KeywordAuthor<group2.ColorAdjustCss, T['colorAdjust']>;
   /**
    * 设置 SVG 图形颜色插值所用的色彩空间。（color-interpolation）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-interpolation
    */
-  declare readonly colorInterpolation: group2.ColorInterpolationCss;
+  declare readonly colorInterpolation: KeywordAuthor<
+    group2.ColorInterpolationCss,
+    T['colorInterpolation']
+  >;
   /**
    * 设置 SVG 滤镜效果进行颜色计算时所用的色彩空间。（color-interpolation-filters）
    *
    * CSS 初始值：`linearRGB`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-interpolation-filters
    */
-  declare readonly colorInterpolationFilters: group2.ColorInterpolationFiltersCss;
+  declare readonly colorInterpolationFilters: KeywordAuthor<
+    group2.ColorInterpolationFiltersCss,
+    T['colorInterpolationFilters']
+  >;
   /**
    * 向 SVG 渲染器提供颜色绘制质量与速度之间的偏好。（color-rendering）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-rendering
    */
-  declare readonly colorRendering: group2.ColorRenderingCss;
+  declare readonly colorRendering: KeywordAuthor<group2.ColorRenderingCss, T['colorRendering']>;
   /**
    * 声明元素支持的配色方案，影响原生控件、滚动条等浏览器绘制内容。（color-scheme）
    *
@@ -1045,73 +1260,73 @@ export class Css {
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/color-scheme
    */
-  declare readonly colorScheme: group2.ColorSchemeCss;
+  declare readonly colorScheme: KeywordAuthor<group2.ColorSchemeCss, T['colorScheme']>;
   /**
    * 设置多栏布局的目标栏数。（column-count）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-count
    */
-  declare readonly columnCount: group2.ColumnCountCss;
+  declare readonly columnCount: KeywordAuthor<group2.ColumnCountCss, T['columnCount']>;
   /**
    * 设置多栏内容顺序填充还是尽量均衡栏高。（column-fill）
    *
    * CSS 初始值：`balance`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-fill
    */
-  declare readonly columnFill: group2.ColumnFillCss;
+  declare readonly columnFill: KeywordAuthor<group2.ColumnFillCss, T['columnFill']>;
   /**
    * 设置布局中相邻列之间的间距。（column-gap）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-gap
    */
-  declare readonly columnGap: group2.ColumnGapCss;
+  declare readonly columnGap: KeywordAuthor<group2.ColumnGapCss, T['columnGap']>;
   /**
    * 设置多栏之间分隔线的宽度、线型和颜色。（column-rule）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule
    */
-  declare readonly columnRule: group2.ColumnRuleCss;
+  declare readonly columnRule: KeywordAuthor<group2.ColumnRuleCss, T['columnRule']>;
   /**
    * 设置多栏分隔线的颜色。（column-rule-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-color
    */
-  declare readonly columnRuleColor: group2.ColumnRuleColorCss;
+  declare readonly columnRuleColor: KeywordAuthor<group2.ColumnRuleColorCss, T['columnRuleColor']>;
   /**
    * 设置多栏分隔线的线型。（column-rule-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-style
    */
-  declare readonly columnRuleStyle: group2.ColumnRuleStyleCss;
+  declare readonly columnRuleStyle: KeywordAuthor<group2.ColumnRuleStyleCss, T['columnRuleStyle']>;
   /**
    * 设置多栏分隔线的宽度。（column-rule-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-width
    */
-  declare readonly columnRuleWidth: group2.ColumnRuleWidthCss;
+  declare readonly columnRuleWidth: KeywordAuthor<group2.ColumnRuleWidthCss, T['columnRuleWidth']>;
   /**
    * 设置多栏布局中的元素是否跨越所有栏。（column-span）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-span
    */
-  declare readonly columnSpan: group2.ColumnSpanCss;
+  declare readonly columnSpan: KeywordAuthor<group2.ColumnSpanCss, T['columnSpan']>;
   /**
    * 设置多栏布局的首选栏宽，实际栏宽由容器空间决定。（column-width）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-width
    */
-  declare readonly columnWidth: group2.ColumnWidthCss;
+  declare readonly columnWidth: KeywordAuthor<group2.ColumnWidthCss, T['columnWidth']>;
   /**
    * 同时设置多栏布局的首选栏宽和目标栏数。（columns）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/columns
    */
-  declare readonly columns: group2.ColumnsCss;
+  declare readonly columns: KeywordAuthor<group2.ColumnsCss, T['columns']>;
   /**
    * 声明尺寸、布局、绘制或样式隔离，限制子树对外部的影响。（contain）
    *
@@ -1131,52 +1346,67 @@ export class Css {
    * s.contain.content
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain
    */
-  declare readonly contain: group2.ContainCss;
+  declare readonly contain: KeywordAuthor<group2.ContainCss, T['contain']>;
   /**
    * 设置块轴尺寸隔离或跳过内容渲染时使用的替代内部尺寸。（contain-intrinsic-block-size）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-block-size
    */
-  declare readonly containIntrinsicBlockSize: group2.ContainIntrinsicBlockSizeCss;
+  declare readonly containIntrinsicBlockSize: KeywordAuthor<
+    group2.ContainIntrinsicBlockSizeCss,
+    T['containIntrinsicBlockSize']
+  >;
   /**
    * 设置高度隔离或跳过内容渲染时使用的替代内部高度。（contain-intrinsic-height）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-height
    */
-  declare readonly containIntrinsicHeight: group2.ContainIntrinsicHeightCss;
+  declare readonly containIntrinsicHeight: KeywordAuthor<
+    group2.ContainIntrinsicHeightCss,
+    T['containIntrinsicHeight']
+  >;
   /**
    * 设置行内轴尺寸隔离或跳过内容渲染时使用的替代内部尺寸。（contain-intrinsic-inline-size）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-inline-size
    */
-  declare readonly containIntrinsicInlineSize: group2.ContainIntrinsicInlineSizeCss;
+  declare readonly containIntrinsicInlineSize: KeywordAuthor<
+    group2.ContainIntrinsicInlineSizeCss,
+    T['containIntrinsicInlineSize']
+  >;
   /**
    * 集中设置尺寸隔离时使用的替代内部宽高。（contain-intrinsic-size）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-size
    */
-  declare readonly containIntrinsicSize: group2.ContainIntrinsicSizeCss;
+  declare readonly containIntrinsicSize: KeywordAuthor<
+    group2.ContainIntrinsicSizeCss,
+    T['containIntrinsicSize']
+  >;
   /**
    * 设置宽度隔离或跳过内容渲染时使用的替代内部宽度。（contain-intrinsic-width）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/contain-intrinsic-width
    */
-  declare readonly containIntrinsicWidth: group2.ContainIntrinsicWidthCss;
+  declare readonly containIntrinsicWidth: KeywordAuthor<
+    group2.ContainIntrinsicWidthCss,
+    T['containIntrinsicWidth']
+  >;
   /**
    * 同时声明查询容器的名称和类型。（container）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container
    */
-  declare readonly container: group2.ContainerCss;
+  declare readonly container: KeywordAuthor<group2.ContainerCss, T['container']>;
   /**
    * 为查询容器命名，供 @container 条件规则选择。（container-name）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-name
    */
-  declare readonly containerName: group2.ContainerNameCss;
+  declare readonly containerName: KeywordAuthor<group2.ContainerNameCss, T['containerName']>;
   /**
    * 建立指定类型的查询容器，并施加所需的隔离行为。（container-type）
    *
@@ -1194,14 +1424,14 @@ export class Css {
    * s.containerType.inlineSize
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-type
    */
-  declare readonly containerType: group2.ContainerTypeCss;
+  declare readonly containerType: KeywordAuthor<group2.ContainerTypeCss, T['containerType']>;
   /**
    * 设置生成内容、替换内容或伪元素的内容。（content）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content
    */
-  declare readonly content: group2.ContentCss;
+  declare readonly content: KeywordAuthor<group2.ContentCss, T['content']>;
   /**
    * 控制是否渲染元素内容，并允许浏览器跳过暂时不可见的子树。（content-visibility）
    *
@@ -1219,63 +1449,69 @@ export class Css {
    * s.contentVisibility.auto
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/content-visibility
    */
-  declare readonly contentVisibility: group2.ContentVisibilityCss;
+  declare readonly contentVisibility: KeywordAuthor<
+    group2.ContentVisibilityCss,
+    T['contentVisibility']
+  >;
   /**
    * 增加或减少指定 CSS 计数器的值。（counter-increment）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-increment
    */
-  declare readonly counterIncrement: group2.CounterIncrementCss;
+  declare readonly counterIncrement: KeywordAuthor<
+    group2.CounterIncrementCss,
+    T['counterIncrement']
+  >;
   /**
    * 创建或重置 CSS 计数器。（counter-reset）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-reset
    */
-  declare readonly counterReset: group2.CounterResetCss;
+  declare readonly counterReset: KeywordAuthor<group2.CounterResetCss, T['counterReset']>;
   /**
    * 设置已有 CSS 计数器的值，必要时创建计数器。（counter-set）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-set
    */
-  declare readonly counterSet: group2.CounterSetCss;
+  declare readonly counterSet: KeywordAuthor<group2.CounterSetCss, T['counterSet']>;
   /**
    * 设置指针位于元素上方时显示的光标。（cursor）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cursor
    */
-  declare readonly cursor: group2.CursorCss;
+  declare readonly cursor: KeywordAuthor<group2.CursorCss, T['cursor']>;
   /**
    * 设置 SVG 圆或椭圆中心的横坐标。（cx）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cx
    */
-  declare readonly cx: group2.CxCss;
+  declare readonly cx: KeywordAuthor<group2.CxCss, T['cx']>;
   /**
    * 设置 SVG 圆或椭圆中心的纵坐标。（cy）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/cy
    */
-  declare readonly cy: group2.CyCss;
+  declare readonly cy: KeywordAuthor<group2.CyCss, T['cy']>;
   /**
    * 设置 SVG path 元素的路径数据。（d）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/d
    */
-  declare readonly d: group2.DCss;
+  declare readonly d: KeywordAuthor<group2.DCss, T['d']>;
   /**
    * 设置文本基本方向，参与双向文本及部分布局计算。（direction）
    *
    * CSS 初始值：`ltr`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/direction
    */
-  declare readonly direction: group2.DirectionCss;
+  declare readonly direction: KeywordAuthor<group2.DirectionCss, T['direction']>;
   /**
    * 决定元素是否生成布局盒子，以及元素自身和内部内容如何排版。（display）
    *
@@ -1296,56 +1532,59 @@ export class Css {
    * css(s.display.flex, s.alignItems.center, s.gap.rem(0.5))
    * @see https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/display
    */
-  declare readonly display: group2.DisplayCss;
+  declare readonly display: KeywordAuthor<group2.DisplayCss, T['display']>;
   /**
    * 选择 SVG 文本布局的主导基线及基线表。（dominant-baseline）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/dominant-baseline
    */
-  declare readonly dominantBaseline: group2.DominantBaselineCss;
+  declare readonly dominantBaseline: KeywordAuthor<
+    group2.DominantBaselineCss,
+    T['dominantBaseline']
+  >;
   /**
    * 控制分离边框表格中空单元格的边框和背景是否绘制。（empty-cells）
    *
    * CSS 初始值：`show`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/empty-cells
    */
-  declare readonly emptyCells: group2.EmptyCellsCss;
+  declare readonly emptyCells: KeywordAuthor<group2.EmptyCellsCss, T['emptyCells']>;
   /**
    * 控制表单控件采用固定默认尺寸还是根据内容调整尺寸。（field-sizing）
    *
    * CSS 初始值：`fixed`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/field-sizing
    */
-  declare readonly fieldSizing: group2.FieldSizingCss;
+  declare readonly fieldSizing: KeywordAuthor<group2.FieldSizingCss, T['fieldSizing']>;
   /**
    * 设置 SVG 图形内部的填充绘制方式。（fill）
    *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill
    */
-  declare readonly fill: group2.FillCss;
+  declare readonly fill: KeywordAuthor<group2.FillCss, T['fill']>;
   /**
    * 设置 SVG 填充的不透明度，不影响描边。（fill-opacity）
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-opacity
    */
-  declare readonly fillOpacity: group2.FillOpacityCss;
+  declare readonly fillOpacity: KeywordAuthor<group2.FillOpacityCss, T['fillOpacity']>;
   /**
    * 设置复杂 SVG 路径的内部区域判定规则。（fill-rule）
    *
    * CSS 初始值：`nonzero`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/fill-rule
    */
-  declare readonly fillRule: group2.FillRuleCss;
+  declare readonly fillRule: KeywordAuthor<group2.FillRuleCss, T['fillRule']>;
   /**
    * 对元素的最终图像应用模糊、亮度等滤镜。（filter）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/filter
    */
-  declare readonly filter: group2.FilterCss;
+  declare readonly filter: KeywordAuthor<group2.FilterCss, T['filter']>;
   /**
    * 集中设置弹性项目的增长系数、收缩系数和基础尺寸。（flex）
    *
@@ -1362,7 +1601,7 @@ export class Css {
    * s.flex.none
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex
    */
-  declare readonly flex: group2.FlexCss;
+  declare readonly flex: KeywordAuthor<group2.FlexCss, T['flex']>;
   /**
    * 设置弹性项目分配剩余空间之前的主轴基础尺寸。（flex-basis）
    *
@@ -1379,7 +1618,7 @@ export class Css {
    * s.flexBasis.rem(16)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-basis
    */
-  declare readonly flexBasis: group2.FlexBasisCss;
+  declare readonly flexBasis: KeywordAuthor<group2.FlexBasisCss, T['flexBasis']>;
   /**
    * 设置弹性容器的主轴方向及项目排列方向。（flex-direction）
    *
@@ -1396,12 +1635,12 @@ export class Css {
    * css(s.display.flex, s.flexDirection.column, s.gap.rem(1))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-direction
    */
-  declare readonly flexDirection: group2.FlexDirectionCss;
+  declare readonly flexDirection: KeywordAuthor<group2.FlexDirectionCss, T['flexDirection']>;
   /**
    * 同时设置弹性布局的主轴方向和换行方式。（flex-flow）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-flow
    */
-  declare readonly flexFlow: group2.FlexFlowCss;
+  declare readonly flexFlow: KeywordAuthor<group2.FlexFlowCss, T['flexFlow']>;
   /**
    * 设置弹性项目分配正剩余空间时的增长系数。（flex-grow）
    *
@@ -1414,7 +1653,7 @@ export class Css {
    * s.flexGrow.raw(1)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-grow
    */
-  declare readonly flexGrow: group2.FlexGrowCss;
+  declare readonly flexGrow: KeywordAuthor<group2.FlexGrowCss, T['flexGrow']>;
   /**
    * 设置弹性项目空间不足时的收缩系数。（flex-shrink）
    *
@@ -1427,7 +1666,7 @@ export class Css {
    * s.flexShrink.raw(0)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-shrink
    */
-  declare readonly flexShrink: group2.FlexShrinkCss;
+  declare readonly flexShrink: KeywordAuthor<group2.FlexShrinkCss, T['flexShrink']>;
   /**
    * 设置弹性项目是否换行，以及多行的排列方向。（flex-wrap）
    *
@@ -1443,73 +1682,82 @@ export class Css {
    * css(s.display.flex, s.flexWrap.wrap, s.gap.rem(0.5))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flex-wrap
    */
-  declare readonly flexWrap: group2.FlexWrapCss;
+  declare readonly flexWrap: KeywordAuthor<group2.FlexWrapCss, T['flexWrap']>;
   /**
    * 将元素浮动到指定侧，使相邻行内内容围绕它排列。（float）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/float
    */
-  declare readonly float: group2.FloatCss;
+  declare readonly float: KeywordAuthor<group2.FloatCss, T['float']>;
   /**
    * 设置 SVG feFlood 或相关滤镜的洪泛颜色。（flood-color）
    *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-color
    */
-  declare readonly floodColor: group2.FloodColorCss;
+  declare readonly floodColor: KeywordAuthor<group2.FloodColorCss, T['floodColor']>;
   /**
    * 设置 SVG 洪泛滤镜颜色的不透明度。（flood-opacity）
    *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/flood-opacity
    */
-  declare readonly floodOpacity: group2.FloodOpacityCss;
+  declare readonly floodOpacity: KeywordAuthor<group2.FloodOpacityCss, T['floodOpacity']>;
   /**
    * 集中设置字体样式、粗细、大小、行高和字体族等信息。（font）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font
    */
-  declare readonly font: group2.FontCss;
+  declare readonly font: KeywordAuthor<group2.FontCss, T['font']>;
   /**
    * 设置按优先级排列的字体族及通用字体回退。（font-family）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-family
    */
-  declare readonly fontFamily: group2.FontFamilyCss;
+  declare readonly fontFamily: KeywordAuthor<group2.FontFamilyCss, T['fontFamily']>;
   /**
    * 通过 OpenType 特性标签控制字体的底层排版功能。（font-feature-settings）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-feature-settings
    */
-  declare readonly fontFeatureSettings: group2.FontFeatureSettingsCss;
+  declare readonly fontFeatureSettings: KeywordAuthor<
+    group2.FontFeatureSettingsCss,
+    T['fontFeatureSettings']
+  >;
   /**
    * 设置是否应用字体提供的字偶间距调整。（font-kerning）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-kerning
    */
-  declare readonly fontKerning: group2.FontKerningCss;
+  declare readonly fontKerning: KeywordAuthor<group2.FontKerningCss, T['fontKerning']>;
   /**
    * 覆盖字体排版使用的语言系统标签，不改变文本实际语言。（font-language-override）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-language-override
    */
-  declare readonly fontLanguageOverride: group2.FontLanguageOverrideCss;
+  declare readonly fontLanguageOverride: KeywordAuthor<
+    group2.FontLanguageOverrideCss,
+    T['fontLanguageOverride']
+  >;
   /**
    * 控制支持光学尺寸轴的字体是否按字号优化字形。（font-optical-sizing）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-optical-sizing
    */
-  declare readonly fontOpticalSizing: group2.FontOpticalSizingCss;
+  declare readonly fontOpticalSizing: KeywordAuthor<
+    group2.FontOpticalSizingCss,
+    T['fontOpticalSizing']
+  >;
   /**
    * 选择或覆盖彩色字体使用的调色板。（font-palette）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-palette
    */
-  declare readonly fontPalette: group2.FontPaletteCss;
+  declare readonly fontPalette: KeywordAuthor<group2.FontPaletteCss, T['fontPalette']>;
   /**
    * 设置字体大小，也影响 em 等相对单位的计算。（font-size）
    *
@@ -1522,131 +1770,164 @@ export class Css {
    * css(s.fontSize.rem(1), s.lineHeight.raw(1.5))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size
    */
-  declare readonly fontSize: group2.FontSizeCss;
+  declare readonly fontSize: KeywordAuthor<group2.FontSizeCss, T['fontSize']>;
   /**
    * 按字体特征尺寸调整字号，减少字体回退造成的视觉变化。（font-size-adjust）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-size-adjust
    */
-  declare readonly fontSizeAdjust: group2.FontSizeAdjustCss;
+  declare readonly fontSizeAdjust: KeywordAuthor<group2.FontSizeAdjustCss, T['fontSizeAdjust']>;
   /**
    * 控制字体平滑的非标准属性；使用前核对目标浏览器。（font-smooth）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-smooth
    */
-  declare readonly fontSmooth: group2.FontSmoothCss;
+  declare readonly fontSmooth: KeywordAuthor<group2.FontSmoothCss, T['fontSmooth']>;
   /**
    * 选择字体的宽窄字面；font-width 是其较新的名称。（font-stretch）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-stretch
    */
-  declare readonly fontStretch: group2.FontStretchCss;
+  declare readonly fontStretch: KeywordAuthor<group2.FontStretchCss, T['fontStretch']>;
   /**
    * 选择正常、斜体或倾斜字体样式。（font-style）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-style
    */
-  declare readonly fontStyle: group2.FontStyleCss;
+  declare readonly fontStyle: KeywordAuthor<group2.FontStyleCss, T['fontStyle']>;
   /**
    * 控制缺少真实字体字形时浏览器可否合成粗体、斜体等样式。（font-synthesis）
    *
    * CSS 初始值：`weight style small-caps position `（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis
    */
-  declare readonly fontSynthesis: group2.FontSynthesisCss;
+  declare readonly fontSynthesis: KeywordAuthor<group2.FontSynthesisCss, T['fontSynthesis']>;
   /**
    * 控制浏览器是否可以合成上标和下标字形。（font-synthesis-position）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-position
    */
-  declare readonly fontSynthesisPosition: group2.FontSynthesisPositionCss;
+  declare readonly fontSynthesisPosition: KeywordAuthor<
+    group2.FontSynthesisPositionCss,
+    T['fontSynthesisPosition']
+  >;
   /**
    * 控制浏览器是否可以合成小型大写字形。（font-synthesis-small-caps）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-small-caps
    */
-  declare readonly fontSynthesisSmallCaps: group2.FontSynthesisSmallCapsCss;
+  declare readonly fontSynthesisSmallCaps: KeywordAuthor<
+    group2.FontSynthesisSmallCapsCss,
+    T['fontSynthesisSmallCaps']
+  >;
   /**
    * 控制浏览器是否可以合成倾斜字体。（font-synthesis-style）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-style
    */
-  declare readonly fontSynthesisStyle: group2.FontSynthesisStyleCss;
+  declare readonly fontSynthesisStyle: KeywordAuthor<
+    group2.FontSynthesisStyleCss,
+    T['fontSynthesisStyle']
+  >;
   /**
    * 控制浏览器是否可以合成加粗字体。（font-synthesis-weight）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-synthesis-weight
    */
-  declare readonly fontSynthesisWeight: group2.FontSynthesisWeightCss;
+  declare readonly fontSynthesisWeight: KeywordAuthor<
+    group2.FontSynthesisWeightCss,
+    T['fontSynthesisWeight']
+  >;
   /**
    * 集中设置字体的连字、大小写、数字及其他变体。（font-variant）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant
    */
-  declare readonly fontVariant: group2.FontVariantCss;
+  declare readonly fontVariant: KeywordAuthor<group2.FontVariantCss, T['fontVariant']>;
   /**
    * 选择字体提供的替代字形。（font-variant-alternates）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-alternates
    */
-  declare readonly fontVariantAlternates: group2.FontVariantAlternatesCss;
+  declare readonly fontVariantAlternates: KeywordAuthor<
+    group2.FontVariantAlternatesCss,
+    T['fontVariantAlternates']
+  >;
   /**
    * 设置小型大写等大小写字形变体。（font-variant-caps）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-caps
    */
-  declare readonly fontVariantCaps: group2.FontVariantCapsCss;
+  declare readonly fontVariantCaps: KeywordAuthor<group2.FontVariantCapsCss, T['fontVariantCaps']>;
   /**
    * 设置东亚文字字形及宽度变体。（font-variant-east-asian）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-east-asian
    */
-  declare readonly fontVariantEastAsian: group2.FontVariantEastAsianCss;
+  declare readonly fontVariantEastAsian: KeywordAuthor<
+    group2.FontVariantEastAsianCss,
+    T['fontVariantEastAsian']
+  >;
   /**
    * 设置字符优先采用文本字形还是 emoji 字形。（font-variant-emoji）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-emoji
    */
-  declare readonly fontVariantEmoji: group2.FontVariantEmojiCss;
+  declare readonly fontVariantEmoji: KeywordAuthor<
+    group2.FontVariantEmojiCss,
+    T['fontVariantEmoji']
+  >;
   /**
    * 设置字体连字的启用方式。（font-variant-ligatures）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-ligatures
    */
-  declare readonly fontVariantLigatures: group2.FontVariantLigaturesCss;
+  declare readonly fontVariantLigatures: KeywordAuthor<
+    group2.FontVariantLigaturesCss,
+    T['fontVariantLigatures']
+  >;
   /**
    * 设置数字的等宽、比例、分数及其他排版变体。（font-variant-numeric）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-numeric
    */
-  declare readonly fontVariantNumeric: group2.FontVariantNumericCss;
+  declare readonly fontVariantNumeric: KeywordAuthor<
+    group2.FontVariantNumericCss,
+    T['fontVariantNumeric']
+  >;
   /**
    * 选择字体提供的上标或下标字形。（font-variant-position）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variant-position
    */
-  declare readonly fontVariantPosition: group2.FontVariantPositionCss;
+  declare readonly fontVariantPosition: KeywordAuthor<
+    group2.FontVariantPositionCss,
+    T['fontVariantPosition']
+  >;
   /**
    * 直接设置可变字体各个轴的数值。（font-variation-settings）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-variation-settings
    */
-  declare readonly fontVariationSettings: group2.FontVariationSettingsCss;
+  declare readonly fontVariationSettings: KeywordAuthor<
+    group2.FontVariationSettingsCss,
+    T['fontVariationSettings']
+  >;
   /**
    * 设置字体粗细，实际可用字重取决于字体。（font-weight）
    *
@@ -1665,21 +1946,24 @@ export class Css {
    * s.fontWeight.raw(600)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-weight
    */
-  declare readonly fontWeight: group2.FontWeightCss;
+  declare readonly fontWeight: KeywordAuthor<group2.FontWeightCss, T['fontWeight']>;
   /**
    * 选择字体的宽窄字面，不是通过变换拉伸元素。（font-width）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-width
    */
-  declare readonly fontWidth: group2.FontWidthCss;
+  declare readonly fontWidth: KeywordAuthor<group2.FontWidthCss, T['fontWidth']>;
   /**
    * 控制元素是否参与系统强制颜色模式的自动替换。（forced-color-adjust）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/forced-color-adjust
    */
-  declare readonly forcedColorAdjust: group2.ForcedColorAdjustCss;
+  declare readonly forcedColorAdjust: KeywordAuthor<
+    group2.ForcedColorAdjustCss,
+    T['forcedColorAdjust']
+  >;
   /**
    * 设置行与列之间的间距，用于 Grid、Flex 和多栏等布局。（gap）
    *
@@ -1690,29 +1974,32 @@ export class Css {
    * s.gap.px(8, 16) // gap:8px 16px;
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/gap
    */
-  declare readonly gap: group3.GapCss;
+  declare readonly gap: KeywordAuthor<group3.GapCss, T['gap']>;
   /**
    * 设置竖排 SVG 字形方向的旧属性；新代码优先考虑 text-orientation。（glyph-orientation-vertical）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/glyph-orientation-vertical
    */
-  declare readonly glyphOrientationVertical: group3.GlyphOrientationVerticalCss;
+  declare readonly glyphOrientationVertical: KeywordAuthor<
+    group3.GlyphOrientationVerticalCss,
+    T['glyphOrientationVertical']
+  >;
   /**
    * 集中设置显式和隐式网格的轨道、区域及自动放置方式。（grid）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid
    */
-  declare readonly grid: group3.GridCss;
+  declare readonly grid: KeywordAuthor<group3.GridCss, T['grid']>;
   /**
    * 设置网格项目的区域名，或行起点、列起点、行终点、列终点。（grid-area）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-area
    */
-  declare readonly gridArea: group3.GridAreaCss;
+  declare readonly gridArea: KeywordAuthor<group3.GridAreaCss, T['gridArea']>;
   /**
    * 设置隐式生成的网格列尺寸。（grid-auto-columns）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-columns
    */
-  declare readonly gridAutoColumns: group3.GridAutoColumnsCss;
+  declare readonly gridAutoColumns: KeywordAuthor<group3.GridAutoColumnsCss, T['gridAutoColumns']>;
   /**
    * 设置网格自动放置算法的行列方向及是否密集填洞。（grid-auto-flow）
    *
@@ -1730,64 +2017,67 @@ export class Css {
    * css(s.display.grid, s.gridAutoFlow.row)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-flow
    */
-  declare readonly gridAutoFlow: group3.GridAutoFlowCss;
+  declare readonly gridAutoFlow: KeywordAuthor<group3.GridAutoFlowCss, T['gridAutoFlow']>;
   /**
    * 设置隐式生成的网格行尺寸。（grid-auto-rows）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-auto-rows
    */
-  declare readonly gridAutoRows: group3.GridAutoRowsCss;
+  declare readonly gridAutoRows: KeywordAuthor<group3.GridAutoRowsCss, T['gridAutoRows']>;
   /**
    * 设置网格项目的列起点和列终点。（grid-column）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column
    */
-  declare readonly gridColumn: group3.GridColumnCss;
+  declare readonly gridColumn: KeywordAuthor<group3.GridColumnCss, T['gridColumn']>;
   /**
    * 设置网格项目的列终止线或跨越范围。（grid-column-end）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-end
    */
-  declare readonly gridColumnEnd: group3.GridColumnEndCss;
+  declare readonly gridColumnEnd: KeywordAuthor<group3.GridColumnEndCss, T['gridColumnEnd']>;
   /**
    * 设置网格项目的列起始线或跨越范围。（grid-column-start）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-column-start
    */
-  declare readonly gridColumnStart: group3.GridColumnStartCss;
+  declare readonly gridColumnStart: KeywordAuthor<group3.GridColumnStartCss, T['gridColumnStart']>;
   /**
    * 设置网格项目的行起点和行终点。（grid-row）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row
    */
-  declare readonly gridRow: group3.GridRowCss;
+  declare readonly gridRow: KeywordAuthor<group3.GridRowCss, T['gridRow']>;
   /**
    * 设置网格项目的行终止线或跨越范围。（grid-row-end）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-end
    */
-  declare readonly gridRowEnd: group3.GridRowEndCss;
+  declare readonly gridRowEnd: KeywordAuthor<group3.GridRowEndCss, T['gridRowEnd']>;
   /**
    * 设置网格项目的行起始线或跨越范围。（grid-row-start）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-row-start
    */
-  declare readonly gridRowStart: group3.GridRowStartCss;
+  declare readonly gridRowStart: KeywordAuthor<group3.GridRowStartCss, T['gridRowStart']>;
   /**
    * 集中设置显式网格的行、列和命名区域。（grid-template）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template
    */
-  declare readonly gridTemplate: group3.GridTemplateCss;
+  declare readonly gridTemplate: KeywordAuthor<group3.GridTemplateCss, T['gridTemplate']>;
   /**
    * 用区域名称矩阵定义网格布局区域。（grid-template-areas）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-areas
    */
-  declare readonly gridTemplateAreas: group3.GridTemplateAreasCss;
+  declare readonly gridTemplateAreas: KeywordAuthor<
+    group3.GridTemplateAreasCss,
+    T['gridTemplateAreas']
+  >;
   /**
    * 定义显式网格的列轨道尺寸及网格线名称。（grid-template-columns）
    *
@@ -1800,7 +2090,10 @@ export class Css {
    * s.gridTemplateColumns.repeat(3, 'minmax(0, 1fr)') // grid-template-columns:repeat(3, minmax(0, 1fr));
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-columns
    */
-  declare readonly gridTemplateColumns: group3.GridTemplateColumnsCss;
+  declare readonly gridTemplateColumns: KeywordAuthor<
+    group3.GridTemplateColumnsCss,
+    T['gridTemplateColumns']
+  >;
   /**
    * 定义显式网格的行轨道尺寸及网格线名称。（grid-template-rows）
    *
@@ -1813,14 +2106,20 @@ export class Css {
    * s.gridTemplateRows.raw('auto minmax(0, 1fr)')
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/grid-template-rows
    */
-  declare readonly gridTemplateRows: group3.GridTemplateRowsCss;
+  declare readonly gridTemplateRows: KeywordAuthor<
+    group3.GridTemplateRowsCss,
+    T['gridTemplateRows']
+  >;
   /**
    * 控制标点是否可以悬挂在行盒边缘之外。（hanging-punctuation）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hanging-punctuation
    */
-  declare readonly hangingPunctuation: group3.HangingPunctuationCss;
+  declare readonly hangingPunctuation: KeywordAuthor<
+    group3.HangingPunctuationCss,
+    T['hangingPunctuation']
+  >;
   /**
    * 设置元素的物理高度，盒子范围受 box-sizing 影响。（height）
    *
@@ -1833,63 +2132,75 @@ export class Css {
    * css(s.maxHeight.rem(20), s.overflowY.auto)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/height
    */
-  declare readonly height: group3.HeightCss;
+  declare readonly height: KeywordAuthor<group3.HeightCss, T['height']>;
   /**
    * 设置自动断词时插入的断字符号。（hyphenate-character）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-character
    */
-  declare readonly hyphenateCharacter: group3.HyphenateCharacterCss;
+  declare readonly hyphenateCharacter: KeywordAuthor<
+    group3.HyphenateCharacterCss,
+    T['hyphenateCharacter']
+  >;
   /**
    * 限制可断词的最小单词长度以及断点两侧的最少字符数。（hyphenate-limit-chars）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphenate-limit-chars
    */
-  declare readonly hyphenateLimitChars: group3.HyphenateLimitCharsCss;
+  declare readonly hyphenateLimitChars: KeywordAuthor<
+    group3.HyphenateLimitCharsCss,
+    T['hyphenateLimitChars']
+  >;
   /**
    * 设置文字断词和连字符插入的方式；自动断词依赖语言和词典。（hyphens）
    *
    * CSS 初始值：`manual`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/hyphens
    */
-  declare readonly hyphens: group3.HyphensCss;
+  declare readonly hyphens: KeywordAuthor<group3.HyphensCss, T['hyphens']>;
   /**
    * 设置图像是否按元数据等信息调整方向。（image-orientation）
    *
    * CSS 初始值：`from-image`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-orientation
    */
-  declare readonly imageOrientation: group3.ImageOrientationCss;
+  declare readonly imageOrientation: KeywordAuthor<
+    group3.ImageOrientationCss,
+    T['imageOrientation']
+  >;
   /**
    * 向浏览器指定图像缩放时的插值与清晰度偏好。（image-rendering）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-rendering
    */
-  declare readonly imageRendering: group3.ImageRenderingCss;
+  declare readonly imageRendering: KeywordAuthor<group3.ImageRenderingCss, T['imageRendering']>;
   /**
    * 设置图像的分辨率解释方式；使用前核对目标浏览器支持。（image-resolution）
    *
    * CSS 初始值：`1dppx`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/image-resolution
    */
-  declare readonly imageResolution: group3.ImageResolutionCss;
+  declare readonly imageResolution: KeywordAuthor<group3.ImageResolutionCss, T['imageResolution']>;
   /**
    * 设置段落首字下沉或抬升时占用的行数与对齐位置。（initial-letter）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/initial-letter
    */
-  declare readonly initialLetter: group3.InitialLetterCss;
+  declare readonly initialLetter: KeywordAuthor<group3.InitialLetterCss, T['initialLetter']>;
   /**
    * 设置首字下沉时字形与正文使用的对齐基线。（initial-letter-align）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/initial-letter-align
    */
-  declare readonly initialLetterAlign: group3.InitialLetterAlignCss;
+  declare readonly initialLetterAlign: KeywordAuthor<
+    group3.InitialLetterAlignCss,
+    T['initialLetterAlign']
+  >;
   /**
    * 设置逻辑行内轴尺寸；水平书写时通常对应宽度。（inline-size）
    *
@@ -1902,57 +2213,60 @@ export class Css {
    * s.inlineSize.rem(20)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inline-size
    */
-  declare readonly inlineSize: group3.InlineSizeCss;
+  declare readonly inlineSize: KeywordAuthor<group3.InlineSizeCss, T['inlineSize']>;
   /**
    * 同时设置定位元素的上、右、下、左偏移。（inset）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset
    */
-  declare readonly inset: group3.InsetCss;
+  declare readonly inset: KeywordAuthor<group3.InsetCss, T['inset']>;
   /**
    * 设置定位元素沿逻辑块轴的起始和结束偏移。（inset-block）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block
    */
-  declare readonly insetBlock: group3.InsetBlockCss;
+  declare readonly insetBlock: KeywordAuthor<group3.InsetBlockCss, T['insetBlock']>;
   /**
    * 设置定位元素在逻辑块轴结束侧的偏移。（inset-block-end）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-end
    */
-  declare readonly insetBlockEnd: group3.InsetBlockEndCss;
+  declare readonly insetBlockEnd: KeywordAuthor<group3.InsetBlockEndCss, T['insetBlockEnd']>;
   /**
    * 设置定位元素在逻辑块轴起始侧的偏移。（inset-block-start）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-block-start
    */
-  declare readonly insetBlockStart: group3.InsetBlockStartCss;
+  declare readonly insetBlockStart: KeywordAuthor<group3.InsetBlockStartCss, T['insetBlockStart']>;
   /**
    * 设置定位元素沿逻辑行内轴的起始和结束偏移。（inset-inline）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline
    */
-  declare readonly insetInline: group3.InsetInlineCss;
+  declare readonly insetInline: KeywordAuthor<group3.InsetInlineCss, T['insetInline']>;
   /**
    * 设置定位元素在逻辑行内轴结束侧的偏移。（inset-inline-end）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-end
    */
-  declare readonly insetInlineEnd: group3.InsetInlineEndCss;
+  declare readonly insetInlineEnd: KeywordAuthor<group3.InsetInlineEndCss, T['insetInlineEnd']>;
   /**
    * 设置定位元素在逻辑行内轴起始侧的偏移。（inset-inline-start）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/inset-inline-start
    */
-  declare readonly insetInlineStart: group3.InsetInlineStartCss;
+  declare readonly insetInlineStart: KeywordAuthor<
+    group3.InsetInlineStartCss,
+    T['insetInlineStart']
+  >;
   /**
    * 控制动画是否允许在数值尺寸与内部尺寸关键字之间插值。（interpolate-size）
    *
    * CSS 初始值：`numeric-only`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interpolate-size
    */
-  declare readonly interpolateSize: group3.InterpolateSizeCss;
+  declare readonly interpolateSize: KeywordAuthor<group3.InterpolateSizeCss, T['interpolateSize']>;
   /**
    * 控制元素是否建立独立的层叠上下文，隔离混合效果。（isolation）
    *
@@ -1967,7 +2281,7 @@ export class Css {
    * s.isolation.isolate
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/isolation
    */
-  declare readonly isolation: group3.IsolationCss;
+  declare readonly isolation: KeywordAuthor<group3.IsolationCss, T['isolation']>;
   /**
    * 分配布局主轴或行内轴的剩余空间，控制内容整体对齐。（justify-content）
    *
@@ -1984,63 +2298,63 @@ export class Css {
    * css(s.display.flex, s.justifyContent.spaceBetween)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-content
    */
-  declare readonly justifyContent: group3.JustifyContentCss;
+  declare readonly justifyContent: KeywordAuthor<group3.JustifyContentCss, T['justifyContent']>;
   /**
    * 设置容器内项目在行内轴上的默认对齐方式；不控制 Flex 项目的主轴对齐。（justify-items）
    *
    * CSS 初始值：`legacy`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-items
    */
-  declare readonly justifyItems: group3.JustifyItemsCss;
+  declare readonly justifyItems: KeywordAuthor<group3.JustifyItemsCss, T['justifyItems']>;
   /**
    * 单独设置项目在其布局区域内的行内轴对齐方式。（justify-self）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-self
    */
-  declare readonly justifySelf: group3.JustifySelfCss;
+  declare readonly justifySelf: KeywordAuthor<group3.JustifySelfCss, T['justifySelf']>;
   /**
    * 旧版瀑布流布局提案中沿行内轴对齐轨道的属性；使用前核对实现与规范版本。（justify-tracks）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/justify-tracks
    */
-  declare readonly justifyTracks: group3.JustifyTracksCss;
+  declare readonly justifyTracks: KeywordAuthor<group3.JustifyTracksCss, T['justifyTracks']>;
   /**
    * 设置定位元素相对于其定位参照的左侧偏移。（left）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/left
    */
-  declare readonly left: group3.LeftCss;
+  declare readonly left: KeywordAuthor<group3.LeftCss, T['left']>;
   /**
    * 设置字符之间额外增加或减少的间距。（letter-spacing）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/letter-spacing
    */
-  declare readonly letterSpacing: group3.LetterSpacingCss;
+  declare readonly letterSpacing: KeywordAuthor<group3.LetterSpacingCss, T['letterSpacing']>;
   /**
    * 设置 SVG 光照滤镜使用的光源颜色。（lighting-color）
    *
    * CSS 初始值：`white`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/lighting-color
    */
-  declare readonly lightingColor: group3.LightingColorCss;
+  declare readonly lightingColor: KeywordAuthor<group3.LightingColorCss, T['lightingColor']>;
   /**
    * 设置东亚文字标点等字符的换行严格程度。（line-break）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-break
    */
-  declare readonly lineBreak: group3.LineBreakCss;
+  declare readonly lineBreak: KeywordAuthor<group3.LineBreakCss, T['lineBreak']>;
   /**
    * 限制块容器显示的行数及截断行为；使用前核对所需语法的支持情况。（line-clamp）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-clamp
    */
-  declare readonly lineClamp: group3.LineClampCss;
+  declare readonly lineClamp: KeywordAuthor<group3.LineClampCss, T['lineClamp']>;
   /**
    * 设置行盒高度；无单位数值按元素自身字号计算。（line-height）
    *
@@ -2053,40 +2367,43 @@ export class Css {
    * s.lineHeight.raw(1.5) // line-height:1.5;
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-height
    */
-  declare readonly lineHeight: group3.LineHeightCss;
+  declare readonly lineHeight: KeywordAuthor<group3.LineHeightCss, T['lineHeight']>;
   /**
    * 设置行盒高度向上取整使用的步长。（line-height-step）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/line-height-step
    */
-  declare readonly lineHeightStep: group3.LineHeightStepCss;
+  declare readonly lineHeightStep: KeywordAuthor<group3.LineHeightStepCss, T['lineHeightStep']>;
   /**
    * 集中设置列表标记的类型、图像和位置。（list-style）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style
    */
-  declare readonly listStyle: group3.ListStyleCss;
+  declare readonly listStyle: KeywordAuthor<group3.ListStyleCss, T['listStyle']>;
   /**
    * 设置用作列表标记的图像。（list-style-image）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-image
    */
-  declare readonly listStyleImage: group3.ListStyleImageCss;
+  declare readonly listStyleImage: KeywordAuthor<group3.ListStyleImageCss, T['listStyleImage']>;
   /**
    * 设置列表标记位于主块盒内部还是外部。（list-style-position）
    *
    * CSS 初始值：`outside`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-position
    */
-  declare readonly listStylePosition: group3.ListStylePositionCss;
+  declare readonly listStylePosition: KeywordAuthor<
+    group3.ListStylePositionCss,
+    T['listStylePosition']
+  >;
   /**
    * 设置列表标记或计数器的样式。（list-style-type）
    *
    * CSS 初始值：`disc`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/list-style-type
    */
-  declare readonly listStyleType: group3.ListStyleTypeCss;
+  declare readonly listStyleType: KeywordAuthor<group3.ListStyleTypeCss, T['listStyleType']>;
   /**
    * 设置盒子四周的外边距，可使用负值或自动外边距。（margin）
    *
@@ -2099,277 +2416,292 @@ export class Css {
    * s.margin.raw('0 auto') // margin:0 auto;
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin
    */
-  declare readonly margin: group4.MarginCss;
+  declare readonly margin: KeywordAuthor<group4.MarginCss, T['margin']>;
   /**
    * 设置逻辑块轴起始侧和结束侧的外边距。（margin-block）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block
    */
-  declare readonly marginBlock: group4.MarginBlockCss;
+  declare readonly marginBlock: KeywordAuthor<group4.MarginBlockCss, T['marginBlock']>;
   /**
    * 设置逻辑块轴结束侧的外边距。（margin-block-end）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block-end
    */
-  declare readonly marginBlockEnd: group4.MarginBlockEndCss;
+  declare readonly marginBlockEnd: KeywordAuthor<group4.MarginBlockEndCss, T['marginBlockEnd']>;
   /**
    * 设置逻辑块轴起始侧的外边距。（margin-block-start）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-block-start
    */
-  declare readonly marginBlockStart: group4.MarginBlockStartCss;
+  declare readonly marginBlockStart: KeywordAuthor<
+    group4.MarginBlockStartCss,
+    T['marginBlockStart']
+  >;
   /**
    * 设置下外边距。（margin-bottom）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-bottom
    */
-  declare readonly marginBottom: group4.MarginBottomCss;
+  declare readonly marginBottom: KeywordAuthor<group4.MarginBottomCss, T['marginBottom']>;
   /**
    * 设置逻辑行内轴起始侧和结束侧的外边距。（margin-inline）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline
    */
-  declare readonly marginInline: group4.MarginInlineCss;
+  declare readonly marginInline: KeywordAuthor<group4.MarginInlineCss, T['marginInline']>;
   /**
    * 设置逻辑行内轴结束侧的外边距。（margin-inline-end）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-end
    */
-  declare readonly marginInlineEnd: group4.MarginInlineEndCss;
+  declare readonly marginInlineEnd: KeywordAuthor<group4.MarginInlineEndCss, T['marginInlineEnd']>;
   /**
    * 设置逻辑行内轴起始侧的外边距。（margin-inline-start）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-inline-start
    */
-  declare readonly marginInlineStart: group4.MarginInlineStartCss;
+  declare readonly marginInlineStart: KeywordAuthor<
+    group4.MarginInlineStartCss,
+    T['marginInlineStart']
+  >;
   /**
    * 设置左外边距。（margin-left）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-left
    */
-  declare readonly marginLeft: group4.MarginLeftCss;
+  declare readonly marginLeft: KeywordAuthor<group4.MarginLeftCss, T['marginLeft']>;
   /**
    * 设置右外边距。（margin-right）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-right
    */
-  declare readonly marginRight: group4.MarginRightCss;
+  declare readonly marginRight: KeywordAuthor<group4.MarginRightCss, T['marginRight']>;
   /**
    * 设置上外边距。（margin-top）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
    */
-  declare readonly marginTop: group4.MarginTopCss;
+  declare readonly marginTop: KeywordAuthor<group4.MarginTopCss, T['marginTop']>;
   /**
    * 控制容器边缘处子元素外边距的裁减。（margin-trim）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-trim
    */
-  declare readonly marginTrim: group4.MarginTrimCss;
+  declare readonly marginTrim: KeywordAuthor<group4.MarginTrimCss, T['marginTrim']>;
   /**
    * 同时设置 SVG 路径起点、中间顶点和终点的标记图形。（marker）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker
    */
-  declare readonly marker: group4.MarkerCss;
+  declare readonly marker: KeywordAuthor<group4.MarkerCss, T['marker']>;
   /**
    * 设置 SVG 路径终点的标记图形。（marker-end）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-end
    */
-  declare readonly markerEnd: group4.MarkerEndCss;
+  declare readonly markerEnd: KeywordAuthor<group4.MarkerEndCss, T['markerEnd']>;
   /**
    * 设置 SVG 路径中间顶点的标记图形。（marker-mid）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-mid
    */
-  declare readonly markerMid: group4.MarkerMidCss;
+  declare readonly markerMid: KeywordAuthor<group4.MarkerMidCss, T['markerMid']>;
   /**
    * 设置 SVG 路径起点的标记图形。（marker-start）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/marker-start
    */
-  declare readonly markerStart: group4.MarkerStartCss;
+  declare readonly markerStart: KeywordAuthor<group4.MarkerStartCss, T['markerStart']>;
   /**
    * 集中设置遮罩图层的图像、位置、尺寸、重复及合成方式。（mask）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask
    */
-  declare readonly mask: group4.MaskCss;
+  declare readonly mask: KeywordAuthor<group4.MaskCss, T['mask']>;
   /**
    * 设置基于九宫格图像切片的边框遮罩。（mask-border）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border
    */
-  declare readonly maskBorder: group4.MaskBorderCss;
+  declare readonly maskBorder: KeywordAuthor<group4.MaskBorderCss, T['maskBorder']>;
   /**
    * 设置边框遮罩使用 alpha 还是亮度信息。（mask-border-mode）
    *
    * CSS 初始值：`alpha`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-mode
    */
-  declare readonly maskBorderMode: group4.MaskBorderModeCss;
+  declare readonly maskBorderMode: KeywordAuthor<group4.MaskBorderModeCss, T['maskBorderMode']>;
   /**
    * 设置边框遮罩超出边框盒的距离。（mask-border-outset）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-outset
    */
-  declare readonly maskBorderOutset: group4.MaskBorderOutsetCss;
+  declare readonly maskBorderOutset: KeywordAuthor<
+    group4.MaskBorderOutsetCss,
+    T['maskBorderOutset']
+  >;
   /**
    * 设置边框遮罩切片的重复或拉伸方式。（mask-border-repeat）
    *
    * CSS 初始值：`stretch`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-repeat
    */
-  declare readonly maskBorderRepeat: group4.MaskBorderRepeatCss;
+  declare readonly maskBorderRepeat: KeywordAuthor<
+    group4.MaskBorderRepeatCss,
+    T['maskBorderRepeat']
+  >;
   /**
    * 设置边框遮罩图像的切片位置。（mask-border-slice）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-slice
    */
-  declare readonly maskBorderSlice: group4.MaskBorderSliceCss;
+  declare readonly maskBorderSlice: KeywordAuthor<group4.MaskBorderSliceCss, T['maskBorderSlice']>;
   /**
    * 设置边框遮罩的源图像。（mask-border-source）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-source
    */
-  declare readonly maskBorderSource: group4.MaskBorderSourceCss;
+  declare readonly maskBorderSource: KeywordAuthor<
+    group4.MaskBorderSourceCss,
+    T['maskBorderSource']
+  >;
   /**
    * 设置边框遮罩各边的宽度。（mask-border-width）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-border-width
    */
-  declare readonly maskBorderWidth: group4.MaskBorderWidthCss;
+  declare readonly maskBorderWidth: KeywordAuthor<group4.MaskBorderWidthCss, T['maskBorderWidth']>;
   /**
    * 设置遮罩效果允许作用的裁剪区域。（mask-clip）
    *
    * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-clip
    */
-  declare readonly maskClip: group4.MaskClipCss;
+  declare readonly maskClip: KeywordAuthor<group4.MaskClipCss, T['maskClip']>;
   /**
    * 设置多个遮罩图层之间的合成运算。（mask-composite）
    *
    * CSS 初始值：`add`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-composite
    */
-  declare readonly maskComposite: group4.MaskCompositeCss;
+  declare readonly maskComposite: KeywordAuthor<group4.MaskCompositeCss, T['maskComposite']>;
   /**
    * 设置遮罩使用的图像、渐变或 SVG 遮罩引用。（mask-image）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-image
    */
-  declare readonly maskImage: group4.MaskImageCss;
+  declare readonly maskImage: KeywordAuthor<group4.MaskImageCss, T['maskImage']>;
   /**
    * 设置遮罩按 alpha、亮度或源类型解释。（mask-mode）
    *
    * CSS 初始值：`match-source`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-mode
    */
-  declare readonly maskMode: group4.MaskModeCss;
+  declare readonly maskMode: KeywordAuthor<group4.MaskModeCss, T['maskMode']>;
   /**
    * 设置遮罩图像定位所依据的盒子。（mask-origin）
    *
    * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-origin
    */
-  declare readonly maskOrigin: group4.MaskOriginCss;
+  declare readonly maskOrigin: KeywordAuthor<group4.MaskOriginCss, T['maskOrigin']>;
   /**
    * 设置遮罩图像在定位区域中的位置。（mask-position）
    *
    * CSS 初始值：`0% 0%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-position
    */
-  declare readonly maskPosition: group4.MaskPositionCss;
+  declare readonly maskPosition: KeywordAuthor<group4.MaskPositionCss, T['maskPosition']>;
   /**
    * 设置遮罩图像的重复方式。（mask-repeat）
    *
    * CSS 初始值：`repeat`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-repeat
    */
-  declare readonly maskRepeat: group4.MaskRepeatCss;
+  declare readonly maskRepeat: KeywordAuthor<group4.MaskRepeatCss, T['maskRepeat']>;
   /**
    * 设置遮罩图像的尺寸。（mask-size）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-size
    */
-  declare readonly maskSize: group4.MaskSizeCss;
+  declare readonly maskSize: KeywordAuthor<group4.MaskSizeCss, T['maskSize']>;
   /**
    * 设置 SVG mask 元素使用亮度还是 alpha 作为遮罩。（mask-type）
    *
    * CSS 初始值：`luminance`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-type
    */
-  declare readonly maskType: group4.MaskTypeCss;
+  declare readonly maskType: KeywordAuthor<group4.MaskTypeCss, T['maskType']>;
   /**
    * 旧版瀑布流布局提案中的自动放置策略；使用前核对实现与规范版本。（masonry-auto-flow）
    *
    * CSS 初始值：`pack`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/masonry-auto-flow
    */
-  declare readonly masonryAutoFlow: group4.MasonryAutoFlowCss;
+  declare readonly masonryAutoFlow: KeywordAuthor<group4.MasonryAutoFlowCss, T['masonryAutoFlow']>;
   /**
    * 设置数学公式的嵌套深度，用于数学字号等排版计算。（math-depth）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-depth
    */
-  declare readonly mathDepth: group4.MathDepthCss;
+  declare readonly mathDepth: KeywordAuthor<group4.MathDepthCss, T['mathDepth']>;
   /**
    * 控制数学上标采用正常还是压缩的垂直偏移。（math-shift）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-shift
    */
-  declare readonly mathShift: group4.MathShiftCss;
+  declare readonly mathShift: KeywordAuthor<group4.MathShiftCss, T['mathShift']>;
   /**
    * 设置数学公式采用正常还是紧凑排版。（math-style）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/math-style
    */
-  declare readonly mathStyle: group4.MathStyleCss;
+  declare readonly mathStyle: KeywordAuthor<group4.MathStyleCss, T['mathStyle']>;
   /**
    * 限制元素逻辑块轴的最大尺寸。（max-block-size）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-block-size
    */
-  declare readonly maxBlockSize: group4.MaxBlockSizeCss;
+  declare readonly maxBlockSize: KeywordAuthor<group4.MaxBlockSizeCss, T['maxBlockSize']>;
   /**
    * 限制元素的最大物理高度。（max-height）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-height
    */
-  declare readonly maxHeight: group4.MaxHeightCss;
+  declare readonly maxHeight: KeywordAuthor<group4.MaxHeightCss, T['maxHeight']>;
   /**
    * 限制元素逻辑行内轴的最大尺寸。（max-inline-size）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-inline-size
    */
-  declare readonly maxInlineSize: group4.MaxInlineSizeCss;
+  declare readonly maxInlineSize: KeywordAuthor<group4.MaxInlineSizeCss, T['maxInlineSize']>;
   /**
    * 限制分片上下文中的最大行数；属于需核对支持情况的截行能力。（max-lines）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-lines
    */
-  declare readonly maxLines: group4.MaxLinesCss;
+  declare readonly maxLines: KeywordAuthor<group4.MaxLinesCss, T['maxLines']>;
   /**
    * 限制元素的最大物理宽度。（max-width）
    *
@@ -2382,28 +2714,28 @@ export class Css {
    * css(s.width.percent(100), s.maxWidth.rem(48))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-width
    */
-  declare readonly maxWidth: group4.MaxWidthCss;
+  declare readonly maxWidth: KeywordAuthor<group4.MaxWidthCss, T['maxWidth']>;
   /**
    * 设置元素逻辑块轴的最小尺寸。（min-block-size）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-block-size
    */
-  declare readonly minBlockSize: group4.MinBlockSizeCss;
+  declare readonly minBlockSize: KeywordAuthor<group4.MinBlockSizeCss, T['minBlockSize']>;
   /**
    * 设置元素的最小物理高度。（min-height）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-height
    */
-  declare readonly minHeight: group4.MinHeightCss;
+  declare readonly minHeight: KeywordAuthor<group4.MinHeightCss, T['minHeight']>;
   /**
    * 设置元素逻辑行内轴的最小尺寸。（min-inline-size）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-inline-size
    */
-  declare readonly minInlineSize: group4.MinInlineSizeCss;
+  declare readonly minInlineSize: KeywordAuthor<group4.MinInlineSizeCss, T['minInlineSize']>;
   /**
    * 设置元素的最小物理宽度。（min-width）
    *
@@ -2416,40 +2748,40 @@ export class Css {
    * s.minWidth.px(0)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-width
    */
-  declare readonly minWidth: group4.MinWidthCss;
+  declare readonly minWidth: KeywordAuthor<group4.MinWidthCss, T['minWidth']>;
   /**
    * 设置元素整体与其背后内容的颜色混合方式。（mix-blend-mode）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mix-blend-mode
    */
-  declare readonly mixBlendMode: group4.MixBlendModeCss;
+  declare readonly mixBlendMode: KeywordAuthor<group4.MixBlendModeCss, T['mixBlendMode']>;
   /**
    * 设置运动路径的旧式简写；对应现代 offset 属性族。（motion）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset
    */
-  declare readonly motion: group4.MotionCss;
+  declare readonly motion: KeywordAuthor<group4.MotionCss, T['motion']>;
   /**
    * 设置沿运动路径行进距离的旧属性；对应 offset-distance。（motion-distance）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-distance
    */
-  declare readonly motionDistance: group4.MotionDistanceCss;
+  declare readonly motionDistance: KeywordAuthor<group4.MotionDistanceCss, T['motionDistance']>;
   /**
    * 设置运动路径的旧属性；对应 offset-path。（motion-path）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-path
    */
-  declare readonly motionPath: group4.MotionPathCss;
+  declare readonly motionPath: KeywordAuthor<group4.MotionPathCss, T['motionPath']>;
   /**
    * 设置运动路径旋转方式的旧属性；对应 offset-rotate。（motion-rotation）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
    */
-  declare readonly motionRotation: group4.MotionRotationCss;
+  declare readonly motionRotation: KeywordAuthor<group4.MotionRotationCss, T['motionRotation']>;
   /**
    * 设置替换元素的内容如何适应其内容盒，例如图像的裁切和缩放。（object-fit）
    *
@@ -2469,68 +2801,68 @@ export class Css {
    * css(s.width.px(80), s.height.px(80), s.objectFit.cover)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-fit
    */
-  declare readonly objectFit: group4.ObjectFitCss;
+  declare readonly objectFit: KeywordAuthor<group4.ObjectFitCss, T['objectFit']>;
   /**
    * 设置替换元素内容在内容盒内的对齐位置。（object-position）
    *
    * CSS 初始值：`50% 50%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-position
    */
-  declare readonly objectPosition: group4.ObjectPositionCss;
+  declare readonly objectPosition: KeywordAuthor<group4.ObjectPositionCss, T['objectPosition']>;
   /**
    * 设置替换元素内容的可视区域，控制用于呈现的图像范围。（object-view-box）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/object-view-box
    */
-  declare readonly objectViewBox: group4.ObjectViewBoxCss;
+  declare readonly objectViewBox: KeywordAuthor<group4.ObjectViewBoxCss, T['objectViewBox']>;
   /**
    * 集中设置运动路径、起始位置、距离、方向和锚点。（offset）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset
    */
-  declare readonly offset: group4.OffsetCss;
+  declare readonly offset: KeywordAuthor<group4.OffsetCss, T['offset']>;
   /**
    * 设置元素沿运动路径移动时与路径相接的内部锚点。（offset-anchor）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-anchor
    */
-  declare readonly offsetAnchor: group4.OffsetAnchorCss;
+  declare readonly offsetAnchor: KeywordAuthor<group4.OffsetAnchorCss, T['offsetAnchor']>;
   /**
    * 设置元素沿运动路径行进的距离。（offset-distance）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-distance
    */
-  declare readonly offsetDistance: group4.OffsetDistanceCss;
+  declare readonly offsetDistance: KeywordAuthor<group4.OffsetDistanceCss, T['offsetDistance']>;
   /**
    * 设置元素运动所沿用的路径。（offset-path）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-path
    */
-  declare readonly offsetPath: group4.OffsetPathCss;
+  declare readonly offsetPath: KeywordAuthor<group4.OffsetPathCss, T['offsetPath']>;
   /**
    * 设置运动路径的初始位置。（offset-position）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-position
    */
-  declare readonly offsetPosition: group4.OffsetPositionCss;
+  declare readonly offsetPosition: KeywordAuthor<group4.OffsetPositionCss, T['offsetPosition']>;
   /**
    * 设置元素沿运动路径移动时的方向和附加旋转。（offset-rotate）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
    */
-  declare readonly offsetRotate: group4.OffsetRotateCss;
+  declare readonly offsetRotate: KeywordAuthor<group4.OffsetRotateCss, T['offsetRotate']>;
   /**
    * 设置路径旋转的旧名称；新代码使用 offset-rotate。（offset-rotation）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/offset-rotate
    */
-  declare readonly offsetRotation: group4.OffsetRotationCss;
+  declare readonly offsetRotation: KeywordAuthor<group4.OffsetRotationCss, T['offsetRotation']>;
   /**
    * 设置元素及其子树合成后的整体不透明度。（opacity）
    *
@@ -2543,7 +2875,7 @@ export class Css {
    * s.opacity.raw(0.5) // opacity:0.5;
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/opacity
    */
-  declare readonly opacity: group4.OpacityCss;
+  declare readonly opacity: KeywordAuthor<group4.OpacityCss, T['opacity']>;
   /**
    * 设置 Flex 或 Grid 项目的视觉排列顺序，不改变 DOM 顺序。（order）
    *
@@ -2552,14 +2884,14 @@ export class Css {
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/order
    */
-  declare readonly order: group4.OrderCss;
+  declare readonly order: KeywordAuthor<group4.OrderCss, T['order']>;
   /**
    * 设置分页或分栏断点前需保留的最少行数。（orphans）
    *
    * CSS 初始值：`2`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/orphans
    */
-  declare readonly orphans: group4.OrphansCss;
+  declare readonly orphans: KeywordAuthor<group4.OrphansCss, T['orphans']>;
   /**
    * 设置盒子外围轮廓线的宽度、线型和颜色，不占布局空间。（outline）
    *
@@ -2570,35 +2902,35 @@ export class Css {
    * s._focusVisible(s.outline.raw('2px solid currentColor'), s.outlineOffset.px(2))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline
    */
-  declare readonly outline: group4.OutlineCss;
+  declare readonly outline: KeywordAuthor<group4.OutlineCss, T['outline']>;
   /**
    * 设置轮廓线颜色。（outline-color）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-color
    */
-  declare readonly outlineColor: group4.OutlineColorCss;
+  declare readonly outlineColor: KeywordAuthor<group4.OutlineColorCss, T['outlineColor']>;
   /**
    * 设置轮廓线与边框边缘之间的距离。（outline-offset）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-offset
    */
-  declare readonly outlineOffset: group4.OutlineOffsetCss;
+  declare readonly outlineOffset: KeywordAuthor<group4.OutlineOffsetCss, T['outlineOffset']>;
   /**
    * 设置轮廓线线型。（outline-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-style
    */
-  declare readonly outlineStyle: group4.OutlineStyleCss;
+  declare readonly outlineStyle: KeywordAuthor<group4.OutlineStyleCss, T['outlineStyle']>;
   /**
    * 设置轮廓线宽度。（outline-width）
    *
    * CSS 初始值：`medium`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-width
    */
-  declare readonly outlineWidth: group4.OutlineWidthCss;
+  declare readonly outlineWidth: KeywordAuthor<group4.OutlineWidthCss, T['outlineWidth']>;
   /**
    * 设置内容超出盒子时的裁剪和滚动行为。（overflow）
    *
@@ -2618,42 +2950,45 @@ export class Css {
    * css(s.maxHeight.rem(20), s.overflow.auto)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow
    */
-  declare readonly overflow: group4.OverflowCss;
+  declare readonly overflow: KeywordAuthor<group4.OverflowCss, T['overflow']>;
   /**
    * 控制元素是否参与滚动锚定，以减少内容变化造成的视口跳动。（overflow-anchor）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-anchor
    */
-  declare readonly overflowAnchor: group4.OverflowAnchorCss;
+  declare readonly overflowAnchor: KeywordAuthor<group4.OverflowAnchorCss, T['overflowAnchor']>;
   /**
    * 设置逻辑块轴上的溢出行为。（overflow-block）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-block
    */
-  declare readonly overflowBlock: group4.OverflowBlockCss;
+  declare readonly overflowBlock: KeywordAuthor<group4.OverflowBlockCss, T['overflowBlock']>;
   /**
    * 设置溢出裁剪参照盒的非标准属性；使用前核对目标浏览器。（overflow-clip-box）
    *
    * CSS 初始值：`padding-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-clip-box
    */
-  declare readonly overflowClipBox: group4.OverflowClipBoxCss;
+  declare readonly overflowClipBox: KeywordAuthor<group4.OverflowClipBoxCss, T['overflowClipBox']>;
   /**
    * 设置 overflow:clip 的裁剪边界允许向外扩展的距离。（overflow-clip-margin）
    *
    * CSS 初始值：`0px`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-clip-margin
    */
-  declare readonly overflowClipMargin: group4.OverflowClipMarginCss;
+  declare readonly overflowClipMargin: KeywordAuthor<
+    group4.OverflowClipMarginCss,
+    T['overflowClipMargin']
+  >;
   /**
    * 设置逻辑行内轴上的溢出行为。（overflow-inline）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-inline
    */
-  declare readonly overflowInline: group4.OverflowInlineCss;
+  declare readonly overflowInline: KeywordAuthor<group4.OverflowInlineCss, T['overflowInline']>;
   /**
    * 设置不可正常断开的长文本是否允许额外换行。（overflow-wrap）
    *
@@ -2669,7 +3004,7 @@ export class Css {
    * s.overflowWrap.anywhere
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-wrap
    */
-  declare readonly overflowWrap: group4.OverflowWrapCss;
+  declare readonly overflowWrap: KeywordAuthor<group4.OverflowWrapCss, T['overflowWrap']>;
   /**
    * 设置水平方向的溢出行为。（overflow-x）
    *
@@ -2687,7 +3022,7 @@ export class Css {
    * s.overflowX.auto
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-x
    */
-  declare readonly overflowX: group4.OverflowXCss;
+  declare readonly overflowX: KeywordAuthor<group4.OverflowXCss, T['overflowX']>;
   /**
    * 设置垂直方向的溢出行为。（overflow-y）
    *
@@ -2705,14 +3040,14 @@ export class Css {
    * css(s.maxHeight.rem(20), s.overflowY.auto)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-y
    */
-  declare readonly overflowY: group4.OverflowYCss;
+  declare readonly overflowY: KeywordAuthor<group4.OverflowYCss, T['overflowY']>;
   /**
    * 反映元素是否位于顶层，主要用于顶层退出过渡；通常由浏览器管理。（overlay）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overlay
    */
-  declare readonly overlay: group4.OverlayCss;
+  declare readonly overlay: KeywordAuthor<group4.OverlayCss, T['overlay']>;
   /**
    * 控制滚动到边界后的滚动链和越界反馈行为。（overscroll-behavior）
    *
@@ -2728,35 +3063,50 @@ export class Css {
    * css(s.overflowY.auto, s.overscrollBehavior.contain)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior
    */
-  declare readonly overscrollBehavior: group4.OverscrollBehaviorCss;
+  declare readonly overscrollBehavior: KeywordAuthor<
+    group4.OverscrollBehaviorCss,
+    T['overscrollBehavior']
+  >;
   /**
    * 控制逻辑块轴上到达滚动边界后的行为。（overscroll-behavior-block）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-block
    */
-  declare readonly overscrollBehaviorBlock: group4.OverscrollBehaviorBlockCss;
+  declare readonly overscrollBehaviorBlock: KeywordAuthor<
+    group4.OverscrollBehaviorBlockCss,
+    T['overscrollBehaviorBlock']
+  >;
   /**
    * 控制逻辑行内轴上到达滚动边界后的行为。（overscroll-behavior-inline）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-inline
    */
-  declare readonly overscrollBehaviorInline: group4.OverscrollBehaviorInlineCss;
+  declare readonly overscrollBehaviorInline: KeywordAuthor<
+    group4.OverscrollBehaviorInlineCss,
+    T['overscrollBehaviorInline']
+  >;
   /**
    * 控制水平方向到达滚动边界后的行为。（overscroll-behavior-x）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-x
    */
-  declare readonly overscrollBehaviorX: group4.OverscrollBehaviorXCss;
+  declare readonly overscrollBehaviorX: KeywordAuthor<
+    group4.OverscrollBehaviorXCss,
+    T['overscrollBehaviorX']
+  >;
   /**
    * 控制垂直方向到达滚动边界后的行为。（overscroll-behavior-y）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-y
    */
-  declare readonly overscrollBehaviorY: group4.OverscrollBehaviorYCss;
+  declare readonly overscrollBehaviorY: KeywordAuthor<
+    group4.OverscrollBehaviorYCss,
+    T['overscrollBehaviorY']
+  >;
   /**
    * 设置内容与边框之间的四边内边距，不接受负值。（padding）
    *
@@ -2767,116 +3117,128 @@ export class Css {
    * s.padding.rem(0.5, 1) // padding:0.5rem 1rem;
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding
    */
-  declare readonly padding: group5.PaddingCss;
+  declare readonly padding: KeywordAuthor<group5.PaddingCss, T['padding']>;
   /**
    * 设置逻辑块轴起始侧和结束侧的内边距。（padding-block）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block
    */
-  declare readonly paddingBlock: group5.PaddingBlockCss;
+  declare readonly paddingBlock: KeywordAuthor<group5.PaddingBlockCss, T['paddingBlock']>;
   /**
    * 设置逻辑块轴结束侧的内边距。（padding-block-end）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-end
    */
-  declare readonly paddingBlockEnd: group5.PaddingBlockEndCss;
+  declare readonly paddingBlockEnd: KeywordAuthor<group5.PaddingBlockEndCss, T['paddingBlockEnd']>;
   /**
    * 设置逻辑块轴起始侧的内边距。（padding-block-start）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-start
    */
-  declare readonly paddingBlockStart: group5.PaddingBlockStartCss;
+  declare readonly paddingBlockStart: KeywordAuthor<
+    group5.PaddingBlockStartCss,
+    T['paddingBlockStart']
+  >;
   /**
    * 设置下内边距。（padding-bottom）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
    */
-  declare readonly paddingBottom: group5.PaddingBottomCss;
+  declare readonly paddingBottom: KeywordAuthor<group5.PaddingBottomCss, T['paddingBottom']>;
   /**
    * 设置逻辑行内轴起始侧和结束侧的内边距。（padding-inline）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline
    */
-  declare readonly paddingInline: group5.PaddingInlineCss;
+  declare readonly paddingInline: KeywordAuthor<group5.PaddingInlineCss, T['paddingInline']>;
   /**
    * 设置逻辑行内轴结束侧的内边距。（padding-inline-end）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
    */
-  declare readonly paddingInlineEnd: group5.PaddingInlineEndCss;
+  declare readonly paddingInlineEnd: KeywordAuthor<
+    group5.PaddingInlineEndCss,
+    T['paddingInlineEnd']
+  >;
   /**
    * 设置逻辑行内轴起始侧的内边距。（padding-inline-start）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
    */
-  declare readonly paddingInlineStart: group5.PaddingInlineStartCss;
+  declare readonly paddingInlineStart: KeywordAuthor<
+    group5.PaddingInlineStartCss,
+    T['paddingInlineStart']
+  >;
   /**
    * 设置左内边距。（padding-left）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-left
    */
-  declare readonly paddingLeft: group5.PaddingLeftCss;
+  declare readonly paddingLeft: KeywordAuthor<group5.PaddingLeftCss, T['paddingLeft']>;
   /**
    * 设置右内边距。（padding-right）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-right
    */
-  declare readonly paddingRight: group5.PaddingRightCss;
+  declare readonly paddingRight: KeywordAuthor<group5.PaddingRightCss, T['paddingRight']>;
   /**
    * 设置上内边距。（padding-top）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
-  declare readonly paddingTop: group5.PaddingTopCss;
+  declare readonly paddingTop: KeywordAuthor<group5.PaddingTopCss, T['paddingTop']>;
   /**
    * 选择分页媒体中使用的命名页面类型。（page）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page
    */
-  declare readonly page: group5.PageCss;
+  declare readonly page: KeywordAuthor<group5.PageCss, T['page']>;
   /**
    * 设置 SVG 填充、描边和标记的绘制先后顺序。（paint-order）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
    */
-  declare readonly paintOrder: group5.PaintOrderCss;
+  declare readonly paintOrder: KeywordAuthor<group5.PaintOrderCss, T['paintOrder']>;
   /**
    * 设置观察子元素三维变换时的透视距离。（perspective）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective
    */
-  declare readonly perspective: group5.PerspectiveCss;
+  declare readonly perspective: KeywordAuthor<group5.PerspectiveCss, T['perspective']>;
   /**
    * 设置三维透视的观察原点。（perspective-origin）
    *
    * CSS 初始值：`50% 50%`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective-origin
    */
-  declare readonly perspectiveOrigin: group5.PerspectiveOriginCss;
+  declare readonly perspectiveOrigin: KeywordAuthor<
+    group5.PerspectiveOriginCss,
+    T['perspectiveOrigin']
+  >;
   /**
    * 同时设置 align-content 与 justify-content。（place-content）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-content
    */
-  declare readonly placeContent: group5.PlaceContentCss;
+  declare readonly placeContent: KeywordAuthor<group5.PlaceContentCss, T['placeContent']>;
   /**
    * 同时设置 align-items 与 justify-items。（place-items）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-items
    */
-  declare readonly placeItems: group5.PlaceItemsCss;
+  declare readonly placeItems: KeywordAuthor<group5.PlaceItemsCss, T['placeItems']>;
   /**
    * 同时设置 align-self 与 justify-self。（place-self）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-self
    */
-  declare readonly placeSelf: group5.PlaceSelfCss;
+  declare readonly placeSelf: KeywordAuthor<group5.PlaceSelfCss, T['placeSelf']>;
   /**
    * 设置元素何时可以成为指针命中目标；SVG 还支持按填充和描边命中。（pointer-events）
    *
@@ -2893,7 +3255,7 @@ export class Css {
    * s.pointerEvents.none
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/pointer-events
    */
-  declare readonly pointerEvents: group5.PointerEventsCss;
+  declare readonly pointerEvents: KeywordAuthor<group5.PointerEventsCss, T['pointerEvents']>;
   /**
    * 设置元素的定位方式，并决定偏移属性如何参与布局。（position）
    *
@@ -2913,143 +3275,155 @@ export class Css {
    * css(s.position.sticky, s.top.px(0))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
    */
-  declare readonly position: group5.PositionCss;
+  declare readonly position: KeywordAuthor<group5.PositionCss, T['position']>;
   /**
    * 选择绝对定位元素使用的默认锚点。（position-anchor）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-anchor
    */
-  declare readonly positionAnchor: group5.PositionAnchorCss;
+  declare readonly positionAnchor: KeywordAuthor<group5.PositionAnchorCss, T['positionAnchor']>;
   /**
    * 选择相对于锚点的定位区域。（position-area）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-area
    */
-  declare readonly positionArea: group5.PositionAreaCss;
+  declare readonly positionArea: KeywordAuthor<group5.PositionAreaCss, T['positionArea']>;
   /**
    * 同时设置锚点定位的候选回退方式及尝试顺序。（position-try）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try
    */
-  declare readonly positionTry: group5.PositionTryCss;
+  declare readonly positionTry: KeywordAuthor<group5.PositionTryCss, T['positionTry']>;
   /**
    * 设置锚点定位溢出时尝试的替代位置。（position-try-fallbacks）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-fallbacks
    */
-  declare readonly positionTryFallbacks: group5.PositionTryFallbacksCss;
+  declare readonly positionTryFallbacks: KeywordAuthor<
+    group5.PositionTryFallbacksCss,
+    T['positionTryFallbacks']
+  >;
   /**
    * 设置锚点定位候选方案的尝试顺序。（position-try-order）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-order
    */
-  declare readonly positionTryOrder: group5.PositionTryOrderCss;
+  declare readonly positionTryOrder: KeywordAuthor<
+    group5.PositionTryOrderCss,
+    T['positionTryOrder']
+  >;
   /**
    * 设置锚点定位元素根据锚点可见性和溢出情况是否显示。（position-visibility）
    *
    * CSS 初始值：`anchors-visible`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-visibility
    */
-  declare readonly positionVisibility: group5.PositionVisibilityCss;
+  declare readonly positionVisibility: KeywordAuthor<
+    group5.PositionVisibilityCss,
+    T['positionVisibility']
+  >;
   /**
    * 设置打印时浏览器是否可以为节墨或可读性调整颜色。（print-color-adjust）
    *
    * CSS 初始值：`economy`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
    */
-  declare readonly printColorAdjust: group5.PrintColorAdjustCss;
+  declare readonly printColorAdjust: KeywordAuthor<
+    group5.PrintColorAdjustCss,
+    T['printColorAdjust']
+  >;
   /**
    * 设置生成引号所用的开闭字符对。（quotes）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/quotes
    */
-  declare readonly quotes: group5.QuotesCss;
+  declare readonly quotes: KeywordAuthor<group5.QuotesCss, T['quotes']>;
   /**
    * 设置 SVG 圆的半径。（r）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/r
    */
-  declare readonly r: group5.RCss;
+  declare readonly r: KeywordAuthor<group5.RCss, T['r']>;
   /**
    * 设置用户是否能调整元素尺寸以及可调整的方向。（resize）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/resize
    */
-  declare readonly resize: group5.ResizeCss;
+  declare readonly resize: KeywordAuthor<group5.ResizeCss, T['resize']>;
   /**
    * 设置定位元素相对于其定位参照的右侧偏移。（right）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
    */
-  declare readonly right: group5.RightCss;
+  declare readonly right: KeywordAuthor<group5.RightCss, T['right']>;
   /**
    * 独立设置元素旋转，不必重写 transform 中的其他变换。（rotate）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rotate
    */
-  declare readonly rotate: group5.RotateCss;
+  declare readonly rotate: KeywordAuthor<group5.RotateCss, T['rotate']>;
   /**
    * 设置布局中相邻行之间的间距。（row-gap）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/row-gap
    */
-  declare readonly rowGap: group5.RowGapCss;
+  declare readonly rowGap: KeywordAuthor<group5.RowGapCss, T['rowGap']>;
   /**
    * 设置注音文字与基底文字之间剩余空间的分配方式。（ruby-align）
    *
    * CSS 初始值：`space-around`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-align
    */
-  declare readonly rubyAlign: group5.RubyAlignCss;
+  declare readonly rubyAlign: KeywordAuthor<group5.RubyAlignCss, T['rubyAlign']>;
   /**
    * 设置相邻注音容器的合并方式；使用前核对目标浏览器。（ruby-merge）
    *
    * CSS 初始值：`separate`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-merge
    */
-  declare readonly rubyMerge: group5.RubyMergeCss;
+  declare readonly rubyMerge: KeywordAuthor<group5.RubyMergeCss, T['rubyMerge']>;
   /**
    * 控制注音文字是否可以悬伸到相邻文本上方。（ruby-overhang）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-overhang
    */
-  declare readonly rubyOverhang: group5.RubyOverhangCss;
+  declare readonly rubyOverhang: KeywordAuthor<group5.RubyOverhangCss, T['rubyOverhang']>;
   /**
    * 设置注音文字相对于基底文字的位置。（ruby-position）
    *
    * CSS 初始值：`alternate`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-position
    */
-  declare readonly rubyPosition: group5.RubyPositionCss;
+  declare readonly rubyPosition: KeywordAuthor<group5.RubyPositionCss, T['rubyPosition']>;
   /**
    * 设置 SVG 椭圆的水平半径，或矩形的水平圆角半径。（rx）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rx
    */
-  declare readonly rx: group5.RxCss;
+  declare readonly rx: KeywordAuthor<group5.RxCss, T['rx']>;
   /**
    * 设置 SVG 椭圆的垂直半径，或矩形的垂直圆角半径。（ry）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ry
    */
-  declare readonly ry: group5.RyCss;
+  declare readonly ry: KeywordAuthor<group5.RyCss, T['ry']>;
   /**
    * 独立设置元素的缩放比例。（scale）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scale
    */
-  declare readonly scale: group6.ScaleCss;
+  declare readonly scale: KeywordAuthor<group6.ScaleCss, T['scale']>;
   /**
    * 设置由导航或滚动 API 触发的滚动采用即时还是平滑方式。（scroll-behavior）
    *
@@ -3062,203 +3436,278 @@ export class Css {
    * s.scrollBehavior.smooth
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-behavior
    */
-  declare readonly scrollBehavior: group6.ScrollBehaviorCss;
+  declare readonly scrollBehavior: KeywordAuthor<group6.ScrollBehaviorCss, T['scrollBehavior']>;
   /**
    * 将元素声明为祖先滚动容器首次呈现时的候选滚动吸附目标。（scroll-initial-target）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-initial-target
    */
-  declare readonly scrollInitialTarget: group6.ScrollInitialTargetCss;
+  declare readonly scrollInitialTarget: KeywordAuthor<
+    group6.ScrollInitialTargetCss,
+    T['scrollInitialTarget']
+  >;
   /**
    * 设置元素滚动目标区域的四边外扩距离，不改变普通布局外边距。（scroll-margin）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
    */
-  declare readonly scrollMargin: group6.ScrollMarginCss;
+  declare readonly scrollMargin: KeywordAuthor<group6.ScrollMarginCss, T['scrollMargin']>;
   /**
    * 设置滚动目标区域在逻辑块轴两侧的外扩距离。（scroll-margin-block）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block
    */
-  declare readonly scrollMarginBlock: group6.ScrollMarginBlockCss;
+  declare readonly scrollMarginBlock: KeywordAuthor<
+    group6.ScrollMarginBlockCss,
+    T['scrollMarginBlock']
+  >;
   /**
    * 设置滚动目标区域在逻辑块轴结束侧的外扩距离。（scroll-margin-block-end）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-end
    */
-  declare readonly scrollMarginBlockEnd: group6.ScrollMarginBlockEndCss;
+  declare readonly scrollMarginBlockEnd: KeywordAuthor<
+    group6.ScrollMarginBlockEndCss,
+    T['scrollMarginBlockEnd']
+  >;
   /**
    * 设置滚动目标区域在逻辑块轴起始侧的外扩距离。（scroll-margin-block-start）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-start
    */
-  declare readonly scrollMarginBlockStart: group6.ScrollMarginBlockStartCss;
+  declare readonly scrollMarginBlockStart: KeywordAuthor<
+    group6.ScrollMarginBlockStartCss,
+    T['scrollMarginBlockStart']
+  >;
   /**
    * 设置滚动目标区域下侧的外扩距离。（scroll-margin-bottom）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
    */
-  declare readonly scrollMarginBottom: group6.ScrollMarginBottomCss;
+  declare readonly scrollMarginBottom: KeywordAuthor<
+    group6.ScrollMarginBottomCss,
+    T['scrollMarginBottom']
+  >;
   /**
    * 设置滚动目标区域在逻辑行内轴两侧的外扩距离。（scroll-margin-inline）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline
    */
-  declare readonly scrollMarginInline: group6.ScrollMarginInlineCss;
+  declare readonly scrollMarginInline: KeywordAuthor<
+    group6.ScrollMarginInlineCss,
+    T['scrollMarginInline']
+  >;
   /**
    * 设置滚动目标区域在逻辑行内轴结束侧的外扩距离。（scroll-margin-inline-end）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-end
    */
-  declare readonly scrollMarginInlineEnd: group6.ScrollMarginInlineEndCss;
+  declare readonly scrollMarginInlineEnd: KeywordAuthor<
+    group6.ScrollMarginInlineEndCss,
+    T['scrollMarginInlineEnd']
+  >;
   /**
    * 设置滚动目标区域在逻辑行内轴起始侧的外扩距离。（scroll-margin-inline-start）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-start
    */
-  declare readonly scrollMarginInlineStart: group6.ScrollMarginInlineStartCss;
+  declare readonly scrollMarginInlineStart: KeywordAuthor<
+    group6.ScrollMarginInlineStartCss,
+    T['scrollMarginInlineStart']
+  >;
   /**
    * 设置滚动目标区域左侧的外扩距离。（scroll-margin-left）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
    */
-  declare readonly scrollMarginLeft: group6.ScrollMarginLeftCss;
+  declare readonly scrollMarginLeft: KeywordAuthor<
+    group6.ScrollMarginLeftCss,
+    T['scrollMarginLeft']
+  >;
   /**
    * 设置滚动目标区域右侧的外扩距离。（scroll-margin-right）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
    */
-  declare readonly scrollMarginRight: group6.ScrollMarginRightCss;
+  declare readonly scrollMarginRight: KeywordAuthor<
+    group6.ScrollMarginRightCss,
+    T['scrollMarginRight']
+  >;
   /**
    * 设置滚动目标区域上侧的外扩距离。（scroll-margin-top）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
-  declare readonly scrollMarginTop: group6.ScrollMarginTopCss;
+  declare readonly scrollMarginTop: KeywordAuthor<group6.ScrollMarginTopCss, T['scrollMarginTop']>;
   /**
    * 设置滚动容器最佳可视区域的四边内缩距离。（scroll-padding）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding
    */
-  declare readonly scrollPadding: group6.ScrollPaddingCss;
+  declare readonly scrollPadding: KeywordAuthor<group6.ScrollPaddingCss, T['scrollPadding']>;
   /**
    * 设置滚动容器最佳可视区域在逻辑块轴两侧的内缩距离。（scroll-padding-block）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block
    */
-  declare readonly scrollPaddingBlock: group6.ScrollPaddingBlockCss;
+  declare readonly scrollPaddingBlock: KeywordAuthor<
+    group6.ScrollPaddingBlockCss,
+    T['scrollPaddingBlock']
+  >;
   /**
    * 设置滚动容器最佳可视区域在逻辑块轴结束侧的内缩距离。（scroll-padding-block-end）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-end
    */
-  declare readonly scrollPaddingBlockEnd: group6.ScrollPaddingBlockEndCss;
+  declare readonly scrollPaddingBlockEnd: KeywordAuthor<
+    group6.ScrollPaddingBlockEndCss,
+    T['scrollPaddingBlockEnd']
+  >;
   /**
    * 设置滚动容器最佳可视区域在逻辑块轴起始侧的内缩距离。（scroll-padding-block-start）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-start
    */
-  declare readonly scrollPaddingBlockStart: group6.ScrollPaddingBlockStartCss;
+  declare readonly scrollPaddingBlockStart: KeywordAuthor<
+    group6.ScrollPaddingBlockStartCss,
+    T['scrollPaddingBlockStart']
+  >;
   /**
    * 设置滚动容器最佳可视区域下侧的内缩距离。（scroll-padding-bottom）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-bottom
    */
-  declare readonly scrollPaddingBottom: group6.ScrollPaddingBottomCss;
+  declare readonly scrollPaddingBottom: KeywordAuthor<
+    group6.ScrollPaddingBottomCss,
+    T['scrollPaddingBottom']
+  >;
   /**
    * 设置滚动容器最佳可视区域在逻辑行内轴两侧的内缩距离。（scroll-padding-inline）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline
    */
-  declare readonly scrollPaddingInline: group6.ScrollPaddingInlineCss;
+  declare readonly scrollPaddingInline: KeywordAuthor<
+    group6.ScrollPaddingInlineCss,
+    T['scrollPaddingInline']
+  >;
   /**
    * 设置滚动容器最佳可视区域在逻辑行内轴结束侧的内缩距离。（scroll-padding-inline-end）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-end
    */
-  declare readonly scrollPaddingInlineEnd: group6.ScrollPaddingInlineEndCss;
+  declare readonly scrollPaddingInlineEnd: KeywordAuthor<
+    group6.ScrollPaddingInlineEndCss,
+    T['scrollPaddingInlineEnd']
+  >;
   /**
    * 设置滚动容器最佳可视区域在逻辑行内轴起始侧的内缩距离。（scroll-padding-inline-start）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-start
    */
-  declare readonly scrollPaddingInlineStart: group6.ScrollPaddingInlineStartCss;
+  declare readonly scrollPaddingInlineStart: KeywordAuthor<
+    group6.ScrollPaddingInlineStartCss,
+    T['scrollPaddingInlineStart']
+  >;
   /**
    * 设置滚动容器最佳可视区域左侧的内缩距离。（scroll-padding-left）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-left
    */
-  declare readonly scrollPaddingLeft: group6.ScrollPaddingLeftCss;
+  declare readonly scrollPaddingLeft: KeywordAuthor<
+    group6.ScrollPaddingLeftCss,
+    T['scrollPaddingLeft']
+  >;
   /**
    * 设置滚动容器最佳可视区域右侧的内缩距离。（scroll-padding-right）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-right
    */
-  declare readonly scrollPaddingRight: group6.ScrollPaddingRightCss;
+  declare readonly scrollPaddingRight: KeywordAuthor<
+    group6.ScrollPaddingRightCss,
+    T['scrollPaddingRight']
+  >;
   /**
    * 设置滚动容器最佳可视区域上侧的内缩距离。（scroll-padding-top）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
    */
-  declare readonly scrollPaddingTop: group6.ScrollPaddingTopCss;
+  declare readonly scrollPaddingTop: KeywordAuthor<
+    group6.ScrollPaddingTopCss,
+    T['scrollPaddingTop']
+  >;
   /**
    * 设置元素作为滚动吸附目标时在块轴和行内轴上的对齐位置。（scroll-snap-align）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-align
    */
-  declare readonly scrollSnapAlign: group6.ScrollSnapAlignCss;
+  declare readonly scrollSnapAlign: KeywordAuthor<group6.ScrollSnapAlignCss, T['scrollSnapAlign']>;
   /**
    * 设置滚动吸附区域外扩的旧名称；新代码使用 scroll-margin。（scroll-snap-margin）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
    */
-  declare readonly scrollSnapMargin: group6.ScrollSnapMarginCss;
+  declare readonly scrollSnapMargin: KeywordAuthor<
+    group6.ScrollSnapMarginCss,
+    T['scrollSnapMargin']
+  >;
   /**
    * 设置滚动吸附区域下侧外扩的旧名称；新代码使用 scroll-margin-bottom。（scroll-snap-margin-bottom）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
    */
-  declare readonly scrollSnapMarginBottom: group6.ScrollSnapMarginBottomCss;
+  declare readonly scrollSnapMarginBottom: KeywordAuthor<
+    group6.ScrollSnapMarginBottomCss,
+    T['scrollSnapMarginBottom']
+  >;
   /**
    * 设置滚动吸附区域左侧外扩的旧名称；新代码使用 scroll-margin-left。（scroll-snap-margin-left）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
    */
-  declare readonly scrollSnapMarginLeft: group6.ScrollSnapMarginLeftCss;
+  declare readonly scrollSnapMarginLeft: KeywordAuthor<
+    group6.ScrollSnapMarginLeftCss,
+    T['scrollSnapMarginLeft']
+  >;
   /**
    * 设置滚动吸附区域右侧外扩的旧名称；新代码使用 scroll-margin-right。（scroll-snap-margin-right）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
    */
-  declare readonly scrollSnapMarginRight: group6.ScrollSnapMarginRightCss;
+  declare readonly scrollSnapMarginRight: KeywordAuthor<
+    group6.ScrollSnapMarginRightCss,
+    T['scrollSnapMarginRight']
+  >;
   /**
    * 设置滚动吸附区域上侧外扩的旧名称；新代码使用 scroll-margin-top。（scroll-snap-margin-top）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
-  declare readonly scrollSnapMarginTop: group6.ScrollSnapMarginTopCss;
+  declare readonly scrollSnapMarginTop: KeywordAuthor<
+    group6.ScrollSnapMarginTopCss,
+    T['scrollSnapMarginTop']
+  >;
   /**
    * 设置滚动时是否允许越过该元素的吸附位置。（scroll-snap-stop）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-stop
    */
-  declare readonly scrollSnapStop: group6.ScrollSnapStopCss;
+  declare readonly scrollSnapStop: KeywordAuthor<group6.ScrollSnapStopCss, T['scrollSnapStop']>;
   /**
    * 设置滚动容器的吸附轴和吸附强度。（scroll-snap-type）
    *
@@ -3269,171 +3718,186 @@ export class Css {
    * s.scrollSnapType.raw('x mandatory') // scroll-snap-type:x mandatory;
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-type
    */
-  declare readonly scrollSnapType: group6.ScrollSnapTypeCss;
+  declare readonly scrollSnapType: KeywordAuthor<group6.ScrollSnapTypeCss, T['scrollSnapType']>;
   /**
    * 同时声明滚动进度时间线的名称和轴。（scroll-timeline）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline
    */
-  declare readonly scrollTimeline: group6.ScrollTimelineCss;
+  declare readonly scrollTimeline: KeywordAuthor<group6.ScrollTimelineCss, T['scrollTimeline']>;
   /**
    * 设置滚动进度时间线所观察的滚动轴。（scroll-timeline-axis）
    *
    * CSS 初始值：`block`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-axis
    */
-  declare readonly scrollTimelineAxis: group6.ScrollTimelineAxisCss;
+  declare readonly scrollTimelineAxis: KeywordAuthor<
+    group6.ScrollTimelineAxisCss,
+    T['scrollTimelineAxis']
+  >;
   /**
    * 声明基于当前容器滚动进度的时间线名称。（scroll-timeline-name）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-name
    */
-  declare readonly scrollTimelineName: group6.ScrollTimelineNameCss;
+  declare readonly scrollTimelineName: KeywordAuthor<
+    group6.ScrollTimelineNameCss,
+    T['scrollTimelineName']
+  >;
   /**
    * 设置滚动条滑块和轨道的颜色。（scrollbar-color）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-color
    */
-  declare readonly scrollbarColor: group6.ScrollbarColorCss;
+  declare readonly scrollbarColor: KeywordAuthor<group6.ScrollbarColorCss, T['scrollbarColor']>;
   /**
    * 设置是否预留滚动条槽位，以减少滚动条出现时的布局变化。（scrollbar-gutter）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-gutter
    */
-  declare readonly scrollbarGutter: group6.ScrollbarGutterCss;
+  declare readonly scrollbarGutter: KeywordAuthor<group6.ScrollbarGutterCss, T['scrollbarGutter']>;
   /**
    * 设置滚动条采用正常、较细或隐藏的外观。（scrollbar-width）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-width
    */
-  declare readonly scrollbarWidth: group6.ScrollbarWidthCss;
+  declare readonly scrollbarWidth: KeywordAuthor<group6.ScrollbarWidthCss, T['scrollbarWidth']>;
   /**
    * 设置从图像 alpha 信息提取环绕形状时的阈值。（shape-image-threshold）
    *
    * CSS 初始值：`0.0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-image-threshold
    */
-  declare readonly shapeImageThreshold: group6.ShapeImageThresholdCss;
+  declare readonly shapeImageThreshold: KeywordAuthor<
+    group6.ShapeImageThresholdCss,
+    T['shapeImageThreshold']
+  >;
   /**
    * 设置文字环绕形状之外的额外间距。（shape-margin）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-margin
    */
-  declare readonly shapeMargin: group6.ShapeMarginCss;
+  declare readonly shapeMargin: KeywordAuthor<group6.ShapeMarginCss, T['shapeMargin']>;
   /**
    * 设置浮动元素周围行内内容所环绕的形状。（shape-outside）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-outside
    */
-  declare readonly shapeOutside: group6.ShapeOutsideCss;
+  declare readonly shapeOutside: KeywordAuthor<group6.ShapeOutsideCss, T['shapeOutside']>;
   /**
    * 向 SVG 渲染器提供图形绘制精度与速度的偏好。（shape-rendering）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-rendering
    */
-  declare readonly shapeRendering: group6.ShapeRenderingCss;
+  declare readonly shapeRendering: KeywordAuthor<group6.ShapeRenderingCss, T['shapeRendering']>;
   /**
    * 设置语音呈现时文字、数字和标点的朗读方式；使用前核对语音媒体支持。（speak-as）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/speak-as
    */
-  declare readonly speakAs: group6.SpeakAsCss;
+  declare readonly speakAs: KeywordAuthor<group6.SpeakAsCss, T['speakAs']>;
   /**
    * 设置 SVG 渐变 stop 节点的颜色。（stop-color）
    *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-color
    */
-  declare readonly stopColor: group6.StopColorCss;
+  declare readonly stopColor: KeywordAuthor<group6.StopColorCss, T['stopColor']>;
   /**
    * 设置 SVG 渐变 stop 节点的不透明度。（stop-opacity）
    *
    * CSS 初始值：`black`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-opacity
    */
-  declare readonly stopOpacity: group6.StopOpacityCss;
+  declare readonly stopOpacity: KeywordAuthor<group6.StopOpacityCss, T['stopOpacity']>;
   /**
    * 设置 SVG 图形轮廓的描边绘制方式。（stroke）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke
    */
-  declare readonly stroke: group6.StrokeCss;
+  declare readonly stroke: KeywordAuthor<group6.StrokeCss, T['stroke']>;
   /**
    * 设置描边颜色的扩展属性；常规 SVG 优先使用 stroke 并核对支持情况。（stroke-color）
    *
    * CSS 初始值：`transparent`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-color
    */
-  declare readonly strokeColor: group6.StrokeColorCss;
+  declare readonly strokeColor: KeywordAuthor<group6.StrokeColorCss, T['strokeColor']>;
   /**
    * 设置 SVG 描边虚线中线段与空隙的长度序列。（stroke-dasharray）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dasharray
    */
-  declare readonly strokeDasharray: group6.StrokeDasharrayCss;
+  declare readonly strokeDasharray: KeywordAuthor<group6.StrokeDasharrayCss, T['strokeDasharray']>;
   /**
    * 设置 SVG 虚线描边相对于路径起点的偏移。（stroke-dashoffset）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dashoffset
    */
-  declare readonly strokeDashoffset: group6.StrokeDashoffsetCss;
+  declare readonly strokeDashoffset: KeywordAuthor<
+    group6.StrokeDashoffsetCss,
+    T['strokeDashoffset']
+  >;
   /**
    * 设置开放 SVG 子路径端点的描边形状。（stroke-linecap）
    *
    * CSS 初始值：`butt`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linecap
    */
-  declare readonly strokeLinecap: group6.StrokeLinecapCss;
+  declare readonly strokeLinecap: KeywordAuthor<group6.StrokeLinecapCss, T['strokeLinecap']>;
   /**
    * 设置 SVG 路径转角处描边的连接形状。（stroke-linejoin）
    *
    * CSS 初始值：`miter`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linejoin
    */
-  declare readonly strokeLinejoin: group6.StrokeLinejoinCss;
+  declare readonly strokeLinejoin: KeywordAuthor<group6.StrokeLinejoinCss, T['strokeLinejoin']>;
   /**
    * 限制尖角连接的延伸比例，超过阈值时改变连接形状。（stroke-miterlimit）
    *
    * CSS 初始值：`4`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-miterlimit
    */
-  declare readonly strokeMiterlimit: group6.StrokeMiterlimitCss;
+  declare readonly strokeMiterlimit: KeywordAuthor<
+    group6.StrokeMiterlimitCss,
+    T['strokeMiterlimit']
+  >;
   /**
    * 设置 SVG 描边的不透明度，不影响填充。（stroke-opacity）
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-opacity
    */
-  declare readonly strokeOpacity: group6.StrokeOpacityCss;
+  declare readonly strokeOpacity: KeywordAuthor<group6.StrokeOpacityCss, T['strokeOpacity']>;
   /**
    * 设置 SVG 描边宽度。（stroke-width）
    *
    * CSS 初始值：`1px`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-width
    */
-  declare readonly strokeWidth: group6.StrokeWidthCss;
+  declare readonly strokeWidth: KeywordAuthor<group6.StrokeWidthCss, T['strokeWidth']>;
   /**
    * 设置保留制表符时每个制表位的宽度。（tab-size）
    *
    * CSS 初始值：`8`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/tab-size
    */
-  declare readonly tabSize: group6.TabSizeCss;
+  declare readonly tabSize: KeywordAuthor<group6.TabSizeCss, T['tabSize']>;
   /**
    * 设置表格列宽采用自动还是固定布局算法。（table-layout）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/table-layout
    */
-  declare readonly tableLayout: group6.TableLayoutCss;
+  declare readonly tableLayout: KeywordAuthor<group6.TableLayoutCss, T['tableLayout']>;
   /**
    * 设置块容器中行内内容的水平或逻辑方向对齐。（text-align）
    *
@@ -3452,150 +3916,180 @@ export class Css {
    * s.textAlign.start
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align
    */
-  declare readonly textAlign: group6.TextAlignCss;
+  declare readonly textAlign: KeywordAuthor<group6.TextAlignCss, T['textAlign']>;
   /**
    * 设置段落最后一行或强制换行前一行的对齐方式。（text-align-last）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align-last
    */
-  declare readonly textAlignLast: group6.TextAlignLastCss;
+  declare readonly textAlignLast: KeywordAuthor<group6.TextAlignLastCss, T['textAlignLast']>;
   /**
    * 设置 SVG 文本片段相对于定位点的锚定方式。（text-anchor）
    *
    * CSS 初始值：`start`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-anchor
    */
-  declare readonly textAnchor: group6.TextAnchorCss;
+  declare readonly textAnchor: KeywordAuthor<group6.TextAnchorCss, T['textAnchor']>;
   /**
    * 设置中西文、数字等不同文字系统之间的自动间距。（text-autospace）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-autospace
    */
-  declare readonly textAutospace: group6.TextAutospaceCss;
+  declare readonly textAutospace: KeywordAuthor<group6.TextAutospaceCss, T['textAutospace']>;
   /**
    * 同时设置文本盒边缘参照及首尾空白裁减。（text-box）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box
    */
-  declare readonly textBox: group6.TextBoxCss;
+  declare readonly textBox: KeywordAuthor<group6.TextBoxCss, T['textBox']>;
   /**
    * 选择文本盒裁减或对齐使用的字体边缘度量。（text-box-edge）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-edge
    */
-  declare readonly textBoxEdge: group6.TextBoxEdgeCss;
+  declare readonly textBoxEdge: KeywordAuthor<group6.TextBoxEdgeCss, T['textBoxEdge']>;
   /**
    * 裁减文本块开头或结尾的额外行高空白。（text-box-trim）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-trim
    */
-  declare readonly textBoxTrim: group6.TextBoxTrimCss;
+  declare readonly textBoxTrim: KeywordAuthor<group6.TextBoxTrimCss, T['textBoxTrim']>;
   /**
    * 设置竖排文字中多个字符是否合成为一个横排字形单元。（text-combine-upright）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-combine-upright
    */
-  declare readonly textCombineUpright: group6.TextCombineUprightCss;
+  declare readonly textCombineUpright: KeywordAuthor<
+    group6.TextCombineUprightCss,
+    T['textCombineUpright']
+  >;
   /**
    * 集中设置文本装饰线的位置、线型、颜色及粗细。（text-decoration）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration
    */
-  declare readonly textDecoration: group6.TextDecorationCss;
+  declare readonly textDecoration: KeywordAuthor<group6.TextDecorationCss, T['textDecoration']>;
   /**
    * 设置文本装饰线颜色。（text-decoration-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-color
    */
-  declare readonly textDecorationColor: group6.TextDecorationColorCss;
+  declare readonly textDecorationColor: KeywordAuthor<
+    group6.TextDecorationColorCss,
+    T['textDecorationColor']
+  >;
   /**
    * 设置下划线、上划线或删除线等装饰线位置。（text-decoration-line）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-line
    */
-  declare readonly textDecorationLine: group6.TextDecorationLineCss;
+  declare readonly textDecorationLine: KeywordAuthor<
+    group6.TextDecorationLineCss,
+    T['textDecorationLine']
+  >;
   /**
    * 设置文本装饰线跳过哪些内容；具体语法需核对支持情况。（text-decoration-skip）
    *
    * CSS 初始值：`objects`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip
    */
-  declare readonly textDecorationSkip: group6.TextDecorationSkipCss;
+  declare readonly textDecorationSkip: KeywordAuthor<
+    group6.TextDecorationSkipCss,
+    T['textDecorationSkip']
+  >;
   /**
    * 设置装饰线是否避让字形的笔画。（text-decoration-skip-ink）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip-ink
    */
-  declare readonly textDecorationSkipInk: group6.TextDecorationSkipInkCss;
+  declare readonly textDecorationSkipInk: KeywordAuthor<
+    group6.TextDecorationSkipInkCss,
+    T['textDecorationSkipInk']
+  >;
   /**
    * 设置文本装饰线的实线、波浪线等线型。（text-decoration-style）
    *
    * CSS 初始值：`solid`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-style
    */
-  declare readonly textDecorationStyle: group6.TextDecorationStyleCss;
+  declare readonly textDecorationStyle: KeywordAuthor<
+    group6.TextDecorationStyleCss,
+    T['textDecorationStyle']
+  >;
   /**
    * 设置文本装饰线粗细。（text-decoration-thickness）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-thickness
    */
-  declare readonly textDecorationThickness: group6.TextDecorationThicknessCss;
+  declare readonly textDecorationThickness: KeywordAuthor<
+    group6.TextDecorationThicknessCss,
+    T['textDecorationThickness']
+  >;
   /**
    * 同时设置文字着重号的样式和颜色。（text-emphasis）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis
    */
-  declare readonly textEmphasis: group6.TextEmphasisCss;
+  declare readonly textEmphasis: KeywordAuthor<group6.TextEmphasisCss, T['textEmphasis']>;
   /**
    * 设置文字着重号颜色。（text-emphasis-color）
    *
    * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-color
    */
-  declare readonly textEmphasisColor: group6.TextEmphasisColorCss;
+  declare readonly textEmphasisColor: KeywordAuthor<
+    group6.TextEmphasisColorCss,
+    T['textEmphasisColor']
+  >;
   /**
    * 设置文字着重号位于文字的哪一侧。（text-emphasis-position）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-position
    */
-  declare readonly textEmphasisPosition: group6.TextEmphasisPositionCss;
+  declare readonly textEmphasisPosition: KeywordAuthor<
+    group6.TextEmphasisPositionCss,
+    T['textEmphasisPosition']
+  >;
   /**
    * 设置文字着重号的形状和填充方式。（text-emphasis-style）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-style
    */
-  declare readonly textEmphasisStyle: group6.TextEmphasisStyleCss;
+  declare readonly textEmphasisStyle: KeywordAuthor<
+    group6.TextEmphasisStyleCss,
+    T['textEmphasisStyle']
+  >;
   /**
    * 设置文本行的缩进距离。（text-indent）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-indent
    */
-  declare readonly textIndent: group6.TextIndentCss;
+  declare readonly textIndent: KeywordAuthor<group6.TextIndentCss, T['textIndent']>;
   /**
    * 设置两端对齐时增加间距的算法。（text-justify）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-justify
    */
-  declare readonly textJustify: group6.TextJustifyCss;
+  declare readonly textJustify: KeywordAuthor<group6.TextJustifyCss, T['textJustify']>;
   /**
    * 设置竖排模式下字符的方向。（text-orientation）
    *
    * CSS 初始值：`mixed`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-orientation
    */
-  declare readonly textOrientation: group6.TextOrientationCss;
+  declare readonly textOrientation: KeywordAuthor<group6.TextOrientationCss, T['textOrientation']>;
   /**
    * 设置被裁剪的行内溢出文本如何提示，例如显示省略号。（text-overflow）
    *
@@ -3612,91 +4106,97 @@ export class Css {
    * css(s.maxWidth.rem(12), s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-overflow
    */
-  declare readonly textOverflow: group6.TextOverflowCss;
+  declare readonly textOverflow: KeywordAuthor<group6.TextOverflowCss, T['textOverflow']>;
   /**
    * 向渲染器提供文本速度、可读性或几何精度的偏好。（text-rendering）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-rendering
    */
-  declare readonly textRendering: group6.TextRenderingCss;
+  declare readonly textRendering: KeywordAuthor<group6.TextRenderingCss, T['textRendering']>;
   /**
    * 设置文字及其装饰的阴影，可叠加多层。（text-shadow）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-shadow
    */
-  declare readonly textShadow: group6.TextShadowCss;
+  declare readonly textShadow: KeywordAuthor<group6.TextShadowCss, T['textShadow']>;
   /**
    * 控制移动浏览器为提升可读性而进行的文字自动放大。（text-size-adjust）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-size-adjust
    */
-  declare readonly textSizeAdjust: group6.TextSizeAdjustCss;
+  declare readonly textSizeAdjust: KeywordAuthor<group6.TextSizeAdjustCss, T['textSizeAdjust']>;
   /**
    * 设置东亚文字标点等字符周围空白的裁减。（text-spacing-trim）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-spacing-trim
    */
-  declare readonly textSpacingTrim: group6.TextSpacingTrimCss;
+  declare readonly textSpacingTrim: KeywordAuthor<group6.TextSpacingTrimCss, T['textSpacingTrim']>;
   /**
    * 设置文字显示时的大小写、全角或其他字形转换。（text-transform）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-transform
    */
-  declare readonly textTransform: group6.TextTransformCss;
+  declare readonly textTransform: KeywordAuthor<group6.TextTransformCss, T['textTransform']>;
   /**
    * 设置下划线相对于默认位置的偏移。（text-underline-offset）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-offset
    */
-  declare readonly textUnderlineOffset: group6.TextUnderlineOffsetCss;
+  declare readonly textUnderlineOffset: KeywordAuthor<
+    group6.TextUnderlineOffsetCss,
+    T['textUnderlineOffset']
+  >;
   /**
    * 设置下划线相对于文字基线或竖排文字的放置方式。（text-underline-position）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-position
    */
-  declare readonly textUnderlinePosition: group6.TextUnderlinePositionCss;
+  declare readonly textUnderlinePosition: KeywordAuthor<
+    group6.TextUnderlinePositionCss,
+    T['textUnderlinePosition']
+  >;
   /**
    * 同时设置文本是否换行及换行策略。（text-wrap）
    *
    * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap
    */
-  declare readonly textWrap: group6.TextWrapCss;
+  declare readonly textWrap: KeywordAuthor<group6.TextWrapCss, T['textWrap']>;
   /**
    * 设置文本是否允许软换行。（text-wrap-mode）
    *
    * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-mode
    */
-  declare readonly textWrapMode: group6.TextWrapModeCss;
+  declare readonly textWrapMode: KeywordAuthor<group6.TextWrapModeCss, T['textWrapMode']>;
   /**
    * 设置文本换行的排版策略，例如平衡各行长度。（text-wrap-style）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-style
    */
-  declare readonly textWrapStyle: group6.TextWrapStyleCss;
+  declare readonly textWrapStyle: KeywordAuthor<group6.TextWrapStyleCss, T['textWrapStyle']>;
   /**
    * 扩大命名动画时间线的可引用作用域。（timeline-scope）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/timeline-scope
    */
-  declare readonly timelineScope: group6.TimelineScopeCss;
+  declare readonly timelineScope: KeywordAuthor<group6.TimelineScopeCss, T['timelineScope']>;
   /**
    * 设置定位元素相对于其定位参照的上侧偏移。（top）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
    */
-  declare readonly top: group6.TopCss;
+  declare readonly top: KeywordAuthor<group6.TopCss, T['top']>;
   /**
    * 声明浏览器可以处理的触摸平移与缩放手势。（touch-action）
    *
@@ -3715,7 +4215,7 @@ export class Css {
    * s.touchAction.panY
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/touch-action
    */
-  declare readonly touchAction: group6.TouchActionCss;
+  declare readonly touchAction: KeywordAuthor<group6.TouchActionCss, T['touchAction']>;
   /**
    * 按顺序组合平移、旋转、缩放等二维或三维变换。（transform）
    *
@@ -3728,28 +4228,28 @@ export class Css {
    * s.transform.raw('translateX(8px) scale(1.05)')
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform
    */
-  declare readonly transform: group6.TransformCss;
+  declare readonly transform: KeywordAuthor<group6.TransformCss, T['transform']>;
   /**
    * 设置变换及其原点所依据的参照盒。（transform-box）
    *
    * CSS 初始值：`view-box`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-box
    */
-  declare readonly transformBox: group6.TransformBoxCss;
+  declare readonly transformBox: KeywordAuthor<group6.TransformBoxCss, T['transformBox']>;
   /**
    * 设置元素变换的原点。（transform-origin）
    *
    * CSS 初始值：`50% 50% 0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-origin
    */
-  declare readonly transformOrigin: group6.TransformOriginCss;
+  declare readonly transformOrigin: KeywordAuthor<group6.TransformOriginCss, T['transformOrigin']>;
   /**
    * 控制子元素的三维位置保留在三维空间还是展平。（transform-style）
    *
    * CSS 初始值：`flat`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-style
    */
-  declare readonly transformStyle: group6.TransformStyleCss;
+  declare readonly transformStyle: KeywordAuthor<group6.TransformStyleCss, T['transformStyle']>;
   /**
    * 集中设置属性变化过渡的目标、时长、缓动、延迟和行为。（transition）
    *
@@ -3760,54 +4260,66 @@ export class Css {
    * s.transition.raw('opacity 160ms ease')
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition
    */
-  declare readonly transition: group6.TransitionCss;
+  declare readonly transition: KeywordAuthor<group6.TransitionCss, T['transition']>;
   /**
    * 控制离散属性是否可以启动 CSS 过渡。（transition-behavior）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-behavior
    */
-  declare readonly transitionBehavior: group6.TransitionBehaviorCss;
+  declare readonly transitionBehavior: KeywordAuthor<
+    group6.TransitionBehaviorCss,
+    T['transitionBehavior']
+  >;
   /**
    * 设置属性变化后开始过渡的延迟。（transition-delay）
    *
    * CSS 初始值：`0s`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-delay
    */
-  declare readonly transitionDelay: group6.TransitionDelayCss;
+  declare readonly transitionDelay: KeywordAuthor<group6.TransitionDelayCss, T['transitionDelay']>;
   /**
    * 设置过渡从开始到完成的时长。（transition-duration）
    *
    * CSS 初始值：`0s`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-duration
    */
-  declare readonly transitionDuration: group6.TransitionDurationCss;
+  declare readonly transitionDuration: KeywordAuthor<
+    group6.TransitionDurationCss,
+    T['transitionDuration']
+  >;
   /**
    * 指定发生变化时需要过渡的 CSS 属性。（transition-property）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-property
    */
-  declare readonly transitionProperty: group6.TransitionPropertyCss;
+  declare readonly transitionProperty: KeywordAuthor<
+    group6.TransitionPropertyCss,
+    T['transitionProperty']
+  >;
   /**
    * 设置过渡进度变化的缓动函数。（transition-timing-function）
    *
    * CSS 初始值：`ease`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-timing-function
    */
-  declare readonly transitionTimingFunction: group6.TransitionTimingFunctionCss;
+  declare readonly transitionTimingFunction: KeywordAuthor<
+    group6.TransitionTimingFunctionCss,
+    T['transitionTimingFunction']
+  >;
   /**
    * 独立设置元素在二维或三维空间中的平移。（translate）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/translate
    */
-  declare readonly translate: group6.TranslateCss;
+  declare readonly translate: KeywordAuthor<group6.TranslateCss, T['translate']>;
   /**
    * 设置元素如何参与 Unicode 双向文本算法，通常与 direction 配合。（unicode-bidi）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/unicode-bidi
    */
-  declare readonly unicodeBidi: group7.UnicodeBidiCss;
+  declare readonly unicodeBidi: KeywordAuthor<group7.UnicodeBidiCss, T['unicodeBidi']>;
   /**
    * 设置用户是否可以选取元素中的文本。（user-select）
    *
@@ -3824,61 +4336,76 @@ export class Css {
    * s.userSelect.all
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/user-select
    */
-  declare readonly userSelect: group7.UserSelectCss;
+  declare readonly userSelect: KeywordAuthor<group7.UserSelectCss, T['userSelect']>;
   /**
    * 设置 SVG 图形变换时对描边等矢量效果的处理。（vector-effect）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/vector-effect
    */
-  declare readonly vectorEffect: group7.VectorEffectCss;
+  declare readonly vectorEffect: KeywordAuthor<group7.VectorEffectCss, T['vectorEffect']>;
   /**
    * 设置行内级盒子或表格单元格的垂直对齐，不用于普通块盒居中。（vertical-align）
    *
    * CSS 初始值：`baseline`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/vertical-align
    */
-  declare readonly verticalAlign: group7.VerticalAlignCss;
+  declare readonly verticalAlign: KeywordAuthor<group7.VerticalAlignCss, T['verticalAlign']>;
   /**
    * 同时声明基于元素可见进度的时间线名称与轴。（view-timeline）
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline
    */
-  declare readonly viewTimeline: group7.ViewTimelineCss;
+  declare readonly viewTimeline: KeywordAuthor<group7.ViewTimelineCss, T['viewTimeline']>;
   /**
    * 设置可见进度时间线所观察的滚动轴。（view-timeline-axis）
    *
    * CSS 初始值：`block`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-axis
    */
-  declare readonly viewTimelineAxis: group7.ViewTimelineAxisCss;
+  declare readonly viewTimelineAxis: KeywordAuthor<
+    group7.ViewTimelineAxisCss,
+    T['viewTimelineAxis']
+  >;
   /**
    * 设置可见进度时间线使用的滚动视口内缩范围。（view-timeline-inset）
    *
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-inset
    */
-  declare readonly viewTimelineInset: group7.ViewTimelineInsetCss;
+  declare readonly viewTimelineInset: KeywordAuthor<
+    group7.ViewTimelineInsetCss,
+    T['viewTimelineInset']
+  >;
   /**
    * 声明基于元素进入和离开滚动视口的时间线名称。（view-timeline-name）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-timeline-name
    */
-  declare readonly viewTimelineName: group7.ViewTimelineNameCss;
+  declare readonly viewTimelineName: KeywordAuthor<
+    group7.ViewTimelineNameCss,
+    T['viewTimelineName']
+  >;
   /**
    * 为视图过渡的快照伪元素分组，以便共用样式。（view-transition-class）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-class
    */
-  declare readonly viewTransitionClass: group7.ViewTransitionClassCss;
+  declare readonly viewTransitionClass: KeywordAuthor<
+    group7.ViewTransitionClassCss,
+    T['viewTransitionClass']
+  >;
   /**
    * 为视图过渡中的元素命名，以匹配前后状态的快照。（view-transition-name）
    *
    * CSS 初始值：`none`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/view-transition-name
    */
-  declare readonly viewTransitionName: group7.ViewTransitionNameCss;
+  declare readonly viewTransitionName: KeywordAuthor<
+    group7.ViewTransitionNameCss,
+    T['viewTransitionName']
+  >;
   /**
    * 设置元素是否可见；隐藏通常保留布局空间。（visibility）
    *
@@ -3894,7 +4421,7 @@ export class Css {
    * s.visibility.hidden
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/visibility
    */
-  declare readonly visibility: group7.VisibilityCss;
+  declare readonly visibility: KeywordAuthor<group7.VisibilityCss, T['visibility']>;
   /**
    * 设置空白折叠和换行处理方式。（white-space）
    *
@@ -3915,21 +4442,24 @@ export class Css {
    * s.whiteSpace.preWrap
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space
    */
-  declare readonly whiteSpace: group7.WhiteSpaceCss;
+  declare readonly whiteSpace: KeywordAuthor<group7.WhiteSpaceCss, T['whiteSpace']>;
   /**
    * 设置空格、制表符和换行符如何折叠或保留。（white-space-collapse）
    *
    * CSS 初始值：`collapse`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space-collapse
    */
-  declare readonly whiteSpaceCollapse: group7.WhiteSpaceCollapseCss;
+  declare readonly whiteSpaceCollapse: KeywordAuthor<
+    group7.WhiteSpaceCollapseCss,
+    T['whiteSpaceCollapse']
+  >;
   /**
    * 设置分页或分栏断点后需保留的最少行数。（widows）
    *
    * CSS 初始值：`2`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/widows
    */
-  declare readonly widows: group7.WidowsCss;
+  declare readonly widows: KeywordAuthor<group7.WidowsCss, T['widows']>;
   /**
    * 设置元素的物理宽度，盒子范围受 box-sizing 影响。（width）
    *
@@ -3950,7 +4480,7 @@ export class Css {
    * s.width.clamp('12rem', '50vw', '40rem') // width:clamp(12rem, 50vw, 40rem);
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/width
    */
-  declare readonly width: group7.WidthCss;
+  declare readonly width: KeywordAuthor<group7.WidthCss, T['width']>;
   /**
    * 提前告知浏览器可能发生变化的属性，便于准备优化资源。（will-change）
    *
@@ -3959,7 +4489,7 @@ export class Css {
    * CSS 初始值：`auto`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/will-change
    */
-  declare readonly willChange: group7.WillChangeCss;
+  declare readonly willChange: KeywordAuthor<group7.WillChangeCss, T['willChange']>;
   /**
    * 设置单词内部或文字之间的断行规则。（word-break）
    *
@@ -3975,42 +4505,42 @@ export class Css {
    * s.wordBreak.normal
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-break
    */
-  declare readonly wordBreak: group7.WordBreakCss;
+  declare readonly wordBreak: KeywordAuthor<group7.WordBreakCss, T['wordBreak']>;
   /**
    * 设置单词或词间分隔符的额外间距。（word-spacing）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-spacing
    */
-  declare readonly wordSpacing: group7.WordSpacingCss;
+  declare readonly wordSpacing: KeywordAuthor<group7.WordSpacingCss, T['wordSpacing']>;
   /**
    * 设置长文本的额外换行行为；是 overflow-wrap 的兼容名称。（word-wrap）
    *
    * CSS 初始值：`normal`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/word-wrap
    */
-  declare readonly wordWrap: group7.WordWrapCss;
+  declare readonly wordWrap: KeywordAuthor<group7.WordWrapCss, T['wordWrap']>;
   /**
    * 设置水平或竖直书写模式，以及行和块的推进方向。（writing-mode）
    *
    * CSS 初始值：`horizontal-tb`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/writing-mode
    */
-  declare readonly writingMode: group7.WritingModeCss;
+  declare readonly writingMode: KeywordAuthor<group7.WritingModeCss, T['writingMode']>;
   /**
    * 设置适用 SVG 元素的水平几何坐标。（x）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/x
    */
-  declare readonly x: group7.XCss;
+  declare readonly x: KeywordAuthor<group7.XCss, T['x']>;
   /**
    * 设置适用 SVG 元素的垂直几何坐标。（y）
    *
    * CSS 初始值：`0`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/y
    */
-  declare readonly y: group7.YCss;
+  declare readonly y: KeywordAuthor<group7.YCss, T['y']>;
   /**
    * 设置元素在所属层叠上下文中的层叠级别。（z-index）
    *
@@ -4023,21 +4553,30 @@ export class Css {
    * css(s.position.relative, s.zIndex.raw(1))
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/z-index
    */
-  declare readonly zIndex: group7.ZIndexCss;
+  declare readonly zIndex: KeywordAuthor<group7.ZIndexCss, T['zIndex']>;
   /**
    * 设置元素及其布局的缩放比例，与 transform:scale 的布局行为不同。（zoom）
    *
    * CSS 初始值：`1`（不同于浏览器默认样式表）。
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/zoom
    */
-  declare readonly zoom: group7.ZoomCss;
+  declare readonly zoom: KeywordAuthor<group7.ZoomCss, T['zoom']>;
 }
 function defineSystemProperty(name: string, create: () => object): void {
+  let shared: object | undefined;
+  const scoped = new WeakMap<object, object>();
   Object.defineProperty(Css.prototype, name, {
     configurable: true,
     get() {
-      const value = Object.freeze(create());
-      Object.defineProperty(Css.prototype, name, { value, enumerable: true });
+      const source = getKeywordSource(this);
+      if (!source) return (shared ??= Object.freeze(create()));
+      let value = scoped.get(this);
+      if (!value) {
+        value = bindKeywords(create() as { raw(value: never): string }, name, () =>
+          Reflect.get(source(), name),
+        );
+        scoped.set(this, value);
+      }
       return value;
     },
   });

@@ -1,4 +1,5 @@
 import { chromium, firefox, webkit } from '@playwright/test';
+export { expect } from '@playwright/test';
 
 export function launchBrowser() {
   const channel = process.env.CSS_PROBE_BROWSER_CHANNEL ?? 'chrome';

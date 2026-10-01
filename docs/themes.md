@@ -1,4 +1,8 @@
-# 可选亮暗主题
+# 主题与作用域
+
+推荐通过 `SystemKeywords` 派生主题并传给 `new Css(theme)`，在 Vue/Svelte 中通过 context 注入；原始值、声明和读取时机见 [注入关键字](keyword-injection.md)。这种方式不要求主题 CSS 变量，亮暗主题共享同一类型契约。
+
+## 可选 CSS 变量主题（兼容入口）
 
 纯系统 `Css` 不携带主题。需要预设时从 `zerodep-css/theme` 导入 `ThemeCss`、对应的 `ThemeColorCss` 等属性类和 `themes`。此入口独立于 core 主入口，不新增包。
 

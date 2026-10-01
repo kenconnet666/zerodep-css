@@ -257,3 +257,62 @@ test('文档关键示例输出完整声明，数值和参数顺序不变', () =>
   );
   assert.equal(s._hover(s.color.red), '&:hover{color:red;}');
 });
+
+test('注入主题的 hover 与候选保留系统文档和自定义关键字说明', () => {
+  const code = `import {Css,SystemKeywords,systemKeywords} from 'zerodep-css';
+interface AppKeywords extends SystemKeywords {
+  readonly color: SystemKeywords['color'] & {
+    /** 主操作颜色，供确认按钮与链接使用。 */
+    readonly _primary: string;
+  };
+}
+class Theme extends SystemKeywords implements AppKeywords {
+  override readonly color: AppKeywords['color'] = {...systemKeywords.color, _primary: 'purple'};
+}
+const s=new Css(new Theme());
+s.display.inlineFlex;
+s.color._primary;
+s.color.raw('_primary');
+s.display.raw('inline-flex');
+systemKeywords.display.inlineFlex;
+`;
+  const { file, service, position } = languageService(code);
+  try {
+    assert.deepEqual(
+      service
+        .getSemanticDiagnostics(file)
+        .map((d) => ts.flattenDiagnosticMessageText(d.messageText, ' ')),
+      [],
+    );
+    const hover = (expression) =>
+      service.getQuickInfoAtPosition(file, position(expression) + expression.lastIndexOf('.') + 2);
+    const nativeDocs = ts.displayPartsToString(hover('s.display.inlineFlex').documentation);
+    assert.match(nativeDocs, /行内排版/);
+    assert.equal(
+      nativeDocs.split('创建行内级的 Flex 容器。').length - 1,
+      1,
+      '原生 hover 文档不得重复',
+    );
+    assert.match(ts.displayPartsToString(hover('s.color._primary').documentation), /主操作颜色/);
+    assert.match(
+      ts.displayPartsToString(hover('systemKeywords.display.inlineFlex').documentation),
+      /行内排版/,
+    );
+    const offset = position('s.color._primary') + 's.color.'.length;
+    const completion = service.getCompletionsAtPosition(file, offset, {});
+    assert(completion.entries.some((item) => item.name === '_primary'));
+    const details = service.getCompletionEntryDetails(file, offset, '_primary', {}, undefined, {});
+    assert.match(ts.displayPartsToString(details.documentation), /主操作颜色/);
+    const raw = service.getCompletionsAtPosition(file, position("'_primary'") + 1, {});
+    assert(raw.entries.some((item) => item.name === '_primary'));
+    const nativeRaw = service.getCompletionsAtPosition(file, position("'inline-flex'") + 1, {});
+    assert(nativeRaw.entries.some((item) => item.name === 'inline-flex'));
+    assert(
+      !nativeRaw.entries.some((item) => item.name === 'inlineFlex'),
+      'raw 不提示作者成员的 camelCase 名称',
+    );
+    assert.match(ts.displayPartsToString(hover('s.color._primary').displayParts), /string/);
+  } finally {
+    service.dispose();
+  }
+});

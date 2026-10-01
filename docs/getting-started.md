@@ -2,6 +2,8 @@
 
 Vue 项目安装 `zerodep-css-vue`，Svelte 项目安装 `zerodep-css-svelte`；Node 构建/SSR 要求 24+，产物为 ESM。浏览器构建使用主入口的默认 DOM 实现，Node SSR 按 `node` 条件使用请求宿主。Nuxt/SvelteKit 已有[专用接入](metaframeworks.md)，[bx 绑定](bindings.md)、[全局规则与动画](author-api.md)、CSP/nonce 均已提供，支持边界见对应文档。
 
+主题值可以由 SystemKeywords 派生，通过 new Css(theme) 注入；需要跟踪主题替换时由 Provider 使用 new Css(() => currentTheme)。后代仍然只读取 useCss()，详见 [注入关键字](keyword-injection.md)。
+
 ## 作者类型与组件
 
 Vue 项目从 `zerodep-css-vue`、Svelte 项目从 `zerodep-css-svelte` 导入相同名字的 `Css`、`WidthCss`、`createCssContext` 和 `css`。选择器直接使用 `s._hover` / `s._selector`。项目模块只创建类型化上下文，实际作者实例由根组件提供：
