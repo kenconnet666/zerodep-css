@@ -22,7 +22,8 @@ for (const group of groups) {
   originals.set(group, source);
   const ast = ts.createSourceFile(`${group}.ts`, source, ts.ScriptTarget.Latest, true);
   for (const node of ast.statements) {
-    if (!ts.isClassDeclaration(node)) continue;
+    // 值对象也在同一生成文件中；这里只研究输出完整声明的作者类。
+    if (!ts.isClassDeclaration(node) || !node.name?.text.endsWith('Css')) continue;
     const fields = node.members.filter(
       (member) =>
         ts.isPropertyDeclaration(member) &&

@@ -14,10 +14,17 @@ const fields = new Map();
 for (const declaration of author.statements) {
   if (!ts.isClassDeclaration(declaration) || declaration.name?.text !== 'Css') continue;
   for (const member of declaration.members) {
-    if (ts.isPropertyDeclaration(member) && ts.isIdentifier(member.name) && member.type)
-      fields.set(member.name.text, member.type.getText(author).split('.').at(-1));
+    if (!ts.isPropertyDeclaration(member) || !ts.isIdentifier(member.name)) continue;
+    const type = member.type;
+    // KeywordAuthor 的首个参数保留原生作者类；该探针只提取默认作者，不能用于主题作者。
+    if (type && ts.isTypeReferenceNode(type) && type.typeName.getText(author) === 'KeywordAuthor') {
+      const native = type.typeArguments?.[0];
+      assert.ok(native && ts.isTypeReferenceNode(native));
+      fields.set(member.name.text, native.typeName.getText(author).split('.').at(-1));
+    }
   }
 }
+assert.equal(fields.size, 502);
 
 const keywords = new Map();
 for (const file of await readdir(generated)) {
