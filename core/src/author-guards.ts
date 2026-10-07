@@ -42,6 +42,9 @@ export function authorInputs(
   const own = descriptor(target, member);
   if (!own || !('value' in own)) return;
   if (typeof own.value === 'string') return [author, target, own.value];
+  // 继承相同方法不代表生成同一 CSS 属性；不读取自定义 name getter。
+  const name = descriptor(target, 'name');
+  if (!name || !('value' in name) || name.value !== descriptor(reference, 'name')?.value) return;
   if (
     typeof own.value !== 'function' ||
     own.value !== reference?.[member] ||
