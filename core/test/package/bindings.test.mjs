@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createBindingTransform, replacePropsId } from '../../dist/compiler.js';
+import { createBindingTransform, replacePropsId } from '../../../compiler/dist/index.js';
 import { createBindings } from '../../dist/bindings.js';
 import { Css, WidthCss, bx } from '../../dist/index.js';
 import { createServerCssHost } from '../../dist/server.js';

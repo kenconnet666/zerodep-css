@@ -81,3 +81,5 @@ protected `declaration` 是动态方法的公共格式化点；关键字字段�
 `zerodep-css/compiler` 已迁移为 `zerodep-css-compiler`，旧入口删除。使用最新版 Vue/Svelte 适配器无需手动安装编译器；直接引用旧内部入口的工具需更新导入和依赖。CSS 核心不再声明 TypeScript/magic-string peer，公开作者与运行时类型可独立由 TS7 消费。旧模板转换仍使用其自己的 TS6 AST；不宣称这个编译器能改用 TS7 AST。
 
 原生适配器可从 `/bindings` 使用 `inlineDeclaration`。它仅将已确认的系统单位、关键字、颜色十六进制值与 opacity 转成元素变量；CSS-wide、important、未知值、负单位和自定义作者回退原声明。普通 `css`、Vue/Svelte 的 bx 语义没有改变。
+
+0.3.0 跨仓库接入先发布到 `next`；`pnpm release:publish` 默认不改动 latest。明确批准正式提升后才传 `--tag latest`。发布前必须确认相同提交 CI 通过、重新打包和核对。

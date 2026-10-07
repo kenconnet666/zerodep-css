@@ -1,13 +1,17 @@
 import assert from 'node:assert/strict';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseArgs } from 'node:util';
+import { removeOutput } from './remove-output.mjs';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const directory = join(root, 'test-results', 'release');
 const registry = 'https://registry.npmjs.org/';
+const { values } = parseArgs({ options: { tag: { type: 'string', default: 'next' } } });
+assert(['next', 'latest'].includes(values.tag), 'Publish tag must be next or latest');
 const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
 assert.equal(git('branch', '--show-current'), 'main', 'Publish from main');
 assert.equal(git('status', '--porcelain'), '', 'Commit release changes before publishing');
@@ -71,7 +75,7 @@ try {
         '--access',
         'public',
         '--tag',
-        'latest',
+        values.tag,
         '--publish-branch',
         'main',
         '--ignore-scripts',
@@ -100,5 +104,5 @@ try {
     );
   }
 } finally {
-  await rm(temporary, { recursive: true, force: true });
+  await removeOutput(root, temporary);
 }
