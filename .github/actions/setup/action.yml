@@ -3,7 +3,7 @@ description: 固定工具链、安装依赖，并按任务需要准备产物和�
 inputs:
   build:
     default: 'true'
-    description: 构建五包产物
+    description: 构建六包产物
   research:
     default: 'true'
     description: 安装浏览器与性能验收工具

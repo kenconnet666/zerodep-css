@@ -163,6 +163,22 @@ importers:
         specifier: catalog:languageServices
         version: 4.6.5
 
+  compiler:
+    dependencies:
+      magic-string:
+        specifier: 'catalog:'
+        version: 1.4.2
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      zerodep-css:
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.13.5
+
   core:
     dependencies:
       csstype:
@@ -172,9 +188,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.5
-      magic-string:
-        specifier: 'catalog:'
-        version: 1.4.2
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -194,15 +207,12 @@ importers:
 
   svelte:
     dependencies:
-      magic-string:
-        specifier: 'catalog:'
-        version: 1.4.2
-      typescript:
-        specifier: 'catalog:'
-        version: 6.0.3
       zerodep-css:
         specifier: workspace:*
         version: link:../core
+      zerodep-css-compiler:
+        specifier: workspace:*
+        version: link:../compiler
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -213,6 +223,9 @@ importers:
       svelte-check:
         specifier: 'catalog:'
         version: 4.7.6(picomatch@4.0.7)(svelte@5.57.0)(typescript@6.0.3)
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
 
   sveltekit:
     dependencies:
@@ -241,19 +254,19 @@ importers:
       '@vue/compiler-dom':
         specifier: 'catalog:'
         version: 3.5.43
-      magic-string:
-        specifier: 'catalog:'
-        version: 1.4.2
-      typescript:
-        specifier: 'catalog:'
-        version: 6.0.3
       zerodep-css:
         specifier: workspace:*
         version: link:../core
+      zerodep-css-compiler:
+        specifier: workspace:*
+        version: link:../compiler
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.5
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
       vue:
         specifier: 'catalog:'
         version: 3.5.43(typescript@6.0.3)

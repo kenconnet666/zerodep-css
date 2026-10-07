@@ -8,7 +8,7 @@ import {
   createBindingTransform,
   scriptEdits,
   type Edit,
-} from 'zerodep-css/compiler';
+} from 'zerodep-css-compiler';
 
 /** 放在 Vue 插件之前，仅处理 script setup；普通运行时写法仍可单独使用。 */
 export default function cssBindings(

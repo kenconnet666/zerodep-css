@@ -1,6 +1,7 @@
+import { removeOutput } from './remove-output.mjs';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, symlink, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -25,7 +26,7 @@ try {
       if (name !== 'zerodep-css' && !name.startsWith('zerodep-css-')) externals.set(name, source);
   }
   externals.set('@types/node', 'core');
-  // 五个待发布包必须来自 tarball；只复用已安装的外部依赖，避免本地重复安装整个框架。
+  // 六个待发布包必须来自 tarball；只复用已安装的外部依赖，避免本地重复安装整个框架。
   for (const [name, source] of externals) {
     const require = createRequire(join(root, source, 'package.json'));
     const target = join(fixture, 'node_modules', name);
@@ -113,5 +114,5 @@ vueBindings({inlineBindings:false}); svelteBindings(); void handle;
   );
   console.log('Packed browser entries and consumer types pass.');
 } finally {
-  await rm(fixture, { recursive: true, force: true });
+  await removeOutput(root, fixture);
 }

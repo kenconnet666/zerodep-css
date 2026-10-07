@@ -1,4 +1,5 @@
-import { mkdtemp, mkdir, rm, symlink, writeFile } from 'node:fs/promises';
+import { removeOutput } from './remove-output.mjs';
+import { mkdtemp, mkdir, symlink, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
@@ -196,5 +197,5 @@ try {
   }
   console.log('Package types pass for Vue/Svelte in Bundler and NodeNext.');
 } finally {
-  await rm(fixture, { recursive: true, force: true });
+  await removeOutput(root, fixture);
 }

@@ -104,4 +104,4 @@ pnpm --dir test/tools test:metaframeworks
 
 验收启动自己的生产服务器，发起不同初值的并发请求，禁用 JavaScript 检查首屏，再启用客户端检查恢复、交互和无整页刷新导航。静态验收使用普通文件服务器，仅提供预渲染 HTML 与客户端资源，不运行 SSR。结束后自动关闭自己的进程、文件服务器和浏览器。
 
-CI 在 Ubuntu 构建并执行这些集成用例；Windows / Ubuntu 都运行五包类型与基础检查。本机还执行了 Windows 元框架应用构建，不等同于所有部署环境的生产认证。
+CI 在 Ubuntu 构建并执行这些集成用例；Windows / Ubuntu 都运行六包类型与基础检查。本机还执行了 Windows 元框架应用构建，不等同于所有部署环境的生产认证。

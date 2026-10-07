@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import { hash } from '../names.js';
+import { hash } from 'zerodep-css/metadata';
 import { collectBindings } from './source.js';
 import { analyzeTemplate, reactive } from './template-analysis.js';
 import { elementBindings } from './element-bindings.js';

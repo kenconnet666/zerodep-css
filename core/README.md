@@ -19,7 +19,8 @@ const button = css(s.display.flex, s.padding.rem(0.5, 1), s._hover(s.color.blue)
 - `/browser`：DOM 样式登记、hydrateCss、configureCss 和 cssStats。
 - `/server`：Node 请求宿主、withCssHost 与安全的 HTML 序列化。
 - `/theme`：可选 ThemeCss、亮暗预设及主题关键字。
-- `/compiler`、`/bindings`：框架插件内部入口。单独使用 compiler 时安装 TypeScript 和 magic-string；Vue/Svelte 适配包已声明这些依赖。
+- `/bindings`、`/metadata`：框架编译适配器使用的绑定与共享数据，不加载 TypeScript。
+- 0.3.0 起，原 `/compiler` 移至 `zerodep-css-compiler`；它独立持有 TypeScript 6 与 magic-string。普通 CSS 消费者可使用 TS7。
 
 Node 构建/服务端要求 Node 24+，产物为 ESM。浏览器使用原生 CSS 嵌套。Vue/Svelte 项目通常直接使用对应适配包。
 

@@ -6,7 +6,7 @@ import {
   replacePropsId,
   scriptEdits,
   type Edit,
-} from 'zerodep-css/compiler';
+} from 'zerodep-css-compiler';
 
 // Svelte 的 ESTree 节点包含偏移，但通用 ESTree 类型未声明这两个字段。
 function located<T>(node: T): T & { start: number; end: number } {

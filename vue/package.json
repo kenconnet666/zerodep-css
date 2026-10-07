@@ -1,6 +1,6 @@
 {
   "name": "zerodep-css-vue",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "exports": {
     "./vite": {
@@ -35,8 +35,7 @@
   "dependencies": {
     "@vue/compiler-dom": "catalog:",
     "zerodep-css": "workspace:*",
-    "typescript": "catalog:",
-    "magic-string": "catalog:"
+    "zerodep-css-compiler": "workspace:*"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
@@ -44,7 +43,8 @@
   "devDependencies": {
     "@types/node": "catalog:",
     "vue": "catalog:",
-    "vue-tsc": "catalog:languageServices"
+    "vue-tsc": "catalog:languageServices",
+    "typescript": "catalog:"
   },
   "description": "Runtime CSS and explicit CSS variable bindings for Vue 3.5.",
   "author": "kenconnet666",

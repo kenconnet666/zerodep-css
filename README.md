@@ -9,13 +9,14 @@ pnpm add zerodep-css-svelte  # Svelte 项目
 
 底层包为 `zerodep-css`；元框架集成使用 `zerodep-css-nuxt` 或 `zerodep-css-sveltekit`。构建与 Node SSR 要求 Node 24+，包产物为 ESM。
 
-| 子项目      | 职责                 |
-| ----------- | -------------------- |
-| `core`      | 与框架无关的作者模型 |
-| `vue`       | Vue 3.5 适配         |
-| `svelte`    | Svelte 5 适配        |
-| `nuxt`      | Nuxt 4 适配          |
-| `sveltekit` | SvelteKit 2 适配     |
+| 子项目      | 职责                                  |
+| ----------- | ------------------------------------- |
+| `core`      | 与框架无关的作者模型                  |
+| `compiler`  | Vue/Svelte 共享模板转换，独立持有 TS6 |
+| `vue`       | Vue 3.5 适配                          |
+| `svelte`    | Svelte 5 适配                         |
+| `nuxt`      | Nuxt 4 适配                           |
+| `sveltekit` | SvelteKit 2 适配                      |
 
 使用 Node 24 和 pnpm 10.34.5。版本集中在 `pnpm-workspace.yaml`，包间通过 `workspace:*` 关联。
 
@@ -41,4 +42,4 @@ pnpm check
 
 ## 工程目录
 
-五包源码位于各自 src；core/src/generated 只通过生成器更新。正式浏览器验收在 test/browser，共享夹具与性能工具在 [test/tools](test/tools/README.md)。已失效的研究稿和阶段记录从 Git 历史查询；历史原始样本保留在 test/tools/results，不作为当前性能结论。
+六包源码位于各自 src；core/src/generated 只通过生成器更新。正式浏览器验收在 test/browser，共享夹具与性能工具在 [test/tools](test/tools/README.md)。已失效的研究稿和阶段记录从 Git 历史查询；历史原始样本保留在 test/tools/results，不作为当前性能结论。

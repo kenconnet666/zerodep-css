@@ -2,7 +2,7 @@
 
 ## 工作区与接续
 
-主线为 `main`，远程为 `kenconnet666/zerodep-css`。五个 npm 包统一版本、采用 MIT；根工作区仍为 private。运行时 CSS 是基础能力，bx 与模板缓存是优化，不要求把全部样式静态提取。
+主线为 `main`，远程为 `kenconnet666/zerodep-css`。六个 npm 包统一版本、采用 MIT；根工作区仍为 private。运行时 CSS 是基础能力，bx 与模板缓存是优化，不要求把全部样式静态提取。
 
 使用 Node 24、pnpm 10.34.5，依赖由 catalog 和锁文件固定。新机器执行：
 
@@ -24,7 +24,7 @@ pnpm lsp:verify
 | core/src/generated                                                             | 502 个属性、关键字、单位与类型签名；只通过 `pnpm css:generate` 更新 |
 | scripts/generate-css-author.mjs、css-author-methods.mjs、css-author-notes.json | 生成规则、方法代码和参数配置                                        |
 | scripts/css-author-docs.json、css-author-docs.mjs                              | 中文语义、调用示例、单位和重载说明及覆盖校验                        |
-| core/src/compiler                                                              | bx 与模板表达式分析、源码编辑和定位                                 |
+| compiler/src                                                                   | bx 与模板表达式分析、源码编辑和定位                                 |
 | core/src/selector-shortcuts.ts、author-guards.ts                               | 选择器元数据、系统作者身份检查                                      |
 | core/src/registry.ts、bindings.ts、browser.ts、server.ts                       | 注册缓存、变量生命周期、浏览器与 Node 宿主                          |
 | vue/src、svelte/src                                                            | 上下文、框架编译与响应式接入                                        |
@@ -70,8 +70,14 @@ protected `declaration` 是动态方法的公共格式化点；关键字字段�
 
 ## npm 发布
 
-五包名称为 zerodep-css、zerodep-css-vue、zerodep-css-svelte、zerodep-css-nuxt、zerodep-css-sveltekit。发布顺序先 core、再两个框架适配器、最后两个元框架包。包间 workspace/catalog 协议由 pnpm pack 转换，不能直接把源码 package.json 交给 npm publish。
+六包名称为 zerodep-css、zerodep-css-compiler、zerodep-css-vue、zerodep-css-svelte、zerodep-css-nuxt、zerodep-css-sveltekit。发布顺序先 core、再 compiler、两个框架适配器、最后两个元框架包。包间 workspace/catalog 协议由 pnpm pack 转换，不能直接把源码 package.json 交给 npm publish。
 
 在已提交并推送的 main 上运行 `pnpm build` 和 `pnpm release:pack`，再运行 `pnpm release:publish`。产物和 SHA-512 清单位于被忽略的 test-results/release；发布脚本只接受当前提交的产物，并核对 registry 摘要后才继续下一个包。中途失败保留产物，可用同一清单重试，不覆盖已发布版本。
 
 令牌只使用 NPM_TOKEN。Windows 用户变量尚未进入当前终端时，发布脚本会读取当前用户变量；临时 npmrc 只含环境变量占位符并在结束时清理。不将令牌写入仓库或复制到命令行参数。源码分支的完整测试和 `release:check` 的 tarball 消费检查都由 CI 执行，本地发布阶段不重复运行完整测试。
+
+## 0.3.0 编译器边界
+
+`zerodep-css/compiler` 已迁移为 `zerodep-css-compiler`，旧入口删除。使用最新版 Vue/Svelte 适配器无需手动安装编译器；直接引用旧内部入口的工具需更新导入和依赖。CSS 核心不再声明 TypeScript/magic-string peer，公开作者与运行时类型可独立由 TS7 消费。旧模板转换仍使用其自己的 TS6 AST；不宣称这个编译器能改用 TS7 AST。
+
+原生适配器可从 `/bindings` 使用 `inlineDeclaration`。它仅将已确认的系统单位、关键字、颜色十六进制值与 opacity 转成元素变量；CSS-wide、important、未知值、负单位和自定义作者回退原声明。普通 `css`、Vue/Svelte 的 bx 语义没有改变。

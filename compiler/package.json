@@ -1,5 +1,5 @@
 {
-  "name": "zerodep-css-nuxt",
+  "name": "zerodep-css-compiler",
   "version": "0.3.0",
   "type": "module",
   "exports": {
@@ -13,16 +13,14 @@
     "check": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "catalog:",
-    "zerodep-css-vue": "workspace:*"
-  },
-  "peerDependencies": {
-    "nuxt": "^4.0.0"
+    "zerodep-css": "workspace:*",
+    "typescript": "catalog:",
+    "magic-string": "catalog:"
   },
   "devDependencies": {
-    "nuxt": "catalog:"
+    "@types/node": "catalog:"
   },
-  "description": "Node SSR and hydration integration for zerodep-css and Nuxt 4.",
+  "description": "Shared Vue/Svelte CSS template compiler, isolated from the CSS runtime.",
   "author": "kenconnet666",
   "engines": {
     "node": ">=24"
@@ -30,7 +28,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kenconnet666/zerodep-css.git",
-    "directory": "nuxt"
+    "directory": "compiler"
   },
   "homepage": "https://github.com/kenconnet666/zerodep-css#readme",
   "bugs": {
@@ -39,8 +37,7 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE",
-    "THIRD_PARTY_NOTICES.md"
+    "LICENSE"
   ],
   "publishConfig": {
     "access": "public",

@@ -1,15 +1,11 @@
 {
   "name": "zerodep-css",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "exports": {
     "./theme": {
       "types": "./dist/types/theme.d.ts",
       "default": "./dist/theme.js"
-    },
-    "./compiler": {
-      "types": "./dist/types/compiler.d.ts",
-      "node": "./dist/compiler.js"
     },
     "./bindings": {
       "types": "./dist/types/bindings.d.ts",
@@ -26,6 +22,10 @@
     "./server": {
       "types": "./dist/types/server.d.ts",
       "node": "./dist/server.js"
+    },
+    "./metadata": {
+      "types": "./dist/types/metadata.d.ts",
+      "default": "./dist/metadata.js"
     }
   },
   "scripts": {
@@ -37,21 +37,8 @@
     "csstype": "catalog:"
   },
   "devDependencies": {
-    "magic-string": "catalog:",
     "@types/node": "catalog:",
     "typescript": "catalog:"
-  },
-  "peerDependencies": {
-    "typescript": ">=5.4 <7",
-    "magic-string": "^1.4.2"
-  },
-  "peerDependenciesMeta": {
-    "typescript": {
-      "optional": true
-    },
-    "magic-string": {
-      "optional": true
-    }
   },
   "description": "Typed CSS declaration strings and framework-independent runtime CSS.",
   "author": "kenconnet666",

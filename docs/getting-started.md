@@ -39,7 +39,7 @@ const className = css(s.display.flex, s.width._md, s._hover(s.color.red));
 | `zerodep-css`                            | 框架无关的作者类与类型；适配器从 `/browser` 或 `/server` 选择宿主 |
 | `zerodep-css/theme`                      | 可选 ThemeCss、主题属性类与 themes.light/dark                     |
 
-`core/compiler` 和适配包的 `/bindings` 是编译器内部协议，业务组件不直接调用。运行时不引入 TypeScript 编译器。Nuxt/Kit 包只提供元框架接入，不重复导出作者 API；配置见[元框架文档](metaframeworks.md)。
+`zerodep-css-compiler` 和适配包的 `/bindings` 是编译器内部协议，业务组件不直接调用。运行时不引入 TypeScript 编译器。Nuxt/Kit 包只提供元框架接入，不重复导出作者 API；配置见[元框架文档](metaframeworks.md)。
 
 | 示例               | Vue                                                                          | Svelte                                                                                   |
 | ------------------ | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |

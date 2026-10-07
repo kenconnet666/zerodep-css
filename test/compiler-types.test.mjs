@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import ts from 'typescript';
-import { createBindingTransform } from '../core/dist/compiler.js';
+import { createBindingTransform } from '../compiler/dist/index.js';
 
 for (const framework of ['vue', 'svelte']) {
   test(`${framework} 转换后的 TS 保留片段参数和框架回调的上下文类型`, () => {

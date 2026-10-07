@@ -1,38 +1,30 @@
-import { lstat, rm } from 'node:fs/promises';
-import { resolve, sep } from 'node:path';
+import { removeOutput } from './remove-output.mjs';
+import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 // 只清理由本脚本生成的 dist，避免重命名后旧声明混入发布产物。
-for (const name of ['core', 'vue', 'svelte', 'nuxt', 'sveltekit']) {
+for (const name of ['core', 'compiler', 'vue', 'svelte', 'nuxt', 'sveltekit']) {
   const dist = resolve(root, name, 'dist');
-  if (!dist.startsWith(root + sep)) throw new Error(`Unsafe build path: ${dist}`);
-  const current = await lstat(dist).catch((error) => {
-    if (error.code === 'ENOENT') return null;
-    throw error;
-  });
-  if (current) {
-    if (!current.isDirectory() || current.isSymbolicLink())
-      throw new Error(`Build output is not a directory: ${dist}`);
-    await rm(dist, { recursive: true });
-  }
+  await removeOutput(root, dist);
 }
 for (const [name, entries, external] of [
   [
     'core',
-    ['index', 'browser', 'server', 'bindings', 'compiler', 'theme'],
+    ['index', 'browser', 'server', 'bindings', 'metadata', 'theme'],
     ['node:*', 'typescript', 'magic-string'],
   ],
+  ['compiler', ['index'], ['node:*', 'zerodep-css/*', 'typescript', 'magic-string']],
   [
     'vue',
     ['index', 'server', 'bindings', 'bindings-server', 'vite'],
-    ['node:*', 'zerodep-css', 'zerodep-css/*', 'vue', '@vue/compiler-dom'],
+    ['node:*', 'zerodep-css', 'zerodep-css/*', 'zerodep-css-compiler', 'vue', '@vue/compiler-dom'],
   ],
   [
     'svelte',
     ['index', 'server', 'bindings', 'bindings-server', 'vite'],
-    ['node:*', 'zerodep-css', 'zerodep-css/*', 'svelte'],
+    ['node:*', 'zerodep-css', 'zerodep-css/*', 'zerodep-css-compiler', 'svelte'],
   ],
   [
     'nuxt',
@@ -41,7 +33,7 @@ for (const [name, entries, external] of [
   ],
   ['sveltekit', ['index', 'server'], ['zerodep-css-svelte', 'zerodep-css-svelte/*']],
 ]) {
-  if (['core', 'vue', 'svelte'].includes(name)) {
+  if (['core', 'compiler', 'vue', 'svelte'].includes(name)) {
     // 多入口共用作者原型与宿主状态，避免 bindings 入口复制另一份类定义。
     await build({
       entryPoints: entries.map((entry) => resolve(root, name, 'src', `${entry}.ts`)),
@@ -76,4 +68,4 @@ for (const [name, entries, external] of [
     });
   }
 }
-console.log('Built all five package JavaScript entries.');
+console.log('Built all package JavaScript entries.');
