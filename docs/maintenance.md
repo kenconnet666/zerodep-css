@@ -115,3 +115,13 @@ zerodep-js 的当前目标是完善基础 API，包括已有能力与已确认�
 新增框架内部接线 `inlineKeyword(target, member, variable)`：仅对本库创建并冻结的主题属性视图读取元数据，每次运行读取当前原始值并沿用元素变量的安全分类。安全值生成声明与变量值；CSS-wide、已有 var()/复杂表达式、未知值及自定义作者保留原声明。普通系统常量不变量化，不解析声明字符串或调用浏览器 CSS.supports；SSR 与浏览器规则一致。`keywords` 原始值、作者成员的字符串类型和已有 Vue/Svelte 路线不变。0.3.2 六包同版本，完整 CI 成功后发布固定产物到 next。
 
 已交付：提交 0f888c8 / CI 37787188898 完整通过，六份固定 tgz 来自该 CI 的 release-candidate；npm 六包 0.3.2 与 manifest SHA512 一致，next 全部为 0.3.2，原 latest 不变。GitHub v0.3.2 预发布保留 tgz、manifest 与 registry-verification-0.3.2.json。主框架已消费 npm 核心包，源码绑定增强由框架自己的 CI 验收。
+
+# 0.3.3 关键字数据与类型去重
+
+提交 071cdd779360a45af3461d8b250089852ca6d61e 的 [CI 37807279904](https://github.com/kenconnet666/zerodep-css/actions/runs/37807279904) 已完整成功，包含三浏览器、Linux/Windows、元框架、生命周期和性能探针。六份固定 tgz 与 manifest 均来自该提交的 release-candidate，不重新构建同版本发行包。
+
+12,586 个关键字按原始值和语义说明归为 219 组；作者声明在实例初始化时生成，保留可继承构造器、自有字符串字段、枚举顺序、子类覆写和主题动态读取。公开类型及常用集合采用 ColorCss、ColorKeywords、globalKeywords、colorKeywords、fontSizeKeywords 等有意义的名称。中文语义文档保留在补全和 hover；属性专属的完整声明示例可以省略，同名但含义不同的关键字不合并。
+
+同入口构建的压缩 JS 由 1,030,728 降至 416,436 字节，gzip 由 98,446 降至 34,484 字节，生成声明由 9,056,355 降至 5,533,941 字节；不是整个应用大小。保留原有按需打包断言，避免共享数据的顶层副作用把所有作者带入小入口。zerodep-js 消费正式 npm 核心包后，25 项 CSS 编译/SSR 和四类 TS7 中文补全/hover 焦点检查通过，其完整应用矩阵仍由消费端 CI 验收。
+
+2026-10-09 发布完成：六包 next 均为 0.3.3，逐包 SHA-512/SHA-1 与 CI 固定产物一致；五包 latest 保持 0.2.0，compiler latest 保持 0.3.0。npm 受理后部分版本延迟可读，没有重复上传；版本端点与禁用缓存的完整元数据确认最终内容。[v0.3.3 预发布](https://github.com/kenconnet666/zerodep-css/releases/tag/v0.3.3) 保存六份 tgz、manifest.json 和 registry-verification-0.3.3.json，本地归档于 test-results/release。临时上传工具、日志和重复候选目录已清理，原始固定产物及旧版归档保留。
