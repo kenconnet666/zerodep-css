@@ -74,13 +74,19 @@ protected `declaration` 是动态方法的公共格式化点；关键字字段�
 
 在已提交并推送的 main 上运行 `pnpm build` 和 `pnpm release:pack`，再运行 `pnpm release:publish`。产物和 SHA-512 清单位于被忽略的 test-results/release；发布脚本只接受当前提交的产物，并核对 registry 摘要后才继续下一个包。中途失败保留产物，可用同一清单重试，不覆盖已发布版本。
 
+npm 返回已受理但立即查询 404 时，先保留原产物并等待版本公开；确认已受理包的 dist.integrity 与 manifest 一致后再恢复发布，不能直接重传。上传成功不等于全部包公开或标签就绪，最后逐包检查版本、next、既有 latest 和摘要。
+
+忽略目录不会随 Git 换机。优先从对应 GitHub 预发布下载六个原始 tgz、manifest.json 和 registry-verification.json，核对源码 commit 与摘要；需要恢复未完成发布时应使用账本对应的源码提交。仅在尚未上传且原产物无法恢复时，才从指定源码重新构建和冻结，重新验证该批产物，不能沿用旧摘要。
+
 令牌只使用 NPM_TOKEN。Windows 用户变量尚未进入当前终端时，发布脚本会读取当前用户变量；临时 npmrc 只含环境变量占位符并在结束时清理。不将令牌写入仓库或复制到命令行参数。源码分支的完整测试和 `release:check` 的 tarball 消费检查都由 CI 执行，本地发布阶段不重复运行完整测试。
 
 ## 0.3.1 作者判断修复
 
 继承系统方法的属性作者只有在底层 CSS 属性名仍是同一个普通数据值时，才适用系统变量绑定。改名或使用 name getter 的作者保留原声明，不把原属性的关键字/层叠假设套到另一个属性，也不为判定执行 getter。
 
-六包保持同版本补丁发布，目标标签仍是 next；提交通过完整 CI 后重新打包、发布和校验，主框架再从 npm 固定消费。不能把仅本地的绑定测试当作发布验收。
+六包 0.3.1 已发布到 next，源码为 593cebde73d62234f0d38c635cf0c56ca368faa9，[完整 CI 37688602400](https://github.com/kenconnet666/zerodep-css/actions/runs/37688602400) 成功。模板性能任务原先在 Playwright 系统依赖安装中因 Ubuntu 镜像源请求停滞超时，重跑同一任务后通过，没有改变断言。
+
+本次换机未带入旧产物，从同一源码重新构建六包并通过包入口、浏览器打包和消费类型验证，再冻结发布。六包 dist.integrity 与固定 tgz 的 SHA-512 均一致，next 均为 0.3.1；原有五包 latest 保持 0.2.0，compiler latest 保持 0.3.0。[GitHub 预发布](https://github.com/kenconnet666/zerodep-css/releases/tag/v0.3.1) 保存六包、manifest 与逐包注册表核验记录。zerodep-js 的 rc.8 候选已从 npm 精确消费核心包 0.3.1，并在 Linux/Windows 独立消费中验证继承作者的层叠与更新。
 
 ## 0.3.0 编译器边界
 

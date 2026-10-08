@@ -3,11 +3,13 @@
 SystemKeywords 提供原始 CSS 关键字值，Css(theme) 按作用域读取并生成声明字符串；无参 Css 保留系统默认行为。属性方法返回声明字符串，`css(...parts)` 组合并缓存样式类；`bx(value)` 可通过框架插件绑定 CSS 变量。保留运行时 CSS 和原生 if/switch，不要求静态提取全部样式。系统包含 502 条属性链和 12,586 个关键字，Vue/Svelte 负责响应式与生命周期，Nuxt/SvelteKit 提供 Node SSR 和预渲染接入。采用 MIT 许可；流式 SSR、边缘部署尚未验收。
 
 ```sh
-pnpm add zerodep-css-vue     # Vue 项目
-pnpm add zerodep-css-svelte  # Svelte 项目
+pnpm add zerodep-css-vue@0.3.1     # Vue 项目
+pnpm add zerodep-css-svelte@0.3.1  # Svelte 项目
 ```
 
 底层包为 `zerodep-css`；元框架集成使用 `zerodep-css-nuxt` 或 `zerodep-css-sveltekit`。构建与 Node SSR 要求 Node 24+，包产物为 ESM。
+
+六包 0.3.1 已发布到 next；安装当前候选请指定精确版本或 @next，不指定标签仍会安装原有 latest。完整 CI、固定 tgz 和注册表摘要见 [0.3.1 预发布](https://github.com/kenconnet666/zerodep-css/releases/tag/v0.3.1)，恢复方法见 [维护文档](docs/maintenance.md#npm-发布)。
 
 | 子项目      | 职责                                  |
 | ----------- | ------------------------------------- |
