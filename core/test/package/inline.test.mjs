@@ -1,7 +1,21 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { runInNewContext } from 'node:vm';
 import { Css, WidthCss, ColorCss } from '../../dist/index.js';
 import { authorInputs, inlineDeclaration, inlineKeyword } from '../../dist/bindings.js';
+
+test('跨 realm 和无原型的关键字对象不混入 Object.prototype 成员', () => {
+  for (const color of [
+    runInNewContext('({ _primary: "red" })'),
+    Object.assign(Object.create(null), { _primary: 'red' }),
+  ]) {
+    const s = new Css({ color });
+    assert.deepEqual(inlineKeyword(s.color, '_primary', '--zj-test'), {
+      declaration: 'color:var(--zj-test);',
+      value: 'red',
+    });
+  }
+});
 
 test('主题关键字在安全值、全局关键字与已有变量之间动态切换，保留原始值', () => {
   let value = '#245fc5';

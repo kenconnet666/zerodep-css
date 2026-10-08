@@ -54,6 +54,14 @@ function keysOf(value: object): string[] {
     current && current !== Object.prototype;
     current = Object.getPrototypeOf(current)
   ) {
+    // iframe/其他 realm 的 Object.prototype 与本地不同，但也不是主题成员来源。
+    const constructor = Object.getOwnPropertyDescriptor(current, 'constructor')?.value;
+    if (
+      Object.getPrototypeOf(current) === null &&
+      typeof constructor === 'function' &&
+      Function.prototype.toString.call(constructor) === Function.prototype.toString.call(Object)
+    )
+      break;
     for (const key of Object.getOwnPropertyNames(current)) if (key !== 'constructor') keys.add(key);
   }
   return [...keys];
