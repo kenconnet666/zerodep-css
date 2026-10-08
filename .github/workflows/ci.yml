@@ -45,6 +45,15 @@ jobs:
       - run: pnpm --dir test/tools test:mup:exports
       - run: pnpm release:pack
       - run: pnpm release:check
+      # 主框架消费的候选必须来自同一次 CI，不要求本地重跑六包构建。
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-candidate
+          path: |
+            test-results/release/*.tgz
+            test-results/release/manifest.json
+          if-no-files-found: error
+          retention-days: 30
       - uses: actions/upload-artifact@v4
         if: always()
         with:
