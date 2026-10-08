@@ -4,6 +4,8 @@ import type { KeywordValues, SystemKeywords } from './generated/keywords.js';
 export type KeywordSource<T> = T | (() => T);
 /** 主题各成员读取后得到完整声明，保留成员名与成员文档。 */
 export type KeywordDeclarations<T> = { readonly [K in keyof T]: string };
+/** 复用成员名及中文说明，值类型仍由具体 CSS 属性决定，不能收窄为默认字面量。 */
+export type KeywordValuesOf<T, V> = { readonly [K in keyof T]: V };
 /** 保留原生方法文档与重载，为 raw 补充主题关键字候选。 */
 export type KeywordAuthor<A extends { raw(value: never): string }, T> = A &
   // 原生成员沿用 A 的文档；只映射新增键，避免 hover 将两份原生说明拼接。

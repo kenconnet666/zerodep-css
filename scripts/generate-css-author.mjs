@@ -1,6 +1,7 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import prettier from 'prettier';
 import ts from 'typescript';
 import { units, extraUnits, unitMethod, valueMethods, gridMethods } from './css-author-methods.mjs';
@@ -158,6 +159,8 @@ const groupLines = new Map(
       ...header,
       "import type { Property } from 'csstype';",
       "import { CssProperty, LengthCssProperty, type CssString } from './base.js';",
+      "import { initializeKeywordDeclarations, keywordConstructor } from '../keyword-data.js';",
+      "import type { KeywordDeclarations, KeywordValuesOf } from '../keyword-source.js';",
       '// 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。',
     ],
   ]),
@@ -178,6 +181,9 @@ const keywordFields = [];
 const keywordCreators = [];
 const keywordValues = [];
 const systemCreators = [];
+const sharedKeywords = new Map();
+const sharedKeywordLines = [...header];
+const keywordImports = new Map(groups.map((group) => [group, new Set()]));
 let keywordCount = 0;
 const notes = new Map(config.properties.map((setting) => [setting.name, setting]));
 for (const name of notes.keys())
@@ -239,20 +245,38 @@ for (const name of names) {
   const lines = groupLines.get(group);
   const alias = `group${groups.indexOf(group)}`;
   const keywordClass = className.replace(/Css$/, 'Keywords');
+  // 值相同但 auto/normal 等说明不同的属性不能共用文档；不重复附加属性专属声明示例。
+  const docs = keywords.map(([, value]) =>
+    keywordDocumentation(name, cssName, value).replace(
+      /CSS 声明：`[^`]+`。/g,
+      `默认 CSS 值：\`${value}\`；主题可覆盖。`,
+    ),
+  );
+  const signature = JSON.stringify([keywords, docs.map((doc) => doc.replace(/\s+/g, ' ').trim())]);
+  let dataName = sharedKeywords.get(signature);
+  if (!dataName) {
+    dataName = `keywords_${createHash('sha256').update(signature).digest('hex').slice(0, 12)}`;
+    if ([...sharedKeywords.values()].includes(dataName))
+      throw new Error('Keyword group hash collision');
+    sharedKeywords.set(signature, dataName);
+    sharedKeywordLines.push(`export const ${dataName} = /* @__PURE__ */ Object.freeze({`);
+    for (const [index, [keyword, value]] of keywords.entries())
+      sharedKeywordLines.push(docs[index], `${JSON.stringify(keyword)}: ${JSON.stringify(value)},`);
+    sharedKeywordLines.push('});');
+  }
+  if (!keywordImports.get(group).has(dataName)) {
+    keywordImports.get(group).add(dataName);
+    lines.push(`import { ${dataName} } from './keyword-sets.js';`);
+  }
   lines.push(
     '',
     jsdoc(`${cssName} 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。`),
-    `export class ${keywordClass} {`,
+    `export type ${keywordClass} = KeywordValuesOf<typeof ${dataName}, Property.${type} | CssString>;`,
+    jsdoc(`创建 ${cssName} 的可继承关键字对象；每个实例独立，成员保留语义说明。`, {
+      examples: [`new ${keywordClass}()`],
+    }),
+    `export const ${keywordClass} = /* @__PURE__ */ keywordConstructor(class ${keywordClass} { constructor() { Object.assign(this, ${dataName}); } }, ${JSON.stringify(keywordClass)}) as new () => ${keywordClass};`,
   );
-  for (const [keyword, value] of keywords)
-    lines.push(
-      keywordDocumentation(name, cssName, value).replace(
-        '/**',
-        '/**\n * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。\n *',
-      ),
-      `readonly ${keyword}: Property.${type} | CssString = ${JSON.stringify(value)};`,
-    );
-  lines.push('}');
   keywordFields.push(documentation, `declare readonly ${name}: ${alias}.${keywordClass};`);
   keywordCreators.push(
     `defineKeywordProperty(${JSON.stringify(name)}, () => new ${alias}.${keywordClass}());`,
@@ -260,19 +284,14 @@ for (const name of names) {
   keywordValues.push(documentation, `readonly ${name}: Property.${type} | CssString;`);
   lines.push(
     '',
-    documentation,
-    `export class ${className} extends ${hasLength ? 'LengthCssProperty' : 'CssProperty'} {`,
+    jsdoc(`${cssName} 作者的运行时方法；公共成员类型由原始关键字定义映射。`),
+    `class ${className}Runtime extends ${hasLength ? 'LengthCssProperty' : 'CssProperty'} {`,
   );
-  for (const [keyword, value] of keywords)
-    lines.push(
-      keywordDocumentation(name, cssName, value),
-      `  readonly ${keyword}: string = ${JSON.stringify(`${cssName}:${value};`)};`,
-    );
   lines.push(
     jsdoc(`创建 ${cssName} 属性作者；普通使用通过 s.${name} 取得共享实例。`, {
       examples: [`class Custom${className} extends ${className} {}`],
     }),
-    `  constructor() { super(${JSON.stringify(cssName)}); }`,
+    `  constructor() { super(${JSON.stringify(cssName)}); initializeKeywordDeclarations(this, ${JSON.stringify(cssName)}, ${dataName}); }`,
   );
   lines.push(
     jsdoc(`原样生成 ${cssName} 声明，保留关键字补全并接受自定义 CSS 值。`, {
@@ -302,6 +321,12 @@ for (const name of names) {
     ...Object.values(grid).flat(),
   );
   lines.push('}');
+  lines.push(
+    jsdoc(`${cssName} 属性作者；关键字读取为完整声明字符串，保留中文说明。`),
+    `export type ${className} = ${className}Runtime & KeywordDeclarations<${keywordClass}>;`,
+    documentation,
+    `export const ${className} = /* @__PURE__ */ keywordConstructor(${className}Runtime, ${JSON.stringify(className)}) as new () => ${className};`,
+  );
   systemFields.push(
     documentation,
     `  declare readonly ${setting.name}: KeywordAuthor<${alias}.${className}, T[${JSON.stringify(name)}]>;`,
@@ -424,6 +449,7 @@ const files = new Map([
   ...groupLines,
   ['author', author],
   ['keywords', keywordRoot],
+  ['keyword-sets', sharedKeywordLines],
 ]);
 // 可选预设单独导出，不能从纯系统作者入口反向导入主题。
 const themeProperties = {
@@ -484,5 +510,5 @@ for (const [name, lines] of files) {
   }
 }
 console.log(
-  `${mode === '--check' ? 'Checked' : 'Generated'} ${names.length} properties and ${keywordCount} keywords.`,
+  `${mode === '--check' ? 'Checked' : 'Generated'} ${names.length} properties and ${keywordCount} keywords in ${sharedKeywords.size} documented groups.`,
 );

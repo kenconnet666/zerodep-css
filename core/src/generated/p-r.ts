@@ -2,95 +2,36 @@
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
 import { CssProperty, LengthCssProperty, type CssString } from './base.js';
+import { initializeKeywordDeclarations, keywordConstructor } from '../keyword-data.js';
+import type { KeywordDeclarations, KeywordValuesOf } from '../keyword-source.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
+import { keywords_dffc425ba867 } from './keyword-sets.js';
 
 /**
  * padding 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding:inherit;`。
-   */
-  readonly inherit: Property.Padding | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding:initial;`。
-   */
-  readonly initial: Property.Padding | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding:revert;`。
-   */
-  readonly revert: Property.Padding | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding:revert-layer;`。
-   */
-  readonly revertLayer: Property.Padding | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding:unset;`。
-   */
-  readonly unset: Property.Padding | CssString = 'unset';
-}
+export type PaddingKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.Padding | CssString
+>;
+/**
+ * 创建 padding 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingKeywords()
+ */
+export const PaddingKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingKeywords',
+) as new () => PaddingKeywords;
 
 /**
- * 设置内容与边框之间的四边内边距，不接受负值。（padding）
- *
- * 1/2/3/4 个值依次表示：四边；上下/左右；上/左右/下；上/右/下/左。不能使用负值或 auto。
- *
- * 适用场景：控制文字或子元素与组件边框之间的留白。
- * @example
- * s.padding.rem(0.5, 1) // padding:0.5rem 1rem;
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding
+ * padding 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding:inherit;`。
-   */
-  readonly inherit: string = 'padding:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding:initial;`。
-   */
-  readonly initial: string = 'padding:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding:revert;`。
-   */
-  readonly revert: string = 'padding:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding:unset;`。
-   */
-  readonly unset: string = 'padding:unset;';
+class PaddingCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding 属性作者；普通使用通过 s.padding 取得共享实例。
    * @example
@@ -98,6 +39,7 @@ export class PaddingCss extends LengthCssProperty {
    */
   constructor() {
     super('padding');
+    initializeKeywordDeclarations(this, 'padding', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding 声明，保留关键字补全并接受自定义 CSS 值。
@@ -2612,88 +2554,50 @@ export class PaddingCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingCss = PaddingCssRuntime & KeywordDeclarations<PaddingKeywords>;
+/**
+ * 设置内容与边框之间的四边内边距，不接受负值。（padding）
+ *
+ * 1/2/3/4 个值依次表示：四边；上下/左右；上/左右/下；上/右/下/左。不能使用负值或 auto。
+ *
+ * 适用场景：控制文字或子元素与组件边框之间的留白。
+ * @example
+ * s.padding.rem(0.5, 1) // padding:0.5rem 1rem;
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding
+ */
+export const PaddingCss = /* @__PURE__ */ keywordConstructor(
+  PaddingCssRuntime,
+  'PaddingCss',
+) as new () => PaddingCss;
 
 /**
  * padding-block 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingBlockKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-block:inherit;`。
-   */
-  readonly inherit: Property.PaddingBlock | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-block:initial;`。
-   */
-  readonly initial: Property.PaddingBlock | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-block:revert;`。
-   */
-  readonly revert: Property.PaddingBlock | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-block:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingBlock | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-block:unset;`。
-   */
-  readonly unset: Property.PaddingBlock | CssString = 'unset';
-}
+export type PaddingBlockKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingBlock | CssString
+>;
+/**
+ * 创建 padding-block 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingBlockKeywords()
+ */
+export const PaddingBlockKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingBlockKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingBlockKeywords',
+) as new () => PaddingBlockKeywords;
 
 /**
- * 设置逻辑块轴起始侧和结束侧的内边距。（padding-block）
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block
+ * padding-block 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingBlockCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-block:inherit;`。
-   */
-  readonly inherit: string = 'padding-block:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-block:initial;`。
-   */
-  readonly initial: string = 'padding-block:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-block:revert;`。
-   */
-  readonly revert: string = 'padding-block:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-block:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-block:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-block:unset;`。
-   */
-  readonly unset: string = 'padding-block:unset;';
+class PaddingBlockCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-block 属性作者；普通使用通过 s.paddingBlock 取得共享实例。
    * @example
@@ -2701,6 +2605,7 @@ export class PaddingBlockCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-block');
+    initializeKeywordDeclarations(this, 'padding-block', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-block 声明，保留关键字补全并接受自定义 CSS 值。
@@ -3971,90 +3876,44 @@ export class PaddingBlockCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-block 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingBlockCss = PaddingBlockCssRuntime & KeywordDeclarations<PaddingBlockKeywords>;
+/**
+ * 设置逻辑块轴起始侧和结束侧的内边距。（padding-block）
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block
+ */
+export const PaddingBlockCss = /* @__PURE__ */ keywordConstructor(
+  PaddingBlockCssRuntime,
+  'PaddingBlockCss',
+) as new () => PaddingBlockCss;
 
 /**
  * padding-block-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingBlockEndKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-block-end:inherit;`。
-   */
-  readonly inherit: Property.PaddingBlockEnd | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-block-end:initial;`。
-   */
-  readonly initial: Property.PaddingBlockEnd | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-block-end:revert;`。
-   */
-  readonly revert: Property.PaddingBlockEnd | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-block-end:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingBlockEnd | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-block-end:unset;`。
-   */
-  readonly unset: Property.PaddingBlockEnd | CssString = 'unset';
-}
+export type PaddingBlockEndKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingBlockEnd | CssString
+>;
+/**
+ * 创建 padding-block-end 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingBlockEndKeywords()
+ */
+export const PaddingBlockEndKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingBlockEndKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingBlockEndKeywords',
+) as new () => PaddingBlockEndKeywords;
 
 /**
- * 设置逻辑块轴结束侧的内边距。（padding-block-end）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-end
+ * padding-block-end 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingBlockEndCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-block-end:inherit;`。
-   */
-  readonly inherit: string = 'padding-block-end:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-block-end:initial;`。
-   */
-  readonly initial: string = 'padding-block-end:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-block-end:revert;`。
-   */
-  readonly revert: string = 'padding-block-end:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-block-end:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-block-end:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-block-end:unset;`。
-   */
-  readonly unset: string = 'padding-block-end:unset;';
+class PaddingBlockEndCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-block-end 属性作者；普通使用通过 s.paddingBlockEnd 取得共享实例。
    * @example
@@ -4062,6 +3921,7 @@ export class PaddingBlockEndCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-block-end');
+    initializeKeywordDeclarations(this, 'padding-block-end', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-block-end 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4132,90 +3992,47 @@ export class PaddingBlockEndCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-block-end 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingBlockEndCss = PaddingBlockEndCssRuntime &
+  KeywordDeclarations<PaddingBlockEndKeywords>;
+/**
+ * 设置逻辑块轴结束侧的内边距。（padding-block-end）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-end
+ */
+export const PaddingBlockEndCss = /* @__PURE__ */ keywordConstructor(
+  PaddingBlockEndCssRuntime,
+  'PaddingBlockEndCss',
+) as new () => PaddingBlockEndCss;
 
 /**
  * padding-block-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingBlockStartKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-block-start:inherit;`。
-   */
-  readonly inherit: Property.PaddingBlockStart | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-block-start:initial;`。
-   */
-  readonly initial: Property.PaddingBlockStart | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-block-start:revert;`。
-   */
-  readonly revert: Property.PaddingBlockStart | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-block-start:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingBlockStart | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-block-start:unset;`。
-   */
-  readonly unset: Property.PaddingBlockStart | CssString = 'unset';
-}
+export type PaddingBlockStartKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingBlockStart | CssString
+>;
+/**
+ * 创建 padding-block-start 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingBlockStartKeywords()
+ */
+export const PaddingBlockStartKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingBlockStartKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingBlockStartKeywords',
+) as new () => PaddingBlockStartKeywords;
 
 /**
- * 设置逻辑块轴起始侧的内边距。（padding-block-start）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-start
+ * padding-block-start 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingBlockStartCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-block-start:inherit;`。
-   */
-  readonly inherit: string = 'padding-block-start:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-block-start:initial;`。
-   */
-  readonly initial: string = 'padding-block-start:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-block-start:revert;`。
-   */
-  readonly revert: string = 'padding-block-start:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-block-start:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-block-start:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-block-start:unset;`。
-   */
-  readonly unset: string = 'padding-block-start:unset;';
+class PaddingBlockStartCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-block-start 属性作者；普通使用通过 s.paddingBlockStart 取得共享实例。
    * @example
@@ -4223,6 +4040,7 @@ export class PaddingBlockStartCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-block-start');
+    initializeKeywordDeclarations(this, 'padding-block-start', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-block-start 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4293,90 +4111,47 @@ export class PaddingBlockStartCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-block-start 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingBlockStartCss = PaddingBlockStartCssRuntime &
+  KeywordDeclarations<PaddingBlockStartKeywords>;
+/**
+ * 设置逻辑块轴起始侧的内边距。（padding-block-start）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-block-start
+ */
+export const PaddingBlockStartCss = /* @__PURE__ */ keywordConstructor(
+  PaddingBlockStartCssRuntime,
+  'PaddingBlockStartCss',
+) as new () => PaddingBlockStartCss;
 
 /**
  * padding-bottom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingBottomKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-bottom:inherit;`。
-   */
-  readonly inherit: Property.PaddingBottom | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-bottom:initial;`。
-   */
-  readonly initial: Property.PaddingBottom | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-bottom:revert;`。
-   */
-  readonly revert: Property.PaddingBottom | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-bottom:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingBottom | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-bottom:unset;`。
-   */
-  readonly unset: Property.PaddingBottom | CssString = 'unset';
-}
+export type PaddingBottomKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingBottom | CssString
+>;
+/**
+ * 创建 padding-bottom 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingBottomKeywords()
+ */
+export const PaddingBottomKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingBottomKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingBottomKeywords',
+) as new () => PaddingBottomKeywords;
 
 /**
- * 设置下内边距。（padding-bottom）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
+ * padding-bottom 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingBottomCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-bottom:inherit;`。
-   */
-  readonly inherit: string = 'padding-bottom:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-bottom:initial;`。
-   */
-  readonly initial: string = 'padding-bottom:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-bottom:revert;`。
-   */
-  readonly revert: string = 'padding-bottom:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-bottom:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-bottom:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-bottom:unset;`。
-   */
-  readonly unset: string = 'padding-bottom:unset;';
+class PaddingBottomCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-bottom 属性作者；普通使用通过 s.paddingBottom 取得共享实例。
    * @example
@@ -4384,6 +4159,7 @@ export class PaddingBottomCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-bottom');
+    initializeKeywordDeclarations(this, 'padding-bottom', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-bottom 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4466,88 +4242,46 @@ export class PaddingBottomCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-bottom 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingBottomCss = PaddingBottomCssRuntime & KeywordDeclarations<PaddingBottomKeywords>;
+/**
+ * 设置下内边距。（padding-bottom）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-bottom
+ */
+export const PaddingBottomCss = /* @__PURE__ */ keywordConstructor(
+  PaddingBottomCssRuntime,
+  'PaddingBottomCss',
+) as new () => PaddingBottomCss;
 
 /**
  * padding-inline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingInlineKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-inline:inherit;`。
-   */
-  readonly inherit: Property.PaddingInline | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-inline:initial;`。
-   */
-  readonly initial: Property.PaddingInline | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-inline:revert;`。
-   */
-  readonly revert: Property.PaddingInline | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-inline:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingInline | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-inline:unset;`。
-   */
-  readonly unset: Property.PaddingInline | CssString = 'unset';
-}
+export type PaddingInlineKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingInline | CssString
+>;
+/**
+ * 创建 padding-inline 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingInlineKeywords()
+ */
+export const PaddingInlineKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingInlineKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingInlineKeywords',
+) as new () => PaddingInlineKeywords;
 
 /**
- * 设置逻辑行内轴起始侧和结束侧的内边距。（padding-inline）
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline
+ * padding-inline 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingInlineCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-inline:inherit;`。
-   */
-  readonly inherit: string = 'padding-inline:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-inline:initial;`。
-   */
-  readonly initial: string = 'padding-inline:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-inline:revert;`。
-   */
-  readonly revert: string = 'padding-inline:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-inline:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-inline:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-inline:unset;`。
-   */
-  readonly unset: string = 'padding-inline:unset;';
+class PaddingInlineCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-inline 属性作者；普通使用通过 s.paddingInline 取得共享实例。
    * @example
@@ -4555,6 +4289,7 @@ export class PaddingInlineCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-inline');
+    initializeKeywordDeclarations(this, 'padding-inline', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-inline 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5825,90 +5560,44 @@ export class PaddingInlineCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-inline 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingInlineCss = PaddingInlineCssRuntime & KeywordDeclarations<PaddingInlineKeywords>;
+/**
+ * 设置逻辑行内轴起始侧和结束侧的内边距。（padding-inline）
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline
+ */
+export const PaddingInlineCss = /* @__PURE__ */ keywordConstructor(
+  PaddingInlineCssRuntime,
+  'PaddingInlineCss',
+) as new () => PaddingInlineCss;
 
 /**
  * padding-inline-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingInlineEndKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-inline-end:inherit;`。
-   */
-  readonly inherit: Property.PaddingInlineEnd | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-inline-end:initial;`。
-   */
-  readonly initial: Property.PaddingInlineEnd | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-inline-end:revert;`。
-   */
-  readonly revert: Property.PaddingInlineEnd | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-inline-end:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingInlineEnd | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-inline-end:unset;`。
-   */
-  readonly unset: Property.PaddingInlineEnd | CssString = 'unset';
-}
+export type PaddingInlineEndKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingInlineEnd | CssString
+>;
+/**
+ * 创建 padding-inline-end 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingInlineEndKeywords()
+ */
+export const PaddingInlineEndKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingInlineEndKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingInlineEndKeywords',
+) as new () => PaddingInlineEndKeywords;
 
 /**
- * 设置逻辑行内轴结束侧的内边距。（padding-inline-end）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
+ * padding-inline-end 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingInlineEndCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-inline-end:inherit;`。
-   */
-  readonly inherit: string = 'padding-inline-end:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-inline-end:initial;`。
-   */
-  readonly initial: string = 'padding-inline-end:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-inline-end:revert;`。
-   */
-  readonly revert: string = 'padding-inline-end:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-inline-end:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-inline-end:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-inline-end:unset;`。
-   */
-  readonly unset: string = 'padding-inline-end:unset;';
+class PaddingInlineEndCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-inline-end 属性作者；普通使用通过 s.paddingInlineEnd 取得共享实例。
    * @example
@@ -5916,6 +5605,7 @@ export class PaddingInlineEndCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-inline-end');
+    initializeKeywordDeclarations(this, 'padding-inline-end', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-inline-end 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5986,90 +5676,47 @@ export class PaddingInlineEndCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-inline-end 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingInlineEndCss = PaddingInlineEndCssRuntime &
+  KeywordDeclarations<PaddingInlineEndKeywords>;
+/**
+ * 设置逻辑行内轴结束侧的内边距。（padding-inline-end）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-end
+ */
+export const PaddingInlineEndCss = /* @__PURE__ */ keywordConstructor(
+  PaddingInlineEndCssRuntime,
+  'PaddingInlineEndCss',
+) as new () => PaddingInlineEndCss;
 
 /**
  * padding-inline-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingInlineStartKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-inline-start:inherit;`。
-   */
-  readonly inherit: Property.PaddingInlineStart | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-inline-start:initial;`。
-   */
-  readonly initial: Property.PaddingInlineStart | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-inline-start:revert;`。
-   */
-  readonly revert: Property.PaddingInlineStart | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-inline-start:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingInlineStart | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-inline-start:unset;`。
-   */
-  readonly unset: Property.PaddingInlineStart | CssString = 'unset';
-}
+export type PaddingInlineStartKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingInlineStart | CssString
+>;
+/**
+ * 创建 padding-inline-start 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingInlineStartKeywords()
+ */
+export const PaddingInlineStartKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingInlineStartKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingInlineStartKeywords',
+) as new () => PaddingInlineStartKeywords;
 
 /**
- * 设置逻辑行内轴起始侧的内边距。（padding-inline-start）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
+ * padding-inline-start 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingInlineStartCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-inline-start:inherit;`。
-   */
-  readonly inherit: string = 'padding-inline-start:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-inline-start:initial;`。
-   */
-  readonly initial: string = 'padding-inline-start:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-inline-start:revert;`。
-   */
-  readonly revert: string = 'padding-inline-start:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-inline-start:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-inline-start:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-inline-start:unset;`。
-   */
-  readonly unset: string = 'padding-inline-start:unset;';
+class PaddingInlineStartCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-inline-start 属性作者；普通使用通过 s.paddingInlineStart 取得共享实例。
    * @example
@@ -6077,6 +5724,7 @@ export class PaddingInlineStartCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-inline-start');
+    initializeKeywordDeclarations(this, 'padding-inline-start', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-inline-start 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6147,90 +5795,47 @@ export class PaddingInlineStartCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-inline-start 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingInlineStartCss = PaddingInlineStartCssRuntime &
+  KeywordDeclarations<PaddingInlineStartKeywords>;
+/**
+ * 设置逻辑行内轴起始侧的内边距。（padding-inline-start）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-inline-start
+ */
+export const PaddingInlineStartCss = /* @__PURE__ */ keywordConstructor(
+  PaddingInlineStartCssRuntime,
+  'PaddingInlineStartCss',
+) as new () => PaddingInlineStartCss;
 
 /**
  * padding-left 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingLeftKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-left:inherit;`。
-   */
-  readonly inherit: Property.PaddingLeft | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-left:initial;`。
-   */
-  readonly initial: Property.PaddingLeft | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-left:revert;`。
-   */
-  readonly revert: Property.PaddingLeft | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-left:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingLeft | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-left:unset;`。
-   */
-  readonly unset: Property.PaddingLeft | CssString = 'unset';
-}
+export type PaddingLeftKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingLeft | CssString
+>;
+/**
+ * 创建 padding-left 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingLeftKeywords()
+ */
+export const PaddingLeftKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingLeftKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingLeftKeywords',
+) as new () => PaddingLeftKeywords;
 
 /**
- * 设置左内边距。（padding-left）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-left
+ * padding-left 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingLeftCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-left:inherit;`。
-   */
-  readonly inherit: string = 'padding-left:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-left:initial;`。
-   */
-  readonly initial: string = 'padding-left:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-left:revert;`。
-   */
-  readonly revert: string = 'padding-left:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-left:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-left:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-left:unset;`。
-   */
-  readonly unset: string = 'padding-left:unset;';
+class PaddingLeftCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-left 属性作者；普通使用通过 s.paddingLeft 取得共享实例。
    * @example
@@ -6238,6 +5843,7 @@ export class PaddingLeftCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-left');
+    initializeKeywordDeclarations(this, 'padding-left', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-left 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6320,90 +5926,46 @@ export class PaddingLeftCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-left 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingLeftCss = PaddingLeftCssRuntime & KeywordDeclarations<PaddingLeftKeywords>;
+/**
+ * 设置左内边距。（padding-left）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-left
+ */
+export const PaddingLeftCss = /* @__PURE__ */ keywordConstructor(
+  PaddingLeftCssRuntime,
+  'PaddingLeftCss',
+) as new () => PaddingLeftCss;
 
 /**
  * padding-right 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingRightKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-right:inherit;`。
-   */
-  readonly inherit: Property.PaddingRight | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-right:initial;`。
-   */
-  readonly initial: Property.PaddingRight | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-right:revert;`。
-   */
-  readonly revert: Property.PaddingRight | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-right:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingRight | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-right:unset;`。
-   */
-  readonly unset: Property.PaddingRight | CssString = 'unset';
-}
+export type PaddingRightKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingRight | CssString
+>;
+/**
+ * 创建 padding-right 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingRightKeywords()
+ */
+export const PaddingRightKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingRightKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingRightKeywords',
+) as new () => PaddingRightKeywords;
 
 /**
- * 设置右内边距。（padding-right）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-right
+ * padding-right 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingRightCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-right:inherit;`。
-   */
-  readonly inherit: string = 'padding-right:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-right:initial;`。
-   */
-  readonly initial: string = 'padding-right:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-right:revert;`。
-   */
-  readonly revert: string = 'padding-right:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-right:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-right:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-right:unset;`。
-   */
-  readonly unset: string = 'padding-right:unset;';
+class PaddingRightCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-right 属性作者；普通使用通过 s.paddingRight 取得共享实例。
    * @example
@@ -6411,6 +5973,7 @@ export class PaddingRightCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-right');
+    initializeKeywordDeclarations(this, 'padding-right', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-right 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6493,90 +6056,46 @@ export class PaddingRightCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-right 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingRightCss = PaddingRightCssRuntime & KeywordDeclarations<PaddingRightKeywords>;
+/**
+ * 设置右内边距。（padding-right）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-right
+ */
+export const PaddingRightCss = /* @__PURE__ */ keywordConstructor(
+  PaddingRightCssRuntime,
+  'PaddingRightCss',
+) as new () => PaddingRightCss;
 
 /**
  * padding-top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaddingTopKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-top:inherit;`。
-   */
-  readonly inherit: Property.PaddingTop | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-top:initial;`。
-   */
-  readonly initial: Property.PaddingTop | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-top:revert;`。
-   */
-  readonly revert: Property.PaddingTop | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-top:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaddingTop | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-top:unset;`。
-   */
-  readonly unset: Property.PaddingTop | CssString = 'unset';
-}
+export type PaddingTopKeywords = KeywordValuesOf<
+  typeof keywords_dffc425ba867,
+  Property.PaddingTop | CssString
+>;
+/**
+ * 创建 padding-top 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaddingTopKeywords()
+ */
+export const PaddingTopKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaddingTopKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'PaddingTopKeywords',
+) as new () => PaddingTopKeywords;
 
 /**
- * 设置上内边距。（padding-top）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
+ * padding-top 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaddingTopCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`padding-top:inherit;`。
-   */
-  readonly inherit: string = 'padding-top:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`padding-top:initial;`。
-   */
-  readonly initial: string = 'padding-top:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`padding-top:revert;`。
-   */
-  readonly revert: string = 'padding-top:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`padding-top:revert-layer;`。
-   */
-  readonly revertLayer: string = 'padding-top:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`padding-top:unset;`。
-   */
-  readonly unset: string = 'padding-top:unset;';
+class PaddingTopCssRuntime extends LengthCssProperty {
   /**
    * 创建 padding-top 属性作者；普通使用通过 s.paddingTop 取得共享实例。
    * @example
@@ -6584,6 +6103,7 @@ export class PaddingTopCss extends LengthCssProperty {
    */
   constructor() {
     super('padding-top');
+    initializeKeywordDeclarations(this, 'padding-top', keywords_dffc425ba867);
   }
   /**
    * 原样生成 padding-top 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6666,96 +6186,44 @@ export class PaddingTopCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * padding-top 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaddingTopCss = PaddingTopCssRuntime & KeywordDeclarations<PaddingTopKeywords>;
+/**
+ * 设置上内边距。（padding-top）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
+ */
+export const PaddingTopCss = /* @__PURE__ */ keywordConstructor(
+  PaddingTopCssRuntime,
+  'PaddingTopCss',
+) as new () => PaddingTopCss;
+import { keywords_10442af7f819 } from './keyword-sets.js';
 
 /**
  * page 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PageKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`page:auto;`。 */
-  readonly auto: Property.Page | CssString = 'auto';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`page:inherit;`。
-   */
-  readonly inherit: Property.Page | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`page:initial;`。
-   */
-  readonly initial: Property.Page | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`page:revert;`。
-   */
-  readonly revert: Property.Page | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`page:revert-layer;`。
-   */
-  readonly revertLayer: Property.Page | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`page:unset;`。
-   */
-  readonly unset: Property.Page | CssString = 'unset';
-}
+export type PageKeywords = KeywordValuesOf<typeof keywords_10442af7f819, Property.Page | CssString>;
+/**
+ * 创建 page 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PageKeywords()
+ */
+export const PageKeywords = /* @__PURE__ */ keywordConstructor(
+  class PageKeywords {
+    constructor() {
+      Object.assign(this, keywords_10442af7f819);
+    }
+  },
+  'PageKeywords',
+) as new () => PageKeywords;
 
 /**
- * 选择分页媒体中使用的命名页面类型。（page）
- *
- * CSS 初始值：`auto`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page
+ * page 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PageCss extends CssProperty {
-  /** CSS 声明：`page:auto;`。 */
-  readonly auto: string = 'page:auto;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`page:inherit;`。
-   */
-  readonly inherit: string = 'page:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`page:initial;`。
-   */
-  readonly initial: string = 'page:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`page:revert;`。
-   */
-  readonly revert: string = 'page:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`page:revert-layer;`。
-   */
-  readonly revertLayer: string = 'page:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`page:unset;`。
-   */
-  readonly unset: string = 'page:unset;';
+class PageCssRuntime extends CssProperty {
   /**
    * 创建 page 属性作者；普通使用通过 s.page 取得共享实例。
    * @example
@@ -6763,6 +6231,7 @@ export class PageCss extends CssProperty {
    */
   constructor() {
     super('page');
+    initializeKeywordDeclarations(this, 'page', keywords_10442af7f819);
   }
   /**
    * 原样生成 page 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6777,114 +6246,47 @@ export class PageCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * page 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PageCss = PageCssRuntime & KeywordDeclarations<PageKeywords>;
+/**
+ * 选择分页媒体中使用的命名页面类型。（page）
+ *
+ * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/page
+ */
+export const PageCss = /* @__PURE__ */ keywordConstructor(
+  PageCssRuntime,
+  'PageCss',
+) as new () => PageCss;
+import { keywords_9ee144a03ca0 } from './keyword-sets.js';
 
 /**
  * paint-order 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PaintOrderKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`paint-order:fill;`。 */
-  readonly fill: Property.PaintOrder | CssString = 'fill';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`paint-order:inherit;`。
-   */
-  readonly inherit: Property.PaintOrder | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`paint-order:initial;`。
-   */
-  readonly initial: Property.PaintOrder | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`paint-order:markers;`。 */
-  readonly markers: Property.PaintOrder | CssString = 'markers';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`paint-order:normal;`。 */
-  readonly normal: Property.PaintOrder | CssString = 'normal';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`paint-order:revert;`。
-   */
-  readonly revert: Property.PaintOrder | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`paint-order:revert-layer;`。
-   */
-  readonly revertLayer: Property.PaintOrder | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`paint-order:stroke;`。 */
-  readonly stroke: Property.PaintOrder | CssString = 'stroke';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`paint-order:unset;`。
-   */
-  readonly unset: Property.PaintOrder | CssString = 'unset';
-}
+export type PaintOrderKeywords = KeywordValuesOf<
+  typeof keywords_9ee144a03ca0,
+  Property.PaintOrder | CssString
+>;
+/**
+ * 创建 paint-order 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PaintOrderKeywords()
+ */
+export const PaintOrderKeywords = /* @__PURE__ */ keywordConstructor(
+  class PaintOrderKeywords {
+    constructor() {
+      Object.assign(this, keywords_9ee144a03ca0);
+    }
+  },
+  'PaintOrderKeywords',
+) as new () => PaintOrderKeywords;
 
 /**
- * 设置 SVG 填充、描边和标记的绘制先后顺序。（paint-order）
- *
- * CSS 初始值：`normal`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
+ * paint-order 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PaintOrderCss extends CssProperty {
-  /** CSS 声明：`paint-order:fill;`。 */
-  readonly fill: string = 'paint-order:fill;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`paint-order:inherit;`。
-   */
-  readonly inherit: string = 'paint-order:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`paint-order:initial;`。
-   */
-  readonly initial: string = 'paint-order:initial;';
-  /** CSS 声明：`paint-order:markers;`。 */
-  readonly markers: string = 'paint-order:markers;';
-  /** CSS 声明：`paint-order:normal;`。 */
-  readonly normal: string = 'paint-order:normal;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`paint-order:revert;`。
-   */
-  readonly revert: string = 'paint-order:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`paint-order:revert-layer;`。
-   */
-  readonly revertLayer: string = 'paint-order:revert-layer;';
-  /** CSS 声明：`paint-order:stroke;`。 */
-  readonly stroke: string = 'paint-order:stroke;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`paint-order:unset;`。
-   */
-  readonly unset: string = 'paint-order:unset;';
+class PaintOrderCssRuntime extends CssProperty {
   /**
    * 创建 paint-order 属性作者；普通使用通过 s.paintOrder 取得共享实例。
    * @example
@@ -6892,6 +6294,7 @@ export class PaintOrderCss extends CssProperty {
    */
   constructor() {
     super('paint-order');
+    initializeKeywordDeclarations(this, 'paint-order', keywords_9ee144a03ca0);
   }
   /**
    * 原样生成 paint-order 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6906,96 +6309,47 @@ export class PaintOrderCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * paint-order 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PaintOrderCss = PaintOrderCssRuntime & KeywordDeclarations<PaintOrderKeywords>;
+/**
+ * 设置 SVG 填充、描边和标记的绘制先后顺序。（paint-order）
+ *
+ * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
+ */
+export const PaintOrderCss = /* @__PURE__ */ keywordConstructor(
+  PaintOrderCssRuntime,
+  'PaintOrderCss',
+) as new () => PaintOrderCss;
+import { keywords_9cd78f567b36 } from './keyword-sets.js';
 
 /**
  * perspective 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PerspectiveKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`perspective:inherit;`。
-   */
-  readonly inherit: Property.Perspective | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`perspective:initial;`。
-   */
-  readonly initial: Property.Perspective | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`perspective:none;`。 */
-  readonly none: Property.Perspective | CssString = 'none';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`perspective:revert;`。
-   */
-  readonly revert: Property.Perspective | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`perspective:revert-layer;`。
-   */
-  readonly revertLayer: Property.Perspective | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`perspective:unset;`。
-   */
-  readonly unset: Property.Perspective | CssString = 'unset';
-}
+export type PerspectiveKeywords = KeywordValuesOf<
+  typeof keywords_9cd78f567b36,
+  Property.Perspective | CssString
+>;
+/**
+ * 创建 perspective 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PerspectiveKeywords()
+ */
+export const PerspectiveKeywords = /* @__PURE__ */ keywordConstructor(
+  class PerspectiveKeywords {
+    constructor() {
+      Object.assign(this, keywords_9cd78f567b36);
+    }
+  },
+  'PerspectiveKeywords',
+) as new () => PerspectiveKeywords;
 
 /**
- * 设置观察子元素三维变换时的透视距离。（perspective）
- *
- * CSS 初始值：`none`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective
+ * perspective 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PerspectiveCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`perspective:inherit;`。
-   */
-  readonly inherit: string = 'perspective:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`perspective:initial;`。
-   */
-  readonly initial: string = 'perspective:initial;';
-  /** CSS 声明：`perspective:none;`。 */
-  readonly none: string = 'perspective:none;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`perspective:revert;`。
-   */
-  readonly revert: string = 'perspective:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`perspective:revert-layer;`。
-   */
-  readonly revertLayer: string = 'perspective:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`perspective:unset;`。
-   */
-  readonly unset: string = 'perspective:unset;';
+class PerspectiveCssRuntime extends LengthCssProperty {
   /**
    * 创建 perspective 属性作者；普通使用通过 s.perspective 取得共享实例。
    * @example
@@ -7003,6 +6357,7 @@ export class PerspectiveCss extends LengthCssProperty {
    */
   constructor() {
     super('perspective');
+    initializeKeywordDeclarations(this, 'perspective', keywords_9cd78f567b36);
   }
   /**
    * 原样生成 perspective 声明，保留关键字补全并接受自定义 CSS 值。
@@ -7073,120 +6428,47 @@ export class PerspectiveCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * perspective 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PerspectiveCss = PerspectiveCssRuntime & KeywordDeclarations<PerspectiveKeywords>;
+/**
+ * 设置观察子元素三维变换时的透视距离。（perspective）
+ *
+ * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective
+ */
+export const PerspectiveCss = /* @__PURE__ */ keywordConstructor(
+  PerspectiveCssRuntime,
+  'PerspectiveCss',
+) as new () => PerspectiveCss;
+import { keywords_626dbe9ffbeb } from './keyword-sets.js';
 
 /**
  * perspective-origin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PerspectiveOriginKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`perspective-origin:bottom;`。 */
-  readonly bottom: Property.PerspectiveOrigin | CssString = 'bottom';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`perspective-origin:center;`。 */
-  readonly center: Property.PerspectiveOrigin | CssString = 'center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`perspective-origin:inherit;`。
-   */
-  readonly inherit: Property.PerspectiveOrigin | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`perspective-origin:initial;`。
-   */
-  readonly initial: Property.PerspectiveOrigin | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`perspective-origin:left;`。 */
-  readonly left: Property.PerspectiveOrigin | CssString = 'left';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`perspective-origin:revert;`。
-   */
-  readonly revert: Property.PerspectiveOrigin | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`perspective-origin:revert-layer;`。
-   */
-  readonly revertLayer: Property.PerspectiveOrigin | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`perspective-origin:right;`。 */
-  readonly right: Property.PerspectiveOrigin | CssString = 'right';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`perspective-origin:top;`。 */
-  readonly top: Property.PerspectiveOrigin | CssString = 'top';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`perspective-origin:unset;`。
-   */
-  readonly unset: Property.PerspectiveOrigin | CssString = 'unset';
-}
+export type PerspectiveOriginKeywords = KeywordValuesOf<
+  typeof keywords_626dbe9ffbeb,
+  Property.PerspectiveOrigin | CssString
+>;
+/**
+ * 创建 perspective-origin 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PerspectiveOriginKeywords()
+ */
+export const PerspectiveOriginKeywords = /* @__PURE__ */ keywordConstructor(
+  class PerspectiveOriginKeywords {
+    constructor() {
+      Object.assign(this, keywords_626dbe9ffbeb);
+    }
+  },
+  'PerspectiveOriginKeywords',
+) as new () => PerspectiveOriginKeywords;
 
 /**
- * 设置三维透视的观察原点。（perspective-origin）
- *
- * CSS 初始值：`50% 50%`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective-origin
+ * perspective-origin 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PerspectiveOriginCss extends LengthCssProperty {
-  /** CSS 声明：`perspective-origin:bottom;`。 */
-  readonly bottom: string = 'perspective-origin:bottom;';
-  /** CSS 声明：`perspective-origin:center;`。 */
-  readonly center: string = 'perspective-origin:center;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`perspective-origin:inherit;`。
-   */
-  readonly inherit: string = 'perspective-origin:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`perspective-origin:initial;`。
-   */
-  readonly initial: string = 'perspective-origin:initial;';
-  /** CSS 声明：`perspective-origin:left;`。 */
-  readonly left: string = 'perspective-origin:left;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`perspective-origin:revert;`。
-   */
-  readonly revert: string = 'perspective-origin:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`perspective-origin:revert-layer;`。
-   */
-  readonly revertLayer: string = 'perspective-origin:revert-layer;';
-  /** CSS 声明：`perspective-origin:right;`。 */
-  readonly right: string = 'perspective-origin:right;';
-  /** CSS 声明：`perspective-origin:top;`。 */
-  readonly top: string = 'perspective-origin:top;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`perspective-origin:unset;`。
-   */
-  readonly unset: string = 'perspective-origin:unset;';
+class PerspectiveOriginCssRuntime extends LengthCssProperty {
   /**
    * 创建 perspective-origin 属性作者；普通使用通过 s.perspectiveOrigin 取得共享实例。
    * @example
@@ -7194,6 +6476,7 @@ export class PerspectiveOriginCss extends LengthCssProperty {
    */
   constructor() {
     super('perspective-origin');
+    initializeKeywordDeclarations(this, 'perspective-origin', keywords_626dbe9ffbeb);
   }
   /**
    * 原样生成 perspective-origin 声明，保留关键字补全并接受自定义 CSS 值。
@@ -7264,154 +6547,48 @@ export class PerspectiveOriginCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * perspective-origin 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PerspectiveOriginCss = PerspectiveOriginCssRuntime &
+  KeywordDeclarations<PerspectiveOriginKeywords>;
+/**
+ * 设置三维透视的观察原点。（perspective-origin）
+ *
+ * CSS 初始值：`50% 50%`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/perspective-origin
+ */
+export const PerspectiveOriginCss = /* @__PURE__ */ keywordConstructor(
+  PerspectiveOriginCssRuntime,
+  'PerspectiveOriginCss',
+) as new () => PerspectiveOriginCss;
+import { keywords_f701374d513c } from './keyword-sets.js';
 
 /**
  * place-content 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PlaceContentKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:baseline;`。 */
-  readonly baseline: Property.PlaceContent | CssString = 'baseline';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:center;`。 */
-  readonly center: Property.PlaceContent | CssString = 'center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:end;`。 */
-  readonly end: Property.PlaceContent | CssString = 'end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:flex-end;`。 */
-  readonly flexEnd: Property.PlaceContent | CssString = 'flex-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:flex-start;`。 */
-  readonly flexStart: Property.PlaceContent | CssString = 'flex-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`place-content:inherit;`。
-   */
-  readonly inherit: Property.PlaceContent | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`place-content:initial;`。
-   */
-  readonly initial: Property.PlaceContent | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:normal;`。 */
-  readonly normal: Property.PlaceContent | CssString = 'normal';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`place-content:revert;`。
-   */
-  readonly revert: Property.PlaceContent | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`place-content:revert-layer;`。
-   */
-  readonly revertLayer: Property.PlaceContent | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:space-around;`。 */
-  readonly spaceAround: Property.PlaceContent | CssString = 'space-around';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:space-between;`。 */
-  readonly spaceBetween: Property.PlaceContent | CssString = 'space-between';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:space-evenly;`。 */
-  readonly spaceEvenly: Property.PlaceContent | CssString = 'space-evenly';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:start;`。 */
-  readonly start: Property.PlaceContent | CssString = 'start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-content:stretch;`。 */
-  readonly stretch: Property.PlaceContent | CssString = 'stretch';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`place-content:unset;`。
-   */
-  readonly unset: Property.PlaceContent | CssString = 'unset';
-}
+export type PlaceContentKeywords = KeywordValuesOf<
+  typeof keywords_f701374d513c,
+  Property.PlaceContent | CssString
+>;
+/**
+ * 创建 place-content 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PlaceContentKeywords()
+ */
+export const PlaceContentKeywords = /* @__PURE__ */ keywordConstructor(
+  class PlaceContentKeywords {
+    constructor() {
+      Object.assign(this, keywords_f701374d513c);
+    }
+  },
+  'PlaceContentKeywords',
+) as new () => PlaceContentKeywords;
 
 /**
- * 同时设置 align-content 与 justify-content。（place-content）
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-content
+ * place-content 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PlaceContentCss extends CssProperty {
-  /** CSS 声明：`place-content:baseline;`。 */
-  readonly baseline: string = 'place-content:baseline;';
-  /** CSS 声明：`place-content:center;`。 */
-  readonly center: string = 'place-content:center;';
-  /** CSS 声明：`place-content:end;`。 */
-  readonly end: string = 'place-content:end;';
-  /** CSS 声明：`place-content:flex-end;`。 */
-  readonly flexEnd: string = 'place-content:flex-end;';
-  /** CSS 声明：`place-content:flex-start;`。 */
-  readonly flexStart: string = 'place-content:flex-start;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`place-content:inherit;`。
-   */
-  readonly inherit: string = 'place-content:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`place-content:initial;`。
-   */
-  readonly initial: string = 'place-content:initial;';
-  /** CSS 声明：`place-content:normal;`。 */
-  readonly normal: string = 'place-content:normal;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`place-content:revert;`。
-   */
-  readonly revert: string = 'place-content:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`place-content:revert-layer;`。
-   */
-  readonly revertLayer: string = 'place-content:revert-layer;';
-  /** CSS 声明：`place-content:space-around;`。 */
-  readonly spaceAround: string = 'place-content:space-around;';
-  /** CSS 声明：`place-content:space-between;`。 */
-  readonly spaceBetween: string = 'place-content:space-between;';
-  /** CSS 声明：`place-content:space-evenly;`。 */
-  readonly spaceEvenly: string = 'place-content:space-evenly;';
-  /** CSS 声明：`place-content:start;`。 */
-  readonly start: string = 'place-content:start;';
-  /** CSS 声明：`place-content:stretch;`。 */
-  readonly stretch: string = 'place-content:stretch;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`place-content:unset;`。
-   */
-  readonly unset: string = 'place-content:unset;';
+class PlaceContentCssRuntime extends CssProperty {
   /**
    * 创建 place-content 属性作者；普通使用通过 s.placeContent 取得共享实例。
    * @example
@@ -7419,6 +6596,7 @@ export class PlaceContentCss extends CssProperty {
    */
   constructor() {
     super('place-content');
+    initializeKeywordDeclarations(this, 'place-content', keywords_f701374d513c);
   }
   /**
    * 原样生成 place-content 声明，保留关键字补全并接受自定义 CSS 值。
@@ -7433,154 +6611,45 @@ export class PlaceContentCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * place-content 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PlaceContentCss = PlaceContentCssRuntime & KeywordDeclarations<PlaceContentKeywords>;
+/**
+ * 同时设置 align-content 与 justify-content。（place-content）
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-content
+ */
+export const PlaceContentCss = /* @__PURE__ */ keywordConstructor(
+  PlaceContentCssRuntime,
+  'PlaceContentCss',
+) as new () => PlaceContentCss;
+import { keywords_1b0d1fa4d1f6 } from './keyword-sets.js';
 
 /**
  * place-items 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PlaceItemsKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:anchor-center;`。 */
-  readonly anchorCenter: Property.PlaceItems | CssString = 'anchor-center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:baseline;`。 */
-  readonly baseline: Property.PlaceItems | CssString = 'baseline';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:center;`。 */
-  readonly center: Property.PlaceItems | CssString = 'center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:end;`。 */
-  readonly end: Property.PlaceItems | CssString = 'end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:flex-end;`。 */
-  readonly flexEnd: Property.PlaceItems | CssString = 'flex-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:flex-start;`。 */
-  readonly flexStart: Property.PlaceItems | CssString = 'flex-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`place-items:inherit;`。
-   */
-  readonly inherit: Property.PlaceItems | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`place-items:initial;`。
-   */
-  readonly initial: Property.PlaceItems | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:normal;`。 */
-  readonly normal: Property.PlaceItems | CssString = 'normal';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`place-items:revert;`。
-   */
-  readonly revert: Property.PlaceItems | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`place-items:revert-layer;`。
-   */
-  readonly revertLayer: Property.PlaceItems | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:self-end;`。 */
-  readonly selfEnd: Property.PlaceItems | CssString = 'self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:self-start;`。 */
-  readonly selfStart: Property.PlaceItems | CssString = 'self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:start;`。 */
-  readonly start: Property.PlaceItems | CssString = 'start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-items:stretch;`。 */
-  readonly stretch: Property.PlaceItems | CssString = 'stretch';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`place-items:unset;`。
-   */
-  readonly unset: Property.PlaceItems | CssString = 'unset';
-}
+export type PlaceItemsKeywords = KeywordValuesOf<
+  typeof keywords_1b0d1fa4d1f6,
+  Property.PlaceItems | CssString
+>;
+/**
+ * 创建 place-items 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PlaceItemsKeywords()
+ */
+export const PlaceItemsKeywords = /* @__PURE__ */ keywordConstructor(
+  class PlaceItemsKeywords {
+    constructor() {
+      Object.assign(this, keywords_1b0d1fa4d1f6);
+    }
+  },
+  'PlaceItemsKeywords',
+) as new () => PlaceItemsKeywords;
 
 /**
- * 同时设置 align-items 与 justify-items。（place-items）
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-items
+ * place-items 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PlaceItemsCss extends CssProperty {
-  /** CSS 声明：`place-items:anchor-center;`。 */
-  readonly anchorCenter: string = 'place-items:anchor-center;';
-  /** CSS 声明：`place-items:baseline;`。 */
-  readonly baseline: string = 'place-items:baseline;';
-  /** CSS 声明：`place-items:center;`。 */
-  readonly center: string = 'place-items:center;';
-  /** CSS 声明：`place-items:end;`。 */
-  readonly end: string = 'place-items:end;';
-  /** CSS 声明：`place-items:flex-end;`。 */
-  readonly flexEnd: string = 'place-items:flex-end;';
-  /** CSS 声明：`place-items:flex-start;`。 */
-  readonly flexStart: string = 'place-items:flex-start;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`place-items:inherit;`。
-   */
-  readonly inherit: string = 'place-items:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`place-items:initial;`。
-   */
-  readonly initial: string = 'place-items:initial;';
-  /** CSS 声明：`place-items:normal;`。 */
-  readonly normal: string = 'place-items:normal;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`place-items:revert;`。
-   */
-  readonly revert: string = 'place-items:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`place-items:revert-layer;`。
-   */
-  readonly revertLayer: string = 'place-items:revert-layer;';
-  /** CSS 声明：`place-items:self-end;`。 */
-  readonly selfEnd: string = 'place-items:self-end;';
-  /** CSS 声明：`place-items:self-start;`。 */
-  readonly selfStart: string = 'place-items:self-start;';
-  /** CSS 声明：`place-items:start;`。 */
-  readonly start: string = 'place-items:start;';
-  /** CSS 声明：`place-items:stretch;`。 */
-  readonly stretch: string = 'place-items:stretch;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`place-items:unset;`。
-   */
-  readonly unset: string = 'place-items:unset;';
+class PlaceItemsCssRuntime extends CssProperty {
   /**
    * 创建 place-items 属性作者；普通使用通过 s.placeItems 取得共享实例。
    * @example
@@ -7588,6 +6657,7 @@ export class PlaceItemsCss extends CssProperty {
    */
   constructor() {
     super('place-items');
+    initializeKeywordDeclarations(this, 'place-items', keywords_1b0d1fa4d1f6);
   }
   /**
    * 原样生成 place-items 声明，保留关键字补全并接受自定义 CSS 值。
@@ -7602,160 +6672,45 @@ export class PlaceItemsCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * place-items 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PlaceItemsCss = PlaceItemsCssRuntime & KeywordDeclarations<PlaceItemsKeywords>;
+/**
+ * 同时设置 align-items 与 justify-items。（place-items）
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-items
+ */
+export const PlaceItemsCss = /* @__PURE__ */ keywordConstructor(
+  PlaceItemsCssRuntime,
+  'PlaceItemsCss',
+) as new () => PlaceItemsCss;
+import { keywords_ce1d2f1554f3 } from './keyword-sets.js';
 
 /**
  * place-self 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PlaceSelfKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:anchor-center;`。 */
-  readonly anchorCenter: Property.PlaceSelf | CssString = 'anchor-center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:auto;`。 */
-  readonly auto: Property.PlaceSelf | CssString = 'auto';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:baseline;`。 */
-  readonly baseline: Property.PlaceSelf | CssString = 'baseline';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:center;`。 */
-  readonly center: Property.PlaceSelf | CssString = 'center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:end;`。 */
-  readonly end: Property.PlaceSelf | CssString = 'end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:flex-end;`。 */
-  readonly flexEnd: Property.PlaceSelf | CssString = 'flex-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:flex-start;`。 */
-  readonly flexStart: Property.PlaceSelf | CssString = 'flex-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`place-self:inherit;`。
-   */
-  readonly inherit: Property.PlaceSelf | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`place-self:initial;`。
-   */
-  readonly initial: Property.PlaceSelf | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:normal;`。 */
-  readonly normal: Property.PlaceSelf | CssString = 'normal';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`place-self:revert;`。
-   */
-  readonly revert: Property.PlaceSelf | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`place-self:revert-layer;`。
-   */
-  readonly revertLayer: Property.PlaceSelf | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:self-end;`。 */
-  readonly selfEnd: Property.PlaceSelf | CssString = 'self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:self-start;`。 */
-  readonly selfStart: Property.PlaceSelf | CssString = 'self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:start;`。 */
-  readonly start: Property.PlaceSelf | CssString = 'start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`place-self:stretch;`。 */
-  readonly stretch: Property.PlaceSelf | CssString = 'stretch';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`place-self:unset;`。
-   */
-  readonly unset: Property.PlaceSelf | CssString = 'unset';
-}
+export type PlaceSelfKeywords = KeywordValuesOf<
+  typeof keywords_ce1d2f1554f3,
+  Property.PlaceSelf | CssString
+>;
+/**
+ * 创建 place-self 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PlaceSelfKeywords()
+ */
+export const PlaceSelfKeywords = /* @__PURE__ */ keywordConstructor(
+  class PlaceSelfKeywords {
+    constructor() {
+      Object.assign(this, keywords_ce1d2f1554f3);
+    }
+  },
+  'PlaceSelfKeywords',
+) as new () => PlaceSelfKeywords;
 
 /**
- * 同时设置 align-self 与 justify-self。（place-self）
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-self
+ * place-self 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PlaceSelfCss extends CssProperty {
-  /** CSS 声明：`place-self:anchor-center;`。 */
-  readonly anchorCenter: string = 'place-self:anchor-center;';
-  /** CSS 声明：`place-self:auto;`。 */
-  readonly auto: string = 'place-self:auto;';
-  /** CSS 声明：`place-self:baseline;`。 */
-  readonly baseline: string = 'place-self:baseline;';
-  /** CSS 声明：`place-self:center;`。 */
-  readonly center: string = 'place-self:center;';
-  /** CSS 声明：`place-self:end;`。 */
-  readonly end: string = 'place-self:end;';
-  /** CSS 声明：`place-self:flex-end;`。 */
-  readonly flexEnd: string = 'place-self:flex-end;';
-  /** CSS 声明：`place-self:flex-start;`。 */
-  readonly flexStart: string = 'place-self:flex-start;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`place-self:inherit;`。
-   */
-  readonly inherit: string = 'place-self:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`place-self:initial;`。
-   */
-  readonly initial: string = 'place-self:initial;';
-  /** CSS 声明：`place-self:normal;`。 */
-  readonly normal: string = 'place-self:normal;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`place-self:revert;`。
-   */
-  readonly revert: string = 'place-self:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`place-self:revert-layer;`。
-   */
-  readonly revertLayer: string = 'place-self:revert-layer;';
-  /** CSS 声明：`place-self:self-end;`。 */
-  readonly selfEnd: string = 'place-self:self-end;';
-  /** CSS 声明：`place-self:self-start;`。 */
-  readonly selfStart: string = 'place-self:self-start;';
-  /** CSS 声明：`place-self:start;`。 */
-  readonly start: string = 'place-self:start;';
-  /** CSS 声明：`place-self:stretch;`。 */
-  readonly stretch: string = 'place-self:stretch;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`place-self:unset;`。
-   */
-  readonly unset: string = 'place-self:unset;';
+class PlaceSelfCssRuntime extends CssProperty {
   /**
    * 创建 place-self 属性作者；普通使用通过 s.placeSelf 取得共享实例。
    * @example
@@ -7763,6 +6718,7 @@ export class PlaceSelfCss extends CssProperty {
    */
   constructor() {
     super('place-self');
+    initializeKeywordDeclarations(this, 'place-self', keywords_ce1d2f1554f3);
   }
   /**
    * 原样生成 place-self 声明，保留关键字补全并接受自定义 CSS 值。
@@ -7777,108 +6733,71 @@ export class PlaceSelfCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * place-self 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PlaceSelfCss = PlaceSelfCssRuntime & KeywordDeclarations<PlaceSelfKeywords>;
+/**
+ * 同时设置 align-self 与 justify-self。（place-self）
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/place-self
+ */
+export const PlaceSelfCss = /* @__PURE__ */ keywordConstructor(
+  PlaceSelfCssRuntime,
+  'PlaceSelfCss',
+) as new () => PlaceSelfCss;
+import { keywords_d67307563c06 } from './keyword-sets.js';
 
 /**
  * pointer-events 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PointerEventsKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`pointer-events:all;`。 */
-  readonly all: Property.PointerEvents | CssString = 'all';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 采用当前元素类型的默认命中规则。
-   *
-   * CSS 声明：`pointer-events:auto;`。
-   */
-  readonly auto: Property.PointerEvents | CssString = 'auto';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`pointer-events:fill;`。 */
-  readonly fill: Property.PointerEvents | CssString = 'fill';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`pointer-events:inherit;`。
-   */
-  readonly inherit: Property.PointerEvents | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`pointer-events:initial;`。
-   */
-  readonly initial: Property.PointerEvents | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 元素本身不成为指针命中目标；不等于禁用，仍可能通过 Tab 获焦，后代也可恢复命中。
-   *
-   * 适用场景：覆盖在内容上方但不应拦截点击的装饰层。
-   *
-   * 注意：后代可以恢复命中；来自后代的事件仍可能经过祖先监听器。
-   *
-   * CSS 声明：`pointer-events:none;`。
-   * @example
-   * s.pointerEvents.none
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/pointer-events
-   */
-  readonly none: Property.PointerEvents | CssString = 'none';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`pointer-events:painted;`。 */
-  readonly painted: Property.PointerEvents | CssString = 'painted';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`pointer-events:revert;`。
-   */
-  readonly revert: Property.PointerEvents | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`pointer-events:revert-layer;`。
-   */
-  readonly revertLayer: Property.PointerEvents | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`pointer-events:stroke;`。 */
-  readonly stroke: Property.PointerEvents | CssString = 'stroke';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`pointer-events:unset;`。
-   */
-  readonly unset: Property.PointerEvents | CssString = 'unset';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`pointer-events:visible;`。 */
-  readonly visible: Property.PointerEvents | CssString = 'visible';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`pointer-events:visibleFill;`。 */
-  readonly visibleFill: Property.PointerEvents | CssString = 'visibleFill';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`pointer-events:visiblePainted;`。 */
-  readonly visiblePainted: Property.PointerEvents | CssString = 'visiblePainted';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`pointer-events:visibleStroke;`。 */
-  readonly visibleStroke: Property.PointerEvents | CssString = 'visibleStroke';
-}
+export type PointerEventsKeywords = KeywordValuesOf<
+  typeof keywords_d67307563c06,
+  Property.PointerEvents | CssString
+>;
+/**
+ * 创建 pointer-events 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PointerEventsKeywords()
+ */
+export const PointerEventsKeywords = /* @__PURE__ */ keywordConstructor(
+  class PointerEventsKeywords {
+    constructor() {
+      Object.assign(this, keywords_d67307563c06);
+    }
+  },
+  'PointerEventsKeywords',
+) as new () => PointerEventsKeywords;
 
+/**
+ * pointer-events 作者的运行时方法；公共成员类型由原始关键字定义映射。
+ */
+class PointerEventsCssRuntime extends CssProperty {
+  /**
+   * 创建 pointer-events 属性作者；普通使用通过 s.pointerEvents 取得共享实例。
+   * @example
+   * class CustomPointerEventsCss extends PointerEventsCss {}
+   */
+  constructor() {
+    super('pointer-events');
+    initializeKeywordDeclarations(this, 'pointer-events', keywords_d67307563c06);
+  }
+  /**
+   * 原样生成 pointer-events 声明，保留关键字补全并接受自定义 CSS 值。
+   *
+   * 不做 CSS 语法校验或转义。多个值、函数或变量可写在同一个字符串中。
+   * @param value 裸 CSS 属性值；不包含属性名或末尾分号。数字不自动添加单位。
+   * @returns 完整声明字符串，形如 pointer-events:value;。
+   * @example
+   * s.pointerEvents.raw('inherit') // pointer-events:inherit;
+   */
+  raw(value: Property.PointerEvents | CssString): string {
+    return this.declaration(value);
+  }
+}
+/**
+ * pointer-events 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PointerEventsCss = PointerEventsCssRuntime & KeywordDeclarations<PointerEventsKeywords>;
 /**
  * 设置元素何时可以成为指针命中目标；SVG 还支持按填充和描边命中。（pointer-events）
  *
@@ -7895,212 +6814,63 @@ export class PointerEventsKeywords {
  * s.pointerEvents.none
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/pointer-events
  */
-export class PointerEventsCss extends CssProperty {
-  /** CSS 声明：`pointer-events:all;`。 */
-  readonly all: string = 'pointer-events:all;';
-  /**
-   * 采用当前元素类型的默认命中规则。
-   *
-   * CSS 声明：`pointer-events:auto;`。
-   */
-  readonly auto: string = 'pointer-events:auto;';
-  /** CSS 声明：`pointer-events:fill;`。 */
-  readonly fill: string = 'pointer-events:fill;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`pointer-events:inherit;`。
-   */
-  readonly inherit: string = 'pointer-events:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`pointer-events:initial;`。
-   */
-  readonly initial: string = 'pointer-events:initial;';
-  /**
-   * 元素本身不成为指针命中目标；不等于禁用，仍可能通过 Tab 获焦，后代也可恢复命中。
-   *
-   * 适用场景：覆盖在内容上方但不应拦截点击的装饰层。
-   *
-   * 注意：后代可以恢复命中；来自后代的事件仍可能经过祖先监听器。
-   *
-   * CSS 声明：`pointer-events:none;`。
-   * @example
-   * s.pointerEvents.none
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/pointer-events
-   */
-  readonly none: string = 'pointer-events:none;';
-  /** CSS 声明：`pointer-events:painted;`。 */
-  readonly painted: string = 'pointer-events:painted;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`pointer-events:revert;`。
-   */
-  readonly revert: string = 'pointer-events:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`pointer-events:revert-layer;`。
-   */
-  readonly revertLayer: string = 'pointer-events:revert-layer;';
-  /** CSS 声明：`pointer-events:stroke;`。 */
-  readonly stroke: string = 'pointer-events:stroke;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`pointer-events:unset;`。
-   */
-  readonly unset: string = 'pointer-events:unset;';
-  /** CSS 声明：`pointer-events:visible;`。 */
-  readonly visible: string = 'pointer-events:visible;';
-  /** CSS 声明：`pointer-events:visibleFill;`。 */
-  readonly visibleFill: string = 'pointer-events:visibleFill;';
-  /** CSS 声明：`pointer-events:visiblePainted;`。 */
-  readonly visiblePainted: string = 'pointer-events:visiblePainted;';
-  /** CSS 声明：`pointer-events:visibleStroke;`。 */
-  readonly visibleStroke: string = 'pointer-events:visibleStroke;';
-  /**
-   * 创建 pointer-events 属性作者；普通使用通过 s.pointerEvents 取得共享实例。
-   * @example
-   * class CustomPointerEventsCss extends PointerEventsCss {}
-   */
-  constructor() {
-    super('pointer-events');
-  }
-  /**
-   * 原样生成 pointer-events 声明，保留关键字补全并接受自定义 CSS 值。
-   *
-   * 不做 CSS 语法校验或转义。多个值、函数或变量可写在同一个字符串中。
-   * @param value 裸 CSS 属性值；不包含属性名或末尾分号。数字不自动添加单位。
-   * @returns 完整声明字符串，形如 pointer-events:value;。
-   * @example
-   * s.pointerEvents.raw('inherit') // pointer-events:inherit;
-   */
-  raw(value: Property.PointerEvents | CssString): string {
-    return this.declaration(value);
-  }
-}
+export const PointerEventsCss = /* @__PURE__ */ keywordConstructor(
+  PointerEventsCssRuntime,
+  'PointerEventsCss',
+) as new () => PointerEventsCss;
+import { keywords_56d41dfd3894 } from './keyword-sets.js';
 
 /**
  * position 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PositionKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 脱离普通文档流，按包含块定位；包含块通常由定位祖先或 transform 等属性建立。
-   *
-   * 适用场景：容器内部的角标、图标覆盖和定位装饰。
-   *
-   * 注意：通常在预期的容器上设置 position:relative；元素不为自己保留普通流占位。
-   *
-   * CSS 声明：`position:absolute;`。
-   * @example
-   * css(s.position.absolute, s.top.px(0), s.right.px(0))
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
-   */
-  readonly absolute: Property.Position | CssString = 'absolute';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 脱离普通流，通常相对视口固定；某些祖先属性会建立不同的包含块。
-   *
-   * 区别：absolute 通常跟随其包含块滚动；fixed 在以视口为包含块时保持视口位置。
-   *
-   * 适用场景：固定工具栏或覆盖层。
-   *
-   * 注意：祖先的 transform 等属性可能改变固定定位的包含块；z-index 仍受层叠上下文约束。
-   *
-   * CSS 声明：`position:fixed;`。
-   * @example
-   * css(s.position.fixed, s.inset.px(0))
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
-   */
-  readonly fixed: Property.Position | CssString = 'fixed';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position:inherit;`。
-   */
-  readonly inherit: Property.Position | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position:initial;`。
-   */
-  readonly initial: Property.Position | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 保留普通流中的原位置，再按偏移移动绘制位置；不会为偏移后的区域重新排版。
-   *
-   * 区别：absolute 会脱离普通流；relative 仍保留原占位。
-   *
-   * 适用场景：为绝对定位后代提供定位参照，或做不改变其他元素排布的视觉偏移。
-   *
-   * CSS 声明：`position:relative;`。
-   * @example
-   * s.position.relative
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
-   */
-  readonly relative: Property.Position | CssString = 'relative';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position:revert;`。
-   */
-  readonly revert: Property.Position | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position:revert-layer;`。
-   */
-  readonly revertLayer: Property.Position | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 参与普通文档流，top/right/bottom/left 等定位偏移不生效。
-   *
-   * CSS 声明：`position:static;`。
-   */
-  readonly static: Property.Position | CssString = 'static';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 保留流内位置，在滚动范围内按 inset 约束吸附。对应轴至少一个 inset 须非 auto，并受滚动祖先和包含块限制。
-   *
-   * 区别：与 fixed 不同，它保留流内占位，并受自身所在包含块的范围约束。
-   *
-   * 适用场景：滚动列表的分组标题、吸顶工具栏。
-   *
-   * 注意：对应轴至少一个 inset 必须非 auto；祖先 overflow 可能改变滚动参照。
-   *
-   * CSS 声明：`position:sticky;`。
-   * @example
-   * css(s.position.sticky, s.top.px(0))
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
-   */
-  readonly sticky: Property.Position | CssString = 'sticky';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position:unset;`。
-   */
-  readonly unset: Property.Position | CssString = 'unset';
-}
+export type PositionKeywords = KeywordValuesOf<
+  typeof keywords_56d41dfd3894,
+  Property.Position | CssString
+>;
+/**
+ * 创建 position 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PositionKeywords()
+ */
+export const PositionKeywords = /* @__PURE__ */ keywordConstructor(
+  class PositionKeywords {
+    constructor() {
+      Object.assign(this, keywords_56d41dfd3894);
+    }
+  },
+  'PositionKeywords',
+) as new () => PositionKeywords;
 
+/**
+ * position 作者的运行时方法；公共成员类型由原始关键字定义映射。
+ */
+class PositionCssRuntime extends CssProperty {
+  /**
+   * 创建 position 属性作者；普通使用通过 s.position 取得共享实例。
+   * @example
+   * class CustomPositionCss extends PositionCss {}
+   */
+  constructor() {
+    super('position');
+    initializeKeywordDeclarations(this, 'position', keywords_56d41dfd3894);
+  }
+  /**
+   * 原样生成 position 声明，保留关键字补全并接受自定义 CSS 值。
+   *
+   * 不做 CSS 语法校验或转义。多个值、函数或变量可写在同一个字符串中。
+   * @param value 裸 CSS 属性值；不包含属性名或末尾分号。数字不自动添加单位。
+   * @returns 完整声明字符串，形如 position:value;。
+   * @example
+   * s.position.raw('inherit') // position:inherit;
+   */
+  raw(value: Property.Position | CssString): string {
+    return this.declaration(value);
+  }
+}
+/**
+ * position 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PositionCss = PositionCssRuntime & KeywordDeclarations<PositionKeywords>;
 /**
  * 设置元素的定位方式，并决定偏移属性如何参与布局。（position）
  *
@@ -8120,210 +6890,36 @@ export class PositionKeywords {
  * css(s.position.sticky, s.top.px(0))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
  */
-export class PositionCss extends CssProperty {
-  /**
-   * 脱离普通文档流，按包含块定位；包含块通常由定位祖先或 transform 等属性建立。
-   *
-   * 适用场景：容器内部的角标、图标覆盖和定位装饰。
-   *
-   * 注意：通常在预期的容器上设置 position:relative；元素不为自己保留普通流占位。
-   *
-   * CSS 声明：`position:absolute;`。
-   * @example
-   * css(s.position.absolute, s.top.px(0), s.right.px(0))
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
-   */
-  readonly absolute: string = 'position:absolute;';
-  /**
-   * 脱离普通流，通常相对视口固定；某些祖先属性会建立不同的包含块。
-   *
-   * 区别：absolute 通常跟随其包含块滚动；fixed 在以视口为包含块时保持视口位置。
-   *
-   * 适用场景：固定工具栏或覆盖层。
-   *
-   * 注意：祖先的 transform 等属性可能改变固定定位的包含块；z-index 仍受层叠上下文约束。
-   *
-   * CSS 声明：`position:fixed;`。
-   * @example
-   * css(s.position.fixed, s.inset.px(0))
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
-   */
-  readonly fixed: string = 'position:fixed;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position:inherit;`。
-   */
-  readonly inherit: string = 'position:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position:initial;`。
-   */
-  readonly initial: string = 'position:initial;';
-  /**
-   * 保留普通流中的原位置，再按偏移移动绘制位置；不会为偏移后的区域重新排版。
-   *
-   * 区别：absolute 会脱离普通流；relative 仍保留原占位。
-   *
-   * 适用场景：为绝对定位后代提供定位参照，或做不改变其他元素排布的视觉偏移。
-   *
-   * CSS 声明：`position:relative;`。
-   * @example
-   * s.position.relative
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
-   */
-  readonly relative: string = 'position:relative;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position:revert;`。
-   */
-  readonly revert: string = 'position:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position:revert-layer;`。
-   */
-  readonly revertLayer: string = 'position:revert-layer;';
-  /**
-   * 参与普通文档流，top/right/bottom/left 等定位偏移不生效。
-   *
-   * CSS 声明：`position:static;`。
-   */
-  readonly static: string = 'position:static;';
-  /**
-   * 保留流内位置，在滚动范围内按 inset 约束吸附。对应轴至少一个 inset 须非 auto，并受滚动祖先和包含块限制。
-   *
-   * 区别：与 fixed 不同，它保留流内占位，并受自身所在包含块的范围约束。
-   *
-   * 适用场景：滚动列表的分组标题、吸顶工具栏。
-   *
-   * 注意：对应轴至少一个 inset 必须非 auto；祖先 overflow 可能改变滚动参照。
-   *
-   * CSS 声明：`position:sticky;`。
-   * @example
-   * css(s.position.sticky, s.top.px(0))
-   * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position
-   */
-  readonly sticky: string = 'position:sticky;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position:unset;`。
-   */
-  readonly unset: string = 'position:unset;';
-  /**
-   * 创建 position 属性作者；普通使用通过 s.position 取得共享实例。
-   * @example
-   * class CustomPositionCss extends PositionCss {}
-   */
-  constructor() {
-    super('position');
-  }
-  /**
-   * 原样生成 position 声明，保留关键字补全并接受自定义 CSS 值。
-   *
-   * 不做 CSS 语法校验或转义。多个值、函数或变量可写在同一个字符串中。
-   * @param value 裸 CSS 属性值；不包含属性名或末尾分号。数字不自动添加单位。
-   * @returns 完整声明字符串，形如 position:value;。
-   * @example
-   * s.position.raw('inherit') // position:inherit;
-   */
-  raw(value: Property.Position | CssString): string {
-    return this.declaration(value);
-  }
-}
+export const PositionCss = /* @__PURE__ */ keywordConstructor(
+  PositionCssRuntime,
+  'PositionCss',
+) as new () => PositionCss;
 
 /**
  * position-anchor 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PositionAnchorKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-anchor:auto;`。 */
-  readonly auto: Property.PositionAnchor | CssString = 'auto';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-anchor:inherit;`。
-   */
-  readonly inherit: Property.PositionAnchor | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-anchor:initial;`。
-   */
-  readonly initial: Property.PositionAnchor | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-anchor:revert;`。
-   */
-  readonly revert: Property.PositionAnchor | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-anchor:revert-layer;`。
-   */
-  readonly revertLayer: Property.PositionAnchor | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-anchor:unset;`。
-   */
-  readonly unset: Property.PositionAnchor | CssString = 'unset';
-}
+export type PositionAnchorKeywords = KeywordValuesOf<
+  typeof keywords_10442af7f819,
+  Property.PositionAnchor | CssString
+>;
+/**
+ * 创建 position-anchor 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PositionAnchorKeywords()
+ */
+export const PositionAnchorKeywords = /* @__PURE__ */ keywordConstructor(
+  class PositionAnchorKeywords {
+    constructor() {
+      Object.assign(this, keywords_10442af7f819);
+    }
+  },
+  'PositionAnchorKeywords',
+) as new () => PositionAnchorKeywords;
 
 /**
- * 选择绝对定位元素使用的默认锚点。（position-anchor）
- *
- * CSS 初始值：`auto`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-anchor
+ * position-anchor 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PositionAnchorCss extends CssProperty {
-  /** CSS 声明：`position-anchor:auto;`。 */
-  readonly auto: string = 'position-anchor:auto;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-anchor:inherit;`。
-   */
-  readonly inherit: string = 'position-anchor:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-anchor:initial;`。
-   */
-  readonly initial: string = 'position-anchor:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-anchor:revert;`。
-   */
-  readonly revert: string = 'position-anchor:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-anchor:revert-layer;`。
-   */
-  readonly revertLayer: string = 'position-anchor:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-anchor:unset;`。
-   */
-  readonly unset: string = 'position-anchor:unset;';
+class PositionAnchorCssRuntime extends CssProperty {
   /**
    * 创建 position-anchor 属性作者；普通使用通过 s.positionAnchor 取得共享实例。
    * @example
@@ -8331,6 +6927,7 @@ export class PositionAnchorCss extends CssProperty {
    */
   constructor() {
     super('position-anchor');
+    initializeKeywordDeclarations(this, 'position-anchor', keywords_10442af7f819);
   }
   /**
    * 原样生成 position-anchor 声明，保留关键字补全并接受自定义 CSS 值。
@@ -8345,396 +6942,48 @@ export class PositionAnchorCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * position-anchor 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PositionAnchorCss = PositionAnchorCssRuntime &
+  KeywordDeclarations<PositionAnchorKeywords>;
+/**
+ * 选择绝对定位元素使用的默认锚点。（position-anchor）
+ *
+ * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-anchor
+ */
+export const PositionAnchorCss = /* @__PURE__ */ keywordConstructor(
+  PositionAnchorCssRuntime,
+  'PositionAnchorCss',
+) as new () => PositionAnchorCss;
+import { keywords_99e9f0a1ccb3 } from './keyword-sets.js';
 
 /**
  * position-area 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PositionAreaKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:block-end;`。 */
-  readonly blockEnd: Property.PositionArea | CssString = 'block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:block-start;`。 */
-  readonly blockStart: Property.PositionArea | CssString = 'block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:bottom;`。 */
-  readonly bottom: Property.PositionArea | CssString = 'bottom';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:center;`。 */
-  readonly center: Property.PositionArea | CssString = 'center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:end;`。 */
-  readonly end: Property.PositionArea | CssString = 'end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-area:inherit;`。
-   */
-  readonly inherit: Property.PositionArea | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-area:initial;`。
-   */
-  readonly initial: Property.PositionArea | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:inline-end;`。 */
-  readonly inlineEnd: Property.PositionArea | CssString = 'inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:inline-start;`。 */
-  readonly inlineStart: Property.PositionArea | CssString = 'inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:left;`。 */
-  readonly left: Property.PositionArea | CssString = 'left';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:none;`。 */
-  readonly none: Property.PositionArea | CssString = 'none';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-area:revert;`。
-   */
-  readonly revert: Property.PositionArea | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-area:revert-layer;`。
-   */
-  readonly revertLayer: Property.PositionArea | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:right;`。 */
-  readonly right: Property.PositionArea | CssString = 'right';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:self-block-end;`。 */
-  readonly selfBlockEnd: Property.PositionArea | CssString = 'self-block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:self-block-start;`。 */
-  readonly selfBlockStart: Property.PositionArea | CssString = 'self-block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:self-end;`。 */
-  readonly selfEnd: Property.PositionArea | CssString = 'self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:self-inline-end;`。 */
-  readonly selfInlineEnd: Property.PositionArea | CssString = 'self-inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:self-inline-start;`。 */
-  readonly selfInlineStart: Property.PositionArea | CssString = 'self-inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:self-start;`。 */
-  readonly selfStart: Property.PositionArea | CssString = 'self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-all;`。 */
-  readonly spanAll: Property.PositionArea | CssString = 'span-all';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-block-end;`。 */
-  readonly spanBlockEnd: Property.PositionArea | CssString = 'span-block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-block-start;`。 */
-  readonly spanBlockStart: Property.PositionArea | CssString = 'span-block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-bottom;`。 */
-  readonly spanBottom: Property.PositionArea | CssString = 'span-bottom';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-end;`。 */
-  readonly spanEnd: Property.PositionArea | CssString = 'span-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-inline-end;`。 */
-  readonly spanInlineEnd: Property.PositionArea | CssString = 'span-inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-inline-start;`。 */
-  readonly spanInlineStart: Property.PositionArea | CssString = 'span-inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-left;`。 */
-  readonly spanLeft: Property.PositionArea | CssString = 'span-left';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-right;`。 */
-  readonly spanRight: Property.PositionArea | CssString = 'span-right';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-self-block-end;`。 */
-  readonly spanSelfBlockEnd: Property.PositionArea | CssString = 'span-self-block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-self-block-start;`。 */
-  readonly spanSelfBlockStart: Property.PositionArea | CssString = 'span-self-block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-self-end;`。 */
-  readonly spanSelfEnd: Property.PositionArea | CssString = 'span-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-self-inline-end;`。 */
-  readonly spanSelfInlineEnd: Property.PositionArea | CssString = 'span-self-inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-self-inline-start;`。 */
-  readonly spanSelfInlineStart: Property.PositionArea | CssString = 'span-self-inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-self-start;`。 */
-  readonly spanSelfStart: Property.PositionArea | CssString = 'span-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-start;`。 */
-  readonly spanStart: Property.PositionArea | CssString = 'span-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-top;`。 */
-  readonly spanTop: Property.PositionArea | CssString = 'span-top';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-x-end;`。 */
-  readonly spanXEnd: Property.PositionArea | CssString = 'span-x-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-x-self-end;`。 */
-  readonly spanXSelfEnd: Property.PositionArea | CssString = 'span-x-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-x-self-start;`。 */
-  readonly spanXSelfStart: Property.PositionArea | CssString = 'span-x-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-x-start;`。 */
-  readonly spanXStart: Property.PositionArea | CssString = 'span-x-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-y-end;`。 */
-  readonly spanYEnd: Property.PositionArea | CssString = 'span-y-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-y-self-end;`。 */
-  readonly spanYSelfEnd: Property.PositionArea | CssString = 'span-y-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-y-self-start;`。 */
-  readonly spanYSelfStart: Property.PositionArea | CssString = 'span-y-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:span-y-start;`。 */
-  readonly spanYStart: Property.PositionArea | CssString = 'span-y-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:start;`。 */
-  readonly start: Property.PositionArea | CssString = 'start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:top;`。 */
-  readonly top: Property.PositionArea | CssString = 'top';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-area:unset;`。
-   */
-  readonly unset: Property.PositionArea | CssString = 'unset';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:x-end;`。 */
-  readonly xEnd: Property.PositionArea | CssString = 'x-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:x-self-end;`。 */
-  readonly xSelfEnd: Property.PositionArea | CssString = 'x-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:x-self-start;`。 */
-  readonly xSelfStart: Property.PositionArea | CssString = 'x-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:x-start;`。 */
-  readonly xStart: Property.PositionArea | CssString = 'x-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:y-end;`。 */
-  readonly yEnd: Property.PositionArea | CssString = 'y-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:y-self-end;`。 */
-  readonly ySelfEnd: Property.PositionArea | CssString = 'y-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:y-self-start;`。 */
-  readonly ySelfStart: Property.PositionArea | CssString = 'y-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-area:y-start;`。 */
-  readonly yStart: Property.PositionArea | CssString = 'y-start';
-}
+export type PositionAreaKeywords = KeywordValuesOf<
+  typeof keywords_99e9f0a1ccb3,
+  Property.PositionArea | CssString
+>;
+/**
+ * 创建 position-area 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PositionAreaKeywords()
+ */
+export const PositionAreaKeywords = /* @__PURE__ */ keywordConstructor(
+  class PositionAreaKeywords {
+    constructor() {
+      Object.assign(this, keywords_99e9f0a1ccb3);
+    }
+  },
+  'PositionAreaKeywords',
+) as new () => PositionAreaKeywords;
 
 /**
- * 选择相对于锚点的定位区域。（position-area）
- *
- * CSS 初始值：`none`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-area
+ * position-area 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PositionAreaCss extends CssProperty {
-  /** CSS 声明：`position-area:block-end;`。 */
-  readonly blockEnd: string = 'position-area:block-end;';
-  /** CSS 声明：`position-area:block-start;`。 */
-  readonly blockStart: string = 'position-area:block-start;';
-  /** CSS 声明：`position-area:bottom;`。 */
-  readonly bottom: string = 'position-area:bottom;';
-  /** CSS 声明：`position-area:center;`。 */
-  readonly center: string = 'position-area:center;';
-  /** CSS 声明：`position-area:end;`。 */
-  readonly end: string = 'position-area:end;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-area:inherit;`。
-   */
-  readonly inherit: string = 'position-area:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-area:initial;`。
-   */
-  readonly initial: string = 'position-area:initial;';
-  /** CSS 声明：`position-area:inline-end;`。 */
-  readonly inlineEnd: string = 'position-area:inline-end;';
-  /** CSS 声明：`position-area:inline-start;`。 */
-  readonly inlineStart: string = 'position-area:inline-start;';
-  /** CSS 声明：`position-area:left;`。 */
-  readonly left: string = 'position-area:left;';
-  /** CSS 声明：`position-area:none;`。 */
-  readonly none: string = 'position-area:none;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-area:revert;`。
-   */
-  readonly revert: string = 'position-area:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-area:revert-layer;`。
-   */
-  readonly revertLayer: string = 'position-area:revert-layer;';
-  /** CSS 声明：`position-area:right;`。 */
-  readonly right: string = 'position-area:right;';
-  /** CSS 声明：`position-area:self-block-end;`。 */
-  readonly selfBlockEnd: string = 'position-area:self-block-end;';
-  /** CSS 声明：`position-area:self-block-start;`。 */
-  readonly selfBlockStart: string = 'position-area:self-block-start;';
-  /** CSS 声明：`position-area:self-end;`。 */
-  readonly selfEnd: string = 'position-area:self-end;';
-  /** CSS 声明：`position-area:self-inline-end;`。 */
-  readonly selfInlineEnd: string = 'position-area:self-inline-end;';
-  /** CSS 声明：`position-area:self-inline-start;`。 */
-  readonly selfInlineStart: string = 'position-area:self-inline-start;';
-  /** CSS 声明：`position-area:self-start;`。 */
-  readonly selfStart: string = 'position-area:self-start;';
-  /** CSS 声明：`position-area:span-all;`。 */
-  readonly spanAll: string = 'position-area:span-all;';
-  /** CSS 声明：`position-area:span-block-end;`。 */
-  readonly spanBlockEnd: string = 'position-area:span-block-end;';
-  /** CSS 声明：`position-area:span-block-start;`。 */
-  readonly spanBlockStart: string = 'position-area:span-block-start;';
-  /** CSS 声明：`position-area:span-bottom;`。 */
-  readonly spanBottom: string = 'position-area:span-bottom;';
-  /** CSS 声明：`position-area:span-end;`。 */
-  readonly spanEnd: string = 'position-area:span-end;';
-  /** CSS 声明：`position-area:span-inline-end;`。 */
-  readonly spanInlineEnd: string = 'position-area:span-inline-end;';
-  /** CSS 声明：`position-area:span-inline-start;`。 */
-  readonly spanInlineStart: string = 'position-area:span-inline-start;';
-  /** CSS 声明：`position-area:span-left;`。 */
-  readonly spanLeft: string = 'position-area:span-left;';
-  /** CSS 声明：`position-area:span-right;`。 */
-  readonly spanRight: string = 'position-area:span-right;';
-  /** CSS 声明：`position-area:span-self-block-end;`。 */
-  readonly spanSelfBlockEnd: string = 'position-area:span-self-block-end;';
-  /** CSS 声明：`position-area:span-self-block-start;`。 */
-  readonly spanSelfBlockStart: string = 'position-area:span-self-block-start;';
-  /** CSS 声明：`position-area:span-self-end;`。 */
-  readonly spanSelfEnd: string = 'position-area:span-self-end;';
-  /** CSS 声明：`position-area:span-self-inline-end;`。 */
-  readonly spanSelfInlineEnd: string = 'position-area:span-self-inline-end;';
-  /** CSS 声明：`position-area:span-self-inline-start;`。 */
-  readonly spanSelfInlineStart: string = 'position-area:span-self-inline-start;';
-  /** CSS 声明：`position-area:span-self-start;`。 */
-  readonly spanSelfStart: string = 'position-area:span-self-start;';
-  /** CSS 声明：`position-area:span-start;`。 */
-  readonly spanStart: string = 'position-area:span-start;';
-  /** CSS 声明：`position-area:span-top;`。 */
-  readonly spanTop: string = 'position-area:span-top;';
-  /** CSS 声明：`position-area:span-x-end;`。 */
-  readonly spanXEnd: string = 'position-area:span-x-end;';
-  /** CSS 声明：`position-area:span-x-self-end;`。 */
-  readonly spanXSelfEnd: string = 'position-area:span-x-self-end;';
-  /** CSS 声明：`position-area:span-x-self-start;`。 */
-  readonly spanXSelfStart: string = 'position-area:span-x-self-start;';
-  /** CSS 声明：`position-area:span-x-start;`。 */
-  readonly spanXStart: string = 'position-area:span-x-start;';
-  /** CSS 声明：`position-area:span-y-end;`。 */
-  readonly spanYEnd: string = 'position-area:span-y-end;';
-  /** CSS 声明：`position-area:span-y-self-end;`。 */
-  readonly spanYSelfEnd: string = 'position-area:span-y-self-end;';
-  /** CSS 声明：`position-area:span-y-self-start;`。 */
-  readonly spanYSelfStart: string = 'position-area:span-y-self-start;';
-  /** CSS 声明：`position-area:span-y-start;`。 */
-  readonly spanYStart: string = 'position-area:span-y-start;';
-  /** CSS 声明：`position-area:start;`。 */
-  readonly start: string = 'position-area:start;';
-  /** CSS 声明：`position-area:top;`。 */
-  readonly top: string = 'position-area:top;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-area:unset;`。
-   */
-  readonly unset: string = 'position-area:unset;';
-  /** CSS 声明：`position-area:x-end;`。 */
-  readonly xEnd: string = 'position-area:x-end;';
-  /** CSS 声明：`position-area:x-self-end;`。 */
-  readonly xSelfEnd: string = 'position-area:x-self-end;';
-  /** CSS 声明：`position-area:x-self-start;`。 */
-  readonly xSelfStart: string = 'position-area:x-self-start;';
-  /** CSS 声明：`position-area:x-start;`。 */
-  readonly xStart: string = 'position-area:x-start;';
-  /** CSS 声明：`position-area:y-end;`。 */
-  readonly yEnd: string = 'position-area:y-end;';
-  /** CSS 声明：`position-area:y-self-end;`。 */
-  readonly ySelfEnd: string = 'position-area:y-self-end;';
-  /** CSS 声明：`position-area:y-self-start;`。 */
-  readonly ySelfStart: string = 'position-area:y-self-start;';
-  /** CSS 声明：`position-area:y-start;`。 */
-  readonly yStart: string = 'position-area:y-start;';
+class PositionAreaCssRuntime extends CssProperty {
   /**
    * 创建 position-area 属性作者；普通使用通过 s.positionArea 取得共享实例。
    * @example
@@ -8742,6 +6991,7 @@ export class PositionAreaCss extends CssProperty {
    */
   constructor() {
     super('position-area');
+    initializeKeywordDeclarations(this, 'position-area', keywords_99e9f0a1ccb3);
   }
   /**
    * 原样生成 position-area 声明，保留关键字补全并接受自定义 CSS 值。
@@ -8756,412 +7006,47 @@ export class PositionAreaCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * position-area 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PositionAreaCss = PositionAreaCssRuntime & KeywordDeclarations<PositionAreaKeywords>;
+/**
+ * 选择相对于锚点的定位区域。（position-area）
+ *
+ * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-area
+ */
+export const PositionAreaCss = /* @__PURE__ */ keywordConstructor(
+  PositionAreaCssRuntime,
+  'PositionAreaCss',
+) as new () => PositionAreaCss;
+import { keywords_7322bcae5c2d } from './keyword-sets.js';
 
 /**
  * position-try 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PositionTryKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:block-end;`。 */
-  readonly blockEnd: Property.PositionTry | CssString = 'block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:block-start;`。 */
-  readonly blockStart: Property.PositionTry | CssString = 'block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:bottom;`。 */
-  readonly bottom: Property.PositionTry | CssString = 'bottom';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:center;`。 */
-  readonly center: Property.PositionTry | CssString = 'center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:end;`。 */
-  readonly end: Property.PositionTry | CssString = 'end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:flip-block;`。 */
-  readonly flipBlock: Property.PositionTry | CssString = 'flip-block';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:flip-inline;`。 */
-  readonly flipInline: Property.PositionTry | CssString = 'flip-inline';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:flip-start;`。 */
-  readonly flipStart: Property.PositionTry | CssString = 'flip-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-try:inherit;`。
-   */
-  readonly inherit: Property.PositionTry | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-try:initial;`。
-   */
-  readonly initial: Property.PositionTry | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:inline-end;`。 */
-  readonly inlineEnd: Property.PositionTry | CssString = 'inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:inline-start;`。 */
-  readonly inlineStart: Property.PositionTry | CssString = 'inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:left;`。 */
-  readonly left: Property.PositionTry | CssString = 'left';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:none;`。 */
-  readonly none: Property.PositionTry | CssString = 'none';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-try:revert;`。
-   */
-  readonly revert: Property.PositionTry | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-try:revert-layer;`。
-   */
-  readonly revertLayer: Property.PositionTry | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:right;`。 */
-  readonly right: Property.PositionTry | CssString = 'right';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:self-block-end;`。 */
-  readonly selfBlockEnd: Property.PositionTry | CssString = 'self-block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:self-block-start;`。 */
-  readonly selfBlockStart: Property.PositionTry | CssString = 'self-block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:self-end;`。 */
-  readonly selfEnd: Property.PositionTry | CssString = 'self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:self-inline-end;`。 */
-  readonly selfInlineEnd: Property.PositionTry | CssString = 'self-inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:self-inline-start;`。 */
-  readonly selfInlineStart: Property.PositionTry | CssString = 'self-inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:self-start;`。 */
-  readonly selfStart: Property.PositionTry | CssString = 'self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-all;`。 */
-  readonly spanAll: Property.PositionTry | CssString = 'span-all';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-block-end;`。 */
-  readonly spanBlockEnd: Property.PositionTry | CssString = 'span-block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-block-start;`。 */
-  readonly spanBlockStart: Property.PositionTry | CssString = 'span-block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-bottom;`。 */
-  readonly spanBottom: Property.PositionTry | CssString = 'span-bottom';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-end;`。 */
-  readonly spanEnd: Property.PositionTry | CssString = 'span-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-inline-end;`。 */
-  readonly spanInlineEnd: Property.PositionTry | CssString = 'span-inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-inline-start;`。 */
-  readonly spanInlineStart: Property.PositionTry | CssString = 'span-inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-left;`。 */
-  readonly spanLeft: Property.PositionTry | CssString = 'span-left';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-right;`。 */
-  readonly spanRight: Property.PositionTry | CssString = 'span-right';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-self-block-end;`。 */
-  readonly spanSelfBlockEnd: Property.PositionTry | CssString = 'span-self-block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-self-block-start;`。 */
-  readonly spanSelfBlockStart: Property.PositionTry | CssString = 'span-self-block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-self-end;`。 */
-  readonly spanSelfEnd: Property.PositionTry | CssString = 'span-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-self-inline-end;`。 */
-  readonly spanSelfInlineEnd: Property.PositionTry | CssString = 'span-self-inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-self-inline-start;`。 */
-  readonly spanSelfInlineStart: Property.PositionTry | CssString = 'span-self-inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-self-start;`。 */
-  readonly spanSelfStart: Property.PositionTry | CssString = 'span-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-start;`。 */
-  readonly spanStart: Property.PositionTry | CssString = 'span-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-top;`。 */
-  readonly spanTop: Property.PositionTry | CssString = 'span-top';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-x-end;`。 */
-  readonly spanXEnd: Property.PositionTry | CssString = 'span-x-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-x-self-end;`。 */
-  readonly spanXSelfEnd: Property.PositionTry | CssString = 'span-x-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-x-self-start;`。 */
-  readonly spanXSelfStart: Property.PositionTry | CssString = 'span-x-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-x-start;`。 */
-  readonly spanXStart: Property.PositionTry | CssString = 'span-x-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-y-end;`。 */
-  readonly spanYEnd: Property.PositionTry | CssString = 'span-y-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-y-self-end;`。 */
-  readonly spanYSelfEnd: Property.PositionTry | CssString = 'span-y-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-y-self-start;`。 */
-  readonly spanYSelfStart: Property.PositionTry | CssString = 'span-y-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:span-y-start;`。 */
-  readonly spanYStart: Property.PositionTry | CssString = 'span-y-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:start;`。 */
-  readonly start: Property.PositionTry | CssString = 'start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:top;`。 */
-  readonly top: Property.PositionTry | CssString = 'top';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-try:unset;`。
-   */
-  readonly unset: Property.PositionTry | CssString = 'unset';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:x-end;`。 */
-  readonly xEnd: Property.PositionTry | CssString = 'x-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:x-self-end;`。 */
-  readonly xSelfEnd: Property.PositionTry | CssString = 'x-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:x-self-start;`。 */
-  readonly xSelfStart: Property.PositionTry | CssString = 'x-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:x-start;`。 */
-  readonly xStart: Property.PositionTry | CssString = 'x-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:y-end;`。 */
-  readonly yEnd: Property.PositionTry | CssString = 'y-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:y-self-end;`。 */
-  readonly ySelfEnd: Property.PositionTry | CssString = 'y-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:y-self-start;`。 */
-  readonly ySelfStart: Property.PositionTry | CssString = 'y-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try:y-start;`。 */
-  readonly yStart: Property.PositionTry | CssString = 'y-start';
-}
+export type PositionTryKeywords = KeywordValuesOf<
+  typeof keywords_7322bcae5c2d,
+  Property.PositionTry | CssString
+>;
+/**
+ * 创建 position-try 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PositionTryKeywords()
+ */
+export const PositionTryKeywords = /* @__PURE__ */ keywordConstructor(
+  class PositionTryKeywords {
+    constructor() {
+      Object.assign(this, keywords_7322bcae5c2d);
+    }
+  },
+  'PositionTryKeywords',
+) as new () => PositionTryKeywords;
 
 /**
- * 同时设置锚点定位的候选回退方式及尝试顺序。（position-try）
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try
+ * position-try 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PositionTryCss extends CssProperty {
-  /** CSS 声明：`position-try:block-end;`。 */
-  readonly blockEnd: string = 'position-try:block-end;';
-  /** CSS 声明：`position-try:block-start;`。 */
-  readonly blockStart: string = 'position-try:block-start;';
-  /** CSS 声明：`position-try:bottom;`。 */
-  readonly bottom: string = 'position-try:bottom;';
-  /** CSS 声明：`position-try:center;`。 */
-  readonly center: string = 'position-try:center;';
-  /** CSS 声明：`position-try:end;`。 */
-  readonly end: string = 'position-try:end;';
-  /** CSS 声明：`position-try:flip-block;`。 */
-  readonly flipBlock: string = 'position-try:flip-block;';
-  /** CSS 声明：`position-try:flip-inline;`。 */
-  readonly flipInline: string = 'position-try:flip-inline;';
-  /** CSS 声明：`position-try:flip-start;`。 */
-  readonly flipStart: string = 'position-try:flip-start;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-try:inherit;`。
-   */
-  readonly inherit: string = 'position-try:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-try:initial;`。
-   */
-  readonly initial: string = 'position-try:initial;';
-  /** CSS 声明：`position-try:inline-end;`。 */
-  readonly inlineEnd: string = 'position-try:inline-end;';
-  /** CSS 声明：`position-try:inline-start;`。 */
-  readonly inlineStart: string = 'position-try:inline-start;';
-  /** CSS 声明：`position-try:left;`。 */
-  readonly left: string = 'position-try:left;';
-  /** CSS 声明：`position-try:none;`。 */
-  readonly none: string = 'position-try:none;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-try:revert;`。
-   */
-  readonly revert: string = 'position-try:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-try:revert-layer;`。
-   */
-  readonly revertLayer: string = 'position-try:revert-layer;';
-  /** CSS 声明：`position-try:right;`。 */
-  readonly right: string = 'position-try:right;';
-  /** CSS 声明：`position-try:self-block-end;`。 */
-  readonly selfBlockEnd: string = 'position-try:self-block-end;';
-  /** CSS 声明：`position-try:self-block-start;`。 */
-  readonly selfBlockStart: string = 'position-try:self-block-start;';
-  /** CSS 声明：`position-try:self-end;`。 */
-  readonly selfEnd: string = 'position-try:self-end;';
-  /** CSS 声明：`position-try:self-inline-end;`。 */
-  readonly selfInlineEnd: string = 'position-try:self-inline-end;';
-  /** CSS 声明：`position-try:self-inline-start;`。 */
-  readonly selfInlineStart: string = 'position-try:self-inline-start;';
-  /** CSS 声明：`position-try:self-start;`。 */
-  readonly selfStart: string = 'position-try:self-start;';
-  /** CSS 声明：`position-try:span-all;`。 */
-  readonly spanAll: string = 'position-try:span-all;';
-  /** CSS 声明：`position-try:span-block-end;`。 */
-  readonly spanBlockEnd: string = 'position-try:span-block-end;';
-  /** CSS 声明：`position-try:span-block-start;`。 */
-  readonly spanBlockStart: string = 'position-try:span-block-start;';
-  /** CSS 声明：`position-try:span-bottom;`。 */
-  readonly spanBottom: string = 'position-try:span-bottom;';
-  /** CSS 声明：`position-try:span-end;`。 */
-  readonly spanEnd: string = 'position-try:span-end;';
-  /** CSS 声明：`position-try:span-inline-end;`。 */
-  readonly spanInlineEnd: string = 'position-try:span-inline-end;';
-  /** CSS 声明：`position-try:span-inline-start;`。 */
-  readonly spanInlineStart: string = 'position-try:span-inline-start;';
-  /** CSS 声明：`position-try:span-left;`。 */
-  readonly spanLeft: string = 'position-try:span-left;';
-  /** CSS 声明：`position-try:span-right;`。 */
-  readonly spanRight: string = 'position-try:span-right;';
-  /** CSS 声明：`position-try:span-self-block-end;`。 */
-  readonly spanSelfBlockEnd: string = 'position-try:span-self-block-end;';
-  /** CSS 声明：`position-try:span-self-block-start;`。 */
-  readonly spanSelfBlockStart: string = 'position-try:span-self-block-start;';
-  /** CSS 声明：`position-try:span-self-end;`。 */
-  readonly spanSelfEnd: string = 'position-try:span-self-end;';
-  /** CSS 声明：`position-try:span-self-inline-end;`。 */
-  readonly spanSelfInlineEnd: string = 'position-try:span-self-inline-end;';
-  /** CSS 声明：`position-try:span-self-inline-start;`。 */
-  readonly spanSelfInlineStart: string = 'position-try:span-self-inline-start;';
-  /** CSS 声明：`position-try:span-self-start;`。 */
-  readonly spanSelfStart: string = 'position-try:span-self-start;';
-  /** CSS 声明：`position-try:span-start;`。 */
-  readonly spanStart: string = 'position-try:span-start;';
-  /** CSS 声明：`position-try:span-top;`。 */
-  readonly spanTop: string = 'position-try:span-top;';
-  /** CSS 声明：`position-try:span-x-end;`。 */
-  readonly spanXEnd: string = 'position-try:span-x-end;';
-  /** CSS 声明：`position-try:span-x-self-end;`。 */
-  readonly spanXSelfEnd: string = 'position-try:span-x-self-end;';
-  /** CSS 声明：`position-try:span-x-self-start;`。 */
-  readonly spanXSelfStart: string = 'position-try:span-x-self-start;';
-  /** CSS 声明：`position-try:span-x-start;`。 */
-  readonly spanXStart: string = 'position-try:span-x-start;';
-  /** CSS 声明：`position-try:span-y-end;`。 */
-  readonly spanYEnd: string = 'position-try:span-y-end;';
-  /** CSS 声明：`position-try:span-y-self-end;`。 */
-  readonly spanYSelfEnd: string = 'position-try:span-y-self-end;';
-  /** CSS 声明：`position-try:span-y-self-start;`。 */
-  readonly spanYSelfStart: string = 'position-try:span-y-self-start;';
-  /** CSS 声明：`position-try:span-y-start;`。 */
-  readonly spanYStart: string = 'position-try:span-y-start;';
-  /** CSS 声明：`position-try:start;`。 */
-  readonly start: string = 'position-try:start;';
-  /** CSS 声明：`position-try:top;`。 */
-  readonly top: string = 'position-try:top;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-try:unset;`。
-   */
-  readonly unset: string = 'position-try:unset;';
-  /** CSS 声明：`position-try:x-end;`。 */
-  readonly xEnd: string = 'position-try:x-end;';
-  /** CSS 声明：`position-try:x-self-end;`。 */
-  readonly xSelfEnd: string = 'position-try:x-self-end;';
-  /** CSS 声明：`position-try:x-self-start;`。 */
-  readonly xSelfStart: string = 'position-try:x-self-start;';
-  /** CSS 声明：`position-try:x-start;`。 */
-  readonly xStart: string = 'position-try:x-start;';
-  /** CSS 声明：`position-try:y-end;`。 */
-  readonly yEnd: string = 'position-try:y-end;';
-  /** CSS 声明：`position-try:y-self-end;`。 */
-  readonly ySelfEnd: string = 'position-try:y-self-end;';
-  /** CSS 声明：`position-try:y-self-start;`。 */
-  readonly ySelfStart: string = 'position-try:y-self-start;';
-  /** CSS 声明：`position-try:y-start;`。 */
-  readonly yStart: string = 'position-try:y-start;';
+class PositionTryCssRuntime extends CssProperty {
   /**
    * 创建 position-try 属性作者；普通使用通过 s.positionTry 取得共享实例。
    * @example
@@ -9169,6 +7054,7 @@ export class PositionTryCss extends CssProperty {
    */
   constructor() {
     super('position-try');
+    initializeKeywordDeclarations(this, 'position-try', keywords_7322bcae5c2d);
   }
   /**
    * 原样生成 position-try 声明，保留关键字补全并接受自定义 CSS 值。
@@ -9183,415 +7069,44 @@ export class PositionTryCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * position-try 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PositionTryCss = PositionTryCssRuntime & KeywordDeclarations<PositionTryKeywords>;
+/**
+ * 同时设置锚点定位的候选回退方式及尝试顺序。（position-try）
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try
+ */
+export const PositionTryCss = /* @__PURE__ */ keywordConstructor(
+  PositionTryCssRuntime,
+  'PositionTryCss',
+) as new () => PositionTryCss;
 
 /**
  * position-try-fallbacks 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PositionTryFallbacksKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:block-end;`。 */
-  readonly blockEnd: Property.PositionTryFallbacks | CssString = 'block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:block-start;`。 */
-  readonly blockStart: Property.PositionTryFallbacks | CssString = 'block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:bottom;`。 */
-  readonly bottom: Property.PositionTryFallbacks | CssString = 'bottom';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:center;`。 */
-  readonly center: Property.PositionTryFallbacks | CssString = 'center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:end;`。 */
-  readonly end: Property.PositionTryFallbacks | CssString = 'end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:flip-block;`。 */
-  readonly flipBlock: Property.PositionTryFallbacks | CssString = 'flip-block';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:flip-inline;`。 */
-  readonly flipInline: Property.PositionTryFallbacks | CssString = 'flip-inline';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:flip-start;`。 */
-  readonly flipStart: Property.PositionTryFallbacks | CssString = 'flip-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-try-fallbacks:inherit;`。
-   */
-  readonly inherit: Property.PositionTryFallbacks | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-try-fallbacks:initial;`。
-   */
-  readonly initial: Property.PositionTryFallbacks | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:inline-end;`。 */
-  readonly inlineEnd: Property.PositionTryFallbacks | CssString = 'inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:inline-start;`。 */
-  readonly inlineStart: Property.PositionTryFallbacks | CssString = 'inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:left;`。 */
-  readonly left: Property.PositionTryFallbacks | CssString = 'left';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:none;`。 */
-  readonly none: Property.PositionTryFallbacks | CssString = 'none';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-try-fallbacks:revert;`。
-   */
-  readonly revert: Property.PositionTryFallbacks | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-try-fallbacks:revert-layer;`。
-   */
-  readonly revertLayer: Property.PositionTryFallbacks | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:right;`。 */
-  readonly right: Property.PositionTryFallbacks | CssString = 'right';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:self-block-end;`。 */
-  readonly selfBlockEnd: Property.PositionTryFallbacks | CssString = 'self-block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:self-block-start;`。 */
-  readonly selfBlockStart: Property.PositionTryFallbacks | CssString = 'self-block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:self-end;`。 */
-  readonly selfEnd: Property.PositionTryFallbacks | CssString = 'self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:self-inline-end;`。 */
-  readonly selfInlineEnd: Property.PositionTryFallbacks | CssString = 'self-inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:self-inline-start;`。 */
-  readonly selfInlineStart: Property.PositionTryFallbacks | CssString = 'self-inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:self-start;`。 */
-  readonly selfStart: Property.PositionTryFallbacks | CssString = 'self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-all;`。 */
-  readonly spanAll: Property.PositionTryFallbacks | CssString = 'span-all';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-block-end;`。 */
-  readonly spanBlockEnd: Property.PositionTryFallbacks | CssString = 'span-block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-block-start;`。 */
-  readonly spanBlockStart: Property.PositionTryFallbacks | CssString = 'span-block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-bottom;`。 */
-  readonly spanBottom: Property.PositionTryFallbacks | CssString = 'span-bottom';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-end;`。 */
-  readonly spanEnd: Property.PositionTryFallbacks | CssString = 'span-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-inline-end;`。 */
-  readonly spanInlineEnd: Property.PositionTryFallbacks | CssString = 'span-inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-inline-start;`。 */
-  readonly spanInlineStart: Property.PositionTryFallbacks | CssString = 'span-inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-left;`。 */
-  readonly spanLeft: Property.PositionTryFallbacks | CssString = 'span-left';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-right;`。 */
-  readonly spanRight: Property.PositionTryFallbacks | CssString = 'span-right';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-self-block-end;`。 */
-  readonly spanSelfBlockEnd: Property.PositionTryFallbacks | CssString = 'span-self-block-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-self-block-start;`。 */
-  readonly spanSelfBlockStart: Property.PositionTryFallbacks | CssString = 'span-self-block-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-self-end;`。 */
-  readonly spanSelfEnd: Property.PositionTryFallbacks | CssString = 'span-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-self-inline-end;`。 */
-  readonly spanSelfInlineEnd: Property.PositionTryFallbacks | CssString = 'span-self-inline-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-self-inline-start;`。 */
-  readonly spanSelfInlineStart: Property.PositionTryFallbacks | CssString =
-    'span-self-inline-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-self-start;`。 */
-  readonly spanSelfStart: Property.PositionTryFallbacks | CssString = 'span-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-start;`。 */
-  readonly spanStart: Property.PositionTryFallbacks | CssString = 'span-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-top;`。 */
-  readonly spanTop: Property.PositionTryFallbacks | CssString = 'span-top';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-x-end;`。 */
-  readonly spanXEnd: Property.PositionTryFallbacks | CssString = 'span-x-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-x-self-end;`。 */
-  readonly spanXSelfEnd: Property.PositionTryFallbacks | CssString = 'span-x-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-x-self-start;`。 */
-  readonly spanXSelfStart: Property.PositionTryFallbacks | CssString = 'span-x-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-x-start;`。 */
-  readonly spanXStart: Property.PositionTryFallbacks | CssString = 'span-x-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-y-end;`。 */
-  readonly spanYEnd: Property.PositionTryFallbacks | CssString = 'span-y-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-y-self-end;`。 */
-  readonly spanYSelfEnd: Property.PositionTryFallbacks | CssString = 'span-y-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-y-self-start;`。 */
-  readonly spanYSelfStart: Property.PositionTryFallbacks | CssString = 'span-y-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:span-y-start;`。 */
-  readonly spanYStart: Property.PositionTryFallbacks | CssString = 'span-y-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:start;`。 */
-  readonly start: Property.PositionTryFallbacks | CssString = 'start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:top;`。 */
-  readonly top: Property.PositionTryFallbacks | CssString = 'top';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-try-fallbacks:unset;`。
-   */
-  readonly unset: Property.PositionTryFallbacks | CssString = 'unset';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:x-end;`。 */
-  readonly xEnd: Property.PositionTryFallbacks | CssString = 'x-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:x-self-end;`。 */
-  readonly xSelfEnd: Property.PositionTryFallbacks | CssString = 'x-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:x-self-start;`。 */
-  readonly xSelfStart: Property.PositionTryFallbacks | CssString = 'x-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:x-start;`。 */
-  readonly xStart: Property.PositionTryFallbacks | CssString = 'x-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:y-end;`。 */
-  readonly yEnd: Property.PositionTryFallbacks | CssString = 'y-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:y-self-end;`。 */
-  readonly ySelfEnd: Property.PositionTryFallbacks | CssString = 'y-self-end';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:y-self-start;`。 */
-  readonly ySelfStart: Property.PositionTryFallbacks | CssString = 'y-self-start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-fallbacks:y-start;`。 */
-  readonly yStart: Property.PositionTryFallbacks | CssString = 'y-start';
-}
+export type PositionTryFallbacksKeywords = KeywordValuesOf<
+  typeof keywords_7322bcae5c2d,
+  Property.PositionTryFallbacks | CssString
+>;
+/**
+ * 创建 position-try-fallbacks 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PositionTryFallbacksKeywords()
+ */
+export const PositionTryFallbacksKeywords = /* @__PURE__ */ keywordConstructor(
+  class PositionTryFallbacksKeywords {
+    constructor() {
+      Object.assign(this, keywords_7322bcae5c2d);
+    }
+  },
+  'PositionTryFallbacksKeywords',
+) as new () => PositionTryFallbacksKeywords;
 
 /**
- * 设置锚点定位溢出时尝试的替代位置。（position-try-fallbacks）
- *
- * CSS 初始值：`none`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-fallbacks
+ * position-try-fallbacks 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PositionTryFallbacksCss extends CssProperty {
-  /** CSS 声明：`position-try-fallbacks:block-end;`。 */
-  readonly blockEnd: string = 'position-try-fallbacks:block-end;';
-  /** CSS 声明：`position-try-fallbacks:block-start;`。 */
-  readonly blockStart: string = 'position-try-fallbacks:block-start;';
-  /** CSS 声明：`position-try-fallbacks:bottom;`。 */
-  readonly bottom: string = 'position-try-fallbacks:bottom;';
-  /** CSS 声明：`position-try-fallbacks:center;`。 */
-  readonly center: string = 'position-try-fallbacks:center;';
-  /** CSS 声明：`position-try-fallbacks:end;`。 */
-  readonly end: string = 'position-try-fallbacks:end;';
-  /** CSS 声明：`position-try-fallbacks:flip-block;`。 */
-  readonly flipBlock: string = 'position-try-fallbacks:flip-block;';
-  /** CSS 声明：`position-try-fallbacks:flip-inline;`。 */
-  readonly flipInline: string = 'position-try-fallbacks:flip-inline;';
-  /** CSS 声明：`position-try-fallbacks:flip-start;`。 */
-  readonly flipStart: string = 'position-try-fallbacks:flip-start;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-try-fallbacks:inherit;`。
-   */
-  readonly inherit: string = 'position-try-fallbacks:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-try-fallbacks:initial;`。
-   */
-  readonly initial: string = 'position-try-fallbacks:initial;';
-  /** CSS 声明：`position-try-fallbacks:inline-end;`。 */
-  readonly inlineEnd: string = 'position-try-fallbacks:inline-end;';
-  /** CSS 声明：`position-try-fallbacks:inline-start;`。 */
-  readonly inlineStart: string = 'position-try-fallbacks:inline-start;';
-  /** CSS 声明：`position-try-fallbacks:left;`。 */
-  readonly left: string = 'position-try-fallbacks:left;';
-  /** CSS 声明：`position-try-fallbacks:none;`。 */
-  readonly none: string = 'position-try-fallbacks:none;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-try-fallbacks:revert;`。
-   */
-  readonly revert: string = 'position-try-fallbacks:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-try-fallbacks:revert-layer;`。
-   */
-  readonly revertLayer: string = 'position-try-fallbacks:revert-layer;';
-  /** CSS 声明：`position-try-fallbacks:right;`。 */
-  readonly right: string = 'position-try-fallbacks:right;';
-  /** CSS 声明：`position-try-fallbacks:self-block-end;`。 */
-  readonly selfBlockEnd: string = 'position-try-fallbacks:self-block-end;';
-  /** CSS 声明：`position-try-fallbacks:self-block-start;`。 */
-  readonly selfBlockStart: string = 'position-try-fallbacks:self-block-start;';
-  /** CSS 声明：`position-try-fallbacks:self-end;`。 */
-  readonly selfEnd: string = 'position-try-fallbacks:self-end;';
-  /** CSS 声明：`position-try-fallbacks:self-inline-end;`。 */
-  readonly selfInlineEnd: string = 'position-try-fallbacks:self-inline-end;';
-  /** CSS 声明：`position-try-fallbacks:self-inline-start;`。 */
-  readonly selfInlineStart: string = 'position-try-fallbacks:self-inline-start;';
-  /** CSS 声明：`position-try-fallbacks:self-start;`。 */
-  readonly selfStart: string = 'position-try-fallbacks:self-start;';
-  /** CSS 声明：`position-try-fallbacks:span-all;`。 */
-  readonly spanAll: string = 'position-try-fallbacks:span-all;';
-  /** CSS 声明：`position-try-fallbacks:span-block-end;`。 */
-  readonly spanBlockEnd: string = 'position-try-fallbacks:span-block-end;';
-  /** CSS 声明：`position-try-fallbacks:span-block-start;`。 */
-  readonly spanBlockStart: string = 'position-try-fallbacks:span-block-start;';
-  /** CSS 声明：`position-try-fallbacks:span-bottom;`。 */
-  readonly spanBottom: string = 'position-try-fallbacks:span-bottom;';
-  /** CSS 声明：`position-try-fallbacks:span-end;`。 */
-  readonly spanEnd: string = 'position-try-fallbacks:span-end;';
-  /** CSS 声明：`position-try-fallbacks:span-inline-end;`。 */
-  readonly spanInlineEnd: string = 'position-try-fallbacks:span-inline-end;';
-  /** CSS 声明：`position-try-fallbacks:span-inline-start;`。 */
-  readonly spanInlineStart: string = 'position-try-fallbacks:span-inline-start;';
-  /** CSS 声明：`position-try-fallbacks:span-left;`。 */
-  readonly spanLeft: string = 'position-try-fallbacks:span-left;';
-  /** CSS 声明：`position-try-fallbacks:span-right;`。 */
-  readonly spanRight: string = 'position-try-fallbacks:span-right;';
-  /** CSS 声明：`position-try-fallbacks:span-self-block-end;`。 */
-  readonly spanSelfBlockEnd: string = 'position-try-fallbacks:span-self-block-end;';
-  /** CSS 声明：`position-try-fallbacks:span-self-block-start;`。 */
-  readonly spanSelfBlockStart: string = 'position-try-fallbacks:span-self-block-start;';
-  /** CSS 声明：`position-try-fallbacks:span-self-end;`。 */
-  readonly spanSelfEnd: string = 'position-try-fallbacks:span-self-end;';
-  /** CSS 声明：`position-try-fallbacks:span-self-inline-end;`。 */
-  readonly spanSelfInlineEnd: string = 'position-try-fallbacks:span-self-inline-end;';
-  /** CSS 声明：`position-try-fallbacks:span-self-inline-start;`。 */
-  readonly spanSelfInlineStart: string = 'position-try-fallbacks:span-self-inline-start;';
-  /** CSS 声明：`position-try-fallbacks:span-self-start;`。 */
-  readonly spanSelfStart: string = 'position-try-fallbacks:span-self-start;';
-  /** CSS 声明：`position-try-fallbacks:span-start;`。 */
-  readonly spanStart: string = 'position-try-fallbacks:span-start;';
-  /** CSS 声明：`position-try-fallbacks:span-top;`。 */
-  readonly spanTop: string = 'position-try-fallbacks:span-top;';
-  /** CSS 声明：`position-try-fallbacks:span-x-end;`。 */
-  readonly spanXEnd: string = 'position-try-fallbacks:span-x-end;';
-  /** CSS 声明：`position-try-fallbacks:span-x-self-end;`。 */
-  readonly spanXSelfEnd: string = 'position-try-fallbacks:span-x-self-end;';
-  /** CSS 声明：`position-try-fallbacks:span-x-self-start;`。 */
-  readonly spanXSelfStart: string = 'position-try-fallbacks:span-x-self-start;';
-  /** CSS 声明：`position-try-fallbacks:span-x-start;`。 */
-  readonly spanXStart: string = 'position-try-fallbacks:span-x-start;';
-  /** CSS 声明：`position-try-fallbacks:span-y-end;`。 */
-  readonly spanYEnd: string = 'position-try-fallbacks:span-y-end;';
-  /** CSS 声明：`position-try-fallbacks:span-y-self-end;`。 */
-  readonly spanYSelfEnd: string = 'position-try-fallbacks:span-y-self-end;';
-  /** CSS 声明：`position-try-fallbacks:span-y-self-start;`。 */
-  readonly spanYSelfStart: string = 'position-try-fallbacks:span-y-self-start;';
-  /** CSS 声明：`position-try-fallbacks:span-y-start;`。 */
-  readonly spanYStart: string = 'position-try-fallbacks:span-y-start;';
-  /** CSS 声明：`position-try-fallbacks:start;`。 */
-  readonly start: string = 'position-try-fallbacks:start;';
-  /** CSS 声明：`position-try-fallbacks:top;`。 */
-  readonly top: string = 'position-try-fallbacks:top;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-try-fallbacks:unset;`。
-   */
-  readonly unset: string = 'position-try-fallbacks:unset;';
-  /** CSS 声明：`position-try-fallbacks:x-end;`。 */
-  readonly xEnd: string = 'position-try-fallbacks:x-end;';
-  /** CSS 声明：`position-try-fallbacks:x-self-end;`。 */
-  readonly xSelfEnd: string = 'position-try-fallbacks:x-self-end;';
-  /** CSS 声明：`position-try-fallbacks:x-self-start;`。 */
-  readonly xSelfStart: string = 'position-try-fallbacks:x-self-start;';
-  /** CSS 声明：`position-try-fallbacks:x-start;`。 */
-  readonly xStart: string = 'position-try-fallbacks:x-start;';
-  /** CSS 声明：`position-try-fallbacks:y-end;`。 */
-  readonly yEnd: string = 'position-try-fallbacks:y-end;';
-  /** CSS 声明：`position-try-fallbacks:y-self-end;`。 */
-  readonly ySelfEnd: string = 'position-try-fallbacks:y-self-end;';
-  /** CSS 声明：`position-try-fallbacks:y-self-start;`。 */
-  readonly ySelfStart: string = 'position-try-fallbacks:y-self-start;';
-  /** CSS 声明：`position-try-fallbacks:y-start;`。 */
-  readonly yStart: string = 'position-try-fallbacks:y-start;';
+class PositionTryFallbacksCssRuntime extends CssProperty {
   /**
    * 创建 position-try-fallbacks 属性作者；普通使用通过 s.positionTryFallbacks 取得共享实例。
    * @example
@@ -9599,6 +7114,7 @@ export class PositionTryFallbacksCss extends CssProperty {
    */
   constructor() {
     super('position-try-fallbacks');
+    initializeKeywordDeclarations(this, 'position-try-fallbacks', keywords_7322bcae5c2d);
   }
   /**
    * 原样生成 position-try-fallbacks 声明，保留关键字补全并接受自定义 CSS 值。
@@ -9613,120 +7129,48 @@ export class PositionTryFallbacksCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * position-try-fallbacks 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PositionTryFallbacksCss = PositionTryFallbacksCssRuntime &
+  KeywordDeclarations<PositionTryFallbacksKeywords>;
+/**
+ * 设置锚点定位溢出时尝试的替代位置。（position-try-fallbacks）
+ *
+ * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-fallbacks
+ */
+export const PositionTryFallbacksCss = /* @__PURE__ */ keywordConstructor(
+  PositionTryFallbacksCssRuntime,
+  'PositionTryFallbacksCss',
+) as new () => PositionTryFallbacksCss;
+import { keywords_3fc6061d8ecb } from './keyword-sets.js';
 
 /**
  * position-try-order 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PositionTryOrderKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-try-order:inherit;`。
-   */
-  readonly inherit: Property.PositionTryOrder | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-try-order:initial;`。
-   */
-  readonly initial: Property.PositionTryOrder | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-order:most-block-size;`。 */
-  readonly mostBlockSize: Property.PositionTryOrder | CssString = 'most-block-size';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-order:most-height;`。 */
-  readonly mostHeight: Property.PositionTryOrder | CssString = 'most-height';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-order:most-inline-size;`。 */
-  readonly mostInlineSize: Property.PositionTryOrder | CssString = 'most-inline-size';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-order:most-width;`。 */
-  readonly mostWidth: Property.PositionTryOrder | CssString = 'most-width';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-try-order:normal;`。 */
-  readonly normal: Property.PositionTryOrder | CssString = 'normal';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-try-order:revert;`。
-   */
-  readonly revert: Property.PositionTryOrder | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-try-order:revert-layer;`。
-   */
-  readonly revertLayer: Property.PositionTryOrder | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-try-order:unset;`。
-   */
-  readonly unset: Property.PositionTryOrder | CssString = 'unset';
-}
+export type PositionTryOrderKeywords = KeywordValuesOf<
+  typeof keywords_3fc6061d8ecb,
+  Property.PositionTryOrder | CssString
+>;
+/**
+ * 创建 position-try-order 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PositionTryOrderKeywords()
+ */
+export const PositionTryOrderKeywords = /* @__PURE__ */ keywordConstructor(
+  class PositionTryOrderKeywords {
+    constructor() {
+      Object.assign(this, keywords_3fc6061d8ecb);
+    }
+  },
+  'PositionTryOrderKeywords',
+) as new () => PositionTryOrderKeywords;
 
 /**
- * 设置锚点定位候选方案的尝试顺序。（position-try-order）
- *
- * CSS 初始值：`normal`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-order
+ * position-try-order 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PositionTryOrderCss extends CssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-try-order:inherit;`。
-   */
-  readonly inherit: string = 'position-try-order:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-try-order:initial;`。
-   */
-  readonly initial: string = 'position-try-order:initial;';
-  /** CSS 声明：`position-try-order:most-block-size;`。 */
-  readonly mostBlockSize: string = 'position-try-order:most-block-size;';
-  /** CSS 声明：`position-try-order:most-height;`。 */
-  readonly mostHeight: string = 'position-try-order:most-height;';
-  /** CSS 声明：`position-try-order:most-inline-size;`。 */
-  readonly mostInlineSize: string = 'position-try-order:most-inline-size;';
-  /** CSS 声明：`position-try-order:most-width;`。 */
-  readonly mostWidth: string = 'position-try-order:most-width;';
-  /** CSS 声明：`position-try-order:normal;`。 */
-  readonly normal: string = 'position-try-order:normal;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-try-order:revert;`。
-   */
-  readonly revert: string = 'position-try-order:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-try-order:revert-layer;`。
-   */
-  readonly revertLayer: string = 'position-try-order:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-try-order:unset;`。
-   */
-  readonly unset: string = 'position-try-order:unset;';
+class PositionTryOrderCssRuntime extends CssProperty {
   /**
    * 创建 position-try-order 属性作者；普通使用通过 s.positionTryOrder 取得共享实例。
    * @example
@@ -9734,6 +7178,7 @@ export class PositionTryOrderCss extends CssProperty {
    */
   constructor() {
     super('position-try-order');
+    initializeKeywordDeclarations(this, 'position-try-order', keywords_3fc6061d8ecb);
   }
   /**
    * 原样生成 position-try-order 声明，保留关键字补全并接受自定义 CSS 值。
@@ -9748,114 +7193,48 @@ export class PositionTryOrderCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * position-try-order 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PositionTryOrderCss = PositionTryOrderCssRuntime &
+  KeywordDeclarations<PositionTryOrderKeywords>;
+/**
+ * 设置锚点定位候选方案的尝试顺序。（position-try-order）
+ *
+ * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-try-order
+ */
+export const PositionTryOrderCss = /* @__PURE__ */ keywordConstructor(
+  PositionTryOrderCssRuntime,
+  'PositionTryOrderCss',
+) as new () => PositionTryOrderCss;
+import { keywords_39c86dab6c9b } from './keyword-sets.js';
 
 /**
  * position-visibility 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PositionVisibilityKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-visibility:always;`。 */
-  readonly always: Property.PositionVisibility | CssString = 'always';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-visibility:anchors-valid;`。 */
-  readonly anchorsValid: Property.PositionVisibility | CssString = 'anchors-valid';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-visibility:anchors-visible;`。 */
-  readonly anchorsVisible: Property.PositionVisibility | CssString = 'anchors-visible';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-visibility:inherit;`。
-   */
-  readonly inherit: Property.PositionVisibility | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-visibility:initial;`。
-   */
-  readonly initial: Property.PositionVisibility | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`position-visibility:no-overflow;`。 */
-  readonly noOverflow: Property.PositionVisibility | CssString = 'no-overflow';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-visibility:revert;`。
-   */
-  readonly revert: Property.PositionVisibility | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-visibility:revert-layer;`。
-   */
-  readonly revertLayer: Property.PositionVisibility | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-visibility:unset;`。
-   */
-  readonly unset: Property.PositionVisibility | CssString = 'unset';
-}
+export type PositionVisibilityKeywords = KeywordValuesOf<
+  typeof keywords_39c86dab6c9b,
+  Property.PositionVisibility | CssString
+>;
+/**
+ * 创建 position-visibility 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PositionVisibilityKeywords()
+ */
+export const PositionVisibilityKeywords = /* @__PURE__ */ keywordConstructor(
+  class PositionVisibilityKeywords {
+    constructor() {
+      Object.assign(this, keywords_39c86dab6c9b);
+    }
+  },
+  'PositionVisibilityKeywords',
+) as new () => PositionVisibilityKeywords;
 
 /**
- * 设置锚点定位元素根据锚点可见性和溢出情况是否显示。（position-visibility）
- *
- * CSS 初始值：`anchors-visible`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-visibility
+ * position-visibility 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PositionVisibilityCss extends CssProperty {
-  /** CSS 声明：`position-visibility:always;`。 */
-  readonly always: string = 'position-visibility:always;';
-  /** CSS 声明：`position-visibility:anchors-valid;`。 */
-  readonly anchorsValid: string = 'position-visibility:anchors-valid;';
-  /** CSS 声明：`position-visibility:anchors-visible;`。 */
-  readonly anchorsVisible: string = 'position-visibility:anchors-visible;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`position-visibility:inherit;`。
-   */
-  readonly inherit: string = 'position-visibility:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`position-visibility:initial;`。
-   */
-  readonly initial: string = 'position-visibility:initial;';
-  /** CSS 声明：`position-visibility:no-overflow;`。 */
-  readonly noOverflow: string = 'position-visibility:no-overflow;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`position-visibility:revert;`。
-   */
-  readonly revert: string = 'position-visibility:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`position-visibility:revert-layer;`。
-   */
-  readonly revertLayer: string = 'position-visibility:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`position-visibility:unset;`。
-   */
-  readonly unset: string = 'position-visibility:unset;';
+class PositionVisibilityCssRuntime extends CssProperty {
   /**
    * 创建 position-visibility 属性作者；普通使用通过 s.positionVisibility 取得共享实例。
    * @example
@@ -9863,6 +7242,7 @@ export class PositionVisibilityCss extends CssProperty {
    */
   constructor() {
     super('position-visibility');
+    initializeKeywordDeclarations(this, 'position-visibility', keywords_39c86dab6c9b);
   }
   /**
    * 原样生成 position-visibility 声明，保留关键字补全并接受自定义 CSS 值。
@@ -9877,102 +7257,48 @@ export class PositionVisibilityCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * position-visibility 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PositionVisibilityCss = PositionVisibilityCssRuntime &
+  KeywordDeclarations<PositionVisibilityKeywords>;
+/**
+ * 设置锚点定位元素根据锚点可见性和溢出情况是否显示。（position-visibility）
+ *
+ * CSS 初始值：`anchors-visible`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/position-visibility
+ */
+export const PositionVisibilityCss = /* @__PURE__ */ keywordConstructor(
+  PositionVisibilityCssRuntime,
+  'PositionVisibilityCss',
+) as new () => PositionVisibilityCss;
+import { keywords_2e0f8bdc8b85 } from './keyword-sets.js';
 
 /**
  * print-color-adjust 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class PrintColorAdjustKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`print-color-adjust:economy;`。 */
-  readonly economy: Property.PrintColorAdjust | CssString = 'economy';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`print-color-adjust:exact;`。 */
-  readonly exact: Property.PrintColorAdjust | CssString = 'exact';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`print-color-adjust:inherit;`。
-   */
-  readonly inherit: Property.PrintColorAdjust | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`print-color-adjust:initial;`。
-   */
-  readonly initial: Property.PrintColorAdjust | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`print-color-adjust:revert;`。
-   */
-  readonly revert: Property.PrintColorAdjust | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`print-color-adjust:revert-layer;`。
-   */
-  readonly revertLayer: Property.PrintColorAdjust | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`print-color-adjust:unset;`。
-   */
-  readonly unset: Property.PrintColorAdjust | CssString = 'unset';
-}
+export type PrintColorAdjustKeywords = KeywordValuesOf<
+  typeof keywords_2e0f8bdc8b85,
+  Property.PrintColorAdjust | CssString
+>;
+/**
+ * 创建 print-color-adjust 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new PrintColorAdjustKeywords()
+ */
+export const PrintColorAdjustKeywords = /* @__PURE__ */ keywordConstructor(
+  class PrintColorAdjustKeywords {
+    constructor() {
+      Object.assign(this, keywords_2e0f8bdc8b85);
+    }
+  },
+  'PrintColorAdjustKeywords',
+) as new () => PrintColorAdjustKeywords;
 
 /**
- * 设置打印时浏览器是否可以为节墨或可读性调整颜色。（print-color-adjust）
- *
- * CSS 初始值：`economy`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
+ * print-color-adjust 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class PrintColorAdjustCss extends CssProperty {
-  /** CSS 声明：`print-color-adjust:economy;`。 */
-  readonly economy: string = 'print-color-adjust:economy;';
-  /** CSS 声明：`print-color-adjust:exact;`。 */
-  readonly exact: string = 'print-color-adjust:exact;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`print-color-adjust:inherit;`。
-   */
-  readonly inherit: string = 'print-color-adjust:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`print-color-adjust:initial;`。
-   */
-  readonly initial: string = 'print-color-adjust:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`print-color-adjust:revert;`。
-   */
-  readonly revert: string = 'print-color-adjust:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`print-color-adjust:revert-layer;`。
-   */
-  readonly revertLayer: string = 'print-color-adjust:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`print-color-adjust:unset;`。
-   */
-  readonly unset: string = 'print-color-adjust:unset;';
+class PrintColorAdjustCssRuntime extends CssProperty {
   /**
    * 创建 print-color-adjust 属性作者；普通使用通过 s.printColorAdjust 取得共享实例。
    * @example
@@ -9980,6 +7306,7 @@ export class PrintColorAdjustCss extends CssProperty {
    */
   constructor() {
     super('print-color-adjust');
+    initializeKeywordDeclarations(this, 'print-color-adjust', keywords_2e0f8bdc8b85);
   }
   /**
    * 原样生成 print-color-adjust 声明，保留关键字补全并接受自定义 CSS 值。
@@ -9994,100 +7321,48 @@ export class PrintColorAdjustCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * print-color-adjust 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type PrintColorAdjustCss = PrintColorAdjustCssRuntime &
+  KeywordDeclarations<PrintColorAdjustKeywords>;
+/**
+ * 设置打印时浏览器是否可以为节墨或可读性调整颜色。（print-color-adjust）
+ *
+ * CSS 初始值：`economy`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/print-color-adjust
+ */
+export const PrintColorAdjustCss = /* @__PURE__ */ keywordConstructor(
+  PrintColorAdjustCssRuntime,
+  'PrintColorAdjustCss',
+) as new () => PrintColorAdjustCss;
+import { keywords_da68e56f4df2 } from './keyword-sets.js';
 
 /**
  * quotes 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class QuotesKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`quotes:auto;`。 */
-  readonly auto: Property.Quotes | CssString = 'auto';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`quotes:inherit;`。
-   */
-  readonly inherit: Property.Quotes | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`quotes:initial;`。
-   */
-  readonly initial: Property.Quotes | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`quotes:none;`。 */
-  readonly none: Property.Quotes | CssString = 'none';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`quotes:revert;`。
-   */
-  readonly revert: Property.Quotes | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`quotes:revert-layer;`。
-   */
-  readonly revertLayer: Property.Quotes | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`quotes:unset;`。
-   */
-  readonly unset: Property.Quotes | CssString = 'unset';
-}
+export type QuotesKeywords = KeywordValuesOf<
+  typeof keywords_da68e56f4df2,
+  Property.Quotes | CssString
+>;
+/**
+ * 创建 quotes 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new QuotesKeywords()
+ */
+export const QuotesKeywords = /* @__PURE__ */ keywordConstructor(
+  class QuotesKeywords {
+    constructor() {
+      Object.assign(this, keywords_da68e56f4df2);
+    }
+  },
+  'QuotesKeywords',
+) as new () => QuotesKeywords;
 
 /**
- * 设置生成引号所用的开闭字符对。（quotes）
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/quotes
+ * quotes 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class QuotesCss extends CssProperty {
-  /** CSS 声明：`quotes:auto;`。 */
-  readonly auto: string = 'quotes:auto;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`quotes:inherit;`。
-   */
-  readonly inherit: string = 'quotes:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`quotes:initial;`。
-   */
-  readonly initial: string = 'quotes:initial;';
-  /** CSS 声明：`quotes:none;`。 */
-  readonly none: string = 'quotes:none;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`quotes:revert;`。
-   */
-  readonly revert: string = 'quotes:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`quotes:revert-layer;`。
-   */
-  readonly revertLayer: string = 'quotes:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`quotes:unset;`。
-   */
-  readonly unset: string = 'quotes:unset;';
+class QuotesCssRuntime extends CssProperty {
   /**
    * 创建 quotes 属性作者；普通使用通过 s.quotes 取得共享实例。
    * @example
@@ -10095,6 +7370,7 @@ export class QuotesCss extends CssProperty {
    */
   constructor() {
     super('quotes');
+    initializeKeywordDeclarations(this, 'quotes', keywords_da68e56f4df2);
   }
   /**
    * 原样生成 quotes 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10109,90 +7385,41 @@ export class QuotesCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * quotes 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type QuotesCss = QuotesCssRuntime & KeywordDeclarations<QuotesKeywords>;
+/**
+ * 设置生成引号所用的开闭字符对。（quotes）
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/quotes
+ */
+export const QuotesCss = /* @__PURE__ */ keywordConstructor(
+  QuotesCssRuntime,
+  'QuotesCss',
+) as new () => QuotesCss;
 
 /**
  * r 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`r:inherit;`。
-   */
-  readonly inherit: Property.R | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`r:initial;`。
-   */
-  readonly initial: Property.R | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`r:revert;`。
-   */
-  readonly revert: Property.R | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`r:revert-layer;`。
-   */
-  readonly revertLayer: Property.R | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`r:unset;`。
-   */
-  readonly unset: Property.R | CssString = 'unset';
-}
+export type RKeywords = KeywordValuesOf<typeof keywords_dffc425ba867, Property.R | CssString>;
+/**
+ * 创建 r 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RKeywords()
+ */
+export const RKeywords = /* @__PURE__ */ keywordConstructor(
+  class RKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'RKeywords',
+) as new () => RKeywords;
 
 /**
- * 设置 SVG 圆的半径。（r）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/r
+ * r 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`r:inherit;`。
-   */
-  readonly inherit: string = 'r:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`r:initial;`。
-   */
-  readonly initial: string = 'r:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`r:revert;`。
-   */
-  readonly revert: string = 'r:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`r:revert-layer;`。
-   */
-  readonly revertLayer: string = 'r:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`r:unset;`。
-   */
-  readonly unset: string = 'r:unset;';
+class RCssRuntime extends LengthCssProperty {
   /**
    * 创建 r 属性作者；普通使用通过 s.r 取得共享实例。
    * @example
@@ -10200,6 +7427,7 @@ export class RCss extends LengthCssProperty {
    */
   constructor() {
     super('r');
+    initializeKeywordDeclarations(this, 'r', keywords_dffc425ba867);
   }
   /**
    * 原样生成 r 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10276,126 +7504,44 @@ export class RCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * r 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RCss = RCssRuntime & KeywordDeclarations<RKeywords>;
+/**
+ * 设置 SVG 圆的半径。（r）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/r
+ */
+export const RCss = /* @__PURE__ */ keywordConstructor(RCssRuntime, 'RCss') as new () => RCss;
+import { keywords_a08129d1e0bc } from './keyword-sets.js';
 
 /**
  * resize 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class ResizeKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`resize:block;`。 */
-  readonly block: Property.Resize | CssString = 'block';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`resize:both;`。 */
-  readonly both: Property.Resize | CssString = 'both';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`resize:horizontal;`。 */
-  readonly horizontal: Property.Resize | CssString = 'horizontal';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`resize:inherit;`。
-   */
-  readonly inherit: Property.Resize | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`resize:initial;`。
-   */
-  readonly initial: Property.Resize | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`resize:inline;`。 */
-  readonly inline: Property.Resize | CssString = 'inline';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`resize:none;`。 */
-  readonly none: Property.Resize | CssString = 'none';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`resize:revert;`。
-   */
-  readonly revert: Property.Resize | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`resize:revert-layer;`。
-   */
-  readonly revertLayer: Property.Resize | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`resize:unset;`。
-   */
-  readonly unset: Property.Resize | CssString = 'unset';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`resize:vertical;`。 */
-  readonly vertical: Property.Resize | CssString = 'vertical';
-}
+export type ResizeKeywords = KeywordValuesOf<
+  typeof keywords_a08129d1e0bc,
+  Property.Resize | CssString
+>;
+/**
+ * 创建 resize 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new ResizeKeywords()
+ */
+export const ResizeKeywords = /* @__PURE__ */ keywordConstructor(
+  class ResizeKeywords {
+    constructor() {
+      Object.assign(this, keywords_a08129d1e0bc);
+    }
+  },
+  'ResizeKeywords',
+) as new () => ResizeKeywords;
 
 /**
- * 设置用户是否能调整元素尺寸以及可调整的方向。（resize）
- *
- * CSS 初始值：`none`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/resize
+ * resize 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class ResizeCss extends CssProperty {
-  /** CSS 声明：`resize:block;`。 */
-  readonly block: string = 'resize:block;';
-  /** CSS 声明：`resize:both;`。 */
-  readonly both: string = 'resize:both;';
-  /** CSS 声明：`resize:horizontal;`。 */
-  readonly horizontal: string = 'resize:horizontal;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`resize:inherit;`。
-   */
-  readonly inherit: string = 'resize:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`resize:initial;`。
-   */
-  readonly initial: string = 'resize:initial;';
-  /** CSS 声明：`resize:inline;`。 */
-  readonly inline: string = 'resize:inline;';
-  /** CSS 声明：`resize:none;`。 */
-  readonly none: string = 'resize:none;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`resize:revert;`。
-   */
-  readonly revert: string = 'resize:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`resize:revert-layer;`。
-   */
-  readonly revertLayer: string = 'resize:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`resize:unset;`。
-   */
-  readonly unset: string = 'resize:unset;';
-  /** CSS 声明：`resize:vertical;`。 */
-  readonly vertical: string = 'resize:vertical;';
+class ResizeCssRuntime extends CssProperty {
   /**
    * 创建 resize 属性作者；普通使用通过 s.resize 取得共享实例。
    * @example
@@ -10403,6 +7549,7 @@ export class ResizeCss extends CssProperty {
    */
   constructor() {
     super('resize');
+    initializeKeywordDeclarations(this, 'resize', keywords_a08129d1e0bc);
   }
   /**
    * 原样生成 resize 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10417,96 +7564,46 @@ export class ResizeCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * resize 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type ResizeCss = ResizeCssRuntime & KeywordDeclarations<ResizeKeywords>;
+/**
+ * 设置用户是否能调整元素尺寸以及可调整的方向。（resize）
+ *
+ * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/resize
+ */
+export const ResizeCss = /* @__PURE__ */ keywordConstructor(
+  ResizeCssRuntime,
+  'ResizeCss',
+) as new () => ResizeCss;
 
 /**
  * right 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RightKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`right:auto;`。 */
-  readonly auto: Property.Right | CssString = 'auto';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`right:inherit;`。
-   */
-  readonly inherit: Property.Right | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`right:initial;`。
-   */
-  readonly initial: Property.Right | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`right:revert;`。
-   */
-  readonly revert: Property.Right | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`right:revert-layer;`。
-   */
-  readonly revertLayer: Property.Right | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`right:unset;`。
-   */
-  readonly unset: Property.Right | CssString = 'unset';
-}
+export type RightKeywords = KeywordValuesOf<
+  typeof keywords_10442af7f819,
+  Property.Right | CssString
+>;
+/**
+ * 创建 right 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RightKeywords()
+ */
+export const RightKeywords = /* @__PURE__ */ keywordConstructor(
+  class RightKeywords {
+    constructor() {
+      Object.assign(this, keywords_10442af7f819);
+    }
+  },
+  'RightKeywords',
+) as new () => RightKeywords;
 
 /**
- * 设置定位元素相对于其定位参照的右侧偏移。（right）
- *
- * CSS 初始值：`auto`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
+ * right 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RightCss extends LengthCssProperty {
-  /** CSS 声明：`right:auto;`。 */
-  readonly auto: string = 'right:auto;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`right:inherit;`。
-   */
-  readonly inherit: string = 'right:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`right:initial;`。
-   */
-  readonly initial: string = 'right:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`right:revert;`。
-   */
-  readonly revert: string = 'right:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`right:revert-layer;`。
-   */
-  readonly revertLayer: string = 'right:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`right:unset;`。
-   */
-  readonly unset: string = 'right:unset;';
+class RightCssRuntime extends LengthCssProperty {
   /**
    * 创建 right 属性作者；普通使用通过 s.right 取得共享实例。
    * @example
@@ -10514,6 +7611,7 @@ export class RightCss extends LengthCssProperty {
    */
   constructor() {
     super('right');
+    initializeKeywordDeclarations(this, 'right', keywords_10442af7f819);
   }
   /**
    * 原样生成 right 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10590,96 +7688,46 @@ export class RightCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * right 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RightCss = RightCssRuntime & KeywordDeclarations<RightKeywords>;
+/**
+ * 设置定位元素相对于其定位参照的右侧偏移。（right）
+ *
+ * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
+ */
+export const RightCss = /* @__PURE__ */ keywordConstructor(
+  RightCssRuntime,
+  'RightCss',
+) as new () => RightCss;
 
 /**
  * rotate 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RotateKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`rotate:inherit;`。
-   */
-  readonly inherit: Property.Rotate | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`rotate:initial;`。
-   */
-  readonly initial: Property.Rotate | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`rotate:none;`。 */
-  readonly none: Property.Rotate | CssString = 'none';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`rotate:revert;`。
-   */
-  readonly revert: Property.Rotate | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`rotate:revert-layer;`。
-   */
-  readonly revertLayer: Property.Rotate | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`rotate:unset;`。
-   */
-  readonly unset: Property.Rotate | CssString = 'unset';
-}
+export type RotateKeywords = KeywordValuesOf<
+  typeof keywords_9cd78f567b36,
+  Property.Rotate | CssString
+>;
+/**
+ * 创建 rotate 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RotateKeywords()
+ */
+export const RotateKeywords = /* @__PURE__ */ keywordConstructor(
+  class RotateKeywords {
+    constructor() {
+      Object.assign(this, keywords_9cd78f567b36);
+    }
+  },
+  'RotateKeywords',
+) as new () => RotateKeywords;
 
 /**
- * 独立设置元素旋转，不必重写 transform 中的其他变换。（rotate）
- *
- * CSS 初始值：`none`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rotate
+ * rotate 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RotateCss extends CssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`rotate:inherit;`。
-   */
-  readonly inherit: string = 'rotate:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`rotate:initial;`。
-   */
-  readonly initial: string = 'rotate:initial;';
-  /** CSS 声明：`rotate:none;`。 */
-  readonly none: string = 'rotate:none;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`rotate:revert;`。
-   */
-  readonly revert: string = 'rotate:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`rotate:revert-layer;`。
-   */
-  readonly revertLayer: string = 'rotate:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`rotate:unset;`。
-   */
-  readonly unset: string = 'rotate:unset;';
+class RotateCssRuntime extends CssProperty {
   /**
    * 创建 rotate 属性作者；普通使用通过 s.rotate 取得共享实例。
    * @example
@@ -10687,6 +7735,7 @@ export class RotateCss extends CssProperty {
    */
   constructor() {
     super('rotate');
+    initializeKeywordDeclarations(this, 'rotate', keywords_9cd78f567b36);
   }
   /**
    * 原样生成 rotate 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10799,96 +7848,47 @@ export class RotateCss extends CssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * rotate 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RotateCss = RotateCssRuntime & KeywordDeclarations<RotateKeywords>;
+/**
+ * 独立设置元素旋转，不必重写 transform 中的其他变换。（rotate）
+ *
+ * CSS 初始值：`none`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rotate
+ */
+export const RotateCss = /* @__PURE__ */ keywordConstructor(
+  RotateCssRuntime,
+  'RotateCss',
+) as new () => RotateCss;
+import { keywords_af86167f4199 } from './keyword-sets.js';
 
 /**
  * row-gap 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RowGapKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`row-gap:inherit;`。
-   */
-  readonly inherit: Property.RowGap | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`row-gap:initial;`。
-   */
-  readonly initial: Property.RowGap | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`row-gap:normal;`。 */
-  readonly normal: Property.RowGap | CssString = 'normal';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`row-gap:revert;`。
-   */
-  readonly revert: Property.RowGap | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`row-gap:revert-layer;`。
-   */
-  readonly revertLayer: Property.RowGap | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`row-gap:unset;`。
-   */
-  readonly unset: Property.RowGap | CssString = 'unset';
-}
+export type RowGapKeywords = KeywordValuesOf<
+  typeof keywords_af86167f4199,
+  Property.RowGap | CssString
+>;
+/**
+ * 创建 row-gap 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RowGapKeywords()
+ */
+export const RowGapKeywords = /* @__PURE__ */ keywordConstructor(
+  class RowGapKeywords {
+    constructor() {
+      Object.assign(this, keywords_af86167f4199);
+    }
+  },
+  'RowGapKeywords',
+) as new () => RowGapKeywords;
 
 /**
- * 设置布局中相邻行之间的间距。（row-gap）
- *
- * CSS 初始值：`normal`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/row-gap
+ * row-gap 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RowGapCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`row-gap:inherit;`。
-   */
-  readonly inherit: string = 'row-gap:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`row-gap:initial;`。
-   */
-  readonly initial: string = 'row-gap:initial;';
-  /** CSS 声明：`row-gap:normal;`。 */
-  readonly normal: string = 'row-gap:normal;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`row-gap:revert;`。
-   */
-  readonly revert: string = 'row-gap:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`row-gap:revert-layer;`。
-   */
-  readonly revertLayer: string = 'row-gap:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`row-gap:unset;`。
-   */
-  readonly unset: string = 'row-gap:unset;';
+class RowGapCssRuntime extends LengthCssProperty {
   /**
    * 创建 row-gap 属性作者；普通使用通过 s.rowGap 取得共享实例。
    * @example
@@ -10896,6 +7896,7 @@ export class RowGapCss extends LengthCssProperty {
    */
   constructor() {
     super('row-gap');
+    initializeKeywordDeclarations(this, 'row-gap', keywords_af86167f4199);
   }
   /**
    * 原样生成 row-gap 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10972,114 +7973,47 @@ export class RowGapCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * row-gap 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RowGapCss = RowGapCssRuntime & KeywordDeclarations<RowGapKeywords>;
+/**
+ * 设置布局中相邻行之间的间距。（row-gap）
+ *
+ * CSS 初始值：`normal`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/row-gap
+ */
+export const RowGapCss = /* @__PURE__ */ keywordConstructor(
+  RowGapCssRuntime,
+  'RowGapCss',
+) as new () => RowGapCss;
+import { keywords_7c6f7139473c } from './keyword-sets.js';
 
 /**
  * ruby-align 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RubyAlignKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-align:center;`。 */
-  readonly center: Property.RubyAlign | CssString = 'center';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ruby-align:inherit;`。
-   */
-  readonly inherit: Property.RubyAlign | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ruby-align:initial;`。
-   */
-  readonly initial: Property.RubyAlign | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ruby-align:revert;`。
-   */
-  readonly revert: Property.RubyAlign | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ruby-align:revert-layer;`。
-   */
-  readonly revertLayer: Property.RubyAlign | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-align:space-around;`。 */
-  readonly spaceAround: Property.RubyAlign | CssString = 'space-around';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-align:space-between;`。 */
-  readonly spaceBetween: Property.RubyAlign | CssString = 'space-between';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-align:start;`。 */
-  readonly start: Property.RubyAlign | CssString = 'start';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ruby-align:unset;`。
-   */
-  readonly unset: Property.RubyAlign | CssString = 'unset';
-}
+export type RubyAlignKeywords = KeywordValuesOf<
+  typeof keywords_7c6f7139473c,
+  Property.RubyAlign | CssString
+>;
+/**
+ * 创建 ruby-align 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RubyAlignKeywords()
+ */
+export const RubyAlignKeywords = /* @__PURE__ */ keywordConstructor(
+  class RubyAlignKeywords {
+    constructor() {
+      Object.assign(this, keywords_7c6f7139473c);
+    }
+  },
+  'RubyAlignKeywords',
+) as new () => RubyAlignKeywords;
 
 /**
- * 设置注音文字与基底文字之间剩余空间的分配方式。（ruby-align）
- *
- * CSS 初始值：`space-around`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-align
+ * ruby-align 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RubyAlignCss extends CssProperty {
-  /** CSS 声明：`ruby-align:center;`。 */
-  readonly center: string = 'ruby-align:center;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ruby-align:inherit;`。
-   */
-  readonly inherit: string = 'ruby-align:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ruby-align:initial;`。
-   */
-  readonly initial: string = 'ruby-align:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ruby-align:revert;`。
-   */
-  readonly revert: string = 'ruby-align:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ruby-align:revert-layer;`。
-   */
-  readonly revertLayer: string = 'ruby-align:revert-layer;';
-  /** CSS 声明：`ruby-align:space-around;`。 */
-  readonly spaceAround: string = 'ruby-align:space-around;';
-  /** CSS 声明：`ruby-align:space-between;`。 */
-  readonly spaceBetween: string = 'ruby-align:space-between;';
-  /** CSS 声明：`ruby-align:start;`。 */
-  readonly start: string = 'ruby-align:start;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ruby-align:unset;`。
-   */
-  readonly unset: string = 'ruby-align:unset;';
+class RubyAlignCssRuntime extends CssProperty {
   /**
    * 创建 ruby-align 属性作者；普通使用通过 s.rubyAlign 取得共享实例。
    * @example
@@ -11087,6 +8021,7 @@ export class RubyAlignCss extends CssProperty {
    */
   constructor() {
     super('ruby-align');
+    initializeKeywordDeclarations(this, 'ruby-align', keywords_7c6f7139473c);
   }
   /**
    * 原样生成 ruby-align 声明，保留关键字补全并接受自定义 CSS 值。
@@ -11101,108 +8036,47 @@ export class RubyAlignCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * ruby-align 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RubyAlignCss = RubyAlignCssRuntime & KeywordDeclarations<RubyAlignKeywords>;
+/**
+ * 设置注音文字与基底文字之间剩余空间的分配方式。（ruby-align）
+ *
+ * CSS 初始值：`space-around`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-align
+ */
+export const RubyAlignCss = /* @__PURE__ */ keywordConstructor(
+  RubyAlignCssRuntime,
+  'RubyAlignCss',
+) as new () => RubyAlignCss;
+import { keywords_b8b9fa8779e5 } from './keyword-sets.js';
 
 /**
  * ruby-merge 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RubyMergeKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-merge:auto;`。 */
-  readonly auto: Property.RubyMerge | CssString = 'auto';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-merge:collapse;`。 */
-  readonly collapse: Property.RubyMerge | CssString = 'collapse';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ruby-merge:inherit;`。
-   */
-  readonly inherit: Property.RubyMerge | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ruby-merge:initial;`。
-   */
-  readonly initial: Property.RubyMerge | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ruby-merge:revert;`。
-   */
-  readonly revert: Property.RubyMerge | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ruby-merge:revert-layer;`。
-   */
-  readonly revertLayer: Property.RubyMerge | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-merge:separate;`。 */
-  readonly separate: Property.RubyMerge | CssString = 'separate';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ruby-merge:unset;`。
-   */
-  readonly unset: Property.RubyMerge | CssString = 'unset';
-}
+export type RubyMergeKeywords = KeywordValuesOf<
+  typeof keywords_b8b9fa8779e5,
+  Property.RubyMerge | CssString
+>;
+/**
+ * 创建 ruby-merge 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RubyMergeKeywords()
+ */
+export const RubyMergeKeywords = /* @__PURE__ */ keywordConstructor(
+  class RubyMergeKeywords {
+    constructor() {
+      Object.assign(this, keywords_b8b9fa8779e5);
+    }
+  },
+  'RubyMergeKeywords',
+) as new () => RubyMergeKeywords;
 
 /**
- * 设置相邻注音容器的合并方式；使用前核对目标浏览器。（ruby-merge）
- *
- * CSS 初始值：`separate`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-merge
+ * ruby-merge 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RubyMergeCss extends CssProperty {
-  /** CSS 声明：`ruby-merge:auto;`。 */
-  readonly auto: string = 'ruby-merge:auto;';
-  /** CSS 声明：`ruby-merge:collapse;`。 */
-  readonly collapse: string = 'ruby-merge:collapse;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ruby-merge:inherit;`。
-   */
-  readonly inherit: string = 'ruby-merge:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ruby-merge:initial;`。
-   */
-  readonly initial: string = 'ruby-merge:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ruby-merge:revert;`。
-   */
-  readonly revert: string = 'ruby-merge:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ruby-merge:revert-layer;`。
-   */
-  readonly revertLayer: string = 'ruby-merge:revert-layer;';
-  /** CSS 声明：`ruby-merge:separate;`。 */
-  readonly separate: string = 'ruby-merge:separate;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ruby-merge:unset;`。
-   */
-  readonly unset: string = 'ruby-merge:unset;';
+class RubyMergeCssRuntime extends CssProperty {
   /**
    * 创建 ruby-merge 属性作者；普通使用通过 s.rubyMerge 取得共享实例。
    * @example
@@ -11210,6 +8084,7 @@ export class RubyMergeCss extends CssProperty {
    */
   constructor() {
     super('ruby-merge');
+    initializeKeywordDeclarations(this, 'ruby-merge', keywords_b8b9fa8779e5);
   }
   /**
    * 原样生成 ruby-merge 声明，保留关键字补全并接受自定义 CSS 值。
@@ -11224,102 +8099,46 @@ export class RubyMergeCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * ruby-merge 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RubyMergeCss = RubyMergeCssRuntime & KeywordDeclarations<RubyMergeKeywords>;
+/**
+ * 设置相邻注音容器的合并方式；使用前核对目标浏览器。（ruby-merge）
+ *
+ * CSS 初始值：`separate`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-merge
+ */
+export const RubyMergeCss = /* @__PURE__ */ keywordConstructor(
+  RubyMergeCssRuntime,
+  'RubyMergeCss',
+) as new () => RubyMergeCss;
 
 /**
  * ruby-overhang 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RubyOverhangKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-overhang:auto;`。 */
-  readonly auto: Property.RubyOverhang | CssString = 'auto';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ruby-overhang:inherit;`。
-   */
-  readonly inherit: Property.RubyOverhang | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ruby-overhang:initial;`。
-   */
-  readonly initial: Property.RubyOverhang | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-overhang:none;`。 */
-  readonly none: Property.RubyOverhang | CssString = 'none';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ruby-overhang:revert;`。
-   */
-  readonly revert: Property.RubyOverhang | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ruby-overhang:revert-layer;`。
-   */
-  readonly revertLayer: Property.RubyOverhang | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ruby-overhang:unset;`。
-   */
-  readonly unset: Property.RubyOverhang | CssString = 'unset';
-}
+export type RubyOverhangKeywords = KeywordValuesOf<
+  typeof keywords_da68e56f4df2,
+  Property.RubyOverhang | CssString
+>;
+/**
+ * 创建 ruby-overhang 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RubyOverhangKeywords()
+ */
+export const RubyOverhangKeywords = /* @__PURE__ */ keywordConstructor(
+  class RubyOverhangKeywords {
+    constructor() {
+      Object.assign(this, keywords_da68e56f4df2);
+    }
+  },
+  'RubyOverhangKeywords',
+) as new () => RubyOverhangKeywords;
 
 /**
- * 控制注音文字是否可以悬伸到相邻文本上方。（ruby-overhang）
- *
- * CSS 初始值：`auto`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-overhang
+ * ruby-overhang 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RubyOverhangCss extends CssProperty {
-  /** CSS 声明：`ruby-overhang:auto;`。 */
-  readonly auto: string = 'ruby-overhang:auto;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ruby-overhang:inherit;`。
-   */
-  readonly inherit: string = 'ruby-overhang:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ruby-overhang:initial;`。
-   */
-  readonly initial: string = 'ruby-overhang:initial;';
-  /** CSS 声明：`ruby-overhang:none;`。 */
-  readonly none: string = 'ruby-overhang:none;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ruby-overhang:revert;`。
-   */
-  readonly revert: string = 'ruby-overhang:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ruby-overhang:revert-layer;`。
-   */
-  readonly revertLayer: string = 'ruby-overhang:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ruby-overhang:unset;`。
-   */
-  readonly unset: string = 'ruby-overhang:unset;';
+class RubyOverhangCssRuntime extends CssProperty {
   /**
    * 创建 ruby-overhang 属性作者；普通使用通过 s.rubyOverhang 取得共享实例。
    * @example
@@ -11327,6 +8146,7 @@ export class RubyOverhangCss extends CssProperty {
    */
   constructor() {
     super('ruby-overhang');
+    initializeKeywordDeclarations(this, 'ruby-overhang', keywords_da68e56f4df2);
   }
   /**
    * 原样生成 ruby-overhang 声明，保留关键字补全并接受自定义 CSS 值。
@@ -11341,114 +8161,47 @@ export class RubyOverhangCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * ruby-overhang 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RubyOverhangCss = RubyOverhangCssRuntime & KeywordDeclarations<RubyOverhangKeywords>;
+/**
+ * 控制注音文字是否可以悬伸到相邻文本上方。（ruby-overhang）
+ *
+ * CSS 初始值：`auto`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-overhang
+ */
+export const RubyOverhangCss = /* @__PURE__ */ keywordConstructor(
+  RubyOverhangCssRuntime,
+  'RubyOverhangCss',
+) as new () => RubyOverhangCss;
+import { keywords_0a53bb5edf8b } from './keyword-sets.js';
 
 /**
  * ruby-position 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RubyPositionKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-position:alternate;`。 */
-  readonly alternate: Property.RubyPosition | CssString = 'alternate';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ruby-position:inherit;`。
-   */
-  readonly inherit: Property.RubyPosition | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ruby-position:initial;`。
-   */
-  readonly initial: Property.RubyPosition | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-position:inter-character;`。 */
-  readonly interCharacter: Property.RubyPosition | CssString = 'inter-character';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-position:over;`。 */
-  readonly over: Property.RubyPosition | CssString = 'over';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ruby-position:revert;`。
-   */
-  readonly revert: Property.RubyPosition | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ruby-position:revert-layer;`。
-   */
-  readonly revertLayer: Property.RubyPosition | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   * CSS 声明：`ruby-position:under;`。 */
-  readonly under: Property.RubyPosition | CssString = 'under';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ruby-position:unset;`。
-   */
-  readonly unset: Property.RubyPosition | CssString = 'unset';
-}
+export type RubyPositionKeywords = KeywordValuesOf<
+  typeof keywords_0a53bb5edf8b,
+  Property.RubyPosition | CssString
+>;
+/**
+ * 创建 ruby-position 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RubyPositionKeywords()
+ */
+export const RubyPositionKeywords = /* @__PURE__ */ keywordConstructor(
+  class RubyPositionKeywords {
+    constructor() {
+      Object.assign(this, keywords_0a53bb5edf8b);
+    }
+  },
+  'RubyPositionKeywords',
+) as new () => RubyPositionKeywords;
 
 /**
- * 设置注音文字相对于基底文字的位置。（ruby-position）
- *
- * CSS 初始值：`alternate`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-position
+ * ruby-position 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RubyPositionCss extends CssProperty {
-  /** CSS 声明：`ruby-position:alternate;`。 */
-  readonly alternate: string = 'ruby-position:alternate;';
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ruby-position:inherit;`。
-   */
-  readonly inherit: string = 'ruby-position:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ruby-position:initial;`。
-   */
-  readonly initial: string = 'ruby-position:initial;';
-  /** CSS 声明：`ruby-position:inter-character;`。 */
-  readonly interCharacter: string = 'ruby-position:inter-character;';
-  /** CSS 声明：`ruby-position:over;`。 */
-  readonly over: string = 'ruby-position:over;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ruby-position:revert;`。
-   */
-  readonly revert: string = 'ruby-position:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ruby-position:revert-layer;`。
-   */
-  readonly revertLayer: string = 'ruby-position:revert-layer;';
-  /** CSS 声明：`ruby-position:under;`。 */
-  readonly under: string = 'ruby-position:under;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ruby-position:unset;`。
-   */
-  readonly unset: string = 'ruby-position:unset;';
+class RubyPositionCssRuntime extends CssProperty {
   /**
    * 创建 ruby-position 属性作者；普通使用通过 s.rubyPosition 取得共享实例。
    * @example
@@ -11456,6 +8209,7 @@ export class RubyPositionCss extends CssProperty {
    */
   constructor() {
     super('ruby-position');
+    initializeKeywordDeclarations(this, 'ruby-position', keywords_0a53bb5edf8b);
   }
   /**
    * 原样生成 ruby-position 声明，保留关键字补全并接受自定义 CSS 值。
@@ -11470,90 +8224,43 @@ export class RubyPositionCss extends CssProperty {
     return this.declaration(value);
   }
 }
+/**
+ * ruby-position 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RubyPositionCss = RubyPositionCssRuntime & KeywordDeclarations<RubyPositionKeywords>;
+/**
+ * 设置注音文字相对于基底文字的位置。（ruby-position）
+ *
+ * CSS 初始值：`alternate`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-position
+ */
+export const RubyPositionCss = /* @__PURE__ */ keywordConstructor(
+  RubyPositionCssRuntime,
+  'RubyPositionCss',
+) as new () => RubyPositionCss;
 
 /**
  * rx 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RxKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`rx:inherit;`。
-   */
-  readonly inherit: Property.Rx | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`rx:initial;`。
-   */
-  readonly initial: Property.Rx | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`rx:revert;`。
-   */
-  readonly revert: Property.Rx | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`rx:revert-layer;`。
-   */
-  readonly revertLayer: Property.Rx | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`rx:unset;`。
-   */
-  readonly unset: Property.Rx | CssString = 'unset';
-}
+export type RxKeywords = KeywordValuesOf<typeof keywords_dffc425ba867, Property.Rx | CssString>;
+/**
+ * 创建 rx 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RxKeywords()
+ */
+export const RxKeywords = /* @__PURE__ */ keywordConstructor(
+  class RxKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'RxKeywords',
+) as new () => RxKeywords;
 
 /**
- * 设置 SVG 椭圆的水平半径，或矩形的水平圆角半径。（rx）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rx
+ * rx 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RxCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`rx:inherit;`。
-   */
-  readonly inherit: string = 'rx:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`rx:initial;`。
-   */
-  readonly initial: string = 'rx:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`rx:revert;`。
-   */
-  readonly revert: string = 'rx:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`rx:revert-layer;`。
-   */
-  readonly revertLayer: string = 'rx:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`rx:unset;`。
-   */
-  readonly unset: string = 'rx:unset;';
+class RxCssRuntime extends LengthCssProperty {
   /**
    * 创建 rx 属性作者；普通使用通过 s.rx 取得共享实例。
    * @example
@@ -11561,6 +8268,7 @@ export class RxCss extends LengthCssProperty {
    */
   constructor() {
     super('rx');
+    initializeKeywordDeclarations(this, 'rx', keywords_dffc425ba867);
   }
   /**
    * 原样生成 rx 声明，保留关键字补全并接受自定义 CSS 值。
@@ -11637,90 +8345,40 @@ export class RxCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * rx 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RxCss = RxCssRuntime & KeywordDeclarations<RxKeywords>;
+/**
+ * 设置 SVG 椭圆的水平半径，或矩形的水平圆角半径。（rx）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/rx
+ */
+export const RxCss = /* @__PURE__ */ keywordConstructor(RxCssRuntime, 'RxCss') as new () => RxCss;
 
 /**
  * ry 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export class RyKeywords {
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ry:inherit;`。
-   */
-  readonly inherit: Property.Ry | CssString = 'inherit';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ry:initial;`。
-   */
-  readonly initial: Property.Ry | CssString = 'initial';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ry:revert;`。
-   */
-  readonly revert: Property.Ry | CssString = 'revert';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ry:revert-layer;`。
-   */
-  readonly revertLayer: Property.Ry | CssString = 'revert-layer';
-  /**
-   * 原始 CSS 值（不含属性名和分号），主题可提供同类型的其他值。
-   *
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ry:unset;`。
-   */
-  readonly unset: Property.Ry | CssString = 'unset';
-}
+export type RyKeywords = KeywordValuesOf<typeof keywords_dffc425ba867, Property.Ry | CssString>;
+/**
+ * 创建 ry 的可继承关键字对象；每个实例独立，成员保留语义说明。
+ * @example
+ * new RyKeywords()
+ */
+export const RyKeywords = /* @__PURE__ */ keywordConstructor(
+  class RyKeywords {
+    constructor() {
+      Object.assign(this, keywords_dffc425ba867);
+    }
+  },
+  'RyKeywords',
+) as new () => RyKeywords;
 
 /**
- * 设置 SVG 椭圆的垂直半径，或矩形的垂直圆角半径。（ry）
- *
- * CSS 初始值：`0`（不同于浏览器默认样式表）。
- * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ry
+ * ry 作者的运行时方法；公共成员类型由原始关键字定义映射。
  */
-export class RyCss extends LengthCssProperty {
-  /**
-   * 使用父元素该属性的计算值，即使这个属性默认不继承。
-   *
-   * CSS 声明：`ry:inherit;`。
-   */
-  readonly inherit: string = 'ry:inherit;';
-  /**
-   * 使用 CSS 规范定义的初始值，不是浏览器默认样式表给元素设置的值。
-   *
-   * CSS 声明：`ry:initial;`。
-   */
-  readonly initial: string = 'ry:initial;';
-  /**
-   * 按层叠来源回退该属性，可能恢复用户或浏览器样式；不等同于 initial。
-   *
-   * CSS 声明：`ry:revert;`。
-   */
-  readonly revert: string = 'ry:revert;';
-  /**
-   * 回退当前层叠层对该属性的贡献，让较早层的声明参与决定结果。
-   *
-   * CSS 声明：`ry:revert-layer;`。
-   */
-  readonly revertLayer: string = 'ry:revert-layer;';
-  /**
-   * 继承型属性按 inherit 处理，非继承型属性按 initial 处理。
-   *
-   * CSS 声明：`ry:unset;`。
-   */
-  readonly unset: string = 'ry:unset;';
+class RyCssRuntime extends LengthCssProperty {
   /**
    * 创建 ry 属性作者；普通使用通过 s.ry 取得共享实例。
    * @example
@@ -11728,6 +8386,7 @@ export class RyCss extends LengthCssProperty {
    */
   constructor() {
     super('ry');
+    initializeKeywordDeclarations(this, 'ry', keywords_dffc425ba867);
   }
   /**
    * 原样生成 ry 声明，保留关键字补全并接受自定义 CSS 值。
@@ -11804,3 +8463,14 @@ export class RyCss extends LengthCssProperty {
     return this.raw(`clamp(${[minimum, preferred, maximum].join(', ')})`);
   }
 }
+/**
+ * ry 属性作者；关键字读取为完整声明字符串，保留中文说明。
+ */
+export type RyCss = RyCssRuntime & KeywordDeclarations<RyKeywords>;
+/**
+ * 设置 SVG 椭圆的垂直半径，或矩形的垂直圆角半径。（ry）
+ *
+ * CSS 初始值：`0`（不同于浏览器默认样式表）。
+ * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ry
+ */
+export const RyCss = /* @__PURE__ */ keywordConstructor(RyCssRuntime, 'RyCss') as new () => RyCss;

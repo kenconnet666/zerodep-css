@@ -104,10 +104,44 @@ test('发布声明覆盖全部属性、关键字字段和公开方法签名', ()
       }
     }
   assert.equal(properties, 502);
-  assert(fields >= 12586 + 502);
+  // 共享声明不再物理重复每个字段；逐个检查消费端可见的关键字，覆盖数量不减少。
+  const probe = languageService("import {Css} from 'zerodep-css'; const s=new Css();");
+  let keywordMembers = 0;
+  try {
+    assert.equal(probe.service.getSemanticDiagnostics(probe.file).length, 0);
+    const program = probe.service.getProgram();
+    const checker = program.getTypeChecker();
+    const source = program.getSourceFile(probe.file);
+    const declaration = source.statements.find(ts.isVariableStatement).declarationList
+      .declarations[0];
+    const author = checker.getTypeAtLocation(declaration.name);
+    for (const property of checker.getPropertiesOfType(author)) {
+      if (property.name === 'keywords' || property.name.startsWith('_')) continue;
+      const type = checker.getTypeOfSymbolAtLocation(property, declaration.name);
+      for (const member of checker.getPropertiesOfType(type)) {
+        if (member.name === 'name') continue;
+        const value = checker.getTypeOfSymbolAtLocation(member, declaration.name);
+        if (!(value.flags & ts.TypeFlags.String)) continue;
+        keywordMembers++;
+        assert.match(
+          ts.displayPartsToString(member.getDocumentationComment(checker)),
+          /[\u4e00-\u9fff]/,
+          `${property.name}.${member.name} 缺少可见的中文语义说明`,
+        );
+      }
+    }
+    assert.equal(keywordMembers, 12586);
+  } finally {
+    probe.service.dispose();
+  }
   assert(methods > 2000);
   console.log(
-    JSON.stringify({ properties, documentedFields: fields, documentedSignatures: methods }),
+    JSON.stringify({
+      properties,
+      documentedFields: fields,
+      keywordMembers,
+      documentedSignatures: methods,
+    }),
   );
 });
 
