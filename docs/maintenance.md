@@ -109,3 +109,5 @@ zerodep-js 的当前目标是完善基础 API，包括已有能力与已确认�
 # 0.3.2 主题关键字变量绑定
 
 新增框架内部接线 `inlineKeyword(target, member, variable)`：仅对本库创建并冻结的主题属性视图读取元数据，每次运行读取当前原始值并沿用元素变量的安全分类。安全值生成声明与变量值；CSS-wide、已有 var()/复杂表达式、未知值及自定义作者保留原声明。普通系统常量不变量化，不解析声明字符串或调用浏览器 CSS.supports；SSR 与浏览器规则一致。`keywords` 原始值、作者成员的字符串类型和已有 Vue/Svelte 路线不变。0.3.2 六包同版本，完整 CI 成功后发布固定产物到 next。
+
+已交付：提交 0f888c8 / CI 37787188898 完整通过，六份固定 tgz 来自该 CI 的 release-candidate；npm 六包 0.3.2 与 manifest SHA512 一致，next 全部为 0.3.2，原 latest 不变。GitHub v0.3.2 预发布保留 tgz、manifest 与 registry-verification-0.3.2.json。主框架已消费 npm 核心包，源码绑定增强由框架自己的 CI 验收。
