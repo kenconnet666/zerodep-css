@@ -1,4 +1,5 @@
-import { authorInputs } from './author-guards.js';
+import { authorInputs, isSystemKeyword } from './author-guards.js';
+import { getKeywordBinding } from './keyword-source.js';
 import { unitSuffix } from './generated/base.js';
 import { systemKeywords } from './generated/keywords.js';
 
@@ -23,6 +24,16 @@ export function inlineDeclaration(
   const method = Reflect.get(Object(target), member);
   const declaration = Reflect.apply(method, target, [value]) as string;
   if (!inputs || !/^--zj-[a-z0-9-]+$/.test(variable)) return { declaration };
+  const text = inlineValue(property, member, value);
+  if (text === undefined) return { declaration };
+  return {
+    declaration: Reflect.apply(Reflect.get(target, 'raw'), target, [`var(${variable})`]) as string,
+    value: text,
+  };
+}
+
+/** 关键字和显式参数共用保守分类；SSR 与浏览器不能依赖不同的 CSS.supports 结果。 */
+function inlineValue(property: string, member: string, value: unknown): string | undefined {
   let text: string | undefined;
   if (
     Object.hasOwn(unitSuffix, member) &&
@@ -55,10 +66,29 @@ export function inlineDeclaration(
   ) {
     text = String(value);
   }
+  return text;
+}
+
+/** 只将可信主题视图的安全值转换为变量；成员及主题 getter 均只读取一次。 */
+export function inlineKeyword(
+  target: unknown,
+  member: string,
+  variable: string,
+): InlineDeclaration {
+  const binding =
+    target !== null && typeof target === 'object' ? getKeywordBinding(target) : undefined;
+  if (!binding?.members.has(member))
+    return { declaration: (target as Record<string, string>)[member]! };
+  const { value, declaration } = binding.read(member);
+  if (
+    !/^--zj-[a-z0-9-]+$/.test(variable) ||
+    !isSystemKeyword(target as object, binding.property, binding.raw)
+  )
+    return { declaration };
+  const text = inlineValue(binding.property, 'raw', value);
   if (text === undefined) return { declaration };
-  // 系统 raw/declaration 已由 authorInputs 核验；单位在内联值端拼接。
   return {
-    declaration: Reflect.apply(Reflect.get(target, 'raw'), target, [`var(${variable})`]) as string,
+    declaration: binding.raw.call(target, `var(${variable})` as never),
     value: text,
   };
 }

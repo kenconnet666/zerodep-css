@@ -1,7 +1,108 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { Css, WidthCss } from '../../dist/index.js';
-import { authorInputs, inlineDeclaration } from '../../dist/bindings.js';
+import { Css, WidthCss, ColorCss } from '../../dist/index.js';
+import { authorInputs, inlineDeclaration, inlineKeyword } from '../../dist/bindings.js';
+
+test('主题关键字在安全值、全局关键字与已有变量之间动态切换，保留原始值', () => {
+  let value = '#245fc5';
+  let reads = 0;
+  const s = new Css(() => ({
+    color: {
+      get _primary() {
+        reads++;
+        return value;
+      },
+    },
+  }));
+  const target = s.color;
+  for (const next of [
+    '#245fc5',
+    'inherit',
+    'initial',
+    'unset',
+    'revert',
+    'revert-layer',
+    'var(--brand, inherit)',
+    'rgb(0 0 0 / 0.5)',
+    'not-a-color',
+    '#ffffff',
+  ]) {
+    value = next;
+    reads = 0;
+    const actual = inlineKeyword(target, '_primary', '--zj-test');
+    assert.equal(reads, 1);
+    assert.deepEqual(
+      actual,
+      next.startsWith('#')
+        ? { declaration: 'color:var(--zj-test);', value: next }
+        : { declaration: `color:${next};` },
+    );
+    assert.equal(s.keywords.color._primary, next);
+  }
+});
+
+test('主题替换、覆盖的原生关键字和多个作者独立取值，普通常量不变量化', () => {
+  let theme = { display: { flex: 'grid' } };
+  const a = new Css(() => theme),
+    b = new Css({ display: { flex: 'block' } });
+  const view = a.display;
+  assert.equal(inlineKeyword(view, 'flex', '--zj-test').value, 'grid');
+  theme = { display: { flex: 'inline-flex' } };
+  assert.equal(inlineKeyword(view, 'flex', '--zj-test').value, 'inline-flex');
+  assert.equal(inlineKeyword(b.display, 'flex', '--zj-test').value, 'block');
+  assert.deepEqual(inlineKeyword(new Css().display, 'flex', '--zj-test'), {
+    declaration: 'display:flex;',
+  });
+});
+
+test('未知成员保持一次 getter 读取及异常，不把普通对象伪装成主题视图', () => {
+  let reads = 0;
+  const target = {
+    get _primary() {
+      reads++;
+      return 'color:blue;';
+    },
+  };
+  assert.deepEqual(inlineKeyword(target, '_primary', '--zj-test'), { declaration: 'color:blue;' });
+  assert.equal(reads, 1);
+  assert.throws(() => inlineKeyword(null, '_primary', '--zj-test'), TypeError);
+  assert.throws(
+    () =>
+      inlineKeyword(
+        {
+          get _primary() {
+            throw Error('getter');
+          },
+        },
+        '_primary',
+        '--zj-test',
+      ),
+    /getter/,
+  );
+});
+
+test('注入主题的自定义 raw 不按系统方法绑定，主题无效值仍报原错误', () => {
+  class CustomColor extends ColorCss {
+    raw(value) {
+      return `outline-color:${value};`;
+    }
+  }
+  class Custom extends Css {
+    color = new CustomColor();
+  }
+  const s = new Custom({ color: { _primary: 'red' } });
+  // 自有作者覆盖了主题属性 getter，没有库登记的视图。
+  assert.deepEqual(inlineKeyword(s.color, 'red', '--zj-test'), { declaration: 'color:red;' });
+  const invalid = new Css({ color: { _primary: {} } });
+  assert.throws(
+    () => inlineKeyword(invalid.color, '_primary', '--zj-test'),
+    /Invalid CSS keyword value/,
+  );
+  const valid = new Css({ color: { _primary: 'red' } });
+  assert.deepEqual(inlineKeyword(valid.color, '_primary', '--user-owned'), {
+    declaration: 'color:red;',
+  });
+});
 
 test('继承系统方法但改写底层属性名时，不按原属性假设绑定变量', () => {
   class Width extends WidthCss {

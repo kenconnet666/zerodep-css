@@ -10,6 +10,20 @@ function descriptor(value: object, name: string): PropertyDescriptor | undefined
   }
 }
 
+/** 主题视图的 raw 已被包装；核对包装前的方法与底层声明，不能推断自定义作者。 */
+export function isSystemKeyword(target: object, property: string, raw: unknown): boolean {
+  const reference = Reflect.get((system ??= new Css()), property);
+  if (!reference) return false;
+  const name = descriptor(target, 'name');
+  return (
+    !!name &&
+    'value' in name &&
+    name.value === descriptor(reference, 'name')?.value &&
+    raw === reference.raw &&
+    descriptor(target, 'declaration')?.value === reference.declaration
+  );
+}
+
 /** 不执行自定义 getter；覆写方法不能使用系统作者方法的优化假设。 */
 export function authorInputs(
   author: unknown,

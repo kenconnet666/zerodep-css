@@ -1,7 +1,7 @@
 import { hash } from './names.js';
 import { canBindInline } from './author-guards.js';
 export { authorInputs } from './author-guards.js';
-export { inlineDeclaration, type InlineDeclaration } from './inline.js';
+export { inlineDeclaration, inlineKeyword, type InlineDeclaration } from './inline.js';
 
 import type { BxValue } from './bx.js';
 type Writer = (key: string, body: string | null) => void;

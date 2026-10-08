@@ -22,6 +22,17 @@ export type CheckedKeywords<T extends SystemKeywords> = {
 
 // 状态属于作者自身；普通框架代理也能转发读取，不依赖代理前后的对象身份相同。
 const sourceKey = Symbol('zerodep-css-keywords');
+interface KeywordBinding {
+  property: string;
+  members: ReadonlySet<string>;
+  raw: (value: never) => string;
+  read(member: string): { value: string | number; declaration: string };
+}
+// 只登记本库创建并冻结的视图；未知作者和代理继续执行原成员读取。
+const keywordBindings = new WeakMap<object, KeywordBinding>();
+export function getKeywordBinding(target: object): KeywordBinding | undefined {
+  return keywordBindings.get(target);
+}
 type SourceOwner = { [sourceKey]?: () => SystemKeywords };
 
 export function setKeywordSource(author: object, source: KeywordSource<SystemKeywords>): void {
@@ -65,7 +76,12 @@ export function bindKeywords<A extends { raw(value: never): string }>(
     }
     return value;
   };
-  for (const key of keysOf(initial)) {
+  const members = new Set(keysOf(initial));
+  const readKeyword = (key: string) => {
+    const value = readValue(key);
+    return { value, declaration: raw.call(author, value as never) };
+  };
+  for (const key of members) {
     // 系统字段是完整声明字符串；自定义成员只允许下划线名称，不能覆盖 raw/px 等方法。
     const existing = Object.getOwnPropertyDescriptor(author, key);
     if (
@@ -76,7 +92,7 @@ export function bindKeywords<A extends { raw(value: never): string }>(
     }
     Object.defineProperty(author, key, {
       enumerable: true,
-      get: () => raw.call(author, readValue(key) as never),
+      get: () => readKeyword(key).declaration,
     });
   }
   Object.defineProperty(author, 'raw', {
@@ -90,5 +106,6 @@ export function bindKeywords<A extends { raw(value: never): string }>(
       );
     },
   });
+  keywordBindings.set(author, { property, members, raw, read: readKeyword });
   return Object.freeze(author);
 }
