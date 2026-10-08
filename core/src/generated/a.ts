@@ -2,16 +2,16 @@
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
 import { CssProperty, LengthCssProperty, type CssString } from './base.js';
-import { initializeKeywordDeclarations, keywordConstructor } from '../keyword-data.js';
+import { initializeKeywordDeclarations } from '../keyword-data.js';
 import type { KeywordDeclarations, KeywordValuesOf } from '../keyword-source.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
-import { keywords_3d3b52bc8ef1 } from './keyword-sets.js';
+import { accentColorKeywords } from './keyword-sets.js';
 
 /**
  * accent-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AccentColorKeywords = KeywordValuesOf<
-  typeof keywords_3d3b52bc8ef1,
+  typeof accentColorKeywords,
   Property.AccentColor | CssString
 >;
 /**
@@ -19,14 +19,11 @@ export type AccentColorKeywords = KeywordValuesOf<
  * @example
  * new AccentColorKeywords()
  */
-export const AccentColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class AccentColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_3d3b52bc8ef1);
-    }
-  },
-  'AccentColorKeywords',
-) as new () => AccentColorKeywords;
+export const AccentColorKeywords = class AccentColorKeywords {
+  constructor() {
+    Object.assign(this, accentColorKeywords);
+  }
+} as new () => AccentColorKeywords;
 
 /**
  * accent-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -39,7 +36,7 @@ class AccentColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('accent-color');
-    initializeKeywordDeclarations(this, 'accent-color', keywords_3d3b52bc8ef1);
+    initializeKeywordDeclarations(this, 'accent-color', accentColorKeywords);
   }
   /**
    * 原样生成 accent-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -142,17 +139,14 @@ export type AccentColorCss = AccentColorCssRuntime & KeywordDeclarations<AccentC
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/accent-color
  */
-export const AccentColorCss = /* @__PURE__ */ keywordConstructor(
-  AccentColorCssRuntime,
-  'AccentColorCss',
-) as new () => AccentColorCss;
-import { keywords_f701374d513c } from './keyword-sets.js';
+export const AccentColorCss = AccentColorCssRuntime as new () => AccentColorCss;
+import { alignContentKeywords } from './keyword-sets.js';
 
 /**
  * align-content 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AlignContentKeywords = KeywordValuesOf<
-  typeof keywords_f701374d513c,
+  typeof alignContentKeywords,
   Property.AlignContent | CssString
 >;
 /**
@@ -160,14 +154,11 @@ export type AlignContentKeywords = KeywordValuesOf<
  * @example
  * new AlignContentKeywords()
  */
-export const AlignContentKeywords = /* @__PURE__ */ keywordConstructor(
-  class AlignContentKeywords {
-    constructor() {
-      Object.assign(this, keywords_f701374d513c);
-    }
-  },
-  'AlignContentKeywords',
-) as new () => AlignContentKeywords;
+export const AlignContentKeywords = class AlignContentKeywords {
+  constructor() {
+    Object.assign(this, alignContentKeywords);
+  }
+} as new () => AlignContentKeywords;
 
 /**
  * align-content 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -180,7 +171,7 @@ class AlignContentCssRuntime extends CssProperty {
    */
   constructor() {
     super('align-content');
-    initializeKeywordDeclarations(this, 'align-content', keywords_f701374d513c);
+    initializeKeywordDeclarations(this, 'align-content', alignContentKeywords);
   }
   /**
    * 原样生成 align-content 声明，保留关键字补全并接受自定义 CSS 值。
@@ -205,17 +196,14 @@ export type AlignContentCss = AlignContentCssRuntime & KeywordDeclarations<Align
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-content
  */
-export const AlignContentCss = /* @__PURE__ */ keywordConstructor(
-  AlignContentCssRuntime,
-  'AlignContentCss',
-) as new () => AlignContentCss;
-import { keywords_d15096dcf250 } from './keyword-sets.js';
+export const AlignContentCss = AlignContentCssRuntime as new () => AlignContentCss;
+import { alignItemsKeywords } from './keyword-sets.js';
 
 /**
  * align-items 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AlignItemsKeywords = KeywordValuesOf<
-  typeof keywords_d15096dcf250,
+  typeof alignItemsKeywords,
   Property.AlignItems | CssString
 >;
 /**
@@ -223,14 +211,11 @@ export type AlignItemsKeywords = KeywordValuesOf<
  * @example
  * new AlignItemsKeywords()
  */
-export const AlignItemsKeywords = /* @__PURE__ */ keywordConstructor(
-  class AlignItemsKeywords {
-    constructor() {
-      Object.assign(this, keywords_d15096dcf250);
-    }
-  },
-  'AlignItemsKeywords',
-) as new () => AlignItemsKeywords;
+export const AlignItemsKeywords = class AlignItemsKeywords {
+  constructor() {
+    Object.assign(this, alignItemsKeywords);
+  }
+} as new () => AlignItemsKeywords;
 
 /**
  * align-items 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -243,7 +228,7 @@ class AlignItemsCssRuntime extends CssProperty {
    */
   constructor() {
     super('align-items');
-    initializeKeywordDeclarations(this, 'align-items', keywords_d15096dcf250);
+    initializeKeywordDeclarations(this, 'align-items', alignItemsKeywords);
   }
   /**
    * 原样生成 align-items 声明，保留关键字补全并接受自定义 CSS 值。
@@ -281,17 +266,14 @@ export type AlignItemsCss = AlignItemsCssRuntime & KeywordDeclarations<AlignItem
  * css(s.display.flex, s.alignItems.center)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-items
  */
-export const AlignItemsCss = /* @__PURE__ */ keywordConstructor(
-  AlignItemsCssRuntime,
-  'AlignItemsCss',
-) as new () => AlignItemsCss;
-import { keywords_977eae9a71c3 } from './keyword-sets.js';
+export const AlignItemsCss = AlignItemsCssRuntime as new () => AlignItemsCss;
+import { alignSelfKeywords } from './keyword-sets.js';
 
 /**
  * align-self 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AlignSelfKeywords = KeywordValuesOf<
-  typeof keywords_977eae9a71c3,
+  typeof alignSelfKeywords,
   Property.AlignSelf | CssString
 >;
 /**
@@ -299,14 +281,11 @@ export type AlignSelfKeywords = KeywordValuesOf<
  * @example
  * new AlignSelfKeywords()
  */
-export const AlignSelfKeywords = /* @__PURE__ */ keywordConstructor(
-  class AlignSelfKeywords {
-    constructor() {
-      Object.assign(this, keywords_977eae9a71c3);
-    }
-  },
-  'AlignSelfKeywords',
-) as new () => AlignSelfKeywords;
+export const AlignSelfKeywords = class AlignSelfKeywords {
+  constructor() {
+    Object.assign(this, alignSelfKeywords);
+  }
+} as new () => AlignSelfKeywords;
 
 /**
  * align-self 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -319,7 +298,7 @@ class AlignSelfCssRuntime extends CssProperty {
    */
   constructor() {
     super('align-self');
-    initializeKeywordDeclarations(this, 'align-self', keywords_977eae9a71c3);
+    initializeKeywordDeclarations(this, 'align-self', alignSelfKeywords);
   }
   /**
    * 原样生成 align-self 声明，保留关键字补全并接受自定义 CSS 值。
@@ -353,16 +332,13 @@ export type AlignSelfCss = AlignSelfCssRuntime & KeywordDeclarations<AlignSelfKe
  * s.alignSelf.center
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-self
  */
-export const AlignSelfCss = /* @__PURE__ */ keywordConstructor(
-  AlignSelfCssRuntime,
-  'AlignSelfCss',
-) as new () => AlignSelfCss;
+export const AlignSelfCss = AlignSelfCssRuntime as new () => AlignSelfCss;
 
 /**
  * align-tracks 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AlignTracksKeywords = KeywordValuesOf<
-  typeof keywords_f701374d513c,
+  typeof alignContentKeywords,
   Property.AlignTracks | CssString
 >;
 /**
@@ -370,14 +346,11 @@ export type AlignTracksKeywords = KeywordValuesOf<
  * @example
  * new AlignTracksKeywords()
  */
-export const AlignTracksKeywords = /* @__PURE__ */ keywordConstructor(
-  class AlignTracksKeywords {
-    constructor() {
-      Object.assign(this, keywords_f701374d513c);
-    }
-  },
-  'AlignTracksKeywords',
-) as new () => AlignTracksKeywords;
+export const AlignTracksKeywords = class AlignTracksKeywords {
+  constructor() {
+    Object.assign(this, alignContentKeywords);
+  }
+} as new () => AlignTracksKeywords;
 
 /**
  * align-tracks 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -390,7 +363,7 @@ class AlignTracksCssRuntime extends CssProperty {
    */
   constructor() {
     super('align-tracks');
-    initializeKeywordDeclarations(this, 'align-tracks', keywords_f701374d513c);
+    initializeKeywordDeclarations(this, 'align-tracks', alignContentKeywords);
   }
   /**
    * 原样生成 align-tracks 声明，保留关键字补全并接受自定义 CSS 值。
@@ -415,17 +388,14 @@ export type AlignTracksCss = AlignTracksCssRuntime & KeywordDeclarations<AlignTr
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/align-tracks
  */
-export const AlignTracksCss = /* @__PURE__ */ keywordConstructor(
-  AlignTracksCssRuntime,
-  'AlignTracksCss',
-) as new () => AlignTracksCss;
-import { keywords_733081824c35 } from './keyword-sets.js';
+export const AlignTracksCss = AlignTracksCssRuntime as new () => AlignTracksCss;
+import { alignmentBaselineKeywords } from './keyword-sets.js';
 
 /**
  * alignment-baseline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AlignmentBaselineKeywords = KeywordValuesOf<
-  typeof keywords_733081824c35,
+  typeof alignmentBaselineKeywords,
   Property.AlignmentBaseline | CssString
 >;
 /**
@@ -433,14 +403,11 @@ export type AlignmentBaselineKeywords = KeywordValuesOf<
  * @example
  * new AlignmentBaselineKeywords()
  */
-export const AlignmentBaselineKeywords = /* @__PURE__ */ keywordConstructor(
-  class AlignmentBaselineKeywords {
-    constructor() {
-      Object.assign(this, keywords_733081824c35);
-    }
-  },
-  'AlignmentBaselineKeywords',
-) as new () => AlignmentBaselineKeywords;
+export const AlignmentBaselineKeywords = class AlignmentBaselineKeywords {
+  constructor() {
+    Object.assign(this, alignmentBaselineKeywords);
+  }
+} as new () => AlignmentBaselineKeywords;
 
 /**
  * alignment-baseline 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -453,7 +420,7 @@ class AlignmentBaselineCssRuntime extends CssProperty {
    */
   constructor() {
     super('alignment-baseline');
-    initializeKeywordDeclarations(this, 'alignment-baseline', keywords_733081824c35);
+    initializeKeywordDeclarations(this, 'alignment-baseline', alignmentBaselineKeywords);
   }
   /**
    * 原样生成 alignment-baseline 声明，保留关键字补全并接受自定义 CSS 值。
@@ -479,29 +446,23 @@ export type AlignmentBaselineCss = AlignmentBaselineCssRuntime &
  * CSS 初始值：`baseline`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/alignment-baseline
  */
-export const AlignmentBaselineCss = /* @__PURE__ */ keywordConstructor(
-  AlignmentBaselineCssRuntime,
-  'AlignmentBaselineCss',
-) as new () => AlignmentBaselineCss;
-import { keywords_dffc425ba867 } from './keyword-sets.js';
+export const AlignmentBaselineCss = AlignmentBaselineCssRuntime as new () => AlignmentBaselineCss;
+import { globalKeywords } from './keyword-sets.js';
 
 /**
  * all 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export type AllKeywords = KeywordValuesOf<typeof keywords_dffc425ba867, Property.All | CssString>;
+export type AllKeywords = KeywordValuesOf<typeof globalKeywords, Property.All | CssString>;
 /**
  * 创建 all 的可继承关键字对象；每个实例独立，成员保留语义说明。
  * @example
  * new AllKeywords()
  */
-export const AllKeywords = /* @__PURE__ */ keywordConstructor(
-  class AllKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'AllKeywords',
-) as new () => AllKeywords;
+export const AllKeywords = class AllKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => AllKeywords;
 
 /**
  * all 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -514,7 +475,7 @@ class AllCssRuntime extends CssProperty {
    */
   constructor() {
     super('all');
-    initializeKeywordDeclarations(this, 'all', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'all', globalKeywords);
   }
   /**
    * 原样生成 all 声明，保留关键字补全并接受自定义 CSS 值。
@@ -537,17 +498,14 @@ export type AllCss = AllCssRuntime & KeywordDeclarations<AllKeywords>;
  * 批量重置 CSS 属性；不重置 direction、unicode-bidi 和自定义属性。（all）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/all
  */
-export const AllCss = /* @__PURE__ */ keywordConstructor(
-  AllCssRuntime,
-  'AllCss',
-) as new () => AllCss;
-import { keywords_9cd78f567b36 } from './keyword-sets.js';
+export const AllCss = AllCssRuntime as new () => AllCss;
+import { noneKeywords } from './keyword-sets.js';
 
 /**
  * anchor-name 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnchorNameKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.AnchorName | CssString
 >;
 /**
@@ -555,14 +513,11 @@ export type AnchorNameKeywords = KeywordValuesOf<
  * @example
  * new AnchorNameKeywords()
  */
-export const AnchorNameKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnchorNameKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'AnchorNameKeywords',
-) as new () => AnchorNameKeywords;
+export const AnchorNameKeywords = class AnchorNameKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => AnchorNameKeywords;
 
 /**
  * anchor-name 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -575,7 +530,7 @@ class AnchorNameCssRuntime extends CssProperty {
    */
   constructor() {
     super('anchor-name');
-    initializeKeywordDeclarations(this, 'anchor-name', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'anchor-name', noneKeywords);
   }
   /**
    * 原样生成 anchor-name 声明，保留关键字补全并接受自定义 CSS 值。
@@ -600,17 +555,14 @@ export type AnchorNameCss = AnchorNameCssRuntime & KeywordDeclarations<AnchorNam
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-name
  */
-export const AnchorNameCss = /* @__PURE__ */ keywordConstructor(
-  AnchorNameCssRuntime,
-  'AnchorNameCss',
-) as new () => AnchorNameCss;
-import { keywords_94e2d00a7633 } from './keyword-sets.js';
+export const AnchorNameCss = AnchorNameCssRuntime as new () => AnchorNameCss;
+import { anchorScopeKeywords } from './keyword-sets.js';
 
 /**
  * anchor-scope 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnchorScopeKeywords = KeywordValuesOf<
-  typeof keywords_94e2d00a7633,
+  typeof anchorScopeKeywords,
   Property.AnchorScope | CssString
 >;
 /**
@@ -618,14 +570,11 @@ export type AnchorScopeKeywords = KeywordValuesOf<
  * @example
  * new AnchorScopeKeywords()
  */
-export const AnchorScopeKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnchorScopeKeywords {
-    constructor() {
-      Object.assign(this, keywords_94e2d00a7633);
-    }
-  },
-  'AnchorScopeKeywords',
-) as new () => AnchorScopeKeywords;
+export const AnchorScopeKeywords = class AnchorScopeKeywords {
+  constructor() {
+    Object.assign(this, anchorScopeKeywords);
+  }
+} as new () => AnchorScopeKeywords;
 
 /**
  * anchor-scope 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -638,7 +587,7 @@ class AnchorScopeCssRuntime extends CssProperty {
    */
   constructor() {
     super('anchor-scope');
-    initializeKeywordDeclarations(this, 'anchor-scope', keywords_94e2d00a7633);
+    initializeKeywordDeclarations(this, 'anchor-scope', anchorScopeKeywords);
   }
   /**
    * 原样生成 anchor-scope 声明，保留关键字补全并接受自定义 CSS 值。
@@ -663,17 +612,14 @@ export type AnchorScopeCss = AnchorScopeCssRuntime & KeywordDeclarations<AnchorS
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/anchor-scope
  */
-export const AnchorScopeCss = /* @__PURE__ */ keywordConstructor(
-  AnchorScopeCssRuntime,
-  'AnchorScopeCss',
-) as new () => AnchorScopeCss;
-import { keywords_f4b9ffa7134f } from './keyword-sets.js';
+export const AnchorScopeCss = AnchorScopeCssRuntime as new () => AnchorScopeCss;
+import { animationKeywords } from './keyword-sets.js';
 
 /**
  * animation 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationKeywords = KeywordValuesOf<
-  typeof keywords_f4b9ffa7134f,
+  typeof animationKeywords,
   Property.Animation | CssString
 >;
 /**
@@ -681,14 +627,11 @@ export type AnimationKeywords = KeywordValuesOf<
  * @example
  * new AnimationKeywords()
  */
-export const AnimationKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationKeywords {
-    constructor() {
-      Object.assign(this, keywords_f4b9ffa7134f);
-    }
-  },
-  'AnimationKeywords',
-) as new () => AnimationKeywords;
+export const AnimationKeywords = class AnimationKeywords {
+  constructor() {
+    Object.assign(this, animationKeywords);
+  }
+} as new () => AnimationKeywords;
 
 /**
  * animation 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -701,7 +644,7 @@ class AnimationCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation');
-    initializeKeywordDeclarations(this, 'animation', keywords_f4b9ffa7134f);
+    initializeKeywordDeclarations(this, 'animation', animationKeywords);
   }
   /**
    * 原样生成 animation 声明，保留关键字补全并接受自定义 CSS 值。
@@ -804,17 +747,14 @@ export type AnimationCss = AnimationCssRuntime & KeywordDeclarations<AnimationKe
  * 集中设置关键帧动画的名称、时长、缓动、延迟、次数及播放行为。（animation）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation
  */
-export const AnimationCss = /* @__PURE__ */ keywordConstructor(
-  AnimationCssRuntime,
-  'AnimationCss',
-) as new () => AnimationCss;
-import { keywords_deee3dc678f4 } from './keyword-sets.js';
+export const AnimationCss = AnimationCssRuntime as new () => AnimationCss;
+import { animationCompositionKeywords } from './keyword-sets.js';
 
 /**
  * animation-composition 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationCompositionKeywords = KeywordValuesOf<
-  typeof keywords_deee3dc678f4,
+  typeof animationCompositionKeywords,
   Property.AnimationComposition | CssString
 >;
 /**
@@ -822,14 +762,11 @@ export type AnimationCompositionKeywords = KeywordValuesOf<
  * @example
  * new AnimationCompositionKeywords()
  */
-export const AnimationCompositionKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationCompositionKeywords {
-    constructor() {
-      Object.assign(this, keywords_deee3dc678f4);
-    }
-  },
-  'AnimationCompositionKeywords',
-) as new () => AnimationCompositionKeywords;
+export const AnimationCompositionKeywords = class AnimationCompositionKeywords {
+  constructor() {
+    Object.assign(this, animationCompositionKeywords);
+  }
+} as new () => AnimationCompositionKeywords;
 
 /**
  * animation-composition 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -842,7 +779,7 @@ class AnimationCompositionCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-composition');
-    initializeKeywordDeclarations(this, 'animation-composition', keywords_deee3dc678f4);
+    initializeKeywordDeclarations(this, 'animation-composition', animationCompositionKeywords);
   }
   /**
    * 原样生成 animation-composition 声明，保留关键字补全并接受自定义 CSS 值。
@@ -868,16 +805,14 @@ export type AnimationCompositionCss = AnimationCompositionCssRuntime &
  * CSS 初始值：`replace`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-composition
  */
-export const AnimationCompositionCss = /* @__PURE__ */ keywordConstructor(
-  AnimationCompositionCssRuntime,
-  'AnimationCompositionCss',
-) as new () => AnimationCompositionCss;
+export const AnimationCompositionCss =
+  AnimationCompositionCssRuntime as new () => AnimationCompositionCss;
 
 /**
  * animation-delay 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationDelayKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.AnimationDelay | CssString
 >;
 /**
@@ -885,14 +820,11 @@ export type AnimationDelayKeywords = KeywordValuesOf<
  * @example
  * new AnimationDelayKeywords()
  */
-export const AnimationDelayKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationDelayKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'AnimationDelayKeywords',
-) as new () => AnimationDelayKeywords;
+export const AnimationDelayKeywords = class AnimationDelayKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => AnimationDelayKeywords;
 
 /**
  * animation-delay 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -905,7 +837,7 @@ class AnimationDelayCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-delay');
-    initializeKeywordDeclarations(this, 'animation-delay', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'animation-delay', globalKeywords);
   }
   /**
    * 原样生成 animation-delay 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1011,17 +943,14 @@ export type AnimationDelayCss = AnimationDelayCssRuntime &
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-delay
  */
-export const AnimationDelayCss = /* @__PURE__ */ keywordConstructor(
-  AnimationDelayCssRuntime,
-  'AnimationDelayCss',
-) as new () => AnimationDelayCss;
-import { keywords_e9c981e8c96e } from './keyword-sets.js';
+export const AnimationDelayCss = AnimationDelayCssRuntime as new () => AnimationDelayCss;
+import { animationDirectionKeywords } from './keyword-sets.js';
 
 /**
  * animation-direction 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationDirectionKeywords = KeywordValuesOf<
-  typeof keywords_e9c981e8c96e,
+  typeof animationDirectionKeywords,
   Property.AnimationDirection | CssString
 >;
 /**
@@ -1029,14 +958,11 @@ export type AnimationDirectionKeywords = KeywordValuesOf<
  * @example
  * new AnimationDirectionKeywords()
  */
-export const AnimationDirectionKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationDirectionKeywords {
-    constructor() {
-      Object.assign(this, keywords_e9c981e8c96e);
-    }
-  },
-  'AnimationDirectionKeywords',
-) as new () => AnimationDirectionKeywords;
+export const AnimationDirectionKeywords = class AnimationDirectionKeywords {
+  constructor() {
+    Object.assign(this, animationDirectionKeywords);
+  }
+} as new () => AnimationDirectionKeywords;
 
 /**
  * animation-direction 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1049,7 +975,7 @@ class AnimationDirectionCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-direction');
-    initializeKeywordDeclarations(this, 'animation-direction', keywords_e9c981e8c96e);
+    initializeKeywordDeclarations(this, 'animation-direction', animationDirectionKeywords);
   }
   /**
    * 原样生成 animation-direction 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1075,17 +1001,15 @@ export type AnimationDirectionCss = AnimationDirectionCssRuntime &
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-direction
  */
-export const AnimationDirectionCss = /* @__PURE__ */ keywordConstructor(
-  AnimationDirectionCssRuntime,
-  'AnimationDirectionCss',
-) as new () => AnimationDirectionCss;
-import { keywords_10442af7f819 } from './keyword-sets.js';
+export const AnimationDirectionCss =
+  AnimationDirectionCssRuntime as new () => AnimationDirectionCss;
+import { autoKeywords } from './keyword-sets.js';
 
 /**
  * animation-duration 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationDurationKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.AnimationDuration | CssString
 >;
 /**
@@ -1093,14 +1017,11 @@ export type AnimationDurationKeywords = KeywordValuesOf<
  * @example
  * new AnimationDurationKeywords()
  */
-export const AnimationDurationKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationDurationKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'AnimationDurationKeywords',
-) as new () => AnimationDurationKeywords;
+export const AnimationDurationKeywords = class AnimationDurationKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => AnimationDurationKeywords;
 
 /**
  * animation-duration 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1113,7 +1034,7 @@ class AnimationDurationCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-duration');
-    initializeKeywordDeclarations(this, 'animation-duration', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'animation-duration', autoKeywords);
   }
   /**
    * 原样生成 animation-duration 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1219,17 +1140,14 @@ export type AnimationDurationCss = AnimationDurationCssRuntime &
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-duration
  */
-export const AnimationDurationCss = /* @__PURE__ */ keywordConstructor(
-  AnimationDurationCssRuntime,
-  'AnimationDurationCss',
-) as new () => AnimationDurationCss;
-import { keywords_67c080a1a497 } from './keyword-sets.js';
+export const AnimationDurationCss = AnimationDurationCssRuntime as new () => AnimationDurationCss;
+import { animationFillModeKeywords } from './keyword-sets.js';
 
 /**
  * animation-fill-mode 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationFillModeKeywords = KeywordValuesOf<
-  typeof keywords_67c080a1a497,
+  typeof animationFillModeKeywords,
   Property.AnimationFillMode | CssString
 >;
 /**
@@ -1237,14 +1155,11 @@ export type AnimationFillModeKeywords = KeywordValuesOf<
  * @example
  * new AnimationFillModeKeywords()
  */
-export const AnimationFillModeKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationFillModeKeywords {
-    constructor() {
-      Object.assign(this, keywords_67c080a1a497);
-    }
-  },
-  'AnimationFillModeKeywords',
-) as new () => AnimationFillModeKeywords;
+export const AnimationFillModeKeywords = class AnimationFillModeKeywords {
+  constructor() {
+    Object.assign(this, animationFillModeKeywords);
+  }
+} as new () => AnimationFillModeKeywords;
 
 /**
  * animation-fill-mode 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1257,7 +1172,7 @@ class AnimationFillModeCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-fill-mode');
-    initializeKeywordDeclarations(this, 'animation-fill-mode', keywords_67c080a1a497);
+    initializeKeywordDeclarations(this, 'animation-fill-mode', animationFillModeKeywords);
   }
   /**
    * 原样生成 animation-fill-mode 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1295,17 +1210,14 @@ export type AnimationFillModeCss = AnimationFillModeCssRuntime &
  * s.animationFillMode.forwards
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-fill-mode
  */
-export const AnimationFillModeCss = /* @__PURE__ */ keywordConstructor(
-  AnimationFillModeCssRuntime,
-  'AnimationFillModeCss',
-) as new () => AnimationFillModeCss;
-import { keywords_a44a282072ef } from './keyword-sets.js';
+export const AnimationFillModeCss = AnimationFillModeCssRuntime as new () => AnimationFillModeCss;
+import { animationIterationCountKeywords } from './keyword-sets.js';
 
 /**
  * animation-iteration-count 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationIterationCountKeywords = KeywordValuesOf<
-  typeof keywords_a44a282072ef,
+  typeof animationIterationCountKeywords,
   Property.AnimationIterationCount | CssString
 >;
 /**
@@ -1313,14 +1225,11 @@ export type AnimationIterationCountKeywords = KeywordValuesOf<
  * @example
  * new AnimationIterationCountKeywords()
  */
-export const AnimationIterationCountKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationIterationCountKeywords {
-    constructor() {
-      Object.assign(this, keywords_a44a282072ef);
-    }
-  },
-  'AnimationIterationCountKeywords',
-) as new () => AnimationIterationCountKeywords;
+export const AnimationIterationCountKeywords = class AnimationIterationCountKeywords {
+  constructor() {
+    Object.assign(this, animationIterationCountKeywords);
+  }
+} as new () => AnimationIterationCountKeywords;
 
 /**
  * animation-iteration-count 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1333,7 +1242,11 @@ class AnimationIterationCountCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-iteration-count');
-    initializeKeywordDeclarations(this, 'animation-iteration-count', keywords_a44a282072ef);
+    initializeKeywordDeclarations(
+      this,
+      'animation-iteration-count',
+      animationIterationCountKeywords,
+    );
   }
   /**
    * 原样生成 animation-iteration-count 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1415,16 +1328,14 @@ export type AnimationIterationCountCss = AnimationIterationCountCssRuntime &
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-iteration-count
  */
-export const AnimationIterationCountCss = /* @__PURE__ */ keywordConstructor(
-  AnimationIterationCountCssRuntime,
-  'AnimationIterationCountCss',
-) as new () => AnimationIterationCountCss;
+export const AnimationIterationCountCss =
+  AnimationIterationCountCssRuntime as new () => AnimationIterationCountCss;
 
 /**
  * animation-name 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationNameKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.AnimationName | CssString
 >;
 /**
@@ -1432,14 +1343,11 @@ export type AnimationNameKeywords = KeywordValuesOf<
  * @example
  * new AnimationNameKeywords()
  */
-export const AnimationNameKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationNameKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'AnimationNameKeywords',
-) as new () => AnimationNameKeywords;
+export const AnimationNameKeywords = class AnimationNameKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => AnimationNameKeywords;
 
 /**
  * animation-name 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1452,7 +1360,7 @@ class AnimationNameCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-name');
-    initializeKeywordDeclarations(this, 'animation-name', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'animation-name', noneKeywords);
   }
   /**
    * 原样生成 animation-name 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1477,17 +1385,14 @@ export type AnimationNameCss = AnimationNameCssRuntime & KeywordDeclarations<Ani
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-name
  */
-export const AnimationNameCss = /* @__PURE__ */ keywordConstructor(
-  AnimationNameCssRuntime,
-  'AnimationNameCss',
-) as new () => AnimationNameCss;
-import { keywords_7911ba524151 } from './keyword-sets.js';
+export const AnimationNameCss = AnimationNameCssRuntime as new () => AnimationNameCss;
+import { animationPlayStateKeywords } from './keyword-sets.js';
 
 /**
  * animation-play-state 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationPlayStateKeywords = KeywordValuesOf<
-  typeof keywords_7911ba524151,
+  typeof animationPlayStateKeywords,
   Property.AnimationPlayState | CssString
 >;
 /**
@@ -1495,14 +1400,11 @@ export type AnimationPlayStateKeywords = KeywordValuesOf<
  * @example
  * new AnimationPlayStateKeywords()
  */
-export const AnimationPlayStateKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationPlayStateKeywords {
-    constructor() {
-      Object.assign(this, keywords_7911ba524151);
-    }
-  },
-  'AnimationPlayStateKeywords',
-) as new () => AnimationPlayStateKeywords;
+export const AnimationPlayStateKeywords = class AnimationPlayStateKeywords {
+  constructor() {
+    Object.assign(this, animationPlayStateKeywords);
+  }
+} as new () => AnimationPlayStateKeywords;
 
 /**
  * animation-play-state 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1515,7 +1417,7 @@ class AnimationPlayStateCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-play-state');
-    initializeKeywordDeclarations(this, 'animation-play-state', keywords_7911ba524151);
+    initializeKeywordDeclarations(this, 'animation-play-state', animationPlayStateKeywords);
   }
   /**
    * 原样生成 animation-play-state 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1541,17 +1443,15 @@ export type AnimationPlayStateCss = AnimationPlayStateCssRuntime &
  * CSS 初始值：`running`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-play-state
  */
-export const AnimationPlayStateCss = /* @__PURE__ */ keywordConstructor(
-  AnimationPlayStateCssRuntime,
-  'AnimationPlayStateCss',
-) as new () => AnimationPlayStateCss;
-import { keywords_27206cc4dac6 } from './keyword-sets.js';
+export const AnimationPlayStateCss =
+  AnimationPlayStateCssRuntime as new () => AnimationPlayStateCss;
+import { animationRangeKeywords } from './keyword-sets.js';
 
 /**
  * animation-range 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationRangeKeywords = KeywordValuesOf<
-  typeof keywords_27206cc4dac6,
+  typeof animationRangeKeywords,
   Property.AnimationRange | CssString
 >;
 /**
@@ -1559,14 +1459,11 @@ export type AnimationRangeKeywords = KeywordValuesOf<
  * @example
  * new AnimationRangeKeywords()
  */
-export const AnimationRangeKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationRangeKeywords {
-    constructor() {
-      Object.assign(this, keywords_27206cc4dac6);
-    }
-  },
-  'AnimationRangeKeywords',
-) as new () => AnimationRangeKeywords;
+export const AnimationRangeKeywords = class AnimationRangeKeywords {
+  constructor() {
+    Object.assign(this, animationRangeKeywords);
+  }
+} as new () => AnimationRangeKeywords;
 
 /**
  * animation-range 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1579,7 +1476,7 @@ class AnimationRangeCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('animation-range');
-    initializeKeywordDeclarations(this, 'animation-range', keywords_27206cc4dac6);
+    initializeKeywordDeclarations(this, 'animation-range', animationRangeKeywords);
   }
   /**
    * 原样生成 animation-range 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1659,16 +1556,13 @@ export type AnimationRangeCss = AnimationRangeCssRuntime &
  * 设置动画附着到时间线的起止范围。（animation-range）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range
  */
-export const AnimationRangeCss = /* @__PURE__ */ keywordConstructor(
-  AnimationRangeCssRuntime,
-  'AnimationRangeCss',
-) as new () => AnimationRangeCss;
+export const AnimationRangeCss = AnimationRangeCssRuntime as new () => AnimationRangeCss;
 
 /**
  * animation-range-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationRangeEndKeywords = KeywordValuesOf<
-  typeof keywords_27206cc4dac6,
+  typeof animationRangeKeywords,
   Property.AnimationRangeEnd | CssString
 >;
 /**
@@ -1676,14 +1570,11 @@ export type AnimationRangeEndKeywords = KeywordValuesOf<
  * @example
  * new AnimationRangeEndKeywords()
  */
-export const AnimationRangeEndKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationRangeEndKeywords {
-    constructor() {
-      Object.assign(this, keywords_27206cc4dac6);
-    }
-  },
-  'AnimationRangeEndKeywords',
-) as new () => AnimationRangeEndKeywords;
+export const AnimationRangeEndKeywords = class AnimationRangeEndKeywords {
+  constructor() {
+    Object.assign(this, animationRangeKeywords);
+  }
+} as new () => AnimationRangeEndKeywords;
 
 /**
  * animation-range-end 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1696,7 +1587,7 @@ class AnimationRangeEndCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('animation-range-end');
-    initializeKeywordDeclarations(this, 'animation-range-end', keywords_27206cc4dac6);
+    initializeKeywordDeclarations(this, 'animation-range-end', animationRangeKeywords);
   }
   /**
    * 原样生成 animation-range-end 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1790,16 +1681,13 @@ export type AnimationRangeEndCss = AnimationRangeEndCssRuntime &
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-end
  */
-export const AnimationRangeEndCss = /* @__PURE__ */ keywordConstructor(
-  AnimationRangeEndCssRuntime,
-  'AnimationRangeEndCss',
-) as new () => AnimationRangeEndCss;
+export const AnimationRangeEndCss = AnimationRangeEndCssRuntime as new () => AnimationRangeEndCss;
 
 /**
  * animation-range-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationRangeStartKeywords = KeywordValuesOf<
-  typeof keywords_27206cc4dac6,
+  typeof animationRangeKeywords,
   Property.AnimationRangeStart | CssString
 >;
 /**
@@ -1807,14 +1695,11 @@ export type AnimationRangeStartKeywords = KeywordValuesOf<
  * @example
  * new AnimationRangeStartKeywords()
  */
-export const AnimationRangeStartKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationRangeStartKeywords {
-    constructor() {
-      Object.assign(this, keywords_27206cc4dac6);
-    }
-  },
-  'AnimationRangeStartKeywords',
-) as new () => AnimationRangeStartKeywords;
+export const AnimationRangeStartKeywords = class AnimationRangeStartKeywords {
+  constructor() {
+    Object.assign(this, animationRangeKeywords);
+  }
+} as new () => AnimationRangeStartKeywords;
 
 /**
  * animation-range-start 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1827,7 +1712,7 @@ class AnimationRangeStartCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('animation-range-start');
-    initializeKeywordDeclarations(this, 'animation-range-start', keywords_27206cc4dac6);
+    initializeKeywordDeclarations(this, 'animation-range-start', animationRangeKeywords);
   }
   /**
    * 原样生成 animation-range-start 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1921,17 +1806,15 @@ export type AnimationRangeStartCss = AnimationRangeStartCssRuntime &
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-range-start
  */
-export const AnimationRangeStartCss = /* @__PURE__ */ keywordConstructor(
-  AnimationRangeStartCssRuntime,
-  'AnimationRangeStartCss',
-) as new () => AnimationRangeStartCss;
-import { keywords_da68e56f4df2 } from './keyword-sets.js';
+export const AnimationRangeStartCss =
+  AnimationRangeStartCssRuntime as new () => AnimationRangeStartCss;
+import { autoNoneKeywords } from './keyword-sets.js';
 
 /**
  * animation-timeline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationTimelineKeywords = KeywordValuesOf<
-  typeof keywords_da68e56f4df2,
+  typeof autoNoneKeywords,
   Property.AnimationTimeline | CssString
 >;
 /**
@@ -1939,14 +1822,11 @@ export type AnimationTimelineKeywords = KeywordValuesOf<
  * @example
  * new AnimationTimelineKeywords()
  */
-export const AnimationTimelineKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationTimelineKeywords {
-    constructor() {
-      Object.assign(this, keywords_da68e56f4df2);
-    }
-  },
-  'AnimationTimelineKeywords',
-) as new () => AnimationTimelineKeywords;
+export const AnimationTimelineKeywords = class AnimationTimelineKeywords {
+  constructor() {
+    Object.assign(this, autoNoneKeywords);
+  }
+} as new () => AnimationTimelineKeywords;
 
 /**
  * animation-timeline 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -1959,7 +1839,7 @@ class AnimationTimelineCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-timeline');
-    initializeKeywordDeclarations(this, 'animation-timeline', keywords_da68e56f4df2);
+    initializeKeywordDeclarations(this, 'animation-timeline', autoNoneKeywords);
   }
   /**
    * 原样生成 animation-timeline 声明，保留关键字补全并接受自定义 CSS 值。
@@ -1985,17 +1865,14 @@ export type AnimationTimelineCss = AnimationTimelineCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timeline
  */
-export const AnimationTimelineCss = /* @__PURE__ */ keywordConstructor(
-  AnimationTimelineCssRuntime,
-  'AnimationTimelineCss',
-) as new () => AnimationTimelineCss;
-import { keywords_583f0316fcba } from './keyword-sets.js';
+export const AnimationTimelineCss = AnimationTimelineCssRuntime as new () => AnimationTimelineCss;
+import { animationTimingFunctionKeywords } from './keyword-sets.js';
 
 /**
  * animation-timing-function 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AnimationTimingFunctionKeywords = KeywordValuesOf<
-  typeof keywords_583f0316fcba,
+  typeof animationTimingFunctionKeywords,
   Property.AnimationTimingFunction | CssString
 >;
 /**
@@ -2003,14 +1880,11 @@ export type AnimationTimingFunctionKeywords = KeywordValuesOf<
  * @example
  * new AnimationTimingFunctionKeywords()
  */
-export const AnimationTimingFunctionKeywords = /* @__PURE__ */ keywordConstructor(
-  class AnimationTimingFunctionKeywords {
-    constructor() {
-      Object.assign(this, keywords_583f0316fcba);
-    }
-  },
-  'AnimationTimingFunctionKeywords',
-) as new () => AnimationTimingFunctionKeywords;
+export const AnimationTimingFunctionKeywords = class AnimationTimingFunctionKeywords {
+  constructor() {
+    Object.assign(this, animationTimingFunctionKeywords);
+  }
+} as new () => AnimationTimingFunctionKeywords;
 
 /**
  * animation-timing-function 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -2023,7 +1897,11 @@ class AnimationTimingFunctionCssRuntime extends CssProperty {
    */
   constructor() {
     super('animation-timing-function');
-    initializeKeywordDeclarations(this, 'animation-timing-function', keywords_583f0316fcba);
+    initializeKeywordDeclarations(
+      this,
+      'animation-timing-function',
+      animationTimingFunctionKeywords,
+    );
   }
   /**
    * 原样生成 animation-timing-function 声明，保留关键字补全并接受自定义 CSS 值。
@@ -2049,17 +1927,15 @@ export type AnimationTimingFunctionCss = AnimationTimingFunctionCssRuntime &
  * CSS 初始值：`ease`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/animation-timing-function
  */
-export const AnimationTimingFunctionCss = /* @__PURE__ */ keywordConstructor(
-  AnimationTimingFunctionCssRuntime,
-  'AnimationTimingFunctionCss',
-) as new () => AnimationTimingFunctionCss;
-import { keywords_be3d1ee9f407 } from './keyword-sets.js';
+export const AnimationTimingFunctionCss =
+  AnimationTimingFunctionCssRuntime as new () => AnimationTimingFunctionCss;
+import { appearanceKeywords } from './keyword-sets.js';
 
 /**
  * appearance 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AppearanceKeywords = KeywordValuesOf<
-  typeof keywords_be3d1ee9f407,
+  typeof appearanceKeywords,
   Property.Appearance | CssString
 >;
 /**
@@ -2067,14 +1943,11 @@ export type AppearanceKeywords = KeywordValuesOf<
  * @example
  * new AppearanceKeywords()
  */
-export const AppearanceKeywords = /* @__PURE__ */ keywordConstructor(
-  class AppearanceKeywords {
-    constructor() {
-      Object.assign(this, keywords_be3d1ee9f407);
-    }
-  },
-  'AppearanceKeywords',
-) as new () => AppearanceKeywords;
+export const AppearanceKeywords = class AppearanceKeywords {
+  constructor() {
+    Object.assign(this, appearanceKeywords);
+  }
+} as new () => AppearanceKeywords;
 
 /**
  * appearance 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -2087,7 +1960,7 @@ class AppearanceCssRuntime extends CssProperty {
    */
   constructor() {
     super('appearance');
-    initializeKeywordDeclarations(this, 'appearance', keywords_be3d1ee9f407);
+    initializeKeywordDeclarations(this, 'appearance', appearanceKeywords);
   }
   /**
    * 原样生成 appearance 声明，保留关键字补全并接受自定义 CSS 值。
@@ -2112,16 +1985,13 @@ export type AppearanceCss = AppearanceCssRuntime & KeywordDeclarations<Appearanc
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/appearance
  */
-export const AppearanceCss = /* @__PURE__ */ keywordConstructor(
-  AppearanceCssRuntime,
-  'AppearanceCss',
-) as new () => AppearanceCss;
+export const AppearanceCss = AppearanceCssRuntime as new () => AppearanceCss;
 
 /**
  * aspect-ratio 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type AspectRatioKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.AspectRatio | CssString
 >;
 /**
@@ -2129,14 +1999,11 @@ export type AspectRatioKeywords = KeywordValuesOf<
  * @example
  * new AspectRatioKeywords()
  */
-export const AspectRatioKeywords = /* @__PURE__ */ keywordConstructor(
-  class AspectRatioKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'AspectRatioKeywords',
-) as new () => AspectRatioKeywords;
+export const AspectRatioKeywords = class AspectRatioKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => AspectRatioKeywords;
 
 /**
  * aspect-ratio 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -2149,7 +2016,7 @@ class AspectRatioCssRuntime extends CssProperty {
    */
   constructor() {
     super('aspect-ratio');
-    initializeKeywordDeclarations(this, 'aspect-ratio', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'aspect-ratio', autoKeywords);
   }
   /**
    * 原样生成 aspect-ratio 声明，保留关键字补全并接受自定义 CSS 值。
@@ -2236,7 +2103,4 @@ export type AspectRatioCss = AspectRatioCssRuntime & KeywordDeclarations<AspectR
  * css(s.aspectRatio.raw('16 / 9'), s.width.percent(100))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/aspect-ratio
  */
-export const AspectRatioCss = /* @__PURE__ */ keywordConstructor(
-  AspectRatioCssRuntime,
-  'AspectRatioCss',
-) as new () => AspectRatioCss;
+export const AspectRatioCss = AspectRatioCssRuntime as new () => AspectRatioCss;

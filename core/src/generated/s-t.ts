@@ -2,31 +2,25 @@
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
 import { CssProperty, LengthCssProperty, type CssString } from './base.js';
-import { initializeKeywordDeclarations, keywordConstructor } from '../keyword-data.js';
+import { initializeKeywordDeclarations } from '../keyword-data.js';
 import type { KeywordDeclarations, KeywordValuesOf } from '../keyword-source.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
-import { keywords_9cd78f567b36 } from './keyword-sets.js';
+import { noneKeywords } from './keyword-sets.js';
 
 /**
  * scale 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export type ScaleKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
-  Property.Scale | CssString
->;
+export type ScaleKeywords = KeywordValuesOf<typeof noneKeywords, Property.Scale | CssString>;
 /**
  * 创建 scale 的可继承关键字对象；每个实例独立，成员保留语义说明。
  * @example
  * new ScaleKeywords()
  */
-export const ScaleKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScaleKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'ScaleKeywords',
-) as new () => ScaleKeywords;
+export const ScaleKeywords = class ScaleKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => ScaleKeywords;
 
 /**
  * scale 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -39,7 +33,7 @@ class ScaleCssRuntime extends CssProperty {
    */
   constructor() {
     super('scale');
-    initializeKeywordDeclarations(this, 'scale', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'scale', noneKeywords);
   }
   /**
    * 原样生成 scale 声明，保留关键字补全并接受自定义 CSS 值。
@@ -150,17 +144,14 @@ export type ScaleCss = ScaleCssRuntime & KeywordDeclarations<ScaleKeywords>;
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scale
  */
-export const ScaleCss = /* @__PURE__ */ keywordConstructor(
-  ScaleCssRuntime,
-  'ScaleCss',
-) as new () => ScaleCss;
-import { keywords_430c1b906eb1 } from './keyword-sets.js';
+export const ScaleCss = ScaleCssRuntime as new () => ScaleCss;
+import { scrollBehaviorKeywords } from './keyword-sets.js';
 
 /**
  * scroll-behavior 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollBehaviorKeywords = KeywordValuesOf<
-  typeof keywords_430c1b906eb1,
+  typeof scrollBehaviorKeywords,
   Property.ScrollBehavior | CssString
 >;
 /**
@@ -168,14 +159,11 @@ export type ScrollBehaviorKeywords = KeywordValuesOf<
  * @example
  * new ScrollBehaviorKeywords()
  */
-export const ScrollBehaviorKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollBehaviorKeywords {
-    constructor() {
-      Object.assign(this, keywords_430c1b906eb1);
-    }
-  },
-  'ScrollBehaviorKeywords',
-) as new () => ScrollBehaviorKeywords;
+export const ScrollBehaviorKeywords = class ScrollBehaviorKeywords {
+  constructor() {
+    Object.assign(this, scrollBehaviorKeywords);
+  }
+} as new () => ScrollBehaviorKeywords;
 
 /**
  * scroll-behavior 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -188,7 +176,7 @@ class ScrollBehaviorCssRuntime extends CssProperty {
    */
   constructor() {
     super('scroll-behavior');
-    initializeKeywordDeclarations(this, 'scroll-behavior', keywords_430c1b906eb1);
+    initializeKeywordDeclarations(this, 'scroll-behavior', scrollBehaviorKeywords);
   }
   /**
    * 原样生成 scroll-behavior 声明，保留关键字补全并接受自定义 CSS 值。
@@ -220,17 +208,14 @@ export type ScrollBehaviorCss = ScrollBehaviorCssRuntime &
  * s.scrollBehavior.smooth
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-behavior
  */
-export const ScrollBehaviorCss = /* @__PURE__ */ keywordConstructor(
-  ScrollBehaviorCssRuntime,
-  'ScrollBehaviorCss',
-) as new () => ScrollBehaviorCss;
-import { keywords_cd3d72b8b8fc } from './keyword-sets.js';
+export const ScrollBehaviorCss = ScrollBehaviorCssRuntime as new () => ScrollBehaviorCss;
+import { scrollInitialTargetKeywords } from './keyword-sets.js';
 
 /**
  * scroll-initial-target 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollInitialTargetKeywords = KeywordValuesOf<
-  typeof keywords_cd3d72b8b8fc,
+  typeof scrollInitialTargetKeywords,
   Property.ScrollInitialTarget | CssString
 >;
 /**
@@ -238,14 +223,11 @@ export type ScrollInitialTargetKeywords = KeywordValuesOf<
  * @example
  * new ScrollInitialTargetKeywords()
  */
-export const ScrollInitialTargetKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollInitialTargetKeywords {
-    constructor() {
-      Object.assign(this, keywords_cd3d72b8b8fc);
-    }
-  },
-  'ScrollInitialTargetKeywords',
-) as new () => ScrollInitialTargetKeywords;
+export const ScrollInitialTargetKeywords = class ScrollInitialTargetKeywords {
+  constructor() {
+    Object.assign(this, scrollInitialTargetKeywords);
+  }
+} as new () => ScrollInitialTargetKeywords;
 
 /**
  * scroll-initial-target 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -258,7 +240,7 @@ class ScrollInitialTargetCssRuntime extends CssProperty {
    */
   constructor() {
     super('scroll-initial-target');
-    initializeKeywordDeclarations(this, 'scroll-initial-target', keywords_cd3d72b8b8fc);
+    initializeKeywordDeclarations(this, 'scroll-initial-target', scrollInitialTargetKeywords);
   }
   /**
    * 原样生成 scroll-initial-target 声明，保留关键字补全并接受自定义 CSS 值。
@@ -284,17 +266,15 @@ export type ScrollInitialTargetCss = ScrollInitialTargetCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-initial-target
  */
-export const ScrollInitialTargetCss = /* @__PURE__ */ keywordConstructor(
-  ScrollInitialTargetCssRuntime,
-  'ScrollInitialTargetCss',
-) as new () => ScrollInitialTargetCss;
-import { keywords_dffc425ba867 } from './keyword-sets.js';
+export const ScrollInitialTargetCss =
+  ScrollInitialTargetCssRuntime as new () => ScrollInitialTargetCss;
+import { globalKeywords } from './keyword-sets.js';
 
 /**
  * scroll-margin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMargin | CssString
 >;
 /**
@@ -302,14 +282,11 @@ export type ScrollMarginKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginKeywords()
  */
-export const ScrollMarginKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginKeywords',
-) as new () => ScrollMarginKeywords;
+export const ScrollMarginKeywords = class ScrollMarginKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginKeywords;
 
 /**
  * scroll-margin 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -322,7 +299,7 @@ class ScrollMarginCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin');
-    initializeKeywordDeclarations(this, 'scroll-margin', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin 声明，保留关键字补全并接受自定义 CSS 值。
@@ -2802,16 +2779,13 @@ export type ScrollMarginCss = ScrollMarginCssRuntime & KeywordDeclarations<Scrol
  * 设置元素滚动目标区域的四边外扩距离，不改变普通布局外边距。（scroll-margin）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
  */
-export const ScrollMarginCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginCssRuntime,
-  'ScrollMarginCss',
-) as new () => ScrollMarginCss;
+export const ScrollMarginCss = ScrollMarginCssRuntime as new () => ScrollMarginCss;
 
 /**
  * scroll-margin-block 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginBlockKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginBlock | CssString
 >;
 /**
@@ -2819,14 +2793,11 @@ export type ScrollMarginBlockKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginBlockKeywords()
  */
-export const ScrollMarginBlockKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginBlockKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginBlockKeywords',
-) as new () => ScrollMarginBlockKeywords;
+export const ScrollMarginBlockKeywords = class ScrollMarginBlockKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginBlockKeywords;
 
 /**
  * scroll-margin-block 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -2839,7 +2810,7 @@ class ScrollMarginBlockCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-block');
-    initializeKeywordDeclarations(this, 'scroll-margin-block', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-block', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-block 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4095,16 +4066,13 @@ export type ScrollMarginBlockCss = ScrollMarginBlockCssRuntime &
  * 设置滚动目标区域在逻辑块轴两侧的外扩距离。（scroll-margin-block）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block
  */
-export const ScrollMarginBlockCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginBlockCssRuntime,
-  'ScrollMarginBlockCss',
-) as new () => ScrollMarginBlockCss;
+export const ScrollMarginBlockCss = ScrollMarginBlockCssRuntime as new () => ScrollMarginBlockCss;
 
 /**
  * scroll-margin-block-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginBlockEndKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginBlockEnd | CssString
 >;
 /**
@@ -4112,14 +4080,11 @@ export type ScrollMarginBlockEndKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginBlockEndKeywords()
  */
-export const ScrollMarginBlockEndKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginBlockEndKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginBlockEndKeywords',
-) as new () => ScrollMarginBlockEndKeywords;
+export const ScrollMarginBlockEndKeywords = class ScrollMarginBlockEndKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginBlockEndKeywords;
 
 /**
  * scroll-margin-block-end 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4132,7 +4097,7 @@ class ScrollMarginBlockEndCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-block-end');
-    initializeKeywordDeclarations(this, 'scroll-margin-block-end', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-block-end', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-block-end 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4214,16 +4179,14 @@ export type ScrollMarginBlockEndCss = ScrollMarginBlockEndCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-end
  */
-export const ScrollMarginBlockEndCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginBlockEndCssRuntime,
-  'ScrollMarginBlockEndCss',
-) as new () => ScrollMarginBlockEndCss;
+export const ScrollMarginBlockEndCss =
+  ScrollMarginBlockEndCssRuntime as new () => ScrollMarginBlockEndCss;
 
 /**
  * scroll-margin-block-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginBlockStartKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginBlockStart | CssString
 >;
 /**
@@ -4231,14 +4194,11 @@ export type ScrollMarginBlockStartKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginBlockStartKeywords()
  */
-export const ScrollMarginBlockStartKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginBlockStartKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginBlockStartKeywords',
-) as new () => ScrollMarginBlockStartKeywords;
+export const ScrollMarginBlockStartKeywords = class ScrollMarginBlockStartKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginBlockStartKeywords;
 
 /**
  * scroll-margin-block-start 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4251,7 +4211,7 @@ class ScrollMarginBlockStartCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-block-start');
-    initializeKeywordDeclarations(this, 'scroll-margin-block-start', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-block-start', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-block-start 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4333,16 +4293,14 @@ export type ScrollMarginBlockStartCss = ScrollMarginBlockStartCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-block-start
  */
-export const ScrollMarginBlockStartCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginBlockStartCssRuntime,
-  'ScrollMarginBlockStartCss',
-) as new () => ScrollMarginBlockStartCss;
+export const ScrollMarginBlockStartCss =
+  ScrollMarginBlockStartCssRuntime as new () => ScrollMarginBlockStartCss;
 
 /**
  * scroll-margin-bottom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginBottomKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginBottom | CssString
 >;
 /**
@@ -4350,14 +4308,11 @@ export type ScrollMarginBottomKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginBottomKeywords()
  */
-export const ScrollMarginBottomKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginBottomKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginBottomKeywords',
-) as new () => ScrollMarginBottomKeywords;
+export const ScrollMarginBottomKeywords = class ScrollMarginBottomKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginBottomKeywords;
 
 /**
  * scroll-margin-bottom 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4370,7 +4325,7 @@ class ScrollMarginBottomCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-bottom');
-    initializeKeywordDeclarations(this, 'scroll-margin-bottom', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-bottom', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-bottom 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4452,16 +4407,14 @@ export type ScrollMarginBottomCss = ScrollMarginBottomCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
  */
-export const ScrollMarginBottomCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginBottomCssRuntime,
-  'ScrollMarginBottomCss',
-) as new () => ScrollMarginBottomCss;
+export const ScrollMarginBottomCss =
+  ScrollMarginBottomCssRuntime as new () => ScrollMarginBottomCss;
 
 /**
  * scroll-margin-inline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginInlineKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginInline | CssString
 >;
 /**
@@ -4469,14 +4422,11 @@ export type ScrollMarginInlineKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginInlineKeywords()
  */
-export const ScrollMarginInlineKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginInlineKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginInlineKeywords',
-) as new () => ScrollMarginInlineKeywords;
+export const ScrollMarginInlineKeywords = class ScrollMarginInlineKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginInlineKeywords;
 
 /**
  * scroll-margin-inline 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4489,7 +4439,7 @@ class ScrollMarginInlineCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-inline');
-    initializeKeywordDeclarations(this, 'scroll-margin-inline', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-inline', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-inline 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5745,16 +5695,14 @@ export type ScrollMarginInlineCss = ScrollMarginInlineCssRuntime &
  * 设置滚动目标区域在逻辑行内轴两侧的外扩距离。（scroll-margin-inline）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline
  */
-export const ScrollMarginInlineCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginInlineCssRuntime,
-  'ScrollMarginInlineCss',
-) as new () => ScrollMarginInlineCss;
+export const ScrollMarginInlineCss =
+  ScrollMarginInlineCssRuntime as new () => ScrollMarginInlineCss;
 
 /**
  * scroll-margin-inline-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginInlineEndKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginInlineEnd | CssString
 >;
 /**
@@ -5762,14 +5710,11 @@ export type ScrollMarginInlineEndKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginInlineEndKeywords()
  */
-export const ScrollMarginInlineEndKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginInlineEndKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginInlineEndKeywords',
-) as new () => ScrollMarginInlineEndKeywords;
+export const ScrollMarginInlineEndKeywords = class ScrollMarginInlineEndKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginInlineEndKeywords;
 
 /**
  * scroll-margin-inline-end 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -5782,7 +5727,7 @@ class ScrollMarginInlineEndCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-inline-end');
-    initializeKeywordDeclarations(this, 'scroll-margin-inline-end', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-inline-end', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-inline-end 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5864,16 +5809,14 @@ export type ScrollMarginInlineEndCss = ScrollMarginInlineEndCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-end
  */
-export const ScrollMarginInlineEndCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginInlineEndCssRuntime,
-  'ScrollMarginInlineEndCss',
-) as new () => ScrollMarginInlineEndCss;
+export const ScrollMarginInlineEndCss =
+  ScrollMarginInlineEndCssRuntime as new () => ScrollMarginInlineEndCss;
 
 /**
  * scroll-margin-inline-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginInlineStartKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginInlineStart | CssString
 >;
 /**
@@ -5881,14 +5824,11 @@ export type ScrollMarginInlineStartKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginInlineStartKeywords()
  */
-export const ScrollMarginInlineStartKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginInlineStartKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginInlineStartKeywords',
-) as new () => ScrollMarginInlineStartKeywords;
+export const ScrollMarginInlineStartKeywords = class ScrollMarginInlineStartKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginInlineStartKeywords;
 
 /**
  * scroll-margin-inline-start 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -5901,7 +5841,7 @@ class ScrollMarginInlineStartCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-inline-start');
-    initializeKeywordDeclarations(this, 'scroll-margin-inline-start', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-inline-start', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-inline-start 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5983,16 +5923,14 @@ export type ScrollMarginInlineStartCss = ScrollMarginInlineStartCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-inline-start
  */
-export const ScrollMarginInlineStartCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginInlineStartCssRuntime,
-  'ScrollMarginInlineStartCss',
-) as new () => ScrollMarginInlineStartCss;
+export const ScrollMarginInlineStartCss =
+  ScrollMarginInlineStartCssRuntime as new () => ScrollMarginInlineStartCss;
 
 /**
  * scroll-margin-left 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginLeftKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginLeft | CssString
 >;
 /**
@@ -6000,14 +5938,11 @@ export type ScrollMarginLeftKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginLeftKeywords()
  */
-export const ScrollMarginLeftKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginLeftKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginLeftKeywords',
-) as new () => ScrollMarginLeftKeywords;
+export const ScrollMarginLeftKeywords = class ScrollMarginLeftKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginLeftKeywords;
 
 /**
  * scroll-margin-left 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -6020,7 +5955,7 @@ class ScrollMarginLeftCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-left');
-    initializeKeywordDeclarations(this, 'scroll-margin-left', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-left', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-left 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6102,16 +6037,13 @@ export type ScrollMarginLeftCss = ScrollMarginLeftCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
  */
-export const ScrollMarginLeftCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginLeftCssRuntime,
-  'ScrollMarginLeftCss',
-) as new () => ScrollMarginLeftCss;
+export const ScrollMarginLeftCss = ScrollMarginLeftCssRuntime as new () => ScrollMarginLeftCss;
 
 /**
  * scroll-margin-right 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginRightKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginRight | CssString
 >;
 /**
@@ -6119,14 +6051,11 @@ export type ScrollMarginRightKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginRightKeywords()
  */
-export const ScrollMarginRightKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginRightKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginRightKeywords',
-) as new () => ScrollMarginRightKeywords;
+export const ScrollMarginRightKeywords = class ScrollMarginRightKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginRightKeywords;
 
 /**
  * scroll-margin-right 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -6139,7 +6068,7 @@ class ScrollMarginRightCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-right');
-    initializeKeywordDeclarations(this, 'scroll-margin-right', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-right', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-right 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6221,16 +6150,13 @@ export type ScrollMarginRightCss = ScrollMarginRightCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
  */
-export const ScrollMarginRightCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginRightCssRuntime,
-  'ScrollMarginRightCss',
-) as new () => ScrollMarginRightCss;
+export const ScrollMarginRightCss = ScrollMarginRightCssRuntime as new () => ScrollMarginRightCss;
 
 /**
  * scroll-margin-top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollMarginTopKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginTop | CssString
 >;
 /**
@@ -6238,14 +6164,11 @@ export type ScrollMarginTopKeywords = KeywordValuesOf<
  * @example
  * new ScrollMarginTopKeywords()
  */
-export const ScrollMarginTopKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollMarginTopKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollMarginTopKeywords',
-) as new () => ScrollMarginTopKeywords;
+export const ScrollMarginTopKeywords = class ScrollMarginTopKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollMarginTopKeywords;
 
 /**
  * scroll-margin-top 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -6258,7 +6181,7 @@ class ScrollMarginTopCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-margin-top');
-    initializeKeywordDeclarations(this, 'scroll-margin-top', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-margin-top', globalKeywords);
   }
   /**
    * 原样生成 scroll-margin-top 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6340,17 +6263,14 @@ export type ScrollMarginTopCss = ScrollMarginTopCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
  */
-export const ScrollMarginTopCss = /* @__PURE__ */ keywordConstructor(
-  ScrollMarginTopCssRuntime,
-  'ScrollMarginTopCss',
-) as new () => ScrollMarginTopCss;
-import { keywords_10442af7f819 } from './keyword-sets.js';
+export const ScrollMarginTopCss = ScrollMarginTopCssRuntime as new () => ScrollMarginTopCss;
+import { autoKeywords } from './keyword-sets.js';
 
 /**
  * scroll-padding 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPadding | CssString
 >;
 /**
@@ -6358,14 +6278,11 @@ export type ScrollPaddingKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingKeywords()
  */
-export const ScrollPaddingKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingKeywords',
-) as new () => ScrollPaddingKeywords;
+export const ScrollPaddingKeywords = class ScrollPaddingKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingKeywords;
 
 /**
  * scroll-padding 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -6378,7 +6295,7 @@ class ScrollPaddingCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding');
-    initializeKeywordDeclarations(this, 'scroll-padding', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding 声明，保留关键字补全并接受自定义 CSS 值。
@@ -8907,16 +8824,13 @@ export type ScrollPaddingCss = ScrollPaddingCssRuntime & KeywordDeclarations<Scr
  * 设置滚动容器最佳可视区域的四边内缩距离。（scroll-padding）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding
  */
-export const ScrollPaddingCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingCssRuntime,
-  'ScrollPaddingCss',
-) as new () => ScrollPaddingCss;
+export const ScrollPaddingCss = ScrollPaddingCssRuntime as new () => ScrollPaddingCss;
 
 /**
  * scroll-padding-block 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingBlockKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingBlock | CssString
 >;
 /**
@@ -8924,14 +8838,11 @@ export type ScrollPaddingBlockKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingBlockKeywords()
  */
-export const ScrollPaddingBlockKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingBlockKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingBlockKeywords',
-) as new () => ScrollPaddingBlockKeywords;
+export const ScrollPaddingBlockKeywords = class ScrollPaddingBlockKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingBlockKeywords;
 
 /**
  * scroll-padding-block 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -8944,7 +8855,7 @@ class ScrollPaddingBlockCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-block');
-    initializeKeywordDeclarations(this, 'scroll-padding-block', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-block', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-block 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10224,16 +10135,14 @@ export type ScrollPaddingBlockCss = ScrollPaddingBlockCssRuntime &
  * 设置滚动容器最佳可视区域在逻辑块轴两侧的内缩距离。（scroll-padding-block）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block
  */
-export const ScrollPaddingBlockCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingBlockCssRuntime,
-  'ScrollPaddingBlockCss',
-) as new () => ScrollPaddingBlockCss;
+export const ScrollPaddingBlockCss =
+  ScrollPaddingBlockCssRuntime as new () => ScrollPaddingBlockCss;
 
 /**
  * scroll-padding-block-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingBlockEndKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingBlockEnd | CssString
 >;
 /**
@@ -10241,14 +10150,11 @@ export type ScrollPaddingBlockEndKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingBlockEndKeywords()
  */
-export const ScrollPaddingBlockEndKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingBlockEndKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingBlockEndKeywords',
-) as new () => ScrollPaddingBlockEndKeywords;
+export const ScrollPaddingBlockEndKeywords = class ScrollPaddingBlockEndKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingBlockEndKeywords;
 
 /**
  * scroll-padding-block-end 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10261,7 +10167,7 @@ class ScrollPaddingBlockEndCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-block-end');
-    initializeKeywordDeclarations(this, 'scroll-padding-block-end', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-block-end', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-block-end 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10355,16 +10261,14 @@ export type ScrollPaddingBlockEndCss = ScrollPaddingBlockEndCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-end
  */
-export const ScrollPaddingBlockEndCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingBlockEndCssRuntime,
-  'ScrollPaddingBlockEndCss',
-) as new () => ScrollPaddingBlockEndCss;
+export const ScrollPaddingBlockEndCss =
+  ScrollPaddingBlockEndCssRuntime as new () => ScrollPaddingBlockEndCss;
 
 /**
  * scroll-padding-block-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingBlockStartKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingBlockStart | CssString
 >;
 /**
@@ -10372,14 +10276,11 @@ export type ScrollPaddingBlockStartKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingBlockStartKeywords()
  */
-export const ScrollPaddingBlockStartKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingBlockStartKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingBlockStartKeywords',
-) as new () => ScrollPaddingBlockStartKeywords;
+export const ScrollPaddingBlockStartKeywords = class ScrollPaddingBlockStartKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingBlockStartKeywords;
 
 /**
  * scroll-padding-block-start 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10392,7 +10293,7 @@ class ScrollPaddingBlockStartCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-block-start');
-    initializeKeywordDeclarations(this, 'scroll-padding-block-start', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-block-start', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-block-start 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10486,16 +10387,14 @@ export type ScrollPaddingBlockStartCss = ScrollPaddingBlockStartCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-block-start
  */
-export const ScrollPaddingBlockStartCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingBlockStartCssRuntime,
-  'ScrollPaddingBlockStartCss',
-) as new () => ScrollPaddingBlockStartCss;
+export const ScrollPaddingBlockStartCss =
+  ScrollPaddingBlockStartCssRuntime as new () => ScrollPaddingBlockStartCss;
 
 /**
  * scroll-padding-bottom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingBottomKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingBottom | CssString
 >;
 /**
@@ -10503,14 +10402,11 @@ export type ScrollPaddingBottomKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingBottomKeywords()
  */
-export const ScrollPaddingBottomKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingBottomKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingBottomKeywords',
-) as new () => ScrollPaddingBottomKeywords;
+export const ScrollPaddingBottomKeywords = class ScrollPaddingBottomKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingBottomKeywords;
 
 /**
  * scroll-padding-bottom 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10523,7 +10419,7 @@ class ScrollPaddingBottomCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-bottom');
-    initializeKeywordDeclarations(this, 'scroll-padding-bottom', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-bottom', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-bottom 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10617,16 +10513,14 @@ export type ScrollPaddingBottomCss = ScrollPaddingBottomCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-bottom
  */
-export const ScrollPaddingBottomCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingBottomCssRuntime,
-  'ScrollPaddingBottomCss',
-) as new () => ScrollPaddingBottomCss;
+export const ScrollPaddingBottomCss =
+  ScrollPaddingBottomCssRuntime as new () => ScrollPaddingBottomCss;
 
 /**
  * scroll-padding-inline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingInlineKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingInline | CssString
 >;
 /**
@@ -10634,14 +10528,11 @@ export type ScrollPaddingInlineKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingInlineKeywords()
  */
-export const ScrollPaddingInlineKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingInlineKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingInlineKeywords',
-) as new () => ScrollPaddingInlineKeywords;
+export const ScrollPaddingInlineKeywords = class ScrollPaddingInlineKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingInlineKeywords;
 
 /**
  * scroll-padding-inline 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10654,7 +10545,7 @@ class ScrollPaddingInlineCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-inline');
-    initializeKeywordDeclarations(this, 'scroll-padding-inline', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-inline', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-inline 声明，保留关键字补全并接受自定义 CSS 值。
@@ -11934,16 +11825,14 @@ export type ScrollPaddingInlineCss = ScrollPaddingInlineCssRuntime &
  * 设置滚动容器最佳可视区域在逻辑行内轴两侧的内缩距离。（scroll-padding-inline）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline
  */
-export const ScrollPaddingInlineCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingInlineCssRuntime,
-  'ScrollPaddingInlineCss',
-) as new () => ScrollPaddingInlineCss;
+export const ScrollPaddingInlineCss =
+  ScrollPaddingInlineCssRuntime as new () => ScrollPaddingInlineCss;
 
 /**
  * scroll-padding-inline-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingInlineEndKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingInlineEnd | CssString
 >;
 /**
@@ -11951,14 +11840,11 @@ export type ScrollPaddingInlineEndKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingInlineEndKeywords()
  */
-export const ScrollPaddingInlineEndKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingInlineEndKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingInlineEndKeywords',
-) as new () => ScrollPaddingInlineEndKeywords;
+export const ScrollPaddingInlineEndKeywords = class ScrollPaddingInlineEndKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingInlineEndKeywords;
 
 /**
  * scroll-padding-inline-end 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -11971,7 +11857,7 @@ class ScrollPaddingInlineEndCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-inline-end');
-    initializeKeywordDeclarations(this, 'scroll-padding-inline-end', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-inline-end', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-inline-end 声明，保留关键字补全并接受自定义 CSS 值。
@@ -12065,16 +11951,14 @@ export type ScrollPaddingInlineEndCss = ScrollPaddingInlineEndCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-end
  */
-export const ScrollPaddingInlineEndCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingInlineEndCssRuntime,
-  'ScrollPaddingInlineEndCss',
-) as new () => ScrollPaddingInlineEndCss;
+export const ScrollPaddingInlineEndCss =
+  ScrollPaddingInlineEndCssRuntime as new () => ScrollPaddingInlineEndCss;
 
 /**
  * scroll-padding-inline-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingInlineStartKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingInlineStart | CssString
 >;
 /**
@@ -12082,14 +11966,11 @@ export type ScrollPaddingInlineStartKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingInlineStartKeywords()
  */
-export const ScrollPaddingInlineStartKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingInlineStartKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingInlineStartKeywords',
-) as new () => ScrollPaddingInlineStartKeywords;
+export const ScrollPaddingInlineStartKeywords = class ScrollPaddingInlineStartKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingInlineStartKeywords;
 
 /**
  * scroll-padding-inline-start 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -12102,7 +11983,7 @@ class ScrollPaddingInlineStartCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-inline-start');
-    initializeKeywordDeclarations(this, 'scroll-padding-inline-start', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-inline-start', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-inline-start 声明，保留关键字补全并接受自定义 CSS 值。
@@ -12196,16 +12077,14 @@ export type ScrollPaddingInlineStartCss = ScrollPaddingInlineStartCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-inline-start
  */
-export const ScrollPaddingInlineStartCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingInlineStartCssRuntime,
-  'ScrollPaddingInlineStartCss',
-) as new () => ScrollPaddingInlineStartCss;
+export const ScrollPaddingInlineStartCss =
+  ScrollPaddingInlineStartCssRuntime as new () => ScrollPaddingInlineStartCss;
 
 /**
  * scroll-padding-left 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingLeftKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingLeft | CssString
 >;
 /**
@@ -12213,14 +12092,11 @@ export type ScrollPaddingLeftKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingLeftKeywords()
  */
-export const ScrollPaddingLeftKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingLeftKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingLeftKeywords',
-) as new () => ScrollPaddingLeftKeywords;
+export const ScrollPaddingLeftKeywords = class ScrollPaddingLeftKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingLeftKeywords;
 
 /**
  * scroll-padding-left 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -12233,7 +12109,7 @@ class ScrollPaddingLeftCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-left');
-    initializeKeywordDeclarations(this, 'scroll-padding-left', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-left', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-left 声明，保留关键字补全并接受自定义 CSS 值。
@@ -12327,16 +12203,13 @@ export type ScrollPaddingLeftCss = ScrollPaddingLeftCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-left
  */
-export const ScrollPaddingLeftCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingLeftCssRuntime,
-  'ScrollPaddingLeftCss',
-) as new () => ScrollPaddingLeftCss;
+export const ScrollPaddingLeftCss = ScrollPaddingLeftCssRuntime as new () => ScrollPaddingLeftCss;
 
 /**
  * scroll-padding-right 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingRightKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingRight | CssString
 >;
 /**
@@ -12344,14 +12217,11 @@ export type ScrollPaddingRightKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingRightKeywords()
  */
-export const ScrollPaddingRightKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingRightKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingRightKeywords',
-) as new () => ScrollPaddingRightKeywords;
+export const ScrollPaddingRightKeywords = class ScrollPaddingRightKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingRightKeywords;
 
 /**
  * scroll-padding-right 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -12364,7 +12234,7 @@ class ScrollPaddingRightCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-right');
-    initializeKeywordDeclarations(this, 'scroll-padding-right', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-right', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-right 声明，保留关键字补全并接受自定义 CSS 值。
@@ -12458,16 +12328,14 @@ export type ScrollPaddingRightCss = ScrollPaddingRightCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-right
  */
-export const ScrollPaddingRightCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingRightCssRuntime,
-  'ScrollPaddingRightCss',
-) as new () => ScrollPaddingRightCss;
+export const ScrollPaddingRightCss =
+  ScrollPaddingRightCssRuntime as new () => ScrollPaddingRightCss;
 
 /**
  * scroll-padding-top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollPaddingTopKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollPaddingTop | CssString
 >;
 /**
@@ -12475,14 +12343,11 @@ export type ScrollPaddingTopKeywords = KeywordValuesOf<
  * @example
  * new ScrollPaddingTopKeywords()
  */
-export const ScrollPaddingTopKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollPaddingTopKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollPaddingTopKeywords',
-) as new () => ScrollPaddingTopKeywords;
+export const ScrollPaddingTopKeywords = class ScrollPaddingTopKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollPaddingTopKeywords;
 
 /**
  * scroll-padding-top 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -12495,7 +12360,7 @@ class ScrollPaddingTopCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-padding-top');
-    initializeKeywordDeclarations(this, 'scroll-padding-top', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scroll-padding-top', autoKeywords);
   }
   /**
    * 原样生成 scroll-padding-top 声明，保留关键字补全并接受自定义 CSS 值。
@@ -12589,17 +12454,14 @@ export type ScrollPaddingTopCss = ScrollPaddingTopCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
  */
-export const ScrollPaddingTopCss = /* @__PURE__ */ keywordConstructor(
-  ScrollPaddingTopCssRuntime,
-  'ScrollPaddingTopCss',
-) as new () => ScrollPaddingTopCss;
-import { keywords_3f1ff81ce9b1 } from './keyword-sets.js';
+export const ScrollPaddingTopCss = ScrollPaddingTopCssRuntime as new () => ScrollPaddingTopCss;
+import { scrollSnapAlignKeywords } from './keyword-sets.js';
 
 /**
  * scroll-snap-align 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollSnapAlignKeywords = KeywordValuesOf<
-  typeof keywords_3f1ff81ce9b1,
+  typeof scrollSnapAlignKeywords,
   Property.ScrollSnapAlign | CssString
 >;
 /**
@@ -12607,14 +12469,11 @@ export type ScrollSnapAlignKeywords = KeywordValuesOf<
  * @example
  * new ScrollSnapAlignKeywords()
  */
-export const ScrollSnapAlignKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollSnapAlignKeywords {
-    constructor() {
-      Object.assign(this, keywords_3f1ff81ce9b1);
-    }
-  },
-  'ScrollSnapAlignKeywords',
-) as new () => ScrollSnapAlignKeywords;
+export const ScrollSnapAlignKeywords = class ScrollSnapAlignKeywords {
+  constructor() {
+    Object.assign(this, scrollSnapAlignKeywords);
+  }
+} as new () => ScrollSnapAlignKeywords;
 
 /**
  * scroll-snap-align 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -12627,7 +12486,7 @@ class ScrollSnapAlignCssRuntime extends CssProperty {
    */
   constructor() {
     super('scroll-snap-align');
-    initializeKeywordDeclarations(this, 'scroll-snap-align', keywords_3f1ff81ce9b1);
+    initializeKeywordDeclarations(this, 'scroll-snap-align', scrollSnapAlignKeywords);
   }
   /**
    * 原样生成 scroll-snap-align 声明，保留关键字补全并接受自定义 CSS 值。
@@ -12653,16 +12512,13 @@ export type ScrollSnapAlignCss = ScrollSnapAlignCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-align
  */
-export const ScrollSnapAlignCss = /* @__PURE__ */ keywordConstructor(
-  ScrollSnapAlignCssRuntime,
-  'ScrollSnapAlignCss',
-) as new () => ScrollSnapAlignCss;
+export const ScrollSnapAlignCss = ScrollSnapAlignCssRuntime as new () => ScrollSnapAlignCss;
 
 /**
  * scroll-snap-margin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollSnapMarginKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMargin | CssString
 >;
 /**
@@ -12670,14 +12526,11 @@ export type ScrollSnapMarginKeywords = KeywordValuesOf<
  * @example
  * new ScrollSnapMarginKeywords()
  */
-export const ScrollSnapMarginKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollSnapMarginKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollSnapMarginKeywords',
-) as new () => ScrollSnapMarginKeywords;
+export const ScrollSnapMarginKeywords = class ScrollSnapMarginKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollSnapMarginKeywords;
 
 /**
  * scroll-snap-margin 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -12690,7 +12543,7 @@ class ScrollSnapMarginCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-snap-margin');
-    initializeKeywordDeclarations(this, 'scroll-snap-margin', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-snap-margin', globalKeywords);
   }
   /**
    * 原样生成 scroll-snap-margin 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15171,16 +15024,13 @@ export type ScrollSnapMarginCss = ScrollSnapMarginCssRuntime &
  * 设置滚动吸附区域外扩的旧名称；新代码使用 scroll-margin。（scroll-snap-margin）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin
  */
-export const ScrollSnapMarginCss = /* @__PURE__ */ keywordConstructor(
-  ScrollSnapMarginCssRuntime,
-  'ScrollSnapMarginCss',
-) as new () => ScrollSnapMarginCss;
+export const ScrollSnapMarginCss = ScrollSnapMarginCssRuntime as new () => ScrollSnapMarginCss;
 
 /**
  * scroll-snap-margin-bottom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollSnapMarginBottomKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginBottom | CssString
 >;
 /**
@@ -15188,14 +15038,11 @@ export type ScrollSnapMarginBottomKeywords = KeywordValuesOf<
  * @example
  * new ScrollSnapMarginBottomKeywords()
  */
-export const ScrollSnapMarginBottomKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollSnapMarginBottomKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollSnapMarginBottomKeywords',
-) as new () => ScrollSnapMarginBottomKeywords;
+export const ScrollSnapMarginBottomKeywords = class ScrollSnapMarginBottomKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollSnapMarginBottomKeywords;
 
 /**
  * scroll-snap-margin-bottom 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -15208,7 +15055,7 @@ class ScrollSnapMarginBottomCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-snap-margin-bottom');
-    initializeKeywordDeclarations(this, 'scroll-snap-margin-bottom', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-snap-margin-bottom', globalKeywords);
   }
   /**
    * 原样生成 scroll-snap-margin-bottom 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15290,16 +15137,14 @@ export type ScrollSnapMarginBottomCss = ScrollSnapMarginBottomCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-bottom
  */
-export const ScrollSnapMarginBottomCss = /* @__PURE__ */ keywordConstructor(
-  ScrollSnapMarginBottomCssRuntime,
-  'ScrollSnapMarginBottomCss',
-) as new () => ScrollSnapMarginBottomCss;
+export const ScrollSnapMarginBottomCss =
+  ScrollSnapMarginBottomCssRuntime as new () => ScrollSnapMarginBottomCss;
 
 /**
  * scroll-snap-margin-left 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollSnapMarginLeftKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginLeft | CssString
 >;
 /**
@@ -15307,14 +15152,11 @@ export type ScrollSnapMarginLeftKeywords = KeywordValuesOf<
  * @example
  * new ScrollSnapMarginLeftKeywords()
  */
-export const ScrollSnapMarginLeftKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollSnapMarginLeftKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollSnapMarginLeftKeywords',
-) as new () => ScrollSnapMarginLeftKeywords;
+export const ScrollSnapMarginLeftKeywords = class ScrollSnapMarginLeftKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollSnapMarginLeftKeywords;
 
 /**
  * scroll-snap-margin-left 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -15327,7 +15169,7 @@ class ScrollSnapMarginLeftCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-snap-margin-left');
-    initializeKeywordDeclarations(this, 'scroll-snap-margin-left', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-snap-margin-left', globalKeywords);
   }
   /**
    * 原样生成 scroll-snap-margin-left 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15409,16 +15251,14 @@ export type ScrollSnapMarginLeftCss = ScrollSnapMarginLeftCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-left
  */
-export const ScrollSnapMarginLeftCss = /* @__PURE__ */ keywordConstructor(
-  ScrollSnapMarginLeftCssRuntime,
-  'ScrollSnapMarginLeftCss',
-) as new () => ScrollSnapMarginLeftCss;
+export const ScrollSnapMarginLeftCss =
+  ScrollSnapMarginLeftCssRuntime as new () => ScrollSnapMarginLeftCss;
 
 /**
  * scroll-snap-margin-right 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollSnapMarginRightKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginRight | CssString
 >;
 /**
@@ -15426,14 +15266,11 @@ export type ScrollSnapMarginRightKeywords = KeywordValuesOf<
  * @example
  * new ScrollSnapMarginRightKeywords()
  */
-export const ScrollSnapMarginRightKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollSnapMarginRightKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollSnapMarginRightKeywords',
-) as new () => ScrollSnapMarginRightKeywords;
+export const ScrollSnapMarginRightKeywords = class ScrollSnapMarginRightKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollSnapMarginRightKeywords;
 
 /**
  * scroll-snap-margin-right 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -15446,7 +15283,7 @@ class ScrollSnapMarginRightCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-snap-margin-right');
-    initializeKeywordDeclarations(this, 'scroll-snap-margin-right', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-snap-margin-right', globalKeywords);
   }
   /**
    * 原样生成 scroll-snap-margin-right 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15528,16 +15365,14 @@ export type ScrollSnapMarginRightCss = ScrollSnapMarginRightCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-right
  */
-export const ScrollSnapMarginRightCss = /* @__PURE__ */ keywordConstructor(
-  ScrollSnapMarginRightCssRuntime,
-  'ScrollSnapMarginRightCss',
-) as new () => ScrollSnapMarginRightCss;
+export const ScrollSnapMarginRightCss =
+  ScrollSnapMarginRightCssRuntime as new () => ScrollSnapMarginRightCss;
 
 /**
  * scroll-snap-margin-top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollSnapMarginTopKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ScrollMarginTop | CssString
 >;
 /**
@@ -15545,14 +15380,11 @@ export type ScrollSnapMarginTopKeywords = KeywordValuesOf<
  * @example
  * new ScrollSnapMarginTopKeywords()
  */
-export const ScrollSnapMarginTopKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollSnapMarginTopKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ScrollSnapMarginTopKeywords',
-) as new () => ScrollSnapMarginTopKeywords;
+export const ScrollSnapMarginTopKeywords = class ScrollSnapMarginTopKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ScrollSnapMarginTopKeywords;
 
 /**
  * scroll-snap-margin-top 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -15565,7 +15397,7 @@ class ScrollSnapMarginTopCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('scroll-snap-margin-top');
-    initializeKeywordDeclarations(this, 'scroll-snap-margin-top', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'scroll-snap-margin-top', globalKeywords);
   }
   /**
    * 原样生成 scroll-snap-margin-top 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15647,17 +15479,15 @@ export type ScrollSnapMarginTopCss = ScrollSnapMarginTopCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
  */
-export const ScrollSnapMarginTopCss = /* @__PURE__ */ keywordConstructor(
-  ScrollSnapMarginTopCssRuntime,
-  'ScrollSnapMarginTopCss',
-) as new () => ScrollSnapMarginTopCss;
-import { keywords_57c82465c44d } from './keyword-sets.js';
+export const ScrollSnapMarginTopCss =
+  ScrollSnapMarginTopCssRuntime as new () => ScrollSnapMarginTopCss;
+import { scrollSnapStopKeywords } from './keyword-sets.js';
 
 /**
  * scroll-snap-stop 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollSnapStopKeywords = KeywordValuesOf<
-  typeof keywords_57c82465c44d,
+  typeof scrollSnapStopKeywords,
   Property.ScrollSnapStop | CssString
 >;
 /**
@@ -15665,14 +15495,11 @@ export type ScrollSnapStopKeywords = KeywordValuesOf<
  * @example
  * new ScrollSnapStopKeywords()
  */
-export const ScrollSnapStopKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollSnapStopKeywords {
-    constructor() {
-      Object.assign(this, keywords_57c82465c44d);
-    }
-  },
-  'ScrollSnapStopKeywords',
-) as new () => ScrollSnapStopKeywords;
+export const ScrollSnapStopKeywords = class ScrollSnapStopKeywords {
+  constructor() {
+    Object.assign(this, scrollSnapStopKeywords);
+  }
+} as new () => ScrollSnapStopKeywords;
 
 /**
  * scroll-snap-stop 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -15685,7 +15512,7 @@ class ScrollSnapStopCssRuntime extends CssProperty {
    */
   constructor() {
     super('scroll-snap-stop');
-    initializeKeywordDeclarations(this, 'scroll-snap-stop', keywords_57c82465c44d);
+    initializeKeywordDeclarations(this, 'scroll-snap-stop', scrollSnapStopKeywords);
   }
   /**
    * 原样生成 scroll-snap-stop 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15711,17 +15538,14 @@ export type ScrollSnapStopCss = ScrollSnapStopCssRuntime &
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-stop
  */
-export const ScrollSnapStopCss = /* @__PURE__ */ keywordConstructor(
-  ScrollSnapStopCssRuntime,
-  'ScrollSnapStopCss',
-) as new () => ScrollSnapStopCss;
-import { keywords_83770613aa0b } from './keyword-sets.js';
+export const ScrollSnapStopCss = ScrollSnapStopCssRuntime as new () => ScrollSnapStopCss;
+import { scrollSnapTypeKeywords } from './keyword-sets.js';
 
 /**
  * scroll-snap-type 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollSnapTypeKeywords = KeywordValuesOf<
-  typeof keywords_83770613aa0b,
+  typeof scrollSnapTypeKeywords,
   Property.ScrollSnapType | CssString
 >;
 /**
@@ -15729,14 +15553,11 @@ export type ScrollSnapTypeKeywords = KeywordValuesOf<
  * @example
  * new ScrollSnapTypeKeywords()
  */
-export const ScrollSnapTypeKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollSnapTypeKeywords {
-    constructor() {
-      Object.assign(this, keywords_83770613aa0b);
-    }
-  },
-  'ScrollSnapTypeKeywords',
-) as new () => ScrollSnapTypeKeywords;
+export const ScrollSnapTypeKeywords = class ScrollSnapTypeKeywords {
+  constructor() {
+    Object.assign(this, scrollSnapTypeKeywords);
+  }
+} as new () => ScrollSnapTypeKeywords;
 
 /**
  * scroll-snap-type 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -15749,7 +15570,7 @@ class ScrollSnapTypeCssRuntime extends CssProperty {
    */
   constructor() {
     super('scroll-snap-type');
-    initializeKeywordDeclarations(this, 'scroll-snap-type', keywords_83770613aa0b);
+    initializeKeywordDeclarations(this, 'scroll-snap-type', scrollSnapTypeKeywords);
   }
   /**
    * 原样生成 scroll-snap-type 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15779,16 +15600,13 @@ export type ScrollSnapTypeCss = ScrollSnapTypeCssRuntime &
  * s.scrollSnapType.raw('x mandatory') // scroll-snap-type:x mandatory;
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-snap-type
  */
-export const ScrollSnapTypeCss = /* @__PURE__ */ keywordConstructor(
-  ScrollSnapTypeCssRuntime,
-  'ScrollSnapTypeCss',
-) as new () => ScrollSnapTypeCss;
+export const ScrollSnapTypeCss = ScrollSnapTypeCssRuntime as new () => ScrollSnapTypeCss;
 
 /**
  * scroll-timeline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollTimelineKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.ScrollTimeline | CssString
 >;
 /**
@@ -15796,14 +15614,11 @@ export type ScrollTimelineKeywords = KeywordValuesOf<
  * @example
  * new ScrollTimelineKeywords()
  */
-export const ScrollTimelineKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollTimelineKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'ScrollTimelineKeywords',
-) as new () => ScrollTimelineKeywords;
+export const ScrollTimelineKeywords = class ScrollTimelineKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => ScrollTimelineKeywords;
 
 /**
  * scroll-timeline 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -15816,7 +15631,7 @@ class ScrollTimelineCssRuntime extends CssProperty {
    */
   constructor() {
     super('scroll-timeline');
-    initializeKeywordDeclarations(this, 'scroll-timeline', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'scroll-timeline', noneKeywords);
   }
   /**
    * 原样生成 scroll-timeline 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15840,17 +15655,14 @@ export type ScrollTimelineCss = ScrollTimelineCssRuntime &
  * 同时声明滚动进度时间线的名称和轴。（scroll-timeline）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline
  */
-export const ScrollTimelineCss = /* @__PURE__ */ keywordConstructor(
-  ScrollTimelineCssRuntime,
-  'ScrollTimelineCss',
-) as new () => ScrollTimelineCss;
-import { keywords_4f160a9cf0d9 } from './keyword-sets.js';
+export const ScrollTimelineCss = ScrollTimelineCssRuntime as new () => ScrollTimelineCss;
+import { scrollTimelineAxisKeywords } from './keyword-sets.js';
 
 /**
  * scroll-timeline-axis 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollTimelineAxisKeywords = KeywordValuesOf<
-  typeof keywords_4f160a9cf0d9,
+  typeof scrollTimelineAxisKeywords,
   Property.ScrollTimelineAxis | CssString
 >;
 /**
@@ -15858,14 +15670,11 @@ export type ScrollTimelineAxisKeywords = KeywordValuesOf<
  * @example
  * new ScrollTimelineAxisKeywords()
  */
-export const ScrollTimelineAxisKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollTimelineAxisKeywords {
-    constructor() {
-      Object.assign(this, keywords_4f160a9cf0d9);
-    }
-  },
-  'ScrollTimelineAxisKeywords',
-) as new () => ScrollTimelineAxisKeywords;
+export const ScrollTimelineAxisKeywords = class ScrollTimelineAxisKeywords {
+  constructor() {
+    Object.assign(this, scrollTimelineAxisKeywords);
+  }
+} as new () => ScrollTimelineAxisKeywords;
 
 /**
  * scroll-timeline-axis 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -15878,7 +15687,7 @@ class ScrollTimelineAxisCssRuntime extends CssProperty {
    */
   constructor() {
     super('scroll-timeline-axis');
-    initializeKeywordDeclarations(this, 'scroll-timeline-axis', keywords_4f160a9cf0d9);
+    initializeKeywordDeclarations(this, 'scroll-timeline-axis', scrollTimelineAxisKeywords);
   }
   /**
    * 原样生成 scroll-timeline-axis 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15904,16 +15713,14 @@ export type ScrollTimelineAxisCss = ScrollTimelineAxisCssRuntime &
  * CSS 初始值：`block`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-axis
  */
-export const ScrollTimelineAxisCss = /* @__PURE__ */ keywordConstructor(
-  ScrollTimelineAxisCssRuntime,
-  'ScrollTimelineAxisCss',
-) as new () => ScrollTimelineAxisCss;
+export const ScrollTimelineAxisCss =
+  ScrollTimelineAxisCssRuntime as new () => ScrollTimelineAxisCss;
 
 /**
  * scroll-timeline-name 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollTimelineNameKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.ScrollTimelineName | CssString
 >;
 /**
@@ -15921,14 +15728,11 @@ export type ScrollTimelineNameKeywords = KeywordValuesOf<
  * @example
  * new ScrollTimelineNameKeywords()
  */
-export const ScrollTimelineNameKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollTimelineNameKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'ScrollTimelineNameKeywords',
-) as new () => ScrollTimelineNameKeywords;
+export const ScrollTimelineNameKeywords = class ScrollTimelineNameKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => ScrollTimelineNameKeywords;
 
 /**
  * scroll-timeline-name 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -15941,7 +15745,7 @@ class ScrollTimelineNameCssRuntime extends CssProperty {
    */
   constructor() {
     super('scroll-timeline-name');
-    initializeKeywordDeclarations(this, 'scroll-timeline-name', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'scroll-timeline-name', noneKeywords);
   }
   /**
    * 原样生成 scroll-timeline-name 声明，保留关键字补全并接受自定义 CSS 值。
@@ -15967,16 +15771,14 @@ export type ScrollTimelineNameCss = ScrollTimelineNameCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-timeline-name
  */
-export const ScrollTimelineNameCss = /* @__PURE__ */ keywordConstructor(
-  ScrollTimelineNameCssRuntime,
-  'ScrollTimelineNameCss',
-) as new () => ScrollTimelineNameCss;
+export const ScrollTimelineNameCss =
+  ScrollTimelineNameCssRuntime as new () => ScrollTimelineNameCss;
 
 /**
  * scrollbar-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollbarColorKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.ScrollbarColor | CssString
 >;
 /**
@@ -15984,14 +15786,11 @@ export type ScrollbarColorKeywords = KeywordValuesOf<
  * @example
  * new ScrollbarColorKeywords()
  */
-export const ScrollbarColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollbarColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'ScrollbarColorKeywords',
-) as new () => ScrollbarColorKeywords;
+export const ScrollbarColorKeywords = class ScrollbarColorKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => ScrollbarColorKeywords;
 
 /**
  * scrollbar-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16004,7 +15803,7 @@ class ScrollbarColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('scrollbar-color');
-    initializeKeywordDeclarations(this, 'scrollbar-color', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'scrollbar-color', autoKeywords);
   }
   /**
    * 原样生成 scrollbar-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16030,17 +15829,14 @@ export type ScrollbarColorCss = ScrollbarColorCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-color
  */
-export const ScrollbarColorCss = /* @__PURE__ */ keywordConstructor(
-  ScrollbarColorCssRuntime,
-  'ScrollbarColorCss',
-) as new () => ScrollbarColorCss;
-import { keywords_81d1400753fc } from './keyword-sets.js';
+export const ScrollbarColorCss = ScrollbarColorCssRuntime as new () => ScrollbarColorCss;
+import { scrollbarGutterKeywords } from './keyword-sets.js';
 
 /**
  * scrollbar-gutter 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollbarGutterKeywords = KeywordValuesOf<
-  typeof keywords_81d1400753fc,
+  typeof scrollbarGutterKeywords,
   Property.ScrollbarGutter | CssString
 >;
 /**
@@ -16048,14 +15844,11 @@ export type ScrollbarGutterKeywords = KeywordValuesOf<
  * @example
  * new ScrollbarGutterKeywords()
  */
-export const ScrollbarGutterKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollbarGutterKeywords {
-    constructor() {
-      Object.assign(this, keywords_81d1400753fc);
-    }
-  },
-  'ScrollbarGutterKeywords',
-) as new () => ScrollbarGutterKeywords;
+export const ScrollbarGutterKeywords = class ScrollbarGutterKeywords {
+  constructor() {
+    Object.assign(this, scrollbarGutterKeywords);
+  }
+} as new () => ScrollbarGutterKeywords;
 
 /**
  * scrollbar-gutter 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16068,7 +15861,7 @@ class ScrollbarGutterCssRuntime extends CssProperty {
    */
   constructor() {
     super('scrollbar-gutter');
-    initializeKeywordDeclarations(this, 'scrollbar-gutter', keywords_81d1400753fc);
+    initializeKeywordDeclarations(this, 'scrollbar-gutter', scrollbarGutterKeywords);
   }
   /**
    * 原样生成 scrollbar-gutter 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16094,17 +15887,14 @@ export type ScrollbarGutterCss = ScrollbarGutterCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-gutter
  */
-export const ScrollbarGutterCss = /* @__PURE__ */ keywordConstructor(
-  ScrollbarGutterCssRuntime,
-  'ScrollbarGutterCss',
-) as new () => ScrollbarGutterCss;
-import { keywords_7463c22e4c2f } from './keyword-sets.js';
+export const ScrollbarGutterCss = ScrollbarGutterCssRuntime as new () => ScrollbarGutterCss;
+import { scrollbarWidthKeywords } from './keyword-sets.js';
 
 /**
  * scrollbar-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ScrollbarWidthKeywords = KeywordValuesOf<
-  typeof keywords_7463c22e4c2f,
+  typeof scrollbarWidthKeywords,
   Property.ScrollbarWidth | CssString
 >;
 /**
@@ -16112,14 +15902,11 @@ export type ScrollbarWidthKeywords = KeywordValuesOf<
  * @example
  * new ScrollbarWidthKeywords()
  */
-export const ScrollbarWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class ScrollbarWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_7463c22e4c2f);
-    }
-  },
-  'ScrollbarWidthKeywords',
-) as new () => ScrollbarWidthKeywords;
+export const ScrollbarWidthKeywords = class ScrollbarWidthKeywords {
+  constructor() {
+    Object.assign(this, scrollbarWidthKeywords);
+  }
+} as new () => ScrollbarWidthKeywords;
 
 /**
  * scrollbar-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16132,7 +15919,7 @@ class ScrollbarWidthCssRuntime extends CssProperty {
    */
   constructor() {
     super('scrollbar-width');
-    initializeKeywordDeclarations(this, 'scrollbar-width', keywords_7463c22e4c2f);
+    initializeKeywordDeclarations(this, 'scrollbar-width', scrollbarWidthKeywords);
   }
   /**
    * 原样生成 scrollbar-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16158,16 +15945,13 @@ export type ScrollbarWidthCss = ScrollbarWidthCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scrollbar-width
  */
-export const ScrollbarWidthCss = /* @__PURE__ */ keywordConstructor(
-  ScrollbarWidthCssRuntime,
-  'ScrollbarWidthCss',
-) as new () => ScrollbarWidthCss;
+export const ScrollbarWidthCss = ScrollbarWidthCssRuntime as new () => ScrollbarWidthCss;
 
 /**
  * shape-image-threshold 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ShapeImageThresholdKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ShapeImageThreshold | CssString
 >;
 /**
@@ -16175,14 +15959,11 @@ export type ShapeImageThresholdKeywords = KeywordValuesOf<
  * @example
  * new ShapeImageThresholdKeywords()
  */
-export const ShapeImageThresholdKeywords = /* @__PURE__ */ keywordConstructor(
-  class ShapeImageThresholdKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ShapeImageThresholdKeywords',
-) as new () => ShapeImageThresholdKeywords;
+export const ShapeImageThresholdKeywords = class ShapeImageThresholdKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ShapeImageThresholdKeywords;
 
 /**
  * shape-image-threshold 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16195,7 +15976,7 @@ class ShapeImageThresholdCssRuntime extends CssProperty {
    */
   constructor() {
     super('shape-image-threshold');
-    initializeKeywordDeclarations(this, 'shape-image-threshold', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'shape-image-threshold', globalKeywords);
   }
   /**
    * 原样生成 shape-image-threshold 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16289,16 +16070,14 @@ export type ShapeImageThresholdCss = ShapeImageThresholdCssRuntime &
  * CSS 初始值：`0.0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-image-threshold
  */
-export const ShapeImageThresholdCss = /* @__PURE__ */ keywordConstructor(
-  ShapeImageThresholdCssRuntime,
-  'ShapeImageThresholdCss',
-) as new () => ShapeImageThresholdCss;
+export const ShapeImageThresholdCss =
+  ShapeImageThresholdCssRuntime as new () => ShapeImageThresholdCss;
 
 /**
  * shape-margin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ShapeMarginKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.ShapeMargin | CssString
 >;
 /**
@@ -16306,14 +16085,11 @@ export type ShapeMarginKeywords = KeywordValuesOf<
  * @example
  * new ShapeMarginKeywords()
  */
-export const ShapeMarginKeywords = /* @__PURE__ */ keywordConstructor(
-  class ShapeMarginKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'ShapeMarginKeywords',
-) as new () => ShapeMarginKeywords;
+export const ShapeMarginKeywords = class ShapeMarginKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => ShapeMarginKeywords;
 
 /**
  * shape-margin 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16326,7 +16102,7 @@ class ShapeMarginCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('shape-margin');
-    initializeKeywordDeclarations(this, 'shape-margin', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'shape-margin', globalKeywords);
   }
   /**
    * 原样生成 shape-margin 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16419,17 +16195,14 @@ export type ShapeMarginCss = ShapeMarginCssRuntime & KeywordDeclarations<ShapeMa
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-margin
  */
-export const ShapeMarginCss = /* @__PURE__ */ keywordConstructor(
-  ShapeMarginCssRuntime,
-  'ShapeMarginCss',
-) as new () => ShapeMarginCss;
-import { keywords_f43b7d7ff76c } from './keyword-sets.js';
+export const ShapeMarginCss = ShapeMarginCssRuntime as new () => ShapeMarginCss;
+import { shapeOutsideKeywords } from './keyword-sets.js';
 
 /**
  * shape-outside 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ShapeOutsideKeywords = KeywordValuesOf<
-  typeof keywords_f43b7d7ff76c,
+  typeof shapeOutsideKeywords,
   Property.ShapeOutside | CssString
 >;
 /**
@@ -16437,14 +16210,11 @@ export type ShapeOutsideKeywords = KeywordValuesOf<
  * @example
  * new ShapeOutsideKeywords()
  */
-export const ShapeOutsideKeywords = /* @__PURE__ */ keywordConstructor(
-  class ShapeOutsideKeywords {
-    constructor() {
-      Object.assign(this, keywords_f43b7d7ff76c);
-    }
-  },
-  'ShapeOutsideKeywords',
-) as new () => ShapeOutsideKeywords;
+export const ShapeOutsideKeywords = class ShapeOutsideKeywords {
+  constructor() {
+    Object.assign(this, shapeOutsideKeywords);
+  }
+} as new () => ShapeOutsideKeywords;
 
 /**
  * shape-outside 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16457,7 +16227,7 @@ class ShapeOutsideCssRuntime extends CssProperty {
    */
   constructor() {
     super('shape-outside');
-    initializeKeywordDeclarations(this, 'shape-outside', keywords_f43b7d7ff76c);
+    initializeKeywordDeclarations(this, 'shape-outside', shapeOutsideKeywords);
   }
   /**
    * 原样生成 shape-outside 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16482,17 +16252,14 @@ export type ShapeOutsideCss = ShapeOutsideCssRuntime & KeywordDeclarations<Shape
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-outside
  */
-export const ShapeOutsideCss = /* @__PURE__ */ keywordConstructor(
-  ShapeOutsideCssRuntime,
-  'ShapeOutsideCss',
-) as new () => ShapeOutsideCss;
-import { keywords_23a417466a1e } from './keyword-sets.js';
+export const ShapeOutsideCss = ShapeOutsideCssRuntime as new () => ShapeOutsideCss;
+import { shapeRenderingKeywords } from './keyword-sets.js';
 
 /**
  * shape-rendering 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type ShapeRenderingKeywords = KeywordValuesOf<
-  typeof keywords_23a417466a1e,
+  typeof shapeRenderingKeywords,
   Property.ShapeRendering | CssString
 >;
 /**
@@ -16500,14 +16267,11 @@ export type ShapeRenderingKeywords = KeywordValuesOf<
  * @example
  * new ShapeRenderingKeywords()
  */
-export const ShapeRenderingKeywords = /* @__PURE__ */ keywordConstructor(
-  class ShapeRenderingKeywords {
-    constructor() {
-      Object.assign(this, keywords_23a417466a1e);
-    }
-  },
-  'ShapeRenderingKeywords',
-) as new () => ShapeRenderingKeywords;
+export const ShapeRenderingKeywords = class ShapeRenderingKeywords {
+  constructor() {
+    Object.assign(this, shapeRenderingKeywords);
+  }
+} as new () => ShapeRenderingKeywords;
 
 /**
  * shape-rendering 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16520,7 +16284,7 @@ class ShapeRenderingCssRuntime extends CssProperty {
    */
   constructor() {
     super('shape-rendering');
-    initializeKeywordDeclarations(this, 'shape-rendering', keywords_23a417466a1e);
+    initializeKeywordDeclarations(this, 'shape-rendering', shapeRenderingKeywords);
   }
   /**
    * 原样生成 shape-rendering 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16546,32 +16310,23 @@ export type ShapeRenderingCss = ShapeRenderingCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/shape-rendering
  */
-export const ShapeRenderingCss = /* @__PURE__ */ keywordConstructor(
-  ShapeRenderingCssRuntime,
-  'ShapeRenderingCss',
-) as new () => ShapeRenderingCss;
-import { keywords_c2870b3ff381 } from './keyword-sets.js';
+export const ShapeRenderingCss = ShapeRenderingCssRuntime as new () => ShapeRenderingCss;
+import { speakAsKeywords } from './keyword-sets.js';
 
 /**
  * speak-as 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export type SpeakAsKeywords = KeywordValuesOf<
-  typeof keywords_c2870b3ff381,
-  Property.SpeakAs | CssString
->;
+export type SpeakAsKeywords = KeywordValuesOf<typeof speakAsKeywords, Property.SpeakAs | CssString>;
 /**
  * 创建 speak-as 的可继承关键字对象；每个实例独立，成员保留语义说明。
  * @example
  * new SpeakAsKeywords()
  */
-export const SpeakAsKeywords = /* @__PURE__ */ keywordConstructor(
-  class SpeakAsKeywords {
-    constructor() {
-      Object.assign(this, keywords_c2870b3ff381);
-    }
-  },
-  'SpeakAsKeywords',
-) as new () => SpeakAsKeywords;
+export const SpeakAsKeywords = class SpeakAsKeywords {
+  constructor() {
+    Object.assign(this, speakAsKeywords);
+  }
+} as new () => SpeakAsKeywords;
 
 /**
  * speak-as 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16584,7 +16339,7 @@ class SpeakAsCssRuntime extends CssProperty {
    */
   constructor() {
     super('speak-as');
-    initializeKeywordDeclarations(this, 'speak-as', keywords_c2870b3ff381);
+    initializeKeywordDeclarations(this, 'speak-as', speakAsKeywords);
   }
   /**
    * 原样生成 speak-as 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16609,17 +16364,14 @@ export type SpeakAsCss = SpeakAsCssRuntime & KeywordDeclarations<SpeakAsKeywords
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/speak-as
  */
-export const SpeakAsCss = /* @__PURE__ */ keywordConstructor(
-  SpeakAsCssRuntime,
-  'SpeakAsCss',
-) as new () => SpeakAsCss;
-import { keywords_357abf558bac } from './keyword-sets.js';
+export const SpeakAsCss = SpeakAsCssRuntime as new () => SpeakAsCss;
+import { colorKeywords } from './keyword-sets.js';
 
 /**
  * stop-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StopColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.StopColor | CssString
 >;
 /**
@@ -16627,14 +16379,11 @@ export type StopColorKeywords = KeywordValuesOf<
  * @example
  * new StopColorKeywords()
  */
-export const StopColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class StopColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'StopColorKeywords',
-) as new () => StopColorKeywords;
+export const StopColorKeywords = class StopColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => StopColorKeywords;
 
 /**
  * stop-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16647,7 +16396,7 @@ class StopColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('stop-color');
-    initializeKeywordDeclarations(this, 'stop-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'stop-color', colorKeywords);
   }
   /**
    * 原样生成 stop-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16750,16 +16499,13 @@ export type StopColorCss = StopColorCssRuntime & KeywordDeclarations<StopColorKe
  * CSS 初始值：`black`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-color
  */
-export const StopColorCss = /* @__PURE__ */ keywordConstructor(
-  StopColorCssRuntime,
-  'StopColorCss',
-) as new () => StopColorCss;
+export const StopColorCss = StopColorCssRuntime as new () => StopColorCss;
 
 /**
  * stop-opacity 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StopOpacityKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.StopOpacity | CssString
 >;
 /**
@@ -16767,14 +16513,11 @@ export type StopOpacityKeywords = KeywordValuesOf<
  * @example
  * new StopOpacityKeywords()
  */
-export const StopOpacityKeywords = /* @__PURE__ */ keywordConstructor(
-  class StopOpacityKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'StopOpacityKeywords',
-) as new () => StopOpacityKeywords;
+export const StopOpacityKeywords = class StopOpacityKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => StopOpacityKeywords;
 
 /**
  * stop-opacity 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16787,7 +16530,7 @@ class StopOpacityCssRuntime extends CssProperty {
    */
   constructor() {
     super('stop-opacity');
-    initializeKeywordDeclarations(this, 'stop-opacity', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'stop-opacity', globalKeywords);
   }
   /**
    * 原样生成 stop-opacity 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16868,32 +16611,23 @@ export type StopOpacityCss = StopOpacityCssRuntime & KeywordDeclarations<StopOpa
  * CSS 初始值：`black`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stop-opacity
  */
-export const StopOpacityCss = /* @__PURE__ */ keywordConstructor(
-  StopOpacityCssRuntime,
-  'StopOpacityCss',
-) as new () => StopOpacityCss;
-import { keywords_c484a5c8e87e } from './keyword-sets.js';
+export const StopOpacityCss = StopOpacityCssRuntime as new () => StopOpacityCss;
+import { fillKeywords } from './keyword-sets.js';
 
 /**
  * stroke 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export type StrokeKeywords = KeywordValuesOf<
-  typeof keywords_c484a5c8e87e,
-  Property.Stroke | CssString
->;
+export type StrokeKeywords = KeywordValuesOf<typeof fillKeywords, Property.Stroke | CssString>;
 /**
  * 创建 stroke 的可继承关键字对象；每个实例独立，成员保留语义说明。
  * @example
  * new StrokeKeywords()
  */
-export const StrokeKeywords = /* @__PURE__ */ keywordConstructor(
-  class StrokeKeywords {
-    constructor() {
-      Object.assign(this, keywords_c484a5c8e87e);
-    }
-  },
-  'StrokeKeywords',
-) as new () => StrokeKeywords;
+export const StrokeKeywords = class StrokeKeywords {
+  constructor() {
+    Object.assign(this, fillKeywords);
+  }
+} as new () => StrokeKeywords;
 
 /**
  * stroke 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16906,7 +16640,7 @@ class StrokeCssRuntime extends CssProperty {
    */
   constructor() {
     super('stroke');
-    initializeKeywordDeclarations(this, 'stroke', keywords_c484a5c8e87e);
+    initializeKeywordDeclarations(this, 'stroke', fillKeywords);
   }
   /**
    * 原样生成 stroke 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17007,16 +16741,13 @@ export type StrokeCss = StrokeCssRuntime & KeywordDeclarations<StrokeKeywords>;
  * 设置 SVG 图形轮廓的描边绘制方式。（stroke）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke
  */
-export const StrokeCss = /* @__PURE__ */ keywordConstructor(
-  StrokeCssRuntime,
-  'StrokeCss',
-) as new () => StrokeCss;
+export const StrokeCss = StrokeCssRuntime as new () => StrokeCss;
 
 /**
  * stroke-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StrokeColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.StrokeColor | CssString
 >;
 /**
@@ -17024,14 +16755,11 @@ export type StrokeColorKeywords = KeywordValuesOf<
  * @example
  * new StrokeColorKeywords()
  */
-export const StrokeColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class StrokeColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'StrokeColorKeywords',
-) as new () => StrokeColorKeywords;
+export const StrokeColorKeywords = class StrokeColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => StrokeColorKeywords;
 
 /**
  * stroke-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17044,7 +16772,7 @@ class StrokeColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('stroke-color');
-    initializeKeywordDeclarations(this, 'stroke-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'stroke-color', colorKeywords);
   }
   /**
    * 原样生成 stroke-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17147,16 +16875,13 @@ export type StrokeColorCss = StrokeColorCssRuntime & KeywordDeclarations<StrokeC
  * CSS 初始值：`transparent`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-color
  */
-export const StrokeColorCss = /* @__PURE__ */ keywordConstructor(
-  StrokeColorCssRuntime,
-  'StrokeColorCss',
-) as new () => StrokeColorCss;
+export const StrokeColorCss = StrokeColorCssRuntime as new () => StrokeColorCss;
 
 /**
  * stroke-dasharray 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StrokeDasharrayKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.StrokeDasharray | CssString
 >;
 /**
@@ -17164,14 +16889,11 @@ export type StrokeDasharrayKeywords = KeywordValuesOf<
  * @example
  * new StrokeDasharrayKeywords()
  */
-export const StrokeDasharrayKeywords = /* @__PURE__ */ keywordConstructor(
-  class StrokeDasharrayKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'StrokeDasharrayKeywords',
-) as new () => StrokeDasharrayKeywords;
+export const StrokeDasharrayKeywords = class StrokeDasharrayKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => StrokeDasharrayKeywords;
 
 /**
  * stroke-dasharray 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17184,7 +16906,7 @@ class StrokeDasharrayCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('stroke-dasharray');
-    initializeKeywordDeclarations(this, 'stroke-dasharray', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'stroke-dasharray', noneKeywords);
   }
   /**
    * 原样生成 stroke-dasharray 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17266,16 +16988,13 @@ export type StrokeDasharrayCss = StrokeDasharrayCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dasharray
  */
-export const StrokeDasharrayCss = /* @__PURE__ */ keywordConstructor(
-  StrokeDasharrayCssRuntime,
-  'StrokeDasharrayCss',
-) as new () => StrokeDasharrayCss;
+export const StrokeDasharrayCss = StrokeDasharrayCssRuntime as new () => StrokeDasharrayCss;
 
 /**
  * stroke-dashoffset 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StrokeDashoffsetKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.StrokeDashoffset | CssString
 >;
 /**
@@ -17283,14 +17002,11 @@ export type StrokeDashoffsetKeywords = KeywordValuesOf<
  * @example
  * new StrokeDashoffsetKeywords()
  */
-export const StrokeDashoffsetKeywords = /* @__PURE__ */ keywordConstructor(
-  class StrokeDashoffsetKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'StrokeDashoffsetKeywords',
-) as new () => StrokeDashoffsetKeywords;
+export const StrokeDashoffsetKeywords = class StrokeDashoffsetKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => StrokeDashoffsetKeywords;
 
 /**
  * stroke-dashoffset 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17303,7 +17019,7 @@ class StrokeDashoffsetCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('stroke-dashoffset');
-    initializeKeywordDeclarations(this, 'stroke-dashoffset', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'stroke-dashoffset', globalKeywords);
   }
   /**
    * 原样生成 stroke-dashoffset 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17397,17 +17113,14 @@ export type StrokeDashoffsetCss = StrokeDashoffsetCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-dashoffset
  */
-export const StrokeDashoffsetCss = /* @__PURE__ */ keywordConstructor(
-  StrokeDashoffsetCssRuntime,
-  'StrokeDashoffsetCss',
-) as new () => StrokeDashoffsetCss;
-import { keywords_98078af1bf6f } from './keyword-sets.js';
+export const StrokeDashoffsetCss = StrokeDashoffsetCssRuntime as new () => StrokeDashoffsetCss;
+import { strokeLinecapKeywords } from './keyword-sets.js';
 
 /**
  * stroke-linecap 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StrokeLinecapKeywords = KeywordValuesOf<
-  typeof keywords_98078af1bf6f,
+  typeof strokeLinecapKeywords,
   Property.StrokeLinecap | CssString
 >;
 /**
@@ -17415,14 +17128,11 @@ export type StrokeLinecapKeywords = KeywordValuesOf<
  * @example
  * new StrokeLinecapKeywords()
  */
-export const StrokeLinecapKeywords = /* @__PURE__ */ keywordConstructor(
-  class StrokeLinecapKeywords {
-    constructor() {
-      Object.assign(this, keywords_98078af1bf6f);
-    }
-  },
-  'StrokeLinecapKeywords',
-) as new () => StrokeLinecapKeywords;
+export const StrokeLinecapKeywords = class StrokeLinecapKeywords {
+  constructor() {
+    Object.assign(this, strokeLinecapKeywords);
+  }
+} as new () => StrokeLinecapKeywords;
 
 /**
  * stroke-linecap 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17435,7 +17145,7 @@ class StrokeLinecapCssRuntime extends CssProperty {
    */
   constructor() {
     super('stroke-linecap');
-    initializeKeywordDeclarations(this, 'stroke-linecap', keywords_98078af1bf6f);
+    initializeKeywordDeclarations(this, 'stroke-linecap', strokeLinecapKeywords);
   }
   /**
    * 原样生成 stroke-linecap 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17460,17 +17170,14 @@ export type StrokeLinecapCss = StrokeLinecapCssRuntime & KeywordDeclarations<Str
  * CSS 初始值：`butt`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linecap
  */
-export const StrokeLinecapCss = /* @__PURE__ */ keywordConstructor(
-  StrokeLinecapCssRuntime,
-  'StrokeLinecapCss',
-) as new () => StrokeLinecapCss;
-import { keywords_e378412ad0e2 } from './keyword-sets.js';
+export const StrokeLinecapCss = StrokeLinecapCssRuntime as new () => StrokeLinecapCss;
+import { strokeLinejoinKeywords } from './keyword-sets.js';
 
 /**
  * stroke-linejoin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StrokeLinejoinKeywords = KeywordValuesOf<
-  typeof keywords_e378412ad0e2,
+  typeof strokeLinejoinKeywords,
   Property.StrokeLinejoin | CssString
 >;
 /**
@@ -17478,14 +17185,11 @@ export type StrokeLinejoinKeywords = KeywordValuesOf<
  * @example
  * new StrokeLinejoinKeywords()
  */
-export const StrokeLinejoinKeywords = /* @__PURE__ */ keywordConstructor(
-  class StrokeLinejoinKeywords {
-    constructor() {
-      Object.assign(this, keywords_e378412ad0e2);
-    }
-  },
-  'StrokeLinejoinKeywords',
-) as new () => StrokeLinejoinKeywords;
+export const StrokeLinejoinKeywords = class StrokeLinejoinKeywords {
+  constructor() {
+    Object.assign(this, strokeLinejoinKeywords);
+  }
+} as new () => StrokeLinejoinKeywords;
 
 /**
  * stroke-linejoin 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17498,7 +17202,7 @@ class StrokeLinejoinCssRuntime extends CssProperty {
    */
   constructor() {
     super('stroke-linejoin');
-    initializeKeywordDeclarations(this, 'stroke-linejoin', keywords_e378412ad0e2);
+    initializeKeywordDeclarations(this, 'stroke-linejoin', strokeLinejoinKeywords);
   }
   /**
    * 原样生成 stroke-linejoin 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17524,16 +17228,13 @@ export type StrokeLinejoinCss = StrokeLinejoinCssRuntime &
  * CSS 初始值：`miter`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-linejoin
  */
-export const StrokeLinejoinCss = /* @__PURE__ */ keywordConstructor(
-  StrokeLinejoinCssRuntime,
-  'StrokeLinejoinCss',
-) as new () => StrokeLinejoinCss;
+export const StrokeLinejoinCss = StrokeLinejoinCssRuntime as new () => StrokeLinejoinCss;
 
 /**
  * stroke-miterlimit 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StrokeMiterlimitKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.StrokeMiterlimit | CssString
 >;
 /**
@@ -17541,14 +17242,11 @@ export type StrokeMiterlimitKeywords = KeywordValuesOf<
  * @example
  * new StrokeMiterlimitKeywords()
  */
-export const StrokeMiterlimitKeywords = /* @__PURE__ */ keywordConstructor(
-  class StrokeMiterlimitKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'StrokeMiterlimitKeywords',
-) as new () => StrokeMiterlimitKeywords;
+export const StrokeMiterlimitKeywords = class StrokeMiterlimitKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => StrokeMiterlimitKeywords;
 
 /**
  * stroke-miterlimit 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17561,7 +17259,7 @@ class StrokeMiterlimitCssRuntime extends CssProperty {
    */
   constructor() {
     super('stroke-miterlimit');
-    initializeKeywordDeclarations(this, 'stroke-miterlimit', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'stroke-miterlimit', globalKeywords);
   }
   /**
    * 原样生成 stroke-miterlimit 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17643,16 +17341,13 @@ export type StrokeMiterlimitCss = StrokeMiterlimitCssRuntime &
  * CSS 初始值：`4`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-miterlimit
  */
-export const StrokeMiterlimitCss = /* @__PURE__ */ keywordConstructor(
-  StrokeMiterlimitCssRuntime,
-  'StrokeMiterlimitCss',
-) as new () => StrokeMiterlimitCss;
+export const StrokeMiterlimitCss = StrokeMiterlimitCssRuntime as new () => StrokeMiterlimitCss;
 
 /**
  * stroke-opacity 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StrokeOpacityKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.StrokeOpacity | CssString
 >;
 /**
@@ -17660,14 +17355,11 @@ export type StrokeOpacityKeywords = KeywordValuesOf<
  * @example
  * new StrokeOpacityKeywords()
  */
-export const StrokeOpacityKeywords = /* @__PURE__ */ keywordConstructor(
-  class StrokeOpacityKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'StrokeOpacityKeywords',
-) as new () => StrokeOpacityKeywords;
+export const StrokeOpacityKeywords = class StrokeOpacityKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => StrokeOpacityKeywords;
 
 /**
  * stroke-opacity 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17680,7 +17372,7 @@ class StrokeOpacityCssRuntime extends CssProperty {
    */
   constructor() {
     super('stroke-opacity');
-    initializeKeywordDeclarations(this, 'stroke-opacity', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'stroke-opacity', globalKeywords);
   }
   /**
    * 原样生成 stroke-opacity 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17761,16 +17453,13 @@ export type StrokeOpacityCss = StrokeOpacityCssRuntime & KeywordDeclarations<Str
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-opacity
  */
-export const StrokeOpacityCss = /* @__PURE__ */ keywordConstructor(
-  StrokeOpacityCssRuntime,
-  'StrokeOpacityCss',
-) as new () => StrokeOpacityCss;
+export const StrokeOpacityCss = StrokeOpacityCssRuntime as new () => StrokeOpacityCss;
 
 /**
  * stroke-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type StrokeWidthKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.StrokeWidth | CssString
 >;
 /**
@@ -17778,14 +17467,11 @@ export type StrokeWidthKeywords = KeywordValuesOf<
  * @example
  * new StrokeWidthKeywords()
  */
-export const StrokeWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class StrokeWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'StrokeWidthKeywords',
-) as new () => StrokeWidthKeywords;
+export const StrokeWidthKeywords = class StrokeWidthKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => StrokeWidthKeywords;
 
 /**
  * stroke-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17798,7 +17484,7 @@ class StrokeWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('stroke-width');
-    initializeKeywordDeclarations(this, 'stroke-width', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'stroke-width', globalKeywords);
   }
   /**
    * 原样生成 stroke-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17891,31 +17577,22 @@ export type StrokeWidthCss = StrokeWidthCssRuntime & KeywordDeclarations<StrokeW
  * CSS 初始值：`1px`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-width
  */
-export const StrokeWidthCss = /* @__PURE__ */ keywordConstructor(
-  StrokeWidthCssRuntime,
-  'StrokeWidthCss',
-) as new () => StrokeWidthCss;
+export const StrokeWidthCss = StrokeWidthCssRuntime as new () => StrokeWidthCss;
 
 /**
  * tab-size 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export type TabSizeKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
-  Property.TabSize | CssString
->;
+export type TabSizeKeywords = KeywordValuesOf<typeof globalKeywords, Property.TabSize | CssString>;
 /**
  * 创建 tab-size 的可继承关键字对象；每个实例独立，成员保留语义说明。
  * @example
  * new TabSizeKeywords()
  */
-export const TabSizeKeywords = /* @__PURE__ */ keywordConstructor(
-  class TabSizeKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'TabSizeKeywords',
-) as new () => TabSizeKeywords;
+export const TabSizeKeywords = class TabSizeKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => TabSizeKeywords;
 
 /**
  * tab-size 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17928,7 +17605,7 @@ class TabSizeCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('tab-size');
-    initializeKeywordDeclarations(this, 'tab-size', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'tab-size', globalKeywords);
   }
   /**
    * 原样生成 tab-size 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18003,17 +17680,14 @@ export type TabSizeCss = TabSizeCssRuntime & KeywordDeclarations<TabSizeKeywords
  * CSS 初始值：`8`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/tab-size
  */
-export const TabSizeCss = /* @__PURE__ */ keywordConstructor(
-  TabSizeCssRuntime,
-  'TabSizeCss',
-) as new () => TabSizeCss;
-import { keywords_ce2170bc9ba7 } from './keyword-sets.js';
+export const TabSizeCss = TabSizeCssRuntime as new () => TabSizeCss;
+import { tableLayoutKeywords } from './keyword-sets.js';
 
 /**
  * table-layout 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TableLayoutKeywords = KeywordValuesOf<
-  typeof keywords_ce2170bc9ba7,
+  typeof tableLayoutKeywords,
   Property.TableLayout | CssString
 >;
 /**
@@ -18021,14 +17695,11 @@ export type TableLayoutKeywords = KeywordValuesOf<
  * @example
  * new TableLayoutKeywords()
  */
-export const TableLayoutKeywords = /* @__PURE__ */ keywordConstructor(
-  class TableLayoutKeywords {
-    constructor() {
-      Object.assign(this, keywords_ce2170bc9ba7);
-    }
-  },
-  'TableLayoutKeywords',
-) as new () => TableLayoutKeywords;
+export const TableLayoutKeywords = class TableLayoutKeywords {
+  constructor() {
+    Object.assign(this, tableLayoutKeywords);
+  }
+} as new () => TableLayoutKeywords;
 
 /**
  * table-layout 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18041,7 +17712,7 @@ class TableLayoutCssRuntime extends CssProperty {
    */
   constructor() {
     super('table-layout');
-    initializeKeywordDeclarations(this, 'table-layout', keywords_ce2170bc9ba7);
+    initializeKeywordDeclarations(this, 'table-layout', tableLayoutKeywords);
   }
   /**
    * 原样生成 table-layout 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18066,17 +17737,14 @@ export type TableLayoutCss = TableLayoutCssRuntime & KeywordDeclarations<TableLa
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/table-layout
  */
-export const TableLayoutCss = /* @__PURE__ */ keywordConstructor(
-  TableLayoutCssRuntime,
-  'TableLayoutCss',
-) as new () => TableLayoutCss;
-import { keywords_f3848a433f34 } from './keyword-sets.js';
+export const TableLayoutCss = TableLayoutCssRuntime as new () => TableLayoutCss;
+import { textAlignKeywords } from './keyword-sets.js';
 
 /**
  * text-align 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextAlignKeywords = KeywordValuesOf<
-  typeof keywords_f3848a433f34,
+  typeof textAlignKeywords,
   Property.TextAlign | CssString
 >;
 /**
@@ -18084,14 +17752,11 @@ export type TextAlignKeywords = KeywordValuesOf<
  * @example
  * new TextAlignKeywords()
  */
-export const TextAlignKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextAlignKeywords {
-    constructor() {
-      Object.assign(this, keywords_f3848a433f34);
-    }
-  },
-  'TextAlignKeywords',
-) as new () => TextAlignKeywords;
+export const TextAlignKeywords = class TextAlignKeywords {
+  constructor() {
+    Object.assign(this, textAlignKeywords);
+  }
+} as new () => TextAlignKeywords;
 
 /**
  * text-align 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18104,7 +17769,7 @@ class TextAlignCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-align');
-    initializeKeywordDeclarations(this, 'text-align', keywords_f3848a433f34);
+    initializeKeywordDeclarations(this, 'text-align', textAlignKeywords);
   }
   /**
    * 原样生成 text-align 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18141,17 +17806,14 @@ export type TextAlignCss = TextAlignCssRuntime & KeywordDeclarations<TextAlignKe
  * s.textAlign.start
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align
  */
-export const TextAlignCss = /* @__PURE__ */ keywordConstructor(
-  TextAlignCssRuntime,
-  'TextAlignCss',
-) as new () => TextAlignCss;
-import { keywords_737a7ae0e5be } from './keyword-sets.js';
+export const TextAlignCss = TextAlignCssRuntime as new () => TextAlignCss;
+import { textAlignLastKeywords } from './keyword-sets.js';
 
 /**
  * text-align-last 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextAlignLastKeywords = KeywordValuesOf<
-  typeof keywords_737a7ae0e5be,
+  typeof textAlignLastKeywords,
   Property.TextAlignLast | CssString
 >;
 /**
@@ -18159,14 +17821,11 @@ export type TextAlignLastKeywords = KeywordValuesOf<
  * @example
  * new TextAlignLastKeywords()
  */
-export const TextAlignLastKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextAlignLastKeywords {
-    constructor() {
-      Object.assign(this, keywords_737a7ae0e5be);
-    }
-  },
-  'TextAlignLastKeywords',
-) as new () => TextAlignLastKeywords;
+export const TextAlignLastKeywords = class TextAlignLastKeywords {
+  constructor() {
+    Object.assign(this, textAlignLastKeywords);
+  }
+} as new () => TextAlignLastKeywords;
 
 /**
  * text-align-last 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18179,7 +17838,7 @@ class TextAlignLastCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-align-last');
-    initializeKeywordDeclarations(this, 'text-align-last', keywords_737a7ae0e5be);
+    initializeKeywordDeclarations(this, 'text-align-last', textAlignLastKeywords);
   }
   /**
    * 原样生成 text-align-last 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18204,17 +17863,14 @@ export type TextAlignLastCss = TextAlignLastCssRuntime & KeywordDeclarations<Tex
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-align-last
  */
-export const TextAlignLastCss = /* @__PURE__ */ keywordConstructor(
-  TextAlignLastCssRuntime,
-  'TextAlignLastCss',
-) as new () => TextAlignLastCss;
-import { keywords_7b44473d3e07 } from './keyword-sets.js';
+export const TextAlignLastCss = TextAlignLastCssRuntime as new () => TextAlignLastCss;
+import { textAnchorKeywords } from './keyword-sets.js';
 
 /**
  * text-anchor 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextAnchorKeywords = KeywordValuesOf<
-  typeof keywords_7b44473d3e07,
+  typeof textAnchorKeywords,
   Property.TextAnchor | CssString
 >;
 /**
@@ -18222,14 +17878,11 @@ export type TextAnchorKeywords = KeywordValuesOf<
  * @example
  * new TextAnchorKeywords()
  */
-export const TextAnchorKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextAnchorKeywords {
-    constructor() {
-      Object.assign(this, keywords_7b44473d3e07);
-    }
-  },
-  'TextAnchorKeywords',
-) as new () => TextAnchorKeywords;
+export const TextAnchorKeywords = class TextAnchorKeywords {
+  constructor() {
+    Object.assign(this, textAnchorKeywords);
+  }
+} as new () => TextAnchorKeywords;
 
 /**
  * text-anchor 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18242,7 +17895,7 @@ class TextAnchorCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-anchor');
-    initializeKeywordDeclarations(this, 'text-anchor', keywords_7b44473d3e07);
+    initializeKeywordDeclarations(this, 'text-anchor', textAnchorKeywords);
   }
   /**
    * 原样生成 text-anchor 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18267,17 +17920,14 @@ export type TextAnchorCss = TextAnchorCssRuntime & KeywordDeclarations<TextAncho
  * CSS 初始值：`start`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-anchor
  */
-export const TextAnchorCss = /* @__PURE__ */ keywordConstructor(
-  TextAnchorCssRuntime,
-  'TextAnchorCss',
-) as new () => TextAnchorCss;
-import { keywords_fd4d7a225861 } from './keyword-sets.js';
+export const TextAnchorCss = TextAnchorCssRuntime as new () => TextAnchorCss;
+import { textAutospaceKeywords } from './keyword-sets.js';
 
 /**
  * text-autospace 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextAutospaceKeywords = KeywordValuesOf<
-  typeof keywords_fd4d7a225861,
+  typeof textAutospaceKeywords,
   Property.TextAutospace | CssString
 >;
 /**
@@ -18285,14 +17935,11 @@ export type TextAutospaceKeywords = KeywordValuesOf<
  * @example
  * new TextAutospaceKeywords()
  */
-export const TextAutospaceKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextAutospaceKeywords {
-    constructor() {
-      Object.assign(this, keywords_fd4d7a225861);
-    }
-  },
-  'TextAutospaceKeywords',
-) as new () => TextAutospaceKeywords;
+export const TextAutospaceKeywords = class TextAutospaceKeywords {
+  constructor() {
+    Object.assign(this, textAutospaceKeywords);
+  }
+} as new () => TextAutospaceKeywords;
 
 /**
  * text-autospace 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18305,7 +17952,7 @@ class TextAutospaceCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-autospace');
-    initializeKeywordDeclarations(this, 'text-autospace', keywords_fd4d7a225861);
+    initializeKeywordDeclarations(this, 'text-autospace', textAutospaceKeywords);
   }
   /**
    * 原样生成 text-autospace 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18330,32 +17977,23 @@ export type TextAutospaceCss = TextAutospaceCssRuntime & KeywordDeclarations<Tex
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-autospace
  */
-export const TextAutospaceCss = /* @__PURE__ */ keywordConstructor(
-  TextAutospaceCssRuntime,
-  'TextAutospaceCss',
-) as new () => TextAutospaceCss;
-import { keywords_689d92d01cc5 } from './keyword-sets.js';
+export const TextAutospaceCss = TextAutospaceCssRuntime as new () => TextAutospaceCss;
+import { textBoxKeywords } from './keyword-sets.js';
 
 /**
  * text-box 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export type TextBoxKeywords = KeywordValuesOf<
-  typeof keywords_689d92d01cc5,
-  Property.TextBox | CssString
->;
+export type TextBoxKeywords = KeywordValuesOf<typeof textBoxKeywords, Property.TextBox | CssString>;
 /**
  * 创建 text-box 的可继承关键字对象；每个实例独立，成员保留语义说明。
  * @example
  * new TextBoxKeywords()
  */
-export const TextBoxKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextBoxKeywords {
-    constructor() {
-      Object.assign(this, keywords_689d92d01cc5);
-    }
-  },
-  'TextBoxKeywords',
-) as new () => TextBoxKeywords;
+export const TextBoxKeywords = class TextBoxKeywords {
+  constructor() {
+    Object.assign(this, textBoxKeywords);
+  }
+} as new () => TextBoxKeywords;
 
 /**
  * text-box 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18368,7 +18006,7 @@ class TextBoxCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-box');
-    initializeKeywordDeclarations(this, 'text-box', keywords_689d92d01cc5);
+    initializeKeywordDeclarations(this, 'text-box', textBoxKeywords);
   }
   /**
    * 原样生成 text-box 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18393,17 +18031,14 @@ export type TextBoxCss = TextBoxCssRuntime & KeywordDeclarations<TextBoxKeywords
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box
  */
-export const TextBoxCss = /* @__PURE__ */ keywordConstructor(
-  TextBoxCssRuntime,
-  'TextBoxCss',
-) as new () => TextBoxCss;
-import { keywords_1a3ac66644d2 } from './keyword-sets.js';
+export const TextBoxCss = TextBoxCssRuntime as new () => TextBoxCss;
+import { textBoxEdgeKeywords } from './keyword-sets.js';
 
 /**
  * text-box-edge 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextBoxEdgeKeywords = KeywordValuesOf<
-  typeof keywords_1a3ac66644d2,
+  typeof textBoxEdgeKeywords,
   Property.TextBoxEdge | CssString
 >;
 /**
@@ -18411,14 +18046,11 @@ export type TextBoxEdgeKeywords = KeywordValuesOf<
  * @example
  * new TextBoxEdgeKeywords()
  */
-export const TextBoxEdgeKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextBoxEdgeKeywords {
-    constructor() {
-      Object.assign(this, keywords_1a3ac66644d2);
-    }
-  },
-  'TextBoxEdgeKeywords',
-) as new () => TextBoxEdgeKeywords;
+export const TextBoxEdgeKeywords = class TextBoxEdgeKeywords {
+  constructor() {
+    Object.assign(this, textBoxEdgeKeywords);
+  }
+} as new () => TextBoxEdgeKeywords;
 
 /**
  * text-box-edge 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18431,7 +18063,7 @@ class TextBoxEdgeCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-box-edge');
-    initializeKeywordDeclarations(this, 'text-box-edge', keywords_1a3ac66644d2);
+    initializeKeywordDeclarations(this, 'text-box-edge', textBoxEdgeKeywords);
   }
   /**
    * 原样生成 text-box-edge 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18456,17 +18088,14 @@ export type TextBoxEdgeCss = TextBoxEdgeCssRuntime & KeywordDeclarations<TextBox
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-edge
  */
-export const TextBoxEdgeCss = /* @__PURE__ */ keywordConstructor(
-  TextBoxEdgeCssRuntime,
-  'TextBoxEdgeCss',
-) as new () => TextBoxEdgeCss;
-import { keywords_276f6f81affc } from './keyword-sets.js';
+export const TextBoxEdgeCss = TextBoxEdgeCssRuntime as new () => TextBoxEdgeCss;
+import { textBoxTrimKeywords } from './keyword-sets.js';
 
 /**
  * text-box-trim 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextBoxTrimKeywords = KeywordValuesOf<
-  typeof keywords_276f6f81affc,
+  typeof textBoxTrimKeywords,
   Property.TextBoxTrim | CssString
 >;
 /**
@@ -18474,14 +18103,11 @@ export type TextBoxTrimKeywords = KeywordValuesOf<
  * @example
  * new TextBoxTrimKeywords()
  */
-export const TextBoxTrimKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextBoxTrimKeywords {
-    constructor() {
-      Object.assign(this, keywords_276f6f81affc);
-    }
-  },
-  'TextBoxTrimKeywords',
-) as new () => TextBoxTrimKeywords;
+export const TextBoxTrimKeywords = class TextBoxTrimKeywords {
+  constructor() {
+    Object.assign(this, textBoxTrimKeywords);
+  }
+} as new () => TextBoxTrimKeywords;
 
 /**
  * text-box-trim 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18494,7 +18120,7 @@ class TextBoxTrimCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-box-trim');
-    initializeKeywordDeclarations(this, 'text-box-trim', keywords_276f6f81affc);
+    initializeKeywordDeclarations(this, 'text-box-trim', textBoxTrimKeywords);
   }
   /**
    * 原样生成 text-box-trim 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18519,17 +18145,14 @@ export type TextBoxTrimCss = TextBoxTrimCssRuntime & KeywordDeclarations<TextBox
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-box-trim
  */
-export const TextBoxTrimCss = /* @__PURE__ */ keywordConstructor(
-  TextBoxTrimCssRuntime,
-  'TextBoxTrimCss',
-) as new () => TextBoxTrimCss;
-import { keywords_7aa6c342783d } from './keyword-sets.js';
+export const TextBoxTrimCss = TextBoxTrimCssRuntime as new () => TextBoxTrimCss;
+import { textCombineUprightKeywords } from './keyword-sets.js';
 
 /**
  * text-combine-upright 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextCombineUprightKeywords = KeywordValuesOf<
-  typeof keywords_7aa6c342783d,
+  typeof textCombineUprightKeywords,
   Property.TextCombineUpright | CssString
 >;
 /**
@@ -18537,14 +18160,11 @@ export type TextCombineUprightKeywords = KeywordValuesOf<
  * @example
  * new TextCombineUprightKeywords()
  */
-export const TextCombineUprightKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextCombineUprightKeywords {
-    constructor() {
-      Object.assign(this, keywords_7aa6c342783d);
-    }
-  },
-  'TextCombineUprightKeywords',
-) as new () => TextCombineUprightKeywords;
+export const TextCombineUprightKeywords = class TextCombineUprightKeywords {
+  constructor() {
+    Object.assign(this, textCombineUprightKeywords);
+  }
+} as new () => TextCombineUprightKeywords;
 
 /**
  * text-combine-upright 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18557,7 +18177,7 @@ class TextCombineUprightCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-combine-upright');
-    initializeKeywordDeclarations(this, 'text-combine-upright', keywords_7aa6c342783d);
+    initializeKeywordDeclarations(this, 'text-combine-upright', textCombineUprightKeywords);
   }
   /**
    * 原样生成 text-combine-upright 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18583,17 +18203,15 @@ export type TextCombineUprightCss = TextCombineUprightCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-combine-upright
  */
-export const TextCombineUprightCss = /* @__PURE__ */ keywordConstructor(
-  TextCombineUprightCssRuntime,
-  'TextCombineUprightCss',
-) as new () => TextCombineUprightCss;
-import { keywords_c631abd621ea } from './keyword-sets.js';
+export const TextCombineUprightCss =
+  TextCombineUprightCssRuntime as new () => TextCombineUprightCss;
+import { textDecorationKeywords } from './keyword-sets.js';
 
 /**
  * text-decoration 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextDecorationKeywords = KeywordValuesOf<
-  typeof keywords_c631abd621ea,
+  typeof textDecorationKeywords,
   Property.TextDecoration | CssString
 >;
 /**
@@ -18601,14 +18219,11 @@ export type TextDecorationKeywords = KeywordValuesOf<
  * @example
  * new TextDecorationKeywords()
  */
-export const TextDecorationKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextDecorationKeywords {
-    constructor() {
-      Object.assign(this, keywords_c631abd621ea);
-    }
-  },
-  'TextDecorationKeywords',
-) as new () => TextDecorationKeywords;
+export const TextDecorationKeywords = class TextDecorationKeywords {
+  constructor() {
+    Object.assign(this, textDecorationKeywords);
+  }
+} as new () => TextDecorationKeywords;
 
 /**
  * text-decoration 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18621,7 +18236,7 @@ class TextDecorationCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('text-decoration');
-    initializeKeywordDeclarations(this, 'text-decoration', keywords_c631abd621ea);
+    initializeKeywordDeclarations(this, 'text-decoration', textDecorationKeywords);
   }
   /**
    * 原样生成 text-decoration 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18779,16 +18394,13 @@ export type TextDecorationCss = TextDecorationCssRuntime &
  * 集中设置文本装饰线的位置、线型、颜色及粗细。（text-decoration）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration
  */
-export const TextDecorationCss = /* @__PURE__ */ keywordConstructor(
-  TextDecorationCssRuntime,
-  'TextDecorationCss',
-) as new () => TextDecorationCss;
+export const TextDecorationCss = TextDecorationCssRuntime as new () => TextDecorationCss;
 
 /**
  * text-decoration-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextDecorationColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.TextDecorationColor | CssString
 >;
 /**
@@ -18796,14 +18408,11 @@ export type TextDecorationColorKeywords = KeywordValuesOf<
  * @example
  * new TextDecorationColorKeywords()
  */
-export const TextDecorationColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextDecorationColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'TextDecorationColorKeywords',
-) as new () => TextDecorationColorKeywords;
+export const TextDecorationColorKeywords = class TextDecorationColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => TextDecorationColorKeywords;
 
 /**
  * text-decoration-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18816,7 +18425,7 @@ class TextDecorationColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-decoration-color');
-    initializeKeywordDeclarations(this, 'text-decoration-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'text-decoration-color', colorKeywords);
   }
   /**
    * 原样生成 text-decoration-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18920,17 +18529,15 @@ export type TextDecorationColorCss = TextDecorationColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-color
  */
-export const TextDecorationColorCss = /* @__PURE__ */ keywordConstructor(
-  TextDecorationColorCssRuntime,
-  'TextDecorationColorCss',
-) as new () => TextDecorationColorCss;
-import { keywords_6a72b3d5c30b } from './keyword-sets.js';
+export const TextDecorationColorCss =
+  TextDecorationColorCssRuntime as new () => TextDecorationColorCss;
+import { textDecorationLineKeywords } from './keyword-sets.js';
 
 /**
  * text-decoration-line 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextDecorationLineKeywords = KeywordValuesOf<
-  typeof keywords_6a72b3d5c30b,
+  typeof textDecorationLineKeywords,
   Property.TextDecorationLine | CssString
 >;
 /**
@@ -18938,14 +18545,11 @@ export type TextDecorationLineKeywords = KeywordValuesOf<
  * @example
  * new TextDecorationLineKeywords()
  */
-export const TextDecorationLineKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextDecorationLineKeywords {
-    constructor() {
-      Object.assign(this, keywords_6a72b3d5c30b);
-    }
-  },
-  'TextDecorationLineKeywords',
-) as new () => TextDecorationLineKeywords;
+export const TextDecorationLineKeywords = class TextDecorationLineKeywords {
+  constructor() {
+    Object.assign(this, textDecorationLineKeywords);
+  }
+} as new () => TextDecorationLineKeywords;
 
 /**
  * text-decoration-line 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18958,7 +18562,7 @@ class TextDecorationLineCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-decoration-line');
-    initializeKeywordDeclarations(this, 'text-decoration-line', keywords_6a72b3d5c30b);
+    initializeKeywordDeclarations(this, 'text-decoration-line', textDecorationLineKeywords);
   }
   /**
    * 原样生成 text-decoration-line 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18984,17 +18588,15 @@ export type TextDecorationLineCss = TextDecorationLineCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-line
  */
-export const TextDecorationLineCss = /* @__PURE__ */ keywordConstructor(
-  TextDecorationLineCssRuntime,
-  'TextDecorationLineCss',
-) as new () => TextDecorationLineCss;
-import { keywords_d25e81258978 } from './keyword-sets.js';
+export const TextDecorationLineCss =
+  TextDecorationLineCssRuntime as new () => TextDecorationLineCss;
+import { textDecorationSkipKeywords } from './keyword-sets.js';
 
 /**
  * text-decoration-skip 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextDecorationSkipKeywords = KeywordValuesOf<
-  typeof keywords_d25e81258978,
+  typeof textDecorationSkipKeywords,
   Property.TextDecorationSkip | CssString
 >;
 /**
@@ -19002,14 +18604,11 @@ export type TextDecorationSkipKeywords = KeywordValuesOf<
  * @example
  * new TextDecorationSkipKeywords()
  */
-export const TextDecorationSkipKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextDecorationSkipKeywords {
-    constructor() {
-      Object.assign(this, keywords_d25e81258978);
-    }
-  },
-  'TextDecorationSkipKeywords',
-) as new () => TextDecorationSkipKeywords;
+export const TextDecorationSkipKeywords = class TextDecorationSkipKeywords {
+  constructor() {
+    Object.assign(this, textDecorationSkipKeywords);
+  }
+} as new () => TextDecorationSkipKeywords;
 
 /**
  * text-decoration-skip 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19022,7 +18621,7 @@ class TextDecorationSkipCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-decoration-skip');
-    initializeKeywordDeclarations(this, 'text-decoration-skip', keywords_d25e81258978);
+    initializeKeywordDeclarations(this, 'text-decoration-skip', textDecorationSkipKeywords);
   }
   /**
    * 原样生成 text-decoration-skip 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19048,17 +18647,15 @@ export type TextDecorationSkipCss = TextDecorationSkipCssRuntime &
  * CSS 初始值：`objects`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip
  */
-export const TextDecorationSkipCss = /* @__PURE__ */ keywordConstructor(
-  TextDecorationSkipCssRuntime,
-  'TextDecorationSkipCss',
-) as new () => TextDecorationSkipCss;
-import { keywords_1e7de12470e7 } from './keyword-sets.js';
+export const TextDecorationSkipCss =
+  TextDecorationSkipCssRuntime as new () => TextDecorationSkipCss;
+import { textDecorationSkipInkKeywords } from './keyword-sets.js';
 
 /**
  * text-decoration-skip-ink 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextDecorationSkipInkKeywords = KeywordValuesOf<
-  typeof keywords_1e7de12470e7,
+  typeof textDecorationSkipInkKeywords,
   Property.TextDecorationSkipInk | CssString
 >;
 /**
@@ -19066,14 +18663,11 @@ export type TextDecorationSkipInkKeywords = KeywordValuesOf<
  * @example
  * new TextDecorationSkipInkKeywords()
  */
-export const TextDecorationSkipInkKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextDecorationSkipInkKeywords {
-    constructor() {
-      Object.assign(this, keywords_1e7de12470e7);
-    }
-  },
-  'TextDecorationSkipInkKeywords',
-) as new () => TextDecorationSkipInkKeywords;
+export const TextDecorationSkipInkKeywords = class TextDecorationSkipInkKeywords {
+  constructor() {
+    Object.assign(this, textDecorationSkipInkKeywords);
+  }
+} as new () => TextDecorationSkipInkKeywords;
 
 /**
  * text-decoration-skip-ink 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19086,7 +18680,7 @@ class TextDecorationSkipInkCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-decoration-skip-ink');
-    initializeKeywordDeclarations(this, 'text-decoration-skip-ink', keywords_1e7de12470e7);
+    initializeKeywordDeclarations(this, 'text-decoration-skip-ink', textDecorationSkipInkKeywords);
   }
   /**
    * 原样生成 text-decoration-skip-ink 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19112,17 +18706,15 @@ export type TextDecorationSkipInkCss = TextDecorationSkipInkCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-skip-ink
  */
-export const TextDecorationSkipInkCss = /* @__PURE__ */ keywordConstructor(
-  TextDecorationSkipInkCssRuntime,
-  'TextDecorationSkipInkCss',
-) as new () => TextDecorationSkipInkCss;
-import { keywords_373ec308a693 } from './keyword-sets.js';
+export const TextDecorationSkipInkCss =
+  TextDecorationSkipInkCssRuntime as new () => TextDecorationSkipInkCss;
+import { textDecorationStyleKeywords } from './keyword-sets.js';
 
 /**
  * text-decoration-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextDecorationStyleKeywords = KeywordValuesOf<
-  typeof keywords_373ec308a693,
+  typeof textDecorationStyleKeywords,
   Property.TextDecorationStyle | CssString
 >;
 /**
@@ -19130,14 +18722,11 @@ export type TextDecorationStyleKeywords = KeywordValuesOf<
  * @example
  * new TextDecorationStyleKeywords()
  */
-export const TextDecorationStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextDecorationStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_373ec308a693);
-    }
-  },
-  'TextDecorationStyleKeywords',
-) as new () => TextDecorationStyleKeywords;
+export const TextDecorationStyleKeywords = class TextDecorationStyleKeywords {
+  constructor() {
+    Object.assign(this, textDecorationStyleKeywords);
+  }
+} as new () => TextDecorationStyleKeywords;
 
 /**
  * text-decoration-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19150,7 +18739,7 @@ class TextDecorationStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-decoration-style');
-    initializeKeywordDeclarations(this, 'text-decoration-style', keywords_373ec308a693);
+    initializeKeywordDeclarations(this, 'text-decoration-style', textDecorationStyleKeywords);
   }
   /**
    * 原样生成 text-decoration-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19176,17 +18765,15 @@ export type TextDecorationStyleCss = TextDecorationStyleCssRuntime &
  * CSS 初始值：`solid`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-style
  */
-export const TextDecorationStyleCss = /* @__PURE__ */ keywordConstructor(
-  TextDecorationStyleCssRuntime,
-  'TextDecorationStyleCss',
-) as new () => TextDecorationStyleCss;
-import { keywords_7982fceeac8e } from './keyword-sets.js';
+export const TextDecorationStyleCss =
+  TextDecorationStyleCssRuntime as new () => TextDecorationStyleCss;
+import { textDecorationThicknessKeywords } from './keyword-sets.js';
 
 /**
  * text-decoration-thickness 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextDecorationThicknessKeywords = KeywordValuesOf<
-  typeof keywords_7982fceeac8e,
+  typeof textDecorationThicknessKeywords,
   Property.TextDecorationThickness | CssString
 >;
 /**
@@ -19194,14 +18781,11 @@ export type TextDecorationThicknessKeywords = KeywordValuesOf<
  * @example
  * new TextDecorationThicknessKeywords()
  */
-export const TextDecorationThicknessKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextDecorationThicknessKeywords {
-    constructor() {
-      Object.assign(this, keywords_7982fceeac8e);
-    }
-  },
-  'TextDecorationThicknessKeywords',
-) as new () => TextDecorationThicknessKeywords;
+export const TextDecorationThicknessKeywords = class TextDecorationThicknessKeywords {
+  constructor() {
+    Object.assign(this, textDecorationThicknessKeywords);
+  }
+} as new () => TextDecorationThicknessKeywords;
 
 /**
  * text-decoration-thickness 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19214,7 +18798,11 @@ class TextDecorationThicknessCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('text-decoration-thickness');
-    initializeKeywordDeclarations(this, 'text-decoration-thickness', keywords_7982fceeac8e);
+    initializeKeywordDeclarations(
+      this,
+      'text-decoration-thickness',
+      textDecorationThicknessKeywords,
+    );
   }
   /**
    * 原样生成 text-decoration-thickness 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19308,17 +18896,15 @@ export type TextDecorationThicknessCss = TextDecorationThicknessCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-decoration-thickness
  */
-export const TextDecorationThicknessCss = /* @__PURE__ */ keywordConstructor(
-  TextDecorationThicknessCssRuntime,
-  'TextDecorationThicknessCss',
-) as new () => TextDecorationThicknessCss;
-import { keywords_fe9a993d10e6 } from './keyword-sets.js';
+export const TextDecorationThicknessCss =
+  TextDecorationThicknessCssRuntime as new () => TextDecorationThicknessCss;
+import { textEmphasisKeywords } from './keyword-sets.js';
 
 /**
  * text-emphasis 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextEmphasisKeywords = KeywordValuesOf<
-  typeof keywords_fe9a993d10e6,
+  typeof textEmphasisKeywords,
   Property.TextEmphasis | CssString
 >;
 /**
@@ -19326,14 +18912,11 @@ export type TextEmphasisKeywords = KeywordValuesOf<
  * @example
  * new TextEmphasisKeywords()
  */
-export const TextEmphasisKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextEmphasisKeywords {
-    constructor() {
-      Object.assign(this, keywords_fe9a993d10e6);
-    }
-  },
-  'TextEmphasisKeywords',
-) as new () => TextEmphasisKeywords;
+export const TextEmphasisKeywords = class TextEmphasisKeywords {
+  constructor() {
+    Object.assign(this, textEmphasisKeywords);
+  }
+} as new () => TextEmphasisKeywords;
 
 /**
  * text-emphasis 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19346,7 +18929,7 @@ class TextEmphasisCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-emphasis');
-    initializeKeywordDeclarations(this, 'text-emphasis', keywords_fe9a993d10e6);
+    initializeKeywordDeclarations(this, 'text-emphasis', textEmphasisKeywords);
   }
   /**
    * 原样生成 text-emphasis 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19447,16 +19030,13 @@ export type TextEmphasisCss = TextEmphasisCssRuntime & KeywordDeclarations<TextE
  * 同时设置文字着重号的样式和颜色。（text-emphasis）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis
  */
-export const TextEmphasisCss = /* @__PURE__ */ keywordConstructor(
-  TextEmphasisCssRuntime,
-  'TextEmphasisCss',
-) as new () => TextEmphasisCss;
+export const TextEmphasisCss = TextEmphasisCssRuntime as new () => TextEmphasisCss;
 
 /**
  * text-emphasis-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextEmphasisColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.TextEmphasisColor | CssString
 >;
 /**
@@ -19464,14 +19044,11 @@ export type TextEmphasisColorKeywords = KeywordValuesOf<
  * @example
  * new TextEmphasisColorKeywords()
  */
-export const TextEmphasisColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextEmphasisColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'TextEmphasisColorKeywords',
-) as new () => TextEmphasisColorKeywords;
+export const TextEmphasisColorKeywords = class TextEmphasisColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => TextEmphasisColorKeywords;
 
 /**
  * text-emphasis-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19484,7 +19061,7 @@ class TextEmphasisColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-emphasis-color');
-    initializeKeywordDeclarations(this, 'text-emphasis-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'text-emphasis-color', colorKeywords);
   }
   /**
    * 原样生成 text-emphasis-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19588,17 +19165,14 @@ export type TextEmphasisColorCss = TextEmphasisColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-color
  */
-export const TextEmphasisColorCss = /* @__PURE__ */ keywordConstructor(
-  TextEmphasisColorCssRuntime,
-  'TextEmphasisColorCss',
-) as new () => TextEmphasisColorCss;
-import { keywords_ea4fe7b95a80 } from './keyword-sets.js';
+export const TextEmphasisColorCss = TextEmphasisColorCssRuntime as new () => TextEmphasisColorCss;
+import { textEmphasisPositionKeywords } from './keyword-sets.js';
 
 /**
  * text-emphasis-position 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextEmphasisPositionKeywords = KeywordValuesOf<
-  typeof keywords_ea4fe7b95a80,
+  typeof textEmphasisPositionKeywords,
   Property.TextEmphasisPosition | CssString
 >;
 /**
@@ -19606,14 +19180,11 @@ export type TextEmphasisPositionKeywords = KeywordValuesOf<
  * @example
  * new TextEmphasisPositionKeywords()
  */
-export const TextEmphasisPositionKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextEmphasisPositionKeywords {
-    constructor() {
-      Object.assign(this, keywords_ea4fe7b95a80);
-    }
-  },
-  'TextEmphasisPositionKeywords',
-) as new () => TextEmphasisPositionKeywords;
+export const TextEmphasisPositionKeywords = class TextEmphasisPositionKeywords {
+  constructor() {
+    Object.assign(this, textEmphasisPositionKeywords);
+  }
+} as new () => TextEmphasisPositionKeywords;
 
 /**
  * text-emphasis-position 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19626,7 +19197,7 @@ class TextEmphasisPositionCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-emphasis-position');
-    initializeKeywordDeclarations(this, 'text-emphasis-position', keywords_ea4fe7b95a80);
+    initializeKeywordDeclarations(this, 'text-emphasis-position', textEmphasisPositionKeywords);
   }
   /**
    * 原样生成 text-emphasis-position 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19652,17 +19223,15 @@ export type TextEmphasisPositionCss = TextEmphasisPositionCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-position
  */
-export const TextEmphasisPositionCss = /* @__PURE__ */ keywordConstructor(
-  TextEmphasisPositionCssRuntime,
-  'TextEmphasisPositionCss',
-) as new () => TextEmphasisPositionCss;
-import { keywords_515f5a1d911d } from './keyword-sets.js';
+export const TextEmphasisPositionCss =
+  TextEmphasisPositionCssRuntime as new () => TextEmphasisPositionCss;
+import { textEmphasisStyleKeywords } from './keyword-sets.js';
 
 /**
  * text-emphasis-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextEmphasisStyleKeywords = KeywordValuesOf<
-  typeof keywords_515f5a1d911d,
+  typeof textEmphasisStyleKeywords,
   Property.TextEmphasisStyle | CssString
 >;
 /**
@@ -19670,14 +19239,11 @@ export type TextEmphasisStyleKeywords = KeywordValuesOf<
  * @example
  * new TextEmphasisStyleKeywords()
  */
-export const TextEmphasisStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextEmphasisStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_515f5a1d911d);
-    }
-  },
-  'TextEmphasisStyleKeywords',
-) as new () => TextEmphasisStyleKeywords;
+export const TextEmphasisStyleKeywords = class TextEmphasisStyleKeywords {
+  constructor() {
+    Object.assign(this, textEmphasisStyleKeywords);
+  }
+} as new () => TextEmphasisStyleKeywords;
 
 /**
  * text-emphasis-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19690,7 +19256,7 @@ class TextEmphasisStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-emphasis-style');
-    initializeKeywordDeclarations(this, 'text-emphasis-style', keywords_515f5a1d911d);
+    initializeKeywordDeclarations(this, 'text-emphasis-style', textEmphasisStyleKeywords);
   }
   /**
    * 原样生成 text-emphasis-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19716,16 +19282,13 @@ export type TextEmphasisStyleCss = TextEmphasisStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-emphasis-style
  */
-export const TextEmphasisStyleCss = /* @__PURE__ */ keywordConstructor(
-  TextEmphasisStyleCssRuntime,
-  'TextEmphasisStyleCss',
-) as new () => TextEmphasisStyleCss;
+export const TextEmphasisStyleCss = TextEmphasisStyleCssRuntime as new () => TextEmphasisStyleCss;
 
 /**
  * text-indent 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextIndentKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.TextIndent | CssString
 >;
 /**
@@ -19733,14 +19296,11 @@ export type TextIndentKeywords = KeywordValuesOf<
  * @example
  * new TextIndentKeywords()
  */
-export const TextIndentKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextIndentKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'TextIndentKeywords',
-) as new () => TextIndentKeywords;
+export const TextIndentKeywords = class TextIndentKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => TextIndentKeywords;
 
 /**
  * text-indent 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19753,7 +19313,7 @@ class TextIndentCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('text-indent');
-    initializeKeywordDeclarations(this, 'text-indent', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'text-indent', globalKeywords);
   }
   /**
    * 原样生成 text-indent 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19846,17 +19406,14 @@ export type TextIndentCss = TextIndentCssRuntime & KeywordDeclarations<TextInden
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-indent
  */
-export const TextIndentCss = /* @__PURE__ */ keywordConstructor(
-  TextIndentCssRuntime,
-  'TextIndentCss',
-) as new () => TextIndentCss;
-import { keywords_d493646f86f3 } from './keyword-sets.js';
+export const TextIndentCss = TextIndentCssRuntime as new () => TextIndentCss;
+import { textJustifyKeywords } from './keyword-sets.js';
 
 /**
  * text-justify 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextJustifyKeywords = KeywordValuesOf<
-  typeof keywords_d493646f86f3,
+  typeof textJustifyKeywords,
   Property.TextJustify | CssString
 >;
 /**
@@ -19864,14 +19421,11 @@ export type TextJustifyKeywords = KeywordValuesOf<
  * @example
  * new TextJustifyKeywords()
  */
-export const TextJustifyKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextJustifyKeywords {
-    constructor() {
-      Object.assign(this, keywords_d493646f86f3);
-    }
-  },
-  'TextJustifyKeywords',
-) as new () => TextJustifyKeywords;
+export const TextJustifyKeywords = class TextJustifyKeywords {
+  constructor() {
+    Object.assign(this, textJustifyKeywords);
+  }
+} as new () => TextJustifyKeywords;
 
 /**
  * text-justify 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19884,7 +19438,7 @@ class TextJustifyCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-justify');
-    initializeKeywordDeclarations(this, 'text-justify', keywords_d493646f86f3);
+    initializeKeywordDeclarations(this, 'text-justify', textJustifyKeywords);
   }
   /**
    * 原样生成 text-justify 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19909,17 +19463,14 @@ export type TextJustifyCss = TextJustifyCssRuntime & KeywordDeclarations<TextJus
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-justify
  */
-export const TextJustifyCss = /* @__PURE__ */ keywordConstructor(
-  TextJustifyCssRuntime,
-  'TextJustifyCss',
-) as new () => TextJustifyCss;
-import { keywords_b79bb799f5d7 } from './keyword-sets.js';
+export const TextJustifyCss = TextJustifyCssRuntime as new () => TextJustifyCss;
+import { textOrientationKeywords } from './keyword-sets.js';
 
 /**
  * text-orientation 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextOrientationKeywords = KeywordValuesOf<
-  typeof keywords_b79bb799f5d7,
+  typeof textOrientationKeywords,
   Property.TextOrientation | CssString
 >;
 /**
@@ -19927,14 +19478,11 @@ export type TextOrientationKeywords = KeywordValuesOf<
  * @example
  * new TextOrientationKeywords()
  */
-export const TextOrientationKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextOrientationKeywords {
-    constructor() {
-      Object.assign(this, keywords_b79bb799f5d7);
-    }
-  },
-  'TextOrientationKeywords',
-) as new () => TextOrientationKeywords;
+export const TextOrientationKeywords = class TextOrientationKeywords {
+  constructor() {
+    Object.assign(this, textOrientationKeywords);
+  }
+} as new () => TextOrientationKeywords;
 
 /**
  * text-orientation 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19947,7 +19495,7 @@ class TextOrientationCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-orientation');
-    initializeKeywordDeclarations(this, 'text-orientation', keywords_b79bb799f5d7);
+    initializeKeywordDeclarations(this, 'text-orientation', textOrientationKeywords);
   }
   /**
    * 原样生成 text-orientation 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19973,17 +19521,14 @@ export type TextOrientationCss = TextOrientationCssRuntime &
  * CSS 初始值：`mixed`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-orientation
  */
-export const TextOrientationCss = /* @__PURE__ */ keywordConstructor(
-  TextOrientationCssRuntime,
-  'TextOrientationCss',
-) as new () => TextOrientationCss;
-import { keywords_b424cbafdd7b } from './keyword-sets.js';
+export const TextOrientationCss = TextOrientationCssRuntime as new () => TextOrientationCss;
+import { textOverflowKeywords } from './keyword-sets.js';
 
 /**
  * text-overflow 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextOverflowKeywords = KeywordValuesOf<
-  typeof keywords_b424cbafdd7b,
+  typeof textOverflowKeywords,
   Property.TextOverflow | CssString
 >;
 /**
@@ -19991,14 +19536,11 @@ export type TextOverflowKeywords = KeywordValuesOf<
  * @example
  * new TextOverflowKeywords()
  */
-export const TextOverflowKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextOverflowKeywords {
-    constructor() {
-      Object.assign(this, keywords_b424cbafdd7b);
-    }
-  },
-  'TextOverflowKeywords',
-) as new () => TextOverflowKeywords;
+export const TextOverflowKeywords = class TextOverflowKeywords {
+  constructor() {
+    Object.assign(this, textOverflowKeywords);
+  }
+} as new () => TextOverflowKeywords;
 
 /**
  * text-overflow 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20011,7 +19553,7 @@ class TextOverflowCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-overflow');
-    initializeKeywordDeclarations(this, 'text-overflow', keywords_b424cbafdd7b);
+    initializeKeywordDeclarations(this, 'text-overflow', textOverflowKeywords);
   }
   /**
    * 原样生成 text-overflow 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20046,17 +19588,14 @@ export type TextOverflowCss = TextOverflowCssRuntime & KeywordDeclarations<TextO
  * css(s.maxWidth.rem(12), s.whiteSpace.nowrap, s.overflow.hidden, s.textOverflow.ellipsis)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-overflow
  */
-export const TextOverflowCss = /* @__PURE__ */ keywordConstructor(
-  TextOverflowCssRuntime,
-  'TextOverflowCss',
-) as new () => TextOverflowCss;
-import { keywords_ca93fffd6611 } from './keyword-sets.js';
+export const TextOverflowCss = TextOverflowCssRuntime as new () => TextOverflowCss;
+import { textRenderingKeywords } from './keyword-sets.js';
 
 /**
  * text-rendering 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextRenderingKeywords = KeywordValuesOf<
-  typeof keywords_ca93fffd6611,
+  typeof textRenderingKeywords,
   Property.TextRendering | CssString
 >;
 /**
@@ -20064,14 +19603,11 @@ export type TextRenderingKeywords = KeywordValuesOf<
  * @example
  * new TextRenderingKeywords()
  */
-export const TextRenderingKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextRenderingKeywords {
-    constructor() {
-      Object.assign(this, keywords_ca93fffd6611);
-    }
-  },
-  'TextRenderingKeywords',
-) as new () => TextRenderingKeywords;
+export const TextRenderingKeywords = class TextRenderingKeywords {
+  constructor() {
+    Object.assign(this, textRenderingKeywords);
+  }
+} as new () => TextRenderingKeywords;
 
 /**
  * text-rendering 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20084,7 +19620,7 @@ class TextRenderingCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-rendering');
-    initializeKeywordDeclarations(this, 'text-rendering', keywords_ca93fffd6611);
+    initializeKeywordDeclarations(this, 'text-rendering', textRenderingKeywords);
   }
   /**
    * 原样生成 text-rendering 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20109,16 +19645,13 @@ export type TextRenderingCss = TextRenderingCssRuntime & KeywordDeclarations<Tex
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-rendering
  */
-export const TextRenderingCss = /* @__PURE__ */ keywordConstructor(
-  TextRenderingCssRuntime,
-  'TextRenderingCss',
-) as new () => TextRenderingCss;
+export const TextRenderingCss = TextRenderingCssRuntime as new () => TextRenderingCss;
 
 /**
  * text-shadow 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextShadowKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.TextShadow | CssString
 >;
 /**
@@ -20126,14 +19659,11 @@ export type TextShadowKeywords = KeywordValuesOf<
  * @example
  * new TextShadowKeywords()
  */
-export const TextShadowKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextShadowKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'TextShadowKeywords',
-) as new () => TextShadowKeywords;
+export const TextShadowKeywords = class TextShadowKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => TextShadowKeywords;
 
 /**
  * text-shadow 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20146,7 +19676,7 @@ class TextShadowCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-shadow');
-    initializeKeywordDeclarations(this, 'text-shadow', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'text-shadow', noneKeywords);
   }
   /**
    * 原样生成 text-shadow 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20171,17 +19701,14 @@ export type TextShadowCss = TextShadowCssRuntime & KeywordDeclarations<TextShado
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-shadow
  */
-export const TextShadowCss = /* @__PURE__ */ keywordConstructor(
-  TextShadowCssRuntime,
-  'TextShadowCss',
-) as new () => TextShadowCss;
-import { keywords_da68e56f4df2 } from './keyword-sets.js';
+export const TextShadowCss = TextShadowCssRuntime as new () => TextShadowCss;
+import { autoNoneKeywords } from './keyword-sets.js';
 
 /**
  * text-size-adjust 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextSizeAdjustKeywords = KeywordValuesOf<
-  typeof keywords_da68e56f4df2,
+  typeof autoNoneKeywords,
   Property.TextSizeAdjust | CssString
 >;
 /**
@@ -20189,14 +19716,11 @@ export type TextSizeAdjustKeywords = KeywordValuesOf<
  * @example
  * new TextSizeAdjustKeywords()
  */
-export const TextSizeAdjustKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextSizeAdjustKeywords {
-    constructor() {
-      Object.assign(this, keywords_da68e56f4df2);
-    }
-  },
-  'TextSizeAdjustKeywords',
-) as new () => TextSizeAdjustKeywords;
+export const TextSizeAdjustKeywords = class TextSizeAdjustKeywords {
+  constructor() {
+    Object.assign(this, autoNoneKeywords);
+  }
+} as new () => TextSizeAdjustKeywords;
 
 /**
  * text-size-adjust 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20209,7 +19733,7 @@ class TextSizeAdjustCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-size-adjust');
-    initializeKeywordDeclarations(this, 'text-size-adjust', keywords_da68e56f4df2);
+    initializeKeywordDeclarations(this, 'text-size-adjust', autoNoneKeywords);
   }
   /**
    * 原样生成 text-size-adjust 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20303,17 +19827,14 @@ export type TextSizeAdjustCss = TextSizeAdjustCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-size-adjust
  */
-export const TextSizeAdjustCss = /* @__PURE__ */ keywordConstructor(
-  TextSizeAdjustCssRuntime,
-  'TextSizeAdjustCss',
-) as new () => TextSizeAdjustCss;
-import { keywords_b6e943e8ada0 } from './keyword-sets.js';
+export const TextSizeAdjustCss = TextSizeAdjustCssRuntime as new () => TextSizeAdjustCss;
+import { textSpacingTrimKeywords } from './keyword-sets.js';
 
 /**
  * text-spacing-trim 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextSpacingTrimKeywords = KeywordValuesOf<
-  typeof keywords_b6e943e8ada0,
+  typeof textSpacingTrimKeywords,
   Property.TextSpacingTrim | CssString
 >;
 /**
@@ -20321,14 +19842,11 @@ export type TextSpacingTrimKeywords = KeywordValuesOf<
  * @example
  * new TextSpacingTrimKeywords()
  */
-export const TextSpacingTrimKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextSpacingTrimKeywords {
-    constructor() {
-      Object.assign(this, keywords_b6e943e8ada0);
-    }
-  },
-  'TextSpacingTrimKeywords',
-) as new () => TextSpacingTrimKeywords;
+export const TextSpacingTrimKeywords = class TextSpacingTrimKeywords {
+  constructor() {
+    Object.assign(this, textSpacingTrimKeywords);
+  }
+} as new () => TextSpacingTrimKeywords;
 
 /**
  * text-spacing-trim 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20341,7 +19859,7 @@ class TextSpacingTrimCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-spacing-trim');
-    initializeKeywordDeclarations(this, 'text-spacing-trim', keywords_b6e943e8ada0);
+    initializeKeywordDeclarations(this, 'text-spacing-trim', textSpacingTrimKeywords);
   }
   /**
    * 原样生成 text-spacing-trim 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20367,17 +19885,14 @@ export type TextSpacingTrimCss = TextSpacingTrimCssRuntime &
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-spacing-trim
  */
-export const TextSpacingTrimCss = /* @__PURE__ */ keywordConstructor(
-  TextSpacingTrimCssRuntime,
-  'TextSpacingTrimCss',
-) as new () => TextSpacingTrimCss;
-import { keywords_7530fa617603 } from './keyword-sets.js';
+export const TextSpacingTrimCss = TextSpacingTrimCssRuntime as new () => TextSpacingTrimCss;
+import { textTransformKeywords } from './keyword-sets.js';
 
 /**
  * text-transform 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextTransformKeywords = KeywordValuesOf<
-  typeof keywords_7530fa617603,
+  typeof textTransformKeywords,
   Property.TextTransform | CssString
 >;
 /**
@@ -20385,14 +19900,11 @@ export type TextTransformKeywords = KeywordValuesOf<
  * @example
  * new TextTransformKeywords()
  */
-export const TextTransformKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextTransformKeywords {
-    constructor() {
-      Object.assign(this, keywords_7530fa617603);
-    }
-  },
-  'TextTransformKeywords',
-) as new () => TextTransformKeywords;
+export const TextTransformKeywords = class TextTransformKeywords {
+  constructor() {
+    Object.assign(this, textTransformKeywords);
+  }
+} as new () => TextTransformKeywords;
 
 /**
  * text-transform 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20405,7 +19917,7 @@ class TextTransformCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-transform');
-    initializeKeywordDeclarations(this, 'text-transform', keywords_7530fa617603);
+    initializeKeywordDeclarations(this, 'text-transform', textTransformKeywords);
   }
   /**
    * 原样生成 text-transform 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20430,16 +19942,13 @@ export type TextTransformCss = TextTransformCssRuntime & KeywordDeclarations<Tex
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-transform
  */
-export const TextTransformCss = /* @__PURE__ */ keywordConstructor(
-  TextTransformCssRuntime,
-  'TextTransformCss',
-) as new () => TextTransformCss;
+export const TextTransformCss = TextTransformCssRuntime as new () => TextTransformCss;
 
 /**
  * text-underline-offset 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextUnderlineOffsetKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.TextUnderlineOffset | CssString
 >;
 /**
@@ -20447,14 +19956,11 @@ export type TextUnderlineOffsetKeywords = KeywordValuesOf<
  * @example
  * new TextUnderlineOffsetKeywords()
  */
-export const TextUnderlineOffsetKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextUnderlineOffsetKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'TextUnderlineOffsetKeywords',
-) as new () => TextUnderlineOffsetKeywords;
+export const TextUnderlineOffsetKeywords = class TextUnderlineOffsetKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => TextUnderlineOffsetKeywords;
 
 /**
  * text-underline-offset 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20467,7 +19973,7 @@ class TextUnderlineOffsetCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('text-underline-offset');
-    initializeKeywordDeclarations(this, 'text-underline-offset', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'text-underline-offset', autoKeywords);
   }
   /**
    * 原样生成 text-underline-offset 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20561,17 +20067,15 @@ export type TextUnderlineOffsetCss = TextUnderlineOffsetCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-offset
  */
-export const TextUnderlineOffsetCss = /* @__PURE__ */ keywordConstructor(
-  TextUnderlineOffsetCssRuntime,
-  'TextUnderlineOffsetCss',
-) as new () => TextUnderlineOffsetCss;
-import { keywords_0061c68af2eb } from './keyword-sets.js';
+export const TextUnderlineOffsetCss =
+  TextUnderlineOffsetCssRuntime as new () => TextUnderlineOffsetCss;
+import { textUnderlinePositionKeywords } from './keyword-sets.js';
 
 /**
  * text-underline-position 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextUnderlinePositionKeywords = KeywordValuesOf<
-  typeof keywords_0061c68af2eb,
+  typeof textUnderlinePositionKeywords,
   Property.TextUnderlinePosition | CssString
 >;
 /**
@@ -20579,14 +20083,11 @@ export type TextUnderlinePositionKeywords = KeywordValuesOf<
  * @example
  * new TextUnderlinePositionKeywords()
  */
-export const TextUnderlinePositionKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextUnderlinePositionKeywords {
-    constructor() {
-      Object.assign(this, keywords_0061c68af2eb);
-    }
-  },
-  'TextUnderlinePositionKeywords',
-) as new () => TextUnderlinePositionKeywords;
+export const TextUnderlinePositionKeywords = class TextUnderlinePositionKeywords {
+  constructor() {
+    Object.assign(this, textUnderlinePositionKeywords);
+  }
+} as new () => TextUnderlinePositionKeywords;
 
 /**
  * text-underline-position 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20599,7 +20100,7 @@ class TextUnderlinePositionCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-underline-position');
-    initializeKeywordDeclarations(this, 'text-underline-position', keywords_0061c68af2eb);
+    initializeKeywordDeclarations(this, 'text-underline-position', textUnderlinePositionKeywords);
   }
   /**
    * 原样生成 text-underline-position 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20625,17 +20126,15 @@ export type TextUnderlinePositionCss = TextUnderlinePositionCssRuntime &
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-underline-position
  */
-export const TextUnderlinePositionCss = /* @__PURE__ */ keywordConstructor(
-  TextUnderlinePositionCssRuntime,
-  'TextUnderlinePositionCss',
-) as new () => TextUnderlinePositionCss;
-import { keywords_756de45a46f0 } from './keyword-sets.js';
+export const TextUnderlinePositionCss =
+  TextUnderlinePositionCssRuntime as new () => TextUnderlinePositionCss;
+import { textWrapKeywords } from './keyword-sets.js';
 
 /**
  * text-wrap 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextWrapKeywords = KeywordValuesOf<
-  typeof keywords_756de45a46f0,
+  typeof textWrapKeywords,
   Property.TextWrap | CssString
 >;
 /**
@@ -20643,14 +20142,11 @@ export type TextWrapKeywords = KeywordValuesOf<
  * @example
  * new TextWrapKeywords()
  */
-export const TextWrapKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextWrapKeywords {
-    constructor() {
-      Object.assign(this, keywords_756de45a46f0);
-    }
-  },
-  'TextWrapKeywords',
-) as new () => TextWrapKeywords;
+export const TextWrapKeywords = class TextWrapKeywords {
+  constructor() {
+    Object.assign(this, textWrapKeywords);
+  }
+} as new () => TextWrapKeywords;
 
 /**
  * text-wrap 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20663,7 +20159,7 @@ class TextWrapCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-wrap');
-    initializeKeywordDeclarations(this, 'text-wrap', keywords_756de45a46f0);
+    initializeKeywordDeclarations(this, 'text-wrap', textWrapKeywords);
   }
   /**
    * 原样生成 text-wrap 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20688,17 +20184,14 @@ export type TextWrapCss = TextWrapCssRuntime & KeywordDeclarations<TextWrapKeywo
  * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap
  */
-export const TextWrapCss = /* @__PURE__ */ keywordConstructor(
-  TextWrapCssRuntime,
-  'TextWrapCss',
-) as new () => TextWrapCss;
-import { keywords_ce0d3653c649 } from './keyword-sets.js';
+export const TextWrapCss = TextWrapCssRuntime as new () => TextWrapCss;
+import { textWrapModeKeywords } from './keyword-sets.js';
 
 /**
  * text-wrap-mode 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextWrapModeKeywords = KeywordValuesOf<
-  typeof keywords_ce0d3653c649,
+  typeof textWrapModeKeywords,
   Property.TextWrapMode | CssString
 >;
 /**
@@ -20706,14 +20199,11 @@ export type TextWrapModeKeywords = KeywordValuesOf<
  * @example
  * new TextWrapModeKeywords()
  */
-export const TextWrapModeKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextWrapModeKeywords {
-    constructor() {
-      Object.assign(this, keywords_ce0d3653c649);
-    }
-  },
-  'TextWrapModeKeywords',
-) as new () => TextWrapModeKeywords;
+export const TextWrapModeKeywords = class TextWrapModeKeywords {
+  constructor() {
+    Object.assign(this, textWrapModeKeywords);
+  }
+} as new () => TextWrapModeKeywords;
 
 /**
  * text-wrap-mode 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20726,7 +20216,7 @@ class TextWrapModeCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-wrap-mode');
-    initializeKeywordDeclarations(this, 'text-wrap-mode', keywords_ce0d3653c649);
+    initializeKeywordDeclarations(this, 'text-wrap-mode', textWrapModeKeywords);
   }
   /**
    * 原样生成 text-wrap-mode 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20751,17 +20241,14 @@ export type TextWrapModeCss = TextWrapModeCssRuntime & KeywordDeclarations<TextW
  * CSS 初始值：`wrap`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-mode
  */
-export const TextWrapModeCss = /* @__PURE__ */ keywordConstructor(
-  TextWrapModeCssRuntime,
-  'TextWrapModeCss',
-) as new () => TextWrapModeCss;
-import { keywords_801a8bbbc78e } from './keyword-sets.js';
+export const TextWrapModeCss = TextWrapModeCssRuntime as new () => TextWrapModeCss;
+import { textWrapStyleKeywords } from './keyword-sets.js';
 
 /**
  * text-wrap-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TextWrapStyleKeywords = KeywordValuesOf<
-  typeof keywords_801a8bbbc78e,
+  typeof textWrapStyleKeywords,
   Property.TextWrapStyle | CssString
 >;
 /**
@@ -20769,14 +20256,11 @@ export type TextWrapStyleKeywords = KeywordValuesOf<
  * @example
  * new TextWrapStyleKeywords()
  */
-export const TextWrapStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class TextWrapStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_801a8bbbc78e);
-    }
-  },
-  'TextWrapStyleKeywords',
-) as new () => TextWrapStyleKeywords;
+export const TextWrapStyleKeywords = class TextWrapStyleKeywords {
+  constructor() {
+    Object.assign(this, textWrapStyleKeywords);
+  }
+} as new () => TextWrapStyleKeywords;
 
 /**
  * text-wrap-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20789,7 +20273,7 @@ class TextWrapStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('text-wrap-style');
-    initializeKeywordDeclarations(this, 'text-wrap-style', keywords_801a8bbbc78e);
+    initializeKeywordDeclarations(this, 'text-wrap-style', textWrapStyleKeywords);
   }
   /**
    * 原样生成 text-wrap-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20814,16 +20298,13 @@ export type TextWrapStyleCss = TextWrapStyleCssRuntime & KeywordDeclarations<Tex
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/text-wrap-style
  */
-export const TextWrapStyleCss = /* @__PURE__ */ keywordConstructor(
-  TextWrapStyleCssRuntime,
-  'TextWrapStyleCss',
-) as new () => TextWrapStyleCss;
+export const TextWrapStyleCss = TextWrapStyleCssRuntime as new () => TextWrapStyleCss;
 
 /**
  * timeline-scope 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TimelineScopeKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.TimelineScope | CssString
 >;
 /**
@@ -20831,14 +20312,11 @@ export type TimelineScopeKeywords = KeywordValuesOf<
  * @example
  * new TimelineScopeKeywords()
  */
-export const TimelineScopeKeywords = /* @__PURE__ */ keywordConstructor(
-  class TimelineScopeKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'TimelineScopeKeywords',
-) as new () => TimelineScopeKeywords;
+export const TimelineScopeKeywords = class TimelineScopeKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => TimelineScopeKeywords;
 
 /**
  * timeline-scope 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20851,7 +20329,7 @@ class TimelineScopeCssRuntime extends CssProperty {
    */
   constructor() {
     super('timeline-scope');
-    initializeKeywordDeclarations(this, 'timeline-scope', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'timeline-scope', noneKeywords);
   }
   /**
    * 原样生成 timeline-scope 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20876,28 +20354,22 @@ export type TimelineScopeCss = TimelineScopeCssRuntime & KeywordDeclarations<Tim
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/timeline-scope
  */
-export const TimelineScopeCss = /* @__PURE__ */ keywordConstructor(
-  TimelineScopeCssRuntime,
-  'TimelineScopeCss',
-) as new () => TimelineScopeCss;
+export const TimelineScopeCss = TimelineScopeCssRuntime as new () => TimelineScopeCss;
 
 /**
  * top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export type TopKeywords = KeywordValuesOf<typeof keywords_10442af7f819, Property.Top | CssString>;
+export type TopKeywords = KeywordValuesOf<typeof autoKeywords, Property.Top | CssString>;
 /**
  * 创建 top 的可继承关键字对象；每个实例独立，成员保留语义说明。
  * @example
  * new TopKeywords()
  */
-export const TopKeywords = /* @__PURE__ */ keywordConstructor(
-  class TopKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'TopKeywords',
-) as new () => TopKeywords;
+export const TopKeywords = class TopKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => TopKeywords;
 
 /**
  * top 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -20910,7 +20382,7 @@ class TopCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('top');
-    initializeKeywordDeclarations(this, 'top', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'top', autoKeywords);
   }
   /**
    * 原样生成 top 声明，保留关键字补全并接受自定义 CSS 值。
@@ -20997,17 +20469,14 @@ export type TopCss = TopCssRuntime & KeywordDeclarations<TopKeywords>;
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
  */
-export const TopCss = /* @__PURE__ */ keywordConstructor(
-  TopCssRuntime,
-  'TopCss',
-) as new () => TopCss;
-import { keywords_58af7d9ce05f } from './keyword-sets.js';
+export const TopCss = TopCssRuntime as new () => TopCss;
+import { touchActionKeywords } from './keyword-sets.js';
 
 /**
  * touch-action 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TouchActionKeywords = KeywordValuesOf<
-  typeof keywords_58af7d9ce05f,
+  typeof touchActionKeywords,
   Property.TouchAction | CssString
 >;
 /**
@@ -21015,14 +20484,11 @@ export type TouchActionKeywords = KeywordValuesOf<
  * @example
  * new TouchActionKeywords()
  */
-export const TouchActionKeywords = /* @__PURE__ */ keywordConstructor(
-  class TouchActionKeywords {
-    constructor() {
-      Object.assign(this, keywords_58af7d9ce05f);
-    }
-  },
-  'TouchActionKeywords',
-) as new () => TouchActionKeywords;
+export const TouchActionKeywords = class TouchActionKeywords {
+  constructor() {
+    Object.assign(this, touchActionKeywords);
+  }
+} as new () => TouchActionKeywords;
 
 /**
  * touch-action 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21035,7 +20501,7 @@ class TouchActionCssRuntime extends CssProperty {
    */
   constructor() {
     super('touch-action');
-    initializeKeywordDeclarations(this, 'touch-action', keywords_58af7d9ce05f);
+    initializeKeywordDeclarations(this, 'touch-action', touchActionKeywords);
   }
   /**
    * 原样生成 touch-action 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21072,16 +20538,13 @@ export type TouchActionCss = TouchActionCssRuntime & KeywordDeclarations<TouchAc
  * s.touchAction.panY
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/touch-action
  */
-export const TouchActionCss = /* @__PURE__ */ keywordConstructor(
-  TouchActionCssRuntime,
-  'TouchActionCss',
-) as new () => TouchActionCss;
+export const TouchActionCss = TouchActionCssRuntime as new () => TouchActionCss;
 
 /**
  * transform 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransformKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.Transform | CssString
 >;
 /**
@@ -21089,14 +20552,11 @@ export type TransformKeywords = KeywordValuesOf<
  * @example
  * new TransformKeywords()
  */
-export const TransformKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransformKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'TransformKeywords',
-) as new () => TransformKeywords;
+export const TransformKeywords = class TransformKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => TransformKeywords;
 
 /**
  * transform 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21109,7 +20569,7 @@ class TransformCssRuntime extends CssProperty {
    */
   constructor() {
     super('transform');
-    initializeKeywordDeclarations(this, 'transform', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'transform', noneKeywords);
   }
   /**
    * 原样生成 transform 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21140,17 +20600,14 @@ export type TransformCss = TransformCssRuntime & KeywordDeclarations<TransformKe
  * s.transform.raw('translateX(8px) scale(1.05)')
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform
  */
-export const TransformCss = /* @__PURE__ */ keywordConstructor(
-  TransformCssRuntime,
-  'TransformCss',
-) as new () => TransformCss;
-import { keywords_e9c591fda010 } from './keyword-sets.js';
+export const TransformCss = TransformCssRuntime as new () => TransformCss;
+import { transformBoxKeywords } from './keyword-sets.js';
 
 /**
  * transform-box 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransformBoxKeywords = KeywordValuesOf<
-  typeof keywords_e9c591fda010,
+  typeof transformBoxKeywords,
   Property.TransformBox | CssString
 >;
 /**
@@ -21158,14 +20615,11 @@ export type TransformBoxKeywords = KeywordValuesOf<
  * @example
  * new TransformBoxKeywords()
  */
-export const TransformBoxKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransformBoxKeywords {
-    constructor() {
-      Object.assign(this, keywords_e9c591fda010);
-    }
-  },
-  'TransformBoxKeywords',
-) as new () => TransformBoxKeywords;
+export const TransformBoxKeywords = class TransformBoxKeywords {
+  constructor() {
+    Object.assign(this, transformBoxKeywords);
+  }
+} as new () => TransformBoxKeywords;
 
 /**
  * transform-box 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21178,7 +20632,7 @@ class TransformBoxCssRuntime extends CssProperty {
    */
   constructor() {
     super('transform-box');
-    initializeKeywordDeclarations(this, 'transform-box', keywords_e9c591fda010);
+    initializeKeywordDeclarations(this, 'transform-box', transformBoxKeywords);
   }
   /**
    * 原样生成 transform-box 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21203,17 +20657,14 @@ export type TransformBoxCss = TransformBoxCssRuntime & KeywordDeclarations<Trans
  * CSS 初始值：`view-box`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-box
  */
-export const TransformBoxCss = /* @__PURE__ */ keywordConstructor(
-  TransformBoxCssRuntime,
-  'TransformBoxCss',
-) as new () => TransformBoxCss;
-import { keywords_626dbe9ffbeb } from './keyword-sets.js';
+export const TransformBoxCss = TransformBoxCssRuntime as new () => TransformBoxCss;
+import { backgroundPositionKeywords } from './keyword-sets.js';
 
 /**
  * transform-origin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransformOriginKeywords = KeywordValuesOf<
-  typeof keywords_626dbe9ffbeb,
+  typeof backgroundPositionKeywords,
   Property.TransformOrigin | CssString
 >;
 /**
@@ -21221,14 +20672,11 @@ export type TransformOriginKeywords = KeywordValuesOf<
  * @example
  * new TransformOriginKeywords()
  */
-export const TransformOriginKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransformOriginKeywords {
-    constructor() {
-      Object.assign(this, keywords_626dbe9ffbeb);
-    }
-  },
-  'TransformOriginKeywords',
-) as new () => TransformOriginKeywords;
+export const TransformOriginKeywords = class TransformOriginKeywords {
+  constructor() {
+    Object.assign(this, backgroundPositionKeywords);
+  }
+} as new () => TransformOriginKeywords;
 
 /**
  * transform-origin 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21241,7 +20689,7 @@ class TransformOriginCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('transform-origin');
-    initializeKeywordDeclarations(this, 'transform-origin', keywords_626dbe9ffbeb);
+    initializeKeywordDeclarations(this, 'transform-origin', backgroundPositionKeywords);
   }
   /**
    * 原样生成 transform-origin 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21335,17 +20783,14 @@ export type TransformOriginCss = TransformOriginCssRuntime &
  * CSS 初始值：`50% 50% 0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-origin
  */
-export const TransformOriginCss = /* @__PURE__ */ keywordConstructor(
-  TransformOriginCssRuntime,
-  'TransformOriginCss',
-) as new () => TransformOriginCss;
-import { keywords_cdfbd270dd54 } from './keyword-sets.js';
+export const TransformOriginCss = TransformOriginCssRuntime as new () => TransformOriginCss;
+import { transformStyleKeywords } from './keyword-sets.js';
 
 /**
  * transform-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransformStyleKeywords = KeywordValuesOf<
-  typeof keywords_cdfbd270dd54,
+  typeof transformStyleKeywords,
   Property.TransformStyle | CssString
 >;
 /**
@@ -21353,14 +20798,11 @@ export type TransformStyleKeywords = KeywordValuesOf<
  * @example
  * new TransformStyleKeywords()
  */
-export const TransformStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransformStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_cdfbd270dd54);
-    }
-  },
-  'TransformStyleKeywords',
-) as new () => TransformStyleKeywords;
+export const TransformStyleKeywords = class TransformStyleKeywords {
+  constructor() {
+    Object.assign(this, transformStyleKeywords);
+  }
+} as new () => TransformStyleKeywords;
 
 /**
  * transform-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21373,7 +20815,7 @@ class TransformStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('transform-style');
-    initializeKeywordDeclarations(this, 'transform-style', keywords_cdfbd270dd54);
+    initializeKeywordDeclarations(this, 'transform-style', transformStyleKeywords);
   }
   /**
    * 原样生成 transform-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21399,17 +20841,14 @@ export type TransformStyleCss = TransformStyleCssRuntime &
  * CSS 初始值：`flat`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-style
  */
-export const TransformStyleCss = /* @__PURE__ */ keywordConstructor(
-  TransformStyleCssRuntime,
-  'TransformStyleCss',
-) as new () => TransformStyleCss;
-import { keywords_66c70154f4dd } from './keyword-sets.js';
+export const TransformStyleCss = TransformStyleCssRuntime as new () => TransformStyleCss;
+import { transitionKeywords } from './keyword-sets.js';
 
 /**
  * transition 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransitionKeywords = KeywordValuesOf<
-  typeof keywords_66c70154f4dd,
+  typeof transitionKeywords,
   Property.Transition | CssString
 >;
 /**
@@ -21417,14 +20856,11 @@ export type TransitionKeywords = KeywordValuesOf<
  * @example
  * new TransitionKeywords()
  */
-export const TransitionKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransitionKeywords {
-    constructor() {
-      Object.assign(this, keywords_66c70154f4dd);
-    }
-  },
-  'TransitionKeywords',
-) as new () => TransitionKeywords;
+export const TransitionKeywords = class TransitionKeywords {
+  constructor() {
+    Object.assign(this, transitionKeywords);
+  }
+} as new () => TransitionKeywords;
 
 /**
  * transition 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21437,7 +20873,7 @@ class TransitionCssRuntime extends CssProperty {
    */
   constructor() {
     super('transition');
-    initializeKeywordDeclarations(this, 'transition', keywords_66c70154f4dd);
+    initializeKeywordDeclarations(this, 'transition', transitionKeywords);
   }
   /**
    * 原样生成 transition 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21546,17 +20982,14 @@ export type TransitionCss = TransitionCssRuntime & KeywordDeclarations<Transitio
  * s.transition.raw('opacity 160ms ease')
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition
  */
-export const TransitionCss = /* @__PURE__ */ keywordConstructor(
-  TransitionCssRuntime,
-  'TransitionCss',
-) as new () => TransitionCss;
-import { keywords_db5db5c79843 } from './keyword-sets.js';
+export const TransitionCss = TransitionCssRuntime as new () => TransitionCss;
+import { transitionBehaviorKeywords } from './keyword-sets.js';
 
 /**
  * transition-behavior 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransitionBehaviorKeywords = KeywordValuesOf<
-  typeof keywords_db5db5c79843,
+  typeof transitionBehaviorKeywords,
   Property.TransitionBehavior | CssString
 >;
 /**
@@ -21564,14 +20997,11 @@ export type TransitionBehaviorKeywords = KeywordValuesOf<
  * @example
  * new TransitionBehaviorKeywords()
  */
-export const TransitionBehaviorKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransitionBehaviorKeywords {
-    constructor() {
-      Object.assign(this, keywords_db5db5c79843);
-    }
-  },
-  'TransitionBehaviorKeywords',
-) as new () => TransitionBehaviorKeywords;
+export const TransitionBehaviorKeywords = class TransitionBehaviorKeywords {
+  constructor() {
+    Object.assign(this, transitionBehaviorKeywords);
+  }
+} as new () => TransitionBehaviorKeywords;
 
 /**
  * transition-behavior 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21584,7 +21014,7 @@ class TransitionBehaviorCssRuntime extends CssProperty {
    */
   constructor() {
     super('transition-behavior');
-    initializeKeywordDeclarations(this, 'transition-behavior', keywords_db5db5c79843);
+    initializeKeywordDeclarations(this, 'transition-behavior', transitionBehaviorKeywords);
   }
   /**
    * 原样生成 transition-behavior 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21610,16 +21040,14 @@ export type TransitionBehaviorCss = TransitionBehaviorCssRuntime &
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-behavior
  */
-export const TransitionBehaviorCss = /* @__PURE__ */ keywordConstructor(
-  TransitionBehaviorCssRuntime,
-  'TransitionBehaviorCss',
-) as new () => TransitionBehaviorCss;
+export const TransitionBehaviorCss =
+  TransitionBehaviorCssRuntime as new () => TransitionBehaviorCss;
 
 /**
  * transition-delay 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransitionDelayKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.TransitionDelay | CssString
 >;
 /**
@@ -21627,14 +21055,11 @@ export type TransitionDelayKeywords = KeywordValuesOf<
  * @example
  * new TransitionDelayKeywords()
  */
-export const TransitionDelayKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransitionDelayKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'TransitionDelayKeywords',
-) as new () => TransitionDelayKeywords;
+export const TransitionDelayKeywords = class TransitionDelayKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => TransitionDelayKeywords;
 
 /**
  * transition-delay 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21647,7 +21072,7 @@ class TransitionDelayCssRuntime extends CssProperty {
    */
   constructor() {
     super('transition-delay');
-    initializeKeywordDeclarations(this, 'transition-delay', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'transition-delay', globalKeywords);
   }
   /**
    * 原样生成 transition-delay 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21753,16 +21178,13 @@ export type TransitionDelayCss = TransitionDelayCssRuntime &
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-delay
  */
-export const TransitionDelayCss = /* @__PURE__ */ keywordConstructor(
-  TransitionDelayCssRuntime,
-  'TransitionDelayCss',
-) as new () => TransitionDelayCss;
+export const TransitionDelayCss = TransitionDelayCssRuntime as new () => TransitionDelayCss;
 
 /**
  * transition-duration 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransitionDurationKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.TransitionDuration | CssString
 >;
 /**
@@ -21770,14 +21192,11 @@ export type TransitionDurationKeywords = KeywordValuesOf<
  * @example
  * new TransitionDurationKeywords()
  */
-export const TransitionDurationKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransitionDurationKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'TransitionDurationKeywords',
-) as new () => TransitionDurationKeywords;
+export const TransitionDurationKeywords = class TransitionDurationKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => TransitionDurationKeywords;
 
 /**
  * transition-duration 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21790,7 +21209,7 @@ class TransitionDurationCssRuntime extends CssProperty {
    */
   constructor() {
     super('transition-duration');
-    initializeKeywordDeclarations(this, 'transition-duration', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'transition-duration', globalKeywords);
   }
   /**
    * 原样生成 transition-duration 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21896,17 +21315,15 @@ export type TransitionDurationCss = TransitionDurationCssRuntime &
  * CSS 初始值：`0s`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-duration
  */
-export const TransitionDurationCss = /* @__PURE__ */ keywordConstructor(
-  TransitionDurationCssRuntime,
-  'TransitionDurationCss',
-) as new () => TransitionDurationCss;
-import { keywords_94e2d00a7633 } from './keyword-sets.js';
+export const TransitionDurationCss =
+  TransitionDurationCssRuntime as new () => TransitionDurationCss;
+import { anchorScopeKeywords } from './keyword-sets.js';
 
 /**
  * transition-property 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransitionPropertyKeywords = KeywordValuesOf<
-  typeof keywords_94e2d00a7633,
+  typeof anchorScopeKeywords,
   Property.TransitionProperty | CssString
 >;
 /**
@@ -21914,14 +21331,11 @@ export type TransitionPropertyKeywords = KeywordValuesOf<
  * @example
  * new TransitionPropertyKeywords()
  */
-export const TransitionPropertyKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransitionPropertyKeywords {
-    constructor() {
-      Object.assign(this, keywords_94e2d00a7633);
-    }
-  },
-  'TransitionPropertyKeywords',
-) as new () => TransitionPropertyKeywords;
+export const TransitionPropertyKeywords = class TransitionPropertyKeywords {
+  constructor() {
+    Object.assign(this, anchorScopeKeywords);
+  }
+} as new () => TransitionPropertyKeywords;
 
 /**
  * transition-property 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21934,7 +21348,7 @@ class TransitionPropertyCssRuntime extends CssProperty {
    */
   constructor() {
     super('transition-property');
-    initializeKeywordDeclarations(this, 'transition-property', keywords_94e2d00a7633);
+    initializeKeywordDeclarations(this, 'transition-property', anchorScopeKeywords);
   }
   /**
    * 原样生成 transition-property 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21958,17 +21372,15 @@ export type TransitionPropertyCss = TransitionPropertyCssRuntime &
  * 指定发生变化时需要过渡的 CSS 属性。（transition-property）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-property
  */
-export const TransitionPropertyCss = /* @__PURE__ */ keywordConstructor(
-  TransitionPropertyCssRuntime,
-  'TransitionPropertyCss',
-) as new () => TransitionPropertyCss;
-import { keywords_583f0316fcba } from './keyword-sets.js';
+export const TransitionPropertyCss =
+  TransitionPropertyCssRuntime as new () => TransitionPropertyCss;
+import { animationTimingFunctionKeywords } from './keyword-sets.js';
 
 /**
  * transition-timing-function 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TransitionTimingFunctionKeywords = KeywordValuesOf<
-  typeof keywords_583f0316fcba,
+  typeof animationTimingFunctionKeywords,
   Property.TransitionTimingFunction | CssString
 >;
 /**
@@ -21976,14 +21388,11 @@ export type TransitionTimingFunctionKeywords = KeywordValuesOf<
  * @example
  * new TransitionTimingFunctionKeywords()
  */
-export const TransitionTimingFunctionKeywords = /* @__PURE__ */ keywordConstructor(
-  class TransitionTimingFunctionKeywords {
-    constructor() {
-      Object.assign(this, keywords_583f0316fcba);
-    }
-  },
-  'TransitionTimingFunctionKeywords',
-) as new () => TransitionTimingFunctionKeywords;
+export const TransitionTimingFunctionKeywords = class TransitionTimingFunctionKeywords {
+  constructor() {
+    Object.assign(this, animationTimingFunctionKeywords);
+  }
+} as new () => TransitionTimingFunctionKeywords;
 
 /**
  * transition-timing-function 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21996,7 +21405,11 @@ class TransitionTimingFunctionCssRuntime extends CssProperty {
    */
   constructor() {
     super('transition-timing-function');
-    initializeKeywordDeclarations(this, 'transition-timing-function', keywords_583f0316fcba);
+    initializeKeywordDeclarations(
+      this,
+      'transition-timing-function',
+      animationTimingFunctionKeywords,
+    );
   }
   /**
    * 原样生成 transition-timing-function 声明，保留关键字补全并接受自定义 CSS 值。
@@ -22022,16 +21435,14 @@ export type TransitionTimingFunctionCss = TransitionTimingFunctionCssRuntime &
  * CSS 初始值：`ease`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transition-timing-function
  */
-export const TransitionTimingFunctionCss = /* @__PURE__ */ keywordConstructor(
-  TransitionTimingFunctionCssRuntime,
-  'TransitionTimingFunctionCss',
-) as new () => TransitionTimingFunctionCss;
+export const TransitionTimingFunctionCss =
+  TransitionTimingFunctionCssRuntime as new () => TransitionTimingFunctionCss;
 
 /**
  * translate 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type TranslateKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.Translate | CssString
 >;
 /**
@@ -22039,14 +21450,11 @@ export type TranslateKeywords = KeywordValuesOf<
  * @example
  * new TranslateKeywords()
  */
-export const TranslateKeywords = /* @__PURE__ */ keywordConstructor(
-  class TranslateKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'TranslateKeywords',
-) as new () => TranslateKeywords;
+export const TranslateKeywords = class TranslateKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => TranslateKeywords;
 
 /**
  * translate 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -22059,7 +21467,7 @@ class TranslateCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('translate');
-    initializeKeywordDeclarations(this, 'translate', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'translate', noneKeywords);
   }
   /**
    * 原样生成 translate 声明，保留关键字补全并接受自定义 CSS 值。
@@ -22152,7 +21560,4 @@ export type TranslateCss = TranslateCssRuntime & KeywordDeclarations<TranslateKe
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/translate
  */
-export const TranslateCss = /* @__PURE__ */ keywordConstructor(
-  TranslateCssRuntime,
-  'TranslateCss',
-) as new () => TranslateCss;
+export const TranslateCss = TranslateCssRuntime as new () => TranslateCss;

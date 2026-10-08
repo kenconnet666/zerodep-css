@@ -2,16 +2,16 @@
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
 import type { Property } from 'csstype';
 import { CssProperty, LengthCssProperty, type CssString } from './base.js';
-import { initializeKeywordDeclarations, keywordConstructor } from '../keyword-data.js';
+import { initializeKeywordDeclarations } from '../keyword-data.js';
 import type { KeywordDeclarations, KeywordValuesOf } from '../keyword-source.js';
 // 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。
-import { keywords_9cd78f567b36 } from './keyword-sets.js';
+import { noneKeywords } from './keyword-sets.js';
 
 /**
  * backdrop-filter 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackdropFilterKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.BackdropFilter | CssString
 >;
 /**
@@ -19,14 +19,11 @@ export type BackdropFilterKeywords = KeywordValuesOf<
  * @example
  * new BackdropFilterKeywords()
  */
-export const BackdropFilterKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackdropFilterKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'BackdropFilterKeywords',
-) as new () => BackdropFilterKeywords;
+export const BackdropFilterKeywords = class BackdropFilterKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => BackdropFilterKeywords;
 
 /**
  * backdrop-filter 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -39,7 +36,7 @@ class BackdropFilterCssRuntime extends CssProperty {
    */
   constructor() {
     super('backdrop-filter');
-    initializeKeywordDeclarations(this, 'backdrop-filter', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'backdrop-filter', noneKeywords);
   }
   /**
    * 原样生成 backdrop-filter 声明，保留关键字补全并接受自定义 CSS 值。
@@ -65,17 +62,14 @@ export type BackdropFilterCss = BackdropFilterCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backdrop-filter
  */
-export const BackdropFilterCss = /* @__PURE__ */ keywordConstructor(
-  BackdropFilterCssRuntime,
-  'BackdropFilterCss',
-) as new () => BackdropFilterCss;
-import { keywords_4fa5e6f21bc3 } from './keyword-sets.js';
+export const BackdropFilterCss = BackdropFilterCssRuntime as new () => BackdropFilterCss;
+import { backfaceVisibilityKeywords } from './keyword-sets.js';
 
 /**
  * backface-visibility 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackfaceVisibilityKeywords = KeywordValuesOf<
-  typeof keywords_4fa5e6f21bc3,
+  typeof backfaceVisibilityKeywords,
   Property.BackfaceVisibility | CssString
 >;
 /**
@@ -83,14 +77,11 @@ export type BackfaceVisibilityKeywords = KeywordValuesOf<
  * @example
  * new BackfaceVisibilityKeywords()
  */
-export const BackfaceVisibilityKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackfaceVisibilityKeywords {
-    constructor() {
-      Object.assign(this, keywords_4fa5e6f21bc3);
-    }
-  },
-  'BackfaceVisibilityKeywords',
-) as new () => BackfaceVisibilityKeywords;
+export const BackfaceVisibilityKeywords = class BackfaceVisibilityKeywords {
+  constructor() {
+    Object.assign(this, backfaceVisibilityKeywords);
+  }
+} as new () => BackfaceVisibilityKeywords;
 
 /**
  * backface-visibility 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -103,7 +94,7 @@ class BackfaceVisibilityCssRuntime extends CssProperty {
    */
   constructor() {
     super('backface-visibility');
-    initializeKeywordDeclarations(this, 'backface-visibility', keywords_4fa5e6f21bc3);
+    initializeKeywordDeclarations(this, 'backface-visibility', backfaceVisibilityKeywords);
   }
   /**
    * 原样生成 backface-visibility 声明，保留关键字补全并接受自定义 CSS 值。
@@ -129,17 +120,15 @@ export type BackfaceVisibilityCss = BackfaceVisibilityCssRuntime &
  * CSS 初始值：`visible`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/backface-visibility
  */
-export const BackfaceVisibilityCss = /* @__PURE__ */ keywordConstructor(
-  BackfaceVisibilityCssRuntime,
-  'BackfaceVisibilityCss',
-) as new () => BackfaceVisibilityCss;
-import { keywords_6de5664a52e6 } from './keyword-sets.js';
+export const BackfaceVisibilityCss =
+  BackfaceVisibilityCssRuntime as new () => BackfaceVisibilityCss;
+import { backgroundKeywords } from './keyword-sets.js';
 
 /**
  * background 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundKeywords = KeywordValuesOf<
-  typeof keywords_6de5664a52e6,
+  typeof backgroundKeywords,
   Property.Background | CssString
 >;
 /**
@@ -147,14 +136,11 @@ export type BackgroundKeywords = KeywordValuesOf<
  * @example
  * new BackgroundKeywords()
  */
-export const BackgroundKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundKeywords {
-    constructor() {
-      Object.assign(this, keywords_6de5664a52e6);
-    }
-  },
-  'BackgroundKeywords',
-) as new () => BackgroundKeywords;
+export const BackgroundKeywords = class BackgroundKeywords {
+  constructor() {
+    Object.assign(this, backgroundKeywords);
+  }
+} as new () => BackgroundKeywords;
 
 /**
  * background 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -167,7 +153,7 @@ class BackgroundCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('background');
-    initializeKeywordDeclarations(this, 'background', keywords_6de5664a52e6);
+    initializeKeywordDeclarations(this, 'background', backgroundKeywords);
   }
   /**
    * 原样生成 background 声明，保留关键字补全并接受自定义 CSS 值。
@@ -324,17 +310,14 @@ export type BackgroundCss = BackgroundCssRuntime & KeywordDeclarations<Backgroun
  * 集中设置背景颜色、图像、位置、尺寸、重复及绘制区域。（background）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background
  */
-export const BackgroundCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundCssRuntime,
-  'BackgroundCss',
-) as new () => BackgroundCss;
-import { keywords_5fd6da6443ed } from './keyword-sets.js';
+export const BackgroundCss = BackgroundCssRuntime as new () => BackgroundCss;
+import { backgroundAttachmentKeywords } from './keyword-sets.js';
 
 /**
  * background-attachment 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundAttachmentKeywords = KeywordValuesOf<
-  typeof keywords_5fd6da6443ed,
+  typeof backgroundAttachmentKeywords,
   Property.BackgroundAttachment | CssString
 >;
 /**
@@ -342,14 +325,11 @@ export type BackgroundAttachmentKeywords = KeywordValuesOf<
  * @example
  * new BackgroundAttachmentKeywords()
  */
-export const BackgroundAttachmentKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundAttachmentKeywords {
-    constructor() {
-      Object.assign(this, keywords_5fd6da6443ed);
-    }
-  },
-  'BackgroundAttachmentKeywords',
-) as new () => BackgroundAttachmentKeywords;
+export const BackgroundAttachmentKeywords = class BackgroundAttachmentKeywords {
+  constructor() {
+    Object.assign(this, backgroundAttachmentKeywords);
+  }
+} as new () => BackgroundAttachmentKeywords;
 
 /**
  * background-attachment 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -362,7 +342,7 @@ class BackgroundAttachmentCssRuntime extends CssProperty {
    */
   constructor() {
     super('background-attachment');
-    initializeKeywordDeclarations(this, 'background-attachment', keywords_5fd6da6443ed);
+    initializeKeywordDeclarations(this, 'background-attachment', backgroundAttachmentKeywords);
   }
   /**
    * 原样生成 background-attachment 声明，保留关键字补全并接受自定义 CSS 值。
@@ -388,17 +368,15 @@ export type BackgroundAttachmentCss = BackgroundAttachmentCssRuntime &
  * CSS 初始值：`scroll`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-attachment
  */
-export const BackgroundAttachmentCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundAttachmentCssRuntime,
-  'BackgroundAttachmentCss',
-) as new () => BackgroundAttachmentCss;
-import { keywords_bb1f680b1e3e } from './keyword-sets.js';
+export const BackgroundAttachmentCss =
+  BackgroundAttachmentCssRuntime as new () => BackgroundAttachmentCss;
+import { backgroundBlendModeKeywords } from './keyword-sets.js';
 
 /**
  * background-blend-mode 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundBlendModeKeywords = KeywordValuesOf<
-  typeof keywords_bb1f680b1e3e,
+  typeof backgroundBlendModeKeywords,
   Property.BackgroundBlendMode | CssString
 >;
 /**
@@ -406,14 +384,11 @@ export type BackgroundBlendModeKeywords = KeywordValuesOf<
  * @example
  * new BackgroundBlendModeKeywords()
  */
-export const BackgroundBlendModeKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundBlendModeKeywords {
-    constructor() {
-      Object.assign(this, keywords_bb1f680b1e3e);
-    }
-  },
-  'BackgroundBlendModeKeywords',
-) as new () => BackgroundBlendModeKeywords;
+export const BackgroundBlendModeKeywords = class BackgroundBlendModeKeywords {
+  constructor() {
+    Object.assign(this, backgroundBlendModeKeywords);
+  }
+} as new () => BackgroundBlendModeKeywords;
 
 /**
  * background-blend-mode 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -426,7 +401,7 @@ class BackgroundBlendModeCssRuntime extends CssProperty {
    */
   constructor() {
     super('background-blend-mode');
-    initializeKeywordDeclarations(this, 'background-blend-mode', keywords_bb1f680b1e3e);
+    initializeKeywordDeclarations(this, 'background-blend-mode', backgroundBlendModeKeywords);
   }
   /**
    * 原样生成 background-blend-mode 声明，保留关键字补全并接受自定义 CSS 值。
@@ -452,17 +427,15 @@ export type BackgroundBlendModeCss = BackgroundBlendModeCssRuntime &
  * CSS 初始值：`normal`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-blend-mode
  */
-export const BackgroundBlendModeCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundBlendModeCssRuntime,
-  'BackgroundBlendModeCss',
-) as new () => BackgroundBlendModeCss;
-import { keywords_36cd7d0c56ca } from './keyword-sets.js';
+export const BackgroundBlendModeCss =
+  BackgroundBlendModeCssRuntime as new () => BackgroundBlendModeCss;
+import { backgroundClipKeywords } from './keyword-sets.js';
 
 /**
  * background-clip 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundClipKeywords = KeywordValuesOf<
-  typeof keywords_36cd7d0c56ca,
+  typeof backgroundClipKeywords,
   Property.BackgroundClip | CssString
 >;
 /**
@@ -470,14 +443,11 @@ export type BackgroundClipKeywords = KeywordValuesOf<
  * @example
  * new BackgroundClipKeywords()
  */
-export const BackgroundClipKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundClipKeywords {
-    constructor() {
-      Object.assign(this, keywords_36cd7d0c56ca);
-    }
-  },
-  'BackgroundClipKeywords',
-) as new () => BackgroundClipKeywords;
+export const BackgroundClipKeywords = class BackgroundClipKeywords {
+  constructor() {
+    Object.assign(this, backgroundClipKeywords);
+  }
+} as new () => BackgroundClipKeywords;
 
 /**
  * background-clip 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -490,7 +460,7 @@ class BackgroundClipCssRuntime extends CssProperty {
    */
   constructor() {
     super('background-clip');
-    initializeKeywordDeclarations(this, 'background-clip', keywords_36cd7d0c56ca);
+    initializeKeywordDeclarations(this, 'background-clip', backgroundClipKeywords);
   }
   /**
    * 原样生成 background-clip 声明，保留关键字补全并接受自定义 CSS 值。
@@ -516,17 +486,14 @@ export type BackgroundClipCss = BackgroundClipCssRuntime &
  * CSS 初始值：`border-box`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-clip
  */
-export const BackgroundClipCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundClipCssRuntime,
-  'BackgroundClipCss',
-) as new () => BackgroundClipCss;
-import { keywords_357abf558bac } from './keyword-sets.js';
+export const BackgroundClipCss = BackgroundClipCssRuntime as new () => BackgroundClipCss;
+import { colorKeywords } from './keyword-sets.js';
 
 /**
  * background-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BackgroundColor | CssString
 >;
 /**
@@ -534,14 +501,11 @@ export type BackgroundColorKeywords = KeywordValuesOf<
  * @example
  * new BackgroundColorKeywords()
  */
-export const BackgroundColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BackgroundColorKeywords',
-) as new () => BackgroundColorKeywords;
+export const BackgroundColorKeywords = class BackgroundColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BackgroundColorKeywords;
 
 /**
  * background-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -554,7 +518,7 @@ class BackgroundColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('background-color');
-    initializeKeywordDeclarations(this, 'background-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'background-color', colorKeywords);
   }
   /**
    * 原样生成 background-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -658,16 +622,13 @@ export type BackgroundColorCss = BackgroundColorCssRuntime &
  * CSS 初始值：`transparent`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-color
  */
-export const BackgroundColorCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundColorCssRuntime,
-  'BackgroundColorCss',
-) as new () => BackgroundColorCss;
+export const BackgroundColorCss = BackgroundColorCssRuntime as new () => BackgroundColorCss;
 
 /**
  * background-image 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundImageKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.BackgroundImage | CssString
 >;
 /**
@@ -675,14 +636,11 @@ export type BackgroundImageKeywords = KeywordValuesOf<
  * @example
  * new BackgroundImageKeywords()
  */
-export const BackgroundImageKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundImageKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'BackgroundImageKeywords',
-) as new () => BackgroundImageKeywords;
+export const BackgroundImageKeywords = class BackgroundImageKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => BackgroundImageKeywords;
 
 /**
  * background-image 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -695,7 +653,7 @@ class BackgroundImageCssRuntime extends CssProperty {
    */
   constructor() {
     super('background-image');
-    initializeKeywordDeclarations(this, 'background-image', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'background-image', noneKeywords);
   }
   /**
    * 原样生成 background-image 声明，保留关键字补全并接受自定义 CSS 值。
@@ -721,17 +679,14 @@ export type BackgroundImageCss = BackgroundImageCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-image
  */
-export const BackgroundImageCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundImageCssRuntime,
-  'BackgroundImageCss',
-) as new () => BackgroundImageCss;
-import { keywords_20c459033184 } from './keyword-sets.js';
+export const BackgroundImageCss = BackgroundImageCssRuntime as new () => BackgroundImageCss;
+import { backgroundOriginKeywords } from './keyword-sets.js';
 
 /**
  * background-origin 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundOriginKeywords = KeywordValuesOf<
-  typeof keywords_20c459033184,
+  typeof backgroundOriginKeywords,
   Property.BackgroundOrigin | CssString
 >;
 /**
@@ -739,14 +694,11 @@ export type BackgroundOriginKeywords = KeywordValuesOf<
  * @example
  * new BackgroundOriginKeywords()
  */
-export const BackgroundOriginKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundOriginKeywords {
-    constructor() {
-      Object.assign(this, keywords_20c459033184);
-    }
-  },
-  'BackgroundOriginKeywords',
-) as new () => BackgroundOriginKeywords;
+export const BackgroundOriginKeywords = class BackgroundOriginKeywords {
+  constructor() {
+    Object.assign(this, backgroundOriginKeywords);
+  }
+} as new () => BackgroundOriginKeywords;
 
 /**
  * background-origin 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -759,7 +711,7 @@ class BackgroundOriginCssRuntime extends CssProperty {
    */
   constructor() {
     super('background-origin');
-    initializeKeywordDeclarations(this, 'background-origin', keywords_20c459033184);
+    initializeKeywordDeclarations(this, 'background-origin', backgroundOriginKeywords);
   }
   /**
    * 原样生成 background-origin 声明，保留关键字补全并接受自定义 CSS 值。
@@ -785,17 +737,14 @@ export type BackgroundOriginCss = BackgroundOriginCssRuntime &
  * CSS 初始值：`padding-box`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-origin
  */
-export const BackgroundOriginCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundOriginCssRuntime,
-  'BackgroundOriginCss',
-) as new () => BackgroundOriginCss;
-import { keywords_626dbe9ffbeb } from './keyword-sets.js';
+export const BackgroundOriginCss = BackgroundOriginCssRuntime as new () => BackgroundOriginCss;
+import { backgroundPositionKeywords } from './keyword-sets.js';
 
 /**
  * background-position 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundPositionKeywords = KeywordValuesOf<
-  typeof keywords_626dbe9ffbeb,
+  typeof backgroundPositionKeywords,
   Property.BackgroundPosition | CssString
 >;
 /**
@@ -803,14 +752,11 @@ export type BackgroundPositionKeywords = KeywordValuesOf<
  * @example
  * new BackgroundPositionKeywords()
  */
-export const BackgroundPositionKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundPositionKeywords {
-    constructor() {
-      Object.assign(this, keywords_626dbe9ffbeb);
-    }
-  },
-  'BackgroundPositionKeywords',
-) as new () => BackgroundPositionKeywords;
+export const BackgroundPositionKeywords = class BackgroundPositionKeywords {
+  constructor() {
+    Object.assign(this, backgroundPositionKeywords);
+  }
+} as new () => BackgroundPositionKeywords;
 
 /**
  * background-position 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -823,7 +769,7 @@ class BackgroundPositionCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('background-position');
-    initializeKeywordDeclarations(this, 'background-position', keywords_626dbe9ffbeb);
+    initializeKeywordDeclarations(this, 'background-position', backgroundPositionKeywords);
   }
   /**
    * 原样生成 background-position 声明，保留关键字补全并接受自定义 CSS 值。
@@ -2105,17 +2051,15 @@ export type BackgroundPositionCss = BackgroundPositionCssRuntime &
  * CSS 初始值：`0% 0%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position
  */
-export const BackgroundPositionCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundPositionCssRuntime,
-  'BackgroundPositionCss',
-) as new () => BackgroundPositionCss;
-import { keywords_66d141cf9d62 } from './keyword-sets.js';
+export const BackgroundPositionCss =
+  BackgroundPositionCssRuntime as new () => BackgroundPositionCss;
+import { backgroundPositionXKeywords } from './keyword-sets.js';
 
 /**
  * background-position-x 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundPositionXKeywords = KeywordValuesOf<
-  typeof keywords_66d141cf9d62,
+  typeof backgroundPositionXKeywords,
   Property.BackgroundPositionX | CssString
 >;
 /**
@@ -2123,14 +2067,11 @@ export type BackgroundPositionXKeywords = KeywordValuesOf<
  * @example
  * new BackgroundPositionXKeywords()
  */
-export const BackgroundPositionXKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundPositionXKeywords {
-    constructor() {
-      Object.assign(this, keywords_66d141cf9d62);
-    }
-  },
-  'BackgroundPositionXKeywords',
-) as new () => BackgroundPositionXKeywords;
+export const BackgroundPositionXKeywords = class BackgroundPositionXKeywords {
+  constructor() {
+    Object.assign(this, backgroundPositionXKeywords);
+  }
+} as new () => BackgroundPositionXKeywords;
 
 /**
  * background-position-x 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -2143,7 +2084,7 @@ class BackgroundPositionXCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('background-position-x');
-    initializeKeywordDeclarations(this, 'background-position-x', keywords_66d141cf9d62);
+    initializeKeywordDeclarations(this, 'background-position-x', backgroundPositionXKeywords);
   }
   /**
    * 原样生成 background-position-x 声明，保留关键字补全并接受自定义 CSS 值。
@@ -2237,17 +2178,15 @@ export type BackgroundPositionXCss = BackgroundPositionXCssRuntime &
  * CSS 初始值：`0%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-x
  */
-export const BackgroundPositionXCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundPositionXCssRuntime,
-  'BackgroundPositionXCss',
-) as new () => BackgroundPositionXCss;
-import { keywords_b19f41bf6d34 } from './keyword-sets.js';
+export const BackgroundPositionXCss =
+  BackgroundPositionXCssRuntime as new () => BackgroundPositionXCss;
+import { backgroundPositionYKeywords } from './keyword-sets.js';
 
 /**
  * background-position-y 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundPositionYKeywords = KeywordValuesOf<
-  typeof keywords_b19f41bf6d34,
+  typeof backgroundPositionYKeywords,
   Property.BackgroundPositionY | CssString
 >;
 /**
@@ -2255,14 +2194,11 @@ export type BackgroundPositionYKeywords = KeywordValuesOf<
  * @example
  * new BackgroundPositionYKeywords()
  */
-export const BackgroundPositionYKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundPositionYKeywords {
-    constructor() {
-      Object.assign(this, keywords_b19f41bf6d34);
-    }
-  },
-  'BackgroundPositionYKeywords',
-) as new () => BackgroundPositionYKeywords;
+export const BackgroundPositionYKeywords = class BackgroundPositionYKeywords {
+  constructor() {
+    Object.assign(this, backgroundPositionYKeywords);
+  }
+} as new () => BackgroundPositionYKeywords;
 
 /**
  * background-position-y 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -2275,7 +2211,7 @@ class BackgroundPositionYCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('background-position-y');
-    initializeKeywordDeclarations(this, 'background-position-y', keywords_b19f41bf6d34);
+    initializeKeywordDeclarations(this, 'background-position-y', backgroundPositionYKeywords);
   }
   /**
    * 原样生成 background-position-y 声明，保留关键字补全并接受自定义 CSS 值。
@@ -2369,17 +2305,15 @@ export type BackgroundPositionYCss = BackgroundPositionYCssRuntime &
  * CSS 初始值：`0%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-position-y
  */
-export const BackgroundPositionYCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundPositionYCssRuntime,
-  'BackgroundPositionYCss',
-) as new () => BackgroundPositionYCss;
-import { keywords_9ebd839568de } from './keyword-sets.js';
+export const BackgroundPositionYCss =
+  BackgroundPositionYCssRuntime as new () => BackgroundPositionYCss;
+import { backgroundRepeatKeywords } from './keyword-sets.js';
 
 /**
  * background-repeat 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundRepeatKeywords = KeywordValuesOf<
-  typeof keywords_9ebd839568de,
+  typeof backgroundRepeatKeywords,
   Property.BackgroundRepeat | CssString
 >;
 /**
@@ -2387,14 +2321,11 @@ export type BackgroundRepeatKeywords = KeywordValuesOf<
  * @example
  * new BackgroundRepeatKeywords()
  */
-export const BackgroundRepeatKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundRepeatKeywords {
-    constructor() {
-      Object.assign(this, keywords_9ebd839568de);
-    }
-  },
-  'BackgroundRepeatKeywords',
-) as new () => BackgroundRepeatKeywords;
+export const BackgroundRepeatKeywords = class BackgroundRepeatKeywords {
+  constructor() {
+    Object.assign(this, backgroundRepeatKeywords);
+  }
+} as new () => BackgroundRepeatKeywords;
 
 /**
  * background-repeat 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -2407,7 +2338,7 @@ class BackgroundRepeatCssRuntime extends CssProperty {
    */
   constructor() {
     super('background-repeat');
-    initializeKeywordDeclarations(this, 'background-repeat', keywords_9ebd839568de);
+    initializeKeywordDeclarations(this, 'background-repeat', backgroundRepeatKeywords);
   }
   /**
    * 原样生成 background-repeat 声明，保留关键字补全并接受自定义 CSS 值。
@@ -2433,17 +2364,14 @@ export type BackgroundRepeatCss = BackgroundRepeatCssRuntime &
  * CSS 初始值：`repeat`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-repeat
  */
-export const BackgroundRepeatCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundRepeatCssRuntime,
-  'BackgroundRepeatCss',
-) as new () => BackgroundRepeatCss;
-import { keywords_19dcd7b96db0 } from './keyword-sets.js';
+export const BackgroundRepeatCss = BackgroundRepeatCssRuntime as new () => BackgroundRepeatCss;
+import { backgroundSizeKeywords } from './keyword-sets.js';
 
 /**
  * background-size 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BackgroundSizeKeywords = KeywordValuesOf<
-  typeof keywords_19dcd7b96db0,
+  typeof backgroundSizeKeywords,
   Property.BackgroundSize | CssString
 >;
 /**
@@ -2451,14 +2379,11 @@ export type BackgroundSizeKeywords = KeywordValuesOf<
  * @example
  * new BackgroundSizeKeywords()
  */
-export const BackgroundSizeKeywords = /* @__PURE__ */ keywordConstructor(
-  class BackgroundSizeKeywords {
-    constructor() {
-      Object.assign(this, keywords_19dcd7b96db0);
-    }
-  },
-  'BackgroundSizeKeywords',
-) as new () => BackgroundSizeKeywords;
+export const BackgroundSizeKeywords = class BackgroundSizeKeywords {
+  constructor() {
+    Object.assign(this, backgroundSizeKeywords);
+  }
+} as new () => BackgroundSizeKeywords;
 
 /**
  * background-size 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -2471,7 +2396,7 @@ class BackgroundSizeCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('background-size');
-    initializeKeywordDeclarations(this, 'background-size', keywords_19dcd7b96db0);
+    initializeKeywordDeclarations(this, 'background-size', backgroundSizeKeywords);
   }
   /**
    * 原样生成 background-size 声明，保留关键字补全并接受自定义 CSS 值。
@@ -3764,17 +3689,14 @@ export type BackgroundSizeCss = BackgroundSizeCssRuntime &
  * css(s.backgroundSize.cover, s.backgroundPosition.raw('center'))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/background-size
  */
-export const BackgroundSizeCss = /* @__PURE__ */ keywordConstructor(
-  BackgroundSizeCssRuntime,
-  'BackgroundSizeCss',
-) as new () => BackgroundSizeCss;
-import { keywords_8033f08005d6 } from './keyword-sets.js';
+export const BackgroundSizeCss = BackgroundSizeCssRuntime as new () => BackgroundSizeCss;
+import { baselineShiftKeywords } from './keyword-sets.js';
 
 /**
  * baseline-shift 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BaselineShiftKeywords = KeywordValuesOf<
-  typeof keywords_8033f08005d6,
+  typeof baselineShiftKeywords,
   Property.BaselineShift | CssString
 >;
 /**
@@ -3782,14 +3704,11 @@ export type BaselineShiftKeywords = KeywordValuesOf<
  * @example
  * new BaselineShiftKeywords()
  */
-export const BaselineShiftKeywords = /* @__PURE__ */ keywordConstructor(
-  class BaselineShiftKeywords {
-    constructor() {
-      Object.assign(this, keywords_8033f08005d6);
-    }
-  },
-  'BaselineShiftKeywords',
-) as new () => BaselineShiftKeywords;
+export const BaselineShiftKeywords = class BaselineShiftKeywords {
+  constructor() {
+    Object.assign(this, baselineShiftKeywords);
+  }
+} as new () => BaselineShiftKeywords;
 
 /**
  * baseline-shift 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -3802,7 +3721,7 @@ class BaselineShiftCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('baseline-shift');
-    initializeKeywordDeclarations(this, 'baseline-shift', keywords_8033f08005d6);
+    initializeKeywordDeclarations(this, 'baseline-shift', baselineShiftKeywords);
   }
   /**
    * 原样生成 baseline-shift 声明，保留关键字补全并接受自定义 CSS 值。
@@ -3895,17 +3814,14 @@ export type BaselineShiftCss = BaselineShiftCssRuntime & KeywordDeclarations<Bas
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
  */
-export const BaselineShiftCss = /* @__PURE__ */ keywordConstructor(
-  BaselineShiftCssRuntime,
-  'BaselineShiftCss',
-) as new () => BaselineShiftCss;
-import { keywords_69f7bb216cc3 } from './keyword-sets.js';
+export const BaselineShiftCss = BaselineShiftCssRuntime as new () => BaselineShiftCss;
+import { heightKeywords } from './keyword-sets.js';
 
 /**
  * block-size 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BlockSizeKeywords = KeywordValuesOf<
-  typeof keywords_69f7bb216cc3,
+  typeof heightKeywords,
   Property.BlockSize | CssString
 >;
 /**
@@ -3913,14 +3829,11 @@ export type BlockSizeKeywords = KeywordValuesOf<
  * @example
  * new BlockSizeKeywords()
  */
-export const BlockSizeKeywords = /* @__PURE__ */ keywordConstructor(
-  class BlockSizeKeywords {
-    constructor() {
-      Object.assign(this, keywords_69f7bb216cc3);
-    }
-  },
-  'BlockSizeKeywords',
-) as new () => BlockSizeKeywords;
+export const BlockSizeKeywords = class BlockSizeKeywords {
+  constructor() {
+    Object.assign(this, heightKeywords);
+  }
+} as new () => BlockSizeKeywords;
 
 /**
  * block-size 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -3933,7 +3846,7 @@ class BlockSizeCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('block-size');
-    initializeKeywordDeclarations(this, 'block-size', keywords_69f7bb216cc3);
+    initializeKeywordDeclarations(this, 'block-size', heightKeywords);
   }
   /**
    * 原样生成 block-size 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4020,32 +3933,23 @@ export type BlockSizeCss = BlockSizeCssRuntime & KeywordDeclarations<BlockSizeKe
  * s.blockSize.rem(10)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/block-size
  */
-export const BlockSizeCss = /* @__PURE__ */ keywordConstructor(
-  BlockSizeCssRuntime,
-  'BlockSizeCss',
-) as new () => BlockSizeCss;
-import { keywords_0a2605ee5857 } from './keyword-sets.js';
+export const BlockSizeCss = BlockSizeCssRuntime as new () => BlockSizeCss;
+import { borderKeywords } from './keyword-sets.js';
 
 /**
  * border 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export type BorderKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
-  Property.Border | CssString
->;
+export type BorderKeywords = KeywordValuesOf<typeof borderKeywords, Property.Border | CssString>;
 /**
  * 创建 border 的可继承关键字对象；每个实例独立，成员保留语义说明。
  * @example
  * new BorderKeywords()
  */
-export const BorderKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderKeywords',
-) as new () => BorderKeywords;
+export const BorderKeywords = class BorderKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderKeywords;
 
 /**
  * border 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4058,7 +3962,7 @@ class BorderCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border');
-    initializeKeywordDeclarations(this, 'border', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border', borderKeywords);
   }
   /**
    * 原样生成 border 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4209,16 +4113,13 @@ export type BorderCss = BorderCssRuntime & KeywordDeclarations<BorderKeywords>;
  * 同时设置四边边框的宽度、线型和颜色。（border）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border
  */
-export const BorderCss = /* @__PURE__ */ keywordConstructor(
-  BorderCssRuntime,
-  'BorderCss',
-) as new () => BorderCss;
+export const BorderCss = BorderCssRuntime as new () => BorderCss;
 
 /**
  * border-block 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderBlock | CssString
 >;
 /**
@@ -4226,14 +4127,11 @@ export type BorderBlockKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockKeywords()
  */
-export const BorderBlockKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderBlockKeywords',
-) as new () => BorderBlockKeywords;
+export const BorderBlockKeywords = class BorderBlockKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderBlockKeywords;
 
 /**
  * border-block 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4246,7 +4144,7 @@ class BorderBlockCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-block');
-    initializeKeywordDeclarations(this, 'border-block', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-block', borderKeywords);
   }
   /**
    * 原样生成 border-block 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4403,16 +4301,13 @@ export type BorderBlockCss = BorderBlockCssRuntime & KeywordDeclarations<BorderB
  * 设置逻辑块轴起始侧和结束侧的边框。（border-block）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block
  */
-export const BorderBlockCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockCssRuntime,
-  'BorderBlockCss',
-) as new () => BorderBlockCss;
+export const BorderBlockCss = BorderBlockCssRuntime as new () => BorderBlockCss;
 
 /**
  * border-block-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderBlockColor | CssString
 >;
 /**
@@ -4420,14 +4315,11 @@ export type BorderBlockColorKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockColorKeywords()
  */
-export const BorderBlockColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderBlockColorKeywords',
-) as new () => BorderBlockColorKeywords;
+export const BorderBlockColorKeywords = class BorderBlockColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderBlockColorKeywords;
 
 /**
  * border-block-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4440,7 +4332,7 @@ class BorderBlockColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-block-color');
-    initializeKeywordDeclarations(this, 'border-block-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-block-color', colorKeywords);
   }
   /**
    * 原样生成 border-block-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4544,16 +4436,13 @@ export type BorderBlockColorCss = BorderBlockColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-color
  */
-export const BorderBlockColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockColorCssRuntime,
-  'BorderBlockColorCss',
-) as new () => BorderBlockColorCss;
+export const BorderBlockColorCss = BorderBlockColorCssRuntime as new () => BorderBlockColorCss;
 
 /**
  * border-block-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockEndKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderBlockEnd | CssString
 >;
 /**
@@ -4561,14 +4450,11 @@ export type BorderBlockEndKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockEndKeywords()
  */
-export const BorderBlockEndKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockEndKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderBlockEndKeywords',
-) as new () => BorderBlockEndKeywords;
+export const BorderBlockEndKeywords = class BorderBlockEndKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderBlockEndKeywords;
 
 /**
  * border-block-end 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4581,7 +4467,7 @@ class BorderBlockEndCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-block-end');
-    initializeKeywordDeclarations(this, 'border-block-end', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-block-end', borderKeywords);
   }
   /**
    * 原样生成 border-block-end 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4739,16 +4625,13 @@ export type BorderBlockEndCss = BorderBlockEndCssRuntime &
  * 设置逻辑块轴结束侧边框的宽度、线型和颜色。（border-block-end）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end
  */
-export const BorderBlockEndCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockEndCssRuntime,
-  'BorderBlockEndCss',
-) as new () => BorderBlockEndCss;
+export const BorderBlockEndCss = BorderBlockEndCssRuntime as new () => BorderBlockEndCss;
 
 /**
  * border-block-end-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockEndColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderBlockEndColor | CssString
 >;
 /**
@@ -4756,14 +4639,11 @@ export type BorderBlockEndColorKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockEndColorKeywords()
  */
-export const BorderBlockEndColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockEndColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderBlockEndColorKeywords',
-) as new () => BorderBlockEndColorKeywords;
+export const BorderBlockEndColorKeywords = class BorderBlockEndColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderBlockEndColorKeywords;
 
 /**
  * border-block-end-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4776,7 +4656,7 @@ class BorderBlockEndColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-block-end-color');
-    initializeKeywordDeclarations(this, 'border-block-end-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-block-end-color', colorKeywords);
   }
   /**
    * 原样生成 border-block-end-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4880,17 +4760,15 @@ export type BorderBlockEndColorCss = BorderBlockEndColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-color
  */
-export const BorderBlockEndColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockEndColorCssRuntime,
-  'BorderBlockEndColorCss',
-) as new () => BorderBlockEndColorCss;
-import { keywords_5efb2180a82d } from './keyword-sets.js';
+export const BorderBlockEndColorCss =
+  BorderBlockEndColorCssRuntime as new () => BorderBlockEndColorCss;
+import { borderBlockEndStyleKeywords } from './keyword-sets.js';
 
 /**
  * border-block-end-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockEndStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderBlockEndStyle | CssString
 >;
 /**
@@ -4898,14 +4776,11 @@ export type BorderBlockEndStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockEndStyleKeywords()
  */
-export const BorderBlockEndStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockEndStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderBlockEndStyleKeywords',
-) as new () => BorderBlockEndStyleKeywords;
+export const BorderBlockEndStyleKeywords = class BorderBlockEndStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderBlockEndStyleKeywords;
 
 /**
  * border-block-end-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4918,7 +4793,7 @@ class BorderBlockEndStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-block-end-style');
-    initializeKeywordDeclarations(this, 'border-block-end-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-block-end-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-block-end-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -4944,17 +4819,15 @@ export type BorderBlockEndStyleCss = BorderBlockEndStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-style
  */
-export const BorderBlockEndStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockEndStyleCssRuntime,
-  'BorderBlockEndStyleCss',
-) as new () => BorderBlockEndStyleCss;
-import { keywords_e73a6d789346 } from './keyword-sets.js';
+export const BorderBlockEndStyleCss =
+  BorderBlockEndStyleCssRuntime as new () => BorderBlockEndStyleCss;
+import { borderWidthKeywords } from './keyword-sets.js';
 
 /**
  * border-block-end-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockEndWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderBlockEndWidth | CssString
 >;
 /**
@@ -4962,14 +4835,11 @@ export type BorderBlockEndWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockEndWidthKeywords()
  */
-export const BorderBlockEndWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockEndWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderBlockEndWidthKeywords',
-) as new () => BorderBlockEndWidthKeywords;
+export const BorderBlockEndWidthKeywords = class BorderBlockEndWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderBlockEndWidthKeywords;
 
 /**
  * border-block-end-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -4982,7 +4852,7 @@ class BorderBlockEndWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-block-end-width');
-    initializeKeywordDeclarations(this, 'border-block-end-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-block-end-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-block-end-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5064,16 +4934,14 @@ export type BorderBlockEndWidthCss = BorderBlockEndWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-width
  */
-export const BorderBlockEndWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockEndWidthCssRuntime,
-  'BorderBlockEndWidthCss',
-) as new () => BorderBlockEndWidthCss;
+export const BorderBlockEndWidthCss =
+  BorderBlockEndWidthCssRuntime as new () => BorderBlockEndWidthCss;
 
 /**
  * border-block-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockStartKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderBlockStart | CssString
 >;
 /**
@@ -5081,14 +4949,11 @@ export type BorderBlockStartKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockStartKeywords()
  */
-export const BorderBlockStartKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockStartKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderBlockStartKeywords',
-) as new () => BorderBlockStartKeywords;
+export const BorderBlockStartKeywords = class BorderBlockStartKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderBlockStartKeywords;
 
 /**
  * border-block-start 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -5101,7 +4966,7 @@ class BorderBlockStartCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-block-start');
-    initializeKeywordDeclarations(this, 'border-block-start', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-block-start', borderKeywords);
   }
   /**
    * 原样生成 border-block-start 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5259,16 +5124,13 @@ export type BorderBlockStartCss = BorderBlockStartCssRuntime &
  * 设置逻辑块轴起始侧边框的宽度、线型和颜色。（border-block-start）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start
  */
-export const BorderBlockStartCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockStartCssRuntime,
-  'BorderBlockStartCss',
-) as new () => BorderBlockStartCss;
+export const BorderBlockStartCss = BorderBlockStartCssRuntime as new () => BorderBlockStartCss;
 
 /**
  * border-block-start-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockStartColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderBlockStartColor | CssString
 >;
 /**
@@ -5276,14 +5138,11 @@ export type BorderBlockStartColorKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockStartColorKeywords()
  */
-export const BorderBlockStartColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockStartColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderBlockStartColorKeywords',
-) as new () => BorderBlockStartColorKeywords;
+export const BorderBlockStartColorKeywords = class BorderBlockStartColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderBlockStartColorKeywords;
 
 /**
  * border-block-start-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -5296,7 +5155,7 @@ class BorderBlockStartColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-block-start-color');
-    initializeKeywordDeclarations(this, 'border-block-start-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-block-start-color', colorKeywords);
   }
   /**
    * 原样生成 border-block-start-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5400,16 +5259,14 @@ export type BorderBlockStartColorCss = BorderBlockStartColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-color
  */
-export const BorderBlockStartColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockStartColorCssRuntime,
-  'BorderBlockStartColorCss',
-) as new () => BorderBlockStartColorCss;
+export const BorderBlockStartColorCss =
+  BorderBlockStartColorCssRuntime as new () => BorderBlockStartColorCss;
 
 /**
  * border-block-start-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockStartStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderBlockStartStyle | CssString
 >;
 /**
@@ -5417,14 +5274,11 @@ export type BorderBlockStartStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockStartStyleKeywords()
  */
-export const BorderBlockStartStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockStartStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderBlockStartStyleKeywords',
-) as new () => BorderBlockStartStyleKeywords;
+export const BorderBlockStartStyleKeywords = class BorderBlockStartStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderBlockStartStyleKeywords;
 
 /**
  * border-block-start-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -5437,7 +5291,7 @@ class BorderBlockStartStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-block-start-style');
-    initializeKeywordDeclarations(this, 'border-block-start-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-block-start-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-block-start-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5463,16 +5317,14 @@ export type BorderBlockStartStyleCss = BorderBlockStartStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-style
  */
-export const BorderBlockStartStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockStartStyleCssRuntime,
-  'BorderBlockStartStyleCss',
-) as new () => BorderBlockStartStyleCss;
+export const BorderBlockStartStyleCss =
+  BorderBlockStartStyleCssRuntime as new () => BorderBlockStartStyleCss;
 
 /**
  * border-block-start-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockStartWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderBlockStartWidth | CssString
 >;
 /**
@@ -5480,14 +5332,11 @@ export type BorderBlockStartWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockStartWidthKeywords()
  */
-export const BorderBlockStartWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockStartWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderBlockStartWidthKeywords',
-) as new () => BorderBlockStartWidthKeywords;
+export const BorderBlockStartWidthKeywords = class BorderBlockStartWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderBlockStartWidthKeywords;
 
 /**
  * border-block-start-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -5500,7 +5349,7 @@ class BorderBlockStartWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-block-start-width');
-    initializeKeywordDeclarations(this, 'border-block-start-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-block-start-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-block-start-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5582,16 +5431,14 @@ export type BorderBlockStartWidthCss = BorderBlockStartWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-width
  */
-export const BorderBlockStartWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockStartWidthCssRuntime,
-  'BorderBlockStartWidthCss',
-) as new () => BorderBlockStartWidthCss;
+export const BorderBlockStartWidthCss =
+  BorderBlockStartWidthCssRuntime as new () => BorderBlockStartWidthCss;
 
 /**
  * border-block-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderBlockStyle | CssString
 >;
 /**
@@ -5599,14 +5446,11 @@ export type BorderBlockStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockStyleKeywords()
  */
-export const BorderBlockStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderBlockStyleKeywords',
-) as new () => BorderBlockStyleKeywords;
+export const BorderBlockStyleKeywords = class BorderBlockStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderBlockStyleKeywords;
 
 /**
  * border-block-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -5619,7 +5463,7 @@ class BorderBlockStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-block-style');
-    initializeKeywordDeclarations(this, 'border-block-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-block-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-block-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -5645,16 +5489,13 @@ export type BorderBlockStyleCss = BorderBlockStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-style
  */
-export const BorderBlockStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockStyleCssRuntime,
-  'BorderBlockStyleCss',
-) as new () => BorderBlockStyleCss;
+export const BorderBlockStyleCss = BorderBlockStyleCssRuntime as new () => BorderBlockStyleCss;
 
 /**
  * border-block-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBlockWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderBlockWidth | CssString
 >;
 /**
@@ -5662,14 +5503,11 @@ export type BorderBlockWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderBlockWidthKeywords()
  */
-export const BorderBlockWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBlockWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderBlockWidthKeywords',
-) as new () => BorderBlockWidthKeywords;
+export const BorderBlockWidthKeywords = class BorderBlockWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderBlockWidthKeywords;
 
 /**
  * border-block-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -5682,7 +5520,7 @@ class BorderBlockWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-block-width');
-    initializeKeywordDeclarations(this, 'border-block-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-block-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-block-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -6940,16 +6778,13 @@ export type BorderBlockWidthCss = BorderBlockWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-width
  */
-export const BorderBlockWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderBlockWidthCssRuntime,
-  'BorderBlockWidthCss',
-) as new () => BorderBlockWidthCss;
+export const BorderBlockWidthCss = BorderBlockWidthCssRuntime as new () => BorderBlockWidthCss;
 
 /**
  * border-bottom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBottomKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderBottom | CssString
 >;
 /**
@@ -6957,14 +6792,11 @@ export type BorderBottomKeywords = KeywordValuesOf<
  * @example
  * new BorderBottomKeywords()
  */
-export const BorderBottomKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBottomKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderBottomKeywords',
-) as new () => BorderBottomKeywords;
+export const BorderBottomKeywords = class BorderBottomKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderBottomKeywords;
 
 /**
  * border-bottom 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -6977,7 +6809,7 @@ class BorderBottomCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-bottom');
-    initializeKeywordDeclarations(this, 'border-bottom', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-bottom', borderKeywords);
   }
   /**
    * 原样生成 border-bottom 声明，保留关键字补全并接受自定义 CSS 值。
@@ -7134,16 +6966,13 @@ export type BorderBottomCss = BorderBottomCssRuntime & KeywordDeclarations<Borde
  * 设置下边框的宽度、线型和颜色。（border-bottom）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom
  */
-export const BorderBottomCss = /* @__PURE__ */ keywordConstructor(
-  BorderBottomCssRuntime,
-  'BorderBottomCss',
-) as new () => BorderBottomCss;
+export const BorderBottomCss = BorderBottomCssRuntime as new () => BorderBottomCss;
 
 /**
  * border-bottom-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBottomColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderBottomColor | CssString
 >;
 /**
@@ -7151,14 +6980,11 @@ export type BorderBottomColorKeywords = KeywordValuesOf<
  * @example
  * new BorderBottomColorKeywords()
  */
-export const BorderBottomColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBottomColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderBottomColorKeywords',
-) as new () => BorderBottomColorKeywords;
+export const BorderBottomColorKeywords = class BorderBottomColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderBottomColorKeywords;
 
 /**
  * border-bottom-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -7171,7 +6997,7 @@ class BorderBottomColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-bottom-color');
-    initializeKeywordDeclarations(this, 'border-bottom-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-bottom-color', colorKeywords);
   }
   /**
    * 原样生成 border-bottom-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -7275,17 +7101,14 @@ export type BorderBottomColorCss = BorderBottomColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-color
  */
-export const BorderBottomColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderBottomColorCssRuntime,
-  'BorderBottomColorCss',
-) as new () => BorderBottomColorCss;
-import { keywords_dffc425ba867 } from './keyword-sets.js';
+export const BorderBottomColorCss = BorderBottomColorCssRuntime as new () => BorderBottomColorCss;
+import { globalKeywords } from './keyword-sets.js';
 
 /**
  * border-bottom-left-radius 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBottomLeftRadiusKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderBottomLeftRadius | CssString
 >;
 /**
@@ -7293,14 +7116,11 @@ export type BorderBottomLeftRadiusKeywords = KeywordValuesOf<
  * @example
  * new BorderBottomLeftRadiusKeywords()
  */
-export const BorderBottomLeftRadiusKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBottomLeftRadiusKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderBottomLeftRadiusKeywords',
-) as new () => BorderBottomLeftRadiusKeywords;
+export const BorderBottomLeftRadiusKeywords = class BorderBottomLeftRadiusKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderBottomLeftRadiusKeywords;
 
 /**
  * border-bottom-left-radius 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -7313,7 +7133,7 @@ class BorderBottomLeftRadiusCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-bottom-left-radius');
-    initializeKeywordDeclarations(this, 'border-bottom-left-radius', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-bottom-left-radius', globalKeywords);
   }
   /**
    * 原样生成 border-bottom-left-radius 声明，保留关键字补全并接受自定义 CSS 值。
@@ -8595,16 +8415,14 @@ export type BorderBottomLeftRadiusCss = BorderBottomLeftRadiusCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-left-radius
  */
-export const BorderBottomLeftRadiusCss = /* @__PURE__ */ keywordConstructor(
-  BorderBottomLeftRadiusCssRuntime,
-  'BorderBottomLeftRadiusCss',
-) as new () => BorderBottomLeftRadiusCss;
+export const BorderBottomLeftRadiusCss =
+  BorderBottomLeftRadiusCssRuntime as new () => BorderBottomLeftRadiusCss;
 
 /**
  * border-bottom-right-radius 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBottomRightRadiusKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderBottomRightRadius | CssString
 >;
 /**
@@ -8612,14 +8430,11 @@ export type BorderBottomRightRadiusKeywords = KeywordValuesOf<
  * @example
  * new BorderBottomRightRadiusKeywords()
  */
-export const BorderBottomRightRadiusKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBottomRightRadiusKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderBottomRightRadiusKeywords',
-) as new () => BorderBottomRightRadiusKeywords;
+export const BorderBottomRightRadiusKeywords = class BorderBottomRightRadiusKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderBottomRightRadiusKeywords;
 
 /**
  * border-bottom-right-radius 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -8632,7 +8447,7 @@ class BorderBottomRightRadiusCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-bottom-right-radius');
-    initializeKeywordDeclarations(this, 'border-bottom-right-radius', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-bottom-right-radius', globalKeywords);
   }
   /**
    * 原样生成 border-bottom-right-radius 声明，保留关键字补全并接受自定义 CSS 值。
@@ -9914,16 +9729,14 @@ export type BorderBottomRightRadiusCss = BorderBottomRightRadiusCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-right-radius
  */
-export const BorderBottomRightRadiusCss = /* @__PURE__ */ keywordConstructor(
-  BorderBottomRightRadiusCssRuntime,
-  'BorderBottomRightRadiusCss',
-) as new () => BorderBottomRightRadiusCss;
+export const BorderBottomRightRadiusCss =
+  BorderBottomRightRadiusCssRuntime as new () => BorderBottomRightRadiusCss;
 
 /**
  * border-bottom-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBottomStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderBottomStyle | CssString
 >;
 /**
@@ -9931,14 +9744,11 @@ export type BorderBottomStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderBottomStyleKeywords()
  */
-export const BorderBottomStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBottomStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderBottomStyleKeywords',
-) as new () => BorderBottomStyleKeywords;
+export const BorderBottomStyleKeywords = class BorderBottomStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderBottomStyleKeywords;
 
 /**
  * border-bottom-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -9951,7 +9761,7 @@ class BorderBottomStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-bottom-style');
-    initializeKeywordDeclarations(this, 'border-bottom-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-bottom-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-bottom-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -9977,16 +9787,13 @@ export type BorderBottomStyleCss = BorderBottomStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-style
  */
-export const BorderBottomStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderBottomStyleCssRuntime,
-  'BorderBottomStyleCss',
-) as new () => BorderBottomStyleCss;
+export const BorderBottomStyleCss = BorderBottomStyleCssRuntime as new () => BorderBottomStyleCss;
 
 /**
  * border-bottom-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderBottomWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderBottomWidth | CssString
 >;
 /**
@@ -9994,14 +9801,11 @@ export type BorderBottomWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderBottomWidthKeywords()
  */
-export const BorderBottomWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderBottomWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderBottomWidthKeywords',
-) as new () => BorderBottomWidthKeywords;
+export const BorderBottomWidthKeywords = class BorderBottomWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderBottomWidthKeywords;
 
 /**
  * border-bottom-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10014,7 +9818,7 @@ class BorderBottomWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-bottom-width');
-    initializeKeywordDeclarations(this, 'border-bottom-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-bottom-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-bottom-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10096,17 +9900,14 @@ export type BorderBottomWidthCss = BorderBottomWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-width
  */
-export const BorderBottomWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderBottomWidthCssRuntime,
-  'BorderBottomWidthCss',
-) as new () => BorderBottomWidthCss;
-import { keywords_d5baee5a8bb8 } from './keyword-sets.js';
+export const BorderBottomWidthCss = BorderBottomWidthCssRuntime as new () => BorderBottomWidthCss;
+import { borderCollapseKeywords } from './keyword-sets.js';
 
 /**
  * border-collapse 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderCollapseKeywords = KeywordValuesOf<
-  typeof keywords_d5baee5a8bb8,
+  typeof borderCollapseKeywords,
   Property.BorderCollapse | CssString
 >;
 /**
@@ -10114,14 +9915,11 @@ export type BorderCollapseKeywords = KeywordValuesOf<
  * @example
  * new BorderCollapseKeywords()
  */
-export const BorderCollapseKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderCollapseKeywords {
-    constructor() {
-      Object.assign(this, keywords_d5baee5a8bb8);
-    }
-  },
-  'BorderCollapseKeywords',
-) as new () => BorderCollapseKeywords;
+export const BorderCollapseKeywords = class BorderCollapseKeywords {
+  constructor() {
+    Object.assign(this, borderCollapseKeywords);
+  }
+} as new () => BorderCollapseKeywords;
 
 /**
  * border-collapse 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10134,7 +9932,7 @@ class BorderCollapseCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-collapse');
-    initializeKeywordDeclarations(this, 'border-collapse', keywords_d5baee5a8bb8);
+    initializeKeywordDeclarations(this, 'border-collapse', borderCollapseKeywords);
   }
   /**
    * 原样生成 border-collapse 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10160,16 +9958,13 @@ export type BorderCollapseCss = BorderCollapseCssRuntime &
  * CSS 初始值：`separate`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-collapse
  */
-export const BorderCollapseCss = /* @__PURE__ */ keywordConstructor(
-  BorderCollapseCssRuntime,
-  'BorderCollapseCss',
-) as new () => BorderCollapseCss;
+export const BorderCollapseCss = BorderCollapseCssRuntime as new () => BorderCollapseCss;
 
 /**
  * border-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderColor | CssString
 >;
 /**
@@ -10177,14 +9972,11 @@ export type BorderColorKeywords = KeywordValuesOf<
  * @example
  * new BorderColorKeywords()
  */
-export const BorderColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderColorKeywords',
-) as new () => BorderColorKeywords;
+export const BorderColorKeywords = class BorderColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderColorKeywords;
 
 /**
  * border-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10197,7 +9989,7 @@ class BorderColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-color');
-    initializeKeywordDeclarations(this, 'border-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-color', colorKeywords);
   }
   /**
    * 原样生成 border-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10298,16 +10090,13 @@ export type BorderColorCss = BorderColorCssRuntime & KeywordDeclarations<BorderC
  * 设置四边边框颜色，支持按上、右、下、左顺序简写。（border-color）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-color
  */
-export const BorderColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderColorCssRuntime,
-  'BorderColorCss',
-) as new () => BorderColorCss;
+export const BorderColorCss = BorderColorCssRuntime as new () => BorderColorCss;
 
 /**
  * border-end-end-radius 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderEndEndRadiusKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderEndEndRadius | CssString
 >;
 /**
@@ -10315,14 +10104,11 @@ export type BorderEndEndRadiusKeywords = KeywordValuesOf<
  * @example
  * new BorderEndEndRadiusKeywords()
  */
-export const BorderEndEndRadiusKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderEndEndRadiusKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderEndEndRadiusKeywords',
-) as new () => BorderEndEndRadiusKeywords;
+export const BorderEndEndRadiusKeywords = class BorderEndEndRadiusKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderEndEndRadiusKeywords;
 
 /**
  * border-end-end-radius 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10335,7 +10121,7 @@ class BorderEndEndRadiusCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-end-end-radius');
-    initializeKeywordDeclarations(this, 'border-end-end-radius', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-end-end-radius', globalKeywords);
   }
   /**
    * 原样生成 border-end-end-radius 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10417,16 +10203,14 @@ export type BorderEndEndRadiusCss = BorderEndEndRadiusCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-end-radius
  */
-export const BorderEndEndRadiusCss = /* @__PURE__ */ keywordConstructor(
-  BorderEndEndRadiusCssRuntime,
-  'BorderEndEndRadiusCss',
-) as new () => BorderEndEndRadiusCss;
+export const BorderEndEndRadiusCss =
+  BorderEndEndRadiusCssRuntime as new () => BorderEndEndRadiusCss;
 
 /**
  * border-end-start-radius 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderEndStartRadiusKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderEndStartRadius | CssString
 >;
 /**
@@ -10434,14 +10218,11 @@ export type BorderEndStartRadiusKeywords = KeywordValuesOf<
  * @example
  * new BorderEndStartRadiusKeywords()
  */
-export const BorderEndStartRadiusKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderEndStartRadiusKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderEndStartRadiusKeywords',
-) as new () => BorderEndStartRadiusKeywords;
+export const BorderEndStartRadiusKeywords = class BorderEndStartRadiusKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderEndStartRadiusKeywords;
 
 /**
  * border-end-start-radius 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10454,7 +10235,7 @@ class BorderEndStartRadiusCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-end-start-radius');
-    initializeKeywordDeclarations(this, 'border-end-start-radius', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-end-start-radius', globalKeywords);
   }
   /**
    * 原样生成 border-end-start-radius 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10536,17 +10317,15 @@ export type BorderEndStartRadiusCss = BorderEndStartRadiusCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
  */
-export const BorderEndStartRadiusCss = /* @__PURE__ */ keywordConstructor(
-  BorderEndStartRadiusCssRuntime,
-  'BorderEndStartRadiusCss',
-) as new () => BorderEndStartRadiusCss;
-import { keywords_6f800ebea941 } from './keyword-sets.js';
+export const BorderEndStartRadiusCss =
+  BorderEndStartRadiusCssRuntime as new () => BorderEndStartRadiusCss;
+import { borderImageKeywords } from './keyword-sets.js';
 
 /**
  * border-image 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderImageKeywords = KeywordValuesOf<
-  typeof keywords_6f800ebea941,
+  typeof borderImageKeywords,
   Property.BorderImage | CssString
 >;
 /**
@@ -10554,14 +10333,11 @@ export type BorderImageKeywords = KeywordValuesOf<
  * @example
  * new BorderImageKeywords()
  */
-export const BorderImageKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderImageKeywords {
-    constructor() {
-      Object.assign(this, keywords_6f800ebea941);
-    }
-  },
-  'BorderImageKeywords',
-) as new () => BorderImageKeywords;
+export const BorderImageKeywords = class BorderImageKeywords {
+  constructor() {
+    Object.assign(this, borderImageKeywords);
+  }
+} as new () => BorderImageKeywords;
 
 /**
  * border-image 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10574,7 +10350,7 @@ class BorderImageCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-image');
-    initializeKeywordDeclarations(this, 'border-image', keywords_6f800ebea941);
+    initializeKeywordDeclarations(this, 'border-image', borderImageKeywords);
   }
   /**
    * 原样生成 border-image 声明，保留关键字补全并接受自定义 CSS 值。
@@ -10653,16 +10429,13 @@ export type BorderImageCss = BorderImageCssRuntime & KeywordDeclarations<BorderI
  * 设置用作边框的图像及其切片、宽度、外扩和重复方式。（border-image）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image
  */
-export const BorderImageCss = /* @__PURE__ */ keywordConstructor(
-  BorderImageCssRuntime,
-  'BorderImageCss',
-) as new () => BorderImageCss;
+export const BorderImageCss = BorderImageCssRuntime as new () => BorderImageCss;
 
 /**
  * border-image-outset 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderImageOutsetKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderImageOutset | CssString
 >;
 /**
@@ -10670,14 +10443,11 @@ export type BorderImageOutsetKeywords = KeywordValuesOf<
  * @example
  * new BorderImageOutsetKeywords()
  */
-export const BorderImageOutsetKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderImageOutsetKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderImageOutsetKeywords',
-) as new () => BorderImageOutsetKeywords;
+export const BorderImageOutsetKeywords = class BorderImageOutsetKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderImageOutsetKeywords;
 
 /**
  * border-image-outset 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -10690,7 +10460,7 @@ class BorderImageOutsetCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-image-outset');
-    initializeKeywordDeclarations(this, 'border-image-outset', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-image-outset', globalKeywords);
   }
   /**
    * 原样生成 border-image-outset 声明，保留关键字补全并接受自定义 CSS 值。
@@ -13173,17 +12943,14 @@ export type BorderImageOutsetCss = BorderImageOutsetCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-outset
  */
-export const BorderImageOutsetCss = /* @__PURE__ */ keywordConstructor(
-  BorderImageOutsetCssRuntime,
-  'BorderImageOutsetCss',
-) as new () => BorderImageOutsetCss;
-import { keywords_fa458d10751c } from './keyword-sets.js';
+export const BorderImageOutsetCss = BorderImageOutsetCssRuntime as new () => BorderImageOutsetCss;
+import { borderImageRepeatKeywords } from './keyword-sets.js';
 
 /**
  * border-image-repeat 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderImageRepeatKeywords = KeywordValuesOf<
-  typeof keywords_fa458d10751c,
+  typeof borderImageRepeatKeywords,
   Property.BorderImageRepeat | CssString
 >;
 /**
@@ -13191,14 +12958,11 @@ export type BorderImageRepeatKeywords = KeywordValuesOf<
  * @example
  * new BorderImageRepeatKeywords()
  */
-export const BorderImageRepeatKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderImageRepeatKeywords {
-    constructor() {
-      Object.assign(this, keywords_fa458d10751c);
-    }
-  },
-  'BorderImageRepeatKeywords',
-) as new () => BorderImageRepeatKeywords;
+export const BorderImageRepeatKeywords = class BorderImageRepeatKeywords {
+  constructor() {
+    Object.assign(this, borderImageRepeatKeywords);
+  }
+} as new () => BorderImageRepeatKeywords;
 
 /**
  * border-image-repeat 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -13211,7 +12975,7 @@ class BorderImageRepeatCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-image-repeat');
-    initializeKeywordDeclarations(this, 'border-image-repeat', keywords_fa458d10751c);
+    initializeKeywordDeclarations(this, 'border-image-repeat', borderImageRepeatKeywords);
   }
   /**
    * 原样生成 border-image-repeat 声明，保留关键字补全并接受自定义 CSS 值。
@@ -13237,16 +13001,13 @@ export type BorderImageRepeatCss = BorderImageRepeatCssRuntime &
  * CSS 初始值：`stretch`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-repeat
  */
-export const BorderImageRepeatCss = /* @__PURE__ */ keywordConstructor(
-  BorderImageRepeatCssRuntime,
-  'BorderImageRepeatCss',
-) as new () => BorderImageRepeatCss;
+export const BorderImageRepeatCss = BorderImageRepeatCssRuntime as new () => BorderImageRepeatCss;
 
 /**
  * border-image-slice 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderImageSliceKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderImageSlice | CssString
 >;
 /**
@@ -13254,14 +13015,11 @@ export type BorderImageSliceKeywords = KeywordValuesOf<
  * @example
  * new BorderImageSliceKeywords()
  */
-export const BorderImageSliceKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderImageSliceKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderImageSliceKeywords',
-) as new () => BorderImageSliceKeywords;
+export const BorderImageSliceKeywords = class BorderImageSliceKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderImageSliceKeywords;
 
 /**
  * border-image-slice 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -13274,7 +13032,7 @@ class BorderImageSliceCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-image-slice');
-    initializeKeywordDeclarations(this, 'border-image-slice', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-image-slice', globalKeywords);
   }
   /**
    * 原样生成 border-image-slice 声明，保留关键字补全并接受自定义 CSS 值。
@@ -13405,16 +13163,13 @@ export type BorderImageSliceCss = BorderImageSliceCssRuntime &
  * CSS 初始值：`100%`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-slice
  */
-export const BorderImageSliceCss = /* @__PURE__ */ keywordConstructor(
-  BorderImageSliceCssRuntime,
-  'BorderImageSliceCss',
-) as new () => BorderImageSliceCss;
+export const BorderImageSliceCss = BorderImageSliceCssRuntime as new () => BorderImageSliceCss;
 
 /**
  * border-image-source 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderImageSourceKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.BorderImageSource | CssString
 >;
 /**
@@ -13422,14 +13177,11 @@ export type BorderImageSourceKeywords = KeywordValuesOf<
  * @example
  * new BorderImageSourceKeywords()
  */
-export const BorderImageSourceKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderImageSourceKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'BorderImageSourceKeywords',
-) as new () => BorderImageSourceKeywords;
+export const BorderImageSourceKeywords = class BorderImageSourceKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => BorderImageSourceKeywords;
 
 /**
  * border-image-source 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -13442,7 +13194,7 @@ class BorderImageSourceCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-image-source');
-    initializeKeywordDeclarations(this, 'border-image-source', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'border-image-source', noneKeywords);
   }
   /**
    * 原样生成 border-image-source 声明，保留关键字补全并接受自定义 CSS 值。
@@ -13468,17 +13220,14 @@ export type BorderImageSourceCss = BorderImageSourceCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-source
  */
-export const BorderImageSourceCss = /* @__PURE__ */ keywordConstructor(
-  BorderImageSourceCssRuntime,
-  'BorderImageSourceCss',
-) as new () => BorderImageSourceCss;
-import { keywords_10442af7f819 } from './keyword-sets.js';
+export const BorderImageSourceCss = BorderImageSourceCssRuntime as new () => BorderImageSourceCss;
+import { autoKeywords } from './keyword-sets.js';
 
 /**
  * border-image-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderImageWidthKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
+  typeof autoKeywords,
   Property.BorderImageWidth | CssString
 >;
 /**
@@ -13486,14 +13235,11 @@ export type BorderImageWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderImageWidthKeywords()
  */
-export const BorderImageWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderImageWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'BorderImageWidthKeywords',
-) as new () => BorderImageWidthKeywords;
+export const BorderImageWidthKeywords = class BorderImageWidthKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => BorderImageWidthKeywords;
 
 /**
  * border-image-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -13506,7 +13252,7 @@ class BorderImageWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-image-width');
-    initializeKeywordDeclarations(this, 'border-image-width', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'border-image-width', autoKeywords);
   }
   /**
    * 原样生成 border-image-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16038,16 +15784,13 @@ export type BorderImageWidthCss = BorderImageWidthCssRuntime &
  * CSS 初始值：`1`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-image-width
  */
-export const BorderImageWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderImageWidthCssRuntime,
-  'BorderImageWidthCss',
-) as new () => BorderImageWidthCss;
+export const BorderImageWidthCss = BorderImageWidthCssRuntime as new () => BorderImageWidthCss;
 
 /**
  * border-inline 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderInline | CssString
 >;
 /**
@@ -16055,14 +15798,11 @@ export type BorderInlineKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineKeywords()
  */
-export const BorderInlineKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderInlineKeywords',
-) as new () => BorderInlineKeywords;
+export const BorderInlineKeywords = class BorderInlineKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderInlineKeywords;
 
 /**
  * border-inline 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16075,7 +15815,7 @@ class BorderInlineCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-inline');
-    initializeKeywordDeclarations(this, 'border-inline', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-inline', borderKeywords);
   }
   /**
    * 原样生成 border-inline 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16232,16 +15972,13 @@ export type BorderInlineCss = BorderInlineCssRuntime & KeywordDeclarations<Borde
  * 设置逻辑行内轴起始侧和结束侧的边框。（border-inline）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline
  */
-export const BorderInlineCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineCssRuntime,
-  'BorderInlineCss',
-) as new () => BorderInlineCss;
+export const BorderInlineCss = BorderInlineCssRuntime as new () => BorderInlineCss;
 
 /**
  * border-inline-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderInlineColor | CssString
 >;
 /**
@@ -16249,14 +15986,11 @@ export type BorderInlineColorKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineColorKeywords()
  */
-export const BorderInlineColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderInlineColorKeywords',
-) as new () => BorderInlineColorKeywords;
+export const BorderInlineColorKeywords = class BorderInlineColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderInlineColorKeywords;
 
 /**
  * border-inline-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16269,7 +16003,7 @@ class BorderInlineColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-inline-color');
-    initializeKeywordDeclarations(this, 'border-inline-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-inline-color', colorKeywords);
   }
   /**
    * 原样生成 border-inline-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16373,16 +16107,13 @@ export type BorderInlineColorCss = BorderInlineColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-color
  */
-export const BorderInlineColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineColorCssRuntime,
-  'BorderInlineColorCss',
-) as new () => BorderInlineColorCss;
+export const BorderInlineColorCss = BorderInlineColorCssRuntime as new () => BorderInlineColorCss;
 
 /**
  * border-inline-end 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineEndKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderInlineEnd | CssString
 >;
 /**
@@ -16390,14 +16121,11 @@ export type BorderInlineEndKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineEndKeywords()
  */
-export const BorderInlineEndKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineEndKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderInlineEndKeywords',
-) as new () => BorderInlineEndKeywords;
+export const BorderInlineEndKeywords = class BorderInlineEndKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderInlineEndKeywords;
 
 /**
  * border-inline-end 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16410,7 +16138,7 @@ class BorderInlineEndCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-inline-end');
-    initializeKeywordDeclarations(this, 'border-inline-end', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-inline-end', borderKeywords);
   }
   /**
    * 原样生成 border-inline-end 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16568,16 +16296,13 @@ export type BorderInlineEndCss = BorderInlineEndCssRuntime &
  * 设置逻辑行内轴结束侧边框的宽度、线型和颜色。（border-inline-end）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end
  */
-export const BorderInlineEndCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineEndCssRuntime,
-  'BorderInlineEndCss',
-) as new () => BorderInlineEndCss;
+export const BorderInlineEndCss = BorderInlineEndCssRuntime as new () => BorderInlineEndCss;
 
 /**
  * border-inline-end-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineEndColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderInlineEndColor | CssString
 >;
 /**
@@ -16585,14 +16310,11 @@ export type BorderInlineEndColorKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineEndColorKeywords()
  */
-export const BorderInlineEndColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineEndColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderInlineEndColorKeywords',
-) as new () => BorderInlineEndColorKeywords;
+export const BorderInlineEndColorKeywords = class BorderInlineEndColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderInlineEndColorKeywords;
 
 /**
  * border-inline-end-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16605,7 +16327,7 @@ class BorderInlineEndColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-inline-end-color');
-    initializeKeywordDeclarations(this, 'border-inline-end-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-inline-end-color', colorKeywords);
   }
   /**
    * 原样生成 border-inline-end-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16709,16 +16431,14 @@ export type BorderInlineEndColorCss = BorderInlineEndColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-color
  */
-export const BorderInlineEndColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineEndColorCssRuntime,
-  'BorderInlineEndColorCss',
-) as new () => BorderInlineEndColorCss;
+export const BorderInlineEndColorCss =
+  BorderInlineEndColorCssRuntime as new () => BorderInlineEndColorCss;
 
 /**
  * border-inline-end-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineEndStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderInlineEndStyle | CssString
 >;
 /**
@@ -16726,14 +16446,11 @@ export type BorderInlineEndStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineEndStyleKeywords()
  */
-export const BorderInlineEndStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineEndStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderInlineEndStyleKeywords',
-) as new () => BorderInlineEndStyleKeywords;
+export const BorderInlineEndStyleKeywords = class BorderInlineEndStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderInlineEndStyleKeywords;
 
 /**
  * border-inline-end-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16746,7 +16463,7 @@ class BorderInlineEndStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-inline-end-style');
-    initializeKeywordDeclarations(this, 'border-inline-end-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-inline-end-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-inline-end-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16772,16 +16489,14 @@ export type BorderInlineEndStyleCss = BorderInlineEndStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-style
  */
-export const BorderInlineEndStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineEndStyleCssRuntime,
-  'BorderInlineEndStyleCss',
-) as new () => BorderInlineEndStyleCss;
+export const BorderInlineEndStyleCss =
+  BorderInlineEndStyleCssRuntime as new () => BorderInlineEndStyleCss;
 
 /**
  * border-inline-end-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineEndWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderInlineEndWidth | CssString
 >;
 /**
@@ -16789,14 +16504,11 @@ export type BorderInlineEndWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineEndWidthKeywords()
  */
-export const BorderInlineEndWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineEndWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderInlineEndWidthKeywords',
-) as new () => BorderInlineEndWidthKeywords;
+export const BorderInlineEndWidthKeywords = class BorderInlineEndWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderInlineEndWidthKeywords;
 
 /**
  * border-inline-end-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16809,7 +16521,7 @@ class BorderInlineEndWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-inline-end-width');
-    initializeKeywordDeclarations(this, 'border-inline-end-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-inline-end-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-inline-end-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -16891,16 +16603,14 @@ export type BorderInlineEndWidthCss = BorderInlineEndWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
  */
-export const BorderInlineEndWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineEndWidthCssRuntime,
-  'BorderInlineEndWidthCss',
-) as new () => BorderInlineEndWidthCss;
+export const BorderInlineEndWidthCss =
+  BorderInlineEndWidthCssRuntime as new () => BorderInlineEndWidthCss;
 
 /**
  * border-inline-start 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineStartKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderInlineStart | CssString
 >;
 /**
@@ -16908,14 +16618,11 @@ export type BorderInlineStartKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineStartKeywords()
  */
-export const BorderInlineStartKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineStartKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderInlineStartKeywords',
-) as new () => BorderInlineStartKeywords;
+export const BorderInlineStartKeywords = class BorderInlineStartKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderInlineStartKeywords;
 
 /**
  * border-inline-start 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -16928,7 +16635,7 @@ class BorderInlineStartCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-inline-start');
-    initializeKeywordDeclarations(this, 'border-inline-start', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-inline-start', borderKeywords);
   }
   /**
    * 原样生成 border-inline-start 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17086,16 +16793,13 @@ export type BorderInlineStartCss = BorderInlineStartCssRuntime &
  * 设置逻辑行内轴起始侧边框的宽度、线型和颜色。（border-inline-start）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start
  */
-export const BorderInlineStartCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineStartCssRuntime,
-  'BorderInlineStartCss',
-) as new () => BorderInlineStartCss;
+export const BorderInlineStartCss = BorderInlineStartCssRuntime as new () => BorderInlineStartCss;
 
 /**
  * border-inline-start-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineStartColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderInlineStartColor | CssString
 >;
 /**
@@ -17103,14 +16807,11 @@ export type BorderInlineStartColorKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineStartColorKeywords()
  */
-export const BorderInlineStartColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineStartColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderInlineStartColorKeywords',
-) as new () => BorderInlineStartColorKeywords;
+export const BorderInlineStartColorKeywords = class BorderInlineStartColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderInlineStartColorKeywords;
 
 /**
  * border-inline-start-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17123,7 +16824,7 @@ class BorderInlineStartColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-inline-start-color');
-    initializeKeywordDeclarations(this, 'border-inline-start-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-inline-start-color', colorKeywords);
   }
   /**
    * 原样生成 border-inline-start-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17227,16 +16928,14 @@ export type BorderInlineStartColorCss = BorderInlineStartColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-color
  */
-export const BorderInlineStartColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineStartColorCssRuntime,
-  'BorderInlineStartColorCss',
-) as new () => BorderInlineStartColorCss;
+export const BorderInlineStartColorCss =
+  BorderInlineStartColorCssRuntime as new () => BorderInlineStartColorCss;
 
 /**
  * border-inline-start-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineStartStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderInlineStartStyle | CssString
 >;
 /**
@@ -17244,14 +16943,11 @@ export type BorderInlineStartStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineStartStyleKeywords()
  */
-export const BorderInlineStartStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineStartStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderInlineStartStyleKeywords',
-) as new () => BorderInlineStartStyleKeywords;
+export const BorderInlineStartStyleKeywords = class BorderInlineStartStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderInlineStartStyleKeywords;
 
 /**
  * border-inline-start-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17264,7 +16960,7 @@ class BorderInlineStartStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-inline-start-style');
-    initializeKeywordDeclarations(this, 'border-inline-start-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-inline-start-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-inline-start-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17290,16 +16986,14 @@ export type BorderInlineStartStyleCss = BorderInlineStartStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-style
  */
-export const BorderInlineStartStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineStartStyleCssRuntime,
-  'BorderInlineStartStyleCss',
-) as new () => BorderInlineStartStyleCss;
+export const BorderInlineStartStyleCss =
+  BorderInlineStartStyleCssRuntime as new () => BorderInlineStartStyleCss;
 
 /**
  * border-inline-start-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineStartWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderInlineStartWidth | CssString
 >;
 /**
@@ -17307,14 +17001,11 @@ export type BorderInlineStartWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineStartWidthKeywords()
  */
-export const BorderInlineStartWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineStartWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderInlineStartWidthKeywords',
-) as new () => BorderInlineStartWidthKeywords;
+export const BorderInlineStartWidthKeywords = class BorderInlineStartWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderInlineStartWidthKeywords;
 
 /**
  * border-inline-start-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17327,7 +17018,7 @@ class BorderInlineStartWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-inline-start-width');
-    initializeKeywordDeclarations(this, 'border-inline-start-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-inline-start-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-inline-start-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17409,16 +17100,14 @@ export type BorderInlineStartWidthCss = BorderInlineStartWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
  */
-export const BorderInlineStartWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineStartWidthCssRuntime,
-  'BorderInlineStartWidthCss',
-) as new () => BorderInlineStartWidthCss;
+export const BorderInlineStartWidthCss =
+  BorderInlineStartWidthCssRuntime as new () => BorderInlineStartWidthCss;
 
 /**
  * border-inline-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderInlineStyle | CssString
 >;
 /**
@@ -17426,14 +17115,11 @@ export type BorderInlineStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineStyleKeywords()
  */
-export const BorderInlineStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderInlineStyleKeywords',
-) as new () => BorderInlineStyleKeywords;
+export const BorderInlineStyleKeywords = class BorderInlineStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderInlineStyleKeywords;
 
 /**
  * border-inline-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17446,7 +17132,7 @@ class BorderInlineStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-inline-style');
-    initializeKeywordDeclarations(this, 'border-inline-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-inline-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-inline-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -17472,16 +17158,13 @@ export type BorderInlineStyleCss = BorderInlineStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-style
  */
-export const BorderInlineStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineStyleCssRuntime,
-  'BorderInlineStyleCss',
-) as new () => BorderInlineStyleCss;
+export const BorderInlineStyleCss = BorderInlineStyleCssRuntime as new () => BorderInlineStyleCss;
 
 /**
  * border-inline-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderInlineWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderInlineWidth | CssString
 >;
 /**
@@ -17489,14 +17172,11 @@ export type BorderInlineWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderInlineWidthKeywords()
  */
-export const BorderInlineWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderInlineWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderInlineWidthKeywords',
-) as new () => BorderInlineWidthKeywords;
+export const BorderInlineWidthKeywords = class BorderInlineWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderInlineWidthKeywords;
 
 /**
  * border-inline-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -17509,7 +17189,7 @@ class BorderInlineWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-inline-width');
-    initializeKeywordDeclarations(this, 'border-inline-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-inline-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-inline-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18767,16 +18447,13 @@ export type BorderInlineWidthCss = BorderInlineWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-width
  */
-export const BorderInlineWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderInlineWidthCssRuntime,
-  'BorderInlineWidthCss',
-) as new () => BorderInlineWidthCss;
+export const BorderInlineWidthCss = BorderInlineWidthCssRuntime as new () => BorderInlineWidthCss;
 
 /**
  * border-left 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderLeftKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderLeft | CssString
 >;
 /**
@@ -18784,14 +18461,11 @@ export type BorderLeftKeywords = KeywordValuesOf<
  * @example
  * new BorderLeftKeywords()
  */
-export const BorderLeftKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderLeftKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderLeftKeywords',
-) as new () => BorderLeftKeywords;
+export const BorderLeftKeywords = class BorderLeftKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderLeftKeywords;
 
 /**
  * border-left 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18804,7 +18478,7 @@ class BorderLeftCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-left');
-    initializeKeywordDeclarations(this, 'border-left', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-left', borderKeywords);
   }
   /**
    * 原样生成 border-left 声明，保留关键字补全并接受自定义 CSS 值。
@@ -18961,16 +18635,13 @@ export type BorderLeftCss = BorderLeftCssRuntime & KeywordDeclarations<BorderLef
  * 设置左边框的宽度、线型和颜色。（border-left）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left
  */
-export const BorderLeftCss = /* @__PURE__ */ keywordConstructor(
-  BorderLeftCssRuntime,
-  'BorderLeftCss',
-) as new () => BorderLeftCss;
+export const BorderLeftCss = BorderLeftCssRuntime as new () => BorderLeftCss;
 
 /**
  * border-left-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderLeftColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderLeftColor | CssString
 >;
 /**
@@ -18978,14 +18649,11 @@ export type BorderLeftColorKeywords = KeywordValuesOf<
  * @example
  * new BorderLeftColorKeywords()
  */
-export const BorderLeftColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderLeftColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderLeftColorKeywords',
-) as new () => BorderLeftColorKeywords;
+export const BorderLeftColorKeywords = class BorderLeftColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderLeftColorKeywords;
 
 /**
  * border-left-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -18998,7 +18666,7 @@ class BorderLeftColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-left-color');
-    initializeKeywordDeclarations(this, 'border-left-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-left-color', colorKeywords);
   }
   /**
    * 原样生成 border-left-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19102,16 +18770,13 @@ export type BorderLeftColorCss = BorderLeftColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-color
  */
-export const BorderLeftColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderLeftColorCssRuntime,
-  'BorderLeftColorCss',
-) as new () => BorderLeftColorCss;
+export const BorderLeftColorCss = BorderLeftColorCssRuntime as new () => BorderLeftColorCss;
 
 /**
  * border-left-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderLeftStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderLeftStyle | CssString
 >;
 /**
@@ -19119,14 +18784,11 @@ export type BorderLeftStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderLeftStyleKeywords()
  */
-export const BorderLeftStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderLeftStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderLeftStyleKeywords',
-) as new () => BorderLeftStyleKeywords;
+export const BorderLeftStyleKeywords = class BorderLeftStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderLeftStyleKeywords;
 
 /**
  * border-left-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19139,7 +18801,7 @@ class BorderLeftStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-left-style');
-    initializeKeywordDeclarations(this, 'border-left-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-left-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-left-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19165,16 +18827,13 @@ export type BorderLeftStyleCss = BorderLeftStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-style
  */
-export const BorderLeftStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderLeftStyleCssRuntime,
-  'BorderLeftStyleCss',
-) as new () => BorderLeftStyleCss;
+export const BorderLeftStyleCss = BorderLeftStyleCssRuntime as new () => BorderLeftStyleCss;
 
 /**
  * border-left-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderLeftWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderLeftWidth | CssString
 >;
 /**
@@ -19182,14 +18841,11 @@ export type BorderLeftWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderLeftWidthKeywords()
  */
-export const BorderLeftWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderLeftWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderLeftWidthKeywords',
-) as new () => BorderLeftWidthKeywords;
+export const BorderLeftWidthKeywords = class BorderLeftWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderLeftWidthKeywords;
 
 /**
  * border-left-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19202,7 +18858,7 @@ class BorderLeftWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-left-width');
-    initializeKeywordDeclarations(this, 'border-left-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-left-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-left-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -19284,16 +18940,13 @@ export type BorderLeftWidthCss = BorderLeftWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-width
  */
-export const BorderLeftWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderLeftWidthCssRuntime,
-  'BorderLeftWidthCss',
-) as new () => BorderLeftWidthCss;
+export const BorderLeftWidthCss = BorderLeftWidthCssRuntime as new () => BorderLeftWidthCss;
 
 /**
  * border-radius 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderRadiusKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderRadius | CssString
 >;
 /**
@@ -19301,14 +18954,11 @@ export type BorderRadiusKeywords = KeywordValuesOf<
  * @example
  * new BorderRadiusKeywords()
  */
-export const BorderRadiusKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderRadiusKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderRadiusKeywords',
-) as new () => BorderRadiusKeywords;
+export const BorderRadiusKeywords = class BorderRadiusKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderRadiusKeywords;
 
 /**
  * border-radius 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -19321,7 +18971,7 @@ class BorderRadiusCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-radius');
-    initializeKeywordDeclarations(this, 'border-radius', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-radius', globalKeywords);
   }
   /**
    * 原样生成 border-radius 声明，保留关键字补全并接受自定义 CSS 值。
@@ -21856,16 +21506,13 @@ export type BorderRadiusCss = BorderRadiusCssRuntime & KeywordDeclarations<Borde
  * s.borderRadius.px(8)
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-radius
  */
-export const BorderRadiusCss = /* @__PURE__ */ keywordConstructor(
-  BorderRadiusCssRuntime,
-  'BorderRadiusCss',
-) as new () => BorderRadiusCss;
+export const BorderRadiusCss = BorderRadiusCssRuntime as new () => BorderRadiusCss;
 
 /**
  * border-right 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderRightKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderRight | CssString
 >;
 /**
@@ -21873,14 +21520,11 @@ export type BorderRightKeywords = KeywordValuesOf<
  * @example
  * new BorderRightKeywords()
  */
-export const BorderRightKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderRightKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderRightKeywords',
-) as new () => BorderRightKeywords;
+export const BorderRightKeywords = class BorderRightKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderRightKeywords;
 
 /**
  * border-right 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -21893,7 +21537,7 @@ class BorderRightCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-right');
-    initializeKeywordDeclarations(this, 'border-right', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-right', borderKeywords);
   }
   /**
    * 原样生成 border-right 声明，保留关键字补全并接受自定义 CSS 值。
@@ -22050,16 +21694,13 @@ export type BorderRightCss = BorderRightCssRuntime & KeywordDeclarations<BorderR
  * 设置右边框的宽度、线型和颜色。（border-right）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
  */
-export const BorderRightCss = /* @__PURE__ */ keywordConstructor(
-  BorderRightCssRuntime,
-  'BorderRightCss',
-) as new () => BorderRightCss;
+export const BorderRightCss = BorderRightCssRuntime as new () => BorderRightCss;
 
 /**
  * border-right-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderRightColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderRightColor | CssString
 >;
 /**
@@ -22067,14 +21708,11 @@ export type BorderRightColorKeywords = KeywordValuesOf<
  * @example
  * new BorderRightColorKeywords()
  */
-export const BorderRightColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderRightColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderRightColorKeywords',
-) as new () => BorderRightColorKeywords;
+export const BorderRightColorKeywords = class BorderRightColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderRightColorKeywords;
 
 /**
  * border-right-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -22087,7 +21725,7 @@ class BorderRightColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-right-color');
-    initializeKeywordDeclarations(this, 'border-right-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-right-color', colorKeywords);
   }
   /**
    * 原样生成 border-right-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -22191,16 +21829,13 @@ export type BorderRightColorCss = BorderRightColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-color
  */
-export const BorderRightColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderRightColorCssRuntime,
-  'BorderRightColorCss',
-) as new () => BorderRightColorCss;
+export const BorderRightColorCss = BorderRightColorCssRuntime as new () => BorderRightColorCss;
 
 /**
  * border-right-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderRightStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderRightStyle | CssString
 >;
 /**
@@ -22208,14 +21843,11 @@ export type BorderRightStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderRightStyleKeywords()
  */
-export const BorderRightStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderRightStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderRightStyleKeywords',
-) as new () => BorderRightStyleKeywords;
+export const BorderRightStyleKeywords = class BorderRightStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderRightStyleKeywords;
 
 /**
  * border-right-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -22228,7 +21860,7 @@ class BorderRightStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-right-style');
-    initializeKeywordDeclarations(this, 'border-right-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-right-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-right-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -22254,16 +21886,13 @@ export type BorderRightStyleCss = BorderRightStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-style
  */
-export const BorderRightStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderRightStyleCssRuntime,
-  'BorderRightStyleCss',
-) as new () => BorderRightStyleCss;
+export const BorderRightStyleCss = BorderRightStyleCssRuntime as new () => BorderRightStyleCss;
 
 /**
  * border-right-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderRightWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderRightWidth | CssString
 >;
 /**
@@ -22271,14 +21900,11 @@ export type BorderRightWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderRightWidthKeywords()
  */
-export const BorderRightWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderRightWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderRightWidthKeywords',
-) as new () => BorderRightWidthKeywords;
+export const BorderRightWidthKeywords = class BorderRightWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderRightWidthKeywords;
 
 /**
  * border-right-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -22291,7 +21917,7 @@ class BorderRightWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-right-width');
-    initializeKeywordDeclarations(this, 'border-right-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-right-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-right-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -22373,16 +21999,13 @@ export type BorderRightWidthCss = BorderRightWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-width
  */
-export const BorderRightWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderRightWidthCssRuntime,
-  'BorderRightWidthCss',
-) as new () => BorderRightWidthCss;
+export const BorderRightWidthCss = BorderRightWidthCssRuntime as new () => BorderRightWidthCss;
 
 /**
  * border-spacing 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderSpacingKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderSpacing | CssString
 >;
 /**
@@ -22390,14 +22013,11 @@ export type BorderSpacingKeywords = KeywordValuesOf<
  * @example
  * new BorderSpacingKeywords()
  */
-export const BorderSpacingKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderSpacingKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderSpacingKeywords',
-) as new () => BorderSpacingKeywords;
+export const BorderSpacingKeywords = class BorderSpacingKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderSpacingKeywords;
 
 /**
  * border-spacing 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -22410,7 +22030,7 @@ class BorderSpacingCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-spacing');
-    initializeKeywordDeclarations(this, 'border-spacing', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-spacing', globalKeywords);
   }
   /**
    * 原样生成 border-spacing 声明，保留关键字补全并接受自定义 CSS 值。
@@ -23667,16 +23287,13 @@ export type BorderSpacingCss = BorderSpacingCssRuntime & KeywordDeclarations<Bor
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-spacing
  */
-export const BorderSpacingCss = /* @__PURE__ */ keywordConstructor(
-  BorderSpacingCssRuntime,
-  'BorderSpacingCss',
-) as new () => BorderSpacingCss;
+export const BorderSpacingCss = BorderSpacingCssRuntime as new () => BorderSpacingCss;
 
 /**
  * border-start-end-radius 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderStartEndRadiusKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderStartEndRadius | CssString
 >;
 /**
@@ -23684,14 +23301,11 @@ export type BorderStartEndRadiusKeywords = KeywordValuesOf<
  * @example
  * new BorderStartEndRadiusKeywords()
  */
-export const BorderStartEndRadiusKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderStartEndRadiusKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderStartEndRadiusKeywords',
-) as new () => BorderStartEndRadiusKeywords;
+export const BorderStartEndRadiusKeywords = class BorderStartEndRadiusKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderStartEndRadiusKeywords;
 
 /**
  * border-start-end-radius 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -23704,7 +23318,7 @@ class BorderStartEndRadiusCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-start-end-radius');
-    initializeKeywordDeclarations(this, 'border-start-end-radius', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-start-end-radius', globalKeywords);
   }
   /**
    * 原样生成 border-start-end-radius 声明，保留关键字补全并接受自定义 CSS 值。
@@ -23786,16 +23400,14 @@ export type BorderStartEndRadiusCss = BorderStartEndRadiusCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-end-radius
  */
-export const BorderStartEndRadiusCss = /* @__PURE__ */ keywordConstructor(
-  BorderStartEndRadiusCssRuntime,
-  'BorderStartEndRadiusCss',
-) as new () => BorderStartEndRadiusCss;
+export const BorderStartEndRadiusCss =
+  BorderStartEndRadiusCssRuntime as new () => BorderStartEndRadiusCss;
 
 /**
  * border-start-start-radius 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderStartStartRadiusKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderStartStartRadius | CssString
 >;
 /**
@@ -23803,14 +23415,11 @@ export type BorderStartStartRadiusKeywords = KeywordValuesOf<
  * @example
  * new BorderStartStartRadiusKeywords()
  */
-export const BorderStartStartRadiusKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderStartStartRadiusKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderStartStartRadiusKeywords',
-) as new () => BorderStartStartRadiusKeywords;
+export const BorderStartStartRadiusKeywords = class BorderStartStartRadiusKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderStartStartRadiusKeywords;
 
 /**
  * border-start-start-radius 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -23823,7 +23432,7 @@ class BorderStartStartRadiusCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-start-start-radius');
-    initializeKeywordDeclarations(this, 'border-start-start-radius', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-start-start-radius', globalKeywords);
   }
   /**
    * 原样生成 border-start-start-radius 声明，保留关键字补全并接受自定义 CSS 值。
@@ -23905,17 +23514,15 @@ export type BorderStartStartRadiusCss = BorderStartStartRadiusCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
  */
-export const BorderStartStartRadiusCss = /* @__PURE__ */ keywordConstructor(
-  BorderStartStartRadiusCssRuntime,
-  'BorderStartStartRadiusCss',
-) as new () => BorderStartStartRadiusCss;
-import { keywords_293491adf24c } from './keyword-sets.js';
+export const BorderStartStartRadiusCss =
+  BorderStartStartRadiusCssRuntime as new () => BorderStartStartRadiusCss;
+import { borderStyleKeywords } from './keyword-sets.js';
 
 /**
  * border-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderStyleKeywords = KeywordValuesOf<
-  typeof keywords_293491adf24c,
+  typeof borderStyleKeywords,
   Property.BorderStyle | CssString
 >;
 /**
@@ -23923,14 +23530,11 @@ export type BorderStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderStyleKeywords()
  */
-export const BorderStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_293491adf24c);
-    }
-  },
-  'BorderStyleKeywords',
-) as new () => BorderStyleKeywords;
+export const BorderStyleKeywords = class BorderStyleKeywords {
+  constructor() {
+    Object.assign(this, borderStyleKeywords);
+  }
+} as new () => BorderStyleKeywords;
 
 /**
  * border-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -23943,7 +23547,7 @@ class BorderStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-style');
-    initializeKeywordDeclarations(this, 'border-style', keywords_293491adf24c);
+    initializeKeywordDeclarations(this, 'border-style', borderStyleKeywords);
   }
   /**
    * 原样生成 border-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -23966,16 +23570,13 @@ export type BorderStyleCss = BorderStyleCssRuntime & KeywordDeclarations<BorderS
  * 设置四边边框线型。（border-style）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-style
  */
-export const BorderStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderStyleCssRuntime,
-  'BorderStyleCss',
-) as new () => BorderStyleCss;
+export const BorderStyleCss = BorderStyleCssRuntime as new () => BorderStyleCss;
 
 /**
  * border-top 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderTopKeywords = KeywordValuesOf<
-  typeof keywords_0a2605ee5857,
+  typeof borderKeywords,
   Property.BorderTop | CssString
 >;
 /**
@@ -23983,14 +23584,11 @@ export type BorderTopKeywords = KeywordValuesOf<
  * @example
  * new BorderTopKeywords()
  */
-export const BorderTopKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderTopKeywords {
-    constructor() {
-      Object.assign(this, keywords_0a2605ee5857);
-    }
-  },
-  'BorderTopKeywords',
-) as new () => BorderTopKeywords;
+export const BorderTopKeywords = class BorderTopKeywords {
+  constructor() {
+    Object.assign(this, borderKeywords);
+  }
+} as new () => BorderTopKeywords;
 
 /**
  * border-top 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -24003,7 +23601,7 @@ class BorderTopCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-top');
-    initializeKeywordDeclarations(this, 'border-top', keywords_0a2605ee5857);
+    initializeKeywordDeclarations(this, 'border-top', borderKeywords);
   }
   /**
    * 原样生成 border-top 声明，保留关键字补全并接受自定义 CSS 值。
@@ -24160,16 +23758,13 @@ export type BorderTopCss = BorderTopCssRuntime & KeywordDeclarations<BorderTopKe
  * 设置上边框的宽度、线型和颜色。（border-top）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
  */
-export const BorderTopCss = /* @__PURE__ */ keywordConstructor(
-  BorderTopCssRuntime,
-  'BorderTopCss',
-) as new () => BorderTopCss;
+export const BorderTopCss = BorderTopCssRuntime as new () => BorderTopCss;
 
 /**
  * border-top-color 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderTopColorKeywords = KeywordValuesOf<
-  typeof keywords_357abf558bac,
+  typeof colorKeywords,
   Property.BorderTopColor | CssString
 >;
 /**
@@ -24177,14 +23772,11 @@ export type BorderTopColorKeywords = KeywordValuesOf<
  * @example
  * new BorderTopColorKeywords()
  */
-export const BorderTopColorKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderTopColorKeywords {
-    constructor() {
-      Object.assign(this, keywords_357abf558bac);
-    }
-  },
-  'BorderTopColorKeywords',
-) as new () => BorderTopColorKeywords;
+export const BorderTopColorKeywords = class BorderTopColorKeywords {
+  constructor() {
+    Object.assign(this, colorKeywords);
+  }
+} as new () => BorderTopColorKeywords;
 
 /**
  * border-top-color 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -24197,7 +23789,7 @@ class BorderTopColorCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-top-color');
-    initializeKeywordDeclarations(this, 'border-top-color', keywords_357abf558bac);
+    initializeKeywordDeclarations(this, 'border-top-color', colorKeywords);
   }
   /**
    * 原样生成 border-top-color 声明，保留关键字补全并接受自定义 CSS 值。
@@ -24301,16 +23893,13 @@ export type BorderTopColorCss = BorderTopColorCssRuntime &
  * CSS 初始值：`currentcolor`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-color
  */
-export const BorderTopColorCss = /* @__PURE__ */ keywordConstructor(
-  BorderTopColorCssRuntime,
-  'BorderTopColorCss',
-) as new () => BorderTopColorCss;
+export const BorderTopColorCss = BorderTopColorCssRuntime as new () => BorderTopColorCss;
 
 /**
  * border-top-left-radius 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderTopLeftRadiusKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderTopLeftRadius | CssString
 >;
 /**
@@ -24318,14 +23907,11 @@ export type BorderTopLeftRadiusKeywords = KeywordValuesOf<
  * @example
  * new BorderTopLeftRadiusKeywords()
  */
-export const BorderTopLeftRadiusKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderTopLeftRadiusKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderTopLeftRadiusKeywords',
-) as new () => BorderTopLeftRadiusKeywords;
+export const BorderTopLeftRadiusKeywords = class BorderTopLeftRadiusKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderTopLeftRadiusKeywords;
 
 /**
  * border-top-left-radius 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -24338,7 +23924,7 @@ class BorderTopLeftRadiusCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-top-left-radius');
-    initializeKeywordDeclarations(this, 'border-top-left-radius', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-top-left-radius', globalKeywords);
   }
   /**
    * 原样生成 border-top-left-radius 声明，保留关键字补全并接受自定义 CSS 值。
@@ -25620,16 +25206,14 @@ export type BorderTopLeftRadiusCss = BorderTopLeftRadiusCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
  */
-export const BorderTopLeftRadiusCss = /* @__PURE__ */ keywordConstructor(
-  BorderTopLeftRadiusCssRuntime,
-  'BorderTopLeftRadiusCss',
-) as new () => BorderTopLeftRadiusCss;
+export const BorderTopLeftRadiusCss =
+  BorderTopLeftRadiusCssRuntime as new () => BorderTopLeftRadiusCss;
 
 /**
  * border-top-right-radius 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderTopRightRadiusKeywords = KeywordValuesOf<
-  typeof keywords_dffc425ba867,
+  typeof globalKeywords,
   Property.BorderTopRightRadius | CssString
 >;
 /**
@@ -25637,14 +25221,11 @@ export type BorderTopRightRadiusKeywords = KeywordValuesOf<
  * @example
  * new BorderTopRightRadiusKeywords()
  */
-export const BorderTopRightRadiusKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderTopRightRadiusKeywords {
-    constructor() {
-      Object.assign(this, keywords_dffc425ba867);
-    }
-  },
-  'BorderTopRightRadiusKeywords',
-) as new () => BorderTopRightRadiusKeywords;
+export const BorderTopRightRadiusKeywords = class BorderTopRightRadiusKeywords {
+  constructor() {
+    Object.assign(this, globalKeywords);
+  }
+} as new () => BorderTopRightRadiusKeywords;
 
 /**
  * border-top-right-radius 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -25657,7 +25238,7 @@ class BorderTopRightRadiusCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-top-right-radius');
-    initializeKeywordDeclarations(this, 'border-top-right-radius', keywords_dffc425ba867);
+    initializeKeywordDeclarations(this, 'border-top-right-radius', globalKeywords);
   }
   /**
    * 原样生成 border-top-right-radius 声明，保留关键字补全并接受自定义 CSS 值。
@@ -26939,16 +26520,14 @@ export type BorderTopRightRadiusCss = BorderTopRightRadiusCssRuntime &
  * CSS 初始值：`0`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
  */
-export const BorderTopRightRadiusCss = /* @__PURE__ */ keywordConstructor(
-  BorderTopRightRadiusCssRuntime,
-  'BorderTopRightRadiusCss',
-) as new () => BorderTopRightRadiusCss;
+export const BorderTopRightRadiusCss =
+  BorderTopRightRadiusCssRuntime as new () => BorderTopRightRadiusCss;
 
 /**
  * border-top-style 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderTopStyleKeywords = KeywordValuesOf<
-  typeof keywords_5efb2180a82d,
+  typeof borderBlockEndStyleKeywords,
   Property.BorderTopStyle | CssString
 >;
 /**
@@ -26956,14 +26535,11 @@ export type BorderTopStyleKeywords = KeywordValuesOf<
  * @example
  * new BorderTopStyleKeywords()
  */
-export const BorderTopStyleKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderTopStyleKeywords {
-    constructor() {
-      Object.assign(this, keywords_5efb2180a82d);
-    }
-  },
-  'BorderTopStyleKeywords',
-) as new () => BorderTopStyleKeywords;
+export const BorderTopStyleKeywords = class BorderTopStyleKeywords {
+  constructor() {
+    Object.assign(this, borderBlockEndStyleKeywords);
+  }
+} as new () => BorderTopStyleKeywords;
 
 /**
  * border-top-style 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -26976,7 +26552,7 @@ class BorderTopStyleCssRuntime extends CssProperty {
    */
   constructor() {
     super('border-top-style');
-    initializeKeywordDeclarations(this, 'border-top-style', keywords_5efb2180a82d);
+    initializeKeywordDeclarations(this, 'border-top-style', borderBlockEndStyleKeywords);
   }
   /**
    * 原样生成 border-top-style 声明，保留关键字补全并接受自定义 CSS 值。
@@ -27002,16 +26578,13 @@ export type BorderTopStyleCss = BorderTopStyleCssRuntime &
  * CSS 初始值：`none`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-style
  */
-export const BorderTopStyleCss = /* @__PURE__ */ keywordConstructor(
-  BorderTopStyleCssRuntime,
-  'BorderTopStyleCss',
-) as new () => BorderTopStyleCss;
+export const BorderTopStyleCss = BorderTopStyleCssRuntime as new () => BorderTopStyleCss;
 
 /**
  * border-top-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderTopWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderTopWidth | CssString
 >;
 /**
@@ -27019,14 +26592,11 @@ export type BorderTopWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderTopWidthKeywords()
  */
-export const BorderTopWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderTopWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderTopWidthKeywords',
-) as new () => BorderTopWidthKeywords;
+export const BorderTopWidthKeywords = class BorderTopWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderTopWidthKeywords;
 
 /**
  * border-top-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -27039,7 +26609,7 @@ class BorderTopWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-top-width');
-    initializeKeywordDeclarations(this, 'border-top-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-top-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-top-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -27121,16 +26691,13 @@ export type BorderTopWidthCss = BorderTopWidthCssRuntime &
  * CSS 初始值：`medium`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-width
  */
-export const BorderTopWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderTopWidthCssRuntime,
-  'BorderTopWidthCss',
-) as new () => BorderTopWidthCss;
+export const BorderTopWidthCss = BorderTopWidthCssRuntime as new () => BorderTopWidthCss;
 
 /**
  * border-width 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BorderWidthKeywords = KeywordValuesOf<
-  typeof keywords_e73a6d789346,
+  typeof borderWidthKeywords,
   Property.BorderWidth | CssString
 >;
 /**
@@ -27138,14 +26705,11 @@ export type BorderWidthKeywords = KeywordValuesOf<
  * @example
  * new BorderWidthKeywords()
  */
-export const BorderWidthKeywords = /* @__PURE__ */ keywordConstructor(
-  class BorderWidthKeywords {
-    constructor() {
-      Object.assign(this, keywords_e73a6d789346);
-    }
-  },
-  'BorderWidthKeywords',
-) as new () => BorderWidthKeywords;
+export const BorderWidthKeywords = class BorderWidthKeywords {
+  constructor() {
+    Object.assign(this, borderWidthKeywords);
+  }
+} as new () => BorderWidthKeywords;
 
 /**
  * border-width 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -27158,7 +26722,7 @@ class BorderWidthCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('border-width');
-    initializeKeywordDeclarations(this, 'border-width', keywords_e73a6d789346);
+    initializeKeywordDeclarations(this, 'border-width', borderWidthKeywords);
   }
   /**
    * 原样生成 border-width 声明，保留关键字补全并接受自定义 CSS 值。
@@ -29638,31 +29202,22 @@ export type BorderWidthCss = BorderWidthCssRuntime & KeywordDeclarations<BorderW
  * 设置四边边框宽度；可见边框通常还需要非 none 的线型。（border-width）
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-width
  */
-export const BorderWidthCss = /* @__PURE__ */ keywordConstructor(
-  BorderWidthCssRuntime,
-  'BorderWidthCss',
-) as new () => BorderWidthCss;
+export const BorderWidthCss = BorderWidthCssRuntime as new () => BorderWidthCss;
 
 /**
  * bottom 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
-export type BottomKeywords = KeywordValuesOf<
-  typeof keywords_10442af7f819,
-  Property.Bottom | CssString
->;
+export type BottomKeywords = KeywordValuesOf<typeof autoKeywords, Property.Bottom | CssString>;
 /**
  * 创建 bottom 的可继承关键字对象；每个实例独立，成员保留语义说明。
  * @example
  * new BottomKeywords()
  */
-export const BottomKeywords = /* @__PURE__ */ keywordConstructor(
-  class BottomKeywords {
-    constructor() {
-      Object.assign(this, keywords_10442af7f819);
-    }
-  },
-  'BottomKeywords',
-) as new () => BottomKeywords;
+export const BottomKeywords = class BottomKeywords {
+  constructor() {
+    Object.assign(this, autoKeywords);
+  }
+} as new () => BottomKeywords;
 
 /**
  * bottom 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -29675,7 +29230,7 @@ class BottomCssRuntime extends LengthCssProperty {
    */
   constructor() {
     super('bottom');
-    initializeKeywordDeclarations(this, 'bottom', keywords_10442af7f819);
+    initializeKeywordDeclarations(this, 'bottom', autoKeywords);
   }
   /**
    * 原样生成 bottom 声明，保留关键字补全并接受自定义 CSS 值。
@@ -29762,17 +29317,14 @@ export type BottomCss = BottomCssRuntime & KeywordDeclarations<BottomKeywords>;
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/bottom
  */
-export const BottomCss = /* @__PURE__ */ keywordConstructor(
-  BottomCssRuntime,
-  'BottomCss',
-) as new () => BottomCss;
-import { keywords_e19061ca4002 } from './keyword-sets.js';
+export const BottomCss = BottomCssRuntime as new () => BottomCss;
+import { boxDecorationBreakKeywords } from './keyword-sets.js';
 
 /**
  * box-decoration-break 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BoxDecorationBreakKeywords = KeywordValuesOf<
-  typeof keywords_e19061ca4002,
+  typeof boxDecorationBreakKeywords,
   Property.BoxDecorationBreak | CssString
 >;
 /**
@@ -29780,14 +29332,11 @@ export type BoxDecorationBreakKeywords = KeywordValuesOf<
  * @example
  * new BoxDecorationBreakKeywords()
  */
-export const BoxDecorationBreakKeywords = /* @__PURE__ */ keywordConstructor(
-  class BoxDecorationBreakKeywords {
-    constructor() {
-      Object.assign(this, keywords_e19061ca4002);
-    }
-  },
-  'BoxDecorationBreakKeywords',
-) as new () => BoxDecorationBreakKeywords;
+export const BoxDecorationBreakKeywords = class BoxDecorationBreakKeywords {
+  constructor() {
+    Object.assign(this, boxDecorationBreakKeywords);
+  }
+} as new () => BoxDecorationBreakKeywords;
 
 /**
  * box-decoration-break 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -29800,7 +29349,7 @@ class BoxDecorationBreakCssRuntime extends CssProperty {
    */
   constructor() {
     super('box-decoration-break');
-    initializeKeywordDeclarations(this, 'box-decoration-break', keywords_e19061ca4002);
+    initializeKeywordDeclarations(this, 'box-decoration-break', boxDecorationBreakKeywords);
   }
   /**
    * 原样生成 box-decoration-break 声明，保留关键字补全并接受自定义 CSS 值。
@@ -29826,16 +29375,14 @@ export type BoxDecorationBreakCss = BoxDecorationBreakCssRuntime &
  * CSS 初始值：`slice`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-decoration-break
  */
-export const BoxDecorationBreakCss = /* @__PURE__ */ keywordConstructor(
-  BoxDecorationBreakCssRuntime,
-  'BoxDecorationBreakCss',
-) as new () => BoxDecorationBreakCss;
+export const BoxDecorationBreakCss =
+  BoxDecorationBreakCssRuntime as new () => BoxDecorationBreakCss;
 
 /**
  * box-shadow 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BoxShadowKeywords = KeywordValuesOf<
-  typeof keywords_9cd78f567b36,
+  typeof noneKeywords,
   Property.BoxShadow | CssString
 >;
 /**
@@ -29843,14 +29390,11 @@ export type BoxShadowKeywords = KeywordValuesOf<
  * @example
  * new BoxShadowKeywords()
  */
-export const BoxShadowKeywords = /* @__PURE__ */ keywordConstructor(
-  class BoxShadowKeywords {
-    constructor() {
-      Object.assign(this, keywords_9cd78f567b36);
-    }
-  },
-  'BoxShadowKeywords',
-) as new () => BoxShadowKeywords;
+export const BoxShadowKeywords = class BoxShadowKeywords {
+  constructor() {
+    Object.assign(this, noneKeywords);
+  }
+} as new () => BoxShadowKeywords;
 
 /**
  * box-shadow 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -29863,7 +29407,7 @@ class BoxShadowCssRuntime extends CssProperty {
    */
   constructor() {
     super('box-shadow');
-    initializeKeywordDeclarations(this, 'box-shadow', keywords_9cd78f567b36);
+    initializeKeywordDeclarations(this, 'box-shadow', noneKeywords);
   }
   /**
    * 原样生成 box-shadow 声明，保留关键字补全并接受自定义 CSS 值。
@@ -29894,17 +29438,14 @@ export type BoxShadowCss = BoxShadowCssRuntime & KeywordDeclarations<BoxShadowKe
  * s.boxShadow.raw('0 2px 8px rgb(0 0 0 / 0.15)')
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-shadow
  */
-export const BoxShadowCss = /* @__PURE__ */ keywordConstructor(
-  BoxShadowCssRuntime,
-  'BoxShadowCss',
-) as new () => BoxShadowCss;
-import { keywords_4d3c35aa804a } from './keyword-sets.js';
+export const BoxShadowCss = BoxShadowCssRuntime as new () => BoxShadowCss;
+import { boxSizingKeywords } from './keyword-sets.js';
 
 /**
  * box-sizing 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BoxSizingKeywords = KeywordValuesOf<
-  typeof keywords_4d3c35aa804a,
+  typeof boxSizingKeywords,
   Property.BoxSizing | CssString
 >;
 /**
@@ -29912,14 +29453,11 @@ export type BoxSizingKeywords = KeywordValuesOf<
  * @example
  * new BoxSizingKeywords()
  */
-export const BoxSizingKeywords = /* @__PURE__ */ keywordConstructor(
-  class BoxSizingKeywords {
-    constructor() {
-      Object.assign(this, keywords_4d3c35aa804a);
-    }
-  },
-  'BoxSizingKeywords',
-) as new () => BoxSizingKeywords;
+export const BoxSizingKeywords = class BoxSizingKeywords {
+  constructor() {
+    Object.assign(this, boxSizingKeywords);
+  }
+} as new () => BoxSizingKeywords;
 
 /**
  * box-sizing 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -29932,7 +29470,7 @@ class BoxSizingCssRuntime extends CssProperty {
    */
   constructor() {
     super('box-sizing');
-    initializeKeywordDeclarations(this, 'box-sizing', keywords_4d3c35aa804a);
+    initializeKeywordDeclarations(this, 'box-sizing', boxSizingKeywords);
   }
   /**
    * 原样生成 box-sizing 声明，保留关键字补全并接受自定义 CSS 值。
@@ -29965,17 +29503,14 @@ export type BoxSizingCss = BoxSizingCssRuntime & KeywordDeclarations<BoxSizingKe
  * css(s.boxSizing.borderBox, s.width.rem(20), s.padding.rem(1))
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/box-sizing
  */
-export const BoxSizingCss = /* @__PURE__ */ keywordConstructor(
-  BoxSizingCssRuntime,
-  'BoxSizingCss',
-) as new () => BoxSizingCss;
-import { keywords_0faf4e44c6a7 } from './keyword-sets.js';
+export const BoxSizingCss = BoxSizingCssRuntime as new () => BoxSizingCss;
+import { breakAfterKeywords } from './keyword-sets.js';
 
 /**
  * break-after 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BreakAfterKeywords = KeywordValuesOf<
-  typeof keywords_0faf4e44c6a7,
+  typeof breakAfterKeywords,
   Property.BreakAfter | CssString
 >;
 /**
@@ -29983,14 +29518,11 @@ export type BreakAfterKeywords = KeywordValuesOf<
  * @example
  * new BreakAfterKeywords()
  */
-export const BreakAfterKeywords = /* @__PURE__ */ keywordConstructor(
-  class BreakAfterKeywords {
-    constructor() {
-      Object.assign(this, keywords_0faf4e44c6a7);
-    }
-  },
-  'BreakAfterKeywords',
-) as new () => BreakAfterKeywords;
+export const BreakAfterKeywords = class BreakAfterKeywords {
+  constructor() {
+    Object.assign(this, breakAfterKeywords);
+  }
+} as new () => BreakAfterKeywords;
 
 /**
  * break-after 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -30003,7 +29535,7 @@ class BreakAfterCssRuntime extends CssProperty {
    */
   constructor() {
     super('break-after');
-    initializeKeywordDeclarations(this, 'break-after', keywords_0faf4e44c6a7);
+    initializeKeywordDeclarations(this, 'break-after', breakAfterKeywords);
   }
   /**
    * 原样生成 break-after 声明，保留关键字补全并接受自定义 CSS 值。
@@ -30028,16 +29560,13 @@ export type BreakAfterCss = BreakAfterCssRuntime & KeywordDeclarations<BreakAfte
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-after
  */
-export const BreakAfterCss = /* @__PURE__ */ keywordConstructor(
-  BreakAfterCssRuntime,
-  'BreakAfterCss',
-) as new () => BreakAfterCss;
+export const BreakAfterCss = BreakAfterCssRuntime as new () => BreakAfterCss;
 
 /**
  * break-before 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BreakBeforeKeywords = KeywordValuesOf<
-  typeof keywords_0faf4e44c6a7,
+  typeof breakAfterKeywords,
   Property.BreakBefore | CssString
 >;
 /**
@@ -30045,14 +29574,11 @@ export type BreakBeforeKeywords = KeywordValuesOf<
  * @example
  * new BreakBeforeKeywords()
  */
-export const BreakBeforeKeywords = /* @__PURE__ */ keywordConstructor(
-  class BreakBeforeKeywords {
-    constructor() {
-      Object.assign(this, keywords_0faf4e44c6a7);
-    }
-  },
-  'BreakBeforeKeywords',
-) as new () => BreakBeforeKeywords;
+export const BreakBeforeKeywords = class BreakBeforeKeywords {
+  constructor() {
+    Object.assign(this, breakAfterKeywords);
+  }
+} as new () => BreakBeforeKeywords;
 
 /**
  * break-before 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -30065,7 +29591,7 @@ class BreakBeforeCssRuntime extends CssProperty {
    */
   constructor() {
     super('break-before');
-    initializeKeywordDeclarations(this, 'break-before', keywords_0faf4e44c6a7);
+    initializeKeywordDeclarations(this, 'break-before', breakAfterKeywords);
   }
   /**
    * 原样生成 break-before 声明，保留关键字补全并接受自定义 CSS 值。
@@ -30090,17 +29616,14 @@ export type BreakBeforeCss = BreakBeforeCssRuntime & KeywordDeclarations<BreakBe
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-before
  */
-export const BreakBeforeCss = /* @__PURE__ */ keywordConstructor(
-  BreakBeforeCssRuntime,
-  'BreakBeforeCss',
-) as new () => BreakBeforeCss;
-import { keywords_8c280262de36 } from './keyword-sets.js';
+export const BreakBeforeCss = BreakBeforeCssRuntime as new () => BreakBeforeCss;
+import { breakInsideKeywords } from './keyword-sets.js';
 
 /**
  * break-inside 的系统关键字值；主题可继承或展开后覆盖，值不包含属性名与分号。
  */
 export type BreakInsideKeywords = KeywordValuesOf<
-  typeof keywords_8c280262de36,
+  typeof breakInsideKeywords,
   Property.BreakInside | CssString
 >;
 /**
@@ -30108,14 +29631,11 @@ export type BreakInsideKeywords = KeywordValuesOf<
  * @example
  * new BreakInsideKeywords()
  */
-export const BreakInsideKeywords = /* @__PURE__ */ keywordConstructor(
-  class BreakInsideKeywords {
-    constructor() {
-      Object.assign(this, keywords_8c280262de36);
-    }
-  },
-  'BreakInsideKeywords',
-) as new () => BreakInsideKeywords;
+export const BreakInsideKeywords = class BreakInsideKeywords {
+  constructor() {
+    Object.assign(this, breakInsideKeywords);
+  }
+} as new () => BreakInsideKeywords;
 
 /**
  * break-inside 作者的运行时方法；公共成员类型由原始关键字定义映射。
@@ -30128,7 +29648,7 @@ class BreakInsideCssRuntime extends CssProperty {
    */
   constructor() {
     super('break-inside');
-    initializeKeywordDeclarations(this, 'break-inside', keywords_8c280262de36);
+    initializeKeywordDeclarations(this, 'break-inside', breakInsideKeywords);
   }
   /**
    * 原样生成 break-inside 声明，保留关键字补全并接受自定义 CSS 值。
@@ -30153,7 +29673,4 @@ export type BreakInsideCss = BreakInsideCssRuntime & KeywordDeclarations<BreakIn
  * CSS 初始值：`auto`（不同于浏览器默认样式表）。
  * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/break-inside
  */
-export const BreakInsideCss = /* @__PURE__ */ keywordConstructor(
-  BreakInsideCssRuntime,
-  'BreakInsideCss',
-) as new () => BreakInsideCss;
+export const BreakInsideCss = BreakInsideCssRuntime as new () => BreakInsideCss;

@@ -1,6 +1,6 @@
 // 由 scripts/generate-css-author.mjs 从 csstype@3.2.3 生成；请勿手改。
 // 来源许可见 core/THIRD_PARTY_NOTICES.md。
-export const keywords_3d3b52bc8ef1 = /* @__PURE__ */ Object.freeze({
+export const accentColorKeywords = {
   /** 默认 CSS 值：`AccentColor`；主题可覆盖。 */
   AccentColor: 'AccentColor',
   /** 默认 CSS 值：`AccentColorText`；主题可覆盖。 */
@@ -425,8 +425,8 @@ export const keywords_3d3b52bc8ef1 = /* @__PURE__ */ Object.freeze({
   yellow: 'yellow',
   /** 默认 CSS 值：`yellowgreen`；主题可覆盖。 */
   yellowgreen: 'yellowgreen',
-});
-export const keywords_f701374d513c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const alignContentKeywords = {
   /** 默认 CSS 值：`baseline`；主题可覆盖。 */
   baseline: 'baseline',
   /** 默认 CSS 值：`center`；主题可覆盖。 */
@@ -479,8 +479,8 @@ export const keywords_f701374d513c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_d15096dcf250 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const alignItemsKeywords = {
   /** 默认 CSS 值：`anchor-center`；主题可覆盖。 */
   anchorCenter: 'anchor-center',
   /**
@@ -579,8 +579,8 @@ export const keywords_d15096dcf250 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_977eae9a71c3 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const alignSelfKeywords = {
   /** 默认 CSS 值：`anchor-center`；主题可覆盖。 */
   anchorCenter: 'anchor-center',
   /**
@@ -647,8 +647,8 @@ export const keywords_977eae9a71c3 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_733081824c35 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const alignmentBaselineKeywords = {
   /** 默认 CSS 值：`alphabetic`；主题可覆盖。 */
   alphabetic: 'alphabetic',
   /** 默认 CSS 值：`baseline`；主题可覆盖。 */
@@ -695,8 +695,8 @@ export const keywords_733081824c35 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_dffc425ba867 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const globalKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -727,8 +727,8 @@ export const keywords_dffc425ba867 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_9cd78f567b36 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const noneKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -761,8 +761,8 @@ export const keywords_9cd78f567b36 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_94e2d00a7633 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const anchorScopeKeywords = {
   /** 默认 CSS 值：`all`；主题可覆盖。 */
   all: 'all',
   /**
@@ -797,8 +797,8 @@ export const keywords_94e2d00a7633 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_f4b9ffa7134f = /* @__PURE__ */ Object.freeze({
+} as const;
+export const animationKeywords = {
   /** 默认 CSS 值：`alternate`；主题可覆盖。 */
   alternate: 'alternate',
   /** 默认 CSS 值：`alternate-reverse`；主题可覆盖。 */
@@ -867,8 +867,8 @@ export const keywords_f4b9ffa7134f = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_deee3dc678f4 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const animationCompositionKeywords = {
   /** 默认 CSS 值：`accumulate`；主题可覆盖。 */
   accumulate: 'accumulate',
   /** 默认 CSS 值：`add`；主题可覆盖。 */
@@ -905,8 +905,8 @@ export const keywords_deee3dc678f4 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e9c981e8c96e = /* @__PURE__ */ Object.freeze({
+} as const;
+export const animationDirectionKeywords = {
   /** 默认 CSS 值：`alternate`；主题可覆盖。 */
   alternate: 'alternate',
   /** 默认 CSS 值：`alternate-reverse`；主题可覆盖。 */
@@ -945,8 +945,8 @@ export const keywords_e9c981e8c96e = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_10442af7f819 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const autoKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -979,8 +979,8 @@ export const keywords_10442af7f819 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_67c080a1a497 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const animationFillModeKeywords = {
   /**
    * 延迟阶段应用最先生效关键帧的效果，具体帧取决于播放方向。
    *
@@ -1035,8 +1035,8 @@ export const keywords_67c080a1a497 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_a44a282072ef = /* @__PURE__ */ Object.freeze({
+} as const;
+export const animationIterationCountKeywords = {
   /** 默认 CSS 值：`infinite`；主题可覆盖。 */
   infinite: 'infinite',
   /**
@@ -1069,8 +1069,8 @@ export const keywords_a44a282072ef = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_7911ba524151 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const animationPlayStateKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -1105,8 +1105,8 @@ export const keywords_7911ba524151 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_27206cc4dac6 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const animationRangeKeywords = {
   /** 默认 CSS 值：`contain`；主题可覆盖。 */
   contain: 'contain',
   /** 默认 CSS 值：`cover`；主题可覆盖。 */
@@ -1151,8 +1151,8 @@ export const keywords_27206cc4dac6 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_da68e56f4df2 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const autoNoneKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -1187,8 +1187,8 @@ export const keywords_da68e56f4df2 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_583f0316fcba = /* @__PURE__ */ Object.freeze({
+} as const;
+export const animationTimingFunctionKeywords = {
   /** 默认 CSS 值：`ease`；主题可覆盖。 */
   ease: 'ease',
   /** 默认 CSS 值：`ease-in`；主题可覆盖。 */
@@ -1233,8 +1233,8 @@ export const keywords_583f0316fcba = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_be3d1ee9f407 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const appearanceKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`button`；主题可覆盖。 */
@@ -1291,8 +1291,8 @@ export const keywords_be3d1ee9f407 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_4fa5e6f21bc3 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backfaceVisibilityKeywords = {
   /** 默认 CSS 值：`hidden`；主题可覆盖。 */
   hidden: 'hidden',
   /**
@@ -1327,8 +1327,8 @@ export const keywords_4fa5e6f21bc3 = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`visible`；主题可覆盖。 */
   visible: 'visible',
-});
-export const keywords_6de5664a52e6 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundKeywords = {
   /** 默认 CSS 值：`AccentColor`；主题可覆盖。 */
   AccentColor: 'AccentColor',
   /** 默认 CSS 值：`AccentColorText`；主题可覆盖。 */
@@ -1787,8 +1787,8 @@ export const keywords_6de5664a52e6 = /* @__PURE__ */ Object.freeze({
   yellow: 'yellow',
   /** 默认 CSS 值：`yellowgreen`；主题可覆盖。 */
   yellowgreen: 'yellowgreen',
-});
-export const keywords_5fd6da6443ed = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundAttachmentKeywords = {
   /** 默认 CSS 值：`fixed`；主题可覆盖。 */
   fixed: 'fixed',
   /**
@@ -1825,8 +1825,8 @@ export const keywords_5fd6da6443ed = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_bb1f680b1e3e = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundBlendModeKeywords = {
   /** 默认 CSS 值：`color`；主题可覆盖。 */
   color: 'color',
   /** 默认 CSS 值：`color-burn`；主题可覆盖。 */
@@ -1889,8 +1889,8 @@ export const keywords_bb1f680b1e3e = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_36cd7d0c56ca = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundClipKeywords = {
   /** 默认 CSS 值：`border-area`；主题可覆盖。 */
   borderArea: 'border-area',
   /** 默认 CSS 值：`border-box`；主题可覆盖。 */
@@ -1935,8 +1935,8 @@ export const keywords_36cd7d0c56ca = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_357abf558bac = /* @__PURE__ */ Object.freeze({
+} as const;
+export const colorKeywords = {
   /** 默认 CSS 值：`AccentColor`；主题可覆盖。 */
   AccentColor: 'AccentColor',
   /** 默认 CSS 值：`AccentColorText`；主题可覆盖。 */
@@ -2359,8 +2359,8 @@ export const keywords_357abf558bac = /* @__PURE__ */ Object.freeze({
   yellow: 'yellow',
   /** 默认 CSS 值：`yellowgreen`；主题可覆盖。 */
   yellowgreen: 'yellowgreen',
-});
-export const keywords_20c459033184 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundOriginKeywords = {
   /** 默认 CSS 值：`border-box`；主题可覆盖。 */
   borderBox: 'border-box',
   /** 默认 CSS 值：`content-box`；主题可覆盖。 */
@@ -2397,8 +2397,8 @@ export const keywords_20c459033184 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_626dbe9ffbeb = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundPositionKeywords = {
   /** 默认 CSS 值：`bottom`；主题可覆盖。 */
   bottom: 'bottom',
   /** 默认 CSS 值：`center`；主题可覆盖。 */
@@ -2439,8 +2439,8 @@ export const keywords_626dbe9ffbeb = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_66d141cf9d62 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundPositionXKeywords = {
   /** 默认 CSS 值：`center`；主题可覆盖。 */
   center: 'center',
   /**
@@ -2481,8 +2481,8 @@ export const keywords_66d141cf9d62 = /* @__PURE__ */ Object.freeze({
   xEnd: 'x-end',
   /** 默认 CSS 值：`x-start`；主题可覆盖。 */
   xStart: 'x-start',
-});
-export const keywords_b19f41bf6d34 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundPositionYKeywords = {
   /** 默认 CSS 值：`bottom`；主题可覆盖。 */
   bottom: 'bottom',
   /** 默认 CSS 值：`center`；主题可覆盖。 */
@@ -2523,8 +2523,8 @@ export const keywords_b19f41bf6d34 = /* @__PURE__ */ Object.freeze({
   yEnd: 'y-end',
   /** 默认 CSS 值：`y-start`；主题可覆盖。 */
   yStart: 'y-start',
-});
-export const keywords_9ebd839568de = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundRepeatKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -2567,8 +2567,8 @@ export const keywords_9ebd839568de = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_19dcd7b96db0 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const backgroundSizeKeywords = {
   /**
    * 依据图像内部尺寸、比例及另一维的设置确定尺寸。
    *
@@ -2617,8 +2617,8 @@ export const keywords_19dcd7b96db0 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_8033f08005d6 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const baselineShiftKeywords = {
   /** 默认 CSS 值：`baseline`；主题可覆盖。 */
   baseline: 'baseline',
   /**
@@ -2655,8 +2655,8 @@ export const keywords_8033f08005d6 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_69f7bb216cc3 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const heightKeywords = {
   /**
    * 让布局算法决定尺寸，不保证等于父元素尺寸。
    *
@@ -2711,8 +2711,8 @@ export const keywords_69f7bb216cc3 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_0a2605ee5857 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const borderKeywords = {
   /** 默认 CSS 值：`AccentColor`；主题可覆盖。 */
   AccentColor: 'AccentColor',
   /** 默认 CSS 值：`AccentColorText`；主题可覆盖。 */
@@ -3161,8 +3161,8 @@ export const keywords_0a2605ee5857 = /* @__PURE__ */ Object.freeze({
   yellow: 'yellow',
   /** 默认 CSS 值：`yellowgreen`；主题可覆盖。 */
   yellowgreen: 'yellowgreen',
-});
-export const keywords_5efb2180a82d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const borderBlockEndStyleKeywords = {
   /** 默认 CSS 值：`dashed`；主题可覆盖。 */
   dashed: 'dashed',
   /** 默认 CSS 值：`dotted`；主题可覆盖。 */
@@ -3213,8 +3213,8 @@ export const keywords_5efb2180a82d = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e73a6d789346 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const borderWidthKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -3251,8 +3251,8 @@ export const keywords_e73a6d789346 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_d5baee5a8bb8 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const borderCollapseKeywords = {
   /** 默认 CSS 值：`collapse`；主题可覆盖。 */
   collapse: 'collapse',
   /**
@@ -3287,8 +3287,8 @@ export const keywords_d5baee5a8bb8 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_6f800ebea941 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const borderImageKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -3329,8 +3329,8 @@ export const keywords_6f800ebea941 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_fa458d10751c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const borderImageRepeatKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -3369,8 +3369,8 @@ export const keywords_fa458d10751c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_293491adf24c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const borderStyleKeywords = {
   /** 默认 CSS 值：`dashed`；主题可覆盖。 */
   dashed: 'dashed',
   /** 默认 CSS 值：`dotted`；主题可覆盖。 */
@@ -3433,8 +3433,8 @@ export const keywords_293491adf24c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e19061ca4002 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const boxDecorationBreakKeywords = {
   /** 默认 CSS 值：`clone`；主题可覆盖。 */
   clone: 'clone',
   /**
@@ -3469,8 +3469,8 @@ export const keywords_e19061ca4002 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_4d3c35aa804a = /* @__PURE__ */ Object.freeze({
+} as const;
+export const boxSizingKeywords = {
   /**
    * 指定尺寸包含内容、内边距和边框，但不包含外边距。
    *
@@ -3527,8 +3527,8 @@ export const keywords_4d3c35aa804a = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_0faf4e44c6a7 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const breakAfterKeywords = {
   /** 默认 CSS 值：`all`；主题可覆盖。 */
   all: 'all',
   /** 默认 CSS 值：`always`；主题可覆盖。 */
@@ -3587,8 +3587,8 @@ export const keywords_0faf4e44c6a7 = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`verso`；主题可覆盖。 */
   verso: 'verso',
-});
-export const keywords_8c280262de36 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const breakInsideKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`avoid`；主题可覆盖。 */
@@ -3629,8 +3629,8 @@ export const keywords_8c280262de36 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_00cfac9e40f7 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const captionSideKeywords = {
   /** 默认 CSS 值：`bottom`；主题可覆盖。 */
   bottom: 'bottom',
   /**
@@ -3665,8 +3665,8 @@ export const keywords_00cfac9e40f7 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_38fb6951451c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const caretKeywords = {
   /** 默认 CSS 值：`AccentColor`；主题可覆盖。 */
   AccentColor: 'AccentColor',
   /** 默认 CSS 值：`AccentColorText`；主题可覆盖。 */
@@ -4097,8 +4097,8 @@ export const keywords_38fb6951451c = /* @__PURE__ */ Object.freeze({
   yellow: 'yellow',
   /** 默认 CSS 值：`yellowgreen`；主题可覆盖。 */
   yellowgreen: 'yellowgreen',
-});
-export const keywords_3bb6f31e28e2 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const caretShapeKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`bar`；主题可覆盖。 */
@@ -4137,8 +4137,8 @@ export const keywords_3bb6f31e28e2 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_161675e4e953 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const clearKeywords = {
   /** 默认 CSS 值：`both`；主题可覆盖。 */
   both: 'both',
   /**
@@ -4181,8 +4181,8 @@ export const keywords_161675e4e953 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_7f5e9235e548 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const clipPathKeywords = {
   /** 默认 CSS 值：`border-box`；主题可覆盖。 */
   borderBox: 'border-box',
   /** 默认 CSS 值：`content-box`；主题可覆盖。 */
@@ -4229,8 +4229,8 @@ export const keywords_7f5e9235e548 = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`view-box`；主题可覆盖。 */
   viewBox: 'view-box',
-});
-export const keywords_d9ac4f83d5eb = /* @__PURE__ */ Object.freeze({
+} as const;
+export const clipRuleKeywords = {
   /** 默认 CSS 值：`evenodd`；主题可覆盖。 */
   evenodd: 'evenodd',
   /**
@@ -4265,8 +4265,8 @@ export const keywords_d9ac4f83d5eb = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_2e0f8bdc8b85 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const colorAdjustKeywords = {
   /** 默认 CSS 值：`economy`；主题可覆盖。 */
   economy: 'economy',
   /** 默认 CSS 值：`exact`；主题可覆盖。 */
@@ -4301,8 +4301,8 @@ export const keywords_2e0f8bdc8b85 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e9074d45f495 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const colorInterpolationKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -4339,8 +4339,8 @@ export const keywords_e9074d45f495 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e89e7b188c33 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const colorRenderingKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -4377,8 +4377,8 @@ export const keywords_e89e7b188c33 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_278860ff8b51 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const colorSchemeKeywords = {
   /** 默认 CSS 值：`dark`；主题可覆盖。 */
   dark: 'dark',
   /**
@@ -4415,8 +4415,8 @@ export const keywords_278860ff8b51 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_369053a253e6 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const columnFillKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`balance`；主题可覆盖。 */
@@ -4451,8 +4451,8 @@ export const keywords_369053a253e6 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_af86167f4199 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const normalKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -4485,8 +4485,8 @@ export const keywords_af86167f4199 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_72dbb56d75ac = /* @__PURE__ */ Object.freeze({
+} as const;
+export const containKeywords = {
   /**
    * 组合 layout、style 和 paint 隔离，不包含 size 隔离。
    *
@@ -4553,8 +4553,8 @@ export const keywords_72dbb56d75ac = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_19fe94f4fd2b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const containerTypeKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -4605,8 +4605,8 @@ export const keywords_19fe94f4fd2b = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_d5b8f3e64a19 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const contentKeywords = {
   /** 默认 CSS 值：`close-quote`；主题可覆盖。 */
   closeQuote: 'close-quote',
   /**
@@ -4649,8 +4649,8 @@ export const keywords_d5b8f3e64a19 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_ab83eef7a4b6 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const contentVisibilityKeywords = {
   /**
    * 允许浏览器跳过与用户暂不相关的内容渲染，仍需维护布局和可访问性语义。
    *
@@ -4699,8 +4699,8 @@ export const keywords_ab83eef7a4b6 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`visible`；主题可覆盖。
    */
   visible: 'visible',
-});
-export const keywords_f9fa6b10efcb = /* @__PURE__ */ Object.freeze({
+} as const;
+export const cursorKeywords = {
   /** 默认 CSS 值：`alias`；主题可覆盖。 */
   alias: 'alias',
   /** 默认 CSS 值：`all-scroll`；主题可覆盖。 */
@@ -4803,8 +4803,8 @@ export const keywords_f9fa6b10efcb = /* @__PURE__ */ Object.freeze({
   zoomIn: 'zoom-in',
   /** 默认 CSS 值：`zoom-out`；主题可覆盖。 */
   zoomOut: 'zoom-out',
-});
-export const keywords_a0fd64e3e09b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const directionKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -4839,8 +4839,8 @@ export const keywords_a0fd64e3e09b = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_910c9b41748d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const displayKeywords = {
   /**
    * 生成块级盒子，内部默认采用普通流布局。
    *
@@ -5046,8 +5046,8 @@ export const keywords_910c9b41748d = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_cf0513ae1315 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const dominantBaselineKeywords = {
   /** 默认 CSS 值：`alphabetic`；主题可覆盖。 */
   alphabetic: 'alphabetic',
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
@@ -5096,8 +5096,8 @@ export const keywords_cf0513ae1315 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_9dac146d1168 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const emptyCellsKeywords = {
   /** 默认 CSS 值：`hide`；主题可覆盖。 */
   hide: 'hide',
   /**
@@ -5132,8 +5132,8 @@ export const keywords_9dac146d1168 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_be401a040109 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fieldSizingKeywords = {
   /** 默认 CSS 值：`content`；主题可覆盖。 */
   content: 'content',
   /** 默认 CSS 值：`fixed`；主题可覆盖。 */
@@ -5168,8 +5168,8 @@ export const keywords_be401a040109 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_c484a5c8e87e = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fillKeywords = {
   /** 默认 CSS 值：`AccentColor`；主题可覆盖。 */
   AccentColor: 'AccentColor',
   /** 默认 CSS 值：`AccentColorText`；主题可覆盖。 */
@@ -5598,8 +5598,8 @@ export const keywords_c484a5c8e87e = /* @__PURE__ */ Object.freeze({
   yellow: 'yellow',
   /** 默认 CSS 值：`yellowgreen`；主题可覆盖。 */
   yellowgreen: 'yellowgreen',
-});
-export const keywords_78fa0dcb907c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fillRuleKeywords = {
   /**
    * 按射线穿过路径次数的奇偶性判断内部，适合交叠或有孔路径。
    *
@@ -5642,8 +5642,8 @@ export const keywords_78fa0dcb907c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_33d475aa9267 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const flexKeywords = {
   /**
    * 等价于 1 1 auto：可增长、可收缩，基础尺寸由主尺寸属性或内容决定。
    *
@@ -5710,8 +5710,8 @@ export const keywords_33d475aa9267 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_bd41cb16001e = /* @__PURE__ */ Object.freeze({
+} as const;
+export const flexBasisKeywords = {
   /**
    * 先参考主轴对应的 width 或 height；该值也为 auto 时由内容决定。
    *
@@ -5760,8 +5760,8 @@ export const keywords_bd41cb16001e = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_123cc2177f76 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const flexDirectionKeywords = {
   /**
    * 主轴沿块方向排列；水平书写时通常从上到下。
    *
@@ -5816,8 +5816,8 @@ export const keywords_123cc2177f76 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_6076ddb7c9fc = /* @__PURE__ */ Object.freeze({
+} as const;
+export const flexFlowKeywords = {
   /** 默认 CSS 值：`column`；主题可覆盖。 */
   column: 'column',
   /** 默认 CSS 值：`column-reverse`；主题可覆盖。 */
@@ -5862,8 +5862,8 @@ export const keywords_6076ddb7c9fc = /* @__PURE__ */ Object.freeze({
   wrap: 'wrap',
   /** 默认 CSS 值：`wrap-reverse`；主题可覆盖。 */
   wrapReverse: 'wrap-reverse',
-});
-export const keywords_ddbe5069d4b1 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const flexWrapKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -5919,8 +5919,8 @@ export const keywords_ddbe5069d4b1 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`wrap-reverse`；主题可覆盖。
    */
   wrapReverse: 'wrap-reverse',
-});
-export const keywords_03e6482114df = /* @__PURE__ */ Object.freeze({
+} as const;
+export const floatKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -5961,8 +5961,8 @@ export const keywords_03e6482114df = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_85b2f2bf3ae4 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontKeywords = {
   /** 默认 CSS 值：`caption`；主题可覆盖。 */
   caption: 'caption',
   /** 默认 CSS 值：`icon`；主题可覆盖。 */
@@ -6005,8 +6005,8 @@ export const keywords_85b2f2bf3ae4 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_b552d693e2ef = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontFamilyKeywords = {
   /** 默认 CSS 值：`-apple-system`；主题可覆盖。 */
   AppleSystem: '-apple-system',
   /** 默认 CSS 值：`cursive`；主题可覆盖。 */
@@ -6065,8 +6065,8 @@ export const keywords_b552d693e2ef = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_0ff20f1f2d05 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontKerningKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -6103,8 +6103,8 @@ export const keywords_0ff20f1f2d05 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_7c49553405a3 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontSizeKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -6157,8 +6157,8 @@ export const keywords_7c49553405a3 = /* @__PURE__ */ Object.freeze({
   xxSmall: 'xx-small',
   /** 默认 CSS 值：`xxx-large`；主题可覆盖。 */
   xxxLarge: 'xxx-large',
-});
-export const keywords_c32229012f32 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontSizeAdjustKeywords = {
   /** 默认 CSS 值：`from-font`；主题可覆盖。 */
   fromFont: 'from-font',
   /**
@@ -6193,8 +6193,8 @@ export const keywords_c32229012f32 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_efb09670ebad = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontSmoothKeywords = {
   /** 默认 CSS 值：`always`；主题可覆盖。 */
   always: 'always',
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
@@ -6247,8 +6247,8 @@ export const keywords_efb09670ebad = /* @__PURE__ */ Object.freeze({
   xxSmall: 'xx-small',
   /** 默认 CSS 值：`xxx-large`；主题可覆盖。 */
   xxxLarge: 'xxx-large',
-});
-export const keywords_baf29a17547a = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontStretchKeywords = {
   /** 默认 CSS 值：`condensed`；主题可覆盖。 */
   condensed: 'condensed',
   /** 默认 CSS 值：`expanded`；主题可覆盖。 */
@@ -6297,8 +6297,8 @@ export const keywords_baf29a17547a = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_4294ff6c838f = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontStyleKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -6335,8 +6335,8 @@ export const keywords_4294ff6c838f = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_976f1cb74140 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontSynthesisKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -6377,8 +6377,8 @@ export const keywords_976f1cb74140 = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`weight`；主题可覆盖。 */
   weight: 'weight',
-});
-export const keywords_53bdef1896d5 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontVariantKeywords = {
   /** 默认 CSS 值：`all-petite-caps`；主题可覆盖。 */
   allPetiteCaps: 'all-petite-caps',
   /** 默认 CSS 值：`all-small-caps`；主题可覆盖。 */
@@ -6477,8 +6477,8 @@ export const keywords_53bdef1896d5 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_b976d9f8e073 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontVariantAlternatesKeywords = {
   /** 默认 CSS 值：`historical-forms`；主题可覆盖。 */
   historicalForms: 'historical-forms',
   /**
@@ -6513,8 +6513,8 @@ export const keywords_b976d9f8e073 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_3ad65db54ea4 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontVariantCapsKeywords = {
   /** 默认 CSS 值：`all-petite-caps`；主题可覆盖。 */
   allPetiteCaps: 'all-petite-caps',
   /** 默认 CSS 值：`all-small-caps`；主题可覆盖。 */
@@ -6559,8 +6559,8 @@ export const keywords_3ad65db54ea4 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_c009baacc019 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontVariantEastAsianKeywords = {
   /** 默认 CSS 值：`full-width`；主题可覆盖。 */
   fullWidth: 'full-width',
   /**
@@ -6611,8 +6611,8 @@ export const keywords_c009baacc019 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_53261628acb9 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontVariantEmojiKeywords = {
   /** 默认 CSS 值：`emoji`；主题可覆盖。 */
   emoji: 'emoji',
   /**
@@ -6651,8 +6651,8 @@ export const keywords_53261628acb9 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_de26789bc5d4 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontVariantLigaturesKeywords = {
   /** 默认 CSS 值：`common-ligatures`；主题可覆盖。 */
   commonLigatures: 'common-ligatures',
   /** 默认 CSS 值：`contextual`；主题可覆盖。 */
@@ -6703,8 +6703,8 @@ export const keywords_de26789bc5d4 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_ca1210a5496f = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontVariantNumericKeywords = {
   /** 默认 CSS 值：`diagonal-fractions`；主题可覆盖。 */
   diagonalFractions: 'diagonal-fractions',
   /**
@@ -6753,8 +6753,8 @@ export const keywords_ca1210a5496f = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_4aee633d36dc = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontVariantPositionKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -6791,8 +6791,8 @@ export const keywords_4aee633d36dc = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_8e434ba17c30 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const fontWeightKeywords = {
   /**
    * 粗体字重，等价于数值 700。
    *
@@ -6847,8 +6847,8 @@ export const keywords_8e434ba17c30 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_d67ac1325c29 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const forcedColorAdjustKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -6885,8 +6885,8 @@ export const keywords_d67ac1325c29 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_35fc8691d67b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const gridAutoColumnsKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -6923,8 +6923,8 @@ export const keywords_35fc8691d67b = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_98270f1a0762 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const gridAutoFlowKeywords = {
   /**
    * 优先沿列放置项目，必要时创建新的隐式列。
    *
@@ -6973,8 +6973,8 @@ export const keywords_98270f1a0762 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_f48e3d6d0f91 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const gridTemplateColumnsKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -7015,8 +7015,8 @@ export const keywords_f48e3d6d0f91 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_16e9f24996d9 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const hangingPunctuationKeywords = {
   /** 默认 CSS 值：`allow-end`；主题可覆盖。 */
   allowEnd: 'allow-end',
   /** 默认 CSS 值：`first`；主题可覆盖。 */
@@ -7057,8 +7057,8 @@ export const keywords_16e9f24996d9 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_6fb241fe0642 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const hyphensKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -7095,8 +7095,8 @@ export const keywords_6fb241fe0642 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_74c3d3b336d0 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const imageOrientationKeywords = {
   /** 默认 CSS 值：`flip`；主题可覆盖。 */
   flip: 'flip',
   /** 默认 CSS 值：`from-image`；主题可覆盖。 */
@@ -7131,8 +7131,8 @@ export const keywords_74c3d3b336d0 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_6c63af7e1a09 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const imageRenderingKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`crisp-edges`；主题可覆盖。 */
@@ -7171,8 +7171,8 @@ export const keywords_6c63af7e1a09 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_82ae2f90aa0b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const imageResolutionKeywords = {
   /** 默认 CSS 值：`from-image`；主题可覆盖。 */
   fromImage: 'from-image',
   /**
@@ -7205,8 +7205,8 @@ export const keywords_82ae2f90aa0b = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e2b59f54f3d8 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const initialLetterAlignKeywords = {
   /** 默认 CSS 值：`alphabetic`；主题可覆盖。 */
   alphabetic: 'alphabetic',
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
@@ -7245,8 +7245,8 @@ export const keywords_e2b59f54f3d8 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_625bf7cc1349 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const interpolateSizeKeywords = {
   /**
    * 允许受支持的内部尺寸关键字与长度/百分比之间插值，不保证两个关键字之间可以插值。
    *
@@ -7289,8 +7289,8 @@ export const keywords_625bf7cc1349 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_1475d86d1a07 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const isolationKeywords = {
   /**
    * 由其他属性是否需要层叠上下文决定，不强制隔离。
    *
@@ -7333,8 +7333,8 @@ export const keywords_1475d86d1a07 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_93ab3ae284be = /* @__PURE__ */ Object.freeze({
+} as const;
+export const justifyContentKeywords = {
   /**
    * 将整体内容放在主轴或行内轴的中间，不改变项目内部文字对齐。
    *
@@ -7431,8 +7431,8 @@ export const keywords_93ab3ae284be = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_829094d1b1ef = /* @__PURE__ */ Object.freeze({
+} as const;
+export const justifyItemsKeywords = {
   /** 默认 CSS 值：`anchor-center`；主题可覆盖。 */
   anchorCenter: 'anchor-center',
   /** 默认 CSS 值：`baseline`；主题可覆盖。 */
@@ -7491,8 +7491,8 @@ export const keywords_829094d1b1ef = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_523adb0031cb = /* @__PURE__ */ Object.freeze({
+} as const;
+export const justifySelfKeywords = {
   /** 默认 CSS 值：`anchor-center`；主题可覆盖。 */
   anchorCenter: 'anchor-center',
   /**
@@ -7559,8 +7559,8 @@ export const keywords_523adb0031cb = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_495c2d8eae86 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const justifyTracksKeywords = {
   /** 默认 CSS 值：`center`；主题可覆盖。 */
   center: 'center',
   /** 默认 CSS 值：`end`；主题可覆盖。 */
@@ -7615,8 +7615,8 @@ export const keywords_495c2d8eae86 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_b9b471fd6dd5 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const lineBreakKeywords = {
   /** 默认 CSS 值：`anywhere`；主题可覆盖。 */
   anywhere: 'anywhere',
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
@@ -7657,8 +7657,8 @@ export const keywords_b9b471fd6dd5 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_9adc60b0277e = /* @__PURE__ */ Object.freeze({
+} as const;
+export const lineHeightKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -7695,8 +7695,8 @@ export const keywords_9adc60b0277e = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_cee9af01ad4f = /* @__PURE__ */ Object.freeze({
+} as const;
+export const listStyleKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -7733,8 +7733,8 @@ export const keywords_cee9af01ad4f = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_14d96a01afe5 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const listStylePositionKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -7769,8 +7769,8 @@ export const keywords_14d96a01afe5 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_b82e4515d43c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const marginKeywords = {
   /**
    * 由布局模式分配自动外边距；在 Flex/Grid 中可吸收剩余空间，不保证所有方向都自动居中。
    *
@@ -7807,8 +7807,8 @@ export const keywords_b82e4515d43c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_6b5d63828b7c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const marginTrimKeywords = {
   /** 默认 CSS 值：`all`；主题可覆盖。 */
   all: 'all',
   /** 默认 CSS 值：`in-flow`；主题可覆盖。 */
@@ -7845,8 +7845,8 @@ export const keywords_6b5d63828b7c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_f8116fcdc46d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const maskKeywords = {
   /** 默认 CSS 值：`add`；主题可覆盖。 */
   add: 'add',
   /** 默认 CSS 值：`alpha`；主题可覆盖。 */
@@ -7931,8 +7931,8 @@ export const keywords_f8116fcdc46d = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`view-box`；主题可覆盖。 */
   viewBox: 'view-box',
-});
-export const keywords_1760054882a1 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const maskBorderKeywords = {
   /** 默认 CSS 值：`alpha`；主题可覆盖。 */
   alpha: 'alpha',
   /**
@@ -7977,8 +7977,8 @@ export const keywords_1760054882a1 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e975d52781c5 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const maskBorderModeKeywords = {
   /** 默认 CSS 值：`alpha`；主题可覆盖。 */
   alpha: 'alpha',
   /**
@@ -8013,8 +8013,8 @@ export const keywords_e975d52781c5 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_3c8674ba88fa = /* @__PURE__ */ Object.freeze({
+} as const;
+export const maskClipKeywords = {
   /** 默认 CSS 值：`border-box`；主题可覆盖。 */
   borderBox: 'border-box',
   /** 默认 CSS 值：`content-box`；主题可覆盖。 */
@@ -8059,8 +8059,8 @@ export const keywords_3c8674ba88fa = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`view-box`；主题可覆盖。 */
   viewBox: 'view-box',
-});
-export const keywords_7b99c5d618a9 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const maskCompositeKeywords = {
   /** 默认 CSS 值：`add`；主题可覆盖。 */
   add: 'add',
   /** 默认 CSS 值：`exclude`；主题可覆盖。 */
@@ -8099,8 +8099,8 @@ export const keywords_7b99c5d618a9 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_8490076c0a78 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const maskModeKeywords = {
   /** 默认 CSS 值：`alpha`；主题可覆盖。 */
   alpha: 'alpha',
   /**
@@ -8137,8 +8137,8 @@ export const keywords_8490076c0a78 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_2a38259b619d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const maskOriginKeywords = {
   /** 默认 CSS 值：`border-box`；主题可覆盖。 */
   borderBox: 'border-box',
   /** 默认 CSS 值：`content-box`；主题可覆盖。 */
@@ -8181,8 +8181,8 @@ export const keywords_2a38259b619d = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`view-box`；主题可覆盖。 */
   viewBox: 'view-box',
-});
-export const keywords_9bd35370eea1 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const masonryAutoFlowKeywords = {
   /** 默认 CSS 值：`definite-first`；主题可覆盖。 */
   definiteFirst: 'definite-first',
   /**
@@ -8221,8 +8221,8 @@ export const keywords_9bd35370eea1 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_013377a9ca4a = /* @__PURE__ */ Object.freeze({
+} as const;
+export const mathDepthKeywords = {
   /** 默认 CSS 值：`auto-add`；主题可覆盖。 */
   autoAdd: 'auto-add',
   /**
@@ -8255,8 +8255,8 @@ export const keywords_013377a9ca4a = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_8d412d1d7c72 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const mathShiftKeywords = {
   /** 默认 CSS 值：`compact`；主题可覆盖。 */
   compact: 'compact',
   /**
@@ -8291,8 +8291,8 @@ export const keywords_8d412d1d7c72 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_bb5da22017b4 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const maxBlockSizeKeywords = {
   /** 默认 CSS 值：`fit-content`；主题可覆盖。 */
   fitContent: 'fit-content',
   /**
@@ -8331,8 +8331,8 @@ export const keywords_bb5da22017b4 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e11b51af29f0 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const maxHeightKeywords = {
   /** 默认 CSS 值：`fit-content`；主题可覆盖。 */
   fitContent: 'fit-content',
   /**
@@ -8373,8 +8373,8 @@ export const keywords_e11b51af29f0 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_52b89cfb8c46 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const minBlockSizeKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`fit-content`；主题可覆盖。 */
@@ -8413,8 +8413,8 @@ export const keywords_52b89cfb8c46 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_58f521d4b73d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const minHeightKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`fit-content`；主题可覆盖。 */
@@ -8455,8 +8455,8 @@ export const keywords_58f521d4b73d = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_07c5aaf19a12 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const minWidthKeywords = {
   /**
    * 自动最小尺寸由布局模式决定；Flex/Grid 项目可能受内容最小宽度限制。
    *
@@ -8503,8 +8503,8 @@ export const keywords_07c5aaf19a12 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_07964553527c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const mixBlendModeKeywords = {
   /** 默认 CSS 值：`color`；主题可覆盖。 */
   color: 'color',
   /** 默认 CSS 值：`color-burn`；主题可覆盖。 */
@@ -8571,8 +8571,8 @@ export const keywords_07964553527c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_56e5e2d13755 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const motionKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`border-box`；主题可覆盖。 */
@@ -8631,8 +8631,8 @@ export const keywords_56e5e2d13755 = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`view-box`；主题可覆盖。 */
   viewBox: 'view-box',
-});
-export const keywords_9f17b59e041d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const motionPathKeywords = {
   /** 默认 CSS 值：`border-box`；主题可覆盖。 */
   borderBox: 'border-box',
   /** 默认 CSS 值：`content-box`；主题可覆盖。 */
@@ -8677,8 +8677,8 @@ export const keywords_9f17b59e041d = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`view-box`；主题可覆盖。 */
   viewBox: 'view-box',
-});
-export const keywords_dd3f294a6939 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const motionRotationKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -8713,8 +8713,8 @@ export const keywords_dd3f294a6939 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_7a6a3ec5b4bd = /* @__PURE__ */ Object.freeze({
+} as const;
+export const objectFitKeywords = {
   /**
    * 保留宽高比并完整放入内容盒，可能留下空白。
    *
@@ -8791,8 +8791,8 @@ export const keywords_7a6a3ec5b4bd = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e5fc88f3edcc = /* @__PURE__ */ Object.freeze({
+} as const;
+export const offsetAnchorKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`bottom`；主题可覆盖。 */
@@ -8835,8 +8835,8 @@ export const keywords_e5fc88f3edcc = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_36ea365afb89 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const offsetPositionKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`bottom`；主题可覆盖。 */
@@ -8881,8 +8881,8 @@ export const keywords_36ea365afb89 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_48183ac63b7d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const outlineKeywords = {
   /** 默认 CSS 值：`AccentColor`；主题可覆盖。 */
   AccentColor: 'AccentColor',
   /** 默认 CSS 值：`AccentColorText`；主题可覆盖。 */
@@ -9331,8 +9331,8 @@ export const keywords_48183ac63b7d = /* @__PURE__ */ Object.freeze({
   yellow: 'yellow',
   /** 默认 CSS 值：`yellowgreen`；主题可覆盖。 */
   yellowgreen: 'yellowgreen',
-});
-export const keywords_beba6873a2f0 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const outlineStyleKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`dashed`；主题可覆盖。 */
@@ -9383,8 +9383,8 @@ export const keywords_beba6873a2f0 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_a7d46d1dccea = /* @__PURE__ */ Object.freeze({
+} as const;
+export const overflowKeywords = {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
@@ -9476,8 +9476,8 @@ export const keywords_a7d46d1dccea = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`visible`；主题可覆盖。
    */
   visible: 'visible',
-});
-export const keywords_24f8cde3ebdb = /* @__PURE__ */ Object.freeze({
+} as const;
+export const overflowBlockKeywords = {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
@@ -9563,8 +9563,8 @@ export const keywords_24f8cde3ebdb = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`visible`；主题可覆盖。
    */
   visible: 'visible',
-});
-export const keywords_2bcbcd3499bf = /* @__PURE__ */ Object.freeze({
+} as const;
+export const overflowClipBoxKeywords = {
   /** 默认 CSS 值：`content-box`；主题可覆盖。 */
   contentBox: 'content-box',
   /**
@@ -9599,8 +9599,8 @@ export const keywords_2bcbcd3499bf = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_ef9a2ce4cae7 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const overflowInlineKeywords = {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
@@ -9686,8 +9686,8 @@ export const keywords_ef9a2ce4cae7 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`visible`；主题可覆盖。
    */
   visible: 'visible',
-});
-export const keywords_309ca90e46e8 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const overflowWrapKeywords = {
   /**
    * 必要时允许在长文本任意位置断行，这些机会参与 min-content 尺寸计算。
    *
@@ -9743,8 +9743,8 @@ export const keywords_309ca90e46e8 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_a9cfa2d5df37 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const overflowXKeywords = {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
@@ -9836,8 +9836,8 @@ export const keywords_a9cfa2d5df37 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`visible`；主题可覆盖。
    */
   visible: 'visible',
-});
-export const keywords_5a4230a836b7 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const overflowYKeywords = {
   /**
    * 按溢出情况提供滚动机制；滚动条外观和是否占空间由环境决定。
    *
@@ -9929,8 +9929,8 @@ export const keywords_5a4230a836b7 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`visible`；主题可覆盖。
    */
   visible: 'visible',
-});
-export const keywords_c14950f4822a = /* @__PURE__ */ Object.freeze({
+} as const;
+export const overscrollBehaviorKeywords = {
   /**
    * 采用默认滚动链和边界反馈。
    *
@@ -9979,8 +9979,8 @@ export const keywords_c14950f4822a = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_9ee144a03ca0 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const paintOrderKeywords = {
   /** 默认 CSS 值：`fill`；主题可覆盖。 */
   fill: 'fill',
   /**
@@ -10019,8 +10019,8 @@ export const keywords_9ee144a03ca0 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_1b0d1fa4d1f6 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const placeItemsKeywords = {
   /** 默认 CSS 值：`anchor-center`；主题可覆盖。 */
   anchorCenter: 'anchor-center',
   /** 默认 CSS 值：`baseline`；主题可覆盖。 */
@@ -10073,8 +10073,8 @@ export const keywords_1b0d1fa4d1f6 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_ce1d2f1554f3 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const placeSelfKeywords = {
   /** 默认 CSS 值：`anchor-center`；主题可覆盖。 */
   anchorCenter: 'anchor-center',
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
@@ -10129,8 +10129,8 @@ export const keywords_ce1d2f1554f3 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_d67307563c06 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const pointerEventsKeywords = {
   /** 默认 CSS 值：`all`；主题可覆盖。 */
   all: 'all',
   /**
@@ -10196,8 +10196,8 @@ export const keywords_d67307563c06 = /* @__PURE__ */ Object.freeze({
   visiblePainted: 'visiblePainted',
   /** 默认 CSS 值：`visibleStroke`；主题可覆盖。 */
   visibleStroke: 'visibleStroke',
-});
-export const keywords_56d41dfd3894 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const positionKeywords = {
   /**
    * 脱离普通文档流，按包含块定位；包含块通常由定位祖先或 transform 等属性建立。
    *
@@ -10290,8 +10290,8 @@ export const keywords_56d41dfd3894 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_99e9f0a1ccb3 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const positionAreaKeywords = {
   /** 默认 CSS 值：`block-end`；主题可覆盖。 */
   blockEnd: 'block-end',
   /** 默认 CSS 值：`block-start`；主题可覆盖。 */
@@ -10424,8 +10424,8 @@ export const keywords_99e9f0a1ccb3 = /* @__PURE__ */ Object.freeze({
   ySelfStart: 'y-self-start',
   /** 默认 CSS 值：`y-start`；主题可覆盖。 */
   yStart: 'y-start',
-});
-export const keywords_7322bcae5c2d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const positionTryKeywords = {
   /** 默认 CSS 值：`block-end`；主题可覆盖。 */
   blockEnd: 'block-end',
   /** 默认 CSS 值：`block-start`；主题可覆盖。 */
@@ -10564,8 +10564,8 @@ export const keywords_7322bcae5c2d = /* @__PURE__ */ Object.freeze({
   ySelfStart: 'y-self-start',
   /** 默认 CSS 值：`y-start`；主题可覆盖。 */
   yStart: 'y-start',
-});
-export const keywords_3fc6061d8ecb = /* @__PURE__ */ Object.freeze({
+} as const;
+export const positionTryOrderKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -10606,8 +10606,8 @@ export const keywords_3fc6061d8ecb = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_39c86dab6c9b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const positionVisibilityKeywords = {
   /** 默认 CSS 值：`always`；主题可覆盖。 */
   always: 'always',
   /** 默认 CSS 值：`anchors-valid`；主题可覆盖。 */
@@ -10646,8 +10646,8 @@ export const keywords_39c86dab6c9b = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_a08129d1e0bc = /* @__PURE__ */ Object.freeze({
+} as const;
+export const resizeKeywords = {
   /** 默认 CSS 值：`block`；主题可覆盖。 */
   block: 'block',
   /** 默认 CSS 值：`both`；主题可覆盖。 */
@@ -10690,8 +10690,8 @@ export const keywords_a08129d1e0bc = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`vertical`；主题可覆盖。 */
   vertical: 'vertical',
-});
-export const keywords_7c6f7139473c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const rubyAlignKeywords = {
   /** 默认 CSS 值：`center`；主题可覆盖。 */
   center: 'center',
   /**
@@ -10730,8 +10730,8 @@ export const keywords_7c6f7139473c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_b8b9fa8779e5 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const rubyMergeKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`collapse`；主题可覆盖。 */
@@ -10768,8 +10768,8 @@ export const keywords_b8b9fa8779e5 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_0a53bb5edf8b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const rubyPositionKeywords = {
   /** 默认 CSS 值：`alternate`；主题可覆盖。 */
   alternate: 'alternate',
   /**
@@ -10808,8 +10808,8 @@ export const keywords_0a53bb5edf8b = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_430c1b906eb1 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const scrollBehaviorKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -10844,8 +10844,8 @@ export const keywords_430c1b906eb1 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_cd3d72b8b8fc = /* @__PURE__ */ Object.freeze({
+} as const;
+export const scrollInitialTargetKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -10880,8 +10880,8 @@ export const keywords_cd3d72b8b8fc = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_3f1ff81ce9b1 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const scrollSnapAlignKeywords = {
   /** 默认 CSS 值：`center`；主题可覆盖。 */
   center: 'center',
   /** 默认 CSS 值：`end`；主题可覆盖。 */
@@ -10920,8 +10920,8 @@ export const keywords_3f1ff81ce9b1 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_57c82465c44d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const scrollSnapStopKeywords = {
   /** 默认 CSS 值：`always`；主题可覆盖。 */
   always: 'always',
   /**
@@ -10956,8 +10956,8 @@ export const keywords_57c82465c44d = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_83770613aa0b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const scrollSnapTypeKeywords = {
   /** 默认 CSS 值：`block`；主题可覆盖。 */
   block: 'block',
   /** 默认 CSS 值：`both`；主题可覆盖。 */
@@ -11000,8 +11000,8 @@ export const keywords_83770613aa0b = /* @__PURE__ */ Object.freeze({
   x: 'x',
   /** 默认 CSS 值：`y`；主题可覆盖。 */
   y: 'y',
-});
-export const keywords_4f160a9cf0d9 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const scrollTimelineAxisKeywords = {
   /** 默认 CSS 值：`block`；主题可覆盖。 */
   block: 'block',
   /**
@@ -11040,8 +11040,8 @@ export const keywords_4f160a9cf0d9 = /* @__PURE__ */ Object.freeze({
   x: 'x',
   /** 默认 CSS 值：`y`；主题可覆盖。 */
   y: 'y',
-});
-export const keywords_81d1400753fc = /* @__PURE__ */ Object.freeze({
+} as const;
+export const scrollbarGutterKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -11076,8 +11076,8 @@ export const keywords_81d1400753fc = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_7463c22e4c2f = /* @__PURE__ */ Object.freeze({
+} as const;
+export const scrollbarWidthKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -11114,8 +11114,8 @@ export const keywords_7463c22e4c2f = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_f43b7d7ff76c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const shapeOutsideKeywords = {
   /** 默认 CSS 值：`border-box`；主题可覆盖。 */
   borderBox: 'border-box',
   /** 默认 CSS 值：`content-box`；主题可覆盖。 */
@@ -11156,8 +11156,8 @@ export const keywords_f43b7d7ff76c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_23a417466a1e = /* @__PURE__ */ Object.freeze({
+} as const;
+export const shapeRenderingKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`crispEdges`；主题可覆盖。 */
@@ -11196,8 +11196,8 @@ export const keywords_23a417466a1e = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_c2870b3ff381 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const speakAsKeywords = {
   /** 默认 CSS 值：`digits`；主题可覆盖。 */
   digits: 'digits',
   /**
@@ -11238,8 +11238,8 @@ export const keywords_c2870b3ff381 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_98078af1bf6f = /* @__PURE__ */ Object.freeze({
+} as const;
+export const strokeLinecapKeywords = {
   /**
    * 在端点处平直截断描边，不向外延伸。
    *
@@ -11288,8 +11288,8 @@ export const keywords_98078af1bf6f = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e378412ad0e2 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const strokeLinejoinKeywords = {
   /** 默认 CSS 值：`arcs`；主题可覆盖。 */
   arcs: 'arcs',
   /** 默认 CSS 值：`bevel`；主题可覆盖。 */
@@ -11330,8 +11330,8 @@ export const keywords_e378412ad0e2 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_ce2170bc9ba7 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const tableLayoutKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`fixed`；主题可覆盖。 */
@@ -11366,8 +11366,8 @@ export const keywords_ce2170bc9ba7 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_f3848a433f34 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textAlignKeywords = {
   /** 默认 CSS 值：`-khtml-center`；主题可覆盖。 */
   KhtmlCenter: '-khtml-center',
   /** 默认 CSS 值：`-khtml-left`；主题可覆盖。 */
@@ -11434,8 +11434,8 @@ export const keywords_f3848a433f34 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_737a7ae0e5be = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textAlignLastKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`center`；主题可覆盖。 */
@@ -11480,8 +11480,8 @@ export const keywords_737a7ae0e5be = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_7b44473d3e07 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textAnchorKeywords = {
   /** 默认 CSS 值：`end`；主题可覆盖。 */
   end: 'end',
   /**
@@ -11518,8 +11518,8 @@ export const keywords_7b44473d3e07 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_fd4d7a225861 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textAutospaceKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`ideograph-alpha`；主题可覆盖。 */
@@ -11566,8 +11566,8 @@ export const keywords_fd4d7a225861 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_689d92d01cc5 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textBoxKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`cap`；主题可覆盖。 */
@@ -11620,8 +11620,8 @@ export const keywords_689d92d01cc5 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_1a3ac66644d2 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textBoxEdgeKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`cap`；主题可覆盖。 */
@@ -11664,8 +11664,8 @@ export const keywords_1a3ac66644d2 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_276f6f81affc = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textBoxTrimKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -11704,8 +11704,8 @@ export const keywords_276f6f81affc = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_7aa6c342783d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textCombineUprightKeywords = {
   /** 默认 CSS 值：`all`；主题可覆盖。 */
   all: 'all',
   /** 默认 CSS 值：`digits`；主题可覆盖。 */
@@ -11742,8 +11742,8 @@ export const keywords_7aa6c342783d = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_c631abd621ea = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textDecorationKeywords = {
   /** 默认 CSS 值：`AccentColor`；主题可覆盖。 */
   AccentColor: 'AccentColor',
   /** 默认 CSS 值：`AccentColorText`；主题可覆盖。 */
@@ -12194,8 +12194,8 @@ export const keywords_c631abd621ea = /* @__PURE__ */ Object.freeze({
   yellow: 'yellow',
   /** 默认 CSS 值：`yellowgreen`；主题可覆盖。 */
   yellowgreen: 'yellowgreen',
-});
-export const keywords_6a72b3d5c30b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textDecorationLineKeywords = {
   /** 默认 CSS 值：`blink`；主题可覆盖。 */
   blink: 'blink',
   /** 默认 CSS 值：`grammar-error`；主题可覆盖。 */
@@ -12240,8 +12240,8 @@ export const keywords_6a72b3d5c30b = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_d25e81258978 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textDecorationSkipKeywords = {
   /** 默认 CSS 值：`box-decoration`；主题可覆盖。 */
   boxDecoration: 'box-decoration',
   /** 默认 CSS 值：`edges`；主题可覆盖。 */
@@ -12286,8 +12286,8 @@ export const keywords_d25e81258978 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_1e7de12470e7 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textDecorationSkipInkKeywords = {
   /** 默认 CSS 值：`all`；主题可覆盖。 */
   all: 'all',
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
@@ -12324,8 +12324,8 @@ export const keywords_1e7de12470e7 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_373ec308a693 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textDecorationStyleKeywords = {
   /** 默认 CSS 值：`dashed`；主题可覆盖。 */
   dashed: 'dashed',
   /** 默认 CSS 值：`dotted`；主题可覆盖。 */
@@ -12366,8 +12366,8 @@ export const keywords_373ec308a693 = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`wavy`；主题可覆盖。 */
   wavy: 'wavy',
-});
-export const keywords_7982fceeac8e = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textDecorationThicknessKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`from-font`；主题可覆盖。 */
@@ -12402,8 +12402,8 @@ export const keywords_7982fceeac8e = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_fe9a993d10e6 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textEmphasisKeywords = {
   /** 默认 CSS 值：`AccentColor`；主题可覆盖。 */
   AccentColor: 'AccentColor',
   /** 默认 CSS 值：`AccentColorText`；主题可覆盖。 */
@@ -12842,8 +12842,8 @@ export const keywords_fe9a993d10e6 = /* @__PURE__ */ Object.freeze({
   yellow: 'yellow',
   /** 默认 CSS 值：`yellowgreen`；主题可覆盖。 */
   yellowgreen: 'yellowgreen',
-});
-export const keywords_ea4fe7b95a80 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textEmphasisPositionKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -12880,8 +12880,8 @@ export const keywords_ea4fe7b95a80 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_515f5a1d911d = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textEmphasisStyleKeywords = {
   /** 默认 CSS 值：`circle`；主题可覆盖。 */
   circle: 'circle',
   /** 默认 CSS 值：`dot`；主题可覆盖。 */
@@ -12928,8 +12928,8 @@ export const keywords_515f5a1d911d = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_d493646f86f3 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textJustifyKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`distribute`；主题可覆盖。 */
@@ -12970,8 +12970,8 @@ export const keywords_d493646f86f3 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_b79bb799f5d7 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textOrientationKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -13010,8 +13010,8 @@ export const keywords_b79bb799f5d7 = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`upright`；主题可覆盖。 */
   upright: 'upright',
-});
-export const keywords_b424cbafdd7b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textOverflowKeywords = {
   /**
    * 直接裁剪溢出文本，不添加省略标记。
    *
@@ -13061,8 +13061,8 @@ export const keywords_b424cbafdd7b = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_ca93fffd6611 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textRenderingKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`geometricPrecision`；主题可覆盖。 */
@@ -13101,8 +13101,8 @@ export const keywords_ca93fffd6611 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_b6e943e8ada0 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textSpacingTrimKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -13141,8 +13141,8 @@ export const keywords_b6e943e8ada0 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_7530fa617603 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textTransformKeywords = {
   /** 默认 CSS 值：`capitalize`；主题可覆盖。 */
   capitalize: 'capitalize',
   /** 默认 CSS 值：`full-size-kana`；主题可覆盖。 */
@@ -13187,8 +13187,8 @@ export const keywords_7530fa617603 = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`uppercase`；主题可覆盖。 */
   uppercase: 'uppercase',
-});
-export const keywords_0061c68af2eb = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textUnderlinePositionKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`from-font`；主题可覆盖。 */
@@ -13229,8 +13229,8 @@ export const keywords_0061c68af2eb = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_756de45a46f0 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textWrapKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -13293,8 +13293,8 @@ export const keywords_756de45a46f0 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`wrap`；主题可覆盖。
    */
   wrap: 'wrap',
-});
-export const keywords_ce0d3653c649 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textWrapModeKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -13337,8 +13337,8 @@ export const keywords_ce0d3653c649 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`wrap`；主题可覆盖。
    */
   wrap: 'wrap',
-});
-export const keywords_801a8bbbc78e = /* @__PURE__ */ Object.freeze({
+} as const;
+export const textWrapStyleKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -13389,8 +13389,8 @@ export const keywords_801a8bbbc78e = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_58af7d9ce05f = /* @__PURE__ */ Object.freeze({
+} as const;
+export const touchActionKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /**
@@ -13457,8 +13457,8 @@ export const keywords_58af7d9ce05f = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_e9c591fda010 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const transformBoxKeywords = {
   /** 默认 CSS 值：`border-box`；主题可覆盖。 */
   borderBox: 'border-box',
   /** 默认 CSS 值：`content-box`；主题可覆盖。 */
@@ -13499,8 +13499,8 @@ export const keywords_e9c591fda010 = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`view-box`；主题可覆盖。 */
   viewBox: 'view-box',
-});
-export const keywords_cdfbd270dd54 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const transformStyleKeywords = {
   /** 默认 CSS 值：`flat`；主题可覆盖。 */
   flat: 'flat',
   /**
@@ -13533,8 +13533,8 @@ export const keywords_cdfbd270dd54 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_66c70154f4dd = /* @__PURE__ */ Object.freeze({
+} as const;
+export const transitionKeywords = {
   /** 默认 CSS 值：`all`；主题可覆盖。 */
   all: 'all',
   /** 默认 CSS 值：`allow-discrete`；主题可覆盖。 */
@@ -13587,8 +13587,8 @@ export const keywords_66c70154f4dd = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_db5db5c79843 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const transitionBehaviorKeywords = {
   /**
    * 允许离散属性启动过渡；切换时机仍由各属性的动画规则决定。
    *
@@ -13631,8 +13631,8 @@ export const keywords_db5db5c79843 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_b3821ae506d9 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const unicodeBidiKeywords = {
   /** 默认 CSS 值：`bidi-override`；主题可覆盖。 */
   bidiOverride: 'bidi-override',
   /** 默认 CSS 值：`embed`；主题可覆盖。 */
@@ -13675,8 +13675,8 @@ export const keywords_b3821ae506d9 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_4c0098b1a2d0 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const userSelectKeywords = {
   /**
    * 将元素内容作为整体选取单元。
    *
@@ -13731,8 +13731,8 @@ export const keywords_4c0098b1a2d0 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_d068b3d5104a = /* @__PURE__ */ Object.freeze({
+} as const;
+export const vectorEffectKeywords = {
   /** 默认 CSS 值：`fixed-position`；主题可覆盖。 */
   fixedPosition: 'fixed-position',
   /**
@@ -13773,8 +13773,8 @@ export const keywords_d068b3d5104a = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_db469316e987 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const verticalAlignKeywords = {
   /** 默认 CSS 值：`baseline`；主题可覆盖。 */
   baseline: 'baseline',
   /** 默认 CSS 值：`bottom`；主题可覆盖。 */
@@ -13821,8 +13821,8 @@ export const keywords_db469316e987 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_488d525ca7a4 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const viewTransitionNameKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -13857,8 +13857,8 @@ export const keywords_488d525ca7a4 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_06350dad029f = /* @__PURE__ */ Object.freeze({
+} as const;
+export const visibilityKeywords = {
   /**
    * 对表格行列等特定布局有折叠语义，其他场景通常类似 hidden；应核对具体布局行为。
    *
@@ -13914,8 +13914,8 @@ export const keywords_06350dad029f = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`visible`；主题可覆盖。
    */
   visible: 'visible',
-});
-export const keywords_b58d3f64856b = /* @__PURE__ */ Object.freeze({
+} as const;
+export const whiteSpaceKeywords = {
   /**
    * 保留空白并允许在保留的空格后换行；行末空格占据空间。
    *
@@ -14006,8 +14006,8 @@ export const keywords_b58d3f64856b = /* @__PURE__ */ Object.freeze({
   unset: 'unset',
   /** 默认 CSS 值：`wrap`；主题可覆盖。 */
   wrap: 'wrap',
-});
-export const keywords_b8cb90e5b045 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const whiteSpaceCollapseKeywords = {
   /** 默认 CSS 值：`break-spaces`；主题可覆盖。 */
   breakSpaces: 'break-spaces',
   /** 默认 CSS 值：`collapse`；主题可覆盖。 */
@@ -14048,8 +14048,8 @@ export const keywords_b8cb90e5b045 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_c444d8a47ed0 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const widthKeywords = {
   /**
    * 让布局算法决定尺寸，不保证等于父元素尺寸。
    *
@@ -14108,8 +14108,8 @@ export const keywords_c444d8a47ed0 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_c0d426a396e3 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const willChangeKeywords = {
   /** 默认 CSS 值：`auto`；主题可覆盖。 */
   auto: 'auto',
   /** 默认 CSS 值：`contents`；主题可覆盖。 */
@@ -14146,8 +14146,8 @@ export const keywords_c0d426a396e3 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_b714b0853d8c = /* @__PURE__ */ Object.freeze({
+} as const;
+export const wordBreakKeywords = {
   /** 默认 CSS 值：`auto-phrase`；主题可覆盖。 */
   autoPhrase: 'auto-phrase',
   /**
@@ -14200,8 +14200,8 @@ export const keywords_b714b0853d8c = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_fc310658aa94 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const wordWrapKeywords = {
   /**
    * 必要时允许长文本断行，但新增断点不按 anywhere 的方式参与 min-content 计算。
    *
@@ -14244,8 +14244,8 @@ export const keywords_fc310658aa94 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
-export const keywords_65c6fb5d6d5f = /* @__PURE__ */ Object.freeze({
+} as const;
+export const writingModeKeywords = {
   /** 默认 CSS 值：`horizontal-tb`；主题可覆盖。 */
   horizontalTb: 'horizontal-tb',
   /**
@@ -14286,8 +14286,8 @@ export const keywords_65c6fb5d6d5f = /* @__PURE__ */ Object.freeze({
   verticalLr: 'vertical-lr',
   /** 默认 CSS 值：`vertical-rl`；主题可覆盖。 */
   verticalRl: 'vertical-rl',
-});
-export const keywords_4ec6e5474051 = /* @__PURE__ */ Object.freeze({
+} as const;
+export const zoomKeywords = {
   /**
    * 使用父元素该属性的计算值，即使这个属性默认不继承。
    *
@@ -14322,4 +14322,4 @@ export const keywords_4ec6e5474051 = /* @__PURE__ */ Object.freeze({
    * 默认 CSS 值：`unset`；主题可覆盖。
    */
   unset: 'unset',
-});
+} as const;

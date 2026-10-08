@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 import { createRuleRegistry } from '../../core/test/runtime/runtime.mjs';
 import { selectorShortcuts } from '../../core/src/selector-shortcuts.ts';
+import { generatedProperties } from './generated-keywords.mjs';
 
 // 只验证固定表达式的可提取性；产品编译器还需确认符号来源和主题覆盖。
 const generated = resolve(dirname(fileURLToPath(import.meta.url)), '../../core/src/generated');
@@ -26,25 +27,12 @@ for (const declaration of author.statements) {
 }
 assert.equal(fields.size, 502);
 
-const keywords = new Map();
-for (const file of await readdir(generated)) {
-  if (!file.endsWith('.ts') || file === 'author.ts' || file === 'base.ts') continue;
-  const source = parse(file, await readFile(join(generated, file), 'utf8'));
-  for (const declaration of source.statements) {
-    if (!ts.isClassDeclaration(declaration) || !declaration.name) continue;
-    const values = new Map();
-    for (const member of declaration.members) {
-      if (
-        ts.isPropertyDeclaration(member) &&
-        ts.isIdentifier(member.name) &&
-        member.initializer &&
-        ts.isStringLiteral(member.initializer)
-      )
-        values.set(member.name.text, member.initializer.text);
-    }
-    keywords.set(declaration.name.text, values);
-  }
-}
+const keywords = new Map(
+  generatedProperties.map((property) => [
+    property.className,
+    new Map(property.keywords.map((field) => [field.name, field.text])),
+  ]),
+);
 
 const maxVariants = 8;
 function combinations(parts) {

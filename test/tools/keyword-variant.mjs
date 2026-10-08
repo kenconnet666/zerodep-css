@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
+import { generatedProperties, generatedSources } from './generated-keywords.mjs';
 
-const directory = new URL('../../core/src/generated/', import.meta.url);
 const groups = ['a', 'b', 'c-f', 'g-l', 'm-o', 'p-r', 's-t', 'u-z'];
 const originals = new Map();
 export const properties = [];
@@ -18,12 +18,33 @@ const globals = {
   unset: 'unset',
 };
 for (const group of groups) {
-  const source = await readFile(new URL(`${group}.ts`, directory), 'utf8');
+  // 将同一份数据构造成旧声明字段，仅用于比较 literal/concat 等研究表示。
+  let source = generatedSources.get(group);
+  const edits = generatedProperties
+    .filter((property) => property.group === group)
+    .flatMap((property) => [
+      [property.initializeStart, property.initializeEnd, ''],
+      [
+        property.bodyStart,
+        property.bodyStart,
+        property.keywords
+          .map((field) => `\nreadonly ${field.name}: string = ${JSON.stringify(field.text)};`)
+          .join(''),
+      ],
+    ])
+    .sort((a, b) => a[0] - b[0]);
+  let cursor = 0;
+  const chunks = [];
+  for (const [start, end, text] of edits) {
+    chunks.push(source.slice(cursor, start), text);
+    cursor = end;
+  }
+  source = chunks.join('') + source.slice(cursor);
   originals.set(group, source);
   const ast = ts.createSourceFile(`${group}.ts`, source, ts.ScriptTarget.Latest, true);
   for (const node of ast.statements) {
     // 值对象也在同一生成文件中；这里只研究输出完整声明的作者类。
-    if (!ts.isClassDeclaration(node) || !node.name?.text.endsWith('Css')) continue;
+    if (!ts.isClassDeclaration(node) || !node.name?.text.endsWith('CssRuntime')) continue;
     const fields = node.members.filter(
       (member) =>
         ts.isPropertyDeclaration(member) &&
@@ -44,7 +65,7 @@ for (const group of groups) {
         property: text.slice(0, split),
       };
     });
-    const className = node.name.text;
+    const className = node.name.text.replace(/Runtime$/, '');
     properties.push({
       className,
       group,

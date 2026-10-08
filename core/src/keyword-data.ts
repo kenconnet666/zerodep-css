@@ -12,9 +12,3 @@ export function initializeKeywordDeclarations(
       writable: true,
     });
 }
-
-/** 公共导出仍是原构造器，保留 instanceof、继承及调试名称，不额外包装实例。 */
-export function keywordConstructor<T extends new () => object>(constructor: T, name: string): T {
-  Object.defineProperty(constructor, 'name', { value: name, configurable: true });
-  return constructor;
-}

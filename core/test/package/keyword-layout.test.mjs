@@ -3,9 +3,10 @@ import test from 'node:test';
 import { Css, ColorCss, ColorKeywords, WidthCss, SystemKeywords } from '../../dist/index.js';
 import { authorInputs, inlineKeyword } from '../../dist/bindings.js';
 
-test('构造器名、实例身份和可覆盖的自有字段保持不变', () => {
-  assert.equal(ColorCss.name, 'ColorCss');
-  assert.equal(ColorKeywords.name, 'ColorKeywords');
+test('公开构造器、实例身份和可覆盖的自有字段保持不变', () => {
+  // 发布 JS 原本就会压缩 Function.name；验证导出和实例身份，不为调试名引入顶层副作用。
+  assert.equal(new ColorCss().constructor, ColorCss);
+  assert.equal(new ColorKeywords().constructor, ColorKeywords);
   const author = new ColorCss();
   assert(author instanceof ColorCss);
   assert.deepEqual(

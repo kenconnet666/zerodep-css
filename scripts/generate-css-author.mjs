@@ -1,7 +1,6 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createHash } from 'node:crypto';
 import prettier from 'prettier';
 import ts from 'typescript';
 import { units, extraUnits, unitMethod, valueMethods, gridMethods } from './css-author-methods.mjs';
@@ -159,7 +158,7 @@ const groupLines = new Map(
       ...header,
       "import type { Property } from 'csstype';",
       "import { CssProperty, LengthCssProperty, type CssString } from './base.js';",
-      "import { initializeKeywordDeclarations, keywordConstructor } from '../keyword-data.js';",
+      "import { initializeKeywordDeclarations } from '../keyword-data.js';",
       "import type { KeywordDeclarations, KeywordValuesOf } from '../keyword-source.js';",
       '// 关键字是实例上的声明字符串；系统实例按属性链惰性创建并共享。',
     ],
@@ -192,13 +191,80 @@ const names = [...properties.keys()].sort((left, right) =>
   left < right ? -1 : left > right ? 1 : 0,
 );
 validatePropertyDocs(names);
+const keywordDefinitions = new Map(
+  names.map((name) => {
+    const { member, cssName } = properties.get(name);
+    const keywords = keywordsOf(member);
+    const docs = keywords.map(([, value]) =>
+      keywordDocumentation(name, cssName, value).replace(
+        /CSS 声明：`[^`]+`。/g,
+        `默认 CSS 值：\`${value}\`；主题可覆盖。`,
+      ),
+    );
+    return [
+      name,
+      {
+        keywords,
+        docs,
+        signature: JSON.stringify([keywords, docs.map((doc) => doc.replace(/\s+/g, ' ').trim())]),
+      },
+    ];
+  }),
+);
+// 常用公共集合优先采用熟悉的属性名；其他集合使用其代表属性名，不把哈希泄漏到类型提示。
+const preferred = [
+  'all',
+  'color',
+  'display',
+  'position',
+  'width',
+  'height',
+  'fontSize',
+  'fontWeight',
+  'lineHeight',
+  'fontFamily',
+  'border',
+  'borderStyle',
+  'borderWidth',
+  'textAlign',
+  'overflow',
+  'alignItems',
+  'justifyContent',
+  'cursor',
+  'background',
+];
+const keywordNames = new Map();
+const globalKeys = new Set(['inherit', 'initial', 'unset', 'revert', 'revertLayer']);
+for (const name of [...preferred, ...names.filter((name) => !preferred.includes(name))]) {
+  const definition = keywordDefinitions.get(name);
+  if (!definition || keywordNames.has(definition.signature)) continue;
+  const extra = definition.keywords.filter(([key]) => !globalKeys.has(key));
+  const generic =
+    extra.length <= 2 &&
+    extra.every(
+      ([key, value]) =>
+        ['auto', 'none', 'normal'].includes(key) &&
+        definition.docs[definition.keywords.findIndex(([entry]) => entry === key)] ===
+          `/** 默认 CSS 值：\`${value}\`；主题可覆盖。 */`,
+    );
+  const label =
+    extra.length === 0
+      ? 'global'
+      : generic
+        ? extra.map(([key], index) => (index ? key[0].toUpperCase() + key.slice(1) : key)).join('')
+        : name;
+  const dataName = `${label}Keywords`;
+  if ([...keywordNames.values()].includes(dataName))
+    throw new Error(`Keyword group name collision: ${dataName}`);
+  keywordNames.set(definition.signature, dataName);
+}
 for (const name of names) {
   const setting = notes.get(name) ?? { name };
   const found = properties.get(name);
   const { member, cssName } = found;
   const type = propertyType(member);
   const className = `${setting.name[0].toUpperCase()}${setting.name.slice(1)}Css`;
-  const keywords = keywordsOf(member);
+  const { keywords, docs, signature } = keywordDefinitions.get(name);
   validateKeywordDocs(name, keywords);
   const documentation = commentOf(member, name, cssName);
   keywordCount += keywords.length;
@@ -246,23 +312,14 @@ for (const name of names) {
   const alias = `group${groups.indexOf(group)}`;
   const keywordClass = className.replace(/Css$/, 'Keywords');
   // 值相同但 auto/normal 等说明不同的属性不能共用文档；不重复附加属性专属声明示例。
-  const docs = keywords.map(([, value]) =>
-    keywordDocumentation(name, cssName, value).replace(
-      /CSS 声明：`[^`]+`。/g,
-      `默认 CSS 值：\`${value}\`；主题可覆盖。`,
-    ),
-  );
-  const signature = JSON.stringify([keywords, docs.map((doc) => doc.replace(/\s+/g, ' ').trim())]);
   let dataName = sharedKeywords.get(signature);
   if (!dataName) {
-    dataName = `keywords_${createHash('sha256').update(signature).digest('hex').slice(0, 12)}`;
-    if ([...sharedKeywords.values()].includes(dataName))
-      throw new Error('Keyword group hash collision');
+    dataName = keywordNames.get(signature);
     sharedKeywords.set(signature, dataName);
-    sharedKeywordLines.push(`export const ${dataName} = /* @__PURE__ */ Object.freeze({`);
+    sharedKeywordLines.push(`export const ${dataName} = {`);
     for (const [index, [keyword, value]] of keywords.entries())
       sharedKeywordLines.push(docs[index], `${JSON.stringify(keyword)}: ${JSON.stringify(value)},`);
-    sharedKeywordLines.push('});');
+    sharedKeywordLines.push('} as const;');
   }
   if (!keywordImports.get(group).has(dataName)) {
     keywordImports.get(group).add(dataName);
@@ -275,7 +332,7 @@ for (const name of names) {
     jsdoc(`创建 ${cssName} 的可继承关键字对象；每个实例独立，成员保留语义说明。`, {
       examples: [`new ${keywordClass}()`],
     }),
-    `export const ${keywordClass} = /* @__PURE__ */ keywordConstructor(class ${keywordClass} { constructor() { Object.assign(this, ${dataName}); } }, ${JSON.stringify(keywordClass)}) as new () => ${keywordClass};`,
+    `export const ${keywordClass} = class ${keywordClass} { constructor() { Object.assign(this, ${dataName}); } } as new () => ${keywordClass};`,
   );
   keywordFields.push(documentation, `declare readonly ${name}: ${alias}.${keywordClass};`);
   keywordCreators.push(
@@ -325,7 +382,7 @@ for (const name of names) {
     jsdoc(`${cssName} 属性作者；关键字读取为完整声明字符串，保留中文说明。`),
     `export type ${className} = ${className}Runtime & KeywordDeclarations<${keywordClass}>;`,
     documentation,
-    `export const ${className} = /* @__PURE__ */ keywordConstructor(${className}Runtime, ${JSON.stringify(className)}) as new () => ${className};`,
+    `export const ${className} = ${className}Runtime as new () => ${className};`,
   );
   systemFields.push(
     documentation,
