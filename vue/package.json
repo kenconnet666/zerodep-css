@@ -1,6 +1,6 @@
 {
   "name": "zerodep-css-vue",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "type": "module",
   "exports": {
     "./vite": {
@@ -52,7 +52,10 @@
     "vue-tsc": "catalog:languageServices",
     "typescript": "catalog:",
     "@nuxt/kit": "catalog:",
-    "nuxt": "catalog:"
+    "nuxt": "catalog:",
+    "@babel/core": "catalog:",
+    "@babel/plugin-syntax-jsx": "catalog:",
+    "@babel/plugin-syntax-typescript": "catalog:"
   },
   "description": "Runtime CSS, implicit variable transforms and Nuxt integration for Vue 3.5.",
   "author": "kenconnet666",

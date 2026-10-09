@@ -30,13 +30,13 @@ try {
       if (name !== 'zerodep-css' && !name.startsWith('zerodep-css-')) externals.set(name, source);
   }
   externals.set('@types/node', 'core');
-  // 四个待发布包必须来自 tarball；只复用已安装的外部依赖，避免本地重复安装整个框架。
+  // 五个待发布包必须来自 tarball；只复用已安装的外部依赖，避免本地重复安装整个框架。
   for (const [name, source] of externals) {
     const require = createRequire(join(root, source, 'package.json'));
     const target = join(fixture, 'node_modules', name);
     await mkdir(dirname(target), { recursive: true });
     await symlink(
-      dirname(require.resolve(name + '/package.json')),
+      dirname(require.resolve(resolve(root, source, 'node_modules', name, 'package.json'))),
       target,
       process.platform === 'win32' ? 'junction' : 'dir',
     );
@@ -56,6 +56,11 @@ for (const framework of ['vue','svelte']) {
 }
 assert.equal(typeof (await import('zerodep-css-vue/nuxt')).default,'function');
 assert.equal(typeof (await import('zerodep-css-svelte/sveltekit/server')).handle,'function');
+const js=await import('zerodep-css-zerodep-js/server');
+const jsContext=js.createCssContext();
+const {_createRoot}=await import('zerodep-js');
+_createRoot(dispose=>{try{const s=jsContext.provideCss(new js.Css());assert.equal(jsContext.useCss(),s);}finally{dispose();}});
+assert.equal((await import('zerodep-css-zerodep-js/compiler')).default().name,'zerodep-css');
 console.log('Packed Node entries and compiler dependencies pass.');
 `,
   );
@@ -65,7 +70,7 @@ console.log('Packed Node entries and compiler dependencies pass.');
       encoding: 'utf8',
     }),
   );
-  for (const framework of ['vue', 'svelte']) {
+  for (const framework of ['vue', 'svelte', 'zerodep-js']) {
     const result = await build({
       stdin: {
         contents: `import {Css,css,hydrateCss} from 'zerodep-css-${framework}'; hydrateCss(); console.log(css(new Css().color.red));`,
@@ -91,6 +96,10 @@ import {css as svelteCss} from 'zerodep-css-svelte';
 import vueBindings from 'zerodep-css-vue/vite';
 import svelteBindings from 'zerodep-css-svelte/vite';
 import {handle} from 'zerodep-css-svelte/sveltekit/server';
+import {createCssContext as createJsCssContext} from 'zerodep-css-zerodep-js';
+import jsCssCompiler from 'zerodep-css-zerodep-js/compiler';
+import type {CompileExtension} from 'zerodep-js-compiler';
+const extension:CompileExtension=jsCssCompiler(); void extension; createJsCssContext<Css>();
 const s=createCssContext<Css>().provideCss(new Css());
 css(s.gridTemplateColumns.repeat(3,'1fr')); svelteCss(s.gridAutoRows.minmax(0,'1fr'));
 vueBindings({inlineBindings:false}); svelteBindings(); void handle;

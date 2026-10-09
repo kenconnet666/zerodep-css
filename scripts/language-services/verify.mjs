@@ -12,6 +12,7 @@ const paths = [
   'svelte/src/__LspProbe.svelte',
   'vue/src/nuxt/__lsp_probe__.ts',
   'svelte/src/sveltekit/__lsp_probe__.ts',
+  'zerodep-js/src/__lsp_probe__.ts',
 ];
 for (const file of paths) {
   try {
@@ -142,6 +143,7 @@ try {
     'svelte/src/index.ts',
     'vue/src/nuxt/index.ts',
     'svelte/src/sveltekit/index.ts',
+    'zerodep-js/src/index.ts',
     'vue/test/types/LanguageFixture.vue',
     'svelte/test/types/LanguageFixture.svelte',
   ]) {

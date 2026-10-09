@@ -28,7 +28,7 @@ function fixture() {
   return { host, scope, tasks, s: new Css() };
 }
 
-test('bx 显式绑定常量、普通值与响应式表达式；未标记调用保持原样', () => {
+test('bx 显式绑定与命名 css 自动派生分别保留值语义', () => {
   const result = transform(
     "const a=css(s.width.raw(bx('12px')), s.opacity.raw(bx(0.5)), s.height.raw(bx(value)), s.color.raw(bx(color.value))); const b=css(s.width.px(width.value));",
   );
@@ -36,7 +36,10 @@ test('bx 显式绑定常量、普通值与响应式表达式；未标记调用�
   assert.equal((result.script.match(/\.bind\(/g) ?? []).length, 4);
   assert.match(result.script, /\(\) => \('12px'\)/);
   assert.match(result.script, /css\(s.width.px\(width.value\)\)/);
-  assert.equal(transform('const b=css(s.width.px(width.value));').used, false);
+  const implicit = transform('const b=css(s.width.px(width.value));');
+  assert.equal(implicit.used, true);
+  assert.match(implicit.script, /\.computed\(\(\) => \(css\(s.width.px\(width.value\)\)\)\)/);
+  assert.doesNotMatch(implicit.script, /\.bind\(/);
   assert.throws(() => bx('12px'), /compiler plugin/);
 });
 

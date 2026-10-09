@@ -1,0 +1,70 @@
+{
+  "name": "zerodep-css-zerodep-js",
+  "version": "0.3.4",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "node": {
+        "types": "./dist/types/server.d.ts",
+        "default": "./dist/server.js"
+      },
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/types/server.d.ts",
+      "node": "./dist/server.js"
+    },
+    "./internal": {
+      "types": "./dist/types/internal.d.ts",
+      "default": "./dist/internal.js"
+    },
+    "./compiler": {
+      "types": "./dist/types/compiler.d.ts",
+      "node": "./dist/compiler.js"
+    }
+  },
+  "scripts": {
+    "build:types": "tsc -p tsconfig.build.json",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "zerodep-css": "workspace:*",
+    "@babel/traverse": "catalog:",
+    "@babel/types": "catalog:"
+  },
+  "peerDependencies": {
+    "zerodep-js": "^1.0.0-rc.9",
+    "zerodep-js-compiler": "^1.0.0-rc.9"
+  },
+  "peerDependenciesMeta": {
+    "zerodep-js-compiler": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "zerodep-js": "catalog:",
+    "zerodep-js-compiler": "catalog:",
+    "zerodep-js-ssr": "catalog:"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "description": "Runtime CSS, context and compiler integration for zerodep-js.",
+  "license": "MIT",
+  "author": "kenconnet666",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenconnet666/zerodep-css.git",
+    "directory": "zerodep-js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

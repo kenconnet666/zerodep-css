@@ -252,6 +252,8 @@ async function start(kind) {
       'svelte/test',
       'vue/src/nuxt',
       'svelte/src/sveltekit',
+      'zerodep-js',
+      'zerodep-js/src',
     ])
       installWatcher(directory);
     const versions = new Map();

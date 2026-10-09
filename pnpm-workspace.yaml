@@ -3,8 +3,17 @@ packages:
   - compiler
   - vue
   - svelte
+  - zerodep-js
 
 catalog:
+  '@babel/core': 7.29.7
+  '@babel/plugin-syntax-jsx': 7.29.7
+  '@babel/plugin-syntax-typescript': 7.29.7
+  '@babel/traverse': 8.0.6
+  '@babel/types': 8.0.6
+  zerodep-js: 1.0.0-rc.9
+  zerodep-js-compiler: 1.0.0-rc.9
+  zerodep-js-ssr: 1.0.0-rc.9
   '@vue/compiler-dom': 3.5.43
   '@types/node': 24.13.5
   '@vitejs/plugin-vue': 6.0.9
@@ -48,3 +57,12 @@ onlyBuiltDependencies:
 # Kit 2.70.3 的传递依赖仍需要局部的 cookie 参数校验修补。
 overrides:
   '@sveltejs/kit>cookie@<0.7.0': 0.7.2
+
+  # 框架适配器的开发检查使用框架选定的 TS7 平台包；CSS 本身继续用 TS6。
+  '@typescript/typescript-win32-x64@7.1.0-dev.jetbrains.20261006.2': https://github.com/JetBrains/typescript-go/releases/download/v7.1.0-dev.jetbrains.20261006.2/typescript-win32-x64-v7.1.0-dev.jetbrains.20261006.2.tgz
+  '@typescript/typescript-win32-arm64@7.1.0-dev.jetbrains.20261006.2': https://github.com/JetBrains/typescript-go/releases/download/v7.1.0-dev.jetbrains.20261006.2/typescript-win32-arm64-v7.1.0-dev.jetbrains.20261006.2.tgz
+  '@typescript/typescript-linux-x64@7.1.0-dev.jetbrains.20261006.2': https://github.com/JetBrains/typescript-go/releases/download/v7.1.0-dev.jetbrains.20261006.2/typescript-linux-x64-v7.1.0-dev.jetbrains.20261006.2.tgz
+  '@typescript/typescript-linux-arm64@7.1.0-dev.jetbrains.20261006.2': https://github.com/JetBrains/typescript-go/releases/download/v7.1.0-dev.jetbrains.20261006.2/typescript-linux-arm64-v7.1.0-dev.jetbrains.20261006.2.tgz
+  '@typescript/typescript-linux-arm@7.1.0-dev.jetbrains.20261006.2': https://github.com/JetBrains/typescript-go/releases/download/v7.1.0-dev.jetbrains.20261006.2/typescript-linux-arm-v7.1.0-dev.jetbrains.20261006.2.tgz
+  '@typescript/typescript-darwin-x64@7.1.0-dev.jetbrains.20261006.2': https://github.com/JetBrains/typescript-go/releases/download/v7.1.0-dev.jetbrains.20261006.2/typescript-darwin-x64-v7.1.0-dev.jetbrains.20261006.2.tgz
+  '@typescript/typescript-darwin-arm64@7.1.0-dev.jetbrains.20261006.2': https://github.com/JetBrains/typescript-go/releases/download/v7.1.0-dev.jetbrains.20261006.2/typescript-darwin-arm64-v7.1.0-dev.jetbrains.20261006.2.tgz

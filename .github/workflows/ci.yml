@@ -38,6 +38,7 @@ jobs:
       - run: pnpm test:theme
       - run: pnpm test:bindings
       - run: pnpm test:compiler
+      - run: node --test zerodep-js/test/adapter.test.mjs
       - run: pnpm --dir test/tools test:compiler-instances
       - run: pnpm --dir test/tools test:keyword-variants
       - run: pnpm --dir test/tools test:vfor-style
@@ -83,6 +84,7 @@ jobs:
       - run: pnpm --dir test/tools test:author-api
       - run: pnpm --dir test/tools test:bindings
       - run: node test/browser/implicit.mjs
+      - run: node zerodep-js/test/browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

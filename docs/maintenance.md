@@ -1,5 +1,13 @@
 # 维护与支持范围
 
+## 0.3.4 zerodep-js 独立适配器
+
+新增 zerodep-js 项目，npm 名为 zerodep-css-zerodep-js。CSS 作者注入、条件运行时入口、CSS 专用 TSX 转换和 class/style 接线归适配器；它复用框架 rc.9 新增的公开运行时与 CompileExtension 接口，不导入 core/src。框架 rc.9 已由完整 CI 发布到 next；适配器以 npm 框架包进行开发与消费验收。
+
+本批五包统一为 0.3.4，新增适配器使用 peer 共享框架运行时，构建入口与浏览器入口分开。CSS 主项目继续使用 TS6，框架开发检查依赖的 TS7 平台包单独固定为原始 GitHub 发行文件。Nuxt 的 Babel 7 开发依赖与框架 Babel 8 分别固定，不关闭严格 peer 检查。
+
+本地通过构建/类型检查、独立适配器的变量更新与上下文/SSR 用例、CSR/严格接管浏览器检查、五包 tarball 的 Node/浏览器入口和类型消费、冻结安装及格式检查。上一提交 CI 中“没有 bx 就不转换”的旧断言已按命名 css 自动派生契约更新并验证。发布仍等待当前提交完整 CI，使用同次 CI 冻结产物，不覆盖旧版发行归档。
+
 ## 2026-10-09 适配器合并与 css 隐式转换
 
 当前源码取消独立 nuxt/sveltekit 包：Nuxt 模块及应用夹具并入 vue，Kit 宿主及夹具并入 svelte。公开入口为 `zerodep-css-vue/nuxt`、`zerodep-css-svelte/sveltekit` 和 `zerodep-css-svelte/sveltekit/server`，元框架依赖作为可选 peer，不让普通 Vue/Svelte 消费端强制安装 Nuxt/Kit。构建、发布清单、CI 路径、LSP 探针及文档同步调整。

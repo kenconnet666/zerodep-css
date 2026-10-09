@@ -5,11 +5,25 @@ import { build } from 'esbuild';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 // 只清理由本脚本生成的 dist，避免重命名后旧声明混入发布产物。
-for (const name of ['core', 'compiler', 'vue', 'svelte']) {
+for (const name of ['core', 'compiler', 'vue', 'svelte', 'zerodep-js']) {
   const dist = resolve(root, name, 'dist');
   await removeOutput(root, dist);
 }
 for (const [name, entries, external] of [
+  [
+    'zerodep-js',
+    ['index', 'server', 'internal', 'compiler'],
+    [
+      'node:*',
+      'zerodep-css',
+      'zerodep-css/*',
+      'zerodep-js',
+      'zerodep-js/*',
+      'zerodep-js-compiler',
+      '@babel/traverse',
+      '@babel/types',
+    ],
+  ],
   [
     'core',
     ['index', 'browser', 'server', 'bindings', 'metadata', 'theme'],

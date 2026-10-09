@@ -42,4 +42,8 @@ pnpm check
 
 ## 工程目录
 
-当前 core/compiler/vue/svelte 四包源码位于各自 src；Nuxt 模块位于 vue/src/nuxt，Kit 宿主位于 svelte/src/sveltekit；core/src/generated 只通过生成器更新。正式浏览器验收在 test/browser，共享夹具与性能工具在 [test/tools](test/tools/README.md)。已失效的研究稿和阶段记录从 Git 历史查询；历史原始样本保留在 test/tools/results，不作为当前性能结论。
+当前 core/compiler/vue/svelte/zerodep-js 五包源码位于各自 src；Nuxt 模块位于 vue/src/nuxt，Kit 宿主位于 svelte/src/sveltekit；core/src/generated 只通过生成器更新。正式浏览器验收在 test/browser，共享夹具与性能工具在 [test/tools](test/tools/README.md)。已失效的研究稿和阶段记录从 Git 历史查询；历史原始样本保留在 test/tools/results，不作为当前性能结论。
+
+## zerodep-js 适配器
+
+`zerodep-css-zerodep-js` 提供 CSS 作者、上下文、运行时和 TSX 编译扩展。框架的 Vite 插件使用 `zerodep({ extensions: [cssCompiler()] })`；cssCompiler 从适配器 `/compiler` 导入。详见 [适配器](zerodep-js/README.md)。浏览器运行时不加载 Babel/TypeScript，SSR 标签仍由应用组合。

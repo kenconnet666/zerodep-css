@@ -15,7 +15,7 @@ const pnpm = process.env.npm_execpath;
 if (!pnpm) throw new Error('Run pnpm release:pack after pnpm build.');
 await mkdir(output, { recursive: true });
 const packages = [];
-for (const directory of ['core', 'compiler', 'vue', 'svelte']) {
+for (const directory of ['core', 'compiler', 'vue', 'svelte', 'zerodep-js']) {
   const source = JSON.parse(await readFile(join(root, directory, 'package.json'), 'utf8'));
   assert.equal(source.private, undefined, `${directory} is not publishable`);
   assert.ok(source.license, `${directory}: choose a project license before release`);
