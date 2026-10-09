@@ -21,6 +21,8 @@ test-results/
 *.tsbuildinfo
 .nuxt/
 .svelte-kit/
+vue/test/nuxt/.output/
+svelte/test/sveltekit/build/
 .DS_Store
 *.suo
 *.ntvs*

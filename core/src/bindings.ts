@@ -2,6 +2,7 @@ import { hash } from './names.js';
 import { canBindInline } from './author-guards.js';
 export { authorInputs } from './author-guards.js';
 export { inlineDeclaration, inlineKeyword, type InlineDeclaration } from './inline.js';
+export { implicitCss, type CssProps, type ImplicitCss } from './implicit.js';
 
 import type { BxValue } from './bx.js';
 type Writer = (key: string, body: string | null) => void;

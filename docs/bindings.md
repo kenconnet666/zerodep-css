@@ -1,6 +1,34 @@
-# bx 显式 CSS 变量绑定
+# CSS 自动追踪与变量
 
-只对显式的 `bx(expression)` 生成 CSS 变量。常量、普通变量、响应式表达式采用同一规则；没有 bx 的声明保持普通运行时字符串语义。bx 返回值的位置是 CSS 值字符串，作用类似 Vue 样式中的 v-bind；不判断 CSS 是否有效，不猜单位，也不自动修复值。
+Vue/Svelte 的普通组件使用 `css(...)`，无需为宽度、颜色等直接动态值额外写 bx。插件识别库的命名、别名和命名空间导入，局部同名函数不转换。
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { Css, css } from 'zerodep-css-vue';
+const s = new Css();
+const width = ref(24);
+const box = css(s.width.px(width.value));
+</script>
+<template>
+  <div :class="box" />
+  <div :class="css(s.width.px(width))" />
+</template>
+```
+
+Svelte 直接写 `<div class={css(s.width.px(width))}></div>`，width 可以来自 `$state`。组件顶层 `const name = css(...)` 自动成为 Vue computed / Svelte derived，Vue 脚本引用由编译器解包；`const saved = name` 仍保留字符串快照。Svelte 原生静态分析不了解插件转换，直接声明读取 $state 时可能提示 state_referenced_locally；模板直接调用没有这个问题，示例只对确认由插件转换的声明加局部说明注释，不关闭全局诊断。
+
+原生 class 与 style 共用一次求值，已有 style 和指令保留。直接响应式值/循环字段交给 core 的 inlineDeclaration 检查：有限非负单位数值、支持的系统关键字、十六进制颜色及 0–1 opacity 可以生成私有 `--zj-*` 元素变量。主题关键字复用 inlineKeyword，始终读取当前主题。CSS-wide、已有 var()/复杂 raw 值、无效值、负单位值、自定义或覆写作者方法保留原始声明，避免改变层叠。
+
+命名 css 只有全部用途可证明是本组件原生 class 时才携带元素变量；跨组件传递、其他脚本用途、同名遮蔽或属性 spread 保留响应式字符串。复杂计算、嵌套选择器与普通 helper 不承诺变量优化，仍可在模板/computed/$derived 中正常重新求值。元素变量随 DOM 移除，不需要绑定帧或额外清理。模块脚本、普通 .ts 和 Vue Options API 不参与组件自动转换。
+
+安装方式仍为下文的 Vite 插件，放在官方 Vue/Svelte 插件之前。Nuxt 使用 `zerodep-css-vue/nuxt`，Kit 使用 `zerodep-css-svelte/sveltekit` 和其 `/server` 子入口，不再安装独立元框架适配包。`inlineBindings: false` 关闭隐式元素变量，但保留命名 css 的自动追踪。
+
+[Vue 示例](../vue/examples/Implicit.vue)与 [Svelte 示例](../svelte/examples/Implicit.svelte)覆盖命名/直接调用、列表重排、自定义作者和快照。`test/implicit-css.test.mjs` 验证安全回退，`test/browser/implicit.mjs` 验证 CSR、SSR 首屏、接管、实际样式和卸载。
+
+## 特殊场景的显式 bx
+
+既有 bx 继续用于任意用户方法、动画帧和跨元素/全局规则等场景。以下说明这一显式路径：bx 返回完整 CSS 值中的 var() 字符串，不判断 CSS 是否有效、不补单位，与上面的隐式安全优化规则不同。
 
 ## 写法
 
@@ -82,7 +110,7 @@ Vue scoped slot 支持 bx，各次调用按参数身份隔离；优先传递有�
 
 模板原生元素的默认快路径参考 Vue CSS v-bind：共享声明，值写到元素内联 style；不直接依赖 Vue 内部 useCssVars API。script/setup、需要传递的 class、动画/全局规则和跨元素选择器继续使用私有 CSSOM 值规则，必要时使用私有 :root 变量。普通 css 仍可在运行时构建，没有要求静态提取全部样式。
 
-SSR 内联变量受页面 `style-src-attr` 策略约束。项目禁止内联 style 时，在 Vue/Svelte 插件上设置 `cssBindings({ inlineBindings: false })`，统一使用样式表传输；Nuxt 模块对应选项同名：`modules: [['zerodep-css-nuxt', { inlineBindings: false }]]`。此选项不关闭 bx。不要依赖客户端 CSSOM 写入是否被 CSP 放行来推断服务端内联 HTML 也被许可。
+SSR 内联变量受页面 `style-src-attr` 策略约束。项目禁止内联 style 时，在 Vue/Svelte 插件上设置 `cssBindings({ inlineBindings: false })`，统一使用样式表传输；Nuxt 模块对应选项同名：`modules: [['zerodep-css-vue/nuxt', { inlineBindings: false }]]`。此选项不关闭 bx。不要依赖客户端 CSSOM 写入是否被 CSP 放行来推断服务端内联 HTML 也被许可。
 
 null/undefined 在私有样式表路径清空声明；元素路径写入 initial，避免继承外层同名变量。0 保留。无效值交给浏览器，包括 CSS 变量在计算值阶段失效的原生行为。重新赋值后恢复。
 

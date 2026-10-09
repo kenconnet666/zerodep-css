@@ -3,7 +3,7 @@ dist
 .nuxt
 .svelte-kit
 test-results
-nuxt/test/app/.output
-sveltekit/test/app/build
+vue/test/nuxt/.output
+svelte/test/sveltekit/build
 pnpm-lock.yaml
 test/tools/results/

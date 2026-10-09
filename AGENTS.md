@@ -1,20 +1,24 @@
 # zerodep-css 研究工作区
 
-- 当前已有六包配置、502 属性生成器、作者 API、Vue/Svelte bx 绑定插件和 Nuxt 4 / SvelteKit 2 的 Node SSR / 预渲染接入。转换范围见 `docs/bindings.md`；流式 SSR、边缘部署未验收，不要把研究探针当作正式 API。
-- `core` 保持框架无关；其 npm 名为 `zerodep-css`，共享模板编译器为 `zerodep-css-compiler`，四个适配包依次为 `zerodep-css-vue`、`zerodep-css-svelte`、`zerodep-css-nuxt`、`zerodep-css-sveltekit`。根工作区保持 private，六包按 MIT 公开发布；本地包间使用 `workspace:*`，打包时转换为明确版本。
+- 当前已有四包配置、502 属性生成器、作者 API、Vue/Svelte css 隐式变量转换及特殊场景 bx 插件和 Nuxt 4 / SvelteKit 2 的 Node SSR / 预渲染接入。转换范围见 `docs/bindings.md`；流式 SSR、边缘部署未验收，不要把研究探针当作正式 API。
+- `core` 保持框架无关；其 npm 名为 `zerodep-css`，共享模板编译器为 `zerodep-css-compiler`，两个适配包为 `zerodep-css-vue`、`zerodep-css-svelte`；Nuxt/Kit 分别通过适配包的 /nuxt 和 /sveltekit 子入口提供。根工作区保持 private，四包按 MIT 公开发布；本地包间使用 `workspace:*`，打包时转换为明确版本。
 - 选择器统一使用作者对象的 `_hover` / `_selector` 等下划线方法；独立 `ic`、`cx` 已移除。`keyframes` 仍是宿主登记函数。快捷方法元数据在 `core/src/selector-shortcuts.ts`，由生成器和绑定编译器共用。
 - 作者类型优先直观可读：属性基类不传泛型，各属性类明确声明 `raw` 等方法参数，系统默认声明保留 readonly string 字段；SystemKeywords 保存原始 CSS 值，Css<T> 注入值或读取函数，主题属性视图按使用时取值。自定义键仅用浅层类型映射保留补全和文档，不生成字面量声明约束。不引入递归条件类型、声明合并或 Proxy 作者模型。主题缓存不能仅依据作者方法身份，必须保留框架的值读取。
 - 条件规则快捷方法和主题局部覆盖由用户在项目类中定义，系统提供 `_selector`、声明字符串和继承能力；不内置 `_media` 或 `themes.override`。属性值方法只补充适用的原生 CSS 函数，不另建值对象 DSL；不引入调试命名或标签模板调用。
-- Vue 模板缓存接入 `vue/src/template-compiler.ts` 的编译 AST 扩展；bx 变量绑定仍由`compiler/src` 的共享源码转换负责。普通元素与 v-for 的缓存不能冻结其他属性；未知/覆写调用保留运行时路径。手写 computed / $derived 内的 bx 使用绑定帧，非 bx 表达式不自动转换。
+- Vue 模板缓存接入 `vue/src/template-compiler.ts` 的编译 AST 扩展；bx 变量绑定仍由`compiler/src` 的共享源码转换负责。普通元素与 v-for 的缓存不能冻结其他属性；未知/覆写调用保留运行时路径。手写 computed / $derived 内的 bx 使用绑定帧，组件顶层命名 css 自动派生，原生 class 的安全动态值/主题关键字隐式转为元素变量；复用 core 安全分类。
 - 使用 Node 24、pnpm 10.34.5 和工作区固定依赖；不要升级全局工具。本地优先运行改动相关的检查，基础配置或包类型入口变更运行 `pnpm check`，LSP 桥变更运行 `pnpm lsp:verify`。
 - `core/src/generated/` 只由 `pnpm css:generate` 更新；`pnpm check` 必须通过生成结果一致性与各包类型检查。
-- 六包的 `dist/` 由 `pnpm build` 生成且不入 Git；改包导出或服务端入口后同时验证浏览器与 Node 构建。元框架接入变更运行对应真实应用构建和 `test:metaframeworks`，准备方法见 `docs/metaframeworks.md`。
+- 四包的 `dist/` 由 `pnpm build` 生成且不入 Git；改包导出或服务端入口后同时验证浏览器与 Node 构建。元框架接入变更运行对应真实应用构建和 `test:metaframeworks`，准备方法见 `docs/metaframeworks.md`。
 - `.codex/config.toml` 由 `pnpm lsp:setup` 按本机路径生成且不入 Git。不修改用户全局 Codex 配置，也不结束其他项目的进程。
 - 旧实现只作为本地 Git 历史和 `zerodep-css-归档` 中的参考。保持归档目录只读，不把旧 API、测试或性能结论当作新分支功能。
 - 分阶段用中文提交，每次提交后推送远程。本地只做改动相关的焦点测试，完整的跨平台、浏览器、SSR 和类型验收由远程 CI 执行；未取得 CI 结果前不要宣称远程验收通过。
 - 推送后不等待或轮询 CI，继续下一阶段；下一次提交前检查上次运行并修复失败。最终交付必须区分本地验证与远程验收状态。
 - 发布从 main 执行；令牌只读取 NPM_TOKEN 环境变量，不写入仓库或日志。发布前打包核对产物，完整消费端测试交 CI；不要为发布重复在本地运行完整测试。
 - 性能测量、长期挂卸 / 列表压力、真实 HMR 与元框架等耗时场景交给 CI；本地仅保留相关类型检查、小范围单元测试和必要复现。
+
+## 本轮范围
+
+- 2026-10-09 用户授权取消独立 nuxt/sveltekit 包，源码、导出与真实应用验收并入 vue/svelte。普通 css 使用隐式转换，参考 zerodep-js 已验证语义；不迁入 TSX/Babel AST，不修改已发布版本或覆盖历史产物。
 
 ## 核心工程要求
 

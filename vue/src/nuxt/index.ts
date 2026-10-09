@@ -2,7 +2,7 @@ import { addPlugin, addVitePlugin, createResolver, defineNuxtModule } from '@nux
 import cssBindings from 'zerodep-css-vue/vite';
 
 export default defineNuxtModule({
-  meta: { name: 'zerodep-css-nuxt', compatibility: { nuxt: '^4.0.0' } },
+  meta: { name: 'zerodep-css-vue/nuxt', compatibility: { nuxt: '^4.0.0' } },
   defaults: { bindings: true, inlineBindings: true },
   setup(options) {
     if (options.bindings) addVitePlugin(cssBindings({ inlineBindings: options.inlineBindings }));

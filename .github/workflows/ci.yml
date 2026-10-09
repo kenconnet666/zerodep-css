@@ -45,7 +45,7 @@ jobs:
       - run: pnpm --dir test/tools test:mup:exports
       - run: pnpm release:pack
       - run: pnpm release:check
-      # 主框架消费的候选必须来自同一次 CI，不要求本地重跑六包构建。
+      # 主框架消费的候选必须来自同一次 CI，不要求本地重跑四包构建。
       - uses: actions/upload-artifact@v4
         with:
           name: release-candidate
@@ -82,6 +82,7 @@ jobs:
       - run: pnpm --dir test/tools test:keyword-context
       - run: pnpm --dir test/tools test:author-api
       - run: pnpm --dir test/tools test:bindings
+      - run: node test/browser/implicit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -124,10 +125,10 @@ jobs:
       - run: node scripts/prepare-framework-fixtures.mjs
       - if: matrix.framework == 'nuxt'
         run: node ../../node_modules/nuxt/bin/nuxt.mjs build
-        working-directory: nuxt/test/app
+        working-directory: vue/test/nuxt
       - if: matrix.framework == 'sveltekit'
         run: node ../../node_modules/vite/bin/vite.js build
-        working-directory: sveltekit/test/app
+        working-directory: svelte/test/sveltekit
       - run: pnpm --dir test/tools test:metaframeworks
 
   performance:

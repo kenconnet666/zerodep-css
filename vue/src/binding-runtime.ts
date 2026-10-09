@@ -1,5 +1,5 @@
-import { getCurrentInstance, onUnmounted, useId, watchEffect } from 'vue';
-import { createBindings } from 'zerodep-css/bindings';
+import { computed, getCurrentInstance, onUnmounted, useId, watchEffect } from 'vue';
+import { createBindings, implicitCss } from 'zerodep-css/bindings';
 import { createTemplateCache } from './template-cache.js';
 
 export function createVueBindings(
@@ -22,5 +22,5 @@ export function createVueBindings(
     host.releaseBindings,
   );
   onUnmounted(scope.dispose);
-  return Object.assign(scope, createTemplateCache());
+  return Object.assign(scope, createTemplateCache(), { auto: implicitCss, computed });
 }

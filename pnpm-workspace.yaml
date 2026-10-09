@@ -3,8 +3,6 @@ packages:
   - compiler
   - vue
   - svelte
-  - nuxt
-  - sveltekit
 
 catalog:
   '@vue/compiler-dom': 3.5.43

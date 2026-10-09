@@ -1,6 +1,6 @@
 # Nuxt 4 与 SvelteKit 2 接入
 
-Nuxt 安装 `zerodep-css-nuxt` 与 `zerodep-css-vue`，SvelteKit 安装 `zerodep-css-sveltekit` 与 `zerodep-css-svelte`。普通组件继续从框架适配包使用作者 API；元框架包负责宿主生命周期，不重新导出另一套作者 API。
+Nuxt 安装 `zerodep-css-vue` 并使用其 /nuxt 模块，SvelteKit 安装 `zerodep-css-svelte` 并使用其 /sveltekit 宿主入口。普通组件继续从框架适配包使用作者 API；适配器子入口负责宿主生命周期，不重新导出另一套作者 API。
 
 本阶段验收 Nuxt 4.5.2、SvelteKit 2.70.3、Vue 3.5.43、Svelte 5.57.0，运行环境为 Node 24 和 Chromium。覆盖标准 Node SSR、客户端导航、静态预渲染页面及其恢复，包含[bx 多变量绑定](bindings.md)。
 
@@ -10,19 +10,19 @@ Nuxt 安装 `zerodep-css-nuxt` 与 `zerodep-css-vue`，SvelteKit 安装 `zerodep
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['zerodep-css-nuxt'],
+  modules: ['zerodep-css-vue/nuxt'],
 });
 ```
 
 应用自行定义 `createCssContext<AppCss>()` 并在根组件 `provideCss(new AppCss())`，使用方式见[入门示例](getting-started.md)。模块不猜测用户的作者类或主题。
 
-模块默认安装绑定转换；`modules: [['zerodep-css-nuxt', { bindings: false }]]` 可以关闭。动态 nonce 从 `event.context.zerodepCssNonce` 读取，应用在前置服务器 middleware 中生成并设置匹配的 CSP 响应头。
+模块默认安装绑定转换；`modules: [['zerodep-css-vue/nuxt', { bindings: false }]]` 可以关闭。动态 nonce 从 `event.context.zerodepCssNonce` 读取，应用在前置服务器 middleware 中生成并设置匹配的 CSP 响应头。
 
 模块注册两个插件：服务端为每个 Nuxt Vue 应用创建独立宿主，组件渲染结束后向 head 输出样式和 JSON 清单；客户端在组件创建前恢复清单。组件内同步调用和异步 setup 恢复上下文后的 `css()` 都使用当前应用宿主。脱离组件上下文的任意服务器任务不会自动获得这个宿主，手工 SSR 仍可使用 `withCssHost()`。
 
 Vue `/server` 新增 `provideCssHost(app, host)`，用于由元框架掌握渲染调度的场景。它是应用级依赖注入，不调用全局 `AsyncLocalStorage.enterWith()`；原有请求路径继续可用。
 
-可运行夹具：[Nuxt 配置](../nuxt/test/app/nuxt.config.ts)、[页面](../nuxt/test/app/app/pages/index.vue)。
+可运行夹具：[Nuxt 配置](../vue/test/nuxt/nuxt.config.ts)、[页面](../vue/test/nuxt/app/pages/index.vue)。
 
 ## SvelteKit
 
@@ -36,14 +36,14 @@ export default { plugins: [cssBindings(), sveltekit()] };
 
 ```ts
 // src/hooks.server.ts
-export { handle } from 'zerodep-css-sveltekit/server';
+export { handle } from 'zerodep-css-svelte/sveltekit/server';
 ```
 
-已有服务器 hook 时用 Kit 的 `sequence` 组合；[夹具](../sveltekit/test/app/src/hooks.server.ts)验证了组合后的自定义响应头仍然保留。需要 nonce 时，由前置 hook 设置 `event.locals.zerodepCssNonce` 和匹配的 CSP 响应头，再进入 CSS handle。
+已有服务器 hook 时用 Kit 的 `sequence` 组合；[夹具](../svelte/test/sveltekit/src/hooks.server.ts)验证了组合后的自定义响应头仍然保留。需要 nonce 时，由前置 hook 设置 `event.locals.zerodepCssNonce` 和匹配的 CSP 响应头，再进入 CSS handle。
 
 ```ts
 // src/hooks.client.ts
-export { init } from 'zerodep-css-sveltekit';
+export { init } from 'zerodep-css-svelte/sveltekit';
 ```
 
 已有客户端 `init` 时，在自己的初始化函数中先调用导入的 `init`，再执行其他初始化，不覆盖原有逻辑。
@@ -60,7 +60,7 @@ CSS handle 在请求作用域内执行 `resolve()`，通过 `transformPageChunk`
 
 Node 接入使用完整 HTML 缓冲，不能保留流式首字节收益；不要把渲染结束后才继续产生 CSS 的延迟任务当作已支持的流式方案。普通同步组件、等待数据后渲染的页面、预渲染均已验证。
 
-可运行夹具：[app.html](../sveltekit/test/app/src/app.html)、[页面](../sveltekit/test/app/src/routes/+page.svelte)。
+可运行夹具：[app.html](../svelte/test/sveltekit/src/app.html)、[页面](../svelte/test/sveltekit/src/routes/+page.svelte)。
 
 ## 恢复清单与安全输出
 
@@ -83,13 +83,13 @@ pnpm build
 node scripts/prepare-framework-fixtures.mjs
 ```
 
-分别在 `nuxt/test/app` 和 `sveltekit/test/app` 构建真实应用：
+分别在 `vue/test/nuxt` 和 `svelte/test/sveltekit` 构建真实应用：
 
 ```powershell
-# 工作目录 nuxt/test/app
+# 工作目录 vue/test/nuxt
 node ../../node_modules/nuxt/bin/nuxt.mjs build
 
-# 工作目录 sveltekit/test/app
+# 工作目录 svelte/test/sveltekit
 node ../../node_modules/vite/bin/vite.js build
 ```
 
@@ -104,4 +104,4 @@ pnpm --dir test/tools test:metaframeworks
 
 验收启动自己的生产服务器，发起不同初值的并发请求，禁用 JavaScript 检查首屏，再启用客户端检查恢复、交互和无整页刷新导航。静态验收使用普通文件服务器，仅提供预渲染 HTML 与客户端资源，不运行 SSR。结束后自动关闭自己的进程、文件服务器和浏览器。
 
-CI 在 Ubuntu 构建并执行这些集成用例；Windows / Ubuntu 都运行六包类型与基础检查。本机还执行了 Windows 元框架应用构建，不等同于所有部署环境的生产认证。
+CI 在 Ubuntu 构建并执行这些集成用例；Windows / Ubuntu 都运行四包类型与基础检查。本机还执行了 Windows 元框架应用构建，不等同于所有部署环境的生产认证。

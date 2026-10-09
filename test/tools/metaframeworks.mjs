@@ -17,7 +17,7 @@ const browser = await launchBrowser();
 try {
   for (const [name, target] of Object.entries(targets)) {
     if (selected && name !== selected) continue;
-    const cwd = resolve(root, name, 'test/app');
+    const cwd = resolve(root, name === 'nuxt' ? 'vue/test/nuxt' : 'svelte/test/sveltekit');
     const server = await startNode(target.entry, cwd);
     try {
       const health = await fetch(`${server.url}/${name === 'nuxt' ? 'api/health' : 'health'}`);

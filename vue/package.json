@@ -26,6 +26,10 @@
     "./server": {
       "types": "./dist/types/server.d.ts",
       "node": "./dist/server.js"
+    },
+    "./nuxt": {
+      "types": "./dist/types/nuxt/index.d.ts",
+      "node": "./dist/nuxt/index.js"
     }
   },
   "scripts": {
@@ -38,15 +42,19 @@
     "zerodep-css-compiler": "workspace:*"
   },
   "peerDependencies": {
-    "vue": "^3.5.0"
+    "vue": "^3.5.0",
+    "@nuxt/kit": "^4.0.0",
+    "nuxt": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "catalog:",
     "vue": "catalog:",
     "vue-tsc": "catalog:languageServices",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@nuxt/kit": "catalog:",
+    "nuxt": "catalog:"
   },
-  "description": "Runtime CSS and explicit CSS variable bindings for Vue 3.5.",
+  "description": "Runtime CSS, implicit variable transforms and Nuxt integration for Vue 3.5.",
   "author": "kenconnet666",
   "engines": {
     "node": ">=24"
@@ -70,5 +78,13 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "peerDependenciesMeta": {
+    "@nuxt/kit": {
+      "optional": true
+    },
+    "nuxt": {
+      "optional": true
+    }
+  }
 }

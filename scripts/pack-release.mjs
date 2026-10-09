@@ -4,14 +4,18 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseArgs } from 'node:util';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
-const output = join(root, 'test-results', 'release');
+const { values } = parseArgs({
+  options: { directory: { type: 'string', default: 'test-results/release' } },
+});
+const output = resolve(root, values.directory);
 const pnpm = process.env.npm_execpath;
 if (!pnpm) throw new Error('Run pnpm release:pack after pnpm build.');
 await mkdir(output, { recursive: true });
 const packages = [];
-for (const directory of ['core', 'compiler', 'vue', 'svelte', 'nuxt', 'sveltekit']) {
+for (const directory of ['core', 'compiler', 'vue', 'svelte']) {
   const source = JSON.parse(await readFile(join(root, directory, 'package.json'), 'utf8'));
   assert.equal(source.private, undefined, `${directory} is not publishable`);
   assert.ok(source.license, `${directory}: choose a project license before release`);

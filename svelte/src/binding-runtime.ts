@@ -1,5 +1,5 @@
 import { onDestroy } from 'svelte';
-import { createBindings } from 'zerodep-css/bindings';
+import { createBindings, implicitCss } from 'zerodep-css/bindings';
 import { getBindingOwner } from './context.js';
 
 export function createSvelteBindings(
@@ -23,5 +23,5 @@ export function createSvelteBindings(
   );
   // 按包入口决定 SSR 语义，避免 DOM 模拟环境把服务端清单提前清空。
   if (!server) onDestroy(scope.dispose);
-  return scope;
+  return Object.assign(scope, { auto: implicitCss });
 }

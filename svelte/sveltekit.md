@@ -1,16 +1,16 @@
-# zerodep-css-sveltekit
+# zerodep-css-svelte/sveltekit
 
 SvelteKit 2 的 Node SSR、样式恢复和预渲染接入。要求 Node 24+；组件作者 API 来自 zerodep-css-svelte。
 
 ```sh
-pnpm add zerodep-css-sveltekit zerodep-css-svelte
+pnpm add zerodep-css-svelte
 ```
 
 ```ts
 // src/hooks.server.ts
-export { handle } from 'zerodep-css-sveltekit/server';
+export { handle } from 'zerodep-css-svelte/sveltekit/server';
 // src/hooks.client.ts
-export { init } from 'zerodep-css-sveltekit';
+export { init } from 'zerodep-css-svelte/sveltekit';
 ```
 
 在 src/app.html 的 head 内加入 `%zerodep-css%`。已有 handle 时使用 Kit 的 sequence 组合；已有 init 时先调用导入的 CSS init。

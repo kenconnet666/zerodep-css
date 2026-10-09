@@ -2,7 +2,7 @@
 
 Vue 项目安装 `zerodep-css-vue`，Svelte 项目安装 `zerodep-css-svelte`；Node 构建/SSR 要求 24+，产物为 ESM。浏览器构建使用主入口的默认 DOM 实现，Node SSR 按 `node` 条件使用请求宿主。Nuxt/SvelteKit 已有[专用接入](metaframeworks.md)，[bx 绑定](bindings.md)、[全局规则与动画](author-api.md)、CSP/nonce 均已提供，支持边界见对应文档。
 
-当前候选为 0.3.1，请安装 `zerodep-css-vue@0.3.1` 或 `zerodep-css-svelte@0.3.1`；元框架包同样使用 0.3.1。next 已更新，latest 保持原值，未指定版本的安装不保证获得本页对应的新候选。
+已发布 next 为 0.3.3。2026-10-09 源码新增 css 隐式转换，并将 Nuxt/Kit 并入 Vue/Svelte 子入口；这些后续改动尚未发布，需在工作区构建验收，不能把旧 npm 0.3.3 当成已包含新入口。latest 保持原值。
 
 主题值可以由 SystemKeywords 派生，通过 new Css(theme) 注入；需要跟踪主题替换时由 Provider 使用 new Css(() => currentTheme)。后代仍然只读取 useCss()，详见 [注入关键字](keyword-injection.md)。
 

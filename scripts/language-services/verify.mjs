@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { access, mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, relative, resolve } from 'node:path';
 import { directory, requireProject, root } from './environment.mjs';
 
 const { Client } = requireProject('@modelcontextprotocol/sdk/client/index.js');
@@ -10,8 +10,8 @@ const paths = [
   'core/src/__lsp_probe__.ts',
   'vue/src/__LspProbe.vue',
   'svelte/src/__LspProbe.svelte',
-  'nuxt/src/__lsp_probe__.ts',
-  'sveltekit/src/__lsp_probe__.ts',
+  'vue/src/nuxt/__lsp_probe__.ts',
+  'svelte/src/sveltekit/__lsp_probe__.ts',
 ];
 for (const file of paths) {
   try {
@@ -71,9 +71,10 @@ async function position(filePath, needle, offset = 0) {
 }
 function fixture(file, valid) {
   const isTs = file.endsWith('.ts');
-  const shared = file.startsWith('core/')
-    ? './__lsp_shared__.js'
-    : '../../core/src/__lsp_shared__.js';
+  const sharedPath = relative(dirname(resolve(root, file)), resolve(root, paths[0]))
+    .replace(/\\/g, '/')
+    .replace(/\.ts$/, '.js');
+  const shared = sharedPath.startsWith('.') ? sharedPath : './' + sharedPath;
   const body = `import { tokens, pixels } from '${shared}';
 ${isTs ? '' : "import 'zerodep-css';"}
 const count: number = ${valid ? '1' : "'wrong'"};
@@ -139,8 +140,8 @@ try {
     'core/src/index.ts',
     'vue/src/index.ts',
     'svelte/src/index.ts',
-    'nuxt/src/index.ts',
-    'sveltekit/src/index.ts',
+    'vue/src/nuxt/index.ts',
+    'svelte/src/sveltekit/index.ts',
     'vue/test/types/LanguageFixture.vue',
     'svelte/test/types/LanguageFixture.svelte',
   ]) {

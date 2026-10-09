@@ -1,5 +1,15 @@
 # 维护与支持范围
 
+## 2026-10-09 适配器合并与 css 隐式转换
+
+当前源码取消独立 nuxt/sveltekit 包：Nuxt 模块及应用夹具并入 vue，Kit 宿主及夹具并入 svelte。公开入口为 `zerodep-css-vue/nuxt`、`zerodep-css-svelte/sveltekit` 和 `zerodep-css-svelte/sveltekit/server`，元框架依赖作为可选 peer，不让普通 Vue/Svelte 消费端强制安装 Nuxt/Kit。构建、发布清单、CI 路径、LSP 探针及文档同步调整。
+
+普通 css 的组件顶层命名声明自动派生；可确认的原生 class 使用私有元素变量，借助 core 的 inlineDeclaration/inlineKeyword 保留无效值、CSS-wide、自定义作者和参数求值顺序。跨用途 class 继续作为响应式字符串传递；普通赋值仍保存快照。复杂动画/全局规则的显式 bx 能力保留，范围见 [CSS 自动追踪](bindings.md)。
+
+本地通过四包构建与类型检查、49 项编译相关用例、隐式路径在 Vue/Svelte 下的 CSR 与 SSR/接管浏览器验证、两元框架的真实构建与 SSR/导航/静态部署验证、隔离目录的四包 tarball Node/浏览器入口及类型消费、完整 LSP 无效→有效探针和格式检查。完整跨平台/三浏览器/长期 HMR 与性能矩阵交当前提交 CI，未将此前 CI 通过视作本次结果。
+
+本次没有发布新版本，源码变更不在 npm 0.3.3 中；历史发行文件仍保留在 test-results/release，本地新验收产物单独位于 test-results/consolidated-adapters。zerodep-js 仅用于对照既有行为，本轮未修改其源码或依赖。
+
 ## 0.3.3 关键字生成结构
 
 2026-10-08 用户确认：原始关键字只保存一份，按值与语义注释一致分组；作者通过公共逻辑构造完整声明字段。属性专属的 color:inherit 等示例可以省略，但属性、关键字、方法和主题扩展在 hover 与补全详情中都必须保留中文说明。使用浅层映射与明确构造器类型转换，不引入声明合并、Proxy、递归类型或应用使用分析。默认作者仍共享，主题继续读取当前值；枚举、自有字段、继承覆盖、构造器导出名、原始值及变量绑定边界均不变。完整跨平台/框架/浏览器验证交 CI，本地只做相关焦点检查。
@@ -32,7 +42,7 @@ pnpm lsp:verify
 | core/src/selector-shortcuts.ts、author-guards.ts                               | 选择器元数据、系统作者身份检查                                      |
 | core/src/registry.ts、bindings.ts、browser.ts、server.ts                       | 注册缓存、变量生命周期、浏览器与 Node 宿主                          |
 | vue/src、svelte/src                                                            | 上下文、框架编译与响应式接入                                        |
-| nuxt/src、sveltekit/src                                                        | 元框架 Node SSR、hydration 与预渲染                                 |
+| vue/src/nuxt、svelte/src/sveltekit                                             | 元框架 Node SSR、hydration 与预渲染                                 |
 | test/browser、test/tools                                                       | 正式浏览器用例、共享夹具、性能与打包工具                            |
 
 作者类型采用普通 readonly 字段和明确的方法参数。基类只复用格式化逻辑，不传值类型泛型，不引入 Proxy 或声明合并：
@@ -74,7 +84,9 @@ protected `declaration` 是动态方法的公共格式化点；关键字字段�
 
 ## npm 发布
 
-六包名称为 zerodep-css、zerodep-css-compiler、zerodep-css-vue、zerodep-css-svelte、zerodep-css-nuxt、zerodep-css-sveltekit。发布顺序先 core、再 compiler、两个框架适配器、最后两个元框架包。包间 workspace/catalog 协议由 pnpm pack 转换，不能直接把源码 package.json 交给 npm publish。
+当前源码的本地候选可用 `pnpm release:pack --directory test-results/consolidated-adapters` 和同目录的 `release:check` 验证，避免覆盖 `test-results/release` 中的历史发行归档；默认路径不变。打包验收不代表已经发布。
+
+当前发布清单为 zerodep-css、zerodep-css-compiler、zerodep-css-vue、zerodep-css-svelte 四包。Nuxt/Kit 通过适配器子入口提供；发布顺序为 core、compiler、vue/svelte。包间 workspace/catalog 协议由 pnpm pack 转换，不能直接把源码 package.json 交给 npm publish。以下六包发行内容保留为历史记录。
 
 在已提交并推送的 main 上运行 `pnpm build` 和 `pnpm release:pack`，再运行 `pnpm release:publish`。产物和 SHA-512 清单位于被忽略的 test-results/release；发布脚本只接受当前提交的产物，并核对 registry 摘要后才继续下一个包。中途失败保留产物，可用同一清单重试，不覆盖已发布版本。
 

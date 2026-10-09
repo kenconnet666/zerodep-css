@@ -4,8 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 for (const [directory, name] of [
-  ['nuxt/test/app', 'nuxt'],
-  ['sveltekit/test/app', 'sveltekit'],
+  ['vue/test/nuxt', 'vue'],
+  ['svelte/test/sveltekit', 'svelte'],
   ['test/tools', 'vue'],
   ['test/tools', 'svelte'],
 ]) {

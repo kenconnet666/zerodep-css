@@ -26,6 +26,14 @@
     "./server": {
       "types": "./dist/types/server.d.ts",
       "node": "./dist/server.js"
+    },
+    "./sveltekit": {
+      "types": "./dist/types/sveltekit/index.d.ts",
+      "default": "./dist/sveltekit/index.js"
+    },
+    "./sveltekit/server": {
+      "types": "./dist/types/sveltekit/server.d.ts",
+      "node": "./dist/sveltekit/server.js"
     }
   },
   "scripts": {
@@ -37,15 +45,20 @@
     "zerodep-css-compiler": "workspace:*"
   },
   "peerDependencies": {
-    "svelte": "^5.20.0"
+    "svelte": "^5.20.0",
+    "@sveltejs/kit": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "catalog:",
     "svelte": "catalog:",
     "svelte-check": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "@sveltejs/kit": "catalog:",
+    "@sveltejs/adapter-node": "catalog:",
+    "@sveltejs/vite-plugin-svelte": "catalog:",
+    "vite": "catalog:"
   },
-  "description": "Runtime CSS and explicit CSS variable bindings for Svelte 5.",
+  "description": "Runtime CSS, implicit variable transforms and SvelteKit integration for Svelte 5.",
   "author": "kenconnet666",
   "engines": {
     "node": ">=24"
@@ -69,5 +82,10 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "peerDependenciesMeta": {
+    "@sveltejs/kit": {
+      "optional": true
+    }
+  }
 }

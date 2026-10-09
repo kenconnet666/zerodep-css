@@ -294,7 +294,7 @@ test('纯 CSS 字符串可缓存，普通对象读取与自定义 getter 保持�
     assert.equal(p.calls(), 1);
   });
   await run(
-    `<div :class="makeCss(s.width.px(plain.width))"></div>`,
+    `<div data-plain :class="makeCss(s.width.px(plain.width))"></div>`,
     async (p) => {
       await p.update((s) => s.noise++);
       assert.equal(p.calls(), 2);
@@ -313,18 +313,20 @@ test('纯 CSS 字符串可缓存，普通对象读取与自定义 getter 保持�
 
 test('浅 ref 内普通对象及内联 getter 不会被错误冻结', async () => {
   await run(
-    `<div :class="makeCss(s.width.px(plain.width))"></div>`,
+    `<div data-plain :class="makeCss(s.width.px(plain.width))"></div>`,
     async (p) => {
       await p.update((s) => {
         s.plain.width = 33;
         s.noise++;
       });
+      const node = find(p.root, 'data-plain')[0];
+      assert.ok(Object.values(node.props.style).includes('33px'));
       assert.match(
         p.host
           .rules()
           .map((r) => r.body)
           .join(''),
-        /33px/,
+        /width:var\(--zj-/,
       );
     },
     `import {shallowRef} from 'vue'; const plain=shallowRef({width:12}); Object.assign(state,{plain:plain.value});`,

@@ -3,6 +3,7 @@ import { parse, type AST } from 'svelte/compiler';
 import {
   applyEdits,
   createBindingTransform,
+  inlineCssNames,
   replacePropsId,
   scriptEdits,
   type Edit,
@@ -70,15 +71,46 @@ export default function cssBindings(options: { inlineBindings?: boolean } = {}) 
       const ast = parse(code, { modern: true });
       if (!ast.instance) return;
       const script = located(ast.instance.content);
+      const names: string[] = [];
+      const native = new Map<AST.Attribute, AST.RegularElement>();
+      function collectNames(value: unknown): void {
+        if (!value || typeof value !== 'object') return;
+        if (Array.isArray(value)) {
+          value.forEach(collectNames);
+          return;
+        }
+        const node = value as AST.BaseNode;
+        if (node.type === 'RegularElement') {
+          const element = node as AST.RegularElement;
+          if (!element.attributes.some((a) => a.type === 'SpreadAttribute'))
+            for (const attr of element.attributes)
+              if (attr.type === 'Attribute' && attr.name === 'class' && attr.value !== true) {
+                native.set(attr, element);
+                const values = Array.isArray(attr.value) ? attr.value : [attr.value];
+                if (values.length === 1 && values[0]?.type === 'ExpressionTag') {
+                  const expression = located(values[0].expression);
+                  names.push(code.slice(expression.start, expression.end).trim());
+                }
+              }
+        }
+        for (const [key, child] of Object.entries(value))
+          if (!['loc', 'metadata', 'comments', 'parent'].includes(key)) collectNames(child);
+      }
+      collectNames(ast.fragment);
       const model = createBindingTransform(
         code.slice(script.start, script.end),
         relative(root, filename),
         'svelte',
         code,
-        { dev, scriptOffset: script.start },
+        {
+          dev,
+          scriptOffset: script.start,
+          inlineNames: options.inlineBindings === false ? new Set() : inlineCssNames(code, names),
+        },
       );
       if (!model.enabled) return;
       const edits: Edit[] = [];
+      const removedStyles = new Set<AST.Attribute>();
       let serial = 0;
       const moduleNames = new Set<string>();
       function moduleIdentifiers(value: unknown): void {
@@ -183,6 +215,7 @@ export default function cssBindings(options: { inlineBindings?: boolean } = {}) 
         }
         if (node.type === 'Attribute') {
           const attribute = node as AST.Attribute;
+          if (removedStyles.has(attribute)) return;
           if (attribute.name === 'class' && attribute.value !== true) {
             const values = Array.isArray(attribute.value) ? attribute.value : [attribute.value];
             const expression =
@@ -190,6 +223,40 @@ export default function cssBindings(options: { inlineBindings?: boolean } = {}) 
                 ? located(values[0].expression)
                 : undefined;
             if (expression?.start != null && expression.end != null) {
+              const implicit =
+                native.has(attribute) && !fallback && options.inlineBindings !== false
+                  ? model.implicit(
+                      code.slice(expression.start, expression.end),
+                      locals,
+                      expression.start,
+                    )
+                  : undefined;
+              if (implicit) {
+                const style = native
+                  .get(attribute)!
+                  .attributes.find((a) => a.type === 'Attribute' && a.name === 'style') as
+                  AST.Attribute | undefined;
+                let original = 'undefined';
+                if (style && style.value !== true) {
+                  const values = Array.isArray(style.value) ? style.value : [style.value];
+                  original =
+                    values
+                      .map((value) =>
+                        value.type === 'Text'
+                          ? JSON.stringify(value.data)
+                          : `String(${code.slice(located(value.expression).start, located(value.expression).end)})`,
+                      )
+                      .join(' + ') || "''";
+                  removedStyles.add(style);
+                  edits.push({ start: style.start, end: style.end, text: '' });
+                }
+                edits.push({
+                  start: attribute.start,
+                  end: attribute.end,
+                  text: `{...${model.scope}.auto.props(${implicit}, ${original})}`,
+                });
+                return;
+              }
               const text = model.expression(
                 code.slice(expression.start, expression.end),
                 locals,

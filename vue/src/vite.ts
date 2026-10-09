@@ -6,6 +6,7 @@ import {
   applyEdits,
   bindingNames,
   createBindingTransform,
+  inlineCssNames,
   scriptEdits,
   type Edit,
 } from 'zerodep-css-compiler';
@@ -44,16 +45,37 @@ export default function cssBindings(
       const { descriptor } = parse(code, { filename: id });
       const script = descriptor.scriptSetup;
       if (!script || !descriptor.template?.ast) return;
+      type Template = NonNullable<typeof descriptor.template.ast>['children'][number];
+      const names: string[] = [];
+      function collectNames(node: Template) {
+        if (node.type !== 1) return;
+        if (
+          node.tagType === 0 &&
+          !node.props.some((p) => p.type === 7 && p.name === 'bind' && !p.arg)
+        )
+          for (const p of node.props)
+            if (
+              p.type === 7 &&
+              p.name === 'bind' &&
+              p.arg?.type === 4 &&
+              p.arg.content === 'class' &&
+              p.exp?.type === 4 &&
+              !p.modifiers.length
+            )
+              names.push(p.exp.content.trim());
+        node.children.forEach(collectNames);
+      }
+      descriptor.template.ast.children.forEach(collectNames);
       const model = createBindingTransform(script.content, relative(root, id), 'vue', code, {
         dev,
         scriptOffset: script.loc.start.offset,
+        inlineNames: options.inlineBindings === false ? new Set() : inlineCssNames(code, names),
       });
       if (!model.enabled) return;
       const edits: Edit[] = [];
       let serial = 0;
       const html = (value: string) =>
         value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-      type Template = NonNullable<typeof descriptor.template.ast>['children'][number];
       function visit(
         node: Template,
         keys: string[],
@@ -115,6 +137,22 @@ export default function cssBindings(
             prop.exp?.type !== 4
           )
             continue;
+          const implicit =
+            !fallback &&
+            node.tagType === 0 &&
+            options.inlineBindings !== false &&
+            !prop.modifiers.length &&
+            !node.props.some((p) => p.type === 7 && p.name === 'bind' && !p.arg)
+              ? model.implicit(prop.exp.content, nextLocals, prop.exp.loc.start.offset)
+              : undefined;
+          if (implicit) {
+            edits.push({
+              start: prop.loc.start.offset,
+              end: prop.loc.end.offset,
+              text: `v-bind="${html(implicit)}"`,
+            });
+            continue;
+          }
           const expression = model.expression(
             prop.exp.content,
             nextLocals,

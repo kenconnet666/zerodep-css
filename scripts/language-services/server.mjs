@@ -245,15 +245,13 @@ async function start(kind) {
       'core',
       'vue',
       'svelte',
-      'nuxt',
-      'sveltekit',
       'core/src',
       'vue/src',
       'vue/test',
       'svelte/src',
       'svelte/test',
-      'nuxt/src',
-      'sveltekit/src',
+      'vue/src/nuxt',
+      'svelte/src/sveltekit',
     ])
       installWatcher(directory);
     const versions = new Map();

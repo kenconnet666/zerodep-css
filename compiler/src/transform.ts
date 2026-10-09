@@ -3,6 +3,7 @@ import { hash } from 'zerodep-css/metadata';
 import { collectBindings } from './source.js';
 import { analyzeTemplate, reactive } from './template-analysis.js';
 import { elementBindings } from './element-bindings.js';
+import { implicitExpression } from './implicit.js';
 
 /** 只变换已导入的库调用；框架适配器提供模板 AST 与循环作用域。 */
 export function createBindingTransform(
@@ -10,7 +11,7 @@ export function createBindingTransform(
   file: string,
   framework: 'vue' | 'svelte',
   reserved = script,
-  options: { dev?: boolean; scriptOffset?: number } = {},
+  options: { dev?: boolean; scriptOffset?: number; inlineNames?: Set<string> } = {},
 ) {
   const fileId = hash(file.replace(/\\/g, '/'));
   const source = ts.createSourceFile(
@@ -144,7 +145,70 @@ export function createBindingTransform(
         : undefined;
     return undefined;
   }
+  const namedCss = new Map<string, ts.CallExpression>();
+  for (const statement of source.statements) {
+    if (
+      !ts.isVariableStatement(statement) ||
+      !(statement.declarationList.flags & ts.NodeFlags.Const)
+    )
+      continue;
+    for (const declaration of statement.declarationList.declarations) {
+      if (
+        ts.isIdentifier(declaration.name) &&
+        declaration.initializer &&
+        ts.isCallExpression(declaration.initializer) &&
+        api(declaration.initializer.expression, new Set()) === 'css'
+      ) {
+        const hasBx = (child: ts.Node): boolean =>
+          (ts.isCallExpression(child) && api(child.expression, new Set()) === 'bx') ||
+          !!ts.forEachChild(child, (n) => hasBx(n) || undefined);
+        if (!hasBx(declaration.initializer))
+          namedCss.set(declaration.name.text, declaration.initializer);
+      }
+    }
+  }
+  const direct = (node: ts.Expression, locals: Set<string>): boolean => {
+    if (ts.isIdentifier(node))
+      return dynamic.has(node.text) || mutable.has(node.text) || locals.has(node.text);
+    return ts.isPropertyAccessExpression(node) && direct(node.expression, locals);
+  };
   function render(node: ts.Node, sf: ts.SourceFile, local: Set<string>): string {
+    if (ts.isTypeNode(node)) return node.getText(sf);
+    if (
+      ts.isVariableDeclaration(node) &&
+      ts.isIdentifier(node.name) &&
+      node.initializer &&
+      node.initializer === namedCss.get(node.name.text)
+    ) {
+      used = true;
+      const value = options.inlineNames?.has(node.name.text)
+        ? implicitExpression(
+            node.initializer!,
+            sf,
+            scope,
+            `${fileId}-${node.pos}`,
+            (n) => api(n, local),
+            (n) => direct(n, local),
+            true,
+            (n) => render(n, sf, local),
+          )!
+        : render(node.initializer!, sf, local);
+      const initializer =
+        framework === 'vue' ? `${scope}.computed(() => (${value}))` : `$derived(${value})`;
+      return sf.text.slice(node.getStart(sf), node.initializer!.getStart(sf)) + initializer;
+    }
+    if (
+      framework === 'vue' &&
+      sf === source &&
+      ts.isIdentifier(node) &&
+      namedCss.has(node.text) &&
+      !local.has(node.text)
+    ) {
+      const parent = node.parent;
+      if (ts.isShorthandPropertyAssignment(parent)) return `${node.text}: ${node.text}.value`;
+      if (!(('name' in parent && parent.name === node) || ts.isImportSpecifier(parent)))
+        return `${node.text}.value`;
+    }
     if (ts.isCatchClause(node) && node.variableDeclaration) {
       local = new Set(local);
       collectBindings(node.variableDeclaration.name, local);
@@ -372,6 +436,27 @@ export function createBindingTransform(
       warnings.add(`${location(offset)}: ${message}`);
     },
     enabled,
+    implicit(text: string, locals: string[] = [], offset = 0): string | undefined {
+      const name = text.trim();
+      if (options.inlineNames?.has(name) && namedCss.has(name) && !locals.includes(name)) {
+        used = true;
+        return name;
+      }
+      const sf = expressionSource(text);
+      const statement = sf.statements[0];
+      if (!statement || !ts.isExpressionStatement(statement)) return;
+      const local = new Set(locals);
+      const result = implicitExpression(
+        statement.expression,
+        sf,
+        scope,
+        `${fileId}-${offset}`,
+        (n) => api(n, local),
+        (n) => direct(n, local),
+      );
+      if (result) used = true;
+      return result;
+    },
     /** 仅标记直接可分析的模板 CSS；未知函数和普通可变变量继续逐次执行。 */
     templateGuards(text: string, locals: string[] = []): string | undefined {
       const guards = templateGuards(text, locals);

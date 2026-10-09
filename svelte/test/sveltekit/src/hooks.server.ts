@@ -1,5 +1,5 @@
 import { sequence } from '@sveltejs/kit/hooks';
-import { handle as cssHandle } from 'zerodep-css-sveltekit/server';
+import { handle as cssHandle } from 'zerodep-css-svelte/sveltekit/server';
 import { createHash, randomUUID } from 'node:crypto';
 // Kit 自带的两个固定内联样式使用精确哈希，不放宽任意内联样式。
 const styleHashes = [
